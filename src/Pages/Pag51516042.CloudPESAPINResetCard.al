@@ -3,7 +3,7 @@ Page 51516042 "SwizzKash PIN Reset Card"
 {
     Editable = true;
     PageType = Card;
-    SourceTable = 51516521;
+    SourceTable = "SwizzKash Applications";
 
     layout
     {
@@ -11,62 +11,62 @@ Page 51516042 "SwizzKash PIN Reset Card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Applied"; "Date Applied")
+                field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Time Applied"; "Time Applied")
+                field("Time Applied"; Rec."Time Applied")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Last PIN Reset"; "Last PIN Reset")
+                field("Last PIN Reset"; Rec."Last PIN Reset")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Reset By"; "Reset By")
+                field("Reset By"; Rec."Reset By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(SentToServer; SentToServer)
+                field(SentToServer; Rec.SentToServer)
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -90,22 +90,22 @@ Page 51516042 "SwizzKash PIN Reset Card"
 
                 trigger OnAction()
                 begin
-                    if SentToServer = false then begin
+                    if Rec.SentToServer = false then begin
                         Error('Pin reset has already been Requested');
                     end else begin
 
-                        "Last PIN Reset" := Today;
-                        "Reset By" := UserId;
-                        SentToServer := false;
-                        "PIN Requested" := true;
+                        Rec."Last PIN Reset" := Today;
+                        Rec."Reset By" := UserId;
+                        Rec.SentToServer := false;
+                        Rec."PIN Requested" := true;
 
                         pinResetLogs.Reset;
                         pinResetLogs.Init;
-                        pinResetLogs."Account Name" := "Account Name";
-                        pinResetLogs.No := "No.";
-                        pinResetLogs."ID No" := "ID No";
-                        pinResetLogs."Account No" := "Account No";
-                        pinResetLogs.Telephone := Telephone;
+                        pinResetLogs."Account Name" := Rec."Account Name";
+                        pinResetLogs.No := Rec."No.";
+                        pinResetLogs."ID No" := Rec."ID No";
+                        pinResetLogs."Account No" := Rec."Account No";
+                        pinResetLogs.Telephone := Rec.Telephone;
                         pinResetLogs.Date := CurrentDatetime;
                         pinResetLogs."Last PIN Reset" := CurrentDatetime;
                         pinResetLogs."Reset By" := UserId;
@@ -138,7 +138,7 @@ Page 51516042 "SwizzKash PIN Reset Card"
     end;
 
     var
-        SwizzKashapp: Record UnknownRecord51516521;
-        pinResetLogs: Record UnknownRecord51516569;
+        SwizzKashapp: Record "SwizzKash Applications";
+        pinResetLogs: Record "SwizzKash Pin Reset Logs";
 }
 

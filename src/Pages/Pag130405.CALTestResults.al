@@ -15,63 +15,63 @@ Page 130405 "CAL Test Results"
             repeater(Group)
             {
                 Caption = 'Repeater';
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field("Test Run No.";"Test Run No.")
+                field("Test Run No."; Rec."Test Run No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Codeunit ID";"Codeunit ID")
+                field("Codeunit ID"; Rec."Codeunit ID")
                 {
                     ApplicationArea = All;
                 }
-                field("Codeunit Name";"Codeunit Name")
-                {
-                    ApplicationArea = All;
-                    Visible = false;
-                }
-                field("Function Name";"Function Name")
-                {
-                    ApplicationArea = All;
-                }
-                field(Platform;Platform)
+                field("Codeunit Name"; Rec."Codeunit Name")
                 {
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field(Result;Result)
+                field("Function Name"; Rec."Function Name")
+                {
+                    ApplicationArea = All;
+                }
+                field(Platform; Rec.Platform)
+                {
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                field(Result; Rec.Result)
                 {
                     ApplicationArea = All;
                     StyleExpr = Style;
                 }
-                field(Restore;Restore)
+                field(Restore; Rec.Restore)
                 {
                     ApplicationArea = All;
                     Visible = false;
                 }
-                field("Start Time";"Start Time")
+                field("Start Time"; Rec."Start Time")
                 {
                     ApplicationArea = All;
                 }
-                field("Execution Time";"Execution Time")
+                field("Execution Time"; Rec."Execution Time")
                 {
                     ApplicationArea = All;
                 }
-                field("Error Message";"Error Message")
+                field("Error Message"; Rec."Error Message")
                 {
                     ApplicationArea = All;
                     Style = Unfavorable;
                     StyleExpr = true;
                 }
-                field("User ID";"User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the ID of the user who posted the entry, to be used, for example, in the change log.';
                 }
-                field(File;File)
+                field(File; Rec.File)
                 {
                     ApplicationArea = All;
                     Visible = false;
@@ -98,11 +98,11 @@ Page 130405 "CAL Test Results"
                     InStr: InStream;
                     CallStack: Text;
                 begin
-                    if "Call Stack".Hasvalue then begin
-                      CalcFields("Call Stack");
-                      "Call Stack".CreateInstream(InStr);
-                      InStr.ReadText(CallStack);
-                      Message(CallStack)
+                    if Rec."Call Stack".Hasvalue then begin
+                        Rec.CalcFields("Call Stack");
+                        Rec."Call Stack".CreateInstream(InStr);
+                        InStr.ReadText(CallStack);
+                        Message(CallStack)
                     end;
                 end;
             }
@@ -136,15 +136,15 @@ Page 130405 "CAL Test Results"
 
     local procedure GetStyle(): Text
     begin
-        case Result of
-          Result::Passed:
-            exit('Favorable');
-          Result::Failed:
-            exit('Unfavorable');
-          Result::Inconclusive:
-            exit('Ambiguous');
-          else
-            exit('Standard');
+        case Rec.Result of
+            Rec.Result::Passed:
+                exit('Favorable');
+            Rec.Result::Failed:
+                exit('Unfavorable');
+            Rec.Result::Inconclusive:
+                exit('Ambiguous');
+            else
+                exit('Standard');
         end;
     end;
 }

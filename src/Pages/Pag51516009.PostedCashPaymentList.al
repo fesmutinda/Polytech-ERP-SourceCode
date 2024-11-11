@@ -7,7 +7,7 @@ Page 51516009 "Posted Cash Payment List"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516000;
+    SourceTable = "Payment Header.";
     SourceTableView = where("Payment Type" = const("Petty Cash"),
                             Posted = const(Yes));
 
@@ -17,51 +17,51 @@ Page 51516009 "Posted Cash Payment List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Type"; "Document Type")
+                field("Document Type"; Rec."Document Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payee Type"; "Payee Type")
+                field("Payee Type"; Rec."Payee Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payee No"; "Payee No")
+                field("Payee No"; Rec."Payee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount(LCY)"; "Amount(LCY)")
+                field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; "Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount(LCY)"; "Net Amount(LCY)")
+                field("Net Amount(LCY)"; Rec."Net Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
@@ -75,7 +75,7 @@ Page 51516009 "Posted Cash Payment List"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Payment Type" := "payment type"::"Cash Purchase";
+        Rec."Payment Type" := Rec."payment type"::"Cash Purchase";
     end;
 }
 

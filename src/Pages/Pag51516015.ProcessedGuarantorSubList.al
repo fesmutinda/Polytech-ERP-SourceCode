@@ -13,55 +13,55 @@ Page 51516015 "Processed Guarantor Sub List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loanee Member No"; "Loanee Member No")
+                field("Loanee Member No"; Rec."Loanee Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loanee Name"; "Loanee Name")
+                field("Loanee Name"; Rec."Loanee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Guaranteed"; "Loan Guaranteed")
+                field("Loan Guaranteed"; Rec."Loan Guaranteed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Substituting Member"; "Substituting Member")
+                field("Substituting Member"; Rec."Substituting Member")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Substituting Member Name"; "Substituting Member Name")
+                field("Substituting Member Name"; Rec."Substituting Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Substituted By"; "Substituted By")
+                field("Substituted By"; Rec."Substituted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Substituted"; "Date Substituted")
+                field("Date Substituted"; Rec."Date Substituted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Substituted; Substituted)
+                field(Substituted; Rec.Substituted)
                 {
                     ApplicationArea = Basic;
                 }
@@ -86,7 +86,7 @@ Page 51516015 "Processed Guarantor Sub List"
                 trigger OnAction()
                 begin
                     cust.Reset;
-                    cust.SetRange(cust."No.", "Loanee Member No");
+                    cust.SetRange(cust."No.", Rec."Loanee Member No");
                     if cust.Find('-') then
                         Report.Run(51516504, true, false, cust);
                 end;

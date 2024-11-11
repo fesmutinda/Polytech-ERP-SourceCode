@@ -17,7 +17,7 @@ Page 130401 "CAL Test Tool"
     {
         area(content)
         {
-            field(CurrentSuiteName;CurrentSuiteName)
+            field(CurrentSuiteName; CurrentSuiteName)
             {
                 ApplicationArea = All;
                 Caption = 'Suite Name';
@@ -27,8 +27,8 @@ Page 130401 "CAL Test Tool"
                     CALTestSuite: Record "CAL Test Suite";
                 begin
                     CALTestSuite.Name := CurrentSuiteName;
-                    if Page.RunModal(0,CALTestSuite) <> Action::LookupOK then
-                      exit(false);
+                    if Page.RunModal(0, CALTestSuite) <> Action::LookupOK then
+                        exit(false);
                     Text := CALTestSuite.Name;
                     exit(true);
                 end;
@@ -45,7 +45,7 @@ Page 130401 "CAL Test Tool"
                 IndentationColumn = NameIndent;
                 IndentationControls = Name;
                 ShowAsTree = true;
-                field(LineType;"Line Type")
+                field(LineType; Rec."Line Type")
                 {
                     ApplicationArea = All;
                     Caption = 'Line Type';
@@ -53,7 +53,7 @@ Page 130401 "CAL Test Tool"
                     Style = Strong;
                     StyleExpr = LineTypeEmphasize;
                 }
-                field(TestCodeunit;"Test Codeunit")
+                field(TestCodeunit; Rec."Test Codeunit")
                 {
                     ApplicationArea = All;
                     BlankZero = true;
@@ -62,7 +62,7 @@ Page 130401 "CAL Test Tool"
                     Style = Strong;
                     StyleExpr = TestCodeunitEmphasize;
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
                     Editable = false;
@@ -70,7 +70,7 @@ Page 130401 "CAL Test Tool"
                     StyleExpr = NameEmphasize;
                     ToolTip = 'Specifies the name of the test tool.';
                 }
-                field("Hit Objects";"Hit Objects")
+                field("Hit Objects"; Rec."Hit Objects")
                 {
                     ApplicationArea = All;
                     BlankZero = true;
@@ -82,10 +82,10 @@ Page 130401 "CAL Test Tool"
                     var
                         CALTestCoverageMap: Record "CAL Test Coverage Map";
                     begin
-                        CALTestCoverageMap.ShowHitObjects("Test Codeunit");
+                        CALTestCoverageMap.ShowHitObjects(Rec."Test Codeunit");
                     end;
                 }
-                field(Run;Run)
+                field(Run; Rec.Run)
                 {
                     ApplicationArea = All;
 
@@ -94,7 +94,7 @@ Page 130401 "CAL Test Tool"
                         CurrPage.Update(true);
                     end;
                 }
-                field(Result;Result)
+                field(Result; Rec.Result)
                 {
                     ApplicationArea = All;
                     BlankZero = true;
@@ -102,7 +102,7 @@ Page 130401 "CAL Test Tool"
                     Style = Favorable;
                     StyleExpr = ResultEmphasize;
                 }
-                field("First Error";"First Error")
+                field("First Error"; Rec."First Error")
                 {
                     ApplicationArea = All;
                     DrillDown = true;
@@ -112,10 +112,10 @@ Page 130401 "CAL Test Tool"
 
                     trigger OnDrillDown()
                     begin
-                        ShowTestResults
+                        Rec.ShowTestResults
                     end;
                 }
-                field(Duration;"Finish Time" - "Start Time")
+                field(Duration; Rec."Finish Time" - Rec."Start Time")
                 {
                     ApplicationArea = All;
                     Caption = 'Duration';
@@ -123,28 +123,28 @@ Page 130401 "CAL Test Tool"
             }
             group(Control14)
             {
-                field(SuccessfulTests;Success)
+                field(SuccessfulTests; Success)
                 {
                     ApplicationArea = All;
                     AutoFormatType = 1;
                     Caption = 'Successful Tests';
                     Editable = false;
                 }
-                field(FailedTests;Failure)
+                field(FailedTests; Failure)
                 {
                     ApplicationArea = All;
                     AutoFormatType = 1;
                     Caption = 'Failed Tests';
                     Editable = false;
                 }
-                field(SkippedTests;Skipped)
+                field(SkippedTests; Skipped)
                 {
                     ApplicationArea = All;
                     AutoFormatType = 1;
                     Caption = 'Skipped Tests';
                     Editable = false;
                 }
-                field(NotExecutedTests;NotExecuted)
+                field(NotExecutedTests; NotExecuted)
                 {
                     ApplicationArea = All;
                     AutoFormatType = 1;
@@ -178,7 +178,7 @@ Page 130401 "CAL Test Tool"
                     begin
                         CurrPage.SetSelectionFilter(CALTestLine);
                         CALTestLine.DeleteAll(true);
-                        CalcTestResults(Success,Failure,Skipped,NotExecuted);
+                        Rec.CalcTestResults(Success, Failure, Skipped, NotExecuted);
                         CurrPage.Update(false);
                     end;
                 }
@@ -236,7 +236,7 @@ Page 130401 "CAL Test Tool"
                         CALTestMgt: Codeunit "CAL Test Management";
                     begin
                         CurrPage.SetSelectionFilter(SelectedCALTestLine);
-                        SelectedCALTestLine.SetRange("Test Suite","Test Suite");
+                        SelectedCALTestLine.SetRange("Test Suite", Rec."Test Suite");
                         CALTestMgt.RunSelected(SelectedCALTestLine);
                         CurrPage.Update(false);
                     end;
@@ -269,7 +269,7 @@ Page 130401 "CAL Test Tool"
                     var
                         CALTestMgt: Codeunit "CAL Test Management";
                     begin
-                        CALTestMgt.RunSuite(Rec,false);
+                        CALTestMgt.RunSuite(Rec, false);
                         CurrPage.Update(false);
                     end;
                 }
@@ -355,31 +355,31 @@ Page 130401 "CAL Test Tool"
 
     trigger OnAfterGetRecord()
     begin
-        CalcTestResults(Success,Failure,Skipped,NotExecuted);
-        NameIndent := "Line Type";
-        LineTypeEmphasize := "Line Type" in ["line type"::Group,"line type"::Codeunit];
-        TestCodeunitEmphasize := "Line Type" = "line type"::Codeunit;
-        NameEmphasize := "Line Type" = "line type"::Group;
-        ResultEmphasize := Result = Result::Success;
-        if "Line Type" <> "line type"::Codeunit then
-          "Hit Objects" := 0;
+        Rec.CalcTestResults(Success, Failure, Skipped, NotExecuted);
+        NameIndent := Rec."Line Type";
+        LineTypeEmphasize := Rec."Line Type" in [Rec."line type"::Group, Rec."line type"::Codeunit];
+        TestCodeunitEmphasize := Rec."Line Type" = Rec."line type"::Codeunit;
+        NameEmphasize := Rec."Line Type" = Rec."line type"::Group;
+        ResultEmphasize := Rec.Result = Rec.Result::Success;
+        if Rec."Line Type" <> Rec."line type"::Codeunit then
+            Rec."Hit Objects" := 0;
     end;
 
     trigger OnOpenPage()
     begin
         if not CALTestSuite.Get(CurrentSuiteName) then
-          if CALTestSuite.FindFirst then
-            CurrentSuiteName := CALTestSuite.Name
-          else begin
-            CreateTestSuite(CurrentSuiteName);
-            Commit;
-          end;
+            if CALTestSuite.FindFirst then
+                CurrentSuiteName := CALTestSuite.Name
+            else begin
+                CreateTestSuite(CurrentSuiteName);
+                Commit;
+            end;
 
-        FilterGroup(2);
-        SetRange("Test Suite",CurrentSuiteName);
-        FilterGroup(0);
+        Rec.FilterGroup(2);
+        Rec.SetRange("Test Suite", CurrentSuiteName);
+        Rec.FilterGroup(0);
 
-        if Find('-') then;
+        if Rec.Find('-') then;
         CurrPage.Update(false);
 
         CALTestSuite.Get(CurrentSuiteName);
@@ -408,12 +408,12 @@ Page 130401 "CAL Test Tool"
         CALTestLine: Record "CAL Test Line";
     begin
         if CALTestSuite.Name <> '' then
-          CALTestLine.SetRange("Test Suite",CALTestSuite.Name);
+            CALTestLine.SetRange("Test Suite", CALTestSuite.Name);
 
-        CALTestLine.ModifyAll(Result,Result::" ");
-        CALTestLine.ModifyAll("First Error",'');
-        CALTestLine.ModifyAll("Start Time",0DT);
-        CALTestLine.ModifyAll("Finish Time",0DT);
+        CALTestLine.ModifyAll(Result, Rec.Result::" ");
+        CALTestLine.ModifyAll("First Error", '');
+        CALTestLine.ModifyAll("Start Time", 0DT);
+        CALTestLine.ModifyAll("Finish Time", 0DT);
     end;
 
     local procedure FindError(Which: Code[10])
@@ -421,9 +421,9 @@ Page 130401 "CAL Test Tool"
         CALTestLine: Record "CAL Test Line";
     begin
         CALTestLine.Copy(Rec);
-        CALTestLine.SetRange(Result,Result::Failure);
+        CALTestLine.SetRange(Result, Rec.Result::Failure);
         if CALTestLine.Find(Which) then
-          Rec := CALTestLine;
+            Rec := CALTestLine;
     end;
 
     local procedure CreateTestSuite(var NewSuiteName: Code[10])
@@ -439,9 +439,9 @@ Page 130401 "CAL Test Tool"
     begin
         CurrPage.SaveRecord;
 
-        FilterGroup(2);
-        SetRange("Test Suite",CurrentSuiteName);
-        FilterGroup(0);
+        Rec.FilterGroup(2);
+        Rec.SetRange("Test Suite", CurrentSuiteName);
+        Rec.FilterGroup(0);
 
         CurrPage.Update(false);
     end;

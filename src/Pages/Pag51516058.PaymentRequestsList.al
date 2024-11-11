@@ -5,7 +5,7 @@ Page 51516058 "Payment Requests List"
     Editable = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516000;
+    SourceTable = "Payment Header";
     SourceTableView = where("Payment Type" = const(Express), Posted = const(No));
 
     layout
@@ -14,51 +14,51 @@ Page 51516058 "Payment Requests List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Description"; "Payment Description")
+                field("Payment Description"; Rec."Payment Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Amount"; "VAT Amount")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("WithHolding Tax Amount"; "WithHolding Tax Amount")
+                field("VAT Amount"; Rec."VAT Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field("WithHolding Tax Amount"; Rec."WithHolding Tax Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Amount(LCY)"; "Amount(LCY)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Cheque No"; "Cheque No")
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Status; Status)
+                field("Amount(LCY)"; Rec."Amount(LCY)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Cheque No"; Rec."Cheque No")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -192,7 +192,7 @@ Page 51516058 "Payment Requests List"
 
                     trigger OnAction()
                     var
-                        BCSetup: Record UnknownRecord51516038;
+                        BCSetup: Record "Budgetary Control Setup";
                     begin
                         BCSetup.Get;
                         if not BCSetup.Mandatory then
@@ -203,12 +203,12 @@ Page 51516058 "Payment Requests List"
                         //First Check whether other lines are already committed.
                         Commitments.Reset;
                         Commitments.SetRange(Commitments."Document Type", Commitments."document type"::"Payment Voucher");
-                        Commitments.SetRange(Commitments."Document No.", "No.");
+                        Commitments.SetRange(Commitments."Document No.", Rec."No.");
                         if Commitments.Find('-') then begin
                             if Confirm('Lines in this Document appear to be committed do you want to re-commit?', false) = false then begin exit end;
                             Commitments.Reset;
                             Commitments.SetRange(Commitments."Document Type", Commitments."document type"::"Payment Voucher");
-                            Commitments.SetRange(Commitments."Document No.", "No.");
+                            Commitments.SetRange(Commitments."Document No.", Rec."No.");
                             Commitments.DeleteAll;
                         end;
 
@@ -231,11 +231,11 @@ Page 51516058 "Payment Requests List"
 
                         Commitments.Reset;
                         Commitments.SetRange(Commitments."Document Type", Commitments."document type"::"Payment Voucher");
-                        Commitments.SetRange(Commitments."Document No.", "No.");
+                        Commitments.SetRange(Commitments."Document No.", Rec."No.");
                         Commitments.DeleteAll;
 
                         PayLine.Reset;
-                        PayLine.SetRange(PayLine."Received From", "No.");
+                        PayLine.SetRange(PayLine."Received From", Rec."No.");
                         if PayLine.Find('-') then begin
                             repeat
                                 PayLine."Cashier Bank Account" := false;
@@ -265,10 +265,10 @@ Page 51516058 "Payment Requests List"
 
                         //IF Status=Status::Pending THEN
                         //ERROR('You cannot Print until the document is released for approval');
-                        Reset;
-                        SetFilter("No.", "No.");
+                        Rec.Reset;
+                        Rec.SetFilter("No.", Rec."No.");
                         Report.Run(55903, true, true, Rec);
-                        Reset;
+                        Rec.Reset;
 
                         CurrPage.Update;
                         CurrPage.SaveRecord;
@@ -282,14 +282,14 @@ Page 51516058 "Payment Requests List"
 
                     trigger OnAction()
                     var
-                        FilterbyPayline: Record UnknownRecord51516001;
+                        FilterbyPayline: Record 51516001;
                     begin
-                        if Status = Status::"Pending Approval" then
+                        if Rec.Status = Rec.Status::"Pending Approval" then
                             Error('You cannot Print until the document is released for approval');
                         FilterbyPayline.Reset;
-                        FilterbyPayline.SetFilter(FilterbyPayline."Received From", "No.");
+                        FilterbyPayline.SetFilter(FilterbyPayline."Received From", Rec."No.");
                         Report.Run(56007, true, true, FilterbyPayline);
-                        Reset;
+                        Rec.Reset;
                     end;
                 }
                 separator(Action1102755019)
@@ -309,13 +309,13 @@ Page 51516058 "Payment Requests List"
                         Text000: label 'Are you sure you want to cancel this Document?';
                         Text001: label 'You have selected not to Cancel the Document';
                     begin
-                        TestField(Status, Status::Approved);
+                        Rec.TestField(Status, Rec.Status::Approved);
                         if Confirm(Text000, true) then begin
                             //Post Reversal Entries for Commitments
                             Doc_Type := Doc_type::"Payment Voucher";
-                            CheckBudgetAvail.ReverseEntries(Doc_Type, "No.");
+                            CheckBudgetAvail.ReverseEntries(Doc_Type, Rec."No.");
                             //Status:=Status::Cancelled;
-                            Modify;
+                            Rec.Modify;
                         end else
                             Error(Text001);
                     end;
@@ -328,9 +328,9 @@ Page 51516058 "Payment Requests List"
     begin
 
         if UserMgt.GetPurchasesFilter() <> '' then begin
-            FilterGroup(2);
-            SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
-            FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
+            Rec.FilterGroup(0);
         end;
 
         /*
@@ -344,29 +344,29 @@ Page 51516058 "Payment Requests List"
     end;
 
     var
-        PayLine: Record UnknownRecord51516001;
-        PVUsers: Record UnknownRecord51516039;
+        PayLine: Record 51516001;
+        PVUsers: Record "CshMgt PV Steps Users";
         strFilter: Text[250];
         IntC: Integer;
         IntCount: Integer;
-        Payments: Record UnknownRecord51516000;
-        RecPayTypes: Record UnknownRecord51516032;
-        TarriffCodes: Record UnknownRecord51516033;
+        Payments: Record "Payment Header";
+        RecPayTypes: Record "Funds Transaction Types";
+        TarriffCodes: Record "Funds Tax Codes";
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record UnknownRecord51516035;
+        CashierLinks: Record 51516035;
         LineNo: Integer;
-        Temp: Record UnknownRecord51516035;
+        Temp: Record "Cash Office User Template";
         JTemplate: Code[10];
         JBatch: Code[10];
-        PCheck: Codeunit UnknownCodeunit55483;
+        PCheck: Codeunit "Posting Check FP";
         Post: Boolean;
         strText: Text[100];
-        PVHead: Record UnknownRecord51516000;
+        PVHead: Record "Payment Header";
         BankAcc: Record "Bank Account";
-        CheckBudgetAvail: Codeunit UnknownCodeunit55484;
-        Commitments: Record UnknownRecord51516036;
-        UserMgt: Codeunit UnknownCodeunit55487;
+        CheckBudgetAvail: Codeunit "Budgetary Control";
+        Commitments: Record Committment;
+        UserMgt: Codeunit 55487;
         JournlPosted: Codeunit UnknownCodeunit55486;
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,Load,Discharge,"Express Pv";
@@ -424,7 +424,7 @@ Page 51516058 "Payment Requests List"
         GenJnlLine.Reset;
 
         Payments.Reset;
-        Payments.SetRange(Payments."No.", "No.");
+        Payments.SetRange(Payments."No.", Rec."No.");
         if Payments.Find('-') then begin
             PayLine.Reset;
             PayLine.SetRange(PayLine."Received From", Payments."No.");
@@ -437,29 +437,29 @@ Page 51516058 "Payment Requests List"
             Post := false;
             Post := JournlPosted.PostedSuccessfully();
             if Post then begin
-                Posted := true;
-                Status := Payments.Status::Posted;
-                "Posted By" := UserId;
-                "Date Posted" := Today;
-                "Time Posted" := Time;
-                Modify;
+                Rec.Posted := true;
+                Rec.Status := Payments.Status::Posted;
+                Rec."Posted By" := UserId;
+                Rec."Date Posted" := Today;
+                Rec."Time Posted" := Time;
+                Rec.Modify;
 
                 //Post Reversal Entries for Commitments
                 Doc_Type := Doc_type::"Payment Voucher";
-                CheckBudgetAvail.ReverseEntries(Doc_Type, "No.");
+                CheckBudgetAvail.ReverseEntries(Doc_Type, Rec."No.");
             end;
         end;
     end;
 
 
-    procedure PostHeader(var Payment: Record UnknownRecord51516000)
+    procedure PostHeader(var Payment: Record "Payment Header")
     begin
 
-        if (Payments."Payment Mode" = Payments."payment mode"::Cheque) and ("Cheque Type" = "cheque type"::" ") then
+        if (Payments."Payment Mode" = Payments."payment mode"::Cheque) and (Rec."Cheque Type" = Rec."cheque type"::" ") then
             Error('Cheque type has to be specified');
 
         if Payments."Payment Mode" = Payments."payment mode"::Cheque then begin
-            if (Payments."Cheque No" = '') and ("Cheque Type" = "cheque type"::"Manual Cheque") then begin
+            if (Payments."Cheque No" = '') and (Rec."Cheque Type" = Rec."cheque type"::"Manual Cheque") then begin
                 Error('Please ensure that the cheque number is inserted');
             end;
         end;
@@ -522,18 +522,18 @@ Page 51516058 "Payment Requests List"
         GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
         GenJnlLine."Shortcut Dimension 1 Code" := PayLine."PV Type";
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
-        GenJnlLine."Shortcut Dimension 2 Code" := "Global Dimension 2 Code";
+        GenJnlLine."Shortcut Dimension 2 Code" := Rec."Global Dimension 2 Code";
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
-        GenJnlLine.ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
-        GenJnlLine.ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
+        GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
+        GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
 
         GenJnlLine.Description := CopyStr('Pay To:' + Payments.Payee, 1, 50);
         GenJnlLine.Validate(GenJnlLine.Description);
 
-        if "Payment Mode" <> "payment mode"::Cheque then begin
+        if Rec."Payment Mode" <> Rec."payment mode"::Cheque then begin
             GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::" "
         end else begin
-            if "Cheque Type" = "cheque type"::"Computer Cheque" then
+            if Rec."Cheque Type" = Rec."cheque type"::"Computer Cheque" then
                 GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::"Computer Check"
             else
                 GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::" "
@@ -549,13 +549,13 @@ Page 51516058 "Payment Requests List"
 
     procedure GetAppliedEntries(var LineNo: Integer) InvText: Text[100]
     var
-        Appl: Record UnknownRecord51516037;
+        Appl: Record "CshMgt Application";
     begin
 
         InvText := '';
         Appl.Reset;
         Appl.SetRange(Appl."Document Type", Appl."document type"::PV);
-        Appl.SetRange(Appl."Document No.", "No.");
+        Appl.SetRange(Appl."Document No.", Rec."No.");
         Appl.SetRange(Appl."Line No.", LineNo);
         if Appl.FindFirst then begin
             repeat
@@ -597,7 +597,7 @@ Page 51516058 "Payment Requests List"
 
     procedure LinesCommitmentStatus() Exists: Boolean
     var
-        BCSetup: Record UnknownRecord51516038;
+        BCSetup: Record "Budgetary Control Setup";
     begin
         if BCSetup.Get() then begin
             if not BCSetup.Mandatory then begin
@@ -610,7 +610,7 @@ Page 51516058 "Payment Requests List"
         end;
         Exists := false;
         PayLine.Reset;
-        PayLine.SetRange(PayLine."Received From", "No.");
+        PayLine.SetRange(PayLine."Received From", Rec."No.");
         PayLine.SetRange(PayLine."Cashier Bank Account", false);
         // PayLine.SETRANGE(PayLine."Budgetary Control A/C",TRUE);
         if PayLine.Find('-') then
@@ -620,21 +620,21 @@ Page 51516058 "Payment Requests List"
 
     procedure CheckPVRequiredItems()
     begin
-        if Posted then begin
+        if Rec.Posted then begin
             Error('The Document has already been posted');
         end;
 
-        TestField(Status, Status::Approved);
-        TestField("Bank Account");
-        TestField("Payment Mode");
-        TestField("Payment Release Date");
+        Rec.TestField(Status, Rec.Status::Approved);
+        Rec.TestField("Bank Account");
+        Rec.TestField("Payment Mode");
+        Rec.TestField("Payment Release Date");
         //Confirm whether Bank Has the Cash
-        if "Payment Mode" = "payment mode"::Cash then
+        if Rec."Payment Mode" = Rec."payment mode"::Cash then
             CheckBudgetAvail.CheckFundsAvailability(Rec);
 
         //Confirm Payment Release Date is today);
-        if "Payment Mode" = "payment mode"::Cash then
-            TestField("Payment Release Date", WorkDate);
+        if Rec."Payment Mode" = Rec."payment mode"::Cash then
+            Rec.TestField("Payment Release Date", WorkDate);
 
         /*Check if the user has selected all the relevant fields*/
         Temp.Get(UserId);
@@ -649,13 +649,13 @@ Page 51516058 "Payment Requests List"
             Error('Ensure the PV Batch is set up in the Cash Office Setup')
         end;
 
-        if ("Payment Mode" = "payment mode"::Cheque) and ("Cheque Type" = "cheque type"::"Computer Cheque") then begin
+        if (Rec."Payment Mode" = Rec."payment mode"::Cheque) and (Rec."Cheque Type" = Rec."cheque type"::"Computer Cheque") then begin
             if not Confirm(Text002, false) then
                 Error('You have selected to Abort PV Posting');
         end;
         //Check whether there is any printed cheques and lines not posted
         CheckLedger.Reset;
-        CheckLedger.SetRange(CheckLedger."Document No.", "No.");
+        CheckLedger.SetRange(CheckLedger."Document No.", Rec."No.");
         CheckLedger.SetRange(CheckLedger."Entry Status", CheckLedger."entry status"::Printed);
         if CheckLedger.Find('-') then begin
             //Ask whether to void the printed cheque
@@ -666,13 +666,13 @@ Page 51516058 "Payment Requests List"
             if Confirm(Text000, false, CheckLedger."Check No.") then
                 CheckManagement.VoidCheck(GenJnlLine)
             else
-                Error(Text001, "No.", CheckLedger."Check No.");
+                Error(Text001, Rec."No.", CheckLedger."Check No.");
         end;
 
     end;
 
 
-    procedure PostPV(var Payment: Record UnknownRecord51516000)
+    procedure PostPV(var Payment: Record "Payment Header")
     begin
 
         PayLine.Reset;
@@ -781,7 +781,7 @@ Page 51516058 "Payment Requests List"
                     GenJnlLine.Description := CopyStr('VAT:' + Format(PayLine.Posted) + '::' + Format(PayLine."Time Posted"), 1, 50);
                     GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
                     GenJnlLine."Shortcut Dimension 1 Code" := PayLine."PV Type";
-                    GenJnlLine."Shortcut Dimension 2 Code" := "Global Dimension 2 Code";
+                    GenJnlLine."Shortcut Dimension 2 Code" := Rec."Global Dimension 2 Code";
                     GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
                     GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
                     GenJnlLine.ValidateShortcutDimCode(3, PayLine."Apply to ID");
@@ -833,7 +833,7 @@ Page 51516058 "Payment Requests List"
                     GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
                     GenJnlLine.Description := CopyStr('W/Tax:' + Format(PayLine."Time Posted") + '::' + strText, 1, 50);
                     GenJnlLine."Shortcut Dimension 1 Code" := PayLine."PV Type";
-                    GenJnlLine."Shortcut Dimension 2 Code" := "Global Dimension 2 Code";
+                    GenJnlLine."Shortcut Dimension 2 Code" := Rec."Global Dimension 2 Code";
                     GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
                     GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
                     GenJnlLine.ValidateShortcutDimCode(3, PayLine."Apply to ID");
@@ -878,7 +878,7 @@ Page 51516058 "Payment Requests List"
                 GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
                 GenJnlLine."Shortcut Dimension 1 Code" := PayLine."PV Type";
                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
-                GenJnlLine."Shortcut Dimension 2 Code" := "Global Dimension 2 Code";
+                GenJnlLine."Shortcut Dimension 2 Code" := Rec."Global Dimension 2 Code";
                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
                 GenJnlLine.ValidateShortcutDimCode(3, PayLine."Apply to ID");
                 GenJnlLine.ValidateShortcutDimCode(4, PayLine."No of Units");
@@ -929,7 +929,7 @@ Page 51516058 "Payment Requests List"
                 GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
                 GenJnlLine."Shortcut Dimension 1 Code" := PayLine."PV Type";
                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
-                GenJnlLine."Shortcut Dimension 2 Code" := "Global Dimension 2 Code";
+                GenJnlLine."Shortcut Dimension 2 Code" := Rec."Global Dimension 2 Code";
                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
                 GenJnlLine.ValidateShortcutDimCode(3, PayLine."Apply to ID");
                 GenJnlLine.ValidateShortcutDimCode(4, PayLine."No of Units");
@@ -954,7 +954,7 @@ Page 51516058 "Payment Requests List"
 
 
             //Before posting if paymode is cheque print the cheque
-            if ("Payment Mode" = "payment mode"::Cheque) and ("Cheque Type" = "cheque type"::"Computer Cheque") then begin
+            if (Rec."Payment Mode" = Rec."payment mode"::Cheque) and (Rec."Cheque Type" = Rec."cheque type"::"Computer Cheque") then begin
                 DocPrint.PrintCheck(GenJnlLine);
                 Codeunit.Run(Codeunit::"Adjust Gen. Journal Balance", GenJnlLine);
                 //Confirm Cheque printed //Not necessary.
@@ -981,7 +981,7 @@ Page 51516058 "Payment Requests List"
 
     procedure UpdatePageControls()
     begin
-        if Status <> Status::Approved then begin
+        if Rec.Status <> Rec.Status::Approved then begin
             "Payment Release DateEditable" := false;
             //CurrForm."Paying Bank Account".EDITABLE:=FALSE;
             //CurrForm."Payment Mode".EDITABLE:=FALSE;
@@ -993,10 +993,10 @@ Page 51516058 "Payment Requests List"
             "Payment Release DateEditable" := true;
             //CurrForm."Paying Bank Account".EDITABLE:=TRUE;
             //CurrForm."Payment Mode".EDITABLE:=TRUE;
-            if "Payment Mode" = "payment mode"::Cheque then
+            if Rec."Payment Mode" = Rec."payment mode"::Cheque then
                 "Cheque TypeEditable" := true;
             //CurrForm."Currency Code".EDITABLE:=FALSE;
-            if "Cheque Type" <> "cheque type"::"Computer Cheque" then
+            if Rec."Cheque Type" <> Rec."cheque type"::"Computer Cheque" then
                 "Cheque No.Editable" := true;
             "Invoice Currency CodeEditable" := false;
 
@@ -1004,7 +1004,7 @@ Page 51516058 "Payment Requests List"
         end;
 
 
-        if Status = Status::"Pending Approval" then begin
+        if Rec.Status = Rec.Status::"Pending Approval" then begin
             "Currency CodeEditable" := true;
             GlobalDimension1CodeEditable := true;
             "Payment NarrationEditable" := true;
@@ -1035,11 +1035,11 @@ Page 51516058 "Payment Requests List"
 
     procedure LinesExists(): Boolean
     var
-        PayLines: Record UnknownRecord51516001;
+        PayLines: Record 51516001;
     begin
         HasLines := false;
         PayLines.Reset;
-        PayLines.SetRange(PayLines."Received From", "No.");
+        PayLines.SetRange(PayLines."Received From", Rec."No.");
         if PayLines.Find('-') then begin
             HasLines := true;
             exit(HasLines);
@@ -1049,11 +1049,11 @@ Page 51516058 "Payment Requests List"
 
     procedure AllFieldsEntered(): Boolean
     var
-        PayLines: Record UnknownRecord51516001;
+        PayLines: Record 51516001;
     begin
         AllKeyFieldsEntered := true;
         PayLines.Reset;
-        PayLines.SetRange(PayLines."Received From", "No.");
+        PayLines.SetRange(PayLines."Received From", Rec."No.");
         if PayLines.Find('-') then begin
             repeat
                 if (PayLines."Date Posted" = '') or (PayLines.Remarks <= 0) then
@@ -1066,10 +1066,10 @@ Page 51516058 "Payment Requests List"
 
     procedure CustomerPayLinesExist(): Boolean
     var
-        PayLine: Record UnknownRecord51516001;
+        PayLine: Record 51516001;
     begin
         PayLine.Reset;
-        PayLine.SetRange(PayLine."Received From", "No.");
+        PayLine.SetRange(PayLine."Received From", Rec."No.");
         PayLine.SetRange(PayLine.Posted, PayLine.Posted::"1");
         exit(PayLine.FindFirst);
     end;
@@ -1080,13 +1080,13 @@ Page 51516058 "Payment Requests List"
         UpdatePageControls();
 
         //Set the filters here
-        SetRange(Posted, false);
-        SetRange("Payment Type", "payment type"::Normal);
-        SetFilter(Status, '<>Cancelled');
+        Rec.SetRange(Posted, false);
+        Rec.SetRange("Payment Type", Rec."payment type"::Normal);
+        Rec.SetFilter(Rec.Status, '<>Cancelled');
     end;
 
 
-    procedure SetSelection(var Collection: Record UnknownRecord51516000)
+    procedure SetSelection(var Collection: Record 51516000)
     begin
         CurrPage.SetSelectionFilter(Collection);
     end;

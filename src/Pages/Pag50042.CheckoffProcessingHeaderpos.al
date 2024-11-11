@@ -513,7 +513,7 @@ Page 50042 "Checkoff Processing Header-pos"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = "Funds Transaction Types";
-    SourceTableView = where(Posted=const(No));
+    SourceTableView = where(Posted = const(No));
 
     layout
     {
@@ -521,168 +521,168 @@ Page 50042 "Checkoff Processing Header-pos"
         {
             group(General)
             {
-                field(No;No)
+                field(No; No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entered By";"Entered By")
+                field("Entered By"; "Entered By")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Date Entered";"Date Entered")
+                field("Date Entered"; "Date Entered")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting date";"Posting date")
+                field("Posting date"; "Posting date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Loan CutOff Date";"Loan CutOff Date")
+                field("Loan CutOff Date"; "Loan CutOff Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks;Remarks)
+                field(Remarks; Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Count";"Total Count")
+                field("Total Count"; "Total Count")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By";"Posted By")
+                field("Posted By"; "Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type";"Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No";"Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Name";"Employer Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Document No";"Document No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Posted;Posted)
+                field("Employer Name"; "Employer Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount;Amount)
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheduled Amount";"Scheduled Amount")
+                field(Posted; Posted)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Amount; Amount)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Scheduled Amount"; "Scheduled Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Interest Amount";"Interest Amount")
+                field("Interest Amount"; "Interest Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("ALL TOTAL AMOUNT";"ALL TOTAL AMOUNT")
+                field("ALL TOTAL AMOUNT"; "ALL TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
             }
-            part("Checkoff Lines-Distributed";"Checkoff Proc Lines-D")
+            part("Checkoff Lines-Distributed"; "Checkoff Proc Lines-D")
             {
                 Caption = 'Checkoff Lines-Distributed';
-                SubPageLink = "Receipt Header No"=field(No);
+                SubPageLink = "Receipt Header No" = field(No);
             }
             group("Total Amount")
             {
-                field("Dev Total Amount";"Dev Total Amount")
+                field("Dev Total Amount"; "Dev Total Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Dev1 Total Amount";"Dev1 Total Amount")
+                field("Dev1 Total Amount"; "Dev1 Total Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Norm Total Amount";"Norm Total Amount")
+                field("Norm Total Amount"; "Norm Total Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Norm 1 TOTAL AMOUNT";"Norm 1 TOTAL AMOUNT")
+                field("Norm 1 TOTAL AMOUNT"; "Norm 1 TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("INVEST TOTAL AMOUNT";"INVEST TOTAL AMOUNT")
+                field("INVEST TOTAL AMOUNT"; "INVEST TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SUPER SCH TOTAL AMOUNT";"SUPER SCH TOTAL AMOUNT")
+                field("SUPER SCH TOTAL AMOUNT"; "SUPER SCH TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("EMER TOTAL AMOUNT";"EMER TOTAL AMOUNT")
+                field("EMER TOTAL AMOUNT"; "EMER TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SCH TOTAL AMOUNT";"SCH TOTAL AMOUNT")
+                field("SCH TOTAL AMOUNT"; "SCH TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SUPER EMER TOTAL AMOUNT";"SUPER EMER TOTAL AMOUNT")
+                field("SUPER EMER TOTAL AMOUNT"; "SUPER EMER TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SUPER QUICK TOTAL AMOUNT";"SUPER QUICK TOTAL AMOUNT")
+                field("SUPER QUICK TOTAL AMOUNT"; "SUPER QUICK TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("QUICK TOTAL AMOUNT";"QUICK TOTAL AMOUNT")
+                field("QUICK TOTAL AMOUNT"; "QUICK TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SHARE TOTAL AMOUNT";"SHARE TOTAL AMOUNT")
+                field("SHARE TOTAL AMOUNT"; "SHARE TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("DEPOSIT TOTAL AMOUNT";"DEPOSIT TOTAL AMOUNT")
+                field("DEPOSIT TOTAL AMOUNT"; "DEPOSIT TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("INSURANCE TOTAL AMOUNT";"INSURANCE TOTAL AMOUNT")
+                field("INSURANCE TOTAL AMOUNT"; "INSURANCE TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("REG TOTAL AMOUNT";"REG TOTAL AMOUNT")
+                field("REG TOTAL AMOUNT"; "REG TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("BEVELONANT TOTAL AMOUNT";"BEVELONANT TOTAL AMOUNT")
+                field("BEVELONANT TOTAL AMOUNT"; "BEVELONANT TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -723,9 +723,9 @@ Page 50042 "Checkoff Processing Header-pos"
                 var
                     ObjCheckOffLines: Record UnknownRecord51516415;
                 begin
-                    
-                    
-                    
+
+
+
                     /*
                     ObjCheckOffLines.RESET;
                     ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Receipt Header No",No);
@@ -780,17 +780,17 @@ Page 50042 "Checkoff Processing Header-pos"
                 var
                     ObjGenBatch: Record "Gen. Journal Batch";
                 begin
-                      if Amount<> "ALL TOTAL AMOUNT" then
-                      Error('Amount must equal Group Total');
+                    if Amount <> "ALL TOTAL AMOUNT" then
+                        Error('Amount must equal Group Total');
 
 
-                    JBatchs:='CHECKOFF';
+                    JBatchs := 'CHECKOFF';
 
                     FnClearBatch();
                     //FnPostPrinciple();
                     ///FnPostInterestPaid();
 
-                    FnPostchechoff ();
+                    FnPostchechoff();
 
 
                     FnPostFOSA();
@@ -813,11 +813,11 @@ Page 50042 "Checkoff Processing Header-pos"
 
                 trigger OnAction()
                 begin
-                    if Confirm('Are you sure you want to mark this Checkoff as Posted.Once Marked as posted it will go to posted. ?',false)=true then begin
-                     Posted:=true;
-                    "Posted By":=UserId;
-                    "Posting date":=Today;
-                    Modify;
+                    if Confirm('Are you sure you want to mark this Checkoff as Posted.Once Marked as posted it will go to posted. ?', false) = true then begin
+                        Posted := true;
+                        "Posted By" := UserId;
+                        "Posting date" := Today;
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -834,12 +834,12 @@ Page 50042 "Checkoff Processing Header-pos"
                 begin
 
 
-                      checkheadreg.Reset;
-                      checkheadreg.SetRange(checkheadreg.No,No);
-                      if checkheadreg.Find ('-') then
-                       // "ALL TOTAL AMOUNT":="Dev Total Amount"+"Norm Total Amount"+"Dev1 Total Amount"+"Norm 1 TOTAL AMOUNT";
-                        "ALL TOTAL AMOUNT":="Dev Total Amount"+"Dev1 Total Amount"+"EMER TOTAL AMOUNT"+"SUPER EMER TOTAL AMOUNT"+"SUPER SCH TOTAL AMOUNT"+"SCH TOTAL AMOUNT"+"Norm 1 TOTAL AMOUNT"+"Norm Total Amount"+"INVEST TOTAL AMOUNT"+"QUICK TOTAL AMOUNT"+
-                       +"SUPER QUICK TOTAL AMOUNT"+"DEPOSIT TOTAL AMOUNT"+"SHARE TOTAL AMOUNT"+"BEVELONANT TOTAL AMOUNT"+"REG TOTAL AMOUNT"+"INSURANCE TOTAL AMOUNT";
+                    checkheadreg.Reset;
+                    checkheadreg.SetRange(checkheadreg.No, No);
+                    if checkheadreg.Find('-') then
+                        // "ALL TOTAL AMOUNT":="Dev Total Amount"+"Norm Total Amount"+"Dev1 Total Amount"+"Norm 1 TOTAL AMOUNT";
+                        "ALL TOTAL AMOUNT" := "Dev Total Amount" + "Dev1 Total Amount" + "EMER TOTAL AMOUNT" + "SUPER EMER TOTAL AMOUNT" + "SUPER SCH TOTAL AMOUNT" + "SCH TOTAL AMOUNT" + "Norm 1 TOTAL AMOUNT" + "Norm Total Amount" + "INVEST TOTAL AMOUNT" + "QUICK TOTAL AMOUNT" +
+                       +"SUPER QUICK TOTAL AMOUNT" + "DEPOSIT TOTAL AMOUNT" + "SHARE TOTAL AMOUNT" + "BEVELONANT TOTAL AMOUNT" + "REG TOTAL AMOUNT" + "INSURANCE TOTAL AMOUNT";
 
                 end;
             }
@@ -848,8 +848,8 @@ Page 50042 "Checkoff Processing Header-pos"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-           "Posting date":=Today;
-           "Date Entered":=Today;
+        "Posting date" := Today;
+        "Date Entered" := Today;
     end;
 
     var
@@ -908,43 +908,42 @@ Page 50042 "Checkoff Processing Header-pos"
     begin
 
 
-            ObjCheckOffLines.TestField("Loan No.");
-            ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-            //ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Utility Type",'REPAYMENT');
-             /// ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'380');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.TestField("Loan No.");
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        //ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Utility Type",'REPAYMENT');
+        /// ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'380');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::"8";
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::"8";
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-ObjCheckOffLines.Amount;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -ObjCheckOffLines.Amount;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=ObjCheckOffLines."Loan No.";
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline."Loan No" := ObjCheckOffLines."Loan No.";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
                 //Gnljnline."Shortcut Dimension 1 Code":=FORMAT('%1',ObjCheckOffLines."Unallocated Fund");
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostInterestPaid()
     var
         ObjCheckOffLines: Record "Funds Tax Codes";
     begin
-        TestField("Posting date");
+        TestField(R"Posting date");
         TestField("Account No");
         TestField("Document No");
         TestField(Remarks);
@@ -952,1527 +951,1490 @@ Page 50042 "Checkoff Processing Header-pos"
 
 
         //================ registration fee contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Registration Fee",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Registration Fee";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Registration Fee", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Registration Fee";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Registration Fee";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Registration Fee";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ Registraation fee contribution end========================
+        //================ Registraation fee contribution end========================
 
 
 
         //================ insurance fund contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Insurance Fee",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Insurance Fee";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Insurance Fee", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Insurance Fee";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Insurance Contribution";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Insurance Contribution";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ Insurance fund contribution end========================
+        //================ Insurance fund contribution end========================
 
 
         //================ benevolent fund contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Benevolent Fund",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Benevolent Fund";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Benevolent Fund", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Benevolent Fund";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Benevolent Fund";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Benevolent Fund";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ benevolent fund contribution end========================
+        //================ benevolent fund contribution end========================
         //================ share capital contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Share Capital",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Share Capital";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Share Capital", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Share Capital";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Share Capital";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Share Capital";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ share capital contribution end========================
+        //================ share capital contribution end========================
 
 
         //================ deposit contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Deposit Contribution",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Deposit Contribution";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Deposit Contribution", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Deposit Contribution";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Deposit Contribution";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Deposit Contribution";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ deposit contribution end========================
+        //================ deposit contribution end========================
 
         //polytech start loans
 
-         //================ development loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."DEVELOPMENT LOAN Amount";
+        //================ development loan amount cal start========================1
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."DEVELOPMENT LOAN Amount";
 
-        // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //        ObjLoans.RESET;
-        // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //        ObjLoans.SETFILTER("Loan Product Type",'%1','20');
-        // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //        IF ObjLoans.FINDSET THEN
-        // //          BEGIN
-        // //            //VarLoanNo:=ObjLoans."Loan  No.";
-        // //            VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN No";
-        // //            END;
-        // //
-        // //        IF ObjCheckOffLines."DEVELOPMENT LOAN Int"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN Int"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        ///..............................................................cj
-         InterestBal:=0;
-                Varp:=0;
+                // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //        ObjLoans.RESET;
+                // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //        ObjLoans.SETFILTER("Loan Product Type",'%1','20');
+                // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //        IF ObjLoans.FINDSET THEN
+                // //          BEGIN
+                // //            //VarLoanNo:=ObjLoans."Loan  No.";
+                // //            VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN No";
+                // //            END;
+                // //
+                // //        IF ObjCheckOffLines."DEVELOPMENT LOAN Int"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN Int"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                ///..............................................................cj
+                InterestBal := 0;
+                Varp := 0;
                 LoansApp.Reset;
-                LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                LoansApp.SetFilter("Loan Product Type",'%1','20');
-                LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."DEVELOPMENT LOAN No");
-               LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-                if LoansApp.FindSet then
-                   begin
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '20');
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."DEVELOPMENT LOAN No");
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
 
-                LoansApp.CalcFields("Oustanding Interest");
-                   InterestBal:=LoansApp."Oustanding Interest";
-                    VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN No";
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."DEVELOPMENT LOAN No";
+                end;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
                     end;
-              if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
 
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //        VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."DEVELOPMENT LOAN Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
+                //=====================================================================================principal repayment
+                // //        VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."DEVELOPMENT LOAN Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
 
-                VarAmounttodeduct:=0;
-                   VarAmounttodeduct:=Varp;
-                    VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN No";
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
+                VarLoanNo := ObjCheckOffLines."DEVELOPMENT LOAN No";
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 //END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ development loan amount cal end========================
+        //================ development loan amount cal end========================
 
         //................................................................................... Development loan 1
         //================ development loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-           // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount",'>%1',0);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount",'>%1',0);
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount",'>%1',0);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount", '>%1', 0);
 
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount";
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount";
 
-        // // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // // //
-        // // //        ObjLoans.RESET;
-        // // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // // //        ObjLoans.SETFILTER("Loan Product Type",'%1','20');
-        // // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // // //        IF ObjLoans.FINDSET THEN
-        // // //          BEGIN
-        // // //            //VarLoanNo:=ObjLoans."Loan  No.";
-        // // //            VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN 1  No";
-        // // //            END;
-        // // //        IF ObjCheckOffLines."DEVELOPMENT LOAN 1  Int"< VarRunningBalance THEN
-        // // //          VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN 1  Int"
-        // // //        ELSE
-        // // //          VarAmounttodeduct:=VarRunningBalance;
-        ///.........................................................................cj
-          InterestBal:=0;
-                Varp:=0;
+                // // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // // //
+                // // //        ObjLoans.RESET;
+                // // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // // //        ObjLoans.SETFILTER("Loan Product Type",'%1','20');
+                // // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // // //        IF ObjLoans.FINDSET THEN
+                // // //          BEGIN
+                // // //            //VarLoanNo:=ObjLoans."Loan  No.";
+                // // //            VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN 1  No";
+                // // //            END;
+                // // //        IF ObjCheckOffLines."DEVELOPMENT LOAN 1  Int"< VarRunningBalance THEN
+                // // //          VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN 1  Int"
+                // // //        ELSE
+                // // //          VarAmounttodeduct:=VarRunningBalance;
+                ///.........................................................................cj
+                InterestBal := 0;
+                Varp := 0;
                 LoansApp.Reset;
-                LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                LoansApp.SetFilter("Loan Product Type",'%1','23');
-                LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."DEVELOPMENT LOAN 1  No");
-               LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-                if LoansApp.FindSet then
-                   begin
-                LoansApp.CalcFields("Oustanding Interest");
-                   InterestBal:=LoansApp."Oustanding Interest";
-                   VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN 1  No";
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '23');
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."DEVELOPMENT LOAN 1  No");
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."DEVELOPMENT LOAN 1  No";
 
+                end;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
                     end;
-                     if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
 
                 //===================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        //        VarAmounttodeduct:=0;
-        //        IF VarRunningBalance>0 THEN
-        //          BEGIN
-        //            IF ObjCheckOffLines."DEVELOPMENT LOAN 1 Principal"< VarRunningBalance THEN
-        //              VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN 1 Principal"
-        //            ELSE
-        //              VarAmounttodeduct:=VarRunningBalance;
+                //=====================================================================================principal repayment
+                //        VarAmounttodeduct:=0;
+                //        IF VarRunningBalance>0 THEN
+                //          BEGIN
+                //            IF ObjCheckOffLines."DEVELOPMENT LOAN 1 Principal"< VarRunningBalance THEN
+                //              VarAmounttodeduct:=ObjCheckOffLines."DEVELOPMENT LOAN 1 Principal"
+                //            ELSE
+                //              VarAmounttodeduct:=VarRunningBalance;
 
-         VarAmounttodeduct:=0;
-                   VarAmounttodeduct:=Varp;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-               // END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                // END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
         //================ emergency loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."EMERGENCY LOAN Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."EMERGENCY LOAN Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."EMERGENCY LOAN Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."EMERGENCY LOAN Amount";
 
-        //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        //
-        //        ObjLoans.RESET;
-        //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        //        ObjLoans.SETFILTER("Loan Product Type",'%1','12');
-        //        ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        //        IF ObjLoans.FINDSET THEN
-        //          BEGIN
-        //            //VarLoanNo:=ObjLoans."Loan  No.";
-        //            VarLoanNo:=ObjCheckOffLines."EMERGENCY LOAN No";
-        //            END;
-        //
-        //        IF ObjCheckOffLines."EMERGENCY LOAN Int"<VarRunningBalance THEN
-        //          VarAmounttodeduct:=ObjCheckOffLines."EMERGENCY LOAN Int"
-        //         ELSE
-        //          VarAmounttodeduct:=VarRunningBalance;
-           ///.........................................................................................cj
-               InterestBal:=0;
-                Varp:=0;
+                //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                //
+                //        ObjLoans.RESET;
+                //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                //        ObjLoans.SETFILTER("Loan Product Type",'%1','12');
+                //        ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                //        IF ObjLoans.FINDSET THEN
+                //          BEGIN
+                //            //VarLoanNo:=ObjLoans."Loan  No.";
+                //            VarLoanNo:=ObjCheckOffLines."EMERGENCY LOAN No";
+                //            END;
+                //
+                //        IF ObjCheckOffLines."EMERGENCY LOAN Int"<VarRunningBalance THEN
+                //          VarAmounttodeduct:=ObjCheckOffLines."EMERGENCY LOAN Int"
+                //         ELSE
+                //          VarAmounttodeduct:=VarRunningBalance;
+                ///.........................................................................................cj
+                InterestBal := 0;
+                Varp := 0;
                 LoansApp.Reset;
-                LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                LoansApp.SetFilter("Loan Product Type",'%1','12');
-                LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."EMERGENCY LOAN No");
-               LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-                if LoansApp.FindSet then
-                   begin
-                LoansApp.CalcFields("Oustanding Interest");
-                   InterestBal:=LoansApp."Oustanding Interest";
-                    VarLoanNo:=ObjCheckOffLines."EMERGENCY LOAN No";
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '12');
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."EMERGENCY LOAN No");
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."EMERGENCY LOAN No";
+                end;
+                // //            Varp:=VarRunningBalance-InterestBal;
+                // //            VarAmounttodeduct:=VarRunningBalance-Varp;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
                     end;
-        // //            Varp:=VarRunningBalance-InterestBal;
-        // //            VarAmounttodeduct:=VarRunningBalance-Varp;
-                     if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
                 //Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Loan No":=ObjCheckOffLines."EMERGENCY LOAN No";
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := ObjCheckOffLines."EMERGENCY LOAN No";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        ////       VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."EMERGENCY LOAN Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."EMERGENCY LOAN Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-                   VarAmounttodeduct:=0;
-                   VarAmounttodeduct:=Varp;
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Loan No":=ObjCheckOffLines."EMERGENCY LOAN No";
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-               // END;
+                //=====================================================================================principal repayment
+                ////       VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."EMERGENCY LOAN Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."EMERGENCY LOAN Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                //Gnljnline."Loan No":=VarLoanNo;
+                Gnljnline."Loan No" := ObjCheckOffLines."EMERGENCY LOAN No";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                // END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ emergency loan amount cal end========================
+        //================ emergency loan amount cal end========================
 
         //================  school fees loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."SCHOOL FEES LOAN Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."SCHOOL FEES LOAN Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."SCHOOL FEES LOAN Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."SCHOOL FEES LOAN Amount";
 
-        // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //        ObjLoans.RESET;
-        // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //        ObjLoans.SETFILTER("Loan Product Type",'%1','17');
-        // //       // ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //        IF ObjLoans.FINDSET THEN
-        // //          BEGIN
-        // //            //VarLoanNo:=ObjLoans."Loan  No.";
-        // //            VarLoanNo:=ObjCheckOffLines."SCHOOL FEES LOAN No";
-        // //            END;
-        // //
-        // //        IF ObjCheckOffLines."SCHOOL FEES LOAN Int"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."SCHOOL FEES LOAN Int"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        ///.............................................................................cj
-           InterestBal:=0;
-                Varp:=0;
+                // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //        ObjLoans.RESET;
+                // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //        ObjLoans.SETFILTER("Loan Product Type",'%1','17');
+                // //       // ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //        IF ObjLoans.FINDSET THEN
+                // //          BEGIN
+                // //            //VarLoanNo:=ObjLoans."Loan  No.";
+                // //            VarLoanNo:=ObjCheckOffLines."SCHOOL FEES LOAN No";
+                // //            END;
+                // //
+                // //        IF ObjCheckOffLines."SCHOOL FEES LOAN Int"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."SCHOOL FEES LOAN Int"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                ///.............................................................................cj
+                InterestBal := 0;
+                Varp := 0;
                 LoansApp.Reset;
-                LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                LoansApp.SetFilter("Loan Product Type",'%1','17');
-               LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-                if LoansApp.FindSet then
-                   begin
-                LoansApp.CalcFields("Oustanding Interest");
-                   InterestBal:=LoansApp."Oustanding Interest";
-                    VarLoanNo:=ObjCheckOffLines."SCHOOL FEES LOAN No";
-                    end;
-        // //            Varp:=VarRunningBalance-InterestBal;
-        // //            VarAmounttodeduct:=VarRunningBalance-Varp;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '17');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."SCHOOL FEES LOAN No";
+                end;
+                // //            Varp:=VarRunningBalance-InterestBal;
+                // //            VarAmounttodeduct:=VarRunningBalance-Varp;
 
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
                 //Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Loan No":=ObjCheckOffLines."SCHOOL FEES LOAN No";
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := ObjCheckOffLines."SCHOOL FEES LOAN No";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //        VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."SCHOOL FEES LOAN Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."SCHOOL FEES LOAN Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
+                //=====================================================================================principal repayment
+                // //        VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."SCHOOL FEES LOAN Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."SCHOOL FEES LOAN Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
 
-        VarAmounttodeduct:=0;
-                   VarAmounttodeduct:=Varp;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Loan No":=ObjCheckOffLines."SCHOOL FEES LOAN No";
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-               // END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                //Gnljnline."Loan No":=VarLoanNo;
+                Gnljnline."Loan No" := ObjCheckOffLines."SCHOOL FEES LOAN No";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                // END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ school fees loan amount cal end========================
+        //================ school fees loan amount cal end========================
 
 
 
 
         //================  super emergency loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Emergency Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Super Emergency Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Emergency Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Super Emergency Amount";
 
-        // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //        ObjLoans.RESET;
-        // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //        ObjLoans.SETFILTER("Loan Product Type",'%1','13');
-        // //        ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //        IF ObjLoans.FINDSET THEN
-        // //          BEGIN
-        // //            VarLoanNo:=ObjCheckOffLines."Super Emergency Loan No";
-        // //            END;
-        // //
-        // //        IF ObjCheckOffLines."Super Emergency Int"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Super Emergency Int"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        ///...................................................................cj
-          InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','13');
-             LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest");
-             InterestBal:=LoansApp."Oustanding Interest";
-             VarLoanNo:=ObjCheckOffLines."Super Emergency Loan No";
-                 end;
+                // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //        ObjLoans.RESET;
+                // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //        ObjLoans.SETFILTER("Loan Product Type",'%1','13');
+                // //        ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //        IF ObjLoans.FINDSET THEN
+                // //          BEGIN
+                // //            VarLoanNo:=ObjCheckOffLines."Super Emergency Loan No";
+                // //            END;
+                // //
+                // //        IF ObjCheckOffLines."Super Emergency Int"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Super Emergency Int"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                ///...................................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '13');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."Super Emergency Loan No";
+                end;
 
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
+                // //     Varp:=VarRunningBalance-InterestBal;
+                // //     VarAmounttodeduct:=VarRunningBalance-Varp;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //        VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."Super Emergency Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Super Emergency Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-         VarAmounttodeduct:=0;
-         VarAmounttodeduct:=Varp;
+                //=====================================================================================principal repayment
+                // //        VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."Super Emergency Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Super Emergency Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-              //  END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                //  END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ super emergency loan amount cal end========================
+        //================ super emergency loan amount cal end========================
 
 
 
         //================  super quick loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Quick Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Super Quick Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Quick Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Super Quick Amount";
 
-        // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //        ObjLoans.RESET;
-        // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //        ObjLoans.SETFILTER("Loan Product Type",'%1','16');
-        // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //        IF ObjLoans.FINDSET THEN
-        // //          BEGIN
-        // //            VarLoanNo:=ObjCheckOffLines."Super Quick Loan No";
-        // //            END;
-        // //
-        // //        IF ObjCheckOffLines."Super Quick Int"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Super Quick Int"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        ///.........................................................................cj
-         InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','16');
-             LoansApp.SetFilter("Oustanding Interest",'>%1',0);
+                // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //        ObjLoans.RESET;
+                // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //        ObjLoans.SETFILTER("Loan Product Type",'%1','16');
+                // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //        IF ObjLoans.FINDSET THEN
+                // //          BEGIN
+                // //            VarLoanNo:=ObjCheckOffLines."Super Quick Loan No";
+                // //            END;
+                // //
+                // //        IF ObjCheckOffLines."Super Quick Int"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Super Quick Int"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                ///.........................................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '16');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
 
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest");
-             InterestBal:=LoansApp."Oustanding Interest";
-             VarLoanNo:=ObjCheckOffLines."Super Quick Loan No";
-                 end;
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."Super Quick Loan No";
+                end;
 
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
+                // //     Varp:=VarRunningBalance-InterestBal;
+                // //     VarAmounttodeduct:=VarRunningBalance-Varp;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //        VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."Super Quick Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Super Quick Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
+                //=====================================================================================principal repayment
+                // //        VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."Super Quick Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Super Quick Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
 
-         VarAmounttodeduct:=0;
-         VarAmounttodeduct:=Varp;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 //END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ super quick loan amount cal end========================
+        //================ super quick loan amount cal end========================
 
 
 
         //================  quick loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Quick Loan Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Quick Loan Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Quick Loan Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Quick Loan Amount";
 
-        // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //        ObjLoans.RESET;
-        // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //        ObjLoans.SETFILTER("Loan Product Type",'%1','15');
-        // //       // ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //        IF ObjLoans.FINDSET THEN
-        // //          BEGIN
-        // //            VarLoanNo:=ObjCheckOffLines."Quick Loan No";
-        // //            END;
-        // //
-        // //        IF ObjCheckOffLines."Quick Loan Int"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Quick Loan Int"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        // // ..........................................cj
-         InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','15');
-             LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest");
-             InterestBal:=LoansApp."Oustanding Interest";
-             VarLoanNo:=ObjCheckOffLines."Quick Loan No";
-                 end;
+                // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //        ObjLoans.RESET;
+                // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //        ObjLoans.SETFILTER("Loan Product Type",'%1','15');
+                // //       // ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //        IF ObjLoans.FINDSET THEN
+                // //          BEGIN
+                // //            VarLoanNo:=ObjCheckOffLines."Quick Loan No";
+                // //            END;
+                // //
+                // //        IF ObjCheckOffLines."Quick Loan Int"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Quick Loan Int"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                // // ..........................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '15');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."Quick Loan No";
+                end;
 
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
+                // //     Varp:=VarRunningBalance-InterestBal;
+                // //     VarAmounttodeduct:=VarRunningBalance-Varp;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // // //        VarAmounttodeduct:=0;
-        // // //        IF VarRunningBalance>0 THEN
-        // // //          BEGIN
-        // // //          IF ObjCheckOffLines."Quick Loan Principal"<VarRunningBalance THEN
-        // // //          VarAmounttodeduct:=ObjCheckOffLines."Quick Loan Principal"
-        // // //         ELSE
-        // // //          VarAmounttodeduct:=VarRunningBalance;
-        VarAmounttodeduct:=0;
-         VarAmounttodeduct:=Varp;
+                //=====================================================================================principal repayment
+                // // //        VarAmounttodeduct:=0;
+                // // //        IF VarRunningBalance>0 THEN
+                // // //          BEGIN
+                // // //          IF ObjCheckOffLines."Quick Loan Principal"<VarRunningBalance THEN
+                // // //          VarAmounttodeduct:=ObjCheckOffLines."Quick Loan Principal"
+                // // //         ELSE
+                // // //          VarAmounttodeduct:=VarRunningBalance;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-           //     END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                //     END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ quick loan amount cal end========================
+        //================ quick loan amount cal end========================
 
 
         //================  super school fees loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super School Fees Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Super School Fees Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super School Fees Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Super School Fees Amount";
 
-        // // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // // //
-        // // //        ObjLoans.RESET;
-        // // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // // //        ObjLoans.SETFILTER("Loan Product Type",'%1','18');
-        // // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // // //        IF ObjLoans.FINDSET THEN
-        // // //          BEGIN
-        // // //            VarLoanNo:=ObjCheckOffLines."Super School Fees Loan No";
-        // // //            END;
-        // // //
-        // // //        IF ObjCheckOffLines."Super School Fees Int"<VarRunningBalance THEN
-        // // //          VarAmounttodeduct:=ObjCheckOffLines."Super School Fees Int"
-        // // //         ELSE
-        // // //          VarAmounttodeduct:=VarRunningBalance;
-        //........................................................................cj
+                // // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // // //
+                // // //        ObjLoans.RESET;
+                // // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // // //        ObjLoans.SETFILTER("Loan Product Type",'%1','18');
+                // // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // // //        IF ObjLoans.FINDSET THEN
+                // // //          BEGIN
+                // // //            VarLoanNo:=ObjCheckOffLines."Super School Fees Loan No";
+                // // //            END;
+                // // //
+                // // //        IF ObjCheckOffLines."Super School Fees Int"<VarRunningBalance THEN
+                // // //          VarAmounttodeduct:=ObjCheckOffLines."Super School Fees Int"
+                // // //         ELSE
+                // // //          VarAmounttodeduct:=VarRunningBalance;
+                //........................................................................cj
 
-        InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','18');
-             LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest");
-             InterestBal:=LoansApp."Oustanding Interest";
-             VarLoanNo:=ObjCheckOffLines."Super School Fees Loan No";
-                 end;
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '18');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."Super School Fees Loan No";
+                end;
 
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
+                // //     Varp:=VarRunningBalance-InterestBal;
+                // //     VarAmounttodeduct:=VarRunningBalance-Varp;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //        VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."Super School Fees Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Super School Fees Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        ///.........................
-        VarAmounttodeduct:=0;
-         VarAmounttodeduct:=Varp;
+                //=====================================================================================principal repayment
+                // //        VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."Super School Fees Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Super School Fees Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                ///.........................
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-               // END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                // END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================  super school fees loan amount cal end========================
+        //================  super school fees loan amount cal end========================
 
 
 
         //================  investment loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Investment  Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Investment  Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Investment  Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Investment  Amount";
 
-        // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //        ObjLoans.RESET;
-        // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //        ObjLoans.SETFILTER("Loan Product Type",'%1','19');
-        // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //        IF ObjLoans.FINDSET THEN
-        // //          BEGIN
-        // //            VarLoanNo:=ObjCheckOffLines."Investment Loan No";
-        // //            END;
-        // //
-        // //        IF ObjCheckOffLines."Investment  Int"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Investment  Int"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        ////..................................................cj
-          InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','19');
-             LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest");
-             InterestBal:=LoansApp."Oustanding Interest";
-             VarLoanNo:=ObjCheckOffLines."Investment Loan No";
-                 end;
+                // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //        ObjLoans.RESET;
+                // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //        ObjLoans.SETFILTER("Loan Product Type",'%1','19');
+                // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //        IF ObjLoans.FINDSET THEN
+                // //          BEGIN
+                // //            VarLoanNo:=ObjCheckOffLines."Investment Loan No";
+                // //            END;
+                // //
+                // //        IF ObjCheckOffLines."Investment  Int"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Investment  Int"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                ////..................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '19');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."Investment Loan No";
+                end;
 
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
-        //     Varp:=VarRunningBalance-InterestBal;
-        //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
+                //     Varp:=VarRunningBalance-InterestBal;
+                //     VarAmounttodeduct:=VarRunningBalance-Varp;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // // //        VarAmounttodeduct:=0;
-        // // //        IF VarRunningBalance>0 THEN
-        // // //          BEGIN
-        // // //          IF ObjCheckOffLines."Investment  Principal"<VarRunningBalance THEN
-        // // //          VarAmounttodeduct:=ObjCheckOffLines."Investment  Principal"
-        // // //         ELSE
-        // // //          VarAmounttodeduct:=VarRunningBalance;
-        // // // ................
-         VarAmounttodeduct:=0;
-         VarAmounttodeduct:=Varp;
+                //=====================================================================================principal repayment
+                // // //        VarAmounttodeduct:=0;
+                // // //        IF VarRunningBalance>0 THEN
+                // // //          BEGIN
+                // // //          IF ObjCheckOffLines."Investment  Principal"<VarRunningBalance THEN
+                // // //          VarAmounttodeduct:=ObjCheckOffLines."Investment  Principal"
+                // // //         ELSE
+                // // //          VarAmounttodeduct:=VarRunningBalance;
+                // // // ................
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-             //   END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                //   END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ investment loan amount cal end========================
+        //================ investment loan amount cal end========================
 
 
 
@@ -2480,290 +2442,285 @@ Page 50042 "Checkoff Processing Header-pos"
         ////////////////////////////////////////kip
 
         //================  Normal loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Normal Loan Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Normal Loan Amount";
 
-        // // //        ObjLoans.CALCFIELDS("Oustanding Interest");
-        // // //
-        // // //        ObjLoans.RESET;
-        // // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // // //        ObjLoans.SETFILTER("Loan Product Type",'%1','21');
-        // // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // // //        IF ObjLoans.FINDSET THEN
-        // // //          BEGIN
-        // // //            VarLoanNo:=ObjCheckOffLines."NORMAL LOAN NO";
-        // // //            END;
-        // // //
-        // // //        IF ObjCheckOffLines."Normal Loan Int"<VarRunningBalance THEN
-        // // //          VarAmounttodeduct:=ObjCheckOffLines."Normal Loan Int"
-        // // //         ELSE
-        // // //          VarAmounttodeduct:=VarRunningBalance;
-        //................................................cj
-         InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','21');
-             LoansApp.SetFilter("Oustanding Interest",'>%1',0);
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest");
-             InterestBal:=LoansApp."Oustanding Interest";
-             VarLoanNo:=ObjCheckOffLines."NORMAL LOAN NO";
-                 end;
-         if LoansApp."Oustanding Interest" < VarRunningBalance then begin
-                    Varp:=VarRunningBalance-InterestBal;
-                    VarAmounttodeduct:=VarRunningBalance-Varp;
-                    end else
-            if LoansApp."Oustanding Interest" > VarRunningBalance then begin
-                   VarAmounttodeduct:=VarRunningBalance;
-            end;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                // // //        ObjLoans.CALCFIELDS("Oustanding Interest");
+                // // //
+                // // //        ObjLoans.RESET;
+                // // //        ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // // //        ObjLoans.SETFILTER("Loan Product Type",'%1','21');
+                // // //        //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // // //        IF ObjLoans.FINDSET THEN
+                // // //          BEGIN
+                // // //            VarLoanNo:=ObjCheckOffLines."NORMAL LOAN NO";
+                // // //            END;
+                // // //
+                // // //        IF ObjCheckOffLines."Normal Loan Int"<VarRunningBalance THEN
+                // // //          VarAmounttodeduct:=ObjCheckOffLines."Normal Loan Int"
+                // // //         ELSE
+                // // //          VarAmounttodeduct:=VarRunningBalance;
+                //................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '21');
+                LoansApp.SetFilter("Oustanding Interest", '>%1', 0);
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest");
+                    InterestBal := LoansApp."Oustanding Interest";
+                    VarLoanNo := ObjCheckOffLines."NORMAL LOAN NO";
+                end;
+                if LoansApp."Oustanding Interest" < VarRunningBalance then begin
+                    Varp := VarRunningBalance - InterestBal;
+                    VarAmounttodeduct := VarRunningBalance - Varp;
+                end else
+                    if LoansApp."Oustanding Interest" > VarRunningBalance then begin
+                        VarAmounttodeduct := VarRunningBalance;
+                    end;
+                // //     Varp:=VarRunningBalance-InterestBal;
+                // //     VarAmounttodeduct:=VarRunningBalance-Varp;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //        VarAmounttodeduct:=0;
-        // //        IF VarRunningBalance>0 THEN
-        // //          BEGIN
-        // //          IF ObjCheckOffLines."Normal Loan Principal"<VarRunningBalance THEN
-        // //          VarAmounttodeduct:=ObjCheckOffLines."Normal Loan Principal"
-        // //         ELSE
-        // //          VarAmounttodeduct:=VarRunningBalance;
-        VarAmounttodeduct:=0;
-         VarAmounttodeduct:=Varp;
+                //=====================================================================================principal repayment
+                // //        VarAmounttodeduct:=0;
+                // //        IF VarRunningBalance>0 THEN
+                // //          BEGIN
+                // //          IF ObjCheckOffLines."Normal Loan Principal"<VarRunningBalance THEN
+                // //          VarAmounttodeduct:=ObjCheckOffLines."Normal Loan Principal"
+                // //         ELSE
+                // //          VarAmounttodeduct:=VarRunningBalance;
+                VarAmounttodeduct := 0;
+                VarAmounttodeduct := Varp;
 
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-              //  END;
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                //  END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ normal loan amount cal end========================
+        //================ normal loan amount cal end========================
 
 
         //================  Normal  loan 1 amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan 1 Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Normal Loan 1 Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan 1 Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Normal Loan 1 Amount";
 
-        // //           ObjLoans.CALCFIELDS("Oustanding Interest");
-        // //
-        // //           ObjLoans.RESET;
-        // //           ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // //           ObjLoans.SETFILTER("Loan Product Type",'%1','22');
-        // //           //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
-        // //           IF ObjLoans.FINDSET THEN
-        // //             BEGIN
-        // //               VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
-        // //               END;
-        // //
-        // //           IF ObjCheckOffLines."Normal Loan Int"<VarRunningBalance THEN
-        // //             VarAmounttodeduct:=ObjCheckOffLines."Normal Loan Int"
-        // //            ELSE
-        // //             VarAmounttodeduct:=VarRunningBalance;
+                // //           ObjLoans.CALCFIELDS("Oustanding Interest");
+                // //
+                // //           ObjLoans.RESET;
+                // //           ObjLoans.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // //           ObjLoans.SETFILTER("Loan Product Type",'%1','22');
+                // //           //ObjLoans.SETFILTER("Oustanding Interest",'>%1',0);
+                // //           IF ObjLoans.FINDSET THEN
+                // //             BEGIN
+                // //               VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
+                // //               END;
+                // //
+                // //           IF ObjCheckOffLines."Normal Loan Int"<VarRunningBalance THEN
+                // //             VarAmounttodeduct:=ObjCheckOffLines."Normal Loan Int"
+                // //            ELSE
+                // //             VarAmounttodeduct:=VarRunningBalance;
 
-                  //...jo
-        // // //             InterestBal:=0;
-        // // //     Varp:=0;
-        // // //     LoansApp.RESET;
-        // // //     LoansApp.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // // //     LoansApp.SETFILTER("Loan Product Type",'%1','22');
-        // // //     LoansApp.SETFILTER("Oustanding Interest",'>%1',0);
-        // // //     IF LoansApp.FINDSET THEN
-        // // //         BEGIN
-        // // //     LoansApp.CALCFIELDS("Oustanding Interest");
-        // // //     InterestBal:=LoansApp."Oustanding Interest";
-        // // //     VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
-        // // //         END;
-        // // //
-        // // // IF LoansApp."Oustanding Interest" < VarRunningBalance THEN BEGIN
-        // // //            Varp:=VarRunningBalance-InterestBal;
-        // // //            VarAmounttodeduct:=VarRunningBalance-Varp;
-        // // //            END ELSE
-        // // //    IF LoansApp."Oustanding Interest" > VarRunningBalance THEN BEGIN
-        // // //           VarAmounttodeduct:=VarRunningBalance;
-        // // //    END;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
+                //...jo
+                // // //             InterestBal:=0;
+                // // //     Varp:=0;
+                // // //     LoansApp.RESET;
+                // // //     LoansApp.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                // // //     LoansApp.SETFILTER("Loan Product Type",'%1','22');
+                // // //     LoansApp.SETFILTER("Oustanding Interest",'>%1',0);
+                // // //     IF LoansApp.FINDSET THEN
+                // // //         BEGIN
+                // // //     LoansApp.CALCFIELDS("Oustanding Interest");
+                // // //     InterestBal:=LoansApp."Oustanding Interest";
+                // // //     VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
+                // // //         END;
+                // // //
+                // // // IF LoansApp."Oustanding Interest" < VarRunningBalance THEN BEGIN
+                // // //            Varp:=VarRunningBalance-InterestBal;
+                // // //            VarAmounttodeduct:=VarRunningBalance-Varp;
+                // // //            END ELSE
+                // // //    IF LoansApp."Oustanding Interest" > VarRunningBalance THEN BEGIN
+                // // //           VarAmounttodeduct:=VarRunningBalance;
+                // // //    END;
+                // //     Varp:=VarRunningBalance-InterestBal;
+                // //     VarAmounttodeduct:=VarRunningBalance-Varp;
 
                 //=====================================================================================interest paid
 
-        //        LineN:=LineN+10000;
-        //        Gnljnline.INIT;
-        //        Gnljnline."Journal Template Name":='GENERAL';
-        //        Gnljnline."Journal Batch Name":=JBatchs;
-        //        Gnljnline."Line No.":=LineN;
-        //        Gnljnline."Account Type":=Gnljnline."Account Type"::Member;
-        //        Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-        //        Gnljnline.VALIDATE(Gnljnline."Account No.");
-        //        Gnljnline."Document No.":="Document No";
-        //        Gnljnline."Posting Date":="Posting date";
-        //        Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-        //        Gnljnline.Amount:=-VarAmounttodeduct;
-        //        Gnljnline.VALIDATE(Gnljnline.Amount);
-        //        Gnljnline."Loan No":=VarLoanNo;
-        //        Gnljnline."Transaction Type":=Gnljnline."Transaction Type"::"Interest Paid";
-        //        Gnljnline.VALIDATE(Gnljnline."Transaction Type");
-        //        Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-        //        //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-        //        IF Gnljnline.Amount<>0 THEN
-        //        Gnljnline.INSERT;
-         ///       VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                //        LineN:=LineN+10000;
+                //        Gnljnline.INIT;
+                //        Gnljnline."Journal Template Name":='GENERAL';
+                //        Gnljnline."Journal Batch Name":=JBatchs;
+                //        Gnljnline."Line No.":=LineN;
+                //        Gnljnline."Account Type":=Gnljnline."Account Type"::Member;
+                //        Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                //        Gnljnline.VALIDATE(Gnljnline."Account No.");
+                //        Gnljnline."Document No.":="Document No";
+                //        Gnljnline."Posting Date":="Posting date";
+                //        Gnljnline.Description:=ObjCheckOffLines."Loan Type";
+                //        Gnljnline.Amount:=-VarAmounttodeduct;
+                //        Gnljnline.VALIDATE(Gnljnline.Amount);
+                //        Gnljnline."Loan No":=VarLoanNo;
+                //        Gnljnline."Transaction Type":=Gnljnline."Transaction Type"::"Interest Paid";
+                //        Gnljnline.VALIDATE(Gnljnline."Transaction Type");
+                //        Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                //        //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                //        IF Gnljnline.Amount<>0 THEN
+                //        Gnljnline.INSERT;
+                ///       VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        // //         VarAmounttodeduct:=0;
-        // //         IF VarRunningBalance>0 THEN
-        // //           BEGIN
-        // //           IF ObjCheckOffLines."Normal Loan 1 Principal"<VarRunningBalance THEN
-        // //           VarAmounttodeduct:=ObjCheckOffLines."Normal Loan 1 Principal"
-        // //          ELSE
-        // //           VarAmounttodeduct:=VarRunningBalance;
-        // // VarAmounttodeduct:=0;
-        // // VarAmounttodeduct:=Varp;
-         ///VarAmounttodeduct := ObjCheckOffLines."Normal Loan 1 Principal";
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                //=====================================================================================principal repayment
+                // //         VarAmounttodeduct:=0;
+                // //         IF VarRunningBalance>0 THEN
+                // //           BEGIN
+                // //           IF ObjCheckOffLines."Normal Loan 1 Principal"<VarRunningBalance THEN
+                // //           VarAmounttodeduct:=ObjCheckOffLines."Normal Loan 1 Principal"
+                // //          ELSE
+                // //           VarAmounttodeduct:=VarRunningBalance;
+                // // VarAmounttodeduct:=0;
+                // // VarAmounttodeduct:=Varp;
+                ///VarAmounttodeduct := ObjCheckOffLines."Normal Loan 1 Principal";
+                LineN := LineN + 10000;
+                Gnljnline.Init;
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                Gnljnline.Validate(Gnljnline."Account No.");
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
+                Gnljnline.Validate(Gnljnline.Amount);
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                Gnljnline.Validate(Gnljnline."Transaction Type");
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 ///END;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ normal loan 1 loan amount cal end========================
+        //================ normal loan 1 loan amount cal end========================
 
 
 
@@ -2779,153 +2736,149 @@ Page 50042 "Checkoff Processing Header-pos"
     var
         ObjCheckOffLines: Record UnknownRecord51516415;
     begin
-         ObjCheckOffLines.Reset;
-          ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."SUPER EMERGENCY LOAN");
-           // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'229');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."SUPER EMERGENCY LOAN");
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'229');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::"8";
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::"8";
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines.Reference;
-                Gnljnline.Amount:=-ObjCheckOffLines."SUPER EMERGENCY LOAN";
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines.Reference;
+                Gnljnline.Amount := -ObjCheckOffLines."SUPER EMERGENCY LOAN";
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Share Capital";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Share Capital";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostNormalShare()
     var
         ObjCheckOffLines: Record "Funds Tax Codes";
     begin
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetRange(ObjCheckOffLines."Deposit Contribution");
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Deposit Contribution");
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
                 //Gnljnline.Description:=ObjCheckOffLines.Reference;
-               // Gnljnline.Amount:=-ObjCheckOffLines."Refinance Loan No";
+                // Gnljnline.Amount:=-ObjCheckOffLines."Refinance Loan No";
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Deposit Contribution";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Deposit Contribution";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostFOSA()
     var
         ObjCheckOffLines: Record UnknownRecord51516415;
     begin
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetRange(ObjCheckOffLines."QUICK LOAN");
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."QUICK LOAN");
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::"8";
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::"8";
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:='Welfare contribution';
-                Gnljnline.Amount:=-ObjCheckOffLines."QUICK LOAN";
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := 'Welfare contribution';
+                Gnljnline.Amount := -ObjCheckOffLines."QUICK LOAN";
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Benevolent Fund";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Benevolent Fund";
                 //Gnljnline.VALIDATE(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostBENEVOLENT()
     var
         ObjCheckOffLines: Record UnknownRecord51516415;
     begin
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetRange(ObjCheckOffLines."Utility Type",'BENEVOLENT');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Utility Type", 'BENEVOLENT');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::"8";
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::"8";
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines.Reference;
-                Gnljnline.Amount:=-ObjCheckOffLines.Amount;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines.Reference;
+                Gnljnline.Amount := -ObjCheckOffLines.Amount;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Benevolent Fund";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Benevolent Fund";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostBalancing()
     begin
-            LineN:=LineN+10000;
-            Gnljnline.Init;
-            Gnljnline."Journal Template Name":='GENERAL';
-            Gnljnline."Journal Batch Name":=JBatchs;
-            Gnljnline."Line No.":=LineN;
-            Gnljnline."Account Type":=Gnljnline."account type"::Customer;
-            Gnljnline."Account No.":="Account No";
-            Gnljnline.Validate(Gnljnline."Account No.");
-            Gnljnline."Document No.":="Document No";
-            Gnljnline."Posting Date":="Posting date";
-            Gnljnline.Description:=No+'-'+"Document No";
-            Gnljnline.Amount:=Amount;
-            Gnljnline.Validate(Gnljnline.Amount);
-            Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-            //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-            if Gnljnline.Amount<>0 then
+        LineN := LineN + 10000;
+        Gnljnline.Init;
+        Gnljnline."Journal Template Name" := 'GENERAL';
+        Gnljnline."Journal Batch Name" := JBatchs;
+        Gnljnline."Line No." := LineN;
+        Gnljnline."Account Type" := Gnljnline."account type"::Customer;
+        Gnljnline."Account No." := "Account No";
+        Gnljnline.Validate(Gnljnline."Account No.");
+        Gnljnline."Document No." := "Document No";
+        Gnljnline."Posting Date" := "Posting date";
+        Gnljnline.Description := No + '-' + "Document No";
+        Gnljnline.Amount := Amount;
+        Gnljnline.Validate(Gnljnline.Amount);
+        Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+        //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+        if Gnljnline.Amount <> 0 then
             Gnljnline.Insert;
     end;
 
@@ -2934,21 +2887,21 @@ Page 50042 "Checkoff Processing Header-pos"
         ObjGenBatch: Record "Gen. Journal Batch";
     begin
         ObjGenBatch.Reset;
-        ObjGenBatch.SetRange(ObjGenBatch."Journal Template Name",'GENERAL');
-        ObjGenBatch.SetRange(ObjGenBatch.Name,JBatchs);
+        ObjGenBatch.SetRange(ObjGenBatch."Journal Template Name", 'GENERAL');
+        ObjGenBatch.SetRange(ObjGenBatch.Name, JBatchs);
         if ObjGenBatch.Find('-') = false then begin
-        ObjGenBatch.Init;
-        ObjGenBatch."Journal Template Name":='GENERAL';
-        ObjGenBatch.Name:=JBatchs;
-        ObjGenBatch.Description:='CHECKOFF PROCESSING';
-        ObjGenBatch.Validate(ObjGenBatch."Journal Template Name");
-        ObjGenBatch.Validate(ObjGenBatch.Name);
-        ObjGenBatch.Insert;
+            ObjGenBatch.Init;
+            ObjGenBatch."Journal Template Name" := 'GENERAL';
+            ObjGenBatch.Name := JBatchs;
+            ObjGenBatch.Description := 'CHECKOFF PROCESSING';
+            ObjGenBatch.Validate(ObjGenBatch."Journal Template Name");
+            ObjGenBatch.Validate(ObjGenBatch.Name);
+            ObjGenBatch.Insert;
         end;
 
         Gnljnline.Reset;
-        Gnljnline.SetRange("Journal Template Name",'GENERAL');
-        Gnljnline.SetRange("Journal Batch Name",JBatchs);
+        Gnljnline.SetRange("Journal Template Name", 'GENERAL');
+        Gnljnline.SetRange("Journal Batch Name", JBatchs);
         Gnljnline.DeleteAll;
     end;
 
@@ -2964,67 +2917,65 @@ Page 50042 "Checkoff Processing Header-pos"
     var
         ObjCheckOffLines: Record UnknownRecord51516415;
     begin
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Trans Type",'RESERVE');
-              ObjCheckOffLines.SetRange(ObjCheckOffLines.Reference,'337');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Trans Type",'RESERVE');
+        ObjCheckOffLines.SetRange(ObjCheckOffLines.Reference, '337');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::"8";
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::"8";
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines.Reference;
-                Gnljnline.Amount:=-ObjCheckOffLines.Amount;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines.Reference;
+                Gnljnline.Amount := -ObjCheckOffLines.Amount;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Jiokoe Savings";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Jiokoe Savings";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostUnallocated()
     var
         ObjCheckOffLines: Record UnknownRecord51516415;
     begin
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetRange(ObjCheckOffLines."Utility Type",'UNALLOCATED');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                LineN:=LineN+10000;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Utility Type", 'UNALLOCATED');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::"8";
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::"8";
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines.Reference;
-                Gnljnline.Amount:=-ObjCheckOffLines.Amount;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines.Reference;
+                Gnljnline.Amount := -ObjCheckOffLines.Amount;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-              until ObjCheckOffLines.Next=0;
-              end;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+            until ObjCheckOffLines.Next = 0;
+        end;
     end;
 
     local procedure FnPostchechoff()
@@ -3039,1332 +2990,1294 @@ Page 50042 "Checkoff Processing Header-pos"
 
 
         //================ registration fee contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Registration Fee",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Registration Fee";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Registration Fee", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Registration Fee";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Registration Fee";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Registration Fee";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ Registraation fee contribution end========================
+        //================ Registraation fee contribution end========================
 
 
 
         //================ insurance fund contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Insurance Fee",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Insurance Fee";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Insurance Fee", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Insurance Fee";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Insurance Contribution";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Insurance Contribution";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ Insurance fund contribution end========================
+        //================ Insurance fund contribution end========================
 
 
         //================ benevolent fund contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Benevolent Fund",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Benevolent Fund";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Benevolent Fund", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Benevolent Fund";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Benevolent Fund";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Benevolent Fund";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ benevolent fund contribution end========================
+        //================ benevolent fund contribution end========================
         //================ share capital contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Share Capital",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Share Capital";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Share Capital", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Share Capital";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Share Capital";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Share Capital";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ share capital contribution end========================
+        //================ share capital contribution end========================
 
 
         //================ deposit contribution start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Deposit Contribution",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Deposit Contribution";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Deposit Contribution", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Deposit Contribution";
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Deposit Contribution";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Deposit Contribution";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
-         //================ deposit contribution end========================
+        //================ deposit contribution end========================
 
         //polytech start loans
 
-         //================ development loan amount cal start========================1
+        //================ development loan amount cal start========================1
 
 
-         ObjCheckOffLines.Reset;
-         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-          ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN Amount",'>%1',0);
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-           VarRunningBalance:=0;
-           VarRunningBalance:=ObjCheckOffLines."DEVELOPMENT LOAN Amount";
-           Varp:=0;
-           InterestBal:=0;
-            VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN No";
-            VarAmounttodeduct:=0;
-                 LoansApp.Reset;
-                 LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                 LoansApp.SetFilter("Loan Product Type",'%1','20');
-                 LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."DEVELOPMENT LOAN No");
-                 if LoansApp.FindSet then
-                    begin
-               LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                      if LoansApp."Oustanding Interest" >0 then
-                            InterestBal:=LoansApp."Oustanding Interest";
-                  end;
-        if InterestBal > VarRunningBalance  then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end
-           else
-          VarAmounttodeduct:=InterestBal;
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN Amount", '>%1', 0);
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."DEVELOPMENT LOAN Amount";
+                Varp := 0;
+                InterestBal := 0;
+                VarLoanNo := ObjCheckOffLines."DEVELOPMENT LOAN No";
+                VarAmounttodeduct := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '20');
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."DEVELOPMENT LOAN No");
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end
+                else
+                    VarAmounttodeduct := InterestBal;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-        if VarRunningBalance >0 then
-          begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ development loan amount cal end========================
+        //================ development loan amount cal end========================
 
         //................................................................................... Development loan 1
         //================ development loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount",'>%1',0);
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-          VarRunningBalance:=0;
-          VarRunningBalance:=ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount";
-         VarLoanNo:=ObjCheckOffLines."DEVELOPMENT LOAN 1  No";
-        ///.........................................................................cj
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount", '>%1', 0);
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."DEVELOPMENT LOAN 1 Amount";
+                VarLoanNo := ObjCheckOffLines."DEVELOPMENT LOAN 1  No";
+                ///.........................................................................cj
 
 
-           InterestBal:=0;
-                 Varp:=0;
-                 LoansApp.Reset;
-                 LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                 LoansApp.SetFilter("Loan Product Type",'%1','23');
-                 LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."DEVELOPMENT LOAN 1  No");
-                 if LoansApp.FindSet then
-                    begin
-               LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                      if LoansApp."Oustanding Interest" > 0 then
-                InterestBal:=LoansApp."Oustanding Interest";
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '23');
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."DEVELOPMENT LOAN 1  No");
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
 
-                  end;
+                end;
 
-        if InterestBal > VarRunningBalance  then begin
+                if InterestBal > VarRunningBalance then begin
 
-          VarAmounttodeduct:=VarRunningBalance
-          end
-           else
-          VarAmounttodeduct:=InterestBal;
+                    VarAmounttodeduct := VarRunningBalance
+                end
+                else
+                    VarAmounttodeduct := InterestBal;
 
                 //===================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
-               // END;
+            // END;
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
 
         //================ emergency loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."EMERGENCY LOAN Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."EMERGENCY LOAN Amount";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."EMERGENCY LOAN Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."EMERGENCY LOAN Amount";
 
-               VarLoanNo:=ObjCheckOffLines."EMERGENCY LOAN No";
-           Varp:=0;
-           InterestBal:=0;
-            VarAmounttodeduct:=0;
-                 LoansApp.Reset;
-                 LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                 LoansApp.SetFilter("Loan Product Type",'%1','12');
-                 LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."EMERGENCY LOAN No");
-                 if LoansApp.FindSet then
-                    begin
-               LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                      if LoansApp."Oustanding Interest" > 0 then
-              InterestBal:=LoansApp."Oustanding Interest";
-                  end;
-        if InterestBal > VarRunningBalance  then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end
-           else
-          VarAmounttodeduct:=InterestBal;
-           ///.........................................................................................cj
+                VarLoanNo := ObjCheckOffLines."EMERGENCY LOAN No";
+                Varp := 0;
+                InterestBal := 0;
+                VarAmounttodeduct := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '12');
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."EMERGENCY LOAN No");
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end
+                else
+                    VarAmounttodeduct := InterestBal;
+                ///.........................................................................................cj
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
                 //Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Loan No":=ObjCheckOffLines."EMERGENCY LOAN No";
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := ObjCheckOffLines."EMERGENCY LOAN No";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Loan No":=ObjCheckOffLines."EMERGENCY LOAN No";
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Loan No" := ObjCheckOffLines."EMERGENCY LOAN No";
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ emergency loan amount cal end========================
+        //================ emergency loan amount cal end========================
 
         //================  school fees loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."SCHOOL FEES LOAN Amount",'>%1',0);
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."SCHOOL FEES LOAN Amount";
-                VarLoanNo:=ObjCheckOffLines."SCHOOL FEES LOAN No";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."SCHOOL FEES LOAN Amount", '>%1', 0);
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."SCHOOL FEES LOAN Amount";
+                VarLoanNo := ObjCheckOffLines."SCHOOL FEES LOAN No";
 
-        ///.............................................................................cj
-           InterestBal:=0;
-                Varp:=0;
+                ///.............................................................................cj
+                InterestBal := 0;
+                Varp := 0;
                 LoansApp.Reset;
-                LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-                LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."SCHOOL FEES LOAN No");
-                LoansApp.SetFilter("Loan Product Type",'%1','17');
-                if LoansApp.FindSet then
-                   begin
-                LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                     if LoansApp."Oustanding Interest" > 0 then
-                   InterestBal:=LoansApp."Oustanding Interest";
-                    end;
-        if InterestBal > VarRunningBalance then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end else
-          VarAmounttodeduct:=InterestBal;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."SCHOOL FEES LOAN No");
+                LoansApp.SetFilter("Loan Product Type", '%1', '17');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
                 //Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Loan No":=ObjCheckOffLines."SCHOOL FEES LOAN No";
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := ObjCheckOffLines."SCHOOL FEES LOAN No";
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Loan No":=ObjCheckOffLines."SCHOOL FEES LOAN No";
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Loan No" := ObjCheckOffLines."SCHOOL FEES LOAN No";
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
-                  VarAmounttodeduct:=VarRunningBalance;
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if VarRunningBalance > 0 then begin
+                    VarAmounttodeduct := VarRunningBalance;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ school fees loan amount cal end========================
+        //================ school fees loan amount cal end========================
 
 
 
 
         //================  super emergency loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Emergency Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Super Emergency Amount";
-                VarLoanNo:=ObjCheckOffLines."Super Emergency Loan No";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Emergency Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Super Emergency Amount";
+                VarLoanNo := ObjCheckOffLines."Super Emergency Loan No";
 
-        ///...................................................................cj
-          InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."Super Emergency Loan No");
-             LoansApp.SetFilter("Loan Product Type",'%1','13');
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                   if LoansApp."Oustanding Interest" > 0 then
-             InterestBal:=LoansApp."Oustanding Interest";
-                 end;
-        if InterestBal > VarRunningBalance then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end else
-          VarAmounttodeduct:=InterestBal;
+                ///...................................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."Super Emergency Loan No");
+                LoansApp.SetFilter("Loan Product Type", '%1', '13');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ super emergency loan amount cal end========================
+        //================ super emergency loan amount cal end========================
 
 
 
         //================  super quick loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Quick Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Super Quick Amount";
-                 VarLoanNo:=ObjCheckOffLines."Super Quick Loan No";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super Quick Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Super Quick Amount";
+                VarLoanNo := ObjCheckOffLines."Super Quick Loan No";
 
-        ///.........................................................................cj
-         InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetRange (LoansApp."Loan  No.",ObjCheckOffLines."Super Quick Loan No");
-             LoansApp.SetFilter("Loan Product Type",'%1','16');
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                   if LoansApp."Oustanding Interest" > 0 then
-             InterestBal:=LoansApp."Oustanding Interest";
-                 end;
-        if InterestBal > VarRunningBalance then
-          begin
-            VarAmounttodeduct:=VarRunningBalance
-            end else
-            VarAmounttodeduct:=InterestBal;
+                ///.........................................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."Super Quick Loan No");
+                LoansApp.SetFilter("Loan Product Type", '%1', '16');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ super quick loan amount cal end========================
+        //================ super quick loan amount cal end========================
 
 
 
         //================  quick loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Quick Loan Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Quick Loan Amount";
-                VarLoanNo:=ObjCheckOffLines."Quick Loan No";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Quick Loan Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Quick Loan Amount";
+                VarLoanNo := ObjCheckOffLines."Quick Loan No";
 
-        // // ..........................................cj
-         InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."Quick Loan No");
-             LoansApp.SetFilter("Loan Product Type",'%1','15');
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                   if LoansApp."Oustanding Interest" > 0 then
-             InterestBal:=LoansApp."Oustanding Interest";
-                 end;
+                // // ..........................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."Quick Loan No");
+                LoansApp.SetFilter("Loan Product Type", '%1', '15');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
 
-        if InterestBal > VarRunningBalance then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end else
-          VarAmounttodeduct:=InterestBal;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ quick loan amount cal end========================
+        //================ quick loan amount cal end========================
 
 
         //================  super school fees loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super School Fees Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Super School Fees Amount";
-                VarLoanNo:=ObjCheckOffLines."Super School Fees Loan No";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Super School Fees Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Super School Fees Amount";
+                VarLoanNo := ObjCheckOffLines."Super School Fees Loan No";
 
 
-        InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."Super School Fees Loan No");
-             LoansApp.SetFilter("Loan Product Type",'%1','18');
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                   if LoansApp."Oustanding Interest">0 then
-             InterestBal:=LoansApp."Oustanding Interest";
-                 end;
-        if InterestBal > VarRunningBalance then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end else
-          VarAmounttodeduct:=InterestBal;
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."Super School Fees Loan No");
+                LoansApp.SetFilter("Loan Product Type", '%1', '18');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
+                if VarRunningBalance > 0 then begin
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================  super school fees loan amount cal end========================
+        //================  super school fees loan amount cal end========================
 
 
 
         //================  investment loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Investment  Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Investment  Amount";
-                 VarLoanNo:=ObjCheckOffLines."Investment Loan No";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Investment  Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Investment  Amount";
+                VarLoanNo := ObjCheckOffLines."Investment Loan No";
 
-        ////..................................................cj
-          InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."Investment Loan No");
-             LoansApp.SetFilter("Loan Product Type",'%1','19');
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
-                   if LoansApp."Oustanding Interest" > 0 then
-             InterestBal:=LoansApp."Oustanding Interest";
-                 end;
-        if InterestBal > VarRunningBalance then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end else
-          VarAmounttodeduct:=InterestBal;
+                ////..................................................cj
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."Investment Loan No");
+                LoansApp.SetFilter("Loan Product Type", '%1', '19');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
 
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
-                  VarAmounttodeduct:=VarRunningBalance;
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if VarRunningBalance > 0 then begin
+                    VarAmounttodeduct := VarRunningBalance;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ investment loan amount cal end========================
+        //================ investment loan amount cal end========================
 
 
 
@@ -4372,270 +4285,264 @@ Page 50042 "Checkoff Processing Header-pos"
         ////////////////////////////////////////kip
 
         //================  Normal loan amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan Amount",'>%1',0);
-            // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Normal Loan Amount";
-               VarLoanNo:=ObjCheckOffLines."NORMAL LOAN NO";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan Amount", '>%1', 0);
+        // ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Special Code",'538');
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Normal Loan Amount";
+                VarLoanNo := ObjCheckOffLines."NORMAL LOAN NO";
 
-         InterestBal:=0;
-             Varp:=0;
-             LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetRange(LoansApp."Loan  No.",ObjCheckOffLines."NORMAL LOAN NO");
-             LoansApp.SetFilter("Loan Product Type",'%1','21');
-             if LoansApp.FindSet then
-                 begin
-                  // MESSAGE ('loan is %1',LoansApp."Loan  No.");
-        LoansApp.CalcFields (LoansApp."Oustanding Interest",LoansApp."Outstanding Balance");
-             /// MESSAGE('int is %1',LoansApp."Oustanding Interest");
-                   if LoansApp."Oustanding Interest" > 0 then
-             InterestBal:=LoansApp."Oustanding Interest";
-                  // MESSAGE('here %1',InterestBal);
-                 end;
-        if InterestBal > VarRunningBalance then begin
-          VarAmounttodeduct:=VarRunningBalance
-          end else
-          VarAmounttodeduct:=InterestBal;
+                InterestBal := 0;
+                Varp := 0;
+                LoansApp.Reset;
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetRange(LoansApp."Loan  No.", ObjCheckOffLines."NORMAL LOAN NO");
+                LoansApp.SetFilter("Loan Product Type", '%1', '21');
+                if LoansApp.FindSet then begin
+                    // MESSAGE ('loan is %1',LoansApp."Loan  No.");
+                    LoansApp.CalcFields(LoansApp."Oustanding Interest", LoansApp."Outstanding Balance");
+                    /// MESSAGE('int is %1',LoansApp."Oustanding Interest");
+                    if LoansApp."Oustanding Interest" > 0 then
+                        InterestBal := LoansApp."Oustanding Interest";
+                    // MESSAGE('here %1',InterestBal);
+                end;
+                if InterestBal > VarRunningBalance then begin
+                    VarAmounttodeduct := VarRunningBalance
+                end else
+                    VarAmounttodeduct := InterestBal;
                 //=====================================================================================interest paid
 
-                LineN:=LineN+10000;
+                LineN := LineN + 10000;
                 Gnljnline.Init;
-                Gnljnline."Journal Template Name":='GENERAL';
-                Gnljnline."Journal Batch Name":=JBatchs;
-                Gnljnline."Line No.":=LineN;
-                Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                Gnljnline."Journal Template Name" := 'GENERAL';
+                Gnljnline."Journal Batch Name" := JBatchs;
+                Gnljnline."Line No." := LineN;
+                Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                Gnljnline."Account No." := ObjCheckOffLines."Member No.";
                 Gnljnline.Validate(Gnljnline."Account No.");
-                Gnljnline."Document No.":="Document No";
-                Gnljnline."Posting Date":="Posting date";
-                Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                Gnljnline.Amount:=-VarAmounttodeduct;
+                Gnljnline."Document No." := "Document No";
+                Gnljnline."Posting Date" := "Posting date";
+                Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                Gnljnline.Amount := -VarAmounttodeduct;
                 Gnljnline.Validate(Gnljnline.Amount);
-                Gnljnline."Loan No":=VarLoanNo;
-                Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Interest Paid";
+                Gnljnline."Loan No" := VarLoanNo;
+                Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Interest Paid";
                 Gnljnline.Validate(Gnljnline."Transaction Type");
-                Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                 //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                if Gnljnline.Amount<>0 then
-                Gnljnline.Insert;
-                VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if Gnljnline.Amount <> 0 then
+                    Gnljnline.Insert;
+                VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
 
-          //=====================================================================================principal repayment
-        if LoansApp."Outstanding Balance" > 0 then begin
-          OutBal :=LoansApp."Outstanding Balance";
+                //=====================================================================================principal repayment
+                if LoansApp."Outstanding Balance" > 0 then begin
+                    OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
 
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
-               end;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
+                end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
-                  VarAmounttodeduct:=VarRunningBalance;
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if VarRunningBalance > 0 then begin
+                    VarAmounttodeduct := VarRunningBalance;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ normal loan amount cal end========================
+        //================ normal loan amount cal end========================
 
 
         //================  Normal  loan 1 amount cal start========================1
-         ObjCheckOffLines.Reset;
-            ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No",No);
-             ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan 1 Amount",'>%1',0);
-            if ObjCheckOffLines.FindSet then
-              begin
-              repeat
-                VarRunningBalance:=0;
-                VarRunningBalance:=ObjCheckOffLines."Normal Loan 1 Amount";
-                VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
+        ObjCheckOffLines.Reset;
+        ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
+        ObjCheckOffLines.SetFilter(ObjCheckOffLines."Normal Loan 1 Amount", '>%1', 0);
+        if ObjCheckOffLines.FindSet then begin
+            repeat
+                VarRunningBalance := 0;
+                VarRunningBalance := ObjCheckOffLines."Normal Loan 1 Amount";
+                VarLoanNo := ObjCheckOffLines."NORMAL LOAN 1 NO";
                 LoansApp.Reset;
-             LoansApp.SetRange("Client Code",ObjCheckOffLines."Member No.");
-             LoansApp.SetFilter("Loan Product Type",'%1','22');
-             if LoansApp.FindSet then
-                 begin
-             LoansApp.CalcFields("Oustanding Interest","Outstanding Balance");
+                LoansApp.SetRange("Client Code", ObjCheckOffLines."Member No.");
+                LoansApp.SetFilter("Loan Product Type", '%1', '22');
+                if LoansApp.FindSet then begin
+                    LoansApp.CalcFields("Oustanding Interest", "Outstanding Balance");
 
-         if LoansApp."Outstanding Balance" > 0 then
-          OutBal :=LoansApp."Outstanding Balance";
+                    if LoansApp."Outstanding Balance" > 0 then
+                        OutBal := LoansApp."Outstanding Balance";
 
-          if OutBal < VarRunningBalance then
-            VarAmounttodeduct:=LoansApp."Outstanding Balance"
-          else
-         VarAmounttodeduct:=VarRunningBalance;
-
+                    if OutBal < VarRunningBalance then
+                        VarAmounttodeduct := LoansApp."Outstanding Balance"
+                    else
+                        VarAmounttodeduct := VarRunningBalance;
 
 
-                  //...jo
-        // // //             InterestBal:=0;
-        // // //     Varp:=0;
-        // // //     LoansApp.RESET;
-        // // //     LoansApp.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
-        // // //     LoansApp.SETFILTER("Loan Product Type",'%1','22');
-        // // //     LoansApp.SETFILTER("Oustanding Interest",'>%1',0);
-        // // //     IF LoansApp.FINDSET THEN
-        // // //         BEGIN
-        // // //     LoansApp.CALCFIELDS("Oustanding Interest");
-        // // //     InterestBal:=LoansApp."Oustanding Interest";
-        // // //     VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
-        // // //         END;
-        // // //
-        // // // IF LoansApp."Oustanding Interest" < VarRunningBalance THEN BEGIN
-        // // //            Varp:=VarRunningBalance-InterestBal;
-        // // //            VarAmounttodeduct:=VarRunningBalance-Varp;
-        // // //            END ELSE
-        // // //    IF LoansApp."Oustanding Interest" > VarRunningBalance THEN BEGIN
-        // // //           VarAmounttodeduct:=VarRunningBalance;
-        // // //    END;
-        // //     Varp:=VarRunningBalance-InterestBal;
-        // //     VarAmounttodeduct:=VarRunningBalance-Varp;
 
-                //=====================================================================================interest paid
+                    //...jo
+                    // // //             InterestBal:=0;
+                    // // //     Varp:=0;
+                    // // //     LoansApp.RESET;
+                    // // //     LoansApp.SETRANGE("Client Code",ObjCheckOffLines."Member No.");
+                    // // //     LoansApp.SETFILTER("Loan Product Type",'%1','22');
+                    // // //     LoansApp.SETFILTER("Oustanding Interest",'>%1',0);
+                    // // //     IF LoansApp.FINDSET THEN
+                    // // //         BEGIN
+                    // // //     LoansApp.CALCFIELDS("Oustanding Interest");
+                    // // //     InterestBal:=LoansApp."Oustanding Interest";
+                    // // //     VarLoanNo:=ObjCheckOffLines."NORMAL LOAN 1 NO";
+                    // // //         END;
+                    // // //
+                    // // // IF LoansApp."Oustanding Interest" < VarRunningBalance THEN BEGIN
+                    // // //            Varp:=VarRunningBalance-InterestBal;
+                    // // //            VarAmounttodeduct:=VarRunningBalance-Varp;
+                    // // //            END ELSE
+                    // // //    IF LoansApp."Oustanding Interest" > VarRunningBalance THEN BEGIN
+                    // // //           VarAmounttodeduct:=VarRunningBalance;
+                    // // //    END;
+                    // //     Varp:=VarRunningBalance-InterestBal;
+                    // //     VarAmounttodeduct:=VarRunningBalance-Varp;
 
-        //        LineN:=LineN+10000;
-        //        Gnljnline.INIT;
-        //        Gnljnline."Journal Template Name":='GENERAL';
-        //        Gnljnline."Journal Batch Name":=JBatchs;
-        //        Gnljnline."Line No.":=LineN;
-        //        Gnljnline."Account Type":=Gnljnline."Account Type"::Member;
-        //        Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-        //        Gnljnline.VALIDATE(Gnljnline."Account No.");
-        //        Gnljnline."Document No.":="Document No";
-        //        Gnljnline."Posting Date":="Posting date";
-        //        Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-        //        Gnljnline.Amount:=-VarAmounttodeduct;
-        //        Gnljnline.VALIDATE(Gnljnline.Amount);
-        //        Gnljnline."Loan No":=VarLoanNo;
-        //        Gnljnline."Transaction Type":=Gnljnline."Transaction Type"::"Interest Paid";
-        //        Gnljnline.VALIDATE(Gnljnline."Transaction Type");
-        //        Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-        //        //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-        //        IF Gnljnline.Amount<>0 THEN
-        //        Gnljnline.INSERT;
-         ///       VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    //=====================================================================================interest paid
 
-          //=====================================================================================principal repayment
-        // //         VarAmounttodeduct:=0;
-        // //         IF VarRunningBalance>0 THEN
-        // //           BEGIN
-        // //           IF ObjCheckOffLines."Normal Loan 1 Principal"<VarRunningBalance THEN
-        // //           VarAmounttodeduct:=ObjCheckOffLines."Normal Loan 1 Principal"
-        // //          ELSE
-        // //           VarAmounttodeduct:=VarRunningBalance;
-        // // VarAmounttodeduct:=0;
-        // // VarAmounttodeduct:=Varp;
-         ///VarAmounttodeduct := ObjCheckOffLines."Normal Loan 1 Principal";
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarAmounttodeduct;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                  Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Loan Repayment";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                    //        LineN:=LineN+10000;
+                    //        Gnljnline.INIT;
+                    //        Gnljnline."Journal Template Name":='GENERAL';
+                    //        Gnljnline."Journal Batch Name":=JBatchs;
+                    //        Gnljnline."Line No.":=LineN;
+                    //        Gnljnline."Account Type":=Gnljnline."Account Type"::Member;
+                    //        Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
+                    //        Gnljnline.VALIDATE(Gnljnline."Account No.");
+                    //        Gnljnline."Document No.":="Document No";
+                    //        Gnljnline."Posting Date":="Posting date";
+                    //        Gnljnline.Description:=ObjCheckOffLines."Loan Type";
+                    //        Gnljnline.Amount:=-VarAmounttodeduct;
+                    //        Gnljnline.VALIDATE(Gnljnline.Amount);
+                    //        Gnljnline."Loan No":=VarLoanNo;
+                    //        Gnljnline."Transaction Type":=Gnljnline."Transaction Type"::"Interest Paid";
+                    //        Gnljnline.VALIDATE(Gnljnline."Transaction Type");
+                    //        Gnljnline."Shortcut Dimension 1 Code":='BOSA';
+                    //        //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    //        IF Gnljnline.Amount<>0 THEN
+                    //        Gnljnline.INSERT;
+                    ///       VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+
+                    //=====================================================================================principal repayment
+                    // //         VarAmounttodeduct:=0;
+                    // //         IF VarRunningBalance>0 THEN
+                    // //           BEGIN
+                    // //           IF ObjCheckOffLines."Normal Loan 1 Principal"<VarRunningBalance THEN
+                    // //           VarAmounttodeduct:=ObjCheckOffLines."Normal Loan 1 Principal"
+                    // //          ELSE
+                    // //           VarAmounttodeduct:=VarRunningBalance;
+                    // // VarAmounttodeduct:=0;
+                    // // VarAmounttodeduct:=Varp;
+                    ///VarAmounttodeduct := ObjCheckOffLines."Normal Loan 1 Principal";
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarAmounttodeduct;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    Gnljnline."Loan No" := VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Loan Repayment";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    VarRunningBalance := VarRunningBalance - VarAmounttodeduct;
                 end;
 
-             //=====================================================================================unallocated funds
+                //=====================================================================================unallocated funds
 
-                if VarRunningBalance>0 then
-                  begin
-                  VarAmounttodeduct:=VarRunningBalance;
-                  LineN:=LineN+10000;
-                  Gnljnline.Init;
-                  Gnljnline."Journal Template Name":='GENERAL';
-                  Gnljnline."Journal Batch Name":=JBatchs;
-                  Gnljnline."Line No.":=LineN;
-                  Gnljnline."Account Type":=Gnljnline."account type"::Member;
-                  Gnljnline."Account No.":=ObjCheckOffLines."Member No.";
-                  Gnljnline.Validate(Gnljnline."Account No.");
-                  Gnljnline."Document No.":="Document No";
-                  Gnljnline."Posting Date":="Posting date";
-                  Gnljnline.Description:=ObjCheckOffLines."Loan Type";
-                  Gnljnline.Amount:=-VarRunningBalance;
-                  Gnljnline.Validate(Gnljnline.Amount);
-                 //Gnljnline."Loan No":=VarLoanNo;
-                  Gnljnline."Transaction Type":=Gnljnline."transaction type"::"Unallocated Funds";
-                  Gnljnline.Validate(Gnljnline."Transaction Type");
-                  Gnljnline."Shortcut Dimension 1 Code":='BOSA';
-                  //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
-                  if Gnljnline.Amount<>0 then
-                  Gnljnline.Insert;
-                  //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
+                if VarRunningBalance > 0 then begin
+                    VarAmounttodeduct := VarRunningBalance;
+                    LineN := LineN + 10000;
+                    Gnljnline.Init;
+                    Gnljnline."Journal Template Name" := 'GENERAL';
+                    Gnljnline."Journal Batch Name" := JBatchs;
+                    Gnljnline."Line No." := LineN;
+                    Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                    Gnljnline."Account No." := ObjCheckOffLines."Member No.";
+                    Gnljnline.Validate(Gnljnline."Account No.");
+                    Gnljnline."Document No." := "Document No";
+                    Gnljnline."Posting Date" := "Posting date";
+                    Gnljnline.Description := ObjCheckOffLines."Loan Type";
+                    Gnljnline.Amount := -VarRunningBalance;
+                    Gnljnline.Validate(Gnljnline.Amount);
+                    //Gnljnline."Loan No":=VarLoanNo;
+                    Gnljnline."Transaction Type" := Gnljnline."transaction type"::"Unallocated Funds";
+                    Gnljnline.Validate(Gnljnline."Transaction Type");
+                    Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
+                    //Gnljnline."Shortcut Dimension 1 Code":='BOSA';Branch
+                    if Gnljnline.Amount <> 0 then
+                        Gnljnline.Insert;
+                    //VarRunningBalance:=VarRunningBalance-VarAmounttodeduct;
                 end;
 
 
-              until ObjCheckOffLines.Next=0;
-              end;
+            until ObjCheckOffLines.Next = 0;
+        end;
 
-         //================ normal loan 1 loan amount cal end========================
+        //================ normal loan 1 loan amount cal end========================
 
 
 

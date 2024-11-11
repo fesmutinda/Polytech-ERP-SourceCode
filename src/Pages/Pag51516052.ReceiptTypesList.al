@@ -3,7 +3,7 @@ Page 51516052 "Receipt Types List"
 {
     CardPageID = "Receipt Types Card";
     PageType = List;
-    SourceTable = 51516032;
+    SourceTable = "Funds Transaction Types";
     SourceTableView = where("Transaction Type" = const(Receipt));
 
     layout
@@ -12,31 +12,31 @@ Page 51516052 "Receipt Types List"
         {
             repeater(Group)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Grouping"; "Default Grouping")
+                field("Default Grouping"; Rec."Default Grouping")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,7 +50,7 @@ Page 51516052 "Receipt Types List"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Transaction Type" := "transaction type"::Receipt;
+        Rec."Transaction Type" := Rec."transaction type"::Receipt;
     end;
 }
 

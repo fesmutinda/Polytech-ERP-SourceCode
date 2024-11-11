@@ -3,7 +3,7 @@ Page 51516030 "Funds Transfer List"
 {
     CardPageID = "Funds Transfer Card";
     PageType = List;
-    SourceTable = 51516056;
+    SourceTable = "Funds Transfer Header";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -12,31 +12,31 @@ Page 51516030 "Funds Transfer List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Account"; "Paying Bank Account")
+                field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Name"; "Paying Bank Name")
+                field("Paying Bank Name"; Rec."Paying Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Transfer"; "Amount to Transfer")
+                field("Amount to Transfer"; Rec."Amount to Transfer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Transfer(LCY)"; "Amount to Transfer(LCY)")
+                field("Amount to Transfer(LCY)"; Rec."Amount to Transfer(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,12 +50,12 @@ Page 51516030 "Funds Transfer List"
 
     trigger OnAfterGetRecord()
     begin
-        SetRange("Created By", UserId);
+        Rec.SetRange("Created By", UserId);
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Pay Mode" := "pay mode"::Cash
+        Rec."Pay Mode" := Rec."pay mode"::Cash
     end;
 }
 

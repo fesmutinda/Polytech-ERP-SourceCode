@@ -2,7 +2,7 @@
 Page 51516026 "Receipt Line"
 {
     PageType = ListPart;
-    SourceTable = 51516003;
+    SourceTable = "Receipt Line";
 
     layout
     {
@@ -10,58 +10,58 @@ Page 51516026 "Receipt Line"
         {
             repeater(Group)
             {
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Grouping"; "Default Grouping")
+                field("Default Grouping"; Rec."Default Grouping")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Code"; "Account Code")
+                field("Account Code"; Rec."Account Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Mode"; "Pay Mode")
+                field("Pay Mode"; Rec."Pay Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount(LCY)"; "Amount(LCY)")
+                field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applies-To Doc No."; "Applies-To Doc No.")
+                field("Applies-To Doc No."; Rec."Applies-To Doc No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applies-To ID"; "Applies-To ID")
+                field("Applies-To ID"; Rec."Applies-To ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Code"; "Bank Code")
+                field("Bank Code"; Rec."Bank Code")
                 {
                     ApplicationArea = Basic;
                 }

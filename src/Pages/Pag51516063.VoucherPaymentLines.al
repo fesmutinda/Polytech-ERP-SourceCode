@@ -10,31 +10,31 @@ Page 51516063 "Voucher Payment Lines"
         {
             repeater(Control1102760000)
             {
-                field(Type;Type)
+                field(Type;Rec.Type)
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                 }
-                field("Account No.";"Account No.")
+                field("Account No.";Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Account Name";"Account Name")
+                field("Account Name";Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Description';
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Global Dimension 1 Code";"Global Dimension 1 Code")
+                field("Global Dimension 1 Code";Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Shortcut Dimension 2 Code";"Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code";Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
@@ -65,7 +65,7 @@ Page 51516063 "Voucher Payment Lines"
                           "account type"::"G/L Account":
                             begin
 
-                        TestField(Amount);
+                        Rec.TestField(Amount);
                         RecPayTypes.Reset;
                         RecPayTypes.SetRange(RecPayTypes.Code,Type);
                         RecPayTypes.SetRange(RecPayTypes.Type,RecPayTypes.Type::Payment);

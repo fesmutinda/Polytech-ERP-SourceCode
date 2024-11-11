@@ -6,7 +6,7 @@ Page 130408 "CAL Test Coverage Map"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "CAL Test Coverage Map";
-    SourceTableView = sorting("Object Type","Object ID");
+    SourceTableView = sorting("Object Type", "Object ID");
 
     layout
     {
@@ -14,37 +14,37 @@ Page 130408 "CAL Test Coverage Map"
         {
             repeater(Group)
             {
-                field("Object Type";"Object Type")
+                field("Object Type"; Rec."Object Type")
                 {
                     ApplicationArea = All;
                     Visible = ObjectVisible;
                 }
-                field("Object ID";"Object ID")
+                field("Object ID"; Rec."Object ID")
                 {
                     ApplicationArea = All;
                     Visible = ObjectVisible;
                 }
-                field("Object Name";"Object Name")
+                field("Object Name"; Rec."Object Name")
                 {
                     ApplicationArea = All;
                     Visible = ObjectVisible;
                 }
-                field("Hit by Test Codeunits";"Hit by Test Codeunits")
+                field("Hit by Test Codeunits"; Rec."Hit by Test Codeunits")
                 {
                     ApplicationArea = All;
                     Visible = ObjectVisible;
 
                     trigger OnDrillDown()
                     begin
-                        ShowTestCodeunits;
+                        Rec.ShowTestCodeunits;
                     end;
                 }
-                field("Test Codeunit ID";"Test Codeunit ID")
+                field("Test Codeunit ID"; Rec."Test Codeunit ID")
                 {
                     ApplicationArea = All;
                     Visible = TestCodeunitVisible;
                 }
-                field("Test Codeunit Name";"Test Codeunit Name")
+                field("Test Codeunit Name"; Rec."Test Codeunit Name")
                 {
                     ApplicationArea = All;
                     Visible = TestCodeunitVisible;
@@ -88,16 +88,16 @@ Page 130408 "CAL Test Coverage Map"
                     ImportFolderPath: Text;
                     ServerFolderPath: Text;
                 begin
-                    if FileManagement.SelectFolderDialog(ImportFromFolderLbl,ImportFolderPath) then begin
-                      ServerFolderPath := FileManagement.UploadClientDirectorySilent(ImportFolderPath,'*.txt',false);
-                      FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer,ServerFolderPath);
-                      if TempNameValueBuffer.FindSet then
-                        repeat
-                          File.Open(TempNameValueBuffer.Name);
-                          File.CreateInstream(InStream);
-                          Xmlport.Import(Xmlport::"CAL Test Coverage Map",InStream);
-                          File.Close;
-                        until TempNameValueBuffer.Next = 0;
+                    if FileManagement.SelectFolderDialog(ImportFromFolderLbl, ImportFolderPath) then begin
+                        ServerFolderPath := FileManagement.UploadClientDirectorySilent(ImportFolderPath, '*.txt', false);
+                        FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, ServerFolderPath);
+                        if TempNameValueBuffer.FindSet then
+                            repeat
+                                File.Open(TempNameValueBuffer.Name);
+                                File.CreateInstream(InStream);
+                                Xmlport.Import(Xmlport::"CAL Test Coverage Map", InStream);
+                                File.Close;
+                            until TempNameValueBuffer.Next = 0;
                     end;
                 end;
             }
@@ -106,8 +106,8 @@ Page 130408 "CAL Test Coverage Map"
 
     trigger OnOpenPage()
     begin
-        TestCodeunitVisible := GetFilter("Test Codeunit ID") = '';
-        ObjectVisible := (GetFilter("Object ID") = '') and (GetFilter("Object Type") = '');
+        TestCodeunitVisible := Rec.GetFilter("Test Codeunit ID") = '';
+        ObjectVisible := (Rec.GetFilter("Object ID") = '') and (Rec.GetFilter("Object Type") = '');
     end;
 
     var

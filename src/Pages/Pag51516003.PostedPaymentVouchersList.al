@@ -16,35 +16,35 @@ Page 51516003 "Posted Payment Vouchers List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Type"; "Payment Type")
+                field("Payment Type"; Rec."Payment Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account"; "Bank Account")
+                field("Bank Account"; Rec."Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account Name"; "Bank Account Name")
+                field("Bank Account Name"; Rec."Bank Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Amount"; "VAT Amount")
+                field("VAT Amount"; Rec."VAT Amount")
                 {
                     ApplicationArea = Basic;
                 }
@@ -52,15 +52,15 @@ Page 51516003 "Posted Payment Vouchers List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; "Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -108,10 +108,10 @@ Page 51516003 "Posted Payment Vouchers List"
 
                         //IF Status=Status::Pending THEN
                         //ERROR('You cannot Print until the document is released for approval');
-                        Reset;
-                        SetFilter("No.", "No.");
+                        Rec.Reset;
+                        Rec.SetFilter("No.", Rec."No.");
                         Report.Run(51516334, true, true, Rec);
-                        Reset;
+                        Rec.Reset;
 
                         CurrPage.Update;
                         CurrPage.SaveRecord;

@@ -3,8 +3,8 @@ Page 50031 "Issue Input Card"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516648;
-    SourceTableView = where(Posted=const(No));
+    SourceTable = "Loans reg";
+    SourceTableView = where(Posted = const(No));
 
     layout
     {
@@ -12,30 +12,30 @@ Page 50031 "Issue Input Card"
         {
             group(General)
             {
-                field("Module Code";"Module Code")
+                field("Module Code"; Rec."Module Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Module';
                 }
-                field("UAT Item";"UAT Item")
+                field("UAT Item"; Rec."UAT Item")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Issue Description';
                     MultiLine = true;
                 }
-                field("USER ID";"USER ID")
+                field("USER ID"; Rec."USER ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("UAT Level";"UAT Level")
+                field("UAT Level"; Rec."UAT Level")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer Status";"Customer Status")
+                field("Customer Status"; Rec."Customer Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User Comments";"User Comments")
+                field("User Comments"; Rec."User Comments")
                 {
                     ApplicationArea = Basic;
                 }
@@ -58,12 +58,12 @@ Page 50031 "Issue Input Card"
 
                 trigger OnAction()
                 begin
-                    if "Module Code" = '' then
-                     Error('Kindly select module');
-                    if "UAT Item" = '' then
-                      Error('Kindly enter description of the issue being submitted.');
-                    Posted:=true;
-                    Modify;
+                    if Rec."Module Code" = '' then
+                        Error('Kindly select module');
+                    if Rec."UAT Item" = '' then
+                        Error('Kindly enter description of the issue being submitted.');
+                    Rec.Posted := true;
+                    Rec.Modify;
                     Message('Your issue has been submitted and shall be handled ASAP! Thank you.');
                 end;
             }

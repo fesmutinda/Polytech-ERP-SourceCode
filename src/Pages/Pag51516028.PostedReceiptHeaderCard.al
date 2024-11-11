@@ -5,7 +5,7 @@ Page 51516028 "Posted Receipt Header Card"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = 51516002;
+    SourceTable = "Receipt Header";
     SourceTableView = where(Posted = const(Yes));
 
     layout
@@ -14,80 +14,80 @@ Page 51516028 "Posted Receipt Header Card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Code"; "Bank Code")
+                field("Bank Code"; Rec."Bank Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Balance"; "Bank Balance")
+                field("Bank Balance"; Rec."Bank Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cheque No.';
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Received"; "Amount Received")
+                field("Amount Received"; Rec."Amount Received")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Received(LCY)"; "Amount Received(LCY)")
+                field("Amount Received(LCY)"; Rec."Amount Received(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Amount"; "Total Amount")
+                field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Amount(LCY)"; "Total Amount(LCY)")
+                field("Total Amount(LCY)"; Rec."Total Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received From"; "Received From")
+                field("Received From"; Rec."Received From")
                 {
                     ApplicationArea = Basic;
                 }
-                field("On Behalf of"; "On Behalf of")
+                field("On Behalf of"; Rec."On Behalf of")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
@@ -112,7 +112,7 @@ Page 51516028 "Posted Receipt Header Card"
 
                 trigger OnAction()
                 begin
-                    DocNo := "No.";
+                    DocNo := Rec."No.";
                     ReceiptHeader.Reset;
                     ReceiptHeader.SetRange(ReceiptHeader."No.", DocNo);
                     if ReceiptHeader.FindFirst then begin
@@ -146,26 +146,26 @@ Page 51516028 "Posted Receipt Header Card"
 
     local procedure CheckReceiptRequiredFields()
     begin
-        CalcFields("Total Amount");
+        Rec.CalcFields("Total Amount");
 
-        TestField("Total Amount");
-        TestField("Amount Received");
-        TestField("Bank Code");
-        TestField(Date);
-        TestField("Posting Date");
-        TestField(Description);
-        TestField("Received From");
-        TestField("Global Dimension 1 Code");
-        TestField("Global Dimension 2 Code");
+        Rec.TestField("Total Amount");
+        Rec.TestField("Amount Received");
+        Rec.TestField("Bank Code");
+        Rec.TestField(Date);
+        Rec.TestField("Posting Date");
+        Rec.TestField(Description);
+        Rec.TestField("Received From");
+        Rec.TestField("Global Dimension 1 Code");
+        Rec.TestField("Global Dimension 2 Code");
 
-        if "Amount Received" <> "Total Amount" then
+        if Rec."Amount Received" <> Rec."Total Amount" then
             Error('Amount Received must be Equal to the total Amount');
     end;
 
     local procedure CheckLines()
     begin
         ReceiptLines.Reset;
-        ReceiptLines.SetRange(ReceiptLines."Document No", "No.");
+        ReceiptLines.SetRange(ReceiptLines."Document No", Rec."No.");
         if ReceiptLines.FindSet then begin
             repeat
                 ReceiptLines.TestField(ReceiptLines."Account Code");

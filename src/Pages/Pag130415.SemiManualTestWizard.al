@@ -21,7 +21,7 @@ Page 130415 "Semi-Manual Test Wizard"
                 {
                     Caption = 'Codeunit';
                     InstructionalText = 'Choose the codeunit, and then load it. The wizard will do the actions that could be automated, and list actions for each step that you need to do manually.';
-                    field(CodeunitId;CodeunitId)
+                    field(CodeunitId; CodeunitId)
                     {
                         ApplicationArea = All;
                         BlankZero = true;
@@ -34,10 +34,10 @@ Page 130415 "Semi-Manual Test Wizard"
                         begin
                             GetSemiManualTestCodeunits.LookupMode := true;
                             if GetSemiManualTestCodeunits.RunModal = Action::LookupOK then begin
-                              GetSemiManualTestCodeunits.SetSelectionFilter(AllObjWithCaption);
-                              if AllObjWithCaption.FindFirst then
-                                CodeunitId := AllObjWithCaption."Object ID";
-                              LoadTest;
+                                GetSemiManualTestCodeunits.SetSelectionFilter(AllObjWithCaption);
+                                if AllObjWithCaption.FindFirst then
+                                    CodeunitId := AllObjWithCaption."Object ID";
+                                LoadTest;
                             end;
                         end;
 
@@ -55,7 +55,7 @@ Page 130415 "Semi-Manual Test Wizard"
                 group(Para3)
                 {
                     Caption = '';
-                    field(CodeunitIdentifier;CodeunitIdentifier)
+                    field(CodeunitIdentifier; CodeunitIdentifier)
                     {
                         ApplicationArea = All;
                         Caption = '';
@@ -68,7 +68,7 @@ Page 130415 "Semi-Manual Test Wizard"
                 {
                     Caption = 'Manual steps';
                     InstructionalText = 'These are the actions that cannot be automated. Manually perform each of the actions listed for each step. If an error message displays, you''ve found a bug! Copy information about the error after clicking on the Download log button, and provide that when you report the bug.';
-                    field(StepHeading;StepHeading)
+                    field(StepHeading; StepHeading)
                     {
                         ApplicationArea = All;
                         Editable = false;
@@ -76,7 +76,7 @@ Page 130415 "Semi-Manual Test Wizard"
                         StyleExpr = true;
                         ToolTip = 'Specifies title of this set of manual actions';
                     }
-                    field(ManualSteps;ManualSteps)
+                    field(ManualSteps; ManualSteps)
                     {
                         ApplicationArea = All;
                         Editable = false;
@@ -112,11 +112,11 @@ Page 130415 "Semi-Manual Test Wizard"
                     File.Create(ServerFileName);
                     File.CreateOutstream(OutStream);
                     if SemiManualExecutionLog.FindSet then
-                      repeat
-                        OutStream.Write('[' + Format(SemiManualExecutionLog."Time stamp") + '] ');
-                        OutStream.WriteText(SemiManualExecutionLog.GetMessage);
-                        OutStream.WriteText;
-                      until SemiManualExecutionLog.Next = 0;
+                        repeat
+                            OutStream.Write('[' + Format(SemiManualExecutionLog."Time stamp") + '] ');
+                            OutStream.WriteText(SemiManualExecutionLog.GetMessage);
+                            OutStream.WriteText;
+                        until SemiManualExecutionLog.Next = 0;
                     File.Close;
                     FileManagement.DownloadTempFile(ServerFileName);
                 end;
@@ -156,7 +156,7 @@ Page 130415 "Semi-Manual Test Wizard"
 
                 trigger OnAction()
                 begin
-                    "Skip current step" := true;
+                    Rec."Skip current step" := true;
                     OnNextStep;
                 end;
             }
@@ -170,7 +170,7 @@ Page 130415 "Semi-Manual Test Wizard"
 
                 trigger OnAction()
                 begin
-                    "Skip current step" := false;
+                    Rec."Skip current step" := false;
                     OnNextStep;
                 end;
             }
@@ -179,10 +179,10 @@ Page 130415 "Semi-Manual Test Wizard"
 
     trigger OnAfterGetRecord()
     begin
-        if "Step number" > "Total steps" then
-          StepHeading := 'TEST COMPLETE'
+        if Rec."Step number" > Rec."Total steps" then
+            StepHeading := 'TEST COMPLETE'
         else
-          StepHeading := StrSubstNo('Step %1 of %2. %3',"Step number","Total steps","Step heading");
+            StepHeading := StrSubstNo('Step %1 of %2. %3', Rec."Step number", Rec."Total steps", Rec."Step heading");
     end;
 
     var
@@ -192,7 +192,7 @@ Page 130415 "Semi-Manual Test Wizard"
         CodeunitId: Integer;
         CodeunitIdentifier: Text;
         TestExecuting: Boolean;
-        ErrorOccuredErr: label 'The following error occured: %1', Locked=true;
+        ErrorOccuredErr: label 'The following error occured: %1', Locked = true;
         TestSuccessfulMsg: label 'Test successfully completed.';
 
     local procedure LoadTest()
@@ -201,20 +201,20 @@ Page 130415 "Semi-Manual Test Wizard"
     begin
         TestExecuting := false;
         if CodeunitId <= 0 then
-          exit;
+            exit;
 
-        SemiManualExecutionLog.Log(StrSubstNo('Attempting to load codeunit %1.',CodeunitId));
-        AllObjWithCaption.SetRange("Object Type",AllObjWithCaption."object type"::Codeunit);
-        AllObjWithCaption.SetRange("Object ID",CodeunitId);
+        SemiManualExecutionLog.Log(StrSubstNo('Attempting to load codeunit %1.', CodeunitId));
+        AllObjWithCaption.SetRange("Object Type", AllObjWithCaption."object type"::Codeunit);
+        AllObjWithCaption.SetRange("Object ID", CodeunitId);
         if not AllObjWithCaption.FindFirst then
-          exit;
+            exit;
 
-        CodeunitIdentifier := StrSubstNo('%1: %2',CodeunitId,AllObjWithCaption."Object Name");
-        Initialize(AllObjWithCaption."Object ID",AllObjWithCaption."Object Name");
-        ManualSteps := GetManualSteps;
+        CodeunitIdentifier := StrSubstNo('%1: %2', CodeunitId, AllObjWithCaption."Object Name");
+        Rec.Initialize(AllObjWithCaption."Object ID", AllObjWithCaption."Object Name");
+        ManualSteps := Rec.GetManualSteps;
         TestExecuting := true;
         SemiManualExecutionLog.Log(StrSubstNo('Loaded codeunit %1. Total steps = %2.',
-            CodeunitId,"Total steps"));
+            CodeunitId, Rec."Total steps"));
         CurrPage.Update;
     end;
 
@@ -222,21 +222,21 @@ Page 130415 "Semi-Manual Test Wizard"
     begin
         ClearLastError;
         SemiManualExecutionLog.Log(StrSubstNo('Manual step %1- %2 executed. Attempting to execute the automation post process.',
-            "Step number","Step heading"));
-        if Codeunit.Run("Codeunit number",Rec) then begin
-          ManualSteps := GetManualSteps;
-          if "Step number" > "Total steps" then begin
-            TestExecuting := false;
-            Message(TestSuccessfulMsg);
-          end;
-          CurrPage.Update;
-          if "Skip current step" then
-            SemiManualExecutionLog.Log('The automation post process step skipped.')
-          else
-            SemiManualExecutionLog.Log('The automation post process executed without errors.');
+            Rec."Step number", Rec."Step heading"));
+        if Codeunit.Run(Rec."Codeunit number", Rec) then begin
+            ManualSteps := Rec.GetManualSteps;
+            if Rec."Step number" > Rec."Total steps" then begin
+                TestExecuting := false;
+                Message(TestSuccessfulMsg);
+            end;
+            CurrPage.Update;
+            if Rec."Skip current step" then
+                SemiManualExecutionLog.Log('The automation post process step skipped.')
+            else
+                SemiManualExecutionLog.Log('The automation post process executed without errors.');
         end else begin
-          SemiManualExecutionLog.Log(StrSubstNo(ErrorOccuredErr,GetLastErrorText));
-          Error(ErrorOccuredErr,GetLastErrorText);
+            SemiManualExecutionLog.Log(StrSubstNo(ErrorOccuredErr, GetLastErrorText));
+            Error(ErrorOccuredErr, GetLastErrorText);
         end;
     end;
 }
