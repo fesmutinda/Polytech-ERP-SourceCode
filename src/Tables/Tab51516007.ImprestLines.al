@@ -10,11 +10,10 @@ Table 51516007 "Imprest Lines"
 
             trigger OnValidate()
             begin
-                // IF Pay.GET(No) THEN
-                // "Imprest Holder":=Pay."Account No.";
+
             end;
         }
-        field(2; "Account No:"; Code[20])
+        field(2; "Account No:"; Code[10])
         {
             Editable = false;
             NotBlank = false;
@@ -35,7 +34,7 @@ Table 51516007 "Imprest Lines"
                 end;
             end;
         }
-        field(3; "Account Name"; Text[100])
+        field(3; "Account Name"; Text[50])
         {
         }
         field(4; Amount; Decimal)
@@ -48,10 +47,6 @@ Table 51516007 "Imprest Lines"
                 ImprestHeader.SetRange(ImprestHeader."No.", No);
                 if ImprestHeader.FindFirst then begin
                     "Date Taken" := ImprestHeader.Date;
-                    ImprestHeader.TestField("Responsibility Center");
-                    ImprestHeader.TestField("Global Dimension 1 Code");
-                    ImprestHeader.TestField("Shortcut Dimension 2 Code");
-                    "Global Dimension 1 Code" := ImprestHeader."Global Dimension 1 Code";
                     "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
                     "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
                     "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
@@ -167,25 +162,23 @@ Table 51516007 "Imprest Lines"
         }
         field(84; "Advance Type"; Code[20])
         {
-            TableRelation = "Receipts and Payment Types".Code where(Type = const(Imprest),
-                                                                     Blocked = const(false));
+            TableRelation = "Funds Transaction Types"."Transaction Code" where("Transaction Type" = const(Payment),
+                                                                                "Transaction Type" = const(Imprest));
 
             trigger OnValidate()
             begin
                 ImprestHeader.Reset;
                 ImprestHeader.SetRange(ImprestHeader."No.", No);
                 if ImprestHeader.FindFirst then begin
-                    if (ImprestHeader.Status = ImprestHeader.Status::Approved) or
-                    (ImprestHeader.Status = ImprestHeader.Status::Rejected) or
-                    (ImprestHeader.Status = ImprestHeader.Status::Open) then
+                    if (ImprestHeader.Status <> ImprestHeader.Status::Open) then
                         Error('You Cannot Insert a new record when the status of the document is not Pending');
                 end;
 
                 RecPay.Reset;
-                RecPay.SetRange(RecPay.Code, "Advance Type");
-                RecPay.SetRange(RecPay.Type, RecPay.Type::Imprest);
+                RecPay.SetRange(RecPay."Transaction Code", "Advance Type");
+                RecPay.SetRange(RecPay."Transaction Type", RecPay."Transaction Type"::Imprest);
                 if RecPay.Find('-') then begin
-                    "Account No:" := RecPay."G/L Account";
+                    "Account No:" := RecPay."Account No";
                     Validate("Account No:");
                 end;
             end;
@@ -243,7 +236,6 @@ Table 51516007 "Imprest Lines"
         }
         field(481; "Destination Code"; Code[20])
         {
-            TableRelation = "Travel Destination"."Destination Code" where(Currency = field("Currency Code"));
 
             trigger OnValidate()
             begin
@@ -256,6 +248,25 @@ Table 51516007 "Imprest Lines"
             trigger OnValidate()
             begin
                 getDestinationRateAndAmounts();
+            end;
+        }
+        field(50018; "Shortcut Dimension 6 Code"; Code[20])
+        {
+            CaptionClass = '1,2,6';
+            Caption = 'Shortcut Dimension 4 Code';
+            DataClassification = ToBeClassified;
+            Description = 'Stores the reference of the 6 global dimension in the database';
+            TableRelation = "Dimension Value".Code where("Global Dimension No." = const(6));
+
+            trigger OnValidate()
+            begin
+                // DimVal.RESET;
+                // //DimVal.SETRANGE(DimVal."Global Dimension No.",2);
+                // DimVal.SETRANGE(DimVal.Code,"Shortcut Dimension 6 Code");
+                // IF DimVal.FIND('-') THEN
+                //    "Dim 6":=DimVal.Name;
+
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
             end;
         }
     }
@@ -281,9 +292,7 @@ Table 51516007 "Imprest Lines"
         ImprestHeader.Reset;
         ImprestHeader.SetRange(ImprestHeader."No.", No);
         if ImprestHeader.FindFirst then begin
-            if (ImprestHeader.Status = ImprestHeader.Status::Approved) or
-            (ImprestHeader.Status = ImprestHeader.Status::Rejected) or
-            (ImprestHeader.Status = ImprestHeader.Status::Open) then
+            if (ImprestHeader.Status <> ImprestHeader.Status::Open) then
                 Error('You Cannot Delete this record its status is not Pending');
         end;
         TestField(Committed, false);
@@ -295,13 +304,11 @@ Table 51516007 "Imprest Lines"
         ImprestHeader.SetRange(ImprestHeader."No.", No);
         if ImprestHeader.FindFirst then begin
             "Date Taken" := ImprestHeader.Date;
-            ImprestHeader.TestField("Responsibility Center");
-            ImprestHeader.TestField("Global Dimension 1 Code");
-            ImprestHeader.TestField("Shortcut Dimension 2 Code");
-            "Global Dimension 1 Code" := ImprestHeader."Global Dimension 1 Code";
-            "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
+            "Due Date" := ImprestHeader."Surrender Due Date";
+            // "Shortcut Dimension 2 Code":=ImprestHeader."Shortcut Dimension 2 Code";
             "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
             "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
+            //"Shortcut Dimension 6 Code":=ImprestHeader."Shortcut Dimension 6 Code";
             "Currency Factor" := ImprestHeader."Currency Factor";
             "Currency Code" := ImprestHeader."Currency Code";
             Purpose := ImprestHeader.Purpose;
@@ -313,38 +320,24 @@ Table 51516007 "Imprest Lines"
         ImprestHeader.Reset;
         ImprestHeader.SetRange(ImprestHeader."No.", No);
         if ImprestHeader.FindFirst then begin
-            if (ImprestHeader.Status = ImprestHeader.Status::Approved) or
-                (ImprestHeader.Status = ImprestHeader.Status::Rejected) or
-                (ImprestHeader.Status = ImprestHeader.Status::Open) then
+            if (ImprestHeader.Status <> ImprestHeader.Status::Open) then
                 Error('You Cannot Modify this record its status is not Pending');
-
-            "Date Taken" := ImprestHeader.Date;
-            "Global Dimension 1 Code" := ImprestHeader."Global Dimension 1 Code";
-            "Shortcut Dimension 2 Code" := ImprestHeader."Shortcut Dimension 2 Code";
-            "Shortcut Dimension 3 Code" := ImprestHeader."Shortcut Dimension 3 Code";
-            "Shortcut Dimension 4 Code" := ImprestHeader."Shortcut Dimension 4 Code";
-            "Currency Factor" := ImprestHeader."Currency Factor";
-            "Currency Code" := ImprestHeader."Currency Code";
-            Purpose := ImprestHeader.Purpose;
-
         end;
 
         TestField(Committed, false);
+
     end;
 
     var
         GLAcc: Record "G/L Account";
         Pay: Record "Imprest Header";
         ImprestHeader: Record "Imprest Header";
-        RecPay: Record "Receipts and Payment Types";
+        RecPay: Record "Funds Transaction Types";
         DimMgt: Codeunit DimensionManagement;
         EmpNo: Code[50];
-        objEmp: Record "HR Employees";
         EmpGrade: Code[50];
-        objDestRateEntry: Record "Destination Rate Entry";
         objCust: Record Customer;
         CustNo: Code[50];
-        objTrvDest: Record "Travel Destination";
         CurrCode: Code[20];
 
 
@@ -389,28 +382,7 @@ Table 51516007 "Imprest Lines"
             CustNo := Pay."Account No.";
         end;
 
-        //Get the Emp No
-        objCust.Reset;
-        objCust.SetRange(objCust."No.", CustNo);
-        if objCust.Find('-') then begin
-            EmpNo := objCust."Employee Job Group";
-        end;
 
-        // get the grade
-        objEmp.Reset;
-        objEmp.SetRange(objEmp."No.", EmpNo);
-        if objEmp.Find('-') then begin
-            EmpGrade := objEmp.Grade;
-        end;
-
-        //get the destination rate for the grade
-        objDestRateEntry.Reset;
-        objDestRateEntry.SetRange(objDestRateEntry."Employee Job Group", EmpGrade);
-        objDestRateEntry.SetRange(objDestRateEntry."Destination Code", "Destination Code");
-        if objDestRateEntry.Find('-') then begin
-            "Daily Rate(Amount)" := objDestRateEntry."Daily Rate (Amount)";
-            Amount := objDestRateEntry."Daily Rate (Amount)" * "No of Days";
-        end;
     end;
 }
 

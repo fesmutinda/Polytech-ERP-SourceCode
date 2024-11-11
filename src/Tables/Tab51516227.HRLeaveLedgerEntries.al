@@ -51,11 +51,9 @@ Table 51516227 "HR Leave Ledger Entries"
         }
         field(11; "Job ID"; Code[20])
         {
-            TableRelation = Table0.Field4;
         }
         field(12; "Job Group"; Code[20])
         {
-            TableRelation = Table55622.Field23;
         }
         field(13; "Contract Type"; Code[20])
         {
@@ -106,7 +104,7 @@ Table 51516227 "HR Leave Ledger Entries"
             var
                 LoginMgt: Codeunit "User Management";
             begin
-                LoginMgt.LookupUserID("User ID");
+                // LoginMgt.LookupUserID("User ID");
             end;
         }
         field(24; "Source Code"; Code[10])
@@ -135,8 +133,8 @@ Table 51516227 "HR Leave Ledger Entries"
         field(29; "Leave Recalled No."; Code[20])
         {
             Caption = 'Leave Application No.';
-            TableRelation = "HR Leave Application"."Application Code" where("Employee No" = field("Staff No."),
-                                                                             Status = const(Approved));
+            // TableRelation = "HR Leave Application"."Application Code" where ("Employee No"=field("Staff No."),
+            //                                                                  Status=const("7"));
         }
         field(30; "Leave Type"; Code[20])
         {

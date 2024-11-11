@@ -4,85 +4,91 @@ Table 51516030 "Funds General Setup"
 
     fields
     {
-        field(10;"Primary Key";Integer)
+        field(10; "Primary Key"; Integer)
         {
         }
-        field(11;"Payment Voucher Nos";Code[20])
-        {
-            TableRelation = "No. Series".Code;
-        }
-        field(12;"Cash Voucher Nos";Code[20])
+        field(11; "Payment Voucher Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(13;"PettyCash Nos";Code[20])
+        field(12; "Cash Voucher Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(14;"Mobile Payment Nos";Code[20])
+        field(13; "PettyCash Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(15;"Receipt Nos";Code[20])
+        field(14; "Mobile Payment Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(16;"Funds Transfer Nos";Code[20])
+        field(15; "Receipt Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(17;"Imprest Nos";Code[20])
+        field(16; "Funds Transfer Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(18;"Imprest Surrender Nos";Code[20])
+        field(17; "Imprest Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(19;"Claim Nos";Code[20])
+        field(18; "Imprest Surrender Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(20;"Travel Advance Nos";Code[20])
+        field(19; "Claim Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(21;"Travel Surrender Nos";Code[20])
+        field(20; "Travel Advance Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(50;"Cash Account";Code[20])
+        field(21; "Travel Surrender Nos"; Code[20])
+        {
+            TableRelation = "No. Series".Code;
+        }
+        field(50; "Cash Account"; Code[20])
         {
             TableRelation = "Bank Account"."No.";
         }
-        field(51;"PettyCash Account";Code[20])
+        field(51; "PettyCash Account"; Code[20])
         {
             TableRelation = "Bank Account"."No.";
         }
-        field(52;"Funds Withdrawal Nos";Code[20])
+        field(52; "Funds Withdrawal Nos"; Code[20])
         {
             TableRelation = "No. Series".Code;
         }
-        field(53;"Cashier Closure Nos";Code[20])
+        field(53; "Cashier Closure Nos"; Code[20])
         {
             TableRelation = "No. Series";
         }
-        field(54;"Allowance Doc Nos";Code[20])
+        field(54; "Allowance Doc Nos"; Code[20])
         {
             TableRelation = "No. Series";
         }
-        field(55;"Cheque Charge";Decimal)
+        field(55; "Cheque Charge"; Decimal)
         {
         }
-        field(56;"Cheque Charge Account";Code[20])
+        field(56; "Cheque Charge Account"; Code[20])
         {
             TableRelation = "G/L Account"."No.";
+        }
+        field(57; "Max Open Documents"; Integer)
+        {
+        }
+        field(58; "Imprest Balance Grace Period"; date)
+        {
         }
     }
 
     keys
     {
-        key(Key1;"Primary Key")
+        key(Key1; "Primary Key")
         {
             Clustered = true;
         }

@@ -130,7 +130,7 @@ Table 51516272 "Job-Ledger Entryy"
             var
                 LoginMgt: Codeunit "User Management";
             begin
-                LoginMgt.LookupUserID("User ID");
+                // LoginMgt.LookupUserID("User ID");
             end;
         }
         field(38;"Source Code";Code[10])

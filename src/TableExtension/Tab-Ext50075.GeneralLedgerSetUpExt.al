@@ -143,6 +143,12 @@ tableextension 50075 "General Ledger SetUpExt" extends "General Ledger Setup"
         {
             TableRelation = "No. Series".Code;
         }
+        field(50019; "File Movement Nos"; Code[20]) { }
+        field(54250; "Base No. Series"; Option)
+        {
+            OptionCaption = ' ,Responsibility Center,Shortcut Dimension 1,Shortcut Dimension 2,Shortcut Dimension 3,Shortcut Dimension 4';
+            OptionMembers = " ","Responsibility Center","Shortcut Dimension 1","Shortcut Dimension 2","Shortcut Dimension 3","Shortcut Dimension 4","Shortcut Dimension 5","Shortcut Dimension 6","Shortcut Dimension 7","Shortcut Dimension 8";
+        }
     }
 
     keys

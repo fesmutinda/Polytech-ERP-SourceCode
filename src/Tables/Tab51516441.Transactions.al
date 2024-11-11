@@ -899,7 +899,7 @@ Table 51516441 Transactions
         }
         field(129; "Branch Account"; Code[20])
         {
-            TableRelation = Vendor."No." where("Creditor Type" = const("Savings Account"),
+            TableRelation = Vendor."No." where("Creditor Type" = const("Account"),
                                                 "Account Category" = const(Branch));
 
             trigger OnValidate()

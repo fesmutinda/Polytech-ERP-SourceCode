@@ -53,8 +53,6 @@ Table 51516104 "Bid Analysis"
                 PurchLine.SetRange(PurchLine."Line No.","RFQ Line No.");
                 if PurchLine.FindSet then
                 begin
-                 PurchLine."RFQ Remarks" := Remarks;
-                 PurchLine.Modify;
                 end
             end;
         }

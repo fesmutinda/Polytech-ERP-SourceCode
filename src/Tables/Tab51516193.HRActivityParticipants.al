@@ -9,11 +9,9 @@ Table 51516193 "HR Activity Participants"
         {
             Caption = 'Table ID';
         }
-        field(2;"Document Type";Option)
+        field(2;"Document Type";enum "Approval Document Type")
         {
             Caption = 'Document Type';
-            OptionCaption = 'Company Activity';
-            OptionMembers = "Company Activity";
         }
         field(3;"Document No.";Code[20])
         {
@@ -144,20 +142,11 @@ Table 51516193 "HR Activity Participants"
         {
             Clustered = true;
         }
-        key(Key2;"Table ID","Document Type","Document No.","Sequence No.")
-        {
-            Clustered = true;
-            Enabled = false;
-        }
         key(Key3;"Approver ID",Status)
         {
             Enabled = false;
         }
         key(Key4;"Sender ID")
-        {
-            Enabled = false;
-        }
-        key(Key5;'')
         {
             Enabled = false;
         }
@@ -180,41 +169,41 @@ Table 51516193 "HR Activity Participants"
         case "Table ID" of
           Database::"Sales Header":
             begin
-              if not SalesHeader.Get("Document Type","Document No.") then
-                exit;
-              case "Document Type" of
-                "document type"::"Company Activity":
-                  Page.Run(Page::"Sales Quote",SalesHeader);
-                "document type"::"1":
-                  Page.Run(Page::"Sales Order",SalesHeader);
-                "document type"::"2":
-                  Page.Run(Page::"Sales Invoice",SalesHeader);
-                "document type"::"3":
-                  Page.Run(Page::"Sales Credit Memo",SalesHeader);
-                "document type"::"4":
-                  Page.Run(Page::"Blanket Sales Order",SalesHeader);
-                "document type"::"5":
-                  Page.Run(Page::"Sales Return Order",SalesHeader);
-              end;
+              // if not SalesHeader.Get("Document Type","Document No.") then
+              //   exit;
+              // case "Document Type" of
+              //   "document type"::"Company Activity":
+              //     Page.Run(Page::"Sales Quote",SalesHeader);
+              //   "document type"::"1":
+              //     Page.Run(Page::"Sales Order",SalesHeader);
+              //   "document type"::"2":
+              //     Page.Run(Page::"Sales Invoice",SalesHeader);
+              //   "document type"::"3":
+              //     Page.Run(Page::"Sales Credit Memo",SalesHeader);
+              //   "document type"::"4":
+              //     Page.Run(Page::"Blanket Sales Order",SalesHeader);
+              //   "document type"::"5":
+              //     Page.Run(Page::"Sales Return Order",SalesHeader);
+              // end;
             end;
           Database::"Purchase Header":
             begin
-              if not PurchHeader.Get("Document Type","Document No.") then
-                exit;
-              case "Document Type" of
-                "document type"::"Company Activity":
-                  Page.Run(Page::"Purchase Quote",PurchHeader);
-                "document type"::"1":
-                  Page.Run(Page::"Purchase Order",PurchHeader);
-                "document type"::"2":
-                  Page.Run(Page::"Purchase Invoice",PurchHeader);
-                "document type"::"3":
-                  Page.Run(Page::"Purchase Credit Memo",PurchHeader);
-                "document type"::"4":
-                  Page.Run(Page::"Blanket Purchase Order",PurchHeader);
-                "document type"::"5":
-                  Page.Run(Page::"Purchase Return Order",PurchHeader);
-              end;
+              // if not PurchHeader.Get("Document Type","Document No.") then
+              //   exit;
+              // case "Document Type" of
+              //   "document type"::"Company Activity":
+              //     Page.Run(Page::"Purchase Quote",PurchHeader);
+              //   "document type"::"1":
+              //     Page.Run(Page::"Purchase Order",PurchHeader);
+              //   "document type"::"2":
+              //     Page.Run(Page::"Purchase Invoice",PurchHeader);
+              //   "document type"::"3":
+              //     Page.Run(Page::"Purchase Credit Memo",PurchHeader);
+              //   "document type"::"4":
+              //     Page.Run(Page::"Blanket Purchase Order",PurchHeader);
+              //   "document type"::"5":
+              //     Page.Run(Page::"Purchase Return Order",PurchHeader);
+              // end;
             end;
         end;
     end;

@@ -34,11 +34,11 @@ Table 51516362 "Member App Signatories"
         field(8; "Must be Present"; Boolean)
         {
         }
-        field(9; Picture; Media)
+        field(9; Picture; MediaSet)
         {
             Caption = 'Picture';
         }
-        field(10; Signature; Media)
+        field(10; Signature; MediaSet)
         {
             Caption = 'Signature';
         }
@@ -47,7 +47,7 @@ Table 51516362 "Member App Signatories"
         }
         field(12; "BOSA No."; Code[30])
         {
-            TableRelation = customer;
+            TableRelation = "Member Register";
 
             trigger OnValidate()
             begin
@@ -57,7 +57,7 @@ Table 51516362 "Member App Signatories"
                     "Email Address" := Cust."E-Mail (Personal)";
                     "Date Of Birth" := Cust."Date of Birth";
                     "Staff/Payroll" := Cust."Personal No";
-                    Picture := Cust.Image;
+                    Picture := Cust.Picture;
                     Signature := Cust.Signature;
                     "Mobile No." := Cust."Mobile Phone No";
                 end;
@@ -92,6 +92,6 @@ Table 51516362 "Member App Signatories"
     }
 
     var
-        Cust: Record Customer;
+        Cust: Record "Member Register";
 }
 

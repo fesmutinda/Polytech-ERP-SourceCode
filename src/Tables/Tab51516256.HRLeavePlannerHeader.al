@@ -172,7 +172,7 @@ Table 51516256 "HR Leave Planner Header"
         ReturnDateLoop: Boolean;
         mSubject: Text[250];
         ApplicantsEmail: Text[30];
-        SMTP: Codeunit 400;
+        // SMTP: Codeunit 400;
         LeaveGjline: Record "HR Journal Line";
         "LineNo.": Integer;
         ApprovalComments: Record "Approval Comment Line";

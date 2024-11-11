@@ -1,12 +1,12 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516192 "HR Drivers"
 {
-    DrillDownPageID = 55603;
-    LookupPageID = 55603;
+    // DrillDownPageID = UnknownPage55603;
+    // LookupPageID = UnknownPage55603;
 
     fields
     {
-        field(1; "Code"; Code[10])
+        field(1;"Code";Code[10])
         {
             TableRelation = "HR Employees"."No.";
 
@@ -14,23 +14,23 @@ Table 51516192 "HR Drivers"
             begin
                 HREmp.Reset;
                 HREmp.Get(Code);
-                "Driver Name" := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
+                "Driver Name":=HREmp."First Name"+' '+HREmp."Middle Name"+' '+HREmp."Last Name";
             end;
         }
-        field(2; "Driver Name"; Text[100])
+        field(2;"Driver Name";Text[100])
         {
         }
-        field(3; "Driver License Number"; Code[20])
+        field(3;"Driver License Number";Code[20])
         {
         }
-        field(4; "Last License Renewal"; Date)
+        field(4;"Last License Renewal";Date)
         {
         }
-        field(5; "Renewal Interval"; Option)
+        field(5;"Renewal Interval";Option)
         {
             OptionMembers = " ",Days,Weeks,Months,Quarterly,Years;
         }
-        field(6; "Renewal Interval Value"; Integer)
+        field(6;"Renewal Interval Value";Integer)
         {
 
             trigger OnValidate()
@@ -63,23 +63,23 @@ Table 51516192 "HR Drivers"
 
             end;
         }
-        field(7; "Next License Renewal"; Date)
+        field(7;"Next License Renewal";Date)
         {
         }
-        field(8; "Year Of Experience"; Decimal)
+        field(8;"Year Of Experience";Decimal)
         {
         }
-        field(9; Grade; Code[20])
+        field(9;Grade;Code[20])
         {
         }
-        field(10; Active; Boolean)
+        field(10;Active;Boolean)
         {
         }
     }
 
     keys
     {
-        key(Key1; "Code")
+        key(Key1;"Code")
         {
             Clustered = true;
         }
@@ -91,7 +91,7 @@ Table 51516192 "HR Drivers"
 
     trigger OnInsert()
     begin
-        Active := true;
+        Active:=true;
     end;
 
     var

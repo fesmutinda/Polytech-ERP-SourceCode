@@ -43,9 +43,7 @@ Table 51516057 "Pending Vch. Surr. Line"
                   end
                 else
                   begin
-                    Emp.Reset;
-                    Emp.Get("Account No.");
-                    "Account Name":=Emp.FullName;
+                  
                   end;
             end;
         }
@@ -106,15 +104,7 @@ Table 51516057 "Pending Vch. Surr. Line"
 
     trigger OnInsert()
     begin
-        Header.Reset;
-        Header.SetRange(Header."No.","No.");
-        if Header.FindFirst then
-          begin
-            "Voucher no.":=Header."Voucher No.";
-            "Entry No.":=Header."Entry No.";
-            "Global Dimension 1 Code":=Header."Global Dimension 1 Code";
-            "Global Dimension 2 Code":=Header."Global Dimension 2 Code";
-          end;
+        
     end;
 
     var

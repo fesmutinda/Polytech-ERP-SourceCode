@@ -18,7 +18,7 @@ Table 51516245 "HR Job Training Needs"
         }
         field(2;"Job ID";Code[50])
         {
-            TableRelation = "HR Jobs"."Job ID";
+            TableRelation = "HR Jobss"."Job ID";
         }
         field(3;Description;Text[250])
         {

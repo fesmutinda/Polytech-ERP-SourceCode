@@ -4,7 +4,7 @@ Table 51516240 "HR Interview Evaluation"
 
     fields
     {
-        field(10;"Interview No.";Code[20])
+        field(10; "Interview No."; Code[20])
         {
 
             trigger OnValidate()
@@ -19,7 +19,7 @@ Table 51516240 "HR Interview Evaluation"
 
             end;
         }
-        field(20;"Application No.";Code[20])
+        field(20; "Application No."; Code[20])
         {
             TableRelation = "HR Job Applications"."Application No";
 
@@ -27,120 +27,119 @@ Table 51516240 "HR Interview Evaluation"
             begin
                 HrJobs.Reset;
                 if HrJobs.Get("Application No.") then begin
-                 "First Name":=HrJobs."First Name";
-                 "Middle Name":= HrJobs."Middle Name" ;
-                 "Last Name":= HrJobs."Last Name"     ;
-                 Initial:= HrJobs.Initials ;
-                 "Date Applied":= HrJobs."Date Applied" ;
-                 Email:= HrJobs."E-Mail" ;
-                 "Job Title":=HrJobs."Job Applied For";
+                    "First Name" := HrJobs."First Name";
+                    "Middle Name" := HrJobs."Middle Name";
+                    "Last Name" := HrJobs."Last Name";
+                    Initial := HrJobs.Initials;
+                    "Date Applied" := HrJobs."Date Applied";
+                    Email := HrJobs."E-Mail";
+                    "Job Title" := HrJobs."Job Applied For";
 
-                objEmpReq.Reset;
-                objEmpReq.SetRange(objEmpReq."Requisition No.",HrJobs."Employee Requisition No");
-                if objEmpReq.Find('-') then
-                 begin
-                  "Job Position":=objEmpReq."Job ID";
-                  "Responsibility Center":=objEmpReq."Responsibility Center";
-                 end;
+                    objEmpReq.Reset;
+                    objEmpReq.SetRange(objEmpReq."Requisition No.", HrJobs."Employee Requisition No");
+                    if objEmpReq.Find('-') then begin
+                        "Job Position" := objEmpReq."Job ID";
+                        "Responsibility Center" := objEmpReq."Responsibility Center";
+                    end;
                 end;
             end;
         }
-        field(30;"First Name";Text[50])
+        field(30; "First Name"; Text[50])
         {
             Editable = false;
         }
-        field(40;"Middle Name";Text[50])
+        field(40; "Middle Name"; Text[50])
         {
             Editable = false;
         }
-        field(50;"Last Name";Text[50])
+        field(50; "Last Name"; Text[50])
         {
             Editable = false;
         }
-        field(60;Initial;Text[30])
+        field(60; Initial; Text[30])
         {
             Editable = false;
         }
-        field(70;"Date Applied";Date)
+        field(70; "Date Applied"; Date)
         {
             Editable = false;
         }
-        field(80;Email;Text[50])
+        field(80; Email; Text[50])
         {
             Editable = false;
         }
-        field(90;"Interview Date";Date)
+        field(90; "Interview Date"; Date)
         {
         }
-        field(100;"Interview Done By";Code[20])
+        field(100; "Interview Done By"; Code[20])
         {
             TableRelation = "HR Employees"."No.";
 
             trigger OnValidate()
             begin
-                                    if HREmp.Get("Interview Done By") then
-                                   "Interviewer Name":=HREmp.FullName;
+                if HREmp.Get("Interview Done By") then
+                    "Interviewer Name" := HREmp.FullName;
             end;
         }
-        field(110;"Interviewer Name";Text[50])
+        field(110; "Interviewer Name"; Text[50])
         {
             Editable = false;
         }
-        field(115;"No series";Code[20])
+        field(115; "No series"; Code[20])
         {
         }
-        field(120;"Job Title";Code[20])
+        field(120; "Job Title"; Code[20])
         {
-            TableRelation = "HR Jobs";
+            TableRelation = "HR Jobss";
 
             trigger OnValidate()
             begin
-                 if Hrjob1.Get("Job Title")  then
-                 "Job Position":= Hrjob1."Job Description" ;
+                if Hrjob1.Get("Job Title") then
+                    "Job Position" := Hrjob1."Job Description";
             end;
         }
-        field(130;"Job Position";Text[50])
+        field(130; "Job Position"; Text[50])
         {
         }
-        field(140;Status;Option)
+        field(140; Status; Option)
         {
             Editable = false;
             OptionMembers = New,"Pending Approval",Approved,Rejected;
         }
-        field(150;"Job Acceptance";Boolean)
+        field(150; "Job Acceptance"; Boolean)
         {
         }
-        field(160;"Stage 1 Score";Decimal)
+        field(160; "Stage 1 Score"; Decimal)
         {
-            CalcFormula = sum("HR Interview Specific Evaluatn"."Stage 1 Score" where ("Interview No."=field("Interview No.")));
+            CalcFormula = sum("HR Interview Specific Evaluatn"."Stage 1 Score" where("Interview No." = field("Interview No.")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(170;"Stage 2 Score";Decimal)
+        field(170; "Stage 2 Score"; Decimal)
         {
-            CalcFormula = sum("HR Interview Specific Evaluatn"."Stage 2 Score" where ("Interview No."=field("Interview No.")));
+            CalcFormula = sum("HR Interview Specific Evaluatn"."Stage 2 Score" where("Interview No." = field("Interview No.")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(180;"Stage 3 Score";Decimal)
+        field(180; "Stage 3 Score"; Decimal)
         {
-            CalcFormula = sum("HR Interview Specific Evaluatn"."Stage 3 Score" where ("Interview No."=field("Interview No.")));
+            CalcFormula = sum("HR Interview Specific Evaluatn"."Stage 3 Score" where("Interview No." = field("Interview No.")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(190;"Recommend for Stage 2";Boolean)
+        field(190; "Recommend for Stage 2"; Boolean)
         {
         }
-        field(200;"Recommend for Stage 3";Boolean)
+        field(200; "Recommend for Stage 3"; Boolean)
         {
         }
-        field(210;"Recommendation for Hire";Boolean)
+        field(210; "Recommendation for Hire"; Boolean)
         {
         }
-        field(220;Comment;Text[250])
+        field(220; Comment; Text[250])
         {
         }
-        field(230;"Responsibility Center";Code[20])
+        field(230; "Responsibility Center"; Code[20])
         {
             TableRelation = "Responsibility Center".Code;
         }
@@ -148,7 +147,7 @@ Table 51516240 "HR Interview Evaluation"
 
     keys
     {
-        key(Key1;"Interview No.")
+        key(Key1; "Interview No.")
         {
             Clustered = true;
         }
@@ -161,12 +160,11 @@ Table 51516240 "HR Interview Evaluation"
     trigger OnInsert()
     begin
 
-        if "Interview No." = '' then
-          begin
-          HRSetup.Get;
-          HRSetup.TestField(HRSetup."Job Interview Nos") ;
-           NoSeriesMgt.InitSeries(HRSetup."Job Interview Nos",xRec."No series",0D,"Interview No.","No series");
-           end;
+        if "Interview No." = '' then begin
+            HRSetup.Get;
+            HRSetup.TestField(HRSetup."Job Interview Nos");
+            NoSeriesMgt.InitSeries(HRSetup."Job Interview Nos", xRec."No series", 0D, "Interview No.", "No series");
+        end;
     end;
 
     var

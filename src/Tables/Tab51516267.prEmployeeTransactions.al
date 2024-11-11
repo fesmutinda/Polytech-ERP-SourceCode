@@ -23,6 +23,7 @@ Table 51516267 "prEmployee Transactions"
                 "Period Month" := PeriodMonth;
                 "Period Year" := PeriodYear;
                 if objTransCodes."Special Transactions" = 8 then blnIsLoan := true;
+
             end;
         }
         field(3; "Transaction Name"; Text[100])
@@ -45,7 +46,7 @@ Table 51516267 "prEmployee Transactions"
         }
         field(9; "Payroll Period"; Date)
         {
-            TableRelation = "prPayroll Periods"."Date Opened";
+            TableRelation = "prPayroll Periods."."Date Opened";
         }
         field(10; "#of Repayments"; Integer)
         {
@@ -138,17 +139,16 @@ Table 51516267 "prEmployee Transactions"
         Transcode: Record "prTransaction Codes";
         objTransCodes: Record "prTransaction Codes";
         SelectedPeriod: Date;
-        objPeriod: Record "prPayroll Periods";
+        objPeriod: Record "prPayroll Periods.";
         PeriodName: Text[30];
-        PeriodTrans: Record "prPeriod Transactions";
+        PeriodTrans: Record "prPeriod Transactions.";
         PeriodMonth: Integer;
         PeriodYear: Integer;
         blnIsLoan: Boolean;
         objEmpTrans: Record "prEmployee Transactions";
         transType: Text[30];
-        objOcx: Codeunit 51516016;
+        objOcx: Codeunit prPayrollProcessingXX;
         strExtractedFrml: Text[30];
         curTransAmount: Decimal;
         empCode: Text[30];
 }
-

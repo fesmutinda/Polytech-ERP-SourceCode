@@ -18,7 +18,7 @@ Table 51516011 "Staff Claim Lines"
         {
             Editable = false;
             NotBlank = false;
-            TableRelation = "G/L Account"."No." where (test=field(Grouping));
+            // TableRelation = "G/L Account"."No." where (test=field(Grouping));
 
             trigger OnValidate()
             begin

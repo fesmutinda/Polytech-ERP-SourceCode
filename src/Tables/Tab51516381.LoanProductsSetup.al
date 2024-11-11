@@ -150,7 +150,7 @@ Table 51516381 "Loan Products Setup"
         }
         field(53; "BOSA Account"; Code[20])
         {
-            TableRelation = Vendor."No." where("Creditor Type" = const("Savings Account"));
+            TableRelation = Vendor."No." where("Creditor Type" = const("Account"));
         }
         field(54; "Action"; Option)
         {
@@ -159,7 +159,7 @@ Table 51516381 "Loan Products Setup"
         }
         field(55; "BOSA Personal Loan Account"; Code[20])
         {
-            TableRelation = Vendor."No." where("Creditor Type" = const("Savings Account"));
+            TableRelation = Vendor."No." where("Creditor Type" = const("Account"));
         }
         field(56; "Top Up Commision Account"; Code[20])
         {

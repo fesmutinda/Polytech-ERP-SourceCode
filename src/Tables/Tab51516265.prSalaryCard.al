@@ -4,11 +4,11 @@ Table 51516265 "prSalary Card"
 
     fields
     {
-        field(1;"Employee Code";Code[20])
+        field(1; "Employee Code"; Code[20])
         {
             TableRelation = "HR Employees"."No.";
         }
-        field(2;"Basic Pay";Decimal)
+        field(2; "Basic Pay"; Decimal)
         {
 
             trigger OnValidate()
@@ -37,16 +37,15 @@ Table 51516265 "prSalary Card"
 
             end;
         }
-        field(3;"Payment Mode";Option)
+        field(3; "Payment Mode"; Option)
         {
             Description = 'Bank Transfer,Cheque,Cash,SACCO';
             OptionMembers = " ","Bank Transfer",Cheque,Cash,FOSA;
         }
-        field(4;Currency;Code[20])
+        field(4; Currency; Code[20])
         {
-            TableRelation = Table39003987.Field1;
         }
-        field(5;"Pays NSSF";Boolean)
+        field(5; "Pays NSSF"; Boolean)
         {
 
             trigger OnValidate()
@@ -82,148 +81,151 @@ Table 51516265 "prSalary Card"
 
             end;
         }
-        field(6;"Pays NHIF";Boolean)
+        field(6; "Pays NHIF"; Boolean)
         {
         }
-        field(7;"Pays PAYE";Boolean)
+        field(7; "Pays PAYE"; Boolean)
         {
         }
-        field(8;"Payslip Message";Text[100])
+        field(8; "Payslip Message"; Text[100])
         {
         }
-        field(9;"Cumm BasicPay";Decimal)
+        field(9; "Cumm BasicPay"; Decimal)
         {
-            CalcFormula = sum("prEmployee P9 Info"."Basic Pay" where ("Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prEmployee P9 Info"."Basic Pay" where("Employee Code" = field("Employee Code")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(10;"Cumm GrossPay";Decimal)
+        field(10; "Cumm GrossPay"; Decimal)
         {
-            CalcFormula = sum("prEmployee P9 Info"."Gross Pay" where ("Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prEmployee P9 Info"."Gross Pay" where("Employee Code" = field("Employee Code")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(11;"Cumm NetPay";Decimal)
+        field(11; "Cumm NetPay"; Decimal)
         {
-            CalcFormula = sum("prEmployee P9 Info"."Net Pay" where ("Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prEmployee P9 Info"."Net Pay" where("Employee Code" = field("Employee Code")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(12;"Cumm Allowances";Decimal)
+        field(12; "Cumm Allowances"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Group Order"=filter(3),
-                                                                    "Sub Group Order"=filter(0),
-                                                                    "Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Group Order" = filter(3),
+                                                                    "Sub Group Order" = filter(0),
+                                                                    "Employee Code" = field("Employee Code")));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(13;"Cumm Deductions";Decimal)
+        field(13; "Cumm Deductions"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Group Order"=filter(8),
-                                                                    "Sub Group Order"=filter(0|1),
-                                                                    "Employee Code"=field("Employee Code"),
-                                                                    "Transaction Code"=filter(<>'Total Deductions')));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Group Order" = filter(8),
+                                                                    "Sub Group Order" = filter(0 | 1),
+                                                                    "Employee Code" = field("Employee Code"),
+                                                                    "Transaction Code" = filter(<> 'Total Deductions')));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(14;"Suspend Pay";Boolean)
+        field(14; "Suspend Pay"; Boolean)
         {
         }
-        field(15;"Suspension Date";Date)
+        field(15; "Suspension Date"; Date)
         {
         }
-        field(16;"Suspension Reasons";Text[200])
+        field(16; "Suspension Reasons"; Text[200])
         {
         }
-        field(17;"Period Filter";Date)
+        field(17; "Period Filter"; Date)
         {
             FieldClass = FlowFilter;
-            TableRelation = "prPayroll Periods"."Date Opened";
+            TableRelation = "prPayroll Periods."."Date Opened";
         }
-        field(18;Exists;Boolean)
+        field(18; Exists; Boolean)
         {
         }
-        field(19;"Cumm PAYE";Decimal)
+        field(19; "Cumm PAYE"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Transaction Code"=filter('PAYE'),
-                                                                    "Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Transaction Code" = filter('PAYE'),
+                                                                    "Employee Code" = field("Employee Code")));
             FieldClass = FlowField;
         }
-        field(20;"Cumm NSSF";Decimal)
+        field(20; "Cumm NSSF"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Transaction Code"=filter('NSSF'),
-                                                                    "Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Transaction Code" = filter('NSSF'),
+                                                                    "Employee Code" = field("Employee Code")));
             FieldClass = FlowField;
         }
-        field(21;"Cumm Pension";Decimal)
+        field(21; "Cumm Pension"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Transaction Code"=filter('D0005'),
-                                                                    "Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Transaction Code" = filter('D0005'),
+                                                                    "Employee Code" = field("Employee Code")));
             FieldClass = FlowField;
         }
-        field(22;"Cumm HELB";Decimal)
+        field(22; "Cumm HELB"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Employee Code"=field("Employee Code"),
-                                                                    "Transaction Code"=filter('320')));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Employee Code" = field("Employee Code"),
+                                                                    "Transaction Code" = filter('320')));
             FieldClass = FlowField;
         }
-        field(23;"Cumm NHIF";Decimal)
+        field(23; "Cumm NHIF"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Employee Code"=field("Employee Code"),
-                                                                    "Transaction Code"=filter('NHIF')));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Employee Code" = field("Employee Code"),
+                                                                    "Transaction Code" = filter('NHIF')));
             FieldClass = FlowField;
         }
-        field(24;"Bank Account Number";Code[50])
+        field(24; "Bank Account Number"; Code[50])
         {
         }
-        field(25;"Bank Branch";Code[50])
+        field(25; "Bank Branch"; Code[50])
         {
         }
-        field(26;"Employee's Bank";Code[50])
+        field(26; "Employee's Bank"; Code[50])
         {
         }
-        field(27;"Posting Group";Code[20])
+        field(27; "Posting Group"; Code[20])
         {
             NotBlank = false;
             TableRelation = Employee;
         }
-        field(28;"Cumm Employer Pension";Decimal)
+        field(28; "Cumm Employer Pension"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Transaction Code"=filter('D0005'),
-                                                                    "Employee Code"=field("Employee Code")));
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Transaction Code" = filter('D0005'),
+                                                                    "Employee Code" = field("Employee Code")));
             FieldClass = FlowField;
         }
-        field(29;"Pays Pension";Boolean)
+        field(29; "Pays Pension"; Boolean)
         {
         }
-        field(30;"Gratuity %";Code[20])
+        field(30; "Gratuity %"; Code[20])
         {
         }
-        field(31;"Gratuity Amount";Decimal)
+        field(31; "Gratuity Amount"; Decimal)
         {
         }
-        field(32;Gratuity;Integer)
+        field(32; Gratuity; Integer)
         {
         }
-        field(33;"Fosa Accounts";Code[50])
+        field(33; "Fosa Accounts"; Code[50])
         {
             TableRelation = Vendor."No.";
         }
-        field(34;"Sacco Paying Bank";Code[20])
+        field(34; "Sacco Paying Bank"; Code[20])
         {
-            CalcFormula = lookup("HR Employees"."Sacco Paying Bank Code" where ("No."=field("Employee Code")));
+            CalcFormula = lookup("HR Employees"."Sacco Paying Bank Code" where("No." = field("Employee Code")));
             FieldClass = FlowField;
         }
-        field(35;"Cheque No";Code[20])
+        field(35; "Cheque No"; Code[20])
         {
-            CalcFormula = lookup("HR Employees"."Cheque No" where ("No."=field("Employee Code")));
+            CalcFormula = lookup("HR Employees"."Cheque No" where("No." = field("Employee Code")));
             FieldClass = FlowField;
+        }
+        field(51516008; test; Boolean)
+        {
         }
     }
 
     keys
     {
-        key(Key1;"Employee Code")
+        key(Key1; "Employee Code")
         {
             Clustered = true;
             SumIndexFields = "Basic Pay";
@@ -243,4 +245,3 @@ Table 51516265 "prSalary Card"
         Employee: Record "HR Employees";
         HREmp: Record "HR Employees";
 }
-

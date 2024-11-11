@@ -46,9 +46,9 @@ Table 51516274 "Job-Journal Template"
 
             trigger OnValidate()
             begin
-                JobJnlLine.SetRange("Journal Template Name", Name);
-                JobJnlLine.ModifyAll("Source Code", "Source Code");
-                Modify;
+                // JobJnlLine.SetRange("Journal Template Name", Name);
+                // JobJnlLine.ModifyAll("Source Code", "Source Code");
+                // Modify;
             end;
         }
         field(11; "Reason Code"; Code[10])
@@ -139,10 +139,10 @@ Table 51516274 "Job-Journal Template"
 
     trigger OnDelete()
     begin
-        JobJnlLine.SetRange("Journal Template Name", Name);
-        JobJnlLine.DeleteAll(true);
-        JobJnlBatch.SetRange("Journal Template Name", Name);
-        JobJnlBatch.DeleteAll;
+        // JobJnlLine.SetRange("Journal Template Name", Name);
+        // JobJnlLine.DeleteAll(true);
+        // JobJnlBatch.SetRange("Journal Template Name", Name);
+        // JobJnlBatch.DeleteAll;
     end;
 
     trigger OnRename()
@@ -155,8 +155,8 @@ Table 51516274 "Job-Journal Template"
     var
         Text000: label 'Only the %1 field can be filled in on recurring journals.';
         Text001: label 'must not be %1';
-        JobJnlBatch: Record 53922;
-        JobJnlLine: Record 53917;
+        // JobJnlBatch: Record 53922;
+        // JobJnlLine: Record 53917;
         SourceCodeSetup: Record "Source Code Setup";
         ReservEngineMgt: Codeunit "Reservation Engine Mgt.";
 }

@@ -3,8 +3,9 @@ Table 51516271 Jobss
 {
     Caption = 'Job';
     DataCaptionFields = "No.", Description;
-    DrillDownPageID = 53926;
-    LookupPageID = 53926;
+    // DrillDownPageID = 53926;
+    // LookupPageID = 53926;
+
 
     fields
     {
@@ -14,11 +15,7 @@ Table 51516271 Jobss
 
             trigger OnValidate()
             begin
-                if "No." <> xRec."No." then begin
-                    JobSetup.Get;
-                    NoSeriesMgt.TestManual(JobSetup."Job Nos.");
-                    "No. Series" := '';
-                end;
+
             end;
         }
         field(2; "Search Description"; Code[250])
@@ -43,7 +40,6 @@ Table 51516271 Jobss
         field(5; "Bill-to Partner No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
-            TableRelation = Customer."No." where("Account Type" = filter(Donor));
 
             trigger OnValidate()
             begin
@@ -85,7 +81,6 @@ Table 51516271 Jobss
 
             trigger OnValidate()
             var
-                JobPlanningLine: Record 53928;
             begin
                 if xRec.Status <> Status then begin
                     if Status = Status::Project then
@@ -97,10 +92,6 @@ Table 51516271 Jobss
                             Status := xRec.Status;
                         end;
                     end;
-                    JobPlanningLine.SetCurrentkey("Grant No.");
-                    JobPlanningLine.SetRange("Grant No.", "No.");
-                    JobPlanningLine.ModifyAll(Status, Status);
-                    Modify;
                 end;
             end;
         }
@@ -173,7 +164,6 @@ Table 51516271 Jobss
         }
         field(49; "Scheduled Res. Qty."; Decimal)
         {
-            CalcFormula = sum("Job-Planning Line"."Quantity (Base)" where("Grant No." = field("No."), "Schedule Line" = const(true), Type = const(Resource), "No." = field("Resource Filter"), "Planning Date" = field("Planning Date Filter")));
             Caption = 'Scheduled Res. Qty.';
             DecimalPlaces = 0 : 5;
             Editable = false;
@@ -198,7 +188,6 @@ Table 51516271 Jobss
         }
         field(56; "Scheduled Res. Gr. Qty."; Decimal)
         {
-            CalcFormula = sum("Job-Planning Line"."Quantity (Base)" where("Grant No." = field("No."), "Schedule Line" = const(true), Type = const(Resource), "Resource Group No." = field("Resource Gr. Filter"), "Planning Date" = field("Planning Date Filter")));
             Caption = 'Scheduled Res. Gr. Qty.';
             DecimalPlaces = 0 : 5;
             Editable = false;
@@ -345,7 +334,6 @@ Table 51516271 Jobss
         field(1005; "Total WIP Cost Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = sum("Job-WIP Entry"."WIP Entry Amount" where("Job No." = field("No."), "Job Complete" = const(No), Type = filter("Accrued Costs" | "WIP Costs" | "Recognized Costs")));
             Caption = 'Total WIP Cost Amount';
             Editable = false;
             FieldClass = FlowField;
@@ -353,7 +341,6 @@ Table 51516271 Jobss
         field(1006; "Total WIP Cost G/L Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = sum("Job-WIP G/L Entry"."WIP Entry Amount" where("Job No." = field("No."), Reversed = const(No), "Job Complete" = const(No), Type = filter("Accrued Costs" | "WIP Costs" | "Recognized Costs")));
             Caption = 'Total WIP Cost G/L Amount';
             Editable = false;
             FieldClass = FlowField;
@@ -370,7 +357,6 @@ Table 51516271 Jobss
         }
         field(1009; "WIP G/L Posting Date"; Date)
         {
-            CalcFormula = min("Job-WIP G/L Entry"."WIP Posting Date" where(Reversed = const(No), "Job No." = field("No.")));
             Caption = 'WIP G/L Posting Date';
             Editable = false;
             FieldClass = FlowField;
@@ -430,7 +416,6 @@ Table 51516271 Jobss
         field(1018; "Recog. Sales G/L Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = sum("Job-WIP G/L Entry"."WIP Entry Amount" where("Job No." = field("No."), Type = filter("Recognized Sales"), Reversed = const(No)));
             Caption = 'Recog. Sales G/L Amount';
             Editable = false;
             FieldClass = FlowField;
@@ -438,7 +423,6 @@ Table 51516271 Jobss
         field(1019; "Recog. Costs Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = - sum("Job-WIP Entry"."WIP Entry Amount" where("Job No." = field("No."), Type = filter("Recognized Costs")));
             Caption = 'Recog. Costs Amount';
             Editable = false;
             FieldClass = FlowField;
@@ -446,7 +430,6 @@ Table 51516271 Jobss
         field(1020; "Recog. Costs G/L Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = - sum("Job-WIP G/L Entry"."WIP Entry Amount" where("Job No." = field("No."), Type = filter("Recognized Costs"), Reversed = const(No)));
             Caption = 'Recog. Costs G/L Amount';
             Editable = false;
             FieldClass = FlowField;
@@ -454,7 +437,6 @@ Table 51516271 Jobss
         field(1021; "Total WIP Sales Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = sum("Job-WIP Entry"."WIP Entry Amount" where("Job No." = field("No."), "Job Complete" = const(No), Type = filter("Accrued Sales" | "WIP Sales" | "Recognized Sales")));
             Caption = 'Total WIP Sales Amount';
             Editable = false;
             FieldClass = FlowField;
@@ -462,26 +444,22 @@ Table 51516271 Jobss
         field(1022; "Total WIP Sales G/L Amount"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = sum("Job-WIP G/L Entry"."WIP Entry Amount" where("Job No." = field("No."), Reversed = const(No), "Job Complete" = const(No), Type = filter("Accrued Sales" | "WIP Sales" | "Recognized Sales")));
             Caption = 'Total WIP Sales G/L Amount';
             Editable = false;
             FieldClass = FlowField;
         }
         field(1023; "Completion Calculated"; Boolean)
         {
-            CalcFormula = exist("Job-WIP Entry" where("Job No." = field("No."), "Job Complete" = filter(= Yes)));
             Caption = 'Completion Calculated';
             FieldClass = FlowField;
         }
         field(1024; "Next Invoice Date"; Date)
         {
-            CalcFormula = min("Job-Planning Line"."Planning Date" where("Grant No." = field("No."), "Contract Line" = filter(= true), Invoiced = filter(= false)));
             Caption = 'Next Invoice Date';
             FieldClass = FlowField;
         }
         field(50000; "Grant Phases"; Code[10])
         {
-            TableRelation = "Grant Phases";
         }
         field(50001; "Approval Status"; Option)
         {
@@ -495,13 +473,11 @@ Table 51516271 Jobss
         }
         field(50003; "Total Cost"; Decimal)
         {
-            CalcFormula = sum("Job-Planning Line"."Total Cost" where("Grant No." = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(50004; "Total Cost(LCY)"; Decimal)
         {
-            CalcFormula = sum("Job-Planning Line"."Total Cost (LCY)" where("Grant No." = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -514,7 +490,6 @@ Table 51516271 Jobss
         }
         field(50007; "Disbursed Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line".Amount where("Shortcut Dimension 2 Code" = field("No.")));
             FieldClass = FlowField;
         }
         field(50008; "Allow OverExpenditure"; Boolean)
@@ -522,13 +497,11 @@ Table 51516271 Jobss
         }
         field(50009; "Accounted Amount"; Decimal)
         {
-            CalcFormula = sum("Grant Surrender Details"."Actual Spent" where("Shortcut Dimension 2 Code" = field("No."), Posted = const(Yes)));
             Editable = false;
             FieldClass = FlowField;
         }
         field(50010; "Received Amount"; Decimal)
         {
-            CalcFormula = sum("Receipt Line"."Total Amount" where("Shortcut Dimension 2 Code" = field("No.")));
             FieldClass = FlowField;
         }
         field(50011; "Proposal No"; Code[20])
@@ -560,10 +533,7 @@ Table 51516271 Jobss
         }
         field(50018; "Reporting dates generated"; Boolean)
         {
-            CalcFormula = exist("Phase Reporting Schedules" where(Project = field("No.")));
-            Editable = false;
-            FieldClass = FlowField;
-            TableRelation = "Reporting Date";
+
         }
         field(50019; "Condition for budget realloca"; Code[10])
         {
@@ -574,24 +544,15 @@ Table 51516271 Jobss
 
             trigger OnValidate()
             begin
-                objReso.Reset;
-                objReso.SetRange(objReso."No.", "Principal Investigator");
-                if objReso.Find('-') then begin
-                    "Principal Investigator name" := objReso.Name;
-                    "Bill-to Address" := objReso.Address;
-                    "Bill-to Address 2" := objReso.Email;
-                    Institution := objReso.Institution;
-                end;
+
             end;
         }
         field(50021; "Expected Receipt Amount"; Decimal)
         {
-            CalcFormula = sum("Project Donors"."Expected Donation" where("Grant No" = field("No.")));
             FieldClass = FlowField;
         }
         field(50022; Partners; Boolean)
         {
-            CalcFormula = exist("Project Partners" where("Grant No" = field("No.")));
             Caption = 'Collaborative Grants';
             Editable = false;
             FieldClass = FlowField;
@@ -642,7 +603,6 @@ Table 51516271 Jobss
         }
         field(50035; "Amount Invoiced"; Decimal)
         {
-            CalcFormula = sum("Purch. Inv. Line".Amount where("Project Code" = field("No.")));
             FieldClass = FlowField;
         }
         field(50036; "Grant Level"; Option)
@@ -671,14 +631,7 @@ Table 51516271 Jobss
 
             trigger OnValidate()
             begin
-                objPImaster.Reset;
-                objPImaster.SetRange(objPImaster."PI Code", "PI Name");
-                if objPImaster.Find('-') then begin
-                    "PI Address" := objPImaster."PI Address";
-                    "PI Telephone" := objPImaster."PI Telephone";
-                    "PI EMail" := objPImaster."PI EMail";
-                    Modify;
-                end;
+
             end;
         }
         field(50042; "PI Address"; Text[30])
@@ -730,7 +683,6 @@ Table 51516271 Jobss
         field(50055; Schools; Code[10])
         {
             Caption = 'Kind of Program';
-            TableRelation = "Institution Departments".Code where(Institution = field(Institution));
         }
         field(50056; "Application Due Date"; Date)
         {
@@ -752,12 +704,10 @@ Table 51516271 Jobss
         }
         field(50062; Donors; Boolean)
         {
-            CalcFormula = exist("Project Donors" where("Grant No" = field("No.")));
             FieldClass = FlowField;
         }
         field(50063; Workplan; Boolean)
         {
-            CalcFormula = exist(Workplan where("Budget Dimension 3 Code" = field("No.")));
             FieldClass = FlowField;
         }
         field(50064; "Period of Performance"; Option)
@@ -777,11 +727,9 @@ Table 51516271 Jobss
         }
         field(50067; "Main Donor"; Code[50])
         {
-            TableRelation = Customer."No." where("Account Type" = filter(Donor));
         }
         field(50068; "Main Sub"; Code[50])
         {
-            TableRelation = Vendor."No." where("Vendor Type" = filter("Implementing Partner"));
         }
         field(50069; "Special Contract Provision"; Text[250])
         {
@@ -857,19 +805,7 @@ Table 51516271 Jobss
 
             trigger OnValidate()
             begin
-                if "Lab Services" = true then begin
-                    if Confirm('Are you sure you want to update the Lab Request') = true then begin
-                        objLabRequest.Reset;
-                        objLabRequest.SetRange(objLabRequest."Proposal No.", "No.");
-                        if objLabRequest.Find('-') then
-                            exit
-                        else begin
-                            objLabRequest.Init;
-                            objLabRequest."Proposal No." := "No.";
-                            objLabRequest.Insert;
-                        end;
-                    end;
-                end;
+
             end;
         }
         field(50090; "AMPATH Data Mgt Core Required"; Boolean)
@@ -955,64 +891,13 @@ Table 51516271 Jobss
 
     trigger OnDelete()
     var
-        CommentLine: Record "Comment Line";
-        JobTask: Record 53926;
-        JobResPrice: Record 53931;
-        JobItemPrice: Record 53932;
-        JobGLAccPrice: Record 53933;
     begin
-        MoveEntries.MoveJobEntries(Rec);
 
-        JobTask.SetCurrentkey("Grant No.");
-        JobTask.SetRange("Grant No.", "No.");
-        JobTask.DeleteAll(true);
-
-        JobResPrice.SetRange("Job No.", "No.");
-        JobResPrice.DeleteAll;
-
-        JobItemPrice.SetRange("Job No.", "No.");
-        JobItemPrice.DeleteAll;
-
-        JobGLAccPrice.SetRange("Job No.", "No.");
-        JobGLAccPrice.DeleteAll;
-
-        CommentLine.SetRange("Table Name", CommentLine."table name"::Job);
-        CommentLine.SetRange("No.", "No.");
-        CommentLine.DeleteAll;
-
-        DimMgt.DeleteDefaultDim(Database::Jobs, "No.");
-        TestField("Approval Status", "approval status"::Open);
-
-        ProjectPartners.SetRange(ProjectPartners."Grant No", "No.");
-        ProjectPartners.DeleteAll;
-
-        ProjectDonors.SetRange(ProjectDonors."Grant No", "No.");
-        ProjectDonors.DeleteAll;
-
-        ProjPersonnel.SetRange(ProjPersonnel.Project, "No.");
-        ProjPersonnel.DeleteAll;
     end;
 
     trigger OnInsert()
     begin
-        if "No." = '' then begin
-            JobSetup.Get;
-            JobSetup.TestField("Concept Nos");
-            NoSeriesMgt.InitSeries(JobSetup."Concept Nos", xRec."No. Series", 0D, "No.", "No. Series");
-        end;
 
-        if GetFilter("Bill-to Partner No.") <> '' then
-            if GetRangeMin("Bill-to Partner No.") = GetRangemax("Bill-to Partner No.") then
-                Validate("Bill-to Partner No.", GetRangeMin("Bill-to Partner No."));
-
-        DimMgt.UpdateDefaultDim(
-          Database::Jobs, "No.",
-          "Global Dimension 1 Code", "Global Dimension 2 Code");
-        InitWIPFields;
-
-        "Creation Date" := Today;
-        "Last Date Modified" := "Creation Date";
-        //Status:=Status::Proposal;
     end;
 
     trigger OnModify()
@@ -1028,9 +913,8 @@ Table 51516271 Jobss
 
     var
         Text000: label 'You cannot change %1 because one or more entries are associated with this %2.';
-        JobSetup: Record 53925;
+
         PostCode: Record "Post Code";
-        Job: Record 53913;
         Cust: Record Customer;
         Cont: Record Contact;
         ContBusinessRelation: Record "Contact Business Relation";
@@ -1046,43 +930,18 @@ Table 51516271 Jobss
         MoveEntries: Codeunit MoveEntries;
         Text010: label 'Before you can use Online Map, you must fill in the Online Map Setup window.\See Setting Up Online Map in Help.';
         Text011: label '%1 must be equal to or earlier than %2.';
-        JobTask: Record 53926;
-        JobTasks: Record 53926;
-        JobPlanningLine: Record 53928;
-        JobPlanningLines: Record 53928;
-        ProjectPartners: Record 53942;
-        ProjectDonors: Record 53943;
-        ProjectPartner: Record 53942;
-        ProjectDonor: Record 53943;
+
         LastEntryNo: Integer;
         JobEntryNo: Record "Job Entry No.";
-        ProjPersonnel: Record 53946;
-        ProjPersonnels: Record 53946;
         ApprovalEntries: Record "Approval Entry";
         ApprovalDate: DateTime;
         DimVal: Record "Dimension Value";
         GLSetup: Record "General Ledger Setup";
         ProjectCode: Code[10];
         objReso: Record Resource;
-        objLabRequest: Record 53910;
-        objPImaster: Record 55548;
 
 
-    procedure AssistEdit(OldJob: Record 53913): Boolean
-    begin
-        with Job do begin
-            Job := Rec;
-            JobSetup.Get;
-            JobSetup.TestField("Job Nos.");
-            if NoSeriesMgt.SelectSeries(JobSetup."Job Nos.", OldJob."No. Series", "No. Series") then begin
-                JobSetup.Get;
-                JobSetup.TestField("Job Nos.");
-                NoSeriesMgt.SetSeries("No.");
-                Rec := Job;
-                exit(true);
-            end;
-        end;
-    end;
+
 
 
     procedure ValidateShortcutDimCode(FieldNumber: Integer; ShortcutDimCode: Code[20])
@@ -1115,21 +974,14 @@ Table 51516271 Jobss
 
     local procedure JobLedgEntryExist(): Boolean
     var
-        JobLedgEntry: Record 53914;
     begin
-        Clear(JobLedgEntry);
-        JobLedgEntry.SetCurrentkey("Job No.");
-        JobLedgEntry.SetRange("Job No.", "No.");
-        exit(JobLedgEntry.Find('-'));
+
     end;
 
     local procedure JobPlanningLineExist(): Boolean
     var
-        JobPlanningLine: Record 53928;
     begin
-        JobPlanningLine.Init;
-        JobPlanningLine.SetRange("Grant No.", "No.");
-        exit(JobPlanningLine.Find('-'));
+
     end;
 
 
@@ -1224,41 +1076,16 @@ Table 51516271 Jobss
 
     procedure CurrencyUpdatePlanningLines()
     var
-        PlaningLine: Record 53928;
     begin
-        PlaningLine.SetRange("Grant No.", "No.");
-        if PlaningLine.Find('-') then
-            repeat
-                if PlaningLine.Transferred then
-                    Error(Text000, FieldCaption("Currency Code"), TableCaption);
-                PlaningLine.Validate("Currency Code", "Currency Code");
-                PlaningLine.Validate("Currency Date");
-                PlaningLine.Modify;
-            until PlaningLine.Next = 0;
+
     end;
 
 
     procedure ChangeJobCompletionStatus()
     var
-        AllObjwithCaption: Record AllObjWithCaption;
-        JobWIPGLEntry: Record 53930;
-        JobCalcWIP: Codeunit "Job Calculate WIP";
-        ReportCaption1: Text[250];
-        ReportCaption2: Text[250];
-    begin
-        AllObjwithCaption.Get(AllObjwithCaption."object type"::Report, Report::"Job Calculate WIP");
-        ReportCaption1 := AllObjwithCaption."Object Caption";
-        AllObjwithCaption.Get(AllObjwithCaption."object type"::Report, Report::"Job Post WIP to G/L");
-        ReportCaption2 := AllObjwithCaption."Object Caption";
 
-        if Complete = true then
-            Message(Text003, ReportCaption1, ReportCaption2)
-        else begin
-            JobCalcWIP.ReOpenJob("No.");
-            "WIP Posting Date" := 0D;
-            "Calc. WIP Method Used" := 0;
-            Message(Text009, ReportCaption2);
-        end;
+    begin
+
     end;
 
 
@@ -1276,27 +1103,8 @@ Table 51516271 Jobss
 
     procedure GetQuantityAvailable(ItemNo: Code[20]; LocationCode: Code[10]; VariantCode: Code[10]; InEntryType: Option Usage,Sale,Both; Direction: Option Possitive,Negative,Both) QtyBase: Decimal
     var
-        JobLedgEntry: Record 53914;
     begin
-        Clear(JobLedgEntry);
-        with JobLedgEntry do begin
-            SetCurrentkey("Job No.", "Entry Type", Type, "No.");
-            SetRange("Job No.", Rec."No.");
-            if not (InEntryType = Inentrytype::Both) then
-                SetRange("Entry Type", InEntryType);
-            SetRange(Type, Type::Item);
-            SetRange("No.", ItemNo);
-            if FindSet then
-                repeat
-                    if ("Location Code" = LocationCode) and
-                       ("Variant Code" = VariantCode) and
-                       ((Direction = Direction::Both) or
-                        ((Direction = Direction::Possitive) and ("Quantity (Base)" > 0)) or
-                        ((Direction = Direction::Negative) and ("Quantity (Base)" < 0)))
-                    then
-                        QtyBase := QtyBase + "Quantity (Base)";
-                until Next = 0;
-        end;
+
     end;
 
     local procedure CheckDate()
@@ -1308,487 +1116,7 @@ Table 51516271 Jobss
 
     procedure ChangeProjectStatus()
     begin
-        //LastEntryNo:=JobPlanningLine.GETRANGEMAX(JobPlanningLine."Grant Contract Entry No.");
-        ApprovalEntries.Reset;
-        ApprovalEntries.SetRange(ApprovalEntries."Document Type", ApprovalEntries."document type"::None);
-        ApprovalEntries.SetRange(ApprovalEntries."Document No.", "No.");
-        if ApprovalEntries.Find('+') then
-            ApprovalDate := ApprovalEntries."Last Date-Time Modified"
-        else
-            ApprovalDate := 0DT;
 
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-        if Status = Status::"Concept Formulation" then begin
-            if Confirm('Convert concept to proposal?', true) = false then exit;
-            if "Approval Status" <> "approval status"::Approved then Error('Status must be approved to continue');
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++
-            if "Proposal No" = '' then begin
-                JobSetup.Get;
-                JobSetup.TestField(JobSetup."Proposal Nos");
-                NoSeriesMgt.InitSeries(JobSetup."Proposal Nos", xRec."No. Series", 0D, "Proposal No", "No. Series");
-            end;
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++
-            Job.Init;
-            Job."Concept Number" := "No.";
-            Job."No." := "Proposal No";
-            Job.Description := Description;
-            Job."Description 2" := "Description 2";
-
-            Job."Bill-to Partner No." := "Bill-to Partner No.";
-            Job.Validate("Bill-to Partner No.");
-            Job.Status := Job.Status::Proposal;
-            Job."Approval Status" := Job."approval status"::Open;
-            Job."Creation Date" := Today;
-            Job."Person Responsible" := "Person Responsible";
-            Job."Starting Date" := "Starting Date";
-            Job."Ending Date" := "Ending Date";
-            Job."Bill-to Name" := "Bill-to Name";
-            Job."Bill-to Address" := "Bill-to Address";
-            Job."Bill-to Address 2" := "Bill-to Address 2";
-            Job."Bill-to City" := "Bill-to City";
-            Job."Bill-to Post Code" := "Bill-to Post Code";
-
-            Job."Last Date Modified" := Today;
-            Job.Objective := Objective;
-            Job."Job Posting Group" := "Job Posting Group";
-            Job."Principal Investigator" := "Principal Investigator";
-            Job."Concept Approval Date" := ApprovalDate;
-            Job.Insert;
-
-            "Converted To Proposal" := true;
-            "Proposal No" := Job."No.";
-            //+++++++++++++++++++++++++++++++++++++++++++++++++
-
-            //++++++++++++++++++Copy Project Personnel++++++++++++++
-            ProjPersonnel.Reset;
-            ProjPersonnel.SetRange(ProjPersonnel.Project, "No.");
-            if ProjPersonnel.Find('-') then
-                repeat
-
-                    with ProjPersonnels do begin
-                        Init;
-                        ProjPersonnels.Project := "Proposal No";
-                        ProjPersonnels."Employee No" := ProjPersonnel."Employee No";
-                        ProjPersonnels.Validate(ProjPersonnels."Employee No");
-                        ProjPersonnels."Project Role" := ProjPersonnel."Project Role";
-                        ProjPersonnels."Start Date" := ProjPersonnel."Start Date";
-                        ProjPersonnels."End Date" := ProjPersonnel."End Date";
-                        ProjPersonnels."% Allocation Value" := ProjPersonnel."% Allocation Value";
-                        Insert;
-                    end;
-                until ProjPersonnel.Next = 0;
-            //++++++++++++++++++End Copy Project Personnel++++++++++++++
-            //++++++++++++++++++Copy Partners++++++++++++++++++
-            ProjectPartners.Reset;
-            ProjectPartners.SetRange(ProjectPartners."Grant No", "No.");
-            if ProjectPartners.Find('-') then
-                repeat
-                    with ProjectPartner do begin
-                        Init;
-                        ProjectPartner."Grant No" := "Proposal No";
-                        ProjectPartner.PartnerID := ProjectPartners.PartnerID;
-                        ProjectPartner."Partner Name" := ProjectPartners."Partner Name";
-                        Insert;
-                    end;
-                until ProjectPartners.Next = 0;
-
-            //++++++++++++++++End Copy Partners++++++++++++++++
-
-            //+++++++++++++++++Copy Donors+++++++++++++++++++++
-            ProjectDonors.Reset;
-            ProjectDonors.SetRange(ProjectDonors."Grant No", "No.");
-            if ProjectDonors.Find('-') then
-                repeat
-                    with ProjectDonor do begin
-                        Init;
-                        ProjectDonor."Grant No" := "Proposal No";
-                        ProjectDonor."Shortcut Dimension 1 Code" := ProjectDonors."Shortcut Dimension 1 Code";
-                        ProjectDonor."Donor Name" := ProjectDonors."Donor Name";
-                        ProjectDonor."Expected Donation" := ProjectDonors."Expected Donation";
-                        Insert;
-                    end;
-                until ProjectDonors.Next = 0;
-            //+++++++++++++++++End Copy Donors++++++++++++++++++
-
-            //++++++Copy Task Lines++++++++++++++++++++++++
-            JobTask.Reset;
-            JobTask.SetRange(JobTask."Grant No.", "No.");
-            if JobTask.FindFirst then begin
-                repeat
-                    with JobTasks do begin
-                        Init;
-                        Validate(JobTasks."Grant No.", "Proposal No");
-                        JobTasks."Grant Task No." := JobTask."Grant Task No.";
-                        JobTasks.Description := JobTask.Description;
-                        Insert;
-                    end
-                until JobTask.Next = 0;
-            end;
-            //++++++++End Copy Task Lines++++++++++++++++++
-
-            //++++++++Copy Planning Lines++++++++++++++++++
-            JobPlanningLine.Reset;
-            JobPlanningLine.SetRange(JobPlanningLine."Grant No.", "No.");
-            if JobPlanningLine.FindFirst then begin
-                repeat
-                    with JobPlanningLines do begin
-
-                        Init;
-                        Validate(JobPlanningLines."Grant No.", "Proposal No");
-                        JobPlanningLines."Grant Task No." := JobPlanningLine."Grant Task No.";
-                        JobPlanningLines."Line No." := JobPlanningLine."Line No.";
-                        JobPlanningLines.Type := JobPlanningLines.Type;
-                        JobPlanningLines."No." := JobPlanningLine."No.";
-                        JobPlanningLines.Quantity := JobPlanningLine.Quantity;
-                        JobPlanningLines.Partner := JobPlanningLine.Partner;
-                        JobPlanningLines."Global Dimension 1 Code" := JobPlanningLine."Global Dimension 1 Code";
-                        JobPlanningLines."Unit Cost" := JobPlanningLine."Unit Cost";
-                        JobPlanningLines.Validate(JobPlanningLines."Unit Cost");
-                        JobPlanningLines."Budget Period" := JobPlanningLine."Budget Period";
-                        JobPlanningLines.Description := JobPlanningLine.Description;
-                        JobPlanningLines."Grant Contract Entry No." := JobEntryNo.GetNextEntryNo;
-                        Insert;
-                    end
-                until JobPlanningLine.Next = 0;
-            end;
-            //++++++++End Copy Planning Lines++++++++++++++
-
-            Message('Concept No' + ' ' + "No." + ' ' + 'has successfully been converted to proposal No.' + ' ' + "Proposal No");
-            Modify;
-        end else begin
-            if Status = Status::Proposal then begin
-                if Confirm('Convert Proposal to Contract?', true) = false then exit;
-                //+++++++++++++++++++++++++++++++++++++++++++++++++++
-                if "System Contract No" = '' then begin
-                    JobSetup.Get();
-                    JobSetup.TestField(JobSetup."System Contract Nos");
-                    NoSeriesMgt.InitSeries(JobSetup."System Contract Nos", xRec."No. Series", 0D, "System Contract No", "No. Series");
-                end;
-                //+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-                Job.Init;
-                Job."No." := "System Contract No";
-                Job.Description := Description;
-                Job."Bill-to Partner No." := "Bill-to Partner No.";
-                Job.Validate("Bill-to Partner No.");
-                Job.Status := Job.Status::Contract;
-                //insert project status
-                // Job."Project Status":=Job."Project Status"::"In Progress";
-                Job."Approval Status" := Job."approval status"::Open;
-                Job."Creation Date" := Today;
-                Job."Starting Date" := "Starting Date";
-                Job."Ending Date" := "Ending Date";
-                Job."Last Date Modified" := Today;
-                Job.Objective := Objective;
-                Job."Principal Investigator" := "Principal Investigator";
-                Job."Job Posting Group" := "Job Posting Group";
-                Job.Insert;
-
-                "System Contract No" := Job."No.";
-                "Converted To Contract" := true;
-
-                //++++++++++++++++++Copy Project Personnel++++++++++++++
-                ProjPersonnel.Reset;
-                ProjPersonnel.SetRange(ProjPersonnel.Project, "No.");
-                if ProjPersonnel.Find('-') then
-                    repeat
-
-                        with ProjPersonnels do begin
-                            Init;
-                            ProjPersonnels.Project := "System Contract No";
-                            ProjPersonnels."Employee No" := ProjPersonnel."Employee No";
-                            ProjPersonnels.Validate(ProjPersonnels."Employee No");
-                            ProjPersonnels."Project Role" := ProjPersonnel."Project Role";
-                            ProjPersonnels."Start Date" := ProjPersonnel."Start Date";
-                            ProjPersonnels."End Date" := ProjPersonnel."End Date";
-                            ProjPersonnels."% Allocation Value" := ProjPersonnel."% Allocation Value";
-                            Insert;
-                        end;
-                    until ProjPersonnel.Next = 0;
-                //++++++++++++++++++End Copy Project Personnel++++++++++++++
-
-
-                //++++++++++++++++++Copy Partners++++++++++++++++++
-                ProjectPartners.Reset;
-                ProjectPartners.SetRange(ProjectPartners."Grant No", "No.");
-                if ProjectPartners.Find('-') then
-                    repeat
-                        with ProjectPartner do begin
-                            Init;
-                            ProjectPartner."Grant No" := "System Contract No";
-                            ProjectPartner.PartnerID := ProjectPartners.PartnerID;
-                            ProjectPartner."Partner Name" := ProjectPartners."Partner Name";
-                            Insert;
-                        end;
-                    until ProjectPartners.Next = 0;
-                //++++++++++++++++End Copy Partners++++++++++++++++
-
-
-                //+++++++++++++++++Copy Donors+++++++++++++++++++++
-                ProjectDonors.Reset;
-                ProjectDonors.SetRange(ProjectDonors."Grant No", "No.");
-                if ProjectDonors.Find('-') then
-                    repeat
-                        with ProjectDonor do begin
-                            Init;
-                            ProjectDonor."Grant No" := "System Contract No";
-                            ProjectDonor."Shortcut Dimension 1 Code" := ProjectDonors."Shortcut Dimension 1 Code";
-                            ProjectDonor."Donor Name" := ProjectDonors."Donor Name";
-                            ProjectDonor."Expected Donation" := ProjectDonors."Expected Donation";
-                            Insert;
-                        end;
-                    until ProjectDonors.Next = 0;
-                //+++++++++++++++++End Copy Donors++++++++++++++++++
-
-
-                //++++++Copy Task Lines++++++++++++++++++++++++
-                JobTask.Reset;
-                JobTask.SetRange(JobTask."Grant No.", "No.");
-                if JobTask.FindFirst then begin
-                    repeat
-                        with JobTasks do begin
-                            Init;
-                            Validate(JobTasks."Grant No.", "System Contract No");
-                            JobTasks."Grant Task No." := JobTask."Grant Task No.";
-                            JobTasks.Description := JobTask.Description;
-                            Insert;
-                        end
-                    until JobTask.Next = 0;
-                end;
-                //++++++++End Copy Task Lines++++++++++++++++++
-
-                //++++++++Copy Planning Lines++++++++++++++++++
-                JobPlanningLine.Reset;
-                JobPlanningLine.SetRange(JobPlanningLine."Grant No.", "No.");
-                if JobPlanningLine.Find('-') then begin
-                    repeat
-
-                        with JobPlanningLines do begin
-                            Init;
-                            Validate(JobPlanningLines."Grant No.", "System Contract No");
-                            JobPlanningLines."Grant Task No." := JobPlanningLine."Grant Task No.";
-                            JobPlanningLines."Line No." := JobPlanningLine."Line No.";
-                            JobPlanningLines.Type := JobPlanningLines.Type;
-                            JobPlanningLines."No." := JobPlanningLine."No.";
-                            JobPlanningLines.Partner := JobPlanningLine.Partner;
-                            JobPlanningLines."Global Dimension 1 Code" := JobPlanningLine."Global Dimension 1 Code";
-                            JobPlanningLines.Quantity := JobPlanningLine.Quantity;
-                            JobPlanningLines."Unit Cost" := JobPlanningLine."Unit Cost";
-                            JobPlanningLines.Validate(JobPlanningLines."Unit Cost");
-                            JobPlanningLines.Description := JobPlanningLine.Description;
-                            JobPlanningLines."Budget Period" := JobPlanningLine."Budget Period";
-                            JobPlanningLines."Grant Contract Entry No." := JobEntryNo.GetNextEntryNo;
-                            Insert;
-                        end
-                    until JobPlanningLine.Next = 0;
-                end;
-                //++++++++End Copy Planning Lines++++++++++++++
-
-                Message('Proposal No' + ' ' + "No." + ' ' + 'has succesfully been converted to Contract No.' + ' ' + "System Contract No");
-                Modify;
-            end else begin
-                if Status = Status::Contract then begin
-
-                    if Confirm('Convert Contract to a project?', true) = false then exit;
-                    //+++++++++++++++++++++++++++++++++++++++++++++++++++
-                    if "Project No" = '' then begin
-                        JobSetup.Get();
-                        JobSetup.TestField(JobSetup."Job Nos.");
-                        NoSeriesMgt.InitSeries(JobSetup."Job Nos.", xRec."No. Series", 0D, "Project No", "No. Series");
-                    end;
-                    //+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-                    Job.Init;
-                    Job."No." := "Project No";
-                    Job.Description := Description;
-                    Job."Bill-to Partner No." := "Bill-to Partner No.";
-                    Job.Validate("Bill-to Partner No.");
-                    Job.Status := Job.Status::Project;
-                    //insert project status
-                    Job."Project Status" := Job."project status"::"In Progress";
-                    Job."Approval Status" := Job."approval status"::Open;
-                    Job."Creation Date" := Today;
-                    Job."Starting Date" := "Starting Date";
-                    Job."Ending Date" := "Ending Date";
-                    Job."Last Date Modified" := Today;
-                    Job.Objective := Objective;
-                    Job."Principal Investigator" := "Principal Investigator";
-                    Job."Job Posting Group" := "Job Posting Group";
-                    Job.Insert;
-
-                    "Converted To Project" := true;
-                    "Project No" := "Project No";
-
-                    /*Commented and taken to only create projects that are fully approved--
-                    //Insert grant in Dim No.
-                    GLSetup.GET;
-                    IF Job.GET(Job."No.") THEN
-                    BEGIN
-                        WITH DimVal DO BEGIN
-                        INIT;
-                        DimVal."Dimension Code":=GLSetup."Global Dimension 2 Code";
-                        DimVal.Code:=Job."No.";
-                        DimVal.Name:=Job.Description;
-                        DimVal."Global Dimension No.":=2;
-                        INSERT
-                        END;
-                    MESSAGE('Project ID'+' '+ProjectCode+' '+'successfully added to dimension values for global dimension'
-                    +' '+GLSetup."Global Dimension 2 Code");
-                    END;
-                     */
-                    //+++++++++++++++++++++++++++++++++++
-
-                    //++++++++++++++++++Copy Project Personnel++++++++++++++
-                    ProjPersonnel.Reset;
-                    ProjPersonnel.SetRange(ProjPersonnel.Project, "No.");
-                    if ProjPersonnel.Find('-') then
-                        repeat
-
-                            with ProjPersonnels do begin
-                                Init;
-                                ProjPersonnels.Project := "Project No";
-                                ProjPersonnels."Employee No" := ProjPersonnel."Employee No";
-                                ProjPersonnels.Validate(ProjPersonnels."Employee No");
-                                ProjPersonnels."Project Role" := ProjPersonnel."Project Role";
-                                ProjPersonnels."Start Date" := ProjPersonnel."Start Date";
-                                ProjPersonnels."End Date" := ProjPersonnel."End Date";
-                                ProjPersonnels."% Allocation Value" := ProjPersonnel."% Allocation Value";
-                                Insert;
-                            end;
-                        until ProjPersonnel.Next = 0;
-                    //++++++++++++++++++End Copy Project Personnel++++++++++++++
-
-
-                    //++++++++++++++++++Copy Partners++++++++++++++++++
-                    ProjectPartners.Reset;
-                    ProjectPartners.SetRange(ProjectPartners."Grant No", "No.");
-                    if ProjectPartners.Find('-') then
-                        repeat
-                            with ProjectPartner do begin
-                                Init;
-                                ProjectPartner."Grant No" := "Project No";
-                                ProjectPartner.PartnerID := ProjectPartners.PartnerID;
-                                ProjectPartner."Partner Name" := ProjectPartners."Partner Name";
-                                Insert;
-                            end;
-                        until ProjectPartners.Next = 0;
-                    //++++++++++++++++End Copy Partners++++++++++++++++
-
-
-                    //+++++++++++++++++Copy Donors+++++++++++++++++++++
-                    ProjectDonors.Reset;
-                    ProjectDonors.SetRange(ProjectDonors."Grant No", "No.");
-                    if ProjectDonors.Find('-') then
-                        repeat
-                            with ProjectDonor do begin
-                                Init;
-                                ProjectDonor."Grant No" := "Project No";
-                                ProjectDonor."Shortcut Dimension 1 Code" := ProjectDonors."Shortcut Dimension 1 Code";
-                                ProjectDonor."Donor Name" := ProjectDonors."Donor Name";
-                                ProjectDonor."Expected Donation" := ProjectDonors."Expected Donation";
-                                Insert;
-                            end;
-                        until ProjectDonors.Next = 0;
-                    //+++++++++++++++++End Copy Donors++++++++++++++++++
-
-
-                    //++++++Copy Task Lines++++++++++++++++++++++++
-                    JobTask.Reset;
-                    JobTask.SetRange(JobTask."Grant No.", "No.");
-                    if JobTask.FindFirst then begin
-                        repeat
-                            with JobTasks do begin
-                                Init;
-                                Validate(JobTasks."Grant No.", "Project No");
-                                JobTasks."Grant Task No." := JobTask."Grant Task No.";
-                                JobTasks.Description := JobTask.Description;
-                                Insert;
-                            end
-                        until JobTask.Next = 0;
-                    end;
-                    //++++++++End Copy Task Lines++++++++++++++++++
-
-                    //++++++++Copy Planning Lines++++++++++++++++++
-                    JobPlanningLine.Reset;
-                    JobPlanningLine.SetRange(JobPlanningLine."Grant No.", "No.");
-                    if JobPlanningLine.Find('-') then begin
-                        repeat
-
-                            with JobPlanningLines do begin
-                                Init;
-                                Validate(JobPlanningLines."Grant No.", "Project No");
-                                JobPlanningLines."Grant Task No." := JobPlanningLine."Grant Task No.";
-                                JobPlanningLines."Line No." := JobPlanningLine."Line No.";
-                                JobPlanningLines.Type := JobPlanningLines.Type;
-                                JobPlanningLines."No." := JobPlanningLine."No.";
-                                JobPlanningLines.Partner := JobPlanningLine.Partner;
-                                JobPlanningLines."Global Dimension 1 Code" := JobPlanningLine."Global Dimension 1 Code";
-                                JobPlanningLines.Quantity := JobPlanningLine.Quantity;
-                                JobPlanningLines."Unit Cost" := JobPlanningLine."Unit Cost";
-                                JobPlanningLines.Validate(JobPlanningLines."Unit Cost");
-                                JobPlanningLines.Description := JobPlanningLine.Description;
-                                JobPlanningLines."Budget Period" := JobPlanningLine."Budget Period";
-                                JobPlanningLines."Grant Contract Entry No." := JobEntryNo.GetNextEntryNo;
-                                Insert;
-                            end
-                        until JobPlanningLine.Next = 0;
-                    end;
-                    //++++++++End Copy Planning Lines++++++++++++++
-
-                    Message('Contract No' + ' ' + "No." + ' ' + 'has succesfully been converted to Project No.' + ' ' + "Project No");
-                    Modify;
-
-                end
-            end;
-
-        end;
-
-    end;
-
-
-    procedure AddtoDimensionValues(ProjectCode: Code[10])
-    var
-        DimVal: Record "Dimension Value";
-        GLSetup: Record "General Ledger Setup";
-    begin
-        GLSetup.Get;
-        //Job.RESET;
-        //Job.SETRANGE(Job."No.",ProjectCode);
-        if Job.Get(ProjectCode) then begin
-            with DimVal do begin
-                Init;
-                DimVal."Dimension Code" := GLSetup."Global Dimension 2 Code";
-                DimVal.Code := ProjectCode;
-                DimVal.Name := Job.Description;
-                DimVal."Global Dimension No." := 2;
-                Insert
-            end;
-            Message('Project ID' + ' ' + ProjectCode + ' ' + 'successfully added to dimension values for global dimension'
-            + ' ' + GLSetup."Global Dimension 2 Code");
-        end;
-    end;
-
-
-    procedure RecordLinkMove(job: Record 53913; newJob: Record 53913)
-    begin
-    end;
-
-
-    procedure CreateDim(mJobs: Record 53913)
-    begin
-        //Insert grant in Dim No.
-        GLSetup.Get;
-        with DimVal do begin
-            Init;
-            DimVal."Dimension Code" := GLSetup."Global Dimension 2 Code";
-            DimVal.Code := mJobs."No.";
-            DimVal.Name := mJobs."Description 2";
-            DimVal."Global Dimension No." := 2;
-            Insert;
-            Message('Project ID' + ' ' + mJobs."No." + ' ' + 'successfully added to dimension values for global dimension'
-        + ' ' + GLSetup."Global Dimension 2 Code");
-        end;
     end;
 }
 

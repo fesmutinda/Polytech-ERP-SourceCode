@@ -30,7 +30,7 @@ Table 51516343 "prPayroll Periods."
         }
         field(8;"Tax Paid";Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions".Amount where ("Payroll Period"=field("Date Opened"),
+            CalcFormula = sum("prPeriod Transactions..".Amount where ("Payroll Period"=field("Date Opened"),
                                                                     "Group Order"=const(7),
                                                                     "Sub Group Order"=const(3)));
             FieldClass = FlowField;
@@ -74,6 +74,6 @@ Table 51516343 "prPayroll Periods."
     end;
 
     var
-        PrPeriodT: Record "prPeriod Transactions";
+        PrPeriodT: Record "prPeriod Transactions..";
 }
 

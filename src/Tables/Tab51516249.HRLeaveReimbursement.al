@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516249 "HR Leave Reimbursement"
 {
-    DrillDownPageID = 55629;
-    LookupPageID = 55629;
+    // DrillDownPageID = UnknownPage55629;
+    // LookupPageID = UnknownPage55629;
 
     fields
     {
@@ -185,8 +185,8 @@ Table 51516249 "HR Leave Reimbursement"
         }
         field(3970; "Leave Application No"; Code[20])
         {
-            TableRelation = "HR Leave Application" where(Status = filter(Approved),
-                                                          "Employee No" = field("Employee No"));
+            TableRelation = "HR Leave Application"."Application Code" where(
+                                                                             "Employee No" = field("Employee No"));
 
             trigger OnValidate()
             begin
@@ -260,7 +260,6 @@ Table 51516249 "HR Leave Reimbursement"
         ReturnDateLoop: Boolean;
         mSubject: Text[250];
         ApplicantsEmail: Text[30];
-        SMTP: Codeunit 400;
         LeaveGjline: Record "HR Journal Line";
         "LineNo.": Integer;
         ApprovalComments: Record "Approval Comment Line";
@@ -368,11 +367,11 @@ Table 51516249 "HR Leave Reimbursement"
         if HREmailParameters.Find('-') then begin
 
 
-            HREmp.TestField(HREmp."Company E-Mail");
-            SMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HREmp."Company E-Mail",
-            HREmailParameters.Subject, 'Dear' + ' ' + HREmp."First Name" + ' ' +
-            HREmailParameters.Body + ' ' + "Application Code" + ' ' + HREmailParameters."Body 2", true);
-            SMTP.Send();
+            // HREmp.TestField(HREmp."Company E-Mail");
+            // SMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HREmp."Company E-Mail",
+            // HREmailParameters.Subject, 'Dear' + ' ' + HREmp."First Name" + ' ' +
+            // HREmailParameters.Body + ' ' + "Application Code" + ' ' + HREmailParameters."Body 2", true);
+            // SMTP.Send();
 
 
             Message('Leave applicant has been notified successfully');

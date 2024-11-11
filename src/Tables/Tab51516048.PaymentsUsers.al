@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516048 "Payments-Users"
 {
-    DrillDownPageID = "Posted Receipt Line";
-    LookupPageID = "Posted Receipt Line";
+    // DrillDownPageID = UnknownPage50029;
+    // LookupPageID = UnknownPage50029;
 
     fields
     {
@@ -77,7 +77,7 @@ Table 51516048 "Payments-Users"
         }
         field(8;"Bank Code";Code[20])
         {
-            TableRelation = "Cash Payments Header";
+           // TableRelation = "Cash Payments Header";
         }
         field(9;"Received From";Text[100])
         {
@@ -87,7 +87,7 @@ Table 51516048 "Payments-Users"
         }
         field(11;Cashier;Code[20])
         {
-            TableRelation = Table2000000002.Field1;
+            TableRelation = "User Setup"."User ID";
         }
         field(12;"Account Type";Option)
         {
@@ -210,7 +210,6 @@ Table 51516048 "Payments-Users"
         }
         field(28;"Paying Bank Account";Code[20])
         {
-            TableRelation = "Bank Account"."No." where (test=field("Bank Type"));
         }
         field(29;Payee;Text[100])
         {
@@ -312,7 +311,6 @@ Table 51516048 "Payments-Users"
         }
         field(57;LineMGERID;Code[20])
         {
-            TableRelation = Table2000000002.Field1;
         }
         field(58;"User ID";Code[20])
         {

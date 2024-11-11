@@ -45,7 +45,7 @@ Table 51516325 "Payroll Salary Arrears."
         }
         field(22;"Payroll Period";Date)
         {
-            TableRelation = "HR Job Qualifications".Field10;
+            // TableRelation = "HR Job Qualifications".Field10;
         }
         field(23;Number;Integer)
         {

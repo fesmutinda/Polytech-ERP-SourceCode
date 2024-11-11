@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516184 "HR Employee Requisitions"
 {
-    DrillDownPageID = 51516185;
-    LookupPageID = 51516185;
+    // DrillDownPageID = UnknownPage55576;
+    // LookupPageID = UnknownPage55576;
 
     fields
     {
@@ -186,7 +186,6 @@ Table 51516184 "HR Employee Requisitions"
         }
         field(3969; "Responsibility Center"; Code[10])
         {
-            TableRelation = "Responsibility Center".Code;
         }
         field(3970; "Shortlisting Comittee"; Code[20])
         {

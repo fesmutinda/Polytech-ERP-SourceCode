@@ -103,6 +103,9 @@ tableextension 50069 "VendorExt" extends Vendor
         {
             Caption = 'State Inscription';
         }
+        field(10026; "Cheque Discounted"; Decimal) { }
+        field(10027; "Comission On Cheque Discount"; Decimal) { }
+        field(10028; "Employer Code"; Code[20]) { }
         field(14020; "Tax Identification Type"; Option)
         {
             Caption = 'Tax Identification Type';
@@ -990,6 +993,7 @@ tableextension 50069 "VendorExt" extends Vendor
             Editable = false;
             FieldClass = FlowField;
         }
+        field(69070121; "Allowable Cheque Discounting %"; Decimal) { }
         field(6907012; "Personal No."; code[20]) { }
         field(6907013; "Picture New"; MediaSet) { }
         field(6907014; "Signature New"; MediaSet) { }

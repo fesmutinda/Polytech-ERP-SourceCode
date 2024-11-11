@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516186 "HR Lookup Values"
 {
-    LookupPageID = 51516193;
+    LookupPageID = "HR Lookup Values List";
 
     fields
     {
@@ -80,14 +80,6 @@ Table 51516186 "HR Lookup Values"
         key(Key1; Type, "Code", Description)
         {
             Clustered = true;
-        }
-        key(Key2;'')
-        {
-            Enabled = false;
-        }
-        key(Key3;'')
-        {
-            Enabled = false;
         }
     }
 

@@ -44,10 +44,10 @@ Table 51516070 "Holiday Savings Table"
         {
             Clustered = true;
         }
-        key(Key2;'')
-        {
-            Enabled = false;
-        }
+        // key(Key2;'')
+        // {
+        //     Enabled = false;
+        // }
     }
 
     fieldgroups

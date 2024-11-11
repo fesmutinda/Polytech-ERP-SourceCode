@@ -179,7 +179,7 @@ tableextension 50002 "BankAccountExt" extends "Bank Account"
         }
         field(51516100; "Bank Type"; Option)
         {
-            OptionMembers = Normal,Cash,"Fixed Deposit",SMPA,"Chq Collection";
+            OptionMembers = Normal,Cash,"Fixed Deposit",SMPA,"Chq Collection","Petty Cash";
 
             trigger OnValidate()
             begin

@@ -4,13 +4,13 @@ Table 51516351 "Pension Processing Lines"
 
     fields
     {
-        field(1;"No.";Integer)
+        field(1; "No."; Integer)
         {
             NotBlank = false;
         }
-        field(2;"Account No.";Code[20])
+        field(2; "Account No."; Code[20])
         {
-            TableRelation = Vendor."No." where ("Creditor Type"=const("Savings Account"));
+            TableRelation = Vendor."No." where("Creditor Type" = const("Account"));
             ValidateTableRelation = false;
 
             trigger OnValidate()
@@ -29,117 +29,117 @@ Table 51516351 "Pension Processing Lines"
 
             end;
         }
-        field(3;"Staff No.";Code[20])
+        field(3; "Staff No."; Code[20])
         {
 
             trigger OnValidate()
             begin
-                  /*
-                Acc.RESET;
-                Acc.SETRANGE(Acc."Account Type",'SAVINGS');
-                Acc.SETRANGE(Acc."Staff No","Staff No.");
-                IF Acc.FIND('-') THEN BEGIN
-                "Account No.":=Acc."No.";
-                "Account Name":=Acc.Name;
-                VALIDATE("Account No.");
-                END
-                ELSE
-                ERROR('Record not found.')
-                  */
+                /*
+              Acc.RESET;
+              Acc.SETRANGE(Acc."Account Type",'SAVINGS');
+              Acc.SETRANGE(Acc."Staff No","Staff No.");
+              IF Acc.FIND('-') THEN BEGIN
+              "Account No.":=Acc."No.";
+              "Account Name":=Acc.Name;
+              VALIDATE("Account No.");
+              END
+              ELSE
+              ERROR('Record not found.')
+                */
 
             end;
         }
-        field(4;Name;Text[100])
+        field(4; Name; Text[100])
         {
         }
-        field(5;Amount;Decimal)
+        field(5; Amount; Decimal)
         {
         }
-        field(6;"Account Not Found";Boolean)
+        field(6; "Account Not Found"; Boolean)
         {
         }
-        field(7;"Date Filter";Date)
+        field(7; "Date Filter"; Date)
         {
             FieldClass = FlowFilter;
         }
-        field(8;Processed;Boolean)
+        field(8; Processed; Boolean)
         {
         }
-        field(9;"Document No.";Code[20])
+        field(9; "Document No."; Code[20])
         {
         }
-        field(10;Date;Date)
+        field(10; Date; Date)
         {
         }
-        field(11;"No. Series";Code[20])
+        field(11; "No. Series"; Code[20])
         {
         }
-        field(12;"Original Account No.";Code[30])
+        field(12; "Original Account No."; Code[30])
         {
         }
-        field(13;"Multiple Salary";Boolean)
+        field(13; "Multiple Salary"; Boolean)
         {
         }
-        field(14;Reversed;Boolean)
+        field(14; Reversed; Boolean)
         {
         }
-        field(15;"Branch Reff.";Code[20])
+        field(15; "Branch Reff."; Code[20])
         {
         }
-        field(16;"Account Name";Text[70])
+        field(16; "Account Name"; Text[70])
         {
         }
-        field(17;"ID No.";Code[30])
+        field(17; "ID No."; Code[30])
         {
         }
-        field(18;Closed;Boolean)
+        field(18; Closed; Boolean)
         {
         }
-        field(33;"Global Dimension 1 Code";Code[10])
+        field(33; "Global Dimension 1 Code"; Code[10])
         {
             CaptionClass = '1,1,1';
-            TableRelation = "Dimension Value".Code where ("Global Dimension No."=const(1),
-                                                          "Dimension Value Type"=const(Standard));
+            TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1),
+                                                          "Dimension Value Type" = const(Standard));
         }
-        field(34;"Global Dimension 2 Code";Code[10])
+        field(34; "Global Dimension 2 Code"; Code[10])
         {
             CaptionClass = '1,2,2';
-            TableRelation = "Dimension Value".Code where ("Global Dimension No."=const(2),
-                                                          "Dimension Value Type"=const(Standard));
+            TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2),
+                                                          "Dimension Value Type" = const(Standard));
         }
-        field(62000;"BOSA Schedule";Boolean)
+        field(62000; "BOSA Schedule"; Boolean)
         {
         }
-        field(62001;USER;Code[60])
+        field(62001; USER; Code[60])
         {
         }
-        field(62002;"Balance sl";Decimal)
+        field(62002; "Balance sl"; Decimal)
         {
-            CalcFormula = sum("Gen. Journal Line".Amount where ("Account No."=field("Account No.")));
+            CalcFormula = sum("Gen. Journal Line".Amount where("Account No." = field("Account No.")));
             FieldClass = FlowField;
         }
-        field(62003;"Salary Header No.";Code[20])
+        field(62003; "Salary Header No."; Code[20])
         {
-            TableRelation = "Pension Processing Headerr".No where (No=field("Salary Header No."));
+            TableRelation = "Pension Processing Headerr".No where(No = field("Salary Header No."));
         }
-        field(62004;"Employer Code";Code[20])
-        {
-        }
-        field(62005;"Pension No";Code[30])
+        field(62004; "Employer Code"; Code[20])
         {
         }
-        field(62006;"Bosa No";Code[30])
+        field(62005; "Pension No"; Code[30])
+        {
+        }
+        field(62006; "Bosa No"; Code[30])
         {
         }
     }
 
     keys
     {
-        key(Key1;"No.","Pension No",Amount,"Salary Header No.")
+        key(Key1; "No.", "Pension No", Amount, "Salary Header No.")
         {
             Clustered = true;
         }
-        key(Key2;"Account No.",Date,Processed)
+        key(Key2; "Account No.", Date, Processed)
         {
             SumIndexFields = Amount;
         }
@@ -153,10 +153,10 @@ Table 51516351 "Pension Processing Lines"
     begin
         SalBuffer.Reset;
         if SalBuffer.Find('+') then
-        "No.":=SalBuffer."No."+1;
+            "No." := SalBuffer."No." + 1;
 
 
-        USER:=UserId;
+        USER := UserId;
     end;
 
     var

@@ -185,6 +185,7 @@ Table 51516464 "Members Nominee Temp"
         {
             DataClassification = ToBeClassified;
         }
+        field(44; "No."; Code[20]) { }
     }
 
     keys

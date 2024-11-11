@@ -22,17 +22,17 @@ Table 51516180 "HR Job Occupations"
                                 HREmp.Modify;
             end;
         }
-        field(3;"First Name";Text[30])
+        field(3;"First Name";Text[100])
         {
             CalcFormula = lookup("HR Employees"."First Name" where ("No."=field("Employee No.")));
             FieldClass = FlowField;
         }
-        field(4;"Middle Name";Text[30])
+        field(4;"Middle Name";Text[100])
         {
             CalcFormula = lookup("HR Employees"."Middle Name" where ("No."=field("Employee No.")));
             FieldClass = FlowField;
         }
-        field(5;"Last Name";Text[30])
+        field(5;"Last Name";Text[100])
         {
             CalcFormula = lookup("HR Employees"."Last Name" where ("No."=field("Employee No.")));
             FieldClass = FlowField;
@@ -55,8 +55,8 @@ Table 51516180 "HR Job Occupations"
         }
         field(55;"Job Desc";Text[50])
         {
-            CalcFormula = lookup(Table55622.Field2 where (Field1=field("Job Id")));
-            FieldClass = FlowField;
+           // CalcFormula = lookup(Table55622.Field2 where (Field1=field("Job Id")));
+            //FieldClass = FlowField;
         }
         field(56;"Job Id";Code[100])
         {

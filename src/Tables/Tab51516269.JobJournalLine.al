@@ -21,28 +21,7 @@ Table 51516269 "Job-Journal Line"
 
             trigger OnValidate()
             begin
-                if "Job No." = '' then begin
-                    Validate("Currency Code", '');
-                    Validate("Job Task No.", '');
-                    CreateDim(
-                      Database::Job, "Job No.",
-                      DimMgt.TypeToTableID2(Type), "No.",
-                      Database::"Resource Group", "Resource Group No.");
-                    exit;
-                end;
 
-                GetJob;
-                Job.TestBlocked;
-                //Job.TESTFIELD("Bill-to Partner No.");
-                //Cust.GET(Job."Bill-to Partner No.");
-                Validate("Job Task No.", '');
-                "Customer Price Group" := Job."Customer Price Group";
-                Validate("Currency Code", Job."Currency Code");
-                CreateDim(
-                  Database::Job, "Job No.",
-                  DimMgt.TypeToTableID2(Type), "No.",
-                  Database::"Resource Group", "Resource Group No.");
-                Validate("Country/Region Code", Cust."Country/Region Code");
             end;
         }
         field(4; "Posting Date"; Date)
@@ -125,8 +104,6 @@ Table 51516269 "Job-Journal Line"
                             Item.TestField(Blocked, false);
                             Description := Item.Description;
                             "Description 2" := Item."Description 2";
-                            if Job."Language Code" <> '' then
-                                GetItemTranslation;
                             "Posting Group" := Item."Inventory Posting Group";
                             "Gen. Prod. Posting Group" := Item."Gen. Prod. Posting Group";
                             Validate("Unit of Measure Code", Item."Base Unit of Measure");
@@ -566,16 +543,8 @@ Table 51516269 "Job-Journal Line"
 
             trigger OnValidate()
             var
-                JobTask: Record 53926;
             begin
-                if ("Job Task No." = '') or (("Job Task No." <> xRec."Job Task No.") and (xRec."Job Task No." <> '')) then begin
-                    Validate("No.", '');
-                    exit;
-                end;
 
-                TestField("Job No.");
-                JobTask.Get("Job No.", "Job Task No.");
-                JobTask.TestField("Grant Task Type", JobTask."grant task type"::Posting);
             end;
         }
         field(1001; "Total Cost"; Decimal)
@@ -868,14 +837,12 @@ Table 51516269 "Job-Journal Line"
 
     trigger OnDelete()
     begin
-        if Type = Type::Item then
-;
+
+    end;
 
     trigger OnInsert()
     begin
         LockTable;
-        JobJnlTemplate.Get("Journal Template Name");
-        JobJnlBatch.Get("Journal Template Name", "Journal Batch Name");
 
         ValidateShortcutDimCode(1, "Shortcut Dimension 1 Code");
         ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
@@ -907,11 +874,7 @@ Table 51516269 "Job-Journal Line"
         Cust: Record Vendor;
         ItemJnlLine: Record "Item Journal Line";
         GLAcc: Record "G/L Account";
-        Job: Record 53913;
         WorkType: Record "Work Type";
-        JobJnlTemplate: Record 53916;
-        JobJnlBatch: Record 53922;
-        JobJnlLine: Record 53917;
         ItemVariant: Record "Item Variant";
         ResUnitofMeasure: Record "Resource Unit of Measure";
         ResCost: Record "Resource Cost";
@@ -966,35 +929,6 @@ Table 51516269 "Job-Journal Line"
         exit(("Job No." = '') and ("No." = '') and (Quantity = 0));
     end;
 
-
-    procedure SetUpNewLine(LastJobJnlLine: Record 53917)
-    begin
-        JobJnlTemplate.Get("Journal Template Name");
-        JobJnlBatch.Get("Journal Template Name", "Journal Batch Name");
-        JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
-        JobJnlLine.SetRange("Journal Batch Name", "Journal Batch Name");
-        if JobJnlLine.Find('-') then begin
-            "Posting Date" := LastJobJnlLine."Posting Date";
-            "Document Date" := LastJobJnlLine."Posting Date";
-            "Document No." := LastJobJnlLine."Document No.";
-            Type := LastJobJnlLine.Type;
-            Validate("Line Type", LastJobJnlLine."Line Type");
-        end else begin
-            "Posting Date" := WorkDate;
-            "Document Date" := WorkDate;
-            if JobJnlBatch."No. Series" <> '' then begin
-                Clear(NoSeriesMgt);
-                "Document No." := NoSeriesMgt.TryGetNextNo(JobJnlBatch."No. Series", "Posting Date");
-            end;
-        end;
-        "Recurring Method" := LastJobJnlLine."Recurring Method";
-        "Entry Type" := "entry type"::Usage;
-        "Source Code" := JobJnlTemplate."Source Code";
-        "Reason Code" := JobJnlBatch."Reason Code";
-        "Posting No. Series" := JobJnlBatch."Posting No. Series";
-    end;
-
-
     procedure CreateDim(Type1: Integer; No1: Code[20]; Type2: Integer; No2: Code[20]; Type3: Integer; No3: Code[20])
     var
         TableID: array[10] of Integer;
@@ -1011,30 +945,17 @@ Table 51516269 "Job-Journal Line"
         //DimMgt.GetDefaultDim(
         //  TableID,No,"Source Code",
         //  "Shortcut Dimension 1 Code","Shortcut Dimension 2 Code");
-        if "Line No." <> 0 then
-;
+    end;
 
 
     procedure ValidateShortcutDimCode(FieldNumber: Integer; var ShortcutDimCode: Code[20])
     begin
-        DimMgt.ValidateDimValueCode(FieldNumber, ShortcutDimCode);
-        if "Line No." <> 0 then
-            DimMgt.SaveJnlLineDim(
-              Database::"Job Journal Line", "Journal Template Name",
-              "Journal Batch Name", "Line No.", 0, FieldNumber, ShortcutDimCode)
-        else
-            ;
+    end;
 
 
     procedure LookupShortcutDimCode(FieldNumber: Integer; var ShortcutDimCode: Code[20])
     begin
-        DimMgt.LookupDimValueCode(FieldNumber, ShortcutDimCode);
-        if "Line No." <> 0 then
-            DimMgt.SaveJnlLineDim(
-              Database::"Job Journal Line", "Journal Template Name",
-              "Journal Batch Name", "Line No.", 0, FieldNumber, ShortcutDimCode)
-        else
-            ;
+    end;
 
 
     procedure ShowShortcutDimCode(var ShortcutDimCode: array[8] of Code[20])
@@ -1061,22 +982,7 @@ Table 51516269 "Job-Journal Line"
 
     procedure GetJob()
     begin
-        TestField("Job No.");
-        if "Job No." <> Job."No." then begin
-            Job.Get("Job No.");
-            if Job."Currency Code" = '' then begin
-                GetGLSetup;
-                Currency.InitRoundingPrecision;
-                AmountRoundingPrecision := GLSetup."Amount Rounding Precision";
-                UnitAmountRoundingPrecision := GLSetup."Unit-Amount Rounding Precision";
-            end else begin
-                GetCurrency;
-                Currency.Get(Job."Currency Code");
-                Currency.TestField("Amount Rounding Precision");
-                AmountRoundingPrecision := Currency."Amount Rounding Precision";
-                UnitAmountRoundingPrecision := Currency."Unit-Amount Rounding Precision";
-            end;
-        end;
+
     end;
 
     local procedure UpdateCurrencyFactor()
@@ -1175,7 +1081,6 @@ Table 51516269 "Job-Journal Line"
     local procedure SelectItemEntry(CurrentFieldNo: Integer)
     var
         ItemLedgEntry: Record "Item Ledger Entry";
-        JobJnlLine2: Record 53917;
     begin
         ItemLedgEntry.SetCurrentkey("Item No.", Open, "Variant Code");
         ItemLedgEntry.SetRange("Item No.", "No.");
@@ -1191,12 +1096,7 @@ Table 51516269 "Job-Journal Line"
             ItemLedgEntry.SetRange(Positive, false);
 
         //IF FORM.RUNMODAL(FORM::"Item Ledger Entries",ItemLedgEntry) = ACTION::LookupOK THEN BEGIN
-        JobJnlLine2 := Rec;
-        if CurrentFieldNo = FieldNo("Applies-to Entry") then
-            JobJnlLine2.Validate("Applies-to Entry", ItemLedgEntry."Entry No.")
-        else
-            JobJnlLine2.Validate("Applies-from Entry", ItemLedgEntry."Entry No.");
-        Rec := JobJnlLine2;
+
         //END;
     end;
 
@@ -1237,11 +1137,7 @@ Table 51516269 "Job-Journal Line"
 
     procedure GetItemTranslation()
     begin
-        GetJob;
-        if ItemTranslation.Get("No.", "Variant Code", Job."Language Code") then begin
-            Description := ItemTranslation.Description;
-            "Description 2" := ItemTranslation."Description 2";
-        end;
+
     end;
 
     local procedure GetGLSetup()
@@ -1255,15 +1151,7 @@ Table 51516269 "Job-Journal Line"
 
     procedure UpdateAllAmounts()
     begin
-        GetJob;
 
-        UpdateUnitCost;
-        UpdateTotalCost;
-        FindPriceAndDiscount(Rec, CurrFieldNo);
-        HandleCostFactor;
-        UpdateUnitPrice;
-        UpdateTotalPrice;
-        UpdateAmountsAndDiscounts;
     end;
 
     local procedure UpdateUnitCost()
@@ -1396,22 +1284,6 @@ Table 51516269 "Job-Journal Line"
               "Posting Date", "Currency Code",
               "Total Cost", "Currency Factor"),
             AmountRoundingPrecision);
-    end;
-
-    local procedure FindPriceAndDiscount(var JobJnlLine: Record 53917; CalledByFieldNo: Integer)
-    begin
-        if RetrieveCostPrice and ("No." <> '') then begin
-            //  SalesPriceCalcMgt.FindJobJnlLinePrice(JobJnlLine,CalledByFieldNo);
-
-            // IF Type <> Type::"G/L Account" THEN
-            //    PurchPriceCalcMgt.FindJobJnlLinePrice(JobJnlLine,CalledByFieldNo)
-            //ELSE BEGIN
-            // Because the SalesPriceCalcMgt.FindJobJnlLinePrice function also retrieves costs for G/L Account,
-            // cost and total cost need to get updated again.
-            UpdateUnitCost;
-            UpdateTotalCost;
-        end;
-        //END;
     end;
 
     local procedure HandleCostFactor()

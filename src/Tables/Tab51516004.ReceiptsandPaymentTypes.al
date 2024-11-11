@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516004 "Receipts and Payment Types"
 {
-    DrillDownPageID = 51516061;
-    LookupPageID = 51516061;
+    DrillDownPageID = "Receipt and Payment Types List";
+    LookupPageID = "Receipt and Payment Types List";
 
     fields
     {
@@ -17,12 +17,12 @@ Table 51516004 "Receipts and Payment Types"
             begin
 
                 PayLine.Reset;
-                PayLine.SetRange(PayLine.Type, Code);
+                PayLine.SetRange(PayLine."Payment Type", Code);
                 if PayLine.Find('-') then
                     Error('This Transaction Code Is Already in Use You cannot Modify');
 
                 PayLine.Reset;
-                PayLine.SetRange(PayLine.Type, Code);
+                PayLine.SetRange(PayLine."Payment Type", Code);
                 if PayLine.Find('-') then
                     Error('This Transaction Code Is Already in Use You Cannot Delete');
             end;
@@ -41,7 +41,7 @@ Table 51516004 "Receipts and Payment Types"
                     "Direct Expense" := false;
 
                 PayLine.Reset;
-                PayLine.SetRange(PayLine.Type, Code);
+                PayLine.SetRange(PayLine."Payment Type", Code);
                 if PayLine.Find('-') then
                     Error('This Transaction Code Is Already in Use You cannot Modify');
             end;
@@ -70,7 +70,8 @@ Table 51516004 "Receipts and Payment Types"
         field(9; "Default Grouping"; Code[20])
         {
             TableRelation = if ("Account Type" = const(Customer)) "Customer Posting Group"
-            else if ("Account Type" = const(Vendor)) "Vendor Posting Group";
+            else
+            if ("Account Type" = const(Vendor)) "Vendor Posting Group";
         }
         field(10; "G/L Account"; Code[20])
         {
@@ -88,10 +89,6 @@ Table 51516004 "Receipts and Payment Types"
                         Error('Direct Posting must be True');
                     end;
                 end;
-
-                PayLine.Reset;
-                PayLine.SetRange(PayLine.Type, Code);
-                if PayLine.Find('-') then begin end;
             end;
         }
         field(11; "Pending Voucher"; Boolean)
@@ -167,7 +164,7 @@ Table 51516004 "Receipts and Payment Types"
     trigger OnDelete()
     begin
         PayLine.Reset;
-        PayLine.SetRange(PayLine.Type, Code);
+        PayLine.SetRange(PayLine."Payment Type", Code);
         if PayLine.Find('-') then
             Error('This Transaction Code Is Already in Use You Cannot Delete');
     end;

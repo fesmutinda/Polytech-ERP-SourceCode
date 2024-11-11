@@ -110,13 +110,13 @@ Table 51516316 "Salary Processing Header"
         }
         field(26;"Scheduled Amount";Decimal)
         {
-            CalcFormula = sum("HR Journal Line".Field5 where (Field62003=field(No)));
-            Editable = false;
-            FieldClass = FlowField;
+            // CalcFormula = sum("HR Journal Line".Field5 where (Field62003=field(No)));
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(27;"Total Count";Integer)
         {
-            CalcFormula = count("HR Journal Line" where (Field62003=field(No)));
+            // CalcFormula = count("HR Journal Line" where (Field62003=field(No)));
             FieldClass = FlowField;
         }
         field(28;"Account Name";Code[50])
@@ -124,7 +124,7 @@ Table 51516316 "Salary Processing Header"
         }
         field(29;"Employer Code";Code[30])
         {
-            TableRelation = "HR Transport Allocations H".Field1;
+            // TableRelation = "HR Transport Allocations H".Field1;
         }
         field(30;"Transaction Type";Option)
         {

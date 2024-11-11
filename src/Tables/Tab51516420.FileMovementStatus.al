@@ -4,40 +4,40 @@ Table 51516420 "File Movement Status"
 
     fields
     {
-        field(1;"User ID";Code[30])
+        field(1; "User ID"; Code[30])
         {
             TableRelation = "User Setup";
 
             trigger OnValidate()
             var
-                UserMgt: Codeunit "User Management";
+                UserMgt: Codeunit "Polytech User Management";
             begin
                 UserMgt.ValidateUserID("User ID");
             end;
         }
-        field(2;"Section ID";Integer)
+        field(2; "Section ID"; Integer)
         {
             NotBlank = false;
-            TableRelation = "Approvals Set Up".Stage where ("Approval Type"=const("File Movement"));
+            TableRelation = "Approvals Set Up".Stage where("Approval Type" = const("File Movement"));
 
             trigger OnValidate()
             begin
-                  approvalsetup.Reset;
-                  approvalsetup.SetRange(approvalsetup.Stage,"Section ID");
-                  if approvalsetup.Find('-') then begin
-                   Description:=approvalsetup.Description;
+                approvalsetup.Reset;
+                approvalsetup.SetRange(approvalsetup.Stage, "Section ID");
+                if approvalsetup.Find('-') then begin
+                    Description := approvalsetup.Description;
 
-                  end;
+                end;
             end;
         }
-        field(3;Description;Code[30])
+        field(3; Description; Code[30])
         {
         }
     }
 
     keys
     {
-        key(Key1;"User ID")
+        key(Key1; "User ID")
         {
             Clustered = true;
         }

@@ -29,9 +29,9 @@ Table 51516275 "Job-Journal Batch"
             trigger OnValidate()
             begin
                 if "Reason Code" <> xRec."Reason Code" then begin
-                    JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
-                    JobJnlLine.SetRange("Journal Batch Name", Name);
-                    JobJnlLine.ModifyAll("Reason Code", "Reason Code");
+                    // JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
+                    // JobJnlLine.SetRange("Journal Batch Name", Name);
+                    // JobJnlLine.ModifyAll("Reason Code", "Reason Code");
                     Modify;
                 end;
             end;
@@ -43,15 +43,15 @@ Table 51516275 "Job-Journal Batch"
 
             trigger OnValidate()
             begin
-                if "No. Series" <> '' then begin
-                    JobJnlTemplate.Get("Journal Template Name");
-                    if JobJnlTemplate.Recurring then
-                        Error(
-                          Text000,
-                          FieldCaption("Posting No. Series"));
-                    if "No. Series" = "Posting No. Series" then
-                        Validate("Posting No. Series", '');
-                end;
+                // if "No. Series" <> '' then begin
+                //     JobJnlTemplate.Get("Journal Template Name");
+                //     if JobJnlTemplate.Recurring then
+                //         Error(
+                //           Text000,
+                //           FieldCaption("Posting No. Series"));
+                //     if "No. Series" = "Posting No. Series" then
+                //         Validate("Posting No. Series", '');
+                // end;
             end;
         }
         field(6; "Posting No. Series"; Code[10])
@@ -61,12 +61,12 @@ Table 51516275 "Job-Journal Batch"
 
             trigger OnValidate()
             begin
-                if ("Posting No. Series" = "No. Series") and ("Posting No. Series" <> '') then
-                    FieldError("Posting No. Series", StrSubstNo(Text001, "Posting No. Series"));
-                JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
-                JobJnlLine.SetRange("Journal Batch Name", Name);
-                JobJnlLine.ModifyAll("Posting No. Series", "Posting No. Series");
-                Modify;
+                // if ("Posting No. Series" = "No. Series") and ("Posting No. Series" <> '') then
+                //     FieldError("Posting No. Series", StrSubstNo(Text001, "Posting No. Series"));
+                // JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
+                // // JobJnlLine.SetRange("Journal Batch Name", Name);
+                // JobJnlLine.ModifyAll("Posting No. Series", "Posting No. Series");
+                // Modify;
             end;
         }
         field(22; Recurring; Boolean)
@@ -92,38 +92,38 @@ Table 51516275 "Job-Journal Batch"
 
     trigger OnDelete()
     begin
-        JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
-        JobJnlLine.SetRange("Journal Batch Name", Name);
-        JobJnlLine.DeleteAll(true);
+        // JobJnlLine.SetRange("Journal Template Name", "Journal Template Name");
+        // JobJnlLine.SetRange("Journal Batch Name", Name);
+        // JobJnlLine.DeleteAll(true);
     end;
 
     trigger OnInsert()
     begin
         LockTable;
-        JobJnlTemplate.Get("Journal Template Name");
+        // JobJnlTemplate.Get("Journal Template Name");
     end;
 
     trigger OnRename()
     begin
-        JobJnlLine.SetRange("Journal Template Name", xRec."Journal Template Name");
-        JobJnlLine.SetRange("Journal Batch Name", xRec.Name);
-        while JobJnlLine.Find('-') do
-            JobJnlLine.Rename("Journal Template Name", Name, JobJnlLine."Line No.");
+        // JobJnlLine.SetRange("Journal Template Name", xRec."Journal Template Name");
+        // JobJnlLine.SetRange("Journal Batch Name", xRec.Name);
+        // while JobJnlLine.Find('-') do
+        //     JobJnlLine.Rename("Journal Template Name", Name, JobJnlLine."Line No.");
     end;
 
     var
         Text000: label 'Only the %1 field can be filled in on recurring journals.';
         Text001: label 'must not be %1';
-        JobJnlTemplate: Record 53916;
-        JobJnlLine: Record 53917;
+    // JobJnlTemplate: Record 53916;
+    // JobJnlLine: Record 53917;
 
 
     procedure SetupNewBatch()
     begin
-        JobJnlTemplate.Get("Journal Template Name");
-        "No. Series" := JobJnlTemplate."No. Series";
-        "Posting No. Series" := JobJnlTemplate."Posting No. Series";
-        "Reason Code" := JobJnlTemplate."Reason Code";
+        // JobJnlTemplate.Get("Journal Template Name");
+        // "No. Series" := JobJnlTemplate."No. Series";
+        // "Posting No. Series" := JobJnlTemplate."Posting No. Series";
+        // "Reason Code" := JobJnlTemplate."Reason Code";
     end;
 }
 

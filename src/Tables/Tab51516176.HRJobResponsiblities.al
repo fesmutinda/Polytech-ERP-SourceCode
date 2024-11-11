@@ -1,14 +1,14 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516176 "HR Job Responsiblities"
 {
-    DrillDownPageID = 55564;
-    LookupPageID = 55564;
+    // DrillDownPageID = UnknownPage55564;
+    // LookupPageID = UnknownPage55564;
 
     fields
     {
         field(2; "Job ID"; Code[50])
         {
-            TableRelation = "HR Jobss"."Job ID";
+            //  TableRelation = "HR Jobs"."Job ID";
         }
         field(3; "Responsibility Description"; Text[250])
         {

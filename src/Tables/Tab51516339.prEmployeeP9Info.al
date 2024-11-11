@@ -66,12 +66,12 @@ Table 51516339 "prEmployee P9 Info"
         }
         field(20; "Payroll Period"; Date)
         {
-            TableRelation = Table39003990.Field4;
+            TableRelation = "Payroll Calender."."Date Opened";
         }
         field(21; "Period Filter"; Date)
         {
             FieldClass = FlowFilter;
-            TableRelation = Table39003990.Field4;
+            TableRelation = "Payroll Calender."."Date Opened";
         }
         field(22; Pension; Decimal)
         {
@@ -81,7 +81,7 @@ Table 51516339 "prEmployee P9 Info"
         }
         field(24; "Payroll Code"; Code[20])
         {
-            TableRelation = Table39004012;
+            TableRelation = "Payroll Calender.";
         }
     }
 

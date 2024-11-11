@@ -27,16 +27,7 @@ Table 51516052 "Job-Task"
 
             trigger OnValidate()
             begin
-                if (xRec."Grant Task Type" = "grant task type"::Posting) and
-                   ("Grant Task Type" <> "grant task type"::Posting)
-                then
-                    if JobLedgEntriesExist or JobPlanningLinesExist then
-                        Error(Text001, FieldCaption("Grant Task Type"), TableCaption);
-
-                if "Grant Task Type" <> "grant task type"::Posting then
-                    "Grant Posting Group" := '';
-
-                Totaling := '';
+               
             end;
         }
         field(6; "WIP-Total"; Option)
@@ -65,21 +56,11 @@ Table 51516052 "Job-Task"
         }
         field(10; "Schedule (Total Cost)"; Decimal)
         {
-            AutoFormatType = 1;
-            BlankZero = true;
-            CalcFormula = sum("Job-Planning Line"."Total Cost (LCY)" where("Grant No." = field("Grant No."), "Grant Task No." = field("Grant Task No."), "Grant Task No." = field(filter(Totaling)), "Schedule Line" = const(true), "Planning Date" = field("Planning Date Filter")));
-            Caption = 'Schedule (Total Cost)';
-            Editable = false;
-            FieldClass = FlowField;
+           
         }
         field(11; "Schedule (Total Price)"; Decimal)
         {
-            AutoFormatType = 1;
-            BlankZero = true;
-            CalcFormula = sum("Job-Planning Line"."Line Amount (LCY)" where("Grant No." = field("Grant No."), "Grant Task No." = field("Grant Task No."), "Grant Task No." = field(filter(Totaling)), "Schedule Line" = const(true), "Planning Date" = field("Planning Date Filter")));
-            Caption = 'Schedule (Total Price)';
-            Editable = false;
-            FieldClass = FlowField;
+           
         }
         field(12; "Usage (Total Cost)"; Decimal)
         {
@@ -101,21 +82,11 @@ Table 51516052 "Job-Task"
         }
         field(14; "Contract (Total Cost)"; Decimal)
         {
-            AutoFormatType = 1;
-            BlankZero = true;
-            CalcFormula = sum("Job-Planning Line"."Total Cost (LCY)" where("Grant No." = field("Grant No."), "Grant Task No." = field("Grant Task No."), "Grant Task No." = field(filter(Totaling)), "Contract Line" = const(true), "Planning Date" = field("Planning Date Filter")));
-            Caption = 'Contract (Total Cost)';
-            Editable = false;
-            FieldClass = FlowField;
+            
         }
         field(15; "Contract (Total Price)"; Decimal)
         {
-            AutoFormatType = 1;
-            BlankZero = true;
-            CalcFormula = sum("Job-Planning Line"."Line Amount (LCY)" where("Grant No." = field("Grant No."), "Grant Task No." = field("Grant Task No."), "Grant Task No." = field(filter(Totaling)), "Contract Line" = const(true), "Planning Date" = field("Planning Date Filter")));
-            Caption = 'Contract (Total Price)';
-            Editable = false;
-            FieldClass = FlowField;
+          
         }
         field(16; "Contract (Invoiced Price)"; Decimal)
         {
@@ -409,7 +380,6 @@ Table 51516052 "Job-Task"
         }
         field(50000; "Grant Phase"; Code[10])
         {
-            TableRelation = "Grant Phases".Code;
         }
         field(50003; "No Series"; Code[20])
         {
@@ -441,88 +411,6 @@ Table 51516052 "Job-Task"
     fieldgroups
     {
     }
-
-    trigger OnDelete()
-    var
-        JobPlanningLine: Record "HR Journal Line";
-        JobTaskDim: Record "HR Leave Ledger Entries";
-        Job: Record 51516213;
-    begin
-        if JobLedgEntriesExist then
-            Error(Text000, TableCaption);
-
-        JobPlanningLine.SetCurrentkey("Grant No.", "Grant Task No.");
-        JobPlanningLine.SetRange("Grant No.", "Grant No.");
-        JobPlanningLine.SetRange("Grant Task No.", "Grant Task No.");
-        JobPlanningLine.DeleteAll(true);
-
-        JobTaskDim.SetRange("Job No.", "Grant No.");
-        JobTaskDim.SetRange("Job Task No.", "Grant Task No.");
-        if not JobTaskDim.IsEmpty then
-            JobTaskDim.DeleteAll;
-
-
-        Job.Get("Grant No.");
-        if Job."Approval Status" <> Job."approval status"::Open then
-            Error('Grant %1 can not be deleted as its status is %2', Job."No.", Job."Approval Status");
-    end;
-
-    trigger OnInsert()
-    var
-        Job: Record 51516213;
-        Cust: Record Customer;
-    begin
-
-        if "Grant Task No." = '' then begin
-            JobSetup.Get;
-            JobSetup.TestField("Grant Task Nos");
-            NoSeriesMgt.InitSeries(JobSetup."Grant Task Nos", xRec."No Series", 0D, "Grant Task No.", "No Series");
-        end;
-
-
-        LockTable;
-        Job.Get("Grant No.");
-        if Job.Blocked = Job.Blocked::All then
-            Job.TestBlocked;
-        //Job.TESTFIELD("Bill-to Partner No.");
-        //Cust.GET(Job."Bill-to Partner No.");
-
-        InitWIPFields;
-        "Schedule (Total Cost)" := 0;
-        "Schedule (Total Price)" := 0;
-        "Usage (Total Cost)" := 0;
-        "Usage (Total Price)" := 0;
-        "Contract (Total Cost)" := 0;
-        "Contract (Total Price)" := 0;
-        "Contract (Invoiced Price)" := 0;
-        "Contract (Invoiced Cost)" := 0;
-
-        DimMgt.InsertJobTaskDim("Grant No.", "Grant Task No.", "Global Dimension 1 Code", "Global Dimension 2 Code");
-
-        /*
-        Job.GET("Grant No.");
-        IF Job."Approval Status"<>Job."Approval Status"::Open THEN
-        ERROR('Grant %1 can not be modified as its status is %2',Job."No.",Job."Approval Status");
-         */
-
-    end;
-
-    trigger OnModify()
-    var
-        Job: Record 51516213;
-    begin
-
-        Job.Get("Grant No.");
-        //IF Job."Approval Status"<>Job."Approval Status"::Open THEN
-        //ERROR('Grant %1 can not be modified as its status is %2',Job."No.",Job."Approval Status");
-    end;
-
-    trigger OnRename()
-    var
-        Job: Record 51516213;
-    begin
-    end;
-
     var
         Text000: label 'You cannot delete %1 because one or more entries are associated.';
         Text001: label 'You cannot change %1 because one or more entries are associated with this %2.';
@@ -530,51 +418,11 @@ Table 51516052 "Job-Task"
         JobSetup: Record "HR Calendar";
         NoSeriesMgt: Codeunit NoSeriesManagement;
 
-    local procedure JobLedgEntriesExist(): Boolean
-    var
-        JobLedgEntry: Record 51516214;
-    begin
-        JobLedgEntry.SetCurrentkey("Job No.", "Job Task No.");
-        JobLedgEntry.SetRange("Job No.", "Grant No.");
-        JobLedgEntry.SetRange("Job Task No.", "Grant Task No.");
-        exit(JobLedgEntry.Find('-'))
-    end;
-
-
     procedure JobPlanningLinesExist(): Boolean
     var
         JobPlanningLine: Record "HR Journal Line";
     begin
-        JobPlanningLine.SetCurrentkey("Grant No.", "Grant Task No.");
-        JobPlanningLine.SetRange("Grant No.", "Grant No.");
-        JobPlanningLine.SetRange("Grant Task No.", "Grant Task No.");
-        exit(JobPlanningLine.Find('-'))
-    end;
-
-
-    procedure Caption(): Text[250]
-    var
-        Job: Record 51516213;
-    begin
-        if not Job.Get("Grant No.") then
-            exit('');
-        exit(StrSubstNo('%1 %2 %3 %4',
-            Job."No.",
-            Job.Description,
-            "Grant Task No.",
-            Description));
-    end;
-
-
-    procedure Caption2(): Text[250]
-    var
-        Job: Record 51516213;
-    begin
-        if not Job.Get("Grant No.") then
-            exit('');
-        exit(StrSubstNo('%1 %2',
-            Job."No.",
-            Job.Description))
+       
     end;
 
 

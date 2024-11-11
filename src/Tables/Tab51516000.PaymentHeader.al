@@ -1,19 +1,9 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Table 51516000 "Payment Header."
+#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+Table 51516000 "Payment Header"
 {
-    DrillDownPageID = 51516006;
-    LookupPageID = 51516006;
 
     fields
     {
-        field(9; Date; Date)
-        {
-
-            trigger OnValidate()
-            begin
-                "Payment Release Date" := Date;
-            end;
-        }
         field(10; "No."; Code[20])
         {
             Editable = false;
@@ -21,11 +11,12 @@ Table 51516000 "Payment Header."
         field(11; "Document Type"; Option)
         {
             Editable = false;
-            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund,Receipt,Funds Transfer,Imprest,Imprest Accounting,Claim,Member Bill,Group Bill';
-            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund,Receipt,"Funds Transfer",Imprest,"Imprest Accounting",Claim,"Member Bill","Group Bill";
+            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund,Receipt';
+            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund,Receipt;
         }
         field(12; "Document Date"; Date)
         {
+            Editable = false;
         }
         field(13; "Posting Date"; Date)
         {
@@ -45,73 +36,77 @@ Table 51516000 "Payment Header."
         }
         field(18; "Payment Mode"; Option)
         {
+            Editable = false;
             OptionCaption = ' ,Cash,Cheque,EFT,Letter of Credit,Custom 3,Custom 4,Custom 5';
             OptionMembers = " ",Cash,Cheque,EFT,"Letter of Credit","Custom 3","Custom 4","Custom 5";
         }
         field(19; Amount; Decimal)
         {
-            CalcFormula = sum("Payment Line".Amount where(No = field("No.")));
+            CalcFormula = sum("Payment Line".Amount where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(20; "Amount(LCY)"; Decimal)
         {
-            CalcFormula = sum("Payment Line".Amount where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."Amount(LCY)" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(21; "VAT Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."VAT Amount" where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."VAT Amount" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(22; "VAT Amount(LCY)"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."VAT Amount" where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."VAT Amount(LCY)" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(23; "WithHolding Tax Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."Withholding Tax Amount" where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."W/TAX Amount" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(24; "WithHolding Tax Amount(LCY)"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."Withholding Tax Amount" where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."W/TAX Amount(LCY)" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(25; "Net Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."Net Amount" where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."Net Amount" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(26; "Net Amount(LCY)"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."NetAmount LCY" where(No = field("No.")));
+            CalcFormula = sum("Payment Line"."Net Amount(LCY)" where("Document No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(27; "Bank Account"; Code[10])
         {
-            TableRelation = "Bank Account";
+            TableRelation = if ("Payment Type" = const(Normal)) "Bank Account"."No." where("Account Type" = filter(<> 'Petty Cash'),
+                                                                                          "Account Type" = const(" "))
+            else
+           // if ("Payment Type" = const("Petty Cash")) "Bank Account"."No." where("Account Type" = const("Petty Cash"));
+                       if ("Payment Type" = const("Petty Cash")) "Bank Account"."No." where("No."= filter('BANK_0013'));
+
 
             trigger OnValidate()
             begin
-                BankAcc.Reset;
-                BankAcc.SetRange(BankAcc."No.", "Bank Account");
-                if BankAcc.FindFirst then begin
-                    "Bank Account Name" := BankAcc.Name;
-                end else begin
-                    "Bank Account Name" := '';
+                BankAccount.Reset;
+                BankAccount.SetRange(BankAccount."No.", "Bank Account");
+                if BankAccount.FindFirst then begin
+                    "Bank Account Name" := BankAccount.Name;
                 end;
             end;
         }
-        field(28; "Bank Account Name"; Text[100])
+        field(28; "Bank Account Name"; Text[50])
         {
             Editable = false;
         }
@@ -123,26 +118,13 @@ Table 51516000 "Payment Header."
         }
         field(30; "Cheque Type"; Option)
         {
-            OptionCaption = ' ,Computer Cheque,Manual Cheque';
-            OptionMembers = " ","Computer Cheque","Manual Cheque";
+            OptionCaption = 'Computer Cheque,Manual Cheque';
+            OptionMembers = "Computer Cheque","Manual Cheque";
         }
-        field(31; "Cheque No"; Code[20])
+        field(31; "Cheque No"; Code[6])
         {
-
-            trigger OnValidate()
-            begin
-                /* PHeader.RESET;
-                 IF PHeader.FINDSET THEN BEGIN
-                  REPEAT
-                    IF PHeader."Cheque No"="Cheque No" THEN
-                      ERROR('The Cheque Number has been used in PV No:'+FORMAT(PHeader."No."));
-                  UNTIL PHeader.NEXT=0;
-                 END;;
-                 */
-
-            end;
         }
-        field(32; "Payment Description"; Text[100])
+        field(32; "Payment Description"; Text[50])
         {
         }
         field(33; "Global Dimension 1 Code"; Code[10])
@@ -177,14 +159,17 @@ Table 51516000 "Payment Header."
         }
         field(41; Status; Option)
         {
+            Editable = true;
             OptionCaption = 'New,Pending Approval,Approved,Rejected,Posted,Cancelled';
             OptionMembers = New,"Pending Approval",Approved,Rejected,Posted,Cancelled;
         }
         field(42; Posted; Boolean)
         {
+            Editable = false;
         }
         field(43; "Posted By"; Code[50])
         {
+            Editable = false;
             TableRelation = "User Setup"."User ID";
         }
         field(44; "Date Posted"; Date)
@@ -195,15 +180,15 @@ Table 51516000 "Payment Header."
         {
             Editable = false;
         }
-        field(46; Cashier; Code[50])
+        field(46; Cashier; Code[100])
         {
             Editable = false;
             TableRelation = "User Setup"."User ID";
         }
-        field(47; "No. Series"; Code[10])
+        field(47; "No. Series"; Code[30])
         {
         }
-        field(48; "Responsibility Center"; Code[20])
+        field(48; "Responsibility Center"; Code[50])
         {
             TableRelation = "Responsibility Center".Code;
         }
@@ -215,9 +200,8 @@ Table 51516000 "Payment Header."
         {
             Editable = false;
         }
-        field(51; "User ID"; Code[50])
+        field(51; "User ID"; Code[70])
         {
-            TableRelation = "User Setup"."User ID";
         }
         field(52; "Payment Type"; Option)
         {
@@ -225,123 +209,30 @@ Table 51516000 "Payment Header."
             OptionCaption = 'Normal,Petty Cash,Express,Cash Purchase,Mobile';
             OptionMembers = Normal,"Petty Cash",Express,"Cash Purchase",Mobile;
         }
-        field(53; "Payment Category"; Option)
+        field(51516430; "Investor Payment"; Boolean)
         {
-            Description = 'Board Payment Field';
-            OptionCaption = ' ,Normal Payment,Meeting Payment';
-            OptionMembers = " ","Normal Payment","Meeting Payment";
         }
-        field(54; "Member No"; Code[10])
+        field(51516431; "Expense Account"; Code[20])
         {
-            Description = 'Board Payment Field';
-            // TableRelation = Table51516805.Field12 where(Field11 = field("Meeting Code"));
-
-            trigger OnValidate()
-            begin
-                /*Members.RESET;
-                Members.SETRANGE(Members."No.","Member No");
-                IF Members.FINDFIRST THEN BEGIN
-                  Payee:=FORMAT(Members.Title)+Members.Surname+Members.Firstname+Members.Middlename;
-                  "Member Name":=FORMAT(Members.Title)+Members.Surname+Members.Firstname+Members.Middlename;
-                END;
-                */
-
-            end;
+            TableRelation = "G/L Account";
         }
-        field(55; "Member Name"; Text[50])
+        field(51516432; "Total Payment Amount"; Decimal)
         {
-            Description = 'Board Payment Field';
+            CalcFormula = sum("Payment Line".Amount where(No = field("No.")));
+            Description = 'Stores the amount of the payment voucher';
             Editable = false;
+            FieldClass = FlowField;
         }
-        field(56; "Meeting Code"; Code[10])
+        field(51516433; "Paying Type"; Option)
         {
-            Description = 'Board Payment Field';
+            OptionCaption = ' ,Vendor,Bank';
+            OptionMembers = " ",Vendor,Bank;
         }
-        field(57; "Meeting Name"; Text[50])
+        field(51516434; "Payments Type"; Option)
         {
-            Description = 'Board Payment Field';
-        }
-        field(58; "Meeting Date"; Date)
-        {
-            Description = 'Board Payment Field';
-        }
-        field(59; "No. Printed"; Integer)
-        {
-        }
-        field(60; "Payee Type"; Option)
-        {
-            OptionCaption = ' ,Vendor,Employee,Board Member';
-            OptionMembers = " ",Vendor,Employee,"Board Member";
-        }
-        field(61; "Payee No"; Code[20])
-        {
-            TableRelation = if ("Payee Type" = const(Vendor)) Vendor
-            else if ("Payee Type" = const(Employee)) "HR Employees";
-
-            trigger OnValidate()
-            begin
-                if "Payee Type" = "payee type"::Vendor then begin
-                    Vendor.Reset;
-                    Vendor.SetRange(Vendor."No.", "Payee No");
-                    if Vendor.FindFirst then begin
-                        Payee := Vendor.Name;
-                    end;
-                end;
-                /*IF "Payee Type"="Payee Type"::Employee THEN BEGIN
-                   "HR Employee".RESET;
-                   "HR Employee".SETRANGE("HR Employee"."No.","Payee No");
-                   IF "HR Employee".FINDFIRST THEN BEGIN
-                     Payee:="HR Employee"."First Name"+' '+"HR Employee"."Middle Name"+' '+"HR Employee"."Last Name";
-                   END;
-                END;*/
-                /*IF "Payee Type"="Payee Type"::"Board Member" THEN BEGIN
-                   Members.RESET;
-                   Members.SETRANGE(Members."No.","Payee No");
-                   IF Members.FINDFIRST THEN BEGIN
-                     Payee:=Members.Firstname+' '+Members.Middlename+' '+Members.Surname;
-                   END;
-                END;
-                */
-
-            end;
-        }
-        field(62; Reversed; Boolean)
-        {
-        }
-        field(63; "Reversed By"; Code[20])
-        {
-        }
-        field(64; "Reversal Date"; Date)
-        {
-        }
-        field(65; "Reversal Time"; Time)
-        {
-        }
-        field(66; "Allowance Document"; Code[10])
-        {
-            // TableRelation = Table59200.Field10;
-        }
-        field(68; "Payment Release Date"; Date)
-        {
-
-            trigger OnValidate()
-            begin
-                //Changed to ensure Release date is not less than the Date entered
-                if "Payment Release Date" < Date then
-                    Error('The Payment Release Date cannot be lesser than the Document Date');
-            end;
-        }
-        field(69; "Pay Mode"; Option)
-        {
-            OptionCaption = ' ,Cash,Cheque,Mpesa,RTGS,EFT';
-            OptionMembers = " ",Cash,Cheque,Mpesa,RTGS,EFT;
-        }
-        field(70; "Manual No"; Code[30])
-        {
-        }
-        field(71; "Pay Asset"; Boolean)
-        {
-            DataClassification = ToBeClassified;
+            Editable = false;
+            OptionCaption = 'Normal,Petty Cash,Delegates';
+            OptionMembers = Normal,"Petty Cash",Delegates;
         }
     }
 
@@ -351,27 +242,11 @@ Table 51516000 "Payment Header."
         {
             Clustered = true;
         }
-        key(Key2; "Payment Category")
-        {
-        }
     }
 
     fieldgroups
     {
     }
-
-    trigger OnDelete()
-    begin
-        if Status = Status::New then begin
-            PaymentLines.Reset;
-            PaymentLines.SetRange(PaymentLines.Cashier, "No.");
-            if PaymentLines.FindSet then
-                PaymentLines.DeleteAll;
-        end else begin
-            Error('You can only delete a new Payment Document. The current status is ' + Format(Status));
-        end;
-
-    end;
 
     trigger OnInsert()
     begin
@@ -402,28 +277,11 @@ Table 51516000 "Payment Header."
         "Document Date" := Today;
         "User ID" := UserId;
         Cashier := UserId;
-        "Global Dimension 1 Code" := 'BOSA';
-
-        Date := Today;
-        "Payment Release Date" := Date;
-        //CASHIER VALIDATION
-        Banks.Reset;
-        Banks.SetRange(Banks.CashierID, UserId);
-        Banks.SetRange(Banks."Account Type", Banks."account type"::Cashier);
-        if Banks.Find('-') then begin
-            "Bank Account" := Banks."No.";
-            "Bank Account Name" := Banks.Name;
-        end;
     end;
 
     var
         Setup: Record "Funds General Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        PaymentLines: Record "Payment Line";
-        BankAcc: Record "Bank Account";
-        "HR Employee": Record Employee;
-        Vendor: Record Vendor;
-        PHeader: Record "Payment Header.";
-        Banks: Record "Bank Account";
+        BankAccount: Record "Bank Account";
 }
 

@@ -14,25 +14,25 @@ Table 51516063 "Expense Transfer Line"
         field(12; "Document Type"; Code[20])
         {
 
-            trigger OnValidate()
-            begin
-                ExpenseHeader.Reset;
-                ExpenseHeader.SetRange(ExpenseHeader."No.", "Document No");
-                if ExpenseHeader.FindFirst then begin
-                    if (ExpenseHeader.Status = ExpenseHeader.Status::"2") or
-                    (ExpenseHeader.Status = ExpenseHeader.Status::"4") or
-                    (ExpenseHeader.Status = ExpenseHeader.Status::"1") then
-                        Error('You Cannot Insert a new record when the status of the document is not Pending');
-                end;
+            // trigger OnValidate()
+            // begin
+            //     ExpenseHeader.Reset;
+            //     ExpenseHeader.SetRange(ExpenseHeader."No.", "Document No");
+            //     if ExpenseHeader.FindFirst then begin
+            //         if (ExpenseHeader.Status = ExpenseHeader.Status::"2") or
+            //         (ExpenseHeader.Status = ExpenseHeader.Status::"4") or
+            //         (ExpenseHeader.Status = ExpenseHeader.Status::"1") then
+            //             Error('You Cannot Insert a new record when the status of the document is not Pending');
+            //     end;
 
-                FTransferHeader.Reset;
-                FTransferHeader.SetRange(FTransferHeader.Code, "Document Type");
-                FTransferHeader.SetRange(FTransferHeader.Type, FTransferHeader.Type::Imprest);
-                if FTransferHeader.Find('-') then begin
-                    "Receiving Bank Account" := FTransferHeader."G/L Account";
-                    Validate("Receiving Bank Account");
-                end;
-            end;
+            //     FTransferHeader.Reset;
+            //     FTransferHeader.SetRange(FTransferHeader.Code, "Document Type");
+            //     FTransferHeader.SetRange(FTransferHeader.Type, FTransferHeader.Type::Imprest);
+            //     if FTransferHeader.Find('-') then begin
+            //         "Receiving Bank Account" := FTransferHeader."G/L Account";
+            //         Validate("Receiving Bank Account");
+            //     end;
+            // end;
         }
         field(13; Date; Date)
         {

@@ -19,13 +19,13 @@ Table 51516342 "prEmployer Deductions."
         field(5;"Period Year";Integer)
         {
         }
-        field(6;"Payroll Period";Date)
+      field(6;"Payroll Period";Date)
         {
-            TableRelation = Table39003990.Field4;
+            TableRelation = "Payroll Calender."."Date Opened";
         }
         field(7;"Payroll Code";Code[20])
         {
-            TableRelation = Table39004012;
+            TableRelation = "Payroll Calender.";
         }
     }
 

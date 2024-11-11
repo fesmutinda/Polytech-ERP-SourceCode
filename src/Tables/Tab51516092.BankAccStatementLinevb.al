@@ -398,7 +398,7 @@ Table 51516092 "Bank Acc. Statement Linevb"
         BankAccReconciliationLine.SetRange("Statement Type","Statement Type");
         BankAccReconciliationLine.SetRange("Bank Account No.","Bank Account No.");
         BankAccReconciliationLine.SetRange("Statement No.","Statement No.");
-        BankAccReconciliationLine.SetRange("Posting Exch. Entry No.","Posting Exch. Entry No.");
+        // BankAccReconciliationLine.SetRange("Posting Exch. Entry No.","Posting Exch. Entry No.");
         BankAccReconciliationLine.SetFilter("Statement Line No.",'<>%1',"Statement Line No.");
         if BankAccReconciliationLine.IsEmpty then
           PostExchField.DeleteRelatedRecords("Posting Exch. Entry No.",0);
@@ -426,10 +426,10 @@ Table 51516092 "Bank Acc. Statement Linevb"
         "Shortcut Dimension 1 Code" := '';
         "Shortcut Dimension 2 Code" := '';
         BankAccReconciliation.Get("Statement Type","Bank Account No.","Statement No.");
-        "Dimension Set ID" :=
-          DimMgt.GetDefaultDimID(
-            TableID,No,SourceCodeSetup."Payment Reconciliation Journal",
-            "Shortcut Dimension 1 Code","Shortcut Dimension 2 Code",BankAccReconciliation."Dimension Set ID",Database::"Bank Account");
+        // "Dimension Set ID" :=
+          // DimMgt.GetDefaultDimID(
+          //   TableID,No,SourceCodeSetup."Payment Reconciliation Journal",
+          //   "Shortcut Dimension 1 Code","Shortcut Dimension 2 Code",BankAccReconciliation."Dimension Set ID",Database::"Bank Account");
     end;
 
 

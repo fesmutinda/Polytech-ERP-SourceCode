@@ -64,12 +64,12 @@ Table 51516321 "Payroll Employee P9."
         }
         field(29;"Payroll Period";Date)
         {
-            TableRelation = "HR Job Qualifications".Field10;
+            // TableRelation = "HR Job Qualifications".Field10;
         }
         field(30;"Period Filter";Date)
         {
             FieldClass = FlowFilter;
-            TableRelation = "HR Job Qualifications".Field10;
+            // TableRelation = "HR Job Qualifications".Field10;
         }
         field(31;Pension;Decimal)
         {

@@ -1,6 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516046 "Tariff Codes"
 {
+    // DrillDownPageID = UnknownPage51516651;
+    // LookupPageID = UnknownPage51516651;
 
     fields
     {
@@ -31,7 +33,6 @@ Table 51516046 "Tariff Codes"
 
             trigger OnValidate()
             var
-                PayLines: Record "Payment Line.";
             begin
             end;
         }
@@ -51,18 +52,8 @@ Table 51516046 "Tariff Codes"
 
     trigger OnDelete()
     begin
-          PaymentLine.Reset;
-          PaymentLine.SetRange(PaymentLine."VAT Code",Code);
-          if PaymentLine.Find('-') then
-             Error('You cannot delete the %1 Code its already used',Type);
-
-          PaymentLine.Reset;
-          PaymentLine.SetRange(PaymentLine."Withholding Tax Code",Code);
-          if PaymentLine.Find('-') then
-             Error('You cannot delete the %1 Code its already used',Type);
     end;
 
     var
-        PaymentLine: Record "Payment Line.";
 }
 

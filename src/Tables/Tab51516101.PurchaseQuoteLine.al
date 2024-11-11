@@ -2,16 +2,14 @@
 Table 51516101 "Purchase Quote Line"
 {
     Caption = 'Purchase Quote Line';
-    LookupPageID = 54371;
     PasteIsValid = false;
 
     fields
     {
-        field(1; "Document Type"; Option)
+        field(1; "Document Type"; enum "Purchase Comment Document Type")
         {
             Caption = 'Document Type';
-            OptionCaption = 'Quotation Request,Open Tender,Restricted Tender';
-            OptionMembers = "Quotation Request","Open Tender","Restricted Tender";
+
         }
         field(2; "Buy-from Vendor No."; Code[20])
         {
@@ -38,16 +36,19 @@ Table 51516101 "Purchase Quote Line"
         {
             Caption = 'No.';
             TableRelation = if (Type = const(" ")) "Standard Text"
-            else if (Type = const("G/L Account")) "G/L Account"."No." where("Expense Code" = field("Expense Code"))
-            else if (Type = const(Item)) Item
-            else if (Type = const("3")) Resource
-            else if (Type = const("Fixed Asset")) "Fixed Asset"
-            else if (Type = const("Charge (Item)")) "Item Charge";
+            else
+            if (Type = const("G/L Account")) "G/L Account"."No." where("Expense Code" = field("Expense Code"))
+            else
+            if (Type = const(Item)) Item
+            else
+            if (Type = const("Fixed Asset")) "Fixed Asset"
+            else
+            if (Type = const("Charge (Item)")) "Item Charge";
 
             trigger OnValidate()
             var
                 ICPartner: Record "IC Partner";
-                ItemCrossReference: Record "Item Cross Reference";
+                // ItemCrossReference: Record "Item Cross Reference";
                 PrepmtMgt: Codeunit "Prepayment Mgt.";
             begin
                 //,G/L Account,Item,,Fixed Asset,Charge (Item)
@@ -56,21 +57,24 @@ Table 51516101 "Purchase Quote Line"
                     GLAcc.Get("No.");
                     Description := GLAcc.Name;
                 end
-                else if Type = Type::Item then begin
-                    Item.Reset;
-                    Item.Get("No.");
-                    Description := Item.Description;
-                end
-                else if Type = Type::"Fixed Asset" then begin
-                    FA.Reset;
-                    FA.Get("No.");
-                    Description := FA.Description;
-                end
-                else if Type = Type::"Charge (Item)" then begin
-                    CItem.Reset;
-                    CItem.Get("No.");
-                    Description := CItem.Description;
-                end;
+                else
+                    if Type = Type::Item then begin
+                        Item.Reset;
+                        Item.Get("No.");
+                        Description := Item.Description;
+                    end
+                    else
+                        if Type = Type::"Fixed Asset" then begin
+                            FA.Reset;
+                            FA.Get("No.");
+                            Description := FA.Description;
+                        end
+                        else
+                            if Type = Type::"Charge (Item)" then begin
+                                CItem.Reset;
+                                CItem.Get("No.");
+                                Description := CItem.Description;
+                            end;
             end;
         }
         field(7; "Location Code"; Code[10])
@@ -83,7 +87,8 @@ Table 51516101 "Purchase Quote Line"
             Caption = 'Posting Group';
             Editable = false;
             TableRelation = if (Type = const(Item)) "Inventory Posting Group"
-            else if (Type = const("Fixed Asset")) "FA Posting Group";
+            else
+            if (Type = const("Fixed Asset")) "FA Posting Group";
         }
         field(10; "Expected Receipt Date"; Date)
         {
@@ -439,15 +444,15 @@ Table 51516101 "Purchase Quote Line"
         }
         field(95; "Reserved Quantity"; Decimal)
         {
-            CalcFormula = sum("Reservation Entry".Quantity where("Source ID" = field("Document No."),
-                                                                  "Source Ref. No." = field("Line No."),
-                                                                  "Source Type" = const(39),
-                                                                  "Source Subtype" = field("Document Type"),
-                                                                  "Reservation Status" = const(Reservation)));
-            Caption = 'Reserved Quantity';
-            DecimalPlaces = 0 : 5;
-            Editable = false;
-            FieldClass = FlowField;
+            // CalcFormula = sum("Reservation Entry".Quantity where ("Source ID"=field("Document No."),
+            //                                                       "Source Ref. No."=field("Line No."),
+            //                                                       "Source Type"=const(39),
+            //                                                       "Source Subtype"=field("Document Type"),
+            //                                                       "Reservation Status"=const(Reservation)));
+            // Caption = 'Reserved Quantity';
+            // DecimalPlaces = 0:5;
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(97; "Blanket Order No."; Code[20])
         {
@@ -521,7 +526,7 @@ Table 51516101 "Purchase Quote Line"
             trigger OnLookup()
             var
                 ICGLAccount: Record "IC G/L Account";
-                ItemCrossReference: Record "Item Cross Reference";
+                //ItemCrossReference: Record "Item Cross Reference";
                 ItemVendorCatalog: Record "Item Vendor";
             begin
             end;
@@ -836,15 +841,15 @@ Table 51516101 "Purchase Quote Line"
         }
         field(5495; "Reserved Qty. (Base)"; Decimal)
         {
-            CalcFormula = sum("Reservation Entry"."Quantity (Base)" where("Source Type" = const(39),
-                                                                           "Source Subtype" = field("Document Type"),
-                                                                           "Source ID" = field("Document No."),
-                                                                           "Source Ref. No." = field("Line No."),
-                                                                           "Reservation Status" = const(Reservation)));
-            Caption = 'Reserved Qty. (Base)';
-            DecimalPlaces = 0 : 5;
-            Editable = false;
-            FieldClass = FlowField;
+            // CalcFormula = sum("Reservation Entry"."Quantity (Base)" where("Source Type" = const(39),
+            //                                                                "Source Subtype" = field("Document Type"),
+            //                                                                "Source ID" = field("Document No."),
+            //                                                                "Source Ref. No." = field("Line No."),
+            //                                                                "Reservation Status" = const(Reservation)));
+            // Caption = 'Reserved Qty. (Base)';
+            // DecimalPlaces = 0 : 5;
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(5600; "FA Posting Date"; Date)
         {
@@ -910,7 +915,6 @@ Table 51516101 "Purchase Quote Line"
 
             trigger OnValidate()
             var
-                ReturnedCrossRef: Record "Item Cross Reference";
             begin
             end;
         }
@@ -946,7 +950,6 @@ Table 51516101 "Purchase Quote Line"
         field(5712; "Product Group Code"; Code[10])
         {
             Caption = 'Product Group Code';
-            TableRelation = "Product Group".Code where("Item Category Code" = field("Item Category Code"));
         }
         field(5713; "Special Order"; Boolean)
         {
@@ -965,15 +968,15 @@ Table 51516101 "Purchase Quote Line"
         }
         field(5750; "Whse. Outstanding Qty. (Base)"; Decimal)
         {
-            BlankZero = true;
-            CalcFormula = sum("Warehouse Receipt Line"."Qty. Outstanding (Base)" where("Source Type" = const(39),
-                                                                                        "Source Subtype" = field("Document Type"),
-                                                                                        "Source No." = field("Document No."),
-                                                                                        "Source Line No." = field("Line No.")));
-            Caption = 'Whse. Outstanding Qty. (Base)';
-            DecimalPlaces = 0 : 5;
-            Editable = false;
-            FieldClass = FlowField;
+            // BlankZero = true;
+            // CalcFormula = sum("Warehouse Receipt Line"."Qty. Outstanding (Base)" where("Source Type" = const(39),
+            //                                                                             "Source Subtype" = field("Document Type"),
+            //                                                                             "Source No." = field("Document No."),
+            //                                                                             "Source Line No." = field("Line No.")));
+            // Caption = 'Whse. Outstanding Qty. (Base)';
+            // DecimalPlaces = 0 : 5;
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(5752; "Completely Received"; Boolean)
         {

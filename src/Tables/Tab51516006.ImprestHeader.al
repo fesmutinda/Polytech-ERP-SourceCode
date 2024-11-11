@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516006 "Imprest Header"
 {
-    DrillDownPageID = 51516074;
-    LookupPageID = 51516074;
+    DrillDownPageID = "Imprest Requisition Lookup";
+    LookupPageID = "Imprest Requisition Lookup";
 
     fields
     {
@@ -16,10 +16,12 @@ Table 51516006 "Imprest Header"
             Description = 'Stores the date when the payment voucher was inserted into the system';
 
             trigger OnValidate()
+            var
+                ObjXImpH: Record "Imprest Header";
+                CurOpenDocs: Integer;
             begin
                 if ImpLinesExist then begin
-                    Error('You first need to delete the existing imprest lines before changing the Currency Code'
-                    );
+                    Error('You first need to delete the existing imprest lines before changing the Currency Code');
                 end;
 
                 if "Currency Code" = xRec."Currency Code" then
@@ -99,7 +101,7 @@ Table 51516006 "Imprest Header"
         }
         field(20; "Total Payment Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line".Amount where(No = field("No.")));
+            CalcFormula = sum("Imprest Lines".Amount where(No = field("No.")));
             Description = 'Stores the amount of the payment voucher';
             Editable = false;
             FieldClass = FlowField;
@@ -107,36 +109,23 @@ Table 51516006 "Imprest Header"
         field(28; "Paying Bank Account"; Code[20])
         {
             Description = 'Stores the name of the paying bank account in the database';
-            TableRelation = if ("Paying Account Type" = filter("Bank Account")) "Bank Account"."No." where("Currency Code" = field("Currency Code"))
-            else if ("Paying Account Type" = filter("FOSA Account")) Vendor."No.";
+            TableRelation = "Bank Account"."No.";
 
             trigger OnValidate()
             begin
-                /*BankAcc.RESET;
-                "Bank Name":='';
-                IF BankAcc.GET("Paying Bank Account") THEN
-                  BEGIN
-                
-                    "Bank Name":=BankAcc.Name;
-                   // "Currency Code":=BankAcc."Currency Code";   //Currency Being determined first before document is released for approval
-                   // VALIDATE("Currency Code");
-                  END;
-                  */
-
-                if "Paying Account Type" = "paying account type"::"Bank Account" then begin
-                    if BankAcc.Get("Paying Bank Account") then begin
-                        "Bank Name" := BankAcc.Name;
-                    end;
-                end else
-                    if "Paying Account Type" = "paying account type"::"FOSA Account" then begin
-                        if Vend.Get("Paying Bank Account") then begin
-                            "Bank Name" := Vend.Name;
-                        end;
-                    end;
-
+                BankAcc.Reset;
+                "Bank Name" := '';
+                BankAcc.SetRange(BankAcc."No.", "Paying Bank Account");
+                if BankAcc.Find('-') then begin
+                    "Bank Name" := BankAcc.Name;
+                    BankAcc.TestField("Global Dimension 1 Code");
+                    BankAcc.TestField("Global Dimension 2 Code");
+                    "Shortcut Dimension 2 Code" := BankAcc."Global Dimension 2 Code";
+                    "Global Dimension 1 Code" := BankAcc."Global Dimension 1 Code";
+                end;
             end;
         }
-        field(30; "Global Dimension 1 Code"; Code[20])
+        field(30; "Global Dimension 1 Code"; Code[50])
         {
             CaptionClass = '1,1,1';
             Caption = 'Global Dimension 1 Code';
@@ -146,28 +135,40 @@ Table 51516006 "Imprest Header"
 
             trigger OnValidate()
             begin
-                DimVal.Reset;
-                DimVal.SetRange(DimVal."Global Dimension No.", 1);
-                DimVal.SetRange(DimVal.Code, "Global Dimension 1 Code");
-                if DimVal.Find('-') then
-                    "Function Name" := DimVal.Name;
 
-                UpdateHeaderToLine;
-                ValidateShortcutDimCode(1, "Global Dimension 1 Code");
             end;
         }
-        field(35; Status; Option)
+        field(35; Status; enum "Record Status")
         {
             Description = 'Stores the status of the record in the database';
-            Editable = false;
-            OptionCaption = 'Open,Pending Approval,Approved,Rejected';
-            OptionMembers = Open,"Pending Approval",Approved,Rejected;
+
+            trigger OnValidate()
+            var
+                Commitments: Record "Committment Entries";
+                Payline: Record "Imprest Lines";
+            begin
+                if Status = Status::Rejected then begin
+                    Commitments.Reset;
+                    Commitments.SetRange(Commitments."Document Type", Commitments."document type"::Imprest);
+                    Commitments.SetRange(Commitments."Document No.", "No.");
+                    Commitments.DeleteAll;
+
+                    Payline.Reset;
+                    Payline.SetRange(Payline.No, "No.");
+                    if Payline.Find('-') then begin
+                        repeat
+                            Payline.Committed := false;
+                            Payline.Modify;
+                        until Payline.Next = 0;
+                    end;
+                end;
+            end;
         }
         field(38; "Payment Type"; Option)
         {
             OptionMembers = Imprest;
         }
-        field(56; "Shortcut Dimension 2 Code"; Code[20])
+        field(56; "Shortcut Dimension 2 Code"; Code[50])
         {
             CaptionClass = '1,2,2';
             Caption = 'Shortcut Dimension 2 Code';
@@ -184,7 +185,7 @@ Table 51516006 "Imprest Header"
                     "Budget Center Name" := DimVal.Name;
 
                 UpdateHeaderToLine;
-                ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
+                // ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
             end;
         }
         field(57; "Function Name"; Text[100])
@@ -209,13 +210,13 @@ Table 51516006 "Imprest Header"
         }
         field(62; "Total VAT Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."VAT Amount" where(No = field("No.")));
+            CalcFormula = sum("Imprest Lines"."Amount LCY" where(No = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(63; "Total Witholding Tax Amount"; Decimal)
         {
-            CalcFormula = sum("Payment Line"."Withholding Tax Amount" where(No = field("No.")));
+            CalcFormula = sum("Imprest Lines"."Amount LCY" where(No = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -264,6 +265,7 @@ Table 51516006 "Imprest Header"
         }
         field(74; "Cancellation Remarks"; Text[250])
         {
+            Enabled = false;
         }
         field(75; "Register Number"; Integer)
         {
@@ -288,7 +290,7 @@ Table 51516006 "Imprest Header"
         }
         field(80; "Document Type"; Option)
         {
-            OptionMembers = "Payment Voucher","Petty Cash";
+            OptionMembers = Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","Payment voucher","Imprest Requisition";
         }
         field(81; "Shortcut Dimension 3 Code"; Code[20])
         {
@@ -335,72 +337,55 @@ Table 51516006 "Imprest Header"
         field(85; "Responsibility Center"; Code[10])
         {
             Caption = 'Responsibility Center';
-            TableRelation = "Responsibility Center".Code;
+            TableRelation = "Responsibility Center";
 
             trigger OnValidate()
             begin
 
-                TestField(Status, Status::Open);
-                if not UserMgt.CheckRespCenter(1, "Shortcut Dimension 3 Code") then
-                    Error(
-                      Text001,
-                      RespCenter.TableCaption, UserMgt.GetPurchasesFilter);
-                /*
-               "Location Code" := UserMgt.GetLocation(1,'',"Responsibility Center");
-               IF "Location Code" = '' THEN BEGIN
-                 IF InvtSetup.GET THEN
-                   "Inbound Whse. Handling Time" := InvtSetup."Inbound Whse. Handling Time";
-               END ELSE BEGIN
-                 IF Location.GET("Location Code") THEN;
-                 "Inbound Whse. Handling Time" := Location."Inbound Whse. Handling Time";
-               END;
-
-               UpdateShipToAddress;
-                  */
-                /*
-             CreateDim(
-               DATABASE::"Responsibility Center","Responsibility Center",
-               DATABASE::Vendor,"Pay-to Vendor No.",
-               DATABASE::"Salesperson/Purchaser","Purchaser Code",
-               DATABASE::Campaign,"Campaign No.");
-
-             IF xRec."Responsibility Center" <> "Responsibility Center" THEN BEGIN
-               RecreatePurchLines(FIELDCAPTION("Responsibility Center"));
-               "Assigned User ID" := '';
-             END;
-               */
-
             end;
         }
-        field(86; "Account Type"; Option)
+        field(86; "Account Type"; enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
-            Editable = false;
-            OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner";
         }
         field(87; "Account No."; Code[20])
         {
             Caption = 'Account No.';
             Editable = true;
-            TableRelation = Customer."No.";
+            TableRelation = if ("Account Type" = const("G/L Account")) "G/L Account" where("Account Type" = const(Posting),
+                                                                                          Blocked = const(false))
+            else
+            if ("Account Type" = const(Customer)) Customer
+            else
+            if ("Account Type" = const(Vendor)) Vendor
+            else
+            if ("Account Type" = const("Bank Account")) "Bank Account"
+            else
+            if ("Account Type" = const("Fixed Asset")) "Fixed Asset"
+            else
+            if ("Account Type" = const("IC Partner")) "IC Partner"
+            else
+            if ("Account Type" = const("Allocation Account")) "Allocation Account"
+            else
+            if ("Account Type" = const(Employee)) Employee;
 
             trigger OnValidate()
             begin
                 Cust.Reset;
-                if Cust.Get("Account No.") then begin
-                    Cust.TestField("Gen. Bus. Posting Group");
-                    Cust.TestField(Blocked, Cust.Blocked::" ");
+                Cust.SetRange(Cust."No.", "Account No.");
+                if Cust.Find('-') then begin
                     Payee := Cust.Name;
-                    "On Behalf Of" := Cust.Name;
-                    /*
-              //Check CreditLimit Here In cases where you have a credit limit set for employees
-               Cust.CALCFIELDS(Cust."Balance (LCY)");
-                IF Cust."Balance (LCY)">Cust."Credit Limit (LCY)" THEN
-                   ERROR('The allowable unaccounted balance of %1 has been exceeded',Cust."Credit Limit (LCY)");
-                   */
                 end;
-
+                Vend.Reset;
+                Vend.SetRange(Vend."No.", "Account No.");
+                if Vend.Find('-') then begin
+                    Payee := Vend.Name;
+                end;
+                GLAcc.Reset;
+                GLAcc.SetRange(GLAcc."No.", "Account No.");
+                if GLAcc.Find('-') then begin
+                    Payee := GLAcc.Name;
+                end;
             end;
         }
         field(88; "Surrender Status"; Option)
@@ -430,10 +415,144 @@ Table 51516006 "Imprest Header"
         {
             TableRelation = "Purchase Header"."No.";
         }
-        field(50001; "Paying Account Type"; Option)
+        field(50001; Reversed; Boolean)
         {
-            OptionCaption = 'FOSA Account,Bank Account';
-            OptionMembers = "FOSA Account","Bank Account";
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50002; "Reversal Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50003; "Reversal Time"; Time)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50004; "Reversed by"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50005; "Payee Bank Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50006; "Payee Bank Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50007; "Bank Account No"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50008; "Branch Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50009; "Branch Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50010; "Start Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                Validate("No of Days");
+            end;
+        }
+        field(50011; "End Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50012; "No of Days"; Integer)
+        {
+            DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                "End Date" := 0D;
+
+                if "No of Days" <> 0 then
+                    "End Date" := CalcDate(Format("No of Days") + 'D', "Start Date");
+
+                if "End Date" <> 0D then begin
+                    GenLedgerSetup.Get;
+
+                    // if GenLedgerSetup."Surrender Due Date" <> "0DF" then
+                    //   "Surrender Due Date" := CalcDate(GenLedgerSetup."Surrender Due Date","End Date");
+
+                    if "Surrender Due Date" <> 0D then begin
+                        ImpLines.Reset;
+                        ImpLines.SetRange(No, "No.");
+                        if ImpLines.Find('-') then begin
+                            ImpLines."Due Date" := "Surrender Due Date";
+                            ImpLines.Modify;
+                        end;
+                    end;
+                end;
+            end;
+        }
+        field(50013; "Imprest Type"; Option)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+            OptionCaption = ' ,Travel Imprest,General Imprest';
+            OptionMembers = " ","Travel Imprest","General Imprest";
+        }
+        field(50014; "Surrender Due Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50015; Surrendered; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50016; Notified; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50017; Archived; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50018; "Shortcut Dimension 6 Code"; Code[20])
+        {
+            CaptionClass = '1,2,6';
+            Caption = 'Shortcut Dimension 4 Code';
+            DataClassification = ToBeClassified;
+            Description = 'Stores the reference of the 6 global dimension in the database';
+            TableRelation = "Dimension Value".Code where("Global Dimension No." = const(6));
+
+            trigger OnValidate()
+            begin
+                DimVal.Reset;
+                //DimVal.SETRANGE(DimVal."Global Dimension No.",2);
+                DimVal.SetRange(DimVal.Code, "Shortcut Dimension 6 Code");
+                if DimVal.Find('-') then
+                    "Dim 6" := DimVal.Name;
+
+                ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
+            end;
+        }
+        field(50019; "Dim 6"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50020; "Email Address"; Text[150])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50021; "Phone No."; Code[30])
+        {
+            DataClassification = ToBeClassified;
         }
     }
 
@@ -447,16 +566,22 @@ Table 51516006 "Imprest Header"
 
     fieldgroups
     {
+        fieldgroup(DropDown; "No.", Date, "Account No.", Payee, "Total Net Amount")
+        {
+        }
     }
 
     trigger OnDelete()
     begin
-        /*  IF (Status=Status::"open") OR (Status=Status::"4") OR (Status=Status::"8")THEN
-             ERROR('You Cannot Delete this record its status is not Pending');*/
-
+        if (Status <> Status::Open) then
+            Error('You Cannot Delete this record its status is not Pending');
     end;
 
     trigger OnInsert()
+    var
+        ObjXImpH: Record "Imprest Header";
+        CurOpenDocs: Integer;
+        ObjFundSetp: Record "Funds General Setup";
     begin
         if "No." = '' then begin
             GenLedgerSetup.Get;
@@ -466,55 +591,51 @@ Table 51516006 "Imprest Header"
             end
         end;
 
-        /*
-        UserTemplate.RESET;
-        UserTemplate.SETRANGE(UserTemplate.UserID,USERID);
-        IF UserTemplate.FINDFIRST THEN
-          BEGIN
-            "Paying Bank Account":=UserTemplate."Default Payment Bank";
-            VALIDATE("Paying Bank Account");
-          END;
-                   */
 
         Date := Today;
         Cashier := UserId;
         Validate(Cashier);
 
-        //
+        "Account Type" := "account type"::Customer;
         if UserSetup.Get(UserId) then begin
-            UserSetup.TestField(UserSetup."Staff Travel Account");
-            "Account Type" := "account type"::Customer;
-            "Account No." := UserSetup."Staff Travel Account";
+            "Account No." := UserSetup."Imprest Account";
             Validate("Account No.");
-        end else
-            Error('User must be setup under User Setup and their respective Account Entered');
+            "Responsibility Center" := UserSetup."Branch";
+        end;
 
+        "Document Type" := "document type"::"Imprest Requisition";
+
+        ObjXImpH.Reset;
+        ObjXImpH.SetRange(ObjXImpH.Cashier, Cashier);
+        ObjXImpH.SetRange(ObjXImpH.Status, ObjXImpH.Status::Open);
+        if ObjXImpH.FindSet then begin
+            repeat
+                CurOpenDocs += 1;
+            until ObjXImpH.Next = 0;
+        end;
+
+        ObjFundSetp.Get;
+        if ObjFundSetp."Max Open Documents" <> 0 then
+            if CurOpenDocs > ObjFundSetp."Max Open Documents" then
+                Error('You have exceeded the maximum limit number of imprest documents %1', ObjFundSetp."Max Open Documents");
     end;
 
     trigger OnModify()
     begin
         if Status = Status::Open then
             UpdateHeaderToLine;
-
-        /*IF (Status=Status::Approved) OR (Status=Status::Posted)OR (Status=Status::"Pending Approval") THEN
-              ERROR('You Cannot Modify this record its status is not Pending'); */
-
     end;
 
     var
         CStatus: Code[20];
-        PVUsers: Record "CshMgt PV Steps Users";
-        UserTemplate: Record "Cash Office User Template";
+        UserTemplate: Record "Funds General Setup";
         GLAcc: Record "G/L Account";
-        Cust: Record Customer;
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         GenLedgerSetup: Record "Funds General Setup";
-        RecPayTypes: Record "Receipts and Payment Types";
-        CashierLinks: Record "Cashier Link";
-        GLAccount: Record "G/L Account";
+        RecPayTypes: Record "Funds Transaction Types";
         EntryNo: Integer;
         SingleMonth: Boolean;
         DateFrom: Date;
@@ -538,15 +659,26 @@ Table 51516006 "Imprest Header"
         LastDay: Date;
         TotAmt: Decimal;
         DimVal: Record "Dimension Value";
-        PVSteps: Record "CshMgt PV Process Road";
-        RespCenter: Record "Responsibility Center BR";
-        UserMgt: Codeunit 51516155;
+        RespCenter: Record "Responsibility Center";
         Text001: label 'Your identification is set up to process from %1 %2 only.';
         Pline: Record "Imprest Lines";
         CurrExchRate: Record "Currency Exchange Rate";
         ImpLines: Record "Imprest Lines";
         UserSetup: Record "User Setup";
         DImMgt: Codeunit DimensionManagement;
+        Cust: Record Customer;
+        ObjPayroll: Record "Payroll Employee.";
+        "0DF": DateFormula;
+        PayLine: Record "Imprest Lines";
+        Temp: Record "Funds User Setup";
+        GenJnlLine: Record "Gen. Journal Line";
+        JTemplate: Code[10];
+        JBatch: Code[10];
+        LineNo: Integer;
+        HasLines: Boolean;
+        ObjCUFactory: Codeunit "SURESTEP Factory";
+        ObjRecBatches: Record "Gen. Journal Batch";
+        CustLeja: Record "Cust. Ledger Entry";
 
 
     procedure UpdateHeaderToLine()
@@ -562,6 +694,7 @@ Table 51516006 "Imprest Header"
                 PayLine."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
                 PayLine."Shortcut Dimension 3 Code" := "Shortcut Dimension 3 Code";
                 PayLine."Shortcut Dimension 4 Code" := "Shortcut Dimension 4 Code";
+                PayLine."Shortcut Dimension 6 Code" := "Shortcut Dimension 6 Code";
                 PayLine."Currency Code" := "Currency Code";
                 PayLine."Currency Factor" := "Currency Factor";
                 PayLine.Validate("Currency Factor");
@@ -615,6 +748,126 @@ Table 51516006 "Imprest Header"
     procedure ShowShortcutDimCode(var ShortcutDimCode: array[8] of Code[20])
     begin
         DImMgt.GetShortcutDimensions("Dimension Set ID", ShortcutDimCode);
+    end;
+
+
+    procedure PostImprest(ImpHeader: Record "Imprest Header")
+    var
+        BankLedgers: Record "Bank Account Ledger Entry";
+    begin
+        if Temp.Get(UserId) then begin
+            GenJnlLine.Reset;
+            GenJnlLine.SetRange(GenJnlLine."Journal Template Name", JTemplate);
+            GenJnlLine.SetRange(GenJnlLine."Journal Batch Name", JBatch);
+            GenJnlLine.DeleteAll;
+        end;
+
+        //Enable Batch Auto Posting
+        BankLedgers.Reset;
+        BankLedgers.SetRange("Document No.", "No.");
+        if not BankLedgers.FindFirst then begin
+            PayLine.Reset;
+            PayLine.SetRange(No, Rec."No.");
+            if PayLine.Find('-') then begin
+                repeat
+                    LineNo := LineNo + 1000;
+                    GenJnlLine.Init;
+                    GenJnlLine."Journal Template Name" := JTemplate;
+                    GenJnlLine."Journal Batch Name" := JBatch;
+                    GenJnlLine."Line No." := LineNo;
+                    GenJnlLine."Source Code" := 'PAYMENTJNL';
+                    GenJnlLine."Posting Date" := "Payment Release Date";
+                    GenJnlLine."Document No." := "No.";
+                    GenJnlLine."External Document No." := "Cheque No.";
+                    GenJnlLine."Account Type" := GenJnlLine."account type"::Customer;
+                    GenJnlLine."Account No." := "Account No.";
+                    GenJnlLine.Validate(GenJnlLine."Account No.");
+                    GenJnlLine.Description := 'Travel Advance: ' + "Account No." + ':' + Payee;
+                    GenJnlLine.Amount := PayLine.Amount;
+                    GenJnlLine.Validate(GenJnlLine.Amount);
+                    GenJnlLine."Bal. Account Type" := GenJnlLine."bal. account type"::"Bank Account";
+                    GenJnlLine."Bal. Account No." := "Paying Bank Account";
+                    GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
+                    GenJnlLine."Currency Code" := "Currency Code";
+                    GenJnlLine.Validate("Currency Code");
+                    GenJnlLine."Currency Factor" := "Currency Factor";
+                    GenJnlLine.Validate("Currency Factor");
+                    GenJnlLine."Shortcut Dimension 1 Code" := PayLine."Global Dimension 1 Code";
+                    GenJnlLine."Shortcut Dimension 2 Code" := PayLine."Shortcut Dimension 2 Code";
+                    if GenJnlLine.Amount <> 0 then
+                        GenJnlLine.Insert;
+                until PayLine.Next = 0;
+            end;
+
+
+            GenJnlLine.Reset;
+            GenJnlLine.SetRange(GenJnlLine."Journal Template Name", JTemplate);
+            GenJnlLine.SetRange(GenJnlLine."Journal Batch Name", JBatch);
+            if GenJnlLine.FindFirst then
+                Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJnlLine);
+        end;
+
+        BankLedgers.Reset;
+        BankLedgers.SetRange("Document No.", "No.");
+        if BankLedgers.FindFirst then begin
+            ImpHeader.Posted := true;
+            ImpHeader."Date Posted" := Today;
+            ImpHeader."Time Posted" := Time;
+            ImpHeader."Posted By" := UserId;
+            ImpHeader.Modify;
+        end;
+        Message('Successfully Posted');
+    end;
+
+
+    procedure CheckImprestRequiredItems(ImpHeader: Record "Imprest Header")
+    begin
+        ImpHeader.TestField("Payment Release Date");
+        ImpHeader.TestField("Paying Bank Account");
+        ImpHeader.TestField("Account No.");
+        ImpHeader.TestField("Cheque No.");
+        ImpHeader.TestField("Account Type", "account type"::Customer);
+        ImpHeader.TestField(Status, Status::Approved);
+
+        Temp.Get(UserId);
+        JTemplate := Temp."Imprest Template";
+        JBatch := Temp."Imprest  Batch";
+
+        if JTemplate = '' then begin
+            Error('Ensure the Imprest Template is set up in Cash Office Setup');
+        end;
+
+        if JBatch = '' then begin
+            Error('Ensure the Imprest Batch is set up in the Cash Office Setup')
+        end;
+
+        if not LinesExists then
+            Error('There are no Lines created for this Document');
+    end;
+
+
+    procedure LinesExists(): Boolean
+    var
+        PayLines: Record "Imprest Lines";
+    begin
+        HasLines := false;
+
+        //Test Lines Spoke and Hub:
+        PayLines.Reset;
+        PayLines.SetRange(PayLines.No, "No.");
+        if PayLines.Find('-') then begin
+            repeat
+                PayLines.TestField("Global Dimension 1 Code");
+                PayLines.TestField("Shortcut Dimension 2 Code");
+            until PayLines.Next = 0;
+        end;
+
+        PayLines.Reset;
+        PayLines.SetRange(PayLines.No, "No.");
+        if PayLines.Find('-') then begin
+            HasLines := true;
+            exit(HasLines);
+        end;
     end;
 }
 

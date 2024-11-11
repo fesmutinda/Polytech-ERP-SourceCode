@@ -9,7 +9,6 @@ Table 51516216 "HR Appraisal Header"
         }
         field(2; Supervisor; Text[100])
         {
-            Editable = false;
         }
         field(3; "Appraisal Type"; Code[30])
         {
@@ -265,7 +264,7 @@ Table 51516216 "HR Appraisal Header"
             Caption = 'Employee Peers Agreed Score';
             FieldClass = FlowField;
         }
-        field(40; "Job Description"; Text[30])
+        field(40; "Job Description"; Text[250])
         {
             CalcFormula = lookup("HR Jobss"."Job Description" where("Job ID" = field("Job Title")));
             Editable = false;
@@ -447,7 +446,7 @@ Table 51516216 "HR Appraisal Header"
         HREmp: Record "HR Employees";
         HRSetup: Record "HR Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        HREmpCard: Page "Employee Card";
+        HREmpCard: Page "HR Employee Card";
         HRAppraisalRatings: Record "HR Appraisal Company Target";
         HRAppraisalGoalSettingH: Record "HR Appraisal Header";
         HRGoalSettingL: Record "HR Appraisal Lines";

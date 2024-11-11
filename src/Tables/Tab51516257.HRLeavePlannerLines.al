@@ -214,7 +214,7 @@ Table 51516257 "HR Leave Planner Lines"
         ReturnDateLoop: Boolean;
         mSubject: Text[250];
         ApplicantsEmail: Text[30];
-        SMTP: Codeunit 400;
+        // SMTP: Codeunit 400;
         LeaveGjline: Record "HR Journal Line";
         "LineNo.": Integer;
         ApprovalComments: Record "Approval Comment Line";
@@ -304,10 +304,10 @@ Table 51516257 "HR Leave Planner Lines"
 
 
             HREmp.TestField(HREmp."Company E-Mail");
-            SMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HREmp."Company E-Mail",
-            HREmailParameters.Subject, 'Dear' + ' ' + HREmp."First Name" + ' ' +
-            HREmailParameters.Body + ' ' + "Application Code" + ' ' + HREmailParameters."Body 2", true);
-            SMTP.Send();
+            // SMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HREmp."Company E-Mail",
+            // HREmailParameters.Subject, 'Dear' + ' ' + HREmp."First Name" + ' ' +
+            // HREmailParameters.Body + ' ' + "Application Code" + ' ' + HREmailParameters."Body 2", true);
+            // SMTP.Send();
 
 
             Message('Leave applicant has been notified successfully');

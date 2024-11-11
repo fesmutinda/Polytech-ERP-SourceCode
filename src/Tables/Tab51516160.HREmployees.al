@@ -3,39 +3,21 @@ Table 51516160 "HR Employees"
 {
     Caption = 'HR Employees';
     DataCaptionFields = "No.", "First Name", "Middle Name", "Last Name", "Job Title", "Search Name";
-    // DrillDownPageID = 51516176;
-    // LookupPageID = 51516176;
+    DrillDownPageID = "HR Employee List";
+    LookupPageID = "HR Employee List";
 
     fields
     {
         field(1; "No."; Code[20])
         {
             Editable = true;
-
+            TableRelation = Customer."No.";
             trigger OnValidate()
             begin
                 if "No." <> xRec."No." then begin
                     HrSetup.Get;
                     NoSeriesMgt.TestManual(HrSetup."Employee Nos.");
                     "No. Series" := '';
-                end;
-
-                if "No." = '' then begin
-                    HrSetup.Get;
-                    if "Contract Type" = "contract type"::Consultant then begin
-                        HrSetup.TestField(HrSetup."Deployed Nos");
-                        NoSeriesMgt.InitSeries(HrSetup."Deployed Nos", xRec."No. Series", 0D, "No.", "No. Series");
-                    end
-                    else if "Contract Type" = "contract type"::Committee then begin
-                        HrSetup.TestField(HrSetup."Full Time Nos");
-                        NoSeriesMgt.InitSeries(HrSetup."Full Time Nos", xRec."No. Series", 0D, "No.", "No. Series");
-                    end else if "Contract Type" = "contract type"::Deployed then begin
-                        HrSetup.TestField(HrSetup."Board Nos");
-                        NoSeriesMgt.InitSeries(HrSetup."Board Nos", xRec."No. Series", 0D, "No.", "No. Series");
-                    end else if "Contract Type" = "contract type"::Board then begin
-                        HrSetup.TestField(HrSetup."Committee Nos");
-                        NoSeriesMgt.InitSeries(HrSetup."Committee Nos", xRec."No. Series", 0D, "No.", "No. Series");
-                    end;
                 end;
             end;
         }
@@ -136,6 +118,18 @@ Table 51516160 "HR Employees"
         {
             TableRelation = "Employee Statistics Group";
         }
+        field(29; "User ID"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "User Setup";
+            trigger OnValidate()
+            var
+                useid: Record "User Setup";
+            begin
+                // useid.Get(UserSecurityID);
+                // "User ID" := useid."User Name"
+            end;
+        }
         field(31; Status; Option)
         {
             Editable = false;
@@ -170,9 +164,11 @@ Table 51516160 "HR Employees"
                 end;
             end;
         }
-        field(37; Office; Code[40])
+        field(37; Office; Code[20])
         {
-            Description = 'Dimension 3';
+            Description = 'Dimension 2';
+            TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2),
+                                                          "Dimension Value Type" = const(Standard));
         }
         field(38; "Resource No."; Code[20])
         {
@@ -283,8 +279,8 @@ Table 51516160 "HR Employees"
         field(58; "Contract Type"; Option)
         {
             Caption = 'Contract Status';
-            OptionCaption = 'Permanent,Contract,Secondment,Temporary,Volunteer,Project Staff,Consultant-Contract,Consultant,Deployed,Board,Committee,Full Time';
-            OptionMembers = Permanent,Contract,Secondment,"Temporary",Volunteer,"Project Staff","Consultant-Contract",Consultant,Deployed,Board,Committee,"Full Time";
+            OptionCaption = 'Contract,Secondment,Temporary,Volunteer,Project Staff,Consultant-Contract,Consultant,Deployed,Board,Committee,Full Time';
+            OptionMembers = Contract,Secondment,"Temporary",Volunteer,"Project Staff","Consultant-Contract",Consultant,Deployed,Board,Committee,"Full Time";
         }
         field(59; "Contract End Date"; Date)
         {
@@ -340,8 +336,7 @@ Table 51516160 "HR Employees"
 
             trigger OnValidate()
             begin
-                if (Disabled = Disabled::Yes) then
-                    Status := Status::Inactive;
+
             end;
         }
         field(79; "Health Assesment?"; Boolean)
@@ -405,33 +400,10 @@ Table 51516160 "HR Employees"
         }
         field(97; "Medical Scheme No."; Text[30])
         {
-            TableRelation = "HR Medical Schemes"."Scheme No";
 
             trigger OnValidate()
             begin
                 //MedicalAidBenefit.SETRANGE("Employee No.","No.");
-
-                ObjMedicalScheme.Reset;
-                ObjMedicalScheme.SetRange(ObjMedicalScheme."Scheme No", "Medical Scheme No.");
-                if ObjMedicalScheme.FindSet then begin
-                    if Confirm('Confirm adding this Employee to this Medical Scheme', false) = true then begin
-
-                        ObjSchemeMembers.Init;
-                        ObjSchemeMembers."Scheme No" := "Medical Scheme No.";
-                        ObjSchemeMembers."Employee No" := "No.";
-                        ObjSchemeMembers."First Name" := "First Name";
-                        ObjSchemeMembers."Last Name" := "Last Name";
-                        ObjSchemeMembers.Designation := Position;
-                        ObjSchemeMembers."Scheme Join Date" := Today;
-                        ObjSchemeMembers."In-patient Limit" := "Medical In-Patient Limit";
-                        ObjSchemeMembers."Out-Patient Limit" := "Medical Out-Patient Limit";
-                        ObjSchemeMembers."Maximum Cover" := "Medical Maximum Cover";
-                        ObjSchemeMembers."No Of Dependants" := "Medical No Of Dependants";
-                        ObjSchemeMembers.Insert;
-
-                        "Medical Scheme Name" := ObjMedicalScheme."Scheme Name";
-                    end;
-                end;
             end;
         }
         field(98; "Medical Scheme Head Member"; Text[60])
@@ -464,7 +436,7 @@ Table 51516160 "HR Employees"
                 // END;
             end;
         }
-        field(100; "Medical Scheme Name"; Text[100])
+        field(100; "Medical Scheme Name"; Text[150])
         {
 
             trigger OnValidate()
@@ -551,7 +523,7 @@ Table 51516160 "HR Employees"
             begin
             end;
         }
-        field(113; "Job Specification"; Code[30])
+        field(113; "Job Specification"; Code[100])
         {
             Description = 'To put description on Job title field';
             TableRelation = "HR Jobss"."Job ID";
@@ -594,29 +566,22 @@ Table 51516160 "HR Employees"
         field(122; "Name Of Manager"; Text[45])
         {
         }
-        field(123; "User ID"; Code[30])
+        field(123; "Supervisor"; Code[30])
         {
-            TableRelation = User."User Name";
-            //This property is currently not supported
-            //TestTableRelation = true;
-
-            trigger OnLookup()
-            begin
-                UserMgt.LookupUserID("User ID");
-            end;
 
             trigger OnValidate()
+            var
+                HrEmployee: Record "HR Employees";
             begin
-                UserMgt.ValidateUserID("User ID");
-
-                if "User ID" = '' then exit;
-
-                HREmp.Reset;
-                if HREmp.Get("User ID") then begin
-                    EmpFullName := HREmp."First Name" + SPACER + HREmp."Middle Name" + SPACER + HREmp."Last Name";
-                    Error('UserID [%1] has already been assigned to another Employee [%2]', "User ID", EmpFullName);
+                HrEmployee.Reset();
+                HrEmployee.SetRange(HrEmployee."No.", Supervisor);
+                if HrEmployee.FindFirst() then begin
+                    "Supervisor Name" := "Supervisor Name";
                 end;
             end;
+
+
+
         }
         field(124; "Disabling Details"; Text[30])
         {
@@ -715,7 +680,7 @@ Table 51516160 "HR Employees"
         }
         field(151; "Period Filter"; Date)
         {
-            // TableRelation = "prPayroll Periods"."Date Opened";
+            TableRelation = "Payroll Calender."."Date Opened";
         }
         field(152; "HELB No"; Text[15])
         {
@@ -759,18 +724,18 @@ Table 51516160 "HR Employees"
         {
             TableRelation = "HR Lookup Values".Code where(Type = filter(Religion));
         }
-        field(163; "Job Title"; Text[40])
+        field(163; "Job Title"; Text[100])
         {
         }
-        field(164; "Post Office No"; Text[10])
+        field(164; "Post Office No"; Text[20])
         {
         }
-        field(165; "Posting Group"; Code[15])
+        field(165; "Posting Group"; Code[20])
         {
             NotBlank = false;
             TableRelation = "Payroll Posting Groups.";
         }
-        field(166; "Payroll Posting Group"; Code[10])
+        field(166; "Payroll Posting Group"; Code[20])
         {
             TableRelation = "Payroll Employee."."No.";
         }
@@ -837,7 +802,6 @@ Table 51516160 "HR Employees"
         }
         field(188; "Salary Grade"; Code[15])
         {
-            // TableRelation = "Payment Terms".Field1396040;
 
             trigger OnValidate()
             begin
@@ -904,8 +868,20 @@ Table 51516160 "HR Employees"
         field(200; "Daily Rate"; Decimal)
         {
         }
+        field(202; "Leave Allowance Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(203; "Leave Allowance Claimed"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(300; "Social Security No."; Code[20])
         {
+        }
+        field(201; "Supervisor Name"; Text[200])
+        {
+            DataClassification = ToBeClassified;
         }
         field(301; "Pension House"; Code[20])
         {
@@ -1000,7 +976,7 @@ Table 51516160 "HR Employees"
         field(304; "Previous Month Filter"; Date)
         {
             FieldClass = FlowFilter;
-            // TableRelation = "prPayroll Periods"."Date Opened";
+            TableRelation = "Payroll Calender."."Date Opened";
         }
         field(305; "Current Month Filter"; Date)
         {
@@ -1008,21 +984,21 @@ Table 51516160 "HR Employees"
         }
         field(306; "Prev. Basic Pay"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions..".Amount where("Employee Code" = field("No."),
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Employee Code" = field("No."),
                                                                     "Transaction Code" = const('BPAY'),
                                                                     "Payroll Period" = field("Previous Month Filter")));
             FieldClass = FlowField;
         }
         field(307; "Curr. Basic Pay"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions..".Amount where("Employee Code" = field("No."),
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Employee Code" = field("No."),
                                                                     "Transaction Code" = const('BPAY'),
                                                                     "Payroll Period" = field("Current Month Filter")));
             FieldClass = FlowField;
         }
         field(308; "Prev. Gross Pay"; Decimal)
         {
-            CalcFormula = sum("prPeriod Transactions..".Amount where("Employee Code" = field("No."),
+            CalcFormula = sum("prPeriod Transactions.".Amount where("Employee Code" = field("No."),
                                                                     "Transaction Code" = const('GPAY'),
                                                                     "Payroll Period" = field("Previous Month Filter")));
             FieldClass = FlowField;
@@ -1098,7 +1074,7 @@ Table 51516160 "HR Employees"
         }
         field(2004; "Total Leave Taken"; Decimal)
         {
-            CalcFormula = sum("HR Leave Ledger Entries"."No. of days" where("Staff No." = field("No."),
+            CalcFormula = -sum("HR Leave Ledger Entries"."No. of days" where("Staff No." = field("No."),
                                                                              "Posting Date" = field("Date Filter"),
                                                                              "Leave Entry Type" = const(Negative),
                                                                              Closed = const(false),
@@ -1204,7 +1180,7 @@ Table 51516160 "HR Employees"
         }
         field(50002; "Bosa Member account"; Code[20])
         {
-            TableRelation = "Member Register";
+            TableRelation = customer;
         }
         field(50003; "Sacco Paying Bank Code"; Code[20])
         {
@@ -1304,9 +1280,7 @@ Table 51516160 "HR Employees"
         field(53915; "Acrued Leave Days"; Decimal)
         {
         }
-        field(53916; Supervisor; Boolean)
-        {
-        }
+
         field(53917; Signature; Blob)
         {
         }
@@ -1441,22 +1415,6 @@ Table 51516160 "HR Employees"
         }
         field(53941; "Claim Amount Used"; Decimal)
         {
-            CalcFormula = sum("HR Medical Claim Entries"."Amount Claimed" where("Employee No" = field("No.")));
-            Editable = false;
-            FieldClass = FlowField;
-
-            trigger OnValidate()
-            begin
-                /*ClaimEntries.RESET;
-                ClaimEntries.SETRANGE(ClaimEntries."Employee No","No.");
-                IF ClaimEntries.FIND('-') THEN BEGIN
-                  UsedAMTBuffer:=ClaimEntries."Amount Claimed";
-                  END;
-                "Claim Remaining Amount":="Claim Limit"-UsedAMTBuffer;
-                MODIFY;
-                */
-
-            end;
         }
         field(53942; "Fosa Account"; Code[20])
         {
@@ -1464,30 +1422,6 @@ Table 51516160 "HR Employees"
         }
         field(53943; "Claim Remaining Amount"; Decimal)
         {
-            Editable = false;
-            FieldClass = Normal;
-        }
-        field(53944; "Leave Allowance Claimed"; Boolean)
-        {
-        }
-        field(53945; "Leave Allowance Amount"; Decimal)
-        {
-        }
-        field(53946; "Medical Out-Patient Limit"; Decimal)
-        {
-        }
-        field(53947; "Medical In-Patient Limit"; Decimal)
-        {
-        }
-        field(53948; "Medical Maximum Cover"; Decimal)
-        {
-        }
-        field(53949; "Medical No Of Dependants"; Code[10])
-        {
-        }
-        field(53950; Missing; Text[20])
-        {
-            DataClassification = ToBeClassified;
         }
     }
 
@@ -1535,38 +1469,43 @@ Table 51516160 "HR Employees"
 
     trigger OnDelete()
     begin
-        Error('Cannot be deleted')
+        //Error('Cannot be deleted')
     end;
 
     trigger OnInsert()
     begin
         if "No." = '' then begin
             HrSetup.Get;
-            if "Contract Type" = "contract type"::Consultant then begin
+            if "Contract Type" = "contract type"::Deployed then begin
                 HrSetup.TestField(HrSetup."Deployed Nos");
                 NoSeriesMgt.InitSeries(HrSetup."Deployed Nos", xRec."No. Series", 0D, "No.", "No. Series");
             end
-            else if "Contract Type" = "contract type"::Committee then begin
-                HrSetup.TestField(HrSetup."Full Time Nos");
-                NoSeriesMgt.InitSeries(HrSetup."Full Time Nos", xRec."No. Series", 0D, "No.", "No. Series");
-            end else if "Contract Type" = "contract type"::Deployed then begin
-                HrSetup.TestField(HrSetup."Board Nos");
-                NoSeriesMgt.InitSeries(HrSetup."Board Nos", xRec."No. Series", 0D, "No.", "No. Series");
-            end else if "Contract Type" = "contract type"::Board then begin
-                HrSetup.TestField(HrSetup."Committee Nos");
-                NoSeriesMgt.InitSeries(HrSetup."Committee Nos", xRec."No. Series", 0D, "No.", "No. Series");
-            end;
+            else
+                if "Contract Type" = "contract type"::"Full Time" then begin
+                    HrSetup.TestField(HrSetup."Full Time Nos");
+                    NoSeriesMgt.InitSeries(HrSetup."Full Time Nos", xRec."No. Series", 0D, "No.", "No. Series");
+                end else
+                    if "Contract Type" = "contract type"::Board then begin
+                        HrSetup.TestField(HrSetup."Board Nos");
+                        NoSeriesMgt.InitSeries(HrSetup."Board Nos", xRec."No. Series", 0D, "No.", "No. Series");
+                    end else
+                        if "Contract Type" = "contract type"::Committee then begin
+                            HrSetup.TestField(HrSetup."Committee Nos");
+                            NoSeriesMgt.InitSeries(HrSetup."Committee Nos", xRec."No. Series", 0D, "No.", "No. Series");
+                        end;
         end;
     end;
 
     trigger OnModify()
     begin
-        "Last Date Modified" := Today;
+        // Rec."Last Date Modified" := Today;
+        // Rec.MODIFY(TRUE);
     end;
 
     trigger OnRename()
     begin
-        "Last Date Modified" := Today;
+        // Rec."Last Date Modified" := Today;
+        // Rec.MODIFY(TRUE);
     end;
 
     var
@@ -1588,7 +1527,7 @@ Table 51516160 "HR Employees"
         SalCard: Record "prSalary Card";
         SalGrade: Record "HR Salary Grades";
         SalNotch: Record "HR Salary Notch";
-        objPayrollPeriod: Record "prPayroll Periods";
+        objPayrollPeriod: Record "prPayroll Periods.";
         EmpTrans: Record "prEmployee Transactions";
         EmpTransR: Record "prEmployee Transactions";
         NotchTrans: Record "Salary Step/Notch Transactions";
@@ -1600,10 +1539,6 @@ Table 51516160 "HR Employees"
         EmpFullName: Text;
         SPACER: label ' ';
         BankRec: Record "Bank Account";
-        ClaimEntries: Record "HR Medical Claim Entries";
-        UsedAMTBuffer: Decimal;
-        ObjMedicalScheme: Record "HR Medical Schemes";
-        ObjSchemeMembers: Record "HR Insurance Scheme Members";
 
 
     procedure AssistEdit(OldEmployee: Record "HR Employees"): Boolean
@@ -1614,9 +1549,9 @@ Table 51516160 "HR Employees"
     procedure FullName(): Text[100]
     begin
         if "Middle Name" = '' then
-            exit("Known As" + ' ' + "Last Name")
+            exit("First Name" + ' ' + "Last Name")
         else
-            exit("Known As" + ' ' + "Middle Name" + ' ' + "Last Name");
+            exit("First Name" + ' ' + "Middle Name" + ' ' + "Last Name");
     end;
 
 

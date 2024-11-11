@@ -12,7 +12,7 @@ Table 51516215 "Employee Cue"
         field(2;"Leaves Pending Approvals";Integer)
         {
             CalcFormula = count("HR Leave Application" where ("User ID"=filter('USER ID'),
-                                                              Status=filter("Pending Approval")));
+                                                              Status=filter(Pending)));
             Caption = 'Overdue Sales Documents';
             FieldClass = FlowField;
         }

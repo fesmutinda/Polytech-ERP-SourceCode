@@ -351,7 +351,7 @@ Table 59001 "Bank Acc. Reconciliation Lines"
                 begin
                     if "Statement Amount" = 0 then
                         Error(TransactionAmountMustNotBeZeroErr);
-                    PaymentApplication.SetBankAccReconcLine(Rec);
+                    // PaymentApplication.SetBankAccReconcLine(Rec);
                     PaymentApplication.RunModal;
                 end;
         end;
@@ -418,10 +418,10 @@ Table 59001 "Bank Acc. Reconciliation Lines"
         "Shortcut Dimension 1 Code" := '';
         "Shortcut Dimension 2 Code" := '';
         BankAccReconciliation.Get("Statement Type", "Bank Account No.", "Statement No.");
-        "Dimension Set ID" :=
-          DimMgt.GetDefaultDimID(
-            TableID, No, SourceCodeSetup."Payment Reconciliation Journal",
-            "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", BankAccReconciliation."Dimension Set ID", Database::"Bank Account");
+        // "Dimension Set ID" :=
+        //   DimMgt.GetDefaultDimID(
+        //     TableID, No, SourceCodeSetup."Payment Reconciliation Journal",
+        //     "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", BankAccReconciliation."Dimension Set ID", Database::"Bank Account");
     end;
 
 

@@ -8,6 +8,7 @@ tableextension 50043 "UserSetUpExt" extends "User Setup"
             DataClassification = ToBeClassified;
             TableRelation = Customer."No.";
         }
+        field(200; "Issue Trunch"; Boolean) { }
 
         field(53900; "Global Dimension 2 Code"; Code[20])
         {
@@ -101,6 +102,9 @@ tableextension 50043 "UserSetUpExt" extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
+        field(51516026; "Responsibility Centre"; code[20]) { }
+        field(51516027; "Other Advance Staff Account"; code[20]) { }//"Imprest Account"
+        field(51516028; "Imprest Account"; code[20]) { }//"Imprest Account"
     }
 
 

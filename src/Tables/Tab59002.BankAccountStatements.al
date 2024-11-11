@@ -2,55 +2,55 @@
 Table 59002 "Bank Account Statements"
 {
     Caption = 'Bank Account Statement';
-    DataCaptionFields = "Bank Account No.","Statement No.";
+    DataCaptionFields = "Bank Account No.", "Statement No.";
     LookupPageID = "Bank Account Statement List";
 
     fields
     {
-        field(1;"Bank Account No.";Code[20])
+        field(1; "Bank Account No."; Code[20])
         {
             Caption = 'Bank Account No.';
             NotBlank = true;
             TableRelation = "Bank Account";
         }
-        field(2;"Statement No.";Code[20])
+        field(2; "Statement No."; Code[20])
         {
             Caption = 'Statement No.';
             NotBlank = true;
         }
-        field(3;"Statement Ending Balance";Decimal)
+        field(3; "Statement Ending Balance"; Decimal)
         {
             AutoFormatExpression = GetCurrencyCode;
             AutoFormatType = 1;
             Caption = 'Statement Ending Balance';
         }
-        field(4;"Statement Date";Date)
+        field(4; "Statement Date"; Date)
         {
             Caption = 'Statement Date';
         }
-        field(5;"Balance Last Statement";Decimal)
+        field(5; "Balance Last Statement"; Decimal)
         {
             AutoFormatExpression = GetCurrencyCode;
             AutoFormatType = 1;
             Caption = 'Balance Last Statement';
             Editable = false;
         }
-        field(50000;Reconcilled;Decimal)
+        field(50000; Reconcilled; Decimal)
         {
         }
-        field(50004;"Open Type";Option)
+        field(50004; "Open Type"; Option)
         {
             OptionCaption = ',Unpresented Cheques List,Uncredited Cheques List';
             OptionMembers = ,Unpresented,Uncredited;
         }
-        field(50005;Imported;Boolean)
+        field(50005; Imported; Boolean)
         {
         }
     }
 
     keys
     {
-        key(Key1;"Bank Account No.","Statement No.")
+        key(Key1; "Bank Account No.", "Statement No.")
         {
             Clustered = true;
         }
@@ -62,14 +62,14 @@ Table 59002 "Bank Account Statements"
 
     trigger OnDelete()
     begin
-        if not Confirm(HasBankEntriesQst,false,"Bank Account No.","Statement No.") then
-          Error('');
-        BankAccStmtLinesDelete.Run(Rec);
+        if not Confirm(HasBankEntriesQst, false, "Bank Account No.", "Statement No.") then
+            Error('');
+        // BankAccStmtLinesDelete.Run(Rec);
     end;
 
     trigger OnRename()
     begin
-        Error(Text000,TableCaption);
+        Error(Text000, TableCaption);
     end;
 
     var
@@ -83,10 +83,10 @@ Table 59002 "Bank Account Statements"
         BankAcc: Record "Bank Account";
     begin
         if "Bank Account No." = BankAcc."No." then
-          exit(BankAcc."Currency Code");
+            exit(BankAcc."Currency Code");
 
         if BankAcc.Get("Bank Account No.") then
-          exit(BankAcc."Currency Code");
+            exit(BankAcc."Currency Code");
 
         exit('');
     end;
@@ -96,8 +96,8 @@ Table 59002 "Bank Account Statements"
     var
         BankAccountLedgerEntry: Record "Bank Account Ledger Entry";
     begin
-        BankAccountLedgerEntry.SetRange("Bank Account No.","Bank Account No.");
-        BankAccountLedgerEntry.SetRange("Statement No.","Statement No.");
+        BankAccountLedgerEntry.SetRange("Bank Account No.", "Bank Account No.");
+        BankAccountLedgerEntry.SetRange("Statement No.", "Statement No.");
         exit(not BankAccountLedgerEntry.IsEmpty);
     end;
 }

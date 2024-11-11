@@ -4,28 +4,27 @@ Table 51516248 "HR Reward Lines"
 
     fields
     {
-        field(1;"No.";Code[20])
+        field(1; "No."; Code[20])
         {
         }
-        field(2;"Line No.";Integer)
+        field(2; "Line No."; Integer)
         {
         }
-        field(3;"Expense Account";Code[20])
-        {
-            TableRelation = Table0;
-        }
-        field(4;"Reason for Compensation";Text[30])
+        field(3; "Expense Account"; Code[20])
         {
         }
-        field(5;Amount;Decimal)
+        field(4; "Reason for Compensation"; Text[30])
+        {
+        }
+        field(5; Amount; Decimal)
         {
 
             trigger OnValidate()
             begin
-                "Total Amount":=Quantity*Amount;
+                "Total Amount" := Quantity * Amount;
             end;
         }
-        field(6;Quantity;Decimal)
+        field(6; Quantity; Decimal)
         {
 
             trigger OnValidate()
@@ -33,14 +32,14 @@ Table 51516248 "HR Reward Lines"
                 Validate(Amount);
             end;
         }
-        field(7;"Total Amount";Decimal)
+        field(7; "Total Amount"; Decimal)
         {
         }
     }
 
     keys
     {
-        key(Key1;"No.","Line No.")
+        key(Key1; "No.", "Line No.")
         {
             Clustered = true;
         }

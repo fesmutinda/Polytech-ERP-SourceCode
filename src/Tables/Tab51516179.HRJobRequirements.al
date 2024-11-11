@@ -7,7 +7,7 @@ Table 51516179 "HR Job Requirements"
         field(1;"Job Id";Code[50])
         {
             NotBlank = true;
-            TableRelation = "HR Jobss"."Job ID";
+            //TableRelation = "HR Jobs"."Job ID";
         }
         field(2;"Qualification Type";Code[20])
         {
@@ -42,7 +42,7 @@ Table 51516179 "HR Job Requirements"
         }
         field(9;"Need code";Code[10])
         {
-            TableRelation = Table0;
+            //TableRelation = Table0;
         }
         field(10;"Stage Code";Code[10])
         {

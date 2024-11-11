@@ -91,6 +91,27 @@ Codeunit 5151418 "Polytech User Management"
         LookupUser(UserName, SID);
     end;
 
+    procedure DisplayUserInformation(Username: Text)
+    var
+        User: Record User;
+    begin
+        User.FilterGroup(2);
+        User.SetRange("User Name", Username);
+        User.FilterGroup(0);
+        if not User.FindLast() then
+            exit;
+        OpenUserPageForSelectedUser(User);
+    end;
+
+    local procedure OpenUserPageForSelectedUser(var User: Record User)
+    var
+        UserLookup: Page "User Lookup";
+    begin
+        UserLookup.Editable := false;
+        UserLookup.SetTableView(User);
+        UserLookup.RunModal();
+    end;
+
     procedure LookupUser(var UserName: Code[50]; var SID: Guid): Boolean
     var
         User: Record User;

@@ -8,11 +8,10 @@ Table 51516114 "Purchase Line Replica"
 
     fields
     {
-        field(1;"Document Type";Option)
+        field(1;"Document Type";enum "Purchase Comment Document Type")
         {
             Caption = 'Document Type';
-            OptionCaption = 'Quote,Order,Invoice,Credit Memo,Blanket Order,Return Order';
-            OptionMembers = Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order";
+           
         }
         field(2;"Buy-from Vendor No.";Code[20])
         {
@@ -47,7 +46,6 @@ Table 51516114 "Purchase Line Replica"
                                                                                                else if (Type=const("G/L Account"),
                                                                                                         "System-Created Entry"=const(false)) "G/L Account"
                                                                                                         else if (Type=const(Item)) Item
-                                                                                                        else if (Type=const("3")) Resource
                                                                                                         else if (Type=const("Fixed Asset")) "Fixed Asset"
                                                                                                         else if (Type=const("Charge (Item)")) "Item Charge"
                                                                                                         else if (Type=const(Resource)) Resource;
@@ -55,7 +53,6 @@ Table 51516114 "Purchase Line Replica"
             trigger OnValidate()
             var
                 ICPartner: Record "IC Partner";
-                ItemCrossReference: Record "Item Reference";
                 PrepmtMgt: Codeunit "Prepayment Mgt.";
             begin
             end;
@@ -409,15 +406,15 @@ Table 51516114 "Purchase Line Replica"
         }
         field(95;"Reserved Quantity";Decimal)
         {
-            CalcFormula = sum("Reservation Entry".Quantity where ("Source ID"=field("Document No."),
-                                                                  "Source Ref. No."=field("Line No."),
-                                                                  "Source Type"=const(39),
-                                                                  "Source Subtype"=field("Document Type"),
-                                                                  "Reservation Status"=const(Reservation)));
-            Caption = 'Reserved Quantity';
-            DecimalPlaces = 0:5;
-            Editable = false;
-            FieldClass = FlowField;
+            // CalcFormula = sum("Reservation Entry".Quantity where ("Source ID"=field("Document No."),
+            //                                                       "Source Ref. No."=field("Line No."),
+            //                                                       "Source Type"=const(39),
+            //                                                       "Source Subtype"=field("Document Type"),
+            //                                                       "Reservation Status"=const(Reservation)));
+            // Caption = 'Reserved Quantity';
+            // DecimalPlaces = 0:5;
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(97;"Blanket Order No.";Code[20])
         {
@@ -492,7 +489,6 @@ Table 51516114 "Purchase Line Replica"
             trigger OnLookup()
             var
                 ICGLAccount: Record "IC G/L Account";
-                ItemCrossReference: Record "Item Reference";
                 ItemVendorCatalog: Record "Item Vendor";
             begin
             end;
@@ -663,7 +659,7 @@ Table 51516114 "Purchase Line Replica"
         field(1001;"Job Task No.";Code[20])
         {
             Caption = 'Job Task No.';
-            TableRelation = Table54343.Field2 where (Field1=field("Job No."));
+            
         }
         field(1002;"Job Line Type";Option)
         {
@@ -871,15 +867,15 @@ Table 51516114 "Purchase Line Replica"
         }
         field(5495;"Reserved Qty. (Base)";Decimal)
         {
-            CalcFormula = sum("Reservation Entry"."Quantity (Base)" where ("Source Type"=const(39),
-                                                                           "Source Subtype"=field("Document Type"),
-                                                                           "Source ID"=field("Document No."),
-                                                                           "Source Ref. No."=field("Line No."),
-                                                                           "Reservation Status"=const(Reservation)));
-            Caption = 'Reserved Qty. (Base)';
-            DecimalPlaces = 0:5;
-            Editable = false;
-            FieldClass = FlowField;
+            // CalcFormula = sum("Reservation Entry"."Quantity (Base)" where ("Source Type"=const(39),
+            //                                                                "Source Subtype"=field("Document Type"),
+            //                                                                "Source ID"=field("Document No."),
+            //                                                                "Source Ref. No."=field("Line No."),
+            //                                                                "Reservation Status"=const(Reservation)));
+            // Caption = 'Reserved Qty. (Base)';
+            // DecimalPlaces = 0:5;
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(5600;"FA Posting Date";Date)
         {
@@ -945,7 +941,6 @@ Table 51516114 "Purchase Line Replica"
 
             trigger OnValidate()
             var
-                ReturnedCrossRef: Record "Item Reference";
             begin
             end;
         }
@@ -981,7 +976,6 @@ Table 51516114 "Purchase Line Replica"
         field(5712;"Product Group Code";Code[10])
         {
             Caption = 'Product Group Code';
-            TableRelation = "Product Group".Code where ("Item Category Code"=field("Item Category Code"));
         }
         field(5713;"Special Order";Boolean)
         {
@@ -1000,15 +994,15 @@ Table 51516114 "Purchase Line Replica"
         }
         field(5750;"Whse. Outstanding Qty. (Base)";Decimal)
         {
-            BlankZero = true;
-            CalcFormula = sum("Warehouse Receipt Line"."Qty. Outstanding (Base)" where ("Source Type"=const(39),
-                                                                                        "Source Subtype"=field("Document Type"),
-                                                                                        "Source No."=field("Document No."),
-                                                                                        "Source Line No."=field("Line No.")));
-            Caption = 'Whse. Outstanding Qty. (Base)';
-            DecimalPlaces = 0:5;
-            Editable = false;
-            FieldClass = FlowField;
+            // BlankZero = true;
+            // CalcFormula = sum("Warehouse Receipt Line"."Qty. Outstanding (Base)" where ("Source Type"=const(39),
+            //                                                                             "Source Subtype"=field("Document Type"),
+            //                                                                             "Source No."=field("Document No."),
+            //                                                                             "Source Line No."=field("Line No.")));
+            // Caption = 'Whse. Outstanding Qty. (Base)';
+            // DecimalPlaces = 0:5;
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(5752;"Completely Received";Boolean)
         {
@@ -1150,8 +1144,8 @@ Table 51516114 "Purchase Line Replica"
         }
         field(50010;"Project Code";Code[10])
         {
-            CalcFormula = lookup("Purchase Header"."Project Code" where ("No."=field("Document No.")));
-            FieldClass = FlowField;
+            // CalcFormula = lookup("Purchase Header"."Project Code" where ("No."=field("Document No.")));
+            // FieldClass = FlowField;
         }
         field(51000;"RFQ Remarks";Text[50])
         {
@@ -1364,9 +1358,7 @@ Table 51516114 "Purchase Line Replica"
         NonstockItemMgt: Codeunit "Catalog Item Management";
         WhseValidateSourceLine: Codeunit "Whse. Validate Source Line";
         LeadTimeMgt: Codeunit "Lead-Time Management";
-#pragma warning disable AL0432
-        PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
-#pragma warning restore AL0432
+        //PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
         CalendarMgmt: Codeunit "Calendar Management";
         CheckDateConflict: Codeunit "Reservation-Check Date Confl.";
         TrackingBlocked: Boolean;
@@ -1743,7 +1735,6 @@ Table 51516114 "Purchase Line Replica"
 
     procedure CrossReferenceNoLookUp()
     var
-        ItemCrossReference: Record "Item Reference";
     begin
     end;
 

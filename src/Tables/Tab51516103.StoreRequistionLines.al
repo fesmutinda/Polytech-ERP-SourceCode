@@ -40,8 +40,8 @@ Table 51516103 "Store Requistion Lines"
                  Items.SetRange(Items."No.","No.") ;
                  if Items.Find ('-') then begin
                  "Category Code":=Items."Item Category Code";
-                 "Item Group":=Items."Item Group" ;
-                 "Item Product Group":= Items."Product Group Code";
+                //  "Item Group":=Items."Item Group" ;
+                //  "Item Product Group":= Items."Product Group Code";
                  "Issuing Store":=LocCode;
                  end;
                 
@@ -49,7 +49,7 @@ Table 51516103 "Store Requistion Lines"
                  Items.Reset;
                  Items.SetRange(Items."No.","No.");
                   if Items.Find ('-') then
-                  LocCode:=Items."Location Code";
+                  //LocCode:=Items."Location Code";
                  //Control: Don't Post Same Item Twice NOT GL's
                  /*IF Type=Type::Item THEN BEGIN
                  RequisitionLine.RESET;
@@ -335,7 +335,6 @@ Table 51516103 "Store Requistion Lines"
         field(51516009;"Item Product Group Filter";Code[20])
         {
             FieldClass = FlowFilter;
-            TableRelation = "Product Group".Code;
         }
         field(51516010;"Cost Per Cost Center";Decimal)
         {
@@ -352,10 +351,6 @@ Table 51516103 "Store Requistion Lines"
         key(Key2;"No.",Type)
         {
             SumIndexFields = Quantity;
-        }
-        key(Key3;'')
-        {
-            Enabled = false;
         }
     }
 

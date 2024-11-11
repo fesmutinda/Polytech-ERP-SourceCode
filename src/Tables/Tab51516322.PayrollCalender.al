@@ -4,44 +4,44 @@ Table 51516322 "Payroll Calender."
 
     fields
     {
-        field(10;"Date Opened";Date)
+        field(10; "Date Opened"; Date)
         {
         }
-        field(11;"Date Closed";Date)
+        field(11; "Date Closed"; Date)
         {
         }
-        field(12;"Period Name";Text[50])
+        field(12; "Period Name"; Text[50])
         {
         }
-        field(13;"Period Month";Integer)
+        field(13; "Period Month"; Integer)
         {
         }
-        field(14;"Period Year";Integer)
+        field(14; "Period Year"; Integer)
         {
         }
-        field(15;"Payroll Code";Code[50])
+        field(15; "Payroll Code"; Code[50])
         {
         }
-        field(16;"Tax Paid";Decimal)
+        field(16; "Tax Paid"; Decimal)
         {
         }
-        field(17;"Tax Paid(LCY)";Decimal)
+        field(17; "Tax Paid(LCY)"; Decimal)
         {
         }
-        field(18;"Basic Pay Paid";Decimal)
+        field(18; "Basic Pay Paid"; Decimal)
         {
         }
-        field(19;"Basic Pay Paid(LCY)";Decimal)
+        field(19; "Basic Pay Paid(LCY)"; Decimal)
         {
         }
-        field(20;Closed;Boolean)
+        field(20; Closed; Boolean)
         {
         }
     }
 
     keys
     {
-        key(Key1;"Date Opened","Period Name")
+        key(Key1; "Date Opened", "Period Name")
         {
             Clustered = true;
         }
