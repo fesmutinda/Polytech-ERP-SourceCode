@@ -1,0 +1,33 @@
+{
+  "id": "69e253e7-3e0d-4cf2-85e4-65cef595086a",
+  "name": "PolyTech",
+  "publisher": "Swizzsoft Systems and Solutions",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "target": "OnPrem",
+  "idRanges": [
+    {
+      "from": 50000,
+      "to": 51516999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
