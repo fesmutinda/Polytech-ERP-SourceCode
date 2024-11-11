@@ -985,7 +985,7 @@ Codeunit 51516025 SwizzKashMB
                         GenBatches.INIT;
                         GenBatches."Journal Template Name":='GENERAL';
                         GenBatches.Name:='MOBILETRAN';
-                        GenBatches.Description:='SUREPESA Tranfers';
+                        GenBatches.Description:='SwizzPESA Tranfers';
                         GenBatches.VALIDATE(GenBatches."Journal Template Name");
                         GenBatches.VALIDATE(GenBatches.Name);
                         GenBatches.INSERT;
@@ -1241,7 +1241,7 @@ Codeunit 51516025 SwizzKashMB
                         GenBatches.Init;
                         GenBatches."Journal Template Name":='GENERAL';
                         GenBatches.Name:='MOBILETRAN';
-                        GenBatches.Description:='SUREPESA Tranfers';
+                        GenBatches.Description:='SwizzPESA Tranfers';
                         GenBatches.Validate(GenBatches."Journal Template Name");
                         GenBatches.Validate(GenBatches.Name);
                         GenBatches.Insert;
@@ -1365,7 +1365,7 @@ Codeunit 51516025 SwizzKashMB
                         GenJournalLine."Account No.":=Members."No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         GenJournalLine."Document No.":=DocNumber;
-                        GenJournalLine."External Document No.":='SUREPESA';
+                        GenJournalLine."External Document No.":='SwizzPESA';
                         GenJournalLine."Posting Date":=Today;
         
                         if accTo='Deposit Contribution' then begin

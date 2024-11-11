@@ -486,7 +486,7 @@ Page 51516869 "Loan 3rd Demand Notices Card"
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         CanCancelApprovalForRecord: Boolean;
-        SurestepFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
         JTemplate: Code[20];
         JBatch: Code[20];
         GenSetup: Record UnknownRecord51516398;

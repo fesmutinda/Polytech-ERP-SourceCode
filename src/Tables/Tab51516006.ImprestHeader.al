@@ -676,7 +676,7 @@ Table 51516006 "Imprest Header"
         JBatch: Code[10];
         LineNo: Integer;
         HasLines: Boolean;
-        ObjCUFactory: Codeunit "SURESTEP Factory";
+        ObjCUFactory: Codeunit "Swizzsoft Factory";
         ObjRecBatches: Record "Gen. Journal Batch";
         CustLeja: Record "Cust. Ledger Entry";
 

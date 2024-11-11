@@ -47,7 +47,7 @@ Table 51516113 "Payment Line"
         {
             Editable = false;
             NotBlank = true;
-            TableRelation = "Payment Header."."No.";
+            TableRelation = "Payment Header"."No.";
         }
         field(12; "Document Type"; Option)
         {

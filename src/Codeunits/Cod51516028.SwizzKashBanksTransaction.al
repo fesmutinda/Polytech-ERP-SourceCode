@@ -305,7 +305,7 @@ Codeunit 51516028 "SwizzKash Banks Transaction"
                     GenBatches.Init;
                     GenBatches."Journal Template Name" := 'GENERAL';
                     GenBatches.Name := 'MOBILETRAN';
-                    GenBatches.Description := 'SUREPESA Tranfers';
+                    GenBatches.Description := 'SwizzPESA Tranfers';
                     GenBatches.Validate(GenBatches."Journal Template Name");
                     GenBatches.Validate(GenBatches.Name);
                     GenBatches.Insert;

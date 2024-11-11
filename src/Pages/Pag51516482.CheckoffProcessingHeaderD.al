@@ -449,18 +449,18 @@ Page 51516482 "Checkoff Processing Header-D"
                                 UnallocatedFunds := 0;
                                 //Deposits
                                 LineNo := LineNo + 10000;
-                                SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Benevolent Fund", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Benevolent Fund", GenJournalLine."account type"::Member,
                                                                      ReceiptLine."Member No.", "Loan CutOff Date", -ReceiptLine."Deposit contribution", 'BOSA', '', 'Deposit contribution Checkoff for ' +
                                                                      KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
                                 //share capital
                                 LineNo := LineNo + 10000;
-                                SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Share Capital", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Share Capital", GenJournalLine."account type"::Member,
                                                                      ReceiptLine."Member No.", "Loan CutOff Date", -ReceiptLine."Shares Capital", 'BOSA', '', 'Shares capital checkofffor '
                                                                      + KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
 
                                 //Reg/fess
                                 LineNo := LineNo + 10000;
-                                SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Registration Fee", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Registration Fee", GenJournalLine."account type"::Member,
                                                                      ReceiptLine."Member No.", "Loan CutOff Date", -ReceiptLine."Entrance Fees", 'BOSA', '', 'Registration fees checkoff for' +
                                                                      KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
                                 LNNO := '';
@@ -541,13 +541,13 @@ Page 51516482 "Checkoff Processing Header-D"
 
                                         end;
                                         LineNo := LineNo + 10000;
-                                        SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Loan Repayment", GenJournalLine."account type"::Member,
+                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Loan Repayment", GenJournalLine."account type"::Member,
                                                                                     ReceiptLine."Member No.", "Loan CutOff Date", -UpdatePrinciple, 'BOSA', '', 'loan repayment checkoff for ' +
                                                                                     KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", LNNO);//LoanApp."Loan  No.");
                                                                                                                                                                                                       //Int normal loan
                                         LineNo := LineNo + 10000;
                                         //AmountToPay:=FnGetLoanInterestToPay(ReceiptLine."Int normal loan",ReceiptLine."NLoan No");
-                                        SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Interest Paid", GenJournalLine."account type"::Member,
+                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Interest Paid", GenJournalLine."account type"::Member,
                                                                               ReceiptLine."Member No.", "Loan CutOff Date", -UpdateInterest, 'BOSA', '', 'Interest payment checkoff for ' +
                                                                               KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", LNNO);//LLoanApp."Loan  No.");
                                     until LoanProductsSetup.Next = 0;
@@ -557,7 +557,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
                                 //Unallocated Funds
                                 LineNo := LineNo + 10000;
-                                SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Unallocated Funds", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Unallocated Funds", GenJournalLine."account type"::Member,
                                                                   ReceiptLine."Member No.", "Loan CutOff Date", -UnallocatedFunds, 'BOSA', '', 'Unallocated Funds checkoff for ' +
                                                                   KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
 
@@ -566,7 +566,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
                         //Balance
                         LineNo := LineNo + 10000;
-                        SURESTEPFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::" ", GenJournalLine."account type"::Customer,
+                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::" ", GenJournalLine."account type"::Customer,
                                                           "Account No", "Loan CutOff Date", "Total Scheduled", 'BOSA', '', 'Checkoff balancing off for ' +
                                                           KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
 
@@ -771,7 +771,7 @@ Page 51516482 "Checkoff Processing Header-D"
         ObjCust: Record UnknownRecord51516364;
         ObjSaccoGenSetUp: Record UnknownRecord51516398;
         MemberNumber: Code[20];
-        SURESTEPFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
         Temp: Record UnknownRecord51516031;
         DefaulterPaymentType: Option;
         KNFactory: Codeunit UnknownCodeunit51516030;

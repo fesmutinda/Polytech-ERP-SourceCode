@@ -2,7 +2,7 @@
 Codeunit 51516154 "MembEntry-Apply Posted Entrie"
 {
     Permissions = TableData "Cust. Ledger Entry" = rimd;
-    TableNo = 51516365;
+    TableNo = "Member Ledger Entry";
 
     trigger OnRun()
     var
