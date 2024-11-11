@@ -2,7 +2,7 @@
 Page 51516061 "Receipt and Payment Types List"
 {
     PageType = List;
-    SourceTable = 51516004;
+    SourceTable = "Receipts and Payment Types";
 
     layout
     {
@@ -10,55 +10,55 @@ Page 51516061 "Receipt and Payment Types List"
         {
             repeater(Control1102758000)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Chargeable"; "VAT Chargeable")
+                field("VAT Chargeable"; Rec."VAT Chargeable")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Chargeable"; "Withholding Tax Chargeable")
+                field("Withholding Tax Chargeable"; Rec."Withholding Tax Chargeable")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Code"; "VAT Code")
+                field("VAT Code"; Rec."VAT Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Code"; "Withholding Tax Code")
+                field("Withholding Tax Code"; Rec."Withholding Tax Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Grouping"; "Default Grouping")
+                field("Default Grouping"; Rec."Default Grouping")
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pending Voucher"; "Pending Voucher")
+                field("Pending Voucher"; Rec."Pending Voucher")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account"; "Bank Account")
+                field("Bank Account"; Rec."Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transation Remarks"; "Transation Remarks")
+                field("Transation Remarks"; Rec."Transation Remarks")
                 {
                     ApplicationArea = Basic;
                 }

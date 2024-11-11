@@ -10,50 +10,50 @@ Page 51516060 "Payment Request Lines"
         {
             repeater(Control1102760000)
             {
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Description';
                     Editable = true;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shortcut Dimension 3 Code"; "Shortcut Dimension 3 Code")
+                field("Shortcut Dimension 3 Code"; Rec."Shortcut Dimension 3 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shortcut Dimension 4 Code"; "Shortcut Dimension 4 Code")
+                field("Shortcut Dimension 4 Code"; Rec."Shortcut Dimension 4 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Invoice No."; "Invoice No.")
+                field("Invoice No."; Rec."Invoice No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
                         //check if the payment reference is for farmer purchase
-                        if "Payment Reference" = "payment reference"::"Farmer Purchase" then begin
-                            if Amount <> xRec.Amount then begin
+                        if Rec."Payment Reference" = Rec."payment reference"::rEC."Farmer Purchase" then begin
+                            if Rec.Amount <> xRec.Amount then begin
                                 Error('Amount cannot be modified');
                             end;
                         end;
@@ -288,8 +288,8 @@ Page 51516060 "Payment Request Lines"
     }
 
     var
-        RecPayTypes: Record UnknownRecord51516038;
-        TarriffCodes: Record UnknownRecord51516033;
+        RecPayTypes: Record "Budgetary Control Setup";
+        TarriffCodes: Record "Funds Tax Codes";
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
         LineNo: Integer;

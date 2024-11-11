@@ -2,7 +2,7 @@
 Page 51516031 "Funds Transfer Card"
 {
     PageType = Card;
-    SourceTable = 51516056;
+    SourceTable = "Funds Transfer Header";
 
     layout
     {
@@ -10,88 +10,88 @@ Page 51516031 "Funds Transfer Card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Mode"; "Pay Mode")
+                field("Pay Mode"; Rec."Pay Mode")
                 {
                     ApplicationArea = Basic;
                     OptionCaption = ',Cash,Cheque,standing Order';
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Account"; "Paying Bank Account")
+                field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Name"; "Paying Bank Name")
+                field("Paying Bank Name"; Rec."Paying Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Balance"; "Bank Balance")
+                field("Bank Balance"; Rec."Bank Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No."; "Bank Account No.")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Currency Code"; "Currency Code")
+                field("Bank Account No."; Rec."Bank Account No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Amount to Transfer"; "Amount to Transfer")
+                field("Currency Code"; Rec."Currency Code")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Amount to Transfer"; Rec."Amount to Transfer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Transfer(LCY)"; "Amount to Transfer(LCY)")
+                field("Amount to Transfer(LCY)"; Rec."Amount to Transfer(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Line Amount"; "Total Line Amount")
+                field("Total Line Amount"; Rec."Total Line Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Line Amount(LCY)"; "Total Line Amount(LCY)")
+                field("Total Line Amount(LCY)"; Rec."Total Line Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque/Doc. No"; "Cheque/Doc. No")
+                field("Cheque/Doc. No"; Rec."Cheque/Doc. No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Created"; "Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Created"; "Time Created")
+                field("Time Created"; Rec."Time Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -118,10 +118,10 @@ Page 51516031 "Funds Transfer Card"
 
                 trigger OnAction()
                 begin
-                    TestField(Posted, false);
+                    Rec.TestField(Posted, false);
                     CheckRequiredItems;
-                    CalcFields("Total Line Amount");
-                    TestField("Amount to Transfer", "Total Line Amount");
+                    Rec.CalcFields("Total Line Amount");
+                    Rec.TestField("Amount to Transfer", Rec."Total Line Amount");
 
 
 

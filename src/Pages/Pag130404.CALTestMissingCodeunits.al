@@ -19,7 +19,7 @@ Page 130404 "CAL Test Missing Codeunits"
             repeater("<Codeunit List>")
             {
                 Caption = 'Codeunit List';
-                field(Number;Number)
+                field(Number; Rec.Number)
                 {
                     ApplicationArea = All;
                     Caption = 'Codeunit ID';
@@ -44,7 +44,7 @@ Page 130404 "CAL Test Missing Codeunits"
                 trigger OnAction()
                 begin
                     if FindFirst then
-                      CALTestMgt.AddMissingTestCodeunits(Rec,CurrentTestSuite);
+                        CALTestMgt.AddMissingTestCodeunits(Rec, CurrentTestSuite);
                 end;
             }
         }
@@ -55,10 +55,10 @@ Page 130404 "CAL Test Missing Codeunits"
         CurrentTestSuite: Code[10];
 
 
-    procedure Initialize(var CUIds: Record "Integer" temporary;TestSuiteName: Code[10])
+    procedure Initialize(var CUIds: Record "Integer" temporary; TestSuiteName: Code[10])
     begin
         CurrentTestSuite := TestSuiteName;
-        Copy(CUIds,true);
+        Copy(CUIds, true);
     end;
 }
 

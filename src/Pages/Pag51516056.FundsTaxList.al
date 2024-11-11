@@ -3,7 +3,7 @@ Page 51516056 "Funds Tax List"
 {
     CardPageID = "Funds Tax Card";
     PageType = List;
-    SourceTable = 51516033;
+    SourceTable = "Funds Tax Codes";
 
     layout
     {
@@ -11,11 +11,11 @@ Page 51516056 "Funds Tax List"
         {
             repeater(Group)
             {
-                field("Tax Code"; "Tax Code")
+                field("Tax Code"; Rec."Tax Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

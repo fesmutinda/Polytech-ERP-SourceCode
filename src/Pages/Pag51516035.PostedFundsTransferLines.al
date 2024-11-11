@@ -2,7 +2,7 @@
 Page 51516035 "Posted Funds Transfer Lines"
 {
     PageType = List;
-    SourceTable = 51516005;
+    SourceTable = "Funds Transfer Line";
 
     layout
     {
@@ -10,43 +10,43 @@ Page 51516035 "Posted Funds Transfer Lines"
         {
             repeater(Group)
             {
-                field("Receiving Bank Account"; "Receiving Bank Account")
+                field("Receiving Bank Account"; Rec."Receiving Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Balance"; "Bank Balance")
+                field("Bank Balance"; Rec."Bank Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Balance(LCY)"; "Bank Balance(LCY)")
+                field("Bank Balance(LCY)"; Rec."Bank Balance(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No."; "Bank Account No.")
+                field("Bank Account No."; Rec."Bank Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Factor"; "Currency Factor")
+                field("Currency Factor"; Rec."Currency Factor")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Receive"; "Amount to Receive")
+                field("Amount to Receive"; Rec."Amount to Receive")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Receive (LCY)"; "Amount to Receive (LCY)")
+                field("Amount to Receive (LCY)"; Rec."Amount to Receive (LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("External Doc No."; "External Doc No.")
+                field("External Doc No."; Rec."External Doc No.")
                 {
                     ApplicationArea = Basic;
                 }

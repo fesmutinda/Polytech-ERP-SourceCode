@@ -2,7 +2,7 @@
 Page 51516032 "Funds Transfer Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516005;
+    SourceTable = "Funds Transfer Line";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516032 "Funds Transfer Lines"
         {
             repeater(Group)
             {
-                field("Receiving Bank Account"; "Receiving Bank Account")
+                field("Receiving Bank Account"; Rec."Receiving Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Balance"; "Bank Balance")
+                field("Bank Balance"; Rec."Bank Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Receive"; "Amount to Receive")
+                field("Amount to Receive"; Rec."Amount to Receive")
                 {
                     ApplicationArea = Basic;
                 }
-                field("External Doc No."; "External Doc No.")
+                field("External Doc No."; Rec."External Doc No.")
                 {
                     ApplicationArea = Basic;
                 }

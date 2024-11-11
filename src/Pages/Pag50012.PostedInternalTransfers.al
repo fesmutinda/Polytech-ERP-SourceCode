@@ -4,7 +4,7 @@ Page 50012 "Posted Internal Transfers"
     CardPageID = "Posted Sacco Transfer Card";
     PageType = List;
     SourceTable = "Imprest Lines";
-    SourceTableView = where(Posted=filter(Yes));
+    SourceTableView = where(Posted = filter(Yes));
 
     layout
     {
@@ -12,39 +12,39 @@ Page 50012 "Posted Internal Transfers"
         {
             repeater(Group)
             {
-                field(No;No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date";"Transaction Date")
+                field("Transaction Date"; "Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Schedule Total";"Schedule Total")
+                field("Schedule Total"; "Schedule Total")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Approved;Approved)
+                field(Approved; Approved)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By";"Approved By")
+                field("Approved By"; "Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account No.";"Source Account No.")
+                field("Source Account No."; "Source Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Transaction Type";"Source Transaction Type")
+                field("Source Transaction Type"; "Source Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account Name";"Source Account Name")
+                field("Source Account Name"; "Source Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted;Posted)
+                field(Posted; Posted)
                 {
                     ApplicationArea = Basic;
                 }

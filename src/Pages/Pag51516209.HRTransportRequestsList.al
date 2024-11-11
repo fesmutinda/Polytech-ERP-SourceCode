@@ -4,7 +4,7 @@ Page 51516209 "HR Transport Requests List"
     CardPageID = "HR Staff Transport Requisition";
     Editable = false;
     PageType = List;
-    SourceTable = 51516226;
+    SourceTable = "HR Transport Requisition";
 
     layout
     {
@@ -12,29 +12,29 @@ Page 51516209 "HR Transport Requests List"
         {
             repeater(Control1102755000)
             {
-                field("Application Code"; "Application Code")
+                field("Application Code"; Rec."Application Code")
                 {
                     ApplicationArea = Basic;
                     Style = Strong;
                     StyleExpr = true;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Tittle"; "Job Tittle")
+                field("Job Tittle"; Rec."Job Tittle")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Days Applied"; "Days Applied")
+                field("Days Applied"; Rec."Days Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Supervisor; Supervisor)
+                field(Supervisor; Rec.Supervisor)
                 {
                     ApplicationArea = Basic;
                 }

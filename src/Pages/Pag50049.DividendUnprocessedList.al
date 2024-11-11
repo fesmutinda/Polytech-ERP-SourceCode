@@ -16,17 +16,17 @@ Page 50049 "Dividend Unprocessed List"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Enabled = false;
                 }
-                field("Payroll no"; "Payroll no")
+                field("Payroll no"; Rec."Payroll no")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dividend year"; "Dividend year")
+                field("Dividend year"; Rec."Dividend year")
                 {
                     ApplicationArea = Basic;
                 }
@@ -36,36 +36,36 @@ Page 50049 "Dividend Unprocessed List"
                     Editable = false;
                     Enabled = false;
                 }
-                field("Amount To Bank"; "Amount To Bank")
+                field("Amount To Bank"; Rec."Amount To Bank")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Share Capital"; "Share Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Processed; Processed)
+                field(Processed; Rec.Processed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Gross Dividend"; "Gross Dividend")
+                field("Gross Dividend"; Rec."Gross Dividend")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dont Pay"; "Dont Pay")
+                field("Dont Pay"; Rec."Dont Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Pay; Pay)
+                field(Pay; Rec.Pay)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Pay To Bank';
                 }
-                field("Pay to Deposit"; "Pay to Deposit")
+                field("Pay to Deposit"; Rec."Pay to Deposit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay to Loan"; "Pay to Loan")
+                field("Pay to Loan"; Rec."Pay to Loan")
                 {
                     ApplicationArea = Basic;
                 }
@@ -355,7 +355,7 @@ Page 50049 "Dividend Unprocessed List"
     trigger OnAfterGetRecord()
     begin
         Cust.Reset;
-        Cust.SetRange(Cust."No.", "Member No");
+        Cust.SetRange(Cust."No.", Rec."Member No");
         if Cust.Find('-') then begin
             Cust.CalcFields("Dividend Amount");
             DividendAmount := Cust."Dividend Amount";
@@ -431,7 +431,7 @@ Page 50049 "Dividend Unprocessed List"
         GenJournalLine."Document No." := DOCUMENT_NO;
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-        GenJournalLine."Account No." := "Member No";
+        GenJournalLine."Account No." := Rec."Member No";
         "Dividends Registerd"."Member No";
         GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Dividend;
         GenJournalLine.Validate(GenJournalLine."Account No.");
@@ -519,7 +519,7 @@ Page 50049 "Dividend Unprocessed List"
         InterestAmount := 0;
         outstandingBal := 0;
         LoansReg.Reset;
-        LoansReg.SetRange("Client Code", "Member No");
+        LoansReg.SetRange("Client Code", Rec."Member No");
         LoansReg.SetAutocalcFields(LoansReg."Outstanding Balance", LoansReg."Oustanding Interest");
         if LoansReg.Find('-') then begin
             repeat
@@ -545,7 +545,7 @@ Page 50049 "Dividend Unprocessed List"
                     GenJournalLine."Document No." := DOCUMENT_NO;
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-                    GenJournalLine."Account No." := "Member No";
+                    GenJournalLine."Account No." := Rec."Member No";
                     GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Paid";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Posting Date" := Today;
@@ -572,7 +572,7 @@ Page 50049 "Dividend Unprocessed List"
                 GenJournalLine."Document No." := DOCUMENT_NO;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-                GenJournalLine."Account No." := "Member No";
+                GenJournalLine."Account No." := Rec."Member No";
                 GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Loan Repayment";
                 GenJournalLine.Validate(GenJournalLine."Account No.");
                 GenJournalLine."Posting Date" := Today;
@@ -609,8 +609,8 @@ Page 50049 "Dividend Unprocessed List"
                 //.............................................Remove amounta from member account
 
                 //**************************************************************************************************
-                "Pay to Loan" := true;
-                Modify;
+                Rec."Pay to Loan" := true;
+                Rec.Modify;
 
             until LoansReg.Next = 0;
             LineNo := LineNo + 1000000;
@@ -620,7 +620,7 @@ Page 50049 "Dividend Unprocessed List"
             GenJournalLine."Document No." := DOCUMENT_NO;
             GenJournalLine."Line No." := LineNo;
             GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-            GenJournalLine."Account No." := "Member No";
+            GenJournalLine."Account No." := Rec."Member No";
             GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Dividend;
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := Today;
@@ -649,7 +649,7 @@ Page 50049 "Dividend Unprocessed List"
         GenJournalLine."Document No." := DOCUMENT_NO;
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-        GenJournalLine."Account No." := "Member No";
+        GenJournalLine."Account No." := Rec."Member No";
         GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Deposit Contribution";
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine."Posting Date" := Today;
@@ -669,7 +669,7 @@ Page 50049 "Dividend Unprocessed List"
         GenJournalLine."Document No." := DOCUMENT_NO;
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-        GenJournalLine."Account No." := "Member No";
+        GenJournalLine."Account No." := Rec."Member No";
         GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Dividend;
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine."Posting Date" := Today;

@@ -3,7 +3,7 @@ Page 51516019 "Mobile Payment Card"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516000;
+    SourceTable = "Payment Header.";
     SourceTableView = where("Payment Type" = const(Mobile));
 
     layout
@@ -12,108 +12,108 @@ Page 51516019 "Mobile Payment Card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Mode"; "Payment Mode")
+                field("Payment Mode"; Rec."Payment Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account"; "Bank Account")
+                field("Bank Account"; Rec."Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account Name"; "Bank Account Name")
+                field("Bank Account Name"; Rec."Bank Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account Balance"; "Bank Account Balance")
+                field("Bank Account Balance"; Rec."Bank Account Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Type"; "Cheque Type")
+                field("Cheque Type"; Rec."Cheque Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("On Behalf Of"; "On Behalf Of")
+                field("On Behalf Of"; Rec."On Behalf Of")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Description"; "Payment Description")
+                field("Payment Description"; Rec."Payment Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount(LCY)"; "Amount(LCY)")
+                field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Amount"; "VAT Amount")
+                field("VAT Amount"; Rec."VAT Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Amount(LCY)"; "VAT Amount(LCY)")
+                field("VAT Amount(LCY)"; Rec."VAT Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("WithHolding Tax Amount"; "WithHolding Tax Amount")
+                field("WithHolding Tax Amount"; Rec."WithHolding Tax Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("WithHolding Tax Amount(LCY)"; "WithHolding Tax Amount(LCY)")
+                field("WithHolding Tax Amount(LCY)"; Rec."WithHolding Tax Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; "Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount(LCY)"; "Net Amount(LCY)")
+                field("Net Amount(LCY)"; Rec."Net Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; "Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Cashier; Cashier)
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                 }
@@ -140,7 +140,7 @@ Page 51516019 "Mobile Payment Card"
                 trigger OnAction()
                 begin
                     CheckRequiredItems;
-                    TestField(Status, Status::Approved);
+                    Rec.TestField(Status, Rec.Status::Approved);
                     if FundsUser.Get(UserId) then begin
                         FundsUser.TestField(FundsUser."Payment Journal Template");
                         FundsUser.TestField(FundsUser."Payment Journal Batch");
@@ -163,7 +163,7 @@ Page 51516019 "Mobile Payment Card"
                 trigger OnAction()
                 begin
                     CheckRequiredItems;
-                    TestField(Status, Status::Approved);
+                    Rec.TestField(Status, Rec.Status::Approved);
                     if FundsUser.Get(UserId) then begin
                         FundsUser.TestField(FundsUser."Payment Journal Template");
                         FundsUser.TestField(FundsUser."Payment Journal Batch");
@@ -185,7 +185,7 @@ Page 51516019 "Mobile Payment Card"
 
                 trigger OnAction()
                 begin
-                    TestField(Status, Status::New);
+                    Rec.TestField(Status, Rec.Status::New);
 
                     DocType := Doctype::"Payment Voucher";
                     Clear(TableID);
@@ -212,7 +212,7 @@ Page 51516019 "Mobile Payment Card"
                 trigger OnAction()
                 begin
                     PHeader.Reset;
-                    PHeader.SetRange(PHeader."No.", "No.");
+                    PHeader.SetRange(PHeader."No.", Rec."No.");
                     if PHeader.FindFirst then begin
                         Report.RunModal(Report::"Mobile Money Voucher", true, false, PHeader);
                     end;
@@ -223,7 +223,7 @@ Page 51516019 "Mobile Payment Card"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Payment Type" := "payment type"::Mobile;
+        Rec."Payment Type" := Rec."payment type"::Mobile;
     end;
 
     var
@@ -238,12 +238,12 @@ Page 51516019 "Mobile Payment Card"
 
     local procedure CheckRequiredItems()
     begin
-        TestField("Posting Date");
-        TestField(Payee);
-        TestField("Bank Account");
-        TestField("Payment Description");
-        TestField("Global Dimension 1 Code");
-        TestField("Global Dimension 2 Code");
+        Rec.TestField("Posting Date");
+        Rec.TestField(Payee);
+        Rec.TestField("Bank Account");
+        Rec.TestField("Payment Description");
+        Rec.TestField("Global Dimension 1 Code");
+        Rec.TestField("Global Dimension 2 Code");
     end;
 }
 

@@ -14,15 +14,15 @@ Page 51516011 "Posted Cash Payment Line"
         {
             repeater(Group)
             {
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
@@ -30,67 +30,67 @@ Page 51516011 "Posted Cash Payment Line"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Posted"; "Date Posted")
+                field("Date Posted"; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Posted"; "Time Posted")
+                field("Time Posted"; Rec."Time Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Code"; "VAT Code")
+                field("VAT Code"; Rec."VAT Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Code"; "Withholding Tax Code")
+                field("Withholding Tax Code"; Rec."Withholding Tax Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Amount"; "VAT Amount")
+                field("VAT Amount"; Rec."VAT Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Amount"; "Withholding Tax Amount")
+                field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; "Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Account"; "Paying Bank Account")
+                field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("PO/INV No"; "PO/INV No")
+                field("PO/INV No"; Rec."PO/INV No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No"; "Bank Account No")
+                field("Bank Account No"; Rec."Bank Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Allocation"; "Total Allocation")
+                field("Total Allocation"; Rec."Total Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Expenditure"; "Total Expenditure")
+                field("Total Expenditure"; Rec."Total Expenditure")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Commitments"; "Total Commitments")
+                field("Total Commitments"; Rec."Total Commitments")
                 {
                     ApplicationArea = Basic;
                 }

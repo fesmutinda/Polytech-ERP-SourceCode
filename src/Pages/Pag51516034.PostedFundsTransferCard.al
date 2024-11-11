@@ -5,7 +5,7 @@ Page 51516034 "Posted Funds Transfer Card"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = 51516056;
+    SourceTable = "Funds Transfer Header";
 
     layout
     {
@@ -13,88 +13,88 @@ Page 51516034 "Posted Funds Transfer Card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Mode"; "Pay Mode")
+                field("Pay Mode"; Rec."Pay Mode")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Account"; "Paying Bank Account")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Paying Bank Name"; "Paying Bank Name")
+                field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Bank Balance"; "Bank Balance")
+                field("Paying Bank Name"; Rec."Paying Bank Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Bank Balance"; Rec."Bank Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No."; "Bank Account No.")
+                field("Bank Account No."; Rec."Bank Account No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Amount to Transfer"; "Amount to Transfer")
+                field("Amount to Transfer"; Rec."Amount to Transfer")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount to Transfer(LCY)"; "Amount to Transfer(LCY)")
+                field("Amount to Transfer(LCY)"; Rec."Amount to Transfer(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Line Amount"; "Total Line Amount")
+                field("Total Line Amount"; Rec."Total Line Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Line Amount(LCY)"; "Total Line Amount(LCY)")
+                field("Total Line Amount(LCY)"; Rec."Total Line Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Cheque/Doc. No"; "Cheque/Doc. No")
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Cheque/Doc. No"; Rec."Cheque/Doc. No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Created"; "Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Created"; "Time Created")
+                field("Time Created"; Rec."Time Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -122,8 +122,8 @@ Page 51516034 "Posted Funds Transfer Card"
                 trigger OnAction()
                 begin
                     CheckRequiredItems;
-                    CalcFields("Total Line Amount");
-                    TestField("Amount to Transfer", "Total Line Amount");
+                    Rec.CalcFields("Total Line Amount");
+                    Rec.TestField("Amount to Transfer", Rec."Total Line Amount");
 
                     if FundsUser.Get(UserId) then begin
                         FundsUser.TestField(FundsUser."FundsTransfer Template Name");
@@ -156,7 +156,7 @@ Page 51516034 "Posted Funds Transfer Card"
                     */
 
                     FHeader.Reset;
-                    FHeader.SetRange(FHeader."No.", "No.");
+                    FHeader.SetRange(FHeader."No.", Rec."No.");
                     if FHeader.FindFirst then
                         Report.Run(51516011, true, true, FHeader);
 
@@ -168,7 +168,7 @@ Page 51516034 "Posted Funds Transfer Card"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         //"Pay Mode":="Pay Mode"::Cash;
-        "Transfer Type" := "transfer type"::InterBank;
+        Rec."Transfer Type" := Rec."transfer type"::InterBank;
     end;
 
     var
@@ -181,16 +181,16 @@ Page 51516034 "Posted Funds Transfer Card"
 
     local procedure CheckRequiredItems()
     begin
-        TestField("Posting Date");
-        TestField("Paying Bank Account");
-        TestField("Amount to Transfer");
-        if "Pay Mode" = "pay mode"::Cheque then
-            TestField("Cheque/Doc. No");
-        TestField(Description);
+        Rec.TestField("Posting Date");
+        Rec.TestField("Paying Bank Account");
+        Rec.TestField("Amount to Transfer");
+        if Rec."Pay Mode" = Rec."pay mode"::Cheque then
+            Rec.TestField("Cheque/Doc. No");
+        Rec.TestField(Description);
         //TESTFIELD("Transfer To");
 
         FLine.Reset;
-        FLine.SetRange(FLine."Document No", "No.");
+        FLine.SetRange(FLine."Document No", Rec."No.");
         FLine.SetFilter(FLine."Amount to Receive", '<>%1', 0);
         if FLine.FindSet then begin
             repeat

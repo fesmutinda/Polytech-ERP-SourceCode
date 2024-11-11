@@ -12,28 +12,28 @@ Page 130400 "CAL Test Suites"
         {
             repeater(Control1)
             {
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the test suite.';
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
                 }
-                field("Update Test Coverage Map";"Update Test Coverage Map")
+                field("Update Test Coverage Map"; Rec."Update Test Coverage Map")
                 {
                     ApplicationArea = All;
                 }
-                field("Tests to Execute";"Tests to Execute")
+                field("Tests to Execute"; Rec."Tests to Execute")
                 {
                     ApplicationArea = All;
                 }
-                field(Failures;Failures)
+                field(Failures; Rec.Failures)
                 {
                     ApplicationArea = All;
                 }
-                field("Tests not Executed";"Tests not Executed")
+                field("Tests not Executed"; Rec."Tests not Executed")
                 {
                     ApplicationArea = All;
                 }
@@ -63,11 +63,11 @@ Page 130400 "CAL Test Suites"
                         CALTestLine: Record "CAL Test Line";
                     begin
                         if CALTestSuite.FindSet then
-                          repeat
-                            CALTestLine.SetRange("Test Suite",CALTestSuite.Name);
-                            if CALTestLine.FindFirst then
-                              Codeunit.Run(Codeunit::"CAL Test Runner",CALTestLine);
-                          until CALTestSuite.Next = 0;
+                            repeat
+                                CALTestLine.SetRange("Test Suite", CALTestSuite.Name);
+                                if CALTestLine.FindFirst then
+                                    Codeunit.Run(Codeunit::"CAL Test Runner", CALTestLine);
+                            until CALTestSuite.Next = 0;
                         Commit;
                     end;
                 }

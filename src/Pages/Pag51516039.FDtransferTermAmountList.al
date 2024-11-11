@@ -4,7 +4,7 @@ Page 51516039 "FD transfer Term Amount List"
     CardPageID = "FD Transfer Term Amount Card";
     DeleteAllowed = false;
     PageType = List;
-    SourceTable = 51516435;
+    SourceTable = "FD Processing";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -13,151 +13,151 @@ Page 51516039 "FD transfer Term Amount List"
         {
             repeater(Group)
             {
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Phone No."; "Phone No.")
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Personal No."; "Personal No.")
+                field("Personal No."; Rec."Personal No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fixed Deposit Status"; "Fixed Deposit Status")
+                field("Fixed Deposit Status"; Rec."Fixed Deposit Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Call Deposit"; "Call Deposit")
+                field("Call Deposit"; Rec."Call Deposit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mobile Phone No"; "Mobile Phone No")
+                field("Mobile Phone No"; Rec."Mobile Phone No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA Account No"; "BOSA Account No")
+                field("BOSA Account No"; Rec."BOSA Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Category"; "Account Category")
+                field("Account Category"; Rec."Account Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("FD Marked for Closure"; "FD Marked for Closure")
+                field("FD Marked for Closure"; Rec."FD Marked for Closure")
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-Mail (Personal)"; "E-Mail (Personal)")
+                field("E-Mail (Personal)"; Rec."E-Mail (Personal)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fixed Deposit Type"; "Fixed Deposit Type")
+                field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Earned"; "Interest Earned")
+                field("Interest Earned"; Rec."Interest Earned")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Untranfered Interest"; "Untranfered Interest")
+                field("Untranfered Interest"; Rec."Untranfered Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("FD Maturity Date"; "FD Maturity Date")
+                field("FD Maturity Date"; Rec."FD Maturity Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Savings Account No."; "Savings Account No.")
+                field("Savings Account No."; Rec."Savings Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Transfer"; "Amount to Transfer")
+                field("Amount to Transfer"; Rec."Amount to Transfer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fixed Duration"; "Fixed Duration")
+                field("Fixed Duration"; Rec."Fixed Duration")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Neg. Interest Rate"; "Neg. Interest Rate")
+                field("Neg. Interest Rate"; Rec."Neg. Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Renewed"; "Date Renewed")
+                field("Date Renewed"; Rec."Date Renewed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Interest Date"; "Last Interest Date")
+                field("Last Interest Date"; Rec."Last Interest Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("S-Mobile No"; "S-Mobile No")
+                field("S-Mobile No"; Rec."S-Mobile No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest rate"; "Interest rate")
+                field("Interest rate"; Rec."Interest rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("FDR Deposit Status Type"; "FDR Deposit Status Type")
+                field("FDR Deposit Status Type"; Rec."FDR Deposit Status Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("On Term Deposit Maturity"; "On Term Deposit Maturity")
+                field("On Term Deposit Maturity"; Rec."On Term Deposit Maturity")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Interest On Term Dep"; "Expected Interest On Term Dep")
+                field("Expected Interest On Term Dep"; Rec."Expected Interest On Term Dep")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account"; "Destination Account")
+                field("Destination Account"; Rec."Destination Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Account Balance"; "Current Account Balance")
+                field("Current Account Balance"; Rec."Current Account Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Posted"; "Date Posted")
+                field("Date Posted"; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }

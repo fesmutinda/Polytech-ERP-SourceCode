@@ -3,7 +3,7 @@ Page 51516040 "Graduated Member Exit  List"
 {
     CardPageID = "Graduated Member Exit Card";
     PageType = List;
-    SourceTable = 51516565;
+    SourceTable = "MWithdrawal Graduated Charges";
 
     layout
     {
@@ -11,31 +11,31 @@ Page 51516040 "Graduated Member Exit  List"
         {
             repeater(Group)
             {
-                field("Minimum Amount"; "Minimum Amount")
+                field("Minimum Amount"; Rec."Minimum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Amount"; "Maximum Amount")
+                field("Maximum Amount"; Rec."Maximum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Use Percentage"; "Use Percentage")
+                field("Use Percentage"; Rec."Use Percentage")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Percentage of Amount"; "Percentage of Amount")
+                field("Percentage of Amount"; Rec."Percentage of Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Account"; "Charge Account")
+                field("Charge Account"; Rec."Charge Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Notice Status"; "Notice Status")
+                field("Notice Status"; Rec."Notice Status")
                 {
                     ApplicationArea = Basic;
                 }

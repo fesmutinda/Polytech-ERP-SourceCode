@@ -6,7 +6,7 @@ Page 50007 "Internal Transfer List(Pend)"
     PageType = List;
     ShowFilter = false;
     SourceTable = "Imprest Lines";
-    SourceTableView = where(Posted=filter(No));
+    SourceTableView = where(Posted = filter(No));
 
     layout
     {
@@ -14,99 +14,99 @@ Page 50007 "Internal Transfer List(Pend)"
         {
             repeater(Group)
             {
-                field(No;No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date";"Transaction Date")
+                field("Transaction Date"; "Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Schedule Total";"Schedule Total")
+                field("Schedule Total"; "Schedule Total")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Approved;Approved)
+                field(Approved; Approved)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By";"Approved By")
+                field("Approved By"; "Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted;Posted)
+                field(Posted; Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series";"No. Series")
+                field("No. Series"; "No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center";"Responsibility Center")
+                field("Responsibility Center"; "Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description";"Transaction Description")
+                field("Transaction Description"; "Transaction Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account Type";"Source Account Type")
+                field("Source Account Type"; "Source Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account No.";"Source Account No.")
+                field("Source Account No."; "Source Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Transaction Type";"Source Transaction Type")
+                field("Source Transaction Type"; "Source Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account Name";"Source Account Name")
+                field("Source Account Name"; "Source Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Loan No";"Source Loan No")
+                field("Source Loan No"; "Source Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By";"Created By")
+                field("Created By"; "Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Debit;Debit)
+                field(Debit; Debit)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Refund;Refund)
+                field(Refund; Refund)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Guarantor Recovery";"Guarantor Recovery")
+                field("Guarantor Recovery"; "Guarantor Recovery")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payrol No.";"Payrol No.")
+                field("Payrol No."; "Payrol No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code";"Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code";"Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bosa Number";"Bosa Number")
+                field("Bosa Number"; "Bosa Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status;Status)
+                field(Status; Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Savings Account Type";"Savings Account Type")
+                field("Savings Account Type"; "Savings Account Type")
                 {
                     ApplicationArea = Basic;
                 }
@@ -120,7 +120,7 @@ Page 50007 "Internal Transfer List(Pend)"
 
     trigger OnOpenPage()
     begin
-        SetRange("Created By",UserId);
+        SetRange("Created By", UserId);
     end;
 }
 

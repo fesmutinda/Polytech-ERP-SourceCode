@@ -10,40 +10,40 @@ Page 50060 "Receipt Allocation-BOSAlistpat"
         {
             repeater(Control1102760000)
             {
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     LookupPageID = "Fosa Account List";
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
-                        if ("Transaction Type" <> "transaction type"::"Mwanangu Savings") and ("Transaction Type" <> "transaction type"::" ") then begin
-                            "Account Type" := "account type"::Member
+                        if (Rec."Transaction Type" <> Rec."transaction type"::"Mwanangu Savings") and (Rec."Transaction Type" <> Rec."transaction type"::" ") then begin
+                            Rec."Account Type" := Rec."account type"::Member
                         end else
-                            "Account Type" := "account type"::Vendor;
+                            Rec."Account Type" := Rec."account type"::Vendor;
                     end;
                 }
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Balance"; "Amount Balance")
+                field("Amount Balance"; Rec."Amount Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

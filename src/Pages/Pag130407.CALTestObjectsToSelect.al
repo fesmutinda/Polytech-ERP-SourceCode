@@ -5,7 +5,7 @@ Page 130407 "CAL Test Objects To Select"
     Editable = false;
     PageType = List;
     SourceTable = "Object";
-    SourceTableView = where(Type=filter(>TableData));
+    SourceTableView = where(Type = filter(> TableData));
 
     layout
     {
@@ -13,21 +13,21 @@ Page 130407 "CAL Test Objects To Select"
         {
             repeater(Control1)
             {
-                field(Type;Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = All;
                 }
-                field(ID;ID)
+                field(ID; Rec.ID)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the ID that applies.';
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the name of the test objects selected.';
                 }
-                field(HitBy;CountTestCodeunits)
+                field(HitBy; CountTestCodeunits)
                 {
                     ApplicationArea = All;
                     Caption = 'Hit By Test Codeunits';
@@ -35,28 +35,28 @@ Page 130407 "CAL Test Objects To Select"
                     trigger OnDrillDown()
                     begin
                         if CALTestCoverageMap.FindFirst then
-                          Page.RunModal(0,CALTestCoverageMap);
+                            Page.RunModal(0, CALTestCoverageMap);
                     end;
                 }
-                field(Caption;Caption)
+                field(Caption; Caption)
                 {
                     ApplicationArea = All;
                     DrillDown = false;
                     Visible = false;
                 }
-                field(Modified;Modified)
+                field(Modified; Rec.Modified)
                 {
                     ApplicationArea = All;
                 }
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = All;
                 }
-                field(Time;Time)
+                field(Time; Time)
                 {
                     ApplicationArea = All;
                 }
-                field("Version List";"Version List")
+                field("Version List"; Rec."Version List")
                 {
                     ApplicationArea = All;
                 }
@@ -70,8 +70,8 @@ Page 130407 "CAL Test Objects To Select"
 
     trigger OnAfterGetRecord()
     begin
-        CALTestCoverageMap.SetRange("Object Type",Type);
-        CALTestCoverageMap.SetRange("Object ID",ID);
+        CALTestCoverageMap.SetRange("Object Type", Rec.Type);
+        CALTestCoverageMap.SetRange("Object ID", Rec.ID);
     end;
 
     var
@@ -80,8 +80,8 @@ Page 130407 "CAL Test Objects To Select"
     local procedure CountTestCodeunits(): Integer
     begin
         if CALTestCoverageMap.FindFirst then begin
-          CALTestCoverageMap.CalcFields("Hit by Test Codeunits");
-          exit(CALTestCoverageMap."Hit by Test Codeunits");
+            CALTestCoverageMap.CalcFields("Hit by Test Codeunits");
+            exit(CALTestCoverageMap."Hit by Test Codeunits");
         end;
         exit(0);
     end;

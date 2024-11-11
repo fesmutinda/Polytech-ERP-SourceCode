@@ -10,53 +10,53 @@ Page 51516014 "Guarantor Sub Subform"
         {
             repeater(Group)
             {
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Guaranteed"; "Amount Guaranteed")
+                field("Amount Guaranteed"; Rec."Amount Guaranteed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Commitment"; "Current Commitment")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Substituted; Substituted)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Substitute Member"; "Substitute Member")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Substitute Member Name"; "Substitute Member Name")
+                field("Current Commitment"; Rec."Current Commitment")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Sub Amount Guaranteed"; "Sub Amount Guaranteed")
+                field(Substituted; Rec.Substituted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Substitute Member"; Rec."Substitute Member")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Substitute Member Name"; Rec."Substitute Member Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Sub Amount Guaranteed"; Rec."Sub Amount Guaranteed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("self  substitute"; "self  substitute")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Document No"; Rec."Document No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("self  substitute"; Rec."self  substitute")
                 {
                     ApplicationArea = Basic;
                 }
@@ -70,7 +70,7 @@ Page 51516014 "Guarantor Sub Subform"
 
     trigger OnAfterGetCurrRecord()
     begin
-        if GSubHeader.Get("Document No") then begin
+        if GSubHeader.Get(Rec."Document No") then begin
             if GSubHeader.Status = GSubHeader.Status::Open then begin
                 SubPageEditable := true
             end else
@@ -82,7 +82,7 @@ Page 51516014 "Guarantor Sub Subform"
 
     trigger OnAfterGetRecord()
     begin
-        if GSubHeader.Get("Document No") then begin
+        if GSubHeader.Get(Rec."Document No") then begin
             if GSubHeader.Status = GSubHeader.Status::Open then begin
                 SubPageEditable := true
             end else

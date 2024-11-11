@@ -4,7 +4,7 @@ Page 51516064 "Voucher Payment List"
     CardPageID = "Voucher Payment Header";
     DeleteAllowed = false;
     PageType = List;
-    SourceTable = 51516000;
+    SourceTable = "Payment Header";
     SourceTableView = where("Payment Type" = const(Normal),
                             Posted = const(No));
 
@@ -14,39 +14,39 @@ Page 51516064 "Voucher Payment List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Type"; "Document Type")
+                field("Document Type"; Rec."Document Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount(LCY)"; "Amount(LCY)")
+                field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; "Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount(LCY)"; "Net Amount(LCY)")
+                field("Net Amount(LCY)"; Rec."Net Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -60,15 +60,15 @@ Page 51516064 "Voucher Payment List"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Payment Type" := "payment type"::"Cash Purchase";
+        Rec."Payment Type" := Rec."payment type"::"Cash Purchase";
         if FundsSetup.Get then begin
             FundsSetup.TestField(FundsSetup."Cash Account");
-            "Bank Account" := FundsSetup."Cash Account";
-            Validate("Bank Account");
+            Rec."Bank Account" := FundsSetup."Cash Account";
+            Rec.Validate("Bank Account");
         end;
     end;
 
     var
-        FundsSetup: Record UnknownRecord51516030;
+        FundsSetup: Record "Funds General Setup";
 }
 
