@@ -231,7 +231,7 @@ Codeunit 51516022 AgencyCode
             VendorLedgEntry.SetCurrentkey(VendorLedgEntry."Entry No.");
             VendorLedgEntry.Ascending(false);
             VendorLedgEntry.SetRange(VendorLedgEntry."Vendor No.", account);
-            VendorLedgEntry.SetRange(VendorLedgEntry.Reversed, VendorLedgEntry.Reversed::"0");
+            VendorLedgEntry.SetRange(VendorLedgEntry.Reversed, VendorLedgEntry.Reversed = false);
             if VendorLedgEntry.Find('-') then begin
                 Statement := '';
                 repeat
@@ -562,7 +562,7 @@ Codeunit 51516022 AgencyCode
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'Agency';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := AgentTransactions."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Document No." := AgentTransactions."Document No.";

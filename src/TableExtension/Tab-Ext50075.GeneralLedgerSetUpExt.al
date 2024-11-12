@@ -144,6 +144,11 @@ tableextension 50075 "General Ledger SetUpExt" extends "General Ledger Setup"
             TableRelation = "No. Series".Code;
         }
         field(50019; "File Movement Nos"; Code[20]) { }
+        field(50020; "MPESA Settl Acc"; Code[20]) { }
+        field(50021; "PayBill Settl Acc"; Code[20]) { }
+        field(50022; "family account bank"; Code[20]) { }
+        field(50023; "equity bank acc"; Code[20]) { }
+        field(50024; "coop bank acc"; Code[20]) { }
         field(54250; "Base No. Series"; Option)
         {
             OptionCaption = ' ,Responsibility Center,Shortcut Dimension 1,Shortcut Dimension 2,Shortcut Dimension 3,Shortcut Dimension 4';

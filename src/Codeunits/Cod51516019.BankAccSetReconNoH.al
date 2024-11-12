@@ -25,7 +25,8 @@ Codeunit 51516019 "Bank Acc. Set Recon.-No. H"
         if (Relation = Relation::"One-to-One") and (BankAccReconLine."Applied Entries" > 0) then
             exit(false);
 
-        BankAccReconLine.TestField(Type, BankAccReconLine.Type::"Bank Account Ledger Entry");
+        BankAccReconLine.TestField("Statement Type", BankAccReconLine."statement type"::"Bank Reconciliation");
+        BankAccReconLine.TestField("Account Type", BankAccReconLine."Account Type"::"Bank Account");
         BankAccReconLine."Ready for Application" := true;
         SetReconNo(BankAccLedgEntry, BankAccReconLine);
         BankAccReconLine."Applied Amount" += BankAccLedgEntry."Remaining Amount";
@@ -54,7 +55,7 @@ Codeunit 51516019 "Bank Acc. Set Recon.-No. H"
             exit;
 
         BankAccReconLine.TestField("Statement Type", BankAccReconLine."statement type"::"Bank Reconciliation");
-        BankAccReconLine.TestField(Type, BankAccReconLine.Type::"Bank Account Ledger Entry");
+        BankAccReconLine.TestField("Account Type", BankAccReconLine."Account Type"::"Bank Account");
         RemoveReconNo(BankAccLedgEntry, BankAccReconLine, true);
 
         BankAccReconLine."Applied Amount" -= BankAccLedgEntry."Remaining Amount";
@@ -132,7 +133,7 @@ Codeunit 51516019 "Bank Acc. Set Recon.-No. H"
     end;
 
 
-    procedure ApplyEntries2(var BankAccReconLine: Record "Bank Acc. Reconciliation Line"; var BankAccLedgEntry: Record "Bank Account Ledger Entry"; Relation: Option "One-to-One","One-to-Many"; BankAccStatementLine: Record 51516012): Boolean
+    procedure ApplyEntries2(var BankAccReconLine: Record "Bank Acc. Reconciliation Line"; var BankAccLedgEntry: Record "Bank Account Ledger Entry"; Relation: Option "One-to-One","One-to-Many"; BankAccStatementLine: Record "Bank Account Statement Line"): Boolean
     begin
         BankAccLedgEntry.LockTable;
         CheckLedgEntry.LockTable;
@@ -145,13 +146,13 @@ Codeunit 51516019 "Bank Acc. Set Recon.-No. H"
         if (Relation = Relation::"One-to-One") and (BankAccReconLine."Applied Entries" > 0) then
             exit(false);
 
-        BankAccReconLine.TestField(Type, BankAccReconLine.Type::"Bank Account Ledger Entry");
+        BankAccReconLine.TestField("Account Type", BankAccReconLine."Account Type"::"Bank Account");
         BankAccReconLine."Ready for Application" := true;
         SetReconNo(BankAccLedgEntry, BankAccReconLine);
         BankAccReconLine."Applied Amount" += BankAccLedgEntry."Remaining Amount";
         BankAccReconLine."Applied Entries" := BankAccReconLine."Applied Entries" + 1;
         BankAccReconLine.Reconciled := true;          //**changes
-        BankAccReconLine."Bank Statement Entry Line No" := BankAccStatementLine."Statement Line No.";
+        BankAccReconLine."Statement Line No." := BankAccStatementLine."Statement Line No.";
         BankAccReconLine.Validate("Statement Amount");
         BankAccReconLine.Modify;
         //**changes to include the statement lines
@@ -167,7 +168,7 @@ Codeunit 51516019 "Bank Acc. Set Recon.-No. H"
     procedure RemoveApplication2(var BankAccLedgEntry: Record "Bank Account Ledger Entry")
     var
         BankAccReconLine: Record "Bank Acc. Reconciliation Line";
-        BankAccStatementLine: Record 51516012;
+        BankAccStatementLine: Record "Bank Account Statement Line";
     begin
         BankAccLedgEntry.LockTable;
         CheckLedgEntry.LockTable;
@@ -181,7 +182,7 @@ Codeunit 51516019 "Bank Acc. Set Recon.-No. H"
             exit;
 
         BankAccReconLine.TestField("Statement Type", BankAccReconLine."statement type"::"Bank Reconciliation");
-        BankAccReconLine.TestField(Type, BankAccReconLine.Type::"Bank Account Ledger Entry");
+        BankAccReconLine.TestField("Account Type", BankAccReconLine."Account Type"::"Bank Account");
         RemoveReconNo(BankAccLedgEntry, BankAccReconLine, true);
 
         BankAccReconLine."Applied Amount" -= BankAccLedgEntry."Remaining Amount";

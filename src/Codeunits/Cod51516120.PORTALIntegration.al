@@ -120,7 +120,7 @@ Codeunit 51516120 PORTALIntegration
                 Online.Email := objMember."E-Mail";
                 Online."Date Created" := Today;
                 Online.IdNumber := idNo;
-                NewPassword := EncryptionManagement.Encrypt(NewPassword);
+                NewPassword := EncryptionManagement.EncryptText(NewPassword);
                 Online.Password.CreateOutstream(OutStream);
                 OutStream.Write(NewPassword);
                 Online.Insert;

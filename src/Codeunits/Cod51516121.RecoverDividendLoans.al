@@ -53,7 +53,7 @@ Codeunit 51516121 "Recover Dividend Loans"
 
                         Gnljnline."Line No." := LineNo;
 
-                        Gnljnline."Account Type" := Gnljnline."account type"::Member;
+                        Gnljnline."Account Type" := Gnljnline."account type"::Customer;
                         Gnljnline."Account No." := LoanApp."BOSA No";
                         Gnljnline.Validate(Gnljnline."Account No.");
 

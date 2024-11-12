@@ -125,11 +125,11 @@ Codeunit 51516027 "IPRS Details"
 
                     if MembApp."Application Category" = MembApp."application category"::"New Application" then begin
 
-                        if MembApp."Identification Document" = MembApp."identification document"::"0" then begin
+                        if MembApp."Identification Document" = MembApp."identification document"::"NATIONAL ID" then begin
                             Idtype := 'NATIONAL_ID';
                             IDDoc := MembApp."ID No.";
                         end;
-                        if MembApp."Identification Document" = MembApp."identification document"::"1" then begin
+                        if MembApp."Identification Document" = MembApp."identification document"::PASSPORT then begin
                             Idtype := 'PASSPORT';
                             IDDoc := MembApp."Passport No.";
                         end;

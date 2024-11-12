@@ -149,7 +149,7 @@ Codeunit 51516025 SwizzKashMB
             VendorLedgEntry.SetFilter(VendorLedgEntry.Description,'<>%1','*Charges*');
             VendorLedgEntry.SetRange(VendorLedgEntry."Vendor No.",Vendor."No.");
             //VendorLedgEntry.SETFILTER(VendorLedgEntry.Description,'<>*Excise duty*');
-            VendorLedgEntry.SetRange(VendorLedgEntry.Reversed,VendorLedgEntry.Reversed::"0");
+            VendorLedgEntry.SetRange(VendorLedgEntry.Reversed,VendorLedgEntry.Reversed=false);
           if VendorLedgEntry.FindSet then begin
               MiniStmt:='';
               repeat
@@ -201,7 +201,7 @@ Codeunit 51516025 SwizzKashMB
                   VendorLedgEntry.Ascending(false);
                   //VendorLedgEntry.SETFILTER(VendorLedgEntry.Description,'<>%1','*Charges*');
                   VendorLedgEntry.SetRange(VendorLedgEntry."Vendor No.",Account);
-                  VendorLedgEntry.SetRange(VendorLedgEntry.Reversed,VendorLedgEntry.Reversed::"0");
+                  VendorLedgEntry.SetRange(VendorLedgEntry.Reversed,VendorLedgEntry.Reversed=false);
                   VendorLedgEntry.SetFilter(VendorLedgEntry."Date Filter", Format(DateFrom)+'..'+Format(DateTo));
                   Mrowcount:=VendorLedgEntry.Count;
                 if VendorLedgEntry.FindSet then begin
@@ -375,7 +375,7 @@ Codeunit 51516025 SwizzKashMB
                   VendorLedgEntry.Ascending(false);
                   //VendorLedgEntry.SETFILTER(VendorLedgEntry.Description,'<>%1','*Charges*');
                   VendorLedgEntry.SetRange(VendorLedgEntry."Vendor No.",Vendor."No.");
-                  VendorLedgEntry.SetRange(VendorLedgEntry.Reversed,VendorLedgEntry.Reversed::"0");
+                  VendorLedgEntry.SetRange(VendorLedgEntry.Reversed,VendorLedgEntry.Reversed=false);
                   Mrowcount:=VendorLedgEntry.Count;
                 if VendorLedgEntry.FindSet then begin
                     Status:='';
@@ -1343,7 +1343,7 @@ Codeunit 51516025 SwizzKashMB
                         GenJournalLine."Journal Template Name":='GENERAL';
                         GenJournalLine."Journal Batch Name":='MOBILETRAN';
                         GenJournalLine."Line No.":=LineNo;
-                        GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                        GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                         GenJournalLine."Account No.":=SurePESACommACC;
                         GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                         GenJournalLine."Document No.":=DocNumber;
@@ -1361,7 +1361,7 @@ Codeunit 51516025 SwizzKashMB
                         GenJournalLine."Journal Template Name":='GENERAL';
                         GenJournalLine."Journal Batch Name":='MOBILETRAN';
                         GenJournalLine."Line No.":=LineNo;
-                        GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                        GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                         GenJournalLine."Account No.":=Members."No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         GenJournalLine."Document No.":=DocNumber;
@@ -1372,7 +1372,7 @@ Codeunit 51516025 SwizzKashMB
                         GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Deposit Contribution";
                         end;
                         if accTo='Shares Capital' then begin
-                        GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                        GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                         end;
                         if accTo='Benevolent Fund' then begin
                         GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Benevolent Fund";
@@ -1788,7 +1788,7 @@ Codeunit 51516025 SwizzKashMB
                                     GenJournalLine."Journal Template Name":='GENERAL';
                                     GenJournalLine."Journal Batch Name":='MOBILETRAN';
                                     GenJournalLine."Line No.":=LineNo;
-                                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No.":=LoansRegister."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Document No.":=DocNumber;
@@ -1821,7 +1821,7 @@ Codeunit 51516025 SwizzKashMB
                                     GenJournalLine."Journal Template Name":='GENERAL';
                                     GenJournalLine."Journal Batch Name":='MOBILETRAN';
                                     GenJournalLine."Line No.":=LineNo;
-                                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No.":=LoansRegister."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Document No.":=DocNumber;
@@ -2634,7 +2634,7 @@ Codeunit 51516025 SwizzKashMB
             GenJournalLine."Journal Template Name":='GENERAL';
             GenJournalLine."Journal Batch Name":=batch;
             GenJournalLine."Line No.":=LineNo;
-            GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+            GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
             GenJournalLine."Account No.":=Members."No.";
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Document No.":=docNo;
@@ -2757,7 +2757,7 @@ Codeunit 51516025 SwizzKashMB
               GenJournalLine."Journal Template Name":='GENERAL';
               GenJournalLine."Journal Batch Name":=batch;
               GenJournalLine."Line No.":=LineNo;
-              GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+              GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
               GenJournalLine."Account No.":=Members."No.";
               GenJournalLine.Validate(GenJournalLine."Account No.");
               GenJournalLine."Document No.":=docNo;
@@ -2765,7 +2765,7 @@ Codeunit 51516025 SwizzKashMB
               GenJournalLine."Posting Date":=Today;
               case PaybillTrans."Key Word" of
                 'DEP': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Deposit Contribution";
-                'SHA': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                'SHA': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                 'JIO': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Jiokoe Savings";
                 'HOL': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Holiday savings";
               end;
@@ -2914,7 +2914,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=LoansRegister."Client Code";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -2946,7 +2946,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=LoansRegister."Client Code";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -2978,7 +2978,7 @@ Codeunit 51516025 SwizzKashMB
                     GenJournalLine."Journal Template Name":='GENERAL';
                     GenJournalLine."Journal Batch Name":=batch;
                     GenJournalLine."Line No.":=LineNo;
-                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No.":=LoansRegister."Client Code";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No.":=docNo;
@@ -3490,7 +3490,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -3519,7 +3519,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -3550,7 +3550,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -3581,7 +3581,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -3657,7 +3657,7 @@ Codeunit 51516025 SwizzKashMB
                 GenJournalLine."Journal Template Name":='GENERAL';
                 GenJournalLine."Journal Batch Name":=batch;
                 GenJournalLine."Line No.":=LineNo;
-                GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                 GenJournalLine."Account No.":=LoansRegister."Client Code";
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."Document No.":=docNo;
@@ -3717,7 +3717,7 @@ Codeunit 51516025 SwizzKashMB
                 GenJournalLine."Journal Template Name":='GENERAL';
                 GenJournalLine."Journal Batch Name":=batch;
                 GenJournalLine."Line No.":=LineNo;
-                GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                 GenJournalLine."Account No.":=LoansRegister."Client Code";
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."Document No.":=docNo;
@@ -3784,7 +3784,7 @@ Codeunit 51516025 SwizzKashMB
                 GenJournalLine."Journal Template Name":='GENERAL';
                 GenJournalLine."Journal Batch Name":=batch;
                 GenJournalLine."Line No.":=LineNo;
-                GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                 GenJournalLine."Account No.":=Members."No.";
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."Document No.":=docNo;
@@ -3823,7 +3823,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."Account Type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."Account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -4416,7 +4416,7 @@ Codeunit 51516025 SwizzKashMB
                   GenJournalLine."Journal Template Name":='GENERAL';
                   GenJournalLine."Journal Batch Name":='MOBILELOAN';
                   GenJournalLine."Line No.":=LineNo;
-                  GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                  GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                   GenJournalLine."Transaction Type":=GenJournalLine."transaction type"::Loan;
                   GenJournalLine."Loan No":=LoansRegister."Loan  No.";
                   GenJournalLine."Account No.":=Members."No.";
@@ -4435,7 +4435,7 @@ Codeunit 51516025 SwizzKashMB
                   GenJournalLine."Journal Template Name":='GENERAL';
                   GenJournalLine."Journal Batch Name":='MOBILELOAN';
                   GenJournalLine."Line No.":=LineNo;
-                  GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                  GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                   GenJournalLine."Transaction Type":=GenJournalLine."transaction type"::Loan;
                   GenJournalLine."Loan No":=LoansRegister."Loan  No.";
                   GenJournalLine."Account No.":=Members."No.";
@@ -4455,7 +4455,7 @@ Codeunit 51516025 SwizzKashMB
                     GenJournalLine."Journal Template Name":='GENERAL';
                     GenJournalLine."Journal Batch Name":='MOBILELOAN';
                     GenJournalLine."Line No.":=LineNo;
-                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No.":= Members."No.";
                     GenJournalLine."Transaction Type":=GenJournalLine."transaction type"::"Interest Due";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
@@ -4834,7 +4834,7 @@ Codeunit 51516025 SwizzKashMB
                     GenJournalLine."Journal Template Name":='GENERAL';
                     GenJournalLine."Journal Batch Name":='MOBILELOAN';
                     GenJournalLine."Line No.":=LineNo;
-                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No.":= Members."No.";
                     GenJournalLine."Transaction Type":=GenJournalLine."transaction type"::"Interest Due";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
@@ -4915,7 +4915,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -4935,7 +4935,7 @@ Codeunit 51516025 SwizzKashMB
                     GenJournalLine."Journal Template Name":='GENERAL';
                     GenJournalLine."Journal Batch Name":=batch;
                     GenJournalLine."Line No.":=LineNo;
-                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No.":=LoansRegister."Client Code";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No.":=docNo;
@@ -4961,7 +4961,7 @@ Codeunit 51516025 SwizzKashMB
                     GenJournalLine."Journal Template Name":='GENERAL';
                     GenJournalLine."Journal Batch Name":=batch;
                     GenJournalLine."Line No.":=LineNo;
-                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No.":=LoansRegister."Client Code";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No.":=docNo;
@@ -5836,7 +5836,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":='MPESAWITHD';
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -5902,7 +5902,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":='MPESAWITHD';
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=Members."No.";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -6108,7 +6108,7 @@ Codeunit 51516025 SwizzKashMB
           GenLedgerSetup.Reset;
           GenLedgerSetup.Get;
          // GenLedgerSetup.TESTFIELD(GenLedgerSetup."Mobile Charge");
-         // GenLedgerSetup.TESTFIELD(GenLedgerSetup."MPESA Settl Acc");
+         GenLedgerSetup.TESTFIELD(GenLedgerSetup."MPESA Settl Acc");
          // GenLedgerSetup.TESTFIELD(GenLedgerSetup."SwizzKash Comm Acc");
         /* // GenLedgerSetup.TESTFIELD(GenLedgerSetup."SwizzKash Charge");
         
@@ -6126,7 +6126,7 @@ Codeunit 51516025 SwizzKashMB
             MobileCharges:=GetCharge(amount,'SACCOWD');
         
            // SwizzKashCommACC:=  GenLedgerSetup."SwizzKash Comm Acc";
-           // MPESARecon:=GenLedgerSetup."MPESA Settl Acc";
+           MPESARecon:=GenLedgerSetup."MPESA Settl Acc";
             MobileChargesACC:='32009';//Charges."GL Account";
         
             ExcDuty:=0;//(20/100)*(MobileCharges);
@@ -6340,7 +6340,7 @@ Codeunit 51516025 SwizzKashMB
                 GenJournalLine."Journal Template Name":='GENERAL';
                 GenJournalLine."Journal Batch Name":=batch;
                 GenJournalLine."Line No.":=LineNo;
-                GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                 GenJournalLine."Account No.":=LoansRegister."Client Code";
                 GenJournalLine.Validate(GenJournalLine."Account No.");
                 GenJournalLine."Document No.":=docNo;
@@ -6402,7 +6402,7 @@ Codeunit 51516025 SwizzKashMB
                 GenJournalLine."Journal Template Name":='GENERAL';
                 GenJournalLine."Journal Batch Name":=batch;
                 GenJournalLine."Line No.":=LineNo;
-                GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                 GenJournalLine."Account No.":=LoansRegister."Client Code";
                 GenJournalLine.Validate(GenJournalLine."Account No.");
                 GenJournalLine."Document No.":=docNo;
@@ -6435,7 +6435,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=LoansRegister."Client Code";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -6572,7 +6572,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=LoansRegister."Client Code";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -6627,7 +6627,7 @@ Codeunit 51516025 SwizzKashMB
                       GenJournalLine."Journal Template Name":='GENERAL';
                       GenJournalLine."Journal Batch Name":=batch;
                       GenJournalLine."Line No.":=LineNo;
-                      GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                      GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                       GenJournalLine."Account No.":=LoansRegister."Client Code";
                       GenJournalLine.Validate(GenJournalLine."Account No.");
                       GenJournalLine."Document No.":=docNo;
@@ -6660,7 +6660,7 @@ Codeunit 51516025 SwizzKashMB
                     GenJournalLine."Journal Template Name":='GENERAL';
                     GenJournalLine."Journal Batch Name":=batch;
                     GenJournalLine."Line No.":=LineNo;
-                    GenJournalLine."Account Type":=GenJournalLine."account type"::Member;
+                    GenJournalLine."Account Type":=GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No.":=LoansRegister."Client Code";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No.":=docNo;

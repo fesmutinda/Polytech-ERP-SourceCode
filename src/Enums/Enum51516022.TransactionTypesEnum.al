@@ -237,9 +237,9 @@ enum 51516010 "TransactionTypesEnum"
 
     }
 
-    // value(58; "Withdrawable Deposits")
-    // {
-    // }
+    value(58; "Jiokoe Savings")
+    {
+    }
     value(59; Junior3)
     {
 

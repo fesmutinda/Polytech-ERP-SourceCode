@@ -67,7 +67,7 @@ Codeunit 51516028 "SwizzKash Banks Transaction"
         coopacc: Code[50];
         AccountLength: Integer;
         fosaAccNo: Code[50];
-        MembApp: Record 51516360;
+        MembApp: Record "Membership Applications";
         Idtype: Code[50];
         IDLength: Integer;
         ImportFile: File;
@@ -584,10 +584,10 @@ Codeunit 51516028 "SwizzKash Banks Transaction"
         if MembApp.Find('-') then begin
             if MembApp."Application Category" = MembApp."application category"::"New Application" then begin
 
-                if MembApp."Identification Document" = MembApp."identification document"::"0" then begin
+                if MembApp."Identification Document" = MembApp."identification document"::"NATIONAL ID" then begin
                     Idtype := 'NATIONAL_ID';
                 end;
-                if MembApp."Identification Document" = MembApp."identification document"::"1" then begin
+                if MembApp."Identification Document" = MembApp."identification document"::PASSPORT then begin
                     Idtype := 'NATIONAL_ID';
                 end;
                 IDLength := StrLen(MembApp."ID No.");

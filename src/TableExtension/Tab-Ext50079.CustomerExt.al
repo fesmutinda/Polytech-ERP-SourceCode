@@ -841,7 +841,7 @@ tableextension 50079 "CustomerExt" extends Customer
 
 
             CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("No."),
-                                                                   "Transaction Type" = filter(Holiday_Savers),
+                                                                   "Transaction Type" = filter("Holiday Savings"),
                                                                    "Posting Date" = field("Date Filter"), Reversed = const(false)));
             Editable = false;
 

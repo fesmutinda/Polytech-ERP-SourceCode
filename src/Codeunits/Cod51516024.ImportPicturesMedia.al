@@ -9,7 +9,7 @@ Codeunit 51516024 "Import Pictures Media"
         ClientFileName: Text;
     begin
         ObjMember.Reset;
-        ObjMember.SetRange("No.",)
+        ObjMember.SetRange("No.", '');
 
         if ObjMember.Picture.Count > 0 then
             /*IF NOT CONFIRM(OverrideImageQst) THEN
@@ -33,6 +33,6 @@ Codeunit 51516024 "Import Pictures Media"
         CameraAvailable: Boolean;
         DeleteExportEnabled: Boolean;
         HideActions: Boolean;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
 }
 

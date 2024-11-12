@@ -389,7 +389,7 @@ Codeunit 51516029 "Periodic Activities"
                             GenJournalLine."Journal Batch Name" := JBatch;
                             GenJournalLine."Line No." := LineNo;
                             GenJournalLine."Posting Date" := LoansInterest."Interest Date";
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                             GenJournalLine."Account No." := LoansInterest."Account No";
                             GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Due";
                             GenJournalLine.Validate(GenJournalLine."Account No.");

@@ -393,7 +393,7 @@ Codeunit 51516020 "Dates Calculation"
 
     procedure ReservedDates(NewStartDate: Date; NewEndDate: Date; EmployeeNumber: Code[20]) Reserved: Boolean
     var
-        AbsenceHoliday: Record 51516161;
+        AbsenceHoliday: Record "HR Absence and Holiday";
         OK: Boolean;
     begin
         /*AbsenceHoliday.SETFILTER("Employee No.",EmployeeNumber);
@@ -454,7 +454,7 @@ Codeunit 51516020 "Dates Calculation"
 
     procedure DetermineHolidays(DateStart: Date; DateEnd: Date) Holiday: Integer
     var
-        StatutoryHoliday: Record 51516161;
+        // StatutoryHoliday: Record 51516161;
         NextDay: Date;
     begin
         /*Holiday:= 0;

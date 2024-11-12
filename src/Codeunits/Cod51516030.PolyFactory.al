@@ -154,7 +154,7 @@ Codeunit 51516030 "Poly Factory"
         EXIT (percentage);
         
         
-        //***************Get the total amount of collateral used***************//
+        //***************Get the total amount of collateral used***************
         */
 
     end;
@@ -951,7 +951,7 @@ Codeunit 51516030 "Poly Factory"
              END;
           END;
         
-        //Calculate the total amount guaranteed by a member excluding self guarantee*******//
+        //Calculate the total amount guaranteed by a member excluding self guarantee*******
         */
 
     end;
@@ -1025,7 +1025,7 @@ Codeunit 51516030 "Poly Factory"
         
         EXIT(Amount);
         
-        //******************get the total amount of overpaid loans***********//
+        //******************get the total amount of overpaid loans*********** //
         */
 
     end;
@@ -1107,7 +1107,7 @@ Codeunit 51516030 "Poly Factory"
         ObjUsers.Reset;
         ObjUsers.SetRange(ObjUsers."User Security ID", UserId);
         if ObjUsers.Find('-') then begin
-            Branch := ObjUsers."Branch Code";
+            // Branch := ObjUsers."Branch Code";
         end;
         exit(Branch);
     end;
@@ -1177,7 +1177,7 @@ Codeunit 51516030 "Poly Factory"
               EXIT(FALSE)
             END;
         
-        //**************check if withdrawal requirements are met*********//
+        //**************check if withdrawal requirements are met********* //
         */
 
     end;
@@ -1295,7 +1295,7 @@ Codeunit 51516030 "Poly Factory"
             UNTIL ObjFormReception.NEXT=0;
           END;
         
-        //*************check if withdrawal notice has been placed by a member**********//
+        //*************check if withdrawal notice has been placed by a member********** //
         */
 
     end;
@@ -1316,7 +1316,7 @@ Codeunit 51516030 "Poly Factory"
           EXIT(TRUE)
         
         
-        //***********get amount from insurance for deceased people********//
+        //***********get amount from insurance for deceased people******** //
         */
 
     end;
@@ -2181,10 +2181,10 @@ Codeunit 51516030 "Poly Factory"
     var
         ObjMedicalSchemeMembers: Record 51516285;
         Date: Date;
-        SMTPSetup: Record "SMTP Mail Setup";
+        // SMTPSetup: Record "SMTP Mail Setup";
         iEntryNo: Integer;
         HRSetup: Record 51516181;
-        SMTPMail: Codeunit "SMTP Mail";
+        // SMTPMail: Codeunit "SMTP Mail";
         EmailMessage: Text;
     begin
         /*HRSetup.GET;
@@ -2549,28 +2549,28 @@ Codeunit 51516030 "Poly Factory"
     procedure FnSendEmail(EmpCode: Code[20]; TrainigSubject: Text)
     var
         HrEmployee: Record 51516160;
-        SMTPMail: Codeunit "SMTP Mail";
-        SMTPSetup: Record "SMTP Mail Setup";
+        // SMTPMail: Codeunit "SMTP Mail";
+        // SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];
         CompanyInfo: Record "Company Information";
         Email: Text[30];
         DisburesmentMessage: label '<p style="font-family:Verdana,Arial;font-size:10pt">Dear<b> %1,</b></p><p style="font-family:Verdana,Arial;font-size:9pt">Hello, Hope this finds you well</p><p style="font-family:Verdana,Arial;font-size:9pt">This is to confirm that your Training Application has been Approved </p><p style="font-family:Verdana,Arial;font-size:9pt">Training Subject <b>%2</b></p><br>Regards<p>%3</p><p><b>KENTOURS SACCO LTD</b></p>';
     begin
-        SMTPSetup.Get();
-        HrEmployee.Reset;
-        HrEmployee.SetRange(HrEmployee."No.", EmpCode);
-        if HrEmployee.Find('-') then begin
-            Email := HrEmployee."E-Mail";
-            if Email <> '' then begin
-                SMTPMail.CreateMessage(SMTPSetup."Email Sender Name", SMTPSetup."Email Sender Address", Email, 'Training Approval', '', true);
-                SMTPMail.AppendBody(StrSubstNo(DisburesmentMessage, HrEmployee."First Name", TrainigSubject, UserId));
-                SMTPMail.AppendBody(SMTPSetup."Email Sender Name");
-                SMTPMail.AppendBody('<br><br>');
-                SMTPMail.AddAttachment(FileName, Attachment);
-                SMTPMail.Send;
-            end;
-        end;
+        // SMTPSetup.Get();
+        // HrEmployee.Reset;
+        // HrEmployee.SetRange(HrEmployee."No.", EmpCode);
+        // if HrEmployee.Find('-') then begin
+        //     Email := HrEmployee."E-Mail";
+        //     if Email <> '' then begin
+        //         SMTPMail.CreateMessage(SMTPSetup."Email Sender Name", SMTPSetup."Email Sender Address", Email, 'Training Approval', '', true);
+        //         SMTPMail.AppendBody(StrSubstNo(DisburesmentMessage, HrEmployee."First Name", TrainigSubject, UserId));
+        //         SMTPMail.AppendBody(SMTPSetup."Email Sender Name");
+        //         SMTPMail.AppendBody('<br><br>');
+        //         SMTPMail.AddAttachment(FileName, Attachment);
+        //         SMTPMail.Send;
+        //     end;
+        // end;
     end;
 
 
@@ -2894,7 +2894,7 @@ Codeunit 51516030 "Poly Factory"
         GenJournalLine."Document No." := DocNo;
         GenJournalLine."Posting Date" := Today;
         GenJournalLine."External Document No." := LoanNo;
-        GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
         GenJournalLine."Account No." := MemberR."No.";
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine.Description := 'Free Shares Retained on Repayment of loan attached to defaulter for -:' + MemberR.Name;
@@ -2919,14 +2919,14 @@ Codeunit 51516030 "Poly Factory"
         GenJournalLine."Document No." := DocNo;
         GenJournalLine."Posting Date" := Today;
         GenJournalLine."External Document No." := LoanNo;
-        GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
         GenJournalLine."Account No." := MemberR."No.";
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine.Description := 'Free Shares Retained on Repayment of loan attached to defaulter for -:' + MemberR.Name;
         //CALCFIELDS("Committed Shares");
         GenJournalLine.Amount := ROUND(FreedAmt, 0.0005, '>');
         GenJournalLine.Validate(GenJournalLine.Amount);
-        GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+        GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
         GenJournalLine."Loan No" := LoanNo;
         GenJournalLine."Shortcut Dimension 1 Code" := Dim1;
         GenJournalLine."Shortcut Dimension 2 Code" := Dim2;

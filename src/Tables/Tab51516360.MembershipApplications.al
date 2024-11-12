@@ -121,6 +121,25 @@ Table 51516360 "Membership Applications"
             Caption = 'Customer Price Group';
             TableRelation = "Customer Price Group";
         }
+        field(59; "Identification Document"; Option)
+        {
+            OptionMembers = " ","NATIONAL ID",PASSPORT;
+        }
+        field(60; "IPRS Details"; Boolean)
+        {
+            // CalcFormula = lookup("IPRS Records".Result where("Application No" = field("No.")));
+            // FieldClass = FlowField;
+        }
+        field(61; "IPRS Status"; Enum "IPRS Verifications Status's")
+        {
+            CalcFormula = lookup("IPRS Records".Result where("Application No" = field("No.")));
+            FieldClass = FlowField;
+        }
+        field(62; "IPRS Error Description"; code[20])
+        {
+            // CalcFormula = lookup("IPRS Records".Result where("Application No" = field("No.")));
+            // FieldClass = FlowField;
+        }
         field(68000; "Customer Type"; Option)
         {
             OptionCaption = ' ,Member,FOSA,Investments,Property';
@@ -1212,6 +1231,14 @@ Table 51516360 "Membership Applications"
             begin
                 //"Search Name":=Section.
             end;
+        }
+        field(69173; "Member House Group"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(69174; "Send E-Statements"; Boolean)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 
