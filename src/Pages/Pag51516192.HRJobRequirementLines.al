@@ -2,7 +2,7 @@
 Page 51516192 "HR Job Requirement Lines"
 {
     PageType = List;
-    SourceTable = 51516179;
+    SourceTable = "HR Job Requirements";
 
     layout
     {
@@ -10,36 +10,36 @@ Page 51516192 "HR Job Requirement Lines"
         {
             repeater(Control1102755000)
             {
-                field("Qualification Type"; "Qualification Type")
+                field("Qualification Type"; Rec."Qualification Type")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Qualification Code"; "Qualification Code")
+                field("Qualification Code"; Rec."Qualification Code")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Qualification Description"; "Qualification Description")
+                field("Qualification Description"; Rec."Qualification Description")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field(Priority; Priority)
+                field(Priority; Rec.Priority)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Desired Score"; "Desired Score")
+                field("Desired Score"; Rec."Desired Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total (Stage)Desired Score"; "Total (Stage)Desired Score")
+                field("Total (Stage)Desired Score"; Rec."Total (Stage)Desired Score")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Mandatory; Mandatory)
+                field(Mandatory; Rec.Mandatory)
                 {
                     ApplicationArea = Basic;
                 }

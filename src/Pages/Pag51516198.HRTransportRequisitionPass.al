@@ -2,7 +2,7 @@
 Page 51516198 "HR Transport Requisition Pass"
 {
     PageType = List;
-    SourceTable = 51516178;
+    SourceTable = "HR Transport Allocations";
     SourceTableView = sorting("Allocation No", "Requisition No");
 
     layout
@@ -11,28 +11,28 @@ Page 51516198 "HR Transport Requisition Pass"
         {
             repeater(Control1102756000)
             {
-                field("Requisition No"; "Requisition No")
+                field("Requisition No"; Rec."Requisition No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Passenger/s Full Name/s"; "Passenger/s Full Name/s")
+                field("Passenger/s Full Name/s"; Rec."Passenger/s Full Name/s")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(From; From)
+                field(From; Rec.From)
                 {
                     ApplicationArea = Basic;
                 }
-                field("To"; "To")
+                field("To"; Rec."To")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Dept; Dept)
+                field(Dept; Rec.Dept)
                 {
                     ApplicationArea = Basic;
                 }

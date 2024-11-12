@@ -3,7 +3,7 @@ Page 51516143 "New Paybill Transactions List"
 {
     CardPageID = "New Paybill Card";
     PageType = List;
-    SourceTable = 51516290;
+    SourceTable = "File Movement Header";
 
     layout
     {
@@ -11,63 +11,63 @@ Page 51516143 "New Paybill Transactions List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Number"; "File Number")
+                field("File Number"; Rec."File Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Name"; "File Name")
+                field("File Name"; Rec."File Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Requested"; "Date Requested")
+                field("Date Requested"; Rec."Date Requested")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsiblity Center"; "Responsiblity Center")
+                field("Responsiblity Center"; Rec."Responsiblity Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Return Date"; "Expected Return Date")
+                field("Expected Return Date"; Rec."Expected Return Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Duration Requested"; "Duration Requested")
+                field("Duration Requested"; Rec."Duration Requested")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Returned"; "Date Returned")
+                field("Date Returned"; Rec."Date Returned")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Location"; "File Location")
+                field("File Location"; Rec."File Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current File Location"; "Current File Location")
+                field("Current File Location"; Rec."Current File Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved By"; "Retrieved By")
+                field("Retrieved By"; Rec."Retrieved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issuing File Location"; "Issuing File Location")
+                field("Issuing File Location"; Rec."Issuing File Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }

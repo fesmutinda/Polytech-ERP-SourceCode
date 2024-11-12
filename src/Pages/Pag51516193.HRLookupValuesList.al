@@ -17,17 +17,17 @@ Page 51516193 "HR Lookup Values List"
             repeater(Control1102755000)
             {
                 Editable = true;
-                field(Type;Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Code";Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -36,9 +36,9 @@ Page 51516193 "HR Lookup Values List"
         }
         area(factboxes)
         {
-            part(Control1102755004;"HR Lookup Values Factbox")
+            part(Control1102755004; "HR Lookup Values Factbox")
             {
-                SubPageLink = Type=field(Type);
+                SubPageLink = Type = field(Type);
             }
         }
     }

@@ -3,7 +3,7 @@ Page 51516174 "HR Job Responsiblities Lines"
 {
     CardPageID = "hr job responsibilities card";
     PageType = List;
-    SourceTable = 51516176;
+    SourceTable = "HR Job Responsiblities";
 
     layout
     {
@@ -11,17 +11,17 @@ Page 51516174 "HR Job Responsiblities Lines"
         {
             repeater(Control1000000000)
             {
-                field("Responsibility Code"; "Responsibility Code")
+                field("Responsibility Code"; Rec."Responsibility Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Responsibility Description"; "Responsibility Description")
+                field("Responsibility Description"; Rec."Responsibility Description")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = false;

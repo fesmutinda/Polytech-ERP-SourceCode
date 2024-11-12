@@ -2,7 +2,7 @@
 Page 51516175 "HR Job Applications Factbox"
 {
     PageType = ListPart;
-    SourceTable = 51516209;
+    SourceTable = "HR Job Applications";
 
     layout
     {
@@ -14,35 +14,35 @@ Page 51516175 "HR Job Applications Factbox"
                 Style = Strong;
                 StyleExpr = true;
             }
-            field("Application No"; "Application No")
+            field("Application No"; Rec."Application No")
             {
                 ApplicationArea = Basic;
             }
-            field("Date Applied"; "Date Applied")
+            field("Date Applied"; Rec."Date Applied")
             {
                 ApplicationArea = Basic;
             }
-            field("First Name"; "First Name")
+            field("First Name"; Rec."First Name")
             {
                 ApplicationArea = Basic;
             }
-            field("Middle Name"; "Middle Name")
+            field("Middle Name"; Rec."Middle Name")
             {
                 ApplicationArea = Basic;
             }
-            field("Last Name"; "Last Name")
+            field("Last Name"; Rec."Last Name")
             {
                 ApplicationArea = Basic;
             }
-            field(Qualified; Qualified)
+            field(Qualified; Rec.Qualified)
             {
                 ApplicationArea = Basic;
             }
-            field("Interview Invitation Sent"; "Interview Invitation Sent")
+            field("Interview Invitation Sent"; Rec."Interview Invitation Sent")
             {
                 ApplicationArea = Basic;
             }
-            field("ID Number"; "ID Number")
+            field("ID Number"; Rec."ID Number")
             {
                 ApplicationArea = Basic;
             }
@@ -52,15 +52,15 @@ Page 51516175 "HR Job Applications Factbox"
                 Style = Strong;
                 StyleExpr = true;
             }
-            field(Status; Status)
+            field(Status; Rec.Status)
             {
                 ApplicationArea = Basic;
             }
-            field(Age; Age)
+            field(Age; Rec.Age)
             {
                 ApplicationArea = Basic;
             }
-            field("Marital Status"; "Marital Status")
+            field("Marital Status"; Rec."Marital Status")
             {
                 ApplicationArea = Basic;
             }
@@ -70,17 +70,17 @@ Page 51516175 "HR Job Applications Factbox"
                 Style = Strong;
                 StyleExpr = true;
             }
-            field("Cell Phone Number"; "Cell Phone Number")
+            field("Cell Phone Number"; Rec."Cell Phone Number")
             {
                 ApplicationArea = Basic;
                 ExtendedDatatype = PhoneNo;
             }
-            field("E-Mail"; "E-Mail")
+            field("E-Mail"; Rec."E-Mail")
             {
                 ApplicationArea = Basic;
                 ExtendedDatatype = EMail;
             }
-            field("Work Phone Number"; "Work Phone Number")
+            field("Work Phone Number"; Rec."Work Phone Number")
             {
                 ApplicationArea = Basic;
                 ExtendedDatatype = PhoneNo;

@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516136 "Loan Rescheduling card"
 {
-    SourceTable = 51516069;
+    SourceTable = "Loan Rescheduling";
 
     layout
     {
@@ -9,78 +9,78 @@ Page 51516136 "Loan Rescheduling card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Previous Disbursement Date"; "Previous Disbursement Date")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Captured By"; "Captured By")
+                field("Previous Disbursement Date"; Rec."Previous Disbursement Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Capture Date"; "Capture Date")
+                field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Capture Date"; Rec."Capture Date")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Enabled = false;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(RepayMethod; RepayMethod)
+                field(RepayMethod; Rec.RepayMethod)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principle Amount"; "Principle Amount")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Principle Amount"; Rec."Principle Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Installments; Installments)
+                field("Outstanding Balance"; Rec."Outstanding Balance")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Installments; Rec.Installments)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Interests; Interests)
+                field(Interests; Rec.Interests)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Disbursement Date"; "Loan Disbursement Date")
+                field("Loan Disbursement Date"; Rec."Loan Disbursement Date")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Reschedule Date (Issue Date)';
                 }
-                field("Repayment Start Date"; "Repayment Start Date")
+                field("Repayment Start Date"; Rec."Repayment Start Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Completion Date"; "Loan Completion Date")
+                field("Loan Completion Date"; Rec."Loan Completion Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -104,14 +104,14 @@ Page 51516136 "Loan Rescheduling card"
 
                     trigger OnAction()
                     begin
-                        TestField("Loan Disbursement Date");
+                        Rec.TestField("Loan Disbursement Date");
                         if Confirm('Are you sure you want to reschedule this loan', false) = true then begin
                             FnRescheduleLoan();
                             Message('Loan successfully Rescheduled.');
-                            Rescheduled := true;
-                            "Rescheduled By" := UserId;
-                            "Posting Date" := Today;
-                            Modify
+                            Rec.Rescheduled := true;
+                            Rec."Rescheduled By" := UserId;
+                            Rec."Posting Date" := Today;
+                            Rec.Modify
                         end;
                     end;
                 }
@@ -124,7 +124,7 @@ Page 51516136 "Loan Rescheduling card"
 
                     trigger OnAction()
                     begin
-                        TestField("Loan Disbursement Date");
+                        Rec.TestField("Loan Disbursement Date");
                         // FnGenerateSchedule();
                         // Loans.RESET;
                         // Loans.SETRANGE(Loans."Loan  No.","Loan No");
@@ -135,7 +135,7 @@ Page 51516136 "Loan Rescheduling card"
 
 
                         LoanApp.Reset;
-                        LoanApp.SetRange(LoanApp."Loan  No.", "Loan No");
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan No");
                         if LoanApp.Find('-') then
                             Report.Run(51516477, true, false, LoanApp);
                     end;
@@ -162,22 +162,22 @@ Page 51516136 "Loan Rescheduling card"
         RepayCode: Code[30];
         WhichDay: Integer;
         TotalMRepay: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "SURESTEP Factory";
         LoanApp: Record 51516371;
 
     local procedure FnRescheduleLoan()
     begin
         Loans.Reset;
-        Loans.SetRange(Loans."Loan  No.", "Loan No");
+        Loans.SetRange(Loans."Loan  No.", Rec."Loan No");
         if Loans.Find('-') then begin
-            Loans."Approved Amount" := "Outstanding Balance";
-            Loans."Issued Date" := "Loan Disbursement Date";
-            Loans."Repayment Start Date" := "Repayment Start Date";
-            Loans."Expected Date of Completion" := "Loan Completion Date";
-            Loans.Installments := Installments;
-            Loans.Interest := Interests;
-            Loans."Loan Principle Repayment" := ROUND(("Outstanding Balance" / Installments), 0.5, '=');
-            Loans."Loan Interest Repayment" := ROUND((Interests * "Outstanding Balance" / 100), 0.5, '=');
+            Loans."Approved Amount" := Rec."Outstanding Balance";
+            Loans."Issued Date" := Rec."Loan Disbursement Date";
+            Loans."Repayment Start Date" := Rec."Repayment Start Date";
+            Loans."Expected Date of Completion" := Rec."Loan Completion Date";
+            Loans.Installments := Rec.Installments;
+            Loans.Interest := Rec.Interests;
+            Loans."Loan Principle Repayment" := ROUND((Rec."Outstanding Balance" / Rec.Installments), 0.5, '=');
+            Loans."Loan Interest Repayment" := ROUND((Rec.Interests * Rec."Outstanding Balance" / 100), 0.5, '=');
             Loans.Rescheduled := true;
             Loans."Reschedule by" := UpperCase(UserId);
 
@@ -190,7 +190,7 @@ Page 51516136 "Loan Rescheduling card"
     begin
         //MESSAGE('repay date is %1',"Repayment Start Date");
         Reschedule.Reset;
-        Reschedule.SetRange(Reschedule."No.", "No.");
+        Reschedule.SetRange(Reschedule."No.", Rec."No.");
         Reschedule.SetFilter(Reschedule."Outstanding Balance", '>%1', 0);
         if Reschedule.Find('-') then begin
             if ((Reschedule."Capture Date" <> 0D) and (Reschedule."Repayment Start Date" <> 0D)) then begin
@@ -198,16 +198,16 @@ Page 51516136 "Loan Rescheduling card"
                 Reschedule.TestField(Reschedule."Capture Date");
 
                 Rschedule.Reset;
-                Rschedule.SetRange(Rschedule."Loan No.", "Loan No");
+                Rschedule.SetRange(Rschedule."Loan No.", Rec."Loan No");
                 Rschedule.DeleteAll;
 
 
-                LoanAmount := "Outstanding Balance";
-                InterestRate := Interests;
-                RepayPeriod := Installments;
-                InitialInstal := Installments;
-                LBalance := "Outstanding Balance";
-                RunDate := "Repayment Start Date";
+                LoanAmount := Rec."Outstanding Balance";
+                InterestRate := Rec.Interests;
+                RepayPeriod := Rec.Installments;
+                InitialInstal := Rec.Installments;
+                LBalance := Rec."Outstanding Balance";
+                RunDate := Rec."Repayment Start Date";
                 Message(Format(RunDate));
                 InstalNo := 0;
 
@@ -292,14 +292,14 @@ Page 51516136 "Loan Rescheduling card"
                         Rschedule.Init;
                         Rschedule."Repayment Code" := RepayCode;
                         Rschedule."Interest Rate" := InterestRate;
-                        Rschedule."Loan No." := "Loan No";
+                        Rschedule."Loan No." := Rec."Loan No";
                         Rschedule."Loan Amount" := LoanAmount;
                         Rschedule."Instalment No" := InstalNo;
                         Rschedule."Repayment Date" := CalcDate('CM', RunDate);
                         //MESSAGE('rundate is %1',RunDate);
 
-                        Rschedule."Member No." := "Member No";
-                        Rschedule."Loan Category" := "Loan Product Type";
+                        Rschedule."Member No." := Rec."Member No";
+                        Rschedule."Loan Category" := Rec."Loan Product Type";
                         Rschedule."Monthly Repayment" := LPrincipal + LInterest;
 
                         Rschedule."Monthly Interest" := LInterest;

@@ -3,7 +3,7 @@ Page 51516179 "HR Employee Kin SF"
 {
     Caption = 'HR Employee Kin & Beneficiaries';
     PageType = List;
-    SourceTable = 51516173;
+    SourceTable = "HR Employee Kin";
 
     layout
     {
@@ -11,51 +11,51 @@ Page 51516179 "HR Employee Kin SF"
         {
             repeater(Control1000000000)
             {
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Relationship; Relationship)
+                field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;
                 }
-                field(SurName; SurName)
+                field(SurName; Rec.SurName)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Other Names"; "Other Names")
+                field("Other Names"; Rec."Other Names")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No/Passport No"; "ID No/Passport No")
+                field("ID No/Passport No"; Rec."ID No/Passport No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Of Birth"; "Date Of Birth")
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Occupation; Occupation)
+                field(Occupation; Rec.Occupation)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-mail"; "E-mail")
+                field("E-mail"; Rec."E-mail")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Office Tel No"; "Office Tel No")
+                field("Office Tel No"; Rec."Office Tel No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Home Tel No"; "Home Tel No")
+                field("Home Tel No"; Rec."Home Tel No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }

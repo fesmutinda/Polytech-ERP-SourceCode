@@ -2,7 +2,7 @@
 Page 51516163 "HR AppraisalCompanyTarget list"
 {
     PageType = List;
-    SourceTable = 51516221;
+    SourceTable = "HR Appraisal Company Target";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516163 "HR AppraisalCompanyTarget list"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Score; Score)
+                field(Score; Rec.Score)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Recommendations; Recommendations)
+                field(Recommendations; Rec.Recommendations)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Description 2"; "Description 2")
+                field("Description 2"; Rec."Description 2")
                 {
                     ApplicationArea = Basic;
                 }

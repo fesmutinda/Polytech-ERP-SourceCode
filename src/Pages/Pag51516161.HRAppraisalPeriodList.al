@@ -5,7 +5,7 @@ Page 51516161 "HR Appraisal Period List"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516186;
+    SourceTable = "HR Lookup Values";
     SourceTableView = where(Type = filter("Appraisal Period"));
 
     layout
@@ -14,43 +14,43 @@ Page 51516161 "HR Appraisal Period List"
         {
             repeater(Group)
             {
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Notice Period"; "Notice Period")
+                field("Notice Period"; Rec."Notice Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Appraisal Period"; "Current Appraisal Period")
+                field("Current Appraisal Period"; Rec."Current Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field(From; From)
+                field(From; Rec.From)
                 {
                     ApplicationArea = Basic;
                 }
-                field("To"; "To")
+                field("To"; Rec."To")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Date Modified"; "Last Date Modified")
+                field("Last Date Modified"; Rec."Last Date Modified")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516134 "Payment Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516113;
+    SourceTable = "Payment Line";
 
     layout
     {
@@ -10,54 +10,54 @@ Page 51516134 "Payment Lines"
         {
             repeater(Control1102760000)
             {
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Type"; "Member Type")
+                field("Member Type"; Rec."Member Type")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Board Member No';
                 }
-                field("Board Member Name"; "Board Member Name")
+                field("Board Member Name"; Rec."Board Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control1102760017; Amount)
+                field(Control1102760017; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
 
                     trigger OnValidate()
                     begin
-                        TestField("Global Dimension 1 Code");
-                        TestField("Shortcut Dimension 2 Code");
+                        Rec.TestField("Global Dimension 1 Code");
+                        Rec.TestField("Shortcut Dimension 2 Code");
 
                         //check if the payment reference is for farmer purchase
-                        if "Payment Reference" = "payment reference"::"Farmer Purchase" then begin
-                            if Amount <> xRec.Amount then begin
+                        if Rec."Payment Reference" = Rec."payment reference"::"Farmer Purchase" then begin
+                            if Rec.Amount <> xRec.Amount then begin
                                 Error('Amount cannot be modified');
                             end;
                         end;
 
-                        "Amount With VAT" := Amount;
+                        Rec."Amount With VAT" := Rec.Amount;
                         /*IF "Account Type" IN ["Account Type"::Customer,"Account Type"::Vendor,
                         "Account Type"::"G/L Account","Account Type"::"Bank Account","Account Type"::"Fixed Asset"] THEN
                         
@@ -274,72 +274,72 @@ Page 51516134 "Payment Lines"
 
                     end;
                 }
-                field("Travel Destination"; "Travel Destination")
+                field("Travel Destination"; Rec."Travel Destination")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Code"; "Withholding Tax Code")
+                field("Withholding Tax Code"; Rec."Withholding Tax Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("W/Tax Rate"; "W/Tax Rate")
+                field("W/Tax Rate"; Rec."W/Tax Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Amount"; "Withholding Tax Amount")
+                field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; "Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Refund Charge"; "Refund Charge")
+                field("Refund Charge"; Rec."Refund Charge")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applies-to Doc. Type"; "Applies-to Doc. Type")
+                field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Applies-to Doc. No."; "Applies-to Doc. No.")
+                field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applies-to ID"; "Applies-to ID")
+                field("Applies-to ID"; Rec."Applies-to ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Board Net Amount"; "Board Net Amount")
+                field("Board Net Amount"; Rec."Board Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Borad"; "Amount Borad")
+                field("Amount Borad"; Rec."Amount Borad")
                 {
                     ApplicationArea = Basic;
                 }
@@ -367,9 +367,9 @@ Page 51516134 "Payment Lines"
                         Text001: label 'You have selected not to Cancel the Document';
                     begin
                         PaymentLine.Reset;
-                        PaymentLine.SetRange(PaymentLine."Member Type", "Member Type");
+                        PaymentLine.SetRange(PaymentLine."Member Type", Rec."Member Type");
                         if PaymentLine.Find('-') then begin
-                            Validate("Amount Borad");
+                            Rec.Validate("Amount Borad");
                             Message(Format("Amount Borad"));
                             PaymentLine.Amount := "Amount Borad";
                             PaymentLine.Modify;
@@ -381,11 +381,11 @@ Page 51516134 "Payment Lines"
     }
 
     var
-        RecPayTypes: Record 51516107;
-        TarriffCodes: Record 51516110;
+        RecPayTypes: Record Logos;
+        TarriffCodes: Record "Item Groups";
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record 51516108;
+        CashierLinks: Record "Quote Specifications";
         LineNo: Integer;
         CustLedger: Record "Vendor Ledger Entry";
         CustLedger1: Record "Vendor Ledger Entry";
@@ -399,6 +399,6 @@ Page 51516134 "Payment Lines"
         VATToPay: Decimal;
         PInvLine: Record "Purch. Inv. Line";
         VATBase: Decimal;
-        PaymentLine: Record 51516113;
+        PaymentLine: Record "Payment Line";
 }
 

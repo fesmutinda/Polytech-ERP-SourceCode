@@ -5,7 +5,7 @@ Page 51516197 "HR Leave Ledger Entries"
     DataCaptionFields = "Leave Period";
     Editable = false;
     PageType = List;
-    SourceTable = 51516227;
+    SourceTable = "HR Leave Ledger Entries";
 
     layout
     {
@@ -13,35 +13,35 @@ Page 51516197 "HR Leave Ledger Entries"
         {
             repeater(Control1)
             {
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Period"; "Leave Period")
+                field("Leave Period"; Rec."Leave Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff No."; "Staff No.")
+                field("Staff No."; Rec."Staff No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff Name"; "Staff Name")
+                field("Staff Name"; Rec."Staff Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Type"; "Leave Type")
+                field("Leave Type"; Rec."Leave Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Entry Type"; "Leave Entry Type")
+                field("Leave Entry Type"; Rec."Leave Entry Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. of days"; "No. of days")
+                field("No. of days"; Rec."No. of days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Posting Description"; "Leave Posting Description")
+                field("Leave Posting Description"; Rec."Leave Posting Description")
                 {
                     ApplicationArea = Basic;
                 }
@@ -76,7 +76,7 @@ Page 51516197 "HR Leave Ledger Entries"
 
                 trigger OnAction()
                 begin
-                    Navigate.SetDoc("Posting Date", "Document No.");
+                    Navigate.SetDoc(Rec."Posting Date", Rec."Document No.");
                     Navigate.Run;
                 end;
             }

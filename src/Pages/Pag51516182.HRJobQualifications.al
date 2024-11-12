@@ -3,7 +3,7 @@ Page 51516182 "HR Job Qualifications"
 {
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Qualifications';
-    SourceTable = 51516185;
+    SourceTable = "HR Job Qualifications";
 
     layout
     {
@@ -11,15 +11,15 @@ Page 51516182 "HR Job Qualifications"
         {
             repeater(Control1)
             {
-                field("Qualification Type"; "Qualification Type")
+                field("Qualification Type"; Rec."Qualification Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

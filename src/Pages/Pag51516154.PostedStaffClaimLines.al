@@ -3,7 +3,7 @@ Page 51516154 "Posted Staff Claim Lines"
 {
     Editable = false;
     PageType = ListPart;
-    SourceTable = 51516011;
+    SourceTable = "Staff Claim Lines";
 
     layout
     {
@@ -11,28 +11,28 @@ Page 51516154 "Posted Staff Claim Lines"
         {
             repeater(Control1000000000)
             {
-                field("Advance Type"; "Advance Type")
+                field("Advance Type"; Rec."Advance Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Visible = false;
                 }
-                field("Account No:"; "Account No:")
+                field("Account No:"; Rec."Account No:")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Description';
                     Editable = true;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
 
@@ -64,28 +64,28 @@ Page 51516154 "Posted Staff Claim Lines"
 
                     end;
                 }
-                field("Claim Receipt No"; "Claim Receipt No")
+                field("Claim Receipt No"; Rec."Claim Receipt No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expenditure Date"; "Expenditure Date")
+                field("Expenditure Date"; Rec."Expenditure Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Purpose; Purpose)
+                field(Purpose; Rec.Purpose)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expenditure Description';
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shortcut Dimension 3 Code"; "Shortcut Dimension 3 Code")
+                field("Shortcut Dimension 3 Code"; Rec."Shortcut Dimension 3 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -99,8 +99,8 @@ Page 51516154 "Posted Staff Claim Lines"
     }
 
     var
-        PayHeader: Record 51516057;
-        PayLine: Record 51516003;
+        PayHeader: Record "Pending Vch. Surr. Line";
+        PayLine: Record "Receipt Line";
         Bal: Decimal;
 }
 

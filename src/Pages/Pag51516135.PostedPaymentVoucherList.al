@@ -20,55 +20,55 @@ Page 51516135 "Posted Payment Voucher List"
         {
             repeater(Control1102755000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Cashier; Cashier)
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Mode"; "Pay Mode")
+                field("Pay Mode"; Rec."Pay Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; "Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Narration"; "Payment Narration")
+                field("Payment Narration"; Rec."Payment Narration")
                 {
                     ApplicationArea = Basic;
                 }
-                field("On Behalf Of"; "On Behalf Of")
+                field("On Behalf Of"; Rec."On Behalf Of")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Payment Amount"; "Total Payment Amount")
+                field("Total Payment Amount"; Rec."Total Payment Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Status"; "Current Status")
+                field("Current Status"; Rec."Current Status")
                 {
                     ApplicationArea = Basic;
                 }
@@ -90,10 +90,10 @@ Page 51516135 "Posted Payment Voucher List"
 
                 trigger OnAction()
                 begin
-                    Reset;
-                    SetFilter("No.", "No.");
+                    Rec.Reset;
+                    Rec.SetFilter("No.", "No.");
                     Report.Run(51516125, true, true, Rec);
-                    Reset;
+                    Rec.Reset;
                 end;
             }
         }
