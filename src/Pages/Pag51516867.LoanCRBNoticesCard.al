@@ -365,7 +365,7 @@ Page 51516867 "Loan CRB Notices Card"
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         CanCancelApprovalForRecord: Boolean;
-        SurestepFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
         JTemplate: Code[20];
         JBatch: Code[20];
         GenSetup: Record 51516398;

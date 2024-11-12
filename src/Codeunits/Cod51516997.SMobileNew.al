@@ -61,7 +61,7 @@ Codeunit 51516997 "S-Mobile-New"
             VendorLedgEntry.SetCurrentkey(VendorLedgEntry."Entry No.");
             VendorLedgEntry.Ascending(false);
             VendorLedgEntry.SetRange(VendorLedgEntry."Vendor No.", Vendor."No.");
-            VendorLedgEntry.SetRange(VendorLedgEntry.Reversed, VendorLedgEntry.Reversed::"0");
+            VendorLedgEntry.SetRange(VendorLedgEntry.Reversed, VendorLedgEntry.Reversed = false);
             if VendorLedgEntry.FindSet then begin
                 MiniStmt := '';
                 repeat

@@ -36,7 +36,7 @@ Page 51516357 "PM Issue Tracker(User)"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("surestep status"; "surestep status")
+                field("Swizzsoft status"; "Swizzsoft status")
                 {
                     ApplicationArea = Basic;
                 }
@@ -44,7 +44,7 @@ Page 51516357 "PM Issue Tracker(User)"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Surestep Comments"; "Surestep Comments")
+                field("Swizzsoft Comments"; "Swizzsoft Comments")
                 {
                     ApplicationArea = Basic;
                 }

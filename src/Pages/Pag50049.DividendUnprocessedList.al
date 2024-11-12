@@ -370,7 +370,7 @@ Page 50049 "Dividend Unprocessed List"
         DividendAmount: Decimal;
         Jtemplate: Code[20];
         JBatch: Code[20];
-        SURESTEPFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
         TotalAmount: Decimal;
         DivProg: Record 51516393;
         GenSetup: Record 51516398;

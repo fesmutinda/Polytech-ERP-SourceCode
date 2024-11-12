@@ -550,10 +550,10 @@ Page 51516974 "Collateral Action Card"
                         if AvailableBal < LodgeFee then
                             Error('The Member has less than %1 Lodge Fee on their Account.Account Available Balance is %2', LodgeFee, AvailableBal);
 
-                        SurestepFactory.FnCreateGnlJournalLineBalanced(JTemplate, JBatch, DocNo, LineNo, TransType, Accounttype::Vendor, "Charge Account", Today, 'Package Lodge Charge_' + Format("Document No"), Balaccounttype::"G/L Account", LodgeFeeAccount,
+                        SwizzsoftFactory.FnCreateGnlJournalLineBalanced(JTemplate, JBatch, DocNo, LineNo, TransType, Accounttype::Vendor, "Charge Account", Today, 'Package Lodge Charge_' + Format("Document No"), Balaccounttype::"G/L Account", LodgeFeeAccount,
                         LodgeFee, 'BOSA', '');
 
-                        SurestepFactory.FnPostGnlJournalLine(JTemplate, JBatch);
+                        SwizzsoftFactory.FnPostGnlJournalLine(JTemplate, JBatch);
                     end;
 
                     Message('Charge Amount of %1 Deducted Successfuly', LodgeFee);
@@ -700,8 +700,13 @@ Page 51516974 "Collateral Action Card"
         ObjPackageTypes: Record 51516908;
         LodgeFee: Decimal;
         LodgeFeeAccount: Code[20];
+<<<<<<< HEAD
         SurestepFactory: Codeunit UnknownCodeunit51516009;
         ObjNoSeries: Record 51516399;
+=======
+        SwizzsoftFactory: Codeunit UnknownCodeunit51516009;
+        ObjNoSeries: Record UnknownRecord51516399;
+>>>>>>> a70ded79f043457f7f86d8f99a53b565838eeea4
         VarPackageNo: Code[20];
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjPackage: Record 51516904;

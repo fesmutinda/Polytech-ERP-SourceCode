@@ -256,4 +256,5 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Debtors to Ex-Members';
     // }
+    value(63; "Loan Repayment") { }
 }
