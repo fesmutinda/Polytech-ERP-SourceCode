@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 59005 "Process Bank Acc. Rec Liness"
 {
-    Permissions = TableData "Data Exch."=rimd;
+    Permissions = TableData "Data Exch." = rimd;
     TableNo = 59001;
 
     trigger OnRun()
@@ -10,16 +10,16 @@ Codeunit 59005 "Process Bank Acc. Rec Liness"
         ProcessDataExch: Codeunit "Process Data Exch.";
         RecRef: RecordRef;
     begin
-        DataExch.Get("Posting Exch. Entry No.");
+        DataExch.Get(DataExch."Entry No.");
         RecRef.GetTable(Rec);
-        ProcessDataExch.ProcessAllLinesColumnMapping(DataExch,RecRef);
+        ProcessDataExch.ProcessAllLinesColumnMapping(DataExch, RecRef);
     end;
 
     var
         ProgressWindowMsg: label 'Please wait while the operation is being completed.';
 
 
-    procedure ImportBankStatement(BankAccRecon: Record 59000;DataExch: Record "Data Exch."): Boolean
+    procedure ImportBankStatement(BankAccRecon: Record 59000; DataExch: Record "Data Exch."): Boolean
     var
         BankAcc: Record "Bank Account";
         DataExchDef: Record "Data Exch. Def";
@@ -31,31 +31,31 @@ Codeunit 59005 "Process Bank Acc. Rec Liness"
         BankAcc.Get(BankAccRecon."Bank Account No.");
         BankAcc.GetDataExchDef(DataExchDef);
 
-        if not DataExch.ImportToDataExch(DataExchDef)then
-          exit(false);
+        if not DataExch.ImportToDataExch(DataExchDef) then
+            exit(false);
 
         ProgressWindow.Open(ProgressWindowMsg);
 
-        CreateBankAccRecLineTemplate(BankAccReconLine,BankAccRecon,DataExch);
-        DataExchLineDef.SetRange("Data Exch. Def Code",DataExchDef.Code);
+        CreateBankAccRecLineTemplate(BankAccReconLine, BankAccRecon, DataExch);
+        DataExchLineDef.SetRange("Data Exch. Def Code", DataExchDef.Code);
         DataExchLineDef.FindFirst;
 
-        DataExchMapping.Get(DataExchDef.Code,DataExchLineDef.Code,Database::"Bank Acc. Reconciliation Lines");
+        DataExchMapping.Get(DataExchDef.Code, DataExchLineDef.Code, Database::"Bank Acc. Reconciliation Lines");
 
         if DataExchMapping."Pre-Mapping Codeunit" <> 0 then
-          Codeunit.Run(DataExchMapping."Pre-Mapping Codeunit",BankAccReconLine);
+            Codeunit.Run(DataExchMapping."Pre-Mapping Codeunit", BankAccReconLine);
 
         DataExchMapping.TestField("Mapping Codeunit");
-        Codeunit.Run(DataExchMapping."Mapping Codeunit",BankAccReconLine);
+        Codeunit.Run(DataExchMapping."Mapping Codeunit", BankAccReconLine);
 
         if DataExchMapping."Post-Mapping Codeunit" <> 0 then
-          Codeunit.Run(DataExchMapping."Post-Mapping Codeunit",BankAccReconLine);
+            Codeunit.Run(DataExchMapping."Post-Mapping Codeunit", BankAccReconLine);
 
         ProgressWindow.Close;
         exit(true);
     end;
 
-    local procedure CreateBankAccRecLineTemplate(var BankAccReconLine: Record 59001;BankAccRecon: Record 59000;DataExch: Record "Data Exch.")
+    local procedure CreateBankAccRecLineTemplate(var BankAccReconLine: Record 59001; BankAccRecon: Record 59000; DataExch: Record "Data Exch.")
     begin
         BankAccReconLine.Init;
         BankAccReconLine."Statement Type" := BankAccRecon."Statement Type";
