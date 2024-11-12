@@ -8,19 +8,19 @@ Codeunit 59006 "Bank Acc. Recon. Apply Entry"
     end;
 
     var
-        BankAccReconLine2: Record 59001;
+        BankAccReconLine2: Record "Bank Acc. Reconciliation Line";
         CheckLedgEntry: Record "Check Ledger Entry";
-        ApplyCheckLedgEntry: Page 59005;
+        ApplyCheckLedgEntry: Page "Apply Check Ledger Entries";
         OK: Boolean;
 
 
-    procedure ApplyEntries(var BankAccReconLine: Record 59001)
+    procedure ApplyEntries(var BankAccReconLine: Record "Bank Acc. Reconciliation Line")
     begin
         BankAccReconLine2 := BankAccReconLine;
         BankAccReconLine2.TestField("Ready for Application", true);
         with BankAccReconLine2 do
-            case Type of
-                Type::"Check Ledger Entry":
+            case "Statement Type" of
+                "Statement Type" ::"Payment Application":
                     begin
                         CheckLedgEntry.Reset;
                         CheckLedgEntry.SetCurrentkey("Bank Account No.", Open);

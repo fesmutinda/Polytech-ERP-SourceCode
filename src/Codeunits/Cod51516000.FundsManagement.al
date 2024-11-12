@@ -19,11 +19,11 @@ Codeunit 51516000 "Funds Management"
     var
         GenJnlLine: Record "Gen. Journal Line";
         LineNo: Integer;
-        PaymentLine: Record 51516001;
+        PaymentLine: Record "Payment Line";
         PaymentHeader: Record 51516000;
         SourceCode: Code[20];
         BankLedgers: Record "Bank Account Ledger Entry";
-        PaymentLine2: Record 51516001;
+        PaymentLine2: Record "Payment Line";
         PaymentHeader2: Record 51516000;
     begin
         PaymentHeader.TransferFields("Payment Header", true);
@@ -83,7 +83,7 @@ Codeunit 51516000 "Funds Management"
         if PaymentHeader."Payment Mode" <> PaymentHeader."payment mode"::Cheque then begin
             GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::" "
         end else begin
-            if PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::" " then
+            if PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::"Computer Cheque" then
                 GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::"Computer Check"
             else
                 GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::" "
@@ -393,7 +393,7 @@ Codeunit 51516000 "Funds Management"
 
         //Before posting if its computer cheque,print the cheque
         if (PaymentHeader."Payment Mode" = PaymentHeader."payment mode"::Cheque) and
-        (PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::" ") then begin
+        (PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::"Computer Cheque") then begin
             DocPrint.PrintCheck(GenJnlLine);
             Codeunit.Run(Codeunit::"Adjust Gen. Journal Balance", GenJnlLine);
         end;
@@ -438,11 +438,11 @@ Codeunit 51516000 "Funds Management"
     var
         GenJnlLine: Record "Gen. Journal Line";
         LineNo: Integer;
-        PaymentLine: Record 51516001;
-        PaymentHeader: Record 51516000;
+        PaymentLine: Record "Payment Line";
+        PaymentHeader: Record "Payment Header";
         SourceCode: Code[20];
         BankLedgers: Record "Bank Account Ledger Entry";
-        PaymentLine2: Record 51516001;
+        PaymentLine2: Record "Payment Line";
         PaymentHeader2: Record 51516000;
     begin
         PaymentHeader.TransferFields("Payment Header", true);
@@ -502,7 +502,7 @@ Codeunit 51516000 "Funds Management"
         if PaymentHeader."Payment Mode" <> PaymentHeader."payment mode"::Cheque then begin
             GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::" "
         end else begin
-            if PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::" " then
+            if PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::"Computer Cheque" then
                 GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::"Computer Check"
             else
                 GenJnlLine."Bank Payment Type" := GenJnlLine."bank payment type"::" "
@@ -814,13 +814,14 @@ Codeunit 51516000 "Funds Management"
 
         //Before posting if its computer cheque,print the cheque
         if (PaymentHeader."Payment Mode" = PaymentHeader."payment mode"::Cheque) and
-        (PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::" ") then begin
+        (PaymentHeader."Cheque Type" = PaymentHeader."cheque type"::"Computer Cheque") then begin
             DocPrint.PrintCheck(GenJnlLine);
             Codeunit.Run(Codeunit::"Adjust Gen. Journal Balance", GenJnlLine);
         end;
 
         //Now Post the Journal Lines
         Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJnlLine);
+
         //***************************************************End Posting****************************************************************//
         Commit;
         //*************************************************Update Document**************************************************************//
@@ -895,7 +896,7 @@ Codeunit 51516000 "Funds Management"
         //ELSE
         //GenJnlLine."Document Type":=GenJnlLine."Document Type"::Payment;
         GenJnlLine."Document No." := ReceiptHeader."No.";
-        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
         GenJnlLine."Account Type" := GenJnlLine."account type"::"Bank Account";
         GenJnlLine."Account No." := ReceiptHeader."Bank Code";
@@ -943,7 +944,7 @@ Codeunit 51516000 "Funds Management"
                 GenJnlLine."Line No." := LineNo;
                 GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                 GenJnlLine."Document No." := ReceiptLine."Document No";
-                GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                 GenJnlLine."Account Type" := ReceiptLine."Account Type";
                 GenJnlLine."Account No." := ReceiptLine."Account Code";
                 GenJnlLine.Validate(GenJnlLine."Account No.");
@@ -1003,7 +1004,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -1053,7 +1054,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := ReceiptLine."Account Type";
                         GenJnlLine."Account No." := ReceiptLine."Account Code";
@@ -1106,7 +1107,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -1155,7 +1156,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := ReceiptLine."Account Type";
                         GenJnlLine."Account No." := ReceiptLine."Account Code";
@@ -1286,7 +1287,7 @@ Codeunit 51516000 "Funds Management"
         //ELSE
         //GenJnlLine."Document Type":=GenJnlLine."Document Type"::Payment;
         GenJnlLine."Document No." := ReceiptHeader."No.";
-        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
         GenJnlLine."Account Type" := GenJnlLine."account type"::"Bank Account";
         GenJnlLine."Account No." := ReceiptHeader."Bank Code";
@@ -1334,7 +1335,7 @@ Codeunit 51516000 "Funds Management"
                 GenJnlLine."Line No." := LineNo;
                 GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                 GenJnlLine."Document No." := ReceiptLine."Document No";
-                GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                 GenJnlLine."Account Type" := ReceiptLine."Account Type";
                 GenJnlLine."Account No." := ReceiptLine."Account Code";
                 GenJnlLine.Validate(GenJnlLine."Account No.");
@@ -1394,7 +1395,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -1444,7 +1445,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := ReceiptLine."Account Type";
                         GenJnlLine."Account No." := ReceiptLine."Account Code";
@@ -1497,7 +1498,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -1546,7 +1547,7 @@ Codeunit 51516000 "Funds Management"
                         GenJnlLine."Source Code" := SourceCode;
                         GenJnlLine."Posting Date" := ReceiptHeader."Posting Date";
                         GenJnlLine."Document No." := ReceiptLine."Document No";
-                        GenJnlLine."Document Type" := GenJnlLine."document type"::"7";
+                        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
                         GenJnlLine."External Document No." := ReceiptHeader."Cheque No";
                         GenJnlLine."Account Type" := ReceiptLine."Account Type";
                         GenJnlLine."Account No." := ReceiptLine."Account Code";
@@ -1745,7 +1746,7 @@ Codeunit 51516000 "Funds Management"
                             if ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"1" then
                                 UpdateApplicant(ReceiptLine2."Applicant No", ReceiptHeader2."No.");
 
-                            if (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"2") or (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"3") then
+                            if (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"2") or (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"2") then
                                 UpdateMemberYears(ReceiptLine2."Account Code", ReceiptLine2."Fee Type", ReceiptLine2."Fee SubType",
                                 ReceiptLine2."Fee Description", ReceiptLine2."From Year", ReceiptLine2.ToYear, ReceiptHeader2.Date);
                         until ReceiptLine2.Next = 0;
@@ -2087,8 +2088,8 @@ Codeunit 51516000 "Funds Management"
 
     local procedure CustomerLinesExist("Payment Header": Record 51516000): Boolean
     var
-        "Payment Line": Record 51516001;
-        "Payment Line2": Record 51516001;
+        "Payment Line": Record "Payment Line";
+        "Payment Line2": Record "Payment Line";
     begin
         "Payment Line".Reset;
         "Payment Line".SetRange("Payment Line".No, "Payment Header"."No.");

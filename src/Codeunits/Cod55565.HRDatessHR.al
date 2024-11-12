@@ -152,7 +152,7 @@ Codeunit 55565 "HR Datess-HR"
         t: Integer;
         s: Integer;
         WeekendDays: Integer;
-        AbsencePreferences: Record 55592;
+        AbsencePreferences: Record "HR Absence Preferences";
         Holidays: Integer;
     begin
         if ((StartDate <> 0D) and (EndDate <> 0D)) then begin
@@ -392,7 +392,7 @@ Codeunit 55565 "HR Datess-HR"
 
     procedure ReservedDates(NewStartDate: Date; NewEndDate: Date; EmployeeNumber: Code[20]) Reserved: Boolean
     var
-        AbsenceHoliday: Record 55585;
+        AbsenceHoliday: Record "HR Absence and Holiday";
         OK: Boolean;
     begin
         AbsenceHoliday.SetFilter("Employee No.", EmployeeNumber);
@@ -453,21 +453,21 @@ Codeunit 55565 "HR Datess-HR"
 
     procedure DetermineHolidays(DateStart: Date; DateEnd: Date) Holiday: Integer
     var
-        StatutoryHoliday: Record 55593;
-        NextDay: Date;
+    // StatutoryHoliday: Record 55593;
+    // NextDay: Date;
     begin
-        Holiday := 0;
-        while (DateStart <= DateEnd) do begin
-            dayOfWeek := Date2dwy(DateStart, 1);
-            StatutoryHoliday.Find('-');
-            repeat
-                if (DateStart = StatutoryHoliday."Non Working Dates") then
-                    Holiday := Holiday + StatutoryHoliday.Code;
+        // Holiday := 0;
+        // while (DateStart <= DateEnd) do begin
+        //     dayOfWeek := Date2dwy(DateStart, 1);
+        //     StatutoryHoliday.Find('-');
+        //     repeat
+        //         if (DateStart = StatutoryHoliday."Non Working Dates") then
+        //             Holiday := Holiday + StatutoryHoliday.Code;
 
-            until StatutoryHoliday.Next = 0;
-            NextDay := CalculateNextDay(DateStart);
-            DateStart := NextDay;
-        end;
+        //     until StatutoryHoliday.Next = 0;
+        //     NextDay := CalculateNextDay(DateStart);
+        //     DateStart := NextDay;
+        // end;
     end;
 
 
