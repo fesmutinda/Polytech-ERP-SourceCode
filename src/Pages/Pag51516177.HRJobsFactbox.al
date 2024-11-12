@@ -2,61 +2,61 @@
 Page 51516177 "HR Jobs Factbox"
 {
     PageType = ListPart;
-    SourceTable = 51516177;
+    SourceTable = "HR Jobss";
 
     layout
     {
         area(content)
         {
-            field("Job ID"; "Job ID")
+            field("Job ID"; Rec."Job ID")
             {
                 ApplicationArea = Basic;
             }
-            field("Job Description"; "Job Description")
+            field("Job Description"; Rec."Job Description")
             {
                 ApplicationArea = Basic;
             }
-            field("No of Posts"; "No of Posts")
+            field("No of Posts"; Rec."No of Posts")
             {
                 ApplicationArea = Basic;
             }
-            field("Position Reporting to"; "Position Reporting to")
+            field("Position Reporting to"; Rec."Position Reporting to")
             {
                 ApplicationArea = Basic;
             }
-            field("Occupied Positions"; "Occupied Positions")
+            field("Occupied Positions"; Rec."Occupied Positions")
             {
                 ApplicationArea = Basic;
             }
-            field("Vacant Positions"; "Vacant Positions")
+            field("Vacant Positions"; Rec."Vacant Positions")
             {
                 ApplicationArea = Basic;
             }
-            field(Category; Category)
+            field(Category; Rec.Category)
             {
                 ApplicationArea = Basic;
             }
-            field(Grade; Grade)
+            field(Grade; Rec.Grade)
             {
                 ApplicationArea = Basic;
             }
-            field("Employee Requisitions"; "Employee Requisitions")
+            field("Employee Requisitions"; Rec."Employee Requisitions")
             {
                 ApplicationArea = Basic;
             }
-            field("Supervisor Name"; "Supervisor Name")
+            field("Supervisor Name"; Rec."Supervisor Name")
             {
                 ApplicationArea = Basic;
             }
-            field(Status; Status)
+            field(Status; Rec.Status)
             {
                 ApplicationArea = Basic;
             }
-            field("Responsibility Center"; "Responsibility Center")
+            field("Responsibility Center"; Rec."Responsibility Center")
             {
                 ApplicationArea = Basic;
             }
-            field("Date Created"; "Date Created")
+            field("Date Created"; Rec."Date Created")
             {
                 ApplicationArea = Basic;
             }
@@ -69,7 +69,7 @@ Page 51516177 "HR Jobs Factbox"
 
     trigger OnAfterGetRecord()
     begin
-        Validate("Vacant Positions");
+        Rec.Validate("Vacant Positions");
     end;
 }
 

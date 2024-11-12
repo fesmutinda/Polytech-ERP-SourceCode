@@ -10,43 +10,43 @@ Page 51516144 "New Paybill Lines"
         {
             repeater(Group)
             {
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Purpose/Description"; "Purpose/Description")
+                field("Purpose/Description"; Rec."Purpose/Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Type"; "File Type")
+                field("File Type"; Rec."File Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control1000000013; "Global Dimension 1 Code")
+                field(Control1000000013; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control1000000014; "Global Dimension 2 Code")
+                field(Control1000000014; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }

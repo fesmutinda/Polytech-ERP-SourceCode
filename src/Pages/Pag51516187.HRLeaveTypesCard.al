@@ -2,7 +2,7 @@
 Page 51516187 "HR Leave Types Card"
 {
     PageType = Card;
-    SourceTable = 51516182;
+    SourceTable = "HR Leave Types";
 
     layout
     {
@@ -11,55 +11,55 @@ Page 51516187 "HR Leave Types Card"
             group(General)
             {
                 Caption = 'General';
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Days; Days)
+                field(Days; Rec.Days)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Acrue Days"; "Acrue Days")
+                field("Acrue Days"; Rec."Acrue Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unlimited Days"; "Unlimited Days")
+                field("Unlimited Days"; Rec."Unlimited Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Gender; Gender)
+                field(Gender; Rec.Gender)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance; Balance)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Carry Forward Days"; "Max Carry Forward Days")
+                field("Max Carry Forward Days"; Rec."Max Carry Forward Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Carry Forward Allowed"; "Carry Forward Allowed")
+                field("Carry Forward Allowed"; Rec."Carry Forward Allowed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Inclusive of Non Working Days"; "Inclusive of Non Working Days")
+                field("Inclusive of Non Working Days"; Rec."Inclusive of Non Working Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Inclusive of Saturday"; "Inclusive of Saturday")
+                field("Inclusive of Saturday"; Rec."Inclusive of Saturday")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Inclusive of Sunday"; "Inclusive of Sunday")
+                field("Inclusive of Sunday"; Rec."Inclusive of Sunday")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Inclusive of Holidays"; "Inclusive of Holidays")
+                field("Inclusive of Holidays"; Rec."Inclusive of Holidays")
                 {
                     ApplicationArea = Basic;
                 }

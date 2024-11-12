@@ -2,7 +2,7 @@
 Page 51516168 "HR Appraisal Assignment List"
 {
     PageType = List;
-    SourceTable = 51516246;
+    SourceTable = "HR Appraisal Assignment";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516168 "HR Appraisal Assignment List"
         {
             repeater(Group)
             {
-                field("Employee Code"; "Employee Code")
+                field("Employee Code"; Rec."Employee Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Categorize As"; "Categorize As")
+                field("Categorize As"; Rec."Categorize As")
                 {
                     ApplicationArea = Basic;
                 }
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Editable = false;

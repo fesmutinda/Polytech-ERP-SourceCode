@@ -3,7 +3,7 @@ Page 51516199 "HR Employee-List PR"
 {
     Editable = false;
     PageType = List;
-    SourceTable = 51516160;
+    SourceTable = "HR Employees";
     SourceTableView = sorting("No.")
                       order(ascending)
                       where(Status = filter(Active));
@@ -14,399 +14,399 @@ Page 51516199 "HR Employee-List PR"
         {
             repeater(Control1)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Initials; Initials)
+                field(Initials; Rec.Initials)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Length Of Service"; "Length Of Service")
+                field("Length Of Service"; Rec."Length Of Service")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Of Join"; "Date Of Join")
+                field("Date Of Join"; Rec."Date Of Join")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Search Name"; "Search Name")
+                field("Search Name"; Rec."Search Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Postal Address"; "Postal Address")
+                field("Postal Address"; Rec."Postal Address")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Postal Address2"; "Postal Address2")
+                field("Postal Address2"; Rec."Postal Address2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Postal Address3"; "Postal Address3")
+                field("Postal Address3"; Rec."Postal Address3")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Post Code"; "Post Code")
+                field("Post Code"; Rec."Post Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Residential Address"; "Residential Address")
+                field("Residential Address"; Rec."Residential Address")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Residential Address2"; "Residential Address2")
+                field("Residential Address2"; Rec."Residential Address2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Residential Address3"; "Residential Address3")
+                field("Residential Address3"; Rec."Residential Address3")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Post Code2"; "Post Code2")
+                field("Post Code2"; Rec."Post Code2")
                 {
                     ApplicationArea = Basic;
                 }
-                field(City; City)
+                field(City; Rec.City)
                 {
                     ApplicationArea = Basic;
                 }
-                field(County; County)
+                field(County; Rec.County)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Home Phone Number"; "Home Phone Number")
+                field("Home Phone Number"; Rec."Home Phone Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cellular Phone Number"; "Cellular Phone Number")
+                field("Cellular Phone Number"; Rec."Cellular Phone Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Work Phone Number"; "Work Phone Number")
+                field("Work Phone Number"; Rec."Work Phone Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ext."; "Ext.")
+                field("Ext."; Rec."Ext.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-Mail"; "E-Mail")
+                field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID Number"; "ID Number")
+                field("ID Number"; Rec."ID Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Union Code"; "Union Code")
+                field("Union Code"; Rec."Union Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("UIF Number"; "UIF Number")
+                field("UIF Number"; Rec."UIF Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Gender; Gender)
+                field(Gender; Rec.Gender)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Country Code"; "Country Code")
+                field("Country Code"; Rec."Country Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Statistics Group Code"; "Statistics Group Code")
+                field("Statistics Group Code"; Rec."Statistics Group Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Office; Office)
+                field(Office; Rec.Office)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Resource No."; "Resource No.")
+                field("Resource No."; Rec."Resource No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Date Modified"; "Last Date Modified")
+                field("Last Date Modified"; Rec."Last Date Modified")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fax Number"; "Fax Number")
+                field("Fax Number"; Rec."Fax Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Company E-Mail"; "Company E-Mail")
+                field("Company E-Mail"; Rec."Company E-Mail")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Title; Title)
+                field(Title; Rec.Title)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salespers./Purch. Code"; "Salespers./Purch. Code")
+                field("Salespers./Purch. Code"; Rec."Salespers./Purch. Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Known As"; "Known As")
+                field("Known As"; Rec."Known As")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Position; Position)
+                field(Position; Rec.Position)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Full / Part Time"; "Full / Part Time")
+                field("Full / Part Time"; Rec."Full / Part Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Contract Type"; "Contract Type")
+                field("Contract Type"; Rec."Contract Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Contract End Date"; "Contract End Date")
+                field("Contract End Date"; Rec."Contract End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Notice Period"; "Notice Period")
+                field("Notice Period"; Rec."Notice Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Union Member?"; "Union Member?")
+                field("Union Member?"; Rec."Union Member?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shift Worker?"; "Shift Worker?")
+                field("Shift Worker?"; Rec."Shift Worker?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Contracted Hours"; "Contracted Hours")
+                field("Contracted Hours"; Rec."Contracted Hours")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Period"; "Pay Period")
+                field("Pay Period"; Rec."Pay Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cost Code"; "Cost Code")
+                field("Cost Code"; Rec."Cost Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("UIF Contributor?"; "UIF Contributor?")
+                field("UIF Contributor?"; Rec."UIF Contributor?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Marital Status"; "Marital Status")
+                field("Marital Status"; Rec."Marital Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ethnic Origin"; "Ethnic Origin")
+                field("Ethnic Origin"; Rec."Ethnic Origin")
                 {
                     ApplicationArea = Basic;
                 }
-                field("First Language (R/W/S)"; "First Language (R/W/S)")
+                field("First Language (R/W/S)"; Rec."First Language (R/W/S)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Driving Licence"; "Driving Licence")
+                field("Driving Licence"; Rec."Driving Licence")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vehicle Registration Number"; "Vehicle Registration Number")
+                field("Vehicle Registration Number"; Rec."Vehicle Registration Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Disabled; Disabled)
+                field(Disabled; Rec.Disabled)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Health Assesment?"; "Health Assesment?")
+                field("Health Assesment?"; Rec."Health Assesment?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Health Assesment Date"; "Health Assesment Date")
+                field("Health Assesment Date"; Rec."Health Assesment Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Of Birth"; "Date Of Birth")
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Age; Age)
+                field(Age; Rec.Age)
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Of Probation Date"; "End Of Probation Date")
+                field("End Of Probation Date"; Rec."End Of Probation Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pension Scheme Join"; "Pension Scheme Join")
+                field("Pension Scheme Join"; Rec."Pension Scheme Join")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Pension Scheme"; "Time Pension Scheme")
+                field("Time Pension Scheme"; Rec."Time Pension Scheme")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Scheme Join"; "Medical Scheme Join")
+                field("Medical Scheme Join"; Rec."Medical Scheme Join")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Medical Scheme"; "Time Medical Scheme")
+                field("Time Medical Scheme"; Rec."Time Medical Scheme")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Of Leaving"; "Date Of Leaving")
+                field("Date Of Leaving"; Rec."Date Of Leaving")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Paterson; Paterson)
+                field(Paterson; Rec.Paterson)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Peromnes; Peromnes)
+                field(Peromnes; Rec.Peromnes)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Hay; Hay)
+                field(Hay; Rec.Hay)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Castellion; Castellion)
+                field(Castellion; Rec.Castellion)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Allow Overtime"; "Allow Overtime")
+                field("Allow Overtime"; Rec."Allow Overtime")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Scheme No."; "Medical Scheme No.")
+                field("Medical Scheme No."; Rec."Medical Scheme No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Scheme Head Member"; "Medical Scheme Head Member")
+                field("Medical Scheme Head Member"; Rec."Medical Scheme Head Member")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Number Of Dependants"; "Number Of Dependants")
+                field("Number Of Dependants"; Rec."Number Of Dependants")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Scheme Name"; "Medical Scheme Name")
+                field("Medical Scheme Name"; Rec."Medical Scheme Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Receiving Car Allowance ?"; "Receiving Car Allowance ?")
+                field("Receiving Car Allowance ?"; Rec."Receiving Car Allowance ?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Second Language (R/W/S)"; "Second Language (R/W/S)")
+                field("Second Language (R/W/S)"; Rec."Second Language (R/W/S)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Additional Language"; "Additional Language")
+                field("Additional Language"; Rec."Additional Language")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cell Phone Reimbursement?"; "Cell Phone Reimbursement?")
+                field("Cell Phone Reimbursement?"; Rec."Cell Phone Reimbursement?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Reimbursed"; "Amount Reimbursed")
+                field("Amount Reimbursed"; Rec."Amount Reimbursed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("UIF Country"; "UIF Country")
+                field("UIF Country"; Rec."UIF Country")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Direct/Indirect"; "Direct/Indirect")
+                field("Direct/Indirect"; Rec."Direct/Indirect")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Primary Skills Category"; "Primary Skills Category")
+                field("Primary Skills Category"; Rec."Primary Skills Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Level; Level)
+                field(Level; Rec.Level)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Termination Category"; "Termination Category")
+                field("Termination Category"; Rec."Termination Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Specification"; "Job Specification")
+                field("Job Specification"; Rec."Job Specification")
                 {
                     ApplicationArea = Basic;
                 }
-                field(DateOfBirth; DateOfBirth)
+                field(DateOfBirth; Rec.DateOfBirth)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DateEngaged; DateEngaged)
+                field(DateEngaged; Rec.DateEngaged)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Citizenship; Citizenship)
+                field(Citizenship; Rec.Citizenship)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Name Of Manager"; "Name Of Manager")
+                field("Name Of Manager"; Rec."Name Of Manager")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disabling Details"; "Disabling Details")
+                field("Disabling Details"; Rec."Disabling Details")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disability Grade"; "Disability Grade")
+                field("Disability Grade"; Rec."Disability Grade")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Passport Number"; "Passport Number")
+                field("Passport Number"; Rec."Passport Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("2nd Skills Category"; "2nd Skills Category")
+                field("2nd Skills Category"; Rec."2nd Skills Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("3rd Skills Category"; "3rd Skills Category")
+                field("3rd Skills Category"; Rec."3rd Skills Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field(PensionJoin; PensionJoin)
+                field(PensionJoin; Rec.PensionJoin)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DateLeaving; DateLeaving)
+                field(DateLeaving; Rec.DateLeaving)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Region; Region)
+                field(Region; Rec.Region)
                 {
                     ApplicationArea = Basic;
                 }

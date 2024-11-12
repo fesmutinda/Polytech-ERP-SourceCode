@@ -5,7 +5,7 @@ Page 51516170 "HR Setup"
     InsertAllowed = false;
     PageType = Card;
     RefreshOnActivate = false;
-    SourceTable = 51516181;
+    SourceTable = "HR Setup";
 
     layout
     {
@@ -14,35 +14,35 @@ Page 51516170 "HR Setup"
             group(General)
             {
                 Caption = 'General';
-                field("Leave Posting Period[FROM]"; "Leave Posting Period[FROM]")
+                field("Leave Posting Period[FROM]"; Rec."Leave Posting Period[FROM]")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Posting Period[TO]"; "Leave Posting Period[TO]")
+                field("Leave Posting Period[TO]"; Rec."Leave Posting Period[TO]")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Leave Posting Template"; "Default Leave Posting Template")
+                field("Default Leave Posting Template"; Rec."Default Leave Posting Template")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Positive Leave Posting Batch"; "Positive Leave Posting Batch")
+                field("Positive Leave Posting Batch"; Rec."Positive Leave Posting Batch")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Negative Leave Posting Batch"; "Negative Leave Posting Batch")
+                field("Negative Leave Posting Batch"; Rec."Negative Leave Posting Batch")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Appraisal Rating"; "Max Appraisal Rating")
+                field("Max Appraisal Rating"; Rec."Max Appraisal Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Template"; "Leave Template")
+                field("Leave Template"; Rec."Leave Template")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Batch"; "Leave Batch")
+                field("Leave Batch"; Rec."Leave Batch")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,103 +50,103 @@ Page 51516170 "HR Setup"
             group(Numbering)
             {
                 Caption = 'Numbering';
-                field("Base Calendar"; "Base Calendar")
+                field("Base Calendar"; Rec."Base Calendar")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Nos."; "Employee Nos.")
+                field("Employee Nos."; Rec."Employee Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deployed Nos"; "Deployed Nos")
+                field("Deployed Nos"; Rec."Deployed Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Full Time Nos"; "Full Time Nos")
+                field("Full Time Nos"; Rec."Full Time Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Board Nos"; "Board Nos")
+                field("Board Nos"; Rec."Board Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Committee Nos"; "Committee Nos")
+                field("Committee Nos"; Rec."Committee Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Training Application Nos."; "Training Application Nos.")
+                field("Training Application Nos."; Rec."Training Application Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Application Nos."; "Leave Application Nos.")
+                field("Leave Application Nos."; Rec."Leave Application Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disciplinary Cases Nos."; "Disciplinary Cases Nos.")
+                field("Disciplinary Cases Nos."; Rec."Disciplinary Cases Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Requisition Nos."; "Employee Requisition Nos.")
+                field("Employee Requisition Nos."; Rec."Employee Requisition Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Claims Nos"; "Medical Claims Nos")
+                field("Medical Claims Nos"; Rec."Medical Claims Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Application Nos"; "Job Application Nos")
+                field("Job Application Nos"; Rec."Job Application Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Exit Interview Nos"; "Exit Interview Nos")
+                field("Exit Interview Nos"; Rec."Exit Interview Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Nos"; "Appraisal Nos")
+                field("Appraisal Nos"; Rec."Appraisal Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Company Activities"; "Company Activities")
+                field("Company Activities"; Rec."Company Activities")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Nos"; "Job Nos")
+                field("Job Nos"; Rec."Job Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Interview Nos"; "Job Interview Nos")
+                field("Job Interview Nos"; Rec."Job Interview Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Notice Board Nos."; "Notice Board Nos.")
+                field("Notice Board Nos."; Rec."Notice Board Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transport Req Nos"; "Transport Req Nos")
+                field("Transport Req Nos"; Rec."Transport Req Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("HR Policies"; "HR Policies")
+                field("HR Policies"; Rec."HR Policies")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Reimbursment Nos."; "Leave Reimbursment Nos.")
+                field("Leave Reimbursment Nos."; Rec."Leave Reimbursment Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Carry Over App Nos."; "Leave Carry Over App Nos.")
+                field("Leave Carry Over App Nos."; Rec."Leave Carry Over App Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay-change No."; "Pay-change No.")
+                field("Pay-change No."; Rec."Pay-change No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Transfer Nos."; "Employee Transfer Nos.")
+                field("Employee Transfer Nos."; Rec."Employee Transfer Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Planner Nos."; "Leave Planner Nos.")
+                field("Leave Planner Nos."; Rec."Leave Planner Nos.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -154,7 +154,7 @@ Page 51516170 "HR Setup"
             group(Leave)
             {
                 Caption = 'Leave';
-                field("Min. Leave App. Months"; "Min. Leave App. Months")
+                field("Min. Leave App. Months"; Rec."Min. Leave App. Months")
                 {
                     ApplicationArea = Basic;
                 }
@@ -169,10 +169,10 @@ Page 51516170 "HR Setup"
     trigger OnOpenPage()
     begin
 
-        Reset;
-        if not Get then begin
-            Init;
-            Insert;
+        Rec.Reset;
+        if not Rec.Get then begin
+            Rec.Init;
+            Rec.Insert;
         end;
     end;
 }

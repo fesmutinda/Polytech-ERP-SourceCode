@@ -224,21 +224,21 @@ Page 51516152 "Posted Staff Claims List"
         Temp: Record 51516035;
         JTemplate: Code[10];
         JBatch: Code[10];
-        PCheck: Codeunit UnknownCodeunit55483;
+        PCheck: Codeunit "Posting Check FP";
         Post: Boolean;
         strText: Text[100];
         PVHead: Record 51516000;
         BankAcc: Record "Bank Account";
-        CheckBudgetAvail: Codeunit UnknownCodeunit55484;
-        Commitments: Record 51516036;
-        UserMgt: Codeunit UnknownCodeunit51516155;
-        JournlPosted: Codeunit UnknownCodeunit51516156;
+        CheckBudgetAvail: Codeunit "Budgetary Control";
+        Commitments: Record Committment;
+        UserMgt: Codeunit "User Setup Management BR";
+        JournlPosted: Codeunit "Journal Post Successful";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender;
         HasLines: Boolean;
         AllKeyFieldsEntered: Boolean;
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher",PettyCash;
-        BudgetControl: Codeunit UnknownCodeunit55484;
-        TravReqHeader: Record 51516010;
+        BudgetControl: Codeunit "Budgetary Control";
+        TravReqHeader: Record "Staff Claims Header";
         AdjustGenJnl: Codeunit "Adjust Gen. Journal Balance";
         [InDataSet]
         "Payment Release DateEditable": Boolean;
@@ -264,7 +264,7 @@ Page 51516152 "Posted Staff Claims List"
 
     procedure LinesCommitmentStatus() Exists: Boolean
     var
-        BCsetup: Record 51516038;
+        BCsetup: Record "Budgetary Control Setup";
     begin
         if BCsetup.Get() then begin
             if not BCsetup.Mandatory then begin

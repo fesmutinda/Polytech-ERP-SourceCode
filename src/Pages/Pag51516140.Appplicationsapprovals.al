@@ -4,7 +4,7 @@ Page 51516140 "Appplications approvals"
     CardPageID = "S-Mobile Applications Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516521;
+    SourceTable = "SwizzKash Applications";
     SourceTableView = where(Status = filter(" Pending Approval"));
 
     layout
@@ -13,43 +13,43 @@ Page 51516140 "Appplications approvals"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Applied"; "Date Applied")
+                field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Applied"; "Time Applied")
+                field("Time Applied"; Rec."Time Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Sent; Sent)
+                field(Sent; Rec.Sent)
                 {
                     ApplicationArea = Basic;
                 }
@@ -69,12 +69,12 @@ Page 51516140 "Appplications approvals"
 
                 trigger OnAction()
                 begin
-                    if Status = Status::" Pending Approval" then begin
-                        if Vendor.Get("Account No") then begin
-                            Vendor."S-Mobile No" := Telephone;
+                    if Rec.Status = Rec.Status::" Pending Approval" then begin
+                        if Vendor.Get(Rec."Account No") then begin
+                            Vendor."S-Mobile No" := Rec.Telephone;
                             Vendor.Modify;
-                            Status := Status::Approved;
-                            Modify;
+                            Rec.Status := Rec.Status::Approved;
+                            Rec.Modify;
 
                             Message('Application has been approved');
 

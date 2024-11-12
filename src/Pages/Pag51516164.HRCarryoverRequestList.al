@@ -3,7 +3,7 @@ Page 51516164 "HR Carryover Request List"
 {
     CardPageID = "HR Leave Carryover Request";
     PageType = List;
-    SourceTable = 51516170;
+    SourceTable = "HR Leave Carry Allocation";
 
     layout
     {
@@ -11,43 +11,43 @@ Page 51516164 "HR Carryover Request List"
         {
             repeater(Group)
             {
-                field("Application Code"; "Application Code")
+                field("Application Code"; Rec."Application Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applicant Comments"; "Applicant Comments")
+                field("Applicant Comments"; Rec."Applicant Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Tittle"; "Job Tittle")
+                field("Job Tittle"; Rec."Job Tittle")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; "Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Attachments; Attachments)
+                field(Attachments; Rec.Attachments)
                 {
                     ApplicationArea = Basic;
                 }

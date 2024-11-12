@@ -10,55 +10,55 @@ Page 51516160 "HR Leave journal Template"
         {
             repeater(Group)
             {
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Test Report ID"; "Test Report ID")
+                field("Test Report ID"; Rec."Test Report ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Form ID"; "Form ID")
+                field("Form ID"; Rec."Form ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Report ID"; "Posting Report ID")
+                field("Posting Report ID"; Rec."Posting Report ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Force Posting Report"; "Force Posting Report")
+                field("Force Posting Report"; Rec."Force Posting Report")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Code"; "Source Code")
+                field("Source Code"; Rec."Source Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason Code"; "Reason Code")
+                field("Reason Code"; Rec."Reason Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Test Report Name"; "Test Report Name")
+                field("Test Report Name"; Rec."Test Report Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Form Name"; "Form Name")
+                field("Form Name"; Rec."Form Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Report Name"; "Posting Report Name")
+                field("Posting Report Name"; Rec."Posting Report Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting No. Series"; "Posting No. Series")
+                field("Posting No. Series"; Rec."Posting No. Series")
                 {
                     ApplicationArea = Basic;
                 }

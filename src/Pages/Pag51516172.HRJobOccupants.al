@@ -6,7 +6,7 @@ Page 51516172 "HR Job Occupants"
     ModifyAllowed = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Report';
-    SourceTable = 51516177;
+    SourceTable = "HR Jobss";
 
     layout
     {
@@ -16,13 +16,13 @@ Page 51516172 "HR Job Occupants"
             {
                 Caption = 'Job Details';
                 Editable = false;
-                field("Job ID"; "Job ID")
+                field("Job ID"; Rec."Job ID")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                     Importance = Promoted;
                 }
-                field("Job Description"; "Job Description")
+                field("Job Description"; Rec."Job Description")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -56,7 +56,7 @@ Page 51516172 "HR Job Occupants"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report UnknownReport55582;
+                RunObject = Report 55582;
             }
         }
     }

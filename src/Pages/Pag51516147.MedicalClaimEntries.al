@@ -5,7 +5,7 @@ Page 51516147 "Medical Claim Entries"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516294;
+    SourceTable = "HR Medical Claim Entries";
 
     layout
     {
@@ -13,67 +13,67 @@ Page 51516147 "Medical Claim Entries"
         {
             repeater(Group)
             {
-                field("Entry No"; "Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Date"; "Claim Date")
+                field("Claim Date"; Rec."Claim Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Hospital Visit Date"; "Hospital Visit Date")
+                field("Hospital Visit Date"; Rec."Hospital Visit Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Limit"; "Claim Limit")
+                field("Claim Limit"; Rec."Claim Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance Claim Amount"; "Balance Claim Amount")
+                field("Balance Claim Amount"; Rec."Balance Claim Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Claimed"; "Amount Claimed")
+                field("Amount Claimed"; Rec."Amount Claimed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Charged"; "Amount Charged")
+                field("Amount Charged"; Rec."Amount Charged")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }
-                field("USER ID"; "USER ID")
+                field("USER ID"; Rec."USER ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim No"; "Claim No")
+                field("Claim No"; Rec."Claim No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Posted"; "Date Posted")
+                field("Date Posted"; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Posted"; "Time Posted")
+                field("Time Posted"; Rec."Time Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }

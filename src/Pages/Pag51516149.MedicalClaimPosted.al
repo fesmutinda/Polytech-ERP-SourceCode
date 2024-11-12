@@ -5,7 +5,7 @@ Page 51516149 "Medical Claim Posted"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = 51516278;
+    SourceTable = "HR Medical Claims";
     SourceTableView = where(Posted = filter(Yes));
 
     layout
@@ -14,91 +14,91 @@ Page 51516149 "Medical Claim Posted"
         {
             group(General)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Type"; "Claim Type")
+                field("Claim Type"; Rec."Claim Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Date"; "Claim Date")
+                field("Claim Date"; Rec."Claim Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Patient Name"; "Patient Name")
+                field("Patient Name"; Rec."Patient Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Ref"; "Document Ref")
+                field("Document Ref"; Rec."Document Ref")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Service"; "Date of Service")
+                field("Date of Service"; Rec."Date of Service")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attended By"; "Attended By")
+                field("Attended By"; Rec."Attended By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Charged"; "Amount Charged")
+                field("Amount Charged"; Rec."Amount Charged")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim No"; "Claim No")
+                field("Claim No"; Rec."Claim No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Dependants; Dependants)
+                field(Dependants; Rec.Dependants)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Claimed"; "Amount Claimed")
+                field("Amount Claimed"; Rec."Amount Claimed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Hospital/Medical Centre"; "Hospital/Medical Centre")
+                field("Hospital/Medical Centre"; Rec."Hospital/Medical Centre")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Limit"; "Claim Limit")
+                field("Claim Limit"; Rec."Claim Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance; Balance)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Posted"; "Date Posted")
+                field("Date Posted"; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Posted"; "Time Posted")
+                field("Time Posted"; Rec."Time Posted")
                 {
                     ApplicationArea = Basic;
                 }
@@ -132,7 +132,7 @@ Page 51516149 "Medical Claim Posted"
                            ERROR('You cannot Print until the document is Approved'); */
 
                         PHeader2.Reset;
-                        PHeader2.SetRange(PHeader2."Member No", "Member No");
+                        PHeader2.SetRange(PHeader2."Member No", Rec."Member No");
                         if PHeader2.FindFirst then
                             Report.Run(51516199, true, true, PHeader2);
 

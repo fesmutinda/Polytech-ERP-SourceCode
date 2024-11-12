@@ -2,7 +2,7 @@
 Page 51516188 "HR Leave Batches"
 {
     PageType = List;
-    SourceTable = 51516188;
+    SourceTable = "HR Leave Journal Batch";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516188 "HR Leave Batches"
         {
             repeater(Control1102755000)
             {
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Description"; "Posting Description")
+                field("Posting Description"; Rec."Posting Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }

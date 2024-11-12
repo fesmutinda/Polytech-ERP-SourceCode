@@ -18,39 +18,39 @@ Page 51516176 "HR Employee List"
             repeater(Control1102755000)
             {
                 Editable = false;
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = true;
                     Editable = false;
                 }
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Middle Name"; "Middle Name")
+                field("Middle Name"; Rec."Middle Name")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
 
-                field("E-Mail"; "E-Mail")
+                field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Cell Phone Number";"Cell Phone Number")
+                field("Cell Phone Number"; Rec."Cell Phone Number")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Phone Number';

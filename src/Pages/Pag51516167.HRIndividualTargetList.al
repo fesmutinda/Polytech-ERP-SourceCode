@@ -3,7 +3,7 @@ Page 51516167 "HR Individual Target List"
 {
     CardPageID = "HR Leave Carryover Request";
     PageType = List;
-    SourceTable = 51516216;
+    SourceTable = "HR Appraisal Header";
     SourceTableView = where("Target Type" = filter("Individual Targets"),
                             Sent = filter(Appraisee));
 
@@ -13,35 +13,35 @@ Page 51516167 "HR Individual Target List"
         {
             repeater(Group)
             {
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Type"; "Appraisal Type")
+                field("Appraisal Type"; Rec."Appraisal Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal No"; "Appraisal No")
+                field("Appraisal No"; Rec."Appraisal No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
