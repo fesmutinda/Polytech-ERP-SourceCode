@@ -2,7 +2,7 @@
 Page 51516291 "HR Medical Claim Card"
 {
     PageType = Card;
-    SourceTable = 51516278;
+    SourceTable = "HR Medical Claims";
 
     layout
     {
@@ -10,7 +10,7 @@ Page 51516291 "HR Medical Claim Card"
         {
             group(General)
             {
-                field("Claim No"; "Claim No")
+                field("Claim No"; Rec."Claim No")
                 {
                     ApplicationArea = Basic;
 
@@ -19,64 +19,64 @@ Page 51516291 "HR Medical Claim Card"
                         CurrPage.Update;
                     end;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Employee No.';
                 }
-                field("Claim Type"; "Claim Type")
+                field("Claim Type"; Rec."Claim Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Date"; "Claim Date")
+                field("Claim Date"; Rec."Claim Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Patient Name"; "Patient Name")
+                field("Patient Name"; Rec."Patient Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Ref"; "Document Ref")
+                field("Document Ref"; Rec."Document Ref")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Document No.(From Hospital)';
                 }
-                field("Date of Service"; "Date of Service")
+                field("Date of Service"; Rec."Date of Service")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Visit Date(Hospital)';
                 }
-                field("Attended By"; "Attended By")
+                field("Attended By"; Rec."Attended By")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Dependants; Dependants)
+                field(Dependants; Rec.Dependants)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Charged"; "Amount Charged")
+                field("Amount Charged"; Rec."Amount Charged")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Claimed"; "Amount Claimed")
+                field("Amount Claimed"; Rec."Amount Claimed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Hospital/Medical Centre"; "Hospital/Medical Centre")
+                field("Hospital/Medical Centre"; Rec."Hospital/Medical Centre")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Limit"; "Claim Limit")
+                field("Claim Limit"; Rec."Claim Limit")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
@@ -104,24 +104,24 @@ Page 51516291 "HR Medical Claim Card"
 
 
 
-                        TestField("Claim Date");
-                        TestField("Amount Claimed");
+                        Rec.TestField("Claim Date");
+                        Rec.TestField("Amount Claimed");
 
                         if Confirm('Do you Wish to Post this transaction?', false) = false then begin exit end;
 
 
                         ClaimJNL.Init;
-                        ClaimJNL."Document No." := "Document Ref";
-                        ClaimJNL."Claim No" := "Claim No";
-                        ClaimJNL."Employee No" := "Member No";
-                        ClaimJNL."Employee Name" := "Patient Name";
-                        ClaimJNL."Claim Date" := "Claim Date";
-                        ClaimJNL."Hospital Visit Date" := "Date of Service";
-                        ClaimJNL."Claim Limit" := "Claim Limit";
-                        ClaimJNL."Balance Claim Amount" := Balance;
-                        ClaimJNL."Amount Charged" := "Amount Charged";
-                        ClaimJNL."Amount Claimed" := "Amount Claimed";
-                        ClaimJNL.Comments := Comments;
+                        ClaimJNL."Document No." := Rec."Document Ref";
+                        ClaimJNL."Claim No" := Rec."Claim No";
+                        ClaimJNL."Employee No" := Rec."Member No";
+                        ClaimJNL."Employee Name" := Rec."Patient Name";
+                        ClaimJNL."Claim Date" := Rec."Claim Date";
+                        ClaimJNL."Hospital Visit Date" := Rec."Date of Service";
+                        ClaimJNL."Claim Limit" := Rec."Claim Limit";
+                        ClaimJNL."Balance Claim Amount" := Rec.Balance;
+                        ClaimJNL."Amount Charged" := Rec."Amount Charged";
+                        ClaimJNL."Amount Claimed" := Rec."Amount Claimed";
+                        ClaimJNL.Comments := Rec.Comments;
                         ClaimJNL."USER ID" := UserId;
                         ClaimJNL."Date Posted" := Today;
                         ClaimJNL."Time Posted" := Time;
@@ -130,10 +130,10 @@ Page 51516291 "HR Medical Claim Card"
 
 
 
-                        "Date Posted" := Today;
-                        "Time Posted" := Time;
-                        Posted := true;
-                        "Posted By" := UserId;
+                        Rec."Date Posted" := Today;
+                        Rec."Time Posted" := Time;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
 
                         Message('Transaction Posted Successfully');
                     end;
@@ -157,7 +157,7 @@ Page 51516291 "HR Medical Claim Card"
                            ERROR('You cannot Print until the document is Approved'); */
 
                         PHeader2.Reset;
-                        PHeader2.SetRange(PHeader2."Member No", "Member No");
+                        PHeader2.SetRange(PHeader2."Member No", Rec."Member No");
                         if PHeader2.FindFirst then
                             Report.Run(51516199, true, true, PHeader2);
 
@@ -236,7 +236,7 @@ Page 51516291 "HR Medical Claim Card"
     trigger OnAfterGetRecord()
     begin
         //TO PREVENT USER FROM SEEING OTHER PEOPLES LEAVE APPLICATIONS
-        SetFilter("User ID", UserId);
+        Rec.SetFilter("User ID", UserId);
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
@@ -256,7 +256,7 @@ Page 51516291 "HR Medical Claim Card"
         //GET THE APPLICANT DETAILS
 
         HREmp.Reset;
-        if HREmp.Get("Member No") then begin
+        if HREmp.Get(Rec."Member No") then begin
             EmpName := HREmp.FullName;
             EmpDept := HREmp."Global Dimension 2 Code";
         end else begin

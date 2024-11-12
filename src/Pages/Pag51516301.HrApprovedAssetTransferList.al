@@ -13,35 +13,35 @@ Page 51516301 "Hr ApprovedAsset Transfer List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Seriess"; "No. Seriess")
+                field("No. Seriess"; Rec."No. Seriess")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Transfered; Transfered)
+                field(Transfered; Rec.Transfered)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Transfered"; "Date Transfered")
+                field("Date Transfered"; Rec."Date Transfered")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transfered By"; "Transfered By")
+                field("Transfered By"; Rec."Transfered By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Posted"; "Time Posted")
+                field("Time Posted"; Rec."Time Posted")
                 {
                     ApplicationArea = Basic;
                 }

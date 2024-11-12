@@ -2,7 +2,7 @@
 Page 51516273 "HR Employee Course of Study"
 {
     PageType = List;
-    SourceTable = 51516279;
+    SourceTable = "HR Employee Course of Study";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516273 "HR Employee Course of Study"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Years of Study"; "Years of Study")
+                field("Years of Study"; Rec."Years of Study")
                 {
                     ApplicationArea = Basic;
                 }

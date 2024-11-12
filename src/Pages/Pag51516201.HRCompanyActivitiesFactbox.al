@@ -2,7 +2,7 @@
 Page 51516201 "HR Company Activities Factbox"
 {
     PageType = CardPart;
-    SourceTable = 51516175;
+    SourceTable = "HR Company Activities";
 
     layout
     {
@@ -17,28 +17,28 @@ Page 51516201 "HR Company Activities Factbox"
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Venue; Venue)
+                field(Venue; Rec.Venue)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Employee Responsible';
                 }
-                field("Email Message"; "Email Message")
+                field("Email Message"; Rec."Email Message")
                 {
                     ApplicationArea = Basic;
                 }
@@ -49,31 +49,31 @@ Page 51516201 "HR Company Activities Factbox"
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field(Costs; Costs)
+                field(Costs; Rec.Costs)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Contribution Amount (If Any)"; "Contribution Amount (If Any)")
+                field("Contribution Amount (If Any)"; Rec."Contribution Amount (If Any)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account No"; "G/L Account No")
+                field("G/L Account No"; Rec."G/L Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account Name"; "G/L Account Name")
+                field("G/L Account Name"; Rec."G/L Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bal. Account Type"; "Bal. Account Type")
+                field("Bal. Account Type"; Rec."Bal. Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bal. Account No"; "Bal. Account No")
+                field("Bal. Account No"; Rec."Bal. Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
@@ -84,11 +84,11 @@ Page 51516201 "HR Company Activities Factbox"
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }

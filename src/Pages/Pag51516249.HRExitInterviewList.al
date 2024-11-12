@@ -4,7 +4,7 @@ Page 51516249 "HR Exit Interview List"
     CardPageID = "HR Employee Exit Interviews";
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516198;
+    SourceTable = "HR Employee Exit Interviews";
 
     layout
     {
@@ -12,36 +12,36 @@ Page 51516249 "HR Exit Interview List"
         {
             repeater(Control1102755000)
             {
-                field("Exit Interview No"; "Exit Interview No")
+                field("Exit Interview No"; Rec."Exit Interview No")
                 {
                     ApplicationArea = Basic;
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Date Of Interview"; "Date Of Interview")
+                field("Date Of Interview"; Rec."Date Of Interview")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interview Done By"; "Interviewer Name")
+                field("Interview Done By"; Rec."Interviewer Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason For Leaving"; "Reason For Leaving")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Promoted;
-                }
-                field("Date Of Leaving"; "Date Of Leaving")
+                field("Reason For Leaving"; Rec."Reason For Leaving")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Re Employ In Future"; "Re Employ In Future")
+                field("Date Of Leaving"; Rec."Date Of Leaving")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Promoted;
+                }
+                field("Re Employ In Future"; Rec."Re Employ In Future")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
@@ -70,7 +70,7 @@ Page 51516249 "HR Exit Interview List"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report UnknownReport55594;
+                RunObject = Report 55594;
             }
         }
     }

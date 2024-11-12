@@ -3,7 +3,7 @@ Page 51516281 "HR 360 Appraisal Card"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Functions,Appraisal';
-    SourceTable = 51516216;
+    SourceTable = "HR Appraisal Header";
 
     layout
     {
@@ -11,66 +11,66 @@ Page 51516281 "HR 360 Appraisal Card"
         {
             group("HR Appraisal Header")
             {
-                field("Appraisal No"; "Appraisal No")
+                field("Appraisal No"; Rec."Appraisal No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Job Description"; "Job Description")
+                field("Job Description"; Rec."Job Description")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Importance = Promoted;
                 }
-                field(Supervisor; Supervisor)
+                field(Supervisor; Rec.Supervisor)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Appraisal Date"; "Appraisal Date")
+                field("Appraisal Date"; Rec."Appraisal Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Evaluation Period Start"; "Evaluation Period Start")
+                field("Evaluation Period Start"; Rec."Evaluation Period Start")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Evaluation Period End"; "Evaluation Period End")
+                field("Evaluation Period End"; Rec."Evaluation Period End")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Stage"; "Appraisal Stage")
+                field("Appraisal Stage"; Rec."Appraisal Stage")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Appraisal Method"; "Appraisal Method")
+                field("Appraisal Method"; Rec."Appraisal Method")
                 {
                     ApplicationArea = Basic;
 
@@ -78,17 +78,17 @@ Page 51516281 "HR 360 Appraisal Card"
                     begin
 
                         //Testfields
-                        TestField(Status, Status::Open);
-                        TestField("Appraisal Method");
+                        Rec.TestField(Status, Rec.Status::Open);
+                        Rec.TestField("Appraisal Method");
 
-                        if Confirm(Text0003, false, "Appraisal Method") = false then begin
+                        if Confirm(Text0003, false, Rec."Appraisal Method") = false then begin
                             Error('Process aborted, Press F5 to discard changes');
                         end else begin
                             //Delete Lines
                             HRAppLines.Reset;
-                            HRAppLines.SetRange(HRAppLines."Appraisal No", "Appraisal No");
-                            HRAppLines.SetRange(HRAppLines."Appraisal Period", "Appraisal Period");
-                            HRAppLines.SetRange(HRAppLines."Employee No", "Employee No");
+                            HRAppLines.SetRange(HRAppLines."Appraisal No", Rec."Appraisal No");
+                            HRAppLines.SetRange(HRAppLines."Appraisal Period", Rec."Appraisal Period");
+                            HRAppLines.SetRange(HRAppLines."Employee No", Rec."Employee No");
                             if HRAppLines.Find('-') then begin
                                 HRAppLines.DeleteAll;
                                 //Subpage Visibility
@@ -98,13 +98,13 @@ Page 51516281 "HR 360 Appraisal Card"
                         end;
                     end;
                 }
-                field("Appraisal Approval Status"; "Appraisal Approval Status")
+                field("Appraisal Approval Status"; Rec."Appraisal Approval Status")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Importance = Promoted;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -194,7 +194,7 @@ Page 51516281 "HR 360 Appraisal Card"
                     trigger OnAction()
                     begin
                         HRAppHeader.Reset;
-                        HRAppHeader.SetRange(HRAppHeader."Appraisal No", "Appraisal No");
+                        HRAppHeader.SetRange(HRAppHeader."Appraisal No", Rec."Appraisal No");
                         if HRAppHeader.Find('-') then
                             Report.Run(Report::"HR Appraisal Form", true, true, HRAppHeader);
                     end;
@@ -212,9 +212,9 @@ Page 51516281 "HR 360 Appraisal Card"
 
                     trigger OnAction()
                     begin
-                        TestField("Job Title");
-                        TestField(Status, Status::Open);
-                        TestField("Appraisal Stage", "appraisal stage"::"Target Setting");
+                        Rec.TestField("Job Title");
+                        Rec.TestField(Status, Rec.Status::Open);
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"Target Setting");
 
 
                         if Confirm(Text0001, false) = false then exit;
@@ -222,14 +222,14 @@ Page 51516281 "HR 360 Appraisal Card"
                         //Job Specific
                         HRAppEvalAreas.Reset;
                         HRAppEvalAreas.SetRange(HRAppEvalAreas."Categorize As", HRAppEvalAreas."categorize as"::"Job Specific");
-                        HRAppEvalAreas.SetRange(HRAppEvalAreas."Assign To", "Job Title");
-                        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", "Appraisal Period");
+                        HRAppEvalAreas.SetRange(HRAppEvalAreas."Assign To", Rec."Job Title");
+                        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", Rec."Appraisal Period");
                         HRAppEvalAreas.SetRange(HRAppEvalAreas.Blocked, false);
                         if HRAppEvalAreas.Find('-') then begin
                             HRAppLines.Reset;
-                            HRAppLines.SetRange(HRAppLines."Appraisal No", "Appraisal No");
-                            HRAppLines.SetRange(HRAppLines."Appraisal Period", "Appraisal Period");
-                            HRAppLines.SetRange(HRAppLines."Employee No", "Employee No");
+                            HRAppLines.SetRange(HRAppLines."Appraisal No", Rec."Appraisal No");
+                            HRAppLines.SetRange(HRAppLines."Appraisal Period", Rec."Appraisal Period");
+                            HRAppLines.SetRange(HRAppLines."Employee No", Rec."Employee No");
                             HRAppLines.SetRange(HRAppLines."Categorize As", HRAppLines."categorize as"::"Job Specific");
                             if HRAppLines.Find('-') then begin
                                 HRAppLines.DeleteAll;
@@ -239,12 +239,12 @@ Page 51516281 "HR 360 Appraisal Card"
                             end;
                         end else begin
                             //if no sections are found
-                            Error(Text0002, "Job Title");
+                            Error(Text0002, Rec."Job Title");
                         end;
 
                         //Load 360 Sections
-                        case "Appraisal Method" of
-                            "appraisal method"::"360 Appraisal":
+                        case Rec."Appraisal Method" of
+                            Rec."appraisal method"::"360 Appraisal":
                                 begin
                                     //Load 360 Sections
                                     fn_Load360Sections;
@@ -263,12 +263,12 @@ Page 51516281 "HR 360 Appraisal Card"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage", "appraisal stage"::"Target Setting");
-                        TestField("Employee No");
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"Target Setting");
+                        Rec.TestField("Employee No");
 
                         if Confirm('Send to supervisor?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"Target Approval";
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"Target Approval";
                         Message('Appraisal sent to supervisor');
                     end;
                 }
@@ -282,11 +282,11 @@ Page 51516281 "HR 360 Appraisal Card"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage", "appraisal stage"::"Target Approval");
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"Target Approval");
 
                         if Confirm('Return to appraisee?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"Target Setting";
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"Target Setting";
                         Message('Appraisal returned to appraisee');
                     end;
                 }
@@ -300,11 +300,11 @@ Page 51516281 "HR 360 Appraisal Card"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage", "appraisal stage"::"End Year Evalauation");
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"End Year Evalauation");
 
                         if Confirm('Return to supervisor?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"Target Approval";
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"Target Approval";
                         Message('Appraisal returned to supervisor');
                     end;
                 }
@@ -318,12 +318,12 @@ Page 51516281 "HR 360 Appraisal Card"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage", "appraisal stage"::"Target Approval");
-                        TestField("Employee No");
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"Target Approval");
+                        Rec.TestField("Employee No");
 
                         if Confirm('Approve targets?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"End Year Evalauation";
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"End Year Evalauation";
                         Message('Appraisal targets approved');
                     end;
                 }
@@ -331,29 +331,29 @@ Page 51516281 "HR 360 Appraisal Card"
         }
     }
 
-    trigger OnAfterGetRecord()
+    trigger OnAfterGet()
     begin
 
         //GET APPLICANT DETAILS FROM HR EMPLOYEES TABLE AND COPY THEM TO THE GOAL SETTING TABLE
         HREmp.Reset;
-        if HREmp.Get("Employee No") then begin
-            "Employee Name" := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
-            "Date of Employment" := HREmp."Date Of Joining the Company";
-            "Global Dimension 1 Code" := HREmp."Global Dimension 1 Code";
-            "Global Dimension 2 Code" := HREmp."Global Dimension 2 Code";
-            "Job Title" := HREmp."Job Specification";
-            "Contract Type" := HREmp."Contract Type";
-            "User ID" := HREmp."User ID";
+        if HREmp.Get(Rec."Employee No") then begin
+            Rec."Employee Name" := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
+            Rec."Date of Employment" := HREmp."Date Of Joining the Company";
+            Rec."Global Dimension 1 Code" := HREmp."Global Dimension 1 Code";
+            Rec."Global Dimension 2 Code" := HREmp."Global Dimension 2 Code";
+            Rec."Job Title" := HREmp."Job Specification";
+            Rec."Contract Type" := HREmp."Contract Type";
+            Rec."User ID" := HREmp."User ID";
             //Supervisor
-            Supervisor := HREmpCard.GetSupervisor("User ID");
+            Rec.Supervisor := HREmpCard.GetSupervisor(Rec."User ID");
             //Superisor ID
-            "Supervisor ID" := HREmpCard.GetSupervisorID("User ID");
+            Rec."Supervisor ID" := HREmpCard.GetSupervisorID(Rec."User ID");
             HREmp.CalcFields(HREmp.Picture);
-            Picture := HREmp.Picture;
+            Rec.Picture := HREmp.Picture;
 
 
         end else begin
-            Error('Employee No' + ' ' + "Employee No" + ' ' + 'is not assigned to any employee. Consult the HR Officer so as to be setup as an employee')
+            Error('Employee No' + ' ' + Rec."Employee No" + ' ' + 'is not assigned to any employee. Consult the HR Officer so as to be setup as an employee')
         end;
 
 
@@ -367,18 +367,18 @@ Page 51516281 "HR 360 Appraisal Card"
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
         ShowWorkflowStatus: Boolean;
-        HRAppEvalAreas: Record 51516220;
-        HRAppLines: Record 51516217;
+        HRAppEvalAreas: 51516220;
+        HRAppLines: 51516217;
         Text0001: label 'Load Appraisal Sections?. \\NB: Existing Lines will be deleted';
-        HRAppLines2: Record 51516217;
-        HREmp: Record 51516160;
+        HRAppLines2: 51516217;
+        HREmp: 51516160;
         HREmpCard: Page "HR Employee Card";
-        HRAppHeader: Record 51516216;
+        HRAppHeader: 51516216;
         Text0002: label 'No job specific sections for [Job ID: %1] are defined';
         LastLineNo: Integer;
-        HRJobResp: Record 51516176;
-        HRSetup: Record 51516181;
-        HREmp2: Record 51516160;
+        HRJobResp: 51516176;
+        HRSetup: 51516181;
+        HREmp2: 51516160;
         SubPageVisible: Boolean;
         Text0003: label 'Change Appraisal Method to [%1]? \\NB: Existing Lines will be deleted';
 
@@ -405,9 +405,9 @@ Page 51516281 "HR 360 Appraisal Card"
             HRAppLines.Init;
 
             HRAppLines."Line No" := LastLineNo + 1;
-            HRAppLines."Appraisal No" := "Appraisal No";
-            HRAppLines."Appraisal Period" := "Appraisal Period";
-            HRAppLines."Employee No" := "Employee No";
+            HRAppLines."Appraisal No" := Rec."Appraisal No";
+            HRAppLines."Appraisal Period" := Rec."Appraisal Period";
+            HRAppLines."Employee No" := Rec."Employee No";
             HRAppLines."Categorize As" := HRAppEvalAreas."Categorize As";
             HRAppLines."Sub Category" := HRAppEvalAreas."Sub Category";
             HRAppLines."Perfomance Goals and Targets" := HRAppEvalAreas.Description;
@@ -425,12 +425,12 @@ Page 51516281 "HR 360 Appraisal Card"
         //Employee's Subordinates
         HRAppEvalAreas.Reset;
         HRAppEvalAreas.SetRange(HRAppEvalAreas."Categorize As", HRAppEvalAreas."categorize as"::"Employee's Subordinates");
-        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", "Appraisal Period");
+        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", Rec."Appraisal Period");
         if HRAppEvalAreas.Find('-') then begin
             HRAppLines.Reset;
-            HRAppLines.SetRange(HRAppLines."Appraisal No", "Appraisal No");
-            HRAppLines.SetRange(HRAppLines."Appraisal Period", "Appraisal Period");
-            HRAppLines.SetRange(HRAppLines."Employee No", "Employee No");
+            HRAppLines.SetRange(HRAppLines."Appraisal No", Rec."Appraisal No");
+            HRAppLines.SetRange(HRAppLines."Appraisal Period", Rec."Appraisal Period");
+            HRAppLines.SetRange(HRAppLines."Employee No", Rec."Employee No");
             HRAppLines.SetRange(HRAppLines."Categorize As", HRAppLines."categorize as"::"Employee's Subordinates");
             if HRAppLines.Find('-') then begin
                 HRAppLines.DeleteAll;
@@ -443,12 +443,12 @@ Page 51516281 "HR 360 Appraisal Card"
         //Employee's Peers
         HRAppEvalAreas.Reset;
         HRAppEvalAreas.SetRange(HRAppEvalAreas."Categorize As", HRAppEvalAreas."categorize as"::"Employee's Peers");
-        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", "Appraisal Period");
+        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", Rec."Appraisal Period");
         if HRAppEvalAreas.Find('-') then begin
             HRAppLines.Reset;
-            HRAppLines.SetRange(HRAppLines."Appraisal No", "Appraisal No");
-            HRAppLines.SetRange(HRAppLines."Appraisal Period", "Appraisal Period");
-            HRAppLines.SetRange(HRAppLines."Employee No", "Employee No");
+            HRAppLines.SetRange(HRAppLines."Appraisal No", Rec."Appraisal No");
+            HRAppLines.SetRange(HRAppLines."Appraisal Period", Rec."Appraisal Period");
+            HRAppLines.SetRange(HRAppLines."Employee No", Rec."Employee No");
             HRAppLines.SetRange(HRAppLines."Categorize As", HRAppLines."categorize as"::"Employee's Peers");
             if HRAppLines.Find('-') then begin
                 HRAppLines.DeleteAll;
@@ -461,12 +461,12 @@ Page 51516281 "HR 360 Appraisal Card"
         //External Sources (Vendors and Customers)
         HRAppEvalAreas.Reset;
         HRAppEvalAreas.SetRange(HRAppEvalAreas."Categorize As", HRAppEvalAreas."categorize as"::"External Sources");
-        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", "Appraisal Period");
+        HRAppEvalAreas.SetRange(HRAppEvalAreas."Appraisal Period", Rec."Appraisal Period");
         if HRAppEvalAreas.Find('-') then begin
             HRAppLines.Reset;
-            HRAppLines.SetRange(HRAppLines."Appraisal No", "Appraisal No");
-            HRAppLines.SetRange(HRAppLines."Appraisal Period", "Appraisal Period");
-            HRAppLines.SetRange(HRAppLines."Employee No", "Employee No");
+            HRAppLines.SetRange(HRAppLines."Appraisal No", Rec."Appraisal No");
+            HRAppLines.SetRange(HRAppLines."Appraisal Period", Rec."Appraisal Period");
+            HRAppLines.SetRange(HRAppLines."Employee No", Rec."Employee No");
             HRAppLines.SetRange(HRAppLines."Categorize As", HRAppLines."categorize as"::"External Sources");
             if HRAppLines.Find('-') then begin
                 HRAppLines.DeleteAll;
@@ -481,7 +481,7 @@ Page 51516281 "HR 360 Appraisal Card"
     procedure fn_ShowSubPages()
     begin
         //Visbility of Subpages
-        if "Appraisal Method" <> "appraisal method"::"360 Appraisal" then begin
+        if Rec."Appraisal Method" <> Rec."appraisal method"::"360 Appraisal" then begin
             SubPageVisible := false;
         end else begin
             SubPageVisible := true;

@@ -2,7 +2,7 @@
 Page 51516278 "HR Appraisal Lines-Comm"
 {
     PageType = ListPart;
-    SourceTable = 51516217;
+    SourceTable = "HR Appraisal Lines";
     SourceTableView = where(Sections = filter(Communication));
 
     layout
@@ -11,69 +11,69 @@ Page 51516278 "HR Appraisal Lines-Comm"
         {
             repeater(Group)
             {
-                field("Appraisal No"; "Appraisal No")
+                field("Appraisal No"; Rec."Appraisal No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Sections; Sections)
+                field(Sections; Rec.Sections)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Perfomance Goals and Targets"; "Perfomance Goals and Targets")
+                field("Perfomance Goals and Targets"; Rec."Perfomance Goals and Targets")
                 {
                     ApplicationArea = Basic;
                     MultiLine = true;
                     Width = 300;
                 }
-                field("Self Rating"; "Self Rating")
+                field("Self Rating"; Rec."Self Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Peer Rating"; "Peer Rating")
+                field("Peer Rating"; Rec."Peer Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Supervisor Rating"; "Supervisor Rating")
+                field("Supervisor Rating"; Rec."Supervisor Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sub-ordinates Rating"; "Sub-ordinates Rating")
+                field("Sub-ordinates Rating"; Rec."Sub-ordinates Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outside Agencies Rating"; "Outside Agencies Rating")
+                field("Outside Agencies Rating"; Rec."Outside Agencies Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agreed Rating"; "Agreed Rating")
+                field("Agreed Rating"; Rec."Agreed Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agreed Rating x Weighting"; "Agreed Rating x Weighting")
+                field("Agreed Rating x Weighting"; Rec."Agreed Rating x Weighting")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Comments"; "Employee Comments")
+                field("Employee Comments"; Rec."Employee Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Peer Comments"; "Peer Comments")
+                field("Peer Comments"; Rec."Peer Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Supervisor Comments"; "Supervisor Comments")
+                field("Supervisor Comments"; Rec."Supervisor Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Subordinates Comments"; "Subordinates Comments")
+                field("Subordinates Comments"; Rec."Subordinates Comments")
                 {
                     ApplicationArea = Basic;
                 }

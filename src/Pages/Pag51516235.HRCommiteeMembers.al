@@ -2,7 +2,7 @@
 Page 51516235 "HR Commitee Members"
 {
     PageType = List;
-    SourceTable = 51516218;
+    SourceTable = "HR Commitee Members";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516235 "HR Commitee Members"
         {
             repeater(Control1102755000)
             {
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Role; Role)
+                field(Role; Rec.Role)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Appointed"; "Date Appointed")
+                field("Date Appointed"; Rec."Date Appointed")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Active; Active)
+                field(Active; Rec.Active)
                 {
                     ApplicationArea = Basic;
                 }

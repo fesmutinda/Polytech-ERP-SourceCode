@@ -4,7 +4,7 @@ Page 51516286 "HR Medical Schemes List"
     CardPageID = "HR Medical Schemes Card";
     DeleteAllowed = false;
     PageType = List;
-    SourceTable = 51516276;
+    SourceTable = "HR Medical Schemes";
 
     layout
     {
@@ -12,35 +12,35 @@ Page 51516286 "HR Medical Schemes List"
         {
             repeater(Group)
             {
-                field("Scheme No"; "Scheme No")
+                field("Scheme No"; Rec."Scheme No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Insurer"; "Medical Insurer")
+                field("Medical Insurer"; Rec."Medical Insurer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheme Name"; "Scheme Name")
+                field("Scheme Name"; Rec."Scheme Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("In-patient limit"; "In-patient limit")
+                field("In-patient limit"; Rec."In-patient limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Out-patient limit"; "Out-patient limit")
+                field("Out-patient limit"; Rec."Out-patient limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Area Covered"; "Area Covered")
+                field("Area Covered"; Rec."Area Covered")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dependants Included"; "Dependants Included")
+                field("Dependants Included"; Rec."Dependants Included")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }

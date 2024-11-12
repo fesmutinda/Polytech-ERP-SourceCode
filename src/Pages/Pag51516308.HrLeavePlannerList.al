@@ -3,7 +3,7 @@ Page 51516308 "Hr Leave Planner List"
 {
     CardPageID = "HR Leave Planner Card";
     PageType = List;
-    SourceTable = 51516256;
+    SourceTable = "HR Leave Planner Header";
 
     layout
     {
@@ -11,19 +11,19 @@ Page 51516308 "Hr Leave Planner List"
         {
             repeater(Group)
             {
-                field("Application Code"; "Application Code")
+                field("Application Code"; Rec."Application Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Tittle"; "Job Tittle")
+                field("Job Tittle"; Rec."Job Tittle")
                 {
                     ApplicationArea = Basic;
                 }

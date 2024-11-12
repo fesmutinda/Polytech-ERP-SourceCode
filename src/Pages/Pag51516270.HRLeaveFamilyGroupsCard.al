@@ -2,7 +2,7 @@
 Page 51516270 "HR Leave Family Groups Card"
 {
     PageType = Card;
-    SourceTable = 51516233;
+    SourceTable = "HR Leave Family Groups";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516270 "HR Leave Family Groups Card"
         {
             group(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Employees On Leave"; "Max Employees On Leave")
+                field("Max Employees On Leave"; Rec."Max Employees On Leave")
                 {
                     ApplicationArea = Basic;
                 }

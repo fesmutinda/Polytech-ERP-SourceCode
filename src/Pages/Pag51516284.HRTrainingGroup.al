@@ -3,7 +3,7 @@ Page 51516284 "HR Training Group"
 {
     DeleteAllowed = false;
     PageType = List;
-    SourceTable = 51516254;
+    SourceTable = "HR Training Applications Group";
 
     layout
     {
@@ -11,11 +11,11 @@ Page 51516284 "HR Training Group"
         {
             repeater(Group)
             {
-                field("Training No."; "Training No.")
+                field("Training No."; Rec."Training No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Training Group Name"; "Training Group Name")
+                field("Training Group Name"; Rec."Training Group Name")
                 {
                     ApplicationArea = Basic;
                 }

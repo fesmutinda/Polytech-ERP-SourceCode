@@ -8,48 +8,48 @@ Page 51516251 "HR Leave Application Comments"
     {
         area(content)
         {
-            field(DocType;DocType)
+            field(DocType; DocType)
             {
                 ApplicationArea = Basic;
                 Editable = false;
                 OptionCaption = 'Quote,Order,Invoice,Credit Memo,Blanket Order,Return Order,None,Payment Voucher,Petty Cash,Imprest,Requisition,ImprestSurrender,Interbank,Receipt,Staff Claim,Staff Advance,AdvanceSurrender,Bank Slip,Grant,Grant Surrender,Employee Requisition,Leave Application,Training Application,Transport Requisition';
             }
-            field(DocNo;DocNo)
+            field(DocNo; DocNo)
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
             repeater(Control1102755000)
             {
-                field("User ID";"User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date and Time";"Date and Time")
+                field("Date and Time"; Rec."Date and Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment;Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Days";"Approved Days")
+                field("Approved Days"; Rec."Approved Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Start Date";"Approved Start Date")
+                field("Approved Start Date"; Rec."Approved Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Return Date";"Approved Return Date")
+                field("Approved Return Date"; Rec."Approved Return Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reason;Reason)
+                field(Reason; Rec.Reason)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Allowance Granted";"Leave Allowance Granted")
+                field("Leave Allowance Granted"; Rec."Leave Allowance Granted")
                 {
                     ApplicationArea = Basic;
                 }
@@ -69,7 +69,7 @@ Page 51516251 "HR Leave Application Comments"
         DocNo: Code[20];
 
 
-    procedure SetUpLine(TableId: Integer;DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Bank Slip",Grant,"Grant Surrender","Employee Requisition","Leave Application","Training Application";DocumentNo: Code[20])
+    procedure SetUpLine(TableId: Integer; DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Bank Slip",Grant,"Grant Surrender","Employee Requisition","Leave Application","Training Application"; DocumentNo: Code[20])
     begin
         NewTableId := TableId;
         NewDocumentType := DocumentType;
@@ -77,16 +77,16 @@ Page 51516251 "HR Leave Application Comments"
     end;
 
 
-    procedure Setfilters(TableId: Integer;DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Bank Slip",Grant,"Grant Surrender","Employee Requisition","Leave Application","Training Application";DocumentNo: Code[20])
+    procedure Setfilters(TableId: Integer; DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Bank Slip",Grant,"Grant Surrender","Employee Requisition","Leave Application","Training Application"; DocumentNo: Code[20])
     begin
         if TableId <> 0 then begin
-          FilterGroup(2);
-          SetCurrentkey("Table ID","Document Type","Document No.");
-          SetRange("Table ID",TableId);
-          SetRange("Document Type",DocumentType);
-          if DocumentNo <> '' then
-            SetRange("Document No.",DocumentNo);
-          FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetCurrentkey("Table ID", "Document Type", "Document No.");
+            Rec.SetRange("Table ID", TableId);
+            Rec.SetRange("Document Type", DocumentType);
+            if DocumentNo <> '' then
+                Rec.SetRange("Document No.", DocumentNo);
+            Rec.FilterGroup(0);
         end;
 
         DocType := DocumentType;

@@ -11,11 +11,11 @@ Page 51516246 "HR Company Attachments"
         {
             repeater(Control1000000000)
             {
-                field("Document Description"; "Document Description")
+                field("Document Description"; Rec."Document Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Attachment; Attachment)
+                field(Attachment; Rec.Attachment)
                 {
                     ApplicationArea = Basic;
                 }
@@ -55,12 +55,12 @@ Page 51516246 "HR Company Attachments"
                     var
                         InteractTemplLanguage: Record "Interaction Tmpl. Language";
                     begin
-                        if DocLink.Get(Code, "Document Description") then begin
+                        if DocLink.Get(Code, Rec."Document Description") then begin
                             if not InteractTemplLanguage.Get(DocLink.Code, DocLink."Language Code (Default)", DocLink."Document Description") then begin
                                 InteractTemplLanguage.Init;
                                 InteractTemplLanguage."Interaction Template Code" := Code;
                                 InteractTemplLanguage."Language Code" := DocLink."Language Code (Default)";
-                                InteractTemplLanguage.Description := "Document Description";
+                                InteractTemplLanguage.Description := Rec."Document Description";
                             end;
                             InteractTemplLanguage.CreateAttachment;
                             CurrPage.Update;
@@ -80,7 +80,7 @@ Page 51516246 "HR Company Attachments"
                     var
                         InteractTemplLanguage: Record "Interaction Tmpl. Language";
                     begin
-                        if DocLink.Get(Code, "Document Description") then begin
+                        if DocLink.Get(Code, Rec."Document Description") then begin
 
                             if InteractTemplLanguage.Get(DocLink.Code, DocLink."Language Code (Default)", DocLink."Document Description") then
                                 InteractTemplLanguage.CopyFromAttachment;
@@ -100,10 +100,10 @@ Page 51516246 "HR Company Attachments"
                     var
                         InteractTemplLanguage: Record "Interaction Tmpl. Language";
                     begin
-                        if DocLink.Get(Code, "Document Description") then begin
+                        if DocLink.Get(Rec.Code, Rec."Document Description") then begin
                             if not InteractTemplLanguage.Get(DocLink."Document Description", DocLink."Language Code (Default)") then begin
                                 InteractTemplLanguage.Init;
-                                InteractTemplLanguage."Interaction Template Code" := Code;
+                                InteractTemplLanguage."Interaction Template Code" := Rec.Code;
                                 InteractTemplLanguage."Language Code" := DocLink."Language Code (Default)";
                                 InteractTemplLanguage.Description := DocLink."Document Description";
                                 InteractTemplLanguage.Insert;
@@ -125,7 +125,7 @@ Page 51516246 "HR Company Attachments"
                     var
                         InteractTemplLanguage: Record "Interaction Tmpl. Language";
                     begin
-                        if DocLink.Get(Code, "Document Description") then begin
+                        if DocLink.Get(Rec.Code, Rec."Document Description") then begin
                             if InteractTemplLanguage.Get(DocLink.Code, DocLink."Language Code (Default)", DocLink."Document Description") then
                                 InteractTemplLanguage.ExportAttachment;
                         end;
@@ -141,7 +141,7 @@ Page 51516246 "HR Company Attachments"
                     var
                         InteractTemplLanguage: Record "Interaction Tmpl. Language";
                     begin
-                        if DocLink.Get(Code, "Document Description") then begin
+                        if DocLink.Get(Rec.Code, Rec."Document Description") then begin
                             if InteractTemplLanguage.Get(DocLink.Code, DocLink."Language Code (Default)", DocLink."Document Description") then begin
                                 InteractTemplLanguage.RemoveAttachment(true);
                                 DocLink.Attachment := DocLink.Attachment::"0";

@@ -2,7 +2,7 @@
 Page 51516309 "hr job responsibilities card"
 {
     PageType = Card;
-    SourceTable = 51516176;
+    SourceTable = "HR Job Responsiblities";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516309 "hr job responsibilities card"
         {
             group(General)
             {
-                field("Job ID"; "Job ID")
+                field("Job ID"; Rec."Job ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Code"; "Responsibility Code")
+                field("Responsibility Code"; Rec."Responsibility Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Description"; "Responsibility Description")
+                field("Responsibility Description"; Rec."Responsibility Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }

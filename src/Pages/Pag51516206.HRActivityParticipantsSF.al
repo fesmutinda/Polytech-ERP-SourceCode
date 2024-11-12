@@ -4,7 +4,7 @@ Page 51516206 "HR Activity Participants SF"
     Caption = 'Activity Participants';
     PageType = List;
     SaveValues = true;
-    SourceTable = 51516193;
+    SourceTable = "HR Activity Participants";
 
     layout
     {
@@ -12,19 +12,19 @@ Page 51516206 "HR Activity Participants SF"
         {
             repeater(Control1102755000)
             {
-                field(Notified; Notified)
+                field(Notified; Rec.Notified)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Participant; Participant)
+                field(Participant; Rec.Participant)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Contribution; Contribution)
+                field(Contribution; Rec.Contribution)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Email Message"; "Email Message")
+                field("Email Message"; Rec."Email Message")
                 {
                     ApplicationArea = Basic;
                 }

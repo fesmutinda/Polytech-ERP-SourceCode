@@ -10,63 +10,63 @@ Page 51516290 "HR Medical Scheme Members Card"
         {
             group(General)
             {
-                field("Scheme No"; "Scheme No")
+                field("Scheme No"; Rec."Scheme No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Designation; Designation)
+                field(Designation; Rec.Designation)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Department; Department)
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheme Join Date"; "Scheme Join Date")
+                field("Scheme Join Date"; Rec."Scheme Join Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheme Anniversary"; "Scheme Anniversary")
+                field("Scheme Anniversary"; Rec."Scheme Anniversary")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Out-Patient Limit"; "Out-Patient Limit")
+                field("Out-Patient Limit"; Rec."Out-Patient Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm.Amount Spent Out"; "Cumm.Amount Spent Out")
+                field("Cumm.Amount Spent Out"; Rec."Cumm.Amount Spent Out")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance Out- Patient"; "Balance Out- Patient")
+                field("Balance Out- Patient"; Rec."Balance Out- Patient")
                 {
                     ApplicationArea = Basic;
                 }
-                field("In-patient Limit"; "In-patient Limit")
+                field("In-patient Limit"; Rec."In-patient Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm.Amount Spent"; "Cumm.Amount Spent")
+                field("Cumm.Amount Spent"; Rec."Cumm.Amount Spent")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance In- Patient"; "Balance In- Patient")
+                field("Balance In- Patient"; Rec."Balance In- Patient")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Cover"; "Maximum Cover")
+                field("Maximum Cover"; Rec."Maximum Cover")
                 {
                     ApplicationArea = Basic;
                 }
@@ -96,7 +96,7 @@ Page 51516290 "HR Medical Scheme Members Card"
     trigger OnAfterGetCurrRecord()
     begin
         Medscheme.Reset;
-        Medscheme.SetRange(Medscheme."Scheme No", "Scheme No");
+        Medscheme.SetRange(Medscheme."Scheme No", Rec."Scheme No");
         if Medscheme.Find('-') then begin
             "Out-Patient Limit" := Medscheme."Out-patient limit";
             "In-patient Limit" := Medscheme."In-patient limit";

@@ -3,7 +3,7 @@ Page 51516216 "HR Employee Qualification Line"
 {
     Caption = 'Employee Qualification Lines';
     PageType = List;
-    SourceTable = 51516197;
+    SourceTable = "HR Employee Qualifications";
 
     layout
     {
@@ -11,43 +11,43 @@ Page 51516216 "HR Employee Qualification Line"
         {
             repeater(Control1102755000)
             {
-                field("Qualification Type"; "Qualification Type")
+                field("Qualification Type"; Rec."Qualification Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Qualification Code"; "Qualification Code")
+                field("Qualification Code"; Rec."Qualification Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Qualification Description"; "Qualification Description")
+                field("Qualification Description"; Rec."Qualification Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Course of Study"; "Course of Study")
+                field("Course of Study"; Rec."Course of Study")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Date"; "From Date")
+                field("From Date"; Rec."From Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Date"; "To Date")
+                field("To Date"; Rec."To Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Institution/Company"; "Institution/Company")
+                field("Institution/Company"; Rec."Institution/Company")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Course Grade"; "Course Grade")
+                field("Course Grade"; Rec."Course Grade")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }

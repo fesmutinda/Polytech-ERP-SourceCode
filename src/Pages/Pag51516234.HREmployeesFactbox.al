@@ -2,7 +2,7 @@
 Page 51516234 "HR Employees Factbox"
 {
     PageType = CardPart;
-    SourceTable = 51516160;
+    SourceTable = "HR Employees";
 
     layout
     {
@@ -14,31 +14,31 @@ Page 51516234 "HR Employees Factbox"
                 Style = StrongAccent;
                 StyleExpr = true;
             }
-            field("No."; "No.")
+            field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;
             }
-            field("First Name"; "First Name")
+            field("First Name"; Rec."First Name")
             {
                 ApplicationArea = Basic;
             }
-            field("Middle Name"; "Middle Name")
+            field("Middle Name"; Rec."Middle Name")
             {
                 ApplicationArea = Basic;
             }
-            field("Last Name"; "Last Name")
+            field("Last Name"; Rec."Last Name")
             {
                 ApplicationArea = Basic;
             }
-            field("E-Mail"; "E-Mail")
+            field("E-Mail"; Rec."E-Mail")
             {
                 ApplicationArea = Basic;
             }
-            field("Company E-Mail"; "Company E-Mail")
+            field("Company E-Mail"; Rec."Company E-Mail")
             {
                 ApplicationArea = Basic;
             }
-            field(Status; Status)
+            field(Status; Rec.Status)
             {
                 ApplicationArea = Basic;
             }
@@ -48,11 +48,11 @@ Page 51516234 "HR Employees Factbox"
                 Style = StrongAccent;
                 StyleExpr = true;
             }
-            field("Job Title"; "Job Title")
+            field("Job Title"; Rec."Job Title")
             {
                 ApplicationArea = Basic;
             }
-            field(Grade; Grade)
+            field(Grade; Rec.Grade)
             {
                 ApplicationArea = Basic;
             }
@@ -62,27 +62,27 @@ Page 51516234 "HR Employees Factbox"
                 Style = StrongAccent;
                 StyleExpr = true;
             }
-            field("Annual Leave Account"; "Annual Leave Account")
+            field("Annual Leave Account"; Rec."Annual Leave Account")
             {
                 ApplicationArea = Basic;
             }
-            field("Compassionate Leave Acc."; "Compassionate Leave Acc.")
+            field("Compassionate Leave Acc."; Rec."Compassionate Leave Acc.")
             {
                 ApplicationArea = Basic;
             }
-            field("Maternity Leave Acc."; "Maternity Leave Acc.")
+            field("Maternity Leave Acc."; Rec."Maternity Leave Acc.")
             {
                 ApplicationArea = Basic;
             }
-            field("Paternity Leave Acc."; "Paternity Leave Acc.")
+            field("Paternity Leave Acc."; Rec."Paternity Leave Acc.")
             {
                 ApplicationArea = Basic;
             }
-            field("Sick Leave Acc."; "Sick Leave Acc.")
+            field("Sick Leave Acc."; Rec."Sick Leave Acc.")
             {
                 ApplicationArea = Basic;
             }
-            field("Study Leave Acc"; "Study Leave Acc")
+            field("Study Leave Acc"; Rec."Study Leave Acc")
             {
                 ApplicationArea = Basic;
             }

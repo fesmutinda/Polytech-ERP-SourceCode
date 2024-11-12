@@ -2,7 +2,7 @@
 Page 51516303 "HR Applicants Qualified Card"
 {
     PageType = Card;
-    SourceTable = 51516209;
+    SourceTable = "HR Job Applications";
     SourceTableView = where("Qualification Status" = const(Qualified));
 
     layout
@@ -11,47 +11,47 @@ Page 51516303 "HR Applicants Qualified Card"
         {
             group(General)
             {
-                field("Application No"; "Application No")
+                field("Application No"; Rec."Application No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Middle Name"; "Middle Name")
+                field("Middle Name"; Rec."Middle Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Applied For"; "Job Applied For")
+                field("Job Applied For"; Rec."Job Applied For")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Qualified; Qualified)
+                field(Qualified; Rec.Qualified)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Interview"; "Date of Interview")
+                field("Date of Interview"; Rec."Date of Interview")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Time"; "From Time")
+                field("From Time"; Rec."From Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Time"; "To Time")
+                field("To Time"; Rec."To Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Venue; Venue)
+                field(Venue; Rec.Venue)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interview Type"; "Interview Type")
+                field("Interview Type"; Rec."Interview Type")
                 {
                     ApplicationArea = Basic;
                 }
@@ -81,8 +81,8 @@ Page 51516303 "HR Applicants Qualified Card"
                         //IF CONFIRM('Send this Requisition for Approval?',TRUE)=FALSE THEN EXIT;
                         if not Confirm(Text002, false) then exit;
 
-                        TestField(Qualified, Qualified::"1");
-                        HRJobApplications.SetRange(HRJobApplications."Application No", "Application No");
+                        Rec.TestField(Qualified, Qualified::"1");
+                        HRJobApplications.SetRange(HRJobApplications."Application No", Rec."Application No");
                         CurrPage.SetSelectionFilter(HRJobApplications);
                         if HRJobApplications.Find('-') then
                             //GET E-MAIL PARAMETERS FOR JOB APPLICATIONS
@@ -99,8 +99,8 @@ Page 51516303 "HR Applicants Qualified Card"
                             until HRJobApplications.Next = 0;
 
                             if Confirm('Do you want to send this invitation alert?', false) = true then begin
-                                "Interview Invitation Sent" := true;
-                                Modify;
+                                Rec."Interview Invitation Sent" := true;
+                                Rec.Modify;
                                 Message('All Qualified shortlisted candidates have been invited for the interview ')
                             end;
                         end;
@@ -113,8 +113,8 @@ Page 51516303 "HR Applicants Qualified Card"
     var
         Text001: label 'Are you sure you want to Upload Applicants Details to the Employee Card?';
         Text002: label 'Are you sure you want to Send this Interview invitation?';
-        HRJobApplications: Record 51516209;
-        HREmailParameters: Record 51516208;
-        SMTP: Codeunit UnknownCodeunit400;
+        HRJobApplications: Record "HR Job Applications";
+        HREmailParameters: Record "HR E-Mail Parameters";
+        SMTP: Codeunit 400;
 }
 

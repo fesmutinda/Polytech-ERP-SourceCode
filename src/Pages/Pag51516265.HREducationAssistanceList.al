@@ -3,7 +3,7 @@ Page 51516265 "HR Education Assistance List"
 {
     CardPageID = "HR Education Assistance";
     PageType = List;
-    SourceTable = 51516232;
+    SourceTable = "HR Education Assistance";
 
     layout
     {
@@ -11,43 +11,43 @@ Page 51516265 "HR Education Assistance List"
         {
             repeater(Group)
             {
-                field("Employee No."; "Employee No.")
+                field("Employee No."; Rec."Employee No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee First Name"; "Employee First Name")
+                field("Employee First Name"; Rec."Employee First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Last Name"; "Employee Last Name")
+                field("Employee Last Name"; Rec."Employee Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Type Of Institution"; "Type Of Institution")
+                field("Type Of Institution"; Rec."Type Of Institution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Educational Institution"; "Educational Institution")
+                field("Educational Institution"; Rec."Educational Institution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Year Of Study"; "Year Of Study")
+                field("Year Of Study"; Rec."Year Of Study")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Refund Level"; "Refund Level")
+                field("Refund Level"; Rec."Refund Level")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Student Number"; "Student Number")
+                field("Student Number"; Rec."Student Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Study Period"; "Study Period")
+                field("Study Period"; Rec."Study Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Cost"; "Total Cost")
+                field("Total Cost"; Rec."Total Cost")
                 {
                     ApplicationArea = Basic;
                 }

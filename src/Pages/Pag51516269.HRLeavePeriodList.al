@@ -2,7 +2,7 @@
 Page 51516269 "HR Leave Period List"
 {
     PageType = List;
-    SourceTable = 51516189;
+    SourceTable = "HR Leave Periods";
 
     layout
     {
@@ -10,33 +10,33 @@ Page 51516269 "HR Leave Period List"
         {
             repeater(Group)
             {
-                field("Period Code"; "Period Code")
+                field("Period Code"; Rec."Period Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Description"; "Period Description")
+                field("Period Description"; Rec."Period Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Starting Date"; "Starting Date")
+                field("Starting Date"; Rec."Starting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Fiscal Year"; "New Fiscal Year")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Closed; Closed)
+                field("New Fiscal Year"; Rec."New Fiscal Year")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Locked"; "Date Locked")
+                field(Closed; Rec.Closed)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Date Locked"; Rec."Date Locked")
                 {
                     ApplicationArea = Basic;
                 }
@@ -65,7 +65,7 @@ Page 51516269 "HR Leave Period List"
                 Image = CreateYear;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report UnknownReport51516233;
+                RunObject = Report 51516233;
             }
             action("C&lose Year")
             {
@@ -74,7 +74,7 @@ Page 51516269 "HR Leave Period List"
                 Image = CloseYear;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Codeunit UnknownCodeunit55582;
+                RunObject = Codeunit 55582;
             }
         }
     }

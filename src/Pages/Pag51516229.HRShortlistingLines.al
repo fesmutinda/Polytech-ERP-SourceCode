@@ -4,7 +4,7 @@ Page 51516229 "HR Shortlisting Lines"
     Caption = 'Shorlisted Candidates';
     Editable = false;
     PageType = List;
-    SourceTable = 51516211;
+    SourceTable = "HR Shortlisted Applicants";
 
     layout
     {
@@ -12,55 +12,55 @@ Page 51516229 "HR Shortlisting Lines"
         {
             repeater(Control1000000000)
             {
-                field(Qualified; Qualified)
+                field(Qualified; Rec.Qualified)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Qualified';
 
                     trigger OnValidate()
                     begin
-                        "Manual Change" := true;
-                        Modify;
+                        Rec."Manual Change" := true;
+                        Rec.Modify;
                     end;
                 }
-                field("Job Application No"; "Job Application No")
+                field("Job Application No"; Rec."Job Application No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Middle Name"; "Middle Name")
+                field("Middle Name"; Rec."Middle Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Stage Score"; "Stage Score")
+                field("Stage Score"; Rec."Stage Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Position; Position)
+                field(Position; Rec.Position)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Employ; Employ)
+                field(Employ; Rec.Employ)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Employed';
                 }
-                field("Reporting Date"; "Reporting Date")
+                field("Reporting Date"; Rec."Reporting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Manual Change"; "Manual Change")
+                field("Manual Change"; Rec."Manual Change")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Manual Change';

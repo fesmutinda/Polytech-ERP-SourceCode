@@ -3,7 +3,7 @@ Page 51516208 "HR Training Needs Card"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Functions';
-    SourceTable = 51516222;
+    SourceTable = "HR Training Needs";
 
     layout
     {
@@ -12,60 +12,60 @@ Page 51516208 "HR Training Needs Card"
             group(General)
             {
                 Caption = 'General';
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Duration Units"; "Duration Units")
+                field("Duration Units"; Rec."Duration Units")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cost Of Training"; "Cost Of Training")
+                field("Cost Of Training"; Rec."Cost Of Training")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Location; Location)
+                field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Provider; Provider)
+                field(Provider; Rec.Provider)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Provider Name"; "Provider Name")
+                field("Provider Name"; Rec."Provider Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job id"; "Job id")
+                field("Job id"; Rec."Job id")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -91,14 +91,14 @@ Page 51516208 "HR Training Needs Card"
 
                     trigger OnAction()
                     begin
-                        if Closed then begin
-                            Closed := false;
-                            Message('Training need :: %1 :: has been Re-Opened', Description);
+                        if Rec.Closed then begin
+                            Rec.Closed := false;
+                            Message('Training need :: %1 :: has been Re-Opened', Rec.Description);
                         end
                         else begin
-                            Closed := true;
-                            Message('Training need :: %1 :: has been closed', Description);
-                            Modify;
+                            Rec.Closed := true;
+                            Message('Training need :: %1 :: has been closed', Rec.Description);
+                            Rec.Modify;
                         end;
                     end;
                 }

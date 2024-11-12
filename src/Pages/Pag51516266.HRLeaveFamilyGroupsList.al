@@ -3,7 +3,7 @@ Page 51516266 "HR Leave Family Groups List"
 {
     CardPageID = "HR Leave Family Groups Card";
     PageType = List;
-    SourceTable = 51516233;
+    SourceTable = "HR Leave Family Groups";
 
     layout
     {
@@ -11,19 +11,19 @@ Page 51516266 "HR Leave Family Groups List"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Employees On Leave"; "Max Employees On Leave")
+                field("Max Employees On Leave"; Rec."Max Employees On Leave")
                 {
                     ApplicationArea = Basic;
                 }

@@ -4,7 +4,7 @@ Page 51516293 "HR Employees Attachements"
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = Card;
-    SourceTable = 51516160;
+    SourceTable = "HR Employees";
 
     layout
     {
@@ -12,43 +12,43 @@ Page 51516293 "HR Employees Attachements"
         {
             group(Attachements)
             {
-                field("Attachement 1"; "Attachement 1")
+                field("Attachement 1"; Rec."Attachement 1")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 2"; "Attachement 2")
+                field("Attachement 2"; Rec."Attachement 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 3"; "Attachement 3")
+                field("Attachement 3"; Rec."Attachement 3")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 4"; "Attachement 4")
+                field("Attachement 4"; Rec."Attachement 4")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 5"; "Attachement 5")
+                field("Attachement 5"; Rec."Attachement 5")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 6"; "Attachement 6")
+                field("Attachement 6"; Rec."Attachement 6")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 7"; "Attachement 7")
+                field("Attachement 7"; Rec."Attachement 7")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 8"; "Attachement 8")
+                field("Attachement 8"; Rec."Attachement 8")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 9"; "Attachement 9")
+                field("Attachement 9"; Rec."Attachement 9")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attachement 10"; "Attachement 10")
+                field("Attachement 10"; Rec."Attachement 10")
                 {
                     ApplicationArea = Basic;
                 }

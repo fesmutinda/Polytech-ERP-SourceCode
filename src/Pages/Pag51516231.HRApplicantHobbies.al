@@ -2,7 +2,7 @@
 Page 51516231 "HR Applicant Hobbies"
 {
     PageType = List;
-    SourceTable = 51516647;
+    SourceTable = "HR Applicant Hobbies";
 
     layout
     {
@@ -10,7 +10,7 @@ Page 51516231 "HR Applicant Hobbies"
         {
             repeater(Control1000000000)
             {
-                field(Hobby; Hobby)
+                field(Hobby; Rec.Hobby)
                 {
                     ApplicationArea = Basic;
                 }

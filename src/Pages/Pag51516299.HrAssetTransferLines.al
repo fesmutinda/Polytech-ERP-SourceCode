@@ -3,7 +3,7 @@ Page 51516299 "Hr Asset Transfer Lines"
 {
     DeleteAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516261;
+    SourceTable = "HR Asset Transfer Lines";
 
     layout
     {
@@ -11,95 +11,95 @@ Page 51516299 "Hr Asset Transfer Lines"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Asset No."; "Asset No.")
+                field("Asset No."; Rec."Asset No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Asset Bar Code"; "Asset Bar Code")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Asset Description"; "Asset Description")
+                field("Asset Bar Code"; Rec."Asset Bar Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("FA Location"; "FA Location")
+                field("Asset Description"; Rec."Asset Description")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Asset Serial No"; "Asset Serial No")
+                field("FA Location"; Rec."FA Location")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Responsible Employee Code"; "Responsible Employee Code")
+                field("Asset Serial No"; Rec."Asset Serial No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Responsible Employee Code"; Rec."Responsible Employee Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("New Responsible Employee Code"; "New Responsible Employee Code")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("New Employee Name"; "New Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("New Responsible Employee Code"; Rec."New Responsible Employee Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dimension 2 Name"; "Dimension 2 Name")
+                field("New Employee Name"; Rec."New Employee Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Global Dimension 2 Code"; "New Global Dimension 2 Code")
+                field("Dimension 2 Name"; Rec."Dimension 2 Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New  Dimension 2 Name"; "New  Dimension 2 Name")
+                field("New Global Dimension 2 Code"; Rec."New Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 3 Code"; "Global Dimension 3 Code")
+                field("New  Dimension 2 Name"; Rec."New  Dimension 2 Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dimension 3 Name"; "Dimension 3 Name")
+                field("Global Dimension 3 Code"; Rec."Global Dimension 3 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Global Dimension 3 Code"; "New Global Dimension 3 Code")
+                field("Dimension 3 Name"; Rec."Dimension 3 Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New  Dimension 3 Name"; "New  Dimension 3 Name")
+                field("New Global Dimension 3 Code"; Rec."New Global Dimension 3 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Asset Expected Back?"; "Is Asset Expected Back?")
+                field("New  Dimension 3 Name"; Rec."New  Dimension 3 Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Asset Location"; "New Asset Location")
+                field("Is Asset Expected Back?"; Rec."Is Asset Expected Back?")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason for Transfer"; "Reason for Transfer")
+                field("New Asset Location"; Rec."New Asset Location")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Reason for Transfer"; Rec."Reason for Transfer")
                 {
                     ApplicationArea = Basic;
                 }

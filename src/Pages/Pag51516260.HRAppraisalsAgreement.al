@@ -3,7 +3,7 @@ Page 51516260 "HR Appraisals Agreement"
 {
     CardPageID = "HR Appraisal Agreement HD";
     PageType = List;
-    SourceTable = 51516216;
+    SourceTable = "HR Appraisal Header";
     SourceTableView = where(Status = filter(Approved));
 
     layout
@@ -12,83 +12,83 @@ Page 51516260 "HR Appraisals Agreement"
         {
             repeater(Group)
             {
-                field("Appraisal No"; "Appraisal No")
+                field("Appraisal No"; Rec."Appraisal No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Supervisor; Supervisor)
+                field(Supervisor; Rec.Supervisor)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Type"; "Appraisal Type")
+                field("Appraisal Type"; Rec."Appraisal Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Recommendations; Recommendations)
+                field(Recommendations; Rec.Recommendations)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Stage"; "Appraisal Stage")
+                field("Appraisal Stage"; Rec."Appraisal Stage")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Sent; Sent)
+                field(Sent; Rec.Sent)
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Department; Department)
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Comments Appraisee"; "Comments Appraisee")
+                field("Comments Appraisee"; Rec."Comments Appraisee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Comments Appraiser"; "Comments Appraiser")
+                field("Comments Appraiser"; Rec."Comments Appraiser")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Date"; "Appraisal Date")
+                field("Appraisal Date"; Rec."Appraisal Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Evaluation Period End"; "Evaluation Period End")
+                field("Evaluation Period End"; Rec."Evaluation Period End")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Target Type"; "Target Type")
+                field("Target Type"; Rec."Target Type")
                 {
                     ApplicationArea = Basic;
                 }

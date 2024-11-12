@@ -2,7 +2,7 @@
 Page 51516267 "HR Leave Family Employees List"
 {
     PageType = List;
-    SourceTable = 51516234;
+    SourceTable = "HR Leave Family Employees";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516267 "HR Leave Family Employees List"
         {
             repeater(Group)
             {
-                field(Family; Family)
+                field(Family; Rec.Family)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }

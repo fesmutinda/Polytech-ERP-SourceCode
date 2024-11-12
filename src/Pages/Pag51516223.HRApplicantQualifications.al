@@ -5,7 +5,7 @@ Page 51516223 "HR Applicant Qualifications"
     PageType = List;
     SaveValues = true;
     ShowFilter = true;
-    SourceTable = 51516644;
+    SourceTable = "HR Applicant Qualifications";
 
     layout
     {
@@ -13,38 +13,38 @@ Page 51516223 "HR Applicant Qualifications"
         {
             repeater(Control1000000000)
             {
-                field("Qualification Type"; "Qualification Type")
+                field("Qualification Type"; Rec."Qualification Type")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Qualification Code"; "Qualification Code")
+                field("Qualification Code"; Rec."Qualification Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Qualification Description"; "Qualification Description")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Promoted;
-                }
-                field("From Date"; "From Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("To Date"; "To Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Type; Type)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Institution/Company"; "Institution/Company")
+                field("Qualification Description"; Rec."Qualification Description")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Score ID"; "Score ID")
+                field("From Date"; Rec."From Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("To Date"; Rec."To Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Type; Rec.Type)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Institution/Company"; Rec."Institution/Company")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Promoted;
+                }
+                field("Score ID"; Rec."Score ID")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;

@@ -17,42 +17,42 @@ Page 51516268 "HR Leave Applications List"
             repeater(Control1102755000)
             {
                 Editable = false;
-                field("Application Code"; "Application Code")
+                field("Application Code"; Rec."Application Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Application No';
                     StyleExpr = true;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Type"; "Leave Type")
+                field("Leave Type"; Rec."Leave Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Days Applied"; "Days Applied")
+                field("Days Applied"; Rec."Days Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Return Date"; "Return Date")
+                field("Return Date"; Rec."Return Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reliever Name"; "Reliever Name")
+                field("Reliever Name"; Rec."Reliever Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Style = StrongAccent;
@@ -78,9 +78,9 @@ Page 51516268 "HR Leave Applications List"
         HREmp.Reset;
         HREmp.SetRange(HREmp."User ID", UserId);
         if HREmp.Find('-') then
-            SetRange("User ID", UserId)
+            Rec.SetRange("User ID", UserId)
         else
-            SetRange("User ID", UserId);
+            Rec.SetRange("User ID", UserId);
     end;
 
     var
@@ -90,11 +90,11 @@ Page 51516268 "HR Leave Applications List"
 
     procedure TESTFIELDS()
     begin
-        TestField("Leave Type");
-        TestField("Days Applied");
-        TestField("Start Date");
-        TestField(Reliever);
-        TestField(Supervisor);
+        Rec.TestField("Leave Type");
+        Rec.TestField("Days Applied");
+        Rec.TestField("Start Date");
+        Rec.TestField(Reliever);
+        Rec.TestField(Supervisor);
     end;
 
 
@@ -104,7 +104,7 @@ Page 51516268 "HR Leave Applications List"
         LeaveFamilyEmployees: Record "HR Leave Family Employees";
         Employees: Record "HR Employees";
     begin
-        LeaveFamilyEmployees.SetRange(LeaveFamilyEmployees."Employee No", "Employee No");
+        LeaveFamilyEmployees.SetRange(LeaveFamilyEmployees."Employee No", Rec."Employee No");
         if LeaveFamilyEmployees.FindSet then //find the leave family employee is associated with
             repeat
                 LeaveFamily.SetRange(LeaveFamily.Code, LeaveFamilyEmployees.Family);

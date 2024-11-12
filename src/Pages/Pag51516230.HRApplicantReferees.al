@@ -2,7 +2,7 @@
 Page 51516230 "HR Applicant Referees"
 {
     PageType = List;
-    SourceTable = 51516212;
+    SourceTable = "HR Applicant Referees";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516230 "HR Applicant Referees"
         {
             repeater(Control1000000000)
             {
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Designation; Designation)
+                field(Designation; Rec.Designation)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Institution; Institution)
+                field(Institution; Rec.Institution)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Telephone No"; "Telephone No")
+                field("Telephone No"; Rec."Telephone No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-Mail"; "E-Mail")
+                field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = Basic;
                 }

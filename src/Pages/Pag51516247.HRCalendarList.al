@@ -2,7 +2,7 @@
 Page 51516247 "HR Calendar List"
 {
     PageType = List;
-    SourceTable = 51516224;
+    SourceTable = "HR Calendar List";
 
     layout
     {
@@ -11,19 +11,19 @@ Page 51516247 "HR Calendar List"
             repeater(Control1102755000)
             {
                 Editable = true;
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Day; Day)
+                field(Day; Rec.Day)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Non Working"; "Non Working")
+                field("Non Working"; Rec."Non Working")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reason; Reason)
+                field(Reason; Rec.Reason)
                 {
                     ApplicationArea = Basic;
                 }

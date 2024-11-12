@@ -10,53 +10,53 @@ Page 51516213 "HR Drivers Card"
         {
             group(General)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Driver Name"; "Driver Name")
+                field("Driver Name"; Rec."Driver Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Driver License Number"; "Driver License Number")
+                field("Driver License Number"; Rec."Driver License Number")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Last License Renewal"; "Last License Renewal")
+                field("Last License Renewal"; Rec."Last License Renewal")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Renewal Interval"; "Renewal Interval")
+                field("Renewal Interval"; Rec."Renewal Interval")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Renewal Interval Value"; "Renewal Interval Value")
+                field("Renewal Interval Value"; Rec."Renewal Interval Value")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Next License Renewal"; "Next License Renewal")
+                field("Next License Renewal"; Rec."Next License Renewal")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Year Of Experience"; "Year Of Experience")
+                field("Year Of Experience"; Rec."Year Of Experience")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field(Grade; Grade)
+                field(Grade; Rec.Grade)
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field(Active; Active)
+                field(Active; Rec.Active)
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;

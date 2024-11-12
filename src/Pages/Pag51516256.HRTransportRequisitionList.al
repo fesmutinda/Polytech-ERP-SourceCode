@@ -3,7 +3,7 @@ Page 51516256 "HR Transport Requisition List"
 {
     CardPageID = "HR Staff Transport Requisition";
     PageType = List;
-    SourceTable = 51516226;
+    SourceTable = "HR Transport Requisition";
 
     layout
     {
@@ -11,63 +11,63 @@ Page 51516256 "HR Transport Requisition List"
         {
             repeater(Group)
             {
-                field("Application Code"; "Application Code")
+                field("Application Code"; Rec."Application Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Supervisor Email"; "Supervisor Email")
+                field("Supervisor Email"; Rec."Supervisor Email")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Tittle"; "Job Tittle")
+                field("Job Tittle"; Rec."Job Tittle")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Supervisor; Supervisor)
+                field(Supervisor; Rec.Supervisor)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; "Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Purpose of Trip"; "Purpose of Trip")
+                field("Purpose of Trip"; Rec."Purpose of Trip")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transport type"; "Transport type")
+                field("Transport type"; Rec."Transport type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time of Trip"; "Time of Trip")
+                field("Time of Trip"; Rec."Time of Trip")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pickup Point"; "Pickup Point")
+                field("Pickup Point"; Rec."Pickup Point")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Destination"; "From Destination")
+                field("From Destination"; Rec."From Destination")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Destination"; "To Destination")
+                field("To Destination"; Rec."To Destination")
                 {
                     ApplicationArea = Basic;
                 }

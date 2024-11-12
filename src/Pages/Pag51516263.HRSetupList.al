@@ -8,7 +8,7 @@ Page 51516263 "HR Setup List"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Administration';
     RefreshOnActivate = false;
-    SourceTable = 51516181;
+    SourceTable = "HR Setup";
 
     layout
     {
@@ -16,67 +16,67 @@ Page 51516263 "HR Setup List"
         {
             repeater(Control1102755000)
             {
-                field("Leave Posting Period[FROM]"; "Leave Posting Period[FROM]")
+                field("Leave Posting Period[FROM]"; Rec."Leave Posting Period[FROM]")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Posting Period[TO]"; "Leave Posting Period[TO]")
+                field("Leave Posting Period[TO]"; Rec."Leave Posting Period[TO]")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Leave Posting Template"; "Default Leave Posting Template")
+                field("Default Leave Posting Template"; Rec."Default Leave Posting Template")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Positive Leave Posting Batch"; "Positive Leave Posting Batch")
+                field("Positive Leave Posting Batch"; Rec."Positive Leave Posting Batch")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Base Calendar"; "Base Calendar")
+                field("Base Calendar"; Rec."Base Calendar")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Nos."; "Employee Nos.")
+                field("Employee Nos."; Rec."Employee Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Training Application Nos."; "Training Application Nos.")
+                field("Training Application Nos."; Rec."Training Application Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Application Nos."; "Leave Application Nos.")
+                field("Leave Application Nos."; Rec."Leave Application Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disciplinary Cases Nos."; "Disciplinary Cases Nos.")
+                field("Disciplinary Cases Nos."; Rec."Disciplinary Cases Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Requisition Nos."; "Employee Requisition Nos.")
+                field("Employee Requisition Nos."; Rec."Employee Requisition Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Application Nos"; "Job Application Nos")
+                field("Job Application Nos"; Rec."Job Application Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Exit Interview Nos"; "Exit Interview Nos")
+                field("Exit Interview Nos"; Rec."Exit Interview Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Nos"; "Appraisal Nos")
+                field("Appraisal Nos"; Rec."Appraisal Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Company Activities"; "Company Activities")
+                field("Company Activities"; Rec."Company Activities")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Interview Nos"; "Job Interview Nos")
+                field("Job Interview Nos"; Rec."Job Interview Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Leave Reimbursment Nos."; "Leave Reimbursment Nos.")
+                field("Leave Reimbursment Nos."; Rec."Leave Reimbursment Nos.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -130,10 +130,10 @@ Page 51516263 "HR Setup List"
     trigger OnOpenPage()
     begin
 
-        Reset;
-        if not Get then begin
-            Init;
-            Insert;
+        Rec.Reset;
+        if not Rec.Get then begin
+            Rec.Init;
+            Rec.Insert;
         end;
     end;
 }

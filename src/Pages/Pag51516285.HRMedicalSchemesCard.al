@@ -2,7 +2,7 @@
 Page 51516285 "HR Medical Schemes Card"
 {
     PageType = Card;
-    SourceTable = 51516276;
+    SourceTable = "HR Medical Schemes";
 
     layout
     {
@@ -10,38 +10,38 @@ Page 51516285 "HR Medical Schemes Card"
         {
             group(General)
             {
-                field("Scheme No"; "Scheme No")
+                field("Scheme No"; Rec."Scheme No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Medical Insurer"; "Medical Insurer")
+                field("Medical Insurer"; Rec."Medical Insurer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheme Name"; "Scheme Name")
+                field("Scheme Name"; Rec."Scheme Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("In-patient limit"; "In-patient limit")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Out-patient limit"; "Out-patient limit")
+                field("In-patient limit"; Rec."In-patient limit")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Area Covered"; "Area Covered")
+                field("Out-patient limit"; Rec."Out-patient limit")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Dependants Included"; "Dependants Included")
+                field("Area Covered"; Rec."Area Covered")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Dependants Included"; Rec."Dependants Included")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }

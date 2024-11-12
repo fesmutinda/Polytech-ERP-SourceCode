@@ -2,7 +2,7 @@
 Page 51516224 "HR Staff Transport Requisition"
 {
     PageType = Card;
-    SourceTable = 51516226;
+    SourceTable = "HR Transport Requisition";
 
     layout
     {
@@ -11,13 +11,13 @@ Page 51516224 "HR Staff Transport Requisition"
             group(General)
             {
                 Caption = 'General';
-                field("Application Code"; "Application Code")
+                field("Application Code"; Rec."Application Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Application No';
                     Editable = false;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Applicant No.';
@@ -29,7 +29,7 @@ Page 51516224 "HR Staff Transport Requisition"
                     Caption = 'Applicant Name';
                     Editable = false;
                 }
-                field("Job Tittle"; "Job Tittle")
+                field("Job Tittle"; Rec."Job Tittle")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Job Title';
@@ -46,37 +46,37 @@ Page 51516224 "HR Staff Transport Requisition"
                     Caption = 'Department';
                     Editable = false;
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Days Applied"; "Days Applied")
+                field("Days Applied"; Rec."Days Applied")
                 {
                     ApplicationArea = Basic;
                     Caption = 'No of Days';
                 }
-                field("Time of Trip"; "Time of Trip")
+                field("Time of Trip"; Rec."Time of Trip")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Destination"; "From Destination")
+                field("From Destination"; Rec."From Destination")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Destination"; "To Destination")
+                field("To Destination"; Rec."To Destination")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Return Date"; "Return Date")
+                field("Return Date"; Rec."Return Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Purpose of Trip"; "Purpose of Trip")
+                field("Purpose of Trip"; Rec."Purpose of Trip")
                 {
                     ApplicationArea = Basic;
                     MultiLine = true;
                 }
-                field(Supervisor; Supervisor)
+                field(Supervisor; Rec.Supervisor)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -87,17 +87,17 @@ Page 51516224 "HR Staff Transport Requisition"
                     Caption = 'Supervisor Name';
                     Editable = false;
                 }
-                field("Supervisor Email"; "Supervisor Email")
+                field("Supervisor Email"; Rec."Supervisor Email")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Supervisor Email';
                     Editable = false;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -161,7 +161,7 @@ Page 51516224 "HR Staff Transport Requisition"
                     trigger OnAction()
                     begin
                         HRLeaveApp.Reset;
-                        HRLeaveApp.SetRange(HRLeaveApp."Application Code", "Application Code");
+                        HRLeaveApp.SetRange(HRLeaveApp."Application Code", Rec."Application Code");
                         if HRLeaveApp.Find('-') then
                             Report.Run(53919, true, true, HRLeaveApp);
                     end;
@@ -173,13 +173,13 @@ Page 51516224 "HR Staff Transport Requisition"
 
                     trigger OnAction()
                     begin
-                        if DoclLink.Get("Application Code", FieldCaption("Application Code")) then begin
+                        if DoclLink.Get(Rec."Application Code", Rec.FieldCaption("Application Code")) then begin
                             DoclLink.PlaceFilter(true, DoclLink."Employee No");
                             Page.RunModal(53998, DoclLink);
                         end else begin
                             DoclLink.Init;
-                            DoclLink."Employee No" := "Application Code";
-                            DoclLink."Document Description" := FieldCaption("Application Code");
+                            DoclLink."Employee No" := Rec."Application Code";
+                            DoclLink."Document Description" := Rec.FieldCaption("Application Code");
                             DoclLink.Insert;
                             Commit;
                             DoclLink.PlaceFilter(true, DoclLink."Employee No");
@@ -224,7 +224,7 @@ Page 51516224 "HR Staff Transport Requisition"
         EmpJobDesc: Text[30];
         HRJobs: Record 51516177;
         SupervisorName: Text[30];
-        SMTP: Codeunit UnknownCodeunit400;
+        SMTP: Codeunit 400;
         URL: Text[500];
         dAlloc: Decimal;
         dEarnd: Decimal;
@@ -252,7 +252,7 @@ Page 51516224 "HR Staff Transport Requisition"
         //GET THE APPLICANT DETAILS
 
         HREmp.Reset;
-        if HREmp.Get("Employee No") then begin
+        if HREmp.Get(Rec."Employee No") then begin
             EmpName := HREmp.FullName;
             EmpDept := HREmp."Global Dimension 2 Code";
         end else begin
@@ -261,7 +261,7 @@ Page 51516224 "HR Staff Transport Requisition"
 
         //GET THE JOB DESCRIPTION FRON THE HR JOBS TABLE AND PASS IT TO THE VARIABLE
         HRJobs.Reset;
-        if HRJobs.Get("Job Tittle") then begin
+        if HRJobs.Get(Rec."Job Tittle") then begin
             EmpJobDesc := HRJobs."Job Description";
         end else begin
             EmpJobDesc := '';
@@ -269,7 +269,7 @@ Page 51516224 "HR Staff Transport Requisition"
 
         //GET THE APPROVER NAMES
         HREmp.Reset;
-        HREmp.SetRange(HREmp."User ID", Supervisor);
+        HREmp.SetRange(HREmp."User ID", Rec.Supervisor);
         if HREmp.Find('-') then begin
             SupervisorName := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
         end else begin
@@ -288,7 +288,7 @@ Page 51516224 "HR Staff Transport Requisition"
         cReimbsd := 0;
         cPerDay := 0;
         cbf := 0;
-        if HREmp.Get("Employee No") then begin
+        if HREmp.Get(Rec."Employee No") then begin
             HREmp.SetFilter(HREmp."Leave Type Filter", LeaveType);
             HREmp.CalcFields(HREmp."Allocated Leave Days");
             dAlloc := HREmp."Allocated Leave Days";
@@ -307,8 +307,8 @@ Page 51516224 "HR Staff Transport Requisition"
     procedure TESTFIELDS()
     begin
         //TESTFIELD("Leave Type");
-        TestField("Days Applied");
-        TestField("Start Date");
+        Rec.TestField("Days Applied");
+        Rec.TestField("Start Date");
         //TESTFIELD(Reliever);
         //TESTFIELD(Supervisor);
     end;

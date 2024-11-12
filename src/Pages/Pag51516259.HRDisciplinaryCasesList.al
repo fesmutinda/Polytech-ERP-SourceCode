@@ -3,7 +3,7 @@ Page 51516259 "HR Disciplinary Cases List"
 {
     CardPageID = "HR Disciplinary Cases";
     PageType = List;
-    SourceTable = 51516160;
+    SourceTable = "HR Employees";
 
     layout
     {
@@ -12,7 +12,7 @@ Page 51516259 "HR Disciplinary Cases List"
             repeater(General)
             {
                 Caption = 'General';
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -25,39 +25,39 @@ Page 51516259 "HR Disciplinary Cases List"
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Job Specification"; "Job Specification")
+                field("Job Specification"; Rec."Job Specification")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field(Gender; Gender)
+                field(Gender; Rec.Gender)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Postal Address"; "Postal Address")
+                field("Postal Address"; Rec."Postal Address")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Post Code"; "Post Code")
+                field("Post Code"; Rec."Post Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cell Phone Number"; "Cell Phone Number")
+                field("Cell Phone Number"; Rec."Cell Phone Number")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("E-Mail"; "E-Mail")
+                field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -92,7 +92,7 @@ Page 51516259 "HR Disciplinary Cases List"
                     begin
                         HRDisciplinary.Reset;
                         HRDisciplinary.SetRange(HRDisciplinary.Selected, true);
-                        HRDisciplinary.SetRange(HRDisciplinary."Employee No", "No.");
+                        HRDisciplinary.SetRange(HRDisciplinary."Employee No", Rec."No.");
                         if HRDisciplinary.Find('-') then begin
 
                             //ENSURE SELECTED RECORDS DO NOT EXCEED ONE
@@ -106,11 +106,11 @@ Page 51516259 "HR Disciplinary Cases List"
                             if HRDisciplinary.Status = HRDisciplinary.Status::Open then begin
                                 HRDisciplinary.Status := HRDisciplinary.Status::Closed;
                                 HRDisciplinary.Modify;
-                                HRDisciplinary."Closed By" := "Employee UserID";
+                                HRDisciplinary."Closed By" := Rec."Employee UserID";
                             end else begin
                                 HRDisciplinary.Status := HRDisciplinary.Status::Open;
                                 HRDisciplinary.Modify;
-                                HRDisciplinary."Closed By" := "Employee UserID";
+                                HRDisciplinary."Closed By" := Rec."Employee UserID";
                             end;
 
                         end else begin
@@ -129,7 +129,7 @@ Page 51516259 "HR Disciplinary Cases List"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report UnknownReport55597;
+                RunObject = Report 55597;
             }
         }
     }
@@ -137,7 +137,7 @@ Page 51516259 "HR Disciplinary Cases List"
     trigger OnAfterGetRecord()
     begin
         HREmp.Reset;
-        if HREmp.Get("No.") then begin
+        if HREmp.Get(Rec."No.") then begin
             EmpNames := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
         end else begin
             EmpNames := '';
@@ -145,9 +145,9 @@ Page 51516259 "HR Disciplinary Cases List"
     end;
 
     var
-        HREmp: Record 51516160;
+        HREmp: Record "HR Employees";
         EmpNames: Text[40];
-        HRDisciplinary: Record 51516206;
+        HRDisciplinary: Record "HR Disciplinary Cases";
         Number: Integer;
 }
 

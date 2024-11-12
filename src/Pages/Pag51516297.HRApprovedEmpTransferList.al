@@ -4,7 +4,7 @@ Page 51516297 "HR Approved  Emp Transfer List"
     CardPageID = "HR Approved Emp Transfer Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516258;
+    SourceTable = "HR Employee Transfer Header";
     SourceTableView = where(Status = const(Approved));
 
     layout
@@ -13,31 +13,31 @@ Page 51516297 "HR Approved  Emp Transfer List"
         {
             repeater(Group)
             {
-                field("Request No"; "Request No")
+                field("Request No"; Rec."Request No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Requested"; "Date Requested")
+                field("Date Requested"; Rec."Date Requested")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Approved"; "Date Approved")
+                field("Date Approved"; Rec."Date Approved")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; "Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transfer details Updated"; "Transfer details Updated")
+                field("Transfer details Updated"; Rec."Transfer details Updated")
                 {
                     ApplicationArea = Basic;
                 }

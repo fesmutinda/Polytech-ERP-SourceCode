@@ -2,7 +2,7 @@
 Page 51516283 "Hr Employee Transfer Line"
 {
     PageType = ListPart;
-    SourceTable = 51516259;
+    SourceTable = "HR Employee Transfer Lines";
 
     layout
     {
@@ -10,37 +10,37 @@ Page 51516283 "Hr Employee Transfer Line"
         {
             repeater(Group)
             {
-                field("Request No"; "Request No")
+                field("Request No"; Rec."Request No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Department"; "Current Department")
+                field("Current Department"; Rec."Current Department")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Branch"; "Global Dimension 2 Code")
+                field("Current Branch"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Current Branch';
                 }
-                field("New Department"; "New Department")
+                field("New Department"; Rec."New Department")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Branch"; "New Global Dimension 2 Code")
+                field("New Branch"; Rec."New Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'New Branch';
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }

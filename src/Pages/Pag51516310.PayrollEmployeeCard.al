@@ -4,7 +4,7 @@ Page 51516310 "Payroll Employee Card."
     DeleteAllowed = false;
     InsertAllowed = true;
     PageType = Card;
-    SourceTable = 51516317;
+    SourceTable = "Payroll Employee.";
 
     layout
     {
@@ -12,149 +12,149 @@ Page 51516310 "Payroll Employee Card."
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Staff No';
                 }
-                field("Payroll No"; "Payroll No")
+                field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Sacco Member No.';
                 }
-                field(Surname; Surname)
+                field(Surname; Rec.Surname)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Firstname; Firstname)
+                field(Firstname; Rec.Firstname)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Lastname; Lastname)
+                field(Lastname; Rec.Lastname)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Email"; "Employee Email")
+                field("Employee Email"; Rec."Employee Email")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Joining Date"; "Joining Date")
+                field("Joining Date"; Rec."Joining Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Global Dimension 1"; "Global Dimension 1")
+                field("Global Dimension 1"; Rec."Global Dimension 1")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2"; "Global Dimension 2")
+                field("Global Dimension 2"; Rec."Global Dimension 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Group"; "Posting Group")
+                field("Posting Group"; Rec."Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("National ID No"; "National ID No")
+                field("National ID No"; Rec."National ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NSSF No"; "NSSF No")
+                field("NSSF No"; Rec."NSSF No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NHIF No"; "NHIF No")
+                field("NHIF No"; Rec."NHIF No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("PIN No"; "PIN No")
+                field("PIN No"; Rec."PIN No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Group"; "Job Group")
+                field("Job Group"; Rec."Job Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Category; Category)
+                field(Category; Rec.Category)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Department; Department)
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Management"; "Is Management")
+                field("Is Management"; Rec."Is Management")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Pay Details")
             {
-                field("Basic Pay"; "Basic Pay")
+                field("Basic Pay"; Rec."Basic Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paid per Hour"; "Paid per Hour")
+                field("Paid per Hour"; Rec."Paid per Hour")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays PAYE"; "Pays PAYE")
+                field("Pays PAYE"; rec."Pays PAYE")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays NSSF"; "Pays NSSF")
+                field("Pays NSSF"; Rec."Pays NSSF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays NHIF"; "Pays NHIF")
+                field("Pays NHIF"; Rec."Pays NHIF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Mode"; "Payment Mode")
+                field("Payment Mode"; Rec."Payment Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Premium"; "Insurance Premium")
+                field("Insurance Premium"; Rec."Insurance Premium")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Bank Details")
             {
-                field("Bank Code"; "Bank Code")
+                field("Bank Code"; Rec."Bank Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Branch Code"; "Branch Code")
+                field("Branch Code"; ReC."Branch Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Branch Name"; "Branch Name")
+                field("Branch Name"; Rec."Branch Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No"; "Bank Account No")
+                field("Bank Account No"; Rec."Bank Account No")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Other Details")
             {
-                field("Payslip Message"; "Payslip Message")
+                field("Payslip Message"; Rec."Payslip Message")
                 {
                     ApplicationArea = Basic;
                 }
@@ -162,58 +162,58 @@ Page 51516310 "Payroll Employee Card."
             group("Cummulative Figures")
             {
                 Editable = false;
-                field("Cummulative Basic Pay"; "Cummulative Basic Pay")
+                field("Cummulative Basic Pay"; Rec."Cummulative Basic Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Gross Pay"; "Cummulative Gross Pay")
+                field("Cummulative Gross Pay"; Rec."Cummulative Gross Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Allowances"; "Cummulative Allowances")
+                field("Cummulative Allowances"; Rec."Cummulative Allowances")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Deductions"; "Cummulative Deductions")
+                field("Cummulative Deductions"; Rec."Cummulative Deductions")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Net Pay"; "Cummulative Net Pay")
+                field("Cummulative Net Pay"; Rec."Cummulative Net Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative PAYE"; "Cummulative PAYE")
+                field("Cummulative PAYE"; Rec."Cummulative PAYE")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative NSSF"; "Cummulative NSSF")
+                field("Cummulative NSSF"; Rec."Cummulative NSSF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Pension"; "Cummulative Pension")
+                field("Cummulative Pension"; Rec."Cummulative Pension")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative HELB"; "Cummulative HELB")
+                field("Cummulative HELB"; Rec."Cummulative HELB")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative NHIF"; "Cummulative NHIF")
+                field("Cummulative NHIF"; Rec."Cummulative NHIF")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Suspension of Payment")
             {
-                field("Suspend Pay"; "Suspend Pay")
+                field("Suspend Pay"; Rec."Suspend Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Suspend Date"; "Suspend Date")
+                field("Suspend Date"; Rec."Suspend Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Suspend Reason"; "Suspend Reason")
+                field("Suspend Reason"; Rec."Suspend Reason")
                 {
                     ApplicationArea = Basic;
                 }
@@ -243,7 +243,7 @@ Page 51516310 "Payroll Employee Card."
                     if objPeriod.Find('-') then begin
                         SelectedPeriod := objPeriod."Date Opened";
                         varPeriodMonth := objPeriod."Period Month";
-                        SalCard.Get("No.");
+                        SalCard.Get(Rec."No.");
                     end;
 
                     //For Multiple Payroll
@@ -325,7 +325,7 @@ Page 51516310 "Payroll Employee Card."
                     SMSMessage.Init;
                     SMSMessage."Entry No" := iEntryNo;
                     //SMSMessage."Batch No":="Batch No.";
-                    SMSMessage."Payroll No" := "Payroll No";
+                    SMSMessage."Payroll No" := Rec."Payroll No";
                     //SMSMessage."Document No":="Loans Register"."Loan  No.";
                     //SMSMessage."Account No":="Loans Register"."Client Code";
                     SMSMessage."Date Entered" := Today;
@@ -333,7 +333,7 @@ Page 51516310 "Payroll Employee Card."
                     SMSMessage.Source := 'Loan Payment Remainder';
                     SMSMessage."Entered By" := UserId;
                     SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                    SMSMessage."SMS Message" := 'Dear , ' + Firstname + 'Your Salary For' + PayrollCalender."Period Name" + ' Has been processed.Kindly Confirm with your bank';
+                    SMSMessage."SMS Message" := 'Dear , ' + Rec.Firstname + 'Your Salary For' + PayrollCalender."Period Name" + ' Has been processed.Kindly Confirm with your bank';
 
 
                     //nthale
@@ -411,7 +411,7 @@ Page 51516310 "Payroll Employee Card."
                 trigger OnAction()
                 begin
                     PayrollEmp.Reset;
-                    PayrollEmp.SetRange(PayrollEmp."No.", "No.");
+                    PayrollEmp.SetRange(PayrollEmp."No.", Rec."No.");
                     if PayrollEmp.FindFirst then begin
                         Report.Run(50010, true, false, PayrollEmp);
                     end;
@@ -431,40 +431,40 @@ Page 51516310 "Payroll Employee Card."
     end;
 
     var
-        PayrollEmp: Record 51516317;
-        PayrollManager: Codeunit UnknownCodeunit51516002;
+        PayrollEmp: Record "Payroll Employee.";
+        PayrollManager: Codeunit 51516002;
         "Payroll Period": Date;
-        PayrollCalender: Record 51516322;
-        PayrollMonthlyTrans: Record 51516320;
-        PayrollEmployeeDed: Record 51516326;
-        PayrollEmployerDed: Record 51516327;
-        objEmp: Record 51516316;
-        SalCard: Record 51516317;
-        objPeriod: Record 51516322;
+        PayrollCalender: Record "Payroll Calender.";
+        PayrollMonthlyTrans: Record "Payroll Monthly Transactions.";
+        PayrollEmployeeDed: Record "Payroll Employee Deductions.";
+        PayrollEmployerDed: Record "Payroll Employer Deductions.";
+        objEmp: Record "Salary Processing Header";
+        SalCard: Record "Payroll Employee.";
+        objPeriod: Record "Payroll Calender.";
         SelectedPeriod: Date;
         PeriodName: Text[30];
         PeriodMonth: Integer;
         PeriodYear: Integer;
-        ProcessPayroll: Codeunit UnknownCodeunit51516015;
-        HrEmployee: Record 51516317;
+        ProcessPayroll: Codeunit 51516015;
+        HrEmployee: Record "Payroll Employee.";
         ProgressWindow: Dialog;
-        prPeriodTransactions: Record 51516341;
-        prEmployerDeductions: Record 51516327;
-        PayrollType: Record 51516312;
+        prPeriodTransactions: Record "prPeriod Transactions..";
+        prEmployerDeductions: Record "Payroll Employer Deductions.";
+        PayrollType: Record "Payroll Type.";
         Selection: Integer;
         PayrollDefined: Text[30];
         PayrollCode: Code[10];
         NoofRecords: Integer;
         i: Integer;
-        ContrInfo: Record 51516313;
+        ContrInfo: Record "Control-Information.";
         UserSetup: Record "User Setup";
-        ObjPayrollTransactions: Record 51516335;
+        ObjPayrollTransactions: Record "prPeriod Transactions.";
         varPeriodMonth: Integer;
-        SMSMessage: Record 51516471;
+        SMSMessage: Record "SMS Messages";
         iEntryNo: Integer;
-        GenSetup: Record 51516398;
+        GenSetup: Record "Sacco General Set-Up";
         compinfo: Record "Company Information";
-        Cust: Record 51516364;
+        Cust: Record "Member Register";
 
     local procedure RemoveTrans(EmpNo: Code[20]; PayrollPeriod: Date)
     begin

@@ -2,7 +2,7 @@
 Page 51516248 "HR Non Working Days & Dates"
 {
     PageType = List;
-    SourceTable = 51516203;
+    SourceTable = "HR Non Working Days & Dates";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516248 "HR Non Working Days & Dates"
         {
             repeater(Control1102755000)
             {
-                field("Non Working Days"; "Non Working Days")
+                field("Non Working Days"; Rec."Non Working Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Non Working Dates"; "Non Working Dates")
+                field("Non Working Dates"; Rec."Non Working Dates")
                 {
                     ApplicationArea = Basic;
                 }

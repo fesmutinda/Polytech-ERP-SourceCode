@@ -2,7 +2,7 @@
 Page 51516274 "HR Employees Supervisee"
 {
     PageType = List;
-    SourceTable = 51516280;
+    SourceTable = "HR Employees Supervisees";
 
     layout
     {
@@ -10,39 +10,39 @@ Page 51516274 "HR Employees Supervisee"
         {
             repeater(Group)
             {
-                field("Supervisor No."; "Supervisor No.")
+                field("Supervisor No."; Rec."Supervisor No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Supervisee No."; "Supervisee No.")
+                field("Supervisee No."; Rec."Supervisee No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Department; Department)
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Key Experience"; "Key Experience")
+                field("Key Experience"; Rec."Key Experience")
                 {
                     ApplicationArea = Basic;
                 }
-                field(From; From)
+                field(From; Rec.From)
                 {
                     ApplicationArea = Basic;
                 }
-                field("To"; "To")
+                field("To"; Rec."To")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Number of Supervisees"; "Number of Supervisees")
+                field("Number of Supervisees"; Rec."Number of Supervisees")
                 {
                     ApplicationArea = Basic;
                 }

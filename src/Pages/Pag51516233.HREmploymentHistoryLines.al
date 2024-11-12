@@ -3,7 +3,7 @@ Page 51516233 "HR Employment History Lines"
 {
     Caption = 'Employment History Lines';
     PageType = List;
-    SourceTable = 51516196;
+    SourceTable = "HR Employment History";
 
     layout
     {
@@ -11,43 +11,43 @@ Page 51516233 "HR Employment History Lines"
         {
             repeater(Control1000000000)
             {
-                field("Company Name"; "Company Name")
+                field("Company Name"; Rec."Company Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(From; From)
+                field(From; Rec.From)
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Date"; "To Date")
+                field("To Date"; Rec."To Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Key Experience"; "Key Experience")
+                field("Key Experience"; Rec."Key Experience")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salary On Leaving"; "Salary On Leaving")
+                field("Salary On Leaving"; Rec."Salary On Leaving")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Postal Address"; "Postal Address")
+                field("Postal Address"; Rec."Postal Address")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Address 2"; "Address 2")
+                field("Address 2"; Rec."Address 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason For Leaving"; "Reason For Leaving")
+                field("Reason For Leaving"; Rec."Reason For Leaving")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment; Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }

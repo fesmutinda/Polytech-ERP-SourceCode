@@ -3,7 +3,7 @@ Page 51516244 "Employee Common Activities"
 {
     Caption = 'Activities';
     PageType = CardPart;
-    SourceTable = 51516215;
+    SourceTable = "Employee Cue";
 
     layout
     {
@@ -12,7 +12,7 @@ Page 51516244 "Employee Common Activities"
             cuegroup("Document Approvals")
             {
                 Caption = 'Document Approvals';
-                field("Leaves Pending Approvals"; "Leaves Pending Approvals")
+                field("Leaves Pending Approvals"; Rec."Leaves Pending Approvals")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Leaves Pending Approvals';
@@ -39,11 +39,11 @@ Page 51516244 "Employee Common Activities"
             cuegroup("Incoming Documents")
             {
                 Caption = 'Incoming Documents';
-                field("New Incoming Documents"; "New Incoming Documents")
+                field("New Incoming Documents"; Rec."New Incoming Documents")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Incoming Documents"; "Approved Incoming Documents")
+                field("Approved Incoming Documents"; Rec."Approved Incoming Documents")
                 {
                     ApplicationArea = Basic;
                 }
@@ -68,10 +68,10 @@ Page 51516244 "Employee Common Activities"
 
     trigger OnOpenPage()
     begin
-        Reset;
-        if not Get then begin
-            Init;
-            Insert;
+        Rec.Reset;
+        if not Rec.Get then begin
+            Rec.Init;
+            Rec.Insert;
         end;
     end;
 }

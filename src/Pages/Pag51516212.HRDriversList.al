@@ -5,7 +5,7 @@ Page 51516212 "HR Drivers List"
     InsertAllowed = true;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516192;
+    SourceTable = "HR Drivers";
 
     layout
     {
@@ -13,43 +13,43 @@ Page 51516212 "HR Drivers List"
         {
             repeater(Control1102755000)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Driver Name"; "Driver Name")
+                field("Driver Name"; Rec."Driver Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Driver License Number"; "Driver License Number")
+                field("Driver License Number"; Rec."Driver License Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last License Renewal"; "Last License Renewal")
+                field("Last License Renewal"; Rec."Last License Renewal")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Renewal Interval"; "Renewal Interval")
+                field("Renewal Interval"; Rec."Renewal Interval")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Renewal Interval Value"; "Renewal Interval Value")
+                field("Renewal Interval Value"; Rec."Renewal Interval Value")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Next License Renewal"; "Next License Renewal")
+                field("Next License Renewal"; Rec."Next License Renewal")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Year Of Experience"; "Year Of Experience")
+                field("Year Of Experience"; Rec."Year Of Experience")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Grade; Grade)
+                field(Grade; Rec.Grade)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Active; Active)
+                field(Active; Rec.Active)
                 {
                     ApplicationArea = Basic;
                 }

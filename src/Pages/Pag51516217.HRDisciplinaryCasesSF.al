@@ -2,7 +2,7 @@
 Page 51516217 "HR Disciplinary Cases SF"
 {
     PageType = List;
-    SourceTable = 51516206;
+    SourceTable = "HR Disciplinary Cases";
 
     layout
     {
@@ -10,79 +10,79 @@ Page 51516217 "HR Disciplinary Cases SF"
         {
             repeater(Control1000000000)
             {
-                field("Case Number"; "Case Number")
+                field("Case Number"; Rec."Case Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Complaint"; "Date of Complaint")
+                field("Date of Complaint"; Rec."Date of Complaint")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Selected; Selected)
+                field(Selected; Rec.Selected)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Type of Disciplinary Case"; "Type of Disciplinary Case")
+                field("Type of Disciplinary Case"; Rec."Type of Disciplinary Case")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Case Description"; "Case Description")
+                field("Case Description"; Rec."Case Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Case Discussion"; "Case Discussion")
+                field("Case Discussion"; Rec."Case Discussion")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mode of Lodging the Complaint"; "Mode of Lodging the Complaint")
+                field("Mode of Lodging the Complaint"; Rec."Mode of Lodging the Complaint")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Accuser; Accuser)
+                field(Accuser; Rec.Accuser)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Witness #1"; "Witness #1")
+                field("Witness #1"; Rec."Witness #1")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Witness #2"; "Witness #2")
+                field("Witness #2"; Rec."Witness #2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Recommended Action"; "Recommended Action")
+                field("Recommended Action"; Rec."Recommended Action")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Action Taken"; "Action Taken")
+                field("Action Taken"; Rec."Action Taken")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Support Documents"; "Support Documents")
+                field("Support Documents"; Rec."Support Documents")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Policy Guidlines In Effect"; "Policy Guidlines In Effect")
+                field("Policy Guidlines In Effect"; Rec."Policy Guidlines In Effect")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Recomendations; Recomendations)
+                field(Recomendations; Rec.Recomendations)
                 {
                     ApplicationArea = Basic;
                 }
-                field("HR/Payroll Implications"; "HR/Payroll Implications")
+                field("HR/Payroll Implications"; Rec."HR/Payroll Implications")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disciplinary Remarks"; "Disciplinary Remarks")
+                field("Disciplinary Remarks"; Rec."Disciplinary Remarks")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }

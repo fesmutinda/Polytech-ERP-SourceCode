@@ -4,7 +4,7 @@ Page 51516210 "HR Exit Interview Checklist"
     AutoSplitKey = true;
     PageType = List;
     PromotedActionCategories = 'New,Process,Report,Functions';
-    SourceTable = 51516204;
+    SourceTable = "HR Exit Interview Checklist";
 
     layout
     {
@@ -12,15 +12,15 @@ Page 51516210 "HR Exit Interview Checklist"
         {
             repeater(Control1)
             {
-                field("CheckList Item"; "CheckList Item")
+                field("CheckList Item"; Rec."CheckList Item")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Cleared; Cleared)
+                field(Cleared; Rec.Cleared)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Clearance Date"; "Clearance Date")
+                field("Clearance Date"; Rec."Clearance Date")
                 {
                     ApplicationArea = Basic;
                 }
@@ -57,12 +57,12 @@ Page 51516210 "HR Exit Interview Checklist"
                             if HRLV.Find('-') then begin
                                 HRLV.FindFirst;
                                 repeat
-                                    Init;
-                                    "Exit Interview No" := GetFilter("Exit Interview No");
-                                    "Employee No" := GetFilter("Employee No");
-                                    "CheckList Item" := HRLV.Code;
-                                    "Line No" := "Line No" + 1000;
-                                    Insert;
+                                    Rec.Init;
+                                    Rec."Exit Interview No" := Rec.GetFilter("Exit Interview No");
+                                    Rec."Employee No" := Rec.GetFilter("Employee No");
+                                    Rec."CheckList Item" := HRLV.Code;
+                                    Rec."Line No" := Rec."Line No" + 1000;
+                                    Rec.Insert;
                                 until
                                 HRLV.Next = 0;
                             end else begin

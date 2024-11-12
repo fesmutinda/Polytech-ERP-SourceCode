@@ -2,7 +2,7 @@
 Page 51516204 "HR Transport Alloc. Factbox"
 {
     PageType = CardPart;
-    SourceTable = 51516191;
+    SourceTable = "HR Transport Allocations H";
 
     layout
     {
@@ -10,63 +10,63 @@ Page 51516204 "HR Transport Alloc. Factbox"
         {
             group(Control1000000017)
             {
-                field("Transport Allocation No"; "Transport Allocation No")
+                field("Transport Allocation No"; Rec."Transport Allocation No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Allocation"; "Date of Allocation")
+                field("Date of Allocation"; Rec."Date of Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Trip"; "Date of Trip")
+                field("Date of Trip"; Rec."Date of Trip")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Purpose of Trip"; "Purpose of Trip")
+                field("Purpose of Trip"; Rec."Purpose of Trip")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vehicle Reg Number"; "Vehicle Reg Number")
+                field("Vehicle Reg Number"; Rec."Vehicle Reg Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Passenger Capacity"; "Passenger Capacity")
+                field("Passenger Capacity"; Rec."Passenger Capacity")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Driver Name"; "Driver Name")
+                field("Driver Name"; Rec."Driver Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination(s)"; "Destination(s)")
+                field("Destination(s)"; Rec."Destination(s)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Journey Route"; "Journey Route")
+                field("Journey Route"; Rec."Journey Route")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time of Trip"; "Time of Trip")
+                field("Time of Trip"; Rec."Time of Trip")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Opening Odometer Reading"; "Opening Odometer Reading")
+                field("Opening Odometer Reading"; Rec."Opening Odometer Reading")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time out"; "Time out")
+                field("Time out"; Rec."Time out")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Closing Odometer Reading"; "Closing Odometer Reading")
+                field("Closing Odometer Reading"; Rec."Closing Odometer Reading")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time In"; "Time In")
+                field("Time In"; Rec."Time In")
                 {
                     ApplicationArea = Basic;
                 }

@@ -62,7 +62,7 @@ Page 51516209 "HR Transport Requests List"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report UnknownReport55605;
+                RunObject = Report 55605;
             }
         }
     }

@@ -2,7 +2,7 @@
 Page 51516202 "HR Trainings Factbox"
 {
     PageType = CardPart;
-    SourceTable = 51516199;
+    SourceTable = "HR Training Applications";
 
     layout
     {
@@ -17,51 +17,51 @@ Page 51516202 "HR Trainings Factbox"
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Application No"; "Application No")
+                field("Application No"; Rec."Application No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Course Title"; "Course Title")
+                field("Course Title"; Rec."Course Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Location; Location)
+                field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Provider Name"; "Provider Name")
+                field("Provider Name"; Rec."Provider Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Date"; "From Date")
+                field("From Date"; Rec."From Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Date"; "To Date")
+                field("To Date"; Rec."To Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Duration Units"; "Duration Units")
+                field("Duration Units"; Rec."Duration Units")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cost Of Training"; "Cost Of Training")
+                field("Cost Of Training"; Rec."Cost Of Training")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }

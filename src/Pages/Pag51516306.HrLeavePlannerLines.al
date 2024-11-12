@@ -2,7 +2,7 @@
 Page 51516306 "Hr Leave Planner Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516257;
+    SourceTable = "HR Leave Planner Lines";
 
     layout
     {
@@ -10,51 +10,51 @@ Page 51516306 "Hr Leave Planner Lines"
         {
             repeater(Group)
             {
-                field("Leave Type"; "Leave Type")
+                field("Leave Type"; Rec."Leave Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Days Applied"; "Days Applied")
+                field("Days Applied"; Rec."Days Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Return Date"; "Return Date")
+                field("Return Date"; Rec."Return Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applicant Comments"; "Applicant Comments")
+                field("Applicant Comments"; Rec."Applicant Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request Leave Allowance"; "Request Leave Allowance")
+                field("Request Leave Allowance"; Rec."Request Leave Allowance")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reliever; Reliever)
+                field(Reliever; Rec.Reliever)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reliever Name"; "Reliever Name")
+                field("Reliever Name"; Rec."Reliever Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved days"; "Approved days")
+                field("Approved days"; Rec."Approved days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Exam"; "Date of Exam")
+                field("Date of Exam"; Rec."Date of Exam")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Details of Examination"; "Details of Examination")
+                field("Details of Examination"; Rec."Details of Examination")
                 {
                     ApplicationArea = Basic;
                 }

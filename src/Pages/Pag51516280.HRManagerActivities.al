@@ -3,7 +3,7 @@ Page 51516280 "HR Manager Activities"
 {
     Caption = 'Activities';
     PageType = CardPart;
-    SourceTable = 51516281;
+    SourceTable = "HR Cue";
 
     layout
     {
@@ -12,7 +12,7 @@ Page 51516280 "HR Manager Activities"
             cuegroup(Leave)
             {
                 Caption = 'Leave';
-                field("Leaves To be Approved"; "Leaves To be Approved")
+                field("Leaves To be Approved"; Rec."Leaves To be Approved")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Posted Leaves';
@@ -39,12 +39,12 @@ Page 51516280 "HR Manager Activities"
             cuegroup(Employees)
             {
                 Caption = 'Employees';
-                field("Employee Requisitions"; "Employee Requisitions")
+                field("Employee Requisitions"; Rec."Employee Requisitions")
                 {
                     ApplicationArea = Basic;
                     DrillDownPageID = "HR Employee Requisitions List";
                 }
-                field("Employee -Active"; "Employee -Active")
+                field("Employee -Active"; Rec."Employee -Active")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Employee -Active';
@@ -72,11 +72,11 @@ Page 51516280 "HR Manager Activities"
             cuegroup("Incoming Documents")
             {
                 Caption = 'Incoming Documents';
-                field("New Incoming Documents"; "New Incoming Documents")
+                field("New Incoming Documents"; Rec."New Incoming Documents")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Incoming Documents"; "Approved Incoming Documents")
+                field("Approved Incoming Documents"; Rec."Approved Incoming Documents")
                 {
                     ApplicationArea = Basic;
                 }
@@ -101,14 +101,14 @@ Page 51516280 "HR Manager Activities"
 
     trigger OnOpenPage()
     begin
-        Reset;
-        if not Get then begin
-            Init;
-            Insert;
+        Rec.Reset;
+        if not Rec.Get then begin
+            Rec.Init;
+            Rec.Insert;
         end;
 
-        SetFilter("Due Date Filter", '<=%1', WorkDate);
-        SetFilter("Overdue Date Filter", '<%1', WorkDate);
+        Rec.SetFilter("Due Date Filter", '<=%1', WorkDate);
+        Rec.SetFilter("Overdue Date Filter", '<%1', WorkDate);
     end;
 }
 

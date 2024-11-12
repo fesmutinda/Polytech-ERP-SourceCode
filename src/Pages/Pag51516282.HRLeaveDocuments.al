@@ -2,7 +2,7 @@
 Page 51516282 "HR Leave Documents"
 {
     PageType = List;
-    SourceTable = 51516239;
+    SourceTable = "Company Documents";
 
     layout
     {
@@ -10,30 +10,30 @@ Page 51516282 "HR Leave Documents"
         {
             repeater(Group)
             {
-                field("Doc No."; "Doc No.")
+                field("Doc No."; Rec."Doc No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Document Description"; "Document Description")
+                field("Document Description"; Rec."Document Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Link"; "Document Link")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Attachment No."; "Attachment No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Language Code (Default)"; "Language Code (Default)")
+                field("Document Link"; Rec."Document Link")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Attachment; Attachment)
+                field("Attachment No."; Rec."Attachment No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Language Code (Default)"; Rec."Language Code (Default)")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field(Attachment; Rec.Attachment)
                 {
                     ApplicationArea = Basic;
                 }
@@ -58,7 +58,7 @@ Page 51516282 "HR Leave Documents"
                 var
                     InteractTemplLanguage: Record "Interaction Tmpl. Language";
                 begin
-                    if DocLink.Get("Doc No.", "Document Description") then begin
+                    if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
@@ -82,7 +82,7 @@ Page 51516282 "HR Leave Documents"
                 var
                     InteractTemplLanguage: Record "Interaction Tmpl. Language";
                 begin
-                    if DocLink.Get("Doc No.", "Document Description") then begin
+                    if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
@@ -91,9 +91,9 @@ Page 51516282 "HR Leave Documents"
                         //iF NOT InteractTemplLanguage.GET(DocLink."Doc No.",DocLink."Language Code (Default)",DocLink."Document Description") THEN
                         begin
                             InteractTemplLanguage.Init;
-                            InteractTemplLanguage."Interaction Template Code" := "Doc No.";
+                            InteractTemplLanguage."Interaction Template Code" := Rec."Doc No.";
                             InteractTemplLanguage."Language Code" := DocLink."Language Code (Default)";
-                            InteractTemplLanguage.Description := "Document Description";
+                            InteractTemplLanguage.Description := Rec."Document Description";
                         end;
                         InteractTemplLanguage.CreateAttachment;
                         CurrPage.Update;
@@ -115,7 +115,7 @@ Page 51516282 "HR Leave Documents"
                 var
                     InteractTemplLanguage: Record "Interaction Tmpl. Language";
                 begin
-                    if DocLink.Get("Doc No.", "Document Description") then begin
+                    if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
@@ -144,7 +144,7 @@ Page 51516282 "HR Leave Documents"
                 var
                     InteractTemplLanguage: Record "Interaction Tmpl. Language";
                 begin
-                    if DocLink.Get("Doc No.", "Document Description") then begin
+                    if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
@@ -153,7 +153,7 @@ Page 51516282 "HR Leave Documents"
                         //IF NOT InteractTemplLanguage.GET(DocLink."Doc No.",DocLink."Language Code (Default)",DocLink."Document Description") THEN
                         begin
                             InteractTemplLanguage.Init;
-                            InteractTemplLanguage."Interaction Template Code" := "Doc No.";
+                            InteractTemplLanguage."Interaction Template Code" := Rec."Doc No.";
                             InteractTemplLanguage."Language Code" := DocLink."Language Code (Default)";
                             InteractTemplLanguage.Description := DocLink."Document Description";
                             InteractTemplLanguage.Insert;
@@ -179,7 +179,7 @@ Page 51516282 "HR Leave Documents"
                 var
                     InteractTemplLanguage: Record "Interaction Tmpl. Language";
                 begin
-                    if DocLink.Get("Doc No.", "Document Description") then begin
+                    if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
@@ -204,7 +204,7 @@ Page 51516282 "HR Leave Documents"
                 var
                     InteractTemplLanguage: Record "Interaction Tmpl. Language";
                 begin
-                    if DocLink.Get("Doc No.", "Document Description") then begin
+                    if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
@@ -223,7 +223,7 @@ Page 51516282 "HR Leave Documents"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        Type := Type::Leave
+        Rec.Type := Rec.Type::Leave
     end;
 
     var
@@ -233,7 +233,7 @@ Page 51516282 "HR Leave Documents"
 
     procedure GetDocument() Document: Text[200]
     begin
-        Document := "Document Description";
+        Document := Rec."Document Description";
     end;
 }
 

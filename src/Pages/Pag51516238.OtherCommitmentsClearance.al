@@ -10,79 +10,79 @@ Page 51516238 "Other Commitments Clearance"
         {
             repeater(Group)
             {
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Filter"; "Date Filter")
+                field("Date Filter"; Rec."Date Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bankers Cheque No"; "Bankers Cheque No")
+                field("Bankers Cheque No"; Rec."Bankers Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bankers Cheque No 2"; "Bankers Cheque No 2")
+                field("Bankers Cheque No 2"; Rec."Bankers Cheque No 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bankers Cheque No 3"; "Bankers Cheque No 3")
+                field("Bankers Cheque No 3"; Rec."Bankers Cheque No 3")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Batch No."; "Batch No.")
+                field("Batch No."; Rec."Batch No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Affects 2/3 Rule"; "Affects 2/3 Rule")
+                field("Affects 2/3 Rule"; Rec."Affects 2/3 Rule")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Deductions"; "Monthly Deductions")
+                field("Monthly Deductions"; Rec."Monthly Deductions")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Account"; "Loan Account")
+                field("Loan Account"; Rec."Loan Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Loan Account"; "Member Loan Account")
+                field("Member Loan Account"; Rec."Member Loan Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Clearance"; "Loan Clearance")
+                field("Loan Clearance"; Rec."Loan Clearance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Loan Balance"; "Total Loan Balance")
+                field("Total Loan Balance"; Rec."Total Loan Balance")
                 {
                     ApplicationArea = Basic;
                 }

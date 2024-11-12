@@ -13,31 +13,31 @@ Page 51516250 "HR Asset Return Form"
         {
             repeater(Control1102755000)
             {
-                field("Misc. Article Code"; "Misc. Article Code")
+                field("Misc. Article Code"; Rec."Misc. Article Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Returned; Returned)
+                field(Returned; Rec.Returned)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Status On Return"; "Status On Return")
+                field("Status On Return"; Rec."Status On Return")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Returned"; "Date Returned")
+                field("Date Returned"; Rec."Date Returned")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Recommendations; Recommendations)
+                field(Recommendations; Rec.Recommendations)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received By"; "Received By")
+                field("Received By"; Rec."Received By")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,7 +50,7 @@ Page 51516250 "HR Asset Return Form"
     }
 
     var
-        EI: Record 51516198;
+        EI: Record "HR Employee Exit Interviews";
 
 
     procedure refresh()

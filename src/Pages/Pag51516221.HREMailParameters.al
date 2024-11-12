@@ -2,7 +2,7 @@
 Page 51516221 "HR E-Mail Parameters"
 {
     PageType = Card;
-    SourceTable = 51516208;
+    SourceTable = "HR E-Mail Parameters";
 
     layout
     {
@@ -11,39 +11,39 @@ Page 51516221 "HR E-Mail Parameters"
             group(General)
             {
                 Caption = 'General';
-                field("Associate With"; "Associate With")
+                field("Associate With"; Rec."Associate With")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sender Name"; "Sender Name")
+                field("Sender Name"; Rec."Sender Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sender Address"; "Sender Address")
+                field("Sender Address"; Rec."Sender Address")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Recipients; Recipients)
+                field(Recipients; Rec.Recipients)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Subject; Subject)
+                field(Subject; Rec.Subject)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Body; Body)
+                field(Body; Rec.Body)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Body 2"; "Body 2")
+                field("Body 2"; Rec."Body 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Body 3"; "Body 3")
+                field("Body 3"; Rec."Body 3")
                 {
                     ApplicationArea = Basic;
                 }
-                field(HTMLFormatted; HTMLFormatted)
+                field(HTMLFormatted; Rec.HTMLFormatted)
                 {
                     ApplicationArea = Basic;
                 }

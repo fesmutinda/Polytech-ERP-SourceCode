@@ -2,7 +2,7 @@
 Page 51516304 "HR Applicants UnQualified Card"
 {
     PageType = Card;
-    SourceTable = 51516209;
+    SourceTable = "HR Job Applications";
     SourceTableView = where("Qualification Status" = filter(UnQualified));
 
     layout
@@ -11,47 +11,47 @@ Page 51516304 "HR Applicants UnQualified Card"
         {
             group(General)
             {
-                field("Application No"; "Application No")
+                field("Application No"; Rec."Application No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Middle Name"; "Middle Name")
+                field("Middle Name"; Rec."Middle Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Applied For"; "Job Applied For")
+                field("Job Applied For"; Rec."Job Applied For")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Qualified; Qualified)
+                field(Qualified; Rec.Qualified)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Interview"; "Date of Interview")
+                field("Date of Interview"; Rec."Date of Interview")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Time"; "From Time")
+                field("From Time"; Rec."From Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Time"; "To Time")
+                field("To Time"; Rec."To Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Venue; Venue)
+                field(Venue; Rec.Venue)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interview Type"; "Interview Type")
+                field("Interview Type"; Rec."Interview Type")
                 {
                     ApplicationArea = Basic;
                 }
