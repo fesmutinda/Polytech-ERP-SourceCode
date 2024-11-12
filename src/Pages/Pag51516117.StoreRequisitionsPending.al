@@ -4,7 +4,7 @@ Page 51516117 "Store Requisitions(Pending)"
     CardPageID = "Store Requisition Header";
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Cancellation,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516102;
+    SourceTable = "Store Requistion Header";
     SourceTableView = where(Status = filter("Pending Approval"));
 
     layout
@@ -13,35 +13,35 @@ Page 51516117 "Store Requisitions(Pending)"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request date"; "Request date")
+                field("Request date"; Rec."Request date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request Description"; "Request Description")
+                field("Request Description"; Rec."Request Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requester ID"; "Requester ID")
+                field("Requester ID"; Rec."Requester ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(TotalAmount; TotalAmount)
+                field(TotalAmount; Rec.TotalAmount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issuing Store"; "Issuing Store")
+                field("Issuing Store"; Rec."Issuing Store")
                 {
                     ApplicationArea = Basic;
                 }
@@ -76,9 +76,9 @@ Page 51516117 "Store Requisitions(Pending)"
     begin
 
         if UserMgt.GetPurchasesFilter() <> '' then begin
-            FilterGroup(2);
-            SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
-            FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
+            Rec.FilterGroup(0);
         end;
         /*
         IF UserMgt.GetSetDimensions(USERID,2) <> '' THEN BEGIN
@@ -91,8 +91,8 @@ Page 51516117 "Store Requisitions(Pending)"
     end;
 
     var
-        UserMgt: Codeunit UnknownCodeunit55487;
-        ReqLine: Record 51516103;
+        UserMgt: Codeunit "User Setup Management BRr";
+        ReqLine: Record "Store Requistion Lines";
         InventorySetup: Record "Inventory Setup";
         GenJnline: Record "Item Journal Line";
         LineNo: Integer;
@@ -104,11 +104,11 @@ Page 51516117 "Store Requisitions(Pending)"
 
     procedure LinesExists(): Boolean
     var
-        PayLines: Record 51516103;
+        PayLines: Record "Store Requistion Lines";
     begin
         HasLines := false;
         PayLines.Reset;
-        PayLines.SetRange(PayLines."Requistion No", "No.");
+        PayLines.SetRange(PayLines."Requistion No", Rec."No.");
         if PayLines.Find('-') then begin
             HasLines := true;
             exit(HasLines);

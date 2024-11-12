@@ -17,60 +17,60 @@ Page 51516102 "Pending Purchase Requisition"
         {
             repeater(Control1)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Order Address Code"; "Order Address Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Buy-from Vendor Name"; "Buy-from Vendor Name")
+                field("Order Address Code"; Rec."Order Address Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Description"; "Posting Description")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Vendor Authorization No."; "Vendor Authorization No.")
+                field("Buy-from Vendor Name"; Rec."Buy-from Vendor Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Post Code"; "Buy-from Post Code")
+                field("Posting Description"; Rec."Posting Description")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Vendor Authorization No."; Rec."Vendor Authorization No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Country/Region Code"; "Buy-from Country/Region Code")
+                field("Buy-from Post Code"; Rec."Buy-from Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Contact"; "Buy-from Contact")
+                field("Buy-from Country/Region Code"; Rec."Buy-from Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Vendor No."; "Pay-to Vendor No.")
+                field("Buy-from Contact"; Rec."Buy-from Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Name"; "Pay-to Name")
+                field("Pay-to Vendor No."; Rec."Pay-to Vendor No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Post Code"; "Pay-to Post Code")
+                field("Pay-to Name"; Rec.Rec"Pay-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Country/Region Code"; "Pay-to Country/Region Code")
+                field("Pay-to Post Code"; Rec."Pay-to Post Code")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Pay-to Country/Region Code"; Rec."Pay-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -209,7 +209,7 @@ Page 51516102 "Pending Purchase Requisition"
 
                     trigger OnAction()
                     begin
-                        CalcInvDiscForHeader;
+                        Rec.CalcInvDiscForHeader;
                         Commit;
                         Page.RunModal(Page::"Purchase Statistics", Rec);
                     end;
@@ -233,7 +233,7 @@ Page 51516102 "Pending Purchase Requisition"
 
                     trigger OnAction()
                     begin
-                        ShowDocDim;
+                        Rec.ShowDocDim;
                     end;
                 }
                 action(Approvals)
@@ -246,7 +246,7 @@ Page 51516102 "Pending Purchase Requisition"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", "Document Type", "No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -284,10 +284,10 @@ Page 51516102 "Pending Purchase Requisition"
                 begin
                     if LinesCommitted then
                         Error('All Lines should be committed');
-                    Reset;
-                    SetRange("No.", "No.");
+                    Rec.Reset;
+                    Rec.SetRange("No.", Rec."No.");
                     Report.Run(51516358, true, true, Rec);
-                    Reset;
+                    Rec.Reset;
                     //DocPrint.PrintPurchHeader(Rec);
                 end;
             }
@@ -383,8 +383,8 @@ Page 51516102 "Pending Purchase Requisition"
         if BCSetup.Get then begin
             Exists := false;
             PurchLines.Reset;
-            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
-            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines."Document Type", Rec."Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", Rec."No.");
             // PurchLines.SETRANGE(PurchLines.Committed,FALSE);
             if PurchLines.Find('-') then
                 Exists := true;

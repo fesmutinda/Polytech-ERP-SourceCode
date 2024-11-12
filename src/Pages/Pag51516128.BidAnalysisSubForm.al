@@ -2,7 +2,7 @@
 Page 51516128 "Bid Analysis SubForm"
 {
     PageType = ListPart;
-    SourceTable = 51516104;
+    SourceTable = "Bid Analysis";
 
     layout
     {
@@ -10,35 +10,35 @@ Page 51516128 "Bid Analysis SubForm"
         {
             repeater(Group)
             {
-                field("Quote No."; "Quote No.")
+                field("Quote No."; Rec."Quote No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vendor No."; "Vendor No.")
+                field("Vendor No."; Rec."Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Item No."; "Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Quantity; Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unit Of Measure"; "Unit Of Measure")
+                field("Unit Of Measure"; Rec."Unit Of Measure")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Line Amount"; "Line Amount")
+                field("Line Amount"; Rec."Line Amount")
                 {
                     ApplicationArea = Basic;
                 }

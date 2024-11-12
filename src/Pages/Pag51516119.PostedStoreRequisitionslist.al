@@ -7,7 +7,7 @@ Page 51516119 "Posted Store Requisitions list"
     ModifyAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Cancellation,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516102;
+    SourceTable = "Store Requistion Header";
     SourceTableView = where(Status = const(Posted));
 
     layout
@@ -16,43 +16,43 @@ Page 51516119 "Posted Store Requisitions list"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request date"; "Request date")
+                field("Request date"; Rec."Request date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request Description"; "Request Description")
+                field("Request Description"; Rec."Request Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requester ID"; "Requester ID")
+                field("Requester ID"; Rec."Requester ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(TotalAmount; TotalAmount)
+                field(TotalAmount; Rec.TotalAmount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issuing Store"; "Issuing Store")
+                field("Issuing Store"; Rec."Issuing Store")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Function Name"; "Function Name")
+                field("Function Name"; Rec."Function Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budget Center Name"; "Budget Center Name")
+                field("Budget Center Name"; Rec."Budget Center Name")
                 {
                     ApplicationArea = Basic;
                 }
@@ -94,17 +94,17 @@ Page 51516119 "Posted Store Requisitions list"
                         if not LinesExists then
                             Error('There are no Lines created for this Document');
 
-                        if Status = Status::Posted then
+                        if Rec.Status = Rec.Status::Posted then
                             Error('The Document Has Already been Posted');
 
-                        if Status <> Status::Released then
+                        if Rec.Status <> Rec.Status::Released then
                             Error('The Document Has not yet been Approved');
 
 
-                        TestField("Issuing Store");
+                        Rec.TestField("Issuing Store");
                         ReqLine.Reset;
-                        ReqLine.SetRange(ReqLine."Requistion No", "No.");
-                        TestField("Issuing Store");
+                        ReqLine.SetRange(ReqLine."Requistion No", Rec."No.");
+                        Rec.TestField("Issuing Store");
                         if ReqLine.Find('-') then begin
                             repeat
                                 //Issue
@@ -120,21 +120,21 @@ Page 51516119 "Posted Store Requisitions list"
                                     GenJnline."Journal Template Name" := InventorySetup."Item Jnl Template";
                                     GenJnline."Journal Batch Name" := InventorySetup."Item Jnl Batch";
                                     GenJnline."Line No." := LineNo;
-                                    GenJnline."Entry Type" := GenJnline."entry type"::"Negative Adjmt.";
-                                    GenJnline."Document No." := "No.";
+                                    GenJnline."Entry Type" := GenJnline."entry type"::Rec."Negative Adjmt.";
+                                    GenJnline."Document No." := Rec."No.";
                                     GenJnline."Item No." := ReqLine."No.";
                                     GenJnline.Validate("Item No.");
-                                    GenJnline."Location Code" := "Issuing Store";
+                                    GenJnline."Location Code" := Rec."Issuing Store";
                                     GenJnline.Validate("Location Code");
-                                    GenJnline."Posting Date" := "Request date";
+                                    GenJnline."Posting Date" := Rec."Request date";
                                     GenJnline.Description := ReqLine.Description;
                                     GenJnline.Quantity := ReqLine.Quantity;
-                                    GenJnline."Shortcut Dimension 1 Code" := "Global Dimension 1 Code";
+                                    GenJnline."Shortcut Dimension 1 Code" := Rec."Global Dimension 1 Code";
                                     GenJnline.Validate("Shortcut Dimension 1 Code");
-                                    GenJnline."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
+                                    GenJnline."Shortcut Dimension 2 Code" := Rec."Shortcut Dimension 2 Code";
                                     GenJnline.Validate("Shortcut Dimension 2 Code");
-                                    GenJnline.ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
-                                    GenJnline.ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
+                                    GenJnline.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
+                                    GenJnline.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
                                     GenJnline.Validate(Quantity);
                                     GenJnline.Validate("Unit Amount");
                                     GenJnline."Reason Code" := '221';
@@ -176,7 +176,7 @@ Page 51516119 "Posted Store Requisitions list"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::Requisition;
-                        ApprovalEntries.Setfilters(Database::Transactions, DocumentType, "No.");
+                        ApprovalEntries.Setfilters(Database::Transactions, DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -224,10 +224,10 @@ Page 51516119 "Posted Store Requisitions list"
 
                     trigger OnAction()
                     begin
-                        Reset;
-                        SetFilter("No.", "No.");
+                        Rec.Reset;
+                        Rec.SetFilter("No.", Rec."No.");
                         Report.Run(51516103, true, true, Rec);
-                        Reset;
+                        Rec.Reset;
                         /*
                        RESET;
                        SETFILTER("No.","No.");
@@ -251,21 +251,21 @@ Page 51516119 "Posted Store Requisitions list"
         END;
         */
         if UserMgt.GetSetDimensions(UserId, 2) <> '' then begin
-            FilterGroup(2);
-            SetRange("Shortcut Dimension 2 Code", UserMgt.GetSetDimensions(UserId, 2));
-            FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetRange("Shortcut Dimension 2 Code", UserMgt.GetSetDimensions(UserId, 2));
+            Rec.FilterGroup(0);
         end;
 
     end;
 
     var
-        UserMgt: Codeunit UnknownCodeunit55487;
-        ReqLine: Record 51516103;
+        UserMgt: Codeunit "User Setup Management BRr";
+        ReqLine: Record "Store Requistion Lines";
         InventorySetup: Record "Inventory Setup";
         GenJnline: Record "Item Journal Line";
         LineNo: Integer;
         Post: Boolean;
-        JournlPosted: Codeunit UnknownCodeunit55486;
+        JournlPosted: Codeunit 55486;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition;
         HasLines: Boolean;
         AllKeyFieldsEntered: Boolean;
@@ -277,7 +277,7 @@ Page 51516119 "Posted Store Requisitions list"
     begin
         HasLines := false;
         PayLines.Reset;
-        PayLines.SetRange(PayLines."Requistion No", "No.");
+        PayLines.SetRange(PayLines."Requistion No", Rec."No.");
         if PayLines.Find('-') then begin
             HasLines := true;
             exit(HasLines);

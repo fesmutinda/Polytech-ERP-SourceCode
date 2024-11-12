@@ -2,7 +2,7 @@
 Page 51516093 "Expense Code"
 {
     PageType = List;
-    SourceTable = 51516115;
+    SourceTable = "Expense Code";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516093 "Expense Code"
         {
             repeater(Control1102756000)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }

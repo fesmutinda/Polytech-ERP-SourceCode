@@ -8,17 +8,17 @@ Page 51516088 "Registry  Role Centre"
     {
         area(rolecenter)
         {
-            part(Control4;"My Job Queue")
+            part(Control4; "My Job Queue")
             {
                 ApplicationArea = Advanced;
                 Visible = false;
             }
-            part(Control1;"Membership Cue")
+            part(Control1; "Membership Cue")
             {
-                AccessByPermission = TableData "Sales Shipment Header"=R;
-                ApplicationArea = Basic,Suite;
+                AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
             }
-            part(Control2;"Team Member Activities")
+            part(Control2; "Team Member Activities")
             {
                 ApplicationArea = Suite;
             }
@@ -34,25 +34,25 @@ Page 51516088 "Registry  Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Customer Care logs';
                 Image = "Report";
-                RunObject = Report UnknownReport51516507;
+                RunObject = Report 51516507;
             }
             action("Member Statement")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
             action("member list report")
             {
                 ApplicationArea = Basic;
-                RunObject = Report UnknownReport51516887;
+                RunObject = Report 51516887;
             }
             action("Dependants Report")
             {
                 ApplicationArea = Basic;
                 Image = "Report";
-                RunObject = Report UnknownReport51516891;
+                RunObject = Report 51516891;
             }
         }
         area(embedding)

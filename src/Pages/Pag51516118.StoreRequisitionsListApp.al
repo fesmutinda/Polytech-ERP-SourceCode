@@ -4,7 +4,7 @@ Page 51516118 "Store Requisitions List-App"
     CardPageID = "Store Requisition Header";
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Cancellation,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516102;
+    SourceTable = "Store Requistion Header";
     SourceTableView = where(Status = filter(Released));
 
     layout
@@ -13,43 +13,43 @@ Page 51516118 "Store Requisitions List-App"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request date"; "Request date")
+                field("Request date"; Rec."Request date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Request Description"; "Request Description")
+                field("Request Description"; Rec."Request Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requester ID"; "Requester ID")
+                field("Requester ID"; Rec."Requester ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(TotalAmount; TotalAmount)
+                field(TotalAmount; Rec.TotalAmount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issuing Store"; "Issuing Store")
+                field("Issuing Store"; Rec."Issuing Store")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Function Name"; "Function Name")
+                field("Function Name"; Rec."Function Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budget Center Name"; "Budget Center Name")
+                field("Budget Center Name"; Rec."Budget Center Name")
                 {
                     ApplicationArea = Basic;
                 }
@@ -88,13 +88,13 @@ Page 51516118 "Store Requisitions List-App"
                     trigger OnAction()
                     begin
 
-                        if Status <> Status::Posted then
+                        if Rec.Status <> Rec.Status::Posted then
                             Error('You can only print a Purchase Order after it Fully Approved And Posted');
 
-                        Reset;
-                        SetFilter("No.", "No.");
+                        Rec.Reset;
+                        Rec.SetFilter("No.", Rec."No.");
                         Report.Run(51516103, true, true, Rec);
-                        Reset;
+                        Rec.Reset;
                     end;
                 }
             }
@@ -105,9 +105,9 @@ Page 51516118 "Store Requisitions List-App"
     begin
 
         if UserMgt.GetPurchasesFilter() <> '' then begin
-            FilterGroup(2);
-            SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
-            FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
+            Rec.FilterGroup(0);
         end;
         /*
         HREmp.RESET;
@@ -129,26 +129,26 @@ Page 51516118 "Store Requisitions List-App"
     end;
 
     var
-        UserMgt: Codeunit UnknownCodeunit51516108;
-        ReqLine: Record 51516103;
+        UserMgt: Codeunit 51516108;
+        ReqLine: Record "Store Requistion Lines";
         InventorySetup: Record "Inventory Setup";
         GenJnline: Record "Item Journal Line";
         LineNo: Integer;
         Post: Boolean;
-        JournlPosted: Codeunit UnknownCodeunit51516156;
+        JournlPosted: Codeunit "Journal Post Successful";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition;
         HasLines: Boolean;
         AllKeyFieldsEntered: Boolean;
-        HREmp: Record 51516160;
+        HREmp: Record "HR Employees";
 
 
     procedure LinesExists(): Boolean
     var
-        PayLines: Record 51516103;
+        PayLines: Record "Store Requistion Lines";
     begin
         HasLines := false;
         PayLines.Reset;
-        PayLines.SetRange(PayLines."Requistion No", "No.");
+        PayLines.SetRange(PayLines."Requistion No", Rec."No.");
         if PayLines.Find('-') then begin
             HasLines := true;
             exit(HasLines);

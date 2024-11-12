@@ -2,7 +2,7 @@
 Page 51516127 "Bid Analysis"
 {
     PageType = Document;
-    SourceTable = 51516100;
+    SourceTable = "Purchase Quote Header";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516127 "Bid Analysis"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(ItemNoFilter; ItemNoFilter)
+                field(ItemNoFilter; Rec.ItemNoFilter)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Item No.';
@@ -79,14 +79,14 @@ Page 51516127 "Bid Analysis"
         //insert the quotes from vendors
         //IF RFQNoFilter = '' THEN ERROR('Specify the RFQ No.');
 
-        PurchHeader.SetRange(PurchHeader."No.", "No.");
+        PurchHeader.SetRange(PurchHeader."No.", Rec."No.");
         PurchHeader.FindSet;
         repeat
             PurchLines.Reset;
             PurchLines.SetRange("Document No.", PurchHeader."No.");
             if PurchLines.FindSet then
                 repeat
-                    Init;
+                    Rec.Init;
                     BidAnalysisLines."RFQ No." := PurchHeader."No.";
                     BidAnalysisLines."RFQ Line No." := PurchLines."Line No.";
                     BidAnalysisLines."Quote No." := PurchLines."Document No.";

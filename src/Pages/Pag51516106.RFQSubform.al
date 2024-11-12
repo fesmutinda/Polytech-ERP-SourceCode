@@ -2,7 +2,7 @@
 Page 51516106 "RFQ Subform"
 {
     PageType = ListPart;
-    SourceTable = 51516101;
+    SourceTable = "Purchase Quote Line";
 
     layout
     {
@@ -10,46 +10,46 @@ Page 51516106 "RFQ Subform"
         {
             repeater(Group)
             {
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expense Code"; "Expense Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("No."; "No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Description; Description)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Description 2"; "Description 2")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Unit of Measure"; "Unit of Measure")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Quantity; Quantity)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Direct Unit Cost"; "Direct Unit Cost")
+                field("Expense Code"; Rec."Expense Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field("No."; Rec."No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Description; Rec.Description)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Description 2"; Rec."Description 2")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Unit of Measure"; Rec."Unit of Measure")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Quantity; Rec.Quantity)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Direct Unit Cost"; Rec."Direct Unit Cost")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("PRF No"; "PRF No")
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("PRF No"; Rec."PRF No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -72,9 +72,9 @@ Page 51516106 "RFQ Subform"
                     PParams: Record 51516106;
                 begin
                     PParams.Reset;
-                    PParams.SetRange(PParams."Document Type", "Document Type");
-                    PParams.SetRange(PParams."Document No.", "Document No.");
-                    PParams.SetRange(PParams."Line No.", "Line No.");
+                    PParams.SetRange(PParams."Document Type", Rec."Document Type");
+                    PParams.SetRange(PParams."Document No.", Rec."Document No.");
+                    PParams.SetRange(PParams."Line No.", Rec."Line No.");
                     Page.Run(51516780, PParams);
                 end;
             }

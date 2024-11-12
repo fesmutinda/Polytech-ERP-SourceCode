@@ -6,9 +6,9 @@ Page 51516112 "Purchase Order-Released"
     Editable = false;
     PageType = List;
     SourceTable = "Purchase Header";
-    SourceTableView = where("Document Type"=const(Order),
-                            Status=const(Released),
-                            Printed=filter(No));
+    SourceTableView = where("Document Type" = const(Order),
+                            Status = const(Released),
+                            Printed = filter(No));
 
     layout
     {
@@ -16,98 +16,98 @@ Page 51516112 "Purchase Order-Released"
         {
             repeater(Control1)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Buy-from Vendor No.";"Buy-from Vendor No.")
+                field("Buy-from Vendor No."; Rec."Buy-from Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Order Address Code";"Order Address Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Buy-from Vendor Name";"Buy-from Vendor Name")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Vendor Authorization No.";"Vendor Authorization No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Buy-from Post Code";"Buy-from Post Code")
+                field("Order Address Code"; Rec."Order Address Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Country/Region Code";"Buy-from Country/Region Code")
+                field("Buy-from Vendor Name"; Rec."Buy-from Vendor Name")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Vendor Authorization No."; Rec."Vendor Authorization No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Buy-from Post Code"; Rec."Buy-from Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Contact";"Buy-from Contact")
+                field("Buy-from Country/Region Code"; Rec."Buy-from Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Vendor No.";"Pay-to Vendor No.")
+                field("Buy-from Contact"; Rec."Buy-from Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Name";"Pay-to Name")
+                field("Pay-to Vendor No."; Rec."Pay-to Vendor No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Post Code";"Pay-to Post Code")
+                field("Pay-to Name"; Rec."Pay-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Country/Region Code";"Pay-to Country/Region Code")
+                field("Pay-to Post Code"; Rec."Pay-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Contact";"Pay-to Contact")
+                field("Pay-to Country/Region Code"; Rec."Pay-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Code";"Ship-to Code")
+                field("Pay-to Contact"; Rec."Pay-to Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Name";"Ship-to Name")
+                field("Ship-to Code"; Rec."Ship-to Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Post Code";"Ship-to Post Code")
+                field("Ship-to Name"; Rec."Ship-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Country/Region Code";"Ship-to Country/Region Code")
+                field("Ship-to Post Code"; Rec."Ship-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Contact";"Ship-to Contact")
+                field("Ship-to Country/Region Code"; Rec."Ship-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Date";"Posting Date")
+                field("Ship-to Contact"; Rec."Ship-to Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Shortcut Dimension 1 Code";"Shortcut Dimension 1 Code")
+                field("Posting Date"; Rec."Posting Date")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -117,7 +117,7 @@ Page 51516112 "Purchase Order-Released"
                         DimMgt.LookupDimValueCodeNoUpdate(1);
                     end;
                 }
-                field("Shortcut Dimension 2 Code";"Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -127,71 +127,71 @@ Page 51516112 "Purchase Order-Released"
                         DimMgt.LookupDimValueCodeNoUpdate(2);
                     end;
                 }
-                field("Location Code";"Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field("Purchaser Code";"Purchaser Code")
+                field("Purchaser Code"; Rec."Purchaser Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Assigned User ID";"Assigned User ID")
+                field("Assigned User ID"; Rec."Assigned User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code";"Currency Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Document Date";"Document Date")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Status;Status)
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Payment Terms Code";"Payment Terms Code")
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Due Date";"Due Date")
+                field("Payment Terms Code"; Rec."Payment Terms Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Payment Discount %";"Payment Discount %")
+                field("Due Date"; Rec."Due Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Payment Method Code";"Payment Method Code")
+                field("Payment Discount %"; Rec."Payment Discount %")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Shipment Method Code";"Shipment Method Code")
+                field("Payment Method Code"; Rec."Payment Method Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Requested Receipt Date";"Requested Receipt Date")
+                field("Shipment Method Code"; Rec."Shipment Method Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Job Queue Status";"Job Queue Status")
+                field("Requested Receipt Date"; Rec."Requested Receipt Date")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Job Queue Status"; Rec."Job Queue Status")
                 {
                     ApplicationArea = Basic;
                     Visible = JobQueueActive;
                 }
-                field(Printed;Printed)
+                field(Printed; Rec.Printed)
                 {
                     ApplicationArea = Basic;
                 }
@@ -199,17 +199,17 @@ Page 51516112 "Purchase Order-Released"
         }
         area(factboxes)
         {
-            part(Control1901138007;"Vendor Details FactBox")
+            part(Control1901138007; "Vendor Details FactBox")
             {
-                SubPageLink = "No."=field("Buy-from Vendor No."),
-                              "Date Filter"=field("Date Filter");
+                SubPageLink = "No." = field("Buy-from Vendor No."),
+                              "Date Filter" = field("Date Filter");
                 Visible = true;
             }
-            systempart(Control1900383207;Links)
+            systempart(Control1900383207; Links)
             {
                 Visible = false;
             }
-            systempart(Control1905767507;Notes)
+            systempart(Control1905767507; Notes)
             {
                 Visible = true;
             }
@@ -226,7 +226,7 @@ Page 51516112 "Purchase Order-Released"
                 Image = "Order";
                 action(Dimensions)
                 {
-                    AccessByPermission = TableData Dimension=R;
+                    AccessByPermission = TableData Dimension = R;
                     ApplicationArea = Basic;
                     Caption = 'Dimensions';
                     Image = Dimensions;
@@ -237,7 +237,7 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        ShowDocDim;
+                        Rec.ShowDocDim;
                     end;
                 }
                 action(Statistics)
@@ -252,9 +252,9 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        CalcInvDiscForHeader;
+                        Rec.CalcInvDiscForHeader;
                         Commit;
-                        Page.RunModal(Page::"Purchase Order Statistics",Rec);
+                        Page.RunModal(Page::"Purchase Order Statistics", Rec);
                     end;
                 }
                 action(Approvals)
@@ -270,7 +270,7 @@ Page 51516112 "Purchase Order-Released"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header","Document Type","No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -280,9 +280,9 @@ Page 51516112 "Purchase Order-Released"
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page "Purch. Comment Sheet";
-                    RunPageLink = "Document Type"=field("Document Type"),
-                                  "No."=field("No."),
-                                  "Document Line No."=const(0);
+                    RunPageLink = "Document Type" = field("Document Type"),
+                                  "No." = field("No."),
+                                  "Document Line No." = const(0);
                 }
             }
             group(Documents)
@@ -298,7 +298,7 @@ Page 51516112 "Purchase Order-Released"
                     //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedIsBig = false;
                     RunObject = Page "Posted Purchase Receipts";
-                    RunPageLink = "Order No."=field("No.");
+                    RunPageLink = "Order No." = field("No.");
                     RunPageView = sorting("Order No.");
                 }
                 action(Invoices)
@@ -310,7 +310,7 @@ Page 51516112 "Purchase Order-Released"
                     //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedIsBig = false;
                     RunObject = Page "Posted Purchase Invoices";
-                    RunPageLink = "Order No."=field("No.");
+                    RunPageLink = "Order No." = field("No.");
                     RunPageView = sorting("Order No.");
                 }
                 action("Prepa&yment Invoices")
@@ -319,7 +319,7 @@ Page 51516112 "Purchase Order-Released"
                     Caption = 'Prepa&yment Invoices';
                     Image = PrepaymentInvoice;
                     RunObject = Page "Posted Purchase Invoices";
-                    RunPageLink = "Prepayment Order No."=field("No.");
+                    RunPageLink = "Prepayment Order No." = field("No.");
                     RunPageView = sorting("Prepayment Order No.");
                 }
                 action("Prepayment Credi&t Memos")
@@ -328,7 +328,7 @@ Page 51516112 "Purchase Order-Released"
                     Caption = 'Prepayment Credi&t Memos';
                     Image = PrepaymentCreditMemo;
                     RunObject = Page "Posted Purchase Credit Memos";
-                    RunPageLink = "Prepayment Order No."=field("No.");
+                    RunPageLink = "Prepayment Order No." = field("No.");
                     RunPageView = sorting("Prepayment Order No.");
                 }
                 separator(Action1102601037)
@@ -345,9 +345,9 @@ Page 51516112 "Purchase Order-Released"
                     Caption = 'In&vt. Put-away/Pick Lines';
                     Image = PickLines;
                     RunObject = Page "Warehouse Activity List";
-                    RunPageLink = "Source Document"=const("Purchase Order"),
-                                  "Source No."=field("No.");
-                    RunPageView = sorting("Source Document","Source No.","Location Code");
+                    RunPageLink = "Source Document" = const("Purchase Order"),
+                                  "Source No." = field("No.");
+                    RunPageView = sorting("Source Document", "Source No.", "Location Code");
                 }
                 action("Whse. Receipt Lines")
                 {
@@ -355,10 +355,10 @@ Page 51516112 "Purchase Order-Released"
                     Caption = 'Whse. Receipt Lines';
                     Image = ReceiptLines;
                     RunObject = Page "Whse. Receipt Lines";
-                    RunPageLink = "Source Type"=const(39),
-                                  "Source Subtype"=field("Document Type"),
-                                  "Source No."=field("No.");
-                    RunPageView = sorting("Source Type","Source Subtype","Source No.","Source Line No.");
+                    RunPageLink = "Source Type" = const(39),
+                                  "Source Subtype" = field("Document Type"),
+                                  "Source No." = field("No.");
+                    RunPageView = sorting("Source Type", "Source Subtype", "Source No.", "Source Line No.");
                 }
                 separator(Action1102601040)
                 {
@@ -384,13 +384,13 @@ Page 51516112 "Purchase Order-Released"
                     trigger OnAction()
                     begin
                         //DocPrint.PrintPurchHeader(Rec);
-                           if Status<>Status::Released then
+                        if Rec.Status <> Rec.Status::Released then
                             Error('You can only print a Payment Voucher after it is fully Approved');
 
                         PHeader.Reset;
-                        PHeader.SetRange(PHeader."No.","No.");
+                        PHeader.SetRange(PHeader."No.", Rec."No.");
                         if PHeader.FindFirst then begin
-                          Report.Run(51516360,true,true,PHeader);
+                            Report.Run(51516360, true, true, PHeader);
                         end;
                     end;
                 }
@@ -461,7 +461,7 @@ Page 51516112 "Purchase Order-Released"
                 }
                 action("Send IC Purchase Order")
                 {
-                    AccessByPermission = TableData "IC G/L Account"=R;
+                    AccessByPermission = TableData "IC G/L Account" = R;
                     ApplicationArea = Basic;
                     Caption = 'Send IC Purchase Order';
                     Image = IntercompanyOrder;
@@ -472,7 +472,7 @@ Page 51516112 "Purchase Order-Released"
                         SalesHeader: Record "Sales Header";
                     begin
                         //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                         // ICInOutboxMgt.SendPurchDoc(Rec,FALSE);
+                        // ICInOutboxMgt.SendPurchDoc(Rec,FALSE);
                     end;
                 }
             }
@@ -482,7 +482,7 @@ Page 51516112 "Purchase Order-Released"
                 Image = Warehouse;
                 action("Create &Whse. Receipt")
                 {
-                    AccessByPermission = TableData "Warehouse Receipt Header"=R;
+                    AccessByPermission = TableData "Warehouse Receipt Header" = R;
                     ApplicationArea = Basic;
                     Caption = 'Create &Whse. Receipt';
                     Image = NewReceipt;
@@ -493,13 +493,13 @@ Page 51516112 "Purchase Order-Released"
                     begin
                         GetSourceDocInbound.CreateFromPurchOrder(Rec);
 
-                        if not Find('=><') then
-                          Init;
+                        if not Rec.Find('=><') then
+                            Rec.Init;
                     end;
                 }
                 action("Create Inventor&y Put-away/Pick")
                 {
-                    AccessByPermission = TableData "Posted Invt. Put-away Header"=R;
+                    AccessByPermission = TableData "Posted Invt. Put-away Header" = R;
                     ApplicationArea = Basic;
                     Caption = 'Create Inventor&y Put-away/Pick';
                     Ellipsis = true;
@@ -507,10 +507,10 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        CreateInvtPutAwayPick;
+                        Rec.CreateInvtPutAwayPick;
 
-                        if not Find('=><') then
-                          Init;
+                        if not Rec.Find('=><') then
+                            Rec.Init;
                     end;
                 }
                 separator(Action1102601017)
@@ -546,7 +546,7 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        SendToPosting(Codeunit::"Purch.-Post (Yes/No)");
+                        Rec.SendToPosting(Codeunit::"Purch.-Post (Yes/No)");
                     end;
                 }
                 action("Post and &Print")
@@ -562,7 +562,7 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        SendToPosting(Codeunit::"Purch.-Post + Print");
+                        Rec.SendToPosting(Codeunit::"Purch.-Post + Print");
                     end;
                 }
                 action("Post &Batch")
@@ -576,7 +576,7 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        Report.RunModal(Report::"Batch Post Purchase Orders",true,true,Rec);
+                        Report.RunModal(Report::"Batch Post Purchase Orders", true, true, Rec);
                         CurrPage.Update(false);
                     end;
                 }
@@ -589,7 +589,7 @@ Page 51516112 "Purchase Order-Released"
 
                     trigger OnAction()
                     begin
-                        CancelBackgroundPosting;
+                        Rec.CancelBackgroundPosting;
                     end;
                 }
             }
@@ -599,14 +599,14 @@ Page 51516112 "Purchase Order-Released"
     trigger OnDeleteRecord(): Boolean
     begin
         //If Status<>Status::Open THEN
-           Error('You cannot Delete this Document');
+        Error('You cannot Delete this Document');
     end;
 
     trigger OnOpenPage()
     var
         PurchasesPayablesSetup: Record "Purchases & Payables Setup";
     begin
-        SetSecurityFilterOnRespCenter;
+        Rec.SetSecurityFilterOnRespCenter;
 
         JobQueueActive := PurchasesPayablesSetup.JobQueueActive;
     end;

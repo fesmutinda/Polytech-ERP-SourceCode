@@ -2,7 +2,7 @@
 Page 51516096 "Expense Transfer Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516005;
+    SourceTable = "Funds Transfer Line";
 
     layout
     {
@@ -10,33 +10,33 @@ Page 51516096 "Expense Transfer Lines"
         {
             repeater(Group)
             {
-                field("Document Type"; "Document Type")
+                field("Document Type"; Rec."Document Type")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expense Type';
                 }
-                field("Receiving Bank Account"; "Receiving Bank Account")
+                field("Receiving Bank Account"; Rec."Receiving Bank Account")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expense Account No.';
                     Editable = false;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expense Name';
                 }
-                field("Bank Balance"; "Bank Balance")
+                field("Bank Balance"; Rec."Bank Balance")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Amount to Receive"; "Amount to Receive")
+                field("Amount to Receive"; Rec."Amount to Receive")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Amount Expensed';
                 }
-                field("External Doc No."; "External Doc No.")
+                field("External Doc No."; Rec."External Doc No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Rcpt No.';

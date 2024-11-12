@@ -11,17 +11,17 @@ Page 51516087 "Accountants  Role Centre"
             group(Control1000000015)
             {
             }
-            part(Control3;"My Job Queue")
+            part(Control3; "My Job Queue")
             {
                 ApplicationArea = Advanced;
                 Visible = false;
             }
-            part(Control2;"Membership Cue")
+            part(Control2; "Membership Cue")
             {
-                AccessByPermission = TableData "Sales Shipment Header"=R;
-                ApplicationArea = Basic,Suite;
+                AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
             }
-            part(Control1;"Team Member Activities")
+            part(Control1; "Team Member Activities")
             {
                 ApplicationArea = Suite;
             }
@@ -37,14 +37,14 @@ Page 51516087 "Accountants  Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Customer Care logs';
                 Image = "Report";
-                RunObject = Report UnknownReport51516507;
+                RunObject = Report 51516507;
             }
             action("Member Statement")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
         }
         area(embedding)
@@ -67,7 +67,7 @@ Page 51516087 "Accountants  Role Centre"
             action("Defaulter aging report")
             {
                 ApplicationArea = Basic;
-                RunObject = Report UnknownReport51516400;
+                RunObject = Report 51516400;
             }
         }
     }

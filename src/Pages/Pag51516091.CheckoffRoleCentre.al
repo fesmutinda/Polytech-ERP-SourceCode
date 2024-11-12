@@ -11,17 +11,17 @@ Page 51516091 "Checkoff  Role Centre"
             group(Control1000000015)
             {
             }
-            part(Control3;"My Job Queue")
+            part(Control3; "My Job Queue")
             {
                 ApplicationArea = Advanced;
                 Visible = false;
             }
-            part(Control2;"Membership Cue")
+            part(Control2; "Membership Cue")
             {
-                AccessByPermission = TableData "Sales Shipment Header"=R;
-                ApplicationArea = Basic,Suite;
+                AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
             }
-            part(Control1;"Team Member Activities")
+            part(Control1; "Team Member Activities")
             {
                 ApplicationArea = Suite;
             }
@@ -37,7 +37,7 @@ Page 51516091 "Checkoff  Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Customer Care logs';
                 Image = "Report";
-                RunObject = Report UnknownReport51516507;
+                RunObject = Report 51516507;
             }
             action("Member dependants ")
             {
@@ -45,7 +45,7 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = Absence;
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516506;
+                RunObject = Report 51516506;
             }
             action("Benovelent fund report")
             {
@@ -53,7 +53,7 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = Web;
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516918;
+                RunObject = Report 51516918;
             }
             action("Fosa shares")
             {
@@ -61,7 +61,7 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = Alerts;
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516907;
+                RunObject = Report 51516907;
             }
             action("Member Deposit balance")
             {
@@ -69,7 +69,7 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = "Action";
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516873;
+                RunObject = Report 51516873;
             }
             action("Member Shares")
             {
@@ -77,7 +77,7 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = Allocate;
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516872;
+                RunObject = Report 51516872;
             }
             action("Member Register list")
             {
@@ -85,7 +85,7 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = LineDescription;
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516887;
+                RunObject = Report 51516887;
             }
             action("Member application list")
             {
@@ -93,14 +93,14 @@ Page 51516091 "Checkoff  Role Centre"
                 Image = List;
                 Promoted = true;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516489;
+                RunObject = Report 51516489;
             }
             action("Member Statement")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
         }
         area(embedding)

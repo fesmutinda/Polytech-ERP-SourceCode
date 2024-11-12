@@ -8,10 +8,10 @@ Page 51516085 "Tellers  Role Centre"
     {
         area(rolecenter)
         {
-            part(Control2;"Membership Cue")
+            part(Control2; "Membership Cue")
             {
-                AccessByPermission = TableData "Sales Shipment Header"=R;
-                ApplicationArea = Basic,Suite;
+                AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
             }
         }
     }
@@ -25,14 +25,14 @@ Page 51516085 "Tellers  Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Customer Care logs';
                 Image = "Report";
-                RunObject = Report UnknownReport51516507;
+                RunObject = Report 51516507;
             }
             action("Member Statement")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
         }
     }

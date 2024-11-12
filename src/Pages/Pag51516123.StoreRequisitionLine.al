@@ -2,7 +2,7 @@
 Page 51516123 "Store Requisition Line"
 {
     PageType = ListPart;
-    SourceTable = 51516103;
+    SourceTable = "Store Requistion Lines";
 
     layout
     {
@@ -10,87 +10,87 @@ Page 51516123 "Store Requisition Line"
         {
             repeater(Control1102755000)
             {
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Description 2"; "Description 2")
+                field("Description 2"; Rec."Description 2")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Remark';
                     Visible = false;
                 }
-                field("Unit of Measure"; "Unit of Measure")
+                field("Unit of Measure"; Rec."Unit of Measure")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Qty in store"; "Qty in store")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Quantity Requested"; "Quantity Requested")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Unit Cost"; "Unit Cost")
+                field("Qty in store"; Rec."Qty in store")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Line Amount"; "Line Amount")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Quantity Requested"; Rec."Quantity Requested")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Unit Cost"; Rec."Unit Cost")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Quantity; Quantity)
+                field("Line Amount"; Rec."Line Amount")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Quantity; Rec.Quantity)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Quantity To Issue';
                 }
-                field("Issuing Store"; "Issuing Store")
+                field("Issuing Store"; Rec."Issuing Store")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bin Code"; "Bin Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Gen. Bus. Posting Group"; "Gen. Bus. Posting Group")
+                field("Bin Code"; Rec."Bin Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Gen. Prod. Posting Group"; "Gen. Prod. Posting Group")
+                field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Item Status"; "Item Status")
+                field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Item Status"; Rec."Item Status")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Lot No."; "Lot No.")
+                field("Lot No."; Rec."Lot No.")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -122,7 +122,7 @@ Page 51516123 "Store Requisition Line"
 
                     trigger OnAction()
                     begin
-                        OpenItemTrackingLines;
+                        Rec.OpenItemTrackingLines;
                     end;
                 }
             }

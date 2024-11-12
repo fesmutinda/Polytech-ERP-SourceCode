@@ -2,7 +2,7 @@
 Page 51516108 "Quotation Request Vendors"
 {
     PageType = List;
-    SourceTable = 51516105;
+    SourceTable = "Quotation Request Vendors";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516108 "Quotation Request Vendors"
         {
             repeater(Group)
             {
-                field("Requisition Document No."; "Requisition Document No.")
+                field("Requisition Document No."; Rec."Requisition Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vendor No."; "Vendor No.")
+                field("Vendor No."; Rec."Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vendor Name"; "Vendor Name")
+                field("Vendor Name"; Rec."Vendor Name")
                 {
                     ApplicationArea = Basic;
                 }

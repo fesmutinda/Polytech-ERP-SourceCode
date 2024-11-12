@@ -2,7 +2,7 @@
 Page 51516098 "S-Mobile Charges"
 {
     PageType = List;
-    SourceTable = 51516523;
+    SourceTable = "S-Mobile Charges";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516098 "S-Mobile Charges"
         {
             repeater(Group)
             {
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Amount"; "Total Amount")
+                field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Tiered; Tiered)
+                field(Tiered; Rec.Tiered)
                 {
                     ApplicationArea = Basic;
                 }

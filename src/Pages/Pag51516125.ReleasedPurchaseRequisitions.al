@@ -14,104 +14,104 @@ Page 51516125 "Released Purchase Requisitions"
         {
             repeater(Control1)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Buy-from Vendor No."; "Buy-from Vendor No.")
+                field("Buy-from Vendor No."; Rec."Buy-from Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Order Address Code"; "Order Address Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Buy-from Vendor Name"; "Buy-from Vendor Name")
+                field("Order Address Code"; Rec."Order Address Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Description"; "Posting Description")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Vendor Authorization No."; "Vendor Authorization No.")
+                field("Buy-from Vendor Name"; Rec."Buy-from Vendor Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Post Code"; "Buy-from Post Code")
+                field("Posting Description"; Rec."Posting Description")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Vendor Authorization No."; Rec."Vendor Authorization No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Country/Region Code"; "Buy-from Country/Region Code")
+                field("Buy-from Post Code"; Rec."Buy-from Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Contact"; "Buy-from Contact")
+                field("Buy-from Country/Region Code"; Rec."Buy-from Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Vendor No."; "Pay-to Vendor No.")
+                field("Buy-from Contact"; Rec."Buy-from Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Name"; "Pay-to Name")
+                field("Pay-to Vendor No."; Rec."Pay-to Vendor No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Post Code"; "Pay-to Post Code")
+                field("Pay-to Name"; Rec."Pay-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Country/Region Code"; "Pay-to Country/Region Code")
+                field("Pay-to Post Code"; Rec."Pay-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Contact"; "Pay-to Contact")
+                field("Pay-to Country/Region Code"; Rec."Pay-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Code"; "Ship-to Code")
+                field("Pay-to Contact"; Rec."Pay-to Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Name"; "Ship-to Name")
+                field("Ship-to Code"; Rec."Ship-to Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Post Code"; "Ship-to Post Code")
+                field("Ship-to Name"; Rec."Ship-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Country/Region Code"; "Ship-to Country/Region Code")
+                field("Ship-to Post Code"; Rec."Ship-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Contact"; "Ship-to Contact")
+                field("Ship-to Country/Region Code"; Rec."Ship-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Ship-to Contact"; Rec."Ship-to Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
+                field("Posting Date"; Rec."Posting Date")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -121,7 +121,7 @@ Page 51516125 "Released Purchase Requisitions"
                         DimMgt.LookupDimValueCodeNoUpdate(1);
                     end;
                 }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -131,41 +131,41 @@ Page 51516125 "Released Purchase Requisitions"
                         DimMgt.LookupDimValueCodeNoUpdate(2);
                     end;
                 }
-                field("Location Code"; "Location Code")
+                field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field("Purchaser Code"; "Purchaser Code")
+                field("Purchaser Code"; Rec."Purchaser Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Responsible Officer"; "Responsible Officer")
+                field("Responsible Officer"; Rec."Responsible Officer")
                 {
                     ApplicationArea = Basic;
                     Caption = '<Procurement Officer>';
                 }
-                field("Assigned User ID"; "Assigned User ID")
+                field("Assigned User ID"; Rec."Assigned User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Document Date"; "Document Date")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Campaign No."; "Campaign No.")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Status; Status)
+                field("Campaign No."; Rec."Campaign No.")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -210,7 +210,7 @@ Page 51516125 "Released Purchase Requisitions"
 
                     trigger OnAction()
                     begin
-                        CalcInvDiscForHeader;
+                        Rec.CalcInvDiscForHeader;
                         Commit;
                         Page.RunModal(Page::"Purchase Statistics", Rec);
                     end;
@@ -232,7 +232,7 @@ Page 51516125 "Released Purchase Requisitions"
 
                     trigger OnAction()
                     begin
-                        ShowDocDim;
+                        Rec.ShowDocDim;
                     end;
                 }
                 action(Approvals)
@@ -245,7 +245,7 @@ Page 51516125 "Released Purchase Requisitions"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", "Document Type", "No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -278,16 +278,16 @@ Page 51516125 "Released Purchase Requisitions"
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report UnknownReport60004;
+                RunObject = Report 60004;
 
                 trigger OnAction()
                 begin
                     if LinesCommitted then
                         Error('All Lines should be committed');
-                    Reset;
-                    SetRange("No.", "No.");
+                    Rec.Reset;
+                    Rec.SetRange("No.", Rec."No.");
                     Report.Run(55984, true, true, Rec);
-                    Reset;
+                    Rec.Reset;
                     //DocPrint.PrintPurchHeader(Rec);
                 end;
             }
@@ -358,7 +358,7 @@ Page 51516125 "Released Purchase Requisitions"
 
     trigger OnOpenPage()
     begin
-        SetSecurityFilterOnRespCenter;
+        Rec.SetSecurityFilterOnRespCenter;
     end;
 
     var
@@ -383,8 +383,8 @@ Page 51516125 "Released Purchase Requisitions"
         if BCSetup.Get then begin
             Exists := false;
             PurchLines.Reset;
-            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
-            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines."Document Type", Rec."Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", Rec."No.");
             PurchLines.SetRange(PurchLines.Committed, false);
             if PurchLines.Find('-') then
                 Exists := true;

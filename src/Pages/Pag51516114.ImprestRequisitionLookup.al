@@ -14,31 +14,31 @@ Page 51516114 "Imprest Requisition Lookup"
         {
             repeater(Control1102755000)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date;Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No.";"Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee;Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Net Amount";"Total Net Amount")
+                field("Total Net Amount"; Rec."Total Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status;Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted;Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
@@ -60,7 +60,7 @@ Page 51516114 "Imprest Requisition Lookup"
 
                 trigger OnAction()
                 begin
-                    
+
                 end;
             }
         }
@@ -68,7 +68,7 @@ Page 51516114 "Imprest Requisition Lookup"
 
     trigger OnOpenPage()
     begin
-      
+
     end;
 
     var

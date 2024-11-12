@@ -68,21 +68,21 @@ Page 51516126 "Bid Analysis Worksheet"
             repeater(Group)
             {
                 Editable = false;
-                field("RFQ No."; "RFQ No.")
+                field("RFQ No."; Rec."RFQ No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("RFQ Line No."; "RFQ Line No.")
+                field("RFQ Line No."; Rec."RFQ Line No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Quote No."; "Quote No.")
+                field("Quote No."; Rec."Quote No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vendor No."; "Vendor No.")
+                field("Vendor No."; Rec."Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -91,27 +91,27 @@ Page 51516126 "Bid Analysis Worksheet"
                     ApplicationArea = Basic;
                     Caption = 'Vendor Name';
                 }
-                field("Item No."; "Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Quantity; Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unit Of Measure"; "Unit Of Measure")
+                field("Unit Of Measure"; Rec."Unit Of Measure")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Line Amount"; "Line Amount")
+                field("Line Amount"; Rec."Line Amount")
                 {
                     ApplicationArea = Basic;
                 }
@@ -142,7 +142,7 @@ Page 51516126 "Bid Analysis Worksheet"
 
     trigger OnAfterGetRecord()
     begin
-        Vendor.Get("Vendor No.");
+        Vendor.Get(Rec."Vendor No.");
         VendorName := Vendor.Name;
         CalcTotals;
     end;
@@ -162,14 +162,14 @@ Page 51516126 "Bid Analysis Worksheet"
     procedure SetRecFilters()
     begin
         if SalesCodeFilter <> '' then
-            SetFilter("Vendor No.", SalesCodeFilter)
+            Rec.SetFilter("Vendor No.", SalesCodeFilter)
         else
-            SetRange("Vendor No.");
+            Rec.SetRange("Vendor No.");
 
         if ItemNoFilter <> '' then begin
-            SetFilter("Item No.", ItemNoFilter);
+            Rec.SetFilter("Item No.", ItemNoFilter);
         end else
-            SetRange("Item No.");
+            Rec.SetRange("Item No.");
 
         CalcTotals;
 
@@ -195,18 +195,18 @@ Page 51516126 "Bid Analysis Worksheet"
             PurchLines.SetRange("Document No.", PurchHeader."No.");
             if PurchLines.FindSet then
                 repeat
-                    Init;
-                    "RFQ No." := PurchHeader."No.";
-                    "RFQ Line No." := PurchLines."Line No.";
-                    "Quote No." := PurchLines."Document No.";
-                    "Vendor No." := PurchLines."Buy-from Vendor No.";
-                    "Item No." := PurchLines."No.";
-                    Description := PurchLines.Description;
-                    Quantity := PurchLines.Quantity;
-                    "Unit Of Measure" := PurchLines."Unit of Measure";
-                    Amount := PurchLines."Direct Unit Cost";
-                    "Line Amount" := Quantity * Amount;
-                    Insert(true);
+                    Rec.Init;
+                    Rec."RFQ No." := PurchHeader."No.";
+                    Rec."RFQ Line No." := PurchLines."Line No.";
+                    Rec."Quote No." := PurchLines."Document No.";
+                    Rec."Vendor No." := PurchLines."Buy-from Vendor No.";
+                    Rec."Item No." := PurchLines."No.";
+                    Rec.Description := PurchLines.Description;
+                    Rec.Quantity := PurchLines.Quantity;
+                    Rec."Unit Of Measure" := PurchLines."Unit of Measure";
+                    Rec.Amount := PurchLines."Direct Unit Cost";
+                    Rec."Line Amount" := Rec.Quantity * Rec.Amount;
+                    Rec.Insert(true);
                     InsertCount := +1;
                 until PurchLines.Next = 0;
         until PurchHeader.Next = 0;
@@ -224,7 +224,7 @@ Page 51516126 "Bid Analysis Worksheet"
     var
         BidAnalysisRec: Record 51516104;
     begin
-        BidAnalysisRec.SetRange("RFQ No.", "RFQ No.");
+        BidAnalysisRec.SetRange("RFQ No.", Rec."RFQ No.");
         if SalesCodeFilter <> '' then
             BidAnalysisRec.SetRange("Vendor No.", SalesCodeFilter);
         if ItemNoFilter <> '' then

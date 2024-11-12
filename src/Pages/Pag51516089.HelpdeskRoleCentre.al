@@ -8,17 +8,17 @@ Page 51516089 "Helpdesk  Role Centre"
     {
         area(rolecenter)
         {
-            part(Control4;"My Job Queue")
+            part(Control4; "My Job Queue")
             {
                 ApplicationArea = Advanced;
                 Visible = false;
             }
-            part(Control1;"Membership Cue")
+            part(Control1; "Membership Cue")
             {
-                AccessByPermission = TableData "Sales Shipment Header"=R;
-                ApplicationArea = Basic,Suite;
+                AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
             }
-            part(Control2;"Team Member Activities")
+            part(Control2; "Team Member Activities")
             {
                 ApplicationArea = Suite;
             }
@@ -34,14 +34,14 @@ Page 51516089 "Helpdesk  Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Customer Care logs';
                 Image = "Report";
-                RunObject = Report UnknownReport51516507;
+                RunObject = Report 51516507;
             }
             action("Member Statement")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
         }
         area(embedding)

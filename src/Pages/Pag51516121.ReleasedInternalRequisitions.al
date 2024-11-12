@@ -20,7 +20,7 @@ Page 51516121 "Released Internal Requisitions"
             group(General)
             {
                 Caption = 'General';
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -28,76 +28,76 @@ Page 51516121 "Released Internal Requisitions"
 
                     trigger OnAssistEdit()
                     begin
-                        if AssistEdit(xRec) then
+                        if Rec.AssistEdit(xRec) then
                             CurrPage.Update;
                     end;
                 }
-                field("Requested Receipt Date"; "Requested Receipt Date")
+                field("Requested Receipt Date"; Rec."Requested Receipt Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Responsibility Center"; "Responsibility Center")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Importance = Additional;
-                }
-                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Posting Description"; "Posting Description")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("No. of Archived Versions"; "No. of Archived Versions")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Responsible Officer"; "Responsible Officer")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Posting Description"; Rec."Posting Description")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("No. of Archived Versions"; Rec."No. of Archived Versions")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Importance = Additional;
+                }
+                field("Responsible Officer"; Rec."Responsible Officer")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field("Procurement Type Code"; "Procurement Type Code")
+                field("Procurement Type Code"; Rec."Procurement Type Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Order Date"; "Order Date")
+                field("Order Date"; Rec."Order Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Assigned User ID"; "Assigned User ID")
+                field("Assigned User ID"; Rec."Assigned User ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field(Completed; Completed)
+                field(Completed; Rec.Completed)
                 {
                     ApplicationArea = Basic;
                 }
@@ -109,7 +109,7 @@ Page 51516121 "Released Internal Requisitions"
             group("Foreign Trade")
             {
                 Caption = 'Foreign Trade';
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -118,9 +118,9 @@ Page 51516121 "Released Internal Requisitions"
                     trigger OnAssistEdit()
                     begin
                         Clear(ChangeExchangeRate);
-                        ChangeExchangeRate.SetParameter("Currency Code", "Currency Factor", WorkDate);
+                        ChangeExchangeRate.SetParameter(Rec."Currency Code", Rec."Currency Factor", WorkDate);
                         if ChangeExchangeRate.RunModal = Action::OK then begin
-                            Validate("Currency Factor", ChangeExchangeRate.GetParameter);
+                            Rec.Validate("Currency Factor", ChangeExchangeRate.GetParameter);
                             CurrPage.Update;
                         end;
                         Clear(ChangeExchangeRate);
@@ -131,27 +131,27 @@ Page 51516121 "Released Internal Requisitions"
                         CurrencyCodeOnAfterValidate;
                     end;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Specification"; "Transaction Specification")
+                field("Transaction Specification"; Rec."Transaction Specification")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transport Method"; "Transport Method")
+                field("Transport Method"; Rec."Transport Method")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entry Point"; "Entry Point")
+                field("Entry Point"; Rec."Entry Point")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Area"; Area)
+                field("Area"; Rec.Area)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -224,7 +224,7 @@ Page 51516121 "Released Internal Requisitions"
 
                     trigger OnAction()
                     begin
-                        CalcInvDiscForHeader;
+                        Rec.CalcInvDiscForHeader;
                         Commit;
                         Page.RunModal(Page::"Purchase Statistics", Rec);
                     end;
@@ -257,7 +257,7 @@ Page 51516121 "Released Internal Requisitions"
 
                     trigger OnAction()
                     begin
-                        ShowDocDim;
+                        Rec.ShowDocDim;
                         CurrPage.SaveRecord;
                     end;
                 }
@@ -274,7 +274,7 @@ Page 51516121 "Released Internal Requisitions"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", "Document Type", "No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -290,7 +290,7 @@ Page 51516121 "Released Internal Requisitions"
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report UnknownReport51516358;
+                RunObject = Report 51516358;
 
                 trigger OnAction()
                 begin
@@ -298,10 +298,10 @@ Page 51516121 "Released Internal Requisitions"
 
                     if LinesCommitted then
                         Error('All Lines should be committed');
-                    Reset;
-                    SetRange("No.", "No.");
+                    Rec.Reset;
+                    Rec.SetRange("No.", Rec."No.");
                     Report.Run(51516100, true, true, Rec);
-                    Reset;
+                    Rec.Reset;
                     //DocPrint.PrintPurchHeader(Rec);
                 end;
             }
@@ -452,14 +452,14 @@ Page 51516121 "Released Internal Requisitions"
                         if not BCSetup.Mandatory then
                             exit;
 
-                        if Status = Status::Released then
+                        if Rec.Status = Rec.Status::Released then
                             Error('This document has already been released. This functionality is available for open documents only');
                         if not SomeLinesCommitted then begin
-                            if not Confirm('Some or All the Lines Are already Committed do you want to continue', true, "Document Type") then
+                            if not Confirm('Some or All the Lines Are already Committed do you want to continue', true, Rec."Document Type") then
                                 Error('Budget Availability Check and Commitment Aborted');
                             DeleteCommitment.Reset;
                             DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
-                            DeleteCommitment.SetRange(DeleteCommitment."Document No.", "No.");
+                            DeleteCommitment.SetRange(DeleteCommitment."Document No.", Rec."No.");
                             DeleteCommitment.DeleteAll;
                         end;
                         Commitment.CheckPurchase(Rec);
@@ -482,12 +482,12 @@ Page 51516121 "Released Internal Requisitions"
 
                         DeleteCommitment.Reset;
                         DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
-                        DeleteCommitment.SetRange(DeleteCommitment."Document No.", "No.");
+                        DeleteCommitment.SetRange(DeleteCommitment."Document No.", Rec."No.");
                         DeleteCommitment.DeleteAll;
                         //Tag all the Purchase Line entries as Uncommitted
                         PurchLine.Reset;
-                        PurchLine.SetRange(PurchLine."Document Type", "Document Type");
-                        PurchLine.SetRange(PurchLine."Document No.", "No.");
+                        PurchLine.SetRange(PurchLine."Document Type", Rec."Document Type");
+                        PurchLine.SetRange(PurchLine."Document No.", Rec."No.");
                         if PurchLine.Find('-') then begin
                             repeat
                                 PurchLine.Committed := false;
@@ -495,7 +495,7 @@ Page 51516121 "Released Internal Requisitions"
                             until PurchLine.Next = 0;
                         end;
 
-                        Message('Commitments Cancelled Successfully for Doc. No %1', "No.");
+                        Message('Commitments Cancelled Successfully for Doc. No %1', Rec."No.");
                     end;
                 }
             }
@@ -537,17 +537,17 @@ Page 51516121 "Released Internal Requisitions"
     trigger OnDeleteRecord(): Boolean
     begin
         CurrPage.SaveRecord;
-        exit(ConfirmDeletion);
+        exit(Rec.ConfirmDeletion);
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        DocApprovalType := Docapprovaltype::Requisition;
+        Rec.DocApprovalType := Docapprovaltype::Requisition;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Responsibility Center" := UserMgt.GetPurchasesFilter;
+        Rec."Responsibility Center" := UserMgt.GetPurchasesFilter;
     end;
 
     trigger OnNextRecord(Steps: Integer): Integer
@@ -571,9 +571,9 @@ Page 51516121 "Released Internal Requisitions"
         ChangeExchangeRate: Page "Change Exchange Rate";
         CopyPurchDoc: Report "Copy Purchase Document";
         DocPrint: Codeunit "Document-Print";
-        UserMgt: Codeunit UnknownCodeunit51516108;
+        UserMgt: Codeunit 51516108;
         ArchiveManagement: Codeunit ArchiveManagement;
-        Commitment: Codeunit UnknownCodeunit55484;
+        Commitment: Codeunit 55484;
         BCSetup: Record 51516038;
         DeleteCommitment: Record 51516036;
         PurchLine: Record "Purchase Line";
@@ -586,9 +586,9 @@ Page 51516121 "Released Internal Requisitions"
 
     local procedure BuyfromVendorNoOnAfterValidate()
     begin
-        if GetFilter("Buy-from Vendor No.") = xRec."Buy-from Vendor No." then
-            if "Buy-from Vendor No." <> xRec."Buy-from Vendor No." then
-                SetRange("Buy-from Vendor No.");
+        if Rec.GetFilter("Buy-from Vendor No.") = xRec."Buy-from Vendor No." then
+            if Rec."Buy-from Vendor No." <> xRec."Buy-from Vendor No." then
+                Rec.SetRange("Buy-from Vendor No.");
         CurrPage.Update;
     end;
 
@@ -639,8 +639,8 @@ Page 51516121 "Released Internal Requisitions"
         if BCSetup.Get then begin
             Exists := false;
             PurchLines.Reset;
-            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
-            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines."Document Type", Rec."Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", Rec."No.");
             PurchLines.SetRange(PurchLines.Committed, false);
             if PurchLines.Find('-') then
                 Exists := true;
@@ -656,8 +656,8 @@ Page 51516121 "Released Internal Requisitions"
         if BCSetup.Get then begin
             Exists := false;
             PurchLines.Reset;
-            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
-            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines."Document Type", Rec."Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", Rec."No.");
             PurchLines.SetRange(PurchLines.Committed, true);
             if PurchLines.Find('-') then
                 Exists := true;
@@ -668,7 +668,7 @@ Page 51516121 "Released Internal Requisitions"
 
     procedure UpdateControls()
     begin
-        if Status = Status::Open then
+        if Rec.Status = Rec.Status::Open then
             StatusEditable := true
         else
             StatusEditable := false;

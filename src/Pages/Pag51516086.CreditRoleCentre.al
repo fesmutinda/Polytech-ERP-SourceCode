@@ -8,17 +8,17 @@ Page 51516086 "Credit  Role Centre"
     {
         area(rolecenter)
         {
-            part(Control2;"My Job Queue")
+            part(Control2; "My Job Queue")
             {
                 ApplicationArea = Advanced;
                 Visible = false;
             }
-            part(Control8;"Membership Cue")
+            part(Control8; "Membership Cue")
             {
-                AccessByPermission = TableData "Sales Shipment Header"=R;
-                ApplicationArea = Basic,Suite;
+                AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
             }
-            part(Control5;"Team Member Activities")
+            part(Control5; "Team Member Activities")
             {
                 ApplicationArea = Suite;
             }
@@ -34,14 +34,14 @@ Page 51516086 "Credit  Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Customer Care logs';
                 Image = "Report";
-                RunObject = Report UnknownReport51516507;
+                RunObject = Report 51516507;
             }
             action("Member Statement")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
         }
         area(embedding)

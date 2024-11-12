@@ -3,7 +3,7 @@ Page 51516129 "PRF Lists"
 {
     PageType = List;
     SourceTable = "Purchase Line";
-    SourceTableView = where("Document Type"=const(Quote));
+    SourceTableView = where("Document Type" = const(Quote));
 
     layout
     {
@@ -11,35 +11,35 @@ Page 51516129 "PRF Lists"
         {
             repeater(Group)
             {
-                field("Document No.";"Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type;Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description;Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Description 2";"Description 2")
+                field("Description 2"; Rec."Description 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unit of Measure";"Unit of Measure")
+                field("Unit of Measure"; Rec."Unit of Measure")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Quantity;Quantity)
+                field(Quantity; Rec.Quantity)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Direct Unit Cost";"Direct Unit Cost")
+                field("Direct Unit Cost"; Rec."Direct Unit Cost")
                 {
                     ApplicationArea = Basic;
                 }

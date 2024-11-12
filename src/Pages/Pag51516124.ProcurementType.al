@@ -2,7 +2,7 @@
 Page 51516124 "Procurement Type"
 {
     PageType = List;
-    SourceTable = 51516443;
+    SourceTable = "Treasury Transactions";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516124 "Procurement Type"
         {
             repeater(Control1102756000)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Account"; "From Account")
+                field("From Account"; Rec."From Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Account"; "To Account")
+                field("To Account"; Rec."To Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516109 "Purchase Quote Parameters"
 {
     PageType = List;
-    SourceTable = 51516516;
+    SourceTable = "Inward file Buffer-Family";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516109 "Purchase Quote Parameters"
         {
             repeater(Group)
             {
-                field(Field3; Field3)
+                field(Field3; Rec.Field3)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Field4; Field4)
+                field(Field4; Rec.Field4)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Field6; Field6)
+                field(Field6; Rec.Field6)
                 {
                     ApplicationArea = Basic;
                 }

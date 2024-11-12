@@ -2,7 +2,7 @@
 Page 51516097 "S-Mobile Tarrifs"
 {
     PageType = List;
-    SourceTable = 51516535;
+    SourceTable = "S-Mobile Tarrifs";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516097 "S-Mobile Tarrifs"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Minimum; Minimum)
+                field(Minimum; Rec.Minimum)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Maximum; Maximum)
+                field(Maximum; Rec.Maximum)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Amount"; "Charge Amount")
+                field("Charge Amount"; Rec."Charge Amount")
                 {
                     ApplicationArea = Basic;
                 }

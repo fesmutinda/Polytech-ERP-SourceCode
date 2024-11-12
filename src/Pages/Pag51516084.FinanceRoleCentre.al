@@ -8,14 +8,14 @@ Page 51516084 "Finance Role Centre"
     {
         area(rolecenter)
         {
-            part(Control1000000041;"SO Processor Activities")
+            part(Control1000000041; "SO Processor Activities")
             {
                 Caption = 'Finance Activities';
             }
             group(Control1000000015)
             {
             }
-            systempart(Control1000000000;MyNotes)
+            systempart(Control1000000000; MyNotes)
             {
             }
         }
@@ -30,7 +30,7 @@ Page 51516084 "Finance Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Member Statement';
                 Image = "Report";
-                RunObject = Report UnknownReport51516223;
+                RunObject = Report 51516223;
             }
         }
         area(embedding)
@@ -54,7 +54,7 @@ Page 51516084 "Finance Role Centre"
                 Caption = 'Balance';
                 Image = Balance;
                 RunObject = Page "Vendor List";
-                RunPageView = where("Balance (LCY)"=filter(<>0));
+                RunPageView = where("Balance (LCY)" = filter(<> 0));
             }
             action("Bank Account List")
             {
@@ -407,7 +407,7 @@ Page 51516084 "Finance Role Centre"
                 ApplicationArea = Basic;
                 Caption = 'Import Sacco Jnl';
                 Image = Allocate;
-                RunObject = XMLport UnknownXMLport51516006;
+                RunObject = XMLport 51516006;
             }
             action("Purchases && Payables &Setup")
             {

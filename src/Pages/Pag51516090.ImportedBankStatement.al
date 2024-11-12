@@ -3,7 +3,7 @@ Page 51516090 "Imported Bank Statement"
 {
     InsertAllowed = false;
     PageType = List;
-    SourceTable = 51516090;
+    SourceTable = "Imported Bank Statement..";
 
     layout
     {
@@ -11,47 +11,47 @@ Page 51516090 "Imported Bank Statement"
         {
             repeater(Group)
             {
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Bank; Bank)
+                field(Bank; Rec.Bank)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Receipted; Receipted)
+                field(Receipted; Rec.Receipted)
                 {
                     ApplicationArea = Basic;
                 }
-                field(ReceiptNo; ReceiptNo)
+                field(ReceiptNo; Rec.ReceiptNo)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Receipting Date"; "Receipting Date")
+                field("Receipting Date"; Rec."Receipting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reconciled; Reconciled)
+                field(Reconciled; Rec.Reconciled)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reconciliation Doc No"; "Reconciliation Doc No")
+                field("Reconciliation Doc No"; Rec."Reconciliation Doc No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reconciliation Date"; "Reconciliation Date")
+                field("Reconciliation Date"; Rec."Reconciliation Date")
                 {
                     ApplicationArea = Basic;
                 }
