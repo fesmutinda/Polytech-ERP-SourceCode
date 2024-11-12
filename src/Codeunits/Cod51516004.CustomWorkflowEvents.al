@@ -17,9 +17,9 @@ Codeunit 51516004 "Custom Workflow Events"
         //---------------------------------------------1. Approval Events--------------------------------------------------------------
         //Payment Header
         WFHandler.AddEventToLibrary(RunWorkflowOnSendPaymentDocForApprovalCode,
-                                    Database::"Payments Header", 'Approval of a Payment Document is Requested.', 0, false);
+                                    Database::"Payment Header", 'Approval of a Payment Document is Requested.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelPaymentApprovalRequestCode,
-                                    Database::"Payments Header", 'An Approval request for a Payment Document is Canceled.', 0, false);
+                                    Database::"Payment Header", 'An Approval request for a Payment Document is Canceled.', 0, false);
 
         //Membership Application
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipApplicationForApprovalCode,
@@ -141,9 +141,9 @@ Codeunit 51516004 "Custom Workflow Events"
 
         //Petty Cash
         WFHandler.AddEventToLibrary(RunWorkflowOnSendPettyCashForApprovalCode,
-                                    Database::"Payment Header.", 'Approval of  Petty Cash is Requested.', 0, false);
+                                    Database::"Payment Header", 'Approval of  Petty Cash is Requested.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelPettyCashApprovalRequestCode,
-                                    Database::"Payment Header.", 'An Approval request for  Petty Cash is canceled.', 0, false);
+                                    Database::"Payment Header", 'An Approval request for  Petty Cash is canceled.', 0, false);
 
         //Staff Claims
         WFHandler.AddEventToLibrary(RunWorkflowOnSendStaffClaimsForApprovalCode,

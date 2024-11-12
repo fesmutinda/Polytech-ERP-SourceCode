@@ -62,10 +62,10 @@ enum 51516010 "TransactionTypesEnum"
     {
         Caption = 'Shares Capital';
     }
-    // value(15; "Loan Adjustment")
-    // {
-    //     Caption = 'Loan Adjustment';
-    // }
+    value(15; "Loan Adjustment")
+    {
+        Caption = 'Loan Adjustment';
+    }
     value(16; Dividend)
     {
         Caption = 'Dividend';
@@ -158,10 +158,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'FOSA Account';
     // }
-    // value(39; "Partial Disbursement")
-    // {
-    //     Caption = 'Partial Disbursement';
-    // }
+    value(39; "Partial Disbursement")
+    {
+        Caption = 'Partial Disbursement';
+    }
     // value(40; "Loan Due")
     // {
     //     Caption = 'Loan Due';
@@ -178,11 +178,11 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Kuscco Shares';
     // }
-    // value(44; "CIC shares")
-    // {
-    //     Caption = 'CIC shares';
+    value(44; "CIC shares")
+    {
+        Caption = 'CIC shares';
 
-    // }
+    }
     // value(45; "COOP Shares")
     // {
     //     Caption = 'COOP Shares';
@@ -211,7 +211,7 @@ enum 51516010 "TransactionTypesEnum"
     {
         Caption = 'Housing Shares';
     }
-    value(52; Holiday_Savers)
+    value(52; "Holiday Savings")
     {
         Caption = 'Holiday Savings';
     }

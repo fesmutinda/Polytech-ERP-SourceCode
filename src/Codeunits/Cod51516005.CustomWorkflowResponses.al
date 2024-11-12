@@ -363,9 +363,9 @@ Codeunit 51516005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReleasePaymentVoucher(var PaymentHeader: Record 51516112)
+    procedure ReleasePaymentVoucher(var PaymentHeader: Record "Payment Header")
     var
-        PHeader: Record 51516112;
+        PHeader: Record "Payment Header";
     begin
         PHeader.Reset;
         PHeader.SetRange(PHeader."No.", PaymentHeader."No.");
@@ -376,14 +376,14 @@ Codeunit 51516005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReOpenPaymentVoucher(var PaymentHeader: Record 51516112)
+    procedure ReOpenPaymentVoucher(var PaymentHeader: Record "Payment Header")
     var
-        PHeader: Record 51516112;
+        PHeader: Record "Payment Header";
     begin
         PHeader.Reset;
         PHeader.SetRange(PHeader."No.", PaymentHeader."No.");
         if PHeader.FindFirst then begin
-            PHeader.Status := PHeader.Status::Pending;
+            PHeader.Status := PHeader.Status::"Pending Approval";
             PHeader.Modify;
         end;
     end;
@@ -688,9 +688,9 @@ Codeunit 51516005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReleaseSaccoTransfer(var SaccoTransfer: Record "Imprest Line")
+    procedure ReleaseSaccoTransfer(var SaccoTransfer: Record "Imprest Lines")
     var
-        STransfer: Record "Imprest Line";
+        STransfer: Record "Imprest Lines";
     begin
         STransfer.Reset;
         STransfer.SetRange(STransfer.No, SaccoTransfer.No);

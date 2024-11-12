@@ -15,7 +15,7 @@ Codeunit 53904 "HR Leave Jnl.-Postt"
         Text001: label 'There is nothing to post.';
         Text002: label 'The journal lines were successfully posted.';
         Text003: label 'The journal lines were successfully posted. You are now in the %1 journal.';
-        HRLeaveJournalTemplate: Record 51516343;
+        HRLeaveJournalTemplate: Record "HR Leave Journal Template";
         HRJournalLine: Record 51516384;
         HRLeaveJnlPostBatch: Codeunit "HR Leave Jnl.-Post Batchh";
         TempJnlBatchName: Code[10];
@@ -23,34 +23,34 @@ Codeunit 53904 "HR Leave Jnl.-Postt"
     local procedure "Code"()
     begin
         with HRJournalLine do begin
-          HRLeaveJournalTemplate.Get("Product Code");
-          HRLeaveJournalTemplate.TestField("Tax Paid",false);
+            HRLeaveJournalTemplate.Get("Product Code");
+            HRLeaveJournalTemplate.TestField("Force Posting Report", false);
 
-          if not Confirm(Text000,false) then
-            exit;
+            if not Confirm(Text000, false) then
+                exit;
 
-          TempJnlBatchName := Cycle;
+            TempJnlBatchName := Cycle;
 
-          HRLeaveJnlPostBatch.Run(HRJournalLine);
+            HRLeaveJnlPostBatch.Run(HRJournalLine);
 
-          if "Max. Installments" = 0 then
-            Message(Text001)
-          else
-            if TempJnlBatchName = Cycle then
-              Message(Text002)
+            if "Max. Installments" = 0 then
+                Message(Text001)
             else
-              Message(
-                Text003,
-                Cycle);
+                if TempJnlBatchName = Cycle then
+                    Message(Text002)
+                else
+                    Message(
+                      Text003,
+                      Cycle);
 
-          if not Find('=><') or (TempJnlBatchName <> Cycle) then begin
-            Reset;
-            FilterGroup := 2;
-            SetRange("Product Code","Product Code");
-            SetRange(Cycle,Cycle);
-            FilterGroup := 0;
-            "Max. Installments" := 1;
-          end;
+            if not Find('=><') or (TempJnlBatchName <> Cycle) then begin
+                Reset;
+                FilterGroup := 2;
+                SetRange("Product Code", "Product Code");
+                SetRange(Cycle, Cycle);
+                FilterGroup := 0;
+                "Max. Installments" := 1;
+            end;
         end;
     end;
 }

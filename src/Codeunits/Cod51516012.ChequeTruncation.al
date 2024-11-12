@@ -11,7 +11,7 @@ Codeunit 51516012 "Cheque Truncation"
         objChequeTruncationBuffer: Record 51516422;
         FilePath: Text[1024];
         Imge: Codeunit "File Management";
-        PicTable: Record TempBlob;
+        PicTable: Record "Upgrade Blob Storage";
         InStream1: InStream;
         InputFile: File;
         OutStream1: OutStream;

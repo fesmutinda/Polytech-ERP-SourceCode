@@ -8,27 +8,27 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
     var
-        ObjTransCharges: Record UnknownRecord51516442;
+        ObjTransCharges: Record "Transaction Charges";
         UserSetup: Record User;
         ObjVendor: Record Vendor;
         Date: Date;
-        ObjProducts: Record UnknownRecord51516436;
-        ObjMemberLedgerEntry: Record UnknownRecord51516365;
-        ObjLoans: Record UnknownRecord51516371;
+        ObjProducts: Record "Account Types-Saving Products";
+        ObjMemberLedgerEntry: Record "Member Ledger Entry";
+        ObjLoans: Record "Loans Register";
         ObjBanks: Record "Bank Account";
-        ObjLoanProductSetup: Record UnknownRecord51516381;
-        ObjProductCharges: Record UnknownRecord51516383;
-        ObjMembers: Record UnknownRecord51516364;
-        ObjMembers2: Record UnknownRecord51516364;
-        ObjGenSetUp: Record UnknownRecord51516398;
+        ObjLoanProductSetup: Record "Loan Products Setup";
+        ObjProductCharges: Record  "Loan Product Charges";
+        ObjMembers: Record "Member Register";
+        ObjMembers2: Record "Member Register";
+        ObjGenSetUp: Record "Sacco General Set-Up";
         ObjCompInfo: Record "Company Information";
         BAND1: Decimal;
         BAND2: Decimal;
         BAND3: Decimal;
         BAND4: Decimal;
         BAND5: Decimal;
-        ObjMembershipWithdrawal: Record UnknownRecord51516400;
-        ObjSalesSetup: Record UnknownRecord51516399;
+        ObjMembershipWithdrawal: Record  "Membership Exit";
+        ObjSalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjNoSeriesManagement: Codeunit NoSeriesManagement;
         ObjNextNo: Code[20];
@@ -37,7 +37,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         VarRepaymentPeriod: Date;
         VarLoanNo: Code[20];
         VarLastMonth: Date;
-        ObjLSchedule: Record UnknownRecord51516375;
+        ObjLSchedule: Record "Loan Repayment Schedule";
         VarScheduledLoanBal: Decimal;
         VarDateFilter: Text;
         VarLBal: Decimal;
@@ -48,18 +48,18 @@ Codeunit 51516007 "Swizzsoft Factory."
         VarLastMonthBeginDate: Date;
         VarScheduleDateFilter: Text;
         VarScheduleRepayDate: Date;
-        ObjCustRiskRates: Record UnknownRecord51516931;
-        ObjMembershipApplication: Record UnknownRecord51516360;
-        ObjMemberRiskRating: Record UnknownRecord51516933;
-        ObjProductRiskRating: Record UnknownRecord51516934;
-        ObjProductsApp: Record UnknownRecord51516509;
-        ObjNetRiskScale: Record UnknownRecord51516935;
+        ObjCustRiskRates: Record 51516931;
+        ObjMembershipApplication: Record 51516360;
+        ObjMemberRiskRating: Record 51516933;
+        ObjProductRiskRating: Record 51516934;
+        ObjProductsApp: Record 51516509;
+        ObjNetRiskScale: Record 51516935;
         BATCH_TEMPLATE: Code[100];
         BATCH_NAME: Code[100];
         DOCUMENT_NO: Code[100];
-        PCharges: Record UnknownRecord51516383;
-        GenSetUp: Record UnknownRecord51516398;
-        LoanTopUp: Record UnknownRecord51516376;
+        PCharges: Record  "Loan Product Charges";
+        GenSetUp: Record "Sacco General Set-Up";
+        LoanTopUp: Record 51516376;
         AmountToDisburse: Decimal;
         Insurance: Decimal;
 
@@ -92,7 +92,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnSendSMS(SMSSource: Text;SMSBody: Text;CurrentAccountNo: Text;MobileNumber: Text)
     var
-        SMSMessage: Record UnknownRecord51516471;
+        SMSMessage: Record 51516471;
         iEntryNo: Integer;
     begin
         ObjGenSetUp.Get;
@@ -363,7 +363,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetMemberBranch(MemberNo: Code[100]) MemberBranch: Code[100]
     var
-        ObjMemberLocal: Record UnknownRecord51516364;
+        ObjMemberLocal: Record "Member Register";
     begin
         ObjMemberLocal.Reset;
         ObjMemberLocal.SetRange(ObjMemberLocal."No.",MemberNo);
@@ -375,7 +375,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     local procedure FnReturnRetirementDate(MemberNo: Code[50]): Date
     var
-        ObjMembers: Record UnknownRecord51516364;
+        ObjMembers: Record "Member Register";
     begin
         ObjGenSetUp.Get();
         ObjMembers.Reset;
@@ -410,7 +410,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetFosaAccount(MemberNo: Code[50]) FosaAccount: Code[50]
     var
-        ObjMembers: Record UnknownRecord51516364;
+        ObjMembers: Record "Member Register";
     begin
         ObjMembers.Reset;
         ObjMembers.SetRange(ObjMembers."No.",MemberNo);
@@ -482,7 +482,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnChargeExcise(ChargeCode: Code[100]): Boolean
     var
-        ObjProductCharges: Record UnknownRecord51516382;
+        ObjProductCharges: Record 51516382;
     begin
         ObjProductCharges.Reset;
         ObjProductCharges.SetRange(Code,ChargeCode);
@@ -491,9 +491,9 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
 
-    procedure FnGetInterestDueTodate(ObjLoans: Record UnknownRecord51516371): Decimal
+    procedure FnGetInterestDueTodate(ObjLoans: Record "Loans Register"): Decimal
     var
-        ObjLoanRegister: Record UnknownRecord51516371;
+        ObjLoanRegister: Record "Loans Register";
     begin
         ObjLoans.SetFilter("Date filter",'..'+Format(Today));
         ObjLoans.CalcFields("Schedule Interest to Date","Outstanding Balance");
@@ -501,7 +501,7 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
 
-    procedure FnGetPhoneNumber(ObjLoans: Record UnknownRecord51516371): Code[50]
+    procedure FnGetPhoneNumber(ObjLoans: Record "Loans Register"): Code[50]
     begin
         ObjMembers.Reset;
         ObjMembers.SetRange("No.",ObjLoans."Client Code");
@@ -509,15 +509,15 @@ Codeunit 51516007 "Swizzsoft Factory."
           exit(ObjMembers."Mobile Phone No");
     end;
 
-    local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record UnknownRecord51516371): Code[40]
+    local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record "Loans Register"): Code[40]
     var
         GenJournalLine: Record "Gen. Journal Line";
         CUNoSeriesManagement: Codeunit NoSeriesManagement;
         DocNumber: Code[100];
-        loanTypes: Record UnknownRecord51516381;
-        ObjLoanX: Record UnknownRecord51516371;
-        LoansRec: Record UnknownRecord51516371;
-        Cust: Record UnknownRecord51516364;
+        loanTypes: Record "Loan Products Setup";
+        ObjLoanX: Record "Loans Register";
+        LoansRec: Record "Loans Register";
+        Cust: Record "Member Register";
     begin
           loanTypes.Reset;
           loanTypes.SetRange(loanTypes.Code,'BLOAN');
@@ -561,8 +561,8 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGenerateRepaymentSchedule(LoanNumber: Code[50])
     var
-        LoansRec: Record UnknownRecord51516371;
-        RSchedule: Record UnknownRecord51516375;
+        LoansRec: Record "Loans Register";
+        RSchedule: Record "Loan Repayment Schedule";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -577,7 +577,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         GrInterest: Integer;
         RepayCode: Code[10];
         WhichDay: Integer;
-        LoanProductsSetup: Record UnknownRecord51516381;
+        LoanProductsSetup: Record "Loan Products Setup";
     begin
          //MESSAGE('here');
         LoansRec.Reset;
@@ -747,9 +747,9 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
 
-    procedure FnGetInterestDueFiltered(ObjLoans: Record UnknownRecord51516371;DateFilter: Text): Decimal
+    procedure FnGetInterestDueFiltered(ObjLoans: Record "Loans Register";DateFilter: Text): Decimal
     var
-        ObjLoanRegister: Record UnknownRecord51516371;
+        ObjLoanRegister: Record "Loans Register";
     begin
         ObjLoans.SetFilter("Date filter",DateFilter);
         //ObjLoans.CALCFIELDS("Schedule Interest to Date","Outstanding Balance");
@@ -760,7 +760,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetPAYEBudCharge(ChargeCode: Code[10]): Decimal
     var
-        ObjpayeCharges: Record UnknownRecord51516478;
+        ObjpayeCharges: Record 51516478;
     begin
         ObjpayeCharges.Reset;
         ObjpayeCharges.SetRange("Tax Band",ChargeCode);
@@ -771,7 +771,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnPayeRate(ChargeCode: Code[10]): Decimal
     var
-        ObjpayeCharges: Record UnknownRecord51516478;
+        ObjpayeCharges: Record 51516478;
     begin
         ObjpayeCharges.Reset;
         ObjpayeCharges.SetRange("Tax Band",ChargeCode);
@@ -782,7 +782,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnCalculatePaye(Chargeable: Decimal) PAYE: Decimal
     var
-        TAXABLEPAY: Record UnknownRecord51516478;
+        TAXABLEPAY: Record 51516478;
         Taxrelief: Decimal;
         OTrelief: Decimal;
     begin
@@ -862,7 +862,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetUpfrontsTotal(ProductCode: Code[50];InsuredAmount: Decimal) FCharged: Decimal
     var
-        ObjLoanCharges: Record UnknownRecord51516382;
+        ObjLoanCharges: Record 51516382;
     begin
         ObjProductCharges.Reset;
         ObjProductCharges.SetRange(ObjProductCharges."Product Code",ProductCode);
@@ -892,9 +892,9 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
 
-    procedure FnGetPrincipalDueFiltered(ObjLoans: Record UnknownRecord51516371;DateFilter: Text): Decimal
+    procedure FnGetPrincipalDueFiltered(ObjLoans: Record "Loans Register";DateFilter: Text): Decimal
     var
-        ObjLoanRegister: Record UnknownRecord51516371;
+        ObjLoanRegister: Record "Loans Register";
     begin
         ObjLoans.SetFilter("Date filter",DateFilter);
         ObjLoans.CalcFields("Scheduled Principal to Date","Outstanding Balance");
@@ -1320,8 +1320,8 @@ Codeunit 51516007 "Swizzsoft Factory."
         MemberTotalRiskRatingScore: Decimal;
         MemberNetRiskScore: Decimal;
         VarMemberAnnualIncome: Decimal;
-        ObjNetWorth: Record UnknownRecord51516932;
-        ObjPeps: Record UnknownRecord51516918;
+        ObjNetWorth: Record 51516932;
+        ObjPeps: Record 51516918;
         VarPepsRiskScore: Decimal;
         VarHighNet: Decimal;
         VarIndividualCategoryOption: Option "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
@@ -1651,10 +1651,10 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetMemberLiability(MemberNo: Code[30]) VarTotaMemberLiability: Decimal
     var
-        ObjLoanGuarantors: Record UnknownRecord51516372;
-        ObjLoans: Record UnknownRecord51516371;
-        ObjLoanSecurities: Record UnknownRecord51516374;
-        ObjLoanGuarantors2: Record UnknownRecord51516372;
+        ObjLoanGuarantors: Record 51516372;
+        ObjLoans: Record "Loans Register";
+        ObjLoanSecurities: Record 51516374;
+        ObjLoanGuarantors2: Record 51516372;
         VarTotalGuaranteeValue: Decimal;
         VarMemberAnountGuaranteed: Decimal;
         VarApportionedLiability: Decimal;
@@ -1715,7 +1715,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetPreviousMonthLastDate(LoanNum: Code[10];RunDate: Date) LastMonthDate: Date
     var
-        ObjLoansReg: Record UnknownRecord51516371;
+        ObjLoansReg: Record "Loans Register";
     begin
         if ObjLoansReg.Get(LoanNum) then
           begin
@@ -1738,7 +1738,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetScheduledExpectedBalance(LoanNum: Code[10];RunDate: Date) ScheduleBal: Decimal
     var
-        ObjRepaySch: Record UnknownRecord51516375;
+        ObjRepaySch: Record "Loan Repayment Schedule";
     begin
         ScheduleBal:=0;
         ObjRepaySch.Reset;
@@ -1754,7 +1754,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetLoanBalance(LoanNum: Code[10];RunDate: Date) LoanBal: Decimal
     var
-        ObjLoanReg: Record UnknownRecord51516371;
+        ObjLoanReg: Record "Loans Register";
     begin
         LoanBal:=0;
 
@@ -1811,7 +1811,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnClassifyLoans(LoanNum: Code[10];PeriodArrears: Decimal;AmountArrears: Decimal) Class: Integer
     var
-        ObjLoansReg: Record UnknownRecord51516371;
+        ObjLoansReg: Record "Loans Register";
     begin
         if ObjLoansReg.Get(LoanNum) then
           begin
@@ -1860,8 +1860,8 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnCalculateDividendProrated(MemberNo: Code[10];StartDate: Date;EndDate: Date)
     var
-        ObjCust: Record UnknownRecord51516364;
-        ObjDivProg: Record UnknownRecord51516393;
+        ObjCust: Record "Member Register";
+        ObjDivProg: Record 51516393;
         FromBate: Date;
         "To Date": Date;
     begin
@@ -1874,7 +1874,7 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
 
-    procedure FnDisburseToCurrentAccount(LoanApps: Record UnknownRecord51516371;LineNumber: Integer): Integer
+    procedure FnDisburseToCurrentAccount(LoanApps: Record "Loans Register";LineNumber: Integer): Integer
     var
         ProcessingFees: Decimal;
         ProcessingFeesAcc: Code[50];
@@ -2149,13 +2149,13 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     end;
 
-    local procedure FnBoosterLoansDisbursementNew(ObjLoanDetails: Record UnknownRecord51516371;LineNo: Integer): Code[40]
+    local procedure FnBoosterLoansDisbursementNew(ObjLoanDetails: Record "Loans Register";LineNo: Integer): Code[40]
     var
         GenJournalLine: Record "Gen. Journal Line";
         CUNoSeriesManagement: Codeunit NoSeriesManagement;
         DocNumber: Code[100];
-        loanTypes: Record UnknownRecord51516381;
-        ObjLoanX: Record UnknownRecord51516371;
+        loanTypes: Record "Loan Products Setup";
+        ObjLoanX: Record "Loans Register";
     begin
           loanTypes.Reset;
           loanTypes.SetRange(loanTypes.Code,'BLOAN');
@@ -2197,7 +2197,7 @@ Codeunit 51516007 "Swizzsoft Factory."
     end;
 
 
-    procedure FnDisburseToExternalAccount(LoanApps: Record UnknownRecord51516371;LineNumber: Integer): Integer
+    procedure FnDisburseToExternalAccount(LoanApps: Record "Loans Register";LineNumber: Integer): Integer
     var
         ProcessingFees: Decimal;
         ProcessingFeesAcc: Code[50];
@@ -2407,8 +2407,8 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGenerateRepaymentScheduleReschedule(LoanNumber: Code[50])
     var
-        LoansRec: Record UnknownRecord51516371;
-        RSchedule: Record UnknownRecord51516375;
+        LoansRec: Record "Loans Register";
+        RSchedule: Record "Loan Repayment Schedule";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -2542,9 +2542,9 @@ Codeunit 51516007 "Swizzsoft Factory."
         Commit;
     end;
 
-    local procedure FnCreateBLAClearingLine(LoansRec: Record UnknownRecord51516371)
+    local procedure FnCreateBLAClearingLine(LoansRec: Record "Loans Register")
     var
-        LoanOffset: Record UnknownRecord51516376;
+        LoanOffset: Record 51516376;
     begin
 
 
@@ -2564,10 +2564,10 @@ Codeunit 51516007 "Swizzsoft Factory."
     procedure KnCalculateLoanTopUpFee(LoanNo: Code[10]): Decimal
     var
         TopUpFee: Decimal;
-        ObjLoanTopUp: Record UnknownRecord51516376;
+        ObjLoanTopUp: Record 51516376;
         TotalAmount: Decimal;
         Commision: Decimal;
-        ObjSaccoGenSetUp: Record UnknownRecord51516398;
+        ObjSaccoGenSetUp: Record "Sacco General Set-Up";
     begin
         ObjSaccoGenSetUp.Get;
         ObjLoanTopUp.Reset;
@@ -2589,7 +2589,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetMemberPhoneNo(MemberNo: Code[15]): Code[20]
     var
-        ObjMembersReg: Record UnknownRecord51516364;
+        ObjMembersReg: Record "Member Register";
         PhoneNo: Code[20];
     begin
         if ObjMembersReg.Get(MemberNo) then
@@ -2603,7 +2603,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetMemberEmailAddress(MemberNo: Code[15]): Code[50]
     var
-        ObjMembersReg: Record UnknownRecord51516364;
+        ObjMembersReg: Record "Member Register";
         Email: Code[50];
     begin
         if ObjMembersReg.Get(MemberNo) then
@@ -2617,7 +2617,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnCheckIfMemberHasConsolidaterLoan(MemberNo: Code[20];LoanType: Code[20]): Boolean
     var
-        ObjLoansReg: Record UnknownRecord51516371;
+        ObjLoansReg: Record "Loans Register";
     begin
         ObjLoansReg.Reset;
         ObjLoansReg.SetRange(ObjLoansReg."Client Code",MemberNo);
@@ -2632,7 +2632,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnCheckIfLoanTypeIsConsolidater(LoanType: Code[10]): Boolean
     var
-        ObjLoanProductSetUp: Record UnknownRecord51516381;
+        ObjLoanProductSetUp: Record "Loan Products Setup";
     begin
         if ObjLoanProductSetUp.Get(LoanType) then
           begin
@@ -2646,10 +2646,10 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetMemberSelfLiability(MemberNo: Code[30]) VarTotaMemberLiability: Decimal
     var
-        ObjLoanGuarantors: Record UnknownRecord51516372;
-        ObjLoans: Record UnknownRecord51516371;
-        ObjLoanSecurities: Record UnknownRecord51516374;
-        ObjLoanGuarantors2: Record UnknownRecord51516372;
+        ObjLoanGuarantors: Record 51516372;
+        ObjLoans: Record "Loans Register";
+        ObjLoanSecurities: Record 51516374;
+        ObjLoanGuarantors2: Record 51516372;
         VarTotalGuaranteeValue: Decimal;
         VarMemberAnountGuaranteed: Decimal;
         VarApportionedLiability: Decimal;
@@ -2729,7 +2729,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetInterestBalanceOneLoan(LoanNo: Code[20]) Amount: Decimal
     var
-        ObjLoansRegister: Record UnknownRecord51516371;
+        ObjLoansRegister: Record "Loans Register";
     begin
         ObjLoansRegister.Reset;
         ObjLoansRegister.SetRange(ObjLoansRegister."Loan  No.",LoanNo);
@@ -2748,8 +2748,8 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetLoanBalanceOneLoan(LoanNo: Code[20]) Amount: Decimal
     var
-        ObjLoansRegister: Record UnknownRecord51516371;
-        MeReg: Record UnknownRecord51516364;
+        ObjLoansRegister: Record "Loans Register";
+        MeReg: Record "Member Register";
     begin
         ObjLoansRegister.Reset;
         ObjLoansRegister.SetRange(ObjLoansRegister."Loan  No.",LoanNo);
@@ -2768,7 +2768,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure knCheckIfMemberIsWithdrawn(MemberNo: Code[30]): Boolean
     var
-        MembersRegisterLocal: Record UnknownRecord51516364;
+        MembersRegisterLocal: Record "Member Register";
     begin
         MembersRegisterLocal.Reset;
         MembersRegisterLocal.SetRange("No.",MemberNo);
@@ -2782,7 +2782,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnCheckIfMemberHasWithdrawalNotice(MemberNo: Code[10]): Boolean
     var
-        MembershipExit: Record UnknownRecord51516400;
+        MembershipExit: Record  "Membership Exit";
     begin
         MembershipExit.Reset;
         MembershipExit.SetRange(MembershipExit."Member No.",MemberNo);
@@ -2796,7 +2796,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
     var
-        ObjLoanRepaymentSchedule: Record UnknownRecord51516375;
+        ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
         PrevMonth: Date;
         DateParm: Date;
         RepaymentDate: Date;
@@ -2821,7 +2821,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetPreviousMonthLastDate(LoanNo_: Text[30];Date_: Date) Lastdate: Date
     var
-        ObjLoansReg: Record UnknownRecord51516371;
+        ObjLoansReg: Record "Loans Register";
     begin
         if ObjLoansReg.Get(LoanNo_) then
           begin
@@ -2844,15 +2844,15 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnUpdateAmountGuaranteed(LoanNo: Code[20];AmountPaid: Decimal;ClientCode: Code[20])
     var
-        ObjLoansGuaranteeDetails: Record UnknownRecord51516372;
+        ObjLoansGuaranteeDetails: Record 51516372;
         Amount: Decimal;
         LoanBalance: Decimal;
         ApprovedAmount: Decimal;
         AmountGuaranteed: Decimal;
-        MembersReg: Record UnknownRecord51516364;
+        MembersReg: Record "Member Register";
         freedSharesRetained: Decimal;
         PrevAmount: Decimal;
-        SavingsGuarantorship: Record UnknownRecord51516711;
+        SavingsGuarantorship: Record 51516711;
         VarTotaMemberLiability: Decimal;
         AmtPaid: Decimal;
     begin
@@ -2889,15 +2889,15 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetMemberSavingsLiability(MemberNo: Code[30]) VarTotaMemberLiability: Decimal
     var
-        ObjLoanGuarantors: Record UnknownRecord51516372;
-        ObjLoans: Record UnknownRecord51516371;
-        ObjLoanSecurities: Record UnknownRecord51516374;
-        ObjLoanGuarantors2: Record UnknownRecord51516372;
+        ObjLoanGuarantors: Record 51516372;
+        ObjLoans: Record "Loans Register";
+        ObjLoanSecurities: Record 51516374;
+        ObjLoanGuarantors2: Record 51516372;
         VarTotalGuaranteeValue: Decimal;
         VarMemberAnountGuaranteed: Decimal;
         VarApportionedLiability: Decimal;
         VarLoanOutstandingBal: Decimal;
-        SavingsGuarantorship: Record UnknownRecord51516711;
+        SavingsGuarantorship: Record 51516711;
     begin
         ObjMembers.Reset;
         ObjMembers.SetRange(ObjMembers."No.",MemberNo);
@@ -2923,7 +2923,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetLoanAmountPaid(LoanNo: Code[30]) AmountPaid: Decimal
     var
-        MemberLedgerEntry: Record UnknownRecord51516365;
+        MemberLedgerEntry: Record "Member Ledger Entry";
     begin
         MemberLedgerEntry.Reset;
         MemberLedgerEntry.SetRange("Loan No",LoanNo);
@@ -2940,7 +2940,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure KnGetLastPayrollPeriod(): Date
     var
-        PayrollCalender: Record UnknownRecord51516322;
+        PayrollCalender: Record 51516322;
         Period: Date;
     begin
         PayrollCalender.Reset;
@@ -2989,8 +2989,8 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     procedure FnGetLoanInArrears(LoanNo: Code[50];CurrentLoanAmount: Decimal): Decimal
     var
-        LoanRepaymentSchedule: Record UnknownRecord51516375;
-        LoansRegTable: Record UnknownRecord51516371;
+        LoanRepaymentSchedule: Record "Loan Repayment Schedule";
+        LoansRegTable: Record "Loans Register";
         ExpectedPayments: Decimal;
         LoanDisbursed: Decimal;
     begin

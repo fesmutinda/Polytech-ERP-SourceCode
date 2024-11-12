@@ -47,8 +47,8 @@ Table 51516552 "Change Request"
                         Name := vend.Name;
                         Branch := vend."Global Dimension 2 Code";
                         Address := vend.Address;
-                        Picture := vend."Picture New";
-                        signinature := vend."Signature New";
+                        // Picture := vend."Picture 2";
+                        // signinature := vend."Specimen Signature";
                         Email := vend."E-Mail";
                         "Mobile No" := vend."Mobile Phone No";
                         "S-Mobile No" := vend."S-Mobile No";

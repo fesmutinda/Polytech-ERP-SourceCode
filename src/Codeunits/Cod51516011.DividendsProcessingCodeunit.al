@@ -1,4 +1,4 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+#pragma warning disable AA0005, AL0603, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 51516011 "Dividends Processing Codeunit"
 {
 
@@ -695,7 +695,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                         // //------------------------------------1. CREDIT MEMBER DIVIDEND A/C_Gross Dividend+Interest on Deposits---------------------------------------
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                        GenJournalLine."account type"::Member, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
+                        GenJournalLine."account type"::Customer, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
                         'Gross Dividend+Interest on Deposits- ' + Format(PostingDate), '');
 
                         // //-------------------------------------
@@ -716,7 +716,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                         LineNo := LineNo + 10000;
                         YearCalc := Format(Date2dmy(StartDate, 3));
                         SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                        GenJournalLine."account type"::Member, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
+                        GenJournalLine."account type"::Customer, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
                         'Witholding Tax on Dividend- ' + YearCalc, '');
                         // //----------------------------------(bank chargr Witholding tax gl a/c)-----------------------------------------------------------------------------
                         LineNo := LineNo + 10000;
@@ -734,7 +734,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                                 ExtraCharge1 := chargges;
                             end;
                         SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                        GenJournalLine."account type"::Member, MemberNo, PostingDate, chargges, 'BOSA', '',
+                        GenJournalLine."account type"::Customer, MemberNo, PostingDate, chargges, 'BOSA', '',
                         'Bank Charge- ' + YearCalc, '');
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::" ",
@@ -745,7 +745,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                         LineNo := LineNo + 10000;
                         GenSetUp.Get();
                         SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                        GenJournalLine."account type"::Member, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
+                        GenJournalLine."account type"::Customer, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
                         'Processing Fee- ' + MemberNo, '');
                         ExtraCharge2 := 0;
                         ExtraCharge2 := GenSetUp."Dividend Processing Fee";
@@ -762,7 +762,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                         LineNo := LineNo + 10000;
                         GenSetUp.Get();
                         SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                        GenJournalLine."account type"::Member, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
+                        GenJournalLine."account type"::Customer, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
                         'Excise Duty- ' + Format(PostingDate), '');
                         ExtraCharge3 := 0;
                         ExtraCharge3 := (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100));
@@ -1447,7 +1447,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                             // //------------------------------------1. CREDIT MEMBER DIVIDEND A/C_Gross Dividend+Interest on Deposits---------------------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                            GenJournalLine."account type"::Member, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
+                            GenJournalLine."account type"::Customer, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
                             'Gross Dividend+Interest on Deposits- ' + Format(PostingDate), '');
 
                             // //-------------------------------------
@@ -1469,7 +1469,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                             LineNo := LineNo + 10000;
                             YearCalc := Format(Date2dmy(StartDate, 3));
                             SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                            GenJournalLine."account type"::Member, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
+                            GenJournalLine."account type"::Customer, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
                             'Witholding Tax on Dividend- ' + YearCalc, '');
                             // //----------------------------------(bank chargr Witholding tax gl a/c)-----------------------------------------------------------------------------
                             LineNo := LineNo + 10000;
@@ -1488,7 +1488,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                                     ExtraCharge1 := chargges;
                                 end;
                             SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                            GenJournalLine."account type"::Member, MemberNo, PostingDate, chargges, 'BOSA', '',
+                            GenJournalLine."account type"::Customer, MemberNo, PostingDate, chargges, 'BOSA', '',
                             'Bank Charge- ' + YearCalc, '');
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::" ",
@@ -1499,7 +1499,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                             LineNo := LineNo + 10000;
                             GenSetUp.Get();
                             SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                            GenJournalLine."account type"::Member, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
+                            GenJournalLine."account type"::Customer, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
                             'Processing Fee- ' + MemberNo, '');
                             ExtraCharge2 := 0;
                             ExtraCharge2 := GenSetUp."Dividend Processing Fee";
@@ -1516,7 +1516,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                             LineNo := LineNo + 10000;
                             GenSetUp.Get();
                             SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                            GenJournalLine."account type"::Member, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
+                            GenJournalLine."account type"::Customer, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
                             'Excise Duty- ' + Format(PostingDate), '');
                             ExtraCharge3 := 0;
                             ExtraCharge3 := (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100));
@@ -2113,7 +2113,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                     // //------------------------------------1. CREDIT MEMBER DIVIDEND A/C_Gross Dividend+Interest on Deposits---------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                    GenJournalLine."account type"::Member, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
+                    GenJournalLine."account type"::Customer, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
                     'Gross Dividend+Interest on Deposits- ' + Format(PostingDate), '');
 
                     // //-------------------------------------
@@ -2134,7 +2134,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                     LineNo := LineNo + 10000;
                     YearCalc := Format(Date2dmy(StartDate, 3));
                     SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                    GenJournalLine."account type"::Member, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
+                    GenJournalLine."account type"::Customer, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
                     'Witholding Tax on Dividend- ' + YearCalc, '');
                     // //----------------------------------(bank chargr Witholding tax gl a/c)-----------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
@@ -2152,7 +2152,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                             ExtraCharge1 := chargges;
                         end;
                     SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                    GenJournalLine."account type"::Member, MemberNo, PostingDate, chargges, 'BOSA', '',
+                    GenJournalLine."account type"::Customer, MemberNo, PostingDate, chargges, 'BOSA', '',
                     'Bank Charge- ' + YearCalc, '');
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::" ",
@@ -2163,7 +2163,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                     LineNo := LineNo + 10000;
                     GenSetUp.Get();
                     SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                    GenJournalLine."account type"::Member, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
+                    GenJournalLine."account type"::Customer, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
                     'Processing Fee- ' + MemberNo, '');
                     ExtraCharge2 := 0;
                     ExtraCharge2 := GenSetUp."Dividend Processing Fee";
@@ -2180,7 +2180,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                     LineNo := LineNo + 10000;
                     GenSetUp.Get();
                     SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                    GenJournalLine."account type"::Member, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
+                    GenJournalLine."account type"::Customer, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
                     'Excise Duty- ' + Format(PostingDate), '');
                     ExtraCharge3 := 0;
                     ExtraCharge3 := (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100));
@@ -2867,7 +2867,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                 // //------------------------------------1. CREDIT MEMBER DIVIDEND A/C_Gross Dividend+Interest on Deposits---------------------------------------
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                GenJournalLine."account type"::Member, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
+                GenJournalLine."account type"::Customer, MemberNo, PostingDate, GrossTotalDiv * -1, 'BOSA', '',
                 'Gross Dividend+Interest on Deposits- ' + Format(PostingDate), '');
 
                 // LineNo:=LineNo+10000;
@@ -2898,7 +2898,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                 LineNo := LineNo + 10000;
                 YearCalc := Format(Date2dmy(StartDate, 3));
                 SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                GenJournalLine."account type"::Member, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
+                GenJournalLine."account type"::Customer, MemberNo, PostingDate, (TotalWhtax), 'BOSA', '',
                 'Witholding Tax on Dividend- ' + YearCalc, '');
                 // //----------------------------------(bank chargr Witholding tax gl a/c)-----------------------------------------------------------------------------
                 LineNo := LineNo + 10000;
@@ -2917,7 +2917,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                         ExtraCharge1 := chargges;
                     end;
                 SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                GenJournalLine."account type"::Member, MemberNo, PostingDate, chargges, 'BOSA', '',
+                GenJournalLine."account type"::Customer, MemberNo, PostingDate, chargges, 'BOSA', '',
                 'Bank Charge- ' + YearCalc, '');
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::" ",
@@ -2941,7 +2941,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                 LineNo := LineNo + 10000;
                 GenSetUp.Get();
                 SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                GenJournalLine."account type"::Member, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
+                GenJournalLine."account type"::Customer, MemberNo, PostingDate, GenSetUp."Dividend Processing Fee", 'BOSA', '',
                 'Processing Fee- ' + MemberNo, '');
                 ExtraCharge2 := 0;
                 ExtraCharge2 := GenSetUp."Dividend Processing Fee";
@@ -2958,7 +2958,7 @@ Codeunit 51516011 "Dividends Processing Codeunit"
                 LineNo := LineNo + 10000;
                 GenSetUp.Get();
                 SFactory.FnCreateGnlJournalLine('PAYMENTS', 'DIVIDEND', Format(PostingDate), LineNo, GenJournalLine."transaction type"::Dividend,
-                GenJournalLine."account type"::Member, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
+                                                    GenJournalLine."account type"::Customer, MemberNo, PostingDate, (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100)), 'BOSA', '',
                 'Excise Duty- ' + Format(PostingDate), '');
                 ExtraCharge3 := 0;
                 ExtraCharge3 := (GenSetUp."Dividend Processing Fee" * (GenSetUp."Excise Duty(%)" / 100));

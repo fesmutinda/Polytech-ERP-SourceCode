@@ -41,7 +41,7 @@ Codeunit 51516010 "Swizzsoft FactoryMobile"
 
     var
         ObjTransCharges: Record 51516442;
-        UserSetup: Record User;
+        UserSetup: Record "User Setup";
         ObjVendor: Record Vendor;
         ObjProducts: Record 51516436;
         ObjMemberLedgerEntry: Record 51516365;
@@ -79,9 +79,9 @@ Codeunit 51516010 "Swizzsoft FactoryMobile"
     procedure FnGetUserBranch() branchCode: Code[20]
     begin
         UserSetup.Reset;
-        UserSetup.SetRange(UserSetup."User Name",UserId);
+        UserSetup.SetRange(UserSetup."User Id",UserId);
         if UserSetup.Find('-') then begin
-          branchCode:=UserSetup."Branch Code";
+          branchCode:=UserSetup."Branch";
           end;
           exit(branchCode);
     end;
@@ -194,8 +194,8 @@ Codeunit 51516010 "Swizzsoft FactoryMobile"
     procedure FnGetMpesaAccount() TellerTillNo: Code[40]
     begin
         ObjBanks.Reset;
-        ObjBanks.SetRange(ObjBanks."Account Type",ObjBanks."account type"::"3");
-        ObjBanks.SetRange(ObjBanks."Bank Account Branch",FnGetUserBranch());
+        ObjBanks.SetRange(ObjBanks."Account Type",ObjBanks."account type"::Treasury);
+        ObjBanks.SetRange(ObjBanks."Bank Account No.",FnGetUserBranch());
         if ObjBanks.Find('-') then begin
         TellerTillNo:=ObjBanks."No.";
         end;
@@ -257,9 +257,9 @@ Codeunit 51516010 "Swizzsoft FactoryMobile"
     procedure FnGetUserBranchB(varUserId: Code[100]) branchCode: Code[20]
     begin
         UserSetup.Reset;
-        UserSetup.SetRange(UserSetup."User Name",varUserId);
+        UserSetup.SetRange(UserSetup."User Id",varUserId);
         if UserSetup.Find('-') then begin
-          branchCode:=UserSetup."Branch Code";
+          branchCode:=UserSetup."Branch";
           end;
           exit(branchCode);
     end;

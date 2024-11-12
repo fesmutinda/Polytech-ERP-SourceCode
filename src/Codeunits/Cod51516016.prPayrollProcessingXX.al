@@ -97,7 +97,7 @@ Codeunit 51516016 prPayrollProcessingXX
         curTaxablePay: Decimal;
         curTaxCharged: Decimal;
         curPAYE: Decimal;
-        prPeriodTransactions: Record 51516268;
+        prPeriodTransactions: Record "prPeriod Transactions.";
         intYear: Integer;
         intMonth: Integer;
         LeapYear: Boolean;
@@ -1097,7 +1097,7 @@ Codeunit 51516016 prPayrollProcessingXX
 
     procedure fnUpdatePeriodTrans(EmpCode: Code[20]; TCode: Code[20]; TGroup: Code[20]; GroupOrder: Integer; SubGroupOrder: Integer; Description: Text[50]; curAmount: Decimal; curBalance: Decimal; Month: Integer; Year: Integer; mMembership: Text[30]; ReferenceNo: Text[30]; dtOpenPeriod: Date; Department: Code[20]; JournalAC: Code[20]; PostAs: Option " ",Debit,Credit; JournalACType: Option " ","G/L Account",Customer,Vendor; LoanNo: Code[60]; CoopParam: Option "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","Development Loan","SACCO Deposit",Insurance,"School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF,"Admin fee")
     var
-        prPeriodTransactions: Record 51516268;
+        prPeriodTransactions: Record "prPeriod Transactions.";
     begin
 
         if curAmount = 0 then exit;
@@ -1283,7 +1283,7 @@ Codeunit 51516016 prPayrollProcessingXX
     procedure fnGetTransAmount(strEmpCode: Code[20]; strTransCode: Code[20]; intMonth: Integer; intYear: Integer) TransAmount: Decimal
     var
         prEmployeeTransactions: Record 51516267;
-        prPeriodTransactions: Record 51516268;
+        prPeriodTransactions: Record "prPeriod Transactions.";
     begin
 
         prEmployeeTransactions.Reset;
@@ -1325,15 +1325,15 @@ Codeunit 51516016 prPayrollProcessingXX
         intNewMonth: Integer;
         intNewYear: Integer;
         prEmployeeTransactions: Record 51516267;
-        prPeriodTransactions: Record 51516268;
+        prPeriodTransactions: Record "prPeriod Transactions.";
         intMonth: Integer;
         intYear: Integer;
         prTransactionCodes: Record 51516318;
         curTransAmount: Decimal;
         curTransBalance: Decimal;
         prEmployeeTrans: Record 51516267;
-        prPayrollPeriods: Record 51516266;
-        prNewPayrollPeriods: Record 51516266;
+        prPayrollPeriods: Record "prPayroll Periods.";
+        prNewPayrollPeriods: Record "prPayroll Periods.";
         CreateTrans: Boolean;
     begin
 
@@ -1460,7 +1460,7 @@ Codeunit 51516016 prPayrollProcessingXX
 
     procedure fnGetNegativePay(intMonth: Integer; intYear: Integer; dtOpenPeriod: Date)
     var
-        prPeriodTransactions: Record 51516268;
+        prPeriodTransactions: Record "prPeriod Transactions.";
         prEmployeeTransactions: Record 51516267;
         intNewMonth: Integer;
         intNewYear: Integer;
@@ -1516,7 +1516,7 @@ Codeunit 51516016 prPayrollProcessingXX
         P9NHIF: Decimal;
         P9Deductions: Decimal;
         P9NetPay: Decimal;
-        prPeriodTransactions: Record 51516268;
+        prPeriodTransactions: Record "prPeriod Transactions.";
         prEmployee: Record 51516160;
     begin
 

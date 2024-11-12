@@ -17,7 +17,7 @@ Table 51516489 "Online Users"
 
             end;
         }
-        field(2; Password; Blob)
+        field(2; Password; Text[25])
         {
         }
         field(3; Email; Text[250])

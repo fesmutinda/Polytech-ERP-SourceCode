@@ -244,8 +244,8 @@ Codeunit 51516113 "Holiday Savings Codeunit"
         //....................................Insert Member Saved Amounts start
         //...Dr Member Holiday Account
         LineNo := LineNo + 10000;
-        SFactory.FnCreateGnlJournalLine('PAYMENTS', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
-        GenJournalLine."account type"::Member, MemberNo, PostingDate, MemberHolidaySaving, 'BOSA', '',
+        SFactory.FnCreateGnlJournalLine('PAYMENTS', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday Savings",
+        GenJournalLine."account type"::Customer, MemberNo, PostingDate, MemberHolidaySaving, 'BOSA', '',
         'Holiday Savings Transferred To Bank- ' + Format(PostingDate) + 'BNK_0001', '');
         //...Cr Bank Account Paying Out
         LineNo := LineNo + 10000;

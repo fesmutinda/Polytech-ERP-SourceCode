@@ -40,17 +40,17 @@ Codeunit 51516119 AdminPortal
         LoanApprovalCommiteeexisting: Record 51516429;
         ReturnList: Text;
         objMember: Record 51516364;
-        Paymentheader: Record 51516112;
+        Paymentheader: Record "Payment Header";
         NewApplicationNumber: Integer;
         OnlineUser: Record 51516489;
         ObjExistingOnlineUser: Record 51516489;
         SMSMessages: Record 51516471;
         ReturnBoolean: Boolean;
         FAccNo: Text[250];
-        SMTPSetup: Record "SMTP Mail Setup";
+        // SMTPSetup: Record "SMTP Mail Setup";
         iEntryNo: Integer;
         CompanyInformation: Record "Company Information";
-        SMTPMail: Codeunit "SMTP Mail";
+        // SMTPMail: Codeunit "SMTP Mail";
         Perfoming: Option;
         FILEFOLDER2: label '\\172.17.9.233\Reports\';
         Vendor: Record Vendor;
@@ -113,7 +113,7 @@ Codeunit 51516119 AdminPortal
                         ObjExistingOnlineUser.Password := objMember.Password;
                         ObjExistingOnlineUser."User Name" := objMember."No.";
                         ObjExistingOnlineUser."Changed Password" := false;
-                        ObjExistingOnlineUser."Date Created" := CurrentDatetime;
+                        ObjExistingOnlineUser."Date Created" := Today;
                         ObjExistingOnlineUser.Modify(true);
                         Created := 'OK, Board Login account activated successfully. You will receive SMS/Email';
                     end else begin
@@ -123,7 +123,7 @@ Codeunit 51516119 AdminPortal
                         OnlineUser."User Name" := objMember."No.";
                         OnlineUser.Password := objMember."No.";
                         FAccNo := objMember."FOSA Account No.";
-                        OnlineUser."Date Created" := CurrentDatetime;
+                        OnlineUser."Date Created" := Today;
                         OnlineUser.Insert;
                         Created := 'OK,  Board Login account activated successfully. You will receive SMS/Email';
                     end;
@@ -312,9 +312,9 @@ Codeunit 51516119 AdminPortal
     var
         Filename: Text[100];
         Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
+        Path: DotNet Path;
+        _File: DotNet File;
+        FileAccess: DotNet FileAccess;
         FileMode: dotnet FileMode;
         MemoryStream: dotnet MemoryStream;
         FileStream: dotnet FileStream;

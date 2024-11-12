@@ -24,7 +24,7 @@ Codeunit 51516996 "S-Mobile"
         iEntryNo: Integer;
         Sms: Record 51516471;
         Gensetup: Record 51516398;
-        Setup: Record 51516522;
+        Setup: Record "SwizzKash Transactions";
         Charges: Record 51516523;
         Tarrifs: Record 51516535;
         Cust: Record 51516364;
@@ -381,7 +381,7 @@ Codeunit 51516996 "S-Mobile"
                                         Loans.CalcFields(Loans."Outstanding Balance");
                                         // MESSAGE(FORMAT(Loans."Loan  No."));
                                         if (Loans."Outstanding Balance" > 0) then begin
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                             GenJournalLine."Account No." := Loans."Client Code";
                                             GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Paid";
                                             GenJournalLine."Loan No" := Loans."Loan  No.";
@@ -496,10 +496,10 @@ Codeunit 51516996 "S-Mobile"
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'SMOBILE';
                                 GenJournalLine."Line No." := LineNo;
-                                GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                 GenJournalLine."Account No." := Loans."Client Code";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                                 GenJournalLine."Loan No" := Loans."Loan  No.";
                                 GenJournalLine."Document No." := SmobileTrans."Document No";
                                 GenJournalLine."External Document No." := SmobileTrans."Account No";

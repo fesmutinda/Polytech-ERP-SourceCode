@@ -195,7 +195,7 @@ Table 51516449 "Standing Orders"
         }
         field(50000; "Company Code"; Code[30])
         {
-            CalcFormula = lookup(Vendor."Company Code" where("No." = field("Source Account No.")));
+            CalcFormula = lookup(Vendor."Employer Code" where("No." = field("Source Account No.")));
             FieldClass = FlowField;
         }
         field(50001; "Posted By"; Code[50])

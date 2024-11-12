@@ -4,26 +4,26 @@ Table 51516384 "Loan Product Cycles"
 
     fields
     {
-        field(1;"Product Code";Code[20])
+        field(1; "Product Code"; Code[20])
         {
             NotBlank = true;
             TableRelation = "HR 360 Appraisal Eval Areas"."Line No.";
         }
-        field(2;Cycle;Integer)
+        field(2; Cycle; Integer)
         {
             NotBlank = true;
         }
-        field(3;"Max. Installments";Integer)
+        field(3; "Max. Installments"; Integer)
         {
         }
-        field(4;"Max. Amount";Decimal)
+        field(4; "Max. Amount"; Decimal)
         {
         }
     }
 
     keys
     {
-        key(Key1;"Product Code",Cycle)
+        key(Key1; "Product Code", Cycle)
         {
             Clustered = true;
         }
