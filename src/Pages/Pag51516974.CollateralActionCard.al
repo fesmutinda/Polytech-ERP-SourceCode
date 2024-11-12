@@ -669,13 +669,13 @@ Page 51516974 "Collateral Action Card"
     end;
 
     var
-        ObjCollateralDeprReg: Record UnknownRecord51516921;
-        ObjCollateralDetails: Record UnknownRecord51516374;
+        ObjCollateralDeprReg: Record 51516921;
+        ObjCollateralDetails: Record 51516374;
         VarNoofYears: Integer;
         VarDepreciationValue: Decimal;
-        ObjDepreciationRegister: Record UnknownRecord51516921;
+        ObjDepreciationRegister: Record 51516921;
         VarDepreciationNo: Integer;
-        ObjDeprCollateralMaster: Record UnknownRecord51516921;
+        ObjDeprCollateralMaster: Record 51516921;
         VarCurrentNBV: Decimal;
         ReceivedAtHQVisible: Boolean;
         StrongRoomVisible: Boolean;
@@ -685,27 +685,27 @@ Page 51516974 "Collateral Action Card"
         IssuetoMemberVisible: Boolean;
         IssuetoAuctioneerVisible: Boolean;
         SafeCustodyVisible: Boolean;
-        ObjCustodians: Record UnknownRecord51516909;
+        ObjCustodians: Record 51516909;
         ObjVendors: Record Vendor;
         AvailableBal: Decimal;
-        ObjAccTypes: Record UnknownRecord51516436;
+        ObjAccTypes: Record 51516436;
         JTemplate: Code[20];
         JBatch: Code[20];
         DocNo: Code[20];
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         LineNo: Integer;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due ";
         AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor;
         BalAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee;
-        ObjPackageTypes: Record UnknownRecord51516908;
+        ObjPackageTypes: Record 51516908;
         LodgeFee: Decimal;
         LodgeFeeAccount: Code[20];
         SurestepFactory: Codeunit UnknownCodeunit51516009;
-        ObjNoSeries: Record UnknownRecord51516399;
+        ObjNoSeries: Record 51516399;
         VarPackageNo: Code[20];
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        ObjPackage: Record UnknownRecord51516904;
-        ObjCollateralMovement: Record UnknownRecord51516922;
+        ObjPackage: Record 51516904;
+        ObjCollateralMovement: Record 51516922;
 
     local procedure FnGetVisibility()
     begin

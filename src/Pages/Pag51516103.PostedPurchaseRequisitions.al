@@ -8,11 +8,11 @@ Page 51516103 "Posted Purchase Requisitions"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Budget,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Purchase Header";
-    SourceTableView = where("Document Type"=filter(Quote),
-                            DocApprovalType=filter(Requisition),
-                            Status=const(Released),
-                            PR=const(Yes),
-                            Completed=const(No));
+    SourceTableView = where("Document Type" = filter(Quote),
+                            DocApprovalType = filter(Requisition),
+                            Status = const(Released),
+                            PR = const(Yes),
+                            Completed = const(No));
 
     layout
     {
@@ -20,43 +20,43 @@ Page 51516103 "Posted Purchase Requisitions"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; "No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Description";"Posting Description")
+                field("Posting Description"; "Posting Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested Receipt Date";"Requested Receipt Date")
+                field("Requested Receipt Date"; "Requested Receipt Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Procurement Type Code";"Procurement Type Code")
+                field("Procurement Type Code"; "Procurement Type Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Order Date";"Order Date")
+                field("Order Date"; "Order Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date";"Document Date")
+                field("Document Date"; "Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center";"Responsibility Center")
+                field("Responsibility Center"; "Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Assigned User ID";"Assigned User ID")
+                field("Assigned User ID"; "Assigned User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status;Status)
+                field(Status; Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Completed;Completed)
+                field(Completed; Completed)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -65,13 +65,13 @@ Page 51516103 "Posted Purchase Requisitions"
         }
         area(factboxes)
         {
-            systempart(Control1102755012;Notes)
+            systempart(Control1102755012; Notes)
             {
             }
-            systempart(Control1102755013;MyNotes)
+            systempart(Control1102755013; MyNotes)
             {
             }
-            systempart(Control1102755014;Links)
+            systempart(Control1102755014; Links)
             {
             }
         }
@@ -95,7 +95,7 @@ Page 51516103 "Posted Purchase Requisitions"
                     begin
                         CalcInvDiscForHeader;
                         Commit;
-                        Page.RunModal(Page::"Purchase Statistics",Rec);
+                        Page.RunModal(Page::"Purchase Statistics", Rec);
                     end;
                 }
                 action("<Action62>")
@@ -104,7 +104,7 @@ Page 51516103 "Posted Purchase Requisitions"
                     Caption = 'Card';
                     Image = EditLines;
                     RunObject = Page "Vendor Card";
-                    RunPageLink = "No."=field("Buy-from Vendor No.");
+                    RunPageLink = "No." = field("Buy-from Vendor No.");
                     ShortCutKey = 'Shift+F7';
                 }
                 action("<Action63>")
@@ -113,9 +113,9 @@ Page 51516103 "Posted Purchase Requisitions"
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page "Purch. Comment Sheet";
-                    RunPageLink = "Document Type"=field("Document Type"),
-                                  "No."=field("No."),
-                                  "Document Line No."=const(0);
+                    RunPageLink = "Document Type" = field("Document Type"),
+                                  "No." = field("No."),
+                                  "Document Line No." = const(0);
                 }
                 action("<Action111>")
                 {
@@ -138,7 +138,7 @@ Page 51516103 "Posted Purchase Requisitions"
 
                     trigger OnAction()
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header","Document Type","No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", "Document Type", "No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -203,10 +203,10 @@ Page 51516103 "Posted Purchase Requisitions"
                     SalesHeader: Record "Sales Header";
                 begin
                     if LinesCommitted then
-                       Error('All Lines should be committed');
+                        Error('All Lines should be committed');
 
                     //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                     // CODEUNIT.RUN(CODEUNIT::"Purch.-Quote to Order (Yes/No)",Rec);
+                    // CODEUNIT.RUN(CODEUNIT::"Purch.-Quote to Order (Yes/No)",Rec);
                 end;
             }
             group("<Action64>")
@@ -295,7 +295,7 @@ Page 51516103 "Posted Purchase Requisitions"
                     trigger OnAction()
                     begin
                         if LinesCommitted then
-                           Error('All Lines should be committed');
+                            Error('All Lines should be committed');
 
                         //IF ApprovalMgt.SendPurchaseApprovalRequest(Rec) THEN;
                     end;
@@ -327,25 +327,25 @@ Page 51516103 "Posted Purchase Requisitions"
 
                     trigger OnAction()
                     var
-                        BCSetup: Record UnknownRecord51516038;
+                        BCSetup: Record 51516038;
                     begin
 
                         BCSetup.Get;
                         if not BCSetup.Mandatory then
-                           exit;
+                            exit;
 
-                        if Status=Status::Released then
-                          Error('This document has already been released. This functionality is available for open documents only');
+                        if Status = Status::Released then
+                            Error('This document has already been released. This functionality is available for open documents only');
                         if not SomeLinesCommitted then begin
-                           if not Confirm( 'Some or All the Lines Are already Committed do you want to continue',true, "Document Type") then
+                            if not Confirm('Some or All the Lines Are already Committed do you want to continue', true, "Document Type") then
                                 Error('Budget Availability Check and Commitment Aborted');
-                          DeleteCommitment.Reset;
-                          DeleteCommitment.SetRange(DeleteCommitment."Document Type",DeleteCommitment."document type"::LPO);
-                          DeleteCommitment.SetRange(DeleteCommitment."Document No.","No.");
-                          DeleteCommitment.DeleteAll;
+                            DeleteCommitment.Reset;
+                            DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
+                            DeleteCommitment.SetRange(DeleteCommitment."Document No.", "No.");
+                            DeleteCommitment.DeleteAll;
                         end;
-                           Commitment.CheckPurchase(Rec);
-                           Message('Budget Availability Checking Complete');
+                        Commitment.CheckPurchase(Rec);
+                        Message('Budget Availability Checking Complete');
                     end;
                 }
                 action("<Action1102755003>")
@@ -359,25 +359,25 @@ Page 51516103 "Posted Purchase Requisitions"
 
                     trigger OnAction()
                     begin
-                           if not Confirm( 'Are you sure you want to Cancel All Commitments Done for this document',true, "Document Type") then
-                                Error('Budget Availability Check and Commitment Aborted');
+                        if not Confirm('Are you sure you want to Cancel All Commitments Done for this document', true, "Document Type") then
+                            Error('Budget Availability Check and Commitment Aborted');
 
-                          DeleteCommitment.Reset;
-                          DeleteCommitment.SetRange(DeleteCommitment."Document Type",DeleteCommitment."document type"::LPO);
-                          DeleteCommitment.SetRange(DeleteCommitment."Document No.","No.");
-                          DeleteCommitment.DeleteAll;
-                          //Tag all the Purchase Line entries as Uncommitted
-                          PurchLine.Reset;
-                          PurchLine.SetRange(PurchLine."Document Type","Document Type");
-                          PurchLine.SetRange(PurchLine."Document No.","No.");
-                          if PurchLine.Find('-') then begin
-                             repeat
-                                PurchLine.Committed:=false;
+                        DeleteCommitment.Reset;
+                        DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
+                        DeleteCommitment.SetRange(DeleteCommitment."Document No.", "No.");
+                        DeleteCommitment.DeleteAll;
+                        //Tag all the Purchase Line entries as Uncommitted
+                        PurchLine.Reset;
+                        PurchLine.SetRange(PurchLine."Document Type", "Document Type");
+                        PurchLine.SetRange(PurchLine."Document No.", "No.");
+                        if PurchLine.Find('-') then begin
+                            repeat
+                                PurchLine.Committed := false;
                                 PurchLine.Modify;
-                             until PurchLine.Next=0;
-                          end;
+                            until PurchLine.Next = 0;
+                        end;
 
-                        Message('Commitments Cancelled Successfully for Doc. No %1',"No.");
+                        Message('Commitments Cancelled Successfully for Doc. No %1', "No.");
                     end;
                 }
                 separator(Action1102755023)
@@ -395,7 +395,7 @@ Page 51516103 "Posted Purchase Requisitions"
                         ReleasePurchDoc: Codeunit "Release Purchase Document";
                     begin
                         if LinesCommitted then
-                           Error('All Lines should be committed');
+                            Error('All Lines should be committed');
 
                         ReleasePurchDoc.PerformManualRelease(Rec);
                     end;
@@ -411,7 +411,7 @@ Page 51516103 "Posted Purchase Requisitions"
                         ReleasePurchDoc: Codeunit "Release Purchase Document";
                     begin
                         if LinesCommitted then
-                           Error('All Lines should be committed');
+                            Error('All Lines should be committed');
 
                         ReleasePurchDoc.PerformManualReopen(Rec);
                     end;
@@ -447,11 +447,11 @@ Page 51516103 "Posted Purchase Requisitions"
 
 
                     if LinesCommitted then
-                       Error('All Lines should be committed');
-                      Reset;
-                      SetRange("No.","No.");
-                      Report.Run(51516358,true,true,Rec);
-                      Reset;
+                        Error('All Lines should be committed');
+                    Reset;
+                    SetRange("No.", "No.");
+                    Report.Run(51516358, true, true, Rec);
+                    Reset;
                     //DocPrint.PrintPurchHeader(Rec);
                 end;
             }
@@ -497,8 +497,8 @@ Page 51516103 "Posted Purchase Requisitions"
         ArchiveManagement: Codeunit ArchiveManagement;
         PurchInfoPaneMgmt: Codeunit "Purchases Info-Pane Management";
         Commitment: Codeunit UnknownCodeunit55484;
-        BCSetup: Record UnknownRecord51516038;
-        DeleteCommitment: Record UnknownRecord51516036;
+        BCSetup: Record 51516038;
+        DeleteCommitment: Record 51516036;
         PurchLine: Record "Purchase Line";
         [InDataSet]
         PurchHistoryBtnVisible: Boolean;
@@ -526,7 +526,7 @@ Page 51516103 "Posted Purchase Requisitions"
         PayToCommentBtnVisible := DifferBuyFromPayTo;
         //PurchHistoryBtn1Visible := PurchInfoPaneMgmt.DocExist(Rec,"Buy-from Vendor No.");
         //IF DifferBuyFromPayTo THEN
-          //PurchHistoryBtnVisible := PurchInfoPaneMgmt.DocExist(Rec,"Pay-to Vendor No.")
+        //PurchHistoryBtnVisible := PurchInfoPaneMgmt.DocExist(Rec,"Pay-to Vendor No.")
     end;
 
 
@@ -534,25 +534,25 @@ Page 51516103 "Posted Purchase Requisitions"
     var
         PurchLines: Record "Purchase Line";
     begin
-         if BCSetup.Get() then  begin
+        if BCSetup.Get() then begin
             if not BCSetup.Mandatory then begin
-               Exists:=false;
-               exit;
+                Exists := false;
+                exit;
             end;
-         end else begin
-               Exists:=false;
-               exit;
-         end;
+        end else begin
+            Exists := false;
+            exit;
+        end;
         if BCSetup.Get then begin
-         Exists:=false;
-         PurchLines.Reset;
-         PurchLines.SetRange(PurchLines."Document Type","Document Type");
-         PurchLines.SetRange(PurchLines."Document No.","No.");
-         PurchLines.SetRange(PurchLines.Committed,false);
-          if PurchLines.Find('-') then
-             Exists:=true;
+            Exists := false;
+            PurchLines.Reset;
+            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines.Committed, false);
+            if PurchLines.Find('-') then
+                Exists := true;
         end else
-            Exists:=false;
+            Exists := false;
     end;
 
 
@@ -561,24 +561,24 @@ Page 51516103 "Posted Purchase Requisitions"
         PurchLines: Record "Purchase Line";
     begin
         if BCSetup.Get then begin
-         Exists:=false;
-         PurchLines.Reset;
-         PurchLines.SetRange(PurchLines."Document Type","Document Type");
-         PurchLines.SetRange(PurchLines."Document No.","No.");
-         PurchLines.SetRange(PurchLines.Committed,true);
-          if PurchLines.Find('-') then
-             Exists:=true;
+            Exists := false;
+            PurchLines.Reset;
+            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines.Committed, true);
+            if PurchLines.Find('-') then
+                Exists := true;
         end else
-            Exists:=false;
+            Exists := false;
     end;
 
 
     procedure UpdateControls()
     begin
-              if Status<>Status::Open then begin
-                PurchLinesEditable :=false;
-              end else
-                PurchLinesEditable :=true;
+        if Status <> Status::Open then begin
+            PurchLinesEditable := false;
+        end else
+            PurchLinesEditable := true;
     end;
 
     local procedure ShortcutDimension1CodeOnAfterV()

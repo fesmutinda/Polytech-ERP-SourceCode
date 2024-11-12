@@ -78,6 +78,6 @@ Page 51516141 "S-Mobile all Appplications"
     }
 
     var
-        StatusPermissions: Record UnknownRecord51516452;
+        StatusPermissions: Record 51516452;
 }
 

@@ -258,21 +258,21 @@ Page 51516702 "Banked Cheques to Clear"
     end;
 
     var
-        Transactions: Record UnknownRecord51516441;
-        SupervisorApprovals: Record UnknownRecord51516451;
+        Transactions: Record 51516441;
+        SupervisorApprovals: Record 51516451;
         UsersID: Record User;
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         Text1: label 'We are sending this mail to test the mail server';
         text2: label 'kisemy@yahoo.com';
         BATCH_TEMPLATE: Code[20];
         BATCH_NAME: Code[20];
         DOCUMENT_NO: Code[20];
-        ObjGensetup: Record UnknownRecord51516398;
+        ObjGensetup: Record 51516398;
         SFactory: Codeunit UnknownCodeunit51516007;
         CheqClearingFee: Decimal;
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
-        ObjDiscountingLedger: Record UnknownRecord51516427;
+        ObjDiscountingLedger: Record 51516427;
 
     local procedure GetCharges(Trans: Code[100]; Amount: Decimal): Decimal
     begin

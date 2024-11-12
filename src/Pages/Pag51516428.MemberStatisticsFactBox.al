@@ -193,16 +193,16 @@ Page 51516428 "Member Statistics FactBox"
         Text002: label 'Not Yet Due';
         Text003: label 'Over %1 Days';
         Text004: label '%1-%2 Days';
-        LoanGuarantors: Record UnknownRecord51516372;
+        LoanGuarantors: Record 51516372;
         ComittedShares: Decimal;
-        Loans: Record UnknownRecord51516371;
+        Loans: Record 51516371;
         FreeShares: Decimal;
         UserSetup: Record "User Setup";
         FieldStyle: Text;
         FieldStyleL: Text;
         FieldStyleI: Text;
         LoanNo: Code[20];
-        LoanGuar: Record UnknownRecord51516372;
+        LoanGuar: Record 51516372;
         TGrAmount: Decimal;
         GrAmount: Decimal;
         FGrAmount: Decimal;
@@ -215,7 +215,7 @@ Page 51516428 "Member Statistics FactBox"
         OutstandingInterest: Decimal;
         InterestDue: Decimal;
         SFactory: Codeunit UnknownCodeunit51516007;
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
         VarMemberLiability: Decimal;
         VarMemberSelfLiability: Decimal;
         FreeSharesSelf: Decimal;

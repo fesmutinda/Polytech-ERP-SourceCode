@@ -78,8 +78,8 @@ Page 51516210 "HR Exit Interview Checklist"
     }
 
     var
-        HRLV: Record UnknownRecord51516186;
-        HREmp: Record UnknownRecord51516160;
+        HRLV: Record 51516186;
+        HREmp: Record 51516160;
         JT: Code[50];
 }
 

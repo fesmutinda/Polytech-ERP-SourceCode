@@ -5,7 +5,7 @@ Page 51516068 "Imprest List"
     CardPageID = "Imprest Request";
     Editable = false;
     PageType = List;
-    SourceTable = 51516006;
+    SourceTable = "Imprest Header";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -14,23 +14,23 @@ Page 51516068 "Imprest List"
         {
             repeater(Control1102755000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Net Amount"; "Total Net Amount")
+                field("Total Net Amount"; Rec."Total Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
@@ -53,7 +53,7 @@ Page 51516068 "Imprest List"
                 trigger OnAction()
                 begin
                     ImprestHeader.Reset;
-                    ImprestHeader.SetRange(ImprestHeader."No.", "No.");
+                    ImprestHeader.SetRange(ImprestHeader."No.", Rec."No.");
                     Report.Run(51516130, true, false, ImprestHeader);
                 end;
             }
@@ -62,10 +62,10 @@ Page 51516068 "Imprest List"
 
     trigger OnOpenPage()
     begin
-        SetRange(Cashier, UserId);
+        Rec.SetRange(Cashier, UserId);
     end;
 
     var
-        ImprestHeader: Record UnknownRecord51516006;
+        ImprestHeader: Record "Imprest Header";
 }
 

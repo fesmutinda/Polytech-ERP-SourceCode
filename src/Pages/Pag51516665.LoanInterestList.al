@@ -117,10 +117,10 @@ Page 51516665 "Loan Interest List"
     var
         Option: Option "Generate Only","Generate & Post";
         PeriodicActivities: Codeunit UnknownCodeunit51516029;
-        members: Record UnknownRecord51516364;
+        members: Record 51516364;
         GenBatches: Record "Gen. Journal Batch";
         PDate: Date;
-        LoanType: Record UnknownRecord51516381;
+        LoanType: Record 51516381;
         PostDate: Date;
         LineNo: Integer;
         DocNo: Code[20];
@@ -130,20 +130,20 @@ Page 51516665 "Loan Interest List"
         DontCharge: Boolean;
         JBatch: Code[10];
         Jtemplate: Code[10];
-        CustLedger: Record UnknownRecord51516391;
-        AccountingPeriod: Record UnknownRecord51516391;
+        CustLedger: Record 51516391;
+        AccountingPeriod: Record 51516391;
         FiscalYearStartDate: Date;
         "ExtDocNo.": Text[30];
         InterestDue: Decimal;
-        LoansInterest: Record UnknownRecord51516295;
-        DailyLoansInterestBuffer: Record UnknownRecord51516297;
+        LoansInterest: Record 51516295;
+        DailyLoansInterestBuffer: Record 51516297;
         LoanNo: Code[20];
         BDate: Date;
         BalDate: Date;
-        ProdFact: Record UnknownRecord51516381;
+        ProdFact: Record 51516381;
         InterestAmount: Decimal;
         iEntryNo: Integer;
-        Temp: Record UnknownRecord51516031;
-        CreditAccounts: Record UnknownRecord51516364;
+        Temp: Record 51516031;
+        CreditAccounts: Record 51516364;
 }
 

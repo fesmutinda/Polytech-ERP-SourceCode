@@ -312,35 +312,35 @@ Page 51516897 "MICRO Receipts"
         RunBal: Decimal;
         Recover: Boolean;
         Cheque: Boolean;
-        ReceiptAllocations: Record UnknownRecord51516246;
-        Loans: Record UnknownRecord51516230;
+        ReceiptAllocations: Record 51516246;
+        Loans: Record 51516230;
         Commision: Decimal;
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record UnknownRecord51516223;
+        Cust: Record 51516223;
         BOSABank: Code[20];
         LineNo: Integer;
-        BOSARcpt: Record UnknownRecord51516247;
+        BOSARcpt: Record 51516247;
         TellerTill: Record "Bank Account";
         CurrentTellerAmount: Decimal;
         TransType: Text[30];
         Cust2: Record Customer;
-        RecAlloc: Record UnknownRecord51516246;
-        Rcpt: Record UnknownRecord51516247;
+        RecAlloc: Record 51516246;
+        Rcpt: Record 51516247;
         Text001: label 'There are still some unposted Micro receipts. Please utilise them first';
         Text002: label 'Account type must be equal to Member. The current value is %1';
         Text003: label 'FOSA Account Bal. must have a value. It cannot be zero.';
         Text004: label 'Amount value of Kshs %1 must be equal to Allocated Amount value of Kshs %2';
         Text005: label 'Transactions Posted successfully';
-        Temp: Record UnknownRecord51516031;
+        Temp: Record 51516031;
         Jtemplate: Code[30];
         JBatch: Code[30];
         Text006: label 'Receipt Journal Template must have a value for %1 in cash office user template. It cannot be Null.';
         Text007: label 'Receipt Journal Batch must have a value for %1 in cash office user template. It cannot be Null.';
-        SMSMessages: Record UnknownRecord51516329;
+        SMSMessages: Record 51516329;
         iEntryNo: Integer;
-        MembCustz: Record UnknownRecord51516223;
+        MembCustz: Record 51516223;
         GenBatch: Record "Gen. Journal Batch";
 
 
@@ -441,7 +441,7 @@ Page 51516897 "MICRO Receipts"
 
     procedure PostBOSAEntries()
     var
-        ReceiptAllocation: Record UnknownRecord51516246;
+        ReceiptAllocation: Record 51516246;
     begin
 
         TestField("Account No.");
@@ -634,7 +634,7 @@ Page 51516897 "MICRO Receipts"
 
     procedure PostSTAFFLoan()
     var
-        ReceiptAllocation: Record UnknownRecord51516246;
+        ReceiptAllocation: Record 51516246;
     begin
 
         TestField("Account No.");

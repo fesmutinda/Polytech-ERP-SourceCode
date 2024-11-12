@@ -38,6 +38,6 @@ Page 51516362 "Membership Application Image"
     end;
 
     var
-        MemberApp: Record UnknownRecord51516360;
+        MemberApp: Record 51516360;
 }
 

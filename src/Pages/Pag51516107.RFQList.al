@@ -63,7 +63,7 @@ Page 51516107 "RFQ List"
 
     procedure GetSelectionFilter(): Text
     var
-        RFQ: Record UnknownRecord51516100;
+        RFQ: Record 51516100;
         SelectionFilterManagement: Codeunit SelectionFilterManagement;
     begin
         CurrPage.SetSelectionFilter(RFQ);
@@ -72,7 +72,7 @@ Page 51516107 "RFQ List"
     end;
 
 
-    procedure SetSelection(var RFQ: Record UnknownRecord51516100)
+    procedure SetSelection(var RFQ: Record 51516100)
     begin
         CurrPage.SetSelectionFilter(RFQ);
     end;

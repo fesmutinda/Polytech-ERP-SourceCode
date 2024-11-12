@@ -300,9 +300,9 @@ Page 51516171 "HR Leave Journal Lines"
     end;
 
     var
-        HRLeaveTypes: Record UnknownRecord51516182;
-        HREmp: Record UnknownRecord51516160;
-        HRLeaveLedger: Record UnknownRecord51516227;
+        HRLeaveTypes: Record 51516182;
+        HREmp: Record 51516160;
+        HRLeaveLedger: Record 51516227;
         InsuranceJnlManagement: Codeunit UnknownCodeunit51516114;
         ReportPrint: Codeunit "Test Report-Print";
         CurrentJnlBatchName: Code[10];
@@ -310,18 +310,18 @@ Page 51516171 "HR Leave Journal Lines"
         FADescription: Text[30];
         ShortcutDimCode: array[8] of Code[20];
         OpenedFromBatch: Boolean;
-        HRLeavePeriods: Record UnknownRecord51516189;
+        HRLeavePeriods: Record 51516189;
         AllocationDone: Boolean;
-        HRJournalBatch: Record UnknownRecord51516188;
+        HRJournalBatch: Record 51516188;
         OK: Boolean;
         ApprovalEntries: Record "Approval Entry";
-        LLE: Record UnknownRecord51516227;
+        LLE: Record 51516227;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
 
 
-    procedure CheckGender(Emp: Record UnknownRecord51516160; LeaveType: Record UnknownRecord51516182) Allocate: Boolean
+    procedure CheckGender(Emp: Record 51516160; LeaveType: Record 51516182) Allocate: Boolean
     begin
 
         //CHECK IF LEAVE TYPE ALLOCATION APPLIES TO EMPLOYEE'S GENDER

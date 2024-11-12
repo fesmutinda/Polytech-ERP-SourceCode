@@ -81,7 +81,7 @@ Page 51516364 "Membership App Nominee Detail"
     end;
 
     var
-        MemberApp: Record UnknownRecord51516360;
+        MemberApp: Record 51516360;
         ReltnShipTypeEditable: Boolean;
 }
 

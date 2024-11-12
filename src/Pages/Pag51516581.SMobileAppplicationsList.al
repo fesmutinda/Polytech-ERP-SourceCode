@@ -71,6 +71,6 @@ Page 51516581 "S-Mobile Appplications List"
     end;
 
     var
-        StatusPermissions: Record UnknownRecord51516452;
+        StatusPermissions: Record 51516452;
 }
 

@@ -190,10 +190,10 @@ Page 51516453 "Banking Schedule Cheques"
     end;
 
     var
-        Transactions: Record UnknownRecord51516441;
-        SupervisorApprovals: Record UnknownRecord51516451;
+        Transactions: Record 51516441;
+        SupervisorApprovals: Record 51516451;
         UsersID: Record User;
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         Text1: label 'We are sending this mail to test the mail server';
         text2: label 'kisemy@yahoo.com';
 }

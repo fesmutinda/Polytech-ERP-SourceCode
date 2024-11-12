@@ -101,8 +101,8 @@ Page 51516539 "Products Signatories"
     end;
 
     var
-        MemberApp: Record UnknownRecord51516360;
+        MemberApp: Record 51516360;
         ReltnShipTypeEditable: Boolean;
-        CUST: Record UnknownRecord51516364;
+        CUST: Record 51516364;
 }
 

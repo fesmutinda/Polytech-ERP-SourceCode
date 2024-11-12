@@ -174,22 +174,22 @@ Page 51516025 "Receipt Header Card"
         BillNoVisible: Boolean;
         AccNoVisible: Boolean;
         ok: Boolean;
-        ReceiptLine: Record UnknownRecord51516003;
+        ReceiptLine: Record 51516003;
         LineNo: Integer;
-        FundsTransTypes: Record UnknownRecord51516032;
+        FundsTransTypes: Record 51516032;
         Amount: Decimal;
         "Amount(LCY)": Decimal;
-        ReceiptLines: Record UnknownRecord51516003;
+        ReceiptLines: Record 51516003;
         FundsManager: Codeunit UnknownCodeunit51516000;
         JTemplate: Code[20];
         JBatch: Code[20];
-        FundsUser: Record UnknownRecord51516031;
+        FundsUser: Record 51516031;
         PostingVisible: Boolean;
         MoveVisible: Boolean;
         PageEditable: Boolean;
         ReverseVisible: Boolean;
         DocNo: Code[20];
-        ReceiptHeader: Record UnknownRecord51516002;
+        ReceiptHeader: Record 51516002;
         BankAcc: Record "Bank Account";
 
     local procedure CheckReceiptRequiredFields()

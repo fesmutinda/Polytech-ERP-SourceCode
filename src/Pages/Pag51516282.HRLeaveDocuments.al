@@ -228,7 +228,7 @@ Page 51516282 "HR Leave Documents"
 
     var
         InteractTemplLanguage: Record "Interaction Tmpl. Language";
-        DocLink: Record UnknownRecord51516239;
+        DocLink: Record 51516239;
 
 
     procedure GetDocument() Document: Text[200]

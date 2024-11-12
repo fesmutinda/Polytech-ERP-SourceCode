@@ -3,7 +3,7 @@ Page 51516073 "Imprest Surrender Details"
 {
     Caption = ' Travel Imprest  Surrender Details';
     PageType = ListPart;
-    SourceTable = 51516009;
+    SourceTable = "Imprest Surrender Details";
 
     layout
     {
@@ -11,60 +11,60 @@ Page 51516073 "Imprest Surrender Details"
         {
             repeater(Control1102758000)
             {
-                field("Account No:"; "Account No:")
+                field("Account No:"; Rec."Account No:")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Actual Spent"; "Actual Spent")
+                field("Actual Spent"; Rec."Actual Spent")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cash Receipt No"; "Cash Receipt No")
+                field("Cash Receipt No"; Rec."Cash Receipt No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cash Receipt Amount"; "Cash Receipt Amount")
+                field("Cash Receipt Amount"; Rec."Cash Receipt Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cash Surrender Amt"; "Cash Surrender Amt")
+                field("Cash Surrender Amt"; Rec."Cash Surrender Amt")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cash Surrender Amount';
                 }
-                field("Bank/Petty Cash"; "Bank/Petty Cash")
+                field("Bank/Petty Cash"; Rec."Bank/Petty Cash")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cash Surrender Bank';
                 }
-                field("Imprest Holder"; "Imprest Holder")
+                field("Imprest Holder"; Rec."Imprest Holder")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Apply to"; "Apply to")
+                field("Apply to"; Rec."Apply to")
                 {
                     ApplicationArea = Basic;
 
                     trigger OnLookup(var Text: Text): Boolean
                     begin
-                        "Apply to" := '';
-                        "Apply to ID" := '';
+                        Rec."Apply to" := '';
+                        Rec."Apply to ID" := '';
 
                         //Amt:=0;
 
                         Custledger.Reset;
                         Custledger.SetCurrentkey(Custledger."Customer No.", Open, "Document No.");
-                        Custledger.SetRange(Custledger."Customer No.", "Imprest Holder");
+                        Custledger.SetRange(Custledger."Customer No.", Rec."Imprest Holder");
                         Custledger.SetRange(Open, true);
                         //CustLedger.SETRANGE(CustLedger."Transaction Type",CustLedger."Transaction Type"::"Down Payment");
                         Custledger.CalcFields(Custledger.Amount);
@@ -73,7 +73,7 @@ Page 51516073 "Imprest Surrender Details"
                             if Custledger."Applies-to ID" <> '' then begin
                                 Custledger1.Reset;
                                 Custledger1.SetCurrentkey(Custledger1."Customer No.", Open, "Applies-to ID");
-                                Custledger1.SetRange(Custledger1."Customer No.", "Imprest Holder");
+                                Custledger1.SetRange(Custledger1."Customer No.", Rec."Imprest Holder");
                                 Custledger1.SetRange(Open, true);
                                 //CustLedger1.SETRANGE("Transaction Type",CustLedger1."Transaction Type"::"Down Payment");
                                 Custledger1.SetRange("Applies-to ID", Custledger."Applies-to ID");
@@ -88,35 +88,35 @@ Page 51516073 "Imprest Surrender Details"
                                     //ERROR('Amount is not equal to the amount applied on the application form');
                                     /*Amount:=Amt;
                                     VALIDATE(Amount);*/
-                           "Apply to" := Custledger."Document No.";
-                                "Apply to ID" := Custledger."Applies-to ID";
+                           Rec."Apply to" := Custledger."Document No.";
+                                Rec."Apply to ID" := Custledger."Applies-to ID";
                             end else begin
-                                if Amount <> Abs(Custledger.Amount) then
+                                if Rec.Amount <> Abs(Custledger.Amount) then
                                     Custledger.CalcFields(Custledger."Remaining Amount");
 
                                 /*Amount:=ABS(CustLedger."Remaining Amount");
                                  VALIDATE(Amount);*/
                                 //ERROR('Amount is not equal to the amount applied on the application form');
 
-                                "Apply to" := Custledger."Document No.";
-                                "Apply to ID" := Custledger."Applies-to ID";
+                                Rec."Apply to" := Custledger."Document No.";
+                                Rec."Apply to ID" := Custledger."Applies-to ID";
 
                             end;
                         end;
 
-                        if "Apply to ID" <> '' then
-                            "Apply to" := '';
+                        if Rec."Apply to ID" <> '' then
+                            Rec."Apply to" := '';
 
-                        Validate(Amount);
+                        Rec.Validate(Amount);
 
                     end;
                 }
-                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
+                field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;

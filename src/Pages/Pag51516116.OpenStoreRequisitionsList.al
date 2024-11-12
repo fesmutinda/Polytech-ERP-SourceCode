@@ -258,7 +258,7 @@ Page 51516116 "Open Store Requisitions List"
 
     var
         UserMgt: Codeunit UnknownCodeunit55487;
-        ReqLine: Record UnknownRecord51516103;
+        ReqLine: Record 51516103;
         InventorySetup: Record "Inventory Setup";
         GenJnline: Record "Item Journal Line";
         LineNo: Integer;
@@ -267,12 +267,12 @@ Page 51516116 "Open Store Requisitions List"
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition;
         HasLines: Boolean;
         AllKeyFieldsEntered: Boolean;
-        HREmp: Record UnknownRecord51516160;
+        HREmp: Record 51516160;
 
 
     procedure LinesExists(): Boolean
     var
-        PayLines: Record UnknownRecord51516103;
+        PayLines: Record 51516103;
     begin
         HasLines := false;
         PayLines.Reset;

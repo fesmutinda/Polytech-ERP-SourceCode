@@ -295,11 +295,11 @@ Page 51516447 "Standing Orders - List"
     }
 
     var
-        StatusPermissions: Record UnknownRecord51516452;
+        StatusPermissions: Record 51516452;
         BankName: Text[200];
-        Banks: Record UnknownRecord51516453;
+        Banks: Record 51516453;
         UsersID: Record User;
-        RAllocations: Record UnknownRecord51516387;
+        RAllocations: Record 51516387;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",STO;
 }
 

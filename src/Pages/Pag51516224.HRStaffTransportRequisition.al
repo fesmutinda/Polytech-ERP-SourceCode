@@ -220,9 +220,9 @@ Page 51516224 "HR Staff Transport Requisition"
     end;
 
     var
-        HREmp: Record UnknownRecord51516160;
+        HREmp: Record 51516160;
         EmpJobDesc: Text[30];
-        HRJobs: Record UnknownRecord51516177;
+        HRJobs: Record 51516177;
         SupervisorName: Text[30];
         SMTP: Codeunit UnknownCodeunit400;
         URL: Text[500];
@@ -233,14 +233,14 @@ Page 51516224 "HR Staff Transport Requisition"
         cReimbsd: Decimal;
         cPerDay: Decimal;
         cbf: Decimal;
-        HRSetup: Record UnknownRecord51516181;
+        HRSetup: Record 51516181;
         EmpDept: Text[30];
-        HRLeaveApp: Record UnknownRecord51516183;
+        HRLeaveApp: Record 51516183;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Budget Transfer","Employee Requisition","Leave Application","Transport Requisition","Training Requisition","Job Approval";
-        HRLeaveLedgerEntries: Record UnknownRecord51516227;
+        HRLeaveLedgerEntries: Record 51516227;
         D: Date;
         EmpName: Text[70];
-        DoclLink: Record UnknownRecord51516231;
+        DoclLink: Record 51516231;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;

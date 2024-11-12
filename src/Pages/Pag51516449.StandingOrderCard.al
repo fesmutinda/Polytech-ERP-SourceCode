@@ -556,11 +556,11 @@ Page 51516449 "Standing Order Card"
     end;
 
     var
-        StatusPermissions: Record UnknownRecord51516452;
+        StatusPermissions: Record 51516452;
         BankName: Text[20];
-        Banks: Record UnknownRecord51516453;
+        Banks: Record 51516453;
         UsersID: Record User;
-        RAllocations: Record UnknownRecord51516387;
+        RAllocations: Record 51516387;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery;
         ReceiptAllVisible: Boolean;
         ObjAccount: Record Vendor;

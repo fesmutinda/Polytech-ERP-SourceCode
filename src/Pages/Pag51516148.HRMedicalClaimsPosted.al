@@ -68,6 +68,6 @@ Page 51516148 "HR Medical Claims-Posted"
     }
 
     var
-        Dependants: Record UnknownRecord51516173;
+        Dependants: Record 51516173;
 }
 

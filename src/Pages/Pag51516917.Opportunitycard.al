@@ -176,17 +176,17 @@ Page 51516917 "Opportunity card."
     }
 
     var
-        PvApp: Record UnknownRecord51516371;
-        CustCare: Record UnknownRecord51516557;
-        CQuery: Record UnknownRecord51516557;
-        employer: Record UnknownRecord51516401;
-        membApp: Record UnknownRecord51516360;
-        LeadM: Record UnknownRecord51516555;
+        PvApp: Record 51516371;
+        CustCare: Record 51516557;
+        CQuery: Record 51516557;
+        employer: Record 51516401;
+        membApp: Record 51516360;
+        LeadM: Record 51516555;
         entry: Integer;
         vend: Record Vendor;
-        CASEM: Record UnknownRecord51516556;
+        CASEM: Record 51516556;
         ok: Boolean;
-        OppSetup: Record UnknownRecord51516399;
+        OppSetup: Record 51516399;
         OppNo: Code[10];
         NoSeriesMgt: Codeunit NoSeriesManagement;
 }

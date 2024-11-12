@@ -54,7 +54,7 @@ Page 51516518 "Bulk SMS Lines Part"
     }
 
     var
-        BulkSMSHeader: Record UnknownRecord51516491;
+        BulkSMSHeader: Record 51516491;
         DimensionValue: Record "Dimension Value";
 }
 

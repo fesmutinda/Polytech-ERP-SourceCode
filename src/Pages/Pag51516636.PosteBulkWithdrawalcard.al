@@ -249,7 +249,7 @@ Page 51516636 "Poste Bulk Withdrawal card"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         EnablePosting: Boolean;
-        ObjTransactions: Record UnknownRecord51516441;
+        ObjTransactions: Record 51516441;
         WithdrawalDateEditable: Boolean;
 
     local procedure FnAddRecordRestriction()

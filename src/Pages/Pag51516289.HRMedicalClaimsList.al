@@ -66,6 +66,6 @@ Page 51516289 "HR Medical Claims List"
     }
 
     var
-        Dependants: Record UnknownRecord51516173;
+        Dependants: Record 51516173;
 }
 

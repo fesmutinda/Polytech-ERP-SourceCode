@@ -122,6 +122,6 @@ Page 51516146 "Payment Voucher List Nafaka"
     end;
 
     var
-        PHeader2: Record UnknownRecord51516112;
+        PHeader2: Record 51516112;
 }
 

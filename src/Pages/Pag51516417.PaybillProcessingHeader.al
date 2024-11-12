@@ -825,22 +825,22 @@ Page 51516417 "Paybill Processing Header"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record UnknownRecord51516413;
+        ReceiptsProcessingLines: Record 51516413;
         LineNo: Integer;
-        LBatches: Record UnknownRecord51516377;
+        LBatches: Record 51516377;
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record UnknownRecord51516412;
-        Cust: Record UnknownRecord51516364;
+        ReptProcHeader: Record 51516412;
+        Cust: Record 51516364;
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record UnknownRecord51516371;
+        Loantable: Record 51516371;
         LRepayment: Decimal;
-        RcptBufLines: Record UnknownRecord51516413;
-        LoanType: Record UnknownRecord51516381;
-        LoanApp: Record UnknownRecord51516371;
+        RcptBufLines: Record 51516413;
+        LoanType: Record 51516381;
+        LoanApp: Record 51516371;
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -851,13 +851,13 @@ Page 51516417 "Paybill Processing Header"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        Genstup: Record UnknownRecord51516398;
-        Memb: Record UnknownRecord51516364;
+        Genstup: Record 51516398;
+        Memb: Record 51516364;
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
-        ReceiptLine: Record UnknownRecord51516413;
-        PaybillTarrifs: Record UnknownRecord51516524;
+        ReceiptLine: Record 51516413;
+        PaybillTarrifs: Record 51516524;
         ChargeAmount: Decimal;
 }
 

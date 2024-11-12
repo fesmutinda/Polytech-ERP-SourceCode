@@ -721,7 +721,7 @@ Page 50042 "Checkoff Processing Header-pos"
 
                 trigger OnAction()
                 var
-                    ObjCheckOffLines: Record UnknownRecord51516415;
+                    ObjCheckOffLines: Record 51516415;
                 begin
 
 
@@ -859,20 +859,20 @@ Page 50042 "Checkoff Processing Header-pos"
         RunBal: Decimal;
         ReceiptsProcessingLines: Record "Funds Tax Codes";
         LineNo: Integer;
-        LBatches: Record UnknownRecord51516377;
+        LBatches: Record 51516377;
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
         ReptProcHeader: Record "Funds Transaction Types";
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record UnknownRecord51516371;
+        Loantable: Record 51516371;
         LRepayment: Decimal;
         RcptBufLines: Record "Funds Tax Codes";
-        LoanType: Record UnknownRecord51516381;
-        LoanApp: Record UnknownRecord51516371;
+        LoanType: Record 51516381;
+        LoanApp: Record 51516371;
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -883,8 +883,8 @@ Page 50042 "Checkoff Processing Header-pos"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        genstup: Record UnknownRecord51516398;
-        Memb: Record UnknownRecord51516364;
+        genstup: Record 51516398;
+        Memb: Record 51516364;
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
@@ -892,10 +892,10 @@ Page 50042 "Checkoff Processing Header-pos"
         JBatchs: Code[10];
         VarAmounttodeduct: Decimal;
         VarLoanNo: Code[30];
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
         VarRunningBalance: Decimal;
         checkheadreg: Record "Funds Transaction Types";
-        LoansApp: Record UnknownRecord51516371;
+        LoansApp: Record 51516371;
         Varp: Decimal;
         VarINT: Decimal;
         TotalAmt: Decimal;
@@ -2734,7 +2734,7 @@ Page 50042 "Checkoff Processing Header-pos"
 
     local procedure FnPostShareCapital()
     var
-        ObjCheckOffLines: Record UnknownRecord51516415;
+        ObjCheckOffLines: Record 51516415;
     begin
         ObjCheckOffLines.Reset;
         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
@@ -2799,7 +2799,7 @@ Page 50042 "Checkoff Processing Header-pos"
 
     local procedure FnPostFOSA()
     var
-        ObjCheckOffLines: Record UnknownRecord51516415;
+        ObjCheckOffLines: Record 51516415;
     begin
         ObjCheckOffLines.Reset;
         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
@@ -2831,7 +2831,7 @@ Page 50042 "Checkoff Processing Header-pos"
 
     local procedure FnPostBENEVOLENT()
     var
-        ObjCheckOffLines: Record UnknownRecord51516415;
+        ObjCheckOffLines: Record 51516415;
     begin
         ObjCheckOffLines.Reset;
         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
@@ -2915,7 +2915,7 @@ Page 50042 "Checkoff Processing Header-pos"
 
     local procedure FnPostCapitalReserve()
     var
-        ObjCheckOffLines: Record UnknownRecord51516415;
+        ObjCheckOffLines: Record 51516415;
     begin
         ObjCheckOffLines.Reset;
         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
@@ -2948,7 +2948,7 @@ Page 50042 "Checkoff Processing Header-pos"
 
     local procedure FnPostUnallocated()
     var
-        ObjCheckOffLines: Record UnknownRecord51516415;
+        ObjCheckOffLines: Record 51516415;
     begin
         ObjCheckOffLines.Reset;
         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);

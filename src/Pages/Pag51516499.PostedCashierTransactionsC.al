@@ -492,11 +492,11 @@ Page 51516499 "Posted Cashier Transactions C"
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         window: Dialog;
         Account: Record Vendor;
-        TransactionTypes: Record UnknownRecord51516440;
-        TransactionCharges: Record UnknownRecord51516442;
+        TransactionTypes: Record 51516440;
+        TransactionCharges: Record 51516442;
         TCharges: Decimal;
         LineNo: Integer;
-        AccountTypes: Record UnknownRecord51516436;
+        AccountTypes: Record 51516436;
         GenLedgerSetup: Record "General Ledger Setup";
         MinAccBal: Decimal;
         FeeBelowMinBal: Decimal;
@@ -505,25 +505,25 @@ Page 51516499 "Posted Cashier Transactions C"
         CurrentTellerAmount: Decimal;
         TellerTill: Record "Bank Account";
         IntervalPenalty: Decimal;
-        StandingOrders: Record UnknownRecord51516449;
+        StandingOrders: Record 51516449;
         AccountAmount: Decimal;
         STODeduction: Decimal;
-        Charges: Record UnknownRecord51516439;
+        Charges: Record 51516439;
         "Total Deductions": Decimal;
         STODeductedAmount: Decimal;
         NoticeAmount: Decimal;
-        AccountNotices: Record UnknownRecord51516437;
-        Cust: Record UnknownRecord51516364;
+        AccountNotices: Record 51516437;
+        Cust: Record 51516364;
         AccountHolders: Record Vendor;
         ChargesOnFD: Decimal;
         TotalGuaranted: Decimal;
         VarAmtHolder: Decimal;
-        chqtransactions: Record UnknownRecord51516441;
-        Trans: Record UnknownRecord51516441;
+        chqtransactions: Record 51516441;
+        Trans: Record 51516441;
         TotalUnprocessed: Decimal;
-        CustAcc: Record UnknownRecord51516364;
+        CustAcc: Record 51516364;
         AmtAfterWithdrawal: Decimal;
-        TransactionsRec: Record UnknownRecord51516441;
+        TransactionsRec: Record 51516441;
         LoansTotal: Decimal;
         Interest: Decimal;
         InterestRate: Decimal;
@@ -532,11 +532,11 @@ Page 51516499 "Posted Cashier Transactions C"
         ATMTrans: Decimal;
         ATMBalance: Decimal;
         TotalBal: Decimal;
-        DenominationsRec: Record UnknownRecord51516445;
+        DenominationsRec: Record 51516445;
         TillNo: Code[20];
         FOSASetup: Record "Purchases & Payables Setup";
         Acc: Record Vendor;
-        ChequeTypes: Record UnknownRecord51516446;
+        ChequeTypes: Record 51516446;
         ChargeAmount: Decimal;
         TChargeAmount: Decimal;
         DActivity: Code[20];
@@ -544,8 +544,8 @@ Page 51516499 "Posted Cashier Transactions C"
         UsersID: Record User;
         ChBank: Code[20];
         DValue: Record "Dimension Value";
-        ReceiptAllocations: Record UnknownRecord51516387;
-        Loans: Record UnknownRecord51516371;
+        ReceiptAllocations: Record 51516387;
+        Loans: Record 51516371;
         Commision: Decimal;
         Cheque: Boolean;
         LOustanding: Decimal;
@@ -556,12 +556,12 @@ Page 51516499 "Posted Cashier Transactions C"
         PaymentAmount: Decimal;
         RunBal: Decimal;
         Recover: Boolean;
-        genSetup: Record UnknownRecord51516398;
+        genSetup: Record 51516398;
         MailContent: Text[150];
-        supervisor: Record UnknownRecord51516451;
+        supervisor: Record 51516451;
         TEXT1: label 'YOU HAVE A TRANSACTION AWAITING APPROVAL';
         AccP: Record Vendor;
-        LoansR: Record UnknownRecord51516371;
+        LoansR: Record 51516371;
         ClearingCharge: Decimal;
         ClearingRate: Decimal;
         [InDataSet]
@@ -1831,7 +1831,7 @@ Page 51516499 "Posted Cashier Transactions C"
 
     procedure PostBOSAEntries()
     var
-        ReceiptAllocation: Record UnknownRecord51516387;
+        ReceiptAllocation: Record 51516387;
     begin
         //BOSA Cash Book Entry
         if "Account No" = '502-00-000300-00' then

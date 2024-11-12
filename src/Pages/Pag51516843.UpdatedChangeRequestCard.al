@@ -753,18 +753,18 @@ Page 51516843 "Updated Change Request Card"
 
     var
         vend: Record Vendor;
-        Memb: Record UnknownRecord51516364;
+        Memb: Record 51516364;
         MobileVisible: Boolean;
         AtmVisible: Boolean;
         AccountVisible: Boolean;
-        ProductNxK: Record UnknownRecord51516433;
-        MembNxK: Record UnknownRecord51516366;
-        cloudRequest: Record UnknownRecord51516552;
+        ProductNxK: Record 51516433;
+        MembNxK: Record 51516366;
+        cloudRequest: Record 51516552;
         nxkinvisible: Boolean;
-        Kinchangedetails: Record UnknownRecord51516366;
+        Kinchangedetails: Record 51516366;
         DocumentType: Option " ",Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Withdrawal","Membership Reg","Loan Batches","Payment Voucher","Petty Cash",Loan,Interbank,Checkoff,"Savings Product Opening","Standing Order",ChangeRequest;
-        MemberNxK: Record UnknownRecord51516366;
-        GenSetUp: Record UnknownRecord51516398;
+        MemberNxK: Record 51516366;
+        GenSetUp: Record 51516398;
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
         NameEditable: Boolean;

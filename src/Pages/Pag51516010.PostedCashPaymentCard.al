@@ -170,6 +170,6 @@ Page 51516010 "Posted Cash Payment Card"
     end;
 
     var
-        PHeader: Record UnknownRecord51516000;
+        PHeader: Record 51516000;
 }
 

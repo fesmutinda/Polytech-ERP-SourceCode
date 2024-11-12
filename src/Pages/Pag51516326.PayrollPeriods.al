@@ -117,7 +117,7 @@ Page 51516326 "Payroll Periods."
     }
 
     var
-        PayPeriod: Record UnknownRecord51516322;
+        PayPeriod: Record 51516322;
         strPeriodName: Text[30];
         Text000: label '''Leave without saving changes?''';
         Text001: label '''You selected %1.''';
@@ -125,13 +125,13 @@ Page 51516326 "Payroll Periods."
         Answer: Boolean;
         objOcx: Codeunit UnknownCodeunit51516015;
         dtOpenPeriod: Date;
-        PayrollType: Record UnknownRecord51516312;
+        PayrollType: Record 51516312;
         Selection: Integer;
         PayrollDefined: Text[30];
         PayrollCode: Code[10];
         NoofRecords: Integer;
         i: Integer;
-        ContrInfo: Record UnknownRecord51516313;
+        ContrInfo: Record 51516313;
 
 
     procedure fnGetOpenPeriod()

@@ -11,12 +11,12 @@ Page 51516502 "Mwanangu Statistics FactBox"
     {
         area(content)
         {
-            field("No.";"No.")
+            field("No."; "No.")
             {
                 ApplicationArea = Basic;
                 Caption = 'Account No.';
             }
-            field(Name;Name)
+            field(Name; Name)
             {
                 ApplicationArea = Basic;
                 Caption = 'Account Name';
@@ -24,13 +24,13 @@ Page 51516502 "Mwanangu Statistics FactBox"
             group("Account Statistics FactBox")
             {
                 Caption = 'Account Statistics FactBox';
-                field("Balance (LCY)";"Balance (LCY)")
+                field("Balance (LCY)"; "Balance (LCY)")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Book Balance';
                     StyleExpr = FieldStyle;
                 }
-                field("Uncleared Cheques";"Uncleared Cheques")
+                field("Uncleared Cheques"; "Uncleared Cheques")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -49,39 +49,38 @@ Page 51516502 "Mwanangu Statistics FactBox"
         GetLatestPayment;
         CalculateAging;
 
-        if ("Assigned System ID"<>'')  then begin //AND ("Assigned System ID"<>USERID)
-          if UserSetup.Get(UserId) then
-        begin
-        if UserSetup."View Special Accounts"=false then Error ('You do not have permission to view this account Details, Contact your system administrator! ')
-        end;
+        if ("Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
+            if UserSetup.Get(UserId) then begin
+                if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
+            end;
 
-          end;
+        end;
         SetFieldStyle;
 
-        MinBalance:=0;
+        MinBalance := 0;
         if AccountType.Get("Account Type") then
-        MinBalance:=AccountType."Minimum Balance";
+            MinBalance := AccountType."Minimum Balance";
     end;
 
     trigger OnOpenPage()
     begin
         // Default the Aging Period to 30D
-        Evaluate(AgingPeriod,'<30D>');
+        Evaluate(AgingPeriod, '<30D>');
         // Initialize Record Variables
         LatestCustLedgerEntry.Reset;
-        LatestCustLedgerEntry.SetCurrentkey("Document Type","Customer No.","Posting Date");
-        LatestCustLedgerEntry.SetRange("Document Type",LatestCustLedgerEntry."document type"::Payment);
+        LatestCustLedgerEntry.SetCurrentkey("Document Type", "Customer No.", "Posting Date");
+        LatestCustLedgerEntry.SetRange("Document Type", LatestCustLedgerEntry."document type"::Payment);
         for I := 1 to ArrayLen(CustLedgerEntry) do begin
-          CustLedgerEntry[I].Reset;
-          CustLedgerEntry[I].SetCurrentkey("Customer No.",Open,Positive,"Due Date");
-          CustLedgerEntry[I].SetRange(Open,true);
+            CustLedgerEntry[I].Reset;
+            CustLedgerEntry[I].SetCurrentkey("Customer No.", Open, Positive, "Due Date");
+            CustLedgerEntry[I].SetRange(Open, true);
         end;
     end;
 
     var
         LatestCustLedgerEntry: Record "Cust. Ledger Entry";
-        CustLedgerEntry: array [4] of Record "Cust. Ledger Entry";
-        AgingTitle: array [4] of Text[30];
+        CustLedgerEntry: array[4] of Record "Cust. Ledger Entry";
+        AgingTitle: array[4] of Text[30];
         AgingPeriod: DateFormula;
         I: Integer;
         PeriodStart: Date;
@@ -92,11 +91,11 @@ Page 51516502 "Mwanangu Statistics FactBox"
         MinBalance: Decimal;
         UserSetup: Record "User Setup";
         FieldStyle: Text;
-        AccountType: Record UnknownRecord51516436;
+        AccountType: Record 51516436;
         FieldStyleL: Text;
 
 
-    procedure CalculateAgingForPeriod(PeriodBeginDate: Date;PeriodEndDate: Date;Index: Integer)
+    procedure CalculateAgingForPeriod(PeriodBeginDate: Date; PeriodEndDate: Date; Index: Integer)
     var
         CustLedgerEntry2: Record "Cust. Ledger Entry";
         NumDaysToBegin: Integer;
@@ -104,30 +103,30 @@ Page 51516502 "Mwanangu Statistics FactBox"
     begin
         // Calculate the Aged Balance for a particular Date Range
         if PeriodEndDate = 0D then
-          CustLedgerEntry[Index].SetFilter("Due Date",'%1..',PeriodBeginDate)
+            CustLedgerEntry[Index].SetFilter("Due Date", '%1..', PeriodBeginDate)
         else
-          CustLedgerEntry[Index].SetRange("Due Date",PeriodBeginDate,PeriodEndDate);
+            CustLedgerEntry[Index].SetRange("Due Date", PeriodBeginDate, PeriodEndDate);
 
         CustLedgerEntry2.Copy(CustLedgerEntry[Index]);
         CustLedgerEntry[Index]."Remaining Amt. (LCY)" := 0;
         if CustLedgerEntry2.Find('-') then
-          repeat
-            CustLedgerEntry2.CalcFields("Remaining Amt. (LCY)");
-            CustLedgerEntry[Index]."Remaining Amt. (LCY)" :=
-              CustLedgerEntry[Index]."Remaining Amt. (LCY)" + CustLedgerEntry2."Remaining Amt. (LCY)";
-          until CustLedgerEntry2.Next = 0;
+            repeat
+                CustLedgerEntry2.CalcFields("Remaining Amt. (LCY)");
+                CustLedgerEntry[Index]."Remaining Amt. (LCY)" :=
+                  CustLedgerEntry[Index]."Remaining Amt. (LCY)" + CustLedgerEntry2."Remaining Amt. (LCY)";
+            until CustLedgerEntry2.Next = 0;
 
         if PeriodBeginDate <> 0D then
-          NumDaysToBegin := WorkDate - PeriodBeginDate;
+            NumDaysToBegin := WorkDate - PeriodBeginDate;
         if PeriodEndDate <> 0D then
-          NumDaysToEnd := WorkDate - PeriodEndDate;
+            NumDaysToEnd := WorkDate - PeriodEndDate;
         if PeriodEndDate = 0D then
-          AgingTitle[Index] := Text002
+            AgingTitle[Index] := Text002
         else
-          if PeriodBeginDate = 0D then
-            AgingTitle[Index] := StrSubstNo(Text003,NumDaysToEnd - 1)
-          else
-            AgingTitle[Index] := StrSubstNo(Text004,NumDaysToEnd,NumDaysToBegin);
+            if PeriodBeginDate = 0D then
+                AgingTitle[Index] := StrSubstNo(Text003, NumDaysToEnd - 1)
+            else
+                AgingTitle[Index] := StrSubstNo(Text004, NumDaysToEnd, NumDaysToBegin);
     end;
 
 
@@ -135,24 +134,23 @@ Page 51516502 "Mwanangu Statistics FactBox"
     begin
         // Calculate the Entire Aging (four Periods)
         for I := 1 to ArrayLen(CustLedgerEntry) do begin
-          case I of
-            1:
-              begin
-                PeriodEnd := 0D;
-                PeriodStart := WorkDate;
-              end;
-            ArrayLen(CustLedgerEntry):
-              begin
-                PeriodEnd := PeriodStart - 1;
-                PeriodStart := 0D;
-              end;
-            else
-              begin
-              PeriodEnd := PeriodStart - 1;
-              PeriodStart := CalcDate('-' + Format(AgingPeriod),PeriodStart);
+            case I of
+                1:
+                    begin
+                        PeriodEnd := 0D;
+                        PeriodStart := WorkDate;
+                    end;
+                ArrayLen(CustLedgerEntry):
+                    begin
+                        PeriodEnd := PeriodStart - 1;
+                        PeriodStart := 0D;
+                    end;
+                else begin
+                    PeriodEnd := PeriodStart - 1;
+                    PeriodStart := CalcDate('-' + Format(AgingPeriod), PeriodStart);
+                end;
             end;
-          end;
-          CalculateAgingForPeriod(PeriodStart,PeriodEnd,I);
+            CalculateAgingForPeriod(PeriodStart, PeriodEnd, I);
         end;
     end;
 
@@ -161,39 +159,39 @@ Page 51516502 "Mwanangu Statistics FactBox"
     begin
         // Find the Latest Payment
         if LatestCustLedgerEntry.FindLast then
-          LatestCustLedgerEntry.CalcFields("Amount (LCY)")
+            LatestCustLedgerEntry.CalcFields("Amount (LCY)")
         else
-          LatestCustLedgerEntry.Init;
+            LatestCustLedgerEntry.Init;
     end;
 
 
     procedure ChangeCustomer()
     begin
         // Change the Customer Filters
-        LatestCustLedgerEntry.SetRange("Customer No.","No.");
+        LatestCustLedgerEntry.SetRange("Customer No.", "No.");
         for I := 1 to ArrayLen(CustLedgerEntry) do
-          CustLedgerEntry[I].SetRange("Customer No.","No.");
+            CustLedgerEntry[I].SetRange("Customer No.", "No.");
     end;
 
 
     procedure DrillDown(Index: Integer)
     begin
         if Index = 0 then
-          Page.RunModal(Page::"Customer Ledger Entries",LatestCustLedgerEntry)
+            Page.RunModal(Page::"Customer Ledger Entries", LatestCustLedgerEntry)
         else
-          Page.RunModal(Page::"Customer Ledger Entries",CustLedgerEntry[Index]);
+            Page.RunModal(Page::"Customer Ledger Entries", CustLedgerEntry[Index]);
     end;
 
     local procedure SetFieldStyle()
     begin
         FieldStyle := '';
         CalcFields("Balance (LCY)");
-        if "Balance (LCY)"<0 then
-          FieldStyle := 'Attention';
+        if "Balance (LCY)" < 0 then
+            FieldStyle := 'Attention';
 
-        FieldStyleL:='';
-        if "Account Special Instructions"<>'' then
-          FieldStyleL:= 'Attention';
+        FieldStyleL := '';
+        if "Account Special Instructions" <> '' then
+            FieldStyleL := 'Attention';
     end;
 }
 

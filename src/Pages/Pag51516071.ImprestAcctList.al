@@ -6,7 +6,7 @@ Page 51516071 "Imprest Acct. List"
     InsertAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Cancellation,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516008;
+    SourceTable = "Imprest Surrender Header";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -15,31 +15,31 @@ Page 51516071 "Imprest Acct. List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Surrender Date"; "Surrender Date")
+                field("Surrender Date"; Rec."Surrender Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Imprest Issue Doc. No"; "Imprest Issue Doc. No")
+                field("Imprest Issue Doc. No"; Rec."Imprest Issue Doc. No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Imprest Issue Date"; "Imprest Issue Date")
+                field("Imprest Issue Date"; Rec."Imprest Issue Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
@@ -76,7 +76,7 @@ Page 51516071 "Imprest Acct. List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::ImprestSurrender;
-                        ApprovalEntries.Setfilters(Database::"Imprest Surrender Header", DocumentType, No);
+                        ApprovalEntries.Setfilters(Database::"Imprest Surrender Header", DocumentType, Rec.No);
                         ApprovalEntries.Run;
                     end;
                 }
@@ -99,7 +99,7 @@ Page 51516071 "Imprest Acct. List"
 
                         //First Check whether all amount entered tally
                         ImprestDetails.Reset;
-                        ImprestDetails.SetRange(ImprestDetails."Surrender Doc No.", No);
+                        ImprestDetails.SetRange(ImprestDetails."Surrender Doc No.", Rec.No);
                         if ImprestDetails.Find('-') then begin
                             repeat
                                 if (ImprestDetails."Cash Receipt Amount" + ImprestDetails."Actual Spent") <> ImprestDetails.Amount then
@@ -142,12 +142,12 @@ Page 51516071 "Imprest Acct. List"
                     trigger OnAction()
                     begin
                         //Post Committment Reversals
-                        TestField(Status, Status::"9");
+                        Rec.TestField(Rec.Status, Rec.Status::"9");
                         if Confirm(Text002, true) then begin
                             Doc_Type := Doc_type::Imprest;
-                            BudgetControl.ReverseEntries(Doc_Type, "Imprest Issue Doc. No");
-                            Status := Status::"5";
-                            Modify;
+                            BudgetControl.ReverseEntries(Doc_Type, Rec."Imprest Issue Doc. No");
+                            Rec.Status := Rec.Status::"5";
+                            Rec.Modify;
                         end;
                     end;
                 }
@@ -169,15 +169,15 @@ Page 51516071 "Imprest Acct. List"
 
 
 
-                    TestField(Status, Status::"9");
+                    Rec.TestField(Status, Rec.Status::"9");
 
-                    if Posted then
+                    if Rec.Posted then
                         Error('The transaction has already been posted.');
 
                     //HOW ABOUT WHERE ONE RETURNS ALL THE AMOUNT??
                     //THERE SHOULD BE NO GENJNL ENTRIES BUT REVERSE THE COMMITTMENTS
-                    CalcFields("Actual Spent");
-                    if "Actual Spent" = 0 then
+                    Rec.CalcFields("Actual Spent");
+                    if Rec."Actual Spent" = 0 then
                         if Confirm(Text000, true) then
                             UpdateforNoActualSpent
                         else
@@ -202,7 +202,7 @@ Page 51516071 "Imprest Acct. List"
                     LineNo := 0;
 
                     ImprestDetails.Reset;
-                    ImprestDetails.SetRange(ImprestDetails."Surrender Doc No.", No);
+                    ImprestDetails.SetRange(ImprestDetails."Surrender Doc No.", Rec.No);
                     if ImprestDetails.Find('-') then begin
                         repeat
                             //Post Surrender Journal
@@ -215,7 +215,7 @@ Page 51516071 "Imprest Acct. List"
                             if (ImprestDetails."Cash Receipt Amount" + ImprestDetails."Actual Spent") <> ImprestDetails.Amount then
                                 Error(Txt0001);
 
-                            TestField("Global Dimension 1 Code");
+                            Rec.TestField("Global Dimension 1 Code");
 
                             LineNo := LineNo + 1000;
                             GenJnlLine.Init;
@@ -227,7 +227,7 @@ Page 51516071 "Imprest Acct. List"
                             GenJnlLine."Account No." := ImprestDetails."Account No:";
                             GenJnlLine.Validate(GenJnlLine."Account No.");
                             //Set these fields to blanks
-                            GenJnlLine."Posting Date" := "Surrender Date";
+                            GenJnlLine."Posting Date" := Rec."Surrender Date";
                             GenJnlLine."Gen. Posting Type" := GenJnlLine."gen. posting type"::" ";
                             GenJnlLine.Validate("Gen. Posting Type");
                             GenJnlLine."Gen. Bus. Posting Group" := '';
@@ -238,32 +238,32 @@ Page 51516071 "Imprest Acct. List"
                             GenJnlLine.Validate("VAT Bus. Posting Group");
                             GenJnlLine."VAT Prod. Posting Group" := '';
                             GenJnlLine.Validate("VAT Prod. Posting Group");
-                            GenJnlLine."Document No." := No;
+                            GenJnlLine."Document No." := Rec.No;
                             GenJnlLine.Amount := ImprestDetails."Actual Spent";
                             GenJnlLine.Validate(GenJnlLine.Amount);
                             GenJnlLine."Bal. Account Type" := GenJnlLine."bal. account type"::Customer;
                             GenJnlLine."Bal. Account No." := ImprestDetails."Imprest Holder";
                             GenJnlLine.Description := 'Imprest Surrendered by staff';
                             GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
-                            GenJnlLine."Currency Code" := "Currency Code";
+                            GenJnlLine."Currency Code" := Rec."Currency Code";
                             GenJnlLine.Validate("Currency Code");
                             //Take care of Currency Factor
-                            GenJnlLine."Currency Factor" := "Currency Factor";
+                            GenJnlLine."Currency Factor" := Rec."Currency Factor";
                             GenJnlLine.Validate("Currency Factor");
 
-                            GenJnlLine."Shortcut Dimension 1 Code" := "Global Dimension 1 Code";
+                            GenJnlLine."Shortcut Dimension 1 Code" := Rec."Global Dimension 1 Code";
                             GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
-                            GenJnlLine."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
+                            GenJnlLine."Shortcut Dimension 2 Code" := Rec."Shortcut Dimension 2 Code";
                             GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
-                            GenJnlLine.ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
-                            GenJnlLine.ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
+                            GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
+                            GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
 
                             //Application of Surrender entries
                             if GenJnlLine."Bal. Account Type" = GenJnlLine."bal. account type"::Customer then begin
                                 GenJnlLine."Applies-to Doc. Type" := GenJnlLine."applies-to doc. type"::Invoice;
-                                GenJnlLine."Applies-to Doc. No." := "Imprest Issue Doc. No";
+                                GenJnlLine."Applies-to Doc. No." := Rec."Imprest Issue Doc. No";
                                 GenJnlLine.Validate(GenJnlLine."Applies-to Doc. No.");
-                                GenJnlLine."Applies-to ID" := "Apply to ID";
+                                GenJnlLine."Applies-to ID" := Rec."Apply to ID";
                             end;
 
                             if GenJnlLine.Amount <> 0 then
@@ -292,26 +292,26 @@ Page 51516071 "Imprest Acct. List"
                                 GenJnlLine.Validate("VAT Bus. Posting Group");
                                 GenJnlLine."VAT Prod. Posting Group" := '';
                                 GenJnlLine.Validate("VAT Prod. Posting Group");
-                                GenJnlLine."Posting Date" := "Surrender Date";
-                                GenJnlLine."Document No." := No;
+                                GenJnlLine."Posting Date" := Rec."Surrender Date";
+                                GenJnlLine."Document No." := Rec.No;
                                 GenJnlLine.Amount := -ImprestDetails."Cash Surrender Amt";
                                 GenJnlLine.Validate(GenJnlLine.Amount);
-                                GenJnlLine."Currency Code" := "Currency Code";
+                                GenJnlLine."Currency Code" := Rec."Currency Code";
                                 GenJnlLine.Validate("Currency Code");
                                 //Take care of Currency Factor
-                                GenJnlLine."Currency Factor" := "Currency Factor";
+                                GenJnlLine."Currency Factor" := Rec."Currency Factor";
                                 GenJnlLine.Validate("Currency Factor");
 
                                 GenJnlLine."Bal. Account Type" := GenJnlLine."bal. account type"::"Bank Account";
                                 GenJnlLine."Bal. Account No." := ImprestDetails."Bank/Petty Cash";
                                 GenJnlLine.Description := 'Imprest Surrender by staff';
                                 GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
-                                GenJnlLine."Shortcut Dimension 1 Code" := "Global Dimension 1 Code";
+                                GenJnlLine."Shortcut Dimension 1 Code" := Rec."Global Dimension 1 Code";
                                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
-                                GenJnlLine."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
+                                GenJnlLine."Shortcut Dimension 2 Code" := Rec."Shortcut Dimension 2 Code";
                                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
-                                GenJnlLine.ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
-                                GenJnlLine.ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
+                                GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
+                                GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
                                 GenJnlLine."Applies-to ID" := ImprestDetails."Imprest Holder";
                                 if GenJnlLine.Amount <> 0 then
                                     GenJnlLine.Insert;
@@ -333,15 +333,15 @@ Page 51516071 "Imprest Acct. List"
                     end;
 
                     if JournalPostSuccessful.PostedSuccessfully then begin
-                        Posted := true;
-                        Status := Status::"4";
-                        "Date Posted" := Today;
-                        "Time Posted" := Time;
-                        "Posted By" := UserId;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec.Status := Rec.Status::"4";
+                        Rec."Date Posted" := Today;
+                        Rec."Time Posted" := Time;
+                        Rec."Posted By" := UserId;
+                        Rec.Modify;
                         //Tag the Source Imprest Requisition as Surrendered
                         ImprestReq.Reset;
-                        ImprestReq.SetRange(ImprestReq."No.", "Imprest Issue Doc. No");
+                        ImprestReq.SetRange(ImprestReq."No.", Rec."Imprest Issue Doc. No");
                         if ImprestReq.Find('-') then begin
                             ImprestReq."Surrender Status" := ImprestReq."surrender status"::Full;
                             ImprestReq.Modify;
@@ -350,7 +350,7 @@ Page 51516071 "Imprest Acct. List"
                         //End Tag
                         //Post Committment Reversals
                         Doc_Type := Doc_type::Imprest;
-                        BudgetControl.ReverseEntries(Doc_Type, "Imprest Issue Doc. No");
+                        BudgetControl.ReverseEntries(Doc_Type, Rec."Imprest Issue Doc. No");
                     end;
                 end;
             }
@@ -365,10 +365,10 @@ Page 51516071 "Imprest Acct. List"
 
                 trigger OnAction()
                 begin
-                    Reset;
-                    SetFilter(No, No);
+                    Rec.Reset;
+                    Rec.SetFilter(No, Rec.No);
                     Report.Run(51516336, true, true, Rec);
-                    Reset;
+                    Rec.Reset;
                 end;
             }
             action("<Action1102760000>")
@@ -382,11 +382,11 @@ Page 51516071 "Imprest Acct. List"
 
                 trigger OnAction()
                 begin
-                    if "Imprest Issue Doc. No" = '' then
+                    if Rec."Imprest Issue Doc. No" = '' then
                         Error('Please Select the Imprest Issue Document Number');
 
                     PaymentLine.Reset;
-                    PaymentLine.SetRange(PaymentLine.No, "Imprest Issue Doc. No");
+                    PaymentLine.SetRange(PaymentLine.No, Rec."Imprest Issue Doc. No");
                     Page.RunModal(51516792, PaymentLine);
                 end;
             }
@@ -396,40 +396,40 @@ Page 51516071 "Imprest Acct. List"
     trigger OnOpenPage()
     begin
         if UserMgt.GetPurchasesFilter() <> '' then begin
-            FilterGroup(2);
-            SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
-            FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
+            Rec.FilterGroup(0);
         end;
     end;
 
     var
-        RecPayTypes: Record UnknownRecord51516004;
-        TarriffCodes: Record UnknownRecord51516046;
+        RecPayTypes: Record "Receipts and Payment Types";
+        TarriffCodes: Record "Tariff Codes";
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record UnknownRecord51516035;
+        CashierLinks: Record "Cash Office User Template";
         LineNo: Integer;
         NextEntryNo: Integer;
         CommitNo: Integer;
-        ImprestDetails: Record UnknownRecord51516009;
+        ImprestDetails: Record "Imprest Surrender Details";
         EntryNo: Integer;
         GLAccount: Record "G/L Account";
         IsImprest: Boolean;
-        ImprestRequestDet: Record UnknownRecord51516048;
-        GenledSetup: Record UnknownRecord51516049;
+        ImprestRequestDet: Record "Payments-Users";
+        GenledSetup: Record "Cash Office Setup";
         ImprestAmt: Decimal;
         DimName1: Text[60];
         DimName2: Text[60];
-        CashPaymentLine: Record UnknownRecord51516043;
-        PaymentLine: Record UnknownRecord51516007;
+        CashPaymentLine: Record "Cash Payment Line";
+        PaymentLine: Record "Imprest Lines";
         CurrSurrDocNo: Code[20];
-        JournalPostSuccessful: Codeunit UnknownCodeunit51516156;
-        Commitments: Record UnknownRecord51516036;
-        BCSetup: Record UnknownRecord51516038;
-        BudgetControl: Codeunit UnknownCodeunit55484;
+        JournalPostSuccessful: Codeunit "Journal Post Successful";
+        Commitments: Record Committment;
+        BCSetup: Record "Budgetary Control Setup";
+        BudgetControl: Codeunit "Budgetary Control";
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher";
-        ImprestReq: Record UnknownRecord51516006;
-        UserMgt: Codeunit UnknownCodeunit51516155;
+        ImprestReq: Record "Imprest Header";
+        UserMgt: Codeunit "User Setup Management BR";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender;
         HasLines: Boolean;
         AllKeyFieldsEntered: Boolean;
@@ -480,7 +480,7 @@ Page 51516071 "Imprest Acct. List"
 
     procedure UpdateControl()
     begin
-        if Status <> Status::Open then begin
+        if Rec.Status <> Rec.Status::Open then begin
             "Surrender DateEditable" := false;
             "Account No.Editable" := false;
             "Imprest Issue Doc. NoEditable" := false;
@@ -510,15 +510,15 @@ Page 51516071 "Imprest Acct. List"
 
     procedure UpdateforNoActualSpent()
     begin
-        Posted := true;
-        Status := Status::"4";
-        "Date Posted" := Today;
-        "Time Posted" := Time;
-        "Posted By" := UserId;
-        Modify;
+        Rec.Posted := true;
+        Rec.Status := Rec.Status::"4";
+        Rec."Date Posted" := Today;
+        Rec."Time Posted" := Time;
+        Rec."Posted By" := UserId;
+        Rec.Modify;
         //Tag the Source Imprest Requisition as Surrendered
         ImprestReq.Reset;
-        ImprestReq.SetRange(ImprestReq."No.", "Imprest Issue Doc. No");
+        ImprestReq.SetRange(ImprestReq."No.", Rec."Imprest Issue Doc. No");
         if ImprestReq.Find('-') then begin
             ImprestReq."Surrender Status" := ImprestReq."surrender status"::Full;
             ImprestReq.Modify;
@@ -526,7 +526,7 @@ Page 51516071 "Imprest Acct. List"
         //End Tag
         //Post Committment Reversals
         Doc_Type := Doc_type::Imprest;
-        BudgetControl.ReverseEntries(Doc_Type, "Imprest Issue Doc. No");
+        BudgetControl.ReverseEntries(Doc_Type, Rec."Imprest Issue Doc. No");
     end;
 
 
@@ -540,9 +540,9 @@ Page 51516071 "Imprest Acct. List"
         //Update Controls as necessary
         //SETFILTER(Status,'<>Cancelled');
         UpdateControl;
-        DimName1 := GetDimensionName("Global Dimension 1 Code", 1);
-        DimName2 := GetDimensionName("Shortcut Dimension 2 Code", 2);
-        AccountName := GetCustName("Account No.");
+        DimName1 := GetDimensionName(Rec."Global Dimension 1 Code", 1);
+        DimName2 := GetDimensionName(Rec."Shortcut Dimension 2 Code", 2);
+        AccountName := GetCustName(Rec."Account No.");
     end;
 }
 

@@ -62,6 +62,6 @@ Page 51516935 "Loan Other Charges"
     end;
 
     var
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
 }
 

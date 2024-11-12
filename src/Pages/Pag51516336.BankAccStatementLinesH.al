@@ -208,9 +208,9 @@ Page 51516336 "Bank Acc. Statement Lines H"
     end;
 
 
-    procedure GetSelectedRecords(var TempBankAccReconciliationLine: Record UnknownRecord51516012 temporary)
+    procedure GetSelectedRecords(var TempBankAccReconciliationLine: Record 51516012 temporary)
     var
-        BankAccReconciliationLine: Record UnknownRecord51516012;
+        BankAccReconciliationLine: Record 51516012;
     begin
         CurrPage.SetSelectionFilter(BankAccReconciliationLine);
         if BankAccReconciliationLine.FindSet then

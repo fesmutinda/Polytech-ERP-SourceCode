@@ -245,11 +245,11 @@ Page 51516291 "HR Medical Claim Card"
     end;
 
     var
-        PHeader2: Record UnknownRecord51516278;
-        HREmp: Record UnknownRecord51516160;
+        PHeader2: Record 51516278;
+        HREmp: Record 51516160;
         EmpName: Text;
         EmpDept: Text;
-        ClaimJNL: Record UnknownRecord51516294;
+        ClaimJNL: Record 51516294;
 
     local procedure FillVariables()
     begin

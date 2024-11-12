@@ -79,7 +79,7 @@ Page 51516237 "HR Calendar"
     }
 
     var
-        HRCalendarList: Record UnknownRecord51516224;
+        HRCalendarList: Record 51516224;
         Day: Date;
 }
 

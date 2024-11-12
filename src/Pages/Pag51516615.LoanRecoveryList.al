@@ -51,6 +51,6 @@ Page 51516615 "Loan Recovery List"
     end;
 
     var
-        ObjLoanRecoveryH: Record UnknownRecord51516550;
+        ObjLoanRecoveryH: Record 51516550;
 }
 

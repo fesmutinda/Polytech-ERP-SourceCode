@@ -227,14 +227,14 @@ Page 51516019 "Mobile Payment Card"
     end;
 
     var
-        FundsUser: Record UnknownRecord51516031;
+        FundsUser: Record 51516031;
         FundsManager: Codeunit UnknownCodeunit51516000;
         JTemplate: Code[20];
         JBatch: Code[20];
         DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,TransportRequest,Maintenance,Fuel,ImporterExporter,"Import Permit","Export Permit",TR,"Safari Notice","Student Applications","Water Research","Consultancy Requests","Consultancy Proposals","Meals Bookings","General Journal","Student Admissions","Staff Claim",KitchenStoreRequisition,"Leave Application","Staff Advance","Staff Advance Accounting";
         TableID: Integer;
         ApprovalMgt: Codeunit "Approvals Mgmt.";
-        PHeader: Record UnknownRecord51516000;
+        PHeader: Record 51516000;
 
     local procedure CheckRequiredItems()
     begin

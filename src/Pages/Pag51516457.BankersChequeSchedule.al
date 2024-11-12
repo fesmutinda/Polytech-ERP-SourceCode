@@ -201,8 +201,8 @@ Page 51516457 "Bankers Cheque Schedule"
     end;
 
     var
-        Transactions: Record UnknownRecord51516441;
-        SupervisorApprovals: Record UnknownRecord51516451;
+        Transactions: Record 51516441;
+        SupervisorApprovals: Record 51516451;
         UsersID: Record User;
 }
 

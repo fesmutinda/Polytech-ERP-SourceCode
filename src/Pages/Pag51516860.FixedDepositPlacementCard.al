@@ -610,7 +610,7 @@ Page 51516860 "Fixed Deposit Placement Card"
         VarFDStartDateEditable: Boolean;
         VarAmountFixedEditable: Boolean;
         VarAccounttoTransferFDAmount: Boolean;
-        ObjAccTypes: Record UnknownRecord51516436;
+        ObjAccTypes: Record 51516436;
         ObjAccount: Record Vendor;
         AvailableBal: Decimal;
         GenJournalLine: Record "Gen. Journal Line";
@@ -619,7 +619,7 @@ Page 51516860 "Fixed Deposit Placement Card"
         DOCUMENT_NO: Code[30];
         SFactory: Codeunit UnknownCodeunit51516007;
         LineNo: Integer;
-        ObjInterestBuffer: Record UnknownRecord51516467;
+        ObjInterestBuffer: Record 51516467;
         ErrorAlreadyEffected: label 'Fixed Deposit Already Effected';
         FDEffectedSuccesfully: label 'Fixed Deposit Effected Succesfully';
         FDTermination: label 'Fixed Deposit Terminated Sucessfully';

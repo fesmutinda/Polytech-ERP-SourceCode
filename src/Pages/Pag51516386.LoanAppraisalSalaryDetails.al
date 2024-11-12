@@ -48,6 +48,6 @@ Page 51516386 "Loan Appraisal Salary Details"
     end;
 
     var
-        LoanApps: Record UnknownRecord51516371;
+        LoanApps: Record 51516371;
 }
 

@@ -752,22 +752,22 @@ Page 51516528 "Cheque Receipts Header"
     var
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        AccountType: Record UnknownRecord51516436;
+        AccountType: Record 51516436;
         AvailableBal: Decimal;
         LineNo: Integer;
         Accounts: Record Vendor;
         ReffNo: Code[20];
         Account: Record Vendor;
-        SMSMessage: Record UnknownRecord51516471;
+        SMSMessage: Record 51516471;
         iEntryNo: Integer;
         Vend: Record Vendor;
-        ChqRecLines: Record UnknownRecord51516498;
-        AccountTypes: Record UnknownRecord51516436;
-        CheqReg: Record UnknownRecord51516500;
-        Charges: Record UnknownRecord51516439;
-        GenSetup: Record UnknownRecord51516398;
-        RefNoRec: Record UnknownRecord51516503;
+        ChqRecLines: Record 51516498;
+        AccountTypes: Record 51516436;
+        CheqReg: Record 51516500;
+        Charges: Record 51516439;
+        GenSetup: Record 51516398;
+        RefNoRec: Record 51516503;
         AllAmount: Decimal;
-        InwardFile: Record UnknownRecord51516502;
+        InwardFile: Record 51516502;
 }
 

@@ -327,16 +327,16 @@ Page 51516527 "Cheque Application"
     }
 
     var
-        CheqReg: Record UnknownRecord51516500;
+        CheqReg: Record 51516500;
         IncrNo: Code[10];
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
         Vend: Record Vendor;
-        AccountTypeS: Record UnknownRecord51516436;
+        AccountTypeS: Record 51516436;
         AvailableBal: Decimal;
-        Charges: Record UnknownRecord51516439;
-        GenSetup: Record UnknownRecord51516398;
-        ChequeSetUp: Record UnknownRecord51516504;
+        Charges: Record 51516439;
+        GenSetup: Record 51516398;
+        ChequeSetUp: Record 51516504;
         "TOTAL CHARGES": Decimal;
         TEST: Code[10];
 }

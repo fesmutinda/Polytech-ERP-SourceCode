@@ -672,17 +672,17 @@ Page 51516451 "Transfer Header Card"
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         Account: Record Vendor;
-        AccountType: Record UnknownRecord51516436;
+        AccountType: Record 51516436;
         AvailableBal: Decimal;
         LineNo: Integer;
-        EFTDetails: Record UnknownRecord51516458;
-        STORegister: Record UnknownRecord51516450;
+        EFTDetails: Record 51516458;
+        STORegister: Record 51516450;
         Accounts: Record Vendor;
-        EFTHeader: Record UnknownRecord51516457;
-        Transactions: Record UnknownRecord51516441;
+        EFTHeader: Record 51516457;
+        Transactions: Record 51516441;
         TextGen: Text[250];
-        STO: Record UnknownRecord51516449;
+        STO: Record 51516449;
         ReffNo: Code[20];
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
 }
 

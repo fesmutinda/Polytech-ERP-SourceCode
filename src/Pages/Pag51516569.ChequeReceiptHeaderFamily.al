@@ -485,29 +485,29 @@ Page 51516569 "Cheque Receipt Header-Family"
     var
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        AccountType: Record UnknownRecord51516436;
+        AccountType: Record 51516436;
         AvailableBal: Decimal;
         LineNo: Integer;
-        EFTDetails: Record UnknownRecord51516458;
-        STORegister: Record UnknownRecord51516450;
+        EFTDetails: Record 51516458;
+        STORegister: Record 51516450;
         Accounts: Record Vendor;
-        EFTHeader: Record UnknownRecord51516457;
-        Transactions: Record UnknownRecord51516441;
+        EFTHeader: Record 51516457;
+        Transactions: Record 51516441;
         TextGen: Text[250];
-        STO: Record UnknownRecord51516449;
+        STO: Record 51516449;
         ReffNo: Code[20];
         Account: Record Vendor;
-        SMSMessage: Record UnknownRecord51516036;
+        SMSMessage: Record 51516036;
         iEntryNo: Integer;
         Vend: Record Vendor;
         UserMgt: Codeunit UnknownCodeunit55478;
-        RefNoRec: Record UnknownRecord51516503;
-        ChqRecLines: Record UnknownRecord51516515;
-        AccountTypes: Record UnknownRecord51516436;
-        CheqReg: Record UnknownRecord51516500;
-        Charges: Record UnknownRecord51516439;
-        GenSetup: Record UnknownRecord51516398;
-        objChequeTransactions: Record UnknownRecord51516422;
+        RefNoRec: Record 51516503;
+        ChqRecLines: Record 51516515;
+        AccountTypes: Record 51516436;
+        CheqReg: Record 51516500;
+        Charges: Record 51516439;
+        GenSetup: Record 51516398;
+        objChequeTransactions: Record 51516422;
 
     local procedure FnGetAccountNo(MemberNo: Code[100]) AccountNo: Code[100]
     begin

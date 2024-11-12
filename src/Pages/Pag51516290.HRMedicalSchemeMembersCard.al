@@ -131,9 +131,9 @@ Page 51516290 "HR Medical Scheme Members Card"
     end;
 
     var
-        objSchMembers: Record UnknownRecord55770;
-        objScmDetails: Record UnknownRecord51516276;
+        objSchMembers: Record 55770;
+        objScmDetails: Record 51516276;
         decInPatientBal: Decimal;
-        Medscheme: Record UnknownRecord51516276;
+        Medscheme: Record 51516276;
 }
 

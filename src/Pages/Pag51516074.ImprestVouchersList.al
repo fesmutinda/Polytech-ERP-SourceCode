@@ -4,7 +4,7 @@ Page 51516074 "Imprest Vouchers List"
     CardPageID = "Imprest Request";
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516006;
+    SourceTable = "Imprest Header";
 
     layout
     {
@@ -12,51 +12,51 @@ Page 51516074 "Imprest Vouchers List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paying Bank Account"; "Paying Bank Account")
+                field("Paying Bank Account"; Rec."Paying Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Net Amount"; "Total Net Amount")
+                field("Total Net Amount"; Rec."Total Net Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Exchange Rate"; "Exchange Rate")
+                field("Exchange Rate"; Rec."Exchange Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Net Amount LCY"; "Total Net Amount LCY")
+                field("Total Net Amount LCY"; Rec."Total Net Amount LCY")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Status"; "Current Status")
+                field("Current Status"; Rec."Current Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Cashier; Cashier)
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                 }
@@ -117,7 +117,7 @@ Page 51516074 "Imprest Vouchers List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::Imprest;
-                        ApprovalEntries.Setfilters(Database::"Imprest Header", DocumentType, "No.");
+                        ApprovalEntries.Setfilters(Database::"Imprest Header", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -181,7 +181,7 @@ Page 51516074 "Imprest Vouchers List"
 
                     trigger OnAction()
                     var
-                        BCSetup: Record UnknownRecord51516038;
+                        BCSetup: Record "Budgetary Control Setup";
                     begin
 
                         BCSetup.Get;
@@ -198,12 +198,12 @@ Page 51516074 "Imprest Vouchers List"
                         //First Check whether other lines are already committed.
                         Commitments.Reset;
                         Commitments.SetRange(Commitments."Document Type", Commitments."document type"::Imprest);
-                        Commitments.SetRange(Commitments."Document No.", "No.");
+                        Commitments.SetRange(Commitments."Document No.", Rec."No.");
                         if Commitments.Find('-') then begin
                             if Confirm('Lines in this Document appear to be committed do you want to re-commit?', false) = false then begin exit end;
                             Commitments.Reset;
                             Commitments.SetRange(Commitments."Document Type", Commitments."document type"::Imprest);
-                            Commitments.SetRange(Commitments."Document No.", "No.");
+                            Commitments.SetRange(Commitments."Document No.", Rec."No.");
                             Commitments.DeleteAll;
                         end;
 
@@ -225,11 +225,11 @@ Page 51516074 "Imprest Vouchers List"
 
                         Commitments.Reset;
                         Commitments.SetRange(Commitments."Document Type", Commitments."document type"::"Payment Voucher");
-                        Commitments.SetRange(Commitments."Document No.", "No.");
+                        Commitments.SetRange(Commitments."Document No.", Rec."No.");
                         Commitments.DeleteAll;
 
                         PayLine.Reset;
-                        PayLine.SetRange(PayLine.No, "No.");
+                        PayLine.SetRange(PayLine.No, Rec."No.");
                         if PayLine.Find('-') then begin
                             repeat
                                 PayLine.Committed := false;
@@ -251,12 +251,12 @@ Page 51516074 "Imprest Vouchers List"
 
                     trigger OnAction()
                     begin
-                        if Status <> Status::"9" then
+                        if Rec.Status <> Rec.Status::"Approved" then
                             Error('You can only print after the document is Approved');
-                        Reset;
-                        SetFilter("No.", "No.");
+                        Rec.Reset;
+                        Rec.SetFilter("No.", Rec."No.");
                         Report.Run(51516335, true, true, Rec);
-                        Reset;
+                        Rec.Reset;
                     end;
                 }
                 separator(Action1102755020)
@@ -276,13 +276,13 @@ Page 51516074 "Imprest Vouchers List"
                         Text000: label 'Are you sure you want to Cancel this Document?';
                         Text001: label 'You have selected not to Cancel this Document';
                     begin
-                        TestField(Status, Status::"9");
+                        Rec.TestField(Status, Rec.Status::"9");
                         if Confirm(Text000, true) then begin
                             //Post Committment Reversals
                             Doc_Type := Doc_type::Imprest;
-                            BudgetControl.ReverseEntries(Doc_Type, "No.");
-                            Status := Status::"5";
-                            Modify;
+                            BudgetControl.ReverseEntries(Doc_Type, Rec."No.");
+                            Rec.Status := Rec.Status::"5";
+                            Rec.Modify;
                         end else
                             Error(Text001);
                     end;
@@ -294,9 +294,9 @@ Page 51516074 "Imprest Vouchers List"
     trigger OnOpenPage()
     begin
         if UserMgt.GetPurchasesFilter() <> '' then begin
-            FilterGroup(2);
-            SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
-            FilterGroup(0);
+            Rec.FilterGroup(2);
+            Rec.SetRange("Responsibility Center", UserMgt.GetPurchasesFilter());
+            Rec.FilterGroup(0);
         end;
 
         /*HREmp.RESET;
@@ -307,41 +307,41 @@ Page 51516074 "Imprest Vouchers List"
         //user id may not be the creator of the doc
         SETRANGE("User ID",USERID);
           */
-        SetRange(Cashier, UserId);
+        Rec.SetRange(Cashier, UserId);
 
     end;
 
     var
-        PayLine: Record UnknownRecord51516007;
-        PVUsers: Record UnknownRecord51516039;
+        PayLine: Record "Imprest Lines";
+        PVUsers: Record "CshMgt PV Steps Users";
         strFilter: Text[250];
         IntC: Integer;
         IntCount: Integer;
-        Payments: Record UnknownRecord51516000;
-        RecPayTypes: Record UnknownRecord51516004;
-        TarriffCodes: Record UnknownRecord51516046;
+        Payments: Record "Payment Header";
+        RecPayTypes: Record "Receipts and Payment Types";
+        TarriffCodes: Record "Tariff Codes";
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record UnknownRecord51516035;
+        CashierLinks: Record "Cash Office User Template";
         LineNo: Integer;
-        Temp: Record UnknownRecord51516035;
+        Temp: Record "Cash Office User Template";
         JTemplate: Code[10];
         JBatch: Code[10];
-        PCheck: Codeunit UnknownCodeunit55483;
+        PCheck: Codeunit "Posting Check FP";
         Post: Boolean;
         strText: Text[100];
-        PVHead: Record UnknownRecord51516000;
+        PVHead: Record "Payment Header";
         BankAcc: Record "Bank Account";
-        CheckBudgetAvail: Codeunit UnknownCodeunit55484;
-        Commitments: Record UnknownRecord51516036;
-        UserMgt: Codeunit UnknownCodeunit51516155;
-        JournlPosted: Codeunit UnknownCodeunit51516156;
+        CheckBudgetAvail: Codeunit "Budgetary Control";
+        Commitments: Record Committment;
+        UserMgt: Codeunit "User Setup Management BR";
+        JournlPosted: Codeunit "Journal Post Successful";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition;
         HasLines: Boolean;
         AllKeyFieldsEntered: Boolean;
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher",PettyCash;
-        BudgetControl: Codeunit UnknownCodeunit55484;
-        ImprestHdr: Record UnknownRecord51516006;
+        BudgetControl: Codeunit "Budgetary Control";
+        ImprestHdr: Record "Imprest Header";
         [InDataSet]
         "Payment Release DateEditable": Boolean;
         [InDataSet]
@@ -362,12 +362,12 @@ Page 51516074 "Imprest Vouchers List"
         DateEditable: Boolean;
         [InDataSet]
         "Currency CodeEditable": Boolean;
-        HREmp: Record UnknownRecord51516316;
+        HREmp: Record "Salary Processing Header";
 
 
     procedure LinesCommitmentStatus() Exists: Boolean
     var
-        BCsetup: Record UnknownRecord51516038;
+        BCsetup: Record "Budgetary Control Setup";
     begin
         if BCsetup.Get() then begin
             if not BCsetup.Mandatory then begin
@@ -380,7 +380,7 @@ Page 51516074 "Imprest Vouchers List"
         end;
         Exists := false;
         PayLine.Reset;
-        PayLine.SetRange(PayLine.No, "No.");
+        PayLine.SetRange(PayLine.No, Rec."No.");
         PayLine.SetRange(PayLine.Committed, false);
         PayLine.SetRange(PayLine."Budgetary Control A/C", true);
         if PayLine.Find('-') then
@@ -404,35 +404,35 @@ Page 51516074 "Imprest Vouchers List"
         GenJnlLine."Journal Batch Name" := JBatch;
         GenJnlLine."Line No." := LineNo;
         GenJnlLine."Source Code" := 'PAYMENTJNL';
-        GenJnlLine."Posting Date" := "Payment Release Date";
+        GenJnlLine."Posting Date" := Rec."Payment Release Date";
         GenJnlLine."Document Type" := GenJnlLine."document type"::Invoice;
-        GenJnlLine."Document No." := "No.";
-        GenJnlLine."External Document No." := "Cheque No.";
+        GenJnlLine."Document No." := Rec."No.";
+        GenJnlLine."External Document No." := Rec."Cheque No.";
         GenJnlLine."Account Type" := GenJnlLine."account type"::Customer;
-        GenJnlLine."Account No." := "Account No.";
+        GenJnlLine."Account No." := Rec."Account No.";
         GenJnlLine.Validate(GenJnlLine."Account No.");
-        GenJnlLine.Description := 'Imprest: ' + "Account No." + ':' + Payee;
-        CalcFields("Total Net Amount");
-        GenJnlLine.Amount := "Total Net Amount";
+        GenJnlLine.Description := 'Imprest: ' + Rec."Account No." + ':' + Rec.Payee;
+        Rec.CalcFields("Total Net Amount");
+        GenJnlLine.Amount := Rec."Total Net Amount";
         GenJnlLine.Validate(GenJnlLine.Amount);
         GenJnlLine."Bal. Account Type" := GenJnlLine."bal. account type"::"Bank Account";
-        GenJnlLine."Bal. Account No." := "Paying Bank Account";
+        GenJnlLine."Bal. Account No." := Rec."Paying Bank Account";
         GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
         //Added for Currency Codes
-        GenJnlLine."Currency Code" := "Currency Code";
+        GenJnlLine."Currency Code" := Rec."Currency Code";
         GenJnlLine.Validate("Currency Code");
-        GenJnlLine."Currency Factor" := "Currency Factor";
+        GenJnlLine."Currency Factor" := Rec."Currency Factor";
         GenJnlLine.Validate("Currency Factor");
         /*
         GenJnlLine."Currency Factor":=Payments."Currency Factor";
         GenJnlLine.VALIDATE("Currency Factor");
         */
-        GenJnlLine."Shortcut Dimension 1 Code" := "Global Dimension 1 Code";
+        GenJnlLine."Shortcut Dimension 1 Code" := Rec."Global Dimension 1 Code";
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
-        GenJnlLine."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
+        GenJnlLine."Shortcut Dimension 2 Code" := Rec."Shortcut Dimension 2 Code";
         GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 2 Code");
-        GenJnlLine.ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
-        GenJnlLine.ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
+        GenJnlLine.ValidateShortcutDimCode(3, Rec."Shortcut Dimension 3 Code");
+        GenJnlLine.ValidateShortcutDimCode(4, Rec."Shortcut Dimension 4 Code");
 
         if GenJnlLine.Amount <> 0 then
             GenJnlLine.Insert;
@@ -446,12 +446,12 @@ Page 51516074 "Imprest Vouchers List"
         Post := false;
         Post := JournlPosted.PostedSuccessfully();
         if Post then begin
-            Posted := true;
-            "Date Posted" := Today;
-            "Time Posted" := Time;
-            "Posted By" := UserId;
-            Status := Status::"4";
-            Modify;
+            Rec.Posted := true;
+            Rec."Date Posted" := Today;
+            Rec."Time Posted" := Time;
+            Rec."Posted By" := UserId;
+            Rec.Status := Rec.Status::"Closed";
+            Rec.Modify;
         end;
 
     end;
@@ -460,16 +460,16 @@ Page 51516074 "Imprest Vouchers List"
     procedure CheckImprestRequiredItems()
     begin
 
-        TestField("Payment Release Date");
-        TestField("Paying Bank Account");
-        TestField("Account No.");
-        TestField("Account Type", "account type"::Customer);
+        Rec.TestField("Payment Release Date");
+        Rec.TestField("Paying Bank Account");
+        Rec.TestField("Account No.");
+        Rec.TestField("Account Type", Rec."account type"::Customer);
 
-        if Posted then begin
+        if Rec.Posted then begin
             Error('The Document has already been posted');
         end;
 
-        TestField(Status, Status::"9");
+        Rec.TestField(Status, Rec.Status::"9");
 
         /*Check if the user has selected all the relevant fields*/
 
@@ -493,7 +493,7 @@ Page 51516074 "Imprest Vouchers List"
 
     procedure UpdateControls()
     begin
-        if Status <> Status::"9" then begin
+        if Rec.Status <> Rec.Status::Closed then begin
             "Payment Release DateEditable" := false;
             "Paying Bank AccountEditable" := false;
             "Pay ModeEditable" := false;
@@ -509,7 +509,7 @@ Page 51516074 "Imprest Vouchers List"
             CurrPage.Update;
         end;
 
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             GlobalDimension1CodeEditable := true;
             ShortcutDimension2CodeEditable := true;
             //CurrForm.Payee.EDITABLE:=TRUE;
@@ -537,11 +537,11 @@ Page 51516074 "Imprest Vouchers List"
 
     procedure LinesExists(): Boolean
     var
-        PayLines: Record UnknownRecord51516007;
+        PayLines: Record 51516007;
     begin
         HasLines := false;
         PayLines.Reset;
-        PayLines.SetRange(PayLines.No, "No.");
+        PayLines.SetRange(PayLines.No, Rec."No.");
         if PayLines.Find('-') then begin
             HasLines := true;
             exit(HasLines);
@@ -551,11 +551,11 @@ Page 51516074 "Imprest Vouchers List"
 
     procedure AllFieldsEntered(): Boolean
     var
-        PayLines: Record UnknownRecord51516007;
+        PayLines: Record 51516007;
     begin
         AllKeyFieldsEntered := true;
         PayLines.Reset;
-        PayLines.SetRange(PayLines.No, "No.");
+        PayLines.SetRange(PayLines.No, Rec."No.");
         if PayLines.Find('-') then begin
             repeat
                 if (PayLines."Account No:" = '') or (PayLines.Amount <= 0) then

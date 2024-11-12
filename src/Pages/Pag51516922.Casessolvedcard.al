@@ -215,16 +215,16 @@ Page 51516922 "Cases solved card"
     end;
 
     var
-        CustCare: Record UnknownRecord51516557;
-        AssignedReas: Record UnknownRecord51516556;
-        caseCare: Record UnknownRecord51516556;
-        casep: Record UnknownRecord51516556;
+        CustCare: Record 51516557;
+        AssignedReas: Record 51516556;
+        caseCare: Record 51516556;
+        casep: Record 51516556;
 
     local procedure sms()
     var
         iEntryNo: Integer;
-        SMSMessages: Record UnknownRecord51516471;
-        Cust: Record UnknownRecord51516364;
+        SMSMessages: Record 51516471;
+        Cust: Record 51516364;
     begin
 
         //SMS MESSAGE
@@ -258,8 +258,8 @@ Page 51516922 "Cases solved card"
     local procedure smsResolved()
     var
         iEntryNo: Integer;
-        SMSMessages: Record UnknownRecord51516471;
-        cust: Record UnknownRecord51516364;
+        SMSMessages: Record 51516471;
+        cust: Record 51516364;
     begin
 
         //SMS MESSAGE

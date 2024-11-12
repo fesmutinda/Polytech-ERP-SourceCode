@@ -247,7 +247,7 @@ Page 51516610 "Funeral Expense Card"
     }
 
     var
-        Generalsetup: Record UnknownRecord51516398;
+        Generalsetup: Record 51516398;
         Gnljnline: Record "Gen. Journal Line";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff;
         DActivity: Code[30];
@@ -257,6 +257,6 @@ Page 51516610 "Funeral Expense Card"
         Table_id: Integer;
         Doc_No: Code[20];
         Doc_Type: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,TransportRequest,Maintenance,Fuel,ImporterExporter,"Import Permit","Export Permit",TR,"Safari Notice","Student Applications","Water Research","Consultancy Requests","Consultancy Proposals","Meals Bookings","General Journal","Student Admissions","Staff Claim",KitchenStoreRequisition,"Leave Application","Account Opening","Member Closure",Loan,"Loan Batch";
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
 }
 

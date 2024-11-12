@@ -701,29 +701,29 @@ Page 51516382 "Receipts Header-BOSA"
         RunBal: Decimal;
         Recover: Boolean;
         Cheque: Boolean;
-        ReceiptAllocations: Record UnknownRecord51516387;
-        Loans: Record UnknownRecord51516371;
+        ReceiptAllocations: Record 51516387;
+        Loans: Record 51516371;
         Commision: Decimal;
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         BOSABank: Code[20];
         LineNo: Integer;
-        BOSARcpt: Record UnknownRecord51516388;
+        BOSARcpt: Record 51516388;
         TellerTill: Record "Bank Account";
         CurrentTellerAmount: Decimal;
         TransType: Text[30];
         RCPintdue: Decimal;
         Text001: label 'This member has reached a maximum share contribution of Kshs. 5,000/=. Do you want to post this transaction as shares contribution?';
-        BosaSetUp: Record UnknownRecord51516398;
+        BosaSetUp: Record 51516398;
         MpesaCharge: Decimal;
         CustPostingGrp: Record "Customer Posting Group";
         MpesaAc: Code[30];
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         JournalTemplate: Code[20];
         JournalBatch: Code[20];
-        FundsUser: Record UnknownRecord51516031;
+        FundsUser: Record 51516031;
 
     local procedure AllocatedAmountOnDeactivate()
     begin

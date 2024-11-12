@@ -365,19 +365,19 @@ Page 50049 "Dividend Unprocessed List"
     end;
 
     var
-        MjDividendsRegisterd: Record UnknownRecord51516099;
-        DIVREG: Record UnknownRecord51516099;
+        MjDividendsRegisterd: Record 51516099;
+        DIVREG: Record 51516099;
         DividendAmount: Decimal;
         Jtemplate: Code[20];
         JBatch: Code[20];
         SURESTEPFactory: Codeunit UnknownCodeunit51516007;
         TotalAmount: Decimal;
-        DivProg: Record UnknownRecord51516393;
-        GenSetup: Record UnknownRecord51516398;
+        DivProg: Record 51516393;
+        GenSetup: Record 51516398;
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
         LoanCount: Integer;
-        LoansReg: Record UnknownRecord51516371;
+        LoansReg: Record 51516371;
         TotalLoanAmount: Decimal;
         LoanAmount: Decimal;
         LoanInt: Decimal;
@@ -385,7 +385,7 @@ Page 50049 "Dividend Unprocessed List"
         RunBal: Decimal;
         Pfee: Decimal;
         PfeeEX: Decimal;
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         StartDate: Date;
         DateFilter: Text[100];
         FromDate: Date;
@@ -394,11 +394,11 @@ Page 50049 "Dividend Unprocessed List"
         ToDateS: Text[100];
         DivTotal: Decimal;
         CDeposits: Decimal;
-        CustDiv: Record UnknownRecord51516364;
+        CustDiv: Record 51516364;
         CDiv: Decimal;
         CInterest: Decimal;
         BDate: Date;
-        CustR: Record UnknownRecord51516364;
+        CustR: Record 51516364;
         IntRebTotal: Decimal;
         CIntReb: Decimal;
         LineNo: Integer;
@@ -411,18 +411,18 @@ Page 50049 "Dividend Unprocessed List"
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         DOCUMENT_NO: Code[50];
-        ObjGensetup: Record UnknownRecord51516398;
+        ObjGensetup: Record 51516398;
         RunnAmount: Decimal;
         InterestAmount: Decimal;
         OutBalAmount: Decimal;
         outstandingBal: Decimal;
-        DividendsRegisterd: Record UnknownRecord51516099;
+        DividendsRegisterd: Record 51516099;
         amountpayable: Decimal;
         payrollno: Code[30];
 
     local procedure FnTransferToBank()
     var
-        DividendsRegisterd: Record UnknownRecord51516099;
+        DividendsRegisterd: Record 51516099;
     begin
         LineNo := LineNo + 1000;
         GenJournalLine.Init;
@@ -450,7 +450,7 @@ Page 50049 "Dividend Unprocessed List"
 
     local procedure FnTransferToLoan()
     var
-        DividendsRegisterd: Record UnknownRecord51516099;
+        DividendsRegisterd: Record 51516099;
     begin
         /* IF "Pay to Loan" = TRUE THEN BEGIN
         LineNo:=LineNo+100;
@@ -640,7 +640,7 @@ Page 50049 "Dividend Unprocessed List"
 
         local procedure FnTransferToDesposit()
     var
-        DividendsRegisterd: Record UnknownRecord51516099;
+        DividendsRegisterd: Record 51516099;
     begin
         LineNo := LineNo + 10000;
         GenJournalLine.Init;

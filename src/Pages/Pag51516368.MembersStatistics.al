@@ -138,7 +138,7 @@ Page 51516368 "Members Statistics"
         OutstandingInterest: Decimal;
         InterestDue: Decimal;
         SFactory: Codeunit UnknownCodeunit51516007;
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
 
     local procedure SetFieldStyle()
     begin

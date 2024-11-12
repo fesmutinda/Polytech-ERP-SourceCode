@@ -110,7 +110,7 @@ Page 51516348 "Checkoff  Periods."
     }
 
     var
-        PayPeriod: Record UnknownRecord51516428;
+        PayPeriod: Record 51516428;
         strPeriodName: Text[30];
         Text000: label '''Leave without saving changes?''';
         Text001: label '''You selected %1.''';
@@ -118,15 +118,15 @@ Page 51516348 "Checkoff  Periods."
         Answer: Boolean;
         objOcx: Codeunit UnknownCodeunit51516015;
         dtOpenPeriod: Date;
-        PayrollType: Record UnknownRecord51516312;
+        PayrollType: Record 51516312;
         Selection: Integer;
         PayrollDefined: Text[30];
         PayrollCode: Code[10];
         NoofRecords: Integer;
         i: Integer;
-        ContrInfo: Record UnknownRecord51516313;
+        ContrInfo: Record 51516313;
         usersetup: Record "User Setup";
-        period: Record UnknownRecord51516428;
+        period: Record 51516428;
 
 
     procedure fnGetOpenPeriod()
@@ -150,10 +150,10 @@ Page 51516348 "Checkoff  Periods."
         intYear: Integer;
         curTransAmount: Decimal;
         curTransBalance: Decimal;
-        prPayrollPeriods: Record UnknownRecord51516428;
-        prNewPayrollPeriods: Record UnknownRecord51516428;
+        prPayrollPeriods: Record 51516428;
+        prNewPayrollPeriods: Record 51516428;
         CreateTrans: Boolean;
-        ControlInfo: Record UnknownRecord51516313;
+        ControlInfo: Record 51516313;
     begin
         //ControlInfo.GET();
         dtNewPeriod := CalcDate('1M', dtOpenPeriod);

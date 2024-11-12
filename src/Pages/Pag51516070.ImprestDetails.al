@@ -2,7 +2,7 @@
 Page 51516070 "Imprest Details"
 {
     PageType = ListPart;
-    SourceTable = 51516007;
+    SourceTable = "Imprest Lines";
 
     layout
     {
@@ -10,43 +10,43 @@ Page 51516070 "Imprest Details"
         {
             repeater(Control1000000000)
             {
-                field("Advance Type"; "Advance Type")
+                field("Advance Type"; Rec."Advance Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Account No:"; "Account No:")
+                field("Account No:"; Rec."Account No:")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Destination Code"; "Destination Code")
+                field("Destination Code"; Rec."Destination Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("No of Days"; "No of Days")
+                field("No of Days"; Rec."No of Days")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Daily Rate(Amount)"; "Daily Rate(Amount)")
+                field("Daily Rate(Amount)"; Rec."Daily Rate(Amount)")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -79,19 +79,19 @@ Page 51516070 "Imprest Details"
 
                     end;
                 }
-                field("Imprest Holder"; "Imprest Holder")
+                field("Imprest Holder"; Rec."Imprest Holder")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Purpose; Purpose)
+                field(Purpose; Rec.Purpose)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Due Date"; "Due Date")
+                field("Due Date"; Rec."Due Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Issued"; "Date Issued")
+                field("Date Issued"; Rec."Date Issued")
                 {
                     ApplicationArea = Basic;
                 }
@@ -104,8 +104,8 @@ Page 51516070 "Imprest Details"
     }
 
     var
-        PayHeader: Record UnknownRecord51516057;
-        PayLine: Record UnknownRecord51516003;
+        PayHeader: Record "Pending Vch. Surr. Line";
+        PayLine: Record "Receipt Line";
         Bal: Decimal;
 }
 

@@ -339,18 +339,18 @@ Page 50052 "Payment Lines Posted"
     }
 
     var
-        RecPayTypes: Record UnknownRecord51516107;
-        TarriffCodes: Record UnknownRecord51516110;
+        RecPayTypes: Record 51516107;
+        TarriffCodes: Record 51516110;
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record UnknownRecord51516108;
+        CashierLinks: Record 51516108;
         LineNo: Integer;
         CustLedger: Record "Vendor Ledger Entry";
         CustLedger1: Record "Vendor Ledger Entry";
         Amt: Decimal;
         TotAmt: Decimal;
         ApplyInvoice: Codeunit "Purchase Header Apply";
-        AppliedEntries: Record UnknownRecord51516112;
+        AppliedEntries: Record 51516112;
         VendEntries: Record "Vendor Ledger Entry";
         PInv: Record "Purch. Inv. Header";
         VATPaid: Decimal;

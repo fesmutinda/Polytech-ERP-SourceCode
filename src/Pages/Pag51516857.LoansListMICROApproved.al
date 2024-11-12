@@ -153,14 +153,14 @@ Page 51516857 "Loans List-MICRO(Approved)"
     end;
 
     var
-        LoanType: Record UnknownRecord51516240;
+        LoanType: Record 51516240;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        LoanApp: Record UnknownRecord51516230;
+        LoanApp: Record 51516230;
         DiscountingAmount: Decimal;
-        StatusPermissions: Record UnknownRecord51516310;
+        StatusPermissions: Record 51516310;
         SpecialComm: Decimal;
         GenJournalLine: Record "Gen. Journal Line";
-        LoansR: Record UnknownRecord51516230;
+        LoansR: Record 51516230;
         DActivity: Code[20];
         DBranch: Code[20];
         Vend: Record Vendor;
@@ -174,7 +174,7 @@ Page 51516857 "Loans List-MICRO(Approved)"
         OBal: Decimal;
         ReffNo: Code[20];
         DiscountCommission: Decimal;
-        BridgedLoans: Record UnknownRecord51516238;
+        BridgedLoans: Record 51516238;
         LoanAdj: Decimal;
         LoanAdjInt: Decimal;
         AdjustRemarks: Text[30];
@@ -182,7 +182,7 @@ Page 51516857 "Loans List-MICRO(Approved)"
         Overdue: Option Yes," ";
         i: Integer;
         PeriodDueDate: Date;
-        ScheduleRep: Record UnknownRecord51516234;
+        ScheduleRep: Record 51516234;
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
@@ -191,13 +191,13 @@ Page 51516857 "Loans List-MICRO(Approved)"
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record UnknownRecord51516234;
-        RSchedule: Record UnknownRecord51516234;
+        NewSchedule: Record 51516234;
+        RSchedule: Record 51516234;
         GP: Text[30];
         ScheduleCode: Code[20];
-        PreviewShedule: Record UnknownRecord51516234;
+        PreviewShedule: Record 51516234;
         PeriodInterval: Code[10];
-        CustomerRecord: Record UnknownRecord51516364;
+        CustomerRecord: Record 51516364;
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -206,14 +206,14 @@ Page 51516857 "Loans List-MICRO(Approved)"
         GenBatch: Record "Gen. Journal Batch";
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         TestAmt: Decimal;
-        CustRec: Record UnknownRecord51516364;
+        CustRec: Record 51516364;
         CustPostingGroup: Record "Customer Posting Group";
         GenSetUp: Record "Sales & Receivables Setup";
-        PCharges: Record UnknownRecord51516241;
+        PCharges: Record 51516241;
         TCharges: Decimal;
-        LAppCharges: Record UnknownRecord51516244;
+        LAppCharges: Record 51516244;
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -235,36 +235,36 @@ Page 51516857 "Loans List-MICRO(Approved)"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record UnknownRecord51516235;
+        LoanTopUp: Record 51516235;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
         TotalTopupComm: Decimal;
-        CustE: Record UnknownRecord51516364;
+        CustE: Record 51516364;
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record UnknownRecord51516231;
+        LoanG: Record 51516231;
         FOSAName: Text[150];
         IDNo: Code[50];
-        MovementTracker: Record UnknownRecord51516253;
-        SMSMessage: Record UnknownRecord51516471;
+        MovementTracker: Record 51516253;
+        SMSMessage: Record 51516471;
         InstallNo2: Integer;
         currency: Record "Currency Exchange Rate";
         CURRENCYFACTOR: Decimal;
-        LoanApps: Record UnknownRecord51516230;
+        LoanApps: Record 51516230;
         LoanDisbAmount: Decimal;
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
-        Disbursement: Record UnknownRecord51516279;
+        Disbursement: Record 51516279;
         SchDate: Date;
         DisbDate: Date;
         WhichDay: Integer;
-        LBatches: Record UnknownRecord51516230;
-        SalDetails: Record UnknownRecord51516232;
-        LGuarantors: Record UnknownRecord51516231;
+        LBatches: Record 51516230;
+        SalDetails: Record 51516232;
+        LGuarantors: Record 51516231;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Imprest,ImprestSurrender,Interbank;
 
 
@@ -275,7 +275,7 @@ Page 51516857 "Loans List-MICRO(Approved)"
     end;
 
 
-    procedure FormatField(Rec: Record UnknownRecord51516371) OK: Boolean
+    procedure FormatField(Rec: Record 51516371) OK: Boolean
     begin
         if "Outstanding Balance" > 0 then begin
             if (Rec."Expected Date of Completion" < Today) then

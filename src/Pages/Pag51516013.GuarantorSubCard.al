@@ -445,14 +445,14 @@ Page 51516013 "Guarantor Sub Card"
     var
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions,FundsTransfer,SaccoTransfers,ChequeDiscounting,ImprestRequisition,ImprestSurrender,LeaveApplication,GuarantorSubstitution;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-        LGuarantor: Record UnknownRecord51516372;
-        GSubLine: Record UnknownRecord51516564;
+        LGuarantor: Record 51516372;
+        GSubLine: Record 51516564;
         LoaneeNoEditable: Boolean;
         LoanGuaranteedEditable: Boolean;
         SubMemberEditable: Boolean;
         TotalReplaced: Decimal;
         Commited: Decimal;
-        NewLGuar: Record UnknownRecord51516372;
+        NewLGuar: Record 51516372;
         SubGAmount: Decimal;
 
     local procedure FNAddRecordRestriction()

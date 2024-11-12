@@ -71,6 +71,6 @@ Page 51516454 "Bankers Cheque Register"
         BankerCh: Code[20];
         NoOfLeaves: Integer;
         i: Integer;
-        BankerR: Record UnknownRecord51516456;
+        BankerR: Record 51516456;
 }
 

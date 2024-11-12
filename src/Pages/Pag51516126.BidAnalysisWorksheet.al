@@ -222,7 +222,7 @@ Page 51516126 "Bid Analysis Worksheet"
 
     procedure CalcTotals()
     var
-        BidAnalysisRec: Record UnknownRecord51516104;
+        BidAnalysisRec: Record 51516104;
     begin
         BidAnalysisRec.SetRange("RFQ No.", "RFQ No.");
         if SalesCodeFilter <> '' then

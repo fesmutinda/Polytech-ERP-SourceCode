@@ -108,8 +108,8 @@ Page 51516157 "Staff Leave Claim Lines"
     }
 
     var
-        PayHeader: Record UnknownRecord51516057;
-        PayLine: Record UnknownRecord51516003;
+        PayHeader: Record 51516057;
+        PayLine: Record 51516003;
         Bal: Decimal;
 }
 

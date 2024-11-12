@@ -98,9 +98,9 @@ Page 51516426 "Posted Member Withdrawal List"
 
     var
         Closure: Integer;
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         UBFRefund: Decimal;
-        Generalsetup: Record UnknownRecord51516398;
+        Generalsetup: Record 51516398;
         Totalavailable: Decimal;
         UnpaidDividends: Decimal;
         TotalOustanding: Decimal;
@@ -111,7 +111,7 @@ Page 51516426 "Posted Member Withdrawal List"
         Advice: Boolean;
         TotalDefaulterR: Decimal;
         AvailableShares: Decimal;
-        Loans: Record UnknownRecord51516371;
+        Loans: Record 51516371;
         Value1: Decimal;
         Interest: Decimal;
         LineN: Integer;

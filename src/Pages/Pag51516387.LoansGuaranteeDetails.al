@@ -82,10 +82,10 @@ Page 51516387 "Loans Guarantee Details"
     end;
 
     var
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         EmployeeCode: Code[20];
         CStatus: Option Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member","New (Pending Confirmation)","Defaulter Recovery";
-        LoanApps: Record UnknownRecord51516371;
-        StatusPermissions: Record UnknownRecord51516452;
+        LoanApps: Record 51516371;
+        StatusPermissions: Record 51516452;
 }
 

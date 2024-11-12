@@ -74,6 +74,6 @@ Page 51516006 "Cash Payment List"
     end;
 
     var
-        FundsSetup: Record UnknownRecord51516030;
+        FundsSetup: Record 51516030;
 }
 

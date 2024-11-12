@@ -207,21 +207,21 @@ Page 51516390 "Loans Sub-Page List"
     end;
 
     var
-        LoanType: Record UnknownRecord51516381;
+        LoanType: Record 51516381;
         NoSeriesMgt: Codeunit NoSeriesManagement;
         FieldStyle: Text;
         FieldStyleI: Text;
         OutstandingInterest: Decimal;
         InterestDue: Decimal;
         SFactory: Codeunit UnknownCodeunit51516007;
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
         VarLoanPayoffAmount: Decimal;
         VarInsurancePayoff: Decimal;
-        ObjProductCharge: Record UnknownRecord51516383;
+        ObjProductCharge: Record 51516383;
         VarEndYear: Date;
         VarInsuranceMonths: Integer;
         VarAmountinArrears: Decimal;
-        ObjRepaymentSchedule: Record UnknownRecord51516375;
+        ObjRepaymentSchedule: Record 51516375;
 
 
     procedure GetVariables(var LoanNo: Code[20]; var LoanProductType: Code[20]; var MemberNo: Code[20])

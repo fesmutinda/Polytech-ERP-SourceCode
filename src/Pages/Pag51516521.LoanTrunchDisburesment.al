@@ -241,6 +241,6 @@ Page 51516521 "Loan Trunch Disburesment"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         OpenApprovalEntriesExist: Boolean;
-        ObjTrunch: Record UnknownRecord51516495;
+        ObjTrunch: Record 51516495;
 }
 

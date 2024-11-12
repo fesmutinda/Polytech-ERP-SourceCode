@@ -210,8 +210,8 @@ Page 51516999 "House Group Registration Card"
     end;
 
     var
-        ObjCellGroups: Record UnknownRecord51516915;
-        ObjCust: Record UnknownRecord51516364;
+        ObjCellGroups: Record 51516915;
+        ObjCust: Record 51516364;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions,FundsTransfer,SaccoTransfers,ChequeDiscounting,ImprestRequisition,ImprestSurrender,LeaveApplication,BulkWithdrawal,PackageLodging,PackageRetrieval,HouseChange,CRMTraining,PettyCash,StaffClaims,MemberAgentNOKChange,HouseRegistration,LoanPayOff;
         EnableCreateHouse: Boolean;
         OpenApprovalEntriesExist: Boolean;
@@ -225,9 +225,9 @@ Page 51516999 "House Group Registration Card"
         VarBOSANOKVisible: Boolean;
         VarFOSANOKVisible: Boolean;
         VarAccountAgentVisible: Boolean;
-        ObjSaccoNos: Record UnknownRecord51516399;
+        ObjSaccoNos: Record 51516399;
         VarHouseNo: Code[30];
-        ObjHouseG: Record UnknownRecord51516915;
+        ObjHouseG: Record 51516915;
         NoSeriesMgt: Codeunit NoSeriesManagement;
 }
 

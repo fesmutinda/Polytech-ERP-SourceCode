@@ -6,10 +6,10 @@ Page 51516102 "Pending Purchase Requisition"
     Editable = false;
     PageType = List;
     SourceTable = "Purchase Header";
-    SourceTableView = where("Document Type"=const(Quote),
-                            DocApprovalType=const(Requisition),
-                            Status=filter("Pending Approval"),
-                            PR=filter(Yes));
+    SourceTableView = where("Document Type" = const(Quote),
+                            DocApprovalType = const(Requisition),
+                            Status = filter("Pending Approval"),
+                            PR = filter(Yes));
 
     layout
     {
@@ -17,100 +17,100 @@ Page 51516102 "Pending Purchase Requisition"
         {
             repeater(Control1)
             {
-                field("No.";"No.")
+                field("No."; "No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Order Address Code";"Order Address Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Buy-from Vendor Name";"Buy-from Vendor Name")
+                field("Order Address Code"; "Order Address Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Description";"Posting Description")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Vendor Authorization No.";"Vendor Authorization No.")
+                field("Buy-from Vendor Name"; "Buy-from Vendor Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Post Code";"Buy-from Post Code")
+                field("Posting Description"; "Posting Description")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Vendor Authorization No."; "Vendor Authorization No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Country/Region Code";"Buy-from Country/Region Code")
+                field("Buy-from Post Code"; "Buy-from Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Buy-from Contact";"Buy-from Contact")
+                field("Buy-from Country/Region Code"; "Buy-from Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Vendor No.";"Pay-to Vendor No.")
+                field("Buy-from Contact"; "Buy-from Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Name";"Pay-to Name")
+                field("Pay-to Vendor No."; "Pay-to Vendor No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Post Code";"Pay-to Post Code")
+                field("Pay-to Name"; "Pay-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Country/Region Code";"Pay-to Country/Region Code")
+                field("Pay-to Post Code"; "Pay-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pay-to Contact";"Pay-to Contact")
+                field("Pay-to Country/Region Code"; "Pay-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Code";"Ship-to Code")
+                field("Pay-to Contact"; "Pay-to Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Name";"Ship-to Name")
+                field("Ship-to Code"; "Ship-to Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Post Code";"Ship-to Post Code")
+                field("Ship-to Name"; "Ship-to Name")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Country/Region Code";"Ship-to Country/Region Code")
+                field("Ship-to Post Code"; "Ship-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Ship-to Contact";"Ship-to Contact")
+                field("Ship-to Country/Region Code"; "Ship-to Country/Region Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Posting Date";"Posting Date")
+                field("Ship-to Contact"; "Ship-to Contact")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Shortcut Dimension 1 Code";"Shortcut Dimension 1 Code")
+                field("Posting Date"; "Posting Date")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -120,7 +120,7 @@ Page 51516102 "Pending Purchase Requisition"
                         DimMgt.LookupDimValueCodeNoUpdate(1);
                     end;
                 }
-                field("Shortcut Dimension 2 Code";"Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -130,41 +130,41 @@ Page 51516102 "Pending Purchase Requisition"
                         DimMgt.LookupDimValueCodeNoUpdate(2);
                     end;
                 }
-                field("Location Code";"Location Code")
+                field("Location Code"; "Location Code")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field("Purchaser Code";"Purchaser Code")
+                field("Purchaser Code"; "Purchaser Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Responsible Officer";"Responsible Officer")
+                field("Responsible Officer"; "Responsible Officer")
                 {
                     ApplicationArea = Basic;
                     Caption = '<Procurement Officer>';
                 }
-                field("Assigned User ID";"Assigned User ID")
+                field("Assigned User ID"; "Assigned User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Currency Code";"Currency Code")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Document Date";"Document Date")
+                field("Currency Code"; "Currency Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Campaign No.";"Campaign No.")
+                field("Document Date"; "Document Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Status;Status)
+                field("Campaign No."; "Campaign No.")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field(Status; Status)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -173,17 +173,17 @@ Page 51516102 "Pending Purchase Requisition"
         }
         area(factboxes)
         {
-            part(Control1901138007;"Vendor Details FactBox")
+            part(Control1901138007; "Vendor Details FactBox")
             {
-                SubPageLink = "No."=field("Buy-from Vendor No."),
-                              "Date Filter"=field("Date Filter");
+                SubPageLink = "No." = field("Buy-from Vendor No."),
+                              "Date Filter" = field("Date Filter");
                 Visible = true;
             }
-            systempart(Control1900383207;Links)
+            systempart(Control1900383207; Links)
             {
                 Visible = false;
             }
-            systempart(Control1905767507;Notes)
+            systempart(Control1905767507; Notes)
             {
                 Visible = true;
             }
@@ -211,7 +211,7 @@ Page 51516102 "Pending Purchase Requisition"
                     begin
                         CalcInvDiscForHeader;
                         Commit;
-                        Page.RunModal(Page::"Purchase Statistics",Rec);
+                        Page.RunModal(Page::"Purchase Statistics", Rec);
                     end;
                 }
                 action("Co&mments")
@@ -220,9 +220,9 @@ Page 51516102 "Pending Purchase Requisition"
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page "Purch. Comment Sheet";
-                    RunPageLink = "Document Type"=field("Document Type"),
-                                  "No."=field("No."),
-                                  "Document Line No."=const(0);
+                    RunPageLink = "Document Type" = field("Document Type"),
+                                  "No." = field("No."),
+                                  "Document Line No." = const(0);
                 }
                 action(Dimensions)
                 {
@@ -246,7 +246,7 @@ Page 51516102 "Pending Purchase Requisition"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header","Document Type","No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", "Document Type", "No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -268,7 +268,7 @@ Page 51516102 "Pending Purchase Requisition"
                     SalesHeader: Record "Sales Header";
                 begin
                     //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                      //CODEUNIT.RUN(CODEUNIT::"Purch.-Quote to Order (Yes/No)",Rec);
+                    //CODEUNIT.RUN(CODEUNIT::"Purch.-Quote to Order (Yes/No)",Rec);
                 end;
             }
             action("&Print")
@@ -283,11 +283,11 @@ Page 51516102 "Pending Purchase Requisition"
                 trigger OnAction()
                 begin
                     if LinesCommitted then
-                       Error('All Lines should be committed');
-                      Reset;
-                      SetRange("No.","No.");
-                      Report.Run(51516358,true,true,Rec);
-                      Reset;
+                        Error('All Lines should be committed');
+                    Reset;
+                    SetRange("No.", "No.");
+                    Report.Run(51516358, true, true, Rec);
+                    Reset;
                     //DocPrint.PrintPurchHeader(Rec);
                 end;
             }
@@ -364,32 +364,32 @@ Page 51516102 "Pending Purchase Requisition"
     var
         DimMgt: Codeunit DimensionManagement;
         DocPrint: Codeunit "Document-Print";
-        BCSetup: Record UnknownRecord51516038;
+        BCSetup: Record 51516038;
 
 
     procedure LinesCommitted() Exists: Boolean
     var
         PurchLines: Record "Purchase Line";
     begin
-         if BCSetup.Get() then  begin
+        if BCSetup.Get() then begin
             if not BCSetup.Mandatory then begin
-               Exists:=false;
-               exit;
+                Exists := false;
+                exit;
             end;
-         end else begin
-               Exists:=false;
-               exit;
-         end;
+        end else begin
+            Exists := false;
+            exit;
+        end;
         if BCSetup.Get then begin
-         Exists:=false;
-         PurchLines.Reset;
-         PurchLines.SetRange(PurchLines."Document Type","Document Type");
-         PurchLines.SetRange(PurchLines."Document No.","No.");
-        // PurchLines.SETRANGE(PurchLines.Committed,FALSE);
-          if PurchLines.Find('-') then
-             Exists:=true;
+            Exists := false;
+            PurchLines.Reset;
+            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            // PurchLines.SETRANGE(PurchLines.Committed,FALSE);
+            if PurchLines.Find('-') then
+                Exists := true;
         end else
-            Exists:=false;
+            Exists := false;
     end;
 }
 

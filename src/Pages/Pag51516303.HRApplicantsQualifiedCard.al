@@ -113,8 +113,8 @@ Page 51516303 "HR Applicants Qualified Card"
     var
         Text001: label 'Are you sure you want to Upload Applicants Details to the Employee Card?';
         Text002: label 'Are you sure you want to Send this Interview invitation?';
-        HRJobApplications: Record UnknownRecord51516209;
-        HREmailParameters: Record UnknownRecord51516208;
+        HRJobApplications: Record 51516209;
+        HREmailParameters: Record 51516208;
         SMTP: Codeunit UnknownCodeunit400;
 }
 

@@ -157,7 +157,7 @@ Page 51516400 "BOSA Receipt Card"
 
                     trigger OnAction()
                     var
-                        ObjTransactions: Record UnknownRecord51516387;
+                        ObjTransactions: Record 51516387;
                         RunBal: Decimal;
                         Datefilter: Text;
                     begin
@@ -707,9 +707,9 @@ Page 51516400 "BOSA Receipt Card"
         startDateS: Text;
         StartDate: Text;
         StartDateshare: Date;
-        LoanRec: Record UnknownRecord51516371;
-        CLedger: Record UnknownRecord51516365;
-        RSchedule: Record UnknownRecord51516375;
+        LoanRec: Record 51516371;
+        CLedger: Record 51516365;
+        RSchedule: Record 51516375;
         LastDate: Date;
         IntAmount: Decimal;
         LoanBalance: Decimal;
@@ -724,44 +724,44 @@ Page 51516400 "BOSA Receipt Card"
         RunBal: Decimal;
         Recover: Boolean;
         Cheque: Boolean;
-        ReceiptAllocations: Record UnknownRecord51516387;
-        Loans: Record UnknownRecord51516371;
+        ReceiptAllocations: Record 51516387;
+        Loans: Record 51516371;
         Commision: Decimal;
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         BOSABank: Code[20];
         LineNo: Integer;
-        BOSARcpt: Record UnknownRecord51516388;
+        BOSARcpt: Record 51516388;
         TellerTill: Record "Bank Account";
         CurrentTellerAmount: Decimal;
         TransType: Text[30];
         RCPintdue: Decimal;
         Text001: label 'This member has reached a maximum share contribution of Kshs. 5,000/=. Do you want to post this transaction as shares contribution?';
-        BosaSetUp: Record UnknownRecord51516398;
+        BosaSetUp: Record 51516398;
         MpesaCharge: Decimal;
         CustPostingGrp: Record "Customer Posting Group";
         MpesaAc: Code[30];
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         ShareCapDefecit: Decimal;
-        LoanApp: Record UnknownRecord51516371;
+        LoanApp: Record 51516371;
         Datefilter: Text;
         SURESTEPFactory: Codeunit UnknownCodeunit51516007;
         RefDate: Date;
         Recruiter: Code[20];
         ChargeAmount: Decimal;
-        loanapps: Record UnknownRecord51516371;
+        loanapps: Record 51516371;
 
     local procedure AllocatedAmountOnDeactivate()
     begin
         CurrPage.Update := true;
     end;
 
-    local procedure FnRunInterest(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunInterest(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
     begin
         if RunningBalance > 0 then begin
             LoanApp.Reset;
@@ -801,10 +801,10 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunPrinciple(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunPrinciple(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -852,15 +852,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunEntranceFee(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunEntranceFee(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
     begin
         if RunningBalance > 0 then begin
             GenSetup.Get();
@@ -896,15 +896,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunShareCapital(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunShareCapital(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -966,15 +966,15 @@ Page 51516400 "BOSA Receipt Card"
         //END;
     end;
 
-    local procedure FnRunDepositContribution(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunDepositContribution(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -1005,15 +1005,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunLoanInsurance(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunLoanInsurance(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
     begin
         GenSetup.Get();
         if RunningBalance > 0 then begin
@@ -1043,15 +1043,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunBenevolentFund(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunBenevolentFund(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
     begin
         if RunningBalance > 0 then begin
             GenSetup.Get();
@@ -1081,15 +1081,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunUnallocatedAmount(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunUnallocatedAmount(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
     begin
         ObjMember.Reset;
         ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
@@ -1111,15 +1111,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunUnallocatedFromExcess(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunUnallocatedFromExcess(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
@@ -1146,7 +1146,7 @@ Page 51516400 "BOSA Receipt Card"
 
     local procedure FnReturnAmountToClear(TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account") AmountReturned: Decimal
     var
-        ObjReceiptAllocation: Record UnknownRecord51516387;
+        ObjReceiptAllocation: Record 51516387;
     begin
         ObjReceiptAllocation.Reset;
         ObjReceiptAllocation.SetRange("Document No", Rec."Transaction No.");
@@ -1158,15 +1158,15 @@ Page 51516400 "BOSA Receipt Card"
         exit;
     end;
 
-    local procedure FnRunSavingsProductExcess(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal; SavingsProduct: Code[100]): Decimal
+    local procedure FnRunSavingsProductExcess(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal; SavingsProduct: Code[100]): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings";
@@ -1190,15 +1190,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunDepositContributionFromExcess(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunDepositContributionFromExcess(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
@@ -1223,15 +1223,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunSavingsContribution(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunSavingsContribution(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -1262,15 +1262,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunRegistrationFee(ObjRcptBuffer: Record UnknownRecord51516388; RunningBalance: Decimal)
+    local procedure FnRunRegistrationFee(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal)
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record UnknownRecord51516364;
+        ObjMember: Record 51516364;
         RegFee: Decimal;
     begin
         /*IF RunningBalance > 0 THEN
@@ -1312,32 +1312,32 @@ Page 51516400 "BOSA Receipt Card"
 
     local procedure FnProcessingDailyInterestDue()
     var
-        MemberLedgerEntry: Record UnknownRecord51516365;
+        MemberLedgerEntry: Record 51516365;
         GenBatches: Record "Gen. Journal Batch";
         PDate: Date;
-        LoanType: Record UnknownRecord51516381;
+        LoanType: Record 51516381;
         PostDate: Date;
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         LineNo: Integer;
         DocNo: Code[20];
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         EndDate: Date;
         DontCharge: Boolean;
-        Temp: Record UnknownRecord51516031;
+        Temp: Record 51516031;
         JBatch: Code[10];
         Jtemplate: Code[10];
-        CustLedger: Record UnknownRecord51516365;
-        AccountingPeriod: Record UnknownRecord51516391;
+        CustLedger: Record 51516365;
+        AccountingPeriod: Record 51516391;
         FiscalYearStartDate: Date;
         "ExtDocNo.": Text[30];
-        loanapp: Record UnknownRecord51516371;
+        loanapp: Record 51516371;
         SDATE: Text[30];
-        Objrepaymentschedule: Record UnknownRecord51516375;
+        Objrepaymentschedule: Record 51516375;
         Varbeginmonth: Date;
         DateTest: Date;
         VarAmount: Decimal;
-        ObjCust: Record UnknownRecord51516364;
+        ObjCust: Record 51516364;
         Date_OutBal: Date;
         OutBal: Decimal;
         BeginMonth_Date: Date;
@@ -1346,7 +1346,7 @@ Page 51516400 "BOSA Receipt Card"
         Month: Code[10];
         Days: Integer;
         varDays: Integer;
-        ReceiptsPayments: Record UnknownRecord51516388;
+        ReceiptsPayments: Record 51516388;
         DaysValue: Integer;
         DaysInMonth: Integer;
     begin

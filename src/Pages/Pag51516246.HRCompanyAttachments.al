@@ -156,7 +156,7 @@ Page 51516246 "HR Company Attachments"
 
     var
         InteractTemplLanguage: Record "Interaction Tmpl. Language";
-        DocLink: Record UnknownRecord51516205;
+        DocLink: Record 51516205;
 
 
     procedure GetDocument() Document: Text[200]

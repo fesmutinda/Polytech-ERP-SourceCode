@@ -208,7 +208,7 @@ Page 51516220 "HR Employee Attachments SF"
 
     var
         InteractTemplLanguage: Record "Interaction Tmpl. Language";
-        DocLink: Record UnknownRecord51516207;
+        DocLink: Record 51516207;
 
 
     procedure GetDocument() Document: Text[200]

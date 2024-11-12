@@ -1638,9 +1638,9 @@ Page 51516854 "Loan Application MICRO(Posted)"
 
     var
         i: Integer;
-        LoanType: Record UnknownRecord51516381;
+        LoanType: Record 51516381;
         PeriodDueDate: Date;
-        ScheduleRep: Record UnknownRecord51516375;
+        ScheduleRep: Record 51516375;
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
@@ -1649,16 +1649,16 @@ Page 51516854 "Loan Application MICRO(Posted)"
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record UnknownRecord51516375;
-        RSchedule: Record UnknownRecord51516375;
+        NewSchedule: Record 51516375;
+        RSchedule: Record 51516375;
         GP: Text[30];
         CheckTiersEditable: Boolean;
         ReasonsEditable: Boolean;
         ScheduleCode: Code[20];
-        PreviewShedule: Record UnknownRecord51516375;
+        PreviewShedule: Record 51516375;
         PeriodInterval: Code[10];
-        LnLoans: Record UnknownRecord51516371;
-        CustomerRecord: Record UnknownRecord51516364;
+        LnLoans: Record 51516371;
+        CustomerRecord: Record 51516364;
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -1668,16 +1668,16 @@ Page 51516854 "Loan Application MICRO(Posted)"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record UnknownRecord51516364;
-        LoanApp: Record UnknownRecord51516371;
+        Cust: Record 51516364;
+        LoanApp: Record 51516371;
         TestAmt: Decimal;
-        CustRec: Record UnknownRecord51516371;
+        CustRec: Record 51516371;
         CustPostingGroup: Record "Customer Posting Group";
-        GenSetUp: Record UnknownRecord51516398;
-        PCharges: Record UnknownRecord51516382;
+        GenSetUp: Record 51516398;
+        PCharges: Record 51516382;
         TCharges: Decimal;
-        LAppCharges: Record UnknownRecord51516373;
-        LoansR: Record UnknownRecord51516371;
+        LAppCharges: Record 51516373;
+        LoansR: Record 51516371;
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -1700,43 +1700,43 @@ Page 51516854 "Loan Application MICRO(Posted)"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record UnknownRecord51516376;
+        LoanTopUp: Record 51516376;
         Vend: Record Vendor;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
         DActivity: Code[20];
         DBranch: Code[20];
         TotalTopupComm: Decimal;
-        CustE: Record UnknownRecord51516364;
+        CustE: Record 51516364;
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record UnknownRecord51516372;
+        LoanG: Record 51516372;
         SpecialComm: Decimal;
         FOSAName: Text[150];
         IDNo: Code[50];
-        MovementTracker: Record UnknownRecord51516394;
+        MovementTracker: Record 51516394;
         DiscountingAmount: Decimal;
-        StatusPermissions: Record UnknownRecord51516452;
-        BridgedLoans: Record UnknownRecord51516371;
-        SMSMessage: Record UnknownRecord51516471;
+        StatusPermissions: Record 51516452;
+        BridgedLoans: Record 51516371;
+        SMSMessage: Record 51516471;
         InstallNo2: Integer;
         currency: Record "Currency Exchange Rate";
         CURRENCYFACTOR: Decimal;
-        LoanApps: Record UnknownRecord51516371;
+        LoanApps: Record 51516371;
         LoanDisbAmount: Decimal;
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
-        Disbursement: Record UnknownRecord51516377;
+        Disbursement: Record 51516377;
         SchDate: Date;
         DisbDate: Date;
         WhichDay: Integer;
-        LBatches: Record UnknownRecord51516371;
-        SalDetails: Record UnknownRecord51516373;
-        LGuarantors: Record UnknownRecord51516372;
+        LBatches: Record 51516371;
+        SalDetails: Record 51516373;
+        LGuarantors: Record 51516372;
         Text001: label 'Status Must Be Open';
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions,FundsTransfer;
         CurrpageEditable: Boolean;
@@ -1753,21 +1753,21 @@ Page 51516854 "Loan Application MICRO(Posted)"
         RepayFrequencyEditable: Boolean;
         ModeofDisburesmentEdit: Boolean;
         DisbursementDateEditable: Boolean;
-        Memb: Record UnknownRecord51516364;
-        LoanSecurities: Record UnknownRecord51516372;
+        Memb: Record 51516364;
+        LoanSecurities: Record 51516372;
         Text002: label 'Please Insert Securities Details';
-        LnSecurities: Record UnknownRecord51516372;
+        LnSecurities: Record 51516372;
         TotalSecurities: Decimal;
         Text003: label 'Collateral Value cannot be less than Applied Amount';
         Text004: label 'This Member has a Pending withdrawal application';
         AppSched: Integer;
         Text005: label 'This loan application is not appraised';
-        GSetUp: Record UnknownRecord51516398;
+        GSetUp: Record 51516398;
         Text006: label 'Number of guarantors less than minimum of 4';
         Text007: label 'You already have a similar running loan, please topup to proceed.';
         Text008: label 'There are still pending applications whose status is -%1, Please utilize them first';
-        Prof: Record UnknownRecord51516287;
-        AppExp: Record UnknownRecord51516288;
+        Prof: Record 51516287;
+        AppExp: Record 51516288;
         compinfo: Record "Company Information";
         iEntryNo: Integer;
         LoanAppMessage: label '<p style="font-family:Verdana,Arial;font-size:10pt">Dear<b> %1,</b></p><p style="font-family:Verdana,Arial;font-size:9pt">Welcome to Mafanikio Sacco</p><p style="font-family:Verdana,Arial;font-size:9pt">This is to confirm that your Loan Application has been received and Undergoing Approval</p><p style="font-family:Verdana,Arial;font-size:9pt"> </b></p><br>Regards<p>%3</p><p><b>MAFANIKIO SACCO LTD</b></p>';
@@ -1902,13 +1902,13 @@ Page 51516854 "Loan Application MICRO(Posted)"
 
     local procedure FnSendReceivedLoanApplEmail(LoanNo: Code[20])
     var
-        LoanRec: Record UnknownRecord51516371;
+        LoanRec: Record 51516371;
         SMTPMail: Codeunit UnknownCodeunit400;
         SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];
         CompanyInfo: Record "Company Information";
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         Email: Text[50];
     begin
         SMTPSetup.Get();
@@ -1934,8 +1934,8 @@ Page 51516854 "Loan Application MICRO(Posted)"
 
     local procedure FnSendGuarantorAppSMS(LoanNo: Code[20])
     var
-        Cust: Record UnknownRecord51516364;
-        Sms: Record UnknownRecord51516471;
+        Cust: Record 51516364;
+        Sms: Record 51516471;
     begin
         LGuarantors.Reset;
         LGuarantors.SetRange(LGuarantors."Loan No", "Loan  No.");

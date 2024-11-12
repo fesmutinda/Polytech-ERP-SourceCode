@@ -2,7 +2,7 @@
 Page 51516076 "Claim Types Card"
 {
     PageType = Card;
-    SourceTable = 51516032;
+    SourceTable = "Funds Transaction Types";
 
     layout
     {
@@ -10,31 +10,31 @@ Page 51516076 "Claim Types Card"
         {
             group(General)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Grouping"; "Default Grouping")
+                field("Default Grouping"; Rec."Default Grouping")
                 {
                     ApplicationArea = Basic;
                 }
@@ -48,7 +48,7 @@ Page 51516076 "Claim Types Card"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Transaction Type" := "transaction type"::Claim;
+        Rec."Transaction Type" := Rec."transaction type"::Claim;
     end;
 }
 

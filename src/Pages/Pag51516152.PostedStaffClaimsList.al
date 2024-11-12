@@ -209,28 +209,28 @@ Page 51516152 "Posted Staff Claims List"
     end;
 
     var
-        PayLine: Record UnknownRecord51516011;
-        PVUsers: Record UnknownRecord51516039;
+        PayLine: Record 51516011;
+        PVUsers: Record 51516039;
         strFilter: Text[250];
         IntC: Integer;
         IntCount: Integer;
-        Payments: Record UnknownRecord51516000;
-        RecPayTypes: Record UnknownRecord51516004;
-        TarriffCodes: Record UnknownRecord51516046;
+        Payments: Record 51516000;
+        RecPayTypes: Record 51516004;
+        TarriffCodes: Record 51516046;
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record UnknownRecord51516035;
+        CashierLinks: Record 51516035;
         LineNo: Integer;
-        Temp: Record UnknownRecord51516035;
+        Temp: Record 51516035;
         JTemplate: Code[10];
         JBatch: Code[10];
         PCheck: Codeunit UnknownCodeunit55483;
         Post: Boolean;
         strText: Text[100];
-        PVHead: Record UnknownRecord51516000;
+        PVHead: Record 51516000;
         BankAcc: Record "Bank Account";
         CheckBudgetAvail: Codeunit UnknownCodeunit55484;
-        Commitments: Record UnknownRecord51516036;
+        Commitments: Record 51516036;
         UserMgt: Codeunit UnknownCodeunit51516155;
         JournlPosted: Codeunit UnknownCodeunit51516156;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender;
@@ -238,7 +238,7 @@ Page 51516152 "Posted Staff Claims List"
         AllKeyFieldsEntered: Boolean;
         Doc_Type: Option LPO,Requisition,Imprest,"Payment Voucher",PettyCash;
         BudgetControl: Codeunit UnknownCodeunit55484;
-        TravReqHeader: Record UnknownRecord51516010;
+        TravReqHeader: Record 51516010;
         AdjustGenJnl: Codeunit "Adjust Gen. Journal Balance";
         [InDataSet]
         "Payment Release DateEditable": Boolean;
@@ -264,7 +264,7 @@ Page 51516152 "Posted Staff Claims List"
 
     procedure LinesCommitmentStatus() Exists: Boolean
     var
-        BCsetup: Record UnknownRecord51516038;
+        BCsetup: Record 51516038;
     begin
         if BCsetup.Get() then begin
             if not BCsetup.Mandatory then begin
@@ -432,7 +432,7 @@ Page 51516152 "Posted Staff Claims List"
 
     procedure LinesExists(): Boolean
     var
-        PayLines: Record UnknownRecord51516011;
+        PayLines: Record 51516011;
     begin
         HasLines := false;
         PayLines.Reset;
@@ -446,7 +446,7 @@ Page 51516152 "Posted Staff Claims List"
 
     procedure AllFieldsEntered(): Boolean
     var
-        PayLines: Record UnknownRecord51516011;
+        PayLines: Record 51516011;
     begin
         AllKeyFieldsEntered := true;
         PayLines.Reset;

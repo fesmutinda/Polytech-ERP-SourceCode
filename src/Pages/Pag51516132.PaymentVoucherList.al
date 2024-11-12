@@ -125,6 +125,6 @@ Page 51516132 "Payment Voucher List"
     end;
 
     var
-        PHeader2: Record UnknownRecord51516112;
+        PHeader2: Record 51516112;
 }
 

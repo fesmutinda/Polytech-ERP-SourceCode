@@ -96,6 +96,6 @@ Page 51516140 "Appplications approvals"
 
     var
         Vendor: Record Vendor;
-        StatusPermissions: Record UnknownRecord51516452;
+        StatusPermissions: Record 51516452;
 }
 

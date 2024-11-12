@@ -79,6 +79,6 @@ Page 51516634 "Loan Insurance Accrual Periods"
     var
         InvtPeriod: Record "Inventory Period";
         date: DateFormula;
-        InterestPeriod: Record UnknownRecord51516710;
+        InterestPeriod: Record 51516710;
 }
 

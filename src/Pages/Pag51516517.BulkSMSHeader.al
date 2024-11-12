@@ -428,12 +428,12 @@ Page 51516517 "Bulk SMS Header"
     end;
 
     var
-        BulkHeader: Record UnknownRecord51516491;
-        BulkLines: Record UnknownRecord51516492;
+        BulkHeader: Record 51516491;
+        BulkLines: Record 51516492;
         Vend: Record Vendor;
-        SMSMessage: Record UnknownRecord51516471;
+        SMSMessage: Record 51516471;
         iEntryNo: Integer;
-        StatusPermissions: Record UnknownRecord51516452;
+        StatusPermissions: Record 51516452;
         ApprovalEntries: Page "Approval Entries";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",StandingOrder,HRJob,HRLeave,"HRTransport Request",HRTraining,"HREmp Requsition",MicroTrans,"Account Reactivation",Overdraft,ImprestSurrender,"MSacco Applications","MSacco PinChange","MSacco PhoneChange","MSacco TransChange",BulkSMS;
         text001: label 'Status must be Open';

@@ -69,7 +69,7 @@ Page 51516954 "Loan Appraisal Statement Buffe"
     end;
 
     var
-        ObjStatementB: Record UnknownRecord51516371;
+        ObjStatementB: Record 51516371;
         VerStatementAvCredits: Decimal;
         VerStatementsAvDebits: Decimal;
 }

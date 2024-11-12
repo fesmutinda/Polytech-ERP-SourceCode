@@ -305,12 +305,12 @@ Page 51516983 "House Change Request Change"
         CanCancelApprovalForRecord: Boolean;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         EnabledApprovalWorkflowsExist: Boolean;
-        ObjCust: Record UnknownRecord51516364;
+        ObjCust: Record 51516364;
         MemberNoEditable: Boolean;
         DestinationHouseEditable: Boolean;
         ReasonforChangeEditable: Boolean;
         ExitMessage: label '<p style="font-family:Verdana,Arial;font-size:10pt">Dear<b> %1,</b></p><p style="font-family:Verdana,Arial;font-size:9pt">Group Leader Group Exit </p><p style="font-family:Verdana,Arial;font-size:9pt">This is to inform you that %2  a group Leader of  %3  has applied to exit the Group,house group change application no %4,</p><p style="font-family:Verdana,Arial;font-size:9pt"> </b></p><br>Regards<p>%5</p><p><b>KINGDOM SACCO LTD</b></p>';
-        ObjHouseGroups: Record UnknownRecord51516915;
+        ObjHouseGroups: Record 51516915;
 
     local procedure FnGroupLeaderExitNotification()
     var
@@ -320,7 +320,7 @@ Page 51516983 "House Change Request Change"
         Attachment: Text[250];
         CompanyInfo: Record "Company Information";
         ObjUser: Record User;
-        ObjHouseGroups: Record UnknownRecord51516915;
+        ObjHouseGroups: Record 51516915;
         VarGroupOfficer: Code[50];
     begin
         SMTPSetup.Get();

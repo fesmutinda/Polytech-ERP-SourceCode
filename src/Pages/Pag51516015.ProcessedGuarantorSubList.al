@@ -95,6 +95,6 @@ Page 51516015 "Processed Guarantor Sub List"
     }
 
     var
-        cust: Record UnknownRecord51516364;
+        cust: Record 51516364;
 }
 

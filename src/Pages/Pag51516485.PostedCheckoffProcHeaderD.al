@@ -569,22 +569,22 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record UnknownRecord51516415;
+        ReceiptsProcessingLines: Record 51516415;
         LineNo: Integer;
-        LBatches: Record UnknownRecord51516377;
+        LBatches: Record 51516377;
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record UnknownRecord51516414;
-        Cust: Record UnknownRecord51516364;
+        ReptProcHeader: Record 51516414;
+        Cust: Record 51516364;
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record UnknownRecord51516371;
+        Loantable: Record 51516371;
         LRepayment: Decimal;
-        RcptBufLines: Record UnknownRecord51516415;
-        LoanType: Record UnknownRecord51516381;
-        LoanApp: Record UnknownRecord51516371;
+        RcptBufLines: Record 51516415;
+        LoanType: Record 51516381;
+        LoanApp: Record 51516371;
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -595,13 +595,13 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        genstup: Record UnknownRecord51516398;
-        Memb: Record UnknownRecord51516364;
+        genstup: Record 51516398;
+        Memb: Record 51516364;
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
-        ReceiptLine: Record UnknownRecord51516415;
-        MembLedg: Record UnknownRecord51516365;
+        ReceiptLine: Record 51516415;
+        MembLedg: Record 51516365;
         SFactory: Codeunit UnknownCodeunit51516007;
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
@@ -611,7 +611,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
 
     local procedure FnGetLoanNumber(MemberNo: Code[40]; "Loan Product Code": Code[100]): Code[100]
     var
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
     begin
         ObjLoans.Reset;
         ObjLoans.SetRange("Client Code", MemberNo);
@@ -633,7 +633,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
 
     local procedure FnCheckLoanErrors(LoanProduct: Code[100]; Amount: Decimal; MemberNo: Code[40]): Boolean
     var
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
     begin
         if Amount > 0 then begin
             ObjLoans.Reset;

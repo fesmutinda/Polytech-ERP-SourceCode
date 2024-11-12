@@ -319,13 +319,13 @@ Page 51516559 "Loan Collateral Register Card"
     end;
 
     var
-        ObjCollateralDeprReg: Record UnknownRecord51516921;
-        ObjCollateralDetails: Record UnknownRecord51516374;
+        ObjCollateralDeprReg: Record 51516921;
+        ObjCollateralDetails: Record 51516374;
         VarNoofYears: Integer;
         VarDepreciationValue: Decimal;
-        ObjDepreciationRegister: Record UnknownRecord51516921;
+        ObjDepreciationRegister: Record 51516921;
         VarDepreciationNo: Integer;
-        ObjDeprCollateralMaster: Record UnknownRecord51516921;
+        ObjDeprCollateralMaster: Record 51516921;
         VarCurrentNBV: Decimal;
         ReceivedAtHQVisible: Boolean;
         StrongRoomVisible: Boolean;

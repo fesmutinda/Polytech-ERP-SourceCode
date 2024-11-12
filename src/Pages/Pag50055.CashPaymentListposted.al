@@ -76,6 +76,6 @@ Page 50055 "Cash Payment List posted"
     end;
 
     var
-        FundsSetup: Record UnknownRecord51516030;
+        FundsSetup: Record 51516030;
 }
 

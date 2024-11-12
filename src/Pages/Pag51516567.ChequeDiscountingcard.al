@@ -344,15 +344,15 @@ Page 51516567 "Cheque Discounting card"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         EnablePosting: Boolean;
-        ObjTransactions: Record UnknownRecord51516441;
+        ObjTransactions: Record 51516441;
         SFactory: Codeunit UnknownCodeunit51516007;
         BATCH_TEMPLATE: Code[100];
         BATCH_NAME: Code[100];
         DOCUMENT_NO: Code[100];
         LineNo: Integer;
         GenJournalLine: Record "Gen. Journal Line";
-        GenSetup: Record UnknownRecord51516398;
-        ObjDiscountingLedger: Record UnknownRecord51516427;
+        GenSetup: Record 51516398;
+        ObjDiscountingLedger: Record 51516427;
 
     local procedure FnAddRecordRestriction()
     begin

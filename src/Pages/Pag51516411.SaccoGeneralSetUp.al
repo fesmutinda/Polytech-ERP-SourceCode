@@ -658,7 +658,7 @@ Page 51516411 "Sacco General Set-Up"
     }
 
     var
-        Cust: Record UnknownRecord51516364;
-        Loans: Record UnknownRecord51516371;
+        Cust: Record 51516364;
+        Loans: Record 51516371;
 }
 

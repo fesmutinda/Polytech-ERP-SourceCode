@@ -316,22 +316,22 @@ Page 51516490 "Salary Processing Header"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record UnknownRecord51516415;
+        ReceiptsProcessingLines: Record 51516415;
         LineNo: Integer;
-        LBatches: Record UnknownRecord51516377;
+        LBatches: Record 51516377;
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record UnknownRecord51516414;
-        Cust: Record UnknownRecord51516364;
-        salarybuffer: Record UnknownRecord51516460;
-        SalHeader: Record UnknownRecord51516459;
-        Sto: Record UnknownRecord51516449;
-        ELoanBuffer: Record UnknownRecord51516533;
+        ReptProcHeader: Record 51516414;
+        Cust: Record 51516364;
+        salarybuffer: Record 51516460;
+        SalHeader: Record 51516459;
+        Sto: Record 51516449;
+        ELoanBuffer: Record 51516533;
         ObjVendor: Record Vendor;
-        MembLedg: Record UnknownRecord51516365;
+        MembLedg: Record 51516365;
         SFactory: Codeunit UnknownCodeunit51516007;
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
@@ -339,14 +339,14 @@ Page 51516490 "Salary Processing Header"
         GenJournalLine: Record "Gen. Journal Line";
         ActionEnabled: Boolean;
         ObjVendorLedger: Record "Vendor Ledger Entry";
-        ObjGenSetup: Record UnknownRecord51516398;
-        Charges: Record UnknownRecord51516439;
+        ObjGenSetup: Record 51516398;
+        Charges: Record 51516439;
         SalProcessingFee: Decimal;
-        LoanApp: Record UnknownRecord51516371;
+        LoanApp: Record 51516371;
         Datefilter: Text;
         DedStatus: Option Successfull,"Partial Deduction",Failed;
-        ObjSTORegister: Record UnknownRecord51516450;
-        ObjLoanProducts: Record UnknownRecord51516381;
+        ObjSTORegister: Record 51516450;
+        ObjLoanProducts: Record 51516381;
         Window: Dialog;
         TotalCount: Integer;
         Counter: Integer;
@@ -355,7 +355,7 @@ Page 51516490 "Salary Processing Header"
         SMSCODE: Code[30];
         enddate: Date;
 
-    local procedure FnPostSalaryToFosa(ObjSalaryLines: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnPostSalaryToFosa(ObjSalaryLines: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
     begin
@@ -365,7 +365,7 @@ Page 51516490 "Salary Processing Header"
         exit(RunningBalance);
     end;
 
-    local procedure FnRecoverStatutories(ObjSalaryLines: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnRecoverStatutories(ObjSalaryLines: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
     begin
@@ -415,7 +415,7 @@ Page 51516490 "Salary Processing Header"
         exit(RunningBalance);
     end;
 
-    local procedure FnRecoverMobileLoanInterest(ObjRcptBuffer: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnRecoverMobileLoanInterest(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
     begin
@@ -458,7 +458,7 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnRecoverMobileLoanPrincipal(ObjRcptBuffer: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnRecoverMobileLoanPrincipal(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
         varLRepayment: Decimal;
@@ -511,10 +511,10 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnRunInterest(ObjRcptBuffer: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnRunInterest(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
     begin
         if RunningBalance > 0 then begin
             LoanApp.Reset;
@@ -555,10 +555,10 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnRunPrinciple(ObjRcptBuffer: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnRunPrinciple(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -623,15 +623,15 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnRunStandingOrders(ObjRcptBuffer: Record UnknownRecord51516460; RunningBalance: Decimal): Decimal
+    local procedure FnRunStandingOrders(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjStandingOrders: Record UnknownRecord51516449;
+        ObjStandingOrders: Record 51516449;
     begin
         if RunningBalance > 0 then begin
             varTotalRepay := 0;
@@ -702,7 +702,7 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnCheckIfStandingOrderIsRunnable(ObjStandingOrders: Record UnknownRecord51516449) DontEffect: Boolean
+    local procedure FnCheckIfStandingOrderIsRunnable(ObjStandingOrders: Record 51516449) DontEffect: Boolean
     begin
         DontEffect := false;
 
@@ -715,15 +715,15 @@ Page 51516490 "Salary Processing Header"
         exit(DontEffect);
     end;
 
-    local procedure FnNonBosaStandingOrderTransaction(ObjRcptBuffer: Record UnknownRecord51516449; RunningBalance: Decimal): Decimal
+    local procedure FnNonBosaStandingOrderTransaction(ObjRcptBuffer: Record 51516449; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjStandingOrders: Record UnknownRecord51516449;
+        ObjStandingOrders: Record 51516449;
     begin
         if RunningBalance > 0 then begin
             //-------------RECOVER-----------------------------------------------------------------------------------------------------------------------
@@ -746,15 +746,15 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnBosaStandingOrderTransaction(ObjRcptBuffer: Record UnknownRecord51516449; RunningBalance: Decimal): Decimal
+    local procedure FnBosaStandingOrderTransaction(ObjRcptBuffer: Record 51516449; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record UnknownRecord51516387;
+        ObjReceiptTransactions: Record 51516387;
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjStandingOrders: Record UnknownRecord51516449;
+        ObjStandingOrders: Record 51516449;
     begin
         if RunningBalance > 0 then begin
             ObjReceiptTransactions.Reset;
@@ -823,7 +823,7 @@ Page 51516490 "Salary Processing Header"
         end;
     end;
 
-    local procedure FnRegisterProcessedStandingOrder(ObjStandingOrders: Record UnknownRecord51516449; AmountToDeduct: Decimal)
+    local procedure FnRegisterProcessedStandingOrder(ObjStandingOrders: Record 51516449; AmountToDeduct: Decimal)
     begin
         ObjSTORegister.Reset;
         ObjSTORegister.SetRange("Document No.", No);

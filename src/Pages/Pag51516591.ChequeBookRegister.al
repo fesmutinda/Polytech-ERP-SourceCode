@@ -71,6 +71,6 @@ Page 51516591 "Cheque Book Register"
         BankerCh: Code[20];
         NoOfLeaves: Integer;
         i: Integer;
-        BankerR: Record UnknownRecord51516528;
+        BankerR: Record 51516528;
 }
 

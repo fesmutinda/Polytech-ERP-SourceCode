@@ -219,7 +219,7 @@ Page 51516482 "Checkoff Processing Header-D"
                     Insurance: Decimal;
                     CompanyInfo: Record "Company Information";
                     PeriodName: Text;
-                    ObjCheckoffLines: Record UnknownRecord51516415;
+                    ObjCheckoffLines: Record 51516415;
                     DeamndSavings: Decimal;
                     TotalAmount: Decimal;
                     TotalLines: Decimal;
@@ -378,7 +378,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
                 trigger OnAction()
                 var
-                    LoanT: Record UnknownRecord51516371;
+                    LoanT: Record 51516371;
                     LoanProdType: Code[30];
                 begin
                     if "Loan CutOff Date" = 0D then
@@ -724,22 +724,22 @@ Page 51516482 "Checkoff Processing Header-D"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record UnknownRecord51516415;
+        ReceiptsProcessingLines: Record 51516415;
         LineNo: Integer;
-        LBatches: Record UnknownRecord51516377;
+        LBatches: Record 51516377;
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record UnknownRecord51516414;
-        Cust: Record UnknownRecord51516364;
+        ReptProcHeader: Record 51516414;
+        Cust: Record 51516364;
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record UnknownRecord51516371;
+        Loantable: Record 51516371;
         LRepayment: Decimal;
-        RcptBufLines: Record UnknownRecord51516415;
-        LoanType: Record UnknownRecord51516381;
-        LoanApp: Record UnknownRecord51516371;
+        RcptBufLines: Record 51516415;
+        LoanType: Record 51516381;
+        LoanApp: Record 51516371;
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -750,13 +750,13 @@ Page 51516482 "Checkoff Processing Header-D"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        genstup: Record UnknownRecord51516398;
-        Memb: Record UnknownRecord51516364;
+        genstup: Record 51516398;
+        Memb: Record 51516364;
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
-        ReceiptLine: Record UnknownRecord51516415;
-        MembLedg: Record UnknownRecord51516365;
+        ReceiptLine: Record 51516415;
+        MembLedg: Record 51516365;
         SFactory: Codeunit UnknownCodeunit51516007;
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
@@ -768,14 +768,14 @@ Page 51516482 "Checkoff Processing Header-D"
         TotalCount: Integer;
         Counter: Integer;
         Percentage: Integer;
-        ObjCust: Record UnknownRecord51516364;
-        ObjSaccoGenSetUp: Record UnknownRecord51516398;
+        ObjCust: Record 51516364;
+        ObjSaccoGenSetUp: Record 51516398;
         MemberNumber: Code[20];
         SURESTEPFactory: Codeunit UnknownCodeunit51516007;
-        Temp: Record UnknownRecord51516031;
+        Temp: Record 51516031;
         DefaulterPaymentType: Option;
         KNFactory: Codeunit UnknownCodeunit51516030;
-        BufferTable: Record UnknownRecord51516917;
+        BufferTable: Record 51516917;
         UnallocatedFunds: Decimal;
         LoanOutstandingBalance: Decimal;
         LoanOutstandingInterest: Decimal;
@@ -783,13 +783,13 @@ Page 51516482 "Checkoff Processing Header-D"
         InterestTopay: Decimal;
         MemberTotal: Decimal;
         UnallocatedPerLoanProd: Decimal;
-        LoanProductsSetup: Record UnknownRecord51516381;
+        LoanProductsSetup: Record 51516381;
         UpdateInterest: Decimal;
         UpdatePrinciple: Decimal;
-        CheckoffLinesBuffer: Record UnknownRecord51516572;
-        Vend: Record UnknownRecord51516364;
+        CheckoffLinesBuffer: Record 51516572;
+        Vend: Record 51516364;
         LNNO: Code[20];
-        LoansRegister6: Record UnknownRecord51516371;
+        LoansRegister6: Record 51516371;
         Postingdate: Date;
 
     local procedure FnInitiateProgressBar()
@@ -805,7 +805,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
     local procedure FnGetLoanNo(MemberNo: Code[20]; LoanType: Code[20]) LoanNo: Code[20]
     var
-        ObjLoansRegister: Record UnknownRecord51516371;
+        ObjLoansRegister: Record 51516371;
     begin
         ObjLoansRegister.Reset;
         ObjLoansRegister.SetRange(ObjLoansRegister."Client Code", MemberNo);
@@ -819,7 +819,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
     local procedure FnGetMemberNo(PayrollNo: Code[30]; EmployerCode: Code[30]) MemberNo: Code[20]
     var
-        ObjMembersReg: Record UnknownRecord51516364;
+        ObjMembersReg: Record 51516364;
     begin
         ObjMembersReg.Reset;
         ObjMembersReg.SetRange(ObjMembersReg."Personal No", PayrollNo);
@@ -832,7 +832,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
     local procedure KnGetPeriodDescription(Period: Date): Text
     var
-        ObjCheckOffPeriods: Record UnknownRecord51516428;
+        ObjCheckOffPeriods: Record 51516428;
         Description: Text;
     begin
         ObjCheckOffPeriods.Reset;

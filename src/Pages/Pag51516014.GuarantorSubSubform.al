@@ -94,6 +94,6 @@ Page 51516014 "Guarantor Sub Subform"
 
     var
         SubPageEditable: Boolean;
-        GSubHeader: Record UnknownRecord51516563;
+        GSubHeader: Record 51516563;
 }
 

@@ -139,6 +139,6 @@ Page 51516389 "Loan Offset Detail List"
     }
 
     var
-        ObjLoanOffset: Record UnknownRecord51516376;
+        ObjLoanOffset: Record 51516376;
 }
 

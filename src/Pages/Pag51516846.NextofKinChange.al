@@ -75,8 +75,8 @@ Page 51516846 "Next of Kin-Change"
     }
 
     var
-        ProductNxK: Record UnknownRecord51516433;
-        MembNxK: Record UnknownRecord51516366;
-        cloudRequest: Record UnknownRecord51516350;
+        ProductNxK: Record 51516433;
+        MembNxK: Record 51516366;
+        cloudRequest: Record 51516350;
 }
 

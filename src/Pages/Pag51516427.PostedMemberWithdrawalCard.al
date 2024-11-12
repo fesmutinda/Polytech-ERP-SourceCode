@@ -231,9 +231,9 @@ Page 51516427 "Posted Member Withdrawal Card"
     var
         Closure: Integer;
         Text001: label 'Not Approved';
-        cust: Record UnknownRecord51516364;
+        cust: Record 51516364;
         UBFRefund: Decimal;
-        Generalsetup: Record UnknownRecord51516398;
+        Generalsetup: Record 51516398;
         Totalavailable: Decimal;
         UnpaidDividends: Decimal;
         TotalOustanding: Decimal;
@@ -244,7 +244,7 @@ Page 51516427 "Posted Member Withdrawal Card"
         Advice: Boolean;
         TotalDefaulterR: Decimal;
         AvailableShares: Decimal;
-        Loans: Record UnknownRecord51516371;
+        Loans: Record 51516371;
         Value1: Decimal;
         Interest: Decimal;
         LineN: Integer;
@@ -261,11 +261,11 @@ Page 51516427 "Posted Member Withdrawal Card"
         LineNo: Integer;
         GenJournalLine: Record "Gen. Journal Line";
         "Remaining Amount": Decimal;
-        LoansR: Record UnknownRecord51516371;
+        LoansR: Record 51516371;
         "AMOUNTTO BE RECOVERED": Decimal;
         PrincipInt: Decimal;
         TotalLoansOut: Decimal;
-        ClosureR: Record UnknownRecord51516400;
+        ClosureR: Record 51516400;
 
 
     procedure UpdateControl()

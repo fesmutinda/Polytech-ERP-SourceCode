@@ -133,22 +133,22 @@ Page 51516161 "HR Appraisal Period List"
     }
 
     var
-        objCurrPeriod: Record UnknownRecord51516186;
-        objHRSetup: Record UnknownRecord51516181;
+        objCurrPeriod: Record 51516186;
+        objHRSetup: Record 51516181;
         decMonths: Decimal;
-        objNewPeriod: Record UnknownRecord51516186;
+        objNewPeriod: Record 51516186;
         strNewPeriodDesc: Text;
         NewFromDate: Date;
         NewToDate: Date;
-        objAppraisalHeader: Record UnknownRecord51516216;
-        objAppraisalLine: Record UnknownRecord51516217;
+        objAppraisalHeader: Record 51516216;
+        objAppraisalLine: Record 51516217;
         CurrFromDate: Date;
         CurrToDate: Date;
         currPeriod: Code[50];
-        objNewAppraisalHeader: Record UnknownRecord51516216;
+        objNewAppraisalHeader: Record 51516216;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        HRSetup: Record UnknownRecord51516181;
-        objNewAppraisalHeaderX: Record UnknownRecord51516216;
+        HRSetup: Record 51516181;
+        objNewAppraisalHeaderX: Record 51516216;
 
 
     procedure newAppraisalStage() newAppraisalStage: Text

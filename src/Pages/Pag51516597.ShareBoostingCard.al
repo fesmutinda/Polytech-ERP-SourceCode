@@ -237,10 +237,10 @@ Page 51516597 "Share Boosting Card"
     end;
 
     var
-        PayOffDetails: Record UnknownRecord51516527;
+        PayOffDetails: Record 51516527;
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
-        LoanType: Record UnknownRecord51516381;
-        GenSetup: Record UnknownRecord51516398;
+        LoanType: Record 51516381;
+        GenSetup: Record 51516398;
 }
 

@@ -145,9 +145,9 @@ Page 51516136 "Loan Rescheduling card"
     }
 
     var
-        Loans: Record UnknownRecord51516371;
-        Reschedule: Record UnknownRecord51516069;
-        Rschedule: Record UnknownRecord51516375;
+        Loans: Record 51516371;
+        Reschedule: Record 51516069;
+        Rschedule: Record 51516375;
         LoanAmount: Decimal;
         InterestRate: Integer;
         RepayPeriod: Integer;
@@ -163,7 +163,7 @@ Page 51516136 "Loan Rescheduling card"
         WhichDay: Integer;
         TotalMRepay: Decimal;
         SFactory: Codeunit UnknownCodeunit51516007;
-        LoanApp: Record UnknownRecord51516371;
+        LoanApp: Record 51516371;
 
     local procedure FnRescheduleLoan()
     begin
@@ -218,95 +218,95 @@ Page 51516136 "Loan Rescheduling card"
 
 
                     repeat
-            InstalNo := InstalNo + 1;
-            //Repayment Frequency
-            if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Daily then
-                RunDate := CalcDate('1D', RunDate)
-            else if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Weekly then
-                RunDate := CalcDate('1W', RunDate)
-            else if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Monthly then
-                RunDate := CalcDate('1M', RunDate)
-            else if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Quaterly then
-                RunDate := CalcDate('1Q', RunDate);
+                        InstalNo := InstalNo + 1;
+                        //Repayment Frequency
+                        if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Daily then
+                            RunDate := CalcDate('1D', RunDate)
+                        else if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Weekly then
+                            RunDate := CalcDate('1W', RunDate)
+                        else if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Monthly then
+                            RunDate := CalcDate('1M', RunDate)
+                        else if Reschedule."Repayment Frequency" = Reschedule."repayment frequency"::Quaterly then
+                            RunDate := CalcDate('1Q', RunDate);
 
 
 
 
-            if InterestRate > 0 then begin
-                if Reschedule.RepayMethod = Reschedule.Repaymethod::Amortised then begin
-                    Reschedule.TestField(Installments);
-                    TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
-                    LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
-                    LPrincipal := TotalMRepay - LInterest;
-                end;
+                        if InterestRate > 0 then begin
+                            if Reschedule.RepayMethod = Reschedule.Repaymethod::Amortised then begin
+                                Reschedule.TestField(Installments);
+                                TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
+                                LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
+                                LPrincipal := TotalMRepay - LInterest;
+                            end;
 
-                if Reschedule.RepayMethod = Reschedule.Repaymethod::"Straight Line" then begin
-                    Reschedule.TestField(Interests);
-                    Reschedule.TestField(Installments);
-                    LPrincipal := LoanAmount / RepayPeriod;
-                    ///LInterest:=(InterestRate/12/100)*LoanAmount/RepayPeriod;
-                    LInterest := (InterestRate / 12 / 100) * LoanAmount;
+                            if Reschedule.RepayMethod = Reschedule.Repaymethod::"Straight Line" then begin
+                                Reschedule.TestField(Interests);
+                                Reschedule.TestField(Installments);
+                                LPrincipal := LoanAmount / RepayPeriod;
+                                ///LInterest:=(InterestRate/12/100)*LoanAmount/RepayPeriod;
+                                LInterest := (InterestRate / 12 / 100) * LoanAmount;
 
-                end;
+                            end;
 
-                if Reschedule.RepayMethod = Reschedule.Repaymethod::"Reducing Balance" then begin
-                    Reschedule.TestField(Interests);
-                    Reschedule.TestField(Installments);
-                    LPrincipal := LoanAmount / RepayPeriod;
-                    LInterest := (InterestRate / 12 / 100) * LBalance;
-                end;
-            end;
-            //IF Reschedule.RepayMethod=Reschedule.RepayMethod::Constants THEN BEGIN
-            //Reschedule.TESTFIELD(r);
-            // IF LBalance < LoansRec.Repayment THEN
-            // LPrincipal:=LBalance
-            // ELSE
-            // LPrincipal:=LoansRec.Repayment;
-            // LInterest:=LoansRec.Interest;
-            // END;
-            // Reschedule.TESTFIELD(Reschedule.Interests);
-            // Reschedule.TESTFIELD(Reschedule.Installments);
-            //
-            // LPrincipal:=ROUND((LoanAmount/Reschedule.Installments),0.05,'>');
-            // LInterest:=(InterestRate/12/100)*LoanAmount/RepayPeriod;
-
-
+                            if Reschedule.RepayMethod = Reschedule.Repaymethod::"Reducing Balance" then begin
+                                Reschedule.TestField(Interests);
+                                Reschedule.TestField(Installments);
+                                LPrincipal := LoanAmount / RepayPeriod;
+                                LInterest := (InterestRate / 12 / 100) * LBalance;
+                            end;
+                        end;
+                        //IF Reschedule.RepayMethod=Reschedule.RepayMethod::Constants THEN BEGIN
+                        //Reschedule.TESTFIELD(r);
+                        // IF LBalance < LoansRec.Repayment THEN
+                        // LPrincipal:=LBalance
+                        // ELSE
+                        // LPrincipal:=LoansRec.Repayment;
+                        // LInterest:=LoansRec.Interest;
+                        // END;
+                        // Reschedule.TESTFIELD(Reschedule.Interests);
+                        // Reschedule.TESTFIELD(Reschedule.Installments);
+                        //
+                        // LPrincipal:=ROUND((LoanAmount/Reschedule.Installments),0.05,'>');
+                        // LInterest:=(InterestRate/12/100)*LoanAmount/RepayPeriod;
 
 
-            //Grace Period
-            if GrPrinciple > 0 then begin
-                LPrincipal := 0
-            end else begin
-                LBalance := LBalance - LPrincipal;
-
-            end;
-
-            if GrInterest > 0 then
-                LInterest := 0;
-
-            GrPrinciple := GrPrinciple - 1;
-            GrInterest := GrInterest - 1;
-            Evaluate(RepayCode, Format(InstalNo));
 
 
-            Rschedule.Init;
-            Rschedule."Repayment Code" := RepayCode;
-            Rschedule."Interest Rate" := InterestRate;
-            Rschedule."Loan No." := "Loan No";
-            Rschedule."Loan Amount" := LoanAmount;
-            Rschedule."Instalment No" := InstalNo;
-            Rschedule."Repayment Date" := CalcDate('CM', RunDate);
-            //MESSAGE('rundate is %1',RunDate);
+                        //Grace Period
+                        if GrPrinciple > 0 then begin
+                            LPrincipal := 0
+                        end else begin
+                            LBalance := LBalance - LPrincipal;
 
-            Rschedule."Member No." := "Member No";
-            Rschedule."Loan Category" := "Loan Product Type";
-            Rschedule."Monthly Repayment" := LPrincipal + LInterest;
+                        end;
 
-            Rschedule."Monthly Interest" := LInterest;
-            Rschedule."Principal Repayment" := LPrincipal;
-            Rschedule."Remaining Debt" := LBalance;
-            Rschedule.Insert;
-            WhichDay := Date2dwy(Rschedule."Repayment Date", 1);
+                        if GrInterest > 0 then
+                            LInterest := 0;
+
+                        GrPrinciple := GrPrinciple - 1;
+                        GrInterest := GrInterest - 1;
+                        Evaluate(RepayCode, Format(InstalNo));
+
+
+                        Rschedule.Init;
+                        Rschedule."Repayment Code" := RepayCode;
+                        Rschedule."Interest Rate" := InterestRate;
+                        Rschedule."Loan No." := "Loan No";
+                        Rschedule."Loan Amount" := LoanAmount;
+                        Rschedule."Instalment No" := InstalNo;
+                        Rschedule."Repayment Date" := CalcDate('CM', RunDate);
+                        //MESSAGE('rundate is %1',RunDate);
+
+                        Rschedule."Member No." := "Member No";
+                        Rschedule."Loan Category" := "Loan Product Type";
+                        Rschedule."Monthly Repayment" := LPrincipal + LInterest;
+
+                        Rschedule."Monthly Interest" := LInterest;
+                        Rschedule."Principal Repayment" := LPrincipal;
+                        Rschedule."Remaining Debt" := LBalance;
+                        Rschedule.Insert;
+                        WhichDay := Date2dwy(Rschedule."Repayment Date", 1);
                     until LBalance < 1
 
             end;

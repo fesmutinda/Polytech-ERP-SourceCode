@@ -172,6 +172,6 @@ Page 51516022 "Posted Mobile Payment Card"
     end;
 
     var
-        PHeader: Record UnknownRecord51516000;
+        PHeader: Record 51516000;
 }
 

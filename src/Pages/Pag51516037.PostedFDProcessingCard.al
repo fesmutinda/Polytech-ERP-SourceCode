@@ -470,22 +470,22 @@ Page 51516037 "Posted FD Processing Card"
     }
 
     var
-        FDProcess: Record UnknownRecord51516435;
+        FDProcess: Record 51516435;
         CalendarMgmt: Codeunit "Calendar Management";
         PaymentToleranceMgt: Codeunit "Payment Tolerance Management";
         CustomizedCalEntry: Record "Customized Calendar Entry";
         CustomizedCalendar: Record "Customized Calendar Change";
         PictureExists: Boolean;
-        AccountTypes: Record UnknownRecord51516436;
+        AccountTypes: Record 51516436;
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        StatusPermissions: Record UnknownRecord51516452;
-        Charges: Record UnknownRecord51516439;
+        StatusPermissions: Record 51516452;
+        Charges: Record 51516439;
         ForfeitInterest: Boolean;
-        InterestBuffer: Record UnknownRecord51516467;
-        FDType: Record UnknownRecord51516447;
+        InterestBuffer: Record 51516467;
+        FDType: Record 51516447;
         Vend: Record Vendor;
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
         LineNo: Integer;
         UsersID: Record User;
         DActivity: Code[20];
@@ -495,23 +495,23 @@ Page 51516037 "Posted FD Processing Card"
         OInterest: Decimal;
         Gnljnline: Record "Gen. Journal Line";
         TotalRecovered: Decimal;
-        LoansR: Record UnknownRecord51516371;
+        LoansR: Record 51516371;
         LoanAllocation: Decimal;
-        LGurantors: Record UnknownRecord51516462;
-        Loans: Record UnknownRecord51516371;
+        LGurantors: Record 51516462;
+        Loans: Record 51516371;
         DefaulterType: Code[20];
         LastWithdrawalDate: Date;
-        AccountType: Record UnknownRecord51516436;
+        AccountType: Record 51516436;
         ReplCharge: Decimal;
         Acc: Record Vendor;
         SearchAcc: Code[10];
         Searchfee: Decimal;
-        Statuschange: Record UnknownRecord51516452;
+        Statuschange: Record 51516452;
         UnclearedLoan: Decimal;
         LineN: Integer;
         Joint2DetailsVisible: Boolean;
         Joint3DetailsVisible: Boolean;
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         TerminateTxt: label 'The Term Deposit Has Already Been Terminated';
 
 

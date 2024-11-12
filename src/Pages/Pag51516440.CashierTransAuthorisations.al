@@ -217,10 +217,10 @@ Page 51516440 "Cashier Trans Authorisations"
     end;
 
     var
-        Transactions: Record UnknownRecord51516441;
-        SupervisorApprovals: Record UnknownRecord51516451;
+        Transactions: Record 51516441;
+        SupervisorApprovals: Record 51516451;
         UsersID: Record User;
-        "Gen-Setup": Record UnknownRecord51516398;
+        "Gen-Setup": Record 51516398;
         SendToAddress: Text[30];
         BankAccount: Record "Bank Account";
         MailContent: Text[150];

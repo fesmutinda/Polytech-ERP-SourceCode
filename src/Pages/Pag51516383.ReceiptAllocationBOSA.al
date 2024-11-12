@@ -76,9 +76,9 @@ Page 51516383 "Receipt Allocation-BOSA"
     end;
 
     var
-        sto: Record UnknownRecord51516449;
-        Loan: Record UnknownRecord51516371;
-        ReceiptAllocation: Record UnknownRecord51516387;
-        ReceiptH: Record UnknownRecord51516388;
+        sto: Record 51516449;
+        Loan: Record 51516371;
+        ReceiptAllocation: Record 51516387;
+        ReceiptH: Record 51516388;
 }
 

@@ -84,6 +84,6 @@ Page 51516412 "Interest Due Periods"
     var
         InvtPeriod: Record "Inventory Period";
         date: DateFormula;
-        InterestPeriod: Record UnknownRecord51516391;
+        InterestPeriod: Record 51516391;
 }
 

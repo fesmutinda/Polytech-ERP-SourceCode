@@ -123,6 +123,6 @@ Page 50050 "Payment Voucher List posted"
     end;
 
     var
-        PHeader2: Record UnknownRecord51516112;
+        PHeader2: Record 51516112;
 }
 

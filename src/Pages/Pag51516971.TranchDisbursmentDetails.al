@@ -54,6 +54,6 @@ Page 51516971 "Tranch Disbursment Details"
     end;
 
     var
-        ObjLoans: Record UnknownRecord51516371;
+        ObjLoans: Record 51516371;
 }
 

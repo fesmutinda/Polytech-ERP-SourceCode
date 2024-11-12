@@ -145,9 +145,9 @@ Page 51516259 "HR Disciplinary Cases List"
     end;
 
     var
-        HREmp: Record UnknownRecord51516160;
+        HREmp: Record 51516160;
         EmpNames: Text[40];
-        HRDisciplinary: Record UnknownRecord51516206;
+        HRDisciplinary: Record 51516206;
         Number: Integer;
 }
 

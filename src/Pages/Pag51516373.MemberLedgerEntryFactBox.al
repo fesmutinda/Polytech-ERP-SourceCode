@@ -163,18 +163,18 @@ Page 51516373 "Member Ledger Entry FactBox"
     end;
 
 
-    procedure GetNoOfAppliedEntries(CustLedgerEntry: Record UnknownRecord51516365): Integer
+    procedure GetNoOfAppliedEntries(CustLedgerEntry: Record 51516365): Integer
     begin
         GetAppliedEntries(CustLedgerEntry);
         exit(CustLedgerEntry.Count);
     end;
 
 
-    procedure GetAppliedEntries(var CustLedgerEntry: Record UnknownRecord51516365)
+    procedure GetAppliedEntries(var CustLedgerEntry: Record 51516365)
     var
         DtldCustLedgEntry1: Record "Detailed Cust. Ledg. Entry";
         DtldCustLedgEntry2: Record "Detailed Cust. Ledg. Entry";
-        CreateCustLedgEntry: Record UnknownRecord51516365;
+        CreateCustLedgEntry: Record 51516365;
     begin
         CreateCustLedgEntry := CustLedgerEntry;
 
@@ -233,7 +233,7 @@ Page 51516373 "Member Ledger Entry FactBox"
     end;
 
 
-    procedure GetDocumentHeading(CustLedgerEntry: Record UnknownRecord51516365): Text[50]
+    procedure GetDocumentHeading(CustLedgerEntry: Record 51516365): Text[50]
     var
         Heading: Text[50];
     begin

@@ -498,7 +498,7 @@ Page 50013 "Posted Sacco Transfer Card"
         DActivity: Code[20];
         DBranch: Code[20];
         UsersID: Record User;
-        FundsUSer: Record UnknownRecord51516031;
+        FundsUSer: Record 51516031;
         Jtemplate: Code[10];
         Jbatch: Code[10];
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions,FundsTransfer,SaccoTransfers;
@@ -517,7 +517,7 @@ Page 50013 "Posted Sacco Transfer Card"
         EnablePost: Boolean;
         Txt0001: label 'You cannot transfer another amount before three months elapse. ';
         DepositDebitTypeVisible: Boolean;
-        ObjGensetup: Record UnknownRecord51516398;
+        ObjGensetup: Record 51516398;
         BATCH_TEMPLATE: Code[50];
         BATCH_NAME: Code[50];
         DOCUMENT_NO: Code[50];

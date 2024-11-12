@@ -255,9 +255,9 @@ Page 51516526 "Customer Care Log"
     }
 
     var
-        Cust: Record UnknownRecord51516364;
-        PvApp: Record UnknownRecord51516045;
-        CustCare: Record UnknownRecord51516496;
-        CQuery: Record UnknownRecord51516496;
+        Cust: Record 51516364;
+        PvApp: Record 51516045;
+        CustCare: Record 51516496;
+        CQuery: Record 51516496;
 }
 

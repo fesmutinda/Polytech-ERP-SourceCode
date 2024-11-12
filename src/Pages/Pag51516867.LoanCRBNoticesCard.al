@@ -368,7 +368,7 @@ Page 51516867 "Loan CRB Notices Card"
         SurestepFactory: Codeunit UnknownCodeunit51516007;
         JTemplate: Code[20];
         JBatch: Code[20];
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         DocNo: Code[20];
         LineNo: Integer;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
@@ -376,10 +376,10 @@ Page 51516867 "Loan CRB Notices Card"
         BalAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         ObjVendors: Record Vendor;
-        ObjAccTypes: Record UnknownRecord51516436;
+        ObjAccTypes: Record 51516436;
         AvailableBal: Decimal;
-        ObjLoans: Record UnknownRecord51516371;
-        ObjDemands: Record UnknownRecord51516926;
+        ObjLoans: Record 51516371;
+        ObjDemands: Record 51516926;
         VarAuctioneerDetailsVisible: Boolean;
 
     local procedure FNenableVisbility()

@@ -69,7 +69,7 @@ Page 51516106 "RFQ Subform"
 
                 trigger OnAction()
                 var
-                    PParams: Record UnknownRecord51516106;
+                    PParams: Record 51516106;
                 begin
                     PParams.Reset;
                     PParams.SetRange(PParams."Document Type", "Document Type");

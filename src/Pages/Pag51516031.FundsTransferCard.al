@@ -234,11 +234,11 @@ Page 51516031 "Funds Transfer Card"
 
     var
         FundsManager: Codeunit UnknownCodeunit51516000;
-        FundsUser: Record UnknownRecord51516031;
+        FundsUser: Record 51516031;
         JTemplate: Code[50];
         JBatch: Code[50];
-        FHeader: Record UnknownRecord51516056;
-        FLine: Record UnknownRecord51516005;
+        FHeader: Record 51516056;
+        FLine: Record 51516005;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,FundsTransfer;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 

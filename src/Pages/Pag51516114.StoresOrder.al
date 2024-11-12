@@ -7,7 +7,7 @@ Page 51516114 "Stores Order"
     PageType = Document;
     RefreshOnActivate = true;
     SourceTable = "Purchase Header";
-    SourceTableView = where("Document Type"=const(Order));
+    SourceTableView = where("Document Type" = const(Order));
 
     layout
     {
@@ -16,7 +16,7 @@ Page 51516114 "Stores Order"
             group(General)
             {
                 Caption = 'General';
-                field("No.";"No.")
+                field("No."; "No.")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
@@ -25,10 +25,10 @@ Page 51516114 "Stores Order"
                     trigger OnAssistEdit()
                     begin
                         if AssistEdit(xRec) then
-                          CurrPage.Update;
+                            CurrPage.Update;
                     end;
                 }
-                field("Buy-from Vendor No.";"Buy-from Vendor No.")
+                field("Buy-from Vendor No."; "Buy-from Vendor No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -40,101 +40,101 @@ Page 51516114 "Stores Order"
                         BuyfromVendorNoOnAfterValidate;
                     end;
                 }
-                field("Buy-from Contact No.";"Buy-from Contact No.")
+                field("Buy-from Contact No."; "Buy-from Contact No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Buy-from Vendor Name";"Buy-from Vendor Name")
+                field("Buy-from Vendor Name"; "Buy-from Vendor Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Buy-from Address";"Buy-from Address")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Importance = Additional;
-                }
-                field("Buy-from Address 2";"Buy-from Address 2")
+                field("Buy-from Address"; "Buy-from Address")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Buy-from Post Code";"Buy-from Post Code")
+                field("Buy-from Address 2"; "Buy-from Address 2")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Buy-from City";"Buy-from City")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Buy-from Contact";"Buy-from Contact")
+                field("Buy-from Post Code"; "Buy-from Post Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("No. of Archived Versions";"No. of Archived Versions")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Additional;
-                }
-                field("Posting Date";"Posting Date")
+                field("Buy-from City"; "Buy-from City")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Order Date";"Order Date")
+                field("Buy-from Contact"; "Buy-from Contact")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Importance = Additional;
+                }
+                field("No. of Archived Versions"; "No. of Archived Versions")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Additional;
+                }
+                field("Posting Date"; "Posting Date")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Order Date"; "Order Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Document Date";"Document Date")
+                field("Document Date"; "Document Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Quote No.";"Quote No.")
+                field("Quote No."; "Quote No.")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Vendor Order No.";"Vendor Order No.")
+                field("Vendor Order No."; "Vendor Order No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Vendor Shipment No.";"Vendor Shipment No.")
+                field("Vendor Shipment No."; "Vendor Shipment No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Vendor Invoice No.";"Vendor Invoice No.")
+                field("Vendor Invoice No."; "Vendor Invoice No.")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     ShowMandatory = VendorInvoiceNoMandatory;
                 }
-                field("Receiving No.";"Receiving No.")
+                field("Receiving No."; "Receiving No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Order Address Code";"Order Address Code")
+                field("Order Address Code"; "Order Address Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Purchaser Code";"Purchaser Code")
+                field("Purchaser Code"; "Purchaser Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -145,49 +145,49 @@ Page 51516114 "Stores Order"
                         PurchaserCodeOnAfterValidate;
                     end;
                 }
-                field("Responsibility Center";"Responsibility Center")
+                field("Responsibility Center"; "Responsibility Center")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Assigned User ID";"Assigned User ID")
+                field("Assigned User ID"; "Assigned User ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Job Queue Status";"Job Queue Status")
+                field("Job Queue Status"; "Job Queue Status")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field(Type;Type)
+                field(Type; Type)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Requisition No.";"Requisition No.")
+                field("Requisition No."; "Requisition No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Status;Status)
+                field(Status; Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Promoted;
                 }
             }
-            part(PurchLines;"Purchase Order Subform")
+            part(PurchLines; "Purchase Order Subform")
             {
-                SubPageLink = "Document No."=field("No.");
+                SubPageLink = "Document No." = field("No.");
             }
             group(Invoicing)
             {
                 Caption = 'Invoicing';
-                field("Pay-to Vendor No.";"Pay-to Vendor No.")
+                field("Pay-to Vendor No."; "Pay-to Vendor No.")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
@@ -197,40 +197,40 @@ Page 51516114 "Stores Order"
                         PaytoVendorNoOnAfterValidate;
                     end;
                 }
-                field("Pay-to Contact No.";"Pay-to Contact No.")
+                field("Pay-to Contact No."; "Pay-to Contact No.")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Pay-to Name";"Pay-to Name")
+                field("Pay-to Name"; "Pay-to Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay-to Address";"Pay-to Address")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Additional;
-                }
-                field("Pay-to Address 2";"Pay-to Address 2")
+                field("Pay-to Address"; "Pay-to Address")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Pay-to Post Code";"Pay-to Post Code")
+                field("Pay-to Address 2"; "Pay-to Address 2")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Pay-to City";"Pay-to City")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Pay-to Contact";"Pay-to Contact")
+                field("Pay-to Post Code"; "Pay-to Post Code")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Shortcut Dimension 1 Code";"Shortcut Dimension 1 Code")
+                field("Pay-to City"; "Pay-to City")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Pay-to Contact"; "Pay-to Contact")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Additional;
+                }
+                field("Shortcut Dimension 1 Code"; "Shortcut Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
 
@@ -239,7 +239,7 @@ Page 51516114 "Stores Order"
                         ShortcutDimension1CodeOnAfterV;
                     end;
                 }
-                field("Shortcut Dimension 2 Code";"Shortcut Dimension 2 Code")
+                field("Shortcut Dimension 2 Code"; "Shortcut Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
 
@@ -248,48 +248,48 @@ Page 51516114 "Stores Order"
                         ShortcutDimension2CodeOnAfterV;
                     end;
                 }
-                field("Payment Terms Code";"Payment Terms Code")
+                field("Payment Terms Code"; "Payment Terms Code")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                     Visible = false;
                 }
-                field("Due Date";"Due Date")
+                field("Due Date"; "Due Date")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                     Visible = false;
                 }
-                field("Payment Discount %";"Payment Discount %")
+                field("Payment Discount %"; "Payment Discount %")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pmt. Discount Date";"Pmt. Discount Date")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Additional;
-                }
-                field("Payment Method Code";"Payment Method Code")
+                field("Pmt. Discount Date"; "Pmt. Discount Date")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
+                }
+                field("Payment Method Code"; "Payment Method Code")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Additional;
                     Visible = false;
                 }
-                field("Payment Reference";"Payment Reference")
+                field("Payment Reference"; "Payment Reference")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Creditor No.";"Creditor No.")
+                field("Creditor No."; "Creditor No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("On Hold";"On Hold")
+                field("On Hold"; "On Hold")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Prices Including VAT";"Prices Including VAT")
+                field("Prices Including VAT"; "Prices Including VAT")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -299,7 +299,7 @@ Page 51516114 "Stores Order"
                         PricesIncludingVATOnAfterValid;
                     end;
                 }
-                field("VAT Bus. Posting Group";"VAT Bus. Posting Group")
+                field("VAT Bus. Posting Group"; "VAT Bus. Posting Group")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -308,70 +308,70 @@ Page 51516114 "Stores Order"
             group(Shipping)
             {
                 Caption = 'Shipping';
-                field("Ship-to Name";"Ship-to Name")
+                field("Ship-to Name"; "Ship-to Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ship-to Address";"Ship-to Address")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Additional;
-                }
-                field("Ship-to Address 2";"Ship-to Address 2")
+                field("Ship-to Address"; "Ship-to Address")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Ship-to Post Code";"Ship-to Post Code")
+                field("Ship-to Address 2"; "Ship-to Address 2")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Ship-to City";"Ship-to City")
+                field("Ship-to Post Code"; "Ship-to Post Code")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Additional;
+                }
+                field("Ship-to City"; "Ship-to City")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ship-to Contact";"Ship-to Contact")
+                field("Ship-to Contact"; "Ship-to Contact")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Location Code";"Location Code")
+                field("Location Code"; "Location Code")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Inbound Whse. Handling Time";"Inbound Whse. Handling Time")
+                field("Inbound Whse. Handling Time"; "Inbound Whse. Handling Time")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Shipment Method Code";"Shipment Method Code")
+                field("Shipment Method Code"; "Shipment Method Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lead Time Calculation";"Lead Time Calculation")
+                field("Lead Time Calculation"; "Lead Time Calculation")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Requested Receipt Date";"Requested Receipt Date")
+                field("Requested Receipt Date"; "Requested Receipt Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Promised Receipt Date";"Promised Receipt Date")
+                field("Promised Receipt Date"; "Promised Receipt Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Receipt Date";"Expected Receipt Date")
+                field("Expected Receipt Date"; "Expected Receipt Date")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Sell-to Customer No.";"Sell-to Customer No.")
+                field("Sell-to Customer No."; "Sell-to Customer No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ship-to Code";"Ship-to Code")
+                field("Ship-to Code"; "Ship-to Code")
                 {
                     ApplicationArea = Basic;
                 }
@@ -379,7 +379,7 @@ Page 51516114 "Stores Order"
             group("Foreign Trade")
             {
                 Caption = 'Foreign Trade';
-                field("Currency Code";"Currency Code")
+                field("Currency Code"; "Currency Code")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
@@ -388,12 +388,12 @@ Page 51516114 "Stores Order"
                     begin
                         Clear(ChangeExchangeRate);
                         if "Posting Date" <> 0D then
-                          ChangeExchangeRate.SetParameter("Currency Code","Currency Factor","Posting Date")
+                            ChangeExchangeRate.SetParameter("Currency Code", "Currency Factor", "Posting Date")
                         else
-                          ChangeExchangeRate.SetParameter("Currency Code","Currency Factor",WorkDate);
+                            ChangeExchangeRate.SetParameter("Currency Code", "Currency Factor", WorkDate);
                         if ChangeExchangeRate.RunModal = Action::OK then begin
-                          Validate("Currency Factor",ChangeExchangeRate.GetParameter);
-                          CurrPage.Update;
+                            Validate("Currency Factor", ChangeExchangeRate.GetParameter);
+                            CurrPage.Update;
                         end;
                         Clear(ChangeExchangeRate);
                     end;
@@ -401,26 +401,26 @@ Page 51516114 "Stores Order"
                     trigger OnValidate()
                     begin
                         CurrPage.Update;
-                        PurchCalcDiscByType.ApplyDefaultInvoiceDiscount(0,Rec);
+                        PurchCalcDiscByType.ApplyDefaultInvoiceDiscount(0, Rec);
                     end;
                 }
-                field("Transaction Type";"Transaction Type")
+                field("Transaction Type"; "Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Specification";"Transaction Specification")
+                field("Transaction Specification"; "Transaction Specification")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transport Method";"Transport Method")
+                field("Transport Method"; "Transport Method")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entry Point";"Entry Point")
+                field("Entry Point"; "Entry Point")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Area";Area)
+                field("Area"; Area)
                 {
                     ApplicationArea = Basic;
                 }
@@ -428,7 +428,7 @@ Page 51516114 "Stores Order"
             group(Prepayment)
             {
                 Caption = 'Prepayment';
-                field("Prepayment %";"Prepayment %")
+                field("Prepayment %"; "Prepayment %")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
@@ -438,28 +438,28 @@ Page 51516114 "Stores Order"
                         Prepayment37OnAfterValidate;
                     end;
                 }
-                field("Compress Prepayment";"Compress Prepayment")
+                field("Compress Prepayment"; "Compress Prepayment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Prepmt. Payment Terms Code";"Prepmt. Payment Terms Code")
+                field("Prepmt. Payment Terms Code"; "Prepmt. Payment Terms Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Prepayment Due Date";"Prepayment Due Date")
+                field("Prepayment Due Date"; "Prepayment Due Date")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
                 }
-                field("Prepmt. Payment Discount %";"Prepmt. Payment Discount %")
+                field("Prepmt. Payment Discount %"; "Prepmt. Payment Discount %")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Prepmt. Pmt. Discount Date";"Prepmt. Pmt. Discount Date")
+                field("Prepmt. Pmt. Discount Date"; "Prepmt. Pmt. Discount Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vendor Cr. Memo No.";"Vendor Cr. Memo No.")
+                field("Vendor Cr. Memo No."; "Vendor Cr. Memo No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -467,38 +467,38 @@ Page 51516114 "Stores Order"
         }
         area(factboxes)
         {
-            part(Control8;"Approval FactBox")
+            part(Control8; "Approval FactBox")
             {
-                SubPageLink = "Table ID"=const(38),
-                              "Document Type"=field("Document Type"),
-                              "Document No."=field("No.");
+                SubPageLink = "Table ID" = const(38),
+                              "Document Type" = field("Document Type"),
+                              "Document No." = field("No.");
                 Visible = false;
             }
-            part(Control7;"Vendor Details FactBox")
+            part(Control7; "Vendor Details FactBox")
             {
-                SubPageLink = "No."=field("Buy-from Vendor No.");
+                SubPageLink = "No." = field("Buy-from Vendor No.");
                 Visible = false;
             }
-            part(Control6;"Vendor Statistics FactBox")
+            part(Control6; "Vendor Statistics FactBox")
             {
-                SubPageLink = "No."=field("Buy-from Vendor No.");
+                SubPageLink = "No." = field("Buy-from Vendor No.");
                 Visible = true;
             }
-            part(Control5;"Vendor Hist. Buy-from FactBox")
+            part(Control5; "Vendor Hist. Buy-from FactBox")
             {
-                SubPageLink = "No."=field("Buy-from Vendor No.");
+                SubPageLink = "No." = field("Buy-from Vendor No.");
                 Visible = true;
             }
-            part(Control3;"Vendor Hist. Pay-to FactBox")
+            part(Control3; "Vendor Hist. Pay-to FactBox")
             {
-                SubPageLink = "No."=field("Pay-to Vendor No.");
+                SubPageLink = "No." = field("Pay-to Vendor No.");
                 Visible = false;
             }
-            systempart(Control2;Links)
+            systempart(Control2; Links)
             {
                 Visible = false;
             }
-            systempart(Control1;Notes)
+            systempart(Control1; Notes)
             {
                 Visible = true;
             }
@@ -515,7 +515,7 @@ Page 51516114 "Stores Order"
                 Image = "Order";
                 action(Dimensions)
                 {
-                    AccessByPermission = TableData Dimension=R;
+                    AccessByPermission = TableData Dimension = R;
                     ApplicationArea = Basic;
                     Caption = 'Dimensions';
                     Image = Dimensions;
@@ -544,7 +544,7 @@ Page 51516114 "Stores Order"
                     begin
                         CalcInvDiscForHeader;
                         Commit;
-                        Page.RunModal(Page::"Purchase Order Statistics",Rec);
+                        Page.RunModal(Page::"Purchase Order Statistics", Rec);
                         PurchCalcDiscByType.ResetRecalculateInvoiceDisc(Rec);
                     end;
                 }
@@ -557,7 +557,7 @@ Page 51516114 "Stores Order"
                     //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedIsBig = false;
                     RunObject = Page "Vendor Card";
-                    RunPageLink = "No."=field("Buy-from Vendor No.");
+                    RunPageLink = "No." = field("Buy-from Vendor No.");
                     ShortCutKey = 'Shift+F7';
                 }
                 action(Approvals)
@@ -573,7 +573,7 @@ Page 51516114 "Stores Order"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header","Document Type","No.");
+                        ApprovalEntries.Setfilters(Database::"Purchase Header", "Document Type", "No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -583,9 +583,9 @@ Page 51516114 "Stores Order"
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page "Purch. Comment Sheet";
-                    RunPageLink = "Document Type"=field("Document Type"),
-                                  "No."=field("No."),
-                                  "Document Line No."=const(0);
+                    RunPageLink = "Document Type" = field("Document Type"),
+                                  "No." = field("No."),
+                                  "Document Line No." = const(0);
                 }
             }
             group(Documents)
@@ -598,7 +598,7 @@ Page 51516114 "Stores Order"
                     Caption = 'Receipts';
                     Image = PostedReceipts;
                     RunObject = Page "Posted Purchase Receipts";
-                    RunPageLink = "Order No."=field("No.");
+                    RunPageLink = "Order No." = field("No.");
                     RunPageView = sorting("Order No.");
                 }
                 action(Invoices)
@@ -610,7 +610,7 @@ Page 51516114 "Stores Order"
                     //The property 'PromotedIsBig' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedIsBig = false;
                     RunObject = Page "Posted Purchase Invoices";
-                    RunPageLink = "Order No."=field("No.");
+                    RunPageLink = "Order No." = field("No.");
                     RunPageView = sorting("Order No.");
                 }
                 action("Prepa&yment Invoices")
@@ -619,7 +619,7 @@ Page 51516114 "Stores Order"
                     Caption = 'Prepa&yment Invoices';
                     Image = PrepaymentInvoice;
                     RunObject = Page "Posted Purchase Invoices";
-                    RunPageLink = "Prepayment Order No."=field("No.");
+                    RunPageLink = "Prepayment Order No." = field("No.");
                     RunPageView = sorting("Prepayment Order No.");
                 }
                 action("Prepayment Credi&t Memos")
@@ -628,7 +628,7 @@ Page 51516114 "Stores Order"
                     Caption = 'Prepayment Credi&t Memos';
                     Image = PrepaymentCreditMemo;
                     RunObject = Page "Posted Purchase Credit Memos";
-                    RunPageLink = "Prepayment Order No."=field("No.");
+                    RunPageLink = "Prepayment Order No." = field("No.");
                     RunPageView = sorting("Prepayment Order No.");
                 }
             }
@@ -645,9 +645,9 @@ Page 51516114 "Stores Order"
                     Caption = 'In&vt. Put-away/Pick Lines';
                     Image = PickLines;
                     RunObject = Page "Warehouse Activity List";
-                    RunPageLink = "Source Document"=const("Purchase Order"),
-                                  "Source No."=field("No.");
-                    RunPageView = sorting("Source Document","Source No.","Location Code");
+                    RunPageLink = "Source Document" = const("Purchase Order"),
+                                  "Source No." = field("No.");
+                    RunPageView = sorting("Source Document", "Source No.", "Location Code");
                 }
                 action("Whse. Receipt Lines")
                 {
@@ -655,10 +655,10 @@ Page 51516114 "Stores Order"
                     Caption = 'Whse. Receipt Lines';
                     Image = ReceiptLines;
                     RunObject = Page "Whse. Receipt Lines";
-                    RunPageLink = "Source Type"=const(39),
-                                  "Source Subtype"=field("Document Type"),
-                                  "Source No."=field("No.");
-                    RunPageView = sorting("Source Type","Source Subtype","Source No.","Source Line No.");
+                    RunPageLink = "Source Type" = const(39),
+                                  "Source Subtype" = field("Document Type"),
+                                  "Source No." = field("No.");
+                    RunPageView = sorting("Source Type", "Source Subtype", "Source No.", "Source Line No.");
                 }
                 separator(Action140)
                 {
@@ -681,7 +681,7 @@ Page 51516114 "Stores Order"
                     Image = SpecialOrder;
                     action(Action136)
                     {
-                        AccessByPermission = TableData "Sales Shipment Header"=R;
+                        AccessByPermission = TableData "Sales Shipment Header" = R;
                         ApplicationArea = Basic;
                         Caption = 'Get &Sales Order';
                         Image = "Order";
@@ -747,7 +747,7 @@ Page 51516114 "Stores Order"
                 Image = "Action";
                 action(CalculateInvoiceDiscount)
                 {
-                    AccessByPermission = TableData "Vendor Invoice Disc."=R;
+                    AccessByPermission = TableData "Vendor Invoice Disc." = R;
                     ApplicationArea = Basic;
                     Caption = 'Calculate &Invoice Discount';
                     Image = CalculateInvoiceDiscount;
@@ -814,29 +814,29 @@ Page 51516114 "Stores Order"
 
                     trigger OnAction()
                     begin
-                        
+
                         BCSetup.Get;
                         if not BCSetup.Mandatory then
-                           exit;
-                        
+                            exit;
+
                         if not CheckforRequiredFields then
-                           Error('There might be some lines missing the key fields: [TYPE, NO.,AMOUNT] Please recheck your document lines');
-                        
-                        if Status=Status::Released then
-                          Error('This document has already been released. This functionality is available for open documents only');
+                            Error('There might be some lines missing the key fields: [TYPE, NO.,AMOUNT] Please recheck your document lines');
+
+                        if Status = Status::Released then
+                            Error('This document has already been released. This functionality is available for open documents only');
                         if SomeLinesCommitted then begin
-                           if not Confirm( 'Some or All the Lines Are already Committed do you want to continue',true, "Document Type") then
+                            if not Confirm('Some or All the Lines Are already Committed do you want to continue', true, "Document Type") then
                                 Error('Budget Availability Check and Commitment Aborted');
-                          DeleteCommitment.Reset;
-                          DeleteCommitment.SetRange(DeleteCommitment."Document Type",DeleteCommitment."document type"::LPO);
-                          DeleteCommitment.SetRange(DeleteCommitment."Document No.","No.");
-                          DeleteCommitment.DeleteAll;
+                            DeleteCommitment.Reset;
+                            DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
+                            DeleteCommitment.SetRange(DeleteCommitment."Document No.", "No.");
+                            DeleteCommitment.DeleteAll;
                         end;
-                           Commitment.CheckPurchase(Rec);
-                        
-                        Message('Commitments done Successfully for Doc. No %1',"No.");
-                        
-                        
+                        Commitment.CheckPurchase(Rec);
+
+                        Message('Commitments done Successfully for Doc. No %1', "No.");
+
+
                         /*BCSetup.GET;
                         IF NOT BCSetup.Mandatory THEN
                            EXIT;
@@ -872,25 +872,25 @@ Page 51516114 "Stores Order"
                     trigger OnAction()
                     begin
 
-                           if not Confirm( 'Are you sure you want to Cancel All Commitments Done for this document',true, "Document Type") then
-                                Error('Budget Availability Check and Commitment Aborted');
+                        if not Confirm('Are you sure you want to Cancel All Commitments Done for this document', true, "Document Type") then
+                            Error('Budget Availability Check and Commitment Aborted');
 
-                          DeleteCommitment.Reset;
-                          DeleteCommitment.SetRange(DeleteCommitment."Document Type",DeleteCommitment."document type"::LPO);
-                          DeleteCommitment.SetRange(DeleteCommitment."Document No.","No.");
-                          DeleteCommitment.DeleteAll;
-                          //Tag all the Purchase Line entries as Uncommitted
-                          PurchLine.Reset;
-                          PurchLine.SetRange(PurchLine."Document Type","Document Type");
-                          PurchLine.SetRange(PurchLine."Document No.","No.");
-                          if PurchLine.Find('-') then begin
-                             repeat
-                                PurchLine.Committed:=false;
+                        DeleteCommitment.Reset;
+                        DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
+                        DeleteCommitment.SetRange(DeleteCommitment."Document No.", "No.");
+                        DeleteCommitment.DeleteAll;
+                        //Tag all the Purchase Line entries as Uncommitted
+                        PurchLine.Reset;
+                        PurchLine.SetRange(PurchLine."Document Type", "Document Type");
+                        PurchLine.SetRange(PurchLine."Document No.", "No.");
+                        if PurchLine.Find('-') then begin
+                            repeat
+                                PurchLine.Committed := false;
                                 PurchLine.Modify;
-                             until PurchLine.Next=0;
-                          end;
+                            until PurchLine.Next = 0;
+                        end;
 
-                        Message('Commitments Cancelled Successfully for Doc. No %1',"No.");
+                        Message('Commitments Cancelled Successfully for Doc. No %1', "No.");
                     end;
                 }
                 group(ActionGroup122)
@@ -911,7 +911,7 @@ Page 51516114 "Stores Order"
                     Image = SpecialOrder;
                     action(l8)
                     {
-                        AccessByPermission = TableData "Sales Shipment Header"=R;
+                        AccessByPermission = TableData "Sales Shipment Header" = R;
                         ApplicationArea = Basic;
                         Caption = 'l8';
                         Image = "Order";
@@ -938,13 +938,13 @@ Page 51516114 "Stores Order"
                         ArchiveManagement.ArchivePurchDocument(Rec);
                         CurrPage.Update(false);
 
-                        Archived:=true;
+                        Archived := true;
                         Modify;
                     end;
                 }
                 action("Send IC Purchase Order")
                 {
-                    AccessByPermission = TableData "IC G/L Account"=R;
+                    AccessByPermission = TableData "IC G/L Account" = R;
                     ApplicationArea = Basic;
                     Caption = 'Send IC Purchase Order';
                     Image = IntercompanyOrder;
@@ -955,7 +955,7 @@ Page 51516114 "Stores Order"
                         SalesHeader: Record "Sales Header";
                     begin
                         //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                         // ICInOutboxMgt.SendPurchDoc(Rec,FALSE);
+                        // ICInOutboxMgt.SendPurchDoc(Rec,FALSE);
                     end;
                 }
                 separator(Action116)
@@ -979,7 +979,7 @@ Page 51516114 "Stores Order"
                         trigger OnAction()
                         begin
                             if not SomeLinesCommitted then
-                              Error('All Lines must be Committed before you send for Approval');
+                                Error('All Lines must be Committed before you send for Approval');
 
 
                             //IF ApprovalMgt.SendPurchaseApprovalRequest(Rec) THEN;
@@ -1004,7 +1004,7 @@ Page 51516114 "Stores Order"
                 Image = Warehouse;
                 action("Create &Whse. Receipt")
                 {
-                    AccessByPermission = TableData "Warehouse Receipt Header"=R;
+                    AccessByPermission = TableData "Warehouse Receipt Header" = R;
                     ApplicationArea = Basic;
                     Caption = 'Create &Whse. Receipt';
                     Image = NewReceipt;
@@ -1016,12 +1016,12 @@ Page 51516114 "Stores Order"
                         GetSourceDocInbound.CreateFromPurchOrder(Rec);
 
                         if not Find('=><') then
-                          Init;
+                            Init;
                     end;
                 }
                 action("Create Inventor&y Put-away/Pick")
                 {
-                    AccessByPermission = TableData "Posted Invt. Put-away Header"=R;
+                    AccessByPermission = TableData "Posted Invt. Put-away Header" = R;
                     ApplicationArea = Basic;
                     Caption = 'Create Inventor&y Put-away/Pick';
                     Ellipsis = true;
@@ -1034,7 +1034,7 @@ Page 51516114 "Stores Order"
                         CreateInvtPutAwayPick;
 
                         if not Find('=><') then
-                          Init;
+                            Init;
                     end;
                 }
                 separator(Action108)
@@ -1058,8 +1058,8 @@ Page 51516114 "Stores Order"
 
                     trigger OnAction()
                     begin
-                        if Archived=false then
-                        Error ('Kindly Archive document for refferal later. Thanks');
+                        if Archived = false then
+                            Error('Kindly Archive document for refferal later. Thanks');
 
                         Post(Codeunit::"Purch.-Post (Yes/No)");
                     end;
@@ -1077,8 +1077,8 @@ Page 51516114 "Stores Order"
 
                     trigger OnAction()
                     begin
-                        if Archived=false then
-                        Error ('Kindly Archive document for refferal later. Thanks');
+                        if Archived = false then
+                            Error('Kindly Archive document for refferal later. Thanks');
 
                         Post(Codeunit::"Purch.-Post + Print");
                     end;
@@ -1104,7 +1104,7 @@ Page 51516114 "Stores Order"
 
                     trigger OnAction()
                     begin
-                        Report.RunModal(Report::"Batch Post Purchase Orders",true,true,Rec);
+                        Report.RunModal(Report::"Batch Post Purchase Orders", true, true, Rec);
                         CurrPage.Update(false);
                     end;
                 }
@@ -1128,12 +1128,11 @@ Page 51516114 "Stores Order"
                     trigger OnAction()
                     begin
                         UserSet.Reset;
-                        UserSet.SetRange(UserSet."Archiving User",UserId);
-                        if not UserSet.Find('-' ) then
-                        begin
-                        Error('Sorry you have no permission to Arhchive Unused Order,');
+                        UserSet.SetRange(UserSet."Archiving User", UserId);
+                        if not UserSet.Find('-') then begin
+                            Error('Sorry you have no permission to Arhchive Unused Order,');
                         end;
-                        "Archive Unused Doc":=true;
+                        "Archive Unused Doc" := true;
                         Modify;
                     end;
                 }
@@ -1169,7 +1168,7 @@ Page 51516114 "Stores Order"
                             PurchPostYNPrepmt: Codeunit "Purch.-Post Prepmt. (Yes/No)";
                         begin
                             //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                             // PurchPostYNPrepmt.PostPrepmtInvoiceYN(Rec,FALSE);
+                            // PurchPostYNPrepmt.PostPrepmtInvoiceYN(Rec,FALSE);
                         end;
                     }
                     action("Post and Print Prepmt. Invoic&e")
@@ -1185,7 +1184,7 @@ Page 51516114 "Stores Order"
                             PurchPostYNPrepmt: Codeunit "Purch.-Post Prepmt. (Yes/No)";
                         begin
                             //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                              //PurchPostYNPrepmt.PostPrepmtInvoiceYN(Rec,TRUE);
+                            //PurchPostYNPrepmt.PostPrepmtInvoiceYN(Rec,TRUE);
                         end;
                     }
                     action(PostPrepaymentCreditMemo)
@@ -1201,7 +1200,7 @@ Page 51516114 "Stores Order"
                             PurchPostYNPrepmt: Codeunit "Purch.-Post Prepmt. (Yes/No)";
                         begin
                             //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                              //PurchPostYNPrepmt.PostPrepmtCrMemoYN(Rec,FALSE);
+                            //PurchPostYNPrepmt.PostPrepmtCrMemoYN(Rec,FALSE);
                         end;
                     }
                     action("Post and Print Prepmt. Cr. Mem&o")
@@ -1217,7 +1216,7 @@ Page 51516114 "Stores Order"
                             PurchPostYNPrepmt: Codeunit "Purch.-Post Prepmt. (Yes/No)";
                         begin
                             //IF ApprovalMgt.PrePostApprovalCheck(SalesHeader,Rec) THEN
-                             // PurchPostYNPrepmt.PostPrepmtCrMemoYN(Rec,TRUE);
+                            // PurchPostYNPrepmt.PostPrepmtCrMemoYN(Rec,TRUE);
                         end;
                     }
                 }
@@ -1243,11 +1242,11 @@ Page 51516114 "Stores Order"
                         IF PHeader.FINDFIRST THEN BEGIN
                           REPORT.RUN(51516360,TRUE,TRUE,PHeader);
                         END;*/
-                        
+
                         PHeader.Reset;
-                        PHeader.SetRange(PHeader."No.","No.");
+                        PHeader.SetRange(PHeader."No.", "No.");
                         if PHeader.FindFirst then begin
-                          Report.Run(51516121,true,true,PHeader);
+                            Report.Run(51516121, true, true, PHeader);
                         end;
 
                     end;
@@ -1259,18 +1258,18 @@ Page 51516114 "Stores Order"
     trigger OnInit()
     begin
         SetExtDocNoMandatoryCondition;
-        if "Currency Code"='KES'  then begin
-        "Currency Code":='';
-        Modify;
+        if "Currency Code" = 'KES' then begin
+            "Currency Code" := '';
+            Modify;
         end;
     end;
 
     trigger OnOpenPage()
     begin
         SetDocNoVisible;
-        if "Currency Code"='KES'  then begin
-        "Currency Code":='';
-        Modify;
+        if "Currency Code" = 'KES' then begin
+            "Currency Code" := '';
+            Modify;
         end;
     end;
 
@@ -1287,9 +1286,9 @@ Page 51516114 "Stores Order"
         JobQueueVisible: Boolean;
         DocNoVisible: Boolean;
         VendorInvoiceNoMandatory: Boolean;
-        BCSetup: Record UnknownRecord51516038;
+        BCSetup: Record 51516038;
         AllFieldsEntered: Boolean;
-        DeleteCommitment: Record UnknownRecord51516036;
+        DeleteCommitment: Record 51516036;
         Commitment: Codeunit UnknownCodeunit55484;
         PurchLine: Record "Purchase Line";
         UserSet: Record "User Setup";
@@ -1299,7 +1298,7 @@ Page 51516114 "Stores Order"
     begin
         SendToPosting(PostingCodeunitID);
         if "Job Queue Status" = "job queue status"::"Scheduled for Posting" then
-          CurrPage.Close;
+            CurrPage.Close;
         CurrPage.Update(false);
     end;
 
@@ -1311,8 +1310,8 @@ Page 51516114 "Stores Order"
     local procedure BuyfromVendorNoOnAfterValidate()
     begin
         if GetFilter("Buy-from Vendor No.") = xRec."Buy-from Vendor No." then
-          if "Buy-from Vendor No." <> xRec."Buy-from Vendor No." then
-            SetRange("Buy-from Vendor No.");
+            if "Buy-from Vendor No." <> xRec."Buy-from Vendor No." then
+                SetRange("Buy-from Vendor No.");
         CurrPage.Update;
     end;
 
@@ -1351,7 +1350,7 @@ Page 51516114 "Stores Order"
         DocumentNoVisibility: Codeunit DocumentNoVisibility;
         DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order",Reminder,FinChMemo;
     begin
-        DocNoVisible := DocumentNoVisibility.PurchaseDocumentNoIsVisible(Doctype::Order,"No.");
+        DocNoVisible := DocumentNoVisibility.PurchaseDocumentNoIsVisible(Doctype::Order, "No.");
     end;
 
     local procedure SetExtDocNoMandatoryCondition()
@@ -1367,17 +1366,17 @@ Page 51516114 "Stores Order"
     var
         PurchLine: Record "Purchase Line";
     begin
-           AllFieldsEntered:=true;
-           PurchLine.Reset;
-           PurchLine.SetRange(PurchLine."Document Type","Document Type");
-           PurchLine.SetRange(PurchLine."Document No.","No.");
-           if PurchLine.Find('-') then begin
-              repeat
-                 if (PurchLine.Type=PurchLine.Type::" ") or (PurchLine."No." ='') or (PurchLine."Line Amount"=0) then
-                    AllFieldsEntered:=false;
-             until PurchLine.Next=0;
-             exit(AllFieldsEntered)
-           end;
+        AllFieldsEntered := true;
+        PurchLine.Reset;
+        PurchLine.SetRange(PurchLine."Document Type", "Document Type");
+        PurchLine.SetRange(PurchLine."Document No.", "No.");
+        if PurchLine.Find('-') then begin
+            repeat
+                if (PurchLine.Type = PurchLine.Type::" ") or (PurchLine."No." = '') or (PurchLine."Line Amount" = 0) then
+                    AllFieldsEntered := false;
+            until PurchLine.Next = 0;
+            exit(AllFieldsEntered)
+        end;
     end;
 
 
@@ -1386,16 +1385,16 @@ Page 51516114 "Stores Order"
         PurchLines: Record "Purchase Line";
     begin
         if BCSetup.Get then begin
-         Exists:=false;
-         PurchLines.Reset;
-         PurchLines.SetRange(PurchLines."Document Type","Document Type");
-         PurchLines.SetRange(PurchLines."Document No.","No.");
-         PurchLines.SetRange(PurchLines.Committed,true);
-          if PurchLines.Find('-') then
-             Exists:=true
+            Exists := false;
+            PurchLines.Reset;
+            PurchLines.SetRange(PurchLines."Document Type", "Document Type");
+            PurchLines.SetRange(PurchLines."Document No.", "No.");
+            PurchLines.SetRange(PurchLines.Committed, true);
+            if PurchLines.Find('-') then
+                Exists := true
             else
-            Exists:=false;
-         end;
+                Exists := false;
+        end;
     end;
 }
 

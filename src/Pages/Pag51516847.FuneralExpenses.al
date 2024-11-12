@@ -204,7 +204,7 @@ Page 51516847 "Funeral Expenses."
     }
 
     var
-        LoanUserSetup: Record UnknownRecord51516167;
+        LoanUserSetup: Record 51516167;
         LoanManager: Codeunit UnknownCodeunit51516003;
         Txt000: label 'User ID:%1 has not been setup for posting, Contact System Administrator';
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";

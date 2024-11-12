@@ -99,26 +99,26 @@ Page 51516139 "Cashier TransactionsListab"
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         Account: Record Vendor;
-        AccountType: Record UnknownRecord51516436;
+        AccountType: Record 51516436;
         LineNo: Integer;
-        ChequeType: Record UnknownRecord51516446;
+        ChequeType: Record 51516446;
         DimensionV: Record "Dimension Value";
         ChargeAmount: Decimal;
         DiscountingAmount: Decimal;
-        Loans: Record UnknownRecord51516371;
+        Loans: Record 51516371;
         DActivity: Code[20];
         DBranch: Code[20];
         UsersID: Record User;
         Vend: Record Vendor;
-        LoanType: Record UnknownRecord51516381;
+        LoanType: Record 51516381;
         BOSABank: Code[20];
-        ReceiptAllocations: Record UnknownRecord51516387;
-        StatusPermissions: Record UnknownRecord51516452;
+        ReceiptAllocations: Record 51516387;
+        StatusPermissions: Record 51516452;
 
 
     procedure PostBOSAEntries()
     var
-        ReceiptAllocation: Record UnknownRecord51516387;
+        ReceiptAllocation: Record 51516387;
     begin
         //BOSA Cash Book Entry
         if "Account No" = '502-00-000300-00' then

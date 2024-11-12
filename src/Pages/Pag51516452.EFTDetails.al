@@ -102,6 +102,6 @@ Page 51516452 "EFT Details"
         AvailableBal: Decimal;
         Charges: Decimal;
         Accounts: Record Vendor;
-        AccountTypes: Record UnknownRecord51516436;
+        AccountTypes: Record 51516436;
 }
 

@@ -74,7 +74,7 @@ Page 51516127 "Bid Analysis"
 
     procedure InsertBidAnalysisLines()
     var
-        BidAnalysisLines: Record UnknownRecord51516104;
+        BidAnalysisLines: Record 51516104;
     begin
         //insert the quotes from vendors
         //IF RFQNoFilter = '' THEN ERROR('Specify the RFQ No.');

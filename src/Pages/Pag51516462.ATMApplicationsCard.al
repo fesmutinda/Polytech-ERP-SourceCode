@@ -571,15 +571,15 @@ Page 51516462 "ATM Applications Card"
         PostingCode: Codeunit "Gen. Jnl.-Post Line";
         CalendarMgmt: Codeunit "Calendar Management";
         PaymentToleranceMgt: Codeunit "Payment Tolerance Management";
-        CustomizedCalEntry: Record UnknownRecord51516408;
+        CustomizedCalEntry: Record 51516408;
         PictureExists: Boolean;
-        AccountTypes: Record UnknownRecord51516436;
+        AccountTypes: Record 51516436;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        StatusPermissions: Record UnknownRecord51516452;
-        Charges: Record UnknownRecord51516439;
+        StatusPermissions: Record 51516452;
+        Charges: Record 51516439;
         ForfeitInterest: Boolean;
-        InterestBuffer: Record UnknownRecord51516467;
-        FDType: Record UnknownRecord51516447;
+        InterestBuffer: Record 51516467;
+        FDType: Record 51516447;
         Vend: Record Vendor;
         Cust: Record Customer;
         UsersID: Record User;
@@ -588,7 +588,7 @@ Page 51516462 "ATM Applications Card"
         UnCheques: Decimal;
         AvBal: Decimal;
         Minbal: Decimal;
-        GeneralSetup: Record UnknownRecord51516398;
+        GeneralSetup: Record 51516398;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest;
         AccountNoEditable: Boolean;
         CardNoEditable: Boolean;
@@ -597,7 +597,7 @@ Page 51516462 "ATM Applications Card"
         ReplacementCardNoEditable: Boolean;
         IssuedtoEditable: Boolean;
         ObjAccount: Record Vendor;
-        ObjATMCardsBuffer: Record UnknownRecord51516913;
+        ObjATMCardsBuffer: Record 51516913;
 
     local procedure FnGetUserBranch() branchCode: Code[50]
     var

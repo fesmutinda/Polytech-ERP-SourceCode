@@ -76,7 +76,7 @@ Page 51516437 "FOSA Account  NOK Details"
     end;
 
     var
-        NextKin: Record UnknownRecord51516366;
+        NextKin: Record 51516366;
         TOTALALLO: Decimal;
 }
 

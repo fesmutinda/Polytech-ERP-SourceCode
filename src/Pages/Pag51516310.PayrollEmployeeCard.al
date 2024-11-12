@@ -431,40 +431,40 @@ Page 51516310 "Payroll Employee Card."
     end;
 
     var
-        PayrollEmp: Record UnknownRecord51516317;
+        PayrollEmp: Record 51516317;
         PayrollManager: Codeunit UnknownCodeunit51516002;
         "Payroll Period": Date;
-        PayrollCalender: Record UnknownRecord51516322;
-        PayrollMonthlyTrans: Record UnknownRecord51516320;
-        PayrollEmployeeDed: Record UnknownRecord51516326;
-        PayrollEmployerDed: Record UnknownRecord51516327;
-        objEmp: Record UnknownRecord51516316;
-        SalCard: Record UnknownRecord51516317;
-        objPeriod: Record UnknownRecord51516322;
+        PayrollCalender: Record 51516322;
+        PayrollMonthlyTrans: Record 51516320;
+        PayrollEmployeeDed: Record 51516326;
+        PayrollEmployerDed: Record 51516327;
+        objEmp: Record 51516316;
+        SalCard: Record 51516317;
+        objPeriod: Record 51516322;
         SelectedPeriod: Date;
         PeriodName: Text[30];
         PeriodMonth: Integer;
         PeriodYear: Integer;
         ProcessPayroll: Codeunit UnknownCodeunit51516015;
-        HrEmployee: Record UnknownRecord51516317;
+        HrEmployee: Record 51516317;
         ProgressWindow: Dialog;
-        prPeriodTransactions: Record UnknownRecord51516341;
-        prEmployerDeductions: Record UnknownRecord51516327;
-        PayrollType: Record UnknownRecord51516312;
+        prPeriodTransactions: Record 51516341;
+        prEmployerDeductions: Record 51516327;
+        PayrollType: Record 51516312;
         Selection: Integer;
         PayrollDefined: Text[30];
         PayrollCode: Code[10];
         NoofRecords: Integer;
         i: Integer;
-        ContrInfo: Record UnknownRecord51516313;
+        ContrInfo: Record 51516313;
         UserSetup: Record "User Setup";
-        ObjPayrollTransactions: Record UnknownRecord51516335;
+        ObjPayrollTransactions: Record 51516335;
         varPeriodMonth: Integer;
-        SMSMessage: Record UnknownRecord51516471;
+        SMSMessage: Record 51516471;
         iEntryNo: Integer;
-        GenSetup: Record UnknownRecord51516398;
+        GenSetup: Record 51516398;
         compinfo: Record "Company Information";
-        Cust: Record UnknownRecord51516364;
+        Cust: Record 51516364;
 
     local procedure RemoveTrans(EmpNo: Code[20]; PayrollPeriod: Date)
     begin

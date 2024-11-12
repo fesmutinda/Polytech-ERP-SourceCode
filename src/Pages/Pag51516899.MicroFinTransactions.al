@@ -601,25 +601,25 @@ Page 51516899 "Micro_Fin_Transactions"
 
     var
         GenJournalLine: Record "Gen. Journal Line";
-        Transact: Record UnknownRecord51516896;
+        Transact: Record 51516896;
         LineNo: Integer;
         DefaultBatch: Record "Gen. Journal Batch";
         BranchCode: Code[20];
         Bank: Record "Bank Account";
         Group: Code[30];
-        MTrans: Record UnknownRecord51516895;
+        MTrans: Record 51516895;
         Bcode: Code[20];
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",StandingOrder,HRJob,HRLeave,"HRTransport Request",HRTraining,"HREmp Requsition",MicroTrans;
         DistributedAmt: Decimal;
-        MicrSchedule: Record UnknownRecord51516896;
-        CustMember: Record UnknownRecord51516364;
-        GensetUp: Record UnknownRecord51516398;
+        MicrSchedule: Record 51516896;
+        CustMember: Record 51516364;
+        GensetUp: Record 51516398;
         ChangeStatus: Boolean;
         DepDifference: Decimal;
         TotDiff: Decimal;
         Text001: label 'Account type Must be Bank Acount. The current Value is -%1 in transaction No. -%2.';
         Text002: label 'There is nothing to Post in transaction No. -%1. The current amount value is -%2.';
-        Temp: Record UnknownRecord51516031;
+        Temp: Record 51516031;
         Jtemplate: Code[30];
         JBatch: Code[30];
         Text003: label 'Ensure The Receipt Journal Template is set up in cash Office set up';
@@ -629,9 +629,9 @@ Page 51516899 "Micro_Fin_Transactions"
         Text007: label 'Loan  Repayment Journal';
         Text008: label 'The transaction No. -%1 is already posted';
         Text009: label 'This Till is No. %1 not assigned to this Specific User. Please contact your system administrator';
-        ReceiptAllocations: Record UnknownRecord51516387;
-        Cust: Record UnknownRecord51516364;
-        LoanApp: Record UnknownRecord51516371;
+        ReceiptAllocations: Record 51516387;
+        Cust: Record 51516364;
+        LoanApp: Record 51516371;
         LOustanding: Decimal;
 }
 

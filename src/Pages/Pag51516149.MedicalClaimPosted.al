@@ -152,6 +152,6 @@ Page 51516149 "Medical Claim Posted"
     }
 
     var
-        PHeader2: Record UnknownRecord51516278;
+        PHeader2: Record 51516278;
 }
 

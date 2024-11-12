@@ -80,6 +80,6 @@ Page 51516576 "S-Mobile Loans"
     var
         Telephone: Code[30];
         "Loan Name": Text[30];
-        Ltype: Record UnknownRecord51516381;
+        Ltype: Record 51516381;
 }
 
