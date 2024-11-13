@@ -11,7 +11,7 @@ Codeunit 53918 "Job Create-PO 1"
         SalesHeader: Record "Purchase Header";
         SalesHeader2: Record "Purchase Header";
         SalesLine: Record "Purchase Line";
-        TempJobPlanningLine: Record 53928 temporary;
+        TempJobPlanningLine: Record "Job Planning Line" temporary;
         Text000: label 'The lines were successfully transferred to an Order.';
         Text001: label 'The lines were not transferred to an Order.';
         Text002: label 'There were no lines to transfer.';
@@ -27,10 +27,10 @@ Codeunit 53918 "Job Create-PO 1"
         Text010: label 'The currency dates on all planning lines will be updated based on the invoice posting date because there is a difference in currency exchange rates. Recalculations will be based on the Exch. Calculation setup for the Cost and Price values for the job. Do you want to continue?';
 
 
-    procedure CreateSalesInvoice(var JobPlanningLine: Record 53928; CrMemo: Boolean)
+    procedure CreateSalesInvoice(var JobPlanningLine: Record "Job Planning Line"; CrMemo: Boolean)
     var
         SalesHeader: Record "Purchase Header";
-        JT: Record 53926;
+        JT: Record "Job Planning Line";
         GetSalesInvoiceNo: Report "Job Transfer to Sales Invoice";
         GetSalesCrMemoNo: Report "Job Transfer to Credit Memo";
         Done: Boolean;
@@ -138,11 +138,11 @@ Codeunit 53918 "Job Create-PO 1"
     end;
 
 
-    procedure CreateSalesInvoiceJT(var JT2: Record 53926; PostingDate: Date; InvoicePerTask: Boolean; var NoOfInvoices: Integer; var OldJobNo: Code[20]; var OldJTNo: Code[20]; LastJobTask: Boolean)
+    procedure CreateSalesInvoiceJT(var JT2: Record "Job Planning Line"; PostingDate: Date; InvoicePerTask: Boolean; var NoOfInvoices: Integer; var OldJobNo: Code[20]; var OldJTNo: Code[20]; LastJobTask: Boolean)
     var
         Cust: Record Vendor;
         Job: Record 53913;
-        JT: Record 53926;
+        JT: Record "Job Planning Line";
         JobPlanningLine: Record 53928;
     begin
         ClearAll;
@@ -219,7 +219,7 @@ Codeunit 53918 "Job Create-PO 1"
             until JobPlanningLine.Next = 0;
     end;
 
-    local procedure CreateNewInvoice(var JT: Record 53926; InvoicePerTask: Boolean; var OldJobNo: Code[20]; var OldJTNo: Code[20]; LastJobTask: Boolean): Boolean
+    local procedure CreateNewInvoice(var JT: Record "Job Planning Line"; InvoicePerTask: Boolean; var OldJobNo: Code[20]; var OldJTNo: Code[20]; LastJobTask: Boolean): Boolean
     var
         NewInvoice: Boolean;
     begin
@@ -282,7 +282,7 @@ Codeunit 53918 "Job Create-PO 1"
     var
         Job: Record 53913;
         Factor: Integer;
-        JobTask: Record 53926;
+        JobTask: Record "Job Planning Line";
     begin
         Factor := 1;
         if SalesHeader2."Document Type" = SalesHeader2."document type"::"Credit Memo" then

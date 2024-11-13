@@ -1,15 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 53906 "HR Leave Jnl.-Post Batchh"
 {
-    Permissions = 
-        tabledata Data56104 = imd,
-        tabledata "HR Leave Planner Header" = R,
-        tabledata "Inspection Header" = RID,
-        tabledata "Loan Product Charges" = R,
-        tabledata "Loan Product Cycles" = RIMD,
-        tabledata "Payroll Employee Transact New" = R,
-        tabledata "prPayroll Periods." = R;
-    TableNo = 51516384;
+    TableNo = "HR Journal Line";
 
     trigger OnRun()
     begin
@@ -24,17 +16,17 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
         Text002: label 'Checking lines        #2######\';
         Text003: label 'Posting lines         #3###### @4@@@@@@@@@@@@@';
         Text004: label 'A maximum of %1 posting number series can be used in each journal.';
-        InsuranceJnlLine: Record 51516384;
-        InsuranceJnlTempl: Record 51516343;
-        InsuranceJnlBatch: Record 51516344;
-        InsuranceReg: Record 51516346;
-        InsCoverageLedgEntry: Record 51516383;
-        InsuranceJnlLine2: Record 51516384;
-        InsuranceJnlLine3: Record 51516384;
+        InsuranceJnlLine: Record "HR Journal Line";
+        InsuranceJnlTempl: Record "HR Leave Journal Template";
+        InsuranceJnlBatch: Record "HR Leave Journal Batch";
+        InsuranceReg: Record "HR Leave Register";
+        InsCoverageLedgEntry: Record "HR Leave Ledger Entries";
+        InsuranceJnlLine2: Record "HR Journal Line";
+        InsuranceJnlLine3: Record "HR Journal Line";
         NoSeries: Record "No. Series" temporary;
-        FAJnlSetup: Record 51516337;
-        InsuranceJnlPostLine: Codeunit "HR Leave Jnl.-Post Linee";
-        InsuranceJnlCheckLine: Codeunit "HR Leave Jnl.-Check Linee";
+        FAJnlSetup: Record "HR Setup";
+        InsuranceJnlPostLine: Codeunit "HR Leave Jnl.-Post Line";
+        InsuranceJnlCheckLine: Codeunit "HR Leave Jnl.-Check Line";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSeriesMgt2: array[10] of Codeunit NoSeriesManagement;
         DimMgt: Codeunit DimensionManagement;
@@ -53,27 +45,26 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
     procedure "Code"()
     var
         UpdateAnalysisView: Codeunit "Update Analysis View";
-        JnlLineDim: Record 51516256;
-        TempJnlLineDim: Record 51516256 temporary;
+        JnlLineDim: Record "Journal Line Dimension";
+        TempJnlLineDim: Record "Journal Line Dimension" temporary;
     begin
         with InsuranceJnlLine do begin
-            SetRange("Product Code", "Product Code");
-            SetRange(Cycle, Cycle);
+            SetRange("Journal Template Name", "Journal Template Name");
+            SetRange("Journal Batch Name", "Journal Batch Name");
             if RECORDLEVELLOCKING then
                 LockTable;
-
-            InsuranceJnlTempl.Get("Product Code");
-            InsuranceJnlBatch.Get("Product Code", Cycle);
-            if StrLen(IncStr(InsuranceJnlBatch."Purchase Order No.")) > MaxStrLen(InsuranceJnlBatch."Purchase Order No.") then
+            InsuranceJnlTempl.Get("Journal Template Name");
+            InsuranceJnlBatch.Get("Journal Template Name", "Journal Batch Name");
+            if StrLen(IncStr(InsuranceJnlBatch.Name)) > MaxStrLen(InsuranceJnlBatch.Name) then
                 InsuranceJnlBatch.FieldError(
-                  "Purchase Order No.",
+                  Name,
                   StrSubstNo(
                     Text000,
-                    MaxStrLen(InsuranceJnlBatch."Purchase Order No.")));
+                    MaxStrLen(InsuranceJnlBatch.Name)));
 
             if not Find('=><') then begin
                 Commit;
-                "Max. Installments" := 0;
+                "Line No." := 0;
                 exit;
             end;
 
@@ -81,27 +72,26 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
               Text001 +
               Text002 +
               Text003);
-            Window.Update(1, Cycle);
+            Window.Update(1, "Journal Batch Name");
 
             // Check lines
             LineCount := 0;
-            StartLineNo := "Max. Installments";
+            StartLineNo := "Line No.";
             repeat
                 LineCount := LineCount + 1;
                 Window.Update(2, LineCount);
 
-                JnlLineDim.SetRange("Application Code", Database::"Loan Product Cycles");
-                JnlLineDim.SetRange(Status, "Product Code");
-                JnlLineDim.SetRange("No series", Cycle);
-                JnlLineDim.SetRange(Picture, "Max. Installments");
-                JnlLineDim.SetRange(Names, 0);
+                JnlLineDim.SetRange("Table ID", Database::"HR Journal Line");
+                JnlLineDim.SetRange("Journal Template Name", "Journal Template Name");
+                JnlLineDim.SetRange("Journal Batch Name", "Journal Batch Name");
+                JnlLineDim.SetRange("Journal Line No.", "Line No.");
+                JnlLineDim.SetRange("Allocation Line No.", 0);
                 TempJnlLineDim.DeleteAll;
                 //DimMgt.CopyJnlLineDimToJnlLineDim(JnlLineDim,TempJnlLineDim);
                 InsuranceJnlCheckLine.RunCheck(InsuranceJnlLine, TempJnlLineDim);
-
                 if Next = 0 then
                     Find('-');
-            until "Max. Installments" = StartLineNo;
+            until "Line No." = StartLineNo;
             NoOfRecords := LineCount;
 
             //LedgEntryDim.LOCKTABLE;
@@ -124,18 +114,18 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
                 LineCount := LineCount + 1;
                 Window.Update(3, LineCount);
                 Window.Update(4, ROUND(LineCount / NoOfRecords * 10000, 1));
-                if not ("Max. Amount" = '') and
-                   (InsuranceJnlBatch."Date Received" <> '') and
+                if not ("Leave Period" = '') and
+                   (InsuranceJnlBatch."No. Series" <> '') and
                    ("Document No." <> LastDocNo2)
                 then
                     //TESTFIELD("Document No.",NoSeriesMgt.GetNextNo(InsuranceJnlBatch."No. Series","Posting Date",FALSE));
 
                     //    LastDocNo2 := "Document No.";
-                    LastDocNo2 := NoSeriesMgt.GetNextNo(InsuranceJnlBatch."Date Received", "Posting Date", false);
+                    LastDocNo2 := NoSeriesMgt.GetNextNo(InsuranceJnlBatch."No. Series", "Posting Date", false);
                 if "Posting No. Series" = '' then
-                    "Posting No. Series" := InsuranceJnlBatch."Date Received"
+                    "Posting No. Series" := InsuranceJnlBatch."No. Series"
                 else
-                    if not ("Max. Amount" = '') then
+                    if not ("Leave Period" = '') then
                         if "Document No." = LastDocNo then
                             "Document No." := LastPostedDocNo
                         else begin
@@ -155,11 +145,11 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
                             LastPostedDocNo := "Document No.";
                         end;
 
-                JnlLineDim.SetRange("Application Code", Database::"Loan Product Cycles");
-                JnlLineDim.SetRange(Status, "Product Code");
-                JnlLineDim.SetRange("No series", Cycle);
-                JnlLineDim.SetRange(Picture, "Max. Installments");
-                JnlLineDim.SetRange(Names, 0);
+                JnlLineDim.SetRange("Table ID", Database::"HR Journal Line");
+                JnlLineDim.SetRange("Journal Template Name", "Journal Template Name");
+                JnlLineDim.SetRange("Journal Batch Name", "Journal Batch Name");
+                JnlLineDim.SetRange("Journal Line No.", "Line No.");
+                JnlLineDim.SetRange("Allocation Line No.", 0);
                 TempJnlLineDim.DeleteAll;
                 //DimMgt.CopyJnlLineDimToJnlLineDim(JnlLineDim,TempJnlLineDim);
                 InsuranceJnlPostLine.RunWithOutCheck(InsuranceJnlLine, TempJnlLineDim);
@@ -170,7 +160,7 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
                 InsuranceRegNo := 0;
 
             Init;
-            "Max. Installments" := InsuranceRegNo;
+            "Line No." := InsuranceRegNo;
 
             // Update/delete lines
             if InsuranceRegNo <> 0 then begin
@@ -179,13 +169,13 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
                     LockTable(true, true);
                 end;
                 InsuranceJnlLine2.CopyFilters(InsuranceJnlLine);
-                InsuranceJnlLine2.SetFilter("Max. Amount", '<>%1', '');
+                InsuranceJnlLine2.SetFilter("Leave Period", '<>%1', '');
                 if InsuranceJnlLine2.Find('+') then; // Remember the last line
 
-                JnlLineDim.SetRange("Application Code", Database::"Loan Product Cycles");
-                JnlLineDim.Copyfilter(Status, "Product Code");
-                JnlLineDim.Copyfilter("No series", Cycle);
-                JnlLineDim.SetRange(Names, 0);
+                JnlLineDim.SetRange("Table ID", Database::"HR Journal Line");
+                JnlLineDim.Copyfilter("Journal Template Name", "Journal Template Name");
+                JnlLineDim.Copyfilter("Journal Batch Name", "Journal Batch Name");
+                JnlLineDim.SetRange("Allocation Line No.", 0);
 
                 InsuranceJnlLine3.Copy(InsuranceJnlLine);
                 if InsuranceJnlLine3.Find('-') then
@@ -195,30 +185,30 @@ Codeunit 53906 "HR Leave Jnl.-Post Batchh"
                         InsuranceJnlLine3.Delete;
                     until InsuranceJnlLine3.Next = 0;
                 InsuranceJnlLine3.Reset;
-                InsuranceJnlLine3.SetRange("Product Code", "Product Code");
-                InsuranceJnlLine3.SetRange(Cycle, Cycle);
+                InsuranceJnlLine3.SetRange("Journal Template Name", "Journal Template Name");
+                InsuranceJnlLine3.SetRange("Journal Batch Name", "Journal Batch Name");
                 if not InsuranceJnlLine3.Find('+') then
-                    if IncStr(Cycle) <> '' then begin
-                        InsuranceJnlBatch.Get("Product Code", Cycle);
+                    if IncStr("Journal Batch Name") <> '' then begin
+                        InsuranceJnlBatch.Get("Journal Template Name", "Journal Batch Name");
                         InsuranceJnlBatch.Delete;
                         //FAJnlSetup.IncInsuranceJnlBatchName(InsuranceJnlBatch);
-                        InsuranceJnlBatch."Purchase Order No." := IncStr(Cycle);
+                        InsuranceJnlBatch.Name := IncStr("Journal Batch Name");
                         if InsuranceJnlBatch.Insert then;
-                        Cycle := InsuranceJnlBatch."Purchase Order No.";
+                        "Journal Batch Name" := InsuranceJnlBatch.Name;
                     end;
 
-                InsuranceJnlLine3.SetRange(Cycle, Cycle);
-                if (InsuranceJnlBatch."Date Received" = '') and not InsuranceJnlLine3.Find('+') then begin
+                InsuranceJnlLine3.SetRange("Journal Batch Name", "Journal Batch Name");
+                if (InsuranceJnlBatch."No. Series" = '') and not InsuranceJnlLine3.Find('+') then begin
                     InsuranceJnlLine3.Init;
-                    InsuranceJnlLine3."Product Code" := "Product Code";
-                    InsuranceJnlLine3.Cycle := Cycle;
-                    InsuranceJnlLine3."Max. Installments" := 10000;
+                    InsuranceJnlLine3."Journal Template Name" := "Journal Template Name";
+                    InsuranceJnlLine3."Journal Batch Name" := "Journal Batch Name";
+                    InsuranceJnlLine3."Line No." := 10000;
                     InsuranceJnlLine3.Insert;
                     InsuranceJnlLine3.SetUpNewLine(InsuranceJnlLine2);
                     InsuranceJnlLine3.Modify;
                 end;
             end;
-            if InsuranceJnlBatch."Date Received" <> '' then
+            if InsuranceJnlBatch."No. Series" <> '' then
                 NoSeriesMgt.SaveNoSeries;
             if NoSeries.Find('-') then
                 repeat
