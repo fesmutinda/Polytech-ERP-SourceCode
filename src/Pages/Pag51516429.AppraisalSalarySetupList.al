@@ -2,7 +2,7 @@
 Page 51516429 "Appraisal Salary Setup List"
 {
     PageType = List;
-    SourceTable = 51516396;
+    SourceTable = "Appraisal Salary Set-up";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516429 "Appraisal Salary Setup List"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }

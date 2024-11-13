@@ -2,7 +2,7 @@
 Page 51516418 "Paybill Processing Line"
 {
     PageType = ListPart;
-    SourceTable = 51516413;
+    SourceTable = "Paybill Processing Lines";
 
     layout
     {
@@ -10,63 +10,63 @@ Page 51516418 "Paybill Processing Line"
         {
             repeater(Group)
             {
-                field("Receipt Line No"; "Receipt Line No")
+                field("Receipt Line No"; Rec."Receipt Line No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Trans Type"; "Trans Type")
+                field("Trans Type"; Rec."Trans Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff/Payroll No"; "Staff/Payroll No")
+                field("Staff/Payroll No"; Rec."Staff/Payroll No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mobile No"; "Mobile No")
+                field("Mobile No"; Rec."Mobile No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction No"; "Transaction No")
+                field("Transaction No"; Rec."Transaction No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Prefix"; "Transaction Prefix")
+                field("Transaction Prefix"; Rec."Transaction Prefix")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff Not Found"; "Staff Not Found")
+                field("Staff Not Found"; Rec."Staff Not Found")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Found"; "Member Found")
+                field("Member Found"; Rec."Member Found")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Search Index"; "Search Index")
+                field("Search Index"; Rec."Search Index")
                 {
                     ApplicationArea = Basic;
                 }

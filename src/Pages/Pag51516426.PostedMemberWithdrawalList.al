@@ -8,7 +8,7 @@ Page 51516426 "Posted Member Withdrawal List"
     ModifyAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption';
-    SourceTable = 51516400;
+    SourceTable = "Membership Exit";
     SourceTableView = where(Posted = filter(Yes));
 
     layout
@@ -17,36 +17,36 @@ Page 51516426 "Posted Member Withdrawal List"
         {
             repeater(Control1102755000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Closing Date"; "Closing Date")
+                field("Closing Date"; Rec."Closing Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Loan"; "Total Loan")
+                field("Total Loan"; Rec."Total Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Interest"; "Total Interest")
+                field("Total Interest"; Rec."Total Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Deposits"; "Member Deposits")
+                field("Member Deposits"; Rec."Member Deposits")
                 {
                     ApplicationArea = Basic;
                 }
@@ -74,7 +74,7 @@ Page 51516426 "Posted Member Withdrawal List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::"Member Closure";
-                        ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, "No.");
+                        ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -87,7 +87,7 @@ Page 51516426 "Posted Member Withdrawal List"
                     trigger OnAction()
                     begin
                         Cust.Reset;
-                        Cust.SetRange(Cust."No.", "Member No.");
+                        Cust.SetRange(Cust."No.", Rec."Member No.");
                         if Cust.Find('-') then
                             Report.Run(51516474, true, false, Cust);
                     end;
@@ -98,9 +98,9 @@ Page 51516426 "Posted Member Withdrawal List"
 
     var
         Closure: Integer;
-        Cust: Record 51516364;
+        Cust: Record "Member Register";
         UBFRefund: Decimal;
-        Generalsetup: Record 51516398;
+        Generalsetup: Record "Sacco General Set-Up";
         Totalavailable: Decimal;
         UnpaidDividends: Decimal;
         TotalOustanding: Decimal;
@@ -111,7 +111,7 @@ Page 51516426 "Posted Member Withdrawal List"
         Advice: Boolean;
         TotalDefaulterR: Decimal;
         AvailableShares: Decimal;
-        Loans: Record 51516371;
+        Loans: Record "Loans Register";
         Value1: Decimal;
         Interest: Decimal;
         LineN: Integer;

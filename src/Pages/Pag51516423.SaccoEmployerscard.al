@@ -2,7 +2,7 @@
 Page 51516423 "Sacco Employers card"
 {
     PageType = Card;
-    SourceTable = 51516401;
+    SourceTable = "Sacco Employers";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516423 "Sacco Employers card"
         {
             group(General)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Method"; "Repayment Method")
+                field("Repayment Method"; Rec."Repayment Method")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Check Off"; "Check Off")
+                field("Check Off"; Rec."Check Off")
                 {
                     ApplicationArea = Basic;
                 }

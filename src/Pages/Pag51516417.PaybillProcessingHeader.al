@@ -512,7 +512,7 @@ Page 51516417 "Paybill Processing Header"
 
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516412;
+    SourceTable = "Paybill Processing Header";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -521,68 +521,68 @@ Page 51516417 "Paybill Processing Header"
         {
             group(General)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting date"; "Posting date")
+                field("Posting date"; Rec."Posting date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Loan CutOff Date"; "Loan CutOff Date")
+                field("Loan CutOff Date"; Rec."Loan CutOff Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheduled Amount"; "Scheduled Amount")
+                field("Scheduled Amount"; Rec."Scheduled Amount")
                 {
                     ApplicationArea = Basic;
                 }
@@ -603,7 +603,7 @@ Page 51516417 "Paybill Processing Header"
             {
                 ApplicationArea = Basic;
                 Caption = 'Import Paybill Transactions';
-                RunObject = XMLport UnknownXMLport51516039;
+                RunObject = XMLport 51516039;
             }
             group(ActionGroup1102755021)
             {
@@ -617,7 +617,7 @@ Page 51516417 "Paybill Processing Header"
                 begin
                     //
                     ReceiptLine.Reset;
-                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", No);
+                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", Rec.No);
                     if ReceiptLine.Find('-') then
                         Report.Run(51516521, true, false, ReceiptLine);
                 end;
@@ -634,27 +634,27 @@ Page 51516417 "Paybill Processing Header"
                 begin
 
                     Genstup.Get();
-                    if Posted = true then
+                    if Rec.Posted = true then
                         Error('This Paybill Batch has already been posted');
-                    if "Account No" = '' then
+                    if Rec."Account No" = '' then
                         Error('You must specify the Account No.');
-                    if "Document No" = '' then
+                    if Rec."Document No" = '' then
                         Error('You must specify the Document No.');
-                    if "Posting date" = 0D then
+                    if Rec."Posting date" = 0D then
                         Error('You must specify the Posting date.');
-                    Datefilter := '..' + Format("Loan CutOff Date");
+                    Datefilter := '..' + Format(Rec."Loan CutOff Date");
 
 
 
-                    PDate := "Posting date";
-                    DocNo := "Document No";
+                    PDate := Rec."Posting date";
+                    DocNo := Rec."Document No";
                     GenBatches.Reset;
                     GenBatches.SetRange(GenBatches."Journal Template Name", 'GENERAL');
-                    GenBatches.SetRange(GenBatches.Name, No);
+                    GenBatches.SetRange(GenBatches.Name, Rec.No);
                     if GenBatches.Find('-') = false then begin
                         GenBatches.Init;
                         GenBatches."Journal Template Name" := 'GENERAL';
-                        GenBatches.Name := No;
+                        GenBatches.Name := Rec.No;
                         GenBatches.Description := 'PAYBILL PROCESS';
                         GenBatches.Validate(GenBatches."Journal Template Name");
                         GenBatches.Validate(GenBatches.Name);
@@ -666,19 +666,19 @@ Page 51516417 "Paybill Processing Header"
                     //Delete journal
                     Gnljnline.Reset;
                     Gnljnline.SetRange("Journal Template Name", 'GENERAL');
-                    Gnljnline.SetRange("Journal Batch Name", No);
+                    Gnljnline.SetRange("Journal Batch Name", Rec.No);
                     Gnljnline.DeleteAll;
                     //End of deletion
 
 
 
                     RunBal := 0;
-                    CalcFields("Scheduled Amount");
+                    Rec.CalcFields("Scheduled Amount");
 
                     Genstup.Get();
                     // MWMBER NOT FOUND
                     RcptBufLines.Reset;
-                    RcptBufLines.SetRange(RcptBufLines."Receipt Header No", No);
+                    RcptBufLines.SetRange(RcptBufLines."Receipt Header No", Rec.No);
                     RcptBufLines.SetRange(RcptBufLines.Posted, false);
                     if RcptBufLines.Find('-') then begin
                         repeat
@@ -686,13 +686,13 @@ Page 51516417 "Paybill Processing Header"
                             LineN := LineN + 10000;
                             Gnljnline.Init;
                             Gnljnline."Journal Template Name" := 'GENERAL';
-                            Gnljnline."Journal Batch Name" := No;
+                            Gnljnline."Journal Batch Name" := Rec.No;
                             Gnljnline."Line No." := LineN;
                             Gnljnline."Account Type" := RcptBufLines."Account Type";
                             Gnljnline."Account No." := RcptBufLines."Member No";
                             Gnljnline.Validate(Gnljnline."Account No.");
                             Gnljnline."Document No." := RcptBufLines."Transaction No";
-                            Gnljnline."Posting Date" := "Posting date";
+                            Gnljnline."Posting Date" := Rec."Posting date";
                             Gnljnline.Description := RcptBufLines.Description;
                             Gnljnline.Amount := RcptBufLines.Amount * -1;
                             if (RcptBufLines."Transaction Prefix" = 'NORMAL') then begin
@@ -708,7 +708,7 @@ Page 51516417 "Paybill Processing Header"
                             Gnljnline."Shortcut Dimension 2 Code" := 'KIAMBU';
                             Gnljnline.Validate(Gnljnline.Amount);
                             Gnljnline."Bal. Account Type" := Gnljnline."bal. account type"::"Bank Account";
-                            Gnljnline."Bal. Account No." := "Account No";
+                            Gnljnline."Bal. Account No." := Rec."Account No";
                             if Gnljnline.Amount <> 0 then
                                 Gnljnline.Insert;
 
@@ -737,13 +737,13 @@ Page 51516417 "Paybill Processing Header"
                             LineN := LineN + 10000;
                             Gnljnline.Init;
                             Gnljnline."Journal Template Name" := 'GENERAL';
-                            Gnljnline."Journal Batch Name" := No;
+                            Gnljnline."Journal Batch Name" := Rec.No;
                             Gnljnline."Line No." := LineN;
                             Gnljnline."Account Type" := RcptBufLines."Account Type";
                             Gnljnline."Account No." := RcptBufLines."Member No";
                             Gnljnline.Validate(Gnljnline."Account No.");
                             Gnljnline."Document No." := RcptBufLines."Transaction No";
-                            Gnljnline."Posting Date" := "Posting date";
+                            Gnljnline."Posting Date" := Rec."Posting date";
                             Gnljnline.Description := RcptBufLines.Description + ' ' + 'Charge';
                             Gnljnline.Amount := ChargeAmount;
                             if (RcptBufLines."Transaction Prefix" = 'NORMAL') then begin
@@ -795,18 +795,18 @@ Page 51516417 "Paybill Processing Header"
                     //Post New
                     Gnljnline.Reset;
                     Gnljnline.SetRange("Journal Template Name", 'GENERAL');
-                    Gnljnline.SetRange("Journal Batch Name", No);
+                    Gnljnline.SetRange("Journal Batch Name", Rec.No);
                     if Gnljnline.Find('-') then begin
                         Codeunit.Run(Codeunit::"Gen. Jnl.-Post Sacco", Gnljnline);
                     end;
-                    Posted := true;
-                    "Posted By" := No;
-                    Modify;
+                    Rec.Posted := true;
+                    Rec."Posted By" := Rec.No;
+                    Rec.Modify;
 
                     Message('Paybill Successfully Generated');
 
-                    Posted := true;
-                    Modify;
+                    Rec.Posted := true;
+                    Rec.Modify;
 
 
                 end;
@@ -816,8 +816,8 @@ Page 51516417 "Paybill Processing Header"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        "Posting date" := Today;
-        "Date Entered" := Today;
+        Rec."Posting date" := Today;
+        Rec."Date Entered" := Today;
     end;
 
     var
@@ -825,22 +825,22 @@ Page 51516417 "Paybill Processing Header"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record 51516413;
+        ReceiptsProcessingLines: Record "Paybill Processing Lines";
         LineNo: Integer;
-        LBatches: Record 51516377;
+        LBatches: Record "Loan Disburesment-Batching";
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record 51516412;
-        Cust: Record 51516364;
+        ReptProcHeader: Record "Paybill Processing Header";
+        Cust: Record "Member Register";
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record 51516371;
+        Loantable: Record "Loans Register";
         LRepayment: Decimal;
-        RcptBufLines: Record 51516413;
-        LoanType: Record 51516381;
-        LoanApp: Record 51516371;
+        RcptBufLines: Record "Paybill Processing Lines";
+        LoanType: Record "Loan Products Setup";
+        LoanApp: Record "Loans Register";
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -851,13 +851,13 @@ Page 51516417 "Paybill Processing Header"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        Genstup: Record 51516398;
-        Memb: Record 51516364;
+        Genstup: Record "Sacco General Set-Up";
+        Memb: Record "Member Register";
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
-        ReceiptLine: Record 51516413;
-        PaybillTarrifs: Record 51516524;
+        ReceiptLine: Record "Paybill Processing Lines";
+        PaybillTarrifs: Record "Paybill Tarrifs";
         ChargeAmount: Decimal;
 }
 

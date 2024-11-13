@@ -4,7 +4,7 @@ Page 51516406 "Posted Bosa Rcpt List-Checkof"
     CardPageID = "PostedBosa Rcpt HCard-Checkof";
     Editable = false;
     PageType = List;
-    SourceTable = 51516481;
+    SourceTable = "Checkoff Header-Distributed2";
     SourceTableView = where(Posted = filter(Yes));
 
     layout
@@ -17,19 +17,19 @@ Page 51516406 "Posted Bosa Rcpt List-Checkof"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
@@ -37,11 +37,11 @@ Page 51516406 "Posted Bosa Rcpt List-Checkof"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }

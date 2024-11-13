@@ -2,7 +2,7 @@
 Page 51516379 "Member Sections List"
 {
     PageType = Card;
-    SourceTable = 51516369;
+    SourceTable = "Member Section";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516379 "Member Sections List"
         {
             repeater(Control1102760000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Section; Section)
+                field(Section; Rec.Section)
                 {
                     ApplicationArea = Basic;
                 }

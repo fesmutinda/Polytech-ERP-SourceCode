@@ -3,7 +3,7 @@ Page 51516387 "Loans Guarantee Details"
 {
     PageType = ListPart;
     RefreshOnActivate = false;
-    SourceTable = 51516372;
+    SourceTable = "Loans Guarantee Details";
 
     layout
     {
@@ -11,39 +11,39 @@ Page 51516387 "Loans Guarantee Details"
         {
             repeater(Control1102760000)
             {
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Account No.';
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Shares; Shares)
+                field(Shares; Rec.Shares)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Deposits';
                     Visible = true;
                 }
-                field("Amont Guaranteed"; "Amont Guaranteed")
+                field("Amont Guaranteed"; Rec."Amont Guaranteed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Self Guarantee"; "Self Guarantee")
+                field("Self Guarantee"; Rec."Self Guarantee")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("TotalLoan Guaranteed"; "TotalLoan Guaranteed")
+                field("TotalLoan Guaranteed"; Rec."TotalLoan Guaranteed")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Guarantorship Liability';
@@ -54,7 +54,7 @@ Page 51516387 "Loans Guarantee Details"
                     Caption = 'Status';
                     Editable = false;
                 }
-                field("free Share"; "free Share")
+                field("free Share"; Rec."free Share")
                 {
                     ApplicationArea = Basic;
                 }
@@ -82,10 +82,10 @@ Page 51516387 "Loans Guarantee Details"
     end;
 
     var
-        Cust: Record 51516364;
+        Cust: Record "Member Register";
         EmployeeCode: Code[20];
         CStatus: Option Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member","New (Pending Confirmation)","Defaulter Recovery";
-        LoanApps: Record 51516371;
-        StatusPermissions: Record 51516452;
+        LoanApps: Record "Loans Register";
+        StatusPermissions: Record "Status Change Permision";
 }
 

@@ -5,50 +5,50 @@ Page 51516428 "Member Statistics FactBox"
     Editable = false;
     PageType = CardPart;
     SaveValues = true;
-    SourceTable = 51516364;
+    SourceTable = "Member Register";
 
     layout
     {
         area(content)
         {
-            field("No."; "No.")
+            field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;
                 Caption = 'Member No.';
             }
-            field(Name; Name)
+            field(Name; Rec.Name)
             {
                 ApplicationArea = Basic;
             }
-            field("Personal No"; "Personal No")
+            field("Personal No"; Rec."Personal No")
             {
                 ApplicationArea = Basic;
             }
-            field("ID No."; "ID No.")
+            field("ID No."; Rec."ID No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Passport No."; "Passport No.")
+            field("Passport No."; Rec."Passport No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Mobile Phone No"; "Mobile Phone No")
+            field("Mobile Phone No"; Rec."Mobile Phone No")
             {
                 ApplicationArea = Basic;
             }
             group("Member Details FactBox")
             {
                 Caption = 'Member Details FactBox';
-                field("Registration Fee Paid"; "Registration Fee Paid")
+                field("Registration Fee Paid"; Rec."Registration Fee Paid")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shares Retained"; "Shares Retained")
+                field("Shares Retained"; Rec."Shares Retained")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Share Capital';
                 }
-                field("Current Shares"; "Current Shares")
+                field("Current Shares"; Rec."Current Shares")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member Deposits';
@@ -57,44 +57,44 @@ Page 51516428 "Member Statistics FactBox"
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Holiday Savings"; "Holiday Savings")
+                field("Holiday Savings"; Rec."Holiday Savings")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Holiday Savings';
                 }
-                field("Additional Shares"; "Additional Shares")
+                field("Additional Shares"; Rec."Additional Shares")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Loan Outstanding Balance';
                     StyleExpr = FieldStyleL;
                 }
-                field("Un-allocated Funds"; "Un-allocated Funds")
+                field("Un-allocated Funds"; Rec."Un-allocated Funds")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = FieldStyle;
                 }
-                field("Insurance Fund"; "Insurance Fund")
+                field("Insurance Fund"; Rec."Insurance Fund")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Loan Insurance';
                 }
-                field("Group Shares"; "Group Shares")
+                field("Group Shares"; Rec."Group Shares")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Dividend Amount"; "Dividend Amount")
+                field("Dividend Amount"; Rec."Dividend Amount")
                 {
                     ApplicationArea = Basic;
                 }
@@ -116,7 +116,7 @@ Page 51516428 "Member Statistics FactBox"
                     Editable = false;
                     Visible = false;
                 }
-                field("Member Loan Liability"; "Member Loan Liability")
+                field("Member Loan Liability"; Rec."Member Loan Liability")
                 {
                     ApplicationArea = Basic;
                 }
@@ -131,14 +131,14 @@ Page 51516428 "Member Statistics FactBox"
     trigger OnAfterGetCurrRecord()
     begin
         ObjLoans.Reset;
-        ObjLoans.SetRange("Client Code", "No.");
+        ObjLoans.SetRange("Client Code", Rec."No.");
         if ObjLoans.Find('-') then
             OutstandingInterest := SFactory.FnGetInterestDueTodate(ObjLoans) - ObjLoans."Interest Paid";
     end;
 
     trigger OnAfterGetRecord()
     begin
-        if ("Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
+        if (Rec."Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
             if UserSetup.Get(UserId) then begin
                 if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
             end;
@@ -152,8 +152,8 @@ Page 51516428 "Member Statistics FactBox"
 
 
         SetFieldStyle;
-        CalcFields("Current Shares", "Member Loan Liability");
-        VarMemberLiability := (("Current Shares") - "Member Loan Liability");
+        Rec.CalcFields("Current Shares", "Member Loan Liability");
+        VarMemberLiability := ((Rec."Current Shares") - Rec."Member Loan Liability");
 
         // VarMemberSelfLiability:=SFactory.FnGetMemberSelfLiability("No.");
         // CALCFIELDS("Current Shares");
@@ -193,16 +193,16 @@ Page 51516428 "Member Statistics FactBox"
         Text002: label 'Not Yet Due';
         Text003: label 'Over %1 Days';
         Text004: label '%1-%2 Days';
-        LoanGuarantors: Record 51516372;
+        LoanGuarantors: Record "Loans Guarantee Details";
         ComittedShares: Decimal;
-        Loans: Record 51516371;
+        Loans: Record "Loans Register";
         FreeShares: Decimal;
         UserSetup: Record "User Setup";
         FieldStyle: Text;
         FieldStyleL: Text;
         FieldStyleI: Text;
         LoanNo: Code[20];
-        LoanGuar: Record 51516372;
+        LoanGuar: Record "Loans Guarantee Details";
         TGrAmount: Decimal;
         GrAmount: Decimal;
         FGrAmount: Decimal;
@@ -214,8 +214,8 @@ Page 51516428 "Member Statistics FactBox"
         TotalAmountPaid: Decimal;
         OutstandingInterest: Decimal;
         InterestDue: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
-        ObjLoans: Record 51516371;
+        SFactory: Codeunit 51516007;
+        ObjLoans: Record "Loans Register";
         VarMemberLiability: Decimal;
         VarMemberSelfLiability: Decimal;
         FreeSharesSelf: Decimal;
@@ -294,9 +294,9 @@ Page 51516428 "Member Statistics FactBox"
     procedure ChangeCustomer()
     begin
         // Change the Customer Filters
-        LatestCustLedgerEntry.SetRange("Customer No.", "No.");
+        LatestCustLedgerEntry.SetRange("Customer No.", Rec."No.");
         for I := 1 to ArrayLen(CustLedgerEntry) do
-            CustLedgerEntry[I].SetRange("Customer No.", "No.");
+            CustLedgerEntry[I].SetRange("Customer No.", Rec."No.");
     end;
 
 
@@ -311,15 +311,15 @@ Page 51516428 "Member Statistics FactBox"
     local procedure SetFieldStyle()
     begin
         FieldStyle := '';
-        CalcFields("Un-allocated Funds");
-        if "Un-allocated Funds" <> 0 then
+        Rec.CalcFields("Un-allocated Funds");
+        if Rec."Un-allocated Funds" <> 0 then
             FieldStyle := 'Attention';
-        CalcFields("Outstanding Balance", "Outstanding Interest");
-        if ("Outstanding Balance" < 0) then
+        Rec.CalcFields("Outstanding Balance", "Outstanding Interest");
+        if (Rec."Outstanding Balance" < 0) then
             FieldStyleL := 'Attention';
 
-        CalcFields("Outstanding Balance", "Outstanding Interest");
-        if ("Outstanding Interest" < 0) then
+        Rec.CalcFields("Outstanding Balance", "Outstanding Interest");
+        if (Rec."Outstanding Interest" < 0) then
             FieldStyleI := 'Attention';
     end;
 }

@@ -5,7 +5,7 @@ Page 51516440 "Cashier Trans Authorisations"
     InsertAllowed = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516441;
+    SourceTable = Transactions;
     SourceTableView = where("Supervisor Checked" = const(No),
                             "Needs Approval" = const(Yes),
                             "Post Attempted" = const(Yes));
@@ -16,65 +16,65 @@ Page 51516440 "Cashier Trans Authorisations"
         {
             repeater(Control1102760000)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Transaction';
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Cashier; Cashier)
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Date';
                     Editable = false;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Time';
                     Editable = false;
                 }
-                field("Authorisation Requirement"; "Authorisation Requirement")
+                field("Authorisation Requirement"; Rec."Authorisation Requirement")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Authorisation Req.';
                     Editable = false;
                 }
-                field(Authorised; Authorised)
+                field(Authorised; Rec.Authorised)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Select; Select)
+                field(Select; Rec.Select)
                 {
                     ApplicationArea = Basic;
                 }
@@ -110,7 +110,7 @@ Page 51516440 "Cashier Trans Authorisations"
 
                 trigger OnAction()
                 begin
-                    MailContent := 'Transaction of Kshs.' + ' ' + Format(Amount) + ' ' + 'for' + ' ' + "Account Name" +
+                    MailContent := 'Transaction of Kshs.' + ' ' + Format(Rec.Amount) + ' ' + 'for' + ' ' + "Account Name" +
                     ' ' + 'has been authorized.';
 
 
@@ -217,10 +217,10 @@ Page 51516440 "Cashier Trans Authorisations"
     end;
 
     var
-        Transactions: Record 51516441;
-        SupervisorApprovals: Record 51516451;
+        Transactions: Record Transactions;
+        SupervisorApprovals: Record "Supervisors Approval Levels";
         UsersID: Record User;
-        "Gen-Setup": Record 51516398;
+        "Gen-Setup": Record "Sacco General Set-Up";
         SendToAddress: Text[30];
         BankAccount: Record "Bank Account";
         MailContent: Text[150];

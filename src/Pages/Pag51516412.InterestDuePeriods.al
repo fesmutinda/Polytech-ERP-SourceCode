@@ -4,7 +4,7 @@ Page 51516412 "Interest Due Periods"
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
-    SourceTable = 51516391;
+    SourceTable = "Interest Due Period";
 
     layout
     {
@@ -12,42 +12,42 @@ Page 51516412 "Interest Due Periods"
         {
             repeater(Group)
             {
-                field("Interest Due Date"; "Interest Due Date")
+                field("Interest Due Date"; Rec."Interest Due Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("New Fiscal Year"; "New Fiscal Year")
+                field("New Fiscal Year"; Rec."New Fiscal Year")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Date Locked"; "Date Locked")
+                field("Date Locked"; Rec."Date Locked")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Closed by User"; "Closed by User")
+                field("Closed by User"; Rec."Closed by User")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Closing Date Time"; "Closing Date Time")
+                field("Closing Date Time"; Rec."Closing Date Time")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Calcuation Date"; "Interest Calcuation Date")
+                field("Interest Calcuation Date"; Rec."Interest Calcuation Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -84,6 +84,6 @@ Page 51516412 "Interest Due Periods"
     var
         InvtPeriod: Record "Inventory Period";
         date: DateFormula;
-        InterestPeriod: Record 51516391;
+        InterestPeriod: Record "Interest Due Period";
 }
 

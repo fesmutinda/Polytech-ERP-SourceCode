@@ -2,7 +2,7 @@
 Page 51516425 "Loan Collateral Setup"
 {
     PageType = List;
-    SourceTable = 51516386;
+    SourceTable = "Loan Collateral Set-up";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516425 "Loan Collateral Setup"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Security Description"; "Security Description")
+                field("Security Description"; Rec."Security Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Category; Category)
+                field(Category; Rec.Category)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Multiplier"; "Collateral Multiplier")
+                field("Collateral Multiplier"; Rec."Collateral Multiplier")
                 {
                     ApplicationArea = Basic;
                 }

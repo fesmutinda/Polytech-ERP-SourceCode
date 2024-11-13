@@ -396,18 +396,18 @@ Page 51516063 "Voucher Payment Lines"
     end;
 
     var
-        RecPayTypes: Record UnknownRecord51516004;
-        TarriffCodes: Record UnknownRecord51516046;
+        RecPayTypes: Record 51516004;
+        TarriffCodes: Record 51516046;
         GenJnlLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        CashierLinks: Record UnknownRecord51516047;
+        CashierLinks: Record 51516047;
         LineNo: Integer;
         CustLedger: Record "Vendor Ledger Entry";
         CustLedger1: Record "Vendor Ledger Entry";
         Amt: Decimal;
         TotAmt: Decimal;
         ApplyInvoice: Codeunit "Purchase Header Apply";
-        AppliedEntries: Record UnknownRecord51516037;
+        AppliedEntries: Record 51516037;
         VendEntries: Record "Vendor Ledger Entry";
         PInv: Record "Purch. Inv. Header";
         VATPaid: Decimal;
@@ -415,6 +415,6 @@ Page 51516063 "Voucher Payment Lines"
         PInvLine: Record "Purch. Inv. Line";
         VATBase: Decimal;
         FieldEditable: Boolean;
-        PHeader: Record UnknownRecord51516000;
+        PHeader: Record 51516000;
 }
 

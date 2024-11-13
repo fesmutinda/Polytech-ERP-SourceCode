@@ -8,7 +8,7 @@ Page 51516395 "Loans Disbursment Batch List"
     ModifyAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516377;
+    SourceTable = "Loan Disburesment-Batching";
     SourceTableView = where(Posted = filter(No));
 
     layout
@@ -17,29 +17,29 @@ Page 51516395 "Loans Disbursment Batch List"
         {
             repeater(Control1102760000)
             {
-                field("Batch No."; "Batch No.")
+                field("Batch No."; Rec."Batch No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Description/Remarks"; "Description/Remarks")
+                field("Description/Remarks"; Rec."Description/Remarks")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No of Loans"; "No of Loans")
+                field("No of Loans"; Rec."No of Loans")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Mode Of Disbursement"; "Mode Of Disbursement")
+                field("Mode Of Disbursement"; Rec."Mode Of Disbursement")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -158,18 +158,18 @@ Page 51516395 "Loans Disbursment Batch List"
                     var
                         Text001: label 'The Batch need to be approved.';
                     begin
-                        if Posted = true then
+                        if Rec.Posted = true then
                             Error('Batch already posted.');
 
-                        if Status <> Status::Approved then
+                        if Rec.Status <> Rec.Status::Approved then
                             Error(Format(Text001));
 
-                        CalcFields(Location);
+                        Rec.CalcFields(Location);
                         if Confirm('Are you sure you want to post this batch?', true) = false then
                             exit;
-                        TestField("Description/Remarks");
-                        TestField("Posting Date");
-                        TestField("Document No.");
+                        Rec.TestField("Description/Remarks");
+                        Rec.TestField("Posting Date");
+                        Rec.TestField("Document No.");
                         GenJournalLine.Reset;
                         GenJournalLine.SetRange("Journal Template Name", 'Payments');
                         GenJournalLine.SetRange("Journal Batch Name", 'LOANS');
@@ -183,9 +183,9 @@ Page 51516395 "Loans Disbursment Batch List"
 
 
                         // fosa posting
-                        if "Mode Of Disbursement" = "mode of disbursement"::MPESA then begin
+                        if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::MPESA then begin
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Batch No.", "Batch No.");
+                            LoanApps.SetRange(LoanApps."Batch No.", Rec."Batch No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
                             if LoanApps.Find('-') then begin
@@ -211,8 +211,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                 GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                 GenJournalLine."Journal Batch Name" := 'LOANS';
                                                 GenJournalLine."Line No." := LineNo;
-                                                GenJournalLine."Document No." := "Document No.";
-                                                GenJournalLine."Posting Date" := "Posting Date";
+                                                GenJournalLine."Document No." := Rec."Document No.";
+                                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                                 GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                                 GenJournalLine."Account No." := LoanApps."Client Code";
@@ -240,8 +240,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Employee;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                    GenJournalLine."Document No." := "Document No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Document No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine.Description := 'Interest Due Paid on top up ' + LoanApps."Loan Product Type Name";
                                                     GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -267,8 +267,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                         GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                         GenJournalLine."Account No." := LoanType."Top Up Commision Account";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Document No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Document No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Levy on Bridging';
                                                         TopUpComm := LoanTopUp.Commision;
                                                         TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -306,8 +306,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                 GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                 GenJournalLine."Journal Batch Name" := 'LOANS';
                                                 GenJournalLine."Line No." := LineNo;
-                                                GenJournalLine."Document No." := "Document No.";
-                                                GenJournalLine."Posting Date" := "Posting Date";
+                                                GenJournalLine."Document No." := Rec."Document No.";
+                                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                                 GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                                 GenJournalLine."Account No." := LoanApps."Client Code";
@@ -333,8 +333,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                    GenJournalLine."Document No." := "Document No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Document No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine.Description := 'Interest Due Paid on top up ' + LoanApps."Loan Product Type Name";
                                                     GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -358,8 +358,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                                         GenJournalLine."Account No." := LoanApps."Client Code";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Document No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Document No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Levy on Bridging';
                                                         TopUpComm := LoanTopUp.Commision;
                                                         TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -388,8 +388,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'transfer to fosa comm';
                                     GenJournalLine.Amount := GenSetUp."Loan Trasfer Fee-FOSA";
                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -407,8 +407,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
@@ -430,9 +430,9 @@ Page 51516395 "Loans Disbursment Batch List"
 
 
                         // eft posting
-                        if "Mode Of Disbursement" = "mode of disbursement"::RTGS then begin
+                        if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::RTGS then begin
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Batch No.", "Batch No.");
+                            LoanApps.SetRange(LoanApps."Batch No.", Rec."Batch No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
                             if LoanApps.Find('-') then begin
@@ -458,8 +458,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                 GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                 GenJournalLine."Journal Batch Name" := 'LOANS';
                                                 GenJournalLine."Line No." := LineNo;
-                                                GenJournalLine."Document No." := "Document No.";
-                                                GenJournalLine."Posting Date" := "Posting Date";
+                                                GenJournalLine."Document No." := Rec."Document No.";
+                                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                                 GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                                 GenJournalLine."Account No." := LoanApps."Client Code";
@@ -487,8 +487,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Employee;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                    GenJournalLine."Document No." := "Document No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Document No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine.Description := 'Interest Due Paid on top up ' + LoanApps."Loan Product Type Name";
                                                     GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -514,8 +514,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                         GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                         GenJournalLine."Account No." := LoanType."Top Up Commision Account";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Document No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Document No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Levy on Bridging';
                                                         TopUpComm := LoanTopUp.Commision;
                                                         TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -552,8 +552,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                     GenJournalLine."Account No." := GenSetUp."Loan Trasfer Fee A/C-EFT";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'EFT COMMision';
                                     GenJournalLine.Amount := GenSetUp."Loan Trasfer Fee-EFT" * -1;
                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -570,11 +570,11 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                    GenJournalLine."Account No." := "BOSA Bank Account";
+                                    GenJournalLine."Account No." := Rec."BOSA Bank Account";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine.Description := 'loans';
                                     GenJournalLine.Amount := LoanApps."Approved Amount" * -1 + (GenSetUp."Loan Trasfer Fee-EFT" + BatchTopUpAmount + BatchTopUpComm);
@@ -592,8 +592,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
@@ -615,9 +615,9 @@ Page 51516395 "Loans Disbursment Batch List"
                         end;
                         // end of eft
                         // cheque posting
-                        if "Mode Of Disbursement" = "mode of disbursement"::Cheque then begin
+                        if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::Cheque then begin
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Batch No.", "Batch No.");
+                            LoanApps.SetRange(LoanApps."Batch No.", Rec."Batch No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
                             if LoanApps.Find('-') then begin
@@ -643,8 +643,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                 GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                 GenJournalLine."Journal Batch Name" := 'LOANS';
                                                 GenJournalLine."Line No." := LineNo;
-                                                GenJournalLine."Document No." := "Document No.";
-                                                GenJournalLine."Posting Date" := "Posting Date";
+                                                GenJournalLine."Document No." := Rec."Document No.";
+                                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                                 GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                                 GenJournalLine."Account No." := LoanApps."Client Code";
@@ -672,8 +672,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Employee;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                    GenJournalLine."Document No." := "Document No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Document No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine.Description := 'Interest Due Paid on top up ' + LoanApps."Loan Product Type Name";
                                                     GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -699,8 +699,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                         GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                         GenJournalLine."Account No." := LoanType."Top Up Commision Account";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Document No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Document No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Levy on Bridging';
                                                         TopUpComm := LoanTopUp.Commision;
                                                         TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -737,8 +737,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                     GenJournalLine."Account No." := GenSetUp."Loan Trasfer Fee A/C-Cheque";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'EFT COMM';
                                     GenJournalLine.Amount := GenSetUp."Loan Trasfer Fee-Cheque" * -1;
                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -755,11 +755,11 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                    GenJournalLine."Account No." := "BOSA Bank Account";
+                                    GenJournalLine."Account No." := Rec."BOSA Bank Account";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine.Description := 'loans';
                                     GenJournalLine.Amount := LoanApps."Approved Amount" * -1 + (GenSetUp."Loan Trasfer Fee-Cheque" + BatchTopUpAmount + BatchTopUpComm);
@@ -777,8 +777,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
@@ -800,9 +800,9 @@ Page 51516395 "Loans Disbursment Batch List"
                         end;
 
                         //rtgs
-                        if "Mode Of Disbursement" = "mode of disbursement"::"5" then begin
+                        if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::"5" then begin
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Batch No.", "Batch No.");
+                            LoanApps.SetRange(LoanApps."Batch No.", Rec."Batch No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
                             if LoanApps.Find('-') then begin
@@ -828,8 +828,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                 GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                 GenJournalLine."Journal Batch Name" := 'LOANS';
                                                 GenJournalLine."Line No." := LineNo;
-                                                GenJournalLine."Document No." := "Document No.";
-                                                GenJournalLine."Posting Date" := "Posting Date";
+                                                GenJournalLine."Document No." := Rec."Document No.";
+                                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                                 GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                                 GenJournalLine."Account No." := LoanApps."Client Code";
@@ -857,8 +857,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Employee;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                    GenJournalLine."Document No." := "Document No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Document No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine.Description := 'Interest Due Paid on top up ' + LoanApps."Loan Product Type Name";
                                                     GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -884,8 +884,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                                         GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                         GenJournalLine."Account No." := LoanType."Top Up Commision Account";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Document No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Document No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Levy on Bridging';
                                                         TopUpComm := LoanTopUp.Commision;
                                                         TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -922,8 +922,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                     GenJournalLine."Account No." := GenSetUp."Loan Trasfer Fee A/C-RTGS";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'EFT COMM';
                                     GenJournalLine.Amount := GenSetUp."Loan Trasfer Fee-RTGS" * -1;
                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -940,11 +940,11 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                    GenJournalLine."Account No." := "BOSA Bank Account";
+                                    GenJournalLine."Account No." := Rec."BOSA Bank Account";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine.Description := 'loans';
                                     GenJournalLine.Amount := LoanApps."Approved Amount" * -1 + (GenSetUp."Loan Trasfer Fee-RTGS" + BatchTopUpAmount + BatchTopUpComm);
@@ -962,8 +962,8 @@ Page 51516395 "Loans Disbursment Batch List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     LoanApps.TestField(LoanApps."Client Code");
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
@@ -1008,16 +1008,16 @@ Page 51516395 "Loans Disbursment Batch List"
     }
 
     var
-        MovementTracker: Record 51516395;
-        FileMovementTracker: Record 51516395;
+        MovementTracker: Record "File Movement Tracker";
+        FileMovementTracker: Record "File Movement Tracker";
         NextStage: Integer;
         EntryNo: Integer;
         NextLocation: Text[100];
-        LoansBatch: Record 51516377;
+        LoansBatch: Record "Loan Disburesment-Batching";
         i: Integer;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PeriodDueDate: Date;
-        ScheduleRep: Record 51516375;
+        ScheduleRep: Record "Loan Repayment Schedule";
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
@@ -1026,13 +1026,13 @@ Page 51516395 "Loans Disbursment Batch List"
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record 51516375;
-        RSchedule: Record 51516375;
+        NewSchedule: Record "Loan Repayment Schedule";
+        RSchedule: Record "Loan Repayment Schedule";
         GP: Text[30];
         ScheduleCode: Code[20];
-        PreviewShedule: Record 51516375;
+        PreviewShedule: Record "Loan Repayment Schedule";
         PeriodInterval: Code[10];
-        CustomerRecord: Record 51516364;
+        CustomerRecord: Record "Member Register";
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -1042,16 +1042,16 @@ Page 51516395 "Loans Disbursment Batch List"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record 51516364;
-        LoanApp: Record 51516371;
+        Cust: Record "Member Register";
+        LoanApp: Record "Loans Register";
         TestAmt: Decimal;
-        CustRec: Record 51516364;
+        CustRec: Record "Member Register";
         CustPostingGroup: Record "Customer Posting Group";
-        GenSetUp: Record 51516398;
-        PCharges: Record 51516383;
+        GenSetUp: Record "Sacco General Set-Up";
+        PCharges: Record "Loan Product Charges";
         TCharges: Decimal;
-        LAppCharges: Record 51516385;
-        Loans: Record 51516371;
+        LAppCharges: Record "Loan Applicaton Charges";
+        Loans: Record "Loans Register";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -1074,7 +1074,7 @@ Page 51516395 "Loans Disbursment Batch List"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record 51516376;
+        LoanTopUp: Record "Loan Offset Details";
         Vend: Record Vendor;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
@@ -1082,25 +1082,25 @@ Page 51516395 "Loans Disbursment Batch List"
         DBranch: Code[20];
         UsersID: Record User;
         TotalTopupComm: Decimal;
-        CustE: Record 51516364;
+        CustE: Record "Member Register";
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record 51516372;
+        LoanG: Record "Loans Guarantee Details";
         SpecialComm: Decimal;
-        LoanApps: Record 51516371;
+        LoanApps: Record "Loans Register";
         Banks: Record "Bank Account";
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
         TotalSpecialLoan: Decimal;
-        SpecialLoanCl: Record 51516379;
-        Loans2: Record 51516371;
+        SpecialLoanCl: Record "Loan Special Clearance";
+        Loans2: Record "Loans Register";
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        Refunds: Record 51516381;
+        Refunds: Record "Loan Products Setup";
         TotalRefunds: Decimal;
         WithdrawalFee: Decimal;
         NetPayable: Decimal;
@@ -1112,13 +1112,13 @@ Page 51516395 "Loans Disbursment Batch List"
         NegFee: Decimal;
         DValue: Record "Dimension Value";
         ChBank: Code[20];
-        Trans: Record 51516441;
-        TransactionCharges: Record 51516442;
-        BChequeRegister: Record 51516456;
-        OtherCommitments: Record 51516403;
+        Trans: Record Transactions;
+        TransactionCharges: Record "Transaction Charges";
+        BChequeRegister: Record "Banker Cheque Register";
+        OtherCommitments: Record "Other Commitements Clearance";
         BoostingComm: Decimal;
         BoostingCommTotal: Decimal;
-        BridgedLoans: Record 51516379;
+        BridgedLoans: Record "Loan Special Clearance";
         InterestDue: Decimal;
         ContractualShares: Decimal;
         BridgingChanged: Boolean;
@@ -1132,12 +1132,12 @@ Page 51516395 "Loans Disbursment Batch List"
         PrincipalRepay: Decimal;
         InterestRepay: Decimal;
         TMonthDays: Integer;
-        SMSMessage: Record 51516373;
+        SMSMessage: Record "Loan Appraisal Salary Details";
         iEntryNo: Integer;
         Temp: Record Customer;
         Jtemplate: Code[30];
         JBatch: Code[30];
-        LBatches: Record 51516377;
+        LBatches: Record "Loan Disburesment-Batching";
         ApprovalMgt: Codeunit "Approvals Mgmt.";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Imprest,ImprestSurrender,Interbank;
 }

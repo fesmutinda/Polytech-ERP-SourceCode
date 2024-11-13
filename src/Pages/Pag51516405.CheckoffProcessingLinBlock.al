@@ -2,7 +2,7 @@
 Page 51516405 "Checkoff Processing Lin(Block)"
 {
     PageType = ListPart;
-    SourceTable = 51516390;
+    SourceTable = "Checkoff Processing Lin(Block)";
 
     layout
     {
@@ -10,25 +10,25 @@ Page 51516405 "Checkoff Processing Lin(Block)"
         {
             repeater(Group)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff/Payroll No"; "Staff/Payroll No")
+                field("Staff/Payroll No"; Rec."Staff/Payroll No")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
@@ -61,9 +61,9 @@ Page 51516405 "Checkoff Processing Lin(Block)"
     local procedure SetStyles()
     begin
         CoveragePercentStyle := 'Strong';
-        if "Member No" = '' then
+        if Rec."Member No" = '' then
             CoveragePercentStyle := 'Unfavorable';
-        if "Member No" <> '' then
+        if Rec."Member No" <> '' then
             CoveragePercentStyle := 'Favorable';
     end;
 }

@@ -6,7 +6,7 @@ Page 51516369 "Member Ledger Entries"
     DeleteAllowed = false;
     Editable = false;
     PageType = Card;
-    SourceTable = 51516365;
+    SourceTable = "Member Ledger Entry";
 
     layout
     {
@@ -14,142 +14,142 @@ Page 51516369 "Member Ledger Entries"
         {
             repeater(Control1)
             {
-                field("Posting Date";"Posting Date")
+                field("Posting Date";Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Type";"Transaction Type")
+                field("Transaction Type";Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No.";"Document No.")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("External Document No.";"External Document No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Customer No.";"Customer No.")
+                field("Document No.";Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan No";"Loan No")
+                field("External Document No.";Rec."External Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction No.";"Transaction No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Loan Type";"Loan Type")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Description;Description)
+                field("Customer No.";Rec."Customer No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Credit Amount";"Credit Amount")
+                field("Loan No";Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Debit Amount";"Debit Amount")
+                field("Transaction No.";Rec."Transaction No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code";"Global Dimension 1 Code")
+                field("Loan Type";Rec."Loan Type")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
-                    Visible = false;
                 }
-                field("Global Dimension 2 Code";"Global Dimension 2 Code")
+                field("Credit Amount";Rec."Credit Amount")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Debit Amount";Rec."Debit Amount")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Global Dimension 1 Code";Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("IC Partner Code";"IC Partner Code")
+                field("Global Dimension 2 Code";Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Salesperson Code";"Salesperson Code")
+                field("IC Partner Code";Rec."IC Partner Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Amount;Amount)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Amount (LCY)";"Amount (LCY)")
+                field("Salesperson Code";Rec."Salesperson Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("User ID";"User ID")
+                field(Amount;Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Amount (LCY)";Rec."Amount (LCY)")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Visible = false;
+                }
+                field("User ID";Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date";"Transaction Date")
+                field("Transaction Date";Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     ToolTip = 'Specifies the Work Date Transaction Date,for transactions that are Backdated';
                 }
-                field("Bal. Account Type";"Bal. Account Type")
+                field("Bal. Account Type";Rec."Bal. Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Bal. Account No.";"Bal. Account No.")
+                field("Bal. Account No.";Rec."Bal. Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Source Code";"Source Code")
+                field("Source Code";Rec."Source Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Reason Code";"Reason Code")
+                field("Reason Code";Rec."Reason Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Reversed;Reversed)
+                field(Reversed;Rec.Reversed)
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field("Reversed by Entry No.";"Reversed by Entry No.")
+                field("Reversed by Entry No.";Rec."Reversed by Entry No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Reversed Entry No.";"Reversed Entry No.")
+                field("Reversed Entry No.";Rec."Reversed Entry No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Reversal Date";"Reversal Date")
+                field("Reversal Date";Rec."Reversal Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entry No.";"Entry No.")
+                field("Entry No.";Rec."Entry No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -192,7 +192,7 @@ Page 51516369 "Member Ledger Entries"
 
                     trigger OnAction()
                     begin
-                        Navigate.SetDoc("Posting Date","Document No.");
+                        Navigate.SetDoc(Rec."Posting Date",Rec."Document No.");
                         Navigate.Run;
                     end;
                 }
@@ -228,35 +228,35 @@ Page 51516369 "Member Ledger Entries"
                          end;
 
                         Clear(ReversalEntry);
-                        if Reversed then
-                          ReversalEntry.AlreadyReversedEntry(TableCaption,"Entry No.");
-                        if "Journal Batch Name" = '' then
+                        if Rec.Reversed then
+                          ReversalEntry.AlreadyReversedEntry(Rec.TableCaption,Rec."Entry No.");
+                        if Rec."Journal Batch Name" = '' then
                           ReversalEntry.TestFieldError;
-                        TestField("Transaction No.");if ("Loan No"<>'') and ("Transaction Type"="transaction type"::Loan) then begin
+                        Rec.TestField("Transaction No.");if (Rec."Loan No"<>'') and (Rec."Transaction Type"=Rec."transaction type"::Loan) then begin
                           ObjMemberLedgerEntries.Reset;
-                          ObjMemberLedgerEntries.SetRange("Loan No","Loan No");
+                          ObjMemberLedgerEntries.SetRange("Loan No",Rec."Loan No");
                           ObjMemberLedgerEntries.SetRange(Reversed,false);
-                          ObjMemberLedgerEntries.SetRange("Transaction Type","transaction type"::"Loan Repayment");
+                          ObjMemberLedgerEntries.SetRange("Transaction Type",Rec."transaction type"::"Loan Repayment");
                           if ObjMemberLedgerEntries.Find('-') then
                             Error('You cannot Reverse a Loan with Repayment Entries.')
                           end;
 
-                        ReversalEntry.ReverseTransaction("Transaction No.");
+                        ReversalEntry.ReverseTransaction(Rec."Transaction No.");
 
-                        if (("Loan No"<>'') and ("Transaction Type"="transaction type"::Loan)) then begin
+                        if ((Rec."Loan No"<>'') and (Rec."Transaction Type"=Rec."transaction type"::Loan)) then begin
                           ObjMemberLedgerEntries.Reset;
-                          ObjMemberLedgerEntries.SetRange("Loan No","Loan No");
+                          ObjMemberLedgerEntries.SetRange("Loan No",Rec."Loan No");
                           ObjMemberLedgerEntries.SetRange(Reversed,true);
-                          ObjMemberLedgerEntries.SetRange("Transaction Type","transaction type"::Loan);
+                          ObjMemberLedgerEntries.SetRange("Transaction Type",Rec."transaction type"::Loan);
                           if ObjMemberLedgerEntries.Find('-') then
                             begin
                               ObjLoans.Reset;
-                              ObjLoans.SetRange("Loan  No.","Loan No");
+                              ObjLoans.SetRange("Loan  No.",Rec."Loan No");
                               if ObjLoans.Find('-') then begin
                                 Message('You are about to reverse a Loan.Yo will be Required to raise the Loan afresh.');
                                 ObjLoans.Reversed:=true;
                                 ObjLoans.Modify;
-                                Message('You successfully reversed Loan No '+"Loan No");
+                                Message('You successfully reversed Loan No '+Rec."Loan No");
                                 end
 
                               end
@@ -274,7 +274,7 @@ Page 51516369 "Member Ledger Entries"
 
                     trigger OnAction()
                     var
-                        MemberLedger: Record UnknownRecord51516365;
+                        MemberLedger: Record "Member Ledger Entry";
                     begin
                         MemberLedger := Rec;
                         CurrPage.SetSelectionFilter(MemberLedger);
@@ -294,7 +294,7 @@ Page 51516369 "Member Ledger Entries"
     var
         Navigate: Page Navigate;
         UserSetup: Record "User Setup";
-        ObjMemberLedgerEntries: Record UnknownRecord51516365;
-        ObjLoans: Record UnknownRecord51516371;
+        ObjMemberLedgerEntries: Record "Member Ledger Entry";
+        ObjLoans: Record "Loans Register";
 }
 

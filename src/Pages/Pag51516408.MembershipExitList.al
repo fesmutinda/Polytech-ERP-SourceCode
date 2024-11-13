@@ -8,7 +8,7 @@ Page 51516408 "Membership Exit List"
     ModifyAllowed = true;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption';
-    SourceTable = 51516400;
+    SourceTable = "Membership Exit";
     SourceTableView = where(Posted = filter(No));
 
     layout
@@ -17,41 +17,41 @@ Page 51516408 "Membership Exit List"
         {
             repeater(Control1102755000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No."; "Member No.")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Member Name"; "Member Name")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Closing Date"; "Closing Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Total Loan"; "Total Loan")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Total Interest"; "Total Interest")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Member Deposits"; "Member Deposits")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("User ID"; "User ID")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Status; Status)
+                field("Member Name"; Rec."Member Name")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Closing Date"; Rec."Closing Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Total Loan"; Rec."Total Loan")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Total Interest"; Rec."Total Interest")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Member Deposits"; Rec."Member Deposits")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("User ID"; Rec."User ID")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Style = StrongAccent;
@@ -81,7 +81,7 @@ Page 51516408 "Membership Exit List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::"Member Closure";
-                        ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, "No.");
+                        ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -96,9 +96,9 @@ Page 51516408 "Membership Exit List"
 
     var
         Closure: Integer;
-        Cust: Record 51516364;
+        Cust: Record "Member Register";
         UBFRefund: Decimal;
-        Generalsetup: Record 51516398;
+        Generalsetup: Record "Sacco General Set-Up";
         Totalavailable: Decimal;
         UnpaidDividends: Decimal;
         TotalOustanding: Decimal;
@@ -109,7 +109,7 @@ Page 51516408 "Membership Exit List"
         Advice: Boolean;
         TotalDefaulterR: Decimal;
         AvailableShares: Decimal;
-        Loans: Record 51516371;
+        Loans: Record "Loans Register";
         Value1: Decimal;
         Interest: Decimal;
         LineN: Integer;

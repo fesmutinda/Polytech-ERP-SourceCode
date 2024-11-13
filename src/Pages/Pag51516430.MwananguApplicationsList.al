@@ -5,7 +5,7 @@ Page 51516430 "Mwanangu Applications List"
     Editable = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516430;
+    SourceTable = "Mwanangu Savings Application";
     SourceTableView = where("Application Status" = filter(<> Converted));
 
     layout
@@ -14,43 +14,43 @@ Page 51516430 "Mwanangu Applications List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA Account No"; "BOSA Account No")
+                field("BOSA Account No"; Rec."BOSA Account No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member No';
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member Name';
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member ID No';
                 }
-                field("Mobile Phone No"; "Mobile Phone No")
+                field("Mobile Phone No"; Rec."Mobile Phone No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member Phone';
                 }
-                field("Child Name"; "Child Name")
+                field("Child Name"; Rec."Child Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Contribution"; "Monthly Contribution")
+                field("Monthly Contribution"; Rec."Monthly Contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -77,12 +77,12 @@ Page 51516430 "Mwanangu Applications List"
                 trigger OnAction()
                 begin
                     //TESTFIELD("Employer Code");
-                    TestField("Account Type");
-                    TestField("ID No.");
-                    TestField("Staff No");
+                    Rec.TestField("Account Type");
+                    Rec.TestField("ID No.");
+                    Rec.TestField("Staff No");
                     //TESTFIELD("BOSA Account No");
-                    TestField("Date of Birth");
-                    TestField("Global Dimension 2 Code");
+                    Rec.TestField("Date of Birth");
+                    Rec.TestField("Global Dimension 2 Code");
                     /*
                     IF ("Micro Group"=FALSE) OR ("Micro Single"=FALSE) THEN
                     IF "BOSA Account No"='' THEN
@@ -94,12 +94,12 @@ Page 51516430 "Mwanangu Applications List"
                     /*IF "Global Dimension 2 Code" = '' THEN
                     ERROR('Please specify the branch.');
                      */
-                    if "Application Status" = "application status"::Converted then
+                    if Rec."Application Status" = Rec."application status"::Converted then
                         Error('Application has already been converted.');
 
-                    if ("Account Type" = 'SAVINGS') then begin
+                    if (Rec."Account Type" = 'SAVINGS') then begin
                         Nok.Reset;
-                        Nok.SetRange(Nok."Account No", "No.");
+                        Nok.SetRange(Nok."Account No", Rec."No.");
                         /*IF Nok.FIND('-') = FALSE THEN BEGIN
                         ERROR('Next of Kin have not been specified.');
                         END;*/
@@ -111,8 +111,8 @@ Page 51516430 "Mwanangu Applications List"
                         exit;
 
 
-                    "Application Status" := "application status"::Converted;
-                    Modify;
+                    Rec."Application Status" := Rec."application status"::Converted;
+                    Rec.Modify;
 
 
 
@@ -129,9 +129,9 @@ Page 51516430 "Mwanangu Applications List"
                     DimensionValue.MODIFY;
                     */
 
-                    if AccoutTypes.Get("Account Type") then begin
+                    if AccoutTypes.Get(Rec."Account Type") then begin
                         if AccoutTypes."Fixed Deposit" = true then begin
-                            TestField("Savings Account No.");
+                            Rec.TestField("Savings Account No.");
                             //TESTFIELD("Maturity Type");
                             //TESTFIELD("Fixed Deposit Type");
                         end;
@@ -184,60 +184,60 @@ Page 51516430 "Mwanangu Applications List"
                         */
                         Accounts.Init;
                         //Accounts."No.":=AcctNo;
-                        Accounts."No." := "No.";
-                        AcctNo := "No.";
-                        Accounts."Date of Birth" := "Date of Birth";
-                        Accounts.Name := Name;
+                        Accounts."No." := Rec."No.";
+                        AcctNo := Rec."No.";
+                        Accounts."Date of Birth" := Rec."Date of Birth";
+                        Accounts.Name := Rec.Name;
                         Accounts."Creditor Type" := Accounts."creditor type"::"Savings Account";
                         Accounts."Debtor Type" := "Debtor Type";
-                        if "Micro Single" = true then
+                        if Rec."Micro Single" = true then
                             Accounts."Group Account" := false
-                        else if "Micro Group" = true then
+                        else if Random()ec."Micro Group" = true then
                             Accounts."Group Account" := false;
-                        Accounts."Personal No." := "Staff No";
-                        Accounts."ID No." := "ID No.";
-                        Accounts."Mobile Phone No" := "Mobile Phone No";
-                        Accounts."Registration Date" := "Registration Date";
+                        Accounts."Personal No." := Rec."Staff No";
+                        Accounts."ID No." := Rec."ID No.";
+                        Accounts."Mobile Phone No" := Rec."Mobile Phone No";
+                        Accounts."Registration Date" := Rec."Registration Date";
                         //Accounts."Marital Status":="Marital Status";
-                        Accounts."BOSA Account No" := "BOSA Account No";
-                        Accounts.Picture := Picture;
-                        Accounts.Signature := Signature;
-                        Accounts."Passport No." := "Passport No.";
-                        Accounts."Employer Code" := "Employer Code";
+                        Accounts."BOSA Account No" := Rec."BOSA Account No";
+                        Accounts.Picture := Rec.Picture;
+                        Accounts.Signature := Rec.Signature;
+                        Accounts."Passport No." := Rec."Passport No.";
+                        Accounts."Employer Code" := Rec."Employer Code";
                         Accounts.Status := Accounts.Status::New;
                         Accounts."Account Type" := "Account Type";
-                        Accounts."Account Category" := "Account Category";
-                        Accounts."Date of Birth" := "Date of Birth";
+                        Accounts."Account Category" := Rec."Account Category";
+                        Accounts."Date of Birth" := Rec."Date of Birth";
                         Accounts."Global Dimension 1 Code" := 'FOSA';
-                        Accounts."Global Dimension 2 Code" := "Global Dimension 2 Code";
-                        Accounts.Address := Address;
-                        Accounts."Address 2" := "Address 2";
-                        Accounts.City := City;
-                        Accounts."Phone No." := "Phone No.";
-                        Accounts."Telex No." := "Telex No.";
-                        Accounts."Post Code" := "Post Code";
-                        Accounts.County := County;
-                        Accounts."E-Mail" := "E-Mail";
-                        Accounts."Home Page" := "Home Page";
+                        Accounts."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
+                        Accounts.Address := Rec.Address;
+                        Accounts."Address 2" := Rec."Address 2";
+                        Accounts.City := Rec.City;
+                        Accounts."Phone No." := Rec."Phone No.";
+                        Accounts."Telex No." := Rec."Telex No.";
+                        Accounts."Post Code" := Rec."Post Code";
+                        Accounts.County := Rec.County;
+                        Accounts."E-Mail" := Rec."E-Mail";
+                        Accounts."Home Page" := Rec."Home Page";
                         Accounts."Registration Date" := Today;
                         //Accounts.Status:=Status::New;
-                        Accounts.Status := Status::Open;
-                        Accounts.Section := Section;
-                        Accounts."Home Address" := "Home Address";
-                        Accounts.District := District;
-                        Accounts.Location := Location;
-                        Accounts."Sub-Location" := "Sub-Location";
-                        Accounts."Savings Account No." := "Savings Account No.";
+                        Accounts.Status := Rec.Status::Open;
+                        Accounts.Section := Rec.Section;
+                        Accounts."Home Address" := Rec."Home Address";
+                        Accounts.District := Rec.District;
+                        Accounts.Location := Rec.Location;
+                        Accounts."Sub-Location" := Rec."Sub-Location";
+                        Accounts."Savings Account No." := Rec."Savings Account No.";
                         //Accounts."Signing Instructions":="Signing Instructions";
-                        Accounts."Fixed Deposit Type" := "Fixed Deposit Type";
-                        Accounts."FD Maturity Date" := "FD Maturity Date";
+                        Accounts."Fixed Deposit Type" := Rec."Fixed Deposit Type";
+                        Accounts."FD Maturity Date" := Rec."FD Maturity Date";
                         Accounts."Registration Date" := Today;
-                        Accounts."Monthly Contribution" := "Monthly Contribution";
-                        Accounts."Formation/Province" := "Formation/Province";
-                        Accounts."Division/Department" := "Division/Department";
-                        Accounts."Station/Sections" := "Station/Sections";
-                        Accounts."Force No." := "Force No.";
-                        Accounts."Vendor Posting Group" := "Account Type";
+                        Accounts."Monthly Contribution" := Rec."Monthly Contribution";
+                        Accounts."Formation/Province" := Rec."Formation/Province";
+                        Accounts."Division/Department" := Rec."Division/Department";
+                        Accounts."Station/Sections" := Rec."Station/Sections";
+                        Accounts."Force No." := Rec."Force No.";
+                        Accounts."Vendor Posting Group" := Rec."Account Type";
                         Accounts.Insert;
 
                     end;
@@ -252,8 +252,8 @@ Page 51516430 "Mwanangu Applications List"
                         Accounts.Modify;
 
                         //Update BOSA with FOSA Account
-                        if ("Account Type" = 'ORDINARY') then begin
-                            if Cust.Get("BOSA Account No") then begin
+                        if (Rec."Account Type" = 'ORDINARY') then begin
+                            if Cust.Get(Rec."BOSA Account No") then begin
                                 Cust."FOSA Account No." := AcctNo;
                                 Cust."FOSA Account" := AcctNo;
                                 Cust.Modify;
@@ -263,12 +263,12 @@ Page 51516430 "Mwanangu Applications List"
                     end;
 
                     NextOfKinApp.Reset;
-                    NextOfKinApp.SetRange(NextOfKinApp."Account No", "No.");
+                    NextOfKinApp.SetRange(NextOfKinApp."Account No", Rec."No.");
                     if NextOfKinApp.Find('-') then begin
                         repeat
                             NextOfKin.Init;
                             //NextOfKin."Account No":=AcctNo;
-                            NextOfKin."Account No" := "No.";
+                            NextOfKin."Account No" := Rec."No.";
 
                             NextOfKin.Name := NextOfKinApp.Name;
                             NextOfKin.Relationship := NextOfKinApp.Relationship;
@@ -286,7 +286,7 @@ Page 51516430 "Mwanangu Applications List"
                     end;
 
                     AccountSignApp.Reset;
-                    AccountSignApp.SetRange(AccountSignApp."Account No", "No.");
+                    AccountSignApp.SetRange(AccountSignApp."Account No", Rec."No.");
                     if AccountSignApp.Find('-') then begin
                         repeat
                             AccountSign.Init;
@@ -322,12 +322,12 @@ Page 51516430 "Mwanangu Applications List"
 
                 trigger OnAction()
                 begin
-                    if "Application Status" = "application status"::Converted then
+                    if Rec."Application Status" = Rec."application status"::Converted then
                         Error('Application has already been converted.');
 
                     if Confirm('Are you sure you want to reject this application', true) = true then begin
-                        "Application Status" := "application status"::Rejected;
-                        Modify;
+                        Rec."Application Status" := Rec."application status"::Rejected;
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -348,22 +348,22 @@ Page 51516430 "Mwanangu Applications List"
                     begin
 
                         //-----Check Mandatory Fields---------
-                        TestField("Employer Code");
-                        TestField("Account Type");
-                        TestField("ID No.");
-                        TestField("Staff No");
-                        TestField("BOSA Account No");
-                        TestField("Date of Birth");
-                        TestField("Global Dimension 2 Code");
-                        if "Global Dimension 2 Code" = '' then
+                        Rec.TestField("Employer Code");
+                        Rec.TestField("Account Type");
+                        Rec.TestField("ID No.");
+                        Rec.TestField("Staff No");
+                        Rec.TestField("BOSA Account No");
+                        Rec.TestField("Date of Birth");
+                        Rec.TestField("Global Dimension 2 Code");
+                        if Rec."Global Dimension 2 Code" = '' then
                             Error('Please specify the branch.');
 
                         //-----End Check Mandatory Fields---------
 
                         //----Check If account Already Exists------
                         Acc.Reset;
-                        Acc.SetRange(Acc."ID No.", "ID No.");
-                        Acc.SetRange(Acc."Account Type", "Account Type");
+                        Acc.SetRange(Acc."ID No.", Rec."ID No.");
+                        Acc.SetRange(Acc."Account Type", Rec."Account Type");
                         Acc.SetRange(Acc.Status, Acc.Status::Active);
                         if Acc.Find('-') then
                             Error('Account already exists. %1', Acc."No.");
@@ -371,15 +371,15 @@ Page 51516430 "Mwanangu Applications List"
 
 
                         //---Checkfields If Fixed Deposit------------
-                        if AccoutTypes.Get("Account Type") then begin
+                        if AccoutTypes.Get(Rec."Account Type") then begin
                             if AccoutTypes."Fixed Deposit" = true then begin
-                                TestField("Savings Account No.");
+                                Rec.TestField("Savings Account No.");
                                 //TESTFIELD("Maturity Type");
                                 //TESTFIELD("Fixed Deposit Type");
                             end;
                             //---End Checkfields If Fixed Deposit------------
 
-                            if "Application Status" = "application status"::Converted then
+                            if Rec."Application Status" = Rec."application status"::Converted then
                                 Error('Application has already been converted.');
 
 
@@ -395,57 +395,57 @@ Page 51516430 "Mwanangu Applications List"
 
                             if Confirm('Are you sure you want to create this account?', true) = false then
                                 exit;
-                            "Application Status" := "application status"::Converted;
-                            "Registration Date" := Today;
-                            Modify;
+                            Rec."Application Status" := Rec."application status"::Converted;
+                            Rec."Registration Date" := Today;
+                            Rec.Modify;
 
                             //--Assign Account Nos Based On The Product Type-----
                             //FOSA A/C FORMAT =PREFIX-MEMBERNO-PRODUCTCODE
-                            if AccoutTypes.Get("Account Type") then
-                                AcctNo := AccoutTypes."Account No Prefix" + '-' + "BOSA Account No" + '-' + AccoutTypes."Product Code";
+                            if AccoutTypes.Get(Rec."Account Type") then
+                                AcctNo := AccoutTypes."Account No Prefix" + '-' + Rec."BOSA Account No" + '-' + AccoutTypes."Product Code";
 
                             //---Create Account on Vendor Table----
                             Accounts.Init;
                             Accounts."No." := AcctNo;
-                            Accounts."Date of Birth" := "Date of Birth";
-                            Accounts.Name := Name;
+                            Accounts."Date of Birth" := Rec."Date of Birth";
+                            Accounts.Name := Rec.Name;
                             Accounts."Creditor Type" := Accounts."creditor type"::"Savings Account";
-                            Accounts."Personal No." := "Staff No";
-                            Accounts."ID No." := "ID No.";
-                            Accounts."Mobile Phone No" := "Mobile Phone No";
-                            Accounts."Registration Date" := "Registration Date";
-                            Accounts."Employer Code" := "Employer Code";
-                            Accounts."BOSA Account No" := "BOSA Account No";
-                            Accounts.Picture := Picture;
-                            Accounts.Signature := Signature;
-                            Accounts."Passport No." := "Passport No.";
+                            Accounts."Personal No." := Rec."Staff No";
+                            Accounts."ID No." := Rec."ID No.";
+                            Accounts."Mobile Phone No" := Rec."Mobile Phone No";
+                            Accounts."Registration Date" := Rec."Registration Date";
+                            Accounts."Employer Code" := Rec."Employer Code";
+                            Accounts."BOSA Account No" := Rec."BOSA Account No";
+                            Accounts.Picture := Rec.Picture;
+                            Accounts.Signature := Rec.Signature;
+                            Accounts."Passport No." := Rec."Passport No.";
                             Accounts.Status := Accounts.Status::Active;
-                            Accounts."Account Type" := "Account Type";
-                            Accounts."Account Category" := "Account Category";
-                            Accounts."Date of Birth" := "Date of Birth";
+                            Accounts."Account Type" := Rec."Account Type";
+                            Accounts."Account Category" := Rec."Account Category";
+                            Accounts."Date of Birth" := Rec."Date of Birth";
                             Accounts."Global Dimension 1 Code" := 'FOSA';
-                            Accounts."Global Dimension 2 Code" := "Global Dimension 2 Code";
-                            Accounts.Address := Address;
-                            Accounts."Address 2" := "Address 2";
-                            Accounts.City := City;
-                            Accounts."Phone No." := "Phone No.";
-                            Accounts."Telex No." := "Telex No.";
-                            Accounts."Post Code" := "Post Code";
-                            Accounts.County := County;
-                            Accounts."E-Mail" := "E-Mail";
-                            Accounts."Home Page" := "Home Page";
+                            Accounts."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
+                            Accounts.Address := Rec.Address;
+                            Accounts."Address 2" := Rec."Address 2";
+                            Accounts.City := Rec.City;
+                            Accounts."Phone No." := Rec."Phone No.";
+                            Accounts."Telex No." := Rec."Telex No.";
+                            Accounts."Post Code" := Rec."Post Code";
+                            Accounts.County := Rec.County;
+                            Accounts."E-Mail" := Rec."E-Mail";
+                            Accounts."Home Page" := Rec."Home Page";
                             Accounts."Registration Date" := Today;
                             Accounts.Status := Status::Approved;
-                            Accounts.Section := Section;
-                            Accounts."Home Address" := "Home Address";
-                            Accounts.District := District;
-                            Accounts.Location := Location;
-                            Accounts."Sub-Location" := "Sub-Location";
-                            Accounts."Savings Account No." := "Savings Account No.";
+                            Accounts.Section := Rec.Section;
+                            Accounts."Home Address" := Rec."Home Address";
+                            Accounts.District := Rec.District;
+                            Accounts.Location := Rec.Location;
+                            Accounts."Sub-Location" := Rec."Sub-Location";
+                            Accounts."Savings Account No." := Rec."Savings Account No.";
                             Accounts."Registration Date" := Today;
-                            Accounts."Vendor Posting Group" := "Vendor Posting Group";
+                            Accounts."Vendor Posting Group" := Rec."Vendor Posting Group";
                             Accounts.Insert;
-                            "Application Status" := "application status"::Converted;
+                            "Application Status" := Rec."application status"::Converted;
                         end;
                         AccoutTypes."Last No Used" := IncStr(AccoutTypes."Last No Used");
                         AccoutTypes.Modify;
@@ -459,8 +459,8 @@ Page 51516430 "Mwanangu Applications List"
                             Accounts.Modify;
 
                             //---Update BOSA with FOSA Account----
-                            if ("Account Type" = 'ORDINARY') then begin
-                                if Cust.Get("BOSA Account No") then begin
+                            if (Rec."Account Type" = 'ORDINARY') then begin
+                                if Cust.Get(Rec."BOSA Account No") then begin
                                     Cust."FOSA Account No." := AcctNo;
                                     Cust."FOSA Account" := AcctNo;
                                     Cust.Modify;
@@ -471,11 +471,11 @@ Page 51516430 "Mwanangu Applications List"
 
                         //----Insert Nominee Information------
                         NextOfKinApp.Reset;
-                        NextOfKinApp.SetRange(NextOfKinApp."Account No", "No.");
+                        NextOfKinApp.SetRange(NextOfKinApp."Account No", Rec."No.");
                         if NextOfKinApp.Find('-') then begin
                             repeat
                                 NextOfKin.Init;
-                                NextOfKin."Account No" := "No.";
+                                NextOfKin."Account No" := Rec."No.";
                                 NextOfKin.Name := NextOfKinApp.Name;
                                 NextOfKin.Relationship := NextOfKinApp.Relationship;
                                 NextOfKin.Beneficiary := NextOfKinApp.Beneficiary;
@@ -493,7 +493,7 @@ Page 51516430 "Mwanangu Applications List"
 
                         //Insert Account Signatories------
                         AccountSignApp.Reset;
-                        AccountSignApp.SetRange(AccountSignApp."Account No", "No.");
+                        AccountSignApp.SetRange(AccountSignApp."Account No", Rec."No.");
                         if AccountSignApp.Find('-') then begin
                             repeat
                                 AccountSign.Init;
@@ -509,7 +509,7 @@ Page 51516430 "Mwanangu Applications List"
                                 AccountSign.Signature := AccountSignApp.Signature;
                                 AccountSign."Expiry Date" := AccountSignApp."Expiry Date";
                                 AccountSign.Insert;
-                                "Application Status" := "application status"::Converted;
+                                Rec."Application Status" := Rec."application status"::Converted;
                             until AccountSignApp.Next = 0;
                         end;
                         //Insert Account Signatories------
@@ -537,27 +537,27 @@ Page 51516430 "Mwanangu Applications List"
                     begin
                         if Confirm('Are you sure you want to send Approval request for this record?', true) = false then
                             exit;
-                        if "Micro Group" <> true then begin
-                            TestField("Account Type");
-                            TestField("ID No.");
+                        if Rec."Micro Group" <> true then begin
+                            Rec.TestField("Account Type");
+                            Rec.TestField("ID No.");
                             //TESTFIELD("Staff No");
                             //TESTFIELD("BOSA Account No");
-                            TestField("Date of Birth");
-                            TestField("Global Dimension 2 Code");
+                            Rec.TestField("Date of Birth");
+                            Rec.TestField("Global Dimension 2 Code");
                         end;
 
                         if ("Micro Single" = true) then begin
-                            TestField("Group Code");
-                            TestField("Global Dimension 2 Code");
-                            TestField("Account Type");
+                            Rec.TestField("Group Code");
+                            Rec.TestField("Global Dimension 2 Code");
+                            Rec.TestField("Account Type");
                         end;
 
-                        if ("Micro Single" <> true) and ("Micro Group" <> true) then
-                            if "Account Type" = 'SAVINGS' then begin
-                                TestField("BOSA Account No");
+                        if (Rec."Micro Single" <> true) and (Rec."Micro Group" <> true) then
+                            if Rec."Account Type" = 'SAVINGS' then begin
+                                Rec.TestField("BOSA Account No");
                             end;
 
-                        if Status <> Status::Open then
+                        if Rec.Status <> Rec.Status::Open then
                             Error(Text001);
                         //IF ApprovalsMgmt.CheckFAccountApplicationApprovalsWorkflowEnabled(Rec) THEN
                         //ApprovalsMgmt.OnSendFAccountApplicationForApproval(Rec);
@@ -609,15 +609,15 @@ Page 51516430 "Mwanangu Applications List"
     begin
 
         EnableCreateMember := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
-        if Rec.Status = Status::Approved then begin
+        if Rec.Status = Rec.Status::Approved then begin
             OpenApprovalEntriesExist := false;
             CanCancelApprovalForRecord := false;
             EnabledApprovalWorkflowsExist := false;
         end;
-        if (Rec.Status = Status::Approved) then
+        if (Rec.Status = Rec.Status::Approved) then
             EnableCreateMember := true;
     end;
 
@@ -627,7 +627,7 @@ Page 51516430 "Mwanangu Applications List"
         ObjUserSetup.SetRange("User ID", UserId);
         if ObjUserSetup.Find('-') then begin
             if ObjUserSetup."Approval Administrator" <> true then
-                SetRange("Created By", UserId);
+                Rec.SetRange("Created By", UserId);
         end;
     end;
 
@@ -637,19 +637,19 @@ Page 51516430 "Mwanangu Applications List"
         CustomizedCalEntry: Record "Customized Calendar Entry";
         CustomizedCalendar: Record "Customized Calendar Change";
         PictureExists: Boolean;
-        AccoutTypes: Record 51516436;
+        AccoutTypes: Record "Account Types-Saving Products";
         Accounts: Record Vendor;
         AcctNo: Code[50];
         DimensionValue: Record "Dimension Value";
-        NextOfKin: Record 51516433;
-        NextOfKinApp: Record 51516431;
-        AccountSign: Record 51516434;
-        AccountSignApp: Record 51516432;
+        NextOfKin: Record "FOSA Account NOK Details";
+        NextOfKinApp: Record "FOSA Account App Kin Details";
+        AccountSign: Record "Witness Details";
+        AccountSignApp: Record "FOSA Account App Signatories";
         Acc: Record Vendor;
         UsersID: Record User;
-        Nok: Record 51516431;
-        Cust: Record 51516364;
-        NOKBOSA: Record 51516433;
+        Nok: Record "FOSA Account App Kin Details";
+        Cust: Record "Member Register";
+        NOKBOSA: Record "FOSA Account NOK Details";
         BranchC: Code[20];
         DimensionV: Record "Dimension Value";
         IncrementNo: Code[20];
@@ -658,7 +658,7 @@ Page 51516430 "Mwanangu Applications List"
         BosaAcnt: Boolean;
         EmailEdiatble: Boolean;
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions;
-        SaccoSetup: Record 51516399;
+        SaccoSetup: Record "Sacco No. Series";
         MicroGroupCode: Boolean;
         Vendor: Record Vendor;
         NameEditable: Boolean;
@@ -684,10 +684,10 @@ Page 51516430 "Mwanangu Applications List"
         ContactPOccupationEditable: Boolean;
         ContactPPhoneEditable: Boolean;
         Accountype: Boolean;
-        Approvalusers: Record 51516452;
-        Member: Record 51516364;
+        Approvalusers: Record "Status Change Permision";
+        Member: Record "Member Register";
         IncrementNoF: Code[20];
-        SMSMessage: Record 51516471;
+        SMSMessage: Record "SMS Messages";
         iEntryNo: Integer;
         ParentEditable: Boolean;
         SavingsEditable: Boolean;
@@ -697,7 +697,7 @@ Page 51516430 "Mwanangu Applications List"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         EnableCreateMember: Boolean;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory.";
         ObjUserSetup: Record "User Setup";
 }
 

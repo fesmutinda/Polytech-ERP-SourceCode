@@ -6,7 +6,7 @@ Page 51516390 "Loans Sub-Page List"
     Editable = false;
     InsertAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516371;
+    SourceTable = "Loans Register";
 
     layout
     {
@@ -14,100 +14,100 @@ Page 51516390 "Loans Sub-Page List"
         {
             repeater(Control1000000000)
             {
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type Name"; "Loan Product Type Name")
+                field("Loan Product Type Name"; Rec."Loan Product Type Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Name"; "Client Name")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested Amount"; "Requested Amount")
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issued Date"; "Issued Date")
+                field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Start Date"; "Repayment Start Date")
+                field("Repayment Start Date"; Rec."Repayment Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Principle Outstanding Balance';
                     Editable = false;
                     StyleExpr = FieldStyle;
                 }
-                field("Interest Due"; "Interest Due")
+                field("Interest Due"; Rec."Interest Due")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Paid"; "Interest Paid")
+                field("Interest Paid"; Rec."Interest Paid")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Oustanding Interest"; "Oustanding Interest")
+                field("Oustanding Interest"; Rec."Oustanding Interest")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Outstanding Interest';
                 }
-                field("Loan Insurance Charged"; "Loan Insurance Charged")
+                field("Loan Insurance Charged"; Rec."Loan Insurance Charged")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Insurance Charged';
                     Editable = false;
                 }
-                field("Loan Insurance Paid"; "Loan Insurance Paid")
+                field("Loan Insurance Paid"; Rec."Loan Insurance Paid")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Insurance Paid';
                     Editable = false;
                 }
-                field("Outstanding Insurance"; "Outstanding Insurance")
+                field("Outstanding Insurance"; Rec."Outstanding Insurance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Penalty Charged"; "Penalty Charged")
+                field("Penalty Charged"; Rec."Penalty Charged")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Penalty Paid"; "Penalty Paid")
+                field("Penalty Paid"; Rec."Penalty Paid")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Penalty"; "Outstanding Penalty")
+                field("Outstanding Penalty"; Rec."Outstanding Penalty")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Current Payoff Amount"; "Loan Current Payoff Amount")
+                field("Loan Current Payoff Amount"; Rec."Loan Current Payoff Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -118,43 +118,43 @@ Page 51516390 "Loans Sub-Page List"
                     Caption = 'Loan Amount in Arrears';
                     Editable = false;
                 }
-                field(Repayment; Repayment)
+                field(Repayment; Rec.Repayment)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Status"; "Loan Status")
+                field("Loan Status"; Rec."Loan Status")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loans Category"; "Loans Category")
+                field("Loans Category"; Rec."Loans Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loans Category-SASRA"; "Loans Category-SASRA")
+                field("Loans Category-SASRA"; Rec."Loans Category-SASRA")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Of Guarantors"; "No. Of Guarantors")
+                field("No. Of Guarantors"; Rec."No. Of Guarantors")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Enabled = true;
                     Visible = false;
                 }
-                field("Loan Due"; "Loan Due")
+                field("Loan Due"; Rec."Loan Due")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Partial Disbursed(Amount Due)"; "Partial Disbursed(Amount Due)")
+                field("Partial Disbursed(Amount Due)"; Rec."Partial Disbursed(Amount Due)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan  Cash Cleared"; "Loan  Cash Cleared")
+                field("Loan  Cash Cleared"; Rec."Loan  Cash Cleared")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Topup Amount"; "Total Topup Amount")
+                field("Total Topup Amount"; Rec."Total Topup Amount")
                 {
                     ApplicationArea = Basic;
                 }
@@ -169,7 +169,7 @@ Page 51516390 "Loans Sub-Page List"
     trigger OnAfterGetCurrRecord()
     begin
         InterestDue := SFactory.FnGetInterestDueTodate(Rec);
-        OutstandingInterest := SFactory.FnGetInterestDueTodate(Rec) - "Interest Paid";
+        OutstandingInterest := SFactory.FnGetInterestDueTodate(Rec) - Rec."Interest Paid";
     end;
 
     trigger OnAfterGetRecord()
@@ -207,38 +207,38 @@ Page 51516390 "Loans Sub-Page List"
     end;
 
     var
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         FieldStyle: Text;
         FieldStyleI: Text;
         OutstandingInterest: Decimal;
         InterestDue: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
-        ObjLoans: Record 51516371;
+        SFactory: Codeunit "Swizzsoft Factory.";
+        ObjLoans: Record "Loans Register";
         VarLoanPayoffAmount: Decimal;
         VarInsurancePayoff: Decimal;
-        ObjProductCharge: Record 51516383;
+        ObjProductCharge: Record "Loan Product Charges";
         VarEndYear: Date;
         VarInsuranceMonths: Integer;
         VarAmountinArrears: Decimal;
-        ObjRepaymentSchedule: Record 51516375;
+        ObjRepaymentSchedule: Record "Loan Repayment Schedule";
 
 
     procedure GetVariables(var LoanNo: Code[20]; var LoanProductType: Code[20]; var MemberNo: Code[20])
     begin
-        LoanNo := "Loan  No.";
-        LoanProductType := "Loan Product Type";
-        MemberNo := "Client Code";
+        LoanNo := Rec."Loan  No.";
+        LoanProductType := Rec."Loan Product Type";
+        MemberNo := Rec."Client Code";
     end;
 
     local procedure SetFieldStyle()
     begin
         FieldStyle := '';
-        CalcFields("Outstanding Balance", "Oustanding Interest");
-        if ("Outstanding Balance" < 0) then
+        Rec.CalcFields("Outstanding Balance", "Oustanding Interest");
+        if (Rec."Outstanding Balance" < 0) then
             FieldStyle := 'Attention';
 
-        if ("Oustanding Interest" < 0) then
+        if (Rec."Oustanding Interest" < 0) then
             FieldStyleI := 'Attention';
     end;
 }

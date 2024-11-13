@@ -2,7 +2,7 @@
 Page 51516434 "FOSA Accounts App Sign. Card"
 {
     PageType = Card;
-    SourceTable = 51516432;
+    SourceTable = "FOSA Account App Signatories";
 
     layout
     {
@@ -10,55 +10,55 @@ Page 51516434 "FOSA Accounts App Sign. Card"
         {
             group(General)
             {
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Of Birth"; "Date Of Birth")
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff/Payroll"; "Staff/Payroll")
+                field("Staff/Payroll"; Rec."Staff/Payroll")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Signatory; Signatory)
+                field(Signatory; Rec.Signatory)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Must Sign"; "Must Sign")
+                field("Must Sign"; Rec."Must Sign")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Must be Present"; "Must be Present")
+                field("Must be Present"; Rec."Must be Present")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec."Email Address"Picture)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Signature; Signature)
+                field(Signature; Rec.Signature)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expiry Date"; "Expiry Date")
+                field("Expiry Date"; Rec."Expiry Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA No."; "BOSA No.")
+                field("BOSA No."; Rec."BOSA No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Email Address"; "Email Address")
+                field("Email Address"; Rec."Email Address")
                 {
                     ApplicationArea = Basic;
                 }

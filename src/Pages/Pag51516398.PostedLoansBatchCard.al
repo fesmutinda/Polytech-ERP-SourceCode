@@ -5,67 +5,68 @@ Page 51516398 "Posted Loans Batch Card"
     InsertAllowed = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516377;
+    SourceTable = "Loan Disburesment-Batching";
     SourceTableView = where(Posted = const(Yes));
 
     layout
     {
         area(content)
         {
-            field("Batch No."; "Batch No.")
+            field("Batch No."; Rec."Batch No.")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Batch Type"; "Batch Type")
+            field("Batch Type"; Rec."Batch Type")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Description/Remarks"; "Description/Remarks")
+            field("Description/Remarks"; Rec."Description/Remarks")
             {
                 ApplicationArea = Basic;
             }
-            field(Status; Status)
+            field(Status; Rec.Status)
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Total Loan Amount"; "Total Loan Amount")
+            field("Total Loan Amount"; Rec."Total Loan Amount")
             {
                 ApplicationArea = Basic;
             }
-            field("No of Loans"; "No of Loans")
+            field("No of Loans"; Rec."No of Loans")
             {
                 ApplicationArea = Basic;
             }
-            field("Mode Of Disbursement"; "Mode Of Disbursement")
+            field("Mode Of Disbursement"; Rec."Mode Of Disbursement")
             {
                 ApplicationArea = Basic;
             }
-            field("Document No."; "Document No.")
+            field(Rec."Document No.";
+                Rec."Document No.")
             {
                 ApplicationArea = Basic;
 
                 trigger OnValidate()
                 begin
-                    if StrLen("Document No.") > 6 then
+                    if StrLen(Rec."Document No.") > 6 then
                         Error('Document No. cannot contain More than 6 Characters.');
                 end;
             }
-            field("Posting Date"; "Posting Date")
+            field("Posting Date"; Rec."Posting Date")
             {
                 ApplicationArea = Basic;
             }
-            field("BOSA Bank Account"; "BOSA Bank Account")
+            field("BOSA Bank Account"; Rec."BOSA Bank Account")
             {
                 ApplicationArea = Basic;
             }
-            field(Posted; Posted)
+            field(Posted; Rec.Posted)
             {
                 ApplicationArea = Basic;
             }
-            field("Cheque Name"; "Cheque Name")
+            field("Cheque Name"; Rec."Cheque Name")
             {
                 ApplicationArea = Basic;
             }
@@ -90,12 +91,12 @@ Page 51516398 "Posted Loans Batch Card"
                     Image = SuggestPayment;
                     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedCategory = Process;
-                    RunObject = Report UnknownReport51516231;
+                    RunObject = Report 51516231;
 
                     trigger OnAction()
                     begin
                         LoansBatch.Reset;
-                        LoansBatch.SetRange(LoansBatch."Batch No.", "Batch No.");
+                        LoansBatch.SetRange(LoansBatch."Batch No.", Rec."Batch No.");
                         if LoansBatch.Find('-') then begin
                             Report.Run(51516372, true, false, LoansBatch);
                         end;
@@ -111,7 +112,7 @@ Page 51516398 "Posted Loans Batch Card"
                     Image = Customer;
                     Promoted = true;
                     PromotedCategory = Process;
-                    RunObject = Report UnknownReport51516279;
+                    RunObject = Report 51516279;
 
                     trigger OnAction()
                     begin
@@ -202,7 +203,7 @@ Page 51516398 "Posted Loans Batch Card"
                         Text001: label 'This Batch is already pending approval';
                     begin
                         LBatches.Reset;
-                        LBatches.SetRange(LBatches."Batch No.", "Batch No.");
+                        LBatches.SetRange(LBatches."Batch No.", Rec."Batch No.");
                         if LBatches.Find('-') then begin
                             if LBatches.Status <> LBatches.Status::Open then
                                 Error(Text001);
@@ -238,26 +239,26 @@ Page 51516398 "Posted Loans Batch Card"
                     var
                         Text001: label 'The Batch need to be approved.';
                     begin
-                        if Posted = true then
+                        if Rec.Posted = true then
                             Error('Batch already posted.');
 
-                        if Status <> Status::Approved then
+                        if Rec.Status <> Rec.Status::Approved then
                             Error(Format(Text001));
 
-                        CalcFields(Location);
+                        Rec.CalcFields(Location);
 
-                        if ("Mode Of Disbursement" = "mode of disbursement"::Cheque) or
-                           ("Mode Of Disbursement" = "mode of disbursement"::"Individual Cheques") then
-                            TestField("BOSA Bank Account");
+                        if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::Cheque) or
+                           (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::"Individual Cheques") then
+                            Rec.TestField("BOSA Bank Account");
 
 
-                        TestField("Description/Remarks");
-                        TestField("Posting Date");
-                        TestField("Document No.");
+                        Rec.TestField("Description/Remarks");
+                        Rec.TestField("Posting Date");
+                        Rec.TestField("Document No.");
 
                         //For branch loans - only individual cheques
-                        if "Batch Type" = "batch type"::"Branch Loans" then begin
-                            if "Mode Of Disbursement" <> "mode of disbursement"::"Individual Cheques" then
+                        if Rec."Batch Type" = Rec."batch type"::"Branch Loans" then begin
+                            if Rec."Mode Of Disbursement" <> Rec."mode of disbursement"::"Individual Cheques" then
                                 Error('Mode of disbursement must be Individual Cheques for branch loans.');
                         end;
 
@@ -268,8 +269,8 @@ Page 51516398 "Posted Loans Batch Card"
                             exit;
 
                         //PRORATED DAYS
-                        EndMonth := CalcDate('-1D', CalcDate('1M', Dmy2date(1, Date2dmy("Posting Date", 2), Date2dmy("Posting Date", 3))));
-                        RemainingDays := (EndMonth - "Posting Date") + 1;
+                        EndMonth := CalcDate('-1D', CalcDate('1M', Dmy2date(1, Date2dmy(Rec."Posting Date", 2), Date2dmy(Rec."Posting Date", 3))));
+                        RemainingDays := (EndMonth - Rec."Posting Date") + 1;
                         TMonthDays := Date2dmy(EndMonth, 1);
                         //PRORATED DAYS
 
@@ -286,7 +287,7 @@ Page 51516398 "Posted Loans Batch Card"
                         DBranch := 'NAIROBI';
 
                         LoanApps.Reset;
-                        LoanApps.SetRange(LoanApps."Batch No.", "Batch No.");
+                        LoanApps.SetRange(LoanApps."Batch No.", Rec."Batch No.");
                         LoanApps.SetRange(LoanApps."System Created", false);
                         //LoanApps.SETRANGE(LoanApps.Source,LoanApps.Source::BOSA);
                         LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
@@ -295,15 +296,15 @@ Page 51516398 "Posted Loans Batch Card"
                                 LoanApps.CalcFields(LoanApps."Special Loan Amount");
 
                                 if (LoanApps.Source = LoanApps.Source::BOSA) and
-                                   ("Mode Of Disbursement" <> "mode of disbursement"::EFT) then
+                                   (Rec."Mode Of Disbursement" <> Rec."mode of disbursement"::EFT) then
                                     Error('Mode of disbursement must be FOSA Loans for FOSA Loans.');
 
                                 if (LoanApps.Source = LoanApps.Source::" ") and
-                                   ("Mode Of Disbursement" = "mode of disbursement"::EFT) then
+                                   (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::EFT) then
                                     Error('Mode of disbursement connot be FOSA loans for BOSA Loans.');
 
 
-                                if "Mode Of Disbursement" = "mode of disbursement"::EFT then begin
+                                if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::EFT then begin
                                     DActivity := '';
                                     DBranch := '';
                                     if Vend.Get(LoanApps."Client Code") then begin
@@ -313,7 +314,7 @@ Page 51516398 "Posted Loans Batch Card"
 
                                 end;
 
-                                if "Batch Type" = "batch type"::"Appeal Loans" then
+                                if Rec."Batch Type" = Rec."batch type"::"Appeal Loans" then
                                     LoanDisbAmount := LoanApps."Appeal Amount"
                                 else
                                     LoanDisbAmount := LoanApps."Approved Amount";
@@ -329,7 +330,7 @@ Page 51516398 "Posted Loans Batch Card"
                                 if LoanApps."Loan Status" <> LoanApps."loan status"::Approved then
                                     Error('Loan status must be Approved for you to post Loan. - ' + LoanApps."Loan  No.");
 
-                                if "Batch Type" <> "batch type"::"Appeal Loans" then begin
+                                if Rec."Batch Type" <> Rec."batch type"::"Appeal Loans" then begin
                                     if LoanApps.Posted = true then
                                         Error('Loan has already been posted. - ' + LoanApps."Loan  No.");
                                 end;
@@ -338,7 +339,7 @@ Page 51516398 "Posted Loans Batch Card"
 
 
 
-                                RunningDate := "Posting Date";
+                                RunningDate := Rec."Posting Date";
 
 
                                 //Generate and post Approved Loan Amount
@@ -364,9 +365,9 @@ Page 51516398 "Posted Loans Batch Card"
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                         GenJournalLine."Account No." := PCharges."G/L Account";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                        GenJournalLine."Document No." := "Document No.";
+                                        GenJournalLine."Document No." := Rec."Document No.";
                                         GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                        GenJournalLine."Posting Date" := "Posting Date";
+                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                         GenJournalLine.Description := PCharges.Description;
                                         if PCharges."Use Perc" = true then
                                             GenJournalLine.Amount := (LoanDisbAmount * PCharges.Percentage / 100) * -1
@@ -374,8 +375,8 @@ Page 51516398 "Posted Loans Batch Card"
                                             GenJournalLine.Amount := PCharges.Amount * -1;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         //Don't top up charges on principle
-                                        if ("Mode Of Disbursement" = "mode of disbursement"::EFT) or
-                                           ("Mode Of Disbursement" = "mode of disbursement"::MPESA) then begin
+                                        if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::EFT) or
+                                           (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::MPESA) then begin
                                             GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::Vendor;
                                             GenJournalLine."Bal. Account No." := LoanApps."Account No";
                                         end else begin
@@ -411,15 +412,15 @@ Page 51516398 "Posted Loans Batch Card"
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                     GenJournalLine."Account No." := GenSetUp."Boosting Fees Account";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
+                                    GenJournalLine."Document No." := Rec."Document No.";
                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'Boosting Commision';
                                     GenJournalLine.Amount := LoanApps."Boosting Commision" * -1;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
                                     //Don't top up charges on principle
-                                    if ("Mode Of Disbursement" = "mode of disbursement"::EFT) or
-                                       ("Mode Of Disbursement" = "mode of disbursement"::MPESA) then begin
+                                    if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::EFT) or
+                                       (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::MPESA) then begin
                                         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::Vendor;
                                         GenJournalLine."Bal. Account No." := LoanApps."Account No";
                                     end;
@@ -449,8 +450,8 @@ Page 51516398 "Posted Loans Batch Card"
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
                                 GenJournalLine."Account No." := LoanApps."Client Code";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Document No." := "Document No.";
-                                GenJournalLine."Posting Date" := "Posting Date";
+                                GenJournalLine."Document No." := Rec."Document No.";
+                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                 GenJournalLine.Description := 'Principal Amount';
                                 GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                 GenJournalLine.Validate(GenJournalLine.Amount);
@@ -477,8 +478,8 @@ Page 51516398 "Posted Loans Batch Card"
                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                     GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'Interest Due';
                                     GenJournalLine.Amount := ((LoanApps.Repayment * LoanApps.Installments)) - LoanApps."Approved Amount";
                                     GenJournalLine.Validate(GenJournalLine.Amount);
@@ -503,8 +504,8 @@ Page 51516398 "Posted Loans Batch Card"
                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                     GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Deposit Contribution";
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'Interest Due';
                                     GenJournalLine.Amount := (((LoanApps.Repayment * LoanApps.Installments)) - LoanApps."Approved Amount") * -1;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
@@ -543,8 +544,8 @@ Page 51516398 "Posted Loans Batch Card"
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'LOANS';
                                             GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Document No." := "Document No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Document No." := Rec."Document No.";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
                                             GenJournalLine."Account No." := LoanApps."Client Code";
@@ -572,8 +573,8 @@ Page 51516398 "Posted Loans Batch Card"
                                                 GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Employee;
                                                 GenJournalLine."Account No." := LoanApps."Client Code";
                                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                GenJournalLine."Document No." := "Document No.";
-                                                GenJournalLine."Posting Date" := "Posting Date";
+                                                GenJournalLine."Document No." := Rec."Document No.";
+                                                GenJournalLine."Posting Date" := Rec."Posting Date";
                                                 GenJournalLine.Description := 'Interest Due rev on top up ' + LoanApps."Loan Product Type Name";
                                                 GenJournalLine.Amount := LoanTopUp."Interest Top Up" * -1;
                                                 GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -603,8 +604,8 @@ Page 51516398 "Posted Loans Batch Card"
                                                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                     GenJournalLine."Account No." := LoanType."Top Up Commision Account";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                    GenJournalLine."Document No." := "Document No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Document No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine.Description := 'Commision on Loan Top Up';
                                                     TopUpComm := (LoanTopUp."Principle Top Up") * (LoanType."Top Up Commision" / 100);
                                                     TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -632,23 +633,23 @@ Page 51516398 "Posted Loans Batch Card"
 
                                     //IF Top Up
                                     if LoanApps."Top Up Amount" > 0 then begin
-                                        if "Mode Of Disbursement" = "mode of disbursement"::"Individual Cheques" then begin
+                                        if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::"Individual Cheques" then begin
                                             LineNo := LineNo + 10000;
 
                                             GenJournalLine.Init;
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'LOANS';
                                             GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Document No." := "Document No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Document No." := Rec."Document No.";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             LoanApps.TestField(LoanApps."Cheque No.");
                                             GenJournalLine."External Document No." := LoanApps."Cheque No.";
-                                            if "Post to Loan Control" = true then begin
+                                            if Rec."Post to Loan Control" = true then begin
                                                 GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                 GenJournalLine."Account No." := '024005';
                                             end else begin
                                                 GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"Bank Account";
-                                                GenJournalLine."Account No." := "BOSA Bank Account";
+                                                GenJournalLine."Account No." := Rec."BOSA Bank Account";
                                             end;
                                             //GenJournalLine."Account Type":=GenJournalLine."Bal. Account Type"::"Bank Account";
                                             //GenJournalLine."Account No.":="BOSA Bank Account";
@@ -669,23 +670,23 @@ Page 51516398 "Posted Loans Batch Card"
 
 
                                 end else begin
-                                    if "Mode Of Disbursement" = "mode of disbursement"::"Individual Cheques" then begin
+                                    if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::"Individual Cheques" then begin
                                         LineNo := LineNo + 10000;
 
                                         GenJournalLine.Init;
                                         GenJournalLine."Journal Template Name" := 'GENERAL';
                                         GenJournalLine."Journal Batch Name" := 'LOANS';
                                         GenJournalLine."Line No." := LineNo;
-                                        GenJournalLine."Document No." := "Document No.";
-                                        GenJournalLine."Posting Date" := "Posting Date";
+                                        GenJournalLine."Document No." := Rec."Document No.";
+                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                         LoanApps.TestField(LoanApps."Cheque No.");
                                         GenJournalLine."External Document No." := LoanApps."Cheque No.";
-                                        if "Post to Loan Control" = true then begin
+                                        if Rec."Post to Loan Control" = true then begin
                                             GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                             GenJournalLine."Account No." := '024005';
                                         end else begin
                                             GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"Bank Account";
-                                            GenJournalLine."Account No." := "BOSA Bank Account";
+                                            GenJournalLine."Account No." := Rec."BOSA Bank Account";
                                         end;
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine.Description := LoanApps."Client Name";
@@ -707,7 +708,7 @@ Page 51516398 "Posted Loans Batch Card"
                                 BatchTopUpComm := BatchTopUpComm + TotalTopupComm;
 
 
-                                LoanApps."Issued Date" := "Posting Date";
+                                LoanApps."Issued Date" := Rec."Posting Date";
                                 LoanApps.Advice := true;
                                 LoanApps."Advice Type" := LoanApps."advice type"::"Fresh Loan";
                                 LoanApps.Posted := true;
@@ -736,7 +737,7 @@ Page 51516398 "Posted Loans Batch Card"
                         end;
 
                         //BOSA Bank Entry
-                        if "Mode Of Disbursement" = "mode of disbursement"::Cheque then begin
+                        if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::Cheque then begin
                             //No Cheque for STIMA
                             //("Mode Of Disbursement"="Mode Of Disbursement"::"Transfer to FOSA") THEN BEGIN
                             LineNo := LineNo + 10000;
@@ -745,17 +746,17 @@ Page 51516398 "Posted Loans Batch Card"
                             GenJournalLine."Journal Template Name" := 'GENERAL';
                             GenJournalLine."Journal Batch Name" := 'LOANS';
                             GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Document No." := "Document No.";
-                            GenJournalLine."Posting Date" := "Posting Date";
-                            GenJournalLine."External Document No." := "Cheque No.";
+                            GenJournalLine."Document No." := Rec."Document No.";
+                            GenJournalLine."Posting Date" := Rec."Posting Date";
+                            GenJournalLine."External Document No." := Rec."Cheque No.";
                             GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"Bank Account";
-                            GenJournalLine."Account No." := "BOSA Bank Account";
+                            GenJournalLine."Account No." := Rec."BOSA Bank Account";
                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine.Description := "Description/Remarks";
-                            if "Batch Type" = "batch type"::"Appeal Loans" then
-                                GenJournalLine.Amount := ("Total Appeal Amount" - (BatchTopUpAmount + BatchTopUpComm)) * -1
+                            GenJournalLine.Description := Rec."Description/Remarks";
+                            if Rec."Batch Type" = Rec."batch type"::"Appeal Loans" then
+                                GenJournalLine.Amount := (Rec."Total Appeal Amount" - (BatchTopUpAmount + BatchTopUpComm)) * -1
                             else
-                                GenJournalLine.Amount := ("Total Loan Amount" - (BatchTopUpAmount + BatchTopUpComm)) * -1;
+                                GenJournalLine.Amount := (Rec."Total Loan Amount" - (BatchTopUpAmount + BatchTopUpComm)) * -1;
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
                             GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
@@ -768,13 +769,13 @@ Page 51516398 "Posted Loans Batch Card"
 
 
                         //Transfer to FOSA
-                        if ("Mode Of Disbursement" = "mode of disbursement"::MPESA) or
-                           ("Mode Of Disbursement" = "mode of disbursement"::EFT) then begin
+                        if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::MPESA) or
+                           (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::EFT) then begin
                             DActivity := 'FOSA';
                             DBranch := 'NAIROBI';
 
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Batch No.", "Batch No.");
+                            LoanApps.SetRange(LoanApps."Batch No.", Rec."Batch No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             //LoanApps.SETRANGE(LoanApps.Source,LoanApps.Source::BOSA);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
@@ -782,7 +783,7 @@ Page 51516398 "Posted Loans Batch Card"
                                 repeat
                                     LoanApps.CalcFields(LoanApps."Special Loan Amount", LoanApps."Other Commitments Clearance");
 
-                                    if "Mode Of Disbursement" = "mode of disbursement"::EFT then begin
+                                    if Rec."Mode Of Disbursement" = Rec."mode of disbursement"::EFT then begin
                                         DActivity := '';
                                         DBranch := '';
                                         if Vend.Get(LoanApps."Client Code") then begin
@@ -793,9 +794,9 @@ Page 51516398 "Posted Loans Batch Card"
                                     end;
 
 
-                                    if "Batch Type" = "batch type"::"Appeal Loans" then
+                                    if Rec."Batch Type" = Rec."batch type"::"Appeal Loans" then
                                         LoanDisbAmount := LoanApps."Appeal Amount"
-                                    else if "Batch Type" = "batch type"::"Personal Loans" then
+                                    else if Rec."Batch Type" = Rec."batch type"::"Personal Loans" then
                                         LoanDisbAmount := LoanApps."Approved Amount" - (LoanApps."Approved Amount" * 0.025)
                                     else
                                         LoanDisbAmount := LoanApps."Approved Amount";
@@ -826,8 +827,8 @@ Page 51516398 "Posted Loans Batch Card"
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Document No.";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Document No.";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                     //LoanApps.TESTFIELD(LoanApps."Account No");
                                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Vendor;
@@ -877,8 +878,8 @@ Page 51516398 "Posted Loans Batch Card"
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'LOANS';
                                             GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Document No." := "Document No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Document No." := Rec."Document No.";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Employee;
                                             GenJournalLine."Account No." := LoanApps."Account No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
@@ -923,8 +924,8 @@ Page 51516398 "Posted Loans Batch Card"
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'LOANS';
                                             GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Document No." := "Document No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Document No." := Rec."Document No.";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             LoanApps.TestField(LoanApps."Account No");
                                             GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Vendor;
                                             GenJournalLine."Account No." := LoanApps."Account No";
@@ -946,8 +947,8 @@ Page 51516398 "Posted Loans Batch Card"
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'LOANS';
                                             GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Document No." := "Document No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Document No." := Rec."Document No.";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             LoanApps.TestField(LoanApps."Account No");
                                             GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Vendor;
                                             GenJournalLine."Account No." := LoanApps."Account No";
@@ -985,8 +986,8 @@ Page 51516398 "Posted Loans Batch Card"
                                         GenJournalLine."Journal Template Name" := 'GENERAL';
                                         GenJournalLine."Journal Batch Name" := 'LOANS';
                                         GenJournalLine."Line No." := LineNo;
-                                        GenJournalLine."Document No." := "Document No.";
-                                        GenJournalLine."Posting Date" := "Posting Date";
+                                        GenJournalLine."Document No." := Rec."Document No.";
+                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                         GenJournalLine."External Document No." := LoanApps."Project Account No";
                                         LoanApps.TestField(LoanApps."Account No");
                                         GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Vendor;
@@ -1009,8 +1010,8 @@ Page 51516398 "Posted Loans Batch Card"
                                         GenJournalLine."Journal Template Name" := 'GENERAL';
                                         GenJournalLine."Journal Batch Name" := 'LOANS';
                                         GenJournalLine."Line No." := LineNo;
-                                        GenJournalLine."Document No." := "Document No.";
-                                        GenJournalLine."Posting Date" := "Posting Date";
+                                        GenJournalLine."Document No." := Rec."Document No.";
+                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                         GenJournalLine."External Document No." := LoanApps."Account No";
                                         LoanApps.TestField(LoanApps."Account No");
                                         GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Vendor;
@@ -1060,8 +1061,8 @@ Page 51516398 "Posted Loans Batch Card"
 
                         //Post New
 
-                        Posted := true;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec.Modify;
 
 
                         Message('Batch posted successfully.');
@@ -1076,15 +1077,15 @@ Page 51516398 "Posted Loans Batch Card"
 
                     trigger OnAction()
                     begin
-                        if ("Mode Of Disbursement" = "mode of disbursement"::RTGS) or ("Mode Of Disbursement" = "mode of disbursement"::"5") then
+                        if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::RTGS) or (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::"5") then
                             Error('This Payment was made by other modes other than Cheque.');
                         //Print Cheque
-                        Reset;
-                        SetFilter("Batch No.", "Batch No.");
+                        Rec.Reset;
+                        Rec.SetFilter("Batch No.", Rec."Batch No.");
                         if Confirm(Text002, true) then begin
 
                             //REPORT.RUN(,TRUE,TRUE,Rec);
-                            Reset;
+                            Rec.Reset;
                         end;
                     end;
                 }
@@ -1095,16 +1096,16 @@ Page 51516398 "Posted Loans Batch Card"
     var
         Text001: label 'Status must be open';
         Text002: label 'Dou you want to print a Cheque for this payment';
-        MovementTracker: Record 51516395;
-        FileMovementTracker: Record 51516395;
+        MovementTracker: Record "File Movement Tracker";
+        FileMovementTracker: Record "File Movement Tracker";
         NextStage: Integer;
         EntryNo: Integer;
         NextLocation: Text[100];
-        LoansBatch: Record 51516377;
+        LoansBatch: Record "Loan Disburesment-Batching";
         i: Integer;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PeriodDueDate: Date;
-        ScheduleRep: Record 51516375;
+        ScheduleRep: Record "Loan Repayment Schedule";
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
@@ -1113,13 +1114,13 @@ Page 51516398 "Posted Loans Batch Card"
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record 51516375;
-        RSchedule: Record 51516375;
+        NewSchedule: Record "Loan Repayment Schedule";
+        RSchedule: Record "Loan Repayment Schedule";
         GP: Text[30];
         ScheduleCode: Code[20];
-        PreviewShedule: Record 51516375;
+        PreviewShedule: Record "Loan Repayment Schedule";
         PeriodInterval: Code[10];
-        CustomerRecord: Record 51516364;
+        CustomerRecord: Record "Member Register";
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -1129,16 +1130,16 @@ Page 51516398 "Posted Loans Batch Card"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record 51516364;
-        LoanApp: Record 51516371;
+        Cust: Record "Member Register";
+        LoanApp: Record "Loans Register";
         TestAmt: Decimal;
-        CustRec: Record 51516364;
+        CustRec: Record "Member Register";
         CustPostingGroup: Record "Customer Posting Group";
-        GenSetUp: Record 51516398;
-        PCharges: Record 51516383;
+        GenSetUp: Record "Sacco General Set-Up";
+        PCharges: Record "Loan Product Charges";
         TCharges: Decimal;
-        LAppCharges: Record 51516385;
-        Loans: Record 51516371;
+        LAppCharges: Record "Loan Applicaton Charges";
+        Loans: Record "Loans Register";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -1161,7 +1162,7 @@ Page 51516398 "Posted Loans Batch Card"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record 51516376;
+        LoanTopUp: Record "Loan Offset Details";
         Vend: Record Vendor;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
@@ -1169,25 +1170,25 @@ Page 51516398 "Posted Loans Batch Card"
         DBranch: Code[20];
         UsersID: Record User;
         TotalTopupComm: Decimal;
-        CustE: Record 51516364;
+        CustE: Record "Member Register";
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record 51516372;
+        LoanG: Record "Loans Guarantee Details";
         SpecialComm: Decimal;
-        LoanApps: Record 51516371;
+        LoanApps: Record "Loans Register";
         Banks: Record "Bank Account";
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
         TotalSpecialLoan: Decimal;
-        SpecialLoanCl: Record 51516379;
-        Loans2: Record 51516371;
+        SpecialLoanCl: Record "Loan Special Clearance";
+        Loans2: Record "Loans Register";
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        Refunds: Record 51516381;
+        Refunds: Record "Loan Products Setup";
         TotalRefunds: Decimal;
         WithdrawalFee: Decimal;
         NetPayable: Decimal;
@@ -1199,13 +1200,13 @@ Page 51516398 "Posted Loans Batch Card"
         NegFee: Decimal;
         DValue: Record "Dimension Value";
         ChBank: Code[20];
-        Trans: Record 51516441;
-        TransactionCharges: Record 51516442;
-        BChequeRegister: Record 51516456;
-        OtherCommitments: Record 51516403;
+        Trans: Record Transactions;
+        TransactionCharges: Record "Transaction Charges";
+        BChequeRegister: Record "Banker Cheque Register";
+        OtherCommitments: Record "Other Commitements Clearance";
         BoostingComm: Decimal;
         BoostingCommTotal: Decimal;
-        BridgedLoans: Record 51516379;
+        BridgedLoans: Record "Loan Special Clearance";
         InterestDue: Decimal;
         ContractualShares: Decimal;
         BridgingChanged: Boolean;
@@ -1219,12 +1220,12 @@ Page 51516398 "Posted Loans Batch Card"
         PrincipalRepay: Decimal;
         InterestRepay: Decimal;
         TMonthDays: Integer;
-        SMSMessage: Record 51516373;
+        SMSMessage: Record "Loan Appraisal Salary Details";
         iEntryNo: Integer;
         Temp: Record Customer;
         Jtemplate: Code[30];
         JBatch: Code[30];
-        LBatches: Record 51516377;
+        LBatches: Record "Loan Disburesment-Batching";
         ApprovalMgt: Codeunit "Approvals Mgmt.";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Imprest,ImprestSurrender,Interbank;
         DescriptionEditable: Boolean;

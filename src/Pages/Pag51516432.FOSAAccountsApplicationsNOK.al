@@ -2,7 +2,7 @@
 Page 51516432 "FOSA Accounts Applications NOK"
 {
     PageType = Card;
-    SourceTable = 51516431;
+    SourceTable = "FOSA Account App Kin Details";
 
     layout
     {
@@ -10,50 +10,50 @@ Page 51516432 "FOSA Accounts Applications NOK"
         {
             repeater(Group)
             {
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Relationship; Relationship)
+                field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Beneficiary; Beneficiary)
+                field(Beneficiary; Rec.Beneficiary)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Fax; Fax)
+                field(Fax; Rec.Fax)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Email; Email)
+                field(Email; Rec.Email)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("%Allocation"; "%Allocation")
+                field("%Allocation"; Rec."%Allocation")
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
-                        CalcFields("Total Allocation");
-                        if "%Allocation" > "Maximun Allocation %" then
+                        Rec.CalcFields("Total Allocation");
+                        if Rec."%Allocation" > Rec."Maximun Allocation %" then
                             Error(' Total allocation should be equal to 100 %');
                     end;
                 }
@@ -67,12 +67,12 @@ Page 51516432 "FOSA Accounts Applications NOK"
 
     trigger OnAfterGetRecord()
     begin
-        "Maximun Allocation %" := 100;
+        Rec."Maximun Allocation %" := 100;
     end;
 
     trigger OnOpenPage()
     begin
-        "Maximun Allocation %" := 100;
+        Rec."Maximun Allocation %" := 100;
         //MODIFY;
     end;
 }

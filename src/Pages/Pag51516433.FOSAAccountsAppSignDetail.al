@@ -4,7 +4,7 @@ Page 51516433 "FOSA Accounts App Sign. Detail"
     CardPageID = "FOSA Accounts App Sign. Card";
     Editable = false;
     PageType = Card;
-    SourceTable = 51516432;
+    SourceTable = "FOSA Account App Signatories";
 
     layout
     {
@@ -12,59 +12,59 @@ Page 51516433 "FOSA Accounts App Sign. Detail"
         {
             repeater(Control1102760000)
             {
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
                         CUST.Reset;
-                        CUST.SetRange(CUST."ID No.", "ID No.");
+                        CUST.SetRange(CUST."ID No.", Rec."ID No.");
                         if CUST.Find('-') then begin
-                            "BOSA No." := CUST."No.";
-                            Modify;
+                            Rec."BOSA No." := CUST."No.";
+                            Rec.Modify;
                         end;
                     end;
                 }
-                field("Staff/Payroll"; "Staff/Payroll")
+                field("Staff/Payroll"; Rec."Staff/Payroll")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Staff/Payroll No';
                 }
-                field("Date Of Birth"; "Date Of Birth")
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control1102760009; Signatory)
+                field(Control1102760009; Rec.Signatory)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Must Sign"; "Must Sign")
+                field("Must Sign"; Rec."Must Sign")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Must be Present"; "Must be Present")
+                field("Must be Present"; Rec."Must be Present")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expiry Date"; "Expiry Date")
+                field("Expiry Date"; Rec."Expiry Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA No."; "BOSA No.")
+                field("BOSA No."; Rec."BOSA No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Email Address"; "Email Address")
+                field("Email Address"; Rec."Email Address")
                 {
                     ApplicationArea = Basic;
                 }
@@ -95,7 +95,7 @@ Page 51516433 "FOSA Accounts App Sign. Detail"
     trigger OnOpenPage()
     begin
         MemberApp.Reset;
-        MemberApp.SetRange(MemberApp."No.", "Account No");
+        MemberApp.SetRange(MemberApp."No.", Rec."Account No");
         if MemberApp.Find('-') then begin
             if MemberApp.Status = MemberApp.Status::Approved then begin
                 CurrPage.Editable := false;
@@ -105,8 +105,8 @@ Page 51516433 "FOSA Accounts App Sign. Detail"
     end;
 
     var
-        MemberApp: Record 51516360;
+        MemberApp: Record "Membership Applications";
         ReltnShipTypeEditable: Boolean;
-        CUST: Record 51516364;
+        CUST: Record "Member Register";
 }
 

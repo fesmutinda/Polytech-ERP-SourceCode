@@ -2,17 +2,17 @@
 Page 51516380 "Member Account Image"
 {
     PageType = Card;
-    SourceTable = 51516364;
+    SourceTable = "Member Register";
 
     layout
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic;
             }
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic;
             }

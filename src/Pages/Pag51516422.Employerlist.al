@@ -3,7 +3,7 @@ Page 51516422 "Employer list"
 {
     CardPageID = "Sacco Employers card";
     PageType = List;
-    SourceTable = 51516401;
+    SourceTable = "Sacco Employers";
 
     layout
     {
@@ -11,19 +11,19 @@ Page 51516422 "Employer list"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Method"; "Repayment Method")
+                field("Repayment Method"; Rec."Repayment Method")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Check Off"; "Check Off")
+                field("Check Off"; Rec."Check Off")
                 {
                     ApplicationArea = Basic;
                 }

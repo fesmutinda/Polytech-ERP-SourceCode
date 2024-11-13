@@ -4,7 +4,7 @@ Page 51516400 "BOSA Receipt Card"
     DeleteAllowed = false;
     Editable = true;
     PageType = Card;
-    SourceTable = 51516388;
+    SourceTable = "Receipts & Payments";
     SourceTableView = where(Posted = filter(No));
 
     layout
@@ -14,100 +14,100 @@ Page 51516400 "BOSA Receipt Card"
             group(Transaction)
             {
                 Caption = 'Transaction';
-                field("Transaction No."; "Transaction No.")
+                field("Transaction No."; Rec."Transaction No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Receipt Mode"; "Receipt Mode")
+                field("Receipt Mode"; Rec."Receipt Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Excess Transaction Type"; "Excess Transaction Type")
+                field("Excess Transaction Type"; Rec."Excess Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Allocated Amount"; "Allocated Amount")
+                field("Allocated Amount"; Rec."Allocated Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Un allocated Amount"; "Un allocated Amount")
+                field("Un allocated Amount"; Rec."Un allocated Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Employer No."; "Employer No.")
+                field("Employer No."; Rec."Employer No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Teller Till / Bank  No.';
                     ShowMandatory = true;
                 }
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cheque / Slip  No.';
                     ShowMandatory = true;
                 }
-                field("Cheque Date"; "Cheque Date")
+                field("Cheque Date"; Rec."Cheque Date")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cheque / Slip  Date';
                     ShowMandatory = true;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Posted; Posted)
+                field("Transaction Time"; Rec."Transaction Time")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -115,7 +115,7 @@ Page 51516400 "BOSA Receipt Card"
             }
             part("Receipt Line"; "Individual Member Risk Rating")
             {
-                SubPageLink = "Document No" = field("Transaction No.");
+                SubPageLink = "Document No" = field(Rec."Transaction No.");
                 Visible = false;
             }
         }
@@ -157,7 +157,7 @@ Page 51516400 "BOSA Receipt Card"
 
                     trigger OnAction()
                     var
-                        ObjTransactions: Record 51516387;
+                        ObjTransactions: Record "Receipt Allocation";
                         RunBal: Decimal;
                         Datefilter: Text;
                     begin
@@ -206,20 +206,20 @@ Page 51516400 "BOSA Receipt Card"
                     CALCFIELDS("Allocated Amount");
                     "Un allocated Amount":=(Amount-"Allocated Amount");
                     MODIFY;*/
-                        TestField(Posted, false);
-                        TestField("Account No.");
-                        TestField(Amount);
+                        Rec.TestField(Posted, false);
+                        Rec.TestField("Account No.");
+                        Rec.TestField(Amount);
                         // ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,FOSA Account
                         GenSetup.Get();
                         ObjTransactions.Reset;
                         ObjTransactions.SetRange(ObjTransactions."Document No", Rec."Transaction No.");
                         if ObjTransactions.Find('-') then
                             ObjTransactions.DeleteAll;
-                        Datefilter := '..' + Format("Transaction Date");
+                        Datefilter := '..' + Format(Rec."Transaction Date");
 
                         //DateDifference:=TODAY-"Registration Date";
                         RunBal := 0;
-                        RunBal := Amount;
+                        RunBal := Rec.Amount;
                         RunBal := FnRunEntranceFee(Rec, RunBal);
                         //    IF "Registration Date"<>0D THEN
                         //    RefDate:=CALCDATE('<+'+GenSetup."Share Capital Period"+'>',"Registration Date");
@@ -237,21 +237,21 @@ Page 51516400 "BOSA Receipt Card"
                         RunBal := FnRunSavingsContribution(Rec, RunBal);
 
                         if RunBal > 0 then begin
-                            if Confirm('Excess Money will allocated to ' + Format("Excess Transaction Type") + '.Do you want to Continue?', true) = false then
+                            if Confirm('Excess Money will allocated to ' + Format(Rec."Excess Transaction Type") + '.Do you want to Continue?', true) = false then
                                 exit;
-                            case "Excess Transaction Type" of
-                                "excess transaction type"::"Deposit Contribution":
+                            case Rec."Excess Transaction Type" of
+                                Rec."excess transaction type"::"Deposit Contribution":
                                     FnRunDepositContributionFromExcess(Rec, RunBal);
                                 //      "Excess Transaction Type"::"Deposit Contribution":
                                 //        FnRunSavingsProductExcess(Rec,RunBal,'JIOKOE');
-                                "excess transaction type"::"Unallocated Funds":
+                                Rec."excess transaction type"::"Unallocated Funds":
                                     FnRunUnallocatedFromExcess(Rec, RunBal);
                             end;
                         end;
 
-                        CalcFields("Allocated Amount");
-                        "Un allocated Amount" := (Amount - "Allocated Amount");
-                        Modify;
+                        Rec.CalcFields("Allocated Amount");
+                        Rec."Un allocated Amount" := (Rec.Amount - Rec."Allocated Amount");
+                        Rec.Modify;
 
                     end;
                 }
@@ -266,11 +266,11 @@ Page 51516400 "BOSA Receipt Card"
 
                     trigger OnAction()
                     begin
-                        if Posted = false then begin
+                        if Rec.Posted = false then begin
                             Error('The member has not been receipted.');
                         end;
                         Cust.Reset;
-                        Cust.SetRange(Cust."No.", "Account No.");
+                        Cust.SetRange(Cust."No.", Rec."Account No.");
                         if Cust.Find('-') then begin
                             if Cust."Recruited By" <> '' then
                                 Recruiter := Cust."Recruited By";
@@ -286,16 +286,16 @@ Page 51516400 "BOSA Receipt Card"
                             GenJournalLine.Init;
                             GenJournalLine."Journal Template Name" := 'GENERAL';
                             GenJournalLine."Journal Batch Name" := 'FTRANS';
-                            GenJournalLine."Document No." := "Transaction No.";
-                            GenJournalLine."External Document No." := "Cheque No.";
+                            GenJournalLine."Document No." := Rec."Transaction No.";
+                            GenJournalLine."External Document No." := Rec."Cheque No.";
                             GenJournalLine."Line No." := LineNo;
                             GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-                            GenJournalLine."Account No." := "Account No.";
+                            GenJournalLine."Account No." := Rec."Account No.";
                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Posting Date" := "Cheque Date";
+                            GenJournalLine."Posting Date" := Rec."Cheque Date";
                             GenJournalLine.Validate(GenJournalLine."Currency Code");
-                            ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                            ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                            ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                            ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                             GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Registration Fee";
                             GenJournalLine.Amount := 500;
                             GenJournalLine.Validate(GenJournalLine.Amount);
@@ -307,16 +307,16 @@ Page 51516400 "BOSA Receipt Card"
                             GenJournalLine.Init;
                             GenJournalLine."Journal Template Name" := 'GENERAL';
                             GenJournalLine."Journal Batch Name" := 'FTRANS';
-                            GenJournalLine."Document No." := "Transaction No.";
-                            GenJournalLine."External Document No." := "Cheque No.";
+                            GenJournalLine."Document No." := Rec."Transaction No.";
+                            GenJournalLine."External Document No." := Rec."Cheque No.";
                             GenJournalLine."Line No." := LineNo;
                             GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
                             GenJournalLine."Account No." := Recruiter;
                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Posting Date" := "Cheque Date";
+                            GenJournalLine."Posting Date" := Rec."Cheque Date";
                             GenJournalLine.Validate(GenJournalLine."Currency Code");
-                            ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                            ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                            ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                            ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                             GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Benevolent Fund";
                             GenJournalLine.Amount := -500;
                             GenJournalLine.Validate(GenJournalLine.Amount);
@@ -344,35 +344,35 @@ Page 51516400 "BOSA Receipt Card"
                     /*IF ("Receipt Mode"="Receipt Mode"::Cash) AND ("Transaction Date"<> TODAY) THEN
                     ERROR('You cannot post cash transactions with a date not today');
                     */
-                    if Posted then
+                    if Rec.Posted then
                         Error('This receipt is already posted');
 
-                    TestField("Account No.");
-                    TestField(Amount);
-                    TestField("Employer No.");
-                    TestField("Cheque No.");
-                    TestField("Cheque Date");
-                    TestField(Remarks);
+                    Rec.TestField("Account No.");
+                    Rec.TestField(Amount);
+                    Rec.TestField("Employer No.");
+                    Rec.TestField("Cheque No.");
+                    Rec.TestField("Cheque Date");
+                    Rec.TestField(Remarks);
 
-                    if ("Account Type" = "account type"::"G/L Account") or
-                       ("Account Type" = "account type"::Debtor) then
+                    if (Rec."Account Type" = Rec."account type"::"G/L Account") or
+                       (Rec."Account Type" = Rec."account type"::Debtor) then
                         TransType := 'Withdrawal'
                     else
                         TransType := 'Deposit';
 
                     ReceiptAllocations.Reset;
-                    ReceiptAllocations.SetRange(ReceiptAllocations."Document No", "Transaction No.");
+                    ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                     ReceiptAllocations.SetRange(ReceiptAllocations."Transaction Type", ReceiptAllocations."transaction type"::"Unallocated Funds");
                     if ReceiptAllocations.Find('-') then begin
                         Error('Unallocated Amount %1', ReceiptAllocations.Amount);
 
                     end;
                     ////***************************************************************************8
-                    IntDate := "Cheque Date";
+                    IntDate := Rec."Cheque Date";
                     //MESSAGE(FORMAT(IntDate));
                     //MESSAGE('here 1');
                     ReceiptAllocations.Reset;
-                    ReceiptAllocations.SetRange(ReceiptAllocations."Document No", "Transaction No.");
+                    ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                     if ReceiptAllocations.Find('-') then begin
                         Loans.Reset;
                         Loans.SetRange(Loans."Loan  No.", ReceiptAllocations."Loan No.");
@@ -404,10 +404,10 @@ Page 51516400 "BOSA Receipt Card"
 
                     //******************************************************************************8888888888888888
 
-                    BOSABank := "Employer No.";
-                    if ("Account Type" = "account type"::Member) or ("Account Type" = "account type"::"FOSA Loan") or ("Account Type" = "account type"::Micro) then begin
+                    BOSABank := Rec."Employer No.";
+                    if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::"FOSA Loan") or (Rec."Account Type" = Rec."account type"::Micro) then begin
 
-                        if Amount <> "Allocated Amount" then
+                        if Rec.Amount <> Rec."Allocated Amount" then
                             Error('Receipt amount must be equal to the allocated amount.');
                     end;
 
@@ -422,71 +422,71 @@ Page 51516400 "BOSA Receipt Card"
                     GenJournalLine.Init;
                     GenJournalLine."Journal Template Name" := 'GENERAL';
                     GenJournalLine."Journal Batch Name" := 'FTRANS';
-                    GenJournalLine."Document No." := "Transaction No.";
-                    GenJournalLine."External Document No." := "Cheque No.";
+                    GenJournalLine."Document No." := Rec."Transaction No.";
+                    GenJournalLine."External Document No." := Rec."Cheque No.";
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                    GenJournalLine."Account No." := "Employer No.";
+                    GenJournalLine."Account No." := Rec."Employer No.";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                    GenJournalLine."Posting Date" := "Cheque Date";
+                    GenJournalLine."Posting Date" := Rec."Cheque Date";
                     //GenJournalLine."Posting Date":="Transaction Date";
-                    GenJournalLine.Description := 'MNO' + "Account No." + ' ' + Name + '-' + Remarks;
+                    GenJournalLine.Description := 'MNO' + Rec."Account No." + ' ' + Rec.Name + '-' + Rec.Remarks;
                     //GenJournalLine.Description:='MNO'+"Account No."+'-'+Remarks;
                     GenJournalLine.Validate(GenJournalLine."Currency Code");
-                    ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                    ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                    ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                    ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                     if TransType = 'Withdrawal' then
-                        GenJournalLine.Amount := -Amount
+                        GenJournalLine.Amount := -Rec.Amount
                     else
-                        GenJournalLine.Amount := Amount;
+                        GenJournalLine.Amount := Rec.Amount;
                     GenJournalLine.Validate(GenJournalLine.Amount);
                     if GenJournalLine.Amount <> 0 then
                         GenJournalLine.Insert;
 
-                    if ("Account Type" <> "account type"::Member) and ("Account Type" <> "account type"::"FOSA Loan") and ("Account Type" <> "account type"::Vendor) and
-                     ("Account Type" <> "account type"::Micro) then begin
+                    if (Rec."Account Type" <> Rec."account type"::Member) and (Rec."Account Type" <> Rec."account type"::"FOSA Loan") and (Rec."Account Type" <> Rec."account type"::Vendor) and
+                     (Rec."Account Type" <> Rec."account type"::Micro) then begin
                         LineNo := LineNo + 10000;
                         GenJournalLine.Init;
                         GenJournalLine."Journal Template Name" := 'GENERAL';
                         GenJournalLine."Journal Batch Name" := 'FTRANS';
-                        GenJournalLine."Document No." := "Transaction No.";
-                        GenJournalLine."External Document No." := "Cheque No.";
+                        GenJournalLine."Document No." := Rec."Transaction No.";
+                        GenJournalLine."External Document No." := Rec."Cheque No.";
                         GenJournalLine."Line No." := LineNo;
-                        if "Account Type" = "account type"::"G/L Account" then
-                            GenJournalLine."Account Type" := "Account Type"
-                        else if "Account Type" = "account type"::Debtor then
-                            GenJournalLine."Account Type" := "Account Type"
-                        else if "Account Type" = "account type"::Vendor then
-                            GenJournalLine."Account Type" := "Account Type"
-                        else if "Account Type" = "account type"::Member then
-                            GenJournalLine."Account Type" := "Account Type"
-                        else if "Account Type" = "account type"::Micro then
+                        if Rec."Account Type" = Rec."account type"::"G/L Account" then
+                            GenJournalLine."Account Type" := Rec."Account Type"
+                        else if Rec."Account Type" = Rec."account type"::Debtor then
+                            GenJournalLine."Account Type" := Rec."Account Type"
+                        else if Rec."Account Type" = Rec."account type"::Vendor then
+                            GenJournalLine."Account Type" := Rec."Account Type"
+                        else if Rec."Account Type" = Rec."account type"::Member then
+                            GenJournalLine."Account Type" := Rec."Account Type"
+                        else if Rec."Account Type" = Rec."account type"::Micro then
                             GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-                        GenJournalLine."Account No." := "Account No.";
+                        GenJournalLine."Account No." := Rec."Account No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         //GenJournalLine."Posting Date":="Cheque Date";
-                        GenJournalLine."Posting Date" := "Transaction Date";
-                        GenJournalLine.Description := 'BT-' + Name + '-' + "Account No." + '-' + Remarks;
+                        GenJournalLine."Posting Date" := Rec."Transaction Date";
+                        GenJournalLine.Description := 'BT-' + Rec.Name + '-' + Rec."Account No." + '-' + Rec.Remarks;
                         GenJournalLine.Validate(GenJournalLine."Currency Code");
                         if TransType = 'Withdrawal' then
-                            GenJournalLine.Amount := Amount
+                            GenJournalLine.Amount := Rec.Amount
                         else
-                            GenJournalLine.Amount := -Amount;
+                            GenJournalLine.Amount := -Rec.Amount;
                         GenJournalLine.Validate(GenJournalLine.Amount);
-                        ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                        ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                        ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                        ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                         if GenJournalLine.Amount <> 0 then
                             GenJournalLine.Insert;
                     end;
 
                     GenSetup.Get();
 
-                    if ("Account Type" = "account type"::Member) or ("Account Type" = "account type"::Vendor) or
-                     ("Account Type" = "account type"::Micro) then begin
-                        if ("Receipt Mode" = "receipt mode"::Cheque) or ("Receipt Mode" = "receipt mode"::"Deposit Slip") or ("Receipt Mode" = "receipt mode"::EFT) or ("Receipt Mode" = "receipt mode"::Mpesa) or ("Receipt Mode" = "receipt mode"::"Standing order")
+                    if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::Vendor) or
+                     (Rec."Account Type" = Rec."account type"::Micro) then begin
+                        if (Rec."Receipt Mode" = Rec."receipt mode"::Cheque) or (Rec."Receipt Mode" = Rec."receipt mode"::"Deposit Slip") or (Rec."Receipt Mode" = Rec."receipt mode"::EFT) or (Rec."Receipt Mode" = Rec."receipt mode"::Mpesa) or (Rec."Receipt Mode" = Rec."receipt mode"::"Standing order")
                             then begin
                             ReceiptAllocations.Reset;
-                            ReceiptAllocations.SetRange(ReceiptAllocations."Document No", "Transaction No.");
+                            ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                             if ReceiptAllocations.Find('-') then begin
                                 repeat
                                     LineNo := LineNo + 10000;
@@ -494,44 +494,44 @@ Page 51516400 "BOSA Receipt Card"
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'FTRANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := "Transaction No.";
-                                    GenJournalLine."External Document No." := "Cheque No.";
-                                    GenJournalLine."Posting Date" := "Cheque Date";
+                                    GenJournalLine."Document No." := Rec."Transaction No.";
+                                    GenJournalLine."External Document No." := Rec."Cheque No.";
+                                    GenJournalLine."Posting Date" := Rec."Cheque Date";
                                     //        GenJournalLine."Posting Date":="Transaction Date";
                                     if ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Mwanangu Savings" then begin
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                         GenJournalLine."Account No." := ReceiptAllocations."Account No";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                        GenJournalLine.Description := 'BT-' + Name + '-' + "Account No." + '-' + Remarks;
+                                        GenJournalLine.Description := 'BT-' + Rec.Name + '-' + Rec."Account No." + '-' + Rec.Remarks;
                                         ReceiptAllocations."Global Dimension 1 Code" := 'FOSA';
                                         ReceiptAllocations."Global Dimension 2 Code" := SwizzsoftFactory.FnGetUserBranch();
                                     end else begin
-                                        if "Account Type" = "account type"::Vendor then begin
+                                        if Rec."Account Type" = Rec."account type"::Vendor then begin
                                             //                GenJournalLine."Posting Date":="Transaction Date";
-                                            GenJournalLine."Posting Date" := "Cheque Date";
+                                            GenJournalLine."Posting Date" := Rec."Cheque Date";
                                             GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
                                             GenJournalLine."Shortcut Dimension 2 Code" := SwizzsoftFactory.FnGetUserBranch();
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                             GenJournalLine."Account No." := ReceiptAllocations."Member No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                            if ("Receipt Mode" = "receipt mode"::"Standing order") and (ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Mwanangu Savings") then begin
-                                                GenJournalLine.Amount := -Amount;
+                                            if (Rec."Receipt Mode" = Rec."receipt mode"::"Standing order") and (ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Mwanangu Savings") then begin
+                                                GenJournalLine.Amount := -Rec.Amount;
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                                 GenJournalLine."Account No." := GenSetup."FOSA MPESA COmm A/C";
                                                 GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::Vendor;
-                                                GenJournalLine."Bal. Account No." := "Account No.";
+                                                GenJournalLine."Bal. Account No." := Rec."Account No.";
                                             end;
                                         end;
-                                        if ("Account Type" = "account type"::Member) or ("Account Type" = "account type"::Micro) then begin
+                                        if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::Micro) then begin
                                             //                GenJournalLine."Posting Date":="Transaction Date";
-                                            GenJournalLine."Posting Date" := "Cheque Date";
-                                            ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                                            ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                                            GenJournalLine."Posting Date" := Rec."Cheque Date";
+                                            ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                                            ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
                                             GenJournalLine."Account No." := ReceiptAllocations."Member No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                            if ("Receipt Mode" = "receipt mode"::"Standing order") and (ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Mwanangu Savings") then begin
-                                                GenJournalLine.Amount := -Amount;
+                                            if (Rec."Receipt Mode" = Rec."receipt mode"::"Standing order") and (ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Mwanangu Savings") then begin
+                                                GenJournalLine.Amount := -Rec.Amount;
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                                 GenJournalLine."Account No." := GenSetup."FOSA MPESA COmm A/C";
                                             end;
@@ -541,7 +541,7 @@ Page 51516400 "BOSA Receipt Card"
                                     GenJournalLine."Shortcut Dimension 1 Code" := ReceiptAllocations."Global Dimension 1 Code";
                                     GenJournalLine."Shortcut Dimension 2 Code" := ReceiptAllocations."Global Dimension 2 Code";
                                     GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine.Description := Format(ReceiptAllocations."Transaction Type") + '-' + Remarks + '-' + Name + '-' + "Account No.";
+                                    GenJournalLine.Description := Format(ReceiptAllocations."Transaction Type") + '-' + Rec.Remarks + '-' + Rec.Name + '-' + Rec."Account No.";
                                     GenJournalLine."Transaction Type" := ReceiptAllocations."Transaction Type";
                                     GenJournalLine."Loan No" := ReceiptAllocations."Loan No.";
                                     if GenJournalLine.Amount <> 0 then
@@ -552,11 +552,11 @@ Page 51516400 "BOSA Receipt Card"
 
                         //*************************************************************External reciept mode
                         ChargeAmount := 0;
-                        if ("Account Type" = "account type"::Member) or ("Account Type" = "account type"::Vendor) or
-                         ("Account Type" = "account type"::Micro) then begin
-                            if "Receipt Mode" = "receipt mode"::"5" then begin
+                        if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::Vendor) or
+                         (Rec."Account Type" = Rec."account type"::Micro) then begin
+                            if Rec."Receipt Mode" = Rec."receipt mode"::"5" then begin
                                 ReceiptAllocations.Reset;
-                                ReceiptAllocations.SetRange(ReceiptAllocations."Document No", "Transaction No.");
+                                ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                                 ReceiptAllocations.SetFilter(ReceiptAllocations."Transaction Type", '%1', ReceiptAllocations."transaction type"::"Loan Repayment");
                                 if ReceiptAllocations.Find('-') then begin
                                     repeat
@@ -571,16 +571,16 @@ Page 51516400 "BOSA Receipt Card"
                                             GenJournalLine.Init;
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'FTRANS';
-                                            GenJournalLine."Document No." := "Transaction No.";
+                                            GenJournalLine."Document No." := Rec."Transaction No.";
                                             GenJournalLine."Line No." := LineNo;
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                             GenJournalLine."Account No." := '400102';//insrt Gl Account No
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                            GenJournalLine."Posting Date" := "Cheque Date";
+                                            GenJournalLine."Posting Date" := Rec."Cheque Date";
                                             GenJournalLine.Description := 'External source amount charged on repayment' + Loans."Loan  No." + Loans."Client Code";
                                             GenJournalLine.Validate(GenJournalLine."Currency Code");
-                                            ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                                            ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                                            ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                                            ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                                             GenJournalLine."Transaction Type" := ReceiptAllocations."Transaction Type";
                                             GenJournalLine.Amount := -ChargeAmount;
                                             GenJournalLine.Validate(GenJournalLine.Amount);
@@ -593,17 +593,17 @@ Page 51516400 "BOSA Receipt Card"
                                             GenJournalLine.Init;
                                             GenJournalLine."Journal Template Name" := 'GENERAL';
                                             GenJournalLine."Journal Batch Name" := 'FTRANS';
-                                            GenJournalLine."Document No." := "Transaction No.";
+                                            GenJournalLine."Document No." := Rec."Transaction No.";
                                             GenJournalLine."Line No." := LineNo;
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
-                                            GenJournalLine."Account No." := "Account No.";
+                                            GenJournalLine."Account No." := Rec."Account No.";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             GenJournalLine."Loan No" := Loans."Loan  No.";
-                                            GenJournalLine."Posting Date" := "Cheque Date";
+                                            GenJournalLine."Posting Date" := Rec."Cheque Date";
                                             GenJournalLine.Description := 'Loan repayment' + Loans."Loan  No." + Loans."Client Code";
                                             GenJournalLine.Validate(GenJournalLine."Currency Code");
-                                            ReceiptAllocations."Global Dimension 1 Code" := "Global Dimension 1 Code";
-                                            ReceiptAllocations."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                                            ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                                            ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                                             //GenJournalLine."Transaction Type":=ReceiptAllocations."Transaction Type";
                                             GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Loan Repayment";
                                             GenJournalLine.Amount := -(ReceiptAllocations.Amount - ChargeAmount);
@@ -628,18 +628,18 @@ Page 51516400 "BOSA Receipt Card"
                     end;
                     //Post New
                     Message('Transaction posted successfully');
-                    Posted := true;
-                    Modify;
+                    Rec.Posted := true;
+                    Rec.Modify;
                     Commit;
                     BOSARcpt.Reset;
-                    BOSARcpt.SetRange(BOSARcpt."Transaction No.", "Transaction No.");
+                    BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
                         if/* ("Mode of Payment"<>"Mode of Payment"::"Standing order") AND */
                           //("Mode of Payment"<>"Mode of Payment"::"Direct Debit") AND
-                           ("Receipt Mode" <> "receipt mode"::"Standing order") then begin
+                           (Rec."Receipt Mode" <> Rec."receipt mode"::"Standing order") then begin
 
                             BOSARcpt.Reset;
-                            BOSARcpt.SetRange(BOSARcpt."Transaction No.", "Transaction No.");
+                            BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                             if BOSARcpt.Find('-') then
                                 Report.Run(51516486, true, true, BOSARcpt);
 
@@ -659,10 +659,10 @@ Page 51516400 "BOSA Receipt Card"
 
                 trigger OnAction()
                 begin
-                    TestField(Posted);
+                    Rec.TestField(Posted);
 
                     BOSARcpt.Reset;
-                    BOSARcpt.SetRange(BOSARcpt."Transaction No.", "Transaction No.");
+                    BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
                         Report.Run(51516486, true, true, BOSARcpt)
                 end;
@@ -685,8 +685,8 @@ Page 51516400 "BOSA Receipt Card"
 
     trigger OnAfterGetCurrRecord()
     begin
-        CalcFields("Allocated Amount");
-        "Un allocated Amount" := Amount - "Allocated Amount";
+        Rec.CalcFields("Allocated Amount");
+        Rec."Un allocated Amount" := Rec.Amount - Rec."Allocated Amount";
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
@@ -707,9 +707,9 @@ Page 51516400 "BOSA Receipt Card"
         startDateS: Text;
         StartDate: Text;
         StartDateshare: Date;
-        LoanRec: Record 51516371;
-        CLedger: Record 51516365;
-        RSchedule: Record 51516375;
+        LoanRec: Record "Loans Register";
+        CLedger: Record "Member Ledger Entry";
+        RSchedule: Record "Loan Repayment Schedule";
         LastDate: Date;
         IntAmount: Decimal;
         LoanBalance: Decimal;
@@ -724,44 +724,44 @@ Page 51516400 "BOSA Receipt Card"
         RunBal: Decimal;
         Recover: Boolean;
         Cheque: Boolean;
-        ReceiptAllocations: Record 51516387;
-        Loans: Record 51516371;
+        ReceiptAllocations: Record "Receipt Allocation";
+        Loans: Record "Loans Register";
         Commision: Decimal;
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record 51516364;
+        Cust: Record "Member Register";
         BOSABank: Code[20];
         LineNo: Integer;
-        BOSARcpt: Record 51516388;
+        BOSARcpt: Record "Receipts & Payments";
         TellerTill: Record "Bank Account";
         CurrentTellerAmount: Decimal;
         TransType: Text[30];
         RCPintdue: Decimal;
         Text001: label 'This member has reached a maximum share contribution of Kshs. 5,000/=. Do you want to post this transaction as shares contribution?';
-        BosaSetUp: Record 51516398;
+        BosaSetUp: Record "Sacco General Set-Up";
         MpesaCharge: Decimal;
         CustPostingGrp: Record "Customer Posting Group";
         MpesaAc: Code[30];
-        GenSetup: Record 51516398;
+        GenSetup: Record "Sacco General Set-Up";
         ShareCapDefecit: Decimal;
-        LoanApp: Record 51516371;
+        LoanApp: Record "Loans Register";
         Datefilter: Text;
-        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit 51516007;
         RefDate: Date;
         Recruiter: Code[20];
         ChargeAmount: Decimal;
-        loanapps: Record 51516371;
+        loanapps: Record "Loans Register";
 
     local procedure AllocatedAmountOnDeactivate()
     begin
         CurrPage.Update := true;
     end;
 
-    local procedure FnRunInterest(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunInterest(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
     begin
         if RunningBalance > 0 then begin
             LoanApp.Reset;
@@ -801,10 +801,10 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunPrinciple(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunPrinciple(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -852,10 +852,10 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunEntranceFee(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunEntranceFee(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -896,10 +896,10 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunShareCapital(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunShareCapital(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -966,15 +966,15 @@ Page 51516400 "BOSA Receipt Card"
         //END;
     end;
 
-    local procedure FnRunDepositContribution(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunDepositContribution(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -1005,15 +1005,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunLoanInsurance(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunLoanInsurance(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
     begin
         GenSetup.Get();
         if RunningBalance > 0 then begin
@@ -1043,15 +1043,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunBenevolentFund(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunBenevolentFund(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
     begin
         if RunningBalance > 0 then begin
             GenSetup.Get();
@@ -1081,15 +1081,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunUnallocatedAmount(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunUnallocatedAmount(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
     begin
         ObjMember.Reset;
         ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
@@ -1111,15 +1111,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunUnallocatedFromExcess(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunUnallocatedFromExcess(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
@@ -1146,7 +1146,7 @@ Page 51516400 "BOSA Receipt Card"
 
     local procedure FnReturnAmountToClear(TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account") AmountReturned: Decimal
     var
-        ObjReceiptAllocation: Record 51516387;
+        ObjReceiptAllocation: Record "Receipt Allocation";
     begin
         ObjReceiptAllocation.Reset;
         ObjReceiptAllocation.SetRange("Document No", Rec."Transaction No.");
@@ -1158,15 +1158,15 @@ Page 51516400 "BOSA Receipt Card"
         exit;
     end;
 
-    local procedure FnRunSavingsProductExcess(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal; SavingsProduct: Code[100]): Decimal
+    local procedure FnRunSavingsProductExcess(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal; SavingsProduct: Code[100]): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings";
@@ -1190,15 +1190,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunDepositContributionFromExcess(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunDepositContributionFromExcess(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
@@ -1223,15 +1223,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunSavingsContribution(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal): Decimal
+    local procedure FnRunSavingsContribution(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -1262,15 +1262,15 @@ Page 51516400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnRunRegistrationFee(ObjRcptBuffer: Record 51516388; RunningBalance: Decimal)
+    local procedure FnRunRegistrationFee(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal)
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record 51516364;
+        ObjMember: Record "Member Register";
         RegFee: Decimal;
     begin
         /*IF RunningBalance > 0 THEN
@@ -1312,32 +1312,32 @@ Page 51516400 "BOSA Receipt Card"
 
     local procedure FnProcessingDailyInterestDue()
     var
-        MemberLedgerEntry: Record 51516365;
+        MemberLedgerEntry: Record "Member Ledger Entry";
         GenBatches: Record "Gen. Journal Batch";
         PDate: Date;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PostDate: Date;
-        Cust: Record 51516364;
+        Cust: Record "Member Register";
         LineNo: Integer;
         DocNo: Code[20];
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         EndDate: Date;
         DontCharge: Boolean;
-        Temp: Record 51516031;
+        Temp: Record "Funds User Setup";
         JBatch: Code[10];
         Jtemplate: Code[10];
-        CustLedger: Record 51516365;
-        AccountingPeriod: Record 51516391;
+        CustLedger: Record "Member Ledger Entry";
+        AccountingPeriod: Record "Interest Due Period";
         FiscalYearStartDate: Date;
         "ExtDocNo.": Text[30];
-        loanapp: Record 51516371;
+        loanapp: Record "Loans Register";
         SDATE: Text[30];
-        Objrepaymentschedule: Record 51516375;
+        Objrepaymentschedule: Record "Loan Repayment Schedule";
         Varbeginmonth: Date;
         DateTest: Date;
         VarAmount: Decimal;
-        ObjCust: Record 51516364;
+        ObjCust: Record "Member Register";
         Date_OutBal: Date;
         OutBal: Decimal;
         BeginMonth_Date: Date;
@@ -1346,15 +1346,15 @@ Page 51516400 "BOSA Receipt Card"
         Month: Code[10];
         Days: Integer;
         varDays: Integer;
-        ReceiptsPayments: Record 51516388;
+        ReceiptsPayments: Record "Receipts & Payments";
         DaysValue: Integer;
         DaysInMonth: Integer;
     begin
 
-        Date_OutBal := "Cheque Date";
-        IntDate := "Cheque Date";
-        BalDate := "Cheque Date";
-        PostDate := CalcDate('CM', "Cheque Date");
+        Date_OutBal := Rec."Cheque Date";
+        IntDate := Rec."Cheque Date";
+        BalDate := Rec."Cheque Date";
+        PostDate := CalcDate('CM', Rec."Cheque Date");
         //MESSAGE('date to post is %1',IntDate  );
 
         GenJournalLine.Reset;
@@ -1362,7 +1362,7 @@ Page 51516400 "BOSA Receipt Card"
         GenJournalLine.SetRange("Journal Batch Name", 'INT DUE');
         GenJournalLine.DeleteAll;
         loanapp.Reset;
-        loanapp.SetRange(loanapp."Client Code", "Account No.");
+        loanapp.SetRange(loanapp."Client Code", Rec."Account No.");
         loanapp.SetFilter(loanapp."Outstanding Balance", '>%1', 0);
         loanapp.SetFilter(loanapp."Loan Product Type", '<>%1', '24');
         //loanapp.SETFILTER( loanapp."Date filter",'<=%1',Date_OutBal);

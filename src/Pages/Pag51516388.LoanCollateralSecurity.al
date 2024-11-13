@@ -2,7 +2,7 @@
 Page 51516388 "Loan Collateral Security"
 {
     PageType = ListPart;
-    SourceTable = 51516374;
+    SourceTable = "Loan Collateral Details";
 
     layout
     {
@@ -10,75 +10,75 @@ Page 51516388 "Loan Collateral Security"
         {
             repeater(Control1102756000)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Registe Doc"; "Collateral Registe Doc")
+                field("Collateral Registe Doc"; Rec."Collateral Registe Doc")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registered Owner"; "Registered Owner")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Reference No"; "Reference No")
+                field("Registered Owner"; Rec."Registered Owner")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Type; Type)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Security Details"; "Security Details")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Motor Vehicle Registration No"; "Motor Vehicle Registration No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Title Deed No."; "Title Deed No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Value; Value)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Comitted Collateral Value"; "Comitted Collateral Value")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Category; Category)
+                field("Security Details"; Rec."Security Details")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Guarantee Value"; "Guarantee Value")
+                field("Motor Vehicle Registration No"; Rec."Motor Vehicle Registration No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("View Document"; "View Document")
+                field("Title Deed No."; Rec."Title Deed No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Value; Rec.Value)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Comitted Collateral Value"; Rec."Comitted Collateral Value")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Remarks; Remarks)
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Multiplier"; "Collateral Multiplier")
+                field(Category; Rec.Category)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Collateral Fee"; "Loan Collateral Fee")
+                field("Guarantee Value"; Rec."Guarantee Value")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("View Document"; Rec."View Document")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Remarks; Rec.Remarks)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Collateral Multiplier"; Rec."Collateral Multiplier")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loan Collateral Fee"; Rec."Loan Collateral Fee")
                 {
                     ApplicationArea = Basic;
                 }

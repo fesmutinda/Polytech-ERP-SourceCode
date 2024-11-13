@@ -2,7 +2,7 @@
 Page 51516421 "Loan Product Charges"
 {
     PageType = List;
-    SourceTable = 51516383;
+    SourceTable = "Loan Product Charges";
 
     layout
     {
@@ -10,43 +10,43 @@ Page 51516421 "Loan Product Charges"
         {
             repeater(Group)
             {
-                field("Product Code"; "Product Code")
+                field("Product Code"; Rec."Product Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Percentage; Percentage)
+                field(Percentage; Rec.Percentage)
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Use Perc"; "Use Perc")
+                field("Use Perc"; Rec."Use Perc")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Minimum Amount"; "Minimum Amount")
+                field("Minimum Amount"; Rec."Minimum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deduction Type"; "Deduction Type")
+                field("Deduction Type"; Rec."Deduction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Charge Type"; "Loan Charge Type")
+                field("Loan Charge Type"; Rec."Loan Charge Type")
                 {
                     ApplicationArea = Basic;
                 }
