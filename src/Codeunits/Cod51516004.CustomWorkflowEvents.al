@@ -4,183 +4,108 @@ Codeunit 51516004 "Custom Workflow Events"
 
     trigger OnRun()
     begin
+        AddEventsToLib();
     end;
 
     var
         WFHandler: Codeunit "Workflow Event Handling";
         WorkflowManagement: Codeunit "Workflow Management";
-
+        WFEventHandler: Codeunit "Workflow Event Handling";
+        SurestepWFEvents: Codeunit "Custom Workflow Events";
+        WFResponseHandler: Codeunit "Workflow Response Handling";
 
     procedure AddEventsToLib()
     begin
 
         //---------------------------------------------1. Approval Events--------------------------------------------------------------
-        //Payment Header
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendPaymentDocForApprovalCode,
-                                    Database::"Payment Header", 'Approval of a Payment Document is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPaymentApprovalRequestCode,
-                                    Database::"Payment Header", 'An Approval request for a Payment Document is Canceled.', 0, false);
-
         //Membership Application
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipApplicationForApprovalCode,
-                                    Database::"Membership Applications", 'Approval of Membership Application is Requested.', 0, false);
+                            Database::"Membership Applications", 'Approval of Membership Application is Requested.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelMembershipApplicationApprovalRequestCode,
                                     Database::"Membership Applications", 'An Approval request for  Membership Application is canceled.', 0, false);
-        //Loan Application
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
+        //Loans Application
         WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanApplicationForApprovalCode,
-                                    Database::"Loans Register", 'Approval of a Loan Application is Requested.', 0, false);
+                            Database::"Loans Register", 'Approval of Loan Application is Requested.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanApplicationApprovalRequestCode,
-                                    Database::"Loans Register", 'An Approval request for a Loan Application is canceled.', 0, false);
-        //Loan Disbursement
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanDisbursementForApprovalCode,
-                                    Database::"Loan Disburesment-Batching", 'Approval of a Loan Disbursement is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanDisbursementApprovalRequestCode,
-                                    Database::"Loan Disburesment-Batching", 'An Approval request for a Loan Disbursement is canceled.', 0, false);
+                                    Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
 
-        //Standing Orders
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendStandingOrderForApprovalCode,
-                                    Database::"Standing Orders", 'Approval of a Standing Order is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelStandingOrderApprovalRequestCode,
-                                    Database::"Standing Orders", 'An Approval request for a Standing Order is canceled.', 0, false);
-
-        //Membership Withdrawal
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendMWithdrawalForApprovalCode,
-                                    Database::"Membership Exit", 'Approval of a Membership Withdrawal is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelMWithdrawalApprovalRequestCode,
-                                    Database::"Membership Exit", 'An Approval request for a Membership Withdrawal is canceled.', 0, false);
-        //ATM Card Application
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendATMCardForApprovalCode,
-                                    Database::"Members Nominee Temp", 'Approval of  ATM Card is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelATMCardApprovalRequestCode,
-                                    Database::"Members Nominee Temp", 'An Approval request for  ATM Card is canceled.', 0, false);
-        //Guarantor Recovery
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendGuarantorRecoveryForApprovalCode,
-                                    Database::"Loan Recovery Header", 'Approval of Guarantor Recovery is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode,
-                                    Database::"Loan Recovery Header", 'An Approval request for Guarantor Recovery is canceled.', 0, false);
-
+        //-----Member exit
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipExitApplicationForApprovalCode,
+        Database::"Membership Withdrawals", 'Approval of Membership Exit is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode,
+                                    Database::"Membership Withdrawals", 'An Approval request for Exit Application is canceled.', 0, false);
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
+        //BOSA Transfers
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendBOSATransForApprovalCode,
+                            Database::"BOSA Transfers", 'Approval of Bosa Transfer is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelBOSATransApprovalRequestCode,
+                                    Database::"BOSA Transfers", 'An Approval request for  Bosa Transfer is canceled.', 0, false);
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
+        //Loan Batch Disbursements
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanBatchForApprovalCode,
+                            Database::"Loan Disburesment-Batching", 'Approval of a Loan Batch document is requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanBatchApprovalRequestCode,
+                                    Database::"Loan Disburesment-Batching", 'An Approval request for a Loan Batch document is canceled.', 0, false);
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
         //Change Request
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendChangeRequestForApprovalCode,
-                                    Database::"Change Request", 'Approval of Change Request is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelChangeRequestApprovalRequestCode,
-                                    Database::"Change Request", 'An Approval request for Change Request is canceled.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendMemberChangeRequestForApprovalCode,
+                            Database::"Change Request", 'Approval of Change Request is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelMemberChangeRequestApprovalRequestCode,
+                                    Database::"Change Request", 'An Approval request for  Change Request is canceled.', 0, false);
 
-        //Treasury Transactions
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendTTransactionsForApprovalCode,
-                                    Database::"Treasury Transactions", 'Approval of Treasury Transaction is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelTTransactionsApprovalRequestCode,
-                                    Database::"Treasury Transactions", 'An Approval request for Treasury Transaction is canceled.', 0, false);
-
-        //FOSA Account Application
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendFAccountApplicationForApprovalCode,
-                                    Database::"Mwanangu Savings Application", 'Approval of FOSA Account Application is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelFAccountApplicationApprovalRequestCode,
-                                    Database::"Mwanangu Savings Application", 'An Approval request for FOSA Account Application is canceled.', 0, false);
-        //Stores Requisition
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendSReqApplicationForApprovalCode,
-                                    Database::"Store Requistion Header", 'Approval of Stores Requisition Application is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelSReqApplicationApprovalRequestCode,
-                                    Database::"Store Requistion Header", 'An Approval request for Stores Requisition Application is canceled.', 0, false);
-
-        //Sacco Transfer
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendSaccoTransferForApprovalCode,
-                                    Database::"Sacco Transfers", 'Approval of Sacco Transfer is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelSaccoTransferApprovalRequestCode,
-                                    Database::"Sacco Transfers", 'An Approval request for Sacco Transfer is canceled.', 0, false);
-
-        //Cheque Discounting
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendChequeDiscountingForApprovalCode,
-                                    Database::"Cheque Discounting", 'Approval of Cheque Discounting is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelChequeDiscountingApprovalRequestCode,
-                                    Database::"Cheque Discounting", 'An Approval request for Cheque Discounting is canceled.', 0, false);
-        //Imprest Requisition
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendImprestRequisitionForApprovalCode,
-                                    Database::"Imprest Header", 'Approval of Imprest Requisition is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelImprestRequisitionApprovalRequestCode,
-                                    Database::"Imprest Header", 'An Approval request for Imprest Requisition is canceled.', 0, false);
-        //Imprest Surrender
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendImprestSurrenderForApprovalCode,
-                                    Database::"Imprest Surrender Header", 'Approval of Imprest Surrender is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelImprestSurrenderApprovalRequestCode,
-                                    Database::"Imprest Surrender Header", 'An Approval request for Imprest Surrender is canceled.', 0, false);
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
         //Leave Application
         WFHandler.AddEventToLibrary(RunWorkflowOnSendLeaveApplicationForApprovalCode,
-                                    Database::"HR Leave Application", 'Approval of Leave Application is Requested.', 0, false);
+                            Database::"HR Leave Application", 'Approval of Leave Application is Requested.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelLeaveApplicationApprovalRequestCode,
-                                    Database::"HR Leave Application", 'An Approval request for Leave Application is canceled.', 0, false);
+                                    Database::"HR Leave Application", 'An Approval request for  Leave Application is canceled.', 0, false);
+        //Guarantor Substitution
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendGuarantorSubForApprovalCode,
+                            Database::"Guarantorship Substitution H", 'Approval of Guarantor Substitution is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelGuarantorSubApprovalRequestCode,
+                                    Database::"Guarantorship Substitution H", 'An Approval request for Guarantor Substitution is canceled.', 0, false);
+        //Petty Cash Reimbursement
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendPettyCashReimbersementForApprovalCode,
+                            Database::"Funds Transfer Header", 'Approval of PettyCash Reimbursment is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPettyCashReimbersementApprovalRequestCode,
+                                    Database::"Funds Transfer Header", 'An Approval request for  PettyCash Reimbursement is canceled.', 0, false);
+        //-------------------------------------------------------------------------
+        //NewFOSAAccount Application
+        // WFHandler.AddEventToLibrary(RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode,
+        //                     Database::"Product Applications Details", 'Approval of New FOSA Product Application is Requested.', 0, false);
+        // WFHandler.AddEventToLibrary(RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequestCode,
+        //                             Database::"Product Applications Details", 'An Approval request for  New FOSA Product Application is canceled.', 0, false);
+        //Teller Transactions
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendTellerTransactionsForApprovalCode,
+                            Database::Transactions, 'Approval of Teller Transactions is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelTellerTransactionsApprovalRequestCode,
+                                    Database::Transactions, 'An Approval request for  Teller Transactions is canceled.', 0, false);
 
-        //Bulk Withdrawal
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendBulkWithdrawalForApprovalCode,
-                                    Database::"Bulk Withdrawal Application", 'Approval of  Bulk Withdrawal is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode,
-                                    Database::"Bulk Withdrawal Application", 'An Approval request for  Bulk Withdrawal is canceled.', 0, false);
+        //STO Transactions
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendSTOTransactionsForApprovalCode,
+                            Database::"Standing Orders", 'Approval of Standing Orders is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelSTOTransactionsApprovalRequestCode,
+                                    Database::"Standing Orders", 'An Approval request for  Standing Orders is canceled.', 0, false);
+        // //ATM Card Applications
+        // WFHandler.AddEventToLibrary(RunWorkflowOnSendATMTransactionsForApprovalCode,
+        //                     Database::"ATM Card Applications", 'Approval of ATM Card Application is Requested.', 0, false);
+        // WFHandler.AddEventToLibrary(RunWorkflowOnCancelATMTransactionsApprovalRequestCode,
+        //                             Database::"ATM Card Applications", 'An Approval request for  ATM Card Application is canceled.', 0, false);
 
-        //Package Lodging
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendPackageLodgeForApprovalCode,
-                                    Database::"Safe Custody Package Register", 'Approval of  Package Lodging is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPackageLodgeApprovalRequestCode,
-                                    Database::"Safe Custody Package Register", 'An Approval request for  Package Lodging is canceled.', 0, false);
-
-        //Package Retrieval
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendPackageRetrievalForApprovalCode,
-                                    Database::"Package Retrieval Register", 'Approval of  Package Retrieval is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPackageRetrievalApprovalRequestCode,
-                                    Database::"Package Retrieval Register", 'An Approval request for  Package Retrieval is canceled.', 0, false);
-
-        //House Change
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendHouseChangeForApprovalCode,
-                                    Database::"House Group Change Request", 'Approval of  House Change is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelHouseChangeApprovalRequestCode,
-                                    Database::"House Group Change Request", 'An Approval request for  House Change is canceled.', 0, false);
-
-        //CRM Training
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendCRMTrainingForApprovalCode,
-                                    Database::"CRM Trainings", 'Approval of  CRM Training is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelCRMTrainingApprovalRequestCode,
-                                    Database::"CRM Trainings", 'An Approval request for  CRM Training is canceled.', 0, false);
-
-        //Petty Cash
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendPettyCashForApprovalCode,
-                                    Database::"Payment Header", 'Approval of  Petty Cash is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPettyCashApprovalRequestCode,
-                                    Database::"Payment Header", 'An Approval request for  Petty Cash is canceled.', 0, false);
-
-        //Staff Claims
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendStaffClaimsForApprovalCode,
-                                    Database::"Staff Claims Header", 'Approval of  Staff Claims is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelStaffClaimsApprovalRequestCode,
-                                    Database::"Staff Claims Header", 'An Approval request for  Staff Claims is canceled.', 0, false);
-
-        //Member Agent/NOK Change
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode,
-                                    Database::"Next Of Kin Change", 'Approval of  Member Agent/NOK Change is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode,
-                                    Database::"Next Of Kin Change", 'An Approval request for  Member Agent/NOK Change is canceled.', 0, false);
-
-        //House Registration
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendHouseRegistrationForApprovalCode,
-                                    Database::"House Groups Registration", 'Approval of  House Registration is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelHouseRegistrationApprovalRequestCode,
-                                    Database::"House Groups Registration", 'An Approval request for House Registration is canceled.', 0, false);
-
-        //Loan PayOff
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanPayOffForApprovalCode,
-                                    Database::"Loan PayOff", 'Approval of  Loan PayOff is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanPayOffApprovalRequestCode,
-                                    Database::"Loan PayOff", 'An Approval request for Loan PayOff  is canceled.', 0, false);
-
-        //Fixed Deposit Placement
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendFixedDepositForApprovalCode,
-                                    Database::"Fixed Deposit Placement", 'Approval of  Fixed Deposit is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelFixedDepositApprovalRequestCode,
-                                    Database::"Fixed Deposit Placement", 'An Approval request for Fixed Deposit  is canceled.', 0, false);
-
-        //Purchase Requisition
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendPurchaseRequisitionForApprovalCode,
-                                    Database::"Purchase Header", 'Approval of  Purchase Requisition is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPurchaseRequisitionApprovalRequestCode,
-                                    Database::"Purchase Header", 'An Approval request for  Purchase Requisition is canceled.', 0, false);
-
+        //InternalTransfersTransactions
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
+        //"Sacco Transfers"
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode,
+                            Database::"Sacco Transfers", 'Approval of Sacco Transfers is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequestCode,
+                                    Database::"Sacco Transfers", 'An Approval request for  Sacco Transfers is canceled.', 0, false);
+        //-------------------------------------------End Approval Events-------------------------------------------------------------
+        //Payment Voucher
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode,
+                            Database::"Payment Header", 'Approval of Payment Voucher Transaction is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequestCode,
+                                    Database::"Payment Header", 'An Approval request for  Payment Voucher Transaction is canceled.', 0, false);
 
 
         //-------------------------------------------End Approval Events-------------------------------------------------------------
@@ -189,189 +114,157 @@ Codeunit 51516004 "Custom Workflow Events"
 
     procedure AddEventsPredecessor()
     begin
-        //--------------------------------------1.Approval,Rejection,Delegation Predecessors------------------------------------------------
-        //Payment Header
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPaymentDocForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPaymentDocForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPaymentDocForApprovalCode);
+        //--------1.Approval,Rejection,Delegation Predecessors----------------------
+        //1. Membership Application
 
-        //Membership Application
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
+
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
+
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
-        //Loan Application
+
+        //2. Loan Application
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
+
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
+
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
-        //Loan Disbursement
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanDisbursementForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanDisbursementForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanDisbursementForApprovalCode);
 
-        //Standing Order
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendStandingOrderForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendStandingOrderForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendStandingOrderForApprovalCode);
+        //3. BOSA Transfers
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendBOSATransForApprovalCode);
 
-        //Membership Withdrawal
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMWithdrawalForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendMWithdrawalForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMWithdrawalForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendBOSATransForApprovalCode);
 
-        //ATM Card Applications
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendATMCardForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendATMCardForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendATMCardForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendBOSATransForApprovalCode);
 
-        //Guarantor Recovery
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
+        //4. Loan Batch Disbursement
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanBatchForApprovalCode);
 
-        //Change Request
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendChangeRequestForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendChangeRequestForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendChangeRequestForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanBatchForApprovalCode);
 
-        //Treasury Transaction
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendTTransactionsForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendTTransactionsForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendTTransactionsForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanBatchForApprovalCode);
 
-        //FOSA Account Application
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendFAccountApplicationForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendFAccountApplicationForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendFAccountApplicationForApprovalCode);
+        //5. Loan TopUp
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanTopUpForApprovalCode);
 
-        //Stores Requisition
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendSReqApplicationForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendSReqApplicationForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendSReqApplicationForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanTopUpForApprovalCode);
 
-        //Sacco Transfer
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendSaccoTransferForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendSaccoTransferForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendSaccoTransferForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanTopUpForApprovalCode);
+        //6. Change Request
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMemberChangeRequestForApprovalCode);
 
-        //Cheque Discounting
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendChequeDiscountingForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendChequeDiscountingForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendChequeDiscountingForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendMemberChangeRequestForApprovalCode);
 
-        //Imprest Requisition
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendImprestRequisitionForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendImprestRequisitionForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendImprestRequisitionForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMemberChangeRequestForApprovalCode);
 
-        //Imprest Surrender
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendImprestSurrenderForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendImprestSurrenderForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendImprestSurrenderForApprovalCode);
+        //7. Leave Application
 
-        //Leave Application
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLeaveApplicationForApprovalCode);
+
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLeaveApplicationForApprovalCode);
+
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLeaveApplicationForApprovalCode);
 
-        //Bulk Withdrawal
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendBulkWithdrawalForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendBulkWithdrawalForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendBulkWithdrawalForApprovalCode);
+        //8.Guarantor Substitution
 
-        //Package Lodging
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPackageLodgeForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPackageLodgeForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPackageLodgeForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendGuarantorSubForApprovalCode);
 
-        //Package Retrieval
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPackageRetrievalForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPackageRetrievalForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPackageRetrievalForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendGuarantorSubForApprovalCode);
 
-        //House Change
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendHouseChangeForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendHouseChangeForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendHouseChangeForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendGuarantorSubForApprovalCode);
+        //8. Payment Voucher
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPaymentVoucherForApprovalCode);
 
-        //CRM Training
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendCRMTrainingForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendCRMTrainingForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendCRMTrainingForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPaymentVoucherForApprovalCode);
 
-        //Petty Cash
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPettyCashForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPettyCashForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPettyCashForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPaymentVoucherForApprovalCode);
+        //9. PettyCash Reimbursement
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPettyCashReimbersementForApprovalCode);
 
-        //Staff Claims
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendStaffClaimsForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendStaffClaimsForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendStaffClaimsForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPettyCashReimbersementForApprovalCode);
 
-        //Member Agent/NOK Change
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPettyCashReimbersementForApprovalCode);
+        //10. FOSA Product Application
 
-        //House Registration
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendHouseRegistrationForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendHouseRegistrationForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendHouseRegistrationForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendFOSAProductApplicationForApprovalCode);
 
-        //Loan Payoff
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanPayOffForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanPayOffForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanPayOffForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendFOSAProductApplicationForApprovalCode);
 
-        //Fixed Deposit
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendFixedDepositForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendFixedDepositForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendFixedDepositForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendFOSAProductApplicationForApprovalCode);
+        //11. Loan Recovery Application
 
-        //Purchase Requisition
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPurchaseRequisitionForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPurchaseRequisitionForApprovalCode);
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPurchaseRequisitionForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanRecoveryApplicationForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanRecoveryApplicationForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanRecoveryApplicationForApprovalCode);
+        //12. Change Request
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendCEEPChangeRequestForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendCEEPChangeRequestForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendCEEPChangeRequestForApprovalCode);
+        //13.Partial Loan Application
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPartialLoanApplicationForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPartialLoanApplicationForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPartialLoanApplicationForApprovalCode);
+        //14. Share Transfers
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendShareTransApplicationForApprovalCode);
 
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendShareTransApplicationForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendShareTransApplicationForApprovalCode);
+
+        //--------------------------------------------
+        //1. NewFOSAAccount Application
+
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode);
+
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode);
+
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode);
+
+        //1. Teller Transactions
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendTellerTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendTellerTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendTellerTransactionsForApprovalCode);
+
+        //1. Standing order Transactions
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendSTOTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendSTOTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendSTOTransactionsForApprovalCode);
+        //1.ATM Carc Application
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendATMTransactionsForApprovalCode);
+
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendATMTransactionsForApprovalCode);
+
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendATMTransactionsForApprovalCode);
+        //1. Sacco Transfers
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode);
+
+        //1.Payment Voucher
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode);
+
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode);
 
         //---------------------------------------End Approval,Rejection,Delegation Predecessors---------------------------------------------
     end;
-
-
-    procedure RunWorkflowOnSendPaymentDocForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendPaymentDocForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelPaymentApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelPaymentApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendPaymentDocForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendPaymentDocForApproval(var PaymentHeader: Record 51516112)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendPaymentDocForApprovalCode, PaymentHeader);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPaymentApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelPaymentApprovalRequest(var PaymentHeader: Record 51516112)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPaymentApprovalRequestCode, PaymentHeader);
-    end;
-
-
-    procedure RunWorkflowOnSendMembershipApplicationForApprovalCode(): Code[128]
+    //...............................................................................................................................................................................
+    //A)Membership Applications
+    procedure RunWorkflowOnSendMembershipApplicationForApprovalCode(): Code[128]//
     begin
         exit(UpperCase('RunWorkflowOnSendMembershipApplicationForApproval'));
     end;
@@ -382,22 +275,48 @@ Codeunit 51516004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelMembershipApplicationApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendMembershipApplicationForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMembershipApplicationForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendMembershipApplicationForApproval(var MembershipApplication: Record 51516360)
+    procedure RunWorkflowOnSendMembershipApplicationForApproval(var MembershipApplication: Record "Membership Applications")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, MembershipApplication);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelMembershipApplicationApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipApplicationApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelMembershipApplicationApprovalRequest(var MembershipApplication: Record 51516360)
+    procedure RunWorkflowOnCancelMembershipApplicationApprovalRequest(var MembershipApplication: Record "Membership Applications")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnCancelMembershipApplicationApprovalRequestCode, MembershipApplication);
     end;
+    //2. Membership Exit
+
+    //1)Membership Exit Application
+    procedure RunWorkflowOnSendMembershipExitApplicationForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendMembershipExitApplicationForApproval'));
+    end;
 
 
-    procedure RunWorkflowOnSendLoanApplicationForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnCancelMembershipExitApplicationApprovalRequest'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMembershipExitApplicationForApproval', '', false, false)]
+
+    procedure RunWorkflowOnSendMembershipExitApplicationForApproval(var MembershipWithdrawals: Record "Membership Withdrawals")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, "Membership Withdrawals");
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipExitApplicationApprovalRequest', '', false, false)]
+
+    procedure RunWorkflowOnCancelMembershipExitApplicationApprovalRequest(var MembershipWithdrawals: Record "Membership Withdrawals")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode, "Membership Withdrawals");
+    end;
+    //2. Loan Applications
+    procedure RunWorkflowOnSendLoanApplicationForApprovalCode(): Code[128]//
     begin
         exit(UpperCase('RunWorkflowOnSendLoanApplicationForApproval'));
     end;
@@ -408,360 +327,114 @@ Codeunit 51516004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelLoanApplicationApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendLoanApplicationForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLoanApplicationForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendLoanApplicationForApproval(var LoanApplication: Record 51516371)
+    procedure RunWorkflowOnSendLoanApplicationForApproval(var LoansRegister: Record "Loans Register")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanApplicationForApprovalCode, LoanApplication);
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanApplicationForApprovalCode, LoansRegister);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelLoanApplicationApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLoanApplicationApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelLoanApplicationApprovalRequest(var LoanApplication: Record 51516371)
+    procedure RunWorkflowOnCancelLoanApplicationApprovalRequest(var LoansRegister: Record "Loans Register")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanApplicationApprovalRequestCode, LoanApplication);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanApplicationApprovalRequestCode, LoansRegister);
     end;
+    //...................................................................................................
 
-
-    procedure RunWorkflowOnSendLoanDisbursementForApprovalCode(): Code[128]
+    //3. BOSA Transfers
+    procedure RunWorkflowOnSendBOSATransForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnSendLoanDisbursementForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelLoanDisbursementApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelLoanDisbursementApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendLoanDisbursementForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendLoanDisbursementForApproval(var LoanDisbursement: Record 51516377)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanDisbursementForApprovalCode, LoanDisbursement);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelLoanDisbursementApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelLoanDisbursementApprovalRequest(var LoanDisbursement: Record 51516377)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanDisbursementApprovalRequestCode, LoanDisbursement);
+        exit(UpperCase('RunWorkflowOnSendBOSATransForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendStandingOrderForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelBOSATransApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendStandingOrderForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelBOSATransApprovalRequest'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendBOSATransForApproval', '', false, false)]
+
+    procedure RunWorkflowOnSendBOSATransForApproval(var BOSATransfers: Record "BOSA Transfers")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendBOSATransForApprovalCode, BOSATransfers);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelBOSATransApprovalRequest', '', false, false)]
+
+    procedure RunWorkflowOnCancelBOSATransApprovalRequest(var BOSATransfers: Record "BOSA Transfers")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelBOSATransApprovalRequestCode, BOSATransfers);
+    end;
+    //...................................................................................................
+    //4. Loan Batches
+    procedure RunWorkflowOnSendLoanBatchForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendLoanBatchForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelStandingOrderApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelLoanBatchApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelStandingOrderApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelLoanBatchApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendStandingOrderForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLoanBatchForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendStandingOrderForApproval(var StandingOrder: Record 51516449)
+    procedure RunWorkflowOnSendLoanBatchForApproval(var LoanDisburesmentBatching: Record "Loan Disburesment-Batching")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendStandingOrderForApprovalCode, StandingOrder);
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanBatchForApprovalCode, LoanDisburesmentBatching);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelStandingOrderApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLoanBatchApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelStandingOrderApprovalRequest(var StandingOrder: Record 51516449)
+    procedure RunWorkflowOnCancelLoanBatchApprovalRequest(var LoanDisburesmentBatching: Record "Loan Disburesment-Batching")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelStandingOrderApprovalRequestCode, StandingOrder);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanBatchApprovalRequestCode, LoanDisburesmentBatching);
     end;
-
-
-    procedure RunWorkflowOnSendMWithdrawalForApprovalCode(): Code[128]
+    //...................................................................................................
+    //5. Loan TopUp
+    procedure RunWorkflowOnSendLoanTopUpForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnSendMWithdrawalForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelMWithdrawalApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelMWithdrawalApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendMWithdrawalForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendMWithdrawalForApproval(var MWithdrawal: Record 51516400)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendMWithdrawalForApprovalCode, MWithdrawal);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelMWithdrawalApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelMWithdrawalApprovalRequest(var MWithdrawal: Record 51516400)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMWithdrawalApprovalRequestCode, MWithdrawal);
+        exit(UpperCase('RunWorkflowOnSendLoanTopUpForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendATMCardForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelLoanTopUpApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendATMCardForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelLoanTopUpApprovalRequest'));
     end;
 
 
-    procedure RunWorkflowOnCancelATMCardApprovalRequestCode(): Code[128]
+    //...................................................................................................
+    //6. Change Request
+    procedure RunWorkflowOnSendMemberChangeRequestForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnCancelATMCardApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendATMCardForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendATMCardForApproval(var ATMCard: Record 51516464)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendATMCardForApprovalCode, ATMCard);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelATMCardApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelATMCardApprovalRequest(var ATMCard: Record 51516464)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelATMCardApprovalRequestCode, ATMCard);
+        exit(UpperCase('RunWorkflowOnSendMemberChangeRequestForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendGuarantorRecoveryForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelMemberChangeRequestApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendGuarantorRecoveryForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelMemberChangeRequestApprovalRequest'));
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMemberChangeRequestForApproval', '', false, false)]
 
-    procedure RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnSendMemberChangeRequestForApproval(var ChangeRequest: Record "Change Request")
     begin
-        exit(UpperCase('RunWorkflowOnCancelGuarantorRecoveryApprovalRequest'));
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendMemberChangeRequestForApprovalCode, ChangeRequest);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendGuarantorRecoveryForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMemberChangeRequestApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnSendGuarantorRecoveryForApproval(var GuarantorRecovery: Record 51516550)
+    procedure RunWorkflowOnCancelMemberChangeRequestApprovalRequest(var ChangeRequest: Record "Change Request")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendGuarantorRecoveryForApprovalCode, GuarantorRecovery);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMemberChangeRequestApprovalRequestCode, ChangeRequest);
     end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelGuarantorRecoveryApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelGuarantorRecoveryApprovalRequest(var GuarantorRecovery: Record 51516550)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode, GuarantorRecovery);
-    end;
-
-
-    procedure RunWorkflowOnSendChangeRequestForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendChangeRequestForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelChangeRequestApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelChangeRequestApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendChangeRequestForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendChangeRequestForApproval(var ChangeRequest: Record 51516552)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendChangeRequestForApprovalCode, ChangeRequest);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelChangeRequestApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelChangeRequestApprovalRequest(var ChangeRequest: Record 51516552)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelChangeRequestApprovalRequestCode, ChangeRequest);
-    end;
-
-
-    procedure RunWorkflowOnSendTTransactionsForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendTTransactionsForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelTTransactionsApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelTTransactionsApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendTTransactionsForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendTTransactionsForApproval(var TTransactions: Record 51516443)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendTTransactionsForApprovalCode, TTransactions);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelTTransactionsApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelTTransactionsApprovalRequest(var TTransactions: Record 51516443)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelTTransactionsApprovalRequestCode, TTransactions);
-    end;
-
-
-    procedure RunWorkflowOnSendFAccountApplicationForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendFAccountApplicationForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelFAccountApplicationApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelFAccountApplicationApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendFAccountApplicationForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendFAccountApplicationForApproval(var FAccount: Record 51516430)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendFAccountApplicationForApprovalCode, FAccount);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelFAccountApplicationApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelFAccountApplicationApprovalRequest(var FAccount: Record 51516430)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelFAccountApplicationApprovalRequestCode, FAccount);
-    end;
-
-
-    procedure RunWorkflowOnSendSReqApplicationForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendSReqApplicationForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelSReqApplicationApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelSReqApplicationApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendSReqApplicationForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendSReqApplicationForApproval(var SReq: Record 51516102)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendSReqApplicationForApprovalCode, SReq);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelSReqApplicationApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelSReqApplicationApprovalRequest(var SReq: Record 51516102)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelSReqApplicationApprovalRequestCode, SReq);
-    end;
-
-
-    procedure RunWorkflowOnSendSaccoTransferForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendSaccoTransferForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelSaccoTransferApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelSaccoTransferApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendSaccoTransferForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendSaccoTransferForApproval(var SaccoTransfer: Record "Imprest Line")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendSaccoTransferForApprovalCode, SaccoTransfer);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelSaccoTransferApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelSaccoTransferApprovalRequest(var SaccoTransfer: Record "Imprest Line")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelSaccoTransferApprovalRequestCode, SaccoTransfer);
-    end;
-
-
-    procedure RunWorkflowOnSendChequeDiscountingForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendChequeDiscountingForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelChequeDiscountingApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelChequeDiscountingApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendChequeDiscountingForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendChequeDiscountingForApproval(var ChequeDiscounting: Record 51516513)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendChequeDiscountingForApprovalCode, ChequeDiscounting);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelChequeDiscountingApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelChequeDiscountingApprovalRequest(var ChequeDiscounting: Record 51516513)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelChequeDiscountingApprovalRequestCode, ChequeDiscounting);
-    end;
-
-
-    procedure RunWorkflowOnSendImprestRequisitionForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendImprestRequisitionForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelImprestRequisitionApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelImprestRequisitionApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendImprestRequisitionForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendImprestRequisitionForApproval(var ImprestRequisition: Record 51516006)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendImprestRequisitionForApprovalCode, ImprestRequisition);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelImprestRequisitionApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelImprestRequisitionApprovalRequest(var ImprestRequisition: Record 51516006)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelImprestRequisitionApprovalRequestCode, ImprestRequisition);
-    end;
-
-
-    procedure RunWorkflowOnSendImprestSurrenderForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendImprestSurrenderForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelImprestSurrenderApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelImprestSurrenderApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendImprestSurrenderForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendImprestSurrenderForApproval(var ImprestSurrender: Record 51516008)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendImprestSurrenderForApprovalCode, ImprestSurrender);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelImprestSurrenderApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelImprestSurrenderApprovalRequest(var ImprestSurrender: Record 51516008)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelImprestSurrenderApprovalRequestCode, ImprestSurrender);
-    end;
-
-
-    procedure RunWorkflowOnSendLeaveApplicationForApprovalCode(): Code[128]
+    //A)Leave Applications
+    procedure RunWorkflowOnSendLeaveApplicationForApprovalCode(): Code[128]//
     begin
         exit(UpperCase('RunWorkflowOnSendLeaveApplicationForApproval'));
     end;
@@ -772,356 +445,294 @@ Codeunit 51516004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelLeaveApplicationApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendLeaveApplicationForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLeaveApplicationForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendLeaveApplicationForApproval(var LeaveApplication: Record 51516183)
+    procedure RunWorkflowOnSendLeaveApplicationForApproval(var LeaveApplication: Record "HR Leave Application")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendLeaveApplicationForApprovalCode, LeaveApplication);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelLeaveApplicationApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLeaveApplicationApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelLeaveApplicationApprovalRequest(var LeaveApplication: Record 51516183)
+    procedure RunWorkflowOnCancelLeaveApplicationApprovalRequest(var LeaveApplication: Record "HR Leave Application")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnCancelLeaveApplicationApprovalRequestCode, LeaveApplication);
     end;
-
-
-    procedure RunWorkflowOnSendPVForApprovalCode(): Code[128]
+    //...................................................................................................
+    //8)Guarantor Substitution
+    procedure RunWorkflowOnSendGuarantorSubForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnSendPVForApproval'));
+        exit(UpperCase('RunWorkflowOnSendGuarantorSubForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelPVApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelGuarantorSubApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelPVApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelGuarantorSubApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendPVForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendGuarantorSubForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendPVForApproval(var PaymentsHeader: Record 51516112)
+    procedure RunWorkflowOnSendGuarantorSubForApproval(var GuarantorSubstitution: Record "Guarantorship Substitution H")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendPVForApprovalCode, PaymentsHeader);
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendGuarantorSubForApprovalCode, GuarantorSubstitution);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPVApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelGuarantorSubApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelPVApprovalRequest(var PaymentsHeader: Record 51516112)
+    procedure RunWorkflowOnCancelGuarantorSubApprovalRequest(var GuarantorSubstitution: Record "Guarantorship Substitution H")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPVApprovalRequestCode, PaymentsHeader);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelGuarantorSubApprovalRequestCode, GuarantorSubstitution);
     end;
-
-
-    procedure RunWorkflowOnSendBulkWithdrawalForApprovalCode(): Code[128]
+    //------------------------------------------------------------------------
+    //8)Payment Voucher
+    procedure RunWorkflowOnSendPaymentVoucherForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnSendBulkWithdrawalForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelBulkWithdrawalApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendBulkWithdrawalForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendBulkWithdrawalForApproval(var BulkWithdrawal: Record 51516902)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendBulkWithdrawalForApprovalCode, BulkWithdrawal);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelBulkWithdrawalApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelBulkWithdrawalApprovalRequest(var BulkWithdrawal: Record 51516902)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode, BulkWithdrawal);
+        exit(UpperCase('RunWorkflowOnSendPaymentVoucherForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendPackageLodgeForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelPaymentVoucherApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendPackageLodgeForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelPaymentVoucherApprovalRequest'));
+    end;
+
+    //---------------------------------------------------------------------------------
+    //9)Payment Voucher
+    procedure RunWorkflowOnSendPettyCashReimbersementForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendPettyCashReimbersementForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelPackageLodgeApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelPettyCashReimbersementApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelPackageLodgeApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelPettyCashReimbersementApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendPackageLodgeForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendPettyCashReimbersementForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendPackageLodgeForApproval(var PackageLodge: Record 51516904)
+    procedure RunWorkflowOnSendPettyCashReimbersementForApproval(var PettyCashReimbersement: Record "Funds Transfer Header")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendPackageLodgeForApprovalCode, PackageLodge);
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendPettyCashReimbersementForApprovalCode, PettyCashReimbersement);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPackageLodgeApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelPettyCashReimbersementApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelPackageLodgeApprovalRequest(var PackageLodge: Record 51516904)
+    procedure RunWorkflowOnCancelPettyCashReimbersementApprovalRequest(var PettyCashReimbersement: Record "Funds Transfer Header")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPackageLodgeApprovalRequestCode, PackageLodge);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPettyCashReimbersementApprovalRequestCode, PettyCashReimbersement);
     end;
-
-
-    procedure RunWorkflowOnSendPackageRetrievalForApprovalCode(): Code[128]
+    //10)FOSA Product Applications
+    procedure RunWorkflowOnSendFOSAProductApplicationForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnSendPackageRetrievalForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelPackageRetrievalApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelPackageRetrievalApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendPackageRetrievalForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendPackageRetrievalForApproval(var PackageRetrieval: Record 51516907)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendPackageRetrievalForApprovalCode, PackageRetrieval);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPackageRetrievalApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelPackageRetrievalApprovalRequest(var PackageRetrieval: Record 51516907)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPackageRetrievalApprovalRequestCode, PackageRetrieval);
+        exit(UpperCase('RunWorkflowOnSendFOSAProductApplicationForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendPurchaseRequisitionForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelFOSAProductApplicationApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendPurchaseRequisitionForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelFOSAProductApplicationApprovalRequest'));
+    end;
+
+    //12)Loan Recovery Applications
+    procedure RunWorkflowOnSendLoanRecoveryApplicationForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendLoanRecoveryApplicationForApproval'));
+    end;
+
+    procedure RunWorkflowOnCancelLoanRecoveryApplicationApprovalRequestCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnCancelLoanRecoveryApplicationApprovalRequest'));
+    end;
+
+    //...................................................................
+    //12.CEEP Change Request
+    procedure RunWorkflowOnSendCEEPChangeRequestForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendCEEPChangeRequestForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelPurchaseRequisitionApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelCEEPChangeRequestApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelPurchaseRequisitionApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelCEEPChangeRequestApprovalRequest'));
     end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendPurchaseRequisitionForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendPurchaseRequisitionForApproval(var PRequest: Record "Purchase Header")
+    //13 Partial Loan Disbursements
+    procedure RunWorkflowOnSendPartialLoanApplicationForApprovalCode(): Code[128]//
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendPurchaseRequisitionForApprovalCode, PRequest);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPurchaseRequisitionApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelPurchaseRequisitionApprovalRequest(var PRequest: Record "Purchase Header")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPurchaseRequisitionApprovalRequestCode, PRequest);
+        exit(UpperCase('RunWorkflowOnSendPartialLoanApplicationForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendHouseChangeForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelPartialLoanApplicationApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendHouseChangeForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelPartialLoanApplicationApprovalRequest'));
+    end;
+
+    //14)Share Transfer
+    procedure RunWorkflowOnSendShareTransApplicationForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendShareTransApplicationForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelHouseChangeApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelShareTransApplicationApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelHouseChangeApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelShareTransApplicationApprovalRequest'));
     end;
+    //...........15)New FOSA Product Accounts Applications
+    // procedure RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode(): Code[128]//
+    // begin
+    //     exit(UpperCase('RunWorkflowOnSendNewFOSAAccountApplicationForApproval'));
+    // end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendHouseChangeForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendHouseChangeForApproval(var HouseChange: Record 51516927)
+    // procedure RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequestCode(): Code[128]
+    // begin
+    //     exit(UpperCase('RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequest'));
+    // end;
+
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendNewFOSAAccountApplicationForApproval', '', false, false)]
+
+    // procedure RunWorkflowOnSendNewFOSAAccountApplicationForApproval(var NewFOSAAccountApplication: Record "Product Applications Details")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode, NewFOSAAccountApplication);
+    // end;
+
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelNewFOSAAccountApplicationApprovalRequest', '', false, false)]
+
+    // procedure RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequest(var NewFOSAAccountApplication: Record "Product Applications Details")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequestCode, NewFOSAAccountApplication);
+    // end;
+    //15)Teller Transactions
+    procedure RunWorkflowOnSendTellerTransactionsForApprovalCode(): Code[128]//
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendHouseChangeForApprovalCode, HouseChange);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelHouseChangeApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelHouseChangeApprovalRequest(var HouseChange: Record 51516927)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelHouseChangeApprovalRequestCode, HouseChange);
-    end;
-
-
-    procedure RunWorkflowOnSendCRMTrainingForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendCRMTrainingForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelCRMTrainingApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelCRMTrainingApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendCRMTrainingForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendCRMTrainingForApproval(var CRMTraining: Record 51516929)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendCRMTrainingForApprovalCode, CRMTraining);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelCRMTrainingApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelCRMTrainingApprovalRequest(var CRMTraining: Record 51516929)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelCRMTrainingApprovalRequestCode, CRMTraining);
+        exit(UpperCase('RunWorkflowOnSendTellerTransactionsForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendPettyCashForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelTellerTransactionsApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendPettyCashForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelTellerTransactionsApprovalRequest'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendTellerTransactionsForApproval', '', false, false)]
+
+    procedure RunWorkflowOnSendTellerTransactionsForApproval(var TellerTransactions: Record Transactions)
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendTellerTransactionsForApprovalCode, TellerTransactions);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelTellerTransactionsApprovalRequest', '', false, false)]
+
+    procedure RunWorkflowOnCancelTellerTransactionsApprovalRequest(var TellerTransactions: Record Transactions)
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelTellerTransactionsApprovalRequestCode, TellerTransactions);
+    end;
+    //...................................................................................................
+    //15)Standing order Transactions
+    procedure RunWorkflowOnSendSTOTransactionsForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendSTOTransactionsForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelPettyCashApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelSTOTransactionsApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelPettyCashApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelSTOTransactionsApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendPettyCashForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendSTOTransactionsForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendPettyCashForApproval(var PettyCash: Record 51516000)
+    procedure RunWorkflowOnSendSTOTransactionsForApproval(var STOTransactions: Record "Standing Orders")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendPettyCashForApprovalCode, PettyCash);
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendSTOTransactionsForApprovalCode, STOTransactions);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPettyCashApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelSTOTransactionsApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelPettyCashApprovalRequest(var PettyCash: Record 51516000)
+    procedure RunWorkflowOnCancelSTOTransactionsApprovalRequest(var STOTransactions: Record "Standing Orders")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPettyCashApprovalRequestCode, PettyCash);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelSTOTransactionsApprovalRequestCode, STOTransactions);
     end;
+    //16)ATM Card Application
+    // procedure RunWorkflowOnSendATMTransactionsForApprovalCode(): Code[128]//
+    // begin
+    //     exit(UpperCase('RunWorkflowOnSendATMTransactionsForApproval'));
+    // end;
 
 
-    procedure RunWorkflowOnSendStaffClaimsForApprovalCode(): Code[128]
+    // procedure RunWorkflowOnCancelATMTransactionsApprovalRequestCode(): Code[128]
+    // begin
+    //     exit(UpperCase('RunWorkflowOnCancelATMTransactionsApprovalRequest'));
+    // end;
+
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendATMTransactionsForApproval', '', false, false)]
+
+    // procedure RunWorkflowOnSendATMTransactionsForApproval(var ATMTransactions: Record "ATM Card Applications")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnSendATMTransactionsForApprovalCode, ATMTransactions);
+    // end;
+
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelATMTransactionsApprovalRequest', '', false, false)]
+
+    // procedure RunWorkflowOnCancelATMTransactionsApprovalRequest(var ATMTransactions: Record "ATM Card Applications")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnCancelATMTransactionsApprovalRequestCode, ATMTransactions);
+    // end;
+    //
+    //15)Sacco Transfers
+    procedure RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode(): Code[128]//
     begin
-        exit(UpperCase('RunWorkflowOnSendStaffClaimsForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelStaffClaimsApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelStaffClaimsApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendStaffClaimsForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendStaffClaimsForApproval(var StaffClaims: Record 51516010)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendStaffClaimsForApprovalCode, StaffClaims);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelPettyCashApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelStaffClaimsApprovalRequest(var StaffClaims: Record 51516010)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelStaffClaimsApprovalRequestCode, StaffClaims);
-    end;
-
-
-    procedure RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendMemberAgentNOKChangeForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendMemberAgentNOKChangeForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendMemberAgentNOKChangeForApproval(var MemberAgentNOKChange: Record 51516940)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode, MemberAgentNOKChange);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelMemberAgentNOKChangeApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequest(var MemberAgentNOKChange: Record 51516940)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode, MemberAgentNOKChange);
+        exit(UpperCase('RunWorkflowOnSendInternalTransfersTransactionsForApproval'));
     end;
 
 
-    procedure RunWorkflowOnSendHouseRegistrationForApprovalCode(): Code[128]
+    procedure RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnSendHouseRegistrationForApproval'));
+        exit(UpperCase('RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequest'));
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendInternalTransfersTransactionsForApproval', '', false, false)]
+
+    procedure RunWorkflowOnSendInternalTransfersTransactionsForApproval(var InternalTransfersTransactions: Record "Sacco Transfers")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode, InternalTransfersTransactions);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelInternalTransfersTransactionsApprovalRequest', '', false, false)]
+
+    procedure RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequest(var InternalTransfersTransactions: Record "Sacco Transfers")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequestCode, InternalTransfersTransactions);
+    end;
+
+    //16)Payment Voucher
+    procedure RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode(): Code[128]//
+    begin
+        exit(UpperCase('RunWorkflowOnSendPaymentVoucherTransactionsForApproval'));
     end;
 
 
-    procedure RunWorkflowOnCancelHouseRegistrationApprovalRequestCode(): Code[128]
+    procedure RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequestCode(): Code[128]
     begin
-        exit(UpperCase('RunWorkflowOnCancelHouseRegistrationApprovalRequest'));
+        exit(UpperCase('RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendHouseRegistrationForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendPaymentVoucherTransactionsForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendHouseRegistrationForApproval(var HouseRegistration: Record 51516942)
+    procedure RunWorkflowOnSendPaymentVoucherTransactionsForApproval(var PaymentVoucherTransactions: Record "Payment Header")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendHouseRegistrationForApprovalCode, HouseRegistration);
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode, PaymentVoucherTransactions);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelHouseRegistrationApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelPaymentVoucherTransactionsApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelHouseRegistrationApprovalRequest(var HouseRegistration: Record 51516942)
+    procedure RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequest(var PaymentVoucherTransactions: Record "Payment Header")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelHouseRegistrationApprovalRequestCode, HouseRegistration);
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequestCode, PaymentVoucherTransactions);
     end;
-
-
-    procedure RunWorkflowOnSendLoanPayOffForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendLoanPayOffForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelLoanPayOffApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelLoanPayOffApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendLoanPayOffForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendLoanPayOffForApproval(var LoanPayOff: Record 51516526)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanPayOffForApprovalCode, LoanPayOff);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelLoanPayOffApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelLoanPayOffApprovalRequest(var LoanPayOff: Record 51516526)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanPayOffApprovalRequestCode, LoanPayOff);
-    end;
-
-
-    procedure RunWorkflowOnSendFixedDepositForApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnSendFixedDepositForApproval'));
-    end;
-
-
-    procedure RunWorkflowOnCancelFixedDepositApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelFixedDepositApprovalRequest'));
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnSendFixedDepositForApproval', '', false, false)]
-
-    procedure RunWorkflowOnSendFixedDepositForApproval(var FixedDeposit: Record 51516945)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendFixedDepositForApprovalCode, FixedDeposit);
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnCancelFixedDepositApprovalRequest', '', false, false)]
-
-    procedure RunWorkflowOnCancelFixedDepositApprovalRequest(var FixedDeposit: Record 51516945)
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelFixedDepositApprovalRequestCode, FixedDeposit);
-    end;
+    //...................................................................................................
 }
-
