@@ -75,7 +75,7 @@ Page 51516202 "HR Trainings Factbox"
 
     var
         Text1: label 'Training Details';
-        Text2: ;
-        Text3: ;
+        // Text2: ;
+        // Text3: ;
 }
 
