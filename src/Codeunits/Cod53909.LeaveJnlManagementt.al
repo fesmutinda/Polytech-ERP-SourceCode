@@ -18,9 +18,9 @@ Codeunit 53909 LeaveJnlManagementt
         OpenFromBatch: Boolean;
 
 
-    procedure TemplateSelection(FormID: Integer; var InsuranceJnlLine: Record 55618; var JnlSelected: Boolean)
+    procedure TemplateSelection(FormID: Integer; var InsuranceJnlLine: Record "HR Journal Line"; var JnlSelected: Boolean)
     var
-        InsuranceJnlTempl: Record 55576;
+        InsuranceJnlTempl: Record "HR Leave Journal Template";
     begin
         JnlSelected := true;
 
@@ -62,10 +62,10 @@ Codeunit 53909 LeaveJnlManagementt
     end;
 
 
-    procedure TemplateSelectionFromBatch(var InsuranceJnlBatch: Record 55577)
+    procedure TemplateSelectionFromBatch(var InsuranceJnlBatch: Record "HR Leave Journal Batch")
     var
-        InsuranceJnlLine: Record 55618;
-        InsuranceJnlTempl: Record 55576;
+        InsuranceJnlLine: Record "HR Journal Line";
+        InsuranceJnlTempl: Record "HR Leave Journal Template";
         JnlSelected: Boolean;
     begin
         OpenFromBatch := true;
@@ -83,7 +83,7 @@ Codeunit 53909 LeaveJnlManagementt
     end;
 
 
-    procedure OpenJournal(var CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record 55618)
+    procedure OpenJournal(var CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record "HR Journal Line")
     begin
         CheckTemplateName(InsuranceJnlLine.GetRangemax("Journal Template Name"), CurrentJnlBatchName);
         InsuranceJnlLine.FilterGroup := 2;
@@ -92,10 +92,10 @@ Codeunit 53909 LeaveJnlManagementt
     end;
 
 
-    procedure OpenJnlBatch(var InsuranceJnlBatch: Record 55577)
+    procedure OpenJnlBatch(var InsuranceJnlBatch: Record "HR Leave Journal Batch")
     var
-        InsuranceJnlTemplate: Record 55576;
-        InsuranceJnlLine: Record 55618;
+        InsuranceJnlTemplate: Record "HR Leave Journal Template";
+        InsuranceJnlLine: Record "HR Journal Line";
         JnlSelected: Boolean;
     begin
         if InsuranceJnlBatch.GetFilter("Journal Template Name") <> '' then
@@ -132,15 +132,15 @@ Codeunit 53909 LeaveJnlManagementt
     end;
 
 
-    procedure CheckName(CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record 55618)
+    procedure CheckName(CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record "HR Journal Line")
     var
-        InsuranceJnlBatch: Record 55577;
+        InsuranceJnlBatch: Record "HR Leave Journal Batch";
     begin
         InsuranceJnlBatch.Get(InsuranceJnlLine.GetRangemax("Journal Template Name"), CurrentJnlBatchName);
     end;
 
 
-    procedure SetName(CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record 55618)
+    procedure SetName(CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record "HR Journal Line")
     begin
         InsuranceJnlLine.FilterGroup := 2;
         InsuranceJnlLine.SetRange("Journal Batch Name", CurrentJnlBatchName);
@@ -149,9 +149,9 @@ Codeunit 53909 LeaveJnlManagementt
     end;
 
 
-    procedure LookupName(var CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record 55618): Boolean
+    procedure LookupName(var CurrentJnlBatchName: Code[10]; var InsuranceJnlLine: Record "HR Journal Line"): Boolean
     var
-        InsuranceJnlBatch: Record 55577;
+        InsuranceJnlBatch: Record "HR Leave Journal Batch";
     begin
         Commit;
 
@@ -169,7 +169,7 @@ Codeunit 53909 LeaveJnlManagementt
 
     procedure CheckTemplateName(CurrentJnlTemplateName: Code[10]; var CurrentJnlBatchName: Code[10])
     var
-        InsuranceJnlBatch: Record 55577;
+        InsuranceJnlBatch: Record "HR Leave Journal Batch";
     begin
         if not InsuranceJnlBatch.Get(CurrentJnlTemplateName, CurrentJnlBatchName) then begin
             InsuranceJnlBatch.SetRange("Journal Template Name", CurrentJnlTemplateName);
@@ -187,10 +187,10 @@ Codeunit 53909 LeaveJnlManagementt
     end;
 
 
-    procedure GetDescriptions(InsuranceJnlLine: Record 55618; var InsuranceDescription: Text[30]; var FADescription: Text[30])
+    procedure GetDescriptions(InsuranceJnlLine: Record "HR Journal Line"; var InsuranceDescription: Text[30]; var FADescription: Text[30])
     var
-        Insurance: Record 55571;
-        FA: Record 55543;
+        Insurance: Record "HR Leave Application";
+        FA: Record "HR Employees";
     begin
         if InsuranceJnlLine."Document No." <> OldInsuranceNo then begin
             InsuranceDescription := '';

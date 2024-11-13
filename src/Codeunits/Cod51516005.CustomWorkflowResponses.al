@@ -701,7 +701,7 @@ Codeunit 51516005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReOpenSaccoTransfer(var SaccoTransfer: Record "Imprest Line")
+    procedure ReOpenSaccoTransfer(var SaccoTransfer: Record "Imprest Lines")
     var
         STransfer: Record "Imprest Line";
     begin

@@ -116,6 +116,11 @@ tableextension 50050 "GenJournalLineExt" extends "Gen. Journal Line"
             OptionCaption = ' ,Acquisition,Self Assessment,Rebate,New Housing Rebates,Pension Rebate';
             OptionMembers = " ",Acquisition,"Self Assessment",Rebate,"New Housing Rebates","Pension Rebate";
         }
+        field(10046; "Recovery Transaction Type"; Option)
+        {
+            OptionMembers = "",Normal,"Guarantor Recoverd","Guarantor Paid";
+        }
+        field(10047; "Recoverd Loan"; code[20]) { }
         field(51516220; "Transaction Type"; enum TransactionTypesEnum)
         {
             trigger OnValidate()

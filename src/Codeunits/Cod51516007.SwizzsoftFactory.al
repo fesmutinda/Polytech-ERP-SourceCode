@@ -1,4 +1,4 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+#pragma warning disable AA0005, AA0008, AL0603, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 51516007 "Swizzsoft Factory."
 {
 
@@ -9,7 +9,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
     var
         ObjTransCharges: Record "Transaction Charges";
-        UserSetup: Record User;
+        UserSetup: Record "User Setup";
         ObjVendor: Record Vendor;
         Date: Date;
         ObjProducts: Record "Account Types-Saving Products";
@@ -82,7 +82,7 @@ Codeunit 51516007 "Swizzsoft Factory."
     procedure FnGetUserBranch() branchCode: Code[20]
     begin
         UserSetup.Reset;
-        UserSetup.SetRange(UserSetup."User Name",UserId);
+        UserSetup.SetRange(UserSetup."User id",UserId);
         if UserSetup.Find('-') then begin
           branchCode:='NAIROBI';
           end;
@@ -290,8 +290,8 @@ Codeunit 51516007 "Swizzsoft Factory."
     procedure FnGetMpesaAccount() TellerTillNo: Code[40]
     begin
         ObjBanks.Reset;
-        ObjBanks.SetRange(ObjBanks."Account Type",ObjBanks."account type"::"3");
-        ObjBanks.SetRange(ObjBanks."Bank Account Branch",FnGetUserBranch());
+        ObjBanks.SetRange(ObjBanks."Account Type",ObjBanks."account type"::Treasury);
+        ObjBanks.SetRange(ObjBanks."Bank Branch No.",FnGetUserBranch());
         if ObjBanks.Find('-') then begin
         TellerTillNo:=ObjBanks."No.";
         end;
@@ -353,9 +353,9 @@ Codeunit 51516007 "Swizzsoft Factory."
     procedure FnGetUserBranchB(varUserId: Code[100]) branchCode: Code[20]
     begin
         UserSetup.Reset;
-        UserSetup.SetRange(UserSetup."User Name",varUserId);
+        UserSetup.SetRange(UserSetup."User id",varUserId);
         if UserSetup.Find('-') then begin
-          branchCode:=UserSetup."Branch Code";
+          branchCode:=UserSetup."Branch";
           end;
           exit(branchCode);
     end;
@@ -1905,7 +1905,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         //------------------------------------1. DEBIT MEMBER LOAN A/C---------------------------------------------------------------------------------------------
         LineNo:=LineNumber;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::Loan,
-        GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",AmountToDisburse,Format(LoanApps.Source),LoanApps."Loan  No.",
+GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan Disbursement Date",AmountToDisburse,Format(LoanApps.Source),LoanApps."Loan  No.",
         'Loan principle- '+LoanApps."Loan Product Type"+'-'+LoanApps."Loan  No.",LoanApps."Loan  No.");
         //--------------------------------(Debit Member Loan Account)---------------------------------------------
         
@@ -1915,7 +1915,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         
         LineNo:=LineNo+1000;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Due",
-        GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount",Format(LoanApps.Source),LoanApps."Loan  No.",
+        GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount",Format(LoanApps.Source),LoanApps."Loan  No.",
         'Interest Due',LoanApps."Loan  No.");
         
         LineNo:=LineNo+1000;
@@ -1925,7 +1925,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         
         LineNo:=LineNo+1000;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Paid",
-        GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount"*-1,Format(LoanApps.Source),LoanApps."Loan  No.",
+        GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount"*-1,Format(LoanApps.Source),LoanApps."Loan  No.",
         'Interest Paid',LoanApps."Loan  No.");
         end;
         
@@ -2005,12 +2005,12 @@ Codeunit 51516007 "Swizzsoft Factory."
             //------------------------------------Principal---------------------
                  LineNo:=LineNo+1000;
                  FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Loan Repayment",
-                 GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Principle Top Up"* -1,'BOSA',LoanTopUp."Loan Top Up",
+                 GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Principle Top Up"* -1,'BOSA',LoanTopUp."Loan Top Up",
                  'Off Set By - '+LoanApps."Client Code"+'-'+LoanApps."Loan Product Type"+'-'+LoanApps."Loan  No.",LoanTopUp."Loan Top Up");
             //------------------------------------Outstanding Interest----------
                  LineNo:=LineNo+1000;
                  FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Paid",
-                 GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Interest Top Up"*-1,'BOSA',LoanTopUp."Loan Top Up",
+                 GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Interest Top Up"*-1,'BOSA',LoanTopUp."Loan Top Up",
                  'Interest Paid-'+'-'+LoanApps."Loan Product Type"+'-'+LoanApps."Loan  No.",LoanTopUp."Loan Top Up");
             //-------------------------------------Levy--------------------------
                 LineNo:=LineNo+1000;
@@ -2061,7 +2061,7 @@ Codeunit 51516007 "Swizzsoft Factory."
             LoanApps."Booster Loan No":=BLoan;
           end;
          // FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."Transaction Type"::"Deposit Contribution",
-          //GenJournalLine."Account Type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount",'BOSA',BLoan,
+          //GenJournalLine."Account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount",'BOSA',BLoan,
           //'Deposits Booster for '+LoanApps."Loan  No.",BLoan);
         
           //----------------------debit FOSA a/c-----------------------------------------------------
@@ -2074,7 +2074,7 @@ Codeunit 51516007 "Swizzsoft Factory."
           //------------------------------Boost Deposits-----------------------------------------------
           LineNo:=LineNo+1000;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Deposit Contribution",
-          GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"* -1,'BOSA',BLoan,
+          GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"* -1,'BOSA',BLoan,
           'Deposits Booster Loan',BLoan);
         
           //--------------------------------------RECOVER-----------------------------------------------
@@ -2116,7 +2116,7 @@ Codeunit 51516007 "Swizzsoft Factory."
          //---------------------------------------PAY-----------------------------------------------
           LineNo:=LineNo+1000;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."Transaction Type"::"Loan Repayment",
-          GenJournalLine."Account Type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"*-1,'BOSA',BLoan,
+          GenJournalLine."Account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"*-1,'BOSA',BLoan,
           'Deposits Booster Repayment-'+LoanApps."Client Code"+LoanApps."Loan Product Type",BLoan);
           //--------------------------------------RECOVER-----------------------------------------------
           LineNo:=LineNo+1000;
@@ -2130,7 +2130,7 @@ Codeunit 51516007 "Swizzsoft Factory."
          //---------------------------------------PAY-----------------------------------------------
           LineNo:=LineNo+1000;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."Transaction Type"::"Interest Paid",
-          GenJournalLine."Account Type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount Interest"*-1,'BOSA',BLoan,
+          GenJournalLine."Account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount Interest"*-1,'BOSA',BLoan,
           'Deposits Booster Int - '+LoanApps."Client Code"+LoanApps."Loan Product Type",BLoan);
           //--------------------------------------RECOVER-----------------------------------------------
           LineNo:=LineNo+1000;
@@ -2232,7 +2232,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         //------------------------------------1. DEBIT MEMBER LOAN A/C---------------------------------------------------------------------------------------------
         LineNo:=LineNumber;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::Loan,
-        GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",RunningBalance,Format(LoanApps.Source),LoanApps."Cheque No.",
+        GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",RunningBalance,Format(LoanApps.Source),LoanApps."Cheque No.",
         'Loan principle- '+LoanApps."Loan Product Type"+'-'+LoanApps."Loan  No.",LoanApps."Loan  No.");
         //--------------------------------(Debit Member Loan Account)------------------------------------------------------------
         //-----------------------------------1B. ACCRUE INTEREST IF Constant-----------------------------------------------------
@@ -2240,7 +2240,7 @@ Codeunit 51516007 "Swizzsoft Factory."
         begin
         LineNo:=LineNo+1000;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Due",
-        GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount",Format(LoanApps.Source),LoanApps."Cheque No.",
+        GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount",Format(LoanApps.Source),LoanApps."Cheque No.",
         'Interest Due',LoanApps."Loan  No.");
         LineNo:=LineNo+1000;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::" ",
@@ -2249,7 +2249,7 @@ Codeunit 51516007 "Swizzsoft Factory."
 
         LineNo:=LineNo+1000;
         FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Paid",
-        GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount"*-1,Format(LoanApps.Source),LoanApps."Cheque No.",
+        GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Interest Upfront Amount"*-1,Format(LoanApps.Source),LoanApps."Cheque No.",
         'Interest Paid',LoanApps."Loan  No.");
         RunningBalance:=RunningBalance - LoanApps."Interest Due";
         end;
@@ -2302,12 +2302,12 @@ Codeunit 51516007 "Swizzsoft Factory."
             //------------------------------------Principal---------------------
                  LineNo:=LineNo+1000;
                  FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Loan Repayment",
-                 GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Principle Top Up"* -1,'BOSA',LoanApps."Loan  No.",
+                 GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Principle Top Up"* -1,'BOSA',LoanApps."Loan  No.",
                  'Off Set By - '+LoanApps."Loan  No.",LoanTopUp."Loan Top Up");
             //------------------------------------Outstanding Interest----------
                  LineNo:=LineNo+1000;
                  FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Paid",
-                 GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Interest Top Up"*-1,'BOSA',LoanApps."Loan  No.",
+                 GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanTopUp."Interest Top Up"*-1,'BOSA',LoanApps."Loan  No.",
                  'Interest Paid-'+'-'+LoanApps."Loan  No.",LoanTopUp."Loan Top Up");
             //-------------------------------------Levy--------------------------
                 LineNo:=LineNo+1000;
@@ -2341,13 +2341,13 @@ Codeunit 51516007 "Swizzsoft Factory."
             LoanApps."Booster Loan No":=BLoan;
           end;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::Loan,
-          GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount",'BOSA',LoanApps."Loan  No.",
+          GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount",'BOSA',LoanApps."Loan  No.",
           'Deposits Booster for '+LoanApps."Loan  No.",BLoan);
 
           //------------------------------Boost Deposits-----------------------------------------------
           LineNo:=LineNo+1000;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Deposit Contribution",
-          GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"* -1,'BOSA',LoanApps."Loan  No.",
+          GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"* -1,'BOSA',LoanApps."Loan  No.",
           'Deposits Booster Loan',BLoan);
         end;
 
@@ -2369,7 +2369,7 @@ Codeunit 51516007 "Swizzsoft Factory."
          //---------------------------------------PAY-----------------------------------------------
           LineNo:=LineNo+1000;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Loan Repayment",
-          GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"*-1,'BOSA',LoanApps."Loan  No.",
+          GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount"*-1,'BOSA',LoanApps."Loan  No.",
           'Deposits Booster Repayment-'+LoanApps."Client Code"+LoanApps."Loan Product Type",BLoan);
           //--------------------------------------RECOVER-----------------------------------------------
           RunningBalance:=RunningBalance - LoanApps."Boosted Amount";
@@ -2381,7 +2381,7 @@ Codeunit 51516007 "Swizzsoft Factory."
          //---------------------------------------PAY-----------------------------------------------
           LineNo:=LineNo+1000;
           FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."transaction type"::"Interest Paid",
-          GenJournalLine."account type"::Member,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount Interest"*-1,'BOSA',LoanApps."Loan  No.",
+          GenJournalLine."account type"::Customer,LoanApps."Client Code",LoanApps."Loan Disbursement Date",LoanApps."Boosted Amount Interest"*-1,'BOSA',LoanApps."Loan  No.",
           'Deposits Booster Int - '+LoanApps."Loan Product Type",BLoan);
           //--------------------------------------RECOVER-----------------------------------------------
           RunningBalance:=RunningBalance - LoanApps."Boosted Amount Interest";
