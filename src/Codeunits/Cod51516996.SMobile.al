@@ -22,17 +22,17 @@ Codeunit 51516996 "S-Mobile"
         GLAccount: Code[20];
         Reversals: Record 51516519;
         iEntryNo: Integer;
-        Sms: Record 51516471;
-        Gensetup: Record 51516398;
+        Sms: Record "SMS Messages";
+        Gensetup: Record "Sacco General Set-Up";
         Setup: Record "SwizzKash Transactions";
-        Charges: Record 51516523;
-        Tarrifs: Record 51516535;
-        Cust: Record 51516364;
-        Loans: Record 51516371;
-        STO: Record 51516449;
-        Loantype: Record 51516381;
+        Charges: Record "S-Mobile Charges";
+        Tarrifs: Record "S-Mobile Tarrifs";
+        Cust: Record "Member Register";
+        Loans: Record "Loans Register";
+        STO: Record "Standing Orders";
+        Loantype: Record "Loan Products Setup";
         Reversed: Boolean;
-        Accounttype: Record 51516436;
+        Accounttype: Record "Account Types-Saving Products";
         AmountPaid: Decimal;
         Totalcharges: Decimal;
         productcharges: Record 51516383;
@@ -127,10 +127,10 @@ Codeunit 51516996 "S-Mobile"
         if Vendor.Get(Account) then begin
             if (Vendor."Salary Processing" = false) then
                 Error('16');
-            Setup.Reset;
-            Setup.Get(1);
-            Setup.TestField(Setup."E-Loan");
-            Loantype.Get(Setup."E-Loan");
+            // Setup.Reset;
+            // Setup.Get(1);
+            // Setup.TestField(Setup."E-Loan");
+            // Loantype.Get(Setup."E-Loan");
             //*****Get Member Default Status
             Loans.Reset;
             Loans.SetRange(Loans."BOSA No", Vendor."BOSA Account No");
@@ -205,11 +205,11 @@ Codeunit 51516996 "S-Mobile"
 
             //***IF Member Meets the Above Parameters the Check for Qualification Amount
 
-            EQualificationAmount := AvarageNetPay * (Setup."E-Loan Qualification (%)" / 100);
-            Vendor."E-Loan Qualification Amount" := EQualificationAmount;
+            // EQualificationAmount := AvarageNetPay * (Setup."E-Loan Qualification (%)" / 100);
+            // Vendor."E-Loan Qualification Amount" := EQualificationAmount;
 
-            if EQualificationAmount > Loantype."Max. Loan Amount" then
-                EQualificationAmount := Loantype."Max. Loan Amount";
+            // if EQualificationAmount > Loantype."Max. Loan Amount" then
+            //     EQualificationAmount := Loantype."Max. Loan Amount";
 
 
             Vendor.Modify;
@@ -245,9 +245,9 @@ Codeunit 51516996 "S-Mobile"
         if SmobileTrans.FindFirst then begin
             repeat
                 Setup.Get(1);
-                Setup.TestField(Setup."Settlement Account");
-                Setup.TestField(Setup."Commission Account");
-                SmobileCharges := 0;
+                // Setup.TestField(Setup."Settlement Account");
+                // Setup.TestField(Setup."Commission Account");
+                // SmobileCharges := 0;
                 BankCharges := 0;
                 ExciseFee := 0;
                 Reversed := false;
@@ -336,7 +336,7 @@ Codeunit 51516996 "S-Mobile"
                                 GenJournalLine."Journal Batch Name" := 'SMOBILE';
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                GenJournalLine."Account No." := Setup."Settlement Account";
+                                // GenJournalLine."Account No." := Setup."Settlement Account";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := SmobileTrans."Document No";
                                 GenJournalLine."External Document No." := SmobileTrans."Account No";
@@ -431,7 +431,7 @@ Codeunit 51516996 "S-Mobile"
                                 GenJournalLine."Journal Batch Name" := 'SMOBILE';
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                GenJournalLine."Account No." := Setup."Settlement Account";
+                                // GenJournalLine."Account No." := Setup."Settlement Account";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := SmobileTrans."Document No";
                                 GenJournalLine."External Document No." := SmobileTrans."Account No";
@@ -454,9 +454,9 @@ Codeunit 51516996 "S-Mobile"
                                     SmobileTrans.Modify;
                                     exit;
                                 end;
-                                Setup.TestField(Setup."E-Loan");
-                                Loantype.Get(Setup."E-Loan");
-                                //MESSAGE(Loantype.Code);
+                                // Setup.TestField(Setup."E-Loan");
+                                // Loantype.Get(Setup."E-Loan");
+                                // //MESSAGE(Loantype.Code);
                                 Loans.Reset;
                                 Loans.Init;
                                 Loans."Loan  No." := '';
@@ -567,7 +567,7 @@ Codeunit 51516996 "S-Mobile"
                                         GenJournalLine."Journal Batch Name" := 'SMOBILE';
                                         GenJournalLine."Line No." := LineNo;
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                        GenJournalLine."Account No." := Setup."Settlement Account";
+                                        // GenJournalLine."Account No." := Setup."Settlement Account";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Document No." := SmobileTrans."Document No";
                                         GenJournalLine."Posting Date" := SmobileTrans."Document Date";
@@ -637,7 +637,7 @@ Codeunit 51516996 "S-Mobile"
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'SMOBILE';
                                 GenJournalLine."Line No." := LineNo;
-                                GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                 GenJournalLine."Account No." := Vendor."BOSA Account No";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := SmobileTrans."Document No";
@@ -658,7 +658,7 @@ Codeunit 51516996 "S-Mobile"
                                 GenJournalLine."Journal Batch Name" := 'SMOBILE';
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                GenJournalLine."Account No." := Setup."Settlement Account";
+                                // GenJournalLine."Account No." := Setup."Settlement Account";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := SmobileTrans."Document No";
                                 GenJournalLine."External Document No." := SmobileTrans."Account No";
@@ -686,9 +686,9 @@ Codeunit 51516996 "S-Mobile"
                     GenJournalLine."Document No." := SmobileTrans."Document No";
                     GenJournalLine."Posting Date" := SmobileTrans."Document Date";
                     GenJournalLine.Description := SmobileTrans.Description + ' Charges';
-                    if Setup."Show excise on statement" then
-                        GenJournalLine.Amount := SmobileCharges + SmobileTrans.Charge
-                    else
+                    // if Setup."Show excise on statement" then
+                    //     GenJournalLine.Amount := SmobileCharges + SmobileTrans.Charge
+                    // else
                         GenJournalLine.Amount := SmobileCharges + SmobileTrans.Charge + ExciseFee;
 
                     GenJournalLine.Validate(GenJournalLine.Amount);
@@ -701,7 +701,7 @@ Codeunit 51516996 "S-Mobile"
                     GenJournalLine."Journal Batch Name" := 'SMOBILE';
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
-                    GenJournalLine."Account No." := Setup."Commission Account";
+                    // GenJournalLine."Account No." := Setup."Commission Account";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No." := SmobileTrans."Document No";
                     GenJournalLine."Posting Date" := SmobileTrans."Document Date";
@@ -718,7 +718,7 @@ Codeunit 51516996 "S-Mobile"
                     GenJournalLine."Journal Batch Name" := 'SMOBILE';
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                    GenJournalLine."Account No." := Setup."Settlement Account";
+                    // GenJournalLine."Account No." := Setup."Settlement Account";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No." := SmobileTrans."Document No";
                     GenJournalLine."Posting Date" := SmobileTrans."Document Date";
@@ -737,16 +737,16 @@ Codeunit 51516996 "S-Mobile"
                     GenJournalLine."Journal Batch Name" := 'SMOBILE';
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
-                    GenJournalLine."Account No." := Setup."Excise Duty Account";
+                    // GenJournalLine."Account No." := Setup."Excise Duty Account";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine."Document No." := SmobileTrans."Document No";
                     GenJournalLine."Posting Date" := SmobileTrans."Document Date";
                     GenJournalLine.Description := SmobileTrans.Description + ' ' + ' Excise Duty Charges';
                     GenJournalLine.Amount := ExciseFee * -1;
-                    if Setup."Show excise on statement" then begin
-                        GenJournalLine."Bal. Account No." := SmobileTrans."Account No";
-                        GenJournalLine."Bal. Account Type" := GenJournalLine."account type"::Vendor;
-                    end;
+                    // if Setup."Show excise on statement" then begin
+                    //     GenJournalLine."Bal. Account No." := SmobileTrans."Account No";
+                    //     GenJournalLine."Bal. Account Type" := GenJournalLine."account type"::Vendor;
+                    // end;
                     GenJournalLine.Validate(GenJournalLine.Amount);
                     if GenJournalLine.Amount <> 0 then
                         GenJournalLine.Insert;
@@ -802,9 +802,9 @@ Codeunit 51516996 "S-Mobile"
                 exit;
             end;
             Setup.Reset;
-            Setup.Get(1);
-            Setup.TestField(Setup."E-Loan");
-            Loantype.Get(Setup."E-Loan");
+            // Setup.Get(1);
+            // Setup.TestField(Setup."E-Loan");
+            // Loantype.Get(Setup."E-Loan");
             //*****Get Member Default Status
             Loans.Reset;
             Loans.SetRange(Loans."BOSA No", Vendor."BOSA Account No");
@@ -885,7 +885,7 @@ Codeunit 51516996 "S-Mobile"
 
             //***IF Member Meets the Above Parameters the Check for Qualification Amount
 
-            EQualificationAmount := AvarageNetPay * (Setup."E-Loan Qualification (%)" / 100);
+            // EQualificationAmount := AvarageNetPay * (Setup."E-Loan Qualification (%)" / 100);
             Vendor."E-Loan Qualification Amount" := EQualificationAmount;
 
             if EQualificationAmount > Loantype."Max. Loan Amount" then

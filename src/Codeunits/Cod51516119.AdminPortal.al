@@ -315,7 +315,7 @@ Codeunit 51516119 AdminPortal
         Path: DotNet Path;
         _File: DotNet File;
         FileAccess: DotNet FileAccess;
-        FileMode: dotnet FileMode;
+        FileMode: dotnet __MissingTypeSymbol__;
         MemoryStream: dotnet MemoryStream;
         FileStream: dotnet FileStream;
         Outputstream: OutStream;

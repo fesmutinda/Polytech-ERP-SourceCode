@@ -1,67 +1,70 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Page 51516202 "HR Trainings Factbox"
+Page 51516372 "Member Account Signatory Card"
 {
-    PageType = CardPart;
-    SourceTable = "HR Training Applications";
+    PageType = Card;
+    SourceTable = "Member Account Signatories";
 
     layout
     {
         area(content)
         {
-            group(Control1102755018)
+            group(General)
             {
-                label(Control1102755019)
-                {
-                    ApplicationArea = Basic;
-                    CaptionClass = Text1;
-                    Style = StrongAccent;
-                    StyleExpr = true;
-                }
-                field("Application No"; Rec."Application No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; Rec."Application Date")
+                field(Names; Rec.Names)
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Course Title"; Rec."Course Title")
+                field("Staff/Payroll"; Rec."Staff/Payroll")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Location; Rec.Location)
+                field("ID No."; Rec."ID No.")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field(Designation; Rec.Designation)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Provider Name"; Rec."Provider Name")
+                field(Signatory; Rec.Signatory)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Rec.Description)
+                field("Must Sign"; Rec."Must Sign")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Date"; Rec."From Date")
+                field("Must be Present"; Rec."Must be Present")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Date"; Rec."To Date")
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Duration Units"; Rec."Duration Units")
+                field(Signature; Rec.Signature)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Rec.Duration)
+                field("Expiry Date"; Rec."Expiry Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cost Of Training"; Rec."Cost Of Training")
+                field("BOSA No."; Rec."BOSA No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Rec.Status)
+                field("Email Address"; Rec."Email Address")
                 {
                     ApplicationArea = Basic;
                 }
@@ -72,10 +75,5 @@ Page 51516202 "HR Trainings Factbox"
     actions
     {
     }
-
-    var
-        Text1: label 'Training Details';
-        // Text2: ;
-        // Text3: ;
 }
 

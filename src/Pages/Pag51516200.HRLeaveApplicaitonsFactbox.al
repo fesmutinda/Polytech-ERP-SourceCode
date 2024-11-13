@@ -72,12 +72,12 @@ Page 51516200 "HR Leave Applicaitons Factbox"
             {
                 ApplicationArea = Basic;
             }
-            field(Missing; Rec.Missing)
-            {
-                ApplicationArea = Basic;
-                Style = Favorable;
-                StyleExpr = true;
-            }
+            // field(Missing; Rec.Missing)
+            // {
+            //     ApplicationArea = Basic;
+            //     Style = Favorable;
+            //     StyleExpr = true;
+            // }
             field("Compassionate Leave Acc."; Rec."Compassionate Leave Acc.")
             {
                 ApplicationArea = Basic;
@@ -108,6 +108,6 @@ Page 51516200 "HR Leave Applicaitons Factbox"
     var
         Text1: label 'Employee Details';
         Text2: label 'Employeee Leave Details';
-        Text3: ;
+    // Text3: ;
 }
 
