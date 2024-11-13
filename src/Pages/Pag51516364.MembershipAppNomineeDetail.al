@@ -2,7 +2,7 @@
 Page 51516364 "Membership App Nominee Detail"
 {
     PageType = List;
-    SourceTable = 51516361;
+    SourceTable = "Member App Nominee";
 
     layout
     {
@@ -10,51 +10,51 @@ Page 51516364 "Membership App Nominee Detail"
         {
             repeater(Group)
             {
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field(Relationship; Relationship)
+                field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     ShowMandatory = true;
                 }
-                field("Next Of Kin Type"; "Next Of Kin Type")
+                field("Next Of Kin Type"; Rec."Next Of Kin Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Age; Age)
+                field(Age; Rec.Age)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Email; Email)
+                field(Email; Rec.Email)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("%Allocation"; "%Allocation")
+                field("%Allocation"; Rec."%Allocation")
                 {
                     ApplicationArea = Basic;
                 }
@@ -70,14 +70,14 @@ Page 51516364 "Membership App Nominee Detail"
     begin
 
         MemberApp.Reset;
-        MemberApp.SetRange(MemberApp."No.", "Account No");
+        MemberApp.SetRange(MemberApp."No.", Rec."Account No");
         if MemberApp.Find('-') then begin
             if MemberApp.Status = MemberApp.Status::Approved then begin                        //MESSAGE(FORMAT(MemberApp.Status));
                 CurrPage.Editable := false;
             end else
                 CurrPage.Editable := true;
         end;
-        "Maximun Allocation %" := 100;
+        Rec."Maximun Allocation %" := 100;
     end;
 
     var

@@ -4,7 +4,7 @@ Page 51516324 "Payroll Employee Assignments."
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = Card;
-    SourceTable = 51516317;
+    SourceTable = "Payroll Employee.";
 
     layout
     {
@@ -12,79 +12,79 @@ Page 51516324 "Payroll Employee Assignments."
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Surname; Surname)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Firstname; Firstname)
+                field(Surname; Rec.Surname)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Lastname; Lastname)
+                field(Firstname; Rec.Firstname)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Pays PAYE"; "Pays PAYE")
+                field(Lastname; Rec.Lastname)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Pays PAYE"; Rec."Pays PAYE")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays NSSF"; "Pays NSSF")
+                field("Pays NSSF"; Rec."Pays NSSF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays NHIF"; "Pays NHIF")
+                field("Pays NHIF"; Rec."Pays NHIF")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Secondary; Secondary)
+                field(Secondary; Rec.Secondary)
                 {
                     ApplicationArea = Basic;
                 }
             }
             group(Numbers)
             {
-                field("National ID No"; "National ID No")
+                field("National ID No"; Rec."National ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("PIN No"; "PIN No")
+                field("PIN No"; Rec."PIN No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NHIF No"; "NHIF No")
+                field("NHIF No"; Rec."NHIF No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NSSF No"; "NSSF No")
+                field("NSSF No"; Rec."NSSF No")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("PAYE Relief and Benefit")
             {
-                field(GetsPayeRelief; GetsPayeRelief)
+                field(GetsPayeRelief; Rec.GetsPayeRelief)
                 {
                     ApplicationArea = Basic;
                 }
-                field(GetsPayeBenefit; GetsPayeBenefit)
+                field(GetsPayeBenefit; Rec.GetsPayeBenefit)
                 {
                     ApplicationArea = Basic;
                 }
-                field(PayeBenefitPercent; PayeBenefitPercent)
+                field(PayeBenefitPercent; Rec.PayeBenefitPercent)
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Employee Company")
             {
-                field(Company; Company)
+                field(Company; Rec.Company)
                 {
                     ApplicationArea = Basic;
                 }

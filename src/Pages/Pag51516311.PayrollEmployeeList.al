@@ -5,7 +5,7 @@ Page 51516311 "Payroll Employee List."
     DeleteAllowed = true;
     InsertAllowed = true;
     PageType = List;
-    SourceTable = 51516317;
+    SourceTable = "Payroll Employee.";
 
     layout
     {
@@ -13,57 +13,57 @@ Page 51516311 "Payroll Employee List."
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Staff  No.';
                 }
-                field("Payroll No"; "Payroll No")
+                field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Sacco Membership No.';
                 }
-                field(Surname; Surname)
+                field(Surname; Rec.Surname)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Firstname; Firstname)
+                field(Firstname; Rec.Firstname)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Lastname; Lastname)
+                field(Lastname; Rec.Lastname)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Basic Pay"; "Basic Pay")
+                field("Basic Pay"; Rec."Basic Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Joining Date"; "Joining Date")
+                field("Joining Date"; Rec."Joining Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Group"; "Job Group")
+                field("Job Group"; Rec."Job Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Category; Category)
+                field(Category; Rec.Category)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Group"; "Posting Group")
+                field("Posting Group"; Rec."Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays PAYE"; "Pays PAYE")
+                field("Pays PAYE"; Rec."Pays PAYE")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No"; "Bank Account No")
+                field("Bank Account No"; Rec."Bank Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Email"; "Employee Email")
+                field("Employee Email"; Rec."Employee Email")
                 {
                     ApplicationArea = Basic;
                 }

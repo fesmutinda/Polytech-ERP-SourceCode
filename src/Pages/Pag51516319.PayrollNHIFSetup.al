@@ -2,7 +2,7 @@
 Page 51516319 "Payroll NHIF Setup."
 {
     PageType = List;
-    SourceTable = 51516329;
+    SourceTable = "Payroll NHIF Setup.";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516319 "Payroll NHIF Setup."
         {
             repeater(Group)
             {
-                field("Tier Code"; "Tier Code")
+                field("Tier Code"; Rec."Tier Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NHIF Tier"; "NHIF Tier")
+                field("NHIF Tier"; Rec."NHIF Tier")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lower Limit"; "Lower Limit")
+                field("Lower Limit"; Rec."Lower Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Upper Limit"; "Upper Limit")
+                field("Upper Limit"; Rec."Upper Limit")
                 {
                     ApplicationArea = Basic;
                 }

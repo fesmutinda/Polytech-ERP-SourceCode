@@ -2,7 +2,7 @@
 Page 51516315 "Payroll Earnings Card."
 {
     PageType = Card;
-    SourceTable = 51516318;
+    SourceTable = "Payroll Transaction Code.";
     SourceTableView = where("Transaction Type" = const(Income));
 
     layout
@@ -11,117 +11,117 @@ Page 51516315 "Payroll Earnings Card."
         {
             group(General)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance Type"; "Balance Type")
+                field("Balance Type"; Rec."Balance Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Frequency; Frequency)
+                field(Frequency; Rec.Frequency)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Taxable; Taxable)
+                field(Taxable; Rec.Taxable)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Cash"; "Is Cash")
+                field("Is Cash"; Rec."Is Cash")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Formulae"; "Is Formulae")
+                field("Is Formulae"; Rec."Is Formulae")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Formulae; Formulae)
+                field(Formulae; Rec.Formulae)
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account Name"; "G/L Account Name")
+                field("G/L Account Name"; Rec."G/L Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(SubLedger; SubLedger)
+                field(SubLedger; Rec.SubLedger)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer Posting Group"; "Customer Posting Group")
+                field("Customer Posting Group"; Rec."Customer Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Loan Details")
             {
-                field("Deduct Premium"; "Deduct Premium")
+                field("Deduct Premium"; Rec."Deduct Premium")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Method"; "Repayment Method")
+                field("Repayment Method"; Rec."Repayment Method")
                 {
                     ApplicationArea = Basic;
                 }
-                field("IsCo-Op/LnRep"; "IsCo-Op/LnRep")
+                field("IsCo-Op/LnRep"; Rec."IsCo-Op/LnRep")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deduct Mortgage"; "Deduct Mortgage")
+                field("Deduct Mortgage"; Rec."Deduct Mortgage")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Other Setup")
             {
-                field("Special Transaction"; "Special Transaction")
+                field("Special Transaction"; Rec."Special Transaction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Preference"; "Amount Preference")
+                field("Amount Preference"; Rec."Amount Preference")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fringe Benefit"; "Fringe Benefit")
+                field("Fringe Benefit"; Rec."Fringe Benefit")
                 {
                     ApplicationArea = Basic;
                 }
-                field(IsHouseAllowance; IsHouseAllowance)
+                field(IsHouseAllowance; Rec.IsHouseAllowance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Deduction"; "Employer Deduction")
+                field("Employer Deduction"; Rec."Employer Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Include Employer Deduction"; "Include Employer Deduction")
+                field("Include Employer Deduction"; Rec."Include Employer Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Formulae for Employer"; "Formulae for Employer")
+                field("Formulae for Employer"; Rec."Formulae for Employer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Co-Op Parameters"; "Co-Op Parameters")
+                field("Co-Op Parameters"; Rec."Co-Op Parameters")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Welfare; Welfare)
+                field(Welfare; Rec.Welfare)
                 {
                     ApplicationArea = Basic;
                 }
@@ -135,7 +135,7 @@ Page 51516315 "Payroll Earnings Card."
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Transaction Type" := "transaction type"::Income;
+        Rec."Transaction Type" := Rec."transaction type"::Income;
     end;
 }
 

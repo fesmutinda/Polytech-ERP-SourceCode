@@ -2,7 +2,7 @@
 Page 51516322 "Payroll General Setup."
 {
     PageType = Card;
-    SourceTable = 51516334;
+    SourceTable = "Payroll General Setup.";
 
     layout
     {
@@ -10,63 +10,63 @@ Page 51516322 "Payroll General Setup."
         {
             group(Relief)
             {
-                field("Tax Relief"; "Tax Relief")
+                field("Tax Relief"; Rec."Tax Relief")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Relief"; "Insurance Relief")
+                field("Insurance Relief"; Rec."Insurance Relief")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Relief"; "Max Relief")
+                field("Max Relief"; Rec."Max Relief")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mortgage Relief"; "Mortgage Relief")
+                field("Mortgage Relief"; Rec."Mortgage Relief")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group(NHIF)
             {
-                field("NHIF Based on"; "NHIF Based on")
+                field("NHIF Based on"; Rec."NHIF Based on")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group(NSSF)
             {
-                field("NSSF Employee"; "NSSF Employee")
+                field("NSSF Employee"; Rec."NSSF Employee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NSSF Employer Factor"; "NSSF Employer Factor")
+                field("NSSF Employer Factor"; Rec."NSSF Employer Factor")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NSSF Based on"; "NSSF Based on")
+                field("NSSF Based on"; Rec."NSSF Based on")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group(Pension)
             {
-                field("Max Pension Contribution"; "Max Pension Contribution")
+                field("Max Pension Contribution"; Rec."Max Pension Contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Tax On Excess Pension"; "Tax On Excess Pension")
+                field("Tax On Excess Pension"; Rec."Tax On Excess Pension")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Staff Loan")
             {
-                field("Loan Market Rate"; "Loan Market Rate")
+                field("Loan Market Rate"; Rec."Loan Market Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Corporate Rate"; "Loan Corporate Rate")
+                field("Loan Corporate Rate"; Rec."Loan Corporate Rate")
                 {
                     ApplicationArea = Basic;
                 }
@@ -76,11 +76,11 @@ Page 51516322 "Payroll General Setup."
             }
             group("Owner Occupier Interest")
             {
-                field("OOI Deduction"; "OOI Deduction")
+                field("OOI Deduction"; Rec."OOI Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("OOI December"; "OOI December")
+                field("OOI December"; Rec."OOI December")
                 {
                     ApplicationArea = Basic;
                 }

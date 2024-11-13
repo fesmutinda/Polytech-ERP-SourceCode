@@ -4,7 +4,7 @@ Page 51516326 "Payroll Periods."
     DeleteAllowed = false;
     Editable = false;
     PageType = Card;
-    SourceTable = 51516322;
+    SourceTable = "Payroll Calender.";
 
     layout
     {
@@ -12,37 +12,37 @@ Page 51516326 "Payroll Periods."
         {
             repeater(Control1102755000)
             {
-                field("Period Month"; "Period Month")
+                field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Period Year"; "Period Year")
+                field("Period Year"; Rec."Period Year")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Period Name"; "Period Name")
+                field("Period Name"; Rec."Period Name")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Date Opened"; "Date Opened")
+                field("Date Opened"; Rec."Date Opened")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Date Closed"; "Date Closed")
+                field("Date Closed"; Rec."Date Closed")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Payroll Code"; "Payroll Code")
+                field("Payroll Code"; Rec."Payroll Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -117,21 +117,21 @@ Page 51516326 "Payroll Periods."
     }
 
     var
-        PayPeriod: Record 51516322;
+        PayPeriod: Record "Payroll Calender.";
         strPeriodName: Text[30];
         Text000: label '''Leave without saving changes?''';
         Text001: label '''You selected %1.''';
         Question: Text[250];
         Answer: Boolean;
-        objOcx: Codeunit UnknownCodeunit51516015;
+        objOcx: Codeunit "Payroll Processing";
         dtOpenPeriod: Date;
-        PayrollType: Record 51516312;
+        PayrollType: Record "Payroll Type.";
         Selection: Integer;
         PayrollDefined: Text[30];
         PayrollCode: Code[10];
         NoofRecords: Integer;
         i: Integer;
-        ContrInfo: Record 51516313;
+        ContrInfo: Record "Control-Information.";
 
 
     procedure fnGetOpenPeriod()

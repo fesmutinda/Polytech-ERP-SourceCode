@@ -13,37 +13,37 @@ Page 51516333 "prPayroll Periods"
         {
             repeater(Control1102755000)
             {
-                field("Period Month"; "Period Month")
+                field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Period Year"; "Period Year")
+                field("Period Year"; Rec."Period Year")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Period Name"; "Period Name")
+                field("Period Name"; Rec."Period Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Opened"; "Date Opened")
+                field("Date Opened"; Rec."Date Opened")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Closed"; "Date Closed")
+                field("Date Closed"; Rec."Date Closed")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Payroll Code"; "Payroll Code")
+                field("Payroll Code"; Rec."Payroll Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -124,9 +124,9 @@ Page 51516333 "prPayroll Periods"
         Text001: label '''You selected %1.''';
         Question: Text[250];
         Answer: Boolean;
-        objOcx: Codeunit UnknownCodeunit51516016;
+        objOcx: Codeunit prPayrollProcessingXX;
         dtOpenPeriod: Date;
-        PayrollType: Record 51516282;
+        PayrollType: Record "prPayroll Type";
         Selection: Integer;
         PayrollDefined: Text[30];
         PayrollCode: Code[10];

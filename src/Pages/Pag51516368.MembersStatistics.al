@@ -3,7 +3,7 @@ Page 51516368 "Members Statistics"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516364;
+    SourceTable = "Member Register";
 
     layout
     {
@@ -12,52 +12,52 @@ Page 51516368 "Members Statistics"
             group(General)
             {
                 Caption = 'General';
-                field("Monthly Contribution"; "Monthly Contribution")
+                field("Monthly Contribution"; Rec."Monthly Contribution")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Width = 50;
                 }
-                field("Holiday Contribution"; "Holiday Contribution")
+                field("Holiday Contribution"; Rec."Holiday Contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shares Retained"; "Shares Retained")
+                field("Shares Retained"; Rec."Shares Retained")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Share Capital Balance';
                 }
-                field("Current Shares"; "Current Shares")
+                field("Current Shares"; Rec."Current Shares")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Deposits Contribution Balance';
                 }
-                field("Benevolent Fund"; "Benevolent Fund")
+                field("Benevolent Fund"; Rec."Benevolent Fund")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Benevolent Fund Balance';
                     Editable = false;
                 }
-                field("Additional Shares"; "Additional Shares")
+                field("Additional Shares"; Rec."Additional Shares")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Registration Fee Paid"; "Registration Fee Paid")
+                field("Registration Fee Paid"; Rec."Registration Fee Paid")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Fund"; "Insurance Fund")
+                field("Insurance Fund"; Rec."Insurance Fund")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dividend Amount"; "Dividend Amount")
+                field("Dividend Amount"; Rec."Dividend Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = true;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Outstanding Loan Balance';
@@ -65,17 +65,17 @@ Page 51516368 "Members Statistics"
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Un-allocated Funds"; "Un-allocated Funds")
+                field("Un-allocated Funds"; Rec."Un-allocated Funds")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = FieldStyle;
                 }
-                field("Loans Recoverd from Guarantors"; "Loans Recoverd from Guarantors")
+                field("Loans Recoverd from Guarantors"; Rec."Loans Recoverd from Guarantors")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -97,7 +97,7 @@ Page 51516368 "Members Statistics"
                 ApplicationArea = Basic;
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report UnknownReport51516412;
+                RunObject = Report 51516412;
 
                 trigger OnAction()
                 begin
@@ -110,7 +110,7 @@ Page 51516368 "Members Statistics"
     trigger OnAfterGetCurrRecord()
     begin
         ObjLoans.Reset;
-        ObjLoans.SetRange("Client Code", "No.");
+        ObjLoans.SetRange("Client Code", Rec."No.");
         if ObjLoans.Find('-') then
             OutstandingInterest := SFactory.FnGetInterestDueTodate(ObjLoans) - ObjLoans."Interest Paid";
     end;
@@ -121,7 +121,7 @@ Page 51516368 "Members Statistics"
           ERROR('You do not have permission to view this account Details');
           END;*/
 
-        if ("Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
+        if (Rec."Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
             if UserSetup.Get(UserId) then begin
                 if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
             end;
@@ -137,14 +137,14 @@ Page 51516368 "Members Statistics"
         FieldStyle: Text;
         OutstandingInterest: Decimal;
         InterestDue: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
-        ObjLoans: Record 51516371;
+        SFactory: Codeunit "Swizzsoft Factory.";
+        ObjLoans: Record "Loans Register";
 
     local procedure SetFieldStyle()
     begin
         FieldStyle := '';
-        CalcFields("Un-allocated Funds");
-        if "Un-allocated Funds" <> 0 then
+        Rec.CalcFields("Un-allocated Funds");
+        if Rec."Un-allocated Funds" <> 0 then
             FieldStyle := 'Attention';
     end;
 }

@@ -2,7 +2,7 @@
 Page 51516327 "payroll Transaction Code."
 {
     PageType = Card;
-    SourceTable = 51516318;
+    SourceTable = "Payroll Transaction Code.";
 
     layout
     {
@@ -11,11 +11,11 @@ Page 51516327 "payroll Transaction Code."
             group(General)
             {
                 Caption = 'General';
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
@@ -27,11 +27,11 @@ Page 51516327 "payroll Transaction Code."
                 group("Select one")
                 {
                     Caption = 'Select one';
-                    field("Transaction Type"; "Transaction Type")
+                    field("Transaction Type"; Rec."Transaction Type")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Notice Days Payment"; "Notice Days Payment")
+                    field("Notice Days Payment"; Rec."Notice Days Payment")
                     {
                         ApplicationArea = Basic;
                     }
@@ -39,7 +39,7 @@ Page 51516327 "payroll Transaction Code."
                 group(Control1102756039)
                 {
                     Caption = 'Select one';
-                    field(Frequency; Frequency)
+                    field(Frequency; Rec.Frequency)
                     {
                         ApplicationArea = Basic;
                         ValuesAllowed = Fixed, Varied;
@@ -53,13 +53,13 @@ Page 51516327 "payroll Transaction Code."
                 group(Control1102756044)
                 {
                     Caption = 'Select one';
-                    field("Balance Type"; "Balance Type")
+                    field("Balance Type"; Rec."Balance Type")
                     {
                         ApplicationArea = Basic;
                         ValuesAllowed = None, Increasing, Reducing;
                     }
                 }
-                field("Transaction Type1"; "Transaction Type")
+                field("Transaction Type1"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Amount Preference';
@@ -69,25 +69,25 @@ Page 51516327 "payroll Transaction Code."
                 {
                     Caption = 'Select one';
                 }
-                field("Amount Preference"; "Amount Preference")
+                field("Amount Preference"; Rec."Amount Preference")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Cash"; "Is Cash")
+                field("Is Cash"; Rec."Is Cash")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Formulae"; "Is Formulae")
+                field("Is Formulae"; Rec."Is Formulae")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Is Formula';
                 }
-                field(Formulae; Formulae)
+                field(Formulae; Rec.Formulae)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Formula';
                 }
-                field("Leave Reimbursement"; "Leave Reimbursement")
+                field("Leave Reimbursement"; Rec."Leave Reimbursement")
                 {
                     ApplicationArea = Basic;
                 }
@@ -98,11 +98,11 @@ Page 51516327 "payroll Transaction Code."
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Include Employer Deduction"; "Include Employer Deduction")
+                field("Include Employer Deduction"; Rec."Include Employer Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Formulae for Employer"; "Formulae for Employer")
+                field("Formulae for Employer"; Rec."Formulae for Employer")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Formula for Employer';
@@ -114,23 +114,23 @@ Page 51516327 "payroll Transaction Code."
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field(SubLedger; SubLedger)
+                field(SubLedger; Rec.SubLedger)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Posting to Subledger';
                 }
-                field("Customer Posting Group"; "Customer Posting Group")
+                field("Customer Posting Group"; Rec."Customer Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
                 group(Control1102756055)
                 {
                     Caption = 'Select one';
-                    field("Special Transaction"; "Special Transaction")
+                    field("Special Transaction"; Rec."Special Transaction")
                     {
                         ApplicationArea = Basic;
                     }
@@ -138,12 +138,12 @@ Page 51516327 "payroll Transaction Code."
                 group(Control1102756068)
                 {
                     Caption = 'Select one';
-                    field("Special Transactions1"; "Special Transaction")
+                    field("Special Transactions1"; Rec."Special Transaction")
                     {
                         ApplicationArea = Basic;
                         ValuesAllowed = "Life Insurance";
                     }
-                    field("Deduct Premium"; "Deduct Premium")
+                    field("Deduct Premium"; Rec."Deduct Premium")
                     {
                         ApplicationArea = Basic;
                     }
@@ -151,7 +151,7 @@ Page 51516327 "payroll Transaction Code."
                 group(Control1102756074)
                 {
                     Caption = 'Select one';
-                    field("Special Transactions2"; "Special Transaction")
+                    field("Special Transactions2"; Rec."Special Transaction")
                     {
                         ApplicationArea = Basic;
                         ValuesAllowed = "Staff Loan";
@@ -159,30 +159,30 @@ Page 51516327 "payroll Transaction Code."
                     group(Control1102756085)
                     {
                         Caption = 'Select one';
-                        field("Repayment Method"; "Repayment Method")
+                        field("Repayment Method"; Rec."Repayment Method")
                         {
                             ApplicationArea = Basic;
                             ValuesAllowed = Reducing, "Straight line";
                         }
                     }
-                    field("Fringe Benefit"; "Fringe Benefit")
+                    field("Fringe Benefit"; Rec."Fringe Benefit")
                     {
                         ApplicationArea = Basic;
                     }
                 }
-                field("Employer Deduction"; "Employer Deduction")
+                field("Employer Deduction"; Rec."Employer Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Taxable; Taxable)
+                field(Taxable; Rec.Taxable)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Method1"; "Repayment Method")
+                field("Repayment Method1"; Rec."Repayment Method")
                 {
                     ApplicationArea = Basic;
                     ValuesAllowed = Amortized;
@@ -190,7 +190,7 @@ Page 51516327 "payroll Transaction Code."
                 group("Coop Reporting")
                 {
                     Caption = 'Coop Reporting';
-                    field("Co-Op Parameters"; "Co-Op Parameters")
+                    field("Co-Op Parameters"; Rec."Co-Op Parameters")
                     {
                         ApplicationArea = Basic;
                     }
@@ -200,7 +200,7 @@ Page 51516327 "payroll Transaction Code."
                     ApplicationArea = Basic;
                     CaptionClass = Text19015031;
                 }
-                field("IsCo-Op/LnRep"; "IsCo-Op/LnRep")
+                field("IsCo-Op/LnRep"; Rec."IsCo-Op/LnRep")
                 {
                     ApplicationArea = Basic;
                 }

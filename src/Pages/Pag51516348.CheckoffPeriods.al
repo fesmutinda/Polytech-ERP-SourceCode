@@ -4,7 +4,7 @@ Page 51516348 "Checkoff  Periods."
     DeleteAllowed = false;
     Editable = false;
     PageType = Card;
-    SourceTable = 51516428;
+    SourceTable = "Checkoff Calender.";
 
     layout
     {
@@ -12,32 +12,32 @@ Page 51516348 "Checkoff  Periods."
         {
             repeater(Control1102755000)
             {
-                field("Period Month"; "Period Month")
+                field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Period Year"; "Period Year")
+                field("Period Year"; Rec."Period Year")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Period Name"; "Period Name")
+                field("Period Name"; Rec."Period Name")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Date Opened"; "Date Opened")
+                field("Date Opened"; Rec."Date Opened")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Date Closed"; "Date Closed")
+                field("Date Closed"; Rec."Date Closed")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -92,13 +92,13 @@ Page 51516348 "Checkoff  Periods."
                             Error('You dont have permissions Approval Status Change, Contact your system administrator! ')
                         end else begin
                             if Confirm('Are you sure you want to Reopen this application for Correction? ', false) = true then begin
-                                Closed := true;
-                                Closed := false;
+                                Rec.Closed := true;
+                                Rec.Closed := false;
                                 period.Closed := true;
                                 period.Closed := false;
 
 
-                                Modify;
+                                Rec.Modify;
                                 Message('Period has been opened');
 
                             end;
@@ -116,7 +116,7 @@ Page 51516348 "Checkoff  Periods."
         Text001: label '''You selected %1.''';
         Question: Text[250];
         Answer: Boolean;
-        objOcx: Codeunit UnknownCodeunit51516015;
+        objOcx: Codeunit 51516015;
         dtOpenPeriod: Date;
         PayrollType: Record 51516312;
         Selection: Integer;

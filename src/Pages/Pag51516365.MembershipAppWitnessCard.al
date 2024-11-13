@@ -2,7 +2,7 @@
 Page 51516365 "Membership App Witness Card"
 {
     PageType = Card;
-    SourceTable = 51516363;
+    SourceTable = "Member Group Details";
 
     layout
     {
@@ -10,44 +10,44 @@ Page 51516365 "Membership App Witness Card"
         {
             group(General)
             {
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("BOSA No."; "BOSA No.")
+                field("BOSA No."; Rec."BOSA No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member No.';
                 }
-                field("Date Of Birth"; "Date Of Birth")
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
-                {
-                    ApplicationArea = Basic;
-                    ShowMandatory = true;
-                }
-                field("Mobile No."; "Mobile No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field(Date; Date)
+                field("Mobile No."; Rec."Mobile No.")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Email Address"; "Email Address")
+                field("Email Address"; Rec."Email Address")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }

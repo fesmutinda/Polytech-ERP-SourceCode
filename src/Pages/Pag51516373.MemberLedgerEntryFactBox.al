@@ -3,7 +3,7 @@ Page 51516373 "Member Ledger Entry FactBox"
 {
     Caption = 'Member Ledger Entry Details';
     PageType = CardPart;
-    SourceTable = 51516365;
+    SourceTable = "Member Ledger Entry";
 
     layout
     {
@@ -27,8 +27,8 @@ Page 51516373 "Member Ledger Entry FactBox"
                 begin
                     CheckGLEntry := true;
 
-                    if "Document Type" = "document type"::Invoice then begin
-                        SalesInvoiceHdr.SetRange("No.", "Document No.");
+                    if Rec."Document Type" = Rec."document type"::Invoice then begin
+                        SalesInvoiceHdr.SetRange("No.", Rec."Document No.");
                         if SalesInvoiceHdr.FindFirst then begin
                             PostedSalesInvoiceCard.SetTableview(SalesInvoiceHdr);
                             PostedSalesInvoiceCard.Run;
@@ -36,8 +36,8 @@ Page 51516373 "Member Ledger Entry FactBox"
                         end
                     end;
 
-                    if "Document Type" = "document type"::"Credit Memo" then begin
-                        SalesCrMemoHdr.SetRange("No.", "Document No.");
+                    if Rec."Document Type" = Rec."document type"::"Credit Memo" then begin
+                        SalesCrMemoHdr.SetRange("No.", Rec."Document No.");
                         if SalesCrMemoHdr.FindFirst then begin
                             PostedSalesCrMemoCard.SetTableview(SalesCrMemoHdr);
                             PostedSalesCrMemoCard.Run;
@@ -47,18 +47,18 @@ Page 51516373 "Member Ledger Entry FactBox"
 
                     if CheckGLEntry then begin
                         GLEntry.SetCurrentkey("Document No.", "Posting Date");
-                        GLEntry.SetRange("Document No.", "Document No.");
-                        GLEntry.SetRange("Posting Date", "Posting Date");
+                        GLEntry.SetRange("Document No.", Rec."Document No.");
+                        GLEntry.SetRange("Posting Date", Rec."Posting Date");
                         GeneralLedgEntriesList.SetTableview(GLEntry);
                         GeneralLedgEntriesList.Run
                     end;
                 end;
             }
-            field("Due Date"; "Due Date")
+            field("Due Date"; Rec."Due Date")
             {
                 ApplicationArea = Basic;
             }
-            field("Pmt. Discount Date"; "Pmt. Discount Date")
+            field("Pmt. Discount Date"; Rec."Pmt. Discount Date")
             {
                 ApplicationArea = Basic;
             }
@@ -73,7 +73,7 @@ Page 51516373 "Member Ledger Entry FactBox"
                     ReminderFinEntry: Record "Reminder/Fin. Charge Entry";
                     ReminderFinEntriesList: Page "Reminder/Fin. Charge Entries";
                 begin
-                    ReminderFinEntry.SetRange("Customer Entry No.", "Entry No.");
+                    ReminderFinEntry.SetRange("Customer Entry No.", Rec."Entry No.");
                     ReminderFinEntriesList.SetTableview(ReminderFinEntry);
                     ReminderFinEntriesList.Run;
                 end;
@@ -88,7 +88,7 @@ Page 51516373 "Member Ledger Entry FactBox"
                 var
                     AppliedCustomerEntriesList: Page "Applied Customer Entries";
                 begin
-                    AppliedCustomerEntriesList.SetTempCustLedgEntry("Entry No.");
+                    AppliedCustomerEntriesList.SetTempCustLedgEntry(Rec."Entry No.");
                     AppliedCustomerEntriesList.Run;
                 end;
             }
@@ -102,8 +102,8 @@ Page 51516373 "Member Ledger Entry FactBox"
                 var
                     DetailedCustLedgEntry: Record "Detailed Cust. Ledg. Entry";
                 begin
-                    DetailedCustLedgEntry.SetRange("Cust. Ledger Entry No.", "Entry No.");
-                    DetailedCustLedgEntry.SetRange("Customer No.", "Customer No.");
+                    DetailedCustLedgEntry.SetRange("Cust. Ledger Entry No.", Rec."Entry No.");
+                    DetailedCustLedgEntry.SetRange("Customer No.", Rec."Customer No.");
                     Page.Run(Page::"Detailed Cust. Ledg. Entries", DetailedCustLedgEntry);
                 end;
             }
@@ -126,7 +126,7 @@ Page 51516373 "Member Ledger Entry FactBox"
         NoOfAppliedEntries := 0;
         DocumentHeading := '';
 
-        exit(Find(Which));
+        exit(Rec.Find(Which));
     end;
 
     trigger OnOpenPage()
@@ -149,16 +149,16 @@ Page 51516373 "Member Ledger Entry FactBox"
         DetailedCustLedgEntry: Record "Detailed Cust. Ledg. Entry";
     begin
         ReminderFinChargeEntry.Reset;
-        ReminderFinChargeEntry.SetRange("Customer Entry No.", "Entry No.");
+        ReminderFinChargeEntry.SetRange("Customer Entry No.", Rec."Entry No.");
         NoOfReminderFinEntries := ReminderFinChargeEntry.Count;
 
         NoOfAppliedEntries := 0;
-        if "Entry No." <> 0 then
+        if Rec."Entry No." <> 0 then
             NoOfAppliedEntries := GetNoOfAppliedEntries(Rec);
 
         DetailedCustLedgEntry.Reset;
-        DetailedCustLedgEntry.SetRange("Cust. Ledger Entry No.", "Entry No.");
-        DetailedCustLedgEntry.SetRange("Customer No.", "Customer No.");
+        DetailedCustLedgEntry.SetRange("Cust. Ledger Entry No.", Rec."Entry No.");
+        DetailedCustLedgEntry.SetRange("Customer No.", Rec."Customer No.");
         NoOfDetailedCustomerEntries := DetailedCustLedgEntry.Count;
     end;
 

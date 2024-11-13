@@ -521,80 +521,80 @@ Page 51516350 "Checkoff Processing Header-Dp"
         {
             group(General)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting date"; "Posting date")
+                field("Posting date"; Rec."Posting date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Loan CutOff Date"; "Loan CutOff Date")
+                field("Loan CutOff Date"; Rec."Loan CutOff Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Name"; "Employer Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Document No"; "Document No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Posted; Posted)
+                field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheduled Amount"; "Scheduled Amount")
+                field(Posted; Rec.Posted)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Scheduled Amount"; Rec."Scheduled Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("ALL TOTAL AMOUNT"; "ALL TOTAL AMOUNT")
+                field("ALL TOTAL AMOUNT"; Rec."ALL TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                 }
@@ -602,76 +602,76 @@ Page 51516350 "Checkoff Processing Header-Dp"
             part("Checkoff Lines-Distributed"; "Checkoff Proc Line-D")
             {
                 Caption = 'Checkoff Lines-Distributed';
-                SubPageLink = "Receipt Header No" = field(No);
+                SubPageLink = Rec."Receipt Header No" = field(No);
             }
             group("Total Amount")
             {
-                field("Dev Total Amount"; "Dev Total Amount")
+                field("Dev Total Amount"; Rec."Dev Total Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Dev1 Total Amount"; "Dev1 Total Amount")
+                field("Dev1 Total Amount"; Rec."Dev1 Total Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Norm Total Amount"; "Norm Total Amount")
+                field("Norm Total Amount"; Rec."Norm Total Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Norm 1 TOTAL AMOUNT"; "Norm 1 TOTAL AMOUNT")
+                field("Norm 1 TOTAL AMOUNT"; Rec."Norm 1 TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("INVEST TOTAL AMOUNT"; "INVEST TOTAL AMOUNT")
+                field("INVEST TOTAL AMOUNT"; Rec."INVEST TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SUPER SCH TOTAL AMOUNT"; "SUPER SCH TOTAL AMOUNT")
+                field("SUPER SCH TOTAL AMOUNT"; Rec."SUPER SCH TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("EMER TOTAL AMOUNT"; "EMER TOTAL AMOUNT")
+                field("EMER TOTAL AMOUNT"; Rec."EMER TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SCH TOTAL AMOUNT"; "SCH TOTAL AMOUNT")
+                field("SCH TOTAL AMOUNT"; Rec."SCH TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SUPER EMER TOTAL AMOUNT"; "SUPER EMER TOTAL AMOUNT")
+                field("SUPER EMER TOTAL AMOUNT"; Rec."SUPER EMER TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SUPER QUICK TOTAL AMOUNT"; "SUPER QUICK TOTAL AMOUNT")
+                field("SUPER QUICK TOTAL AMOUNT"; Rec."SUPER QUICK TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("QUICK TOTAL AMOUNT"; "QUICK TOTAL AMOUNT")
+                field("QUICK TOTAL AMOUNT"; Rec."QUICK TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("DEPOSIT TOTAL AMOUNT"; "DEPOSIT TOTAL AMOUNT")
+                field("DEPOSIT TOTAL AMOUNT"; Rec."DEPOSIT TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("SHARE TOTAL AMOUNT"; "SHARE TOTAL AMOUNT")
+                field("SHARE TOTAL AMOUNT"; Rec."SHARE TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("INSURANCE TOTAL AMOUNT"; "INSURANCE TOTAL AMOUNT")
+                field("INSURANCE TOTAL AMOUNT"; Rec."INSURANCE TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -681,20 +681,20 @@ Page 51516350 "Checkoff Processing Header-Dp"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("BEVELONANT TOTAL AMOUNT"; "BEVELONANT TOTAL AMOUNT")
+                field("BEVELONANT TOTAL AMOUNT"; Rec."BEVELONANT TOTAL AMOUNT")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Holiday; Holiday)
+                field(Holiday; Rec.Holiday)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Normal2 Total"; "Normal2 Total")
+                field("Normal2 Total"; Rec."Normal2 Total")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Merch Amount Total"; "Merch Amount Total")
+                field("Merch Amount Total"; Rec."Merch Amount Total")
                 {
                     ApplicationArea = Basic;
                 }
@@ -714,7 +714,7 @@ Page 51516350 "Checkoff Processing Header-Dp"
                 Promoted = true;
                 PromotedIsBig = true;
                 PromotedOnly = true;
-                RunObject = XMLport UnknownXMLport51516003;
+                RunObject = XMLport 51516003;
             }
             group(ActionGroup1102755021)
             {
@@ -731,11 +731,11 @@ Page 51516350 "Checkoff Processing Header-Dp"
 
                 trigger OnAction()
                 var
-                    ObjCheckOffLines: Record 51516415;
+                    ObjCheckOffLines: Record "Checkoff Lines-Distributed";
                 begin
 
                     ReceiptsProcessingLines.Reset;
-                    ReceiptsProcessingLines.SetRange("Receipt Header No", No);
+                    ReceiptsProcessingLines.SetRange(Rec."Receipt Header No", No);
                     if ReceiptsProcessingLines.Find('-') then begin
                         repeat
                             // MESSAGE('MEMBER NO IS %1',ReceiptsProcessingLines."Staff/Payroll No");
@@ -1024,10 +1024,10 @@ Page 51516350 "Checkoff Processing Header-Dp"
                 trigger OnAction()
                 begin
                     if Confirm('Are you sure you want to mark this Checkoff as Posted.Once Marked as posted it will go to posted. ?', false) = true then begin
-                        Posted := true;
-                        "Posted By" := UserId;
-                        "Posting date" := Today;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
+                        Rec."Posting date" := Today;
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -1058,8 +1058,8 @@ Page 51516350 "Checkoff Processing Header-Dp"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        "Posting date" := Today;
-        "Date Entered" := Today;
+        Rec."Posting date" := Today;
+        Rec."Date Entered" := Today;
     end;
 
     var
@@ -1119,7 +1119,7 @@ Page 51516350 "Checkoff Processing Header-Dp"
     begin
 
 
-        ObjCheckOffLines.TestField("Loan No.");
+        ObjCheckOffLines.TestField(Rec."Loan No.");
         ObjCheckOffLines.Reset;
         ObjCheckOffLines.SetRange(ObjCheckOffLines."Receipt Header No", No);
         //ObjCheckOffLines.SETRANGE(ObjCheckOffLines."Utility Type",'REPAYMENT');

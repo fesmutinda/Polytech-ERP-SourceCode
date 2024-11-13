@@ -2,7 +2,7 @@
 Page 51516332 "prList Transactions"
 {
     PageType = List;
-    SourceTable = 51516267;
+    SourceTable = "prEmployee Transactions";
 
     layout
     {
@@ -10,115 +10,115 @@ Page 51516332 "prList Transactions"
         {
             repeater(Group)
             {
-                field("Employee Code"; "Employee Code")
+                field("Employee Code"; Rec."Employee Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance; Balance)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Original Amount"; "Original Amount")
+                field("Original Amount"; Rec."Original Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Month"; "Period Month")
+                field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Year"; "Period Year")
+                field("Period Year"; Rec."Period Year")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll Period"; "Payroll Period")
+                field("Payroll Period"; Rec."Payroll Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("#of Repayments"; "#of Repayments")
+                field("#of Repayments"; Rec."#of Repayments")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Membership; Membership)
+                field(Membership; Rec.Membership)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(integera; integera)
+                field(integera; Rec.integera)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Amount"; "Employer Amount")
+                field("Employer Amount"; Rec."Employer Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Balance"; "Employer Balance")
+                field("Employer Balance"; Rec."Employer Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Stop for Next Period"; "Stop for Next Period")
+                field("Stop for Next Period"; Rec."Stop for Next Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amortized Loan Total Repay Amt"; "Amortized Loan Total Repay Amt")
+                field("Amortized Loan Total Repay Amt"; Rec."Amortized Loan Total Repay Amt")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Number"; "Loan Number")
+                field("Loan Number"; Rec."Loan Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll Code"; "Payroll Code")
+                field("Payroll Code"; Rec."Payroll Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No of Units"; "No of Units")
+                field("No of Units"; Rec."No of Units")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Suspended; Suspended)
+                field(Suspended; Rec.Suspended)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Account No"; "Loan Account No")
+                field("Loan Account No"; Rec."Loan Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Emp Count"; "Emp Count")
+                field("Emp Count"; Rec."Emp Count")
                 {
                     ApplicationArea = Basic;
                 }
-                field("PV Filter"; "PV Filter")
+                field("PV Filter"; Rec."PV Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Emp Status"; "Emp Status")
+                field("Emp Status"; Rec."Emp Status")
                 {
                     ApplicationArea = Basic;
                 }

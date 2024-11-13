@@ -3,7 +3,7 @@ Page 51516323 "Payroll Transaction List."
 {
     CardPageID = "payroll Transaction Code.";
     PageType = List;
-    SourceTable = 51516318;
+    SourceTable = "Payroll Transaction Code.";
 
     layout
     {
@@ -11,40 +11,40 @@ Page 51516323 "Payroll Transaction List."
         {
             repeater(Group)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Formulae"; "Is Formulae")
+                field("Is Formulae"; Rec."Is Formulae")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Formulae; Formulae)
+                field(Formulae; Rec.Formulae)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Taxable; Taxable)
+                field(Taxable; Rec.Taxable)
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account Name"; "G/L Account Name")
+                field("G/L Account Name"; Rec."G/L Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("IsCo-Op/LnRep"; "IsCo-Op/LnRep")
+                field("IsCo-Op/LnRep"; Rec."IsCo-Op/LnRep")
                 {
                     ApplicationArea = Basic;
                 }

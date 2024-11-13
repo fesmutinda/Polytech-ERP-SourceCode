@@ -6,7 +6,7 @@ Page 51516337 "Bank Acc. Recon. List H"
     Editable = false;
     PageType = List;
     SourceTable = "Bank Acc. Reconciliation";
-    SourceTableView = where("Statement Type"=const("Bank Reconciliation"));
+    SourceTableView = where("Statement Type" = const("Bank Reconciliation"));
 
     layout
     {
@@ -14,23 +14,23 @@ Page 51516337 "Bank Acc. Recon. List H"
         {
             repeater(Control1)
             {
-                field(BankAccountNo;"Bank Account No.")
+                field(BankAccountNo; Rec."Bank Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(StatementNo;"Statement No.")
+                field(StatementNo; Rec."Statement No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(StatementDate;"Statement Date")
+                field(StatementDate; Rec."Statement Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(BalanceLastStatement;"Balance Last Statement")
+                field(BalanceLastStatement; Rec."Balance Last Statement")
                 {
                     ApplicationArea = Basic;
                 }
-                field(StatementEndingBalance;"Statement Ending Balance")
+                field(StatementEndingBalance; Rec."Statement Ending Balance")
                 {
                     ApplicationArea = Basic;
                 }
@@ -38,11 +38,11 @@ Page 51516337 "Bank Acc. Recon. List H"
         }
         area(factboxes)
         {
-            systempart(Control1900383207;Links)
+            systempart(Control1900383207; Links)
             {
                 Visible = false;
             }
-            systempart(Control1905767507;Notes)
+            systempart(Control1905767507; Notes)
             {
                 Visible = false;
             }
@@ -70,9 +70,8 @@ Page 51516337 "Bank Acc. Recon. List H"
 
                     trigger OnAction()
                     begin
-                        if UserSetup.Get(UserId) then
-                        begin
-                        if UserSetup."Post Bank Rec" =false then Error ('You dont have permissions to post, Contact your system administrator! ')
+                        if UserSetup.Get(UserId) then begin
+                            if UserSetup."Post Bank Rec" = false then Error('You dont have permissions to post, Contact your system administrator! ')
                         end;
                     end;
                 }
@@ -89,9 +88,8 @@ Page 51516337 "Bank Acc. Recon. List H"
 
                     trigger OnAction()
                     begin
-                        if UserSetup.Get(UserId) then
-                        begin
-                        if UserSetup."Post Bank Rec" =false then Error ('You dont have permissions to post, Contact your system administrator! ')
+                        if UserSetup.Get(UserId) then begin
+                            if UserSetup."Post Bank Rec" = false then Error('You dont have permissions to post, Contact your system administrator! ')
                         end;
                     end;
                 }
