@@ -12,94 +12,94 @@ Page 51516342 "Pension Processing Lines"
             repeater(Control1102760000)
             {
                 Editable = true;
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Pension No"; "Pension No")
+                field("Pension No"; Rec."Pension No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field(Amount; Amount)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Employer Code"; "Employer Code")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Branch Reff."; "Branch Reff.")
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("ID No."; "ID No.")
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Branch Reff."; Rec."Branch Reff.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Original Account No."; "Original Account No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account Not Found"; "Account Not Found")
+                field("Original Account No."; Rec."Original Account No.")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Account Not Found"; Rec."Account Not Found")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = true;
                 }
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("BOSA Schedule"; "BOSA Schedule")
+                field("BOSA Schedule"; Rec."BOSA Schedule")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Closed; Closed)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = true;
-                }
-                field("Multiple Salary"; "Multiple Salary")
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = true;
                 }
-                field("Bosa No"; "Bosa No")
+                field("Multiple Salary"; Rec."Multiple Salary")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Visible = true;
+                }
+                field("Bosa No"; Rec."Bosa No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salary Header No."; "Salary Header No.")
+                field("Salary Header No."; Rec."Salary Header No.")
                 {
                     ApplicationArea = Basic;
                 }

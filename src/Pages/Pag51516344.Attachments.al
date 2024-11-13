@@ -10,31 +10,31 @@ Page 51516344 Attachments
         {
             repeater(Group)
             {
-                field(Entry; Entry)
+                field(Entry; Rec.Entry)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Loan; Loan)
+                field(Loan; Rec.Loan)
                 {
                     ApplicationArea = Basic;
                 }
-                field(LocaLAttacmentLink; LocaLAttacmentLink)
+                field(LocaLAttacmentLink; Rec.LocaLAttacmentLink)
                 {
                     ApplicationArea = Basic;
                 }
-                field(PublicLink; PublicLink)
+                field(PublicLink; Rec.PublicLink)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DateUploaded; DateUploaded)
+                field(DateUploaded; Rec.DateUploaded)
                 {
                     ApplicationArea = Basic;
                 }

@@ -7,7 +7,7 @@ Page 51516336 "Bank Acc. Statement Lines H"
     Editable = false;
     LinksAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516012;
+    SourceTable = "Payments Header Board";
     SourceTableView = where(Field20 = const(0));
 
     layout
@@ -16,27 +16,27 @@ Page 51516336 "Bank Acc. Statement Lines H"
         {
             repeater(Control1)
             {
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = StyleTxt;
                 }
-                field("Value Date"; "Value Date")
+                field("Value Date"; Rec."Value Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Check No."; "Check No.")
+                field("Check No."; Rec."Check No.")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
 
@@ -45,40 +45,40 @@ Page 51516336 "Bank Acc. Statement Lines H"
                         SetUserInteractions;
                     end;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                     StyleExpr = StyleTxt;
                 }
-                field("Statement Amount"; "Statement Amount")
+                field("Statement Amount"; Rec."Statement Amount")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = StyleTxt;
                 }
-                field("Applied Amount"; "Applied Amount")
+                field("Applied Amount"; Rec."Applied Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reconciled; Reconciled)
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field(Difference; Difference)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Applied Entries"; "Applied Entries")
+                field(Reconciled; Rec.Reconciled)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Related-Party Name"; "Related-Party Name")
+                field(Difference; Rec.Difference)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Applied Entries"; Rec."Applied Entries")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Additional Transaction Info"; "Additional Transaction Info")
+                field("Related-Party Name"; Rec."Related-Party Name")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Additional Transaction Info"; Rec."Additional Transaction Info")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -116,8 +116,8 @@ Page 51516336 "Bank Acc. Statement Lines H"
 
     trigger OnAfterGetCurrRecord()
     begin
-        if "Statement Line No." <> 0 then
-            CalcBalance("Statement Line No.");
+        if Rec."Statement Line No." <> 0 then
+            CalcBalance(Rec."Statement Line No.");
         SetUserInteractions;
     end;
 
@@ -230,9 +230,9 @@ Page 51516336 "Bank Acc. Statement Lines H"
     procedure ToggleMatchedFilter(SetFilterOn: Boolean)
     begin
         if SetFilterOn then
-            SetFilter(Difference, '<>%1', 0)
+            Rec.SetFilter(Rec.Difference, '<>%1', 0)
         else
-            Reset;
+            Rec.Reset;
         CurrPage.Update;
     end;
 }

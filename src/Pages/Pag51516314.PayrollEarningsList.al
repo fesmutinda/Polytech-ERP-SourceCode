@@ -3,7 +3,7 @@ Page 51516314 "Payroll Earnings List."
 {
     CardPageID = "HR Employee Requisitions List";
     PageType = List;
-    SourceTable = 51516318;
+    SourceTable = "Payroll Transaction Code.";
     SourceTableView = where("Transaction Type" = const(Income));
 
     layout
@@ -12,19 +12,19 @@ Page 51516314 "Payroll Earnings List."
         {
             repeater(Group)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Taxable; Taxable)
+                field(Taxable; Rec.Taxable)
                 {
                     ApplicationArea = Basic;
                 }
@@ -38,7 +38,7 @@ Page 51516314 "Payroll Earnings List."
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Transaction Type" := "transaction type"::Income;
+        Rec."Transaction Type" := Rec."transaction type"::Income;
     end;
 }
 

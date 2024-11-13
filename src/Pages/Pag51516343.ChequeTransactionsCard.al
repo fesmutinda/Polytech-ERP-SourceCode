@@ -5,7 +5,7 @@ Page 51516343 "Cheque Transactions Card."
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = 51516422;
+    SourceTable = "Cheque Truncation Buffer";
 
     layout
     {
@@ -13,79 +13,79 @@ Page 51516343 "Cheque Transactions Card."
         {
             group(General)
             {
-                field(SerialId; SerialId)
+                field(SerialId; Rec.SerialId)
                 {
                     ApplicationArea = Basic;
                 }
-                field(RCODE; RCODE)
+                field(RCODE; Rec.RCODE)
                 {
                     ApplicationArea = Basic;
                 }
-                field(VTYPE; VTYPE)
+                field(VTYPE; Rec.VTYPE)
                 {
                     ApplicationArea = Basic;
                 }
-                field(AMOUNT; AMOUNT)
+                field(AMOUNT; Rec.AMOUNT)
                 {
                     ApplicationArea = Basic;
                 }
-                field(ENTRYMODE; ENTRYMODE)
+                field(ENTRYMODE; Rec.ENTRYMODE)
                 {
                     ApplicationArea = Basic;
                 }
-                field(CURRENCYCODE; CURRENCYCODE)
+                field(CURRENCYCODE; Rec.CURRENCYCODE)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DESTBANK; DESTBANK)
+                field(DESTBANK; Rec.DESTBANK)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DESTBRANCH; DESTBRANCH)
+                field(DESTBRANCH; Rec.DESTBRANCH)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DESTACC; DESTACC)
+                field(DESTACC; Rec.DESTACC)
                 {
                     ApplicationArea = Basic;
                 }
-                field(CHQDGT; CHQDGT)
+                field(CHQDGT; Rec.CHQDGT)
                 {
                     ApplicationArea = Basic;
                 }
-                field(PBANK; PBANK)
+                field(PBANK; Rec.PBANK)
                 {
                     ApplicationArea = Basic;
                 }
-                field(PBRANCH; PBRANCH)
+                field(PBRANCH; Rec.PBRANCH)
                 {
                     ApplicationArea = Basic;
                 }
-                field(COLLACC; COLLACC)
+                field(COLLACC; Rec.COLLACC)
                 {
                     ApplicationArea = Basic;
                 }
-                field(MemberNo; MemberNo)
+                field(MemberNo; Rec.MemberNo)
                 {
                     ApplicationArea = Basic;
                 }
-                field(SNO; SNO)
+                field(SNO; Rec.SNO)
                 {
                     ApplicationArea = Basic;
                 }
-                field(FrontBWImage; FrontBWImage)
+                field(FrontBWImage; Rec.FrontBWImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(FrontGrayScaleImage; FrontGrayScaleImage)
+                field(FrontGrayScaleImage; Rec.FrontGrayScaleImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(RearImage; RearImage)
+                field(RearImage; Rec.RearImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(IsFCY; IsFCY)
+                field(IsFCY; Rec.IsFCY)
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516358 "PM Modules Summary"
 {
     PageType = List;
-    SourceTable = 51516649;
+    SourceTable = "PM Modules";
 
     layout
     {
@@ -10,38 +10,38 @@ Page 51516358 "PM Modules Summary"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Module Name"; "Module Name")
+                field("Module Name"; Rec."Module Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(New; New)
+                field(New; Rec.New)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(WIP; WIP)
+                field(WIP; Rec.WIP)
                 {
                     ApplicationArea = Basic;
                     Style = Standard;
                     StyleExpr = true;
                 }
-                field(Resolved; Resolved)
+                field(Resolved; Rec.Resolved)
                 {
                     ApplicationArea = Basic;
                     Style = Favorable;
                     StyleExpr = true;
                 }
-                field(Rejected; Rejected)
+                field(Rejected; Rec.Rejected)
                 {
                     ApplicationArea = Basic;
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Total Items"; "Total Items")
+                field("Total Items"; Rec."Total Items")
                 {
                     ApplicationArea = Basic;
                     Style = Strong;

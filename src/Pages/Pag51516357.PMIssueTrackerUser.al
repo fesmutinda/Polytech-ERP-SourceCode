@@ -13,59 +13,59 @@ Page 51516357 "PM Issue Tracker(User)"
         {
             repeater(Group)
             {
-                field("Module Code"; "Module Code")
+                field("Module Code"; Rec."Module Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("UAT Level"; "UAT Level")
+                field("UAT Level"; Rec."UAT Level")
                 {
                     ApplicationArea = Basic;
                 }
-                field("UAT Item"; "UAT Item")
+                field("UAT Item"; Rec."UAT Item")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field("USER ID"; "USER ID")
+                field("USER ID"; Rec."USER ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Assigned to"; "Assigned to")
+                field("Assigned to"; Rec."Assigned to")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Swizzsoft status"; "Swizzsoft status")
+                field("Swizzsoft status"; Rec."Swizzsoft status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Resolved SS"; "Date Resolved SS")
+                field("Date Resolved SS"; Rec."Date Resolved SS")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Swizzsoft Comments"; "Swizzsoft Comments")
+                field("Swizzsoft Comments"; Rec."Swizzsoft Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer Status"; "Customer Status")
+                field("Customer Status"; Rec."Customer Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User Comments"; "User Comments")
+                field("User Comments"; Rec."User Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Raised"; "Date Raised")
+                field("Date Raised"; Rec."Date Raised")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Resolved"; "Date Resolved")
+                field("Date Resolved"; Rec."Date Resolved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entry No"; "Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -86,7 +86,7 @@ Page 51516357 "PM Issue Tracker(User)"
 
     trigger OnOpenPage()
     begin
-        SetRange("USER ID", UserId);
+        Rec.SetRange("USER ID", UserId);
     end;
 
     var
@@ -95,11 +95,11 @@ Page 51516357 "PM Issue Tracker(User)"
     local procedure SetStyles()
     begin
         CoveragePercentStyle := 'None';
-        if "Customer Status" = "customer status"::WIP then
+        if Rec."Customer Status" = Rec."customer status"::WIP then
             CoveragePercentStyle := 'Unfavorable';
-        if "Customer Status" = "customer status"::Rejected then
+        if Rec."Customer Status" = Rec."customer status"::Rejected then
             CoveragePercentStyle := 'Unfavorable';
-        if "Customer Status" = "customer status"::Resolved then
+        if Rec."Customer Status" = Rec."customer status"::Resolved then
             CoveragePercentStyle := 'favorable';
     end;
 }

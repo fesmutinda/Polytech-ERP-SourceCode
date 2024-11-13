@@ -2,7 +2,7 @@
 Page 51516321 "Payroll Posting Group."
 {
     PageType = List;
-    SourceTable = 51516324;
+    SourceTable = "Payroll Posting Groups.";
 
     layout
     {
@@ -10,93 +10,93 @@ Page 51516321 "Payroll Posting Group."
         {
             repeater(Group)
             {
-                field("Posting Code"; "Posting Code")
+                field("Posting Code"; Rec."Posting Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salary Account"; "Salary Account")
+                field("Salary Account"; Rec."Salary Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Income Tax Account"; "Income Tax Account")
+                field("Income Tax Account"; Rec."Income Tax Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("SSF Employer Account"; "SSF Employer Account")
+                field("SSF Employer Account"; Rec."SSF Employer Account")
                 {
                     ApplicationArea = Basic;
                     Caption = 'NSSF Employer Account';
                 }
-                field("SSF Employee Account"; "SSF Employee Account")
+                field("SSF Employee Account"; Rec."SSF Employee Account")
                 {
                     ApplicationArea = Basic;
                     Caption = 'NSSF Employee Account';
                 }
-                field("Net Salary Payable"; "Net Salary Payable")
+                field("Net Salary Payable"; Rec."Net Salary Payable")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Operating Overtime"; "Operating Overtime")
+                field("Operating Overtime"; Rec."Operating Overtime")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Tax Relief"; "Tax Relief")
+                field("Tax Relief"; Rec."Tax Relief")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Provident Fund Acc."; "Employee Provident Fund Acc.")
+                field("Employee Provident Fund Acc."; Rec."Employee Provident Fund Acc.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Period Filter"; "Pay Period Filter")
+                field("Pay Period Filter"; Rec."Pay Period Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pension Employer Acc"; "Pension Employer Acc")
+                field("Pension Employer Acc"; Rec."Pension Employer Acc")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pension Employee Acc"; "Pension Employee Acc")
+                field("Pension Employee Acc"; Rec."Pension Employee Acc")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Earnings and deductions"; "Earnings and deductions")
+                field("Earnings and deductions"; Rec."Earnings and deductions")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff Benevolent"; "Staff Benevolent")
+                field("Staff Benevolent"; Rec."Staff Benevolent")
                 {
                     ApplicationArea = Basic;
                 }
-                field(SalaryExpenseAC; SalaryExpenseAC)
+                field(SalaryExpenseAC; Rec.SalaryExpenseAC)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Directors Fee GL"; "Directors Fee GL")
+                field("Directors Fee GL"; Rec."Directors Fee GL")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff Gratuity"; "Staff Gratuity")
+                field("Staff Gratuity"; Rec."Staff Gratuity")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NHIF Employee Account"; "NHIF Employee Account")
+                field("NHIF Employee Account"; Rec."NHIF Employee Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll Code"; "Payroll Code")
+                field("Payroll Code"; Rec."Payroll Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Upload to Payroll"; "Upload to Payroll")
+                field("Upload to Payroll"; Rec."Upload to Payroll")
                 {
                     ApplicationArea = Basic;
                 }
-                field("PAYE Benefit A/C"; "PAYE Benefit A/C")
+                field("PAYE Benefit A/C"; Rec."PAYE Benefit A/C")
                 {
                     ApplicationArea = Basic;
                 }

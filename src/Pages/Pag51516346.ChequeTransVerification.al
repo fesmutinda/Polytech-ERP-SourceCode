@@ -4,7 +4,7 @@ Page 51516346 "Cheque Trans Verification"
     CardPageID = "Cheque Truncation Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516515;
+    SourceTable = "Cheque Issue Lines-Family";
     SourceTableView = where(Status = const(Pending));
 
     layout
@@ -13,59 +13,59 @@ Page 51516346 "Cheque Trans Verification"
         {
             repeater(Group)
             {
-                field("Chq Receipt No"; "Chq Receipt No")
+                field("Chq Receipt No"; Rec."Chq Receipt No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Serial No"; "Cheque Serial No")
+                field("Cheque Serial No"; Rec."Cheque Serial No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date _Refference No."; "Date _Refference No.")
+                field("Date _Refference No."; Rec."Date _Refference No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Branch Code"; "Branch Code")
+                field("Branch Code"; Rec."Branch Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(FrontImage; FrontImage)
+                field(FrontImage; Rec.FrontImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(FrontGrayImage; FrontGrayImage)
+                field(FrontGrayImage; Rec.FrontGrayImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(BackImages; BackImages)
+                field(BackImages; Rec.BackImages)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Balance"; "Account Balance")
+                field("Account Balance"; Rec."Account Balance")
                 {
                     ApplicationArea = Basic;
                 }

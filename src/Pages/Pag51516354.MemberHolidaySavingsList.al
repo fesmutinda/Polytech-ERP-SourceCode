@@ -5,7 +5,7 @@ Page 51516354 "Member Holiday Savings List"
     Editable = false;
     InsertAllowed = false;
     PageType = List;
-    SourceTable = 51516070;
+    SourceTable = "Holiday Savings Table";
 
     layout
     {
@@ -13,27 +13,27 @@ Page 51516354 "Member Holiday Savings List"
         {
             repeater(Group)
             {
-                field(Year; Year)
+                field(Year; Rec.Year)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll No"; "Payroll No")
+                field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Holiday Savings Paid Out"; "Holiday Savings Paid Out")
+                field("Holiday Savings Paid Out"; Rec."Holiday Savings Paid Out")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Holiday Interest Paid Out"; "Holiday Interest Paid Out")
+                field("Holiday Interest Paid Out"; Rec."Holiday Interest Paid Out")
                 {
                     ApplicationArea = Basic;
                 }

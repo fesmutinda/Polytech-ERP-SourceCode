@@ -3,7 +3,7 @@ Page 51516338 "HR Medical Claims List-posted"
 {
     CardPageID = "HR Medical Claim Card";
     PageType = List;
-    SourceTable = 51516278;
+    SourceTable = "HR Medical Claims";
     SourceTableView = where(Posted = const(Yes));
 
     layout
@@ -12,47 +12,47 @@ Page 51516338 "HR Medical Claims List-posted"
         {
             repeater(Group)
             {
-                field("Claim No"; "Claim No")
+                field("Claim No"; Rec."Claim No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Type"; "Claim Type")
+                field("Claim Type"; Rec."Claim Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Claim Date"; "Claim Date")
+                field("Claim Date"; Rec."Claim Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Dependants; Dependants)
+                field(Dependants; Rec.Dependants)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Patient Name"; "Patient Name")
+                field("Patient Name"; Rec."Patient Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Ref"; "Document Ref")
+                field("Document Ref"; Rec."Document Ref")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Service"; "Date of Service")
+                field("Date of Service"; Rec."Date of Service")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Attended By"; "Attended By")
+                field("Attended By"; Rec."Attended By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Charged"; "Amount Charged")
+                field("Amount Charged"; Rec."Amount Charged")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }

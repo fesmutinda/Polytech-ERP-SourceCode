@@ -12,19 +12,19 @@ Page 51516316 "Payroll Deductions List."
         {
             repeater(Group)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Taxable; Taxable)
+                field(Taxable; Rec.Taxable)
                 {
                     ApplicationArea = Basic;
                 }
@@ -38,7 +38,7 @@ Page 51516316 "Payroll Deductions List."
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Transaction Type" := "transaction type"::Deduction;
+        Rec."Transaction Type" := Rec."transaction type"::Deduction;
     end;
 }
 

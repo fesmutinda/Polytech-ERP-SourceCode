@@ -2,7 +2,7 @@
 Page 51516312 "Payroll Employee Deductions."
 {
     PageType = List;
-    SourceTable = 51516319;
+    SourceTable = "Payroll Employee Transactions.";
     SourceTableView = where("Transaction Type" = const(Deduction));
 
     layout
@@ -11,74 +11,74 @@ Page 51516312 "Payroll Employee Deductions."
         {
             repeater(Group)
             {
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                     TableRelation = "Payroll Transaction Code."."Transaction Code" where("Transaction Type" = const(Deduction));
                 }
-                field("Transaction Name"; "Transaction Name")
+                field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Number"; "Loan Number")
+                field("Loan Number"; Rec."Loan Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Original Deduction Amount"; "Original Deduction Amount")
+                field("Original Deduction Amount"; Rec."Original Deduction Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Charged"; "Interest Charged")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Amount; Amount)
+                field("Interest Charged"; Rec."Interest Charged")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount(LCY)"; "Amount(LCY)")
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amtzd Loan Repay Amt"; "Amtzd Loan Repay Amt")
+                field("Amtzd Loan Repay Amt"; Rec."Amtzd Loan Repay Amt")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance; Balance)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance(LCY)"; "Balance(LCY)")
+                field("Balance(LCY)"; Rec."Balance(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Month"; "Period Month")
+                field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Year"; "Period Year")
+                field("Period Year"; Rec."Period Year")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll Period"; "Payroll Period")
+                field("Payroll Period"; Rec."Payroll Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Original Amount"; "Original Amount")
+                field("Original Amount"; Rec."Original Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sacco Membership No."; "Sacco Membership No.")
+                field("Sacco Membership No."; Rec."Sacco Membership No.")
                 {
                     ApplicationArea = Basic;
                 }

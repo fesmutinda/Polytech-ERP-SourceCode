@@ -2,17 +2,17 @@
 Page 51516362 "Membership Application Image"
 {
     PageType = Card;
-    SourceTable = 51516360;
+    SourceTable = "Membership Applications";
 
     layout
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic;
             }
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic;
             }
@@ -38,6 +38,6 @@ Page 51516362 "Membership Application Image"
     end;
 
     var
-        MemberApp: Record 51516360;
+        MemberApp: Record "Membership Applications";
 }
 

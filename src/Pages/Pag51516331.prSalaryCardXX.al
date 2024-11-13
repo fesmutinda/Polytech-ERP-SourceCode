@@ -3,7 +3,7 @@ Page 51516331 "prSalary CardXX"
 {
     DeleteAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516265;
+    SourceTable = "prSalary Card";
 
     layout
     {
@@ -12,99 +12,99 @@ Page 51516331 "prSalary CardXX"
             repeater(Group)
             {
                 Caption = 'Payment Info';
-                field("Basic Pay"; "Basic Pay")
+                field("Basic Pay"; Rec."Basic Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Mode"; "Payment Mode")
+                field("Payment Mode"; Rec."Payment Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Currency; Currency)
+                field(Currency; Rec.Currency)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays NSSF"; "Pays NSSF")
+                field("Pays NSSF"; Rec."Pays NSSF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays NHIF"; "Pays NHIF")
+                field("Pays NHIF"; Rec."Pays NHIF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays PAYE"; "Pays PAYE")
+                field("Pays PAYE"; Rec."Pays PAYE")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pays Pension"; "Pays Pension")
+                field("Pays Pension"; Rec."Pays Pension")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payslip Message"; "Payslip Message")
+                field("Payslip Message"; Rec."Payslip Message")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm BasicPay"; "Cumm BasicPay")
+                field("Cumm BasicPay"; Rec."Cumm BasicPay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm GrossPay"; "Cumm GrossPay")
+                field("Cumm GrossPay"; Rec."Cumm GrossPay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm NetPay"; "Cumm NetPay")
+                field("Cumm NetPay"; Rec."Cumm NetPay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm Allowances"; "Cumm Allowances")
+                field("Cumm Allowances"; Rec."Cumm Allowances")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm Deductions"; "Cumm Deductions")
+                field("Cumm Deductions"; Rec."Cumm Deductions")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Filter"; "Period Filter")
+                field("Period Filter"; Rec."Period Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm PAYE"; "Cumm PAYE")
+                field("Cumm PAYE"; Rec."Cumm PAYE")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm NSSF"; "Cumm NSSF")
+                field("Cumm NSSF"; Rec."Cumm NSSF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm Pension"; "Cumm Pension")
+                field("Cumm Pension"; Rec."Cumm Pension")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm HELB"; "Cumm HELB")
+                field("Cumm HELB"; Rec."Cumm HELB")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm NHIF"; "Cumm NHIF")
+                field("Cumm NHIF"; Rec."Cumm NHIF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cumm Employer Pension"; "Cumm Employer Pension")
+                field("Cumm Employer Pension"; Rec."Cumm Employer Pension")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Suspend Pay"; "Suspend Pay")
+                field("Suspend Pay"; Rec."Suspend Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Suspension Date"; "Suspension Date")
+                field("Suspension Date"; Rec."Suspension Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Suspension Reasons"; "Suspension Reasons")
+                field("Suspension Reasons"; Rec."Suspension Reasons")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fosa Accounts"; "Fosa Accounts")
+                field("Fosa Accounts"; Rec."Fosa Accounts")
                 {
                     ApplicationArea = Basic;
                 }
