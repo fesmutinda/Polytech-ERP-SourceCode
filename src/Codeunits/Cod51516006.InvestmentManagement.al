@@ -7,16 +7,17 @@ Codeunit 51516006 "Investment Management"
     end;
 
     var
-        InvestorAmounts: Record 51516440;
-        InvestorAccount: Record 51516433;
-        InvestorPostingGroup: Record 51516450;
+        InvestorAmounts: Record "Transaction Types";
+        InvestorAccount: Record "FOSA Account NOK Details";
+        InvestorPostingGroup: Record "Standing Order Register";
         GenJnlLine: Record "Gen. Journal Line";
+        PaymentHeader: Record "Payment Header";
 
     local procedure InvestorInterestBatchJob("Investor No": Code[20]; "Journal Template": Code[20]; "Journal Batch": Code[20]; PostingGroup: Code[20])
     var
-        InvestorAccount: Record 51516433;
-        InvestorAmounts: Record 51516440;
-        InvestorPostingGroup: Record 51516450;
+        InvestorAccount: Record "Standing Order Register";
+        InvestorAmounts: Record "Transaction Types";
+        InvestorPostingGroup: Record "Standing Order Register";
         LineNo: Integer;
     begin
         if InvestorPostingGroup.Get(PostingGroup) then begin
@@ -29,9 +30,9 @@ Codeunit 51516006 "Investment Management"
             GenJnlLine.Validate(GenJnlLine."Journal Batch Name");
             GenJnlLine."Line No." := LineNo;
             GenJnlLine."Source Code" := SourceCode;
-            GenJnlLine."Posting Date" := today;
+            GenJnlLine."Posting Date" := Today;
         end;
-        PaymentHeader."Posting Date";
+        // PaymentHeader."Posting Date";
         if CustomerLinesExist(PaymentHeader) then
             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
         else
