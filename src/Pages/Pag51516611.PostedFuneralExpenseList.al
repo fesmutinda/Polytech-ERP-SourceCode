@@ -7,7 +7,7 @@ Page 51516611 "Posted Funeral Expense List"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516549;
+    SourceTable = "Funeral Expense Payment";
     SourceTableView = where(Posted = filter(Yes));
 
     layout
@@ -16,23 +16,23 @@ Page 51516611 "Posted Funeral Expense List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Status"; "Member Status")
+                field("Member Status"; Rec."Member Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Death Date"; "Death Date")
+                field("Death Date"; Rec."Death Date")
                 {
                     ApplicationArea = Basic;
                 }

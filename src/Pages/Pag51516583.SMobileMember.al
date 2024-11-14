@@ -2,7 +2,7 @@
 Page 51516583 "S-Mobile Member"
 {
     PageType = List;
-    SourceTable = 51516364;
+    SourceTable = "Member Register";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516583 "S-Mobile Member"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Shares"; "Current Shares")
+                field("Current Shares"; Rec."Current Shares")
                 {
                     ApplicationArea = Basic;
                 }

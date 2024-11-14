@@ -2,7 +2,7 @@
 Page 51516604 "Agent Applications Card"
 {
     PageType = Card;
-    SourceTable = 51516541;
+    SourceTable = "Agent Applications";
 
     layout
     {
@@ -10,155 +10,155 @@ Page 51516604 "Agent Applications Card"
         {
             group(General)
             {
-                field("Agent Code"; "Agent Code")
+                field("Agent Code"; Rec."Agent Code")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Float Account"; Account)
+                field("Float Account"; Rec.Account)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Time Entered"; "Time Entered")
+                field("Time Entered"; Rec."Time Entered")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Serial No"; "Document Serial No")
+                field("Document Serial No"; Rec."Document Serial No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
-                {
-                    ApplicationArea = Basic;
-                    ShowMandatory = true;
-                }
-                field("Agent ID No"; "Customer ID No")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Date of Birth"; "Date of Birth")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Name; Name)
+                field("Agent ID No"; Rec."Customer ID No")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Mobile No"; "Mobile No")
+                field("Date of Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field(Status; Status)
+                field("Mobile No"; Rec."Mobile No")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Approved"; "Date Approved")
+                field("Date Approved"; Rec."Date Approved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Approved"; "Time Approved")
+                field("Time Approved"; Rec."Time Approved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By"; "Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Rejected"; "Date Rejected")
+                field("Date Rejected"; Rec."Date Rejected")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Rejected"; "Time Rejected")
+                field("Time Rejected"; Rec."Time Rejected")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejected By"; "Rejected By")
+                field("Rejected By"; Rec."Rejected By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejection Reason"; "Rejection Reason")
+                field("Rejection Reason"; Rec."Rejection Reason")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sent To Server"; "Sent To Server")
+                field("Sent To Server"; Rec."Sent To Server")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("1st Approval By"; "1st Approval By")
+                field("1st Approval By"; Rec."1st Approval By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date 1st Approval"; "Date 1st Approval")
+                field("Date 1st Approval"; Rec."Date 1st Approval")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time First Approval"; "Time First Approval")
+                field("Time First Approval"; Rec."Time First Approval")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withdrawal Limit Code"; "Withdrawal Limit Code")
+                field("Withdrawal Limit Code"; Rec."Withdrawal Limit Code")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Withdrawal Limit Amount"; "Withdrawal Limit Amount")
+                field("Withdrawal Limit Amount"; Rec."Withdrawal Limit Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     ShowMandatory = true;
                 }
-                field("Name of the Proposed Agent"; "Name of the Proposed Agent")
+                field("Name of the Proposed Agent"; Rec."Name of the Proposed Agent")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Comm Account"; "Comm Account")
+                field("Comm Account"; Rec."Comm Account")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Type of Business"; "Type of Business")
+                field("Type of Business"; Rec."Type of Business")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Place of Business"; "Place of Business")
-                {
-                    ApplicationArea = Basic;
-                    ShowMandatory = true;
-                }
-                field("Business/Work Experience"; "Business/Work Experience")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Branch Registered at"; "Branch Registered at")
+                field("Place of Business"; Rec."Place of Business")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field(Branch; Branch)
+                field("Business/Work Experience"; Rec."Business/Work Experience")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Branch Registered at"; Rec."Branch Registered at")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field(Branch; Rec.Branch)
                 {
                     ApplicationArea = Basic;
                 }

@@ -7,7 +7,7 @@ Page 51516757 "File Movement List"
     InsertAllowed = true;
     ModifyAllowed = true;
     PageType = List;
-    SourceTable = 51516290;
+    SourceTable = "File Movement Header";
 
     layout
     {
@@ -15,91 +15,91 @@ Page 51516757 "File Movement List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Number"; "File Number")
+                field("File Number"; Rec."File Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Name"; "File Name")
+                field("File Name"; Rec."File Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Requested"; "Date Requested")
+                field("Date Requested"; Rec."Date Requested")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested By"; "Requested By")
+                field("Requested By"; Rec."Requested By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Retrieved"; "Date Retrieved")
+                field("Date Retrieved"; Rec."Date Retrieved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsiblity Center"; "Responsiblity Center")
+                field("Responsiblity Center"; Rec."Responsiblity Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Return Date"; "Expected Return Date")
+                field("Expected Return Date"; Rec."Expected Return Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Duration Requested"; "Duration Requested")
+                field("Duration Requested"; Rec."Duration Requested")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Returned"; "Date Returned")
+                field("Date Returned"; Rec."Date Returned")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Location"; "File Location")
+                field("File Location"; Rec."File Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current File Location"; "Current File Location")
+                field("Current File Location"; Rec."Current File Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved By"; "Retrieved By")
+                field("Retrieved By"; Rec."Retrieved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Returned By"; "Returned By")
+                field("Returned By"; Rec."Returned By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issuing File Location"; "Issuing File Location")
+                field("Issuing File Location"; Rec."Issuing File Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }

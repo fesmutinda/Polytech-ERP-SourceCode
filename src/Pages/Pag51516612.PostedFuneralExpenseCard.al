@@ -5,88 +5,88 @@ Page 51516612 "Posted Funeral Expense Card"
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
-    SourceTable = 51516549;
+    SourceTable = "Funeral Expense Payment";
 
     layout
     {
         area(content)
         {
-            field("No."; "No.")
+            field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Member No."; "Member No.")
+            field("Member No."; Rec."Member No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Member Name"; "Member Name")
+            field("Member Name"; Rec."Member Name")
             {
                 ApplicationArea = Basic;
             }
-            field("Member ID No"; "Member ID No")
+            field("Member ID No"; Rec."Member ID No")
             {
                 ApplicationArea = Basic;
             }
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic;
             }
-            field("Member Status"; "Member Status")
+            field("Member Status"; Rec."Member Status")
             {
                 ApplicationArea = Basic;
             }
-            field("Death Date"; "Death Date")
+            field("Death Date"; Rec."Death Date")
             {
                 ApplicationArea = Basic;
             }
-            field("Date Reported"; "Date Reported")
+            field("Date Reported"; Rec."Date Reported")
             {
                 ApplicationArea = Basic;
             }
-            field("Reported By"; "Reported By")
+            field("Reported By"; Rec."Reported By")
             {
                 ApplicationArea = Basic;
             }
-            field("Reporter ID No."; "Reporter ID No.")
+            field("Reporter ID No."; Rec."Reporter ID No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Reporter Mobile No"; "Reporter Mobile No")
+            field("Reporter Mobile No"; Rec."Reporter Mobile No")
             {
                 ApplicationArea = Basic;
             }
-            field("Reporter Address"; "Reporter Address")
+            field("Reporter Address"; Rec."Reporter Address")
             {
                 ApplicationArea = Basic;
             }
-            field("Relationship With Deceased"; "Relationship With Deceased")
+            field("Relationship With Deceased"; Rec."Relationship With Deceased")
             {
                 ApplicationArea = Basic;
             }
-            field("Received Burial Permit"; "Received Burial Permit")
+            field("Received Burial Permit"; Rec."Received Burial Permit")
             {
                 ApplicationArea = Basic;
             }
-            field("Received Letter From Chief"; "Received Letter From Chief")
+            field("Received Letter From Chief"; Rec."Received Letter From Chief")
             {
                 ApplicationArea = Basic;
             }
-            field(Posted; Posted)
-            {
-                ApplicationArea = Basic;
-                Editable = false;
-            }
-            field("Date Posted"; "Date Posted")
+            field(Posted; Rec.Posted)
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Time Posted"; "Time Posted")
+            field("Date Posted"; Rec."Date Posted")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Posted By"; "Posted By")
+            field("Time Posted"; Rec."Time Posted")
+            {
+                ApplicationArea = Basic;
+                Editable = false;
+            }
+            field("Posted By"; Rec."Posted By")
             {
                 ApplicationArea = Basic;
                 Editable = false;

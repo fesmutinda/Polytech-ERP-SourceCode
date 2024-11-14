@@ -6,7 +6,7 @@ Page 51516739 "ATM Transactions Logs"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516480;
+    SourceTable = "ATM Transactions 2";
 
     layout
     {
@@ -14,155 +14,155 @@ Page 51516739 "ATM Transactions Logs"
         {
             repeater(Group)
             {
-                field(ID; ID)
+                field(ID; Rec.ID)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Processing Code"; "Processing Code")
+                field("Processing Code"; Rec."Processing Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Amount"; "Transaction Amount")
+                field("Transaction Amount"; Rec."Transaction Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cardholder Billing"; "Cardholder Billing")
+                field("Cardholder Billing"; Rec."Cardholder Billing")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transmission Date Time"; "Transmission Date Time")
+                field("Transmission Date Time"; Rec."Transmission Date Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Conversion Rate"; "Conversion Rate")
+                field("Conversion Rate"; Rec."Conversion Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("System Trace Audit No"; "System Trace Audit No")
+                field("System Trace Audit No"; Rec."System Trace Audit No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Time - Local"; "Date Time - Local")
+                field("Date Time - Local"; Rec."Date Time - Local")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expiry Date"; "Expiry Date")
+                field("Expiry Date"; Rec."Expiry Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("POS Entry Mode"; "POS Entry Mode")
+                field("POS Entry Mode"; Rec."POS Entry Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Function Code"; "Function Code")
+                field("Function Code"; Rec."Function Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("POS Capture Code"; "POS Capture Code")
+                field("POS Capture Code"; Rec."POS Capture Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Fee"; "Transaction Fee")
+                field("Transaction Fee"; Rec."Transaction Fee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Settlement Fee"; "Settlement Fee")
+                field("Settlement Fee"; Rec."Settlement Fee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Settlement Processing Fee"; "Settlement Processing Fee")
+                field("Settlement Processing Fee"; Rec."Settlement Processing Fee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Acquiring Institution ID Code"; "Acquiring Institution ID Code")
+                field("Acquiring Institution ID Code"; Rec."Acquiring Institution ID Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Forwarding Institution ID Code"; "Forwarding Institution ID Code")
+                field("Forwarding Institution ID Code"; Rec."Forwarding Institution ID Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction 2 Data"; "Transaction 2 Data")
+                field("Transaction 2 Data"; Rec."Transaction 2 Data")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieval Reference No"; "Retrieval Reference No")
+                field("Retrieval Reference No"; Rec."Retrieval Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Authorisation ID Response"; "Authorisation ID Response")
+                field("Authorisation ID Response"; Rec."Authorisation ID Response")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Response Code"; "Response Code")
+                field("Response Code"; Rec."Response Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Acceptor Terminal ID"; "Card Acceptor Terminal ID")
+                field("Card Acceptor Terminal ID"; Rec."Card Acceptor Terminal ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Acceptor ID Code"; "Card Acceptor ID Code")
+                field("Card Acceptor ID Code"; Rec."Card Acceptor ID Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Acceptor Name/Location"; "Card Acceptor Name/Location")
+                field("Card Acceptor Name/Location"; Rec."Card Acceptor Name/Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Additional Data - Private"; "Additional Data - Private")
+                field("Additional Data - Private"; Rec."Additional Data - Private")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Currency Code"; "Transaction Currency Code")
+                field("Transaction Currency Code"; Rec."Transaction Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Settlement Currency Code"; "Settlement Currency Code")
+                field("Settlement Currency Code"; Rec."Settlement Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cardholder Billing Cur Code"; "Cardholder Billing Cur Code")
+                field("Cardholder Billing Cur Code"; Rec."Cardholder Billing Cur Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Response Indicator"; "Response Indicator")
+                field("Response Indicator"; Rec."Response Indicator")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Service Indicator"; "Service Indicator")
+                field("Service Indicator"; Rec."Service Indicator")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Replacement Amounts"; "Replacement Amounts")
+                field("Replacement Amounts"; Rec."Replacement Amounts")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Receiving Institution ID Code"; "Receiving Institution ID Code")
+                field("Receiving Institution ID Code"; Rec."Receiving Institution ID Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Identification 2"; "Account Identification 2")
+                field("Account Identification 2"; Rec."Account Identification 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bitmap - Hexadecimal"; "Bitmap - Hexadecimal")
+                field("Bitmap - Hexadecimal"; Rec."Bitmap - Hexadecimal")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bitmap - Binary"; "Bitmap - Binary")
+                field("Bitmap - Binary"; Rec."Bitmap - Binary")
                 {
                     ApplicationArea = Basic;
                 }

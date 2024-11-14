@@ -8,7 +8,7 @@ Page 51516626 "Receipt Allocation(Posted)"
     ModifyAllowed = false;
     PageType = Card;
     ShowFilter = false;
-    SourceTable = 51516387;
+    SourceTable = "Cheque Discounting";
 
     layout
     {
@@ -16,68 +16,68 @@ Page 51516626 "Receipt Allocation(Posted)"
         {
             repeater(Control1102760000)
             {
-                field("Mpesa Account Type"; "Mpesa Account Type")
+                field("Mpesa Account Type"; Rec."Mpesa Account Type")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Mpesa Account No"; "Mpesa Account No")
+                field("Mpesa Account No"; Rec."Mpesa Account No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Total Payment Loan"; "Cummulative Total Payment Loan")
+                field("Cummulative Total Payment Loan"; Rec."Cummulative Total Payment Loan")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cummulative Total Payment Loan';
                 }
-                field("Cash Clearing Charge"; "Cash Clearing Charge")
+                field("Cash Clearing Charge"; Rec."Cash Clearing Charge")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Amount"; "Total Amount")
+                field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Balance"; "Amount Balance")
+                field("Amount Balance"; Rec."Amount Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Interest Balance"; "Interest Balance")
+                field("Interest Balance"; Rec."Interest Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Prepayment Date"; "Prepayment Date")
+                field("Prepayment Date"; Rec."Prepayment Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Insurance"; "Loan Insurance")
+                field("Loan Insurance"; Rec."Loan Insurance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
@@ -92,7 +92,7 @@ Page 51516626 "Receipt Allocation(Posted)"
     trigger OnOpenPage()
     begin
         sto.Reset;
-        sto.SetRange(sto."No.", "Document No");
+        sto.SetRange(sto."No.", Rec."Document No");
         if sto.Find('-') then begin
             if sto.Status = sto.Status::Approved then begin
                 CurrPage.Editable := false;
@@ -102,9 +102,9 @@ Page 51516626 "Receipt Allocation(Posted)"
     end;
 
     var
-        sto: Record 51516449;
-        Loan: Record 51516371;
-        ReceiptAllocation: Record 51516387;
-        ReceiptH: Record 51516388;
+        sto: Record "Standing Orders";
+        Loan: Record "Loans Register";
+        ReceiptAllocation: Record "Receipt Allocation";
+        ReceiptH: Record "Receipts & Payments";
 }
 

@@ -2,7 +2,7 @@
 Page 51516644 "CheckOff Distributions Master"
 {
     PageType = List;
-    SourceTable = 51516425;
+    SourceTable = "Checkoff Processing Details(B)";
 
     layout
     {
@@ -10,43 +10,43 @@ Page 51516644 "CheckOff Distributions Master"
         {
             repeater(Group)
             {
-                field("Check Off No"; "Check Off No")
+                field("Check Off No"; Rec."Check Off No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Check Off Advice No"; "Check Off Advice No")
+                field("Check Off Advice No"; Rec."Check Off Advice No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Check Off Date"; "Check Off Date")
+                field("Check Off Date"; Rec."Check Off Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product"; "Loan Product")
+                field("Loan Product"; Rec."Loan Product")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }

@@ -4,7 +4,7 @@ Page 51516570 "Cheque Receipt Line-Family"
     CardPageID = "Cheque Truncation Card";
     Editable = true;
     PageType = List;
-    SourceTable = 51516515;
+    SourceTable = "Cheque Issue Lines-Family";
 
     layout
     {
@@ -12,99 +12,99 @@ Page 51516570 "Cheque Receipt Line-Family"
         {
             repeater(Group)
             {
-                field("Cheque Serial No"; "Cheque Serial No")
+                field("Cheque Serial No"; Rec."Cheque Serial No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Balance"; "Account Balance")
+                field("Account Balance"; Rec."Account Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Un pay Code"; "Un pay Code")
+                field("Un pay Code"; Rec."Un pay Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Interpretation; Interpretation)
+                field(Interpretation; Rec.Interpretation)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Un Pay Charge Amount"; "Un Pay Charge Amount")
+                field("Un Pay Charge Amount"; Rec."Un Pay Charge Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Family Account No."; "Family Account No.")
+                field("Family Account No."; Rec."Family Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date _Refference No."; "Date _Refference No.")
+                field("Date _Refference No."; Rec."Date _Refference No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Branch Code"; "Branch Code")
+                field("Branch Code"; Rec."Branch Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date-1"; "Date-1")
+                field("Date-1"; Rec."Date-1")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date-2"; "Date-2")
+                field("Date-2"; Rec."Date-2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Family Routing No."; "Family Routing No.")
+                field("Family Routing No."; Rec."Family Routing No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Fillers; Fillers)
+                field(Fillers; Rec.Fillers)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Refference"; "Transaction Refference")
+                field("Transaction Refference"; Rec."Transaction Refference")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unpay Date"; "Unpay Date")
+                field("Unpay Date"; Rec."Unpay Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(FrontImage; FrontImage)
+                field(FrontImage; Rec.FrontImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(FrontGrayImage; FrontGrayImage)
+                field(FrontGrayImage; Rec.FrontGrayImage)
                 {
                     ApplicationArea = Basic;
                 }
-                field(BackImages; BackImages)
+                field(BackImages; Rec.BackImages)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }

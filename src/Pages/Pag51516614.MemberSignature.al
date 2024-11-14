@@ -6,13 +6,13 @@ Page 51516614 "Member Signature"
     InsertAllowed = false;
     LinksAllowed = false;
     PageType = CardPart;
-    SourceTable = 51516360;
+    SourceTable = "Membership Applications";
 
     layout
     {
         area(content)
         {
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic;
             }
@@ -69,16 +69,16 @@ Page 51516614 "Member Signature"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("No.");
+                    Rec.TestField("No.");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "No." + Format(Picture.MediaId);
-                    Picture.ExportFile(ExportPath);
+                    ExportPath := TemporaryPath + Rec."No." + Format(Rec.Picture.MediaId);
+                    Rec.Picture.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "No.", ConvertStr("No.", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', rec."No.", ConvertStr(Rec."No.", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -128,8 +128,8 @@ Page 51516614 "Member Signature"
     var
         CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
@@ -146,11 +146,11 @@ Page 51516614 "Member Signature"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Picture.Count > 0 then
+        if Rec.Picture.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -159,17 +159,17 @@ Page 51516614 "Member Signature"
         if FileName = '' then
             Error('');
 
-        Clear(Picture);
-        Picture.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        Clear(Rec.Picture);
+        Rec.Picture.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Picture.Count <> 0;
+        DeleteExportEnabled := Rec.Picture.Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean
@@ -185,13 +185,13 @@ Page 51516614 "Member Signature"
 
     procedure DeleteItemPicture()
     begin
-        TestField("No.");
+        Rec.TestField("No.");
 
         if not Confirm(DeleteImageQst) then
             exit;
 
-        Clear(Picture);
-        Modify(true);
+        Clear(Rec.Picture);
+        Rec.Modify(true);
     end;
 
     trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)

@@ -7,7 +7,7 @@ Page 51516751 "HR 360 Appraisals List - EV"
     ModifyAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Functions,Appraisal';
-    SourceTable = 51516216;
+    SourceTable = "HR Appraisal Header";
     SourceTableView = where("Appraisal Stage" = const("End Year Evalauation"));
 
     layout
@@ -16,47 +16,47 @@ Page 51516751 "HR 360 Appraisals List - EV"
         {
             repeater(Group)
             {
-                field("Appraisal No"; "Appraisal No")
+                field("Appraisal No"; Rec."Appraisal No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Department; Department)
+                field(Department; Rec."Department")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Type"; "Appraisal Type")
+                field("Appraisal Type"; Rec."Appraisal Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Stage"; "Appraisal Stage")
+                field("Appraisal Stage"; Rec."Appraisal Stage")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Sent; Sent)
+                field(Sent; Rec.Sent)
                 {
                     ApplicationArea = Basic;
                 }
@@ -96,12 +96,12 @@ Page 51516751 "HR 360 Appraisals List - EV"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage", "appraisal stage"::"End Year Evalauation");
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"End Year Evalauation");
 
                         if Confirm('Return to supervisor?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"Target Approval";
-                        Modify;
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"Target Approval";
+                        Rec.Modify;
                         Message('Appraisal returned to supervisor');
                     end;
                 }
@@ -115,12 +115,12 @@ Page 51516751 "HR 360 Appraisals List - EV"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage");
+                        Rec.TestField("Appraisal Stage");
 
                         if Confirm('Return to appraisee?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"Target Setting";
-                        Modify;
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"Target Setting";
+                        Rec.Modify;
                         Message('Appraisal returned to appraisee');
                     end;
                 }

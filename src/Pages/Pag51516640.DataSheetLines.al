@@ -7,7 +7,7 @@ Page 51516640 "Data Sheet Lines"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516421;
+    SourceTable = "Data Sheet Lines";
 
     layout
     {
@@ -15,56 +15,56 @@ Page 51516640 "Data Sheet Lines"
         {
             repeater(Group)
             {
-                field("Payroll No"; "Payroll No")
+                field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Type"; "Loan Type")
+                field("Loan Type"; Rec."Loan Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principal Amount"; "Principal Amount")
+                field("Principal Amount"; Rec."Principal Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Principal Balance"; "Expected Principal Balance")
+                field("Expected Principal Balance"; Rec."Expected Principal Balance")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expected Principal Balance(Post-ChkOff)';
                 }
-                field("Share Capital"; "Share Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entrance Fees"; "Entrance Fees")
+                field("Entrance Fees"; Rec."Entrance Fees")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deposit Contribution"; "Deposit Contribution")
+                field("Deposit Contribution"; Rec."Deposit Contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Kanisa Savings"; "Kanisa Savings")
+                field("Kanisa Savings"; Rec."Kanisa Savings")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Style = StrongAccent;

@@ -2,7 +2,7 @@
 Page 51516572 "Supervisor Approval Levels"
 {
     PageType = List;
-    SourceTable = 51516451;
+    SourceTable = "Supervisors Approval Levels";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516572 "Supervisor Approval Levels"
         {
             repeater(Group)
             {
-                field("Supervisor ID"; "Supervisor ID")
+                field("Supervisor ID"; Rec."Supervisor ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Approval Amount"; "Maximum Approval Amount")
+                field("Maximum Approval Amount"; Rec."Maximum Approval Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-mail Address"; "E-mail Address")
+                field("E-mail Address"; Rec."E-mail Address")
                 {
                     ApplicationArea = Basic;
                 }

@@ -3,7 +3,7 @@ Page 51516621 "SwizzKash Applications"
 {
     CardPageID = "SwizzKash Application Card";
     PageType = List;
-    SourceTable = 51516521;
+    SourceTable = "SwizzKash Applications";
 
     layout
     {
@@ -11,43 +11,43 @@ Page 51516621 "SwizzKash Applications"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(SentToServer; SentToServer)
+                field(SentToServer; Rec.SentToServer)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Applied"; "Date Applied")
+                field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Applied"; "Time Applied")
+                field("Time Applied"; Rec."Time Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }

@@ -7,7 +7,7 @@ Page 51516652 "Data Sheet Lines-Dist"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516651;
+    SourceTable = "Data Sheet Lines-Dist";
 
     layout
     {
@@ -15,58 +15,58 @@ Page 51516652 "Data Sheet Lines-Dist"
         {
             repeater(Group)
             {
-                field("Payroll No"; "Payroll No")
+                field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principal Amount"; "Principal Amount")
+                field("Principal Amount"; Rec."Principal Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Principal Balance"; "Expected Principal Balance")
+                field("Expected Principal Balance"; Rec."Expected Principal Balance")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expected Principal Balance(Post-ChkOff)';
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Special Code"; "Special Code")
+                field("Special Code"; Rec."Special Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Installments; Installments)
+                field(Installments; Rec.Installments)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deduction type"; "Deduction type")
+                field("Deduction type"; Rec."Deduction type")
                 {
                     ApplicationArea = Basic;
                 }

@@ -7,7 +7,7 @@ Page 51516655 "Checkoff Processing Linesx"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516653;
+    SourceTable = "Checkoff Lines-Distributedx";
 
     layout
     {
@@ -15,101 +15,101 @@ Page 51516655 "Checkoff Processing Linesx"
         {
             repeater(Group)
             {
-                field("Checkoff No"; "Checkoff No")
+                field("Checkoff No"; Rec."Checkoff No")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field("Staff/Payroll No"; "Staff/Payroll No")
+                field("Staff/Payroll No"; Rec."Staff/Payroll No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Account Name"; "Account Name")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(TOTAL_DISTRIBUTED; TOTAL_DISTRIBUTED)
+                field("Account Name"; Rec."Account Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(TOTAL_DISTRIBUTED; Rec.TOTAL_DISTRIBUTED)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Total Amount';
                     Editable = false;
                 }
-                field("No Repayment"; "No Repayment")
+                field("No Repayment"; Rec."No Repayment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff Not Found"; "Staff Not Found")
+                field("Staff Not Found"; Rec."Staff Not Found")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Date Filter"; "Date Filter")
+                field("Date Filter"; Rec."Date Filter")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Car Loan"; "Car Loan")
+                field("Car Loan"; Rec."Car Loan")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Development; Development)
+                field(Development; Rec.Development)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Sambamba; Sambamba)
+                field(Sambamba; Rec.Sambamba)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Emergency; Emergency)
+                field(Emergency; Rec.Emergency)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("School Fees"; "School Fees")
+                field("School Fees"; Rec."School Fees")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Benevolent; Benevolent)
+                field(Benevolent; Rec.Benevolent)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Deposit Contribution"; "Deposit Contribution")
+                field("Deposit Contribution"; Rec."Deposit Contribution")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Defaulter; Defaulter)
+                field(Defaulter; Rec.Defaulter)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Not Found"; "Account Not Found")
+                field("Account Not Found"; Rec."Account Not Found")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Okoa Jahazi"; "Okoa Jahazi")
+                field("Okoa Jahazi"; Rec."Okoa Jahazi")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Vuka Special"; "Vuka Special")
+                field("Vuka Special"; Rec."Vuka Special")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("40 Years"; "40 Years")
+                field("40 Years"; Rec."40 Years")
                 {
                     ApplicationArea = Basic;
                 }

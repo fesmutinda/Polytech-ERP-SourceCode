@@ -2,7 +2,7 @@
 Page 51516603 "SMS Charges"
 {
     PageType = List;
-    SourceTable = 51516554;
+    SourceTable = "SMS Charges";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516603 "SMS Charges"
         {
             repeater(Group)
             {
-                field("Charge Code"; "Charge Code")
+                field("Charge Code"; Rec."Charge Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Account"; "Charge Account")
+                field("Charge Account"; Rec."Charge Account")
                 {
                     ApplicationArea = Basic;
                 }

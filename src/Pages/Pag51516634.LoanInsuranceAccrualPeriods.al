@@ -4,7 +4,7 @@ Page 51516634 "Loan Insurance Accrual Periods"
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
-    SourceTable = 51516710;
+    SourceTable = "Loan Insurance Accrual Period";
 
     layout
     {
@@ -12,41 +12,41 @@ Page 51516634 "Loan Insurance Accrual Periods"
         {
             repeater(Group)
             {
-                field("Insurance Due Date"; "Insurance Due Date")
+                field("Insurance Due Date"; Rec."Insurance Due Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("New Fiscal Year"; "New Fiscal Year")
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Closed; Closed)
+                field("New Fiscal Year"; Rec."New Fiscal Year")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Date Locked"; "Date Locked")
+                field("Date Locked"; Rec."Date Locked")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Closed by User"; "Closed by User")
+                field("Closed by User"; Rec."Closed by User")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Closing Date Time"; "Closing Date Time")
+                field("Closing Date Time"; Rec."Closing Date Time")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Insurance Calcuation Date"; "Insurance Calcuation Date")
+                field("Insurance Calcuation Date"; Rec."Insurance Calcuation Date")
                 {
                     ApplicationArea = Basic;
                 }
@@ -79,6 +79,6 @@ Page 51516634 "Loan Insurance Accrual Periods"
     var
         InvtPeriod: Record "Inventory Period";
         date: DateFormula;
-        InterestPeriod: Record 51516710;
+        InterestPeriod: Record "Loan Insurance Accrual Period";
 }
 

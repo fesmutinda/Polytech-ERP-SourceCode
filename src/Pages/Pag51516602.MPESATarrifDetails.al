@@ -2,7 +2,7 @@
 Page 51516602 "MPESA Tarrif Details"
 {
     PageType = List;
-    SourceTable = 51516097;
+    SourceTable = "Tariff Details";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516602 "MPESA Tarrif Details"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lower Limit"; "Lower Limit")
+                field("Lower Limit"; Rec."Lower Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Upper Limit"; "Upper Limit")
+                field("Upper Limit"; Rec."Upper Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Amount"; "Charge Amount")
+                field("Charge Amount"; Rec."Charge Amount")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516637 "Graduated Loan Interest"
 {
     PageType = List;
-    SourceTable = 51516404;
+    SourceTable = "Graduated Loan Int.";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516637 "Graduated Loan Interest"
         {
             repeater(Group)
             {
-                field("Loan Code"; "Loan Code")
+                field("Loan Code"; Rec."Loan Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period From"; "Period From")
+                field("Period From"; Rec."Period From")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period To"; "Period To")
+                field("Period To"; Rec."Period To")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min Amount"; "Min Amount")
+                field("Min Amount"; Rec."Min Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Amount"; "Max Amount")
+                field("Max Amount"; Rec."Max Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516633 "Product Deposit>Loan Analysis"
 {
     PageType = List;
-    SourceTable = 51516709;
+    SourceTable = "Product Deposit>Loan Analysis";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516633 "Product Deposit>Loan Analysis"
         {
             repeater(Group)
             {
-                field("Product Code"; "Product Code")
+                field("Product Code"; Rec."Product Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deposit Multiplier"; "Deposit Multiplier")
+                field("Deposit Multiplier"; Rec."Deposit Multiplier")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Minimum Deposit"; "Minimum Deposit")
+                field("Minimum Deposit"; Rec."Minimum Deposit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Minimum Share Capital"; "Minimum Share Capital")
+                field("Minimum Share Capital"; Rec."Minimum Share Capital")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Minimum No of Membership Month"; "Minimum No of Membership Month")
+                field("Minimum No of Membership Month"; Rec."Minimum No of Membership Month")
                 {
                     ApplicationArea = Basic;
                 }

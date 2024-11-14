@@ -6,7 +6,7 @@ Page 51516575 "Mobile PIN Reset"
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = List;
-    SourceTable = 51516521;
+    SourceTable = "SwizzKash Applications";
 
     layout
     {
@@ -14,40 +14,40 @@ Page 51516575 "Mobile PIN Reset"
         {
             repeater(Group)
             {
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Enabled = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(SentToServer; SentToServer)
+                field(SentToServer; Rec.SentToServer)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Reset PIN';
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Applied"; "Date Applied")
+                field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last PIN Reset"; "Last PIN Reset")
+                field("Last PIN Reset"; Rec."Last PIN Reset")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reset By"; "Reset By")
+                field("Reset By"; Rec."Reset By")
                 {
                     ApplicationArea = Basic;
                 }

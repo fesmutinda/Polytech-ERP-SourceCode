@@ -3,7 +3,7 @@ Page 51516706 "Loan Reschedulling list"
 {
     CardPageID = "Loan Rescheduling card";
     PageType = List;
-    SourceTable = 51516069;
+    SourceTable = "Loan Rescheduling";
 
     layout
     {
@@ -11,19 +11,19 @@ Page 51516706 "Loan Reschedulling list"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Rescheduled; Rescheduled)
+                field(Rescheduled; Rec.Rescheduled)
                 {
                     ApplicationArea = Basic;
                 }

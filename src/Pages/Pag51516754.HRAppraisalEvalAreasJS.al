@@ -3,7 +3,7 @@ Page 51516754 "HR Appraisal Eval Areas - JS"
 {
     Caption = 'HR Appraisal Evaluation Areas - Job Specific';
     PageType = List;
-    SourceTable = 51516220;
+    SourceTable = "HR Appraisal Eval Areas";
     SourceTableView = where("Categorize As" = const("Job Specific"));
 
     layout
@@ -13,46 +13,46 @@ Page 51516754 "HR Appraisal Eval Areas - JS"
             repeater(Control1102760000)
             {
                 Editable = true;
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
-                {
-                    ApplicationArea = Basic;
-
-                    trigger OnValidate()
-                    begin
-                        TestField(Code);
-                    end;
-                }
-                field("Assign To"; "Assign To")
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
-                        TestField(Description);
+                        Rec.TestField(Code);
                     end;
                 }
-                field("Assigned To"; "Assigned To")
+                field("Assign To"; Rec."Assign To")
+                {
+                    ApplicationArea = Basic;
+
+                    trigger OnValidate()
+                    begin
+                        Rec.TestField(Description);
+                    end;
+                }
+                field("Assigned To"; Rec."Assigned To")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Categorize As"; "Categorize As")
+                field("Categorize As"; Rec."Categorize As")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Sub Category"; "Sub Category")
+                field("Sub Category"; Rec."Sub Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Include in Evaluation Form"; "Include in Evaluation Form")
+                field("Include in Evaluation Form"; Rec."Include in Evaluation Form")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
@@ -66,8 +66,8 @@ Page 51516754 "HR Appraisal Eval Areas - JS"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Categorize As" := "categorize as"::"Job Specific";
-        "Include in Evaluation Form" := true;
+        Rec."Categorize As" := Rec."categorize as"::"Job Specific";
+        Rec."Include in Evaluation Form" := true;
     end;
 }
 

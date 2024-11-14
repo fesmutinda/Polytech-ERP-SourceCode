@@ -2,7 +2,7 @@
 Page 51516759 "File Location SetUp Card"
 {
     PageType = Card;
-    SourceTable = 51516292;
+    SourceTable = "File Locations Setup";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516759 "File Location SetUp Card"
         {
             group(General)
             {
-                field(Location; Location)
+                field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Custodian Code"; "Custodian Code")
+                field("Custodian Code"; Rec."Custodian Code")
                 {
                     ApplicationArea = Basic;
                 }

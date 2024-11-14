@@ -7,7 +7,7 @@ Page 51516700 "Cheque Clearing Process"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516441;
+    SourceTable = Transactions;
     SourceTableView = where(Posted = filter(Yes),
                             "Transaction Type" = const(CHEQDEPORD),
                             "Cheque Processed" = const(No));
@@ -19,57 +19,57 @@ Page 51516700 "Cheque Clearing Process"
             repeater(Control1102760000)
             {
                 Editable = false;
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Maturity Date"; "Expected Maturity Date")
+                field("Expected Maturity Date"; Rec."Expected Maturity Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Cashier; Cashier)
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Discounted"; "Amount Discounted")
+                field("Amount Discounted"; Rec."Amount Discounted")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Clear Cheque"; "Clear Cheque")
+                field("Clear Cheque"; Rec."Clear Cheque")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bounce Cheque"; "Bounce Cheque")
+                field("Bounce Cheque"; Rec."Bounce Cheque")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Processed"; "Cheque Processed")
+                field("Cheque Processed"; Rec."Cheque Processed")
                 {
                     ApplicationArea = Basic;
                 }
@@ -83,38 +83,38 @@ Page 51516700 "Cheque Clearing Process"
 
     trigger OnInit()
     begin
-        SetRange("Expected Maturity Date", 0D, Today);
+        Rec.SetRange("Expected Maturity Date", 0D, Today);
     end;
 
     var
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         Account: Record Vendor;
-        AccountType: Record 51516436;
+        AccountType: Record "Account Types-Saving Products";
         LineNo: Integer;
-        ChequeType: Record 51516446;
+        ChequeType: Record "Cheque Types";
         DimensionV: Record "Dimension Value";
         ChargeAmount: Decimal;
         DiscountingAmount: Decimal;
-        Loans: Record 51516371;
+        Loans: Record "Loans Register";
         DActivity: Code[20];
         DBranch: Code[20];
         UsersID: Record User;
         Vend: Record Vendor;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         BOSABank: Code[20];
-        ReceiptAllocations: Record 51516387;
-        StatusPermissions: Record 51516452;
+        ReceiptAllocations: Record "Receipt Allocation";
+        StatusPermissions: Record "Status Change Permision";
 
 
     procedure PostBOSAEntries()
     var
-        ReceiptAllocation: Record 51516387;
+        ReceiptAllocation: Record "Receipt Allocation";
     begin
         //BOSA Cash Book Entry
-        if "Account No" = '502-00-000300-00' then
+        if Rec."Account No" = '502-00-000300-00' then
             BOSABank := '13865'
-        else if "Account No" = '502-00-000303-00' then
+        else if Rec."Account No" = '502-00-000303-00' then
             BOSABank := '070006';
 
 
@@ -123,22 +123,22 @@ Page 51516700 "Cheque Clearing Process"
         GenJournalLine.Init;
         GenJournalLine."Journal Template Name" := 'PURCHASES';
         GenJournalLine."Journal Batch Name" := 'FTRANS';
-        GenJournalLine."Document No." := No;
-        GenJournalLine."External Document No." := "Cheque No";
+        GenJournalLine."Document No." := Rec.No;
+        GenJournalLine."External Document No." := Rec."Cheque No";
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
         GenJournalLine."Account No." := BOSABank;
         GenJournalLine.Validate(GenJournalLine."Account No.");
-        GenJournalLine."Posting Date" := "Transaction Date";
-        GenJournalLine.Description := Payee;
+        GenJournalLine."Posting Date" := Rec."Transaction Date";
+        GenJournalLine.Description := Rec.Payee;
         GenJournalLine.Validate(GenJournalLine."Currency Code");
-        GenJournalLine.Amount := -Amount;
+        GenJournalLine.Amount := -Rec.Amount;
         GenJournalLine.Validate(GenJournalLine.Amount);
         if GenJournalLine.Amount <> 0 then
             GenJournalLine.Insert;
 
         ReceiptAllocations.Reset;
-        ReceiptAllocations.SetRange(ReceiptAllocations."Document No", No);
+        ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec.No);
         if ReceiptAllocations.Find('-') then begin
             repeat
 
@@ -148,17 +148,17 @@ Page 51516700 "Cheque Clearing Process"
                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                 GenJournalLine."Journal Batch Name" := 'FTRANS';
                 GenJournalLine."Line No." := LineNo;
-                GenJournalLine."Document No." := No;
-                GenJournalLine."External Document No." := "Cheque No";
-                GenJournalLine."Posting Date" := "Transaction Date";
+                GenJournalLine."Document No." := Rec.No;
+                GenJournalLine."External Document No." := Rec."Cheque No";
+                GenJournalLine."Posting Date" := Rec."Transaction Date";
                 if ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Interest Paid" then begin
                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                    if "Account No" = '502-00-000303-00' then
+                    if Rec."Account No" = '502-00-000303-00' then
                         GenJournalLine."Account No." := '080023'
                     else
                         GenJournalLine."Account No." := '045003';
                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                    GenJournalLine.Description := Payee;
+                    GenJournalLine.Description := Rec.Payee;
                 end else begin
                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Customer;
                     GenJournalLine."Account No." := ReceiptAllocations."Member No";
@@ -189,9 +189,9 @@ Page 51516700 "Cheque Clearing Process"
                     GenJournalLine."Journal Template Name" := 'PURCHASES';
                     GenJournalLine."Journal Batch Name" := 'FTRANS';
                     GenJournalLine."Line No." := LineNo;
-                    GenJournalLine."Document No." := No;
-                    GenJournalLine."External Document No." := "Cheque No";
-                    GenJournalLine."Posting Date" := "Transaction Date";
+                    GenJournalLine."Document No." := Rec.No;
+                    GenJournalLine."External Document No." := Rec."Cheque No";
+                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                     GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Customer;
                     GenJournalLine."Account No." := ReceiptAllocations."Member No";
                     GenJournalLine.Validate(GenJournalLine."Account No.");

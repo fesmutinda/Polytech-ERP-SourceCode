@@ -4,7 +4,7 @@ Page 51516587 "Loan PayOff List"
     CardPageID = "Loan PayOff Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516526;
+    SourceTable = "Loan PayOff";
     SourceTableView = where(Posted = filter(No));
 
     layout
@@ -13,35 +13,35 @@ Page 51516587 "Loan PayOff List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested PayOff Amount"; "Requested PayOff Amount")
+                field("Requested PayOff Amount"; Rec."Requested PayOff Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved PayOff Amount"; "Approved PayOff Amount")
+                field("Approved PayOff Amount"; Rec."Approved PayOff Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Personal No"; "Personal No")
+                field("Personal No"; Rec."Personal No")
                 {
                     ApplicationArea = Basic;
                 }

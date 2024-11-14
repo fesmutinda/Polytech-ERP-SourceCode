@@ -2,7 +2,7 @@
 Page 51516664 "Loan Application Witness"
 {
     PageType = List;
-    SourceTable = 51516370;
+    SourceTable = "Loan App Witness";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516664 "Loan Application Witness"
         {
             repeater(Group)
             {
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Witness No"; "Witness No")
+                field("Witness No"; Rec."Witness No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Witness Name"; "Witness Name")
+                field("Witness Name"; Rec."Witness Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }

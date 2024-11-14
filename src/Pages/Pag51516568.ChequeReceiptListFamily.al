@@ -5,7 +5,7 @@ Page 51516568 "Cheque Receipt List-Family"
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
-    SourceTable = 51516514;
+    SourceTable = "Cheque Receipts-Family";
 
     layout
     {

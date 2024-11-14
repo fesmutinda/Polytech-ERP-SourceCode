@@ -7,7 +7,7 @@ Page 51516660 "Checkoff Processing Lines-D2"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516654;
+    SourceTable = "Checkoff Lines-Distributed2";
 
     layout
     {
@@ -15,109 +15,109 @@ Page 51516660 "Checkoff Processing Lines-D2"
         {
             repeater(Group)
             {
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field("Staff/Payroll No"; "Staff/Payroll No")
+                field("Staff/Payroll No"; Rec."Staff/Payroll No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Variance; Variance)
+                field(Variance; Rec.Variance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Receipt Header No"; "Receipt Header No")
+                field("Receipt Header No"; Rec."Receipt Header No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Jiokoe Savings"; "Jiokoe Savings")
+                field("Jiokoe Savings"; Rec."Jiokoe Savings")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unallocated Fund"; "Unallocated Fund")
+                field("Unallocated Fund"; Rec."Unallocated Fund")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deposit contribution"; "Deposit contribution")
+                field("Deposit contribution"; Rec."Deposit contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Share Capital"; "Share Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entrance Fees"; "Entrance Fees")
+                field("Entrance Fees"; Rec."Entrance Fees")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principal Loan"; "Principal Loan")
+                field("Principal Loan"; Rec."Principal Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Emergency 1 Loan"; "Emergency 1 Loan")
+                field("Emergency 1 Loan"; Rec."Emergency 1 Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Emergency 2 Loan"; "Emergency 2 Loan")
+                field("Emergency 2 Loan"; Rec."Emergency 2 Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Instant Loan"; "Instant Loan")
+                field("Instant Loan"; Rec."Instant Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Instant2 Loan"; "Instant2 Loan")
+                field("Instant2 Loan"; Rec."Instant2 Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Elimu Loan"; "Elimu Loan")
+                field("Elimu Loan"; Rec."Elimu Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mjengo Loan"; "Mjengo Loan")
+                field("Mjengo Loan"; Rec."Mjengo Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vision Loan"; "Vision Loan")
+                field("Vision Loan"; Rec."Vision Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("KHL Loan"; "KHL Loan")
+                field("KHL Loan"; Rec."KHL Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Car Loan"; "Car Loan")
+                field("Car Loan"; Rec."Car Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sukuma Mwezi Loan"; "Sukuma Mwezi Loan")
+                field("Sukuma Mwezi Loan"; Rec."Sukuma Mwezi Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Karibu Loan"; "Karibu Loan")
+                field("Karibu Loan"; Rec."Karibu Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mali Mali Loan"; "Mali Mali Loan")
+                field("Mali Mali Loan"; Rec."Mali Mali Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Motor Vehicle Insurance"; "Motor Vehicle Insurance")
+                field("Motor Vehicle Insurance"; Rec."Motor Vehicle Insurance")
                 {
                     ApplicationArea = Basic;
                 }
@@ -140,9 +140,9 @@ Page 51516660 "Checkoff Processing Lines-D2"
     local procedure SetStyles()
     begin
         CoveragePercentStyle := 'Strong';
-        if Name = '' then
+        if Rec.Name = '' then
             CoveragePercentStyle := 'Unfavorable';
-        if Name <> '' then
+        if Rec.Name <> '' then
             CoveragePercentStyle := 'Favorable';
     end;
 }

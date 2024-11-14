@@ -345,7 +345,7 @@ Page 51516567 "Cheque Discounting card"
         EventFilter: Text;
         EnablePosting: Boolean;
         ObjTransactions: Record Transactions;
-        SFactory: Codeunit 51516007;
+        SFactory: Codeunit "Swizzsoft Factory.";
         BATCH_TEMPLATE: Code[100];
         BATCH_NAME: Code[100];
         DOCUMENT_NO: Code[100];

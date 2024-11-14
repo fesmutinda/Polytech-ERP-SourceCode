@@ -2,7 +2,7 @@
 Page 51516756 "File Movement Line"
 {
     PageType = ListPart;
-    SourceTable = 51516291;
+    SourceTable = "File Movement Line";
 
     layout
     {
@@ -10,43 +10,43 @@ Page 51516756 "File Movement Line"
         {
             repeater(General)
             {
-                field("File Type"; "File Type")
+                field("File Type"; Rec."File Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Number"; "File Number")
-                {
-                    ApplicationArea = Basic;
-                    ShowMandatory = true;
-                }
-                field("Destination File Location"; "Destination File Location")
+                field("File Number"; Rec."File Number")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Account Type"; "Account Type")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Account No."; "Account No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Account Name"; "Account Name")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Purpose/Description"; "Purpose/Description")
+                field("Destination File Location"; Rec."Destination File Location")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Global Dimension 1 Code"; "Global Dimension 1 Code")
+                field("Account Type"; Rec."Account Type")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Account No."; Rec."Account No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Account Name"; Rec."Account Name")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Purpose/Description"; Rec."Purpose/Description")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;

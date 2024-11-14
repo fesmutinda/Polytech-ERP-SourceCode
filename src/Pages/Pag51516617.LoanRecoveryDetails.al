@@ -2,7 +2,7 @@
 Page 51516617 "Loan Recovery Details"
 {
     PageType = ListPart;
-    SourceTable = 51516551;
+    SourceTable = "Loan Member Loans";
 
     layout
     {
@@ -10,87 +10,87 @@ Page 51516617 "Loan Recovery Details"
         {
             repeater(Group)
             {
-                field("Guarantor Number"; "Guarantor Number")
+                field("Guarantor Number"; Rec."Guarantor Number")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Name';
                     Editable = false;
                 }
-                field("phone No"; "phone No")
+                field("phone No"; Rec."phone No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Type"; "Loan Type")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Monthly Repayment"; "Monthly Repayment")
+                field("Loan Type"; Rec."Loan Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
-                    Visible = false;
                 }
-                field("Loan No."; "Loan No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Loan Outstanding"; "Loan Outstanding")
+                field("Monthly Repayment"; Rec."Monthly Repayment")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Loan No."; Rec."Loan No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loan Outstanding"; Rec."Loan Outstanding")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Visible = false;
+                }
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Guarantor Deposits"; "Guarantor Deposits")
+                field("Guarantor Deposits"; Rec."Guarantor Deposits")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Defaulter Loan"; "Defaulter Loan")
+                field("Defaulter Loan"; Rec."Defaulter Loan")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Trustee Loan';
                     Editable = false;
                 }
-                field("Amount to Trustee Loan"; "Amount to Trustee Loan")
+                field("Amount to Trustee Loan"; Rec."Amount to Trustee Loan")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Origan Amount"; "Origan Amount")
+                field("Origan Amount"; Rec."Origan Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amont Guaranteed"; "Amont Guaranteed")
+                field("Amont Guaranteed"; Rec."Amont Guaranteed")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Per(%)"; "Per(%)")
+                field("Per(%)"; Rec."Per(%)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(PayOff; PayOff)
+                field(PayOff; Rec.PayOff)
                 {
                     ApplicationArea = Basic;
                     Caption = 'PayOff Amount';
                 }
-                field("Amount from Deposits"; "Amount from Deposits")
+                field("Amount from Deposits"; Rec."Amount from Deposits")
                 {
                     ApplicationArea = Basic;
                 }

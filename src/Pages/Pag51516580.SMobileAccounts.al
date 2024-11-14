@@ -10,31 +10,31 @@ Page 51516580 "S-Mobile Accounts"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No.";"ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status;Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Blocked;Blocked)
+                field(Blocked; Rec.Blocked)
                 {
                     ApplicationArea = Basic;
                 }
-                field("S-Mobile No";"S-Mobile No")
+                field("S-Mobile No"; Rec."S-Mobile No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA Account No";"BOSA Account No")
+                field("BOSA Account No"; Rec."BOSA Account No")
                 {
                     ApplicationArea = Basic;
                 }

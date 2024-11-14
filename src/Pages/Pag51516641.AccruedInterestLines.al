@@ -7,7 +7,7 @@ Page 51516641 "Accrued Interest Lines"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516424;
+    SourceTable = "Monthly Interest Acrual";
 
     layout
     {
@@ -15,35 +15,35 @@ Page 51516641 "Accrued Interest Lines"
         {
             repeater(Group)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product"; "Loan Product")
+                field("Loan Product"; Rec."Loan Product")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Accrued"; "Interest Accrued")
+                field("Interest Accrued"; Rec."Interest Accrued")
                 {
                     ApplicationArea = Basic;
                     Style = Attention;

@@ -7,7 +7,7 @@ Page 51516738 "ATM Log Entries"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516465;
+    SourceTable = "ATM Log Entries";
 
     layout
     {
@@ -15,59 +15,59 @@ Page 51516738 "ATM Log Entries"
         {
             repeater(Group)
             {
-                field("Entry No"; "Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Time"; "Date Time")
+                field("Date Time"; Rec."Date Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM No"; "ATM No")
+                field("ATM No"; Rec."ATM No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Location"; "ATM Location")
+                field("ATM Location"; Rec."ATM Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; ReC."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Return Code"; "Return Code")
+                field("Return Code"; Rec."Return Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Trace ID"; "Trace ID")
+                field("Trace ID"; Rec."Trace ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card No."; "Card No.")
+                field("Card No."; Rec."Card No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Amount"; "ATM Amount")
+                field("ATM Amount"; Rec."ATM Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withdrawal Location"; "Withdrawal Location")
+                field("Withdrawal Location"; Rec."Withdrawal Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                 }

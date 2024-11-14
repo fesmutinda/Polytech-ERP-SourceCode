@@ -3,7 +3,7 @@ Page 51516569 "Cheque Receipt Header-Family"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516514;
+    SourceTable = "Cheque Receipts-Family";
 
     layout
     {
@@ -11,40 +11,40 @@ Page 51516569 "Cheque Receipt Header-Family"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unpaid By"; "Unpaid By")
+                field("Unpaid By"; Rec."Unpaid By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Refference Document"; "Refference Document")
+                field("Refference Document"; Rec."Refference Document")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Unpaid; Unpaid)
+                field(Unpaid; Rec.Unpaid)
                 {
                     ApplicationArea = Basic;
                 }
@@ -76,18 +76,18 @@ Page 51516569 "Cheque Receipt Header-Family"
                     RefNoRec.Reset;
                     RefNoRec.SetRange(RefNoRec.CurrUserID, UserId);
                     if RefNoRec.Find('-') then begin
-                        RefNoRec."Reference No" := "No.";
+                        RefNoRec."Reference No" := Rec."No.";
                         RefNoRec.Modify;
                     end
                     else begin
                         RefNoRec.Init;
                         RefNoRec.CurrUserID := UserId;
-                        RefNoRec."Reference No" := "No.";
+                        RefNoRec."Reference No" := Rec."No.";
                         RefNoRec.Insert;
                     end;
 
-                    "Created By" := UserId;
-                    Modify;
+                    Rec."Created By" := UserId;
+                    Rec.Modify;
                 end;
             }
             action(Post)
@@ -109,7 +109,7 @@ Page 51516569 "Cheque Receipt Header-Family"
                         GenJournalLine.DeleteAll;
 
                         ChqRecLines.Reset;
-                        ChqRecLines.SetRange(ChqRecLines."Header No", "No.");
+                        ChqRecLines.SetRange(ChqRecLines."Header No", Rec."No.");
                         ChqRecLines.SetRange(ChqRecLines.Status, ChqRecLines.Status::Pending);
                         ChqRecLines.SetRange(ChqRecLines."Verification Status", ChqRecLines."verification status"::Verified);
                         if ChqRecLines.Find('-') then begin
@@ -130,12 +130,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                GenJournalLine."Document No." := "No.";
+                                GenJournalLine."Document No." := Rec."No.";
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := ChqRecLines."Account No.";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Posting Date" := "Transaction Date";
+                                GenJournalLine."Posting Date" := Rec."Transaction Date";
                                 GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Amount := ChqRecLines.Amount;
@@ -156,12 +156,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                GenJournalLine."Document No." := "No.";
+                                GenJournalLine."Document No." := Rec."No.";
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := ChqRecLines."Account No.";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Posting Date" := "Transaction Date";
+                                GenJournalLine."Posting Date" := Rec."Transaction Date";
                                 GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Description := 'Cheque Issued Commision';
                                 GenJournalLine.Amount := GenSetup."Mpesa Withdrawal Fee";
@@ -181,12 +181,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                GenJournalLine."Document No." := "No.";
+                                GenJournalLine."Document No." := Rec."No.";
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := ChqRecLines."Account No.";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Posting Date" := "Transaction Date";
+                                GenJournalLine."Posting Date" := Rec."Transaction Date";
                                 GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Description := 'Excise Duty';
                                 GenJournalLine.Amount := (GenSetup."Mpesa Withdrawal Fee" * (GenSetup."Excise Duty(%)" / 100));
@@ -226,7 +226,7 @@ Page 51516569 "Cheque Receipt Header-Family"
 
                         //Mark cheque book register
                         ChqRecLines.Reset;
-                        ChqRecLines.SetRange(ChqRecLines."Header No", "No.");
+                        ChqRecLines.SetRange(ChqRecLines."Header No", Rec."No.");
                         ChqRecLines.SetRange(ChqRecLines.Status, ChqRecLines.Status::Pending);
                         if ChqRecLines.Find('-') then begin
                             repeat
@@ -242,9 +242,9 @@ Page 51516569 "Cheque Receipt Header-Family"
                         end;
 
 
-                        Posted := true;
-                        "Posted By" := UserId;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
+                        Rec.Modify;
 
                         //Update cheque register
 
@@ -261,10 +261,10 @@ Page 51516569 "Cheque Receipt Header-Family"
 
                     if Confirm('Are you sure you want to unpay accounts', false) = true then begin
 
-                        if UpperCase(UserId) = UpperCase("Posted By") then
+                        if UpperCase(UserId) = UpperCase(Rec."Posted By") then
                             Error('This must be done by another user');
 
-                        if Posted = false then
+                        if Rec.Posted = false then
                             Error('It must be posted first');
 
                         GenJournalLine.Reset;
@@ -273,7 +273,7 @@ Page 51516569 "Cheque Receipt Header-Family"
                         GenJournalLine.DeleteAll;
 
                         ChqRecLines.Reset;
-                        ChqRecLines.SetRange(ChqRecLines."Header No", "No.");
+                        ChqRecLines.SetRange(ChqRecLines."Header No", Rec."No.");
                         ChqRecLines.SetRange(ChqRecLines.Status, ChqRecLines.Status::Approved);
                         if ChqRecLines.Find('-') then begin
                             repeat
@@ -288,12 +288,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Amount := ChqRecLines.Amount * -1;
@@ -316,12 +316,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Amount := GenSetup."Mpesa Withdrawal Fee" * -1;
@@ -344,12 +344,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Amount := (GenSetup."Mpesa Withdrawal Fee" * (GenSetup."Excise Duty(%)" / 100)) * -1;
@@ -369,12 +369,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque unpay Commision';
                                     //GenJournalLine.Amount:=GenSetup."Unpaid Cheques Fee";
@@ -395,12 +395,12 @@ Page 51516569 "Cheque Receipt Header-Family"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Excise Duty';
                                     //GenJournalLine.Amount:=GenSetup."Unpaid Cheques Fee"*(GenSetup."Excise Duty(%)"/100);
@@ -428,8 +428,8 @@ Page 51516569 "Cheque Receipt Header-Family"
 
 
 
-                        "Unpaid By" := UserId;
-                        Unpaid := true;
+                        Rec."Unpaid By" := UserId;
+                        Rec.Unpaid := true;
                     end;
                 end;
             }
@@ -441,7 +441,7 @@ Page 51516569 "Cheque Receipt Header-Family"
                 begin
 
                     ChqRecLines.Reset;
-                    ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", "No.");
+                    ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", Rec."No.");
                     //DATAPORT.RUN(50003,TRUE,ChqRecLines);
                 end;
             }
@@ -461,7 +461,7 @@ Page 51516569 "Cheque Receipt Header-Family"
                             ChqRecLines."Chq Receipt No" := Format(objChequeTransactions.ChequeDataId);
                             ChqRecLines."Account No." := FnGetAccountNo(objChequeTransactions.MemberNo);
                             ChqRecLines."Cheque No" := objChequeTransactions.SNO;
-                            ChqRecLines."Header No" := "No.";
+                            ChqRecLines."Header No" := Rec."No.";
                             ChqRecLines."Account Name" := FnGetAccountName(objChequeTransactions.MemberNo);
                             ChqRecLines.Amount := objChequeTransactions.AMOUNT;
                             ChqRecLines.Currency := 'KES';
@@ -485,29 +485,29 @@ Page 51516569 "Cheque Receipt Header-Family"
     var
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        AccountType: Record 51516436;
+        AccountType: Record "Account Types-Saving Products";
         AvailableBal: Decimal;
         LineNo: Integer;
-        EFTDetails: Record 51516458;
-        STORegister: Record 51516450;
+        EFTDetails: Record "EFT Details";
+        STORegister: Record "Standing Order Register";
         Accounts: Record Vendor;
-        EFTHeader: Record 51516457;
-        Transactions: Record 51516441;
+        EFTHeader: Record "Bank Transfer Header Details";
+        Transactions: Record Transactions;
         TextGen: Text[250];
-        STO: Record 51516449;
+        STO: Record "Standing Orders";
         ReffNo: Code[20];
         Account: Record Vendor;
-        SMSMessage: Record 51516036;
+        SMSMessage: Record Committment;
         iEntryNo: Integer;
         Vend: Record Vendor;
-        UserMgt: Codeunit UnknownCodeunit55478;
-        RefNoRec: Record 51516503;
-        ChqRecLines: Record 51516515;
-        AccountTypes: Record 51516436;
-        CheqReg: Record 51516500;
-        Charges: Record 51516439;
-        GenSetup: Record 51516398;
-        objChequeTransactions: Record 51516422;
+        UserMgt: Codeunit "Check Manual Nos";
+        RefNoRec: Record "Refference Number";
+        ChqRecLines: Record "Cheque Issue Lines-Family";
+        AccountTypes: Record "Account Types-Saving Products";
+        CheqReg: Record "Cheques Register";
+        Charges: Record Charges;
+        GenSetup: Record "Sacco General Set-Up";
+        objChequeTransactions: Record "Cheque Truncation Buffer";
 
     local procedure FnGetAccountNo(MemberNo: Code[100]) AccountNo: Code[100]
     begin

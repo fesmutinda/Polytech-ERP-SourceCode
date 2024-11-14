@@ -2,48 +2,48 @@
 Page 51516642 "Data Sheet FactBox"
 {
     PageType = CardPart;
-    SourceTable = 51516482;
+    SourceTable = "Data Sheet Header";
 
     layout
     {
         area(content)
         {
-            field("Code"; Code)
+            field("Code"; Rec.Code)
             {
                 ApplicationArea = Basic;
             }
-            field("Total Members"; "Total Members")
+            field("Total Members"; Rec."Total Members")
             {
                 ApplicationArea = Basic;
             }
-            field("Total Schedule Amount P"; "Total Schedule Amount P")
+            field("Total Schedule Amount P"; Rec."Total Schedule Amount P")
             {
                 ApplicationArea = Basic;
                 Caption = 'Total Loan Principal';
             }
-            field("Total Schedule Amount I"; "Total Schedule Amount I")
+            field("Total Schedule Amount I"; Rec."Total Schedule Amount I")
             {
                 ApplicationArea = Basic;
                 Caption = 'Total Loan Interest';
             }
-            field("Total Entrance Fees"; "Total Entrance Fees")
+            field("Total Entrance Fees"; Rec."Total Entrance Fees")
             {
                 ApplicationArea = Basic;
             }
-            field("Total Share Capital"; "Total Share Capital")
+            field("Total Share Capital"; Rec."Total Share Capital")
             {
                 ApplicationArea = Basic;
             }
-            field("Total Schedule Amount D"; "Total Schedule Amount D")
+            field("Total Schedule Amount D"; Rec."Total Schedule Amount D")
             {
                 ApplicationArea = Basic;
                 Caption = 'Total Deposit Contribution';
             }
-            field("Total Kanisa Savings"; "Total Kanisa Savings")
+            field("Total Kanisa Savings"; Rec."Total Kanisa Savings")
             {
                 ApplicationArea = Basic;
             }
-            field("Total Schedule Amount"; "Total Schedule Amount")
+            field("Total Schedule Amount"; Rec."Total Schedule Amount")
             {
                 ApplicationArea = Basic;
                 Style = Attention;

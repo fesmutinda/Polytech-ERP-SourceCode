@@ -6,7 +6,7 @@ Page 51516666 "Loan Interest Posted List"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516295;
+    SourceTable = "Loans Interest";
     SourceTableView = where(Posted = const(Yes),
                             Transferred = const(Yes),
                             Reversed = const(No));
@@ -17,71 +17,71 @@ Page 51516666 "Loan Interest Posted List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Date"; "Interest Date")
+                field("Interest Date"; Rec."Interest Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Transferred; Transferred)
+                field(Transferred; Rec.Transferred)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No."; "Loan No.")
+                field("Loan No."; "Rec. No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product type"; "Loan Product type")
+                field("Loan Product type"; Rec."Loan Product type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bal. Account Type"; "Bal. Account Type")
+                field("Bal. Account Type"; Rec."Bal. Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issued Date"; "Issued Date")
+                field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reversed; Reversed)
+                field(Reversed; Rec.Reversed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bosa No"; "Bosa No")
+                field("Bosa No"; Rec."Bosa No")
                 {
                     ApplicationArea = Basic;
                 }
@@ -100,7 +100,7 @@ Page 51516666 "Loan Interest Posted List"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516579;
+                RunObject = Report 51516579;
             }
             action("Option ")
             {
@@ -113,7 +113,7 @@ Page 51516666 "Loan Interest Posted List"
                 Promoted = true;
                 PromotedCategory = Category4;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516580;
+                RunObject = Report 51516580;
             }
         }
     }

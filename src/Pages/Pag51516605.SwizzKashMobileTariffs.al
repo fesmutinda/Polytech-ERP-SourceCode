@@ -2,7 +2,7 @@
 Page 51516605 "SwizzKash Mobile Tariffs"
 {
     PageType = List;
-    SourceTable = 51516062;
+    SourceTable = "SwizzKash Mobile Tariffs";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516605 "SwizzKash Mobile Tariffs"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge amount"; "Charge amount")
+                field("Charge amount"; Rec."Charge amount")
                 {
                     ApplicationArea = Basic;
                 }

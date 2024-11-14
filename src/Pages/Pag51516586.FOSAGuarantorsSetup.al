@@ -2,7 +2,7 @@
 Page 51516586 "FOSA Guarantors Setup"
 {
     PageType = List;
-    SourceTable = 51516525;
+    SourceTable = "FOSA Guarantors Setup";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516586 "FOSA Guarantors Setup"
         {
             repeater(Group)
             {
-                field("Minimum Amount"; "Minimum Amount")
+                field("Minimum Amount"; Rec."Minimum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Amount"; "Maximum Amount")
+                field("Maximum Amount"; Rec."Maximum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No of Guarantors"; "No of Guarantors")
+                field("No of Guarantors"; Rec."No of Guarantors")
                 {
                     ApplicationArea = Basic;
                 }

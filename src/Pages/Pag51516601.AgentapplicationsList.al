@@ -4,7 +4,7 @@ Page 51516601 "Agent applications List"
     CardPageID = "Agent Applications Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516541;
+    SourceTable = "Agent Applications";
     SourceTableView = where(Status = filter(Pending));
 
     layout
@@ -13,131 +13,131 @@ Page 51516601 "Agent applications List"
         {
             repeater(Group)
             {
-                field("Agent Code"; "Agent Code")
+                field("Agent Code"; Rec."Agent Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Entered"; "Time Entered")
+                field("Time Entered"; Rec."Time Entered")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Serial No"; "Document Serial No")
+                field("Document Serial No"; Rec."Document Serial No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer ID No"; "Customer ID No")
+                field("Customer ID No"; Rec."Customer ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mobile No"; "Mobile No")
+                field("Mobile No"; Rec."Mobile No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comments; Comments)
+                field(Comments; Rec.Comments)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejection Reason"; "Rejection Reason")
+                field("Rejection Reason"; Rec."Rejection Reason")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Approved"; "Date Approved")
+                field("Date Approved"; Rec."Date Approved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Approved"; "Time Approved")
+                field("Time Approved"; Rec."Time Approved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By"; "Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Rejected"; "Date Rejected")
+                field("Date Rejected"; Rec."Date Rejected")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Rejected"; "Time Rejected")
+                field("Time Rejected"; Rec."Time Rejected")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejected By"; "Rejected By")
+                field("Rejected By"; Rec."Rejected By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sent To Server"; "Sent To Server")
+                field("Sent To Server"; Rec."Sent To Server")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("1st Approval By"; "1st Approval By")
+                field("1st Approval By"; Rec."1st Approval By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date 1st Approval"; "Date 1st Approval")
+                field("Date 1st Approval"; Rec."Date 1st Approval")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time First Approval"; "Time First Approval")
+                field("Time First Approval"; Rec."Time First Approval")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withdrawal Limit Code"; "Withdrawal Limit Code")
+                field("Withdrawal Limit Code"; Rec."Withdrawal Limit Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withdrawal Limit Amount"; "Withdrawal Limit Amount")
+                field("Withdrawal Limit Amount"; Rec."Withdrawal Limit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Account; Account)
+                field(Account; Rec.Account)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Name of the Proposed Agent"; "Name of the Proposed Agent")
+                field("Name of the Proposed Agent"; Rec."Name of the Proposed Agent")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Type of Business"; "Type of Business")
+                field("Type of Business"; Rec."Type of Business")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Business/Work Experience"; "Business/Work Experience")
+                field("Business/Work Experience"; Rec."Business/Work Experience")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Name of Banker"; "Name of Banker")
+                field("Name of Banker"; Rec."Name of Banker")
                 {
                     ApplicationArea = Basic;
                 }
-                field("PIN(KRA)"; "PIN(KRA)")
+                field("PIN(KRA)"; Rec."PIN(KRA)")
                 {
                     ApplicationArea = Basic;
                 }

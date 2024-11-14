@@ -3,7 +3,7 @@ Page 51516591 "Cheque Book Register"
 {
     Editable = false;
     PageType = Card;
-    SourceTable = 51516528;
+    SourceTable = "Cheque Book Register";
 
     layout
     {
@@ -11,11 +11,11 @@ Page 51516591 "Cheque Book Register"
         {
             repeater(Control5)
             {
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Issued; Issued)
+                field(Issued; Rec.Issued)
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -71,6 +71,6 @@ Page 51516591 "Cheque Book Register"
         BankerCh: Code[20];
         NoOfLeaves: Integer;
         i: Integer;
-        BankerR: Record 51516528;
+        BankerR: Record "Cheque Book Register";
 }
 

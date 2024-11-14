@@ -2,7 +2,7 @@
 Page 51516589 "Loan PayOff Details"
 {
     PageType = ListPart;
-    SourceTable = 51516527;
+    SourceTable = "Loans PayOff Details";
 
     layout
     {
@@ -10,35 +10,35 @@ Page 51516589 "Loan PayOff Details"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan to PayOff"; "Loan to PayOff")
+                field("Loan to PayOff"; Rec."Loan to PayOff")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Type"; "Loan Type")
+                field("Loan Type"; Rec."Loan Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Outstanding"; "Loan Outstanding")
+                field("Loan Outstanding"; Rec."Loan Outstanding")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Commision on PayOff"; "Commision on PayOff")
+                field("Commision on PayOff"; Rec."Commision on PayOff")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total PayOff"; "Total PayOff")
+                field("Total PayOff"; Rec."Total PayOff")
                 {
                     ApplicationArea = Basic;
                 }

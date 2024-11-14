@@ -4,7 +4,7 @@ Page 51516742 "HR 360 Appraisals List - TS"
     CardPageID = "HR 360 Appraisal Card";
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Functions,Appraisal';
-    SourceTable = 51516216;
+    SourceTable = "HR Appraisal Header";
     SourceTableView = where("Appraisal Stage" = const("Target Setting"));
 
     layout
@@ -13,47 +13,47 @@ Page 51516742 "HR 360 Appraisals List - TS"
         {
             repeater(Group)
             {
-                field("Appraisal No"; "Appraisal No")
+                field("Appraisal No"; Rec."Appraisal No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee No"; "Employee No")
+                field("Employee No"; Rec."Employee No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Name"; "Employee Name")
+                field("Employee Name"; Rec."Employee Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Job Title"; "Job Title")
+                field("Job Title"; Rec."Job Title")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Department; Department)
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Type"; "Appraisal Type")
+                field("Appraisal Type"; Rec."Appraisal Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Stage"; "Appraisal Stage")
+                field("Appraisal Stage"; Rec."Appraisal Stage")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Sent; Sent)
+                field(Sent; Rec.Sent)
                 {
                     ApplicationArea = Basic;
                 }
@@ -93,13 +93,13 @@ Page 51516742 "HR 360 Appraisals List - TS"
 
                     trigger OnAction()
                     begin
-                        TestField("Appraisal Stage", "appraisal stage"::"Target Setting");
-                        TestField("Employee No");
+                        Rec.TestField("Appraisal Stage", Rec."appraisal stage"::"Target Setting");
+                        Rec.TestField("Employee No");
 
                         if Confirm('Send to supervisor?', false) = false then exit;
 
-                        "Appraisal Stage" := "appraisal stage"::"Target Approval";
-                        Modify;
+                        Rec."Appraisal Stage" := Rec."appraisal stage"::"Target Approval";
+                        Rec.Modify;
                         Message('Appraisal sent to supervisor');
                     end;
                 }

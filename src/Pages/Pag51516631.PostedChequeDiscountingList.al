@@ -4,7 +4,7 @@ Page 51516631 "Posted Cheque Discounting List"
     CardPageID = "Posted Cheque Discounting card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516513;
+    SourceTable = "Cheque Discounting";
     SourceTableView = where(Posted = filter(Yes));
 
     layout
@@ -13,51 +13,51 @@ Page 51516631 "Posted Cheque Discounting List"
         {
             repeater(Group)
             {
-                field("Transaction No"; "Transaction No")
+                field("Transaction No"; Rec."Transaction No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Created"; "Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Discounted"; "Amount Discounted")
+                field("Amount Discounted"; Rec."Amount Discounted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Savings Product"; "Savings Product")
+                field("Savings Product"; Rec."Savings Product")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }

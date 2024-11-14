@@ -2,7 +2,7 @@
 Page 51516600 "Agent Transactions"
 {
     PageType = List;
-    SourceTable = 51516545;
+    SourceTable = "Agent Transactions";
 
     layout
     {
@@ -10,155 +10,155 @@ Page 51516600 "Agent Transactions"
         {
             repeater(Group)
             {
-                field("Document No."; "Document No.")
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bal. Account No."; "Bal. Account No.")
+                field("Bal. Account No."; Rec."Bal. Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Posted"; "Date Posted")
+                field("Date Posted"; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Posted"; "Time Posted")
+                field("Time Posted"; Rec."Time Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Status"; "Account Status")
+                field("Account Status"; Rec."Account Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Messages; Messages)
+                field(Messages; Rec.Messages)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Needs Change"; "Needs Change")
+                field("Needs Change"; Rec."Needs Change")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Old Account No"; "Old Account No")
+                field("Old Account No"; Rec."Old Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Changed; Changed)
+                field(Changed; Rec.Changed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Changed"; "Date Changed")
+                field("Date Changed"; Rec."Date Changed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Changed"; "Time Changed")
+                field("Time Changed"; Rec."Time Changed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Changed By"; "Changed By")
+                field("Changed By"; Rec."Changed By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By"; "Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Original Account No"; "Original Account No")
+                field("Original Account No"; Rec."Original Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Balance"; "Account Balance")
+                field("Account Balance"; Rec."Account Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Branch Code"; "Branch Code")
+                field("Branch Code"; Rec."Branch Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Activity Code"; "Activity Code")
+                field("Activity Code"; Rec."Activity Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Filter"; "Global Dimension 1 Filter")
+                field("Global Dimension 1 Filter"; Rec."Global Dimension 1 Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Filter"; "Global Dimension 2 Filter")
+                field("Global Dimension 2 Filter"; Rec."Global Dimension 2 Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No 2"; "Account No 2")
+                field("Account No 2"; Rec."Account No 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field(CCODE; CCODE)
+                field(CCODE; Rec.CCODE)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Location"; "Transaction Location")
+                field("Transaction Location"; Rec."Transaction Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction By"; "Transaction By")
+                field("Transaction By"; Rec."Transaction By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agent Code"; "Agent Code")
+                field("Agent Code"; Rec."Agent Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Id No"; "Id No")
+                field("Id No"; Rec."Id No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Branch; Branch)
+                field(Branch; Rec.Branch)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }

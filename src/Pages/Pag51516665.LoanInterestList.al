@@ -2,7 +2,7 @@
 Page 51516665 "Loan Interest List"
 {
     PageType = List;
-    SourceTable = 51516295;
+    SourceTable = "Loans Interest";
     SourceTableView = where(Posted = const(No),
                             Transferred = const(No),
                             Reversed = const(No));
@@ -13,71 +13,71 @@ Page 51516665 "Loan Interest List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Date"; "Interest Date")
+                field("Interest Date"; Rec."Interest Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Transferred; Transferred)
+                field(Transferred; rec.Transferred)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product type"; "Loan Product type")
+                field("Loan Product type"; Rec."Loan Product type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bal. Account Type"; "Bal. Account Type")
+                field("Bal. Account Type"; Rec."Bal. Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issued Date"; "Issued Date")
+                field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reversed; Reversed)
+                field(Reversed; Rec.Reversed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bosa No"; "Bosa No")
+                field("Bosa No"; Rec."Bosa No")
                 {
                     ApplicationArea = Basic;
                 }
@@ -96,7 +96,7 @@ Page 51516665 "Loan Interest List"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516579;
+                RunObject = Report 51516579;
             }
             action("Option ")
             {
@@ -109,18 +109,18 @@ Page 51516665 "Loan Interest List"
                 Promoted = true;
                 PromotedCategory = Category4;
                 PromotedIsBig = true;
-                RunObject = Report UnknownReport51516580;
+                RunObject = Report 51516580;
             }
         }
     }
 
     var
         Option: Option "Generate Only","Generate & Post";
-        PeriodicActivities: Codeunit UnknownCodeunit51516029;
-        members: Record 51516364;
+        PeriodicActivities: Codeunit "Periodic Activities";
+        members: Record "Member Register";
         GenBatches: Record "Gen. Journal Batch";
         PDate: Date;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PostDate: Date;
         LineNo: Integer;
         DocNo: Code[20];
@@ -130,20 +130,20 @@ Page 51516665 "Loan Interest List"
         DontCharge: Boolean;
         JBatch: Code[10];
         Jtemplate: Code[10];
-        CustLedger: Record 51516391;
-        AccountingPeriod: Record 51516391;
+        CustLedger: Record "Interest Due Period";
+        AccountingPeriod: Record "Interest Due Period";
         FiscalYearStartDate: Date;
         "ExtDocNo.": Text[30];
         InterestDue: Decimal;
-        LoansInterest: Record 51516295;
-        DailyLoansInterestBuffer: Record 51516297;
+        LoansInterest: Record "Loans Interest";
+        DailyLoansInterestBuffer: Record "Daily Loans Interest Buffer";
         LoanNo: Code[20];
         BDate: Date;
         BalDate: Date;
-        ProdFact: Record 51516381;
+        ProdFact: Record "Loan Products Setup";
         InterestAmount: Decimal;
         iEntryNo: Integer;
-        Temp: Record 51516031;
-        CreditAccounts: Record 51516364;
+        Temp: Record "Funds User Setup";
+        CreditAccounts: Record "Member Register";
 }
 

@@ -10,287 +10,287 @@ Page 51516593 "Chart of Accounts 1"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Search Name";"Search Name")
+                field("Search Name"; Rec."Search Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type";"Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code";"Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code";"Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Category";"Account Category")
+                field("Account Category"; Rec."Account Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Income/Balance";"Income/Balance")
+                field("Income/Balance"; Rec."Income/Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Debit/Credit";"Debit/Credit")
+                field("Debit/Credit"; Rec."Debit/Credit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. 2";"No. 2")
+                field("No. 2"; Rec."No. 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Comment;Comment)
+                field(Comment; Rec.Comment)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Blocked;Blocked)
+                field(Blocked; Rec.Blocked)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Direct Posting";"Direct Posting")
+                field("Direct Posting"; Rec."Direct Posting")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reconciliation Account";"Reconciliation Account")
+                field("Reconciliation Account"; Rec."Reconciliation Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Page";"New Page")
+                field("New Page"; Rec."New Page")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. of Blank Lines";"No. of Blank Lines")
+                field("No. of Blank Lines"; Rec."No. of Blank Lines")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Indentation;Indentation)
+                field(Indentation; Rec.Indentation)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Modified Date Time";"Last Modified Date Time")
+                field("Last Modified Date Time"; Rec."Last Modified Date Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Date Modified";"Last Date Modified")
+                field("Last Date Modified"; Rec."Last Date Modified")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Filter";"Date Filter")
+                field("Date Filter"; Rec."Date Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Filter";"Global Dimension 1 Filter")
+                field("Global Dimension 1 Filter"; Rec."Global Dimension 1 Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Filter";"Global Dimension 2 Filter")
+                field("Global Dimension 2 Filter"; Rec."Global Dimension 2 Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance at Date";"Balance at Date")
+                field("Balance at Date"; Rec."Balance at Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Change";"Net Change")
+                field("Net Change"; Rec."Net Change")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budgeted Amount";"Budgeted Amount")
+                field("Budgeted Amount"; Rec."Budgeted Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Totaling;Totaling)
+                field(Totaling; Rec.Totaling)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budget Filter";"Budget Filter")
+                field("Budget Filter"; Rec."Budget Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance;Balance)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budget at Date";"Budget at Date")
+                field("Budget at Date"; Rec."Budget at Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Consol. Translation Method";"Consol. Translation Method")
+                field("Consol. Translation Method"; Rec."Consol. Translation Method")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Consol. Debit Acc.";"Consol. Debit Acc.")
+                field("Consol. Debit Acc."; Rec."Consol. Debit Acc.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Consol. Credit Acc.";"Consol. Credit Acc.")
+                field("Consol. Credit Acc."; Rec."Consol. Credit Acc.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Business Unit Filter";"Business Unit Filter")
+                field("Business Unit Filter"; Rec."Business Unit Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Gen. Posting Type";"Gen. Posting Type")
+                field("Gen. Posting Type"; Rec."Gen. Posting Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Gen. Bus. Posting Group";"Gen. Bus. Posting Group")
+                field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Gen. Prod. Posting Group";"Gen. Prod. Posting Group")
+                field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture;Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Debit Amount";"Debit Amount")
+                field("Debit Amount"; Rec."Debit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Credit Amount";"Credit Amount")
+                field("Credit Amount"; Rec."Credit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Automatic Ext. Texts";"Automatic Ext. Texts")
+                field("Automatic Ext. Texts"; Rec."Automatic Ext. Texts")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budgeted Debit Amount";"Budgeted Debit Amount")
+                field("Budgeted Debit Amount"; Rec."Budgeted Debit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budgeted Credit Amount";"Budgeted Credit Amount")
+                field("Budgeted Credit Amount"; Rec."Budgeted Credit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Tax Area Code";"Tax Area Code")
+                field("Tax Area Code"; Rec."Tax Area Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Tax Liable";"Tax Liable")
+                field("Tax Liable"; Rec."Tax Liable")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Tax Group Code";"Tax Group Code")
+                field("Tax Group Code"; Rec."Tax Group Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Bus. Posting Group";"VAT Bus. Posting Group")
+                field("VAT Bus. Posting Group"; Rec."VAT Bus. Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Prod. Posting Group";"VAT Prod. Posting Group")
+                field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Additional-Currency Net Change";"Additional-Currency Net Change")
+                field("Additional-Currency Net Change"; Rec."Additional-Currency Net Change")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Add.-Currency Balance at Date";"Add.-Currency Balance at Date")
+                field("Add.-Currency Balance at Date"; Rec."Add.-Currency Balance at Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Additional-Currency Balance";"Additional-Currency Balance")
+                field("Additional-Currency Balance"; Rec."Additional-Currency Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Exchange Rate Adjustment";"Exchange Rate Adjustment")
+                field("Exchange Rate Adjustment"; Rec."Exchange Rate Adjustment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Add.-Currency Debit Amount";"Add.-Currency Debit Amount")
+                field("Add.-Currency Debit Amount"; Rec."Add.-Currency Debit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Add.-Currency Credit Amount";"Add.-Currency Credit Amount")
+                field("Add.-Currency Credit Amount"; Rec."Add.-Currency Credit Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default IC Partner G/L Acc. No";"Default IC Partner G/L Acc. No")
+                field("Default IC Partner G/L Acc. No"; Rec."Default IC Partner G/L Acc. No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Omit Default Descr. in Jnl.";"Omit Default Descr. in Jnl.")
+                field("Omit Default Descr. in Jnl."; Rec."Omit Default Descr. in Jnl.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Subcategory Entry No.";"Account Subcategory Entry No.")
+                field("Account Subcategory Entry No."; Rec."Account Subcategory Entry No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Subcategory Descript.";"Account Subcategory Descript.")
+                field("Account Subcategory Descript."; Rec."Account Subcategory Descript.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dimension Set ID Filter";"Dimension Set ID Filter")
+                field("Dimension Set ID Filter"; Rec."Dimension Set ID Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cost Type No.";"Cost Type No.")
+                field("Cost Type No."; Rec."Cost Type No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Default Deferral Template Code";"Default Deferral Template Code")
+                field("Default Deferral Template Code"; Rec."Default Deferral Template Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Id;Id)
+                field(Id; Rec.Id)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Budget Controlled";"Budget Controlled")
+                field("Budget Controlled"; Rec."Budget Controlled")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expense Code";"Expense Code")
+                field("Expense Code"; Rec."Expense Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Donor defined Account";"Donor defined Account")
+                field("Donor defined Account"; Rec."Donor defined Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field(test;test)
+                field(test; Rec.test)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Grant Expense";"Grant Expense")
+                field("Grant Expense"; Rec."Grant Expense")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status;Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center";"Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Old No.";"Old No.")
+                field("Old No."; Rec."Old No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Created";"Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By";"Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }

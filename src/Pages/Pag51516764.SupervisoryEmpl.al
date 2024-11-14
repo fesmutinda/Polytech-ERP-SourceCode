@@ -2,7 +2,7 @@
 Page 51516764 "Supervisory$Empl"
 {
     PageType = List;
-    SourceTable = 51516573;
+    SourceTable = "Supervisory$Board$Empl";
 
     layout
     {
@@ -10,16 +10,16 @@ Page 51516764 "Supervisory$Empl"
         {
             repeater(Group)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Position held"; "Position held")
+                field("Position held"; Rec."Position held")
                 {
                     ApplicationArea = Basic;
                 }

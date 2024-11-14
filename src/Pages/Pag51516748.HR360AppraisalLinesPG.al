@@ -3,7 +3,7 @@ Page 51516748 "HR 360 Appraisal Lines - PG"
 {
     Caption = 'HR Appraisal Lines - Personal Goals/Objectives';
     PageType = ListPart;
-    SourceTable = 51516217;
+    SourceTable = "HR Appraisal Lines";
     SourceTableView = where("Categorize As" = const("Personal Goals/Objectives"));
 
     layout
@@ -12,35 +12,35 @@ Page 51516748 "HR 360 Appraisal Lines - PG"
         {
             repeater(Group)
             {
-                field("Sub Category"; "Sub Category")
+                field("Sub Category"; Rec."Sub Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Perfomance Goals and Targets"; "Perfomance Goals and Targets")
+                field("Perfomance Goals and Targets"; Rec."Perfomance Goals and Targets")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min. Target Score"; "Min. Target Score")
+                field("Min. Target Score"; Rec."Min. Target Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Target Score"; "Max Target Score")
+                field("Max Target Score"; Rec."Max Target Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Self Rating"; "Self Rating")
+                field("Self Rating"; Rec."Self Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Comments"; "Employee Comments")
+                field("Employee Comments"; Rec."Employee Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Supervisor Rating"; "Supervisor Rating")
+                field("Supervisor Rating"; Rec."Supervisor Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Supervisor Comments"; "Supervisor Comments")
+                field("Supervisor Comments"; Rec."Supervisor Comments")
                 {
                     ApplicationArea = Basic;
                 }
@@ -54,8 +54,8 @@ Page 51516748 "HR 360 Appraisal Lines - PG"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Categorize As" := "categorize as"::"Personal Goals/Objectives";
-        "Sub Category" := "sub category"::"Personal Goals";
+        Rec."Categorize As" := Rec."categorize as"::"Personal Goals/Objectives";
+        Rec."Sub Category" := Rec."sub category"::"Personal Goals";
     end;
 }
 

@@ -3,7 +3,7 @@ Page 51516758 "File Movement SetUp"
 {
     CardPageID = "File Location SetUp Card";
     PageType = List;
-    SourceTable = 51516292;
+    SourceTable = "File Locations Setup";
 
     layout
     {
@@ -11,15 +11,15 @@ Page 51516758 "File Movement SetUp"
         {
             repeater(Group)
             {
-                field(Location; Location)
+                field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Custodian Code"; "Custodian Code")
+                field("Custodian Code"; Rec."Custodian Code")
                 {
                     ApplicationArea = Basic;
                 }

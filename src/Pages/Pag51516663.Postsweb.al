@@ -2,7 +2,7 @@
 Page 51516663 "Posts_web"
 {
     PageType = List;
-    SourceTable = 51516973;
+    SourceTable = Posts_Web;
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516663 "Posts_web"
         {
             repeater(Group)
             {
-                field(Entry; Entry)
+                field(Entry; Rec.Entry)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Title; Title)
+                field(Title; Rec.Title)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DateEntered; DateEntered)
+                field(DateEntered; Rec.DateEntered)
                 {
                     ApplicationArea = Basic;
                 }
-                field(DateModified; DateModified)
+                field(DateModified; Rec.DateModified)
                 {
                     ApplicationArea = Basic;
                 }

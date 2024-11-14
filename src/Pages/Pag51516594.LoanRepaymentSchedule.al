@@ -2,7 +2,7 @@
 Page 51516594 "Loan Repayment Schedule"
 {
     PageType = List;
-    SourceTable = 51516529;
+    SourceTable = "Loan Repay Schedule-Calc";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516594 "Loan Repayment Schedule"
         {
             repeater(Group)
             {
-                field("Loan Balance"; "Loan Balance")
+                field("Loan Balance"; Rec."Loan Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principal Repayment"; "Principal Repayment")
+                field("Principal Repayment"; Rec."Principal Repayment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Interest"; "Monthly Interest")
+                field("Monthly Interest"; Rec."Monthly Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Insurance"; "Monthly Insurance")
+                field("Monthly Insurance"; Rec."Monthly Insurance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Repayment"; "Monthly Repayment")
+                field("Monthly Repayment"; Rec."Monthly Repayment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Date"; "Repayment Date")
+                field("Repayment Date"; Rec."Repayment Date")
                 {
                     ApplicationArea = Basic;
                 }

@@ -5,7 +5,7 @@ Page 51516578 "S-Mobile Applications"
     Editable = true;
     InsertAllowed = false;
     PageType = List;
-    SourceTable = 51516521;
+    SourceTable = "SwizzKash Applications";
 
     layout
     {
@@ -13,31 +13,31 @@ Page 51516578 "S-Mobile Applications"
         {
             repeater(Group)
             {
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Sent; Sent)
+                field(Sent; Rec.Sent)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Applied"; "Date Applied")
+                field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
                 }

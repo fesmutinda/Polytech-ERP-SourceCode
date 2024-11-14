@@ -3,7 +3,7 @@ Page 51516592 "Cheque Book Register SetUp"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516528;
+    SourceTable = "Cheque Book Register";
 
     layout
     {
@@ -11,16 +11,16 @@ Page 51516592 "Cheque Book Register SetUp"
         {
             repeater(Control6)
             {
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Issued; Issued)
+                field(Issued; Rec.Issued)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Cancelled; Cancelled)
+                field(Cancelled; Rec.Cancelled)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -74,6 +74,6 @@ Page 51516592 "Cheque Book Register SetUp"
         BankerCh: Code[20];
         NoOfLeaves: Integer;
         i: Integer;
-        BankerR: Record 51516528;
+        BankerR: Record "Cheque Book Register";
 }
 

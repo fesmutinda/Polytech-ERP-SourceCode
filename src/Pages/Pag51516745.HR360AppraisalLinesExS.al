@@ -3,7 +3,7 @@ Page 51516745 "HR 360 Appraisal Lines - ExS"
 {
     Caption = 'HR Appraisal Lines - External Sources (Customers,Vendors)';
     PageType = ListPart;
-    SourceTable = 51516217;
+    SourceTable = "HR Appraisal Lines";
     SourceTableView = where("Categorize As" = const("External Sources"));
 
     layout
@@ -12,31 +12,31 @@ Page 51516745 "HR 360 Appraisal Lines - ExS"
         {
             repeater(Group)
             {
-                field("Sub Category"; "Sub Category")
+                field("Sub Category"; Rec."Sub Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Perfomance Goals and Targets"; "Perfomance Goals and Targets")
+                field("Perfomance Goals and Targets"; Rec."Perfomance Goals and Targets")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min. Target Score"; "Min. Target Score")
+                field("Min. Target Score"; Rec."Min. Target Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Target Score"; "Max Target Score")
+                field("Max Target Score"; Rec."Max Target Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("External Source Rating"; "External Source Rating")
+                field("External Source Rating"; Rec."External Source Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("External Source Comments"; "External Source Comments")
+                field("External Source Comments"; Rec."External Source Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Comments"; "Employee Comments")
+                field("Employee Comments"; Rec."Employee Comments")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,7 +50,7 @@ Page 51516745 "HR 360 Appraisal Lines - ExS"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Categorize As" := "categorize as"::"External Sources";
+        Rec."Categorize As" := Rec."categorize as"::"External Sources";
     end;
 }
 

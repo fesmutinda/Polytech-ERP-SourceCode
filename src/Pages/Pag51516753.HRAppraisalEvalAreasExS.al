@@ -3,7 +3,7 @@ Page 51516753 "HR Appraisal Eval Areas - ExS"
 {
     Caption = 'HR Appraisal Evaluation Areas - External Sources';
     PageType = List;
-    SourceTable = 51516220;
+    SourceTable = "HR Appraisal Eval Areas";
     SourceTableView = where("Categorize As" = const("External Sources"));
 
     layout
@@ -13,33 +13,33 @@ Page 51516753 "HR Appraisal Eval Areas - ExS"
             repeater(Control1102760000)
             {
                 Editable = true;
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
-                        TestField(Code);
+                        Rec.TestField(Code);
                     end;
                 }
-                field("Categorize As"; "Categorize As")
+                field("Categorize As"; Rec."Categorize As")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Sub Category"; "Sub Category")
+                field("Sub Category"; Rec."Sub Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Include in Evaluation Form"; "Include in Evaluation Form")
+                field("Include in Evaluation Form"; Rec."Include in Evaluation Form")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Period"; "Appraisal Period")
+                field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
                 }
@@ -53,8 +53,8 @@ Page 51516753 "HR Appraisal Eval Areas - ExS"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Categorize As" := "categorize as"::"External Sources";
-        "Include in Evaluation Form" := true;
+        Rec."Categorize As" := Rec."categorize as"::"External Sources";
+        Rec."Include in Evaluation Form" := true;
     end;
 }
 

@@ -3,7 +3,7 @@ Page 51516744 "HR 360 Appraisal Lines - ES"
 {
     Caption = 'HR Appraisal Lines - Employee Subordinates';
     PageType = ListPart;
-    SourceTable = 51516217;
+    SourceTable = "HR Appraisal Lines";
     SourceTableView = where("Categorize As" = const("Employee's Subordinates"));
 
     layout
@@ -12,31 +12,31 @@ Page 51516744 "HR 360 Appraisal Lines - ES"
         {
             repeater(Group)
             {
-                field("Sub Category"; "Sub Category")
+                field("Sub Category"; Rec."Sub Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Perfomance Goals and Targets"; "Perfomance Goals and Targets")
+                field("Perfomance Goals and Targets"; Rec."Perfomance Goals and Targets")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min. Target Score"; "Min. Target Score")
+                field("Min. Target Score"; Rec."Min. Target Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Target Score"; "Max Target Score")
+                field("Max Target Score"; Rec."Max Target Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sub-ordinates Rating"; "Sub-ordinates Rating")
+                field("Sub-ordinates Rating"; Rec."Sub-ordinates Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Subordinates Comments"; "Subordinates Comments")
+                field("Subordinates Comments"; Rec."Subordinates Comments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employee Comments"; "Employee Comments")
+                field("Employee Comments"; Rec."Employee Comments")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,7 +50,7 @@ Page 51516744 "HR 360 Appraisal Lines - ES"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "Categorize As" := "categorize as"::"Employee's Subordinates";
+        Rec."Categorize As" := Rec."categorize as"::"Employee's Subordinates";
     end;
 }
 

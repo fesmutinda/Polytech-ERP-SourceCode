@@ -7,7 +7,7 @@ Page 51516705 "Discounting Ledger Entry"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516427;
+    SourceTable = "Discounting Ledger Entry";
 
     layout
     {
@@ -15,43 +15,43 @@ Page 51516705 "Discounting Ledger Entry"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("External Transaction No"; "External Transaction No")
+                field("External Transaction No"; Rec."External Transaction No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Debit; Debit)
+                field(Debit; Rec.Debit)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Credit; Credit)
+                field(Credit; Rec.Credit)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fosa Account"; "Fosa Account")
+                field("Fosa Account"; Rec."Fosa Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }

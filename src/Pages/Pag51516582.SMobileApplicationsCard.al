@@ -2,7 +2,7 @@
 Page 51516582 "S-Mobile Applications Card"
 {
     PageType = Card;
-    SourceTable = 51516521;
+    SourceTable = "SwizzKash Applications";
 
     layout
     {
@@ -10,25 +10,25 @@ Page 51516582 "S-Mobile Applications Card"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -37,22 +37,22 @@ Page 51516582 "S-Mobile Applications Card"
             group("Other Details")
             {
                 Caption = 'Other Details';
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Applied"; "Date Applied")
+                field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Time Applied"; "Time Applied")
+                field("Time Applied"; Rec."Time Applied")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -76,14 +76,14 @@ Page 51516582 "S-Mobile Applications Card"
 
                 trigger OnAction()
                 begin
-                    if Status <> Status::Application then
+                    if Rec.Status <> Rec.Status::Application then
                         Error('Application is already sent for approval');
 
-                    TestField(Telephone);
-                    TestField("Account No");
+                    Rec.TestField(Telephone);
+                    Rec.TestField("Account No");
 
                     //Status := Status::" Pending Approval";
-                    Modify;
+                    Rec.Modify;
                     Message('Application has been sent to approval');
                 end;
             }

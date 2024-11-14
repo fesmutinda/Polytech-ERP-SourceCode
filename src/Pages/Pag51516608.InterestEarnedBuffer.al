@@ -3,7 +3,7 @@ Page 51516608 "Interest Earned Buffer"
 {
     Editable = false;
     PageType = List;
-    SourceTable = 51516546;
+    SourceTable = "Interest Buffer Savings";
 
     layout
     {
@@ -11,47 +11,47 @@ Page 51516608 "Interest Earned Buffer"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Date"; "Interest Date")
+                field("Interest Date"; Rec."Interest Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Matured"; "Account Matured")
+                field("Account Matured"; Rec."Account Matured")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Late Interest"; "Late Interest")
+                field("Late Interest"; Rec."Late Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Transferred; Transferred)
+                field(Transferred; Rec.Transferred)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mark For Deletion"; "Mark For Deletion")
+                field("Mark For Deletion"; Rec."Mark For Deletion")
                 {
                     ApplicationArea = Basic;
                 }

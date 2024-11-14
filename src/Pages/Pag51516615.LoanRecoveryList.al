@@ -4,7 +4,7 @@ Page 51516615 "Loan Recovery List"
     CardPageID = "Loan Recovery Header";
     Editable = false;
     PageType = List;
-    SourceTable = 51516550;
+    SourceTable = "Loan Recovery Header";
     SourceTableView = where(Posted = filter(No));
 
     layout
@@ -13,27 +13,27 @@ Page 51516615 "Loan Recovery List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Personal No"; "Personal No")
+                field("Personal No"; Rec."Personal No")
                 {
                     ApplicationArea = Basic;
                 }
@@ -47,10 +47,10 @@ Page 51516615 "Loan Recovery List"
 
     trigger OnOpenPage()
     begin
-        SetRange("Created By", UserId);
+        Rec.SetRange(Rec."Created By", UserId);
     end;
 
     var
-        ObjLoanRecoveryH: Record 51516550;
+        ObjLoanRecoveryH: Record "Loan Recovery Header";
 }
 

@@ -4,7 +4,7 @@ Page 51516650 "Data Sheet List-DIST"
     CardPageID = "Data Sheet Header-Dist";
     Editable = true;
     PageType = List;
-    SourceTable = 51516650;
+    SourceTable = "Data Sheet Header-Dist";
 
     layout
     {
@@ -12,43 +12,43 @@ Page 51516650 "Data Sheet List-DIST"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Month"; "Period Month")
+                field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Period Code"; "Period Code")
+                field("Period Code"; Rec."Period Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Schedule Amount"; "Total Schedule Amount")
+                field("Total Schedule Amount"; Rec."Total Schedule Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Schedule Amount P"; "Total Schedule Amount P")
+                field("Total Schedule Amount P"; Rec."Total Schedule Amount P")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Schedule Amount I"; "Total Schedule Amount I")
+                field("Total Schedule Amount I"; Rec."Total Schedule Amount I")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Schedule Amount D"; "Total Schedule Amount D")
+                field("Total Schedule Amount D"; Rec."Total Schedule Amount D")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }

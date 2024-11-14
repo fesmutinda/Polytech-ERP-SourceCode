@@ -4,7 +4,7 @@ Page 51516573 "Loans Application List(Approv)"
     CardPageID = "Loans Application Card(Approv)";
     Editable = false;
     PageType = List;
-    SourceTable = 51516371;
+    SourceTable = "Loans Register";
     SourceTableView = where("Approval Status" = filter(Approved),
                             Posted = filter(No),
                             Source = const(BOSA));
@@ -15,64 +15,64 @@ Page 51516573 "Loans Application List(Approv)"
         {
             repeater(Group)
             {
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Group Code"; "Group Code")
+                field("Group Code"; Rec."Group Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested Amount"; "Requested Amount")
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Interest; Interest)
+                field(Interest; Rec.Interest)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Insurance; Insurance)
+                field(Insurance; Rec.Insurance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Name"; "Client Name")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Captured By"; "Captured By")
+                field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Released By Auditor"; "Released By Auditor")
+                field("Released By Auditor"; Rec."Released By Auditor")
                 {
                     ApplicationArea = Basic;
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Checked By"; "Checked By")
+                field("Checked By"; Rec."Checked By")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Released By';
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
@@ -98,7 +98,7 @@ Page 51516573 "Loans Application List(Approv)"
                 begin
                     SFactory.FnGenerateRepaymentSchedule(Rec."Loan  No.");
                     LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                    LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                     if LoanApp.Find('-') then
                         Report.Run(51516477, true, false, LoanApp);
                 end;
@@ -115,9 +115,9 @@ Page 51516573 "Loans Application List(Approv)"
 
                 trigger OnAction()
                 begin
-                    TestField("Mode of Disbursement");
+                    Rec.TestField("Mode of Disbursement");
                     LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                    LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                     if LoanApp.Find('-') then begin
                         if LoanApp.Source = LoanApp.Source::BOSA then
                             Report.Run(51516384, true, false, LoanApp)
@@ -142,7 +142,7 @@ Page 51516573 "Loans Application List(Approv)"
                             Error('You dont have permissions to Release a Loan! ')
                     end;
                     LoanApp.Reset;
-                    LoanApp.SetRange("Loan  No.", "Loan  No.");
+                    LoanApp.SetRange("Loan  No.", Rec."Loan  No.");
                     if LoanApp.Find('-') then begin
                         if Confirm('Are you sure you want to Re-Open this Document ?') = true then
                             LoanApp."Loan Status" := LoanApp."loan status"::Application;
@@ -158,27 +158,27 @@ Page 51516573 "Loans Application List(Approv)"
 
     var
         i: Integer;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PeriodDueDate: Date;
-        ScheduleRep: Record 51516375;
-        LoanGuar: Record 51516372;
+        ScheduleRep: Record "Loan Repayment Schedule";
+        LoanGuar: Record "Loans Guarantee Details";
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
-        SMSMessages: Record 51516471;
+        SMSMessages: Record "SMS Messages";
         iEntryNo: Integer;
         GracePeiodEndDate: Date;
         InstalmentEnddate: Date;
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record 51516375;
-        RSchedule: Record 51516375;
+        NewSchedule: Record "Loan Repayment Schedule";
+        RSchedule: Record "Loan Repayment Schedule";
         GP: Text[30];
         ScheduleCode: Code[20];
-        PreviewShedule: Record 51516375;
+        PreviewShedule: Record "Loan Repayment Schedule";
         PeriodInterval: Code[10];
-        CustomerRecord: Record 51516364;
+        CustomerRecord: Record "Member Register";
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -188,16 +188,16 @@ Page 51516573 "Loans Application List(Approv)"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record 51516364;
-        LoanApp: Record 51516371;
+        Cust: Record "Member Register";
+        LoanApp: Record "Loans Register";
         TestAmt: Decimal;
-        CustRec: Record 51516364;
+        CustRec: Record "Member Register";
         CustPostingGroup: Record "Customer Posting Group";
-        GenSetUp: Record 51516398;
-        PCharges: Record 51516383;
+        GenSetUp: Record "Sacco General Set-Up";
+        PCharges: Record "Loan Product Charges";
         TCharges: Decimal;
-        LAppCharges: Record 51516385;
-        LoansR: Record 51516371;
+        LAppCharges: Record "Loan Applicaton Charges";
+        LoansR: Record "Loans Register";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -220,43 +220,43 @@ Page 51516573 "Loans Application List(Approv)"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record 51516376;
+        LoanTopUp: Record "Loan Offset Details";
         Vend: Record Vendor;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
         DActivity: Code[20];
         DBranch: Code[20];
         TotalTopupComm: Decimal;
-        CustE: Record 51516364;
+        CustE: Record "Member Register";
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record 51516372;
+        LoanG: Record "Loans Guarantee Details";
         SpecialComm: Decimal;
         FOSAName: Text[150];
         IDNo: Code[50];
-        MovementTracker: Record 51516394;
+        MovementTracker: Record "Movement Tracker";
         DiscountingAmount: Decimal;
-        StatusPermissions: Record 51516452;
-        BridgedLoans: Record 51516379;
-        SMSMessage: Record 51516471;
+        StatusPermissions: Record "Status Change Permision";
+        BridgedLoans: Record "Loan Special Clearance";
+        SMSMessage: Record "SMS Messages";
         InstallNo2: Integer;
         currency: Record "Currency Exchange Rate";
         CURRENCYFACTOR: Decimal;
-        LoanApps: Record 51516371;
+        LoanApps: Record "Loans Register";
         LoanDisbAmount: Decimal;
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
-        Disbursement: Record 51516377;
+        Disbursement: Record "Loan Disburesment-Batching";
         SchDate: Date;
         DisbDate: Date;
         WhichDay: Integer;
-        LBatches: Record 51516371;
-        SalDetails: Record 51516373;
-        LGuarantors: Record 51516372;
+        LBatches: Record "Loans Register";
+        SalDetails: Record "Loan Appraisal Salary Details";
+        LGuarantors: Record "Loans Guarantee Details";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal;
         CurrpageEditable: Boolean;
         LoanStatusEditable: Boolean;
@@ -288,7 +288,7 @@ Page 51516573 "Loans Application List(Approv)"
         NetUtilizable: Decimal;
         Deductions: Decimal;
         Benov: Decimal;
-        TAXABLEPAY: Record 51516478;
+        TAXABLEPAY: Record "PAYE Brackets Credit";
         PAYE: Decimal;
         PAYESUM: Decimal;
         BAND1: Decimal;
@@ -299,10 +299,10 @@ Page 51516573 "Loans Application List(Approv)"
         Taxrelief: Decimal;
         OTrelief: Decimal;
         Chargeable: Decimal;
-        PartPay: Record 51516494;
+        PartPay: Record "Loan Partial Disburesments";
         PartPayTotal: Decimal;
         AmountPayable: Decimal;
-        RepaySched: Record 51516375;
+        RepaySched: Record "Loan Repayment Schedule";
         LoanReferee1NameEditable: Boolean;
         LoanReferee2NameEditable: Boolean;
         LoanReferee1MobileEditable: Boolean;
@@ -317,13 +317,13 @@ Page 51516573 "Loans Application List(Approv)"
         WitnessEditable: Boolean;
         compinfo: Record "Company Information";
         CummulativeGuarantee: Decimal;
-        LoansRec: Record 51516371;
+        LoansRec: Record "Loans Register";
         RecoveryModeEditable: Boolean;
         RemarksEditable: Boolean;
         CopyofIDEditable: Boolean;
         CopyofPayslipEditable: Boolean;
         ScheduleBal: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory.";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         ReschedulingFees: Decimal;
@@ -337,7 +337,7 @@ Page 51516573 "Loans Application List(Approv)"
 
     procedure UpdateControl()
     begin
-        if "Approval Status" = "approval status"::Open then begin
+        if Rec."Approval Status" = "approval status"::Open then begin
             MNoEditable := true;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -355,7 +355,7 @@ Page 51516573 "Loans Application List(Approv)"
             RemarksEditable := false;
         end;
 
-        if "Approval Status" = "approval status"::Pending then begin
+        if Rec."Approval Status" = "approval status"::Pending then begin
             MNoEditable := false;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -373,7 +373,7 @@ Page 51516573 "Loans Application List(Approv)"
             RemarksEditable := false;
         end;
 
-        if "Approval Status" = "approval status"::Rejected then begin
+        if Rec."Approval Status" = "approval status"::Rejected then begin
             MNoEditable := false;
             AccountNoEditable := false;
             ApplcDateEditable := false;
@@ -393,7 +393,7 @@ Page 51516573 "Loans Application List(Approv)"
             RemarksEditable := false;
         end;
 
-        if "Approval Status" = "approval status"::Approved then begin
+        if Rec."Approval Status" = "approval status"::Approved then begin
             MNoEditable := false;
             AccountNoEditable := false;
             LoanStatusEditable := false;
@@ -419,13 +419,13 @@ Page 51516573 "Loans Application List(Approv)"
     begin
     end;
 
-    local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record 51516371; LineNo: Integer): Code[40]
+    local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record "Loans Register"; LineNo: Integer): Code[40]
     var
         GenJournalLine: Record "Gen. Journal Line";
         CUNoSeriesManagement: Codeunit NoSeriesManagement;
         DocNumber: Code[100];
-        loanTypes: Record 51516381;
-        ObjLoanX: Record 51516371;
+        loanTypes: Record "Loan Products Setup";
+        ObjLoanX: Record "Loans Register";
     begin
         loanTypes.Reset;
         loanTypes.SetRange(loanTypes.Code, 'BLOAN');

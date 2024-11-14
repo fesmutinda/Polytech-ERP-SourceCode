@@ -3,7 +3,7 @@ Page 51516585 "Standing Order Card Approved"
 {
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516449;
+    SourceTable = "Standing Orders";
 
     layout
     {
@@ -12,40 +12,40 @@ Page 51516585 "Standing Order Card Approved"
             group(General)
             {
                 Caption = 'General';
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Source Account No."; "Source Account No.")
+                field("Source Account No."; Rec."Source Account No.")
                 {
                     ApplicationArea = Basic;
                     AssistEdit = false;
                     Editable = true;
                 }
-                field("Staff/Payroll No."; "Staff/Payroll No.")
+                field("Staff/Payroll No."; Rec."Staff/Payroll No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Type"; "Destination Account Type")
+                field("Destination Account Type"; Rec."Destination Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account No."; "Destination Account No.")
+                field("Destination Account No."; Rec."Destination Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Name"; "Destination Account Name")
+                field("Destination Account Name"; Rec."Destination Account Name")
                 {
                     ApplicationArea = Basic;
                 }
@@ -53,14 +53,14 @@ Page 51516585 "Standing Order Card Approved"
                 {
                     Caption = 'BankDetails';
                     Visible = BankDetailsVisible;
-                    field("Bank Code"; "Bank Code")
+                    field("Bank Code"; Rec."Bank Code")
                     {
                         ApplicationArea = Basic;
 
                         trigger OnValidate()
                         begin
                             BankName := '';
-                            if Banks.Get("Bank Code") then
+                            if Banks.Get(Rec."Bank Code") then
                                 BankName := Banks."Bank Name";
                         end;
                     }
@@ -70,95 +70,95 @@ Page 51516585 "Standing Order Card Approved"
                         Caption = 'Bank Name';
                     }
                 }
-                field("BOSA Account No."; "BOSA Account No.")
+                field("BOSA Account No."; Rec."BOSA Account No.")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field("Allocated Amount"; "Allocated Amount")
+                field("Allocated Amount"; Rec."Allocated Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Effective/Start Date"; "Effective/Start Date")
+                field("Effective/Start Date"; Rec."Effective/Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field(Frequency; Frequency)
+                field(Frequency; Rec.Frequency)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Don't Allow Partial Deduction"; "Don't Allow Partial Deduction")
+                field("Don't Allow Partial Deduction"; Rec."Don't Allow Partial Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Standing Order Description"; "Standing Order Description")
+                field("Standing Order Description"; Rec."Standing Order Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Unsuccessfull; Unsuccessfull)
+                field(Unsuccessfull; Rec.Unsuccessfull)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Next Run Date"; "Next Run Date")
+                field("Next Run Date"; Rec."Next Run Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance; Balance)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Importance = Additional;
-                }
-                field(Effected; Effected)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Auto Process"; "Auto Process")
+                field(Effected; Rec.Effected)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Standing Order Type"; "Standing Order Type")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("None Salary"; "None Salary")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Additional;
-                }
-                field("Date Reset"; "Date Reset")
+                field("Auto Process"; Rec."Auto Process")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field(Status; Status)
+                field("Standing Order Type"; Rec."Standing Order Type")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
                 }
-                field("Posted By"; "Posted By")
+                field("None Salary"; Rec."None Salary")
+                {
+                    ApplicationArea = Basic;
+                    Importance = Additional;
+                }
+                field("Date Reset"; Rec."Date Reset")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Importance = Additional;
                 }
-                field("Next Attempt Date"; "Next Attempt Date")
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Posted By"; Rec."Posted By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Importance = Additional;
+                }
+                field("Next Attempt Date"; Rec."Next Attempt Date")
                 {
                     ApplicationArea = Basic;
                     Importance = Additional;
@@ -195,15 +195,15 @@ Page 51516585 "Standing Order Card Approved"
                 begin
                     if Confirm('Are you sure you want to reset the standing order?') = true then begin
 
-                        Effected := false;
-                        Balance := 0;
-                        Unsuccessfull := false;
-                        "Auto Process" := false;
-                        "Date Reset" := Today;
-                        Modify;
+                        Rec.Effected := false;
+                        Rec.Balance := 0;
+                        Rec.Unsuccessfull := false;
+                        Rec."Auto Process" := false;
+                        Rec."Date Reset" := Today;
+                        Rec.Modify;
 
                         RAllocations.Reset;
-                        RAllocations.SetRange(RAllocations."Document No", "No.");
+                        RAllocations.SetRange(RAllocations."Document No", Rec."No.");
                         if RAllocations.Find('-') then begin
                             repeat
                                 RAllocations."Amount Balance" := 0;
@@ -227,12 +227,12 @@ Page 51516585 "Standing Order Card Approved"
 
                 trigger OnAction()
                 begin
-                    TestField("Source Account No.");
-                    if "Destination Account Type" <> "destination account type"::BOSA then
-                        TestField("Destination Account No.");
-                    TestField("Effective/Start Date");
-                    TestField(Frequency);
-                    TestField("Next Run Date");
+                    Rec.TestField("Source Account No.");
+                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                        Rec.TestField("Destination Account No.");
+                    Rec.TestField("Effective/Start Date");
+                    Rec.TestField(Frequency);
+                    Rec.TestField("Next Run Date");
 
 
                     StatusPermissions.Reset;
@@ -298,7 +298,7 @@ Page 51516585 "Standing Order Card Approved"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::STO;
-                        ApprovalEntries.Setfilters(Database::"HR Commitee Members", DocumentType, "No.");
+                        ApprovalEntries.Setfilters(Database::"HR Commitee Members", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -315,21 +315,21 @@ Page 51516585 "Standing Order Card Approved"
                         Text001: label 'This request is already pending approval';
                         Approvalmgt: Codeunit "Approvals Mgmt.";
                     begin
-                        TestField("Source Account No.");
-                        if "Destination Account Type" <> "destination account type"::BOSA then
-                            TestField("Destination Account No.");
+                        Rec.TestField("Source Account No.");
+                        if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                            Rec.TestField("Destination Account No.");
 
-                        TestField("Effective/Start Date");
-                        TestField(Frequency);
-                        TestField("Next Run Date");
+                        Rec.TestField("Effective/Start Date");
+                        Rec.TestField(Frequency);
+                        Rec.TestField("Next Run Date");
 
-                        if "Destination Account Type" = "destination account type"::BOSA then begin
-                            CalcFields("Allocated Amount");
-                            if Amount <> "Allocated Amount" then
+                        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+                            Rec.CalcFields("Allocated Amount");
+                            if Rec.Amount <> Rec."Allocated Amount" then
                                 Error('Allocated amount must be equal to amount');
                         end;
 
-                        if Status <> Status::Open then
+                        if Rec.Status <> Rec.Status::Open then
                             Error(Text001);
 
 
@@ -337,8 +337,8 @@ Page 51516585 "Standing Order Card Approved"
                        //End allocate batch number
                        IF Approvalmgt.SendFOSASTOApprovalRequest(Rec) THEN;
                          */
-                        Status := Status::Approved;
-                        "Posted By" := UserId;
+                        Rec.Status := Rec.Status::Approved;
+                        Rec."Posted By" := UserId;
 
                     end;
                 }
@@ -373,12 +373,12 @@ Page 51516585 "Standing Order Card Approved"
 
                 trigger OnAction()
                 begin
-                    TestField("Source Account No.");
-                    if "Destination Account Type" <> "destination account type"::BOSA then
-                        TestField("Destination Account No.");
-                    TestField("Effective/Start Date");
-                    TestField(Frequency);
-                    TestField("Next Run Date");
+                    Rec.TestField("Source Account No.");
+                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                        Rec.TestField("Destination Account No.");
+                    Rec.TestField("Effective/Start Date");
+                    Rec.TestField(Frequency);
+                    Rec.TestField("Next Run Date");
 
                     //IF Status<>Status::"2" THEN
                     //ERROR('Standing order status must be approved for you to create it');
@@ -390,9 +390,9 @@ Page 51516585 "Standing Order Card Approved"
                         Error('You do not have permissions to change the standing order status.');
                     if Confirm('Are you sure you want to activate this Record ?') = false then
                         exit;
-                    "Is Active" := true;
-                    "Posted By" := UserId;
-                    Modify;
+                    Rec."Is Active" := true;
+                    Rec."Posted By" := UserId;
+                    rec.Modify;
                 end;
             }
             action(Stop_STO)
@@ -412,10 +412,10 @@ Page 51516585 "Standing Order Card Approved"
                         Error('You do not have permissions to stop the standing order.');
 
                     if Confirm('Are you sure you want to stop the standing order?', false) = true then begin
-                        "Is Active" := false;
-                        "Posted By" := UserId;
+                        Rec."Is Active" := false;
+                        Rec."Posted By" := UserId;
 
-                        Modify;
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -425,42 +425,42 @@ Page 51516585 "Standing Order Card Approved"
     trigger OnAfterGetRecord()
     begin
         BankName := '';
-        if Banks.Get("Bank Code") then
+        if Banks.Get(Rec."Bank Code") then
             BankName := Banks."Bank Name";
 
         ReceiptAllVisible := false;
-        if "Destination Account Type" = "destination account type"::BOSA then begin
+        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
             ReceiptAllVisible := true;
         end;
 
         BankDetailsVisible := false;
-        if "Destination Account Type" = "destination account type"::External then begin
+        if Rec."Destination Account Type" = "destination account type"::External then begin
             BankDetailsVisible := true;
         end;
     end;
 
     trigger OnOpenPage()
     begin
-        if Status = Status::Approved then
+        if Rec.Status = Rec.Status::Approved then
             CurrPage.Editable := false;
 
         ReceiptAllVisible := false;
-        if "Destination Account Type" = "destination account type"::BOSA then begin
+        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
             ReceiptAllVisible := true;
         end;
 
         BankDetailsVisible := false;
-        if "Destination Account Type" = "destination account type"::External then begin
+        if Rec."Destination Account Type" = "destination account type"::External then begin
             BankDetailsVisible := true;
         end;
     end;
 
     var
-        StatusPermissions: Record 51516452;
+        StatusPermissions: Record "Status Change Permision";
         BankName: Text[20];
-        Banks: Record 51516453;
+        Banks: Record Banks;
         UsersID: Record User;
-        RAllocations: Record 51516387;
+        RAllocations: Record "Receipt Allocation";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",STO;
         ReceiptAllVisible: Boolean;
         ObjAccount: Record Vendor;
