@@ -5,7 +5,7 @@ Codeunit 51516153 "G/L Reg.-Cust.Ledger-Member"
 
     trigger OnRun()
     begin
-        CustLedgEntry.SetRange("Entry No.", "From Entry No.", "To Entry No.");
+        CustLedgEntry.SetRange("Entry No.", Rec."From Entry No.", Rec."To Entry No.");
         Page.Run(Page::"HR Leave journal Template", CustLedgEntry);
     end;
 
