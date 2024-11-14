@@ -4,7 +4,7 @@ Page 51516484 "Posted Checkoff Proc.-D List"
     CardPageID = "Posted Checkoff Proc. Header-D";
     Editable = false;
     PageType = List;
-    SourceTable = 51516414;
+    SourceTable = "Checkoff Header-Distributed";
     SourceTableView = where(Posted = filter(Yes));
 
     layout
@@ -13,35 +13,35 @@ Page 51516484 "Posted Checkoff Proc.-D List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Name"; "Employer Name")
+                field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reversed; Reversed)
+                field(Reversed; Rec.Reversed)
                 {
                     ApplicationArea = Basic;
                 }

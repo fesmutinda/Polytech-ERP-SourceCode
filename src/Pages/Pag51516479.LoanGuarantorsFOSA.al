@@ -2,7 +2,7 @@
 Page 51516479 "Loan Guarantors FOSA"
 {
     PageType = ListPart;
-    SourceTable = 51516462;
+    SourceTable = "Loan GuarantorsFOSA";
 
     layout
     {
@@ -10,48 +10,48 @@ Page 51516479 "Loan Guarantors FOSA"
         {
             repeater(Group)
             {
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff/Payroll No."; "Staff/Payroll No.")
+                field("Staff/Payroll No."; Rec."Staff/Payroll No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Shares"; "Current Shares")
+                field("Current Shares"; Rec."Current Shares")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount Guaranted"; "Amount Guaranted")
+                field("Amount Guaranted"; Rec."Amount Guaranted")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Substituted; Substituted)
+                field(Substituted; Rec.Substituted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Line No"; "Line No")
+                field("Line No"; Rec."Line No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Self Guarantee"; "Self Guarantee")
+                field("Self Guarantee"; Rec."Self Guarantee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Salaried; Salaried)
+                field(Salaried; Rec.Salaried)
                 {
                     ApplicationArea = Basic;
                 }

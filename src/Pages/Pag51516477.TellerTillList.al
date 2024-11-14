@@ -5,7 +5,7 @@ Page 51516477 "Teller Till List"
     Editable = false;
     PageType = List;
     SourceTable = "Bank Account";
-    SourceTableView = where("Account Type"=filter(Cashier));
+    SourceTableView = where("Account Type" = filter(Cashier));
 
     layout
     {
@@ -13,19 +13,19 @@ Page 51516477 "Teller Till List"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(CashierID;CashierID)
+                field(CashierID; Rec.CashierID)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance (LCY)";"Balance (LCY)")
+                field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Running Balance';
@@ -51,9 +51,9 @@ Page 51516477 "Teller Till List"
                 trigger OnAction()
                 begin
                     TillNo.Reset;
-                    TillNo.SetRange(TillNo."No.","No.");
+                    TillNo.SetRange(TillNo."No.", Rec."No.");
                     if TillNo.Find('-') then
-                    Report.Run(51516029,true,false,TillNo)
+                        Report.Run(51516029, true, false, TillNo)
                 end;
             }
             action("Cashier Activity Report 2")
@@ -69,9 +69,9 @@ Page 51516477 "Teller Till List"
                 trigger OnAction()
                 begin
                     TillNo.Reset;
-                    TillNo.SetRange(TillNo."No.","No.");
+                    TillNo.SetRange(TillNo."No.", Rec."No.");
                     if TillNo.Find('-') then
-                    Report.Run(51516029,true,false,TillNo)
+                        Report.Run(51516029, true, false, TillNo)
                 end;
             }
         }

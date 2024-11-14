@@ -4,7 +4,7 @@ Page 51516522 "Loan Trunch Disburesment List"
     CardPageID = "Loan Trunch Disburesment";
     Editable = false;
     PageType = List;
-    SourceTable = 51516495;
+    SourceTable = "Loan trunch Disburesment";
 
     layout
     {
@@ -12,71 +12,71 @@ Page 51516522 "Loan Trunch Disburesment List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issue Date"; "Issue Date")
+                field("Issue Date"; Rec."Issue Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disbursed Amount"; "Disbursed Amount")
+                field("Disbursed Amount"; Rec."Disbursed Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance Outstanding"; "Balance Outstanding")
+                field("Balance Outstanding"; Rec."Balance Outstanding")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested Amount"; "Requested Amount")
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Disburse"; "Amount to Disburse")
+                field("Amount to Disburse"; Rec."Amount to Disburse")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("FOSA Account"; "FOSA Account")
+                field("FOSA Account"; Rec."FOSA Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mode of Disbursement"; "Mode of Disbursement")
+                field("Mode of Disbursement"; Rec."Mode of Disbursement")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No/Reference No"; "Cheque No/Reference No")
+                field("Cheque No/Reference No"; Rec."Cheque No/Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }

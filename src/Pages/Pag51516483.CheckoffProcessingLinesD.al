@@ -7,7 +7,7 @@ Page 51516483 "Checkoff Processing Lines-D"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516415;
+    SourceTable = "Checkoff Lines-Distributed";
 
     layout
     {
@@ -15,109 +15,109 @@ Page 51516483 "Checkoff Processing Lines-D"
         {
             repeater(Group)
             {
-                field("Staff/Payroll No"; "Staff/Payroll No")
+                field("Staff/Payroll No"; Rec."Staff/Payroll No")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shares Capital"; "Shares Capital")
+                field("Shares Capital"; Rec."Shares Capital")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deposit contribution"; "Deposit contribution")
+                field("Deposit contribution"; Rec."Deposit contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("DLoan No"; "DLoan No")
+                field("DLoan No"; Rec."DLoan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int DEVELOPMENT LOAN"; "Int DEVELOPMENT LOAN")
+                field("Int DEVELOPMENT LOAN"; Rec."Int DEVELOPMENT LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("DEVELOPMENT LOAN"; "DEVELOPMENT LOAN")
+                field("DEVELOPMENT LOAN"; Rec."DEVELOPMENT LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int INVESTMENT LOAN"; "Int INVESTMENT LOAN")
+                field("Int INVESTMENT LOAN"; Rec."Int INVESTMENT LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("INVESTMENT LOAN"; "INVESTMENT LOAN")
+                field("INVESTMENT LOAN"; Rec."INVESTMENT LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int SUPER SCHOOL FEES"; "Int SUPER SCHOOL FEES")
+                field("Int SUPER SCHOOL FEES"; Rec."Int SUPER SCHOOL FEES")
                 {
                     ApplicationArea = Basic;
                 }
-                field("SUPER SCHOOL FEES"; "SUPER SCHOOL FEES")
+                field("SUPER SCHOOL FEES"; Rec."SUPER SCHOOL FEES")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int SCHOOL FEES"; "Int SCHOOL FEES")
+                field("Int SCHOOL FEES"; Rec."Int SCHOOL FEES")
                 {
                     ApplicationArea = Basic;
                 }
-                field("SCHOOL FEES"; "SCHOOL FEES")
+                field("SCHOOL FEES"; Rec."SCHOOL FEES")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int SUPER QUICK"; "Int SUPER QUICK")
+                field("Int SUPER QUICK"; Rec."Int SUPER QUICK")
                 {
                     ApplicationArea = Basic;
                 }
-                field("SUPER QUICK"; "SUPER QUICK")
+                field("SUPER QUICK"; Rec."SUPER QUICK")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int QUICK LOAN"; "Int QUICK LOAN")
+                field("Int QUICK LOAN"; Rec."Int QUICK LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("QUICK LOAN"; "QUICK LOAN")
+                field("QUICK LOAN"; Rec."QUICK LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Int EMERGENCY LOAN"; "Int EMERGENCY LOAN")
+                field("Int EMERGENCY LOAN"; Rec."Int EMERGENCY LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("EMERGENCY LOAN"; "EMERGENCY LOAN")
+                field("EMERGENCY LOAN"; Rec."EMERGENCY LOAN")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ELoan No."; "ELoan No.")
+                field("ELoan No."; Rec."ELoan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(SLoanNo; SLoanNo)
+                field(SLoanNo; Rec.SLoanNo)
                 {
                     ApplicationArea = Basic;
                 }
-                field("QLoan No"; "QLoan No")
+                field("QLoan No"; Rec."QLoan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("House Loan"; "House Loan")
+                field("House Loan"; Rec."House Loan")
                 {
                     ApplicationArea = Basic;
                 }
@@ -140,9 +140,9 @@ Page 51516483 "Checkoff Processing Lines-D"
     local procedure SetStyles()
     begin
         CoveragePercentStyle := 'Strong';
-        if "Member No." = '' then
+        if Rec."Member No." = '' then
             CoveragePercentStyle := 'Unfavorable';
-        if "Member No." <> '' then
+        if Rec."Member No." <> '' then
             CoveragePercentStyle := 'Favorable';
     end;
 }

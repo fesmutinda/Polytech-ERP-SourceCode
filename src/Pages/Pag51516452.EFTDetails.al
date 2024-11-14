@@ -2,7 +2,7 @@
 Page 51516452 "EFT Details"
 {
     PageType = ListPart;
-    SourceTable = 51516458;
+    SourceTable = "EFT Details";
     SourceTableView = sorting("Header No", No);
 
     layout
@@ -11,30 +11,30 @@ Page 51516452 "EFT Details"
         {
             repeater(Control17)
             {
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Phone No."; "Phone No.")
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Type"; "Destination Account Type")
+                field("Destination Account Type"; Rec."Destination Account Type")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Type';
@@ -44,24 +44,24 @@ Page 51516452 "EFT Details"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Destination Account No"; "Destination Account No")
+                field("Destination Account No"; Rec."Destination Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Name"; "Destination Account Name")
+                field("Destination Account Name"; Rec."Destination Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank No"; "Bank No")
+                field("Bank No"; Rec."Bank No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payee Bank Name"; "Payee Bank Name")
+                field("Payee Bank Name"; Rec."Payee Bank Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -77,19 +77,19 @@ Page 51516452 "EFT Details"
     trigger OnAfterGetRecord()
     begin
         DCHAR := 0;
-        DCHAR := StrLen("Destination Account No");
+        DCHAR := StrLen(Rec."Destination Account No");
 
         NotAvailable := true;
         AvailableBal := 0;
 
 
         //Available Bal
-        if Accounts.Get("Account No") then begin
+        if Accounts.Get(Rec."Account No") then begin
             Accounts.CalcFields(Accounts.Balance, Accounts."Uncleared Cheques", Accounts."ATM Transactions");
             if AccountTypes.Get(Accounts."Account Type") then begin
                 AvailableBal := Accounts.Balance - (Accounts."Uncleared Cheques" + Accounts."ATM Transactions" + Charges + AccountTypes."Minimum Balance");
 
-                if Amount <= AvailableBal then
+                if Rec.Amount <= AvailableBal then
                     NotAvailable := false;
 
             end;
@@ -102,6 +102,6 @@ Page 51516452 "EFT Details"
         AvailableBal: Decimal;
         Charges: Decimal;
         Accounts: Record Vendor;
-        AccountTypes: Record 51516436;
+        AccountTypes: Record "Account Types-Saving Products";
 }
 

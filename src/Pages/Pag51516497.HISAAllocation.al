@@ -2,7 +2,7 @@
 Page 51516497 "HISA Allocation"
 {
     PageType = List;
-    SourceTable = 51516475;
+    SourceTable = "HISA Allocation";
 
     layout
     {
@@ -10,47 +10,47 @@ Page 51516497 "HISA Allocation"
         {
             repeater(Group)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Amount"; "Total Amount")
+                field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Balance"; "Amount Balance")
+                field("Amount Balance"; Rec."Amount Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Balance"; "Interest Balance")
+                field("Interest Balance"; Rec."Interest Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Share Mode of Payment"; "Share Mode of Payment")
+                field("Share Mode of Payment"; Rec."Share Mode of Payment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Allocation"; "Total Allocation")
+                field("Total Allocation"; Rec."Total Allocation")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516465 "Front Office Charges"
 {
     PageType = Card;
-    SourceTable = 51516439;
+    SourceTable = Charges;
 
     layout
     {
@@ -10,39 +10,39 @@ Page 51516465 "Front Office Charges"
         {
             repeater(Control1102760000)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Amount"; "Charge Amount")
+                field("Charge Amount"; Rec."Charge Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Type"; "Charge Type")
+                field("Charge Type"; Rec."Charge Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Use Percentage"; "Use Percentage")
+                field("Use Percentage"; Rec."Use Percentage")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Percentage of Amount"; "Percentage of Amount")
+                field("Percentage of Amount"; Rec."Percentage of Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Minimum; Minimum)
+                field(Minimum; Rec.Minimum)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Maximum; Maximum)
+                field(Maximum; Rec.Maximum)
                 {
                     ApplicationArea = Basic;
                 }
-                field("GL Account"; "GL Account")
+                field("GL Account"; Rec."GL Account")
                 {
                     ApplicationArea = Basic;
                 }

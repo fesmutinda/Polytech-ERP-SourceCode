@@ -2,7 +2,7 @@
 Page 51516496 "Data Sheet Main"
 {
     PageType = List;
-    SourceTable = 51516417;
+    SourceTable = "Data Sheet Main";
 
     layout
     {
@@ -10,151 +10,151 @@ Page 51516496 "Data Sheet Main"
         {
             repeater(Group)
             {
-                field("PF/Staff No"; "PF/Staff No")
+                field("PF/Staff No"; Rec."PF/Staff No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID NO."; "ID NO.")
+                field("ID NO."; Rec."ID NO.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Type of Deduction"; "Type of Deduction")
+                field("Type of Deduction"; Rec."Type of Deduction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount ON"; "Amount ON")
+                field("Amount ON"; Rec."Amount ON")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount OFF"; "Amount OFF")
+                field("Amount OFF"; Rec."Amount OFF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Balance"; "New Balance")
+                field("New Balance"; Rec."New Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("REF."; "REF.")
+                field("REF."; Rec."REF.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Remark/LoanNO"; "Remark/LoanNO")
+                field("Remark/LoanNO"; Rec."Remark/LoanNO")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sort Code"; "Sort Code")
+                field("Sort Code"; Rec."Sort Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Employer; Employer)
+                field(Employer; Rec.Employer)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll Month"; "Payroll Month")
+                field("Payroll Month"; Rec."Payroll Month")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Uploaded Interest"; "Uploaded Interest")
+                field("Uploaded Interest"; Rec."Uploaded Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Batch No."; "Batch No.")
+                field("Batch No."; Rec."Batch No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principal Amount"; "Principal Amount")
+                field("Principal Amount"; Rec."Principal Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(UploadInt; UploadInt)
+                field(UploadInt; Rec.UploadInt)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shares OFF"; "Shares OFF")
+                field("Shares OFF"; Rec."Shares OFF")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Adjustment Type"; "Adjustment Type")
+                field("Adjustment Type"; Rec."Adjustment Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Period; Period)
+                field(Period; Rec.Period)
                 {
                     ApplicationArea = Basic;
                 }
-                field("aMOUNT ON 1"; "aMOUNT ON 1")
+                field("aMOUNT ON 1"; Rec."aMOUNT ON 1")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Vote Code"; "Vote Code")
+                field("Vote Code"; Rec."Vote Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(EDCode; EDCode)
+                field(EDCode; Rec.EDCode)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Balance"; "Current Balance")
+                field("Current Balance"; Rec."Current Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field(TranType; TranType)
+                field(TranType; Rec.TranType)
                 {
                     ApplicationArea = Basic;
                 }
-                field(TranName; TranName)
+                field(TranName; Rec.TranName)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Action"; Action)
+                field("Action"; Rec.Action)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Fee"; "Interest Fee")
+                field("Interest Fee"; Rec."Interest Fee")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Recoveries; Recoveries)
+                field(Recoveries; Rec.Recoveries)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Filter"; "Date Filter")
+                field("Date Filter"; Rec."Date Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Off"; "Interest Off")
+                field("Interest Off"; Rec."Interest Off")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Repayment Method"; "Repayment Method")
+                field("Repayment Method"; Rec."Repayment Method")
                 {
                     ApplicationArea = Basic;
                 }

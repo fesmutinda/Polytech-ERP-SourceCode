@@ -2,7 +2,7 @@
 Page 51516551 "Member Parishes"
 {
     PageType = Card;
-    SourceTable = 51516506;
+    SourceTable = "Member's Parishes";
 
     layout
     {
@@ -10,29 +10,29 @@ Page 51516551 "Member Parishes"
         {
             group(General)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Share Class"; "Share Class")
+                field("Share Class"; Rec."Share Class")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No of Members"; "No of Members")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Male Members"; "Male Members")
+                field("No of Members"; Rec."No of Members")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Female Members"; "Female Members")
+                field("Male Members"; Rec."Male Members")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Female Members"; Rec."Female Members")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

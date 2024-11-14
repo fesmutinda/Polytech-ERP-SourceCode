@@ -2,7 +2,7 @@
 Page 51516473 "Fixed Deposit Interest Rates"
 {
     PageType = ListPart;
-    SourceTable = 51516448;
+    SourceTable = "FD Interest Calculation Crite";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516473 "Fixed Deposit Interest Rates"
         {
             repeater(Control1102760000)
             {
-                field("Minimum Amount"; "Minimum Amount")
+                field("Minimum Amount"; Rec."Minimum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Amount"; "Maximum Amount")
+                field("Maximum Amount"; Rec."Maximum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("On Call Interest Rate"; "On Call Interest Rate")
+                field("On Call Interest Rate"; Rec."On Call Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No of Months"; "No of Months")
+                field("No of Months"; Rec."No of Months")
                 {
                     ApplicationArea = Basic;
                 }

@@ -4,7 +4,7 @@ Page 51516513 "Atm Transaction Details"
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
-    SourceTable = 51516466;
+    SourceTable = "ATM Transactions";
 
     layout
     {
@@ -12,47 +12,47 @@ Page 51516513 "Atm Transaction Details"
         {
             repeater(Group)
             {
-                field("Trace ID"; "Trace ID")
+                field("Trace ID"; Rec."Trace ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting S"; "Posting S")
+                field("Posting S"; Rec."Posting S")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withdrawal Location"; "Withdrawal Location")
+                field("Withdrawal Location"; Rec."Withdrawal Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Card No"; "ATM Card No")
+                field("ATM Card No"; Rec."ATM Card No")
                 {
                     ApplicationArea = Basic;
                 }

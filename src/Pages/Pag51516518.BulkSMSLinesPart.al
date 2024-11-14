@@ -2,7 +2,7 @@
 Page 51516518 "Bulk SMS Lines Part"
 {
     PageType = ListPart;
-    SourceTable = 51516492;
+    SourceTable = "Bulk SMS Lines";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516518 "Bulk SMS Lines Part"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Telephone No';
@@ -41,7 +41,7 @@ Page 51516518 "Bulk SMS Lines Part"
 
                     end;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
@@ -54,7 +54,7 @@ Page 51516518 "Bulk SMS Lines Part"
     }
 
     var
-        BulkSMSHeader: Record 51516491;
+        BulkSMSHeader: Record "Bulk SMS Header";
         DimensionValue: Record "Dimension Value";
 }
 

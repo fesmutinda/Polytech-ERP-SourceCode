@@ -2,7 +2,7 @@
 Page 51516507 "BOSA Transfer Sched"
 {
     PageType = ListPart;
-    SourceTable = 51516407;
+    SourceTable = "BOSA TransferS Schedule";
 
     layout
     {
@@ -10,49 +10,49 @@ Page 51516507 "BOSA Transfer Sched"
         {
             repeater(Control1102760000)
             {
-                field("Source Type"; "Source Type")
+                field("Source Type"; Rec."Source Type")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Account Type';
                 }
-                field("Source Account No."; "Source Account No.")
+                field("Source Account No."; Rec."Source Account No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Account to Debit(BOSA)';
                 }
-                field("Source Account Name"; "Source Account Name")
+                field("Source Account Name"; Rec."Source Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Loan; Loan)
+                field(Loan; Rec.Loan)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Type"; "Destination Account Type")
+                field("Destination Account Type"; Rec."Destination Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account No."; "Destination Account No.")
+                field("Destination Account No."; Rec."Destination Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Name"; "Destination Account Name")
+                field("Destination Account Name"; Rec."Destination Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Loan"; "Destination Loan")
+                field("Destination Loan"; Rec."Destination Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Type"; "Destination Type")
+                field("Destination Type"; Rec."Destination Type")
                 {
                     ApplicationArea = Basic;
                 }

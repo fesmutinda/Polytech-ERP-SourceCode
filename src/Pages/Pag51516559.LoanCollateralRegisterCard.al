@@ -2,7 +2,7 @@
 Page 51516559 "Loan Collateral Register Card"
 {
     PageType = Card;
-    SourceTable = 51516512;
+    SourceTable = "Loan Collateral Register";
 
     layout
     {
@@ -10,128 +10,128 @@ Page 51516559 "Loan Collateral Register Card"
         {
             group(General)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Type"; "Collateral Type")
+                field("Collateral Type"; Rec."Collateral Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Description"; "Collateral Description")
+                field("Collateral Description"; Rec."Collateral Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Posting Group"; "Collateral Posting Group")
+                field("Collateral Posting Group"; Rec."Collateral Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Received"; "Date Received")
+                field("Date Received"; Rec."Date Received")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registered Owner"; "Registered Owner")
+                field("Registered Owner"; Rec."Registered Owner")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received By"; "Received By")
+                field("Received By"; Rec."Received By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Released"; "Date Released")
+                field("Date Released"; Rec."Date Released")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Released By"; "Released By")
+                field("Released By"; Rec."Released By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Insurance Details")
             {
-                field("Insurance Effective Date"; "Insurance Effective Date")
+                field("Insurance Effective Date"; Rec."Insurance Effective Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Expiration Date"; "Insurance Expiration Date")
+                field("Insurance Expiration Date"; Rec."Insurance Expiration Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Policy No."; "Insurance Policy No.")
+                field("Insurance Policy No."; Rec."Insurance Policy No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Annual Premium"; "Insurance Annual Premium")
+                field("Insurance Annual Premium"; Rec."Insurance Annual Premium")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Policy Coverage"; "Policy Coverage")
+                field("Policy Coverage"; Rec."Policy Coverage")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Value Insured"; "Total Value Insured")
+                field("Total Value Insured"; Rec."Total Value Insured")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Type"; "Insurance Type")
+                field("Insurance Type"; Rec."Insurance Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Vendor No."; "Insurance Vendor No.")
+                field("Insurance Vendor No."; Rec."Insurance Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Depreciation Details")
             {
-                field("Asset Value"; "Asset Value")
+                field("Asset Value"; Rec."Asset Value")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Depreciation Completion Date"; "Depreciation Completion Date")
+                field("Depreciation Completion Date"; Rec."Depreciation Completion Date")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expected Date of Loan Complition';
                     Editable = false;
                 }
-                field("Depreciation Percentage"; "Depreciation Percentage")
+                field("Depreciation Percentage"; Rec."Depreciation Percentage")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Collateral Depreciation Method"; "Collateral Depreciation Method")
+                field("Collateral Depreciation Method"; Rec."Collateral Depreciation Method")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Asset Depreciation Amount"; "Asset Depreciation Amount")
+                field("Asset Depreciation Amount"; Rec."Asset Depreciation Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Asset Value @Loan Completion"; "Asset Value @Loan Completion")
+                field("Asset Value @Loan Completion"; Rec."Asset Value @Loan Completion")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -154,20 +154,20 @@ Page 51516559 "Loan Collateral Register Card"
                 trigger OnAction()
                 begin
 
-                    VarNoofYears := ROUND(("Depreciation Completion Date" - Today) / 365, 1, '>');
+                    VarNoofYears := ROUND((Rec."Depreciation Completion Date" - Today) / 365, 1, '>');
 
                     //===========Update Year 1 Depreciation==================================
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindSet = false then begin
-                        VarDepreciationValue := "Asset Value" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := Rec."Asset Value" * (Rec."Depreciation Percentage" / 100);
 
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', Today);
                         ObjCollateralDeprReg."Transaction Description" := 'Year 1 Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
-                        ObjCollateralDeprReg."Collateral NBV" := "Asset Value" - VarDepreciationValue;
+                        ObjCollateralDeprReg."Collateral NBV" := Rec."Asset Value" - VarDepreciationValue;
                         ObjCollateralDeprReg.Insert;
 
                     end;
@@ -177,21 +177,21 @@ Page 51516559 "Loan Collateral Register Card"
                     //===========Update Year 2 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
 
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -203,20 +203,20 @@ Page 51516559 "Loan Collateral Register Card"
                     //===========Update Year 3 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -228,20 +228,20 @@ Page 51516559 "Loan Collateral Register Card"
                     //===========Update Year 4 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -253,20 +253,20 @@ Page 51516559 "Loan Collateral Register Card"
                     //===========Update Year 5 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -278,20 +278,20 @@ Page 51516559 "Loan Collateral Register Card"
                     //===========Update Year 6 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -319,13 +319,13 @@ Page 51516559 "Loan Collateral Register Card"
     end;
 
     var
-        ObjCollateralDeprReg: Record 51516921;
-        ObjCollateralDetails: Record 51516374;
+        ObjCollateralDeprReg: Record "Collateral Depr Register";
+        ObjCollateralDetails: Record "Loan Collateral Details";
         VarNoofYears: Integer;
         VarDepreciationValue: Decimal;
-        ObjDepreciationRegister: Record 51516921;
+        ObjDepreciationRegister: Record "Collateral Depr Register";
         VarDepreciationNo: Integer;
-        ObjDeprCollateralMaster: Record 51516921;
+        ObjDeprCollateralMaster: Record "Collateral Depr Register";
         VarCurrentNBV: Decimal;
         ReceivedAtHQVisible: Boolean;
         StrongRoomVisible: Boolean;
@@ -338,25 +338,25 @@ Page 51516559 "Loan Collateral Register Card"
 
     local procedure FnGetVisibility()
     begin
-        if Action = Action::"Receive at HQ" then begin
+        if Rec.Action = Rec.Action::"Receive at HQ" then begin
             ReceivedAtHQVisible := true;
         end;
-        if (Action = Action::"Dispatch to Branch") or (Action = Action::"Receive at Branch") then begin
+        if (Rec.Action = Rec.Action::"Dispatch to Branch") or (Rec.Action = Rec.Action::"Receive at Branch") then begin
             BranchVisible := true;
         end;
-        if (Action = Action::"Issue to Lawyer") or (Action = Action::"Receive From Lawyer") then begin
+        if (Rec.Action = Rec.Action::"Issue to Lawyer") or (Rec.Action = Rec.Action::"Receive From Lawyer") then begin
             LawyerVisible := true;
         end;
-        if Action = Action::"Issue to Auctioneer" then begin
+        if Rec.Action = Rec.Action::"Issue to Auctioneer" then begin
             IssuetoAuctioneerVisible := true;
         end;
-        if Action = Action::"Issue to Insurance Agent" then begin
+        if Rec.Action = Rec.Action::"Issue to Insurance Agent" then begin
             InsuranceAgentVisible := true;
         end;
-        if Action = Action::"Release to Member" then begin
+        if Rec.Action = Rec.Action::"Release to Member" then begin
             IssuetoMemberVisible := true;
         end;
-        if Action = Action::"Retrieve From Strong Room" then begin
+        if Rec.Action = Rec.Action::"Retrieve From Strong Room" then begin
             SafeCustodyVisible := true;
         end;
     end;

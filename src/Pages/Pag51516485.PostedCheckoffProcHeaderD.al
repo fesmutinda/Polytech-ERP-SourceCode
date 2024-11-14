@@ -4,7 +4,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
     DeleteAllowed = false;
     Editable = false;
     PageType = Card;
-    SourceTable = 51516414;
+    SourceTable = "Checkoff Header-Distributed";
     SourceTableView = where(Posted = const(Yes));
 
     layout
@@ -13,37 +13,37 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
         {
             group(General)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting date"; "Posting date")
+                field("Posting date"; Rec."Posting date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Loan CutOff Date"; "Loan CutOff Date")
+                field("Loan CutOff Date"; Rec."Loan CutOff Date")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -51,46 +51,46 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                     Style = Favorable;
                     StyleExpr = true;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Name"; "Employer Name")
+                field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Document No./ Cheque No.';
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("CheckOff Period"; "CheckOff Period")
+                field("CheckOff Period"; Rec."CheckOff Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Scheduled"; "Total Scheduled")
+                field("Total Scheduled"; Rec."Total Scheduled")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -120,7 +120,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
-                RunObject = XMLport UnknownXMLport51516003;
+                RunObject = XMLport 51516003;
             }
             group(ActionGroup1102755021)
             {
@@ -196,7 +196,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 trigger OnAction()
                 begin
                     ReptProcHeader.Reset;
-                    ReptProcHeader.SetRange(ReptProcHeader.No, No);
+                    ReptProcHeader.SetRange(ReptProcHeader.No, Rec.No);
                     if ReptProcHeader.Find('-') then
                         Report.Run(51516542, true, false, ReptProcHeader);
                 end;
@@ -446,7 +446,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 trigger OnAction()
                 begin
                     MembLedg.Reset;
-                    MembLedg.SetRange(MembLedg."Document No.", Remarks);
+                    MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
                     if MembLedg.Find('-') = false then begin
                         Error('You Can Only do this process on Already Posted Checkoffs')
                     end;
@@ -466,8 +466,8 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
 
                 trigger OnAction()
                 begin
-                    TestField("Document No");
-                    TestField(Amount);
+                    Rec.TestField("Document No");
+                    Rec.TestField(Amount);
                     ReceiptLine.Reset;
                     //ReceiptLine.SETRANGE(ReceiptLine."Receipt Header No",No);
                     //IF ReceiptLine.FIND('-') THEN
@@ -487,13 +487,13 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 begin
                     if Confirm('Are you sure you want to mark this Checkoff as Posted ?', false) = true then begin
                         MembLedg.Reset;
-                        MembLedg.SetRange(MembLedg."Document No.", Remarks);
+                        MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
                         if MembLedg.Find('-') = false then
                             Error('Sorry,You can only do this process on already posted Checkoffs');
-                        Posted := true;
-                        "Posted By" := UserId;
-                        "Posting date" := Today;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
+                        Rec."Posting date" := Today;
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -508,7 +508,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 trigger OnAction()
                 begin
                     ReptProcHeader.Reset;
-                    ReptProcHeader.SetRange(ReptProcHeader.No, No);
+                    ReptProcHeader.SetRange(ReptProcHeader.No, Rec.No);
                     if ReptProcHeader.Find('-') then
                         Report.Run(51516972, true, false, ReptProcHeader)
                 end;
@@ -526,8 +526,8 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 begin
                     if Confirm('Are you sure  this Loan is Reversed?', true) = false then
                         exit;
-                    Reversed := Reversed::"1";
-                    Modify;
+                    Rec.Reversed := Reversed::"1";
+                    Rec.Modify;
                 end;
             }
             action("Unmark Reversed")
@@ -543,8 +543,8 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 begin
                     if Confirm('Are you sure  you want to Unmark this Loan?', true) = false then
                         exit;
-                    Reversed := Reversed::"0";
-                    Modify;
+                    Rec.Reversed := Reversed::"0";
+                    Rec.Modify;
                 end;
             }
         }
@@ -553,15 +553,15 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
     trigger OnAfterGetCurrRecord()
     begin
         MembLedg.Reset;
-        MembLedg.SetRange(MembLedg."Document No.", Remarks);
+        MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
         if MembLedg.Find('-') = true then
             ActionEnabled := false;
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        "Posting date" := Today;
-        "Date Entered" := Today;
+        Rec."Posting date" := Today;
+        Rec."Date Entered" := Today;
     end;
 
     var
@@ -569,22 +569,22 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record 51516415;
+        ReceiptsProcessingLines: Record "Checkoff Lines-Distributed";
         LineNo: Integer;
-        LBatches: Record 51516377;
+        LBatches: Record "Loan Disburesment-Batching";
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record 51516414;
-        Cust: Record 51516364;
+        ReptProcHeader: Record "Checkoff Header-Distributed";
+        Cust: Record "Member Register";
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record 51516371;
+        Loantable: Record "Loans Register";
         LRepayment: Decimal;
-        RcptBufLines: Record 51516415;
-        LoanType: Record 51516381;
-        LoanApp: Record 51516371;
+        RcptBufLines: Record "Checkoff Lines-Distributed";
+        LoanType: Record "Loan Products Setup";
+        LoanApp: Record "Loans Register";
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -595,14 +595,14 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        genstup: Record 51516398;
-        Memb: Record 51516364;
+        genstup: Record "Sacco General Set-Up";
+        Memb: Record "Member Register";
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
-        ReceiptLine: Record 51516415;
-        MembLedg: Record 51516365;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        ReceiptLine: Record "Checkoff Lines-Distributed";
+        MembLedg: Record "Member Ledger Entry";
+        SFactory: Codeunit "Swizzsoft Factory.";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         DOCUMENT_NO: Code[40];

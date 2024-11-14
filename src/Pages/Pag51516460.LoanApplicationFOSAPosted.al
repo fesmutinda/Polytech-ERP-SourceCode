@@ -7,7 +7,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516371;
+    SourceTable = "Loans Register";
     SourceTableView = where(Posted = const(Yes),
                             Source = const(FOSA),
                             "Loan Status" = const(Issued));
@@ -18,86 +18,86 @@ Page 51516460 "Loan Application FOSA(Posted)"
         {
             repeater(Group)
             {
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff No"; "Staff No")
+                field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Name"; "Client Name")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested Amount"; "Requested Amount")
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                     Style = AttentionAccent;
                     StyleExpr = true;
                 }
-                field("Amount Disbursed"; "Amount Disbursed")
+                field("Amount Disbursed"; Rec."Amount Disbursed")
                 {
                     ApplicationArea = Basic;
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field("Oustanding Interest"; "Oustanding Interest")
+                field("Oustanding Interest"; Rec."Oustanding Interest")
                 {
                     ApplicationArea = Basic;
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field(Installments; Installments)
+                field(Installments; Rec.Installments)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Principle Repayment"; "Loan Principle Repayment")
+                field("Loan Principle Repayment"; Rec."Loan Principle Repayment")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Interest; Interest)
+                field(Interest; Rec.Interest)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reversed; Reversed)
+                field(Reversed; Rec.Reversed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Captured By"; "Captured By")
+                field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Checked By"; "Checked By")
+                field("Checked By"; Rec."Checked By")
                 {
                     ApplicationArea = Basic;
                 }
@@ -123,7 +123,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 begin
                     //FnGenerateSchedule();
                     LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                    LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                     if LoanApp.Find('-') then
                         Report.Run(51516477, true, false, LoanApp);
                 end;
@@ -140,9 +140,9 @@ Page 51516460 "Loan Application FOSA(Posted)"
 
                 trigger OnAction()
                 begin
-                    TestField("Mode of Disbursement");
+                    Rec.TestField("Mode of Disbursement");
                     LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                    LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                     if LoanApp.Find('-') then begin
                         if LoanApp.Source = LoanApp.Source::BOSA then
                             Report.Run(51516399, true, false, LoanApp)
@@ -162,9 +162,9 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 trigger OnAction()
                 begin
                     Cust.Reset;
-                    Cust.SetRange(Cust."No.", "Client Code");
-                    Cust.SetFilter("Loan No. Filter", "Loan  No.");
-                    Cust.SetFilter("Loan Product Filter", "Loan Product Type");
+                    Cust.SetRange(Cust."No.", Rec."Client Code");
+                    Cust.SetFilter("Loan No. Filter", Rec."Loan  No.");
+                    Cust.SetFilter("Loan Product Filter", Rec."Loan Product Type");
                     if Cust.Find('-') then
                         Report.Run(51516531, true, false, Cust);
                 end;
@@ -180,9 +180,9 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 trigger OnAction()
                 begin
                     Cust.Reset;
-                    Cust.SetRange(Cust."No.", "Client Code");
-                    Cust.SetFilter("Loan No. Filter", "Loan  No.");
-                    Cust.SetFilter("Loan Product Filter", "Loan Product Type");
+                    Cust.SetRange(Cust."No.", Rec."Client Code");
+                    Cust.SetFilter("Loan No. Filter", Rec."Loan  No.");
+                    Cust.SetFilter("Loan Product Filter", Rec."Loan Product Type");
                     if Cust.Find('-') then
                         Report.Run(51516494, true, false, Cust);
                 end;
@@ -198,7 +198,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 trigger OnAction()
                 begin
                     Cust.Reset;
-                    Cust.SetRange(Cust."No.", "Client Code");
+                    Cust.SetRange(Cust."No.", Rec."Client Code");
                     Report.Run(51516886, true, false, Cust);
                 end;
             }
@@ -224,27 +224,27 @@ Page 51516460 "Loan Application FOSA(Posted)"
 
     var
         i: Integer;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PeriodDueDate: Date;
-        ScheduleRep: Record 51516375;
-        LoanGuar: Record 51516372;
+        ScheduleRep: Record "Loan Repayment Schedule";
+        LoanGuar: Record "Loans Guarantee Details";
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
-        SMSMessages: Record 51516471;
+        SMSMessages: Record "SMS Messages";
         iEntryNo: Integer;
         GracePeiodEndDate: Date;
         InstalmentEnddate: Date;
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record 51516375;
-        RSchedule: Record 51516375;
+        NewSchedule: Record "Loan Repayment Schedule";
+        RSchedule: Record "Loan Repayment Schedule";
         GP: Text[30];
         ScheduleCode: Code[20];
-        PreviewShedule: Record 51516375;
+        PreviewShedule: Record "Loan Repayment Schedule";
         PeriodInterval: Code[10];
-        CustomerRecord: Record 51516364;
+        CustomerRecord: Record "Member Register";
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -254,16 +254,16 @@ Page 51516460 "Loan Application FOSA(Posted)"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record 51516364;
-        LoanApp: Record 51516371;
+        Cust: Record "Member Register";
+        LoanApp: Record "Loans Register";
         TestAmt: Decimal;
-        CustRec: Record 51516364;
+        CustRec: Record "Member Register";
         CustPostingGroup: Record "Customer Posting Group";
-        GenSetUp: Record 51516398;
-        PCharges: Record 51516383;
+        GenSetUp: Record "Sacco General Set-Up";
+        PCharges: Record "Loan Product Charges";
         TCharges: Decimal;
-        LAppCharges: Record 51516385;
-        LoansR: Record 51516371;
+        LAppCharges: Record "Loan Applicaton Charges";
+        LoansR: Record "Loans Register";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -286,43 +286,43 @@ Page 51516460 "Loan Application FOSA(Posted)"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record 51516376;
+        LoanTopUp: Record "Loan Offset Details";
         Vend: Record Vendor;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
         DActivity: Code[20];
         DBranch: Code[20];
         TotalTopupComm: Decimal;
-        CustE: Record 51516364;
+        CustE: Record "Member Register";
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record 51516372;
+        LoanG: Record "Member Register";
         SpecialComm: Decimal;
         FOSAName: Text[150];
         IDNo: Code[50];
-        MovementTracker: Record 51516394;
+        MovementTracker: Record "Movement Tracker";
         DiscountingAmount: Decimal;
-        StatusPermissions: Record 51516452;
-        BridgedLoans: Record 51516379;
-        SMSMessage: Record 51516471;
+        StatusPermissions: Record "Status Change Permision";
+        BridgedLoans: Record "Loan Special Clearance";
+        SMSMessage: Record "SMS Messages";
         InstallNo2: Integer;
         currency: Record "Currency Exchange Rate";
         CURRENCYFACTOR: Decimal;
-        LoanApps: Record 51516371;
+        LoanApps: Record "Loans Register";
         LoanDisbAmount: Decimal;
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
-        Disbursement: Record 51516377;
+        Disbursement: Record "Loan Disburesment-Batching";
         SchDate: Date;
         DisbDate: Date;
         WhichDay: Integer;
-        LBatches: Record 51516371;
-        SalDetails: Record 51516373;
-        LGuarantors: Record 51516372;
+        LBatches: Record "Loans Register";
+        SalDetails: Record "Loan Appraisal Salary Details";
+        LGuarantors: Record "Loans Guarantee Details";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal;
         CurrpageEditable: Boolean;
         LoanStatusEditable: Boolean;
@@ -354,7 +354,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
         NetUtilizable: Decimal;
         Deductions: Decimal;
         Benov: Decimal;
-        TAXABLEPAY: Record 51516478;
+        TAXABLEPAY: Record "PAYE Brackets Credit";
         PAYE: Decimal;
         PAYESUM: Decimal;
         BAND1: Decimal;
@@ -365,10 +365,10 @@ Page 51516460 "Loan Application FOSA(Posted)"
         Taxrelief: Decimal;
         OTrelief: Decimal;
         Chargeable: Decimal;
-        PartPay: Record 51516494;
+        PartPay: Record "Loan Partial Disburesments";
         PartPayTotal: Decimal;
         AmountPayable: Decimal;
-        RepaySched: Record 51516375;
+        RepaySched: Record "Loan Repayment Schedule";
         LoanReferee1NameEditable: Boolean;
         LoanReferee2NameEditable: Boolean;
         LoanReferee1MobileEditable: Boolean;
@@ -383,13 +383,13 @@ Page 51516460 "Loan Application FOSA(Posted)"
         WitnessEditable: Boolean;
         compinfo: Record "Company Information";
         CummulativeGuarantee: Decimal;
-        LoansRec: Record 51516371;
+        LoansRec: Record "Loans Register";
         RecoveryModeEditable: Boolean;
         RemarksEditable: Boolean;
         CopyofIDEditable: Boolean;
         CopyofPayslipEditable: Boolean;
         ScheduleBal: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory.";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         ReschedulingFees: Decimal;
@@ -406,7 +406,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
 
     procedure UpdateControl()
     begin
-        if "Approval Status" = "approval status"::Open then begin
+        if Rec."Approval Status" = "approval status"::Open then begin
             MNoEditable := true;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -424,7 +424,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
             RemarksEditable := false;
         end;
 
-        if "Approval Status" = "approval status"::Pending then begin
+        if Rec."Approval Status" = "approval status"::Pending then begin
             MNoEditable := false;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -442,7 +442,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
             RemarksEditable := false;
         end;
 
-        if "Approval Status" = "approval status"::Rejected then begin
+        if Rec."Approval Status" = "approval status"::Rejected then begin
             MNoEditable := false;
             AccountNoEditable := false;
             ApplcDateEditable := false;
@@ -462,7 +462,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
             RemarksEditable := false;
         end;
 
-        if "Approval Status" = "approval status"::Approved then begin
+        if Rec."Approval Status" = "approval status"::Approved then begin
             MNoEditable := false;
             AccountNoEditable := false;
             LoanStatusEditable := false;
@@ -490,53 +490,53 @@ Page 51516460 "Loan Application FOSA(Posted)"
 
     local procedure FnGenerateSchedule()
     begin
-        if "Repayment Frequency" = "repayment frequency"::Daily then
+        if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
             Evaluate(InPeriod, '1D')
-        else if "Repayment Frequency" = "repayment frequency"::Weekly then
+        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
             Evaluate(InPeriod, '1W')
-        else if "Repayment Frequency" = "repayment frequency"::Monthly then
+        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
             Evaluate(InPeriod, '1M')
-        else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
             Evaluate(InPeriod, '1Q');
 
 
         QCounter := 0;
         QCounter := 3;
         ScheduleBal := 0;
-        GrPrinciple := "Grace Period - Principle (M)";
-        GrInterest := "Grace Period - Interest (M)";
-        InitialGraceInt := "Grace Period - Interest (M)";
+        GrPrinciple := Rec."Grace Period - Principle (M)";
+        GrInterest := Rec."Grace Period - Interest (M)";
+        InitialGraceInt := Rec."Grace Period - Interest (M)";
 
         LoansR.Reset;
-        LoansR.SetRange(LoansR."Loan  No.", "Loan  No.");
+        LoansR.SetRange(LoansR."Loan  No.", Rec."Loan  No.");
         if LoansR.Find('-') then begin
 
-            TestField("Loan Disbursement Date");
-            TestField("Repayment Start Date");
+            Rec.TestField("Loan Disbursement Date");
+            Rec.TestField("Repayment Start Date");
 
             RSchedule.Reset;
-            RSchedule.SetRange(RSchedule."Loan No.", "Loan  No.");
+            RSchedule.SetRange(RSchedule."Loan No.", Rec."Loan  No.");
             RSchedule.DeleteAll;
 
             LoanAmount := LoansR."Approved Amount" + LoansR."Capitalized Charges";
             InterestRate := LoansR.Interest;
             RepayPeriod := LoansR.Installments;
-            InitialInstal := LoansR.Installments + "Grace Period - Principle (M)";
+            InitialInstal := LoansR.Installments + Rec."Grace Period - Principle (M)";
             LBalance := LoansR."Approved Amount" + LoansR."Capitalized Charges";
             LNBalance := LoansR."Outstanding Balance";
-            RunDate := "Repayment Start Date";
+            RunDate := Rec."Repayment Start Date";
 
             InstalNo := 0;
             Evaluate(RepayInterval, '1W');
 
             //Repayment Frequency
-            if "Repayment Frequency" = "repayment frequency"::Daily then
+            if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                 RunDate := CalcDate('-1D', RunDate)
-            else if "Repayment Frequency" = "repayment frequency"::Weekly then
+            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                 RunDate := CalcDate('-1W', RunDate)
-            else if "Repayment Frequency" = "repayment frequency"::Monthly then
+            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                 RunDate := CalcDate('-1M', RunDate)
-            else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                 RunDate := CalcDate('-1Q', RunDate);
             //Repayment Frequency
 
@@ -546,13 +546,13 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 ScheduleBal := LBalance;
 
                 //*************Repayment Frequency***********************//
-                if "Repayment Frequency" = "repayment frequency"::Daily then
+                if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                     RunDate := CalcDate('1D', RunDate)
-                else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                     RunDate := CalcDate('1W', RunDate)
-                else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                     RunDate := CalcDate('1M', RunDate)
-                else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                     RunDate := CalcDate('1Q', RunDate);
 
 
@@ -561,10 +561,10 @@ Page 51516460 "Loan Application FOSA(Posted)"
 
 
                 //*******************If Amortised****************************//
-                if "Repayment Method" = "repayment method"::Amortised then begin
-                    TestField(Installments);
-                    TestField(Interest);
-                    TestField(Installments);
+                if Rec."Repayment Method" = Rec."repayment method"::Amortised then begin
+                    Rec.TestField(Installments);
+                    Rec.TestField(Interest);
+                    Rec.TestField(Installments);
                     TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -RepayPeriod)) * LoanAmount, 1, '>');
                     TotalMRepay := (InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -RepayPeriod)) * LoanAmount;
                     LInterest := ROUND(LBalance / 100 / 12 * InterestRate);
@@ -574,35 +574,35 @@ Page 51516460 "Loan Application FOSA(Posted)"
 
 
 
-                if "Repayment Method" = "repayment method"::"Straight Line" then begin
-                    TestField(Installments);
+                if Rec."Repayment Method" = Rec."repayment method"::"Straight Line" then begin
+                    Rec.TestField(Installments);
                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 1, '>');
-                    if ("Loan Product Type" = 'INST') or ("Loan Product Type" = 'MAZAO') then begin
+                    if (Rec."Loan Product Type" = 'INST') or (Rec."Loan Product Type" = 'MAZAO') then begin
                         LInterest := 0;
                     end else begin
                         LInterest := ROUND((InterestRate / 1200) * LoanAmount, 1, '>');
                     end;
 
-                    Repayment := LPrincipal + LInterest;
-                    "Loan Principle Repayment" := LPrincipal;
-                    "Loan Interest Repayment" := LInterest;
+                    Rec.Repayment := LPrincipal + LInterest;
+                    Rec."Loan Principle Repayment" := LPrincipal;
+                    Rec."Loan Interest Repayment" := LInterest;
                 end;
 
 
-                if "Repayment Method" = "repayment method"::"Reducing Balance" then begin
-                    TestField(Interest);
-                    TestField(Installments);
+                if Rec."Repayment Method" = Rec."repayment method"::"Reducing Balance" then begin
+                    Rec.TestField(Interest);
+                    Rec.TestField(Installments);
                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 1, '>');
                     LInterest := ROUND((InterestRate / 12 / 100) * LBalance, 1, '>');
                 end;
 
-                if "Repayment Method" = "repayment method"::Constants then begin
-                    TestField(Repayment);
-                    if LBalance < Repayment then
+                if Rec."Repayment Method" = Rec."repayment method"::Constants then begin
+                    Rec.TestField(Repayment);
+                    if LBalance < Rec.Repayment then
                         LPrincipal := LBalance
                     else
-                        LPrincipal := Repayment;
-                    LInterest := Interest;
+                        LPrincipal := Rec.Repayment;
+                    LInterest := Rec.Interest;
                 end;
 
 
@@ -610,7 +610,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 if GrPrinciple > 0 then begin
                     LPrincipal := 0
                 end else begin
-                    if "Instalment Period" <> InPeriod then
+                    if Rec."Instalment Period" <> InPeriod then
                         LBalance := LBalance - LPrincipal;
                     ScheduleBal := ScheduleBal - LPrincipal;
                 end;
@@ -624,12 +624,12 @@ Page 51516460 "Loan Application FOSA(Posted)"
                                                                                                                                           //Grace Period
                 RSchedule.Init;
                 RSchedule."Repayment Code" := RepayCode;
-                RSchedule."Loan No." := "Loan  No.";
+                RSchedule."Loan No." := Rec."Loan  No.";
                 RSchedule."Loan Amount" := LoanAmount;
                 RSchedule."Instalment No" := InstalNo;
                 RSchedule."Repayment Date" := CalcDate('CM', RunDate);
-                RSchedule."Member No." := "Client Code";
-                RSchedule."Loan Category" := "Loan Product Type";
+                RSchedule."Member No." := Rec."Client Code";
+                RSchedule."Loan Category" := Rec."Loan Product Type";
                 RSchedule."Monthly Repayment" := LInterest + LPrincipal;
                 RSchedule."Monthly Interest" := LInterest;
                 RSchedule."Principal Repayment" := LPrincipal;
@@ -666,7 +666,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
         NoTransactionDescriptionText
         NoLoanNumberCode50
         */
-        if ("Account No" = '') then
+        if (Rec."Account No" = '') then
             Error('Member must be assigned the ordinary Account.');
 
         GenSetUp.Get();
@@ -678,14 +678,14 @@ Page 51516460 "Loan Application FOSA(Posted)"
         //------------------------------------1. DEBIT MEMBER LOAN A/C---------------------------------------------------------------------------------------------
         LineNo := LineNo + 10000;
         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::Loan,
-        GenJournalLine."account type"::Investor, LoanApps."Client Code", "Posting Date", LoanApps."Approved Amount", Format(LoanApps.Source), LoanApps."Loan  No.",
+        GenJournalLine."account type"::Investor, LoanApps."Client Code", Rec."Posting Date", LoanApps."Approved Amount", Format(LoanApps.Source), LoanApps."Loan  No.",
         'Loan principle- ' + LoanApps."Loan Product Type Name" + '-' + LoanApps."Loan  No.", LoanApps."Loan  No.");
         //--------------------------------(Debit Member Loan Account)---------------------------------------------
 
         //------------------------------------2. CREDIT MEMBER FOSA A/C---------------------------------------------------------------------------------------------
         LineNo := LineNo + 10000;
         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-        GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanApps."Approved Amount" * -1, Format(LoanApps.Source), LoanApps."Loan  No.",
+        GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanApps."Approved Amount" * -1, Format(LoanApps.Source), LoanApps."Loan  No.",
         'Loan Issued- ' + LoanApps."Loan Product Type Name", LoanApps."Loan  No.");
         //----------------------------------(Credit Member Fosa Account)------------------------------------------------
 
@@ -702,12 +702,12 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 //-------------------EARN CHARGE-------------------------------------------
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                GenJournalLine."account type"::"G/L Account", PCharges."G/L Account", "Posting Date", PChargeAmount * -1, Format(LoanApps.Source), LoanApps."Loan  No.",
+                GenJournalLine."account type"::"G/L Account", PCharges."G/L Account", Rec."Posting Date", PChargeAmount * -1, Format(LoanApps.Source), LoanApps."Loan  No.",
                 PCharges.Description + '-' + LoanApps."Client Code" + '-' + LoanApps."Loan Product Type Name" + '-' + LoanApps."Loan  No.", LoanApps."Loan  No.");
                 //-------------------RECOVER-----------------------------------------------
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                GenJournalLine."account type"::Vendor, "Account No", "Posting Date", PChargeAmount, Format(LoanApps.Source), LoanApps."Loan  No.",
+                GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", PChargeAmount, Format(LoanApps.Source), LoanApps."Loan  No.",
                 PCharges.Description + '-' + LoanApps."Loan Product Type Name", LoanApps."Loan  No.");
 
                 //------------------10% EXCISE DUTY----------------------------------------
@@ -715,12 +715,12 @@ Page 51516460 "Loan Application FOSA(Posted)"
                     //-------------------Earn---------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::"G/L Account", GenSetUp."Excise Duty Account", "Posting Date", (PChargeAmount * -1) * 0.1, Format(LoanApps.Source), LoanApps."Loan  No.",
+                    GenJournalLine."account type"::"G/L Account", GenSetUp."Excise Duty Account", Rec."Posting Date", (PChargeAmount * -1) * 0.1, Format(LoanApps.Source), LoanApps."Loan  No.",
                     PCharges.Description + '-' + LoanApps."Client Code" + '-' + LoanApps."Loan Product Type Name" + '-' + LoanApps."Loan  No." + '- Excise(10%)', LoanApps."Loan  No.");
                     //-----------------Recover---------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account No", "Posting Date", PChargeAmount * 0.1, Format(LoanApps.Source), LoanApps."Loan  No.",
+                    GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", PChargeAmount * 0.1, Format(LoanApps.Source), LoanApps."Loan  No.",
                     PCharges.Description + '-' + LoanApps."Loan Product Type Name" + ' - Excise(10%)', LoanApps."Loan  No.");
                 end
             //----------------END 10% EXCISE--------------------------------------------
@@ -738,18 +738,18 @@ Page 51516460 "Loan Application FOSA(Posted)"
                     //------------------------------------Principal---------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                    GenJournalLine."account type"::Investor, LoanApps."Client Code", "Posting Date", LoanTopUp."Principle Top Up" * -1, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
+                    GenJournalLine."account type"::Investor, LoanApps."Client Code", Rec."Posting Date", LoanTopUp."Principle Top Up" * -1, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
                     'Off Set By - ' + LoanApps."Client Code" + '-' + LoanApps."Loan Product Type Name" + '-' + LoanApps."Loan  No.", LoanTopUp."Loan Top Up");
                     //------------------------------------Outstanding Interest----------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                    GenJournalLine."account type"::Investor, LoanApps."Client Code", "Posting Date", LoanTopUp."Interest Top Up" * -1, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
+                    GenJournalLine."account type"::Investor, LoanApps."Client Code", Rec."Posting Date", LoanTopUp."Interest Top Up" * -1, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
                     'Interest Due Paid on top up - ' + LoanApps."Client Code" + '-' + LoanApps."Loan Product Type Name" + '-' + LoanApps."Loan  No.", LoanTopUp."Loan Top Up");
                     //-------------------------------------Levy--------------------------
                     LineNo := LineNo + 10000;
                     if LoanType.Get(LoanApps."Loan Product Type") then begin
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                        GenJournalLine."account type"::"G/L Account", LoanType."Top Up Commision Account", "Posting Date", LoanTopUp.Commision * -1, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
+                        GenJournalLine."account type"::"G/L Account", LoanType."Top Up Commision Account", Rec."Posting Date", LoanTopUp.Commision * -1, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
                         'Levy on Bridging -' + LoanApps."Client Code" + '-' + LoanApps."Loan Product Type Name" + '-' + LoanApps."Loan  No.", LoanTopUp."Loan Top Up");
                     end;
 
@@ -757,18 +757,18 @@ Page 51516460 "Loan Application FOSA(Posted)"
                     //-------------------------------------Principal-----------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanTopUp."Principle Top Up", Format(LoanApps.Source), LoanTopUp."Loan Top Up",
+                    GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanTopUp."Principle Top Up", Format(LoanApps.Source), LoanTopUp."Loan Top Up",
                     'Loan Offset  - ' + LoanApps."Loan Product Type Name", LoanTopUp."Loan Top Up");
                     //-------------------------------------Outstanding Interest-------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanTopUp."Interest Top Up", Format(LoanApps.Source), LoanTopUp."Loan Top Up",
+                    GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanTopUp."Interest Top Up", Format(LoanApps.Source), LoanTopUp."Loan Top Up",
                     'Interest Due Paid on top up - ' + LoanApps."Loan Product Type Name", LoanTopUp."Loan Top Up");
                     //--------------------------------------Levies--------------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     if LoanType.Get(LoanApps."Loan Product Type") then begin
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                        GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanTopUp.Commision, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
+                        GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanTopUp.Commision, Format(LoanApps.Source), LoanTopUp."Loan Top Up",
                         'Levy on Bridging - ' + LoanApps."Loan Product Type Name", LoanTopUp."Loan Top Up");
                     end;
                 until LoanTopUp.Next = 0;
@@ -785,32 +785,32 @@ Page 51516460 "Loan Application FOSA(Posted)"
         if LoanApps."Boost this Loan" then begin
             //---------------------------------------BOOST-----------------------------------------------
             LineNo := LineNo + 10000;
-            BLoan := "Booster Loan No";
+            BLoan := Rec."Booster Loan No";
             if BLoan = '' then begin
                 BLoan := FnBoosterLoansDisbursement(Rec, LineNo); //Issue Loan
-                "Booster Loan No" := BLoan;
+                Rec."Booster Loan No" := BLoan;
             end;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::Loan,
-            GenJournalLine."account type"::Investor, LoanApps."Client Code", "Posting Date", LoanApps."Boosted Amount", Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Investor, LoanApps."Client Code", Rec."Posting Date", LoanApps."Boosted Amount", Format(LoanApps.Source), BLoan,
             'Deposits Booster for ' + LoanApps."Loan  No.", BLoan);
 
             //----------------------Credit FOSA a/c-----------------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanApps."Boosted Amount" * -1, Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanApps."Boosted Amount" * -1, Format(LoanApps.Source), BLoan,
             'Deposits Booster Loan-Booster Loan', BLoan);
 
 
             //------------------------------Boost Deposits-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Deposit Contribution",
-            GenJournalLine."account type"::Investor, "Client Code", "Posting Date", LoanApps."Boosted Amount" * -1, Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Investor, Rec."Client Code", Rec."Posting Date", LoanApps."Boosted Amount" * -1, Format(LoanApps.Source), BLoan,
             'Deposits Booster Loan', BLoan);
 
             //--------------------------------------RECOVER-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanApps."Boosted Amount", Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanApps."Boosted Amount", Format(LoanApps.Source), BLoan,
             'Deposits Booster Loan Recov.', BLoan);
         end;
 
@@ -830,7 +830,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
             //--------------------------------------RECOVER-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanApps."Boosting Commision", Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanApps."Boosting Commision", Format(LoanApps.Source), BLoan,
             'Deposits Booster Comm. Recov.', LoanApps."Loan  No.");
         end;
 
@@ -839,12 +839,12 @@ Page 51516460 "Loan Application FOSA(Posted)"
             //---------------------------------------PAY-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-            GenJournalLine."account type"::Investor, "Client Code", "Posting Date", LoanApps."Boosted Amount" * -1, Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Investor, Rec."Client Code", Rec."Posting Date", LoanApps."Boosted Amount" * -1, Format(LoanApps.Source), BLoan,
             'Deposits Booster Repayment-' + LoanApps."Client Code" + LoanApps."Loan Product Type Name", BLoan);
             //--------------------------------------RECOVER-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanApps."Boosted Amount", Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanApps."Boosted Amount", Format(LoanApps.Source), BLoan,
             'Deposits Booster Loan Recov.', BLoan);
         end;
 
@@ -853,22 +853,22 @@ Page 51516460 "Loan Application FOSA(Posted)"
             //---------------------------------------PAY-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-            GenJournalLine."account type"::Investor, "Client Code", "Posting Date", LoanApps."Boosted Amount Interest" * -1, Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Investor, Rec."Client Code", Rec."Posting Date", LoanApps."Boosted Amount Interest" * -1, Format(LoanApps.Source), BLoan,
             'Deposits Booster Int - ' + LoanApps."Client Code" + LoanApps."Loan Product Type Name", BLoan);
             //--------------------------------------RECOVER-----------------------------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, "Account No", "Posting Date", LoanApps."Boosted Amount Interest", Format(LoanApps.Source), BLoan,
+            GenJournalLine."account type"::Vendor, Rec."Account No", Rec."Posting Date", LoanApps."Boosted Amount Interest", Format(LoanApps.Source), BLoan,
             'Deposits Booster Int Recov.', BLoan);
         end;
 
         LoanApps."Net Payment to FOSA" := LoanApps."Approved Amount";
         LoanApps."Processed Payment" := true;
-        Modify;
+        Rec.Modify;
 
     end;
 
-    local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record 51516371; LineNo: Integer): Code[40]
+    local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record "Loans Register"; LineNo: Integer): Code[40]
     var
         GenJournalLine: Record "Gen. Journal Line";
         CUNoSeriesManagement: Codeunit NoSeriesManagement;
@@ -934,7 +934,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
                 RepayPeriod := LoansR.Installments;
                 InitialInstal := LoansR.Installments + LoansRec."Grace Period - Principle (M)";
                 LBalance := LoansR."Approved Amount";
-                RunDate := "Repayment Start Date";
+                RunDate := Rec."Repayment Start Date";
                 InstalNo := 0;
 
                 //Repayment Frequency
@@ -1033,7 +1033,7 @@ Page 51516460 "Loan Application FOSA(Posted)"
     local procedure SetStyles()
     begin
         MinimumBalance := 0;
-        Balance := "Outstanding Balance";
+        Balance := Rec."Outstanding Balance";
         if Balance = 0 then
             CoveragePercentStyle := 'Favorable'
         else

@@ -5,7 +5,7 @@ Page 51516512 "ATM Transactions Info"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516466;
+    SourceTable = "ATM Transactions";
 
     layout
     {
@@ -13,111 +13,111 @@ Page 51516512 "ATM Transactions Info"
         {
             repeater(Group)
             {
-                field("Trace ID"; "Trace ID")
+                field("Trace ID"; Rec."Trace ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting Date"; "Posting Date")
+                field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posting S"; "Posting S")
+                field("Posting S"; Rec."Posting S")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unit ID"; "Unit ID")
+                field("Unit ID"; Rec."Unit ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Trans Time"; "Trans Time")
+                field("Trans Time"; Rec."Trans Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Reversed; Reversed)
+                field(Reversed; Rec.Reversed)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reversed Posted"; "Reversed Posted")
+                field("Reversed Posted"; Rec."Reversed Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reversal Trace ID"; "Reversal Trace ID")
+                field("Reversal Trace ID"; Rec."Reversal Trace ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withdrawal Location"; "Withdrawal Location")
+                field("Withdrawal Location"; Rec."Withdrawal Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entry No"; "Entry No")
+                field("Entry No"; "Rec.Entry No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type Charges"; "Transaction Type Charges")
+                field("Transaction Type Charges"; Rec."Transaction Type Charges")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Acceptor Terminal ID"; "Card Acceptor Terminal ID")
+                field("Card Acceptor Terminal ID"; Rec."Card Acceptor Terminal ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Card No"; "ATM Card No")
+                field("ATM Card No"; Rec."ATM Card No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer Names"; "Customer Names")
+                field("Customer Names"; Rec."Customer Names")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Process Code"; "Process Code")
+                field("Process Code"; Rec."Process Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Coop Bank"; "Is Coop Bank")
+                field("Is Coop Bank"; Rec."Is Coop Bank")
                 {
                     ApplicationArea = Basic;
                 }
-                field("POS Vendor"; "POS Vendor")
+                field("POS Vendor"; Rec."POS Vendor")
                 {
                     ApplicationArea = Basic;
                 }

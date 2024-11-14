@@ -4,7 +4,7 @@ Page 51516470 "Fixed deposit Types list"
     CardPageID = "Fixed Deposit Types Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516447;
+    SourceTable = "Fixed Deposit Type";
     SourceTableView = sorting(Code, "Maximum Amount")
                       order(descending);
 
@@ -14,19 +14,19 @@ Page 51516470 "Fixed deposit Types list"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. of Months"; "No. of Months")
+                field("No. of Months"; Rec."No. of Months")
                 {
                     ApplicationArea = Basic;
                 }

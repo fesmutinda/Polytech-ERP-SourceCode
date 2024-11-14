@@ -7,7 +7,7 @@ Page 51516491 "Salary Processing Lines"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = ListPart;
-    SourceTable = 51516460;
+    SourceTable = "Salary Processing Lines";
 
     layout
     {
@@ -16,102 +16,102 @@ Page 51516491 "Salary Processing Lines"
             repeater(Control1102760000)
             {
                 Editable = true;
-                field("BOSA No"; "BOSA No")
+                field("BOSA No"; Rec."BOSA No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member Number';
                     Visible = false;
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Visible = false;
                 }
-                field("Staff No."; "Staff No.")
+                field("Staff No."; Rec."Staff No.")
                 {
                     ApplicationArea = Basic;
                     StyleExpr = CoveragePercentStyle;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Image = Person;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field(Amount; Amount)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Employer Code"; "Employer Code")
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Branch Reff."; "Branch Reff.")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("ID No."; "ID No.")
+                field("Branch Reff."; Rec."Branch Reff.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Original Account No."; "Original Account No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account Not Found"; "Account Not Found")
+                field("Original Account No."; Rec."Original Account No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Document No."; "Document No.")
+                field("Account Not Found"; Rec."Account Not Found")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Date; Date)
+                field(Date; Rec.Date)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("BOSA Schedule"; "BOSA Schedule")
+                field("BOSA Schedule"; Rec."BOSA Schedule")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Closed; Closed)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = false;
-                }
-                field("Multiple Salary"; "Multiple Salary")
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Salary Header No."; "Salary Header No.")
+                field("Multiple Salary"; Rec."Multiple Salary")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Visible = false;
+                }
+                field("Salary Header No."; Rec."Salary Header No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -141,9 +141,9 @@ Page 51516491 "Salary Processing Lines"
     local procedure SetStyles()
     begin
         CoveragePercentStyle := 'Strong';
-        if "Account Name" = '' then
+        if Rec."Account Name" = '' then
             CoveragePercentStyle := 'Unfavorable';
-        if "Account Name" <> '' then
+        if Rec."Account Name" <> '' then
             CoveragePercentStyle := 'Favorable';
     end;
 }

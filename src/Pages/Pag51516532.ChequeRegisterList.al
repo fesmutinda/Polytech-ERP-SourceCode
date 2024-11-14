@@ -2,7 +2,7 @@
 Page 51516532 "Cheque Register List"
 {
     PageType = List;
-    SourceTable = 51516500;
+    SourceTable = "Cheques Register";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516532 "Cheque Register List"
         {
             repeater(Group)
             {
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approval Date"; "Approval Date")
+                field("Approval Date"; Rec."Approval Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application No."; "Application No.")
+                field("Application No."; Rec."Application No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cancelled/Stopped By"; "Cancelled/Stopped By")
+                field("Cancelled/Stopped By"; Rec."Cancelled/Stopped By")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,12 +50,12 @@ Page 51516532 "Cheque Register List"
                 begin
 
                     if Confirm('Are you sure you want to cancel cheque ?', false) = true then begin
-                        if Status <> Status::Pending then
+                        if Rec.Status <> Rec.Status::Pending then
                             Error('Status must be pending');
-                        Status := Status::Cancelled;
-                        "Approval Date" := Today;
-                        "Cancelled/Stopped By" := UserId;
-                        Modify;
+                        Rec.Status := Rec.Status::Cancelled;
+                        Rec."Approval Date" := Today;
+                        Rec."Cancelled/Stopped By" := UserId;
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -67,12 +67,12 @@ Page 51516532 "Cheque Register List"
                 begin
 
                     if Confirm('Are you sure you want to stop cheque ?', false) = true then begin
-                        if Status <> Status::Pending then
+                        if Rec.Status <> Rec.Status::Pending then
                             Error('Status must be pending');
-                        Status := Status::stopped;
-                        "Approval Date" := Today;
-                        "Cancelled/Stopped By" := UserId;
-                        Modify;
+                        Rec.Status := Rec.Status::stopped;
+                        Rec."Approval Date" := Today;
+                        Rec."Cancelled/Stopped By" := UserId;
+                        Rec.Modify;
                     end;
                 end;
             }

@@ -2,7 +2,7 @@
 Page 51516510 "Loan Salary Details"
 {
     PageType = ListPart;
-    SourceTable = 51516373;
+    SourceTable = "Loan Appraisal Salary Details";
 
     layout
     {

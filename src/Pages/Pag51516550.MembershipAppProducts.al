@@ -2,7 +2,7 @@
 Page 51516550 "Membership App Products"
 {
     PageType = List;
-    SourceTable = 51516509;
+    SourceTable = "Membership Reg. Products Appli";
 
     layout
     {
@@ -10,16 +10,16 @@ Page 51516550 "Membership App Products"
         {
             repeater(Group)
             {
-                field(Product; Product)
+                field(Product; Rec.Product)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Product Name"; "Product Name")
+                field("Product Name"; Rec."Product Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Product Source"; "Product Source")
+                field("Product Source"; Rec."Product Source")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

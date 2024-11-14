@@ -2,7 +2,7 @@
 Page 51516548 "Agent Account Signatory Card"
 {
     PageType = Card;
-    SourceTable = 51516508;
+    SourceTable = "Account Agent Details";
 
     layout
     {
@@ -10,59 +10,59 @@ Page 51516548 "Agent Account Signatory Card"
         {
             group(General)
             {
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Names; Names)
+                field(Names; Rec.Names)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agent Serial No"; "Agent Serial No")
+                field("Agent Serial No"; Rec."Agent Serial No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Of Birth"; "Date Of Birth")
+                field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff/Payroll"; "Staff/Payroll")
+                field("Staff/Payroll"; Rec."Staff/Payroll")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Designation; Designation)
+                field(Designation; Rec.Designation)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Must Sign"; "Must Sign")
+                field("Must Sign"; Rec."Must Sign")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Must be Present"; "Must be Present")
+                field("Must be Present"; Rec."Must be Present")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Signature; Signature)
+                field(Signature; Rec.Signature)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expiry Date"; "Expiry Date")
+                field("Expiry Date"; Rec."Expiry Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA No."; "BOSA No.")
+                field("BOSA No."; Rec."BOSA No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Email Address"; "Email Address")
+                field("Email Address"; rec."Email Address")
                 {
                     ApplicationArea = Basic;
                 }

@@ -14,55 +14,55 @@ Page 51516447 "Standing Orders - List"
         {
             repeater(Control1102760000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account No."; "Source Account No.")
+                field("Source Account No."; Rec."Source Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff/Payroll No."; "Staff/Payroll No.")
+                field("Staff/Payroll No."; Rec."Staff/Payroll No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("None Salary"; "None Salary")
+                field("None Salary"; Rec."None Salary")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Next Run Date"; "Next Run Date")
+                field("Next Run Date"; Rec."Next Run Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Effective/Start Date"; "Effective/Start Date")
+                field("Effective/Start Date"; Rec."Effective/Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Type"; "Destination Account Type")
+                field("Destination Account Type"; Rec."Destination Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account No."; "Destination Account No.")
+                field("Destination Account No."; Rec."Destination Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Name"; "Destination Account Name")
+                field("Destination Account Name"; Rec."Destination Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Standing Order Description"; "Standing Order Description")
+                field("Standing Order Description"; Rec."Standing Order Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
@@ -86,15 +86,15 @@ Page 51516447 "Standing Orders - List"
                 begin
                     if Confirm('Are you sure you want to reset the standing order?') = true then begin
 
-                        Effected := false;
-                        Balance := 0;
-                        Unsuccessfull := false;
-                        "Auto Process" := false;
-                        "Date Reset" := Today;
-                        Modify;
+                        Rec.Effected := false;
+                        Rec.Balance := 0;
+                        Rec.Unsuccessfull := false;
+                        Rec."Auto Process" := false;
+                        Rec."Date Reset" := Today;
+                        Rec.Modify;
 
                         RAllocations.Reset;
-                        RAllocations.SetRange(RAllocations."Document No", "No.");
+                        RAllocations.SetRange(RAllocations."Document No", Rec."No.");
                         if RAllocations.Find('-') then begin
                             repeat
                                 RAllocations."Amount Balance" := 0;
@@ -118,12 +118,12 @@ Page 51516447 "Standing Orders - List"
 
                 trigger OnAction()
                 begin
-                    TestField("Source Account No.");
-                    if "Destination Account Type" <> "destination account type"::BOSA then
-                        TestField("Destination Account No.");
-                    TestField("Effective/Start Date");
-                    TestField(Frequency);
-                    TestField("Next Run Date");
+                    Rec.TestField("Source Account No.");
+                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                        Rec.TestField("Destination Account No.");
+                    Rec.TestField("Effective/Start Date");
+                    Rec.TestField(Frequency);
+                    Rec.TestField("Next Run Date");
 
                     StatusPermissions.Reset;
                     StatusPermissions.SetRange(StatusPermissions."User ID", UserId);
@@ -202,21 +202,21 @@ Page 51516447 "Standing Orders - List"
                         Text001: label 'This request is already pending approval';
                         Approvalmgt: Codeunit "Approvals Mgmt.";
                     begin
-                        TestField("Source Account No.");
-                        if "Destination Account Type" <> "destination account type"::BOSA then
-                            TestField("Destination Account No.");
+                        Rec.TestField("Source Account No.");
+                        if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                            Rec.TestField("Destination Account No.");
 
-                        TestField("Effective/Start Date");
-                        TestField(Frequency);
-                        TestField("Next Run Date");
+                        Rec.TestField("Effective/Start Date");
+                        Rec.TestField(Frequency);
+                        Rec.TestField("Next Run Date");
 
-                        if "Destination Account Type" = "destination account type"::BOSA then begin
-                            CalcFields("Allocated Amount");
-                            if Amount <> "Allocated Amount" then
+                        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+                            Rec.CalcFields("Allocated Amount");
+                            if Rec.Amount <> Rec."Allocated Amount" then
                                 Error('Allocated amount must be equal to amount');
                         end;
 
-                        if Status <> Status::Open then
+                        if Rec.Status <> Rec.Status::Open then
                             Error(Text001);
 
 
@@ -257,12 +257,12 @@ Page 51516447 "Standing Orders - List"
 
                 trigger OnAction()
                 begin
-                    TestField("Source Account No.");
-                    if "Destination Account Type" <> "destination account type"::BOSA then
-                        TestField("Destination Account No.");
-                    TestField("Effective/Start Date");
-                    TestField(Frequency);
-                    TestField("Next Run Date");
+                    Rec.TestField("Source Account No.");
+                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                        Rec.TestField("Destination Account No.");
+                    Rec.TestField("Effective/Start Date");
+                    Rec.TestField(Frequency);
+                    Rec.TestField("Next Run Date");
 
                     StatusPermissions.Reset;
                     StatusPermissions.SetRange(StatusPermissions."User ID", UserId);
@@ -295,11 +295,11 @@ Page 51516447 "Standing Orders - List"
     }
 
     var
-        StatusPermissions: Record 51516452;
+        StatusPermissions: Record "Status Change Permision";
         BankName: Text[200];
-        Banks: Record 51516453;
+        Banks: Record Banks;
         UsersID: Record User;
-        RAllocations: Record 51516387;
+        RAllocations: Record "Receipt Allocation";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",STO;
 }
 

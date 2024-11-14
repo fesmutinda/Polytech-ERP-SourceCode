@@ -2,7 +2,7 @@
 Page 51516480 "Relationship list"
 {
     PageType = List;
-    SourceTable = 51516461;
+    SourceTable = "Relationship Types";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516480 "Relationship list"
         {
             repeater(Group)
             {
-                field("code"; code)
+                field("code"; Rec.code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Describution; Describution)
+                field(Describution; Rec.Describution)
                 {
                     ApplicationArea = Basic;
                 }

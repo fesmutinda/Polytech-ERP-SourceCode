@@ -5,7 +5,7 @@ Page 51516478 "Treasury List"
     Editable = false;
     PageType = List;
     SourceTable = "Bank Account";
-    SourceTableView = where("Account Type"=filter(Treasury));
+    SourceTableView = where("Account Type" = filter(Treasury));
 
     layout
     {
@@ -13,35 +13,35 @@ Page 51516478 "Treasury List"
         {
             repeater(Group)
             {
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Contact;Contact)
+                field(Contact; Rec.Contact)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Phone No.";"Phone No.")
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No.";"Bank Account No.")
+                field("Bank Account No."; Rec."Bank Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Acc. Posting Group";"Bank Acc. Posting Group")
+                field("Bank Acc. Posting Group"; Rec."Bank Acc. Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Balance;Balance)
+                field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance (LCY)";"Balance (LCY)")
+                field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
                     ApplicationArea = Basic;
                 }
@@ -66,9 +66,9 @@ Page 51516478 "Treasury List"
                 trigger OnAction()
                 begin
                     TillNo.Reset;
-                    TillNo.SetRange(TillNo."No.","No.");
+                    TillNo.SetRange(TillNo."No.", Rec."No.");
                     if TillNo.Find('-') then
-                    Report.Run(1404,true,false,TillNo)
+                        Report.Run(1404, true, false, TillNo)
                 end;
             }
             action("Cashier Activity Report 2")
@@ -84,9 +84,9 @@ Page 51516478 "Treasury List"
                 trigger OnAction()
                 begin
                     TillNo.Reset;
-                    TillNo.SetRange(TillNo."No.","No.");
+                    TillNo.SetRange(TillNo."No.", Rec."No.");
                     if TillNo.Find('-') then
-                    Report.Run(51516019,true,false,TillNo)
+                        Report.Run(51516019, true, false, TillNo)
                 end;
             }
         }

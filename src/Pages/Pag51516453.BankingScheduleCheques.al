@@ -5,7 +5,7 @@ Page 51516453 "Banking Schedule Cheques"
     InsertAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516441;
+    SourceTable = Transactions;
     SourceTableView = where(Type = const("Cheque Deposit"),
                             Posted = const(Yes),
                             "Banking Posted" = const(No));
@@ -16,67 +16,67 @@ Page 51516453 "Banking Schedule Cheques"
         {
             repeater(Control1102760000)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Transaction';
                     Editable = false;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque Date"; "Cheque Date")
+                field("Cheque Date"; Rec."Cheque Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Maturity Date"; "Expected Maturity Date")
+                field("Expected Maturity Date"; Rec."Expected Maturity Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("BIH No"; "BIH No")
+                field("BIH No"; Rec."BIH No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Select; Select)
+                field(Select; Rec.Select)
                 {
                     ApplicationArea = Basic;
                 }
@@ -173,7 +173,7 @@ Page 51516453 "Banking Schedule Cheques"
                 PromotedCategory = "Report";
                 PromotedIsBig = true;
                 PromotedOnly = true;
-                RunObject = Report UnknownReport51516434;
+                RunObject = Report 51516434;
             }
         }
     }
@@ -190,10 +190,10 @@ Page 51516453 "Banking Schedule Cheques"
     end;
 
     var
-        Transactions: Record 51516441;
-        SupervisorApprovals: Record 51516451;
+        Transactions: Record Transactions;
+        SupervisorApprovals: Record "Supervisors Approval Levels";
         UsersID: Record User;
-        GenSetup: Record 51516398;
+        GenSetup: Record "Sacco General Set-Up";
         Text1: label 'We are sending this mail to test the mail server';
         text2: label 'kisemy@yahoo.com';
 }

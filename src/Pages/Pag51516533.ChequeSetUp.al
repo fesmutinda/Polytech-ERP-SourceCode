@@ -3,7 +3,7 @@ Page 51516533 "Cheque Set-Up"
 {
     Editable = false;
     PageType = List;
-    SourceTable = 51516504;
+    SourceTable = "Cheque Set Up";
 
     layout
     {
@@ -11,15 +11,15 @@ Page 51516533 "Cheque Set-Up"
         {
             repeater(Group)
             {
-                field("Cheque Code"; "Cheque Code")
+                field("Cheque Code"; Rec."Cheque Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Number Of Leaf"; "Number Of Leaf")
+                field("Number Of Leaf"; Rec."Number Of Leaf")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }

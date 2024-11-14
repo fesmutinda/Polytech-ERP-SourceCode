@@ -5,7 +5,7 @@ Page 51516457 "Bankers Cheque Schedule"
     InsertAllowed = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516441;
+    SourceTable = Transactions;
     SourceTableView = where(Type = const("Bankers Cheque"),
                             Posted = const(Yes),
                             "Banking Posted" = const(No));
@@ -16,81 +16,81 @@ Page 51516457 "Bankers Cheque Schedule"
         {
             repeater(Control17)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Staff/Payroll No"; "Staff/Payroll No")
+                field("Staff/Payroll No"; Rec."Staff/Payroll No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Staff No';
                     Editable = false;
                 }
-                field(Payee; Payee)
+                field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Transaction';
                     Editable = false;
                 }
-                field("Bankers Cheque No"; "Bankers Cheque No")
+                field("Bankers Cheque No"; Rec."Bankers Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Other Bankers No."; "Other Bankers No.")
+                field("Other Bankers No."; Rec."Other Bankers No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Date"; "Cheque Date")
+                field("Cheque Date"; Rec."Cheque Date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("BIH No"; "BIH No")
+                field("BIH No"; Rec."BIH No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Select; Select)
+                field(Select; Rec.Select)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -201,8 +201,8 @@ Page 51516457 "Bankers Cheque Schedule"
     end;
 
     var
-        Transactions: Record 51516441;
-        SupervisorApprovals: Record 51516451;
+        Transactions: Record Transactions;
+        SupervisorApprovals: Record "Supervisors Approval Levels";
         UsersID: Record User;
 }
 

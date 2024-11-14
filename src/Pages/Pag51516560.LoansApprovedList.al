@@ -5,7 +5,7 @@ Page 51516560 "Loans Approved List"
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
-    SourceTable = 51516371;
+    SourceTable = "Loans Register";
 
     layout
     {
@@ -21,175 +21,175 @@ Page 51516560 "Loans Approved List"
                     OptionCaption = 'Yes';
                     ToolTip = 'OverDue Entry';
                 }
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Old Account No."; "Old Account No.")
+                field("Old Account No."; Rec."Old Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Advice Type"; "Advice Type")
+                field("Advice Type"; Rec."Advice Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Date of Completion"; "Expected Date of Completion")
+                field("Expected Date of Completion"; Rec."Expected Date of Completion")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Client Code"; "Client Code")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("BOSA No"; "BOSA No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Issued Date"; "Issued Date")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Client Name"; "Client Name")
+                field("BOSA No"; Rec."BOSA No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Staff No"; "Staff No")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Repayment; Repayment)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Requested Amount"; "Requested Amount")
+                field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field(Repayment; Rec.Repayment)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Approved Amount"; Rec."Approved Amount")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = true;
                 }
-                field("Oustanding Interest"; "Oustanding Interest")
+                field("Oustanding Interest"; Rec."Oustanding Interest")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field("Interest Debit"; "Interest Debit")
+                field("Interest Debit"; Rec."Interest Debit")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Special Loan Amount"; "Special Loan Amount")
+                field("Special Loan Amount"; Rec."Special Loan Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Other Commitments Clearance"; "Other Commitments Clearance")
+                field("Other Commitments Clearance"; Rec."Other Commitments Clearance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Commitements Offset"; "Commitements Offset")
+                field("Commitements Offset"; Rec."Commitements Offset")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("No. Of Guarantors"; "No. Of Guarantors")
+                field("No. Of Guarantors"; Rec."No. Of Guarantors")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("No. Of Guarantors-FOSA"; "No. Of Guarantors-FOSA")
+                field("No. Of Guarantors-FOSA"; Rec."No. Of Guarantors-FOSA")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Batch No."; "Batch No.")
+                field("Batch No."; Rec."Batch No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Installments; Installments)
+                field(Installments; Rec.Installments)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Installments';
                     Editable = false;
                 }
-                field(Interest; Interest)
+                field(Interest; Rec.Interest)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Interest Repayment"; "Loan Interest Repayment")
+                field("Loan Interest Repayment"; Rec."Loan Interest Repayment")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Interest Repayment';
                     Editable = false;
                 }
-                field("Loan Status"; "Loan Status")
+                field("Loan Status"; Rec."Loan Status")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Discounted Amount"; "Discounted Amount")
+                field("Discounted Amount"; Rec."Discounted Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Last Pay Date"; "Last Pay Date")
+                field("Last Pay Date"; Rec."Last Pay Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Defaulted; Defaulted)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Posted; Posted)
+                field(Defaulted; Rec.Defaulted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field(Posted; Rec.Posted)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Loans Insurance"; "Loans Insurance")
+                field("Loans Insurance"; Rec."Loans Insurance")
                 {
                     ApplicationArea = Basic;
                 }
@@ -217,7 +217,7 @@ Page 51516560 "Loans Approved List"
                     trigger OnAction()
                     begin
                         LoanApp.Reset;
-                        LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                         if LoanApp.Find('-') then begin
                             Report.Run(50039, true, false, LoanApp);
                         end;
@@ -232,7 +232,7 @@ Page 51516560 "Loans Approved List"
                     trigger OnAction()
                     begin
                         Cust.Reset;
-                        Cust.SetRange(Cust."No.", "Client Code");
+                        Cust.SetRange(Cust."No.", Rec."Client Code");
                         Report.Run(50031, true, false, Cust);
                     end;
                 }
@@ -250,53 +250,53 @@ Page 51516560 "Loans Approved List"
                         //IF Posted=TRUE THEN
                         //ERROR('Loan has been posted, Can only preview schedule');
 
-                        if "Repayment Frequency" = "repayment frequency"::Daily then
+                        if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                             Evaluate(InPeriod, '1D')
-                        else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                             Evaluate(InPeriod, '1W')
-                        else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                             Evaluate(InPeriod, '1M')
-                        else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                             Evaluate(InPeriod, '1Q');
 
 
                         QCounter := 0;
                         QCounter := 3;
                         //EVALUATE(InPeriod,'1D');
-                        GrPrinciple := "Grace Period - Principle (M)";
-                        GrInterest := "Grace Period - Interest (M)";
-                        InitialGraceInt := "Grace Period - Interest (M)";
+                        GrPrinciple := Rec."Grace Period - Principle (M)";
+                        GrInterest := Rec."Grace Period - Interest (M)";
+                        InitialGraceInt := Rec."Grace Period - Interest (M)";
 
                         LoansR.Reset;
-                        LoansR.SetRange(LoansR."Loan  No.", "Loan  No.");
+                        LoansR.SetRange(LoansR."Loan  No.", Rec."Loan  No.");
                         if LoansR.Find('-') then begin
 
-                            TestField("Loan Disbursement Date");
-                            TestField("Repayment Start Date");
+                            Rec.TestField("Loan Disbursement Date");
+                            Rec.TestField("Repayment Start Date");
 
                             RSchedule.Reset;
-                            RSchedule.SetRange(RSchedule."Loan No.", "Loan  No.");
+                            RSchedule.SetRange(RSchedule."Loan No.", Rec."Loan  No.");
                             RSchedule.DeleteAll;
 
                             LoanAmount := LoansR."Approved Amount";
                             InterestRate := LoansR.Interest;
                             RepayPeriod := LoansR.Installments;
-                            InitialInstal := LoansR.Installments + "Grace Period - Principle (M)";
+                            InitialInstal := LoansR.Installments + Rec."Grace Period - Principle (M)";
                             LBalance := LoansR."Approved Amount";
                             LNBalance := LoansR."Outstanding Balance";
-                            RunDate := "Repayment Start Date";
+                            RunDate := Rec."Repayment Start Date";
 
                             InstalNo := 0;
                             Evaluate(RepayInterval, '1W');
 
                             //Repayment Frequency
-                            if "Repayment Frequency" = "repayment frequency"::Daily then
+                            if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                                 RunDate := CalcDate('-1D', RunDate)
-                            else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                                 RunDate := CalcDate('-1W', RunDate)
-                            else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                                 RunDate := CalcDate('-1M', RunDate)
-                            else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                                 RunDate := CalcDate('-1Q', RunDate);
                             //Repayment Frequency
 
@@ -306,13 +306,13 @@ Page 51516560 "Loans Approved List"
 
 
                                 //*************Repayment Frequency***********************//
-                                if "Repayment Frequency" = "repayment frequency"::Daily then
+                                if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                                     RunDate := CalcDate('1D', RunDate)
-                                else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                                     RunDate := CalcDate('1W', RunDate)
-                                else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                                     RunDate := CalcDate('1M', RunDate)
-                                else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                                     RunDate := CalcDate('1Q', RunDate);
 
 
@@ -321,10 +321,10 @@ Page 51516560 "Loans Approved List"
 
 
                                 //*******************If Amortised****************************//
-                                if "Repayment Method" = "repayment method"::Amortised then begin
-                                    TestField(Installments);
-                                    TestField(Interest);
-                                    TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::Amortised then begin
+                                    Rec.TestField(Installments);
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     //TotalMRepay:=ROUND((InterestRate/12/100) / (1 - POWER((1 + (InterestRate/12/100)),- RepayPeriod)) * LoanAmount,1,'>');
                                     TotalMRepay := (InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -RepayPeriod)) * LoanAmount;
                                     LInterest := ROUND(LBalance / 100 / 12 * InterestRate);
@@ -334,35 +334,35 @@ Page 51516560 "Loans Approved List"
 
 
 
-                                if "Repayment Method" = "repayment method"::"Straight Line" then begin
-                                    TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::"Straight Line" then begin
+                                    Rec.TestField(Installments);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 1, '>');
-                                    if ("Loan Product Type" = 'INST') or ("Loan Product Type" = 'MAZAO') then begin
+                                    if (Rec."Loan Product Type" = 'INST') or (rec."Loan Product Type" = 'MAZAO') then begin
                                         LInterest := 0;
                                     end else begin
                                         LInterest := ROUND((InterestRate / 100) * LoanAmount, 1, '>');
                                     end;
 
-                                    Repayment := LPrincipal + LInterest;
-                                    "Loan Principle Repayment" := LPrincipal;
-                                    "Loan Interest Repayment" := LInterest;
+                                    Rec.Repayment := LPrincipal + LInterest;
+                                    Rec."Loan Principle Repayment" := LPrincipal;
+                                    Rec."Loan Interest Repayment" := LInterest;
                                 end;
 
 
-                                if "Repayment Method" = "repayment method"::"Reducing Balance" then begin
-                                    TestField(Interest);
-                                    TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::"Reducing Balance" then begin
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 1, '>');
                                     LInterest := ROUND((InterestRate / 12 / 100) * LBalance, 1, '>');
                                 end;
 
-                                if "Repayment Method" = "repayment method"::Constants then begin
-                                    TestField(Repayment);
-                                    if LBalance < Repayment then
+                                if Rec."Repayment Method" = Rec."repayment method"::Constants then begin
+                                    Rec.TestField(Repayment);
+                                    if LBalance < Rec.Repayment then
                                         LPrincipal := LBalance
                                     else
-                                        LPrincipal := Repayment;
-                                    LInterest := Interest;
+                                        LPrincipal := Rec.Repayment;
+                                    LInterest := Rec.Interest;
                                 end;
 
 
@@ -370,7 +370,7 @@ Page 51516560 "Loans Approved List"
                                 if GrPrinciple > 0 then begin
                                     LPrincipal := 0
                                 end else begin
-                                    if "Instalment Period" <> InPeriod then
+                                    if Rec."Instalment Period" <> InPeriod then
                                         LBalance := LBalance - LPrincipal;
 
                                 end;
@@ -384,12 +384,12 @@ Page 51516560 "Loans Approved List"
                                 //Grace Period
                                 RSchedule.Init;
                                 RSchedule."Repayment Code" := RepayCode;
-                                RSchedule."Loan No." := "Loan  No.";
+                                RSchedule."Loan No." := Rec."Loan  No.";
                                 RSchedule."Loan Amount" := LoanAmount;
                                 RSchedule."Instalment No" := InstalNo;
                                 RSchedule."Repayment Date" := RunDate;
-                                RSchedule."Member No." := "Client Code";
-                                RSchedule."Loan Category" := "Loan Product Type";
+                                RSchedule."Member No." := Rec."Client Code";
+                                RSchedule."Loan Category" := Rec."Loan Product Type";
                                 RSchedule."Monthly Repayment" := LInterest + LPrincipal;
                                 RSchedule."Monthly Interest" := LInterest;
                                 RSchedule."Principal Repayment" := LPrincipal;
@@ -404,7 +404,7 @@ Page 51516560 "Loans Approved List"
                         Commit;
 
                         LoanApp.Reset;
-                        LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                         if LoanApp.Find('-') then
                             if LoanApp."Loan Product Type" <> 'INST' then begin
                                 Report.Run(51516477, true, false, LoanApp);
@@ -435,13 +435,13 @@ Page 51516560 "Loans Approved List"
 
                     trigger OnAction()
                     begin
-                        if Posted = true then
+                        if Rec.Posted = true then
                             Error('Loan already posted.');
 
 
-                        "Loan Disbursement Date" := Today;
-                        TestField("Loan Disbursement Date");
-                        "Posting Date" := "Loan Disbursement Date";
+                        Rec."Loan Disbursement Date" := Today;
+                        Rec.TestField("Loan Disbursement Date");
+                        Rec."Posting Date" := Rec."Loan Disbursement Date";
 
 
                         if Confirm('Are you sure you want to post this loan?', true) = false then
@@ -454,7 +454,7 @@ Page 51516560 "Loans Approved List"
                         //PRORATED DAYS
                         
                         */
-                        if "Mode of Disbursement" = "mode of disbursement"::"Bank Transfer" then begin
+                        if Rec."Mode of Disbursement" = Rec."mode of disbursement"::"Bank Transfer" then begin
 
                             GenJournalLine.Reset;
                             GenJournalLine.SetRange("Journal Template Name", 'PAYMENTS');
@@ -467,7 +467,7 @@ Page 51516560 "Loans Approved List"
                             DActivity := 'BOSA';
                             DBranch := '';//PKKS'NAIROBI';
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Loan  No.", "Loan  No.");
+                            LoanApps.SetRange(LoanApps."Loan  No.", Rec."Loan  No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
                             if LoanApps.Find('-') then begin
@@ -500,7 +500,7 @@ Page 51516560 "Loans Approved List"
                                     LoanApps.CalcFields(LoanApps."Top Up Amount");
 
 
-                                    RunningDate := "Posting Date";
+                                    RunningDate := Rec."Posting Date";
 
 
                                     //Generate and post Approved Loan Amount
@@ -526,9 +526,9 @@ Page 51516560 "Loans Approved List"
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                             GenJournalLine."Account No." := PCharges."G/L Account";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                            GenJournalLine."Document No." := "Loan  No.";
+                                            GenJournalLine."Document No." := Rec."Loan  No.";
                                             GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             GenJournalLine.Description := PCharges.Description;
                                             if PCharges."Use Perc" = true then begin
                                                 GenJournalLine.Amount := (LoanDisbAmount * PCharges.Percentage / 100) * -1;
@@ -571,11 +571,11 @@ Page 51516560 "Loans Approved List"
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
-                                    GenJournalLine."Account No." := "Client Code";
+                                    GenJournalLine."Account No." := Rec."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Loan  No.";
-                                    GenJournalLine."External Document No." := "ID NO";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Loan  No.";
+                                    GenJournalLine."External Document No." := Rec."ID NO";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'Principal Amount';
                                     GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
@@ -603,8 +603,8 @@ Page 51516560 "Loans Approved List"
                                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                                     GenJournalLine."Line No." := LineNo;
-                                                    GenJournalLine."Document No." := "Loan  No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Loan  No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
@@ -628,8 +628,8 @@ Page 51516560 "Loans Approved List"
                                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                                     GenJournalLine."Line No." := LineNo;
-                                                    GenJournalLine."Document No." := "Loan  No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Loan  No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                                     GenJournalLine."Account No." := LoanApps."Account No";
@@ -659,8 +659,8 @@ Page 51516560 "Loans Approved List"
                                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
                                                         GenJournalLine."Account No." := LoanApps."Client Code";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Loan  No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Loan  No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Interest paid ' + LoanApps."Loan  No.";
                                                         GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                         GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -684,8 +684,8 @@ Page 51516560 "Loans Approved List"
                                                         GenJournalLine."Journal Batch Name" := 'LOANS';
                                                         GenJournalLine."Line No." := LineNo;
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Loan  No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Loan  No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Interest paid ' + LoanApps."Loan  No.";
                                                         GenJournalLine.Amount := LoanTopUp."Interest Top Up";
                                                         GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -719,8 +719,8 @@ Page 51516560 "Loans Approved List"
                                                             GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                             GenJournalLine."Bal. Account No." := LoanType."Top Up Commision Account";
                                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                            GenJournalLine."Document No." := "Loan  No.";
-                                                            GenJournalLine."Posting Date" := "Posting Date";
+                                                            GenJournalLine."Document No." := Rec."Loan  No.";
+                                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                                             GenJournalLine.Description := 'Commision on Loan Top Up';
                                                             TopUpComm := (LoanTopUp."Principle Top Up") * (LoanType."Top Up Commision" / 100);
                                                             TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -755,9 +755,9 @@ Page 51516560 "Loans Approved List"
                             GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                             GenJournalLine."Account No." := LoanApps."Account No";
                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Document No." := "Loan  No.";
-                            GenJournalLine."External Document No." := "ID NO";
-                            GenJournalLine."Posting Date" := "Posting Date";
+                            GenJournalLine."Document No." := Rec."Loan  No.";
+                            GenJournalLine."External Document No." := Rec."ID NO";
+                            GenJournalLine."Posting Date" := Rec."Posting Date";
                             GenJournalLine.Description := 'Principal Amount';
                             GenJournalLine.Amount := (LoanApps."Approved Amount") * -1;
                             GenJournalLine.Validate(GenJournalLine.Amount);
@@ -771,7 +771,7 @@ Page 51516560 "Loans Approved List"
 
 
 
-                        if "Mode of Disbursement" = "mode of disbursement"::Cheque then begin
+                        if Rec."Mode of Disbursement" = Rec."mode of disbursement"::Cheque then begin
 
                             GenJournalLine.Reset;
                             GenJournalLine.SetRange("Journal Template Name", 'PAYMENTS');
@@ -784,7 +784,7 @@ Page 51516560 "Loans Approved List"
                             DActivity := 'BOSA';
                             DBranch := '';//PKKS'NAIROBI';
                             LoanApps.Reset;
-                            LoanApps.SetRange(LoanApps."Loan  No.", "Loan  No.");
+                            LoanApps.SetRange(LoanApps."Loan  No.", Rec."Loan  No.");
                             LoanApps.SetRange(LoanApps."System Created", false);
                             LoanApps.SetFilter(LoanApps."Loan Status", '<>Rejected');
                             if LoanApps.Find('-') then begin
@@ -822,7 +822,7 @@ Page 51516560 "Loans Approved List"
                                     LoanApps.CalcFields(LoanApps."Top Up Amount");
 
 
-                                    RunningDate := "Posting Date";
+                                    RunningDate := Rec."Posting Date";
 
 
                                     //Generate and post Approved Loan Amount
@@ -848,9 +848,9 @@ Page 51516560 "Loans Approved List"
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                             GenJournalLine."Account No." := PCharges."G/L Account";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                            GenJournalLine."Document No." := "Loan  No.";
+                                            GenJournalLine."Document No." := Rec."Loan  No.";
                                             GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                            GenJournalLine."Posting Date" := "Posting Date";
+                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                             GenJournalLine.Description := PCharges.Description;
                                             if PCharges."Use Perc" = true then begin
                                                 GenJournalLine.Amount := (LoanDisbAmount * PCharges.Percentage / 100) * -1;
@@ -891,11 +891,11 @@ Page 51516560 "Loans Approved List"
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
-                                    GenJournalLine."Account No." := "Client Code";
+                                    GenJournalLine."Account No." := Rec."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Document No." := "Loan  No.";
-                                    GenJournalLine."External Document No." := "ID NO";
-                                    GenJournalLine."Posting Date" := "Posting Date";
+                                    GenJournalLine."Document No." := Rec."Loan  No.";
+                                    GenJournalLine."External Document No." := Rec."ID NO";
+                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                     GenJournalLine.Description := 'Principal Amount';
                                     GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
@@ -923,8 +923,8 @@ Page 51516560 "Loans Approved List"
                                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                                     GenJournalLine."Line No." := LineNo;
-                                                    GenJournalLine."Document No." := "Loan  No.";
-                                                    GenJournalLine."Posting Date" := "Posting Date";
+                                                    GenJournalLine."Document No." := Rec."Loan  No.";
+                                                    GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
                                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
@@ -954,8 +954,8 @@ Page 51516560 "Loans Approved List"
                                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
                                                         GenJournalLine."Account No." := LoanApps."Client Code";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                        GenJournalLine."Document No." := "Loan  No.";
-                                                        GenJournalLine."Posting Date" := "Posting Date";
+                                                        GenJournalLine."Document No." := Rec."Loan  No.";
+                                                        GenJournalLine."Posting Date" := Rec."Posting Date";
                                                         GenJournalLine.Description := 'Interestpaid ' + LoanApps."Loan  No.";
                                                         GenJournalLine.Amount := -LoanTopUp."Interest Top Up";
                                                         GenJournalLine."External Document No." := LoanApps."Loan  No.";
@@ -986,8 +986,8 @@ Page 51516560 "Loans Approved List"
                                                             GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                                             GenJournalLine."Account No." := LoanType."Top Up Commision Account";
                                                             GenJournalLine.Validate(GenJournalLine."Account No.");
-                                                            GenJournalLine."Document No." := "Loan  No.";
-                                                            GenJournalLine."Posting Date" := "Posting Date";
+                                                            GenJournalLine."Document No." := Rec."Loan  No.";
+                                                            GenJournalLine."Posting Date" := Rec."Posting Date";
                                                             GenJournalLine.Description := 'Commision on Loan Top Up';
                                                             TopUpComm := (LoanTopUp."Principle Top Up") * (LoanType."Top Up Commision" / 100);
                                                             TotalTopupComm := TotalTopupComm + TopUpComm;
@@ -1059,8 +1059,8 @@ Page 51516560 "Loans Approved List"
 
                         //Post New
 
-                        Posted := true;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec.Modify;
 
 
 
@@ -1100,7 +1100,7 @@ Page 51516560 "Loans Approved List"
                         */
 
                         DocumentType := Documenttype::Loan;
-                        ApprovalEntries.Setfilters(Database::"Salary Step/Notch Transactions", DocumentType, "Loan  No.");
+                        ApprovalEntries.Setfilters(Database::"Salary Step/Notch Transactions", DocumentType, Rec."Loan  No.");
                         ApprovalEntries.Run;
 
                     end;
@@ -1125,16 +1125,16 @@ Page 51516560 "Loans Approved List"
                        ERROR('Please Insert Loan Applicant Salary Information');
                        END;
                           */
-                        if "Loan Product Type" <> 'SDV' then begin
+                        if Rec."Loan Product Type" <> 'SDV' then begin
                             LGuarantors.Reset;
-                            LGuarantors.SetRange(LGuarantors."Loan No", "Loan  No.");
+                            LGuarantors.SetRange(LGuarantors."Loan No", Rec."Loan  No.");
                             if LGuarantors.Find('-') = false then begin
                                 Error('Please Insert Loan Applicant Guarantor Information');
                             end;
                         end;
                         //TESTFIELD("Approved Amount");
-                        TestField("Loan Product Type");
-                        TestField("Mode of Disbursement");
+                        Rec.TestField("Loan Product Type");
+                        Rec.TestField("Mode of Disbursement");
                         // Commet during testing Enock-To uncomment
                         /*
                   IF "Mode of Disbursement"="Mode of Disbursement"::Cheque THEN
@@ -1211,9 +1211,9 @@ Page 51516560 "Loans Approved List"
 
     var
         i: Integer;
-        LoanType: Record 51516381;
+        LoanType: Record "Loan Products Setup";
         PeriodDueDate: Date;
-        ScheduleRep: Record 51516375;
+        ScheduleRep: Record "Loan Repayment Schedule";
         RunningDate: Date;
         G: Integer;
         IssuedDate: Date;
@@ -1222,13 +1222,13 @@ Page 51516560 "Loans Approved List"
         GracePerodDays: Integer;
         InstalmentDays: Integer;
         NoOfGracePeriod: Integer;
-        NewSchedule: Record 51516375;
-        RSchedule: Record 51516375;
+        NewSchedule: Record "Loan Repayment Schedule";
+        RSchedule: Record "Loan Repayment Schedule";
         GP: Text[30];
         ScheduleCode: Code[20];
-        PreviewShedule: Record 51516375;
+        PreviewShedule: Record "Loan Repayment Schedule";
         PeriodInterval: Code[10];
-        CustomerRecord: Record 51516364;
+        CustomerRecord: Record "Member Register";
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -1238,16 +1238,16 @@ Page 51516560 "Loans Approved List"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record 51516364;
-        LoanApp: Record 51516371;
+        Cust: Record "Member Register";
+        LoanApp: Record "Loans Register";
         TestAmt: Decimal;
-        CustRec: Record 51516364;
+        CustRec: Record "Member Register";
         CustPostingGroup: Record "Customer Posting Group";
         GenSetUp: Record "Sales & Receivables Setup";
-        PCharges: Record 51516383;
+        PCharges: Record "Loan Product Charges";
         TCharges: Decimal;
-        LAppCharges: Record 51516385;
-        LoansR: Record 51516371;
+        LAppCharges: Record "Loan Applicaton Charges";
+        LoansR: Record "Loans Register";
         LoanAmount: Decimal;
         InterestRate: Decimal;
         RepayPeriod: Integer;
@@ -1270,43 +1270,43 @@ Page 51516560 "Loans Approved List"
         FOSAComm: Decimal;
         BOSAComm: Decimal;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        LoanTopUp: Record 51516376;
+        LoanTopUp: Record "Loan Offset Details";
         Vend: Record Vendor;
         BOSAInt: Decimal;
         TopUpComm: Decimal;
         DActivity: Code[20];
         DBranch: Code[20];
         TotalTopupComm: Decimal;
-        CustE: Record 51516364;
+        CustE: Record "Member Register";
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
         DocF: Text[50];
         MailBody: Text[250];
         ccEmail: Text[250];
-        LoanG: Record 51516372;
+        LoanG: Record "Loans Guarantee Details";
         SpecialComm: Decimal;
         FOSAName: Text[150];
         IDNo: Code[50];
-        MovementTracker: Record 51516394;
+        MovementTracker: Record "Movement Tracker";
         DiscountingAmount: Decimal;
-        StatusPermissions: Record 51516452;
-        BridgedLoans: Record 51516379;
-        SMSMessage: Record 51516364;
+        StatusPermissions: Record "Status Change Permision";
+        BridgedLoans: Record "Loan Special Clearance";
+        SMSMessage: Record "Member Register";
         InstallNo2: Integer;
         currency: Record "Currency Exchange Rate";
         CURRENCYFACTOR: Decimal;
-        LoanApps: Record 51516371;
+        LoanApps: Record "Loans Register";
         LoanDisbAmount: Decimal;
         BatchTopUpAmount: Decimal;
         BatchTopUpComm: Decimal;
-        Disbursement: Record 51516377;
+        Disbursement: Record "Loan Disburesment-Batching";
         SchDate: Date;
         DisbDate: Date;
         WhichDay: Integer;
-        LBatches: Record 51516371;
-        SalDetails: Record 51516373;
-        LGuarantors: Record 51516372;
+        LBatches: Record "Loans Register";
+        SalDetails: Record "Loan Appraisal Salary Details";
+        LGuarantors: Record "Loans Guarantee Details";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Imprest,ImprestSurrender,Interbank;
         CurrpageEditable: Boolean;
         LoanStatusEditable: Boolean;
@@ -1332,14 +1332,14 @@ Page 51516560 "Loans Approved List"
 
     procedure GetVariables(var LoanNo: Code[20]; var LoanProductType: Code[20])
     begin
-        LoanNo := "Loan  No.";
-        LoanProductType := "Loan Product Type";
+        LoanNo := Rec."Loan  No.";
+        LoanProductType := Rec."Loan Product Type";
     end;
 
 
-    procedure FormatField(Rec: Record 51516371) OK: Boolean
+    procedure FormatField(Rec: Record "Loans Register") OK: Boolean
     begin
-        if "Outstanding Balance" > 0 then begin
+        if Rec."Outstanding Balance" > 0 then begin
             if (Rec."Expected Date of Completion" < Today) then
                 exit(true)
             else

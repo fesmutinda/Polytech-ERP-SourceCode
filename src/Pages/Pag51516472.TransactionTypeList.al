@@ -4,7 +4,7 @@ Page 51516472 "Transaction Type - List"
     CardPageID = "Transaction Type Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516440;
+    SourceTable = "Transaction Types";
 
     layout
     {
@@ -12,23 +12,23 @@ Page 51516472 "Transaction Type - List"
         {
             repeater(Control1102760000)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Category"; "Transaction Category")
+                field("Transaction Category"; Rec."Transaction Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }

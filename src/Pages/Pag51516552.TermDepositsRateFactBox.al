@@ -5,25 +5,25 @@ Page 51516552 "Term Deposits Rate FactBox"
     Editable = false;
     PageType = Worksheet;
     SaveValues = true;
-    SourceTable = 51516448;
+    SourceTable = "FD Interest Calculation Crite";
 
     layout
     {
         area(content)
         {
-            field("Code"; Code)
+            field("Code"; Rec.Code)
             {
                 ApplicationArea = Basic;
             }
-            field("Interest Rate"; "Interest Rate")
+            field("Interest Rate"; Rec."Interest Rate")
             {
                 ApplicationArea = Basic;
             }
-            field(Duration; Duration)
+            field(Duration; Rec.Duration)
             {
                 ApplicationArea = Basic;
             }
-            field("On Call Interest Rate"; "On Call Interest Rate")
+            field("On Call Interest Rate"; Rec."On Call Interest Rate")
             {
                 ApplicationArea = Basic;
             }

@@ -3,7 +3,7 @@ Page 51516482 "Checkoff Processing Header-D"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516414;
+    SourceTable = "Checkoff Header-Distributed";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -12,59 +12,59 @@ Page 51516482 "Checkoff Processing Header-D"
         {
             group(General)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting date"; "Posting date")
+                field("Posting date"; Rec."Posting date")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Loan CutOff Date"; "Loan CutOff Date")
+                field("Loan CutOff Date"; Rec."Loan CutOff Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Name"; "Employer Name")
+                field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
 
                     trigger OnValidate()
                     begin
-                        if "Employer Code" <> '' then begin
+                        if Rec."Employer Code" <> '' then begin
                             BufferTable.Reset;
                             BufferTable.SetRange(BufferTable.UserId, UserId);
                             if BufferTable.Find('-') then begin
@@ -72,34 +72,34 @@ Page 51516482 "Checkoff Processing Header-D"
                             end;
                             BufferTable.Init;
                             BufferTable.UserId := UserId;
-                            BufferTable.EmployerCode := "Employer Code";
+                            BufferTable.EmployerCode := Rec."Employer Code";
                             BufferTable.Insert;
                         end;
                     end;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Document No./ Cheque No.';
                     ShowMandatory = true;
                 }
-                field("CheckOff Period"; "CheckOff Period")
+                field("CheckOff Period"; Rec."CheckOff Period")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Total Scheduled"; "Total Scheduled")
+                field("Total Scheduled"; Rec."Total Scheduled")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -107,7 +107,7 @@ Page 51516482 "Checkoff Processing Header-D"
                     Style = Strong;
                     StyleExpr = true;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -142,12 +142,12 @@ Page 51516482 "Checkoff Processing Header-D"
                     if Confirm('This Action will clear all the Lines for the current Check off. Do you want to Continue') = false then
                         exit;
                     ReceiptLine.Reset;
-                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", No);
+                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", Rec.No);
                     ReceiptLine.DeleteAll;
 
                     BATCH_TEMPLATE := 'GENERAL';
                     BATCH_NAME := 'CHECKOFF';
-                    DOCUMENT_NO := Remarks;
+                    DOCUMENT_NO := Rec.Remarks;
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                     GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -163,13 +163,13 @@ Page 51516482 "Checkoff Processing Header-D"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
-                RunObject = XMLport UnknownXMLport51516003;
+                RunObject = XMLport 51516003;
 
                 trigger OnAction()
                 begin
                     ReceiptLine.Reset;
-                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", No);
-                    if FindSet then
+                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", Rec.No);
+                    if Rec.FindSet then
                         ReceiptLine.DeleteAll;
                 end;
             }
@@ -230,12 +230,12 @@ Page 51516482 "Checkoff Processing Header-D"
                     // TESTFIELD("Document No");
                     // TESTFIELD(Amount);
                     //MESSAGE('test');
-                    TestField("CheckOff Period");
+                    Rec.TestField("CheckOff Period");
 
 
                     BATCH_TEMPLATE := 'GENERAL';
                     BATCH_NAME := 'CHECKOFF';
-                    DOCUMENT_NO := Remarks;
+                    DOCUMENT_NO := Rec.Remarks;
 
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
@@ -243,13 +243,13 @@ Page 51516482 "Checkoff Processing Header-D"
                     GenJournalLine.DeleteAll;
 
                     MembLedg.Reset;
-                    MembLedg.SetRange(MembLedg."Document No.", "Document No");
+                    MembLedg.SetRange(MembLedg."Document No.", Rec."Document No");
                     if MembLedg.Find('-') = true then
                         Error('Sorry,You have already posted this Document. Validation not Allowed.');
 
 
                     ReceiptLine.Reset;
-                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", No);
+                    ReceiptLine.SetRange(ReceiptLine."Receipt Header No", Rec.No);
                     if ReceiptLine.Find('-') then begin//1
                                                        // MESSAGE('Header No %1',No);
                         Window.Open('@1@');
@@ -287,7 +287,7 @@ Page 51516482 "Checkoff Processing Header-D"
                     MemberTotal := 0;
                     //Validate Amounts
                     ObjCheckoffLines.Reset;
-                    ObjCheckoffLines.SetRange(ObjCheckoffLines."Receipt Header No", No);
+                    ObjCheckoffLines.SetRange(ObjCheckoffLines."Receipt Header No", Rec.No);
                     if ObjCheckoffLines.Find('-') then begin
                         repeat
                             MemberTotal := ObjCheckoffLines."EMERGENCY LOAN" + ObjCheckoffLines."Int EMERGENCY LOAN" + ObjCheckoffLines."SUPER EMERGENCY LOAN" + ObjCheckoffLines."Int SUPER EMERGENCY LOAN"
@@ -295,7 +295,7 @@ Page 51516482 "Checkoff Processing Header-D"
                             + ObjCheckoffLines."SCHOOL FEES" + ObjCheckoffLines."Int SCHOOL FEES" + ObjCheckoffLines."SUPER SCHOOL FEES" + ObjCheckoffLines."Int SUPER SCHOOL FEES"
                             + ObjCheckoffLines."INVESTMENT LOAN" + ObjCheckoffLines."Int INVESTMENT LOAN" + ObjCheckoffLines."DEVELOPMENT LOAN" + ObjCheckoffLines."Int DEVELOPMENT LOAN" + ObjCheckoffLines."Insurance Contribution"
                             + ObjCheckoffLines."Deposit contribution" + ObjCheckoffLines."Shares Capital";
-                            Amount := MemberTotal;
+                            Rec.Amount := MemberTotal;
                             //VALIDATE(Amount);
                             ObjCheckoffLines.Amount := MemberTotal;
                             ObjCheckoffLines.Modify;
@@ -304,7 +304,7 @@ Page 51516482 "Checkoff Processing Header-D"
                         until ObjCheckoffLines.Next = 0;
                     end;
                     ObjCheckoffLines.Reset;
-                    ObjCheckoffLines.SetRange(ObjCheckoffLines."Receipt Header No", No);
+                    ObjCheckoffLines.SetRange(ObjCheckoffLines."Receipt Header No", Rec.No);
                     if ObjCheckoffLines.FindSet then begin
                         ObjCheckoffLines.CalcSums(ObjCheckoffLines."Deposit contribution", ObjCheckoffLines."Shares Capital",
                         ObjCheckoffLines."EMERGENCY LOAN", ObjCheckoffLines."Int EMERGENCY LOAN", ObjCheckoffLines."SUPER EMERGENCY LOAN", ObjCheckoffLines."Int SUPER EMERGENCY LOAN"
@@ -381,15 +381,15 @@ Page 51516482 "Checkoff Processing Header-D"
                     LoanT: Record 51516371;
                     LoanProdType: Code[30];
                 begin
-                    if "Loan CutOff Date" = 0D then
+                    if Rec."Loan CutOff Date" = 0D then
                         Error('Posting Date cannot be blank');
 
-                    CalcFields("Total Scheduled");
-                    if "Total Scheduled" <> Amount then
+                    Rec.CalcFields("Total Scheduled");
+                    if Rec."Total Scheduled" <> Rec.Amount then
                         if Confirm('Total schedule is not equal to cheque amount, do you wish to continue?') = false then
                             exit;
                     if Confirm('Are you sure you want to Transfer this Checkoff to Journals ?') = true then begin
-                        TestField("Document No");
+                        Rec.TestField("Document No");
 
                         //Temp.GET(USERID);
                         Jtemplate := 'GENERAL';
@@ -405,17 +405,17 @@ Page 51516482 "Checkoff Processing Header-D"
                         end;
 
 
-                        Datefilter := '..' + Format("Loan CutOff Date");
+                        Datefilter := '..' + Format(Rec."Loan CutOff Date");
 
                         MembLedg.Reset;
-                        MembLedg.SetRange(MembLedg."Document No.", Remarks);
+                        MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
                         MembLedg.SetRange(MembLedg.Reversed, false);
                         if MembLedg.Find('-') = true then
                             //ERROR('Sorry,You have already posted this Document. Validation not Allowed.');
 
                             //BATCH_TEMPLATE:='GENERAL';
                             //BATCH_NAME:='CHECKOFF';
-                            DOCUMENT_NO := Remarks;
+                            DOCUMENT_NO := Rec.Remarks;
                         Counter := 0;
                         Percentage := 0;
                         TotalCount := 0;
@@ -428,7 +428,7 @@ Page 51516482 "Checkoff Processing Header-D"
                         //LineNo:=0;
 
                         ReceiptLine.Reset;
-                        ReceiptLine.SetRange("Receipt Header No", No);
+                        ReceiptLine.SetRange("Receipt Header No", Rec.No);
                         if ReceiptLine.FindSet then begin//1
                                                          //MESSAGE('No %1',No);
                             Window.Open('@1@');
@@ -449,20 +449,20 @@ Page 51516482 "Checkoff Processing Header-D"
                                 UnallocatedFunds := 0;
                                 //Deposits
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Benevolent Fund", GenJournalLine."account type"::Member,
-                                                                     ReceiptLine."Member No.", "Loan CutOff Date", -ReceiptLine."Deposit contribution", 'BOSA', '', 'Deposit contribution Checkoff for ' +
-                                                                     KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Benevolent Fund", GenJournalLine."account type"::Member,
+                                                                     ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Deposit contribution", 'BOSA', '', 'Deposit contribution Checkoff for ' +
+                                                                     KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
                                 //share capital
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Share Capital", GenJournalLine."account type"::Member,
-                                                                     ReceiptLine."Member No.", "Loan CutOff Date", -ReceiptLine."Shares Capital", 'BOSA', '', 'Shares capital checkofffor '
-                                                                     + KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Share Capital", GenJournalLine."account type"::Member,
+                                                                     ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Shares Capital", 'BOSA', '', 'Shares capital checkofffor '
+                                                                     + KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
 
                                 //Reg/fess
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Registration Fee", GenJournalLine."account type"::Member,
-                                                                     ReceiptLine."Member No.", "Loan CutOff Date", -ReceiptLine."Entrance Fees", 'BOSA', '', 'Registration fees checkoff for' +
-                                                                     KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Registration Fee", GenJournalLine."account type"::Member,
+                                                                     ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Entrance Fees", 'BOSA', '', 'Registration fees checkoff for' +
+                                                                     KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
                                 LNNO := '';
                                 LoanProductsSetup.Reset;
                                 LoanProductsSetup.SetFilter(LoanProductsSetup.Code, '<>%1', '');
@@ -541,15 +541,15 @@ Page 51516482 "Checkoff Processing Header-D"
 
                                         end;
                                         LineNo := LineNo + 10000;
-                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Loan Repayment", GenJournalLine."account type"::Member,
-                                                                                    ReceiptLine."Member No.", "Loan CutOff Date", -UpdatePrinciple, 'BOSA', '', 'loan repayment checkoff for ' +
-                                                                                    KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", LNNO);//LoanApp."Loan  No.");
-                                                                                                                                                                                                      //Int normal loan
+                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Loan Repayment", GenJournalLine."account type"::Member,
+                                                                                    ReceiptLine."Member No.", Rec."Loan CutOff Date", -UpdatePrinciple, 'BOSA', '', 'loan repayment checkoff for ' +
+                                                                                    KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", LNNO);//LoanApp."Loan  No.");
+                                                                                                                                                                                                              //Int normal loan
                                         LineNo := LineNo + 10000;
                                         //AmountToPay:=FnGetLoanInterestToPay(ReceiptLine."Int normal loan",ReceiptLine."NLoan No");
-                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Interest Paid", GenJournalLine."account type"::Member,
-                                                                              ReceiptLine."Member No.", "Loan CutOff Date", -UpdateInterest, 'BOSA', '', 'Interest payment checkoff for ' +
-                                                                              KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", LNNO);//LLoanApp."Loan  No.");
+                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Interest Paid", GenJournalLine."account type"::Member,
+                                                                              ReceiptLine."Member No.", Rec."Loan CutOff Date", -UpdateInterest, 'BOSA', '', 'Interest payment checkoff for ' +
+                                                                              KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", LNNO);//LLoanApp."Loan  No.");
                                     until LoanProductsSetup.Next = 0;
                                 end;//END LoanProductsSetup
 
@@ -557,18 +557,18 @@ Page 51516482 "Checkoff Processing Header-D"
 
                                 //Unallocated Funds
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::"Unallocated Funds", GenJournalLine."account type"::Member,
-                                                                  ReceiptLine."Member No.", "Loan CutOff Date", -UnallocatedFunds, 'BOSA', '', 'Unallocated Funds checkoff for ' +
-                                                                  KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Unallocated Funds", GenJournalLine."account type"::Member,
+                                                                  ReceiptLine."Member No.", Rec."Loan CutOff Date", -UnallocatedFunds, 'BOSA', '', 'Unallocated Funds checkoff for ' +
+                                                                  KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
 
                             until ReceiptLine.Next = 0;
                         end;//1
 
                         //Balance
                         LineNo := LineNo + 10000;
-                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, No, LineNo, GenJournalLine."transaction type"::" ", GenJournalLine."account type"::Customer,
-                                                          "Account No", "Loan CutOff Date", "Total Scheduled", 'BOSA', '', 'Checkoff balancing off for ' +
-                                                          KnGetPeriodDescription("CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + "Employer Code", '');
+                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::" ", GenJournalLine."account type"::Customer,
+                                                          Rec."Account No", Rec."Loan CutOff Date", Rec."Total Scheduled", 'BOSA', '', 'Checkoff balancing off for ' +
+                                                          KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
 
                         Window.Close;
 
@@ -596,7 +596,7 @@ Page 51516482 "Checkoff Processing Header-D"
                 trigger OnAction()
                 begin
                     MembLedg.Reset;
-                    MembLedg.SetRange(MembLedg."Document No.", Remarks);
+                    MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
                     if MembLedg.Find('-') = false then begin
                         Error('You Can Only do this process on Already Posted Checkoffs')
                     end;
@@ -613,8 +613,8 @@ Page 51516482 "Checkoff Processing Header-D"
 
                 trigger OnAction()
                 begin
-                    TestField("Document No");
-                    TestField(Amount);
+                    Rec.TestField("Document No");
+                    Rec.TestField(Amount);
                     ReceiptLine.Reset;
                 end;
             }
@@ -632,13 +632,13 @@ Page 51516482 "Checkoff Processing Header-D"
                 begin
                     if Confirm('Are you sure you want to mark this Checkoff as Posted ?', false) = true then begin
                         MembLedg.Reset;
-                        MembLedg.SetRange(MembLedg."Document No.", Remarks);
+                        MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
                         if MembLedg.Find('-') = false then
                             Error('Sorry,You can only do this process on already posted Checkoffs');
-                        Posted := true;
-                        "Posted By" := UserId;
-                        "Loan CutOff Date" := "Loan CutOff Date";
-                        Modify;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
+                        Rec."Loan CutOff Date" := Rec."Loan CutOff Date";
+                        Rec.Modify;
                     end;
                 end;
             }
@@ -680,7 +680,7 @@ Page 51516482 "Checkoff Processing Header-D"
     begin
         ActionEnabled := true;
         MembLedg.Reset;
-        MembLedg.SetRange(MembLedg."Document No.", Remarks);
+        MembLedg.SetRange(MembLedg."Document No.", Rec.Remarks);
         MembLedg.SetRange(MembLedg."External Document No.", "Cheque No.");
         if MembLedg.Find('-') then begin
             //ActionEnabled:=FALSE;
@@ -689,9 +689,9 @@ Page 51516482 "Checkoff Processing Header-D"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        "Posting date" := Today;
-        "Date Entered" := Today;
-        if "Employer Code" <> '' then begin
+        Rec."Posting date" := Today;
+        Rec."Date Entered" := Today;
+        if Rec."Employer Code" <> '' then begin
             BufferTable.Reset;
             BufferTable.SetRange(BufferTable.UserId, UserId);
             if BufferTable.Find('-') then begin
@@ -699,14 +699,14 @@ Page 51516482 "Checkoff Processing Header-D"
             end;
             BufferTable.Init;
             BufferTable.UserId := UserId;
-            BufferTable.EmployerCode := "Employer Code";
+            BufferTable.EmployerCode := Rec."Employer Code";
             BufferTable.Insert;
         end;
     end;
 
     trigger OnOpenPage()
     begin
-        if "Employer Code" <> '' then begin
+        if Rec."Employer Code" <> '' then begin
             BufferTable.Reset;
             BufferTable.SetRange(BufferTable.UserId, UserId);
             if BufferTable.Find('-') then begin
@@ -714,7 +714,7 @@ Page 51516482 "Checkoff Processing Header-D"
             end;
             BufferTable.Init;
             BufferTable.UserId := UserId;
-            BufferTable.EmployerCode := "Employer Code";
+            BufferTable.EmployerCode := Rec."Employer Code";
             BufferTable.Insert;
         end;
     end;
@@ -724,22 +724,22 @@ Page 51516482 "Checkoff Processing Header-D"
         PDate: Date;
         DocNo: Code[20];
         RunBal: Decimal;
-        ReceiptsProcessingLines: Record 51516415;
+        ReceiptsProcessingLines: Record "Checkoff Lines-Distributed";
         LineNo: Integer;
-        LBatches: Record 51516377;
+        LBatches: Record "Loan Disburesment-Batching";
         Jtemplate: Code[30];
         JBatch: Code[30];
         "Cheque No.": Code[20];
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
-        ReptProcHeader: Record 51516414;
-        Cust: Record 51516364;
+        ReptProcHeader: Record "Checkoff Header-Distributed";
+        Cust: Record "Member Register";
         MembPostGroup: Record "Customer Posting Group";
-        Loantable: Record 51516371;
+        Loantable: Record "Loans Register";
         LRepayment: Decimal;
-        RcptBufLines: Record 51516415;
-        LoanType: Record 51516381;
-        LoanApp: Record 51516371;
+        RcptBufLines: Record "Checkoff Lines-Distributed";
+        LoanType: Record "Loan Products Setup";
+        LoanApp: Record "Loans Register";
         Interest: Decimal;
         LineN: Integer;
         TotalRepay: Decimal;
@@ -750,37 +750,32 @@ Page 51516482 "Checkoff Processing Header-D"
         SHARESCAP: Decimal;
         DIFF: Decimal;
         DIFFPAID: Decimal;
-        genstup: Record 51516398;
-        Memb: Record 51516364;
+        genstup: Record "Sacco General Set-Up";
+        Memb: Record "Member Register";
         INSURANCE: Decimal;
         GenBatches: Record "Gen. Journal Batch";
         Datefilter: Text[50];
-        ReceiptLine: Record 51516415;
-        MembLedg: Record 51516365;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        ReceiptLine: Record "Checkoff Lines-Distributed";
+        MembLedg: Record "Member Ledger Entry";
+        SFactory: Codeunit "Swizzsoft Factory.";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         DOCUMENT_NO: Code[40];
         GenJournalLine: Record "Gen. Journal Line";
         ActionEnabled: Boolean;
-        XMLCheckOff: XmlPort UnknownXmlPort51516003;
+        XMLCheckOff: XmlPort 51516003;
         Window: Dialog;
         TotalCount: Integer;
         Counter: Integer;
         Percentage: Integer;
-        ObjCust: Record 51516364;
-        ObjSaccoGenSetUp: Record 51516398;
+        ObjCust: Record "Member Register";
+        ObjSaccoGenSetUp: Record "Sacco General Set-Up";
         MemberNumber: Code[20];
-<<<<<<< HEAD
-        SURESTEPFactory: Codeunit UnknownCodeunit51516007;
-        Temp: Record 51516031;
-=======
-        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
-        Temp: Record UnknownRecord51516031;
->>>>>>> a70ded79f043457f7f86d8f99a53b565838eeea4
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory.";
+        Temp: Record "Funds User Setup";
         DefaulterPaymentType: Option;
-        KNFactory: Codeunit UnknownCodeunit51516030;
-        BufferTable: Record 51516917;
+        KNFactory: Codeunit "Poly Factory";
+        BufferTable: Record "Checkoff Code Buffer";
         UnallocatedFunds: Decimal;
         LoanOutstandingBalance: Decimal;
         LoanOutstandingInterest: Decimal;
@@ -788,13 +783,13 @@ Page 51516482 "Checkoff Processing Header-D"
         InterestTopay: Decimal;
         MemberTotal: Decimal;
         UnallocatedPerLoanProd: Decimal;
-        LoanProductsSetup: Record 51516381;
+        LoanProductsSetup: Record "Loan Products Setup";
         UpdateInterest: Decimal;
         UpdatePrinciple: Decimal;
-        CheckoffLinesBuffer: Record 51516572;
-        Vend: Record 51516364;
+        CheckoffLinesBuffer: Record "Checkoff Lines-Buffer";
+        Vend: Record "Member Register";
         LNNO: Code[20];
-        LoansRegister6: Record 51516371;
+        LoansRegister6: Record "Loans Register";
         Postingdate: Date;
 
     local procedure FnInitiateProgressBar()

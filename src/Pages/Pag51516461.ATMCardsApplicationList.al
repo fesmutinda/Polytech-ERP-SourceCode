@@ -4,7 +4,7 @@ Page 51516461 "ATM Cards Application List"
     CardPageID = "ATM Applications Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516464;
+    SourceTable = "Members Nominee Temp";
 
     layout
     {
@@ -13,59 +13,59 @@ Page 51516461 "ATM Cards Application List"
             repeater(Control15)
             {
                 Editable = false;
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Allocation"; "Total Allocation")
+                field("Total Allocation"; Rec."Total Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Relationship; Relationship)
+                field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Beneficiary; Beneficiary)
+                field(Beneficiary; Rec.Beneficiary)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Address 3"; "Address 3")
+                field("Address 3"; Rec."Address 3")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Email; Email)
+                field(Email; Rec.Email)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("%Allocation"; "%Allocation")
+                field("%Allocation"; Rec."%Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field("New Upload"; "New Upload")
+                field("New Upload"; Rec."New Upload")
                 {
                     ApplicationArea = Basic;
                 }

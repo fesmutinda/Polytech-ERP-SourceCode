@@ -2,7 +2,7 @@
 Page 51516451 "Transfer Header Card"
 {
     PageType = Card;
-    SourceTable = 51516457;
+    SourceTable = "Bank Transfer Header Details";
 
     layout
     {
@@ -11,51 +11,51 @@ Page 51516451 "Transfer Header Card"
             group("EFT Batch")
             {
                 Caption = 'EFT Batch';
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Bank  No"; "Bank  No")
+                field("Bank  No"; Rec."Bank  No")
                 {
                     ApplicationArea = Basic;
                     Visible = true;
                 }
-                field(Bank; Bank)
+                field(Bank; Rec.Bank)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Total; Total)
+                field(Total; Rec.Total)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Record Count';
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Transferred; Transferred)
+                field(Transferred; Rec.Transferred)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Transferred"; "Date Transferred")
+                field("Date Transferred"; Rec."Date Transferred")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Transferred"; "Time Transferred")
+                field("Time Transferred"; Rec."Time Transferred")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transferred By"; "Transferred By")
+                field("Transferred By"; Rec."Transferred By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(RTGS; RTGS)
+                field(RTGS; Rec.RTGS)
                 {
                     ApplicationArea = Basic;
                 }
@@ -82,7 +82,7 @@ Page 51516451 "Transfer Header Card"
 
                     trigger OnAction()
                     begin
-                        if Transferred = true then
+                        if Rec.Transferred = true then
                             Error('EFT Batch already transfered. Please use another one.');
 
                         STORegister.Reset;
@@ -92,7 +92,7 @@ Page 51516451 "Transfer Header Card"
                             repeat
                                 EFTDetails.Init;
                                 EFTDetails.No := '';
-                                EFTDetails."Header No" := No;
+                                EFTDetails."Header No" := Rec.No;
                                 EFTDetails."Account No" := STORegister."Source Account No.";
                                 //EFTDetails."Account Name":=STORegister."Account Name";
                                 EFTDetails.Validate(EFTDetails."Account No");
@@ -171,7 +171,7 @@ Page 51516451 "Transfer Header Card"
                     begin
 
                         EFTDetails.Reset;
-                        EFTDetails.SetRange(EFTDetails."Header No", No);
+                        EFTDetails.SetRange(EFTDetails."Header No", Rec.No);
                         if EFTDetails.Find('-') then begin
                             repeat
                                 EFTDetails.TestField(EFTDetails."Destination Account No");
@@ -228,7 +228,7 @@ Page 51516451 "Transfer Header Card"
 
 
                         EFTDetails.Reset;
-                        EFTDetails.SetRange(EFTDetails."Header No", No);
+                        EFTDetails.SetRange(EFTDetails."Header No", Rec.No);
                         if EFTDetails.Find('-') then
 ;
                 }
@@ -286,7 +286,7 @@ Page 51516451 "Transfer Header Card"
                     begin
 
                         EFTDetails.Reset;
-                        EFTDetails.SetRange(EFTDetails."Header No", No);
+                        EFTDetails.SetRange(EFTDetails."Header No", Rec.No);
                         if EFTDetails.Find('-') then begin
                             repeat
                                 EFTDetails.TestField(EFTDetails."Destination Account No");
@@ -361,7 +361,7 @@ Page 51516451 "Transfer Header Card"
                 trigger OnAction()
                 begin
                     EFTHeader.Reset;
-                    EFTHeader.SetRange(EFTHeader.No, No);
+                    EFTHeader.SetRange(EFTHeader.No, Rec.No);
                     if EFTHeader.Find('-') then
                         Report.Run(51516526, true, true, EFTHeader)
                 end;
@@ -376,9 +376,9 @@ Page 51516451 "Transfer Header Card"
                 trigger OnAction()
                 begin
 
-                    TestField(Remarks);
+                    Rec.TestField(Remarks);
 
-                    if Transferred = true then
+                    if Rec.Transferred = true then
                         Error('Funds transfers has already been done.');
 
                     if Confirm('Are you absolutely sure you want to post the EFT/RTGS tranfers.', false) = false then
@@ -392,7 +392,7 @@ Page 51516451 "Transfer Header Card"
                         GenJournalLine.DeleteAll;
 
                     EFTDetails.Reset;
-                    EFTDetails.SetRange(EFTDetails."Header No", No);
+                    EFTDetails.SetRange(EFTDetails."Header No", Rec.No);
                     if EFTDetails.Find('-') then begin
                         repeat
 
@@ -412,7 +412,7 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
@@ -437,7 +437,7 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
@@ -462,14 +462,14 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := EFTDetails."Account No";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Posting Date" := Today;
-                                if RTGS = true then
+                                if Rec.RTGS = true then
                                     GenJournalLine.Description := 'RTGS Charges'
                                 else
                                     GenJournalLine.Description := 'EFT Charges';
@@ -494,7 +494,7 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
@@ -534,13 +534,13 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := EFTDetails."Account No";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                if RTGS = true then
+                                if Rec.RTGS = true then
                                     GenJournalLine.Description := 'RTGS' + EFTDetails."Payee Bank Name"
                                 else
                                     GenJournalLine.Description := 'EFT to Account' + EFTDetails."Payee Bank Name";
@@ -562,11 +562,11 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                GenJournalLine."Account No." := "Bank  No";
+                                GenJournalLine."Account No." := Rec."Bank  No";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine.Description := 'EFT' + EFTDetails."Account No" + '-' + EFTDetails."Account Name";
                                 GenJournalLine."Posting Date" := Today;
@@ -587,14 +587,14 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := EFTDetails."Account No";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Posting Date" := Today;
-                                if RTGS = true then
+                                if Rec.RTGS = true then
                                     GenJournalLine.Description := 'RTGS Charges'
                                 else
                                     GenJournalLine.Description := 'EFT Charges';
@@ -619,7 +619,7 @@ Page 51516451 "Transfer Header Card"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'PURCHASES';
                                 GenJournalLine."Journal Batch Name" := 'EFT';
-                                GenJournalLine."Document No." := No;
+                                GenJournalLine."Document No." := Rec.No;
                                 GenJournalLine."External Document No." := CopyStr(EFTDetails."Destination Account No", 1, 20);
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
@@ -655,11 +655,11 @@ Page 51516451 "Transfer Header Card"
                     end;
 
 
-                    Transferred := true;
-                    "Date Transferred" := Today;
-                    "Time Transferred" := Time;
-                    "Transferred By" := UserId;
-                    Modify;
+                    Rec.Transferred := true;
+                    Rec."Date Transferred" := Today;
+                    Rec."Time Transferred" := Time;
+                    Rec."Transferred By" := UserId;
+                    Rec.Modify;
 
 
                     Message('Transaction Posted successfully.');
@@ -672,17 +672,17 @@ Page 51516451 "Transfer Header Card"
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         Account: Record Vendor;
-        AccountType: Record 51516436;
+        AccountType: Record "Account Types-Saving Products";
         AvailableBal: Decimal;
         LineNo: Integer;
-        EFTDetails: Record 51516458;
-        STORegister: Record 51516450;
+        EFTDetails: Record "EFT Details";
+        STORegister: Record "Standing Order Register";
         Accounts: Record Vendor;
-        EFTHeader: Record 51516457;
-        Transactions: Record 51516441;
+        EFTHeader: Record "Bank Transfer Header Details";
+        Transactions: Record Transactions;
         TextGen: Text[250];
-        STO: Record 51516449;
+        STO: Record "Standing Orders";
         ReffNo: Code[20];
-        GenSetup: Record 51516398;
+        GenSetup: Record "Sacco General Set-Up";
 }
 

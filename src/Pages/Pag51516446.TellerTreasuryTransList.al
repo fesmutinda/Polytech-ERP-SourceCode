@@ -5,7 +5,7 @@ Page 51516446 "Teller & Treasury Trans List"
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
-    SourceTable = 51516443;
+    SourceTable = "Treasury Transactions";
     SourceTableView = where(Posted = filter(No));
 
     layout
@@ -14,45 +14,45 @@ Page 51516446 "Teller & Treasury Trans List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Account"; "From Account")
+                field("From Account"; Rec."From Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("From Account User"; "From Account User")
+                field("From Account User"; Rec."From Account User")
                 {
                     ApplicationArea = Basic;
                     Caption = 'From';
                 }
-                field("To Account"; "To Account")
+                field("To Account"; Rec."To Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("To Account User"; "To Account User")
+                field("To Account User"; Rec."To Account User")
                 {
                     ApplicationArea = Basic;
                     Caption = 'To';
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

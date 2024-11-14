@@ -5,7 +5,7 @@ Page 51516534 "Member Parish"
     CardPageID = "Member Parishes";
     Editable = false;
     PageType = List;
-    SourceTable = 51516506;
+    SourceTable = "Member's Parishes";
 
     layout
     {
@@ -13,11 +13,11 @@ Page 51516534 "Member Parish"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

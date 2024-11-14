@@ -4,7 +4,7 @@ Page 51516558 "Loan Collateral Register List"
     CardPageID = "Loan Collateral Register Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516512;
+    SourceTable = "Loan Collateral Register";
 
     layout
     {
@@ -12,51 +12,51 @@ Page 51516558 "Loan Collateral Register List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registered Owner"; "Registered Owner")
+                field("Registered Owner"; Rec."Registered Owner")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Type"; "Collateral Type")
+                field("Collateral Type"; Rec."Collateral Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Description"; "Collateral Description")
+                field("Collateral Description"; Rec."Collateral Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Received"; "Date Received")
+                field("Date Received"; Rec."Date Received")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received By"; "Received By")
+                field("Received By"; Rec."Received By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Released"; "Date Released")
+                field("Date Released"; Rec."Date Released")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Released By"; "Released By")
+                field("Released By"; Rec."Released By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }

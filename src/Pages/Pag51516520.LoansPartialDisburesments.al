@@ -2,7 +2,7 @@
 Page 51516520 "Loans Partial Disburesments"
 {
     PageType = List;
-    SourceTable = 51516494;
+    SourceTable = "Loan Partial Disburesments";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516520 "Loans Partial Disburesments"
         {
             repeater(Group)
             {
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product"; "Loan Product")
+                field("Loan Product"; Rec."Loan Product")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Be Disbursed"; "Amount to Be Disbursed")
+                field("Amount to Be Disbursed"; Rec."Amount to Be Disbursed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Due"; "Amount Due")
+                field("Amount Due"; Rec."Amount Due")
                 {
                     ApplicationArea = Basic;
                 }

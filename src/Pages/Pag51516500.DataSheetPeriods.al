@@ -2,7 +2,7 @@
 Page 51516500 "Data Sheet Periods"
 {
     PageType = List;
-    SourceTable = 51516419;
+    SourceTable = "Data Periods";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516500 "Data Sheet Periods"
         {
             repeater(Group)
             {
-                field("Period Code"; "Period Code")
+                field("Period Code"; Rec."Period Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Begin Date"; "Begin Date")
+                field("Begin Date"; Rec."Begin Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Month; Month)
+                field(Month; Rec.Month)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payroll Month"; "Payroll Month")
+                field("Payroll Month"; Rec."Payroll Month")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516563 "Meetings Schedule"
 {
     PageType = List;
-    SourceTable = 51516562;
+    SourceTable = "Meetings Schedule";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516563 "Meetings Schedule"
         {
             repeater(Group)
             {
-                field("Meeting Date"; "Meeting Date")
+                field("Meeting Date"; Rec."Meeting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Meeting Place"; "Meeting Place")
+                field("Meeting Place"; Rec."Meeting Place")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Meeting Status"; "Meeting Status")
+                field("Meeting Status"; Rec."Meeting Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Meeting Outcome(Brief)"; "Meeting Outcome(Brief)")
+                field("Meeting Outcome(Brief)"; Rec."Meeting Outcome(Brief)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User to Notify"; "User to Notify")
+                field("User to Notify"; Rec."User to Notify")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User Email"; "User Email")
+                field("User Email"; Rec."User Email")
                 {
                     ApplicationArea = Basic;
                 }

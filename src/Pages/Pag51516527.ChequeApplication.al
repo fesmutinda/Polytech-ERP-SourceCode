@@ -2,7 +2,7 @@
 Page 51516527 "Cheque Application"
 {
     PageType = Card;
-    SourceTable = 51516497;
+    SourceTable = "Cheque Book Application";
 
     layout
     {
@@ -10,73 +10,73 @@ Page 51516527 "Cheque Application"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("ID No."; "ID No.")
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque Book Type"; "Cheque Book Type")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Begining Cheque No."; "Begining Cheque No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("End Cheque No."; "End Cheque No.")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Responsibility Centre"; "Responsibility Centre")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Last check"; "Last check")
+                field("Cheque Book Type"; Rec."Cheque Book Type")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Begining Cheque No."; Rec."Begining Cheque No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("End Cheque No."; Rec."End Cheque No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Responsibility Centre"; Rec."Responsibility Centre")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Application Date"; "Application Date")
+                field("Last check"; Rec."Last check")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque Account No."; "Cheque Account No.")
+                field("Application Date"; Rec."Application Date")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Cheque Account No."; Rec."Cheque Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Cheque Register Generated"; "Cheque Register Generated")
+                field("Cheque Register Generated"; Rec."Cheque Register Generated")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Cheque Book charges Posted"; "Cheque Book charges Posted")
+                field("Cheque Book charges Posted"; Rec."Cheque Book charges Posted")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Requested By"; "Requested By")
+                field("Requested By"; Rec."Requested By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -99,27 +99,27 @@ Page 51516527 "Cheque Application"
                 trigger OnAction()
                 begin
 
-                    if "Cheque Register Generated" then
+                    if Rec."Cheque Register Generated" then
                         Error('Cheque generation already done');
-                    TestField("Begining Cheque No.");
-                    TestField("End Cheque No.");
-                    IncrNo := "Begining Cheque No.";
+                    Rec.TestField("Begining Cheque No.");
+                    Rec.TestField("End Cheque No.");
+                    IncrNo := Rec."Begining Cheque No.";
 
-                    if "End Cheque No." < "Begining Cheque No." then
+                    if Rec."End Cheque No." < Rec."Begining Cheque No." then
                         Error('Beginning number is more than ending number');
 
 
-                    while IncrNo <= "End Cheque No." do begin
+                    while IncrNo <= Rec."End Cheque No." do begin
                         CheqReg.Init;
-                        CheqReg."Account No." := "Cheque Account No.";
+                        CheqReg."Account No." := Rec."Cheque Account No.";
                         CheqReg."Cheque No." := IncrNo;
-                        CheqReg."Application No." := "No.";
+                        CheqReg."Application No." := Rec."No.";
                         CheqReg.Insert;
 
                         IncrNo := IncStr(IncrNo);
                     end;
-                    "Cheque Register Generated" := true;
-                    Modify;
+                    Rec."Cheque Register Generated" := true;
+                    Rec.Modify;
                 end;
             }
             action("Cheque Register")
@@ -146,7 +146,7 @@ Page 51516527 "Cheque Application"
                   END;
                    */
 
-                    if "Cheque Book charges Posted" = true then begin
+                    if Rec."Cheque Book charges Posted" = true then begin
                         Error('Cheque book charges has already been posted');
 
                     end;
@@ -170,18 +170,18 @@ Page 51516527 "Cheque Application"
                             GenJournalLine.Init;
                             GenJournalLine."Journal Template Name" := 'GENERAL';
                             GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                            GenJournalLine."Document No." := "No.";
+                            GenJournalLine."Document No." := Rec."No.";
                             GenJournalLine."Line No." := LineNo;
                             GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                             GenJournalLine."Account No." := Charges."GL Account";//'1-00-600-003';
                             GenJournalLine.Validate(GenJournalLine."Account No.");
                             GenJournalLine."Posting Date" := Today;
-                            GenJournalLine."External Document No." := "Cheque Account No.";
+                            GenJournalLine."External Document No." := Rec."Cheque Account No.";
                             GenJournalLine.Description := 'Cheque Application fees';
                             GenJournalLine.Amount := -Charges."Charge Amount";
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
-                            if Vend.Get("Account No.") then begin
+                            if Vend.Get(Rec."Account No.") then begin
                                 GenJournalLine."Shortcut Dimension 2 Code" := Vend."Global Dimension 2 Code";
                             end;
                             GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
@@ -249,18 +249,18 @@ Page 51516527 "Cheque Application"
                         GenJournalLine.Init;
                         GenJournalLine."Journal Template Name" := 'GENERAL';
                         GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                        GenJournalLine."Document No." := "No.";
+                        GenJournalLine."Document No." := Rec."No.";
                         GenJournalLine."Line No." := LineNo;
                         GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
-                        GenJournalLine."Account No." := "Account No.";
+                        GenJournalLine."Account No." := Rec."Account No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         GenJournalLine."Posting Date" := Today;
-                        GenJournalLine."External Document No." := "Cheque Account No.";
+                        GenJournalLine."External Document No." := Rec."Cheque Account No.";
                         GenJournalLine.Description := 'Cheque Application fees';
                         GenJournalLine.Amount := ("TOTAL CHARGES");
                         GenJournalLine.Validate(GenJournalLine.Amount);
                         GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
-                        if Vend.Get("Account No.") then begin
+                        if Vend.Get(Rec."Account No.") then begin
                             GenJournalLine."Shortcut Dimension 2 Code" := Vend."Global Dimension 2 Code";
                         end;
                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
@@ -290,8 +290,8 @@ Page 51516527 "Cheque Application"
 
                     end;
 
-                    "Cheque Book charges Posted" := true;
-                    Modify;
+                    Rec."Cheque Book charges Posted" := true;
+                    Rec.Modify;
 
                     Message('Cheque book charged successfully');
 
@@ -327,16 +327,16 @@ Page 51516527 "Cheque Application"
     }
 
     var
-        CheqReg: Record 51516500;
+        CheqReg: Record "Cheques Register";
         IncrNo: Code[10];
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
         Vend: Record Vendor;
-        AccountTypeS: Record 51516436;
+        AccountTypeS: Record "Account Types-Saving Products";
         AvailableBal: Decimal;
-        Charges: Record 51516439;
-        GenSetup: Record 51516398;
-        ChequeSetUp: Record 51516504;
+        Charges: Record Charges;
+        GenSetup: Record "Sacco General Set-Up";
+        ChequeSetUp: Record "Cheque Set Up";
         "TOTAL CHARGES": Decimal;
         TEST: Code[10];
 }

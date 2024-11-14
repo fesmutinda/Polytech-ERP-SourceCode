@@ -2,7 +2,7 @@
 Page 51516528 "Cheque Receipts Header"
 {
     PageType = Card;
-    SourceTable = 51516499;
+    SourceTable = "Cheque Receipts";
 
     layout
     {
@@ -10,46 +10,46 @@ Page 51516528 "Cheque Receipts Header"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Unpaid By"; "Unpaid By")
+                field("Unpaid By"; Rec."Unpaid By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Refference Document"; "Refference Document")
+                field("Refference Document"; Rec."Refference Document")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Unpaid; Unpaid)
+                field(Unpaid; Rec.Unpaid)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -81,13 +81,13 @@ Page 51516528 "Cheque Receipts Header"
                     RefNoRec.Reset;
                     RefNoRec.SetRange(RefNoRec.CurrUserID, UserId);
                     if RefNoRec.Find('-') then begin
-                        RefNoRec."Reference No" := "No.";
+                        RefNoRec."Reference No" := Rec."No.";
                         RefNoRec.Modify;
                     end
                     else begin
                         RefNoRec.Init;
                         RefNoRec.CurrUserID := UserId;
-                        RefNoRec."Reference No" := "No.";
+                        RefNoRec."Reference No" := Rec."No.";
                         RefNoRec.Insert;
                     end;
 
@@ -112,8 +112,8 @@ Page 51516528 "Cheque Receipts Header"
 
                     Report.Run(51516505, true);
 
-                    "Created By" := UserId;
-                    Modify;
+                    Rec."Created By" := UserId;
+                    Rec.Modify;
                 end;
             }
             action(Post)
@@ -130,7 +130,7 @@ Page 51516528 "Cheque Receipts Header"
                     if Confirm('Are you sure you want post cheques', true) = true then begin
                         GenSetup.Get;
 
-                        if Posted = true then
+                        if Rec.Posted = true then
                             Error('The Transaction has already been posted');
 
                         GenJournalLine.Reset;
@@ -139,7 +139,7 @@ Page 51516528 "Cheque Receipts Header"
                         GenJournalLine.DeleteAll;
 
                         ChqRecLines.Reset;
-                        ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", "No.");
+                        ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", Rec."No.");
                         ChqRecLines.SetRange(ChqRecLines.Status, ChqRecLines.Status::Pending);
                         if ChqRecLines.Find('-') then begin
                             repeat
@@ -150,12 +150,12 @@ Page 51516528 "Cheque Receipts Header"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                GenJournalLine."Document No." := "No.";
+                                GenJournalLine."Document No." := Rec."No.";
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
                                 GenJournalLine."Account No." := 'BNK0022';
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Posting Date" := "Transaction Date";
+                                GenJournalLine."Posting Date" := Rec."Transaction Date";
                                 GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Amount := -(ChqRecLines.Amount);
@@ -177,12 +177,12 @@ Page 51516528 "Cheque Receipts Header"
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                GenJournalLine."Document No." := "No.";
+                                GenJournalLine."Document No." := Rec."No.";
                                 GenJournalLine."Line No." := LineNo;
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                 GenJournalLine."Account No." := ChqRecLines."Account No.";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
-                                GenJournalLine."Posting Date" := "Transaction Date";
+                                GenJournalLine."Posting Date" := Rec."Transaction Date";
                                 GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                 GenJournalLine.Amount := ChqRecLines.Amount;
@@ -216,12 +216,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                     GenJournalLine."Account No." := Charges."GL Account";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque processed Commision';
                                     GenJournalLine.Amount := (Charges."Sacco Amount") * -1;
@@ -241,12 +241,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                     GenJournalLine."Account No." := GenSetup."Excise Duty Account";//GenSetup."Excise Duty G/L Acc.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Excise Duty';
                                     GenJournalLine.Amount := -ROUND(Charges."Sacco Amount" * 0.1);
@@ -267,12 +267,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
                                     GenJournalLine."Account No." := Charges."Bank Account";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque Processed Charges' + ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Amount := (Charges."Charge Amount" - Charges."Sacco Amount") * -1;
@@ -294,12 +294,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque Processed Charges' + ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Amount := AllAmount;
@@ -340,7 +340,7 @@ Page 51516528 "Cheque Receipts Header"
 
                         //Mark cheque book register
                         ChqRecLines.Reset;
-                        ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", "No.");
+                        ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", Rec."No.");
                         ChqRecLines.SetRange(ChqRecLines.Status, ChqRecLines.Status::Pending);
                         if ChqRecLines.Find('-') then begin
                             repeat
@@ -359,9 +359,9 @@ Page 51516528 "Cheque Receipts Header"
 
 
 
-                        Posted := true;
-                        "Posted By" := UserId;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
+                        Rec.Modify;
 
                         //Update cheque register
 
@@ -597,10 +597,10 @@ Page 51516528 "Cheque Receipts Header"
                         //IF UPPERCASE(USERID)=UPPERCASE("Posted By") THEN
                         //ERROR('This must be done by another user');
 
-                        if Posted = false then
+                        if Rec.Posted = false then
                             Error('It must be posted first');
 
-                        if Unpaid = true then
+                        if Rec.Unpaid = true then
                             Error('The Transaction has already been unpaid');
 
 
@@ -610,7 +610,7 @@ Page 51516528 "Cheque Receipts Header"
                         GenJournalLine.DeleteAll;
 
                         ChqRecLines.Reset;
-                        ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", "No.");
+                        ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", Rec."No.");
                         ChqRecLines.SetRange(ChqRecLines.Status, ChqRecLines.Status::Pending);
                         if ChqRecLines.Find('-') then begin
                             repeat
@@ -625,12 +625,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque Issued' + ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Amount := ChqRecLines.Amount * -1;
@@ -651,12 +651,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Cheque unpay Commision';
                                     GenJournalLine.Amount := ChqRecLines."Un Pay Charge Amount";
@@ -677,12 +677,12 @@ Page 51516528 "Cheque Receipts Header"
                                     GenJournalLine.Init;
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'CHQTRANS';
-                                    GenJournalLine."Document No." := "No.";
+                                    GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                     GenJournalLine."Account No." := ChqRecLines."Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine."External Document No." := ChqRecLines."Cheque Serial No";
                                     GenJournalLine.Description := 'Excise Duty';
                                     GenJournalLine.Amount := ChqRecLines."Un Pay Charge Amount" * 0.1;
@@ -713,11 +713,11 @@ Page 51516528 "Cheque Receipts Header"
 
 
 
-                        Unpaid := true;
-                        "Unpaid By" := UserId;
-                        Modify;
+                        Rec.Unpaid := true;
+                        Rec."Unpaid By" := UserId;
+                        Rec.Modify;
 
-                        if Unpaid = true then
+                        if Rec.Unpaid = true then
                             Error('The Transaction has already been unpaid');
 
 
@@ -742,7 +742,7 @@ Page 51516528 "Cheque Receipts Header"
                 begin
 
                     ChqRecLines.Reset;
-                    ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", "No.");
+                    ChqRecLines.SetRange(ChqRecLines."Chq Receipt No", Rec."No.");
                     Xmlport.Run(51516034);
                 end;
             }
@@ -752,22 +752,22 @@ Page 51516528 "Cheque Receipts Header"
     var
         GenJournalLine: Record "Gen. Journal Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        AccountType: Record 51516436;
+        AccountType: Record "Account Types-Saving Products";
         AvailableBal: Decimal;
         LineNo: Integer;
         Accounts: Record Vendor;
         ReffNo: Code[20];
         Account: Record Vendor;
-        SMSMessage: Record 51516471;
+        SMSMessage: Record "SMS Messages";
         iEntryNo: Integer;
         Vend: Record Vendor;
-        ChqRecLines: Record 51516498;
-        AccountTypes: Record 51516436;
-        CheqReg: Record 51516500;
-        Charges: Record 51516439;
-        GenSetup: Record 51516398;
-        RefNoRec: Record 51516503;
+        ChqRecLines: Record "Cheque Issue Lines";
+        AccountTypes: Record "Account Types-Saving Products";
+        CheqReg: Record "Cheques Register";
+        Charges: Record Charges;
+        GenSetup: Record "Sacco General Set-Up";
+        RefNoRec: Record "Refference Number";
         AllAmount: Decimal;
-        InwardFile: Record 51516502;
+        InwardFile: Record "Inward file Buffer";
 }
 

@@ -13,90 +13,90 @@ Page 51516442 "Treasury Card"
             group(General)
             {
                 Caption = 'General';
-                field("No.";"No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
 
                     trigger OnAssistEdit()
                     begin
-                        if AssistEdit(xRec) then
-                          CurrPage.Update;
+                        if Rec.AssistEdit(xRec) then
+                            CurrPage.Update;
                     end;
                 }
-                field(Name;Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address;Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Address 2";"Address 2")
+                field("Address 2"; Rec."Address 2")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Post Code";"Post Code")
+                field("Post Code"; Rec."Post Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Post Code/City';
                 }
-                field(City;City)
+                field(City; Rec.City)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Country/Region Code";"Country/Region Code")
+                field("Country/Region Code"; Rec."Country/Region Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Phone No.";"Phone No.")
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Contact;Contact)
+                field(Contact; Rec.Contact)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Branch No.";"Bank Branch No.")
+                field("Bank Branch No."; Rec."Bank Branch No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No.";"Bank Account No.")
+                field("Bank Account No."; Rec."Bank Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Search Name";"Search Name")
+                field("Search Name"; Rec."Search Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control22;Balance)
+                field(Control22; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance (LCY)";"Balance (LCY)")
+                field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min. Balance";"Min. Balance")
+                field("Min. Balance"; Rec."Min. Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Our Contact Code";"Our Contact Code")
+                field("Our Contact Code"; Rec."Our Contact Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Blocked;Blocked)
+                field(Blocked; Rec.Blocked)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Date Modified";"Last Date Modified")
+                field("Last Date Modified"; Rec."Last Date Modified")
                 {
                     ApplicationArea = Basic;
                 }
-                field(CashierID;CashierID)
+                field(CashierID; Rec.CashierID)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Teller Withholding";"Maximum Teller Withholding")
+                field("Maximum Teller Withholding"; Rec."Maximum Teller Withholding")
                 {
                     ApplicationArea = Basic;
                 }
@@ -104,15 +104,15 @@ Page 51516442 "Treasury Card"
             group(Communication)
             {
                 Caption = 'Communication';
-                field("Fax No.";"Fax No.")
+                field("Fax No."; Rec."Fax No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-Mail";"E-Mail")
+                field("E-Mail"; Rec."E-Mail")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Home Page";"Home Page")
+                field("Home Page"; Rec."Home Page")
                 {
                     ApplicationArea = Basic;
                 }
@@ -120,27 +120,27 @@ Page 51516442 "Treasury Card"
             group(Posting)
             {
                 Caption = 'Posting';
-                field("Currency Code";"Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Check No.";"Last Check No.")
+                field("Last Check No."; Rec."Last Check No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transit No.";"Transit No.")
+                field("Transit No."; Rec."Transit No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Statement No.";"Last Statement No.")
+                field("Last Statement No."; Rec."Last Statement No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Balance Last Statement";"Balance Last Statement")
+                field("Balance Last Statement"; Rec."Balance Last Statement")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Acc. Posting Group";"Bank Acc. Posting Group")
+                field("Bank Acc. Posting Group"; Rec."Bank Acc. Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
@@ -148,11 +148,11 @@ Page 51516442 "Treasury Card"
             group(Transfer)
             {
                 Caption = 'Transfer';
-                field("SWIFT Code";"SWIFT Code")
+                field("SWIFT Code"; Rec."SWIFT Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Iban;Iban)
+                field(Iban; Rec.Iban)
                 {
                     ApplicationArea = Basic;
                 }
@@ -175,10 +175,10 @@ Page 51516442 "Treasury Card"
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = Page "Bank Account Statistics";
-                    RunPageLink = "No."=field("No."),
-                                  "Date Filter"=field("Date Filter"),
-                                  "Global Dimension 1 Filter"=field("Global Dimension 1 Filter"),
-                                  "Global Dimension 2 Filter"=field("Global Dimension 2 Filter");
+                    RunPageLink = "No." = field("No."),
+                                  "Date Filter" = field("Date Filter"),
+                                  "Global Dimension 1 Filter" = field("Global Dimension 1 Filter"),
+                                  "Global Dimension 2 Filter" = field("Global Dimension 2 Filter");
                     ShortCutKey = 'F7';
                 }
                 action("Co&mments")
@@ -187,8 +187,8 @@ Page 51516442 "Treasury Card"
                     Caption = 'Co&mments';
                     Image = ViewComments;
                     RunObject = Page "Comment Sheet";
-                    RunPageLink = "Table Name"=const("Bank Account"),
-                                  "No."=field("No.");
+                    RunPageLink = "Table Name" = const("Bank Account"),
+                                  "No." = field("No.");
                 }
                 action(Dimensions)
                 {
@@ -196,8 +196,8 @@ Page 51516442 "Treasury Card"
                     Caption = 'Dimensions';
                     Image = Dimensions;
                     RunObject = Page "Default Dimensions";
-                    RunPageLink = "Table ID"=const(270),
-                                  "No."=field("No.");
+                    RunPageLink = "Table ID" = const(270),
+                                  "No." = field("No.");
                     ShortCutKey = 'Shift+Ctrl+D';
                 }
                 action(Balance)
@@ -206,23 +206,23 @@ Page 51516442 "Treasury Card"
                     Caption = 'Balance';
                     Image = Balance;
                     RunObject = Page "Bank Account Balance";
-                    RunPageLink = "No."=field("No."),
-                                  "Global Dimension 1 Filter"=field("Global Dimension 1 Filter"),
-                                  "Global Dimension 2 Filter"=field("Global Dimension 2 Filter");
+                    RunPageLink = "No." = field("No."),
+                                  "Global Dimension 1 Filter" = field("Global Dimension 1 Filter"),
+                                  "Global Dimension 2 Filter" = field("Global Dimension 2 Filter");
                 }
                 action("St&atements")
                 {
                     ApplicationArea = Basic;
                     Caption = 'St&atements';
                     RunObject = Page "Bank Account Statement";
-                    RunPageLink = "Bank Account No."=field("No.");
+                    RunPageLink = "Bank Account No." = field("No.");
                 }
                 action("Ledger E&ntries")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Ledger E&ntries';
                     RunObject = Page "Bank Account Ledger Entries";
-                    RunPageLink = "Bank Account No."=field("No.");
+                    RunPageLink = "Bank Account No." = field("No.");
                     RunPageView = sorting("Bank Account No.");
                     ShortCutKey = 'Ctrl+F7';
                 }
@@ -232,7 +232,7 @@ Page 51516442 "Treasury Card"
                     Caption = 'Chec&k Ledger Entries';
                     Image = CheckLedger;
                     RunObject = Page "Check Ledger Entries";
-                    RunPageLink = "Bank Account No."=field("No.");
+                    RunPageLink = "Bank Account No." = field("No.");
                     RunPageView = sorting("Bank Account No.");
                 }
                 action("C&ontact")
@@ -242,7 +242,7 @@ Page 51516442 "Treasury Card"
 
                     trigger OnAction()
                     begin
-                        ShowContact;
+                        Rec.ShowContact;
                     end;
                 }
                 action("Treasury Activity Report")
@@ -253,9 +253,9 @@ Page 51516442 "Treasury Card"
                     trigger OnAction()
                     begin
                         TillNo.Reset;
-                        TillNo.SetRange(TillNo."No.","No.");
+                        TillNo.SetRange(TillNo."No.", Rec."No.");
                         if TillNo.Find('-') then
-                        Report.Run(1404,true,false,TillNo)
+                            Report.Run(1404, true, false, TillNo)
                     end;
                 }
                 action("Treasury Activity Report 2")
@@ -266,9 +266,9 @@ Page 51516442 "Treasury Card"
                     trigger OnAction()
                     begin
                         TillNo.Reset;
-                        TillNo.SetRange(TillNo."No.","No.");
+                        TillNo.SetRange(TillNo."No.", Rec."No.");
                         if TillNo.Find('-') then
-                        Report.Run(51516019,true,false,TillNo)
+                            Report.Run(51516019, true, false, TillNo)
                     end;
                 }
             }
@@ -277,12 +277,12 @@ Page 51516442 "Treasury Card"
 
     trigger OnAfterGetRecord()
     begin
-        CalcFields("Check Report Name");
+        Rec.CalcFields("Check Report Name");
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        "Account Type":="account type"::Treasury;
+        Rec."Account Type" := Rec."account type"::Treasury;
     end;
 
     var

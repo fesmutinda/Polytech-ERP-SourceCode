@@ -2,7 +2,7 @@
 Page 51516553 "Type of Trade"
 {
     PageType = List;
-    SourceTable = 51516510;
+    SourceTable = "Type of Trade";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516553 "Type of Trade"
         {
             repeater(Group)
             {
-                field("Type of Trade"; "Type of Trade")
+                field("Type of Trade"; Rec."Type of Trade")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Trade Description"; "Trade Description")
+                field("Trade Description"; Rec."Trade Description")
                 {
                     ApplicationArea = Basic;
                 }

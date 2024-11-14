@@ -4,7 +4,7 @@ Page 51516523 "Customer Care List"
     CardPageID = "Customer Care Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516364;
+    SourceTable = "Member Register";
 
     layout
     {
@@ -12,44 +12,44 @@ Page 51516523 "Customer Care List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Phone No."; "Phone No.")
+                field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mobile Phone No"; "Mobile Phone No")
+                field("Mobile Phone No"; Rec."Mobile Phone No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Personal No"; "Personal No")
+                field("Personal No"; Rec."Personal No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Payroll No.';
                 }
-                field("FOSA Account No."; "FOSA Account No.")
+                field("FOSA Account No."; Rec."FOSA Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }

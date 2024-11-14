@@ -3,7 +3,7 @@ Page 51516567 "Cheque Discounting card"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516513;
+    SourceTable = "Cheque Discounting";
 
     layout
     {
@@ -11,114 +11,114 @@ Page 51516567 "Cheque Discounting card"
         {
             group(General)
             {
-                field("Transaction No"; "Transaction No")
+                field("Transaction No"; Rec."Transaction No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                     Editable = MemberNoEditable;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Savings Product"; "Savings Product")
+                field("Savings Product"; Rec."Savings Product")
                 {
                     ApplicationArea = Basic;
                     Editable = SavingsProductEditable;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = AccountNoEditable;
                 }
-                field("Cheque to Discount"; "Cheque to Discount")
+                field("Cheque to Discount"; Rec."Cheque to Discount")
                 {
                     ApplicationArea = Basic;
                     Editable = ChequetoDiscountEditable;
                 }
-                field("Cheque Amount"; "Cheque Amount")
+                field("Cheque Amount"; Rec."Cheque Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Outstanding Discounted Cheque"; "Outstanding Discounted Cheque")
+                field("Outstanding Discounted Cheque"; Rec."Outstanding Discounted Cheque")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Maturity Date"; "Expected Maturity Date")
+                field("Expected Maturity Date"; Rec."Expected Maturity Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Percentage Discount"; "Percentage Discount")
+                field("Percentage Discount"; Rec."Percentage Discount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Discount Amount Allowable"; "Discount Amount Allowable")
+                field("Discount Amount Allowable"; Rec."Discount Amount Allowable")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount Discounted"; "Amount Discounted")
+                field("Amount Discounted"; Rec."Amount Discounted")
                 {
                     ApplicationArea = Basic;
                     Editable = AmounttoDiscountEditable;
                 }
-                field("Discounted Amount+Fee"; "Discounted Amount+Fee")
+                field("Discounted Amount+Fee"; Rec."Discounted Amount+Fee")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Discounted Amount-Commission';
                     Editable = false;
                     Visible = false;
                 }
-                field("Cheque Discounting Commission"; "Cheque Discounting Commission")
+                field("Cheque Discounting Commission"; Rec."Cheque Discounting Commission")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Excise Duty"; "Excise Duty")
+                field("Excise Duty"; Rec."Excise Duty")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Created"; "Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Posted"; "Date Posted")
+                field("Date Posted"; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -162,35 +162,35 @@ Page 51516567 "Cheque Discounting card"
 
                 trigger OnAction()
                 begin
-                    TestField(Posted, false);
-                    TestField(Status, Status::Approved);
+                    Rec.TestField(Posted, false);
+                    Rec.TestField(Status, Rec.Status::Approved);
                     if Confirm('Are you sure you want to discount this Cheque ?', false) = true then begin
-                        if Status <> Status::Approved then begin
+                        if Rec.Status <> Rec.Status::Approved then begin
                             Error('Status Must be Approved')
                         end else
-                            if Accounts.Get("Account No") then
-                                Accounts."Cheque Discounted" := Accounts."Cheque Discounted" + "Amount Discounted";
-                        Accounts."Comission On Cheque Discount" := "Discounted Amount+Fee" - "Amount Discounted";
+                            if Accounts.Get(Rec."Account No") then
+                                Accounts."Cheque Discounted" := Accounts."Cheque Discounted" + Rec."Amount Discounted";
+                        Accounts."Comission On Cheque Discount" := Rec."Discounted Amount+Fee" - Rec."Amount Discounted";
                         Accounts.Modify;
                     end;
                     GenSetup.Get;
 
                     ObjDiscountingLedger.Init;
-                    ObjDiscountingLedger.No := "Transaction No";
-                    ObjDiscountingLedger."External Transaction No" := "Transaction No";
-                    ObjDiscountingLedger."Cheque No" := "Cheque No";
-                    ObjDiscountingLedger.Amount := "Amount Discounted";
-                    ObjDiscountingLedger.Debit := "Amount Discounted";
+                    ObjDiscountingLedger.No := Rec."Transaction No";
+                    ObjDiscountingLedger."External Transaction No" := Rec."Transaction No";
+                    ObjDiscountingLedger."Cheque No" := Rec."Cheque No";
+                    ObjDiscountingLedger.Amount := Rec."Amount Discounted";
+                    ObjDiscountingLedger.Debit := Rec."Amount Discounted";
                     ObjDiscountingLedger."Transaction Type" := ObjDiscountingLedger."transaction type"::Discounting;
                     ObjDiscountingLedger."Posting Date" := Today;
-                    ObjDiscountingLedger."Fosa Account" := "Account No";
+                    ObjDiscountingLedger."Fosa Account" := Rec."Account No";
                     ObjDiscountingLedger."User ID" := UserId;
                     ObjDiscountingLedger.Insert;
 
 
                     BATCH_TEMPLATE := 'GENERAL';
                     BATCH_NAME := 'FTRANS';
-                    DOCUMENT_NO := "Transaction No";
+                    DOCUMENT_NO := Rec."Transaction No";
 
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
@@ -201,20 +201,20 @@ Page 51516567 "Cheque Discounting card"
                     //--------------1. Debit FOSA (With Transaction Charges)------------------------------------------------------------------
                     LineNo := LineNo + 1000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account No", Today, "Cheque Discounting Commission", 'FOSA', "Cheque No", 'Cheque Discounting Charges', '');
+                    GenJournalLine."account type"::Vendor, Rec."Account No", Today, Rec."Cheque Discounting Commission", 'FOSA', Rec."Cheque No", 'Cheque Discounting Charges', '');
                     //--------------2. Debit FOSA(With Excise Duty)--------------------------------------------------------------------------
                     LineNo := LineNo + 1000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account No", Today, "Excise Duty", 'FOSA', "Cheque No", 'Excise Duty', '');
+                    GenJournalLine."account type"::Vendor, Rec."Account No", Today, Rec."Excise Duty", 'FOSA', Rec."Cheque No", 'Excise Duty', '');
 
                     //--------------4. Credit Cheque Discounting Income (With Transaction Charges)------------------------------------------------------------------
                     LineNo := LineNo + 1000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::"G/L Account", GenSetup."Cheque Discounting Fee Account", Today, "Cheque Discounting Commission" * -1, 'FOSA', "Cheque No", 'Cheque Discounting Charges', '');
+                    GenJournalLine."account type"::"G/L Account", GenSetup."Cheque Discounting Fee Account", Today, Rec."Cheque Discounting Commission" * -1, 'FOSA', Rec."Cheque No", 'Cheque Discounting Charges', '');
                     //--------------5. Credit Excise(With Excise Duty)--------------------------------------------------------------------------
                     LineNo := LineNo + 1000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::"G/L Account", GenSetup."Excise Duty Account", Today, "Excise Duty" * -1, 'FOSA', "Cheque No", 'Excise Duty', '');
+                    GenJournalLine."account type"::"G/L Account", GenSetup."Excise Duty Account", Today, Rec."Excise Duty" * -1, 'FOSA', Rec."Cheque No", 'Excise Duty', '');
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                     GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -224,14 +224,14 @@ Page 51516567 "Cheque Discounting card"
                     end;
                     //---------------------End---------------------------------------------------------
                     Message('Cheque has been discounted Successfully');
-                    Posted := true;
-                    "Posted By" := UserId;
-                    "Date Posted" := Today;
+                    Rec.Posted := true;
+                    Rec."Posted By" := UserId;
+                    Rec."Date Posted" := Today;
 
                     ObjTransactions.Reset;
-                    ObjTransactions.SetRange(ObjTransactions.No, "Cheque to Discount");
+                    ObjTransactions.SetRange(ObjTransactions.No, Rec."Cheque to Discount");
                     if ObjTransactions.FindSet then begin
-                        ObjTransactions."Cheque Discounted Amount" := "Amount Discounted";
+                        ObjTransactions."Cheque Discounted Amount" := Rec."Amount Discounted";
                         ObjTransactions.Modify;
                     end;
                 end;
@@ -295,7 +295,7 @@ Page 51516567 "Cheque Discounting card"
                     begin
 
                         DocumentType := Documenttype::ChequeDiscounting;
-                        ApprovalEntries.Setfilters(Database::"Cheque Discounting", DocumentType, "Transaction No");
+                        ApprovalEntries.Setfilters(Database::"Cheque Discounting", DocumentType, Rec."Transaction No");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -308,15 +308,15 @@ Page 51516567 "Cheque Discounting card"
         FnAddRecordRestriction();
 
         EnablePosting := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
-        if Rec.Status = Status::Approved then begin
+        if Rec.Status = Rec.Status::Approved then begin
             OpenApprovalEntriesExist := false;
             CanCancelApprovalForRecord := false;
             EnabledApprovalWorkflowsExist := false;
         end;
-        if (Rec.Status = Status::Approved) then
+        if (Rec.Status = Rec.Status::Approved) then
             EnablePosting := true;
     end;
 
@@ -344,33 +344,33 @@ Page 51516567 "Cheque Discounting card"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         EnablePosting: Boolean;
-        ObjTransactions: Record 51516441;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        ObjTransactions: Record Transactions;
+        SFactory: Codeunit 51516007;
         BATCH_TEMPLATE: Code[100];
         BATCH_NAME: Code[100];
         DOCUMENT_NO: Code[100];
         LineNo: Integer;
         GenJournalLine: Record "Gen. Journal Line";
-        GenSetup: Record 51516398;
-        ObjDiscountingLedger: Record 51516427;
+        GenSetup: Record "Sacco General Set-Up";
+        ObjDiscountingLedger: Record "Discounting Ledger Entry";
 
     local procedure FnAddRecordRestriction()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             MemberNoEditable := true;
             SavingsProductEditable := true;
             AccountNoEditable := true;
             ChequetoDiscountEditable := true;
             AmounttoDiscountEditable := true
         end else
-            if Status = Status::"Pending Approval" then begin
+            if Rec.Status = Rec.Status::"Pending Approval" then begin
                 MemberNoEditable := false;
                 SavingsProductEditable := false;
                 AccountNoEditable := false;
                 ChequetoDiscountEditable := false;
                 AmounttoDiscountEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status = Rec.Status::Approved then begin
                     MemberNoEditable := false;
                     SavingsProductEditable := false;
                     AccountNoEditable := false;

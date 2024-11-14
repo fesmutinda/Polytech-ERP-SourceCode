@@ -3,7 +3,7 @@ Page 51516454 "Bankers Cheque Register"
 {
     Editable = false;
     PageType = Card;
-    SourceTable = 51516456;
+    SourceTable = "Banker Cheque Register";
 
     layout
     {
@@ -11,11 +11,11 @@ Page 51516454 "Bankers Cheque Register"
         {
             repeater(Control5)
             {
-                field("Banker Cheque No."; "Banker Cheque No.")
+                field("Banker Cheque No."; Rec."Banker Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Issued; Issued)
+                field(Issued; Rec.Issued)
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
@@ -71,6 +71,6 @@ Page 51516454 "Bankers Cheque Register"
         BankerCh: Code[20];
         NoOfLeaves: Integer;
         i: Integer;
-        BankerR: Record 51516456;
+        BankerR: Record "Banker Cheque Register";
 }
 

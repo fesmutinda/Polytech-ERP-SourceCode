@@ -13,43 +13,43 @@ Page 51516568 "Cheque Receipt List-Family"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Refference Document"; "Refference Document")
+                field("Refference Document"; Rec."Refference Document")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Time"; "Transaction Time")
+                field("Transaction Time"; Rec."Transaction Time")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Unpaid By"; "Unpaid By")
+                field("Unpaid By"; Rec."Unpaid By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Unpaid; Unpaid)
+                field(Unpaid; Rec.Unpaid)
                 {
                     ApplicationArea = Basic;
                 }

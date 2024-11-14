@@ -4,7 +4,7 @@ Page 51516530 "Cheque Book Application List"
     CardPageID = "Cheque Application";
     Editable = false;
     PageType = List;
-    SourceTable = 51516497;
+    SourceTable = "Cheque Book Application";
 
     layout
     {
@@ -12,39 +12,39 @@ Page 51516530 "Cheque Book Application List"
         {
             repeater(Group)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Account No."; "Cheque Account No.")
+                field("Cheque Account No."; Rec."Cheque Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff No."; "Staff No.")
+                field("Staff No."; Rec."Staff No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requested By"; "Requested By")
+                field("Requested By"; Rec."Requested By")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516521 "Loan Trunch Disburesment"
 {
     PageType = Card;
-    SourceTable = 51516495;
+    SourceTable = "Loan trunch Disburesment";
 
     layout
     {
@@ -10,69 +10,69 @@ Page 51516521 "Loan Trunch Disburesment"
         {
             group(General)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Loan No"; "Loan No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Issue Date"; "Issue Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Approved Amount"; "Approved Amount")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Disbursed Amount"; "Disbursed Amount")
+                field("Loan No"; Rec."Loan No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Issue Date"; Rec."Issue Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Balance Outstanding"; "Balance Outstanding")
+                field("Disbursed Amount"; Rec."Disbursed Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Requested Amount"; "Requested Amount")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Amount to Disburse"; "Amount to Disburse")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Mode of Disbursement"; "Mode of Disbursement")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Status; Status)
+                field("Balance Outstanding"; Rec."Balance Outstanding")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("FOSA Account"; "FOSA Account")
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No/Reference No"; "Cheque No/Reference No")
+                field("Amount to Disburse"; Rec."Amount to Disburse")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("Mode of Disbursement"; Rec."Mode of Disbursement")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("FOSA Account"; Rec."FOSA Account")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Cheque No/Reference No"; Rec."Cheque No/Reference No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -97,12 +97,12 @@ Page 51516521 "Loan Trunch Disburesment"
 
                     trigger OnAction()
                     begin
-                        TestField(Status, Status::Approved);
-                        TestField(Posted, false);
+                        Rec.TestField(Status, Rec.Status::Approved);
+                        Rec.TestField(Posted, false);
                         if Confirm('Are You Sure you Want to Post this trunch?', false) = true then begin
                             BATCH_TEMPLATE := 'PAYMENTS';
                             BATCH_NAME := 'LOANS';
-                            DOCUMENT_NO := "Document No";
+                            DOCUMENT_NO := Rec."Document No";
                             GenJournalLine.Reset;
                             GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                             GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -111,15 +111,15 @@ Page 51516521 "Loan Trunch Disburesment"
                             //------------------------------------1. DEBIT MEMBER LOAN A/C---------------------------------------------------------------------------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::Loan,
-                            GenJournalLine."account type"::Member, "Member No", "Issue Date", "Amount to Disburse", '', "Loan No",
-                            'Trunch Disbursment- ' + "Loan No", "Loan No");
+                            GenJournalLine."account type"::Member, Rec."Member No", Rec."Issue Date", Rec."Amount to Disburse", '', Rec."Loan No",
+                            'Trunch Disbursment- ' + Rec."Loan No", Rec."Loan No");
                             //--------------------------------(Debit Member Loan Account)------------------------------------------------------------------------------------------------
 
                             //------------------------------------2. CREDIT MEMBER FOSA A/C---------------------------------------------------------------------------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                            GenJournalLine."account type"::Vendor, "FOSA Account", "Issue Date", "Amount to Disburse" * -1, 'BOSA', "Loan No",
-                            'Trunch Disbursment- ' + "Loan No", "Loan No");
+                            GenJournalLine."account type"::Vendor, Rec."FOSA Account", Rec."Issue Date", Rec."Amount to Disburse" * -1, 'BOSA', Rec."Loan No",
+                            'Trunch Disbursment- ' + Rec."Loan No", Rec."Loan No");
                             //----------------------------------(Credit Member Fosa Account)------------------------------------------------
 
 
@@ -130,9 +130,9 @@ Page 51516521 "Loan Trunch Disburesment"
                             if GenJournalLine.Find('-') then begin
                                 Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
                             end;
-                            Posted := true;
-                            "Posting Date" := Today;
-                            Modify;
+                            Rec.Posted := true;
+                            Rec."Posting Date" := Today;
+                            Rec.Modify;
                             //Post New
 
                         end;
@@ -207,7 +207,7 @@ Page 51516521 "Loan Trunch Disburesment"
                     trigger OnAction()
                     begin
                         ObjTrunch.Reset;
-                        ObjTrunch.SetRange("Document No", "Document No");
+                        ObjTrunch.SetRange("Document No", Rec."Document No");
                         if ObjTrunch.Find('-') then begin
                             Report.Run(50027, true, false, ObjTrunch);
                         end
@@ -219,10 +219,10 @@ Page 51516521 "Loan Trunch Disburesment"
 
     trigger OnAfterGetCurrRecord()
     begin
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
-        if Rec.Status = Status::Approved then begin
+        if Rec.Status = Rec.Status::Approved then begin
             OpenApprovalEntriesExist := false;
             CanCancelApprovalForRecord := false;
             EnabledApprovalWorkflowsExist := false;
@@ -232,7 +232,7 @@ Page 51516521 "Loan Trunch Disburesment"
     var
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory.";
         BATCH_TEMPLATE: Code[50];
         BATCH_NAME: Code[50];
         DOCUMENT_NO: Code[50];
@@ -241,6 +241,6 @@ Page 51516521 "Loan Trunch Disburesment"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         OpenApprovalEntriesExist: Boolean;
-        ObjTrunch: Record 51516495;
+        ObjTrunch: Record "Loan trunch Disburesment";
 }
 

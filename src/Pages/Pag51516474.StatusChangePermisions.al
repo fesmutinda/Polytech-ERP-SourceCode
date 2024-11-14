@@ -2,7 +2,7 @@
 Page 51516474 "Status Change Permisions"
 {
     PageType = Card;
-    SourceTable = 51516452;
+    SourceTable = "Status Change Permision";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516474 "Status Change Permisions"
         {
             repeater(Control3)
             {
-                field("Function"; "Function")
+                field("Function"; Rec."Function")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }

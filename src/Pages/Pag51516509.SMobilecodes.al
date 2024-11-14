@@ -2,7 +2,7 @@
 Page 51516509 "S-Mobile codes"
 {
     PageType = List;
-    SourceTable = 51516520;
+    SourceTable = "Error Codes";
 
     layout
     {
@@ -10,12 +10,12 @@ Page 51516509 "S-Mobile codes"
         {
             repeater(Group)
             {
-                field(ErrorCode; ErrorCode)
+                field(ErrorCode; Rec.ErrorCode)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Error Description"; "Error Description")
+                field("Error Description"; Rec."Error Description")
                 {
                     ApplicationArea = Basic;
                 }

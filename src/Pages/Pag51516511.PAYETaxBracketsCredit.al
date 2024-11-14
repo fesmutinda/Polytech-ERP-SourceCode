@@ -2,7 +2,7 @@
 Page 51516511 "PAYE Tax Brackets Credit"
 {
     PageType = List;
-    SourceTable = 51516478;
+    SourceTable = "PAYE Brackets Credit";
 
     layout
     {
@@ -10,23 +10,23 @@ Page 51516511 "PAYE Tax Brackets Credit"
         {
             repeater(Group)
             {
-                field("Tax Band"; "Tax Band")
+                field("Tax Band"; Rec."Tax Band")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lower Limit"; "Lower Limit")
+                field("Lower Limit"; Rec."Lower Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Upper Limit"; "Upper Limit")
+                field("Upper Limit"; Rec."Upper Limit")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Percentage; Percentage)
+                field(Percentage; Rec.Percentage)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Taxable Amount"; "Taxable Amount")
+                field("Taxable Amount"; Rec."Taxable Amount")
                 {
                     ApplicationArea = Basic;
                 }

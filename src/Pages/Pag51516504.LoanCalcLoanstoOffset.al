@@ -2,7 +2,7 @@
 Page 51516504 "Loan Calc. Loans to Offset"
 {
     PageType = List;
-    SourceTable = 51516476;
+    SourceTable = "Loan Calc. Loans to Offset";
 
     layout
     {
@@ -10,71 +10,71 @@ Page 51516504 "Loan Calc. Loans to Offset"
         {
             repeater(Group)
             {
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Top Up"; "Loan Top Up")
+                field("Loan Top Up"; Rec."Loan Top Up")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Type"; "Loan Type")
+                field("Loan Type"; Rec."Loan Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principle Top Up"; "Principle Top Up")
+                field("Principle Top Up"; Rec."Principle Top Up")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Top Up"; "Interest Top Up")
+                field("Interest Top Up"; Rec."Interest Top Up")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Top Up"; "Total Top Up")
+                field("Total Top Up"; Rec."Total Top Up")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Repayment"; "Monthly Repayment")
+                field("Monthly Repayment"; Rec."Monthly Repayment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Paid"; "Interest Paid")
+                field("Interest Paid"; Rec."Interest Paid")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID. NO"; "ID. NO")
+                field("ID. NO"; Rec."ID. NO")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Commision; Commision)
+                field(Commision; Rec.Commision)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Partial Bridged"; "Partial Bridged")
+                field("Partial Bridged"; Rec."Partial Bridged")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Remaining Installments"; "Remaining Installments")
+                field("Remaining Installments"; Rec."Remaining Installments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Finale Instalment"; "Finale Instalment")
+                field("Finale Instalment"; Rec."Finale Instalment")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Penalty Charged"; "Penalty Charged")
+                field("Penalty Charged"; Rec."Penalty Charged")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff No"; "Staff No")
+                field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic;
                 }

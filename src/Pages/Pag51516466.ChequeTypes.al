@@ -2,7 +2,7 @@
 Page 51516466 "Cheque Types"
 {
     PageType = Card;
-    SourceTable = 51516446;
+    SourceTable = "Cheque Types";
 
     layout
     {
@@ -10,55 +10,55 @@ Page 51516466 "Cheque Types"
         {
             repeater(Control14)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Clearing Days"; "Clearing Days")
+                field("Clearing Days"; Rec."Clearing Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Clearing  Days"; "Clearing  Days")
+                field("Clearing  Days"; Rec."Clearing  Days")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Use %"; "Use %")
+                field("Use %"; Rec."Use %")
                 {
                     ApplicationArea = Basic;
                 }
-                field("% Of Amount"; "% Of Amount")
+                field("% Of Amount"; Rec."% Of Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Clearing Charges"; "Clearing Charges")
+                field("Clearing Charges"; Rec."Clearing Charges")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bounced Charges"; "Bounced Charges")
+                field("Bounced Charges"; Rec."Bounced Charges")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Clearing Bank Account"; "Clearing Bank Account")
+                field("Clearing Bank Account"; Rec."Clearing Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bounced Charges GL Account"; "Bounced Charges GL Account")
+                field("Bounced Charges GL Account"; Rec."Bounced Charges GL Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Clearing Charges GL Account"; "Clearing Charges GL Account")
+                field("Clearing Charges GL Account"; Rec."Clearing Charges GL Account")
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 51516486 "Membership Processor"
 {
     PageType = CardPart;
-    SourceTable = 51516468;
+    SourceTable = "Cue Sacco Roles";
 
     layout
     {
@@ -11,15 +11,15 @@ Page 51516486 "Membership Processor"
             cuegroup("Member Applications")
             {
                 Caption = 'Member Applications';
-                field("Open Member Applications"; "Open Member Applications")
+                field("Open Member Applications"; Rec."Open Member Applications")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pending Member Applications"; "Pending Member Applications")
+                field("Pending Member Applications"; Rec."Pending Member Applications")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejected Member Applications"; "Rejected Member Applications")
+                field("Rejected Member Applications"; Rec."Rejected Member Applications")
                 {
                     ApplicationArea = Basic;
                 }

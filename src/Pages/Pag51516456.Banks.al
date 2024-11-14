@@ -3,7 +3,7 @@ Page 51516456 Banks
 {
     Editable = true;
     PageType = Card;
-    SourceTable = 51516453;
+    SourceTable = Banks;
 
     layout
     {
@@ -11,19 +11,19 @@ Page 51516456 Banks
         {
             repeater(Control5)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Branch; Branch)
+                field(Branch; Rec.Branch)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Code"; "Bank Code")
+                field("Bank Code"; Rec."Bank Code")
                 {
                     ApplicationArea = Basic;
                 }

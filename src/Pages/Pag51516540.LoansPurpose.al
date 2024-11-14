@@ -2,7 +2,7 @@
 Page 51516540 "Loans Purpose"
 {
     PageType = List;
-    SourceTable = 51516378;
+    SourceTable = "Loans Purpose";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516540 "Loans Purpose"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }

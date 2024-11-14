@@ -3,7 +3,7 @@ Page 51516476 "Credit Processor Role"
 {
     Caption = 'Activities';
     PageType = CardPart;
-    SourceTable = 51516468;
+    SourceTable = "Cue Sacco Roles";
 
     layout
     {
@@ -12,28 +12,28 @@ Page 51516476 "Credit Processor Role"
             cuegroup("Loan Activities")
             {
                 Caption = 'Loan Activities';
-                field("Application Loans"; "Application Loans")
+                field("Application Loans"; Rec."Application Loans")
                 {
                     ApplicationArea = Basic;
                     DrillDownPageID = "Employee Common Activities";
                 }
-                field("Appraisal Loans"; "Appraisal Loans")
+                field("Appraisal Loans"; Rec."Appraisal Loans")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Loans"; "Approved Loans")
+                field("Approved Loans"; Rec."Approved Loans")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejected Loans"; "Rejected Loans")
+                field("Rejected Loans"; Rec."Rejected Loans")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pending Loan Batches"; "Pending Loan Batches")
+                field("Pending Loan Batches"; Rec."Pending Loan Batches")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved Loan Batches"; "Approved Loan Batches")
+                field("Approved Loan Batches"; Rec."Approved Loan Batches")
                 {
                     ApplicationArea = Basic;
                 }

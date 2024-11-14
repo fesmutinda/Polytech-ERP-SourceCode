@@ -3,7 +3,7 @@ Page 51516508 "BOSA Transfer List"
 {
     CardPageID = "BOSA Transfer";
     PageType = List;
-    SourceTable = 51516406;
+    SourceTable = "BOSA Transfers";
     SourceTableView = where(Posted = const(No));
 
     layout
@@ -12,39 +12,39 @@ Page 51516508 "BOSA Transfer List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Schedule Total"; "Schedule Total")
+                field("Schedule Total"; Rec."Schedule Total")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Approved; Approved)
+                field(Approved; Rec.Approved)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By"; "Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; "Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }

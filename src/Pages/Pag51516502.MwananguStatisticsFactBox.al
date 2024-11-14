@@ -11,12 +11,12 @@ Page 51516502 "Mwanangu Statistics FactBox"
     {
         area(content)
         {
-            field("No."; "No.")
+            field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;
                 Caption = 'Account No.';
             }
-            field(Name; Name)
+            field(Name; Rec.Name)
             {
                 ApplicationArea = Basic;
                 Caption = 'Account Name';
@@ -24,13 +24,13 @@ Page 51516502 "Mwanangu Statistics FactBox"
             group("Account Statistics FactBox")
             {
                 Caption = 'Account Statistics FactBox';
-                field("Balance (LCY)"; "Balance (LCY)")
+                field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Book Balance';
                     StyleExpr = FieldStyle;
                 }
-                field("Uncleared Cheques"; "Uncleared Cheques")
+                field("Uncleared Cheques"; Rec."Uncleared Cheques")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -49,7 +49,7 @@ Page 51516502 "Mwanangu Statistics FactBox"
         GetLatestPayment;
         CalculateAging;
 
-        if ("Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
+        if (Rec."Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
             if UserSetup.Get(UserId) then begin
                 if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
             end;
@@ -58,7 +58,7 @@ Page 51516502 "Mwanangu Statistics FactBox"
         SetFieldStyle;
 
         MinBalance := 0;
-        if AccountType.Get("Account Type") then
+        if AccountType.Get(Rec."Account Type") then
             MinBalance := AccountType."Minimum Balance";
     end;
 
@@ -91,7 +91,7 @@ Page 51516502 "Mwanangu Statistics FactBox"
         MinBalance: Decimal;
         UserSetup: Record "User Setup";
         FieldStyle: Text;
-        AccountType: Record 51516436;
+        AccountType: Record "Account Types-Saving Products";
         FieldStyleL: Text;
 
 
@@ -168,9 +168,9 @@ Page 51516502 "Mwanangu Statistics FactBox"
     procedure ChangeCustomer()
     begin
         // Change the Customer Filters
-        LatestCustLedgerEntry.SetRange("Customer No.", "No.");
+        LatestCustLedgerEntry.SetRange("Customer No.", Rec."No.");
         for I := 1 to ArrayLen(CustLedgerEntry) do
-            CustLedgerEntry[I].SetRange("Customer No.", "No.");
+            CustLedgerEntry[I].SetRange("Customer No.", Rec."No.");
     end;
 
 
@@ -185,12 +185,12 @@ Page 51516502 "Mwanangu Statistics FactBox"
     local procedure SetFieldStyle()
     begin
         FieldStyle := '';
-        CalcFields("Balance (LCY)");
-        if "Balance (LCY)" < 0 then
+        Rec.CalcFields("Balance (LCY)");
+        if Rec."Balance (LCY)" < 0 then
             FieldStyle := 'Attention';
 
         FieldStyleL := '';
-        if "Account Special Instructions" <> '' then
+        if Rec."Account Special Instructions" <> '' then
             FieldStyleL := 'Attention';
     end;
 }

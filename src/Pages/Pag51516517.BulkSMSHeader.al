@@ -1,57 +1,57 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516517 "Bulk SMS Header"
 {
-    SourceTable = 51516491;
+    SourceTable = "Bulk SMS Header";
 
     layout
     {
         area(content)
         {
-            field(No; No)
+            field(No; Rec.No)
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Date Entered"; "Date Entered")
+            field("Date Entered"; Rec."Date Entered")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Time Entered"; "Time Entered")
+            field("Time Entered"; Rec."Time Entered")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Entered By"; "Entered By")
+            field("Entered By"; Rec."Entered By")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("SMS Type"; "SMS Type")
+            field("SMS Type"; Rec."SMS Type")
             {
                 ApplicationArea = Basic;
             }
-            field("SMS Status"; "SMS Status")
-            {
-                ApplicationArea = Basic;
-                Editable = false;
-            }
-            field("Status Date"; "Status Date")
+            field("SMS Status"; Rec."SMS Status")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Status Time"; "Status Time")
+            field("Status Date"; Rec."Status Date")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Status By"; "Status By")
+            field("Status Time"; Rec."Status Time")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field(Message; Message)
+            field("Status By"; Rec."Status By")
+            {
+                ApplicationArea = Basic;
+                Editable = false;
+            }
+            field(Message; Rec.Message)
             {
                 ApplicationArea = Basic;
                 Editable = Mssage;
@@ -82,9 +82,9 @@ Page 51516517 "Bulk SMS Header"
                     //*******************************************************************************************************
 
                     if Confirm('Are you sure you would like to send the SMS(ES)?', false) = true then begin
-                        TestField(Message);
+                        Rec.TestField(Message);
                         BulkHeader.Reset;
-                        BulkHeader.SetRange(BulkHeader.No, No);
+                        BulkHeader.SetRange(BulkHeader.No, Rec.No);
                         if BulkHeader.Find('-') then begin
 
                             //ALL
@@ -106,7 +106,7 @@ Page 51516517 "Bulk SMS Header"
 
                                         SMSMessage.Init;
                                         SMSMessage."Entry No" := iEntryNo;
-                                        SMSMessage."Batch No" := No;
+                                        SMSMessage."Batch No" := Rec.No;
                                         SMSMessage."Document No" := '';
                                         SMSMessage."Account No" := Vend."No.";
                                         SMSMessage."Date Entered" := Today;
@@ -114,7 +114,7 @@ Page 51516517 "Bulk SMS Header"
                                         SMSMessage.Source := 'BULK';
                                         SMSMessage."Entered By" := UserId;
                                         SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                                        SMSMessage."SMS Message" := Message;
+                                        SMSMessage."SMS Message" := Rec.Message;
                                         SMSMessage."Telephone No" := Vend."Phone No.";
                                         if Vend."Phone No." <> '' then
                                             SMSMessage.Insert;
@@ -126,7 +126,7 @@ Page 51516517 "Bulk SMS Header"
                             //DIMENSION
                             if BulkHeader."SMS Type" = BulkHeader."sms type"::Dimension then begin
                                 BulkLines.Reset;
-                                BulkLines.SetRange(BulkLines.No, No);
+                                BulkLines.SetRange(BulkLines.No, Rec.No);
                                 if BulkLines.Find('-') then begin
                                     repeat
 
@@ -148,7 +148,7 @@ Page 51516517 "Bulk SMS Header"
 
                                                 SMSMessage.Init;
                                                 SMSMessage."Entry No" := iEntryNo;
-                                                SMSMessage."Batch No" := No;
+                                                SMSMessage."Batch No" := Rec.No;
                                                 SMSMessage."Document No" := '';
                                                 SMSMessage."Account No" := Vend."No.";
                                                 SMSMessage."Date Entered" := Today;
@@ -156,7 +156,7 @@ Page 51516517 "Bulk SMS Header"
                                                 SMSMessage.Source := 'BULK';
                                                 SMSMessage."Entered By" := UserId;
                                                 SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                                                SMSMessage."SMS Message" := Message;
+                                                SMSMessage."SMS Message" := Rec.Message;
                                                 SMSMessage."Telephone No" := Vend."Phone No.";
                                                 if Vend."Phone No." <> '' then
                                                     SMSMessage.Insert;
@@ -171,7 +171,7 @@ Page 51516517 "Bulk SMS Header"
                             //Telephone
                             if BulkHeader."SMS Type" = BulkHeader."sms type"::Telephone then begin
                                 BulkLines.Reset;
-                                BulkLines.SetRange(BulkLines.No, No);
+                                BulkLines.SetRange(BulkLines.No, Rec.No);
                                 if BulkLines.Find('-') then begin
                                     repeat
 
@@ -187,7 +187,7 @@ Page 51516517 "Bulk SMS Header"
 
                                         SMSMessage.Init;
                                         SMSMessage."Entry No" := iEntryNo;
-                                        SMSMessage."Batch No" := No;
+                                        SMSMessage."Batch No" := Rec.No;
                                         SMSMessage."Document No" := '';
                                         SMSMessage."Account No" := BulkLines.Code;
                                         SMSMessage."Date Entered" := Today;
@@ -195,7 +195,7 @@ Page 51516517 "Bulk SMS Header"
                                         SMSMessage.Source := 'BULK';
                                         SMSMessage."Entered By" := UserId;
                                         SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                                        SMSMessage."SMS Message" := Message;
+                                        SMSMessage."SMS Message" := Rec.Message;
                                         SMSMessage."Telephone No" := BulkLines.Code;
                                         if BulkLines.Code <> '' then
                                             SMSMessage.Insert;
@@ -206,11 +206,11 @@ Page 51516517 "Bulk SMS Header"
                             end;
 
 
-                            "SMS Status" := "sms status"::Sent;
-                            "Status Date" := Today;
-                            "Status Time" := Time;
-                            "Status By" := UserId;
-                            Modify;
+                            Rec."SMS Status" := Rec."sms status"::Sent;
+                            Rec."Status Date" := Today;
+                            Rec."Status Time" := Time;
+                            Rec."Status By" := UserId;
+                            Rec.Modify;
 
                         end;
                     end;
@@ -401,12 +401,12 @@ Page 51516517 "Bulk SMS Header"
                 trigger OnAction()
                 begin
 
-                    if "SMS Type" <> "sms type"::Telephone then begin
+                    if Rec."SMS Type" <> Rec."sms type"::Telephone then begin
                         Error('SMS Type must be Telephone.');
                     end;
 
                     BulkHeader.Reset;
-                    BulkHeader.SetRange(BulkHeader.No, No);
+                    BulkHeader.SetRange(BulkHeader.No, Rec.No);
                     if BulkHeader.Find('-') then begin
                         BulkLines.Reset;
                         BulkLines.SetRange(BulkLines.No, BulkHeader.No);
@@ -424,16 +424,16 @@ Page 51516517 "Bulk SMS Header"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "SMS Type" := "sms type"::Telephone;
+        Rec."SMS Type" := Rec."sms type"::Telephone;
     end;
 
     var
-        BulkHeader: Record 51516491;
-        BulkLines: Record 51516492;
+        BulkHeader: Record "Bulk SMS Header";
+        BulkLines: Record "Bulk SMS Lines";
         Vend: Record Vendor;
-        SMSMessage: Record 51516471;
+        SMSMessage: Record "SMS Messages";
         iEntryNo: Integer;
-        StatusPermissions: Record 51516452;
+        StatusPermissions: Record "Status Change Permision";
         ApprovalEntries: Page "Approval Entries";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",StandingOrder,HRJob,HRLeave,"HRTransport Request",HRTraining,"HREmp Requsition",MicroTrans,"Account Reactivation",Overdraft,ImprestSurrender,"MSacco Applications","MSacco PinChange","MSacco PhoneChange","MSacco TransChange",BulkSMS;
         text001: label 'Status must be Open';
@@ -445,26 +445,26 @@ Page 51516517 "Bulk SMS Header"
 
     procedure UpdateControl()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             Mssage := true;
             UseHeader := true;
             BulkSMSLines := true;
         end;
 
-        if Status = Status::Pending then begin
+        if Rec.Status = Rec.Status::Pending then begin
             Mssage := false;
             UseHeader := false;
             BulkSMSLines := false;
         end;
 
-        if Status = Status::Rejected then begin
+        if Rec.Status = Rec.Status::Rejected then begin
             Mssage := false;
             UseHeader := false;
             BulkSMSLines := false;
         end;
 
 
-        if Status = Status::Approved then begin
+        if Rec.Status = rec.Status::Approved then begin
             Mssage := false;
             UseHeader := false;
             BulkSMSLines := false;

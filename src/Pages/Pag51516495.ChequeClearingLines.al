@@ -3,7 +3,7 @@ Page 51516495 "Cheque Clearing Lines"
 {
     Editable = true;
     PageType = ListPart;
-    SourceTable = 51516474;
+    SourceTable = "Cheque Clearing Lines";
 
     layout
     {
@@ -12,43 +12,43 @@ Page 51516495 "Cheque Clearing Lines"
             repeater(Control1102760000)
             {
                 Editable = true;
-                field("Transaction No"; "Transaction No")
+                field("Transaction No"; Rec."Transaction No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Maturity Date"; "Expected Maturity Date")
+                field("Expected Maturity Date"; Rec."Expected Maturity Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Clearing Status"; "Cheque Clearing Status")
+                field("Cheque Clearing Status"; Rec."Cheque Clearing Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ledger Entry No"; "Ledger Entry No")
+                field("Ledger Entry No"; Rec."Ledger Entry No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ledger Transaction No."; "Ledger Transaction No.")
+                field("Ledger Transaction No."; Rec."Ledger Transaction No.")
                 {
                     ApplicationArea = Basic;
                 }

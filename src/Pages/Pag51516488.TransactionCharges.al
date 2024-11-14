@@ -2,7 +2,7 @@
 Page 51516488 "Transaction Charges"
 {
     PageType = ListPart;
-    SourceTable = 51516442;
+    SourceTable = "Transaction Charges";
 
     layout
     {
@@ -10,51 +10,51 @@ Page 51516488 "Transaction Charges"
         {
             repeater(Group)
             {
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Code"; "Charge Code")
+                field("Charge Code"; Rec."Charge Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Amount"; "Charge Amount")
+                field("Charge Amount"; Rec."Charge Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Percentage of Amount"; "Percentage of Amount")
+                field("Percentage of Amount"; Rec."Percentage of Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Use Percentage"; "Use Percentage")
+                field("Use Percentage"; Rec."Use Percentage")
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Minimum Amount"; "Minimum Amount")
+                field("Minimum Amount"; Rec."Minimum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximum Amount"; "Maximum Amount")
+                field("Maximum Amount"; Rec."Maximum Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Due Amount"; "Due Amount")
+                field("Due Amount"; Rec."Due Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Due to Account"; "Due to Account")
+                field("Due to Account"; Rec."Due to Account")
                 {
                     ApplicationArea = Basic;
                 }

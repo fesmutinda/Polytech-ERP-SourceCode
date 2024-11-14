@@ -2,7 +2,7 @@
 Page 51516471 "Fixed Deposit Types Card"
 {
     PageType = Card;
-    SourceTable = 51516447;
+    SourceTable = "Fixed Deposit Type";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516471 "Fixed Deposit Types Card"
         {
             group(General)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Duration; Duration)
+                field(Duration; Rec.Duration)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. of Months"; "No. of Months")
+                field("No. of Months"; Rec."No. of Months")
                 {
                     ApplicationArea = Basic;
                 }

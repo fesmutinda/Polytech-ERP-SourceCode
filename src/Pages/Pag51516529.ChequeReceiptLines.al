@@ -2,7 +2,7 @@
 Page 51516529 "Cheque Receipt Lines"
 {
     PageType = List;
-    SourceTable = 51516498;
+    SourceTable = "Cheque Issue Lines";
 
     layout
     {
@@ -10,97 +10,97 @@ Page 51516529 "Cheque Receipt Lines"
         {
             repeater(Group)
             {
-                field("Cheque Serial No"; "Cheque Serial No")
+                field("Cheque Serial No"; Rec."Cheque Serial No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Un pay Code"; "Un pay Code")
+                field("Un pay Code"; Rec."Un pay Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Interpretation; Interpretation)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Status; Status)
+                field(Interpretation; Rec.Interpretation)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Unpay Date"; "Unpay Date")
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Un Pay Charge Amount"; "Un Pay Charge Amount")
+                field("Unpay Date"; Rec."Unpay Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Family Account No."; "Family Account No.")
+                field("Un Pay Charge Amount"; Rec."Un Pay Charge Amount")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Family Account No."; Rec."Family Account No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Co-op Account No';
                     Editable = false;
                 }
-                field("Date _Refference No."; "Date _Refference No.")
+                field("Date _Refference No."; Rec."Date _Refference No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Code"; "Transaction Code")
+                field("Transaction Code"; Rec."Transaction Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Branch Code"; "Branch Code")
+                field("Branch Code"; Rec."Branch Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Currency; Currency)
+                field(Currency; Rec.Currency)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date-1"; "Date-1")
+                field("Date-1"; Rec."Date-1")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date-2"; "Date-2")
+                field("Date-2"; Rec."Date-2")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Coop  Routing No."; "Coop  Routing No.")
+                field("Coop  Routing No."; Rec."Coop  Routing No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Fillers; Fillers)
+                field(Fillers; Rec.Fillers)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Refference"; "Transaction Refference")
+                field("Transaction Refference"; Rec."Transaction Refference")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

@@ -4,7 +4,7 @@ Page 51516450 "Bank Transfer List"
     CardPageID = "Transfer Header Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516457;
+    SourceTable = "Bank Transfer Header Details";
 
     layout
     {
@@ -12,79 +12,79 @@ Page 51516450 "Bank Transfer List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Transferred; Transferred)
+                field(Transferred; Rec.Transferred)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Transferred"; "Date Transferred")
+                field("Date Transferred"; Rec."Date Transferred")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Transferred"; "Time Transferred")
+                field("Time Transferred"; Rec."Time Transferred")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transferred By"; "Transferred By")
+                field("Transferred By"; Rec."Transferred By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Time Entered"; "Time Entered")
+                field("Time Entered"; Rec."Time Entered")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payee Bank Name"; "Payee Bank Name")
+                field("Payee Bank Name"; Rec."Payee Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank  No"; "Bank  No")
+                field("Bank  No"; Rec."Bank  No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salary Processing No."; "Salary Processing No.")
+                field("Salary Processing No."; Rec."Salary Processing No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salary Options"; "Salary Options")
+                field("Salary Options"; Rec."Salary Options")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Total; Total)
+                field(Total; Rec.Total)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                 }
-                field(RTGS; RTGS)
+                field(RTGS; Rec.RTGS)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No. Filter"; "Document No. Filter")
+                field("Document No. Filter"; Rec."Document No. Filter")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Filter"; "Date Filter")
+                field("Date Filter"; Rec."Date Filter")
                 {
                     ApplicationArea = Basic;
                 }

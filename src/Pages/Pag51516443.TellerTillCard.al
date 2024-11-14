@@ -20,7 +20,7 @@ Page 51516443 "Teller Till Card"
 
                     trigger OnAssistEdit()
                     begin
-                        if AssistEdit(xRec) then
+                        if Rec.AssistEdit(xRec) then
                             CurrPage.Update;
                     end;
                 }
@@ -41,7 +41,7 @@ Page 51516443 "Teller Till Card"
                     ApplicationArea = Basic;
                     Caption = 'Post Code/City';
                 }
-                field(City; City)
+                field(City; Rec.City)
                 {
                     ApplicationArea = Basic;
                 }
@@ -53,7 +53,7 @@ Page 51516443 "Teller Till Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Contact; Contact)
+                field(Contact; Rec.Contact)
                 {
                     ApplicationArea = Basic;
                 }
@@ -69,7 +69,7 @@ Page 51516443 "Teller Till Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control22; Balance)
+                field(Control22; Rec.Balance)
                 {
                     ApplicationArea = Basic;
                 }
@@ -265,7 +265,7 @@ Page 51516443 "Teller Till Card"
 
                     trigger OnAction()
                     begin
-                        ShowContact;
+                        Rec.ShowContact;
                     end;
                 }
                 action("Cashier Activity Report")
@@ -276,7 +276,7 @@ Page 51516443 "Teller Till Card"
                     trigger OnAction()
                     begin
                         TillNo.Reset;
-                        TillNo.SetRange(TillNo."No.", "No.");
+                        TillNo.SetRange(TillNo."No.", Rec."No.");
                         if TillNo.Find('-') then
                             Report.Run(1404, true, false, TillNo)
                     end;
@@ -289,7 +289,7 @@ Page 51516443 "Teller Till Card"
                     trigger OnAction()
                     begin
                         TillNo.Reset;
-                        TillNo.SetRange(TillNo."No.", "No.");
+                        TillNo.SetRange(TillNo."No.", Rec."No.");
                         if TillNo.Find('-') then
                             Report.Run(51516029, true, false, TillNo)
                     end;
@@ -300,12 +300,12 @@ Page 51516443 "Teller Till Card"
 
     trigger OnAfterGetRecord()
     begin
-        CalcFields("Check Report Name");
+        Rec.CalcFields("Check Report Name");
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        "Account Type" := "account type"::Cashier;
+        Rec."Account Type" := Rec."account type"::Cashier;
     end;
 
     var

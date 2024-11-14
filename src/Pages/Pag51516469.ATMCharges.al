@@ -2,7 +2,7 @@
 Page 51516469 "ATM Charges"
 {
     PageType = List;
-    SourceTable = 51516470;
+    SourceTable = "ATM Charges";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516469 "ATM Charges"
         {
             repeater(Control1102756000)
             {
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Amount"; "Total Amount")
+                field("Total Amount"; Rec."Total Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sacco Amount"; "Sacco Amount")
+                field("Sacco Amount"; Rec."Sacco Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Atm Income A/c"; "Atm Income A/c")
+                field("Atm Income A/c"; Rec."Atm Income A/c")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Atm Bank Settlement A/C"; "Atm Bank Settlement A/C")
+                field("Atm Bank Settlement A/C"; Rec."Atm Bank Settlement A/C")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
