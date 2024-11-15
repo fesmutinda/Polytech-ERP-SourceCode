@@ -10,39 +10,39 @@ Page 51516952 "ATM Card Receipt SubPage"
         {
             repeater(Group)
             {
-                field("ATM Application No"; "ATM Application No")
+                field("ATM Application No"; Rec."ATM Application No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Card Account No"; "ATM Card Account No")
+                field("ATM Card Account No"; Rec."ATM Card Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("ATM Card Application Date"; "ATM Card Application Date")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("ATM Card No"; "ATM Card No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Received; Received)
+                field("ATM Card Application Date"; Rec."ATM Card Application Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Received By"; "Received By")
+                field("ATM Card No"; Rec."ATM Card No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Received; Rec.Received)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Received On"; "Received On")
+                field("Received By"; Rec."Received By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Received On"; Rec."Received On")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

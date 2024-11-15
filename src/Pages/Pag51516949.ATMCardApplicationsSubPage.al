@@ -10,11 +10,11 @@ Page 51516949 "ATM Card Applications SubPage"
         {
             repeater(Group)
             {
-                field("Order ATM Card"; "Order ATM Card")
+                field("Order ATM Card"; Rec."Order ATM Card")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -22,44 +22,44 @@ Page 51516949 "ATM Card Applications SubPage"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Relationship; Relationship)
+                field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Beneficiary; Beneficiary)
+                field(Beneficiary; Rec.Beneficiary)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Allocation"; "Total Allocation")
+                field("Total Allocation"; Rec."Total Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximun Allocation %"; "Maximun Allocation %")
+                field("Maximun Allocation %"; Rec."Maximun Allocation %")
                 {
                     ApplicationArea = Basic;
                 }
-                field("NOK Residence"; "NOK Residence")
+                field("NOK Residence"; Rec."NOK Residence")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entry No"; "Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Created"; "Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Ordered By"; "Ordered By")
+                field("Ordered By"; Rec."Ordered By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Ordered On"; "Ordered On")
+                field("Ordered On"; Rec."Ordered On")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

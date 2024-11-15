@@ -4,8 +4,8 @@ Page 51516842 "Change Request List"
     CardPageID = "Change Request Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516552;
-    SourceTableView = where(Changed = const(No));
+    SourceTable = "Change Request";
+    SourceTableView = where(Changed = const(false));
 
     layout
     {
@@ -13,7 +13,7 @@ Page 51516842 "Change Request List"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
@@ -21,135 +21,135 @@ Page 51516842 "Change Request List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mobile No"; "Mobile No")
+                field("Mobile No"; Rec."Mobile No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Branch; Branch)
+                field(Branch; Rec.Branch)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
-                field(signinature; signinature)
+                field(signinature; Rec.signinature)
                 {
                     ApplicationArea = Basic;
                 }
-                field(City; City)
+                field(City; Rec.City)
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-mail"; "E-mail")
+                field("E-mail"; Rec."E-mail")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Personal No"; "Personal No")
+                field("Personal No"; Rec."Personal No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No"; "ID No")
+                field("ID No"; Rec."ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Marital Status"; "Marital Status")
+                field("Marital Status"; Rec."Marital Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Passport No."; "Passport No.")
+                field("Passport No."; Rec."Passport No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Category"; "Account Category")
+                field("Account Category"; Rec."Account Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Email; Email)
+                field(Email; Rec.Email)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Section; Section)
+                field(Section; Rec.Section)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card No"; "Card No")
+                field("Card No"; Rec."Card No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Home Address"; "Home Address")
+                field("Home Address"; Rec."Home Address")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Loaction; Loaction)
+                field(Loaction; Rec.Loaction)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sub-Location"; "Sub-Location")
+                field("Sub-Location"; Rec."Sub-Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field(District; District)
+                field(District; Rec.District)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason for change"; "Reason for change")
+                field("Reason for change"; Rec."Reason for change")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Signing Instructions"; "Signing Instructions")
+                field("Signing Instructions"; Rec."Signing Instructions")
                 {
                     ApplicationArea = Basic;
                 }
-                field("S-Mobile No"; "S-Mobile No")
+                field("S-Mobile No"; Rec."S-Mobile No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Approve"; "ATM Approve")
+                field("ATM Approve"; Rec."ATM Approve")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Expiry Date"; "Card Expiry Date")
+                field("Card Expiry Date"; Rec."Card Expiry Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Valid From"; "Card Valid From")
+                field("Card Valid From"; Rec."Card Valid From")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Card Valid To"; "Card Valid To")
+                field("Card Valid To"; Rec."Card Valid To")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date ATM Linked"; "Date ATM Linked")
+                field("Date ATM Linked"; Rec."Date ATM Linked")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM No."; "ATM No.")
+                field("ATM No."; Rec."ATM No.")
                 {
                     ApplicationArea = Basic;
                 }

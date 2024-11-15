@@ -5,8 +5,8 @@ Page 51516960 "Cheque Clearing BufferII"
     InsertAllowed = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = 51516441;
-    SourceTableView = where(Posted = filter(Yes),
+    SourceTable = "Cheque Clearing Header";
+    SourceTableView = where(Posted = filter(true),
                             Type = filter("Cheque Deposit"),
                             "Clear Cheque" = filter(No),
                             "Bounce Cheque" = filter(No));
@@ -17,22 +17,22 @@ Page 51516960 "Cheque Clearing BufferII"
         {
             repeater(Control17)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Type"; "Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -42,22 +42,22 @@ Page 51516960 "Cheque Clearing BufferII"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Maturity Date"; "Expected Maturity Date")
+                field("Expected Maturity Date"; Rec."Expected Maturity Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Cashier; Cashier)
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount Discounted"; "Amount Discounted")
+                field("Amount Discounted"; Rec."Amount Discounted")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -67,26 +67,26 @@ Page 51516960 "Cheque Clearing BufferII"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque Type"; "Cheque Type")
+                field("Cheque Type"; Rec."Cheque Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque No"; "Cheque No")
+                field("Cheque No"; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cheque Date"; "Cheque Date")
+                field("Cheque Date"; Rec."Cheque Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Clear Cheque"; "Clear Cheque")
+                field("Clear Cheque"; Rec."Clear Cheque")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bounce Cheque"; "Bounce Cheque")
+                field("Bounce Cheque"; Rec."Bounce Cheque")
                 {
                     ApplicationArea = Basic;
                 }

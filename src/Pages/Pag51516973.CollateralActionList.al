@@ -3,7 +3,7 @@ Page 51516973 "Collateral Action List"
 {
     CardPageID = "Collateral Action Card";
     PageType = List;
-    SourceTable = 51516512;
+    SourceTable = "Loan Collateral Register";
 
     layout
     {
@@ -11,39 +11,39 @@ Page 51516973 "Collateral Action List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registered Owner"; "Registered Owner")
+                field("Registered Owner"; Rec."Registered Owner")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Type"; "Collateral Type")
+                field("Collateral Type"; Rec."Collateral Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Asset Value"; "Asset Value")
+                field("Asset Value"; Rec."Asset Value")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Depreciation Completion Date"; "Depreciation Completion Date")
+                field("Depreciation Completion Date"; Rec."Depreciation Completion Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Asset Depreciation Amount"; "Asset Depreciation Amount")
+                field("Asset Depreciation Amount"; Rec."Asset Depreciation Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Asset Value @Loan Completion"; "Asset Value @Loan Completion")
+                field("Asset Value @Loan Completion"; Rec."Asset Value @Loan Completion")
                 {
                     ApplicationArea = Basic;
                 }

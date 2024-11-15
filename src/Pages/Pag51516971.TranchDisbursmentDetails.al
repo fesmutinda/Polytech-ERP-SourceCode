@@ -2,7 +2,7 @@
 Page 51516971 "Tranch Disbursment Details"
 {
     PageType = ListPart;
-    SourceTable = 51516920;
+    SourceTable = "Tranch Disburesment Details";
 
     layout
     {
@@ -10,19 +10,19 @@ Page 51516971 "Tranch Disbursment Details"
         {
             repeater(Group)
             {
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Name"; "Client Name")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                 }
@@ -30,7 +30,7 @@ Page 51516971 "Tranch Disbursment Details"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
@@ -45,11 +45,11 @@ Page 51516971 "Tranch Disbursment Details"
     trigger OnAfterGetRecord()
     begin
         ObjLoans.Reset;
-        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan No");
+        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan No");
         if ObjLoans.FindSet then begin
-            "Client Code" := ObjLoans."Client Code";
-            "Client Name" := ObjLoans."Client Name";
-            "Loan Product Type" := ObjLoans."Loan Product Type";
+            Rec."Client Code" := ObjLoans."Client Code";
+            Rec."Client Name" := ObjLoans."Client Name";
+            Rec."Loan Product Type" := ObjLoans."Loan Product Type";
         end;
     end;
 

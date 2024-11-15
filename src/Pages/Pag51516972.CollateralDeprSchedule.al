@@ -10,27 +10,27 @@ Page 51516972 "Collateral Depr. Schedule"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Value"; "Collateral Value")
+                field("Collateral Value"; Rec."Collateral Value")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Depreciation Amount"; "Depreciation Amount")
+                field("Depreciation Amount"; Rec."Depreciation Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral NBV"; "Collateral NBV")
+                field("Collateral NBV"; Rec."Collateral NBV")
                 {
                     ApplicationArea = Basic;
                 }

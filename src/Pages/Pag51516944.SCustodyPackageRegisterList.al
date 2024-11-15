@@ -12,39 +12,39 @@ Page 51516944 "SCustody Package Register List"
         {
             repeater(Group)
             {
-                field("Package ID"; "Package ID")
+                field("Package ID"; Rec."Package ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Type"; "Package Type")
+                field("Package Type"; Rec."Package Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Description"; "Package Description")
+                field("Package Description"; Rec."Package Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Custody Period"; "Custody Period")
+                field("Custody Period"; Rec."Custody Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Account"; "Charge Account")
+                field("Charge Account"; Rec."Charge Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maturity Instruction"; "Maturity Instruction")
+                field("Maturity Instruction"; Rec."Maturity Instruction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Serial No"; "File Serial No")
+                field("File Serial No"; Rec."File Serial No")
                 {
                     ApplicationArea = Basic;
                 }

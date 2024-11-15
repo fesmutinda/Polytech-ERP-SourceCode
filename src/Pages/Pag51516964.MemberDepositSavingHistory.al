@@ -11,23 +11,23 @@ Page 51516964 "Member Deposit Saving History"
         {
             repeater(Group)
             {
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Transaction Description"; Rec."Transaction Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Out"; "Amount Out")
+                field("Amount Out"; Rec."Amount Out")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount In"; "Amount In")
+                field("Amount In"; Rec."Amount In")
                 {
                     ApplicationArea = Basic;
                 }

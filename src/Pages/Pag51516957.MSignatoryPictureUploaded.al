@@ -8,7 +8,7 @@ Page 51516957 "M_Signatory Picture-Uploaded"
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic, Suite;
                 ShowCaption = false;
@@ -68,16 +68,16 @@ Page 51516957 "M_Signatory Picture-Uploaded"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("Account No");
+                    Rec.TestField("Account No");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "Account No" + Format(Picture.MediaId);
+                    ExportPath := TemporaryPath + Rec."Account No" + Format(Rec.Picture.MediaId);
                     Picture.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "Account No", ConvertStr("Account No", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."Account No", ConvertStr(Rec."Account No", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -115,8 +115,8 @@ Page 51516957 "M_Signatory Picture-Uploaded"
     var
         CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("Account No");
+        Rec.Find;
+        Rec.TestField("Account No");
         //TESTFIELD(Description);
 
         if not CameraAvailable then

@@ -7,13 +7,13 @@ Page 51516958 "M_Signatory Signature-Uploaded"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = CardPart;
-    SourceTable = 51516367;
+    SourceTable = "Member Account Signatories";
 
     layout
     {
         area(content)
         {
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic, Suite;
                 Editable = false;
@@ -76,16 +76,16 @@ Page 51516958 "M_Signatory Signature-Uploaded"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("Account No");
+                    Rec.TestField("Account No");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "Account No" + Format(Signature.MediaId);
+                    ExportPath := TemporaryPath + Rec."Account No" + Format(Signature.MediaId);
                     Signature.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "Account No", ConvertStr("Account No", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."Account No", ConvertStr(Rec."Account No", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -123,8 +123,8 @@ Page 51516958 "M_Signatory Signature-Uploaded"
     var
         CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("Account No");
+        Rec.Find;
+        Rec.TestField("Account No");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
@@ -141,8 +141,8 @@ Page 51516958 "M_Signatory Signature-Uploaded"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("Account No");
+        Rec.Find;
+        Rec.TestField("Account No");
         //TESTFIELD(Description);
 
         if Signature.Count > 0 then
@@ -156,8 +156,8 @@ Page 51516958 "M_Signatory Signature-Uploaded"
 
         Clear(Signature);
         Signature.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
@@ -180,12 +180,12 @@ Page 51516958 "M_Signatory Signature-Uploaded"
 
     procedure DeleteItemPicture()
     begin
-        TestField("Account No");
+        Rec.TestField("Account No");
 
         if not Confirm(DeleteImageQst) then
             exit;
 
-        Clear(Signature);
+        Clear(Rec.Signature);
         Modify(true);
     end;
 

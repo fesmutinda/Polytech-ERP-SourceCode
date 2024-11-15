@@ -180,7 +180,7 @@ Page 51516999 "House Group Registration Card"
                     ApprovalEntries: Page "Approval Entries";
                 begin
                     DocumentType := Documenttype::HouseRegistration;
-                    ApprovalEntries.Setfilters(Database::"House Groups Registration", DocumentType, "Cell Group Code");
+                    ApprovalEntries.SetRecordFilters(Database::"House Groups Registration", DocumentType, Rec."Cell Group Code");
                     ApprovalEntries.Run;
                 end;
             }
@@ -190,19 +190,19 @@ Page 51516999 "House Group Registration Card"
     trigger OnAfterGetRecord()
     begin
         EnableCreateHouse := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
 
-        if ((Rec.Status = Status::Approved)) then
+        if ((Rec.Status = Rec.Status::Approved)) then
             EnableCreateHouse := true;
     end;
 
     trigger OnOpenPage()
     begin
         EnableCreateHouse := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.Id);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
 
         if ((Rec.Status = Rec.Status::Approved)) then

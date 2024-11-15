@@ -10,96 +10,96 @@ Page 51516947 "Members Nominee Details Temp"
         {
             repeater(Control1102760000)
             {
-                field("Add New"; "Add New")
+                field("Add New"; Rec."Add New")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("ID No.(New)"; "ID No.(New)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Address; Address)
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Address(New)"; "Address(New)")
+                field("ID No.(New)"; Rec."ID No.(New)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Relationship; Relationship)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Relationship(New)"; "Relationship(New)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("%Allocation"; "%Allocation")
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("%Allocation(New)"; "%Allocation(New)")
+                field("Address(New)"; Rec."Address(New)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Next Of Kin Type"; "Next Of Kin Type")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Next Of Kin Type(New)"; "Next Of Kin Type(New)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Date of Birth"; "Date of Birth")
+                field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date of Birth(New)"; "Date of Birth(New)")
+                field("Relationship(New)"; Rec."Relationship(New)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Telephone(New)"; "Telephone(New)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Email; Email)
+                field("%Allocation"; Rec."%Allocation")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Email(New)"; "Email(New)")
+                field("%Allocation(New)"; Rec."%Allocation(New)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Allocation"; "Total Allocation")
+                field("Next Of Kin Type"; Rec."Next Of Kin Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Total Allocation(New)"; "Total Allocation(New)")
+                field("Next Of Kin Type(New)"; Rec."Next Of Kin Type(New)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remove; Remove)
+                field("Date of Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Date of Birth(New)"; Rec."Date of Birth(New)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Telephone; Rec.Telephone)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Telephone(New)"; Rec."Telephone(New)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Email; Rec.Email)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Email(New)"; Rec."Email(New)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Total Allocation"; Rec."Total Allocation")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Total Allocation(New)"; Rec."Total Allocation(New)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Remove; Rec.Remove)
                 {
                     ApplicationArea = Basic;
                 }
@@ -113,9 +113,9 @@ Page 51516947 "Members Nominee Details Temp"
 
     trigger OnOpenPage()
     begin
-        if Name = '' then
+        if Rec.Name = '' then
             NewEdittable := true;
-        if "Add New" = true then
+        if Rec."Add New" = true then
             Nameedittable := true;
     end;
 

@@ -11,43 +11,43 @@ Page 51516946 "Package Retrieval SubPage"
         {
             repeater(Group)
             {
-                field("Request No"; "Request No")
+                field("Request No"; Rec."Request No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package ID"; "Package ID")
+                field("Package ID"; Rec."Package ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Description"; "Package Description")
+                field("Package Description"; Rec."Package Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieval Requested By"; "Retrieval Requested By")
+                field("Retrieval Requested By"; Rec."Retrieval Requested By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieval Request Date"; "Retrieval Request Date")
+                field("Retrieval Request Date"; Rec."Retrieval Request Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved By(Custodian 1)"; "Retrieved By(Custodian 1)")
+                field("Retrieved By(Custodian 1)"; Rec."Retrieved By(Custodian 1)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved By(Custodian 2)"; "Retrieved By(Custodian 2)")
+                field("Retrieved By(Custodian 2)"; Rec."Retrieved By(Custodian 2)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieval Date"; "Retrieval Date")
+                field("Retrieval Date"; Rec."Retrieval Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason for Retrieval"; "Reason for Retrieval")
+                field("Reason for Retrieval"; Rec."Reason for Retrieval")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
