@@ -2,7 +2,7 @@
 Page 51516999 "House Group Registration Card"
 {
     PageType = Card;
-    SourceTable = 51516942;
+    SourceTable = "House Groups Registration";
 
     layout
     {
@@ -10,74 +10,74 @@ Page 51516999 "House Group Registration Card"
         {
             group(General)
             {
-                field("Cell Group Code"; "Cell Group Code")
+                field("Cell Group Code"; Rec."Cell Group Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Cell Group Name"; "Cell Group Name")
+                field("Cell Group Name"; Rec."Cell Group Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Formed"; "Date Formed")
+                field("Date Formed"; Rec."Date Formed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Meeting Date"; "Meeting Date")
+                field("Meeting Date"; Rec."Meeting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Group Leader"; "Group Leader")
+                field("Group Leader"; Rec."Group Leader")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Group Leader Name"; "Group Leader Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Group Leader Email"; "Group Leader Email")
+                field("Group Leader Name"; Rec."Group Leader Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Assistant group Leader"; "Assistant group Leader")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Assistant Group Name"; "Assistant Group Name")
+                field("Group Leader Email"; Rec."Group Leader Email")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Assistant Group Leader Email"; "Assistant Group Leader Email")
+                field("Assistant group Leader"; Rec."Assistant group Leader")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Assistant Group Name"; Rec."Assistant Group Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Credit Officer"; "Credit Officer")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Field Officer"; "Field Officer")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Meeting Place"; "Meeting Place")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("No of Members"; "No of Members")
+                field("Assistant Group Leader Email"; Rec."Assistant Group Leader Email")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Credit Officer"; Rec."Credit Officer")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Field Officer"; Rec."Field Officer")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Meeting Place"; Rec."Meeting Place")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("No of Members"; Rec."No of Members")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created On"; "Created On")
+                field("Created By"; Rec."Created By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Created On"; Rec."Created On")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -110,16 +110,16 @@ Page 51516999 "House Group Registration Card"
 
                             ObjHouseG.Init;
                             ObjHouseG."Cell Group Code" := VarHouseNo;
-                            ObjHouseG."Cell Group Name" := "Cell Group Name";
-                            ObjHouseG."Group Leader" := "Group Leader";
-                            ObjHouseG."Group Leader Name" := "Group Leader Name";
-                            ObjHouseG."Group Leader Email" := "Group Leader Email";
-                            ObjHouseG."Group Leader Phone No" := "Group Leader Phone No";
-                            ObjHouseG."Assistant group Leader" := "Assistant group Leader";
-                            ObjHouseG."Assistant Group Name" := "Assistant Group Name";
-                            ObjHouseG."Assistant Group Leader Email" := "Assistant Group Leader Email";
-                            ObjHouseG."Assistant Group Leader Phone N" := "Assistant Group Leader Phone N";
-                            ObjHouseG."Meeting Place" := "Meeting Place";
+                            ObjHouseG."Cell Group Name" := Rec."Cell Group Name";
+                            ObjHouseG."Group Leader" := Rec."Group Leader";
+                            ObjHouseG."Group Leader Name" := Rec."Group Leader Name";
+                            ObjHouseG."Group Leader Email" := Rec."Group Leader Email";
+                            ObjHouseG."Group Leader Phone No" := Rec."Group Leader Phone No";
+                            ObjHouseG."Assistant group Leader" := Rec."Assistant group Leader";
+                            ObjHouseG."Assistant Group Name" := Rec."Assistant Group Name";
+                            ObjHouseG."Assistant Group Leader Email" := Rec."Assistant Group Leader Email";
+                            ObjHouseG."Assistant Group Leader Phone N" := Rec."Assistant Group Leader Phone N";
+                            ObjHouseG."Meeting Place" := Rec."Meeting Place";
                             ObjHouseG.Insert;
 
                         end;
@@ -201,11 +201,11 @@ Page 51516999 "House Group Registration Card"
     trigger OnOpenPage()
     begin
         EnableCreateHouse := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.Id);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
         EnabledApprovalWorkflowsExist := true;
 
-        if ((Rec.Status = Status::Approved)) then
+        if ((Rec.Status = Rec.Status::Approved)) then
             EnableCreateHouse := true;
     end;
 

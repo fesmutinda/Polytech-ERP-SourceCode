@@ -370,7 +370,7 @@ Page 50049 "Dividend Unprocessed List"
         DividendAmount: Decimal;
         Jtemplate: Code[20];
         JBatch: Code[20];
-        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
         TotalAmount: Decimal;
         DivProg: Record 51516393;
         GenSetup: Record 51516398;
@@ -407,7 +407,7 @@ Page 50049 "Dividend Unprocessed List"
         "W/Tax": Decimal;
         CommDiv: Decimal;
         GenJournalLine: Record "Gen. Journal Line";
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         DOCUMENT_NO: Code[50];

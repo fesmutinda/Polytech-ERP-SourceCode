@@ -3,7 +3,7 @@ Page 51516870 "Loan 4TH Demand Notices Card"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516926;
+    SourceTable = "Default Notices Register";
 
     layout
     {
@@ -11,62 +11,62 @@ Page 51516870 "Loan 4TH Demand Notices Card"
         {
             group(General)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan In Default"; "Loan In Default")
+                field("Loan In Default"; Rec."Loan In Default")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Product Name"; "Loan Product Name")
+                field("Loan Product Name"; Rec."Loan Product Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Instalments"; "Loan Instalments")
+                field("Loan Instalments"; Rec."Loan Instalments")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Disbursement Date"; "Loan Disbursement Date")
+                field("Loan Disbursement Date"; Rec."Loan Disbursement Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Completion Date"; "Expected Completion Date")
+                field("Expected Completion Date"; Rec."Expected Completion Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount In Arrears"; "Amount In Arrears")
+                field("Amount In Arrears"; Rec."Amount In Arrears")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Outstanding Balance"; "Loan Outstanding Balance")
+                field("Loan Outstanding Balance"; Rec."Loan Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Notice Type"; "Notice Type")
+                field("Notice Type"; Rec."Notice Type")
                 {
                     ApplicationArea = Basic;
 
@@ -78,41 +78,41 @@ Page 51516870 "Loan 4TH Demand Notices Card"
                 group("Auctioneer Details")
                 {
                     Visible = VarAuctioneerDetailsVisible;
-                    field("Auctioneer No"; "Auctioneer No")
+                    field("Auctioneer No"; Rec."Auctioneer No")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Auctioneer  Name"; "Auctioneer  Name")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                    }
-                    field("Auctioneer Address"; "Auctioneer Address")
+                    field("Auctioneer  Name"; Rec."Auctioneer  Name")
                     {
                         ApplicationArea = Basic;
                         Editable = false;
                     }
-                    field("Auctioneer Mobile No"; "Auctioneer Mobile No")
+                    field("Auctioneer Address"; Rec."Auctioneer Address")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = false;
+                    }
+                    field("Auctioneer Mobile No"; Rec."Auctioneer Mobile No")
                     {
                         ApplicationArea = Basic;
                         Editable = false;
                     }
                 }
-                field("Demand Notice Date"; "Demand Notice Date")
+                field("Demand Notice Date"; Rec."Demand Notice Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Email Sent"; "Email Sent")
+                field("Email Sent"; Rec."Email Sent")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("SMS Sent"; "SMS Sent")
+                field("SMS Sent"; Rec."SMS Sent")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -137,9 +137,9 @@ Page 51516870 "Loan 4TH Demand Notices Card"
                     trigger OnAction()
                     begin
                         // //  /
-                        "Notice Type" := "notice type"::"1st Demand Notice";
+                        Rec."Notice Type" := Rec."notice type"::"1st Demand Notice";
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516925, true, true, ObjLoans);
                         end;
@@ -174,10 +174,10 @@ Page 51516870 "Loan 4TH Demand Notices Card"
                         //  ObjDemands.SETRANGE(ObjDemands."Loan In Default","Loan In Default");
                         //  ObjDemands.SETFILTER(ObjDemands."Document No",'<>%1',"Document No");
                         //  IF ObjDemands.FIND('-')=FALSE THEN BEGIN
-                        "Notice Type" := "notice type"::"2nd Demand Notice";
+                        Rec."Notice Type" := Rec."notice type"::"2nd Demand Notice";
                         //   "Demand Notice Date":=TODAY;
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516915, true, true, ObjLoans);
                         end;
@@ -211,12 +211,12 @@ Page 51516870 "Loan 4TH Demand Notices Card"
                         // // ObjDemands.RESET;
                         // // ObjDemands.SETRANGE(ObjDemands."Document No","Document No");
                         // // IF ObjDemands.FINDSET THEN BEGIN
-                        "Notice Type" := "notice type"::"3rd Notice";
+                        Rec."Notice Type" := Rec."notice type"::"3rd Notice";
                         //    "Demand Notice Date":=TODAY;
                         // //    END;
                         // //
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516916, true, true, ObjLoans);
                         end;
@@ -233,14 +233,14 @@ Page 51516870 "Loan 4TH Demand Notices Card"
                     trigger OnAction()
                     begin
                         ObjDemands.Reset;
-                        ObjDemands.SetRange(ObjDemands."Document No", "Document No");
+                        ObjDemands.SetRange(ObjDemands."Document No", Rec."Document No");
                         if ObjDemands.FindSet then begin
-                            "Notice Type" := "notice type"::"CRB Notice";
-                            "Demand Notice Date" := Today;
+                            Rec."Notice Type" := Rec."notice type"::"CRB Notice";
+                            Rec."Demand Notice Date" := Today;
                         end;
 
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516926, true, true, ObjLoans);
                         end;
@@ -361,7 +361,7 @@ Page 51516870 "Loan 4TH Demand Notices Card"
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         CanCancelApprovalForRecord: Boolean;
-        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
         JTemplate: Code[20];
         JBatch: Code[20];
         GenSetup: Record 51516398;
@@ -382,7 +382,7 @@ Page 51516870 "Loan 4TH Demand Notices Card"
     begin
         VarAuctioneerDetailsVisible := false;
 
-        if "Notice Type" = "notice type"::"3rd Notice" then begin
+        if Rec."Notice Type" = Rec."notice type"::"3rd Notice" then begin
             VarAuctioneerDetailsVisible := true;
         end
     end;

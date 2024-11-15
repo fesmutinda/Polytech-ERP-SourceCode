@@ -8,7 +8,7 @@ Page 51516873 "Member Picture-App"
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic, Suite;
                 ShowCaption = false;
@@ -66,16 +66,16 @@ Page 51516873 "Member Picture-App"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("No.");
+                    Rec.TestField("No.");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "No." + Format(Picture.MediaId);
-                    Picture.ExportFile(ExportPath);
+                    ExportPath := TemporaryPath + Rec."No." + Format(Rec.Picture.MediaId);
+                    Rec.Picture.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "No.", ConvertStr("No.", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."No.", ConvertStr(Rec."No.", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;

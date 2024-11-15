@@ -1107,7 +1107,7 @@ Page 51516853 "Loan Application MICRO(Approv)"
         CopyofIDEditable: Boolean;
         CopyofPayslipEditable: Boolean;
         ScheduleBal: Decimal;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         ReschedulingFees: Decimal;

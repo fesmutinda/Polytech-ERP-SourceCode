@@ -5,9 +5,9 @@ Page 51516864 "Loan 2nd Demand Notices List"
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = List;
-    SourceTable = 51516926;
-    SourceTableView = where(SECONDNOTE = filter(Yes),
-                            THIRDNOTE = filter(No));
+    SourceTable = "Default Notices Register";
+    SourceTableView = where(SECONDNOTE = filter(true),
+                            THIRDNOTE = filter(false));
 
     layout
     {
@@ -15,59 +15,59 @@ Page 51516864 "Loan 2nd Demand Notices List"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan In Default"; "Loan In Default")
+                field("Loan In Default"; Rec."Loan In Default")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product"; "Loan Product")
+                field("Loan Product"; Rec."Loan Product")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Instalments"; "Loan Instalments")
+                field("Loan Instalments"; Rec."Loan Instalments")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Disbursement Date"; "Loan Disbursement Date")
+                field("Loan Disbursement Date"; Rec."Loan Disbursement Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Completion Date"; "Expected Completion Date")
+                field("Expected Completion Date"; Rec."Expected Completion Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount In Arrears"; "Amount In Arrears")
+                field("Amount In Arrears"; Rec."Amount In Arrears")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Outstanding Balance"; "Loan Outstanding Balance")
+                field("Loan Outstanding Balance"; Rec."Loan Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Notice Type"; "Notice Type")
+                field("Notice Type"; Rec."Notice Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Demand Notice Date"; "Demand Notice Date")
+                field("Demand Notice Date"; Rec."Demand Notice Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
@@ -89,10 +89,10 @@ Page 51516864 "Loan 2nd Demand Notices List"
 
                 trigger OnAction()
                 begin
-                    Paid := true;
-                    DEFAUTER := true;
-                    SECONDNOTE := false;
-                    Modify;
+                    Rec.Paid := true;
+                    Rec.DEFAUTER := true;
+                    Rec.SECONDNOTE := false;
+                    Rec.Modify;
                     Message('successfuly')
                 end;
             }

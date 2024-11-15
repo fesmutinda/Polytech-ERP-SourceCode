@@ -73,7 +73,7 @@ Page 50013 "Posted Sacco Transfer Card"
                     Caption = 'Deposit Debit Type';
                     Editable = false;
                     Visible = DepositDebitTypeVisible;
-                    field("Deposit Debit Options"; Rec. "Deposit Debit Options")
+                    field("Deposit Debit Options"; Rec."Deposit Debit Options")
                     {
                         ApplicationArea = Basic;
                         Editable = VarDepositDebitTypeEditable;
@@ -522,7 +522,7 @@ Page 50013 "Posted Sacco Transfer Card"
         BATCH_NAME: Code[50];
         DOCUMENT_NO: Code[50];
         LineNo: Integer;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory";
         VarExciseDuty: Decimal;
         VarExciseDutyAccount: Code[30];
         VarDepositDebitTypeEditable: Boolean;

@@ -2,7 +2,7 @@
 Page 51516863 "Loan 1st Demand Notices Card"
 {
     PageType = Card;
-    SourceTable = 51516926;
+    SourceTable = "Default Notices Register";
 
     layout
     {
@@ -10,60 +10,60 @@ Page 51516863 "Loan 1st Demand Notices Card"
         {
             group(General)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Loan In Default"; "Loan In Default")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Loan Product Name"; "Loan Product Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Instalments"; "Loan Instalments")
+                field("Loan In Default"; Rec."Loan In Default")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loan Product Name"; Rec."Loan Product Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Disbursement Date"; "Loan Disbursement Date")
+                field("Loan Instalments"; Rec."Loan Instalments")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Completion Date"; "Expected Completion Date")
+                field("Loan Disbursement Date"; Rec."Loan Disbursement Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount In Arrears"; "Amount In Arrears")
+                field("Expected Completion Date"; Rec."Expected Completion Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Outstanding Balance"; "Loan Outstanding Balance")
+                field("Amount In Arrears"; Rec."Amount In Arrears")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Outstanding Interest"; "Outstanding Interest")
+                field("Loan Outstanding Balance"; Rec."Loan Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Notice Type"; "Notice Type")
+                field("Outstanding Interest"; Rec."Outstanding Interest")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Notice Type"; Rec."Notice Type")
                 {
                     ApplicationArea = Basic;
 
@@ -75,41 +75,41 @@ Page 51516863 "Loan 1st Demand Notices Card"
                 group("Auctioneer Details")
                 {
                     Visible = VarAuctioneerDetailsVisible;
-                    field("Auctioneer No"; "Auctioneer No")
+                    field("Auctioneer No"; Rec."Auctioneer No")
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Auctioneer  Name"; "Auctioneer  Name")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                    }
-                    field("Auctioneer Address"; "Auctioneer Address")
+                    field("Auctioneer  Name"; Rec."Auctioneer  Name")
                     {
                         ApplicationArea = Basic;
                         Editable = false;
                     }
-                    field("Auctioneer Mobile No"; "Auctioneer Mobile No")
+                    field("Auctioneer Address"; Rec."Auctioneer Address")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = false;
+                    }
+                    field("Auctioneer Mobile No"; Rec."Auctioneer Mobile No")
                     {
                         ApplicationArea = Basic;
                         Editable = false;
                     }
                 }
-                field("Demand Notice Date"; "Demand Notice Date")
+                field("Demand Notice Date"; Rec."Demand Notice Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Email Sent"; "Email Sent")
+                field("Email Sent"; Rec."Email Sent")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("SMS Sent"; "SMS Sent")
+                field("SMS Sent"; Rec."SMS Sent")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -140,13 +140,13 @@ Page 51516863 "Loan 1st Demand Notices Card"
                         //    "Notice Type":="Notice Type"::"1st Demand Notice";
                         //    //"Demand Notice Date":=TODAY;
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516925, true, true, ObjLoans);
                         end;
                         Commit;
                         PreviewOn := true;
-                        Modify;
+                        Rec.Modify;
                         //END;
 
                         //  ObjDemands.RESET;
@@ -178,13 +178,13 @@ Page 51516863 "Loan 1st Demand Notices Card"
                         if PreviewOn = false then begin
                             Error('Kindly Preview The Report First To Confirm');
                         end;
-                        TestField("Loan In Default");
-                        TestField("Notice Type");
-                        TestField("Demand Notice Date");
-                        TestField("Notice Type");
+                        Rec.TestField("Loan In Default");
+                        Rec.TestField("Notice Type");
+                        Rec.TestField("Demand Notice Date");
+                        Rec.TestField("Notice Type");
 
                         cust.Reset;
-                        cust.SetRange(cust."No.", "Member No");
+                        cust.SetRange(cust."No.", Rec."Member No");
                         if cust.Find('-') then begin
                             //PhoneNo:=Cust."Phone No.";
 
@@ -200,27 +200,27 @@ Page 51516863 "Loan 1st Demand Notices Card"
                             SMSMessage.Reset;
                             SMSMessage.Init;
                             SMSMessage."Entry No" := iEntryNo;
-                            SMSMessage."Account No" := "Member No";
-                            SMSMessage."Date Entered" := "Demand Notice Date";
+                            SMSMessage."Account No" := Rec."Member No";
+                            SMSMessage."Date Entered" := Rec."Demand Notice Date";
                             SMSMessage."Time Entered" := Time;
                             SMSMessage.Source := 'LOAN DEF1';
                             SMSMessage."Entered By" := UserId;
                             SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                            SMSMessage."SMS Message" := 'Defaulter First Notice: Dear ,' + "Member Name" + ' you have defaulted  '
-                            + "Loan Product Name" + ' with Arrears of KSHs.' + Format(ROUND("Amount In Arrears", 1, '=')) +
+                            SMSMessage."SMS Message" := 'Defaulter First Notice: Dear ,' + Rec."Member Name" + ' you have defaulted  '
+                            + Rec."Loan Product Name" + ' with Arrears of KSHs.' + Format(ROUND(Rec."Amount In Arrears", 1, '=')) +
                                                       ' at Polytech SACCO LTD. ';
 
                             SMSMessage."Telephone No" := cust."Mobile Phone No";
                             cust.Reset;
-                            if cust.Get("Member No") then
+                            if cust.Get(Rec."Member No") then
                                 SMSMessage."Telephone No" := cust."Mobile Phone No";
                             SMSMessage.Insert;
                         end;
-                        DEFAUTER := true;
-                        SECONDNOTE := true;
-                        "Second Letter Date" := Today;
-                        "Notice Type" := "notice type"::"2nd Demand Notice";
-                        Modify;
+                        Rec.DEFAUTER := true;
+                        Rec.SECONDNOTE := true;
+                        Rec."Second Letter Date" := Today;
+                        Rec."Notice Type" := Rec."notice type"::"2nd Demand Notice";
+                        Rec.Modify;
                         // END;
                         Message('Notified successfully');
                         CurrPage.Close;
@@ -237,13 +237,13 @@ Page 51516863 "Loan 1st Demand Notices Card"
                     trigger OnAction()
                     begin
                         ObjDemands.Reset;
-                        ObjDemands.SetRange(ObjDemands."Loan In Default", "Loan In Default");
-                        ObjDemands.SetFilter(ObjDemands."Document No", '<>%1', "Document No");
+                        ObjDemands.SetRange(ObjDemands."Loan In Default", Rec."Loan In Default");
+                        ObjDemands.SetFilter(ObjDemands."Document No", '<>%1', Rec."Document No");
                         if ObjDemands.Find('-') = false then begin
-                            "Notice Type" := "notice type"::"2nd Demand Notice";
-                            "Demand Notice Date" := Today;
+                            Rec."Notice Type" := Rec."notice type"::"2nd Demand Notice";
+                            Rec."Demand Notice Date" := Today;
                             ObjLoans.Reset;
-                            ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                            ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                             if ObjLoans.FindSet then begin
                                 Report.Run(51516915, true, true, ObjLoans);
                             end;
@@ -276,14 +276,14 @@ Page 51516863 "Loan 1st Demand Notices Card"
                     trigger OnAction()
                     begin
                         ObjDemands.Reset;
-                        ObjDemands.SetRange(ObjDemands."Document No", "Document No");
+                        ObjDemands.SetRange(ObjDemands."Document No", Rec."Document No");
                         if ObjDemands.FindSet then begin
-                            "Notice Type" := "notice type"::"CRB Notice";
-                            "Demand Notice Date" := Today;
+                            Rec."Notice Type" := Rec."notice type"::"CRB Notice";
+                            Rec."Demand Notice Date" := Today;
                         end;
 
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516926, true, true, ObjLoans);
                         end;
@@ -300,14 +300,14 @@ Page 51516863 "Loan 1st Demand Notices Card"
                     trigger OnAction()
                     begin
                         ObjDemands.Reset;
-                        ObjDemands.SetRange(ObjDemands."Document No", "Document No");
+                        ObjDemands.SetRange(ObjDemands."Document No", Rec."Document No");
                         if ObjDemands.FindSet then begin
-                            "Notice Type" := "notice type"::"3rd Notice";
-                            "Demand Notice Date" := Today;
+                            Rec."Notice Type" := Rec."notice type"::"3rd Notice";
+                            Rec."Demand Notice Date" := Today;
                         end;
 
                         ObjLoans.Reset;
-                        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan In Default");
+                        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
                             Report.Run(51516916, true, true, ObjLoans);
                         end;
@@ -431,7 +431,7 @@ Page 51516863 "Loan 1st Demand Notices Card"
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         CanCancelApprovalForRecord: Boolean;
-        SwizzsoftFactory: Codeunit UnknownCodeunit51516007;
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
         JTemplate: Code[20];
         JBatch: Code[20];
         GenSetup: Record 51516398;
@@ -456,7 +456,7 @@ Page 51516863 "Loan 1st Demand Notices Card"
     begin
         VarAuctioneerDetailsVisible := false;
 
-        if "Notice Type" = "notice type"::"3rd Notice" then begin
+        if Rec."Notice Type" = Rec."notice type"::"3rd Notice" then begin
             VarAuctioneerDetailsVisible := true;
         end
     end;

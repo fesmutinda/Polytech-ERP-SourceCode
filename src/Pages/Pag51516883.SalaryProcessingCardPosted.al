@@ -340,7 +340,7 @@ Page 51516883 "Salary Processing Card(Posted)"
         ELoanBuffer: Record 51516533;
         ObjVendor: Record Vendor;
         MembLedg: Record 51516365;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory";
         BATCH_NAME: Code[50];
         BATCH_TEMPLATE: Code[50];
         DOCUMENT_NO: Code[40];

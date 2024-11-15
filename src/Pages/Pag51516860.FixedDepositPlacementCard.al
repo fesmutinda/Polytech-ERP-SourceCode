@@ -617,7 +617,7 @@ Page 51516860 "Fixed Deposit Placement Card"
         BATCH_TEMPLATE: Code[30];
         BATCH_NAME: Code[30];
         DOCUMENT_NO: Code[30];
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory";
         LineNo: Integer;
         ObjInterestBuffer: Record 51516467;
         ErrorAlreadyEffected: label 'Fixed Deposit Already Effected';

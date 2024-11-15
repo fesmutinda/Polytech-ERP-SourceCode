@@ -592,7 +592,7 @@ Page 50014 "Sacco Transfer Card(App)"
         BATCH_NAME: Code[50];
         DOCUMENT_NO: Code[50];
         LineNo: Integer;
-        SFactory: Codeunit UnknownCodeunit51516007;
+        SFactory: Codeunit "Swizzsoft Factory";
         VarExciseDuty: Decimal;
         VarExciseDutyAccount: Code[30];
         VarDepositDebitTypeEditable: Boolean;
