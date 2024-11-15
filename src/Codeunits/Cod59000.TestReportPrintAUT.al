@@ -35,7 +35,7 @@ Codeunit 59000 "Test Report-PrintAUT"
         ServLine: Record "Service Line";
         WhseJnlTemplate: Record "Warehouse Journal Template";
         WhseJnlLine: Record "Warehouse Journal Line";
-        BankRecHdr: Record 10120;
+        BankRecHdr: Record "Bank Transfer Header Details";
         InvtPeriod: Record "Inventory Period";
         SalesCalcDisc: Codeunit "Sales-Calc. Discount";
         PurchCalcDisc: Codeunit "Purch.-Calc.Discount";
@@ -59,8 +59,8 @@ Codeunit 59000 "Test Report-PrintAUT"
                     Report.Run(ReportSelection."Report ID", true, false, BankAccRecon);
                 ReportSelection.Usage::"SM.Test":
                     Report.Run(ReportSelection."Report ID", true, false, ServiceHeader);
-                ReportSelection.Usage::"Invt. Period Test":
-                    Report.Run(ReportSelection."Report ID", true, false, InvtPeriod);
+            // ReportSelection.Usage::"Invt. Period Test":
+            //     Report.Run(ReportSelection."Report ID", true, false, InvtPeriod);
             end;
         until ReportSelection.Next = 0;
     end;
@@ -300,7 +300,7 @@ Codeunit 59000 "Test Report-PrintAUT"
     begin
         InvtPeriod := NewInvtPeriod;
         InvtPeriod.SetRecfilter;
-        PrintReport(ReportSelection.Usage::"Invt. Period Test");
+        // PrintReport(ReportSelection.Usage::"Invt. Period Test");
     end;
 
 
@@ -324,7 +324,7 @@ Codeunit 59000 "Test Report-PrintAUT"
     end;
 
 
-    procedure PrintBankRec(NewBankRecHdr: Record 10120)
+    procedure PrintBankRec(NewBankRecHdr: Record "Bank Transfer Header Details")
     begin
         BankRecHdr := NewBankRecHdr;
         BankRecHdr.SetRecfilter;

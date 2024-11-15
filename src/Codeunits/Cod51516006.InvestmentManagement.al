@@ -29,14 +29,14 @@ Codeunit 51516006 "Investment Management"
             GenJnlLine."Journal Batch Name" := "Journal Batch";
             GenJnlLine.Validate(GenJnlLine."Journal Batch Name");
             GenJnlLine."Line No." := LineNo;
-            GenJnlLine."Source Code" := SourceCode;
+            // GenJnlLine."Source Code" := SourceCode;
             GenJnlLine."Posting Date" := Today;
         end;
         // PaymentHeader."Posting Date";
-        if CustomerLinesExist(PaymentHeader) then
-            GenJnlLine."Document Type" := GenJnlLine."document type"::" "
-        else
-            GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
+        // if CustomerLinesExist(PaymentHeader) then
+        //     GenJnlLine."Document Type" := GenJnlLine."document type"::" "
+        // else
+        GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
         GenJnlLine."Document No." := PaymentHeader."No.";
         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
         GenJnlLine."Account Type" := GenJnlLine."account type"::"Bank Account";

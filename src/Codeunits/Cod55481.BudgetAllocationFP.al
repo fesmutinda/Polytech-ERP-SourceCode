@@ -22,29 +22,29 @@ Codeunit 55481 "Budget Allocation FP"
         with Rec do begin
 
             //check if the date inserted as the start date is greater than the end date
-            if ("Start Date" > "End Date") then begin
+            if (Rec."Start Date" > Rec."End Date") then begin
                 Error('Ending Date must BE greater than or equal to start date');
             end;
             /*Get the new date selected by the user first*/
-            NewDate := "Start Date";
+            NewDate := Rec."Start Date";
             /*Get the period*/
-            if "Period Type" = "period type"::"0" then begin
+            if Rec."Period Type" = Rec."period type"::"0" then begin
                 Period := 'D';
             end
-            else if "Period Type" = "period type"::"1" then begin
+            else if Rec."Period Type" = Rec."period type"::"1" then begin
                 Period := 'W';
             end
-            else if "Period Type" = "period type"::"2" then begin
+            else if Rec."Period Type" = Rec."period type"::"2" then begin
                 Period := 'M';
             end
-            else if "Period Type" = "period type"::"3" then begin
+            else if Rec."Period Type" = Rec."period type"::"3" then begin
                 Period := 'Q';
             end
             else begin
                 Period := 'Y';
             end;
             /*Initiate the loop*/
-            while NewDate <= "End Date"
+            while NewDate <= Rec."End Date"
               do begin
                 IntC := IntC + 1;
                 NewDate := CalcDate('1' + Period, NewDate);
@@ -52,7 +52,7 @@ Codeunit 55481 "Budget Allocation FP"
             /*Number of times to divide amount has been identified*/
             /*Get the amount and get the amount per period identified*/
 
-            Amnt := Amount / IntC;
+            Amnt := Rec.Amount / IntC;
 
             /*Get the entry number*/
             GLBudgetEntry.Reset;
@@ -65,65 +65,65 @@ Codeunit 55481 "Budget Allocation FP"
 
             EntryNo := EntryNo + 1;
             /*Check if the user wishes to overwrite the details already in the system*/
-            if Overwrite = true then begin
+            if Rec.Overwrite = true then begin
                 GLBudgetEntry.Reset;
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Name", Name);
-                GLBudgetEntry.SetRange(GLBudgetEntry."Item No.", "Item No");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 1 Code", "Global Dimension 1 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 2 Code", "Global Dimension 2 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 1 Code", "Budget Dimension 1 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 2 Code", "Budget Dimension 2 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 3 Code", "Budget Dimension 3 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Name", Rec.Name);
+                GLBudgetEntry.SetRange(GLBudgetEntry."Item No.", Rec."Item No");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 2 Code", Rec."Global Dimension 2 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 1 Code", Rec."Budget Dimension 1 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 2 Code", Rec."Budget Dimension 2 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 3 Code", Rec."Budget Dimension 3 Code");
                 if GLBudgetEntry.Find('-') then begin
                     GLBudgetEntry.DeleteAll;
                 end;
             end;
 
             /*Reset the new date*/
-            NewDate := "Start Date";
+            NewDate := Rec."Start Date";
             /*Initiate the loop to save the details into the table*/
-            while NewDate <= "End Date"
+            while NewDate <= Rec."End Date"
               do begin
                 GLBudgetEntry.Init;
                 GLBudgetEntry."Entry No." := EntryNo;
 
                 GLBudgetEntry."Analysis Area" := GLBudgetEntry."analysis area"::Purchase;
 
-                GLBudgetEntry."Budget Name" := Name;
+                GLBudgetEntry."Budget Name" := Rec.Name;
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Name");
 
-                GLBudgetEntry."Item No." := "Item No";
+                GLBudgetEntry."Item No." := Rec."Item No";
                 GLBudgetEntry.Validate(GLBudgetEntry."Item No.");
                 //    GL.RESET;
                 //    GL.GET("Item No");
                 //      Forced to comment out by TChibo
                 //    GLBudgetEntry."Item G/L Sales Account":=GL."Item G/L Sales Account";
                 //    GLBudgetEntry."Item G/L Cost Account":=GLBudgetEntry."Item G/L Cost Account";
-                GLBudgetEntry."Global Dimension 1 Code" := "Global Dimension 1 Code";
+                GLBudgetEntry."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Global Dimension 1 Code");
 
-                GLBudgetEntry."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                GLBudgetEntry."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Global Dimension 2 Code");
 
-                GLBudgetEntry."Budget Dimension 1 Code" := "Budget Dimension 1 Code";
+                GLBudgetEntry."Budget Dimension 1 Code" := Rec."Budget Dimension 1 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 1 Code");
 
-                GLBudgetEntry."Budget Dimension 2 Code" := "Budget Dimension 2 Code";
+                GLBudgetEntry."Budget Dimension 2 Code" := Rec."Budget Dimension 2 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 2 Code");
 
-                GLBudgetEntry."Budget Dimension 3 Code" := "Budget Dimension 3 Code";
+                GLBudgetEntry."Budget Dimension 3 Code" := Rec."Budget Dimension 3 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 3 Code");
 
                 GLBudgetEntry.Date := NewDate;
 
 
-                if "Show As" = "show as"::"0" then begin
+                if Rec."Show As" = Rec."show as"::"0" then begin
                     GLBudgetEntry."Sales Amount" := Amnt;
                 end
-                else if "Show As" = "show as"::"1" then begin
+                else if Rec."Show As" = Rec."show as"::"1" then begin
                     GLBudgetEntry.Quantity := Amnt;
                 end
-                else if "Show As" = "show as"::"2" then begin
+                else if Rec."Show As" = Rec."show as"::"2" then begin
                     GLBudgetEntry."Cost Amount" := Amnt;
                 end;
 
@@ -133,9 +133,9 @@ Codeunit 55481 "Budget Allocation FP"
                 NewDate := CalcDate('1' + Period, NewDate);
                 EntryNo := EntryNo + 1;
             end;
-            Processed := true;
+            Rec.Processed := true;
             Rec."User ID" := UserId;
-            Modify;
+            Rec.Modify;
             Message('Budgetary Allocation Complete');
 
         end;
@@ -159,30 +159,30 @@ Codeunit 55481 "Budget Allocation FP"
         with Rec do begin
 
             //check if the date inserted as the start date is greater than the end date
-            if ("Start Date" > "End Date") then begin
+            if (Rec."Start Date" > Rec."End Date") then begin
                 Error('Ending Date must BE greater than or equal to start date');
             end;
 
             /*Get the new date selected by the user first*/
-            NewDate := "Start Date";
+            NewDate := Rec."Start Date";
             /*Get the period*/
-            if "Period Type" = "period type"::"0" then begin
+            if Rec."Period Type" = Rec."period type"::"0" then begin
                 Period := 'D';
             end
-            else if "Period Type" = "period type"::"1" then begin
+            else if Rec."Period Type" = Rec."period type"::"1" then begin
                 Period := 'W';
             end
-            else if "Period Type" = "period type"::"2" then begin
+            else if Rec."Period Type" = Rec."period type"::"2" then begin
                 Period := 'M';
             end
-            else if "Period Type" = "period type"::"3" then begin
+            else if Rec."Period Type" = Rec."period type"::"3" then begin
                 Period := 'Q';
             end
             else begin
                 Period := 'Y';
             end;
             /*Initiate the loop*/
-            while NewDate <= "End Date"
+            while NewDate <= Rec."End Date"
               do begin
                 IntC := IntC + 1;
                 NewDate := CalcDate('1' + Period, NewDate);
@@ -190,7 +190,7 @@ Codeunit 55481 "Budget Allocation FP"
             /*Number of times to divide amount has been identified*/
             /*Get the amount and get the amount per period identified*/
 
-            Amnt := Amount / IntC;
+            Amnt := Rec.Amount / IntC;
 
             /*Get the entry number*/
             GLBudgetEntry.Reset;
@@ -202,66 +202,66 @@ Codeunit 55481 "Budget Allocation FP"
             end;
             EntryNo := EntryNo + 1;
             /*Check if the user wishes to overwrite the details already in the system*/
-            if Overwrite = true then begin
+            if Rec.Overwrite = true then begin
                 GLBudgetEntry.Reset;
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Name", Name);
-                GLBudgetEntry.SetRange(GLBudgetEntry."Item No.", "Item No");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 1 Code", "Global Dimension 1 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 2 Code", "Global Dimension 2 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 1 Code", "Budget Dimension 1 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 2 Code", "Budget Dimension 2 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 3 Code", "Budget Dimension 3 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Name", Rec.Name);
+                GLBudgetEntry.SetRange(GLBudgetEntry."Item No.", Rec."Item No");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 2 Code", Rec."Global Dimension 2 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 1 Code", Rec."Budget Dimension 1 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 2 Code", Rec."Budget Dimension 2 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 3 Code", Rec."Budget Dimension 3 Code");
                 if GLBudgetEntry.Find('-') then begin
                     GLBudgetEntry.DeleteAll;
                 end;
             end;
             /*Reset the new date*/
-            NewDate := "Start Date";
+            NewDate := Rec."Start Date";
             /*Initiate the loop to save the details into the table*/
-            while NewDate <= "End Date"
+            while NewDate <= Rec."End Date"
               do begin
                 GLBudgetEntry.Init;
                 GLBudgetEntry."Entry No." := EntryNo;
 
-                GLBudgetEntry."Analysis Area" := "analysis area"::"0";
+                GLBudgetEntry."Analysis Area" := "Analysis Area Type"::Inventory;
 
-                GLBudgetEntry."Budget Name" := Name;
+                GLBudgetEntry."Budget Name" := Rec.Name;
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Name");
 
-                GLBudgetEntry."Item No." := "Item No";
+                GLBudgetEntry."Item No." := Rec."Item No";
                 GLBudgetEntry.Validate(GLBudgetEntry."Item No.");
                 GL.Reset;
-                GL.Get("Item No");
+                GL.Get(Rec."Item No");
                 /*
                       Forced to comment out by TChibo
                 //    GLBudgetEntry."Item G/L Sales Account":=GL."Item G/L Sales Account";
                 //    GLBudgetEntry."Item G/L Cost Account":=GLBudgetEntry."Item G/L Cost Account";
                 */
-                GLBudgetEntry."Global Dimension 1 Code" := "Global Dimension 1 Code";
+                GLBudgetEntry."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Global Dimension 1 Code");
 
-                GLBudgetEntry."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                GLBudgetEntry."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Global Dimension 2 Code");
 
-                GLBudgetEntry."Budget Dimension 1 Code" := "Budget Dimension 1 Code";
+                GLBudgetEntry."Budget Dimension 1 Code" := Rec."Budget Dimension 1 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 1 Code");
 
-                GLBudgetEntry."Budget Dimension 2 Code" := "Budget Dimension 2 Code";
+                GLBudgetEntry."Budget Dimension 2 Code" := Rec."Budget Dimension 2 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 2 Code");
 
-                GLBudgetEntry."Budget Dimension 3 Code" := "Budget Dimension 3 Code";
+                GLBudgetEntry."Budget Dimension 3 Code" := Rec."Budget Dimension 3 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 3 Code");
 
                 GLBudgetEntry.Date := NewDate;
 
 
-                if "Show As" = "show as"::"0" then begin
+                if Rec."Show As" = Rec."show as"::"0" then begin
                     GLBudgetEntry."Sales Amount" := Amnt;
                 end
-                else if "Show As" = "show as"::"1" then begin
+                else if Rec."Show As" = Rec."show as"::"1" then begin
                     GLBudgetEntry.Quantity := Amnt;
                 end
-                else if "Show As" = "show as"::"2" then begin
+                else if Rec."Show As" = Rec."show as"::"2" then begin
                     GLBudgetEntry."Cost Amount" := Amnt;
                 end;
 
@@ -271,9 +271,9 @@ Codeunit 55481 "Budget Allocation FP"
                 NewDate := CalcDate('1' + Period, NewDate);
                 EntryNo := EntryNo + 1;
             end;
-            Processed := true;
+            Rec.Processed := true;
             Rec."User ID" := UserId;
-            Modify;
+            Rec.Modify;
             Message('Budgetary Allocation Complete');
 
         end;
@@ -297,33 +297,33 @@ Codeunit 55481 "Budget Allocation FP"
         with Rec do begin
 
             //check if the date inserted as the start date is greater than the end date
-            if ("Start Date" > "End Date") then begin
+            if (Rec."Start Date" > Rec."End Date") then begin
                 Error('Ending Date must BE greater than or equal to start date');
             end;
 
-            if "Type of Entry" = "type of entry"::"0" then begin
-                Error('Type Of Entry must not be blank in Line no.' + Format("Line No."));
+            if Rec."Type of Entry" = Rec."type of entry"::"0" then begin
+                Error('Type Of Entry must not be blank in Line no.' + Format(Rec."Line No."));
             end;
             /*Get the new date selected by the user first*/
-            NewDate := "Start Date";
+            NewDate := Rec."Start Date";
             /*Get the period*/
-            if "Period Type" = "period type"::"0" then begin
+            if Rec."Period Type" = Rec."period type"::"0" then begin
                 Period := 'D';
             end
-            else if "Period Type" = "period type"::"1" then begin
+            else if Rec."Period Type" = Rec."period type"::"1" then begin
                 Period := 'W';
             end
-            else if "Period Type" = "period type"::"2" then begin
+            else if Rec."Period Type" = Rec."period type"::"2" then begin
                 Period := 'M';
             end
-            else if "Period Type" = "period type"::"3" then begin
+            else if Rec."Period Type" = Rec."period type"::"3" then begin
                 Period := 'Q';
             end
             else begin
                 Period := 'Y';
             end;
             /*Initiate the loop*/
-            while NewDate <= "End Date"
+            while NewDate <= Rec."End Date"
               do begin
                 IntC := IntC + 1;
                 NewDate := CalcDate('1' + Period, NewDate);
@@ -331,7 +331,7 @@ Codeunit 55481 "Budget Allocation FP"
             /*Number of times to divide amount has been identified*/
             /*Get the amount and get the amount per period identified*/
 
-            Amnt := Amount / IntC;
+            Amnt := Rec.Amount / IntC;
 
             /*Get the entry number*/
             GLBudgetEntry.Reset;
@@ -343,69 +343,69 @@ Codeunit 55481 "Budget Allocation FP"
             end;
             EntryNo := EntryNo + 1;
             /*Check if the user wishes to overwrite the details already in the system*/
-            if Overwrite = true then begin
+            if Rec.Overwrite = true then begin
                 GLBudgetEntry.Reset;
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Name", Name);
-                GLBudgetEntry.SetRange(GLBudgetEntry."G/L Account No.", "G/L Account");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 1 Code", "Global Dimension 1 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 2 Code", "Global Dimension 2 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Business Unit Code", "Business Unit");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 1 Code", "Budget Dimension 1 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 2 Code", "Budget Dimension 2 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 3 Code", "Budget Dimension 3 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 4 Code", "Budget Dimension 4 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 5 Code", "Budget Dimension 5 Code");
-                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 6 Code", "Budget Dimension 6 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Name", Rec.Name);
+                GLBudgetEntry.SetRange(GLBudgetEntry."G/L Account No.", Rec."G/L Account");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Global Dimension 2 Code", Rec."Global Dimension 2 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Business Unit Code", Rec."Business Unit");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 1 Code", Rec."Budget Dimension 1 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 2 Code", Rec."Budget Dimension 2 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 3 Code", Rec."Budget Dimension 3 Code");
+                GLBudgetEntry.SetRange(GLBudgetEntry."Budget Dimension 4 Code", Rec."Budget Dimension 4 Code");
+                GLBudgetEntry.SetRange(Rec."Budget Dimension 5 Code", Rec."Budget Dimension 5 Code");
+                GLBudgetEntry.SetRange(Rec."Budget Dimension 6 Code", Rec."Budget Dimension 6 Code");
                 if GLBudgetEntry.Find('-') then begin
                     GLBudgetEntry.DeleteAll;
                 end;
             end;
             /*Reset the new date*/
-            NewDate := "Start Date";
+            NewDate := Rec."Start Date";
             /*Initiate the loop to save the details into the table*/
-            while NewDate <= "End Date"
+            while NewDate <= Rec."End Date"
               do begin
                 GLBudgetEntry.Init;
                 GLBudgetEntry."Entry No." := EntryNo;
 
-                GLBudgetEntry."Budget Name" := Name;
+                GLBudgetEntry."Budget Name" := Rec.Name;
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Name");
 
-                GLBudgetEntry."G/L Account No." := "G/L Account";
+                GLBudgetEntry."G/L Account No." := Rec."G/L Account";
                 GLBudgetEntry.Validate(GLBudgetEntry."G/L Account No.");
 
-                GLBudgetEntry."Global Dimension 1 Code" := "Global Dimension 1 Code";
+                GLBudgetEntry."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Global Dimension 1 Code");
 
-                GLBudgetEntry."Global Dimension 2 Code" := "Global Dimension 2 Code";
+                GLBudgetEntry."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Global Dimension 2 Code");
 
-                GLBudgetEntry."Business Unit Code" := "Business Unit";
+                GLBudgetEntry."Business Unit Code" := Rec."Business Unit";
                 GLBudgetEntry.Validate(GLBudgetEntry."Business Unit Code");
 
-                GLBudgetEntry."Budget Dimension 1 Code" := "Budget Dimension 1 Code";
+                GLBudgetEntry."Budget Dimension 1 Code" := Rec."Budget Dimension 1 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 1 Code");
 
-                GLBudgetEntry."Budget Dimension 2 Code" := "Budget Dimension 2 Code";
+                GLBudgetEntry."Budget Dimension 2 Code" := Rec."Budget Dimension 2 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 2 Code");
 
-                GLBudgetEntry."Budget Dimension 3 Code" := "Budget Dimension 3 Code";
+                GLBudgetEntry."Budget Dimension 3 Code" := Rec."Budget Dimension 3 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 3 Code");
 
-                GLBudgetEntry."Budget Dimension 4 Code" := "Budget Dimension 4 Code";
+                GLBudgetEntry."Budget Dimension 4 Code" := Rec."Budget Dimension 4 Code";
                 GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 4 Code");
 
-                GLBudgetEntry."Budget Dimension 5 Code" := "Budget Dimension 5 Code";
-                GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 5 Code");
+                Rec."Budget Dimension 5 Code" := Rec."Budget Dimension 5 Code";
+                GLBudgetEntry.Validate(Rec."Budget Dimension 5 Code");
 
-                GLBudgetEntry."Budget Dimension 6 Code" := "Budget Dimension 6 Code";
-                GLBudgetEntry.Validate(GLBudgetEntry."Budget Dimension 6 Code");
+                Rec."Budget Dimension 6 Code" := Rec."Budget Dimension 6 Code";
+                GLBudgetEntry.Validate(Rec."Budget Dimension 6 Code");
 
                 GLBudgetEntry.Date := NewDate;
-                if "Type of Entry" = "type of entry"::"1" then begin
+                if Rec."Type of Entry" = Rec."type of entry"::"1" then begin
                     GLBudgetEntry.Amount := Amnt;
                 end
-                else if "Type of Entry" = "type of entry"::"2" then begin
+                else if Rec."Type of Entry" = Rec."type of entry"::"2" then begin
                     GLBudgetEntry.Amount := -Amnt;
                 end;
                 GLBudgetEntry."User ID" := UserId;

@@ -186,49 +186,49 @@ Codeunit 51516119 AdminPortal
     end;
 
 
-    procedure FnLoanportfolio(From: Date; Todate: Date; Product: Code[10]; var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
+    // procedure FnLoanportfolio(From: Date; Todate: Date; Product: Code[10]; var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
 
-        ProductsSetup.Reset;
-        LoanApp.SetRange(LoanApp."Loan Product Type", Product);
-        // LoanApp.SETRANGE(LoanApp."Issued Date",From,Todate);
-        if LoanApp.Find('-') then begin
+    //     ProductsSetup.Reset;
+    //     LoanApp.SetRange(LoanApp."Loan Product Type", Product);
+    //     // LoanApp.SETRANGE(LoanApp."Issued Date",From,Todate);
+    //     if LoanApp.Find('-') then begin
 
-            Filename := Path.GetTempPath() + Path.GetRandomFileName();
-            Report.SaveAsPdf(51516373, Filename, LoanApp);
+    //         Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //         Report.SaveAsPdf(51516373, Filename, LoanApp);
 
-            FileMode := 4;
-            FileAccess := 1;
+    //         FileMode := 4;
+    //         FileAccess := 1;
 
-            FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //         FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-            MemoryStream := MemoryStream.MemoryStream();
+    //         MemoryStream := MemoryStream.MemoryStream();
 
-            MemoryStream.SetLength(FileStream.Length);
-            FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //         MemoryStream.SetLength(FileStream.Length);
+    //         FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-            Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-            Message(Format(Bigtext));
-            // exitString:=BigText;
-            //MESSAGE(exitString);
-            MemoryStream.Close();
-            MemoryStream.Dispose();
-            FileStream.Close();
-            FileStream.Dispose();
-            _File.Delete(Filename);
+    //         Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //         Message(Format(Bigtext));
+    //         // exitString:=BigText;
+    //         //MESSAGE(exitString);
+    //         MemoryStream.Close();
+    //         MemoryStream.Dispose();
+    //         FileStream.Close();
+    //         FileStream.Dispose();
+    //         _File.Delete(Filename);
 
-        end;
-    end;
+    //     end;
+    // end;
 
 
     procedure FnLoanPerproduct(ProductType: Code[10]) info: Decimal
@@ -252,51 +252,51 @@ Codeunit 51516119 AdminPortal
     end;
 
 
-    procedure FnLoansRegister(Status: Option; SourceLoan: Option; Bank: Code[30]; Producttype: Code[30]; var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        if SourceLoan <> 0 then
-            LoanApp.SetFilter(Source, '%1', SourceLoan);
-        if Bank <> '' then
-            LoanApp.SetFilter("Bank code", '%1', Bank);
-        if Producttype <> '' then
-            LoanApp.SetFilter("Loan Product Type", '%1', Producttype);
-        if Status <> 0 then
-            LoanApp.SetFilter("Loan Status", '%1', Status);
+    // procedure FnLoansRegister(Status: Option; SourceLoan: Option; Bank: Code[30]; Producttype: Code[30]; var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     if SourceLoan <> 0 then
+    //         LoanApp.SetFilter(Source, '%1', SourceLoan);
+    //     if Bank <> '' then
+    //         LoanApp.SetFilter("Bank code", '%1', Bank);
+    //     if Producttype <> '' then
+    //         LoanApp.SetFilter("Loan Product Type", '%1', Producttype);
+    //     if Status <> 0 then
+    //         LoanApp.SetFilter("Loan Status", '%1', Status);
 
-        Filename := Path.GetTempPath() + Path.GetRandomFileName();
-        Report.SaveAsPdf(51516868, Filename, LoanApp);
+    //     Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //     Report.SaveAsPdf(51516868, Filename, LoanApp);
 
-        FileMode := 4;
-        FileAccess := 1;
+    //     FileMode := 4;
+    //     FileAccess := 1;
 
-        FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //     FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-        MemoryStream := MemoryStream.MemoryStream();
+    //     MemoryStream := MemoryStream.MemoryStream();
 
-        MemoryStream.SetLength(FileStream.Length);
-        FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //     MemoryStream.SetLength(FileStream.Length);
+    //     FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-        Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-        Message(Format(Bigtext));
-        // exitString:=BigText;
-        //MESSAGE(exitString);
-        MemoryStream.Close();
-        MemoryStream.Dispose();
-        FileStream.Close();
-        FileStream.Dispose();
-        _File.Delete(Filename);
-        //END;
-    end;
+    //     Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //     Message(Format(Bigtext));
+    //     // exitString:=BigText;
+    //     //MESSAGE(exitString);
+    //     MemoryStream.Close();
+    //     MemoryStream.Dispose();
+    //     FileStream.Close();
+    //     FileStream.Dispose();
+    //     _File.Delete(Filename);
+    //     //END;
+    // end;
 
 
     procedure Fnbanks() Loans: Text
@@ -308,49 +308,49 @@ Codeunit 51516119 AdminPortal
     end;
 
 
-    procedure FnAppraisalReports(LoanNo: Code[20]; var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: DotNet Path;
-        _File: DotNet File;
-        FileAccess: DotNet FileAccess;
-        FileMode: DotNet __MissingTypeSymbol__;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: DotNet FileStream;
-        Outputstream: OutStream;
-    begin
-        //ProductsSetup.RESET;
-        LoanApp.Reset;
-        LoanApp.SetRange(LoanApp."Loan  No.", LoanNo);
-        // LoanApp.SETRANGE(LoanApp."Issued Date",From,Todate);
-        if LoanApp.Find('-') then begin
+    // procedure FnAppraisalReports(LoanNo: Code[20]; var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: DotNet Path;
+    //     _File: DotNet File;
+    //     FileAccess: DotNet FileAccess;
+    //     FileMode: DotNet __MissingTypeSymbol__;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: DotNet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     //ProductsSetup.RESET;
+    //     LoanApp.Reset;
+    //     LoanApp.SetRange(LoanApp."Loan  No.", LoanNo);
+    //     // LoanApp.SETRANGE(LoanApp."Issued Date",From,Todate);
+    //     if LoanApp.Find('-') then begin
 
-            Filename := Path.GetTempPath() + Path.GetRandomFileName();
-            Report.SaveAsPdf(51516384, Filename, LoanApp);
+    //         Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //         Report.SaveAsPdf(51516384, Filename, LoanApp);
 
-            FileMode := 4;
-            FileAccess := 1;
+    //         FileMode := 4;
+    //         FileAccess := 1;
 
-            FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //         FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-            MemoryStream := MemoryStream.MemoryStream();
+    //         MemoryStream := MemoryStream.MemoryStream();
 
-            MemoryStream.SetLength(FileStream.Length);
-            FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //         MemoryStream.SetLength(FileStream.Length);
+    //         FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-            Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-            Message(Format(Bigtext));
-            // exitString:=BigText;
-            //MESSAGE(exitString);
-            MemoryStream.Close();
-            MemoryStream.Dispose();
-            FileStream.Close();
-            FileStream.Dispose();
-            _File.Delete(Filename);
+    //         Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //         Message(Format(Bigtext));
+    //         // exitString:=BigText;
+    //         //MESSAGE(exitString);
+    //         MemoryStream.Close();
+    //         MemoryStream.Dispose();
+    //         FileStream.Close();
+    //         FileStream.Dispose();
+    //         _File.Delete(Filename);
 
-        end;
-    end;
+    //     end;
+    // end;
 
 
     procedure fnMembers(var Gender: Text; var Location: Text) Total: Integer
@@ -415,9 +415,9 @@ Codeunit 51516119 AdminPortal
     begin
         Members.Reset;
         repeat
-            Members.CalcFields("Current Shares", "Outstanding Balance", "Share Capital B Class");
-            Deposits := Deposits + Members."Current Shares";
-            Shares := Shares + Members."Share Capital B Class";
+            // Members.CalcFields("Current Shares", "Outstanding Balance", "Share Capital B Class");
+            // Deposits := Deposits + Members."Current Shares";
+            // Shares := Shares + Members."Share Capital B Class";
             OutstandingLoans := OutstandingLoans + Members."Outstanding Balance";
         until Members.Next = 0;
     end;
@@ -521,175 +521,175 @@ Codeunit 51516119 AdminPortal
     end;
 
 
-    procedure FnDepostiReturns(var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        Filename := Path.GetTempPath() + Path.GetRandomFileName();
-        Report.SaveAsPdf(51516426, Filename, Members);
+    // procedure FnDepostiReturns(var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //     Report.SaveAsPdf(51516426, Filename, Members);
 
-        FileMode := 4;
-        FileAccess := 1;
+    //     FileMode := 4;
+    //     FileAccess := 1;
 
-        FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //     FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-        MemoryStream := MemoryStream.MemoryStream();
+    //     MemoryStream := MemoryStream.MemoryStream();
 
-        MemoryStream.SetLength(FileStream.Length);
-        FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //     MemoryStream.SetLength(FileStream.Length);
+    //     FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-        Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-        Message(Format(Bigtext));
-        // exitString:=BigText;
-        //MESSAGE(exitString);
-        MemoryStream.Close();
-        MemoryStream.Dispose();
-        FileStream.Close();
-        FileStream.Dispose();
-        _File.Delete(Filename);
-    end;
-
-
-    procedure FnRiskClassification(var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        Filename := Path.GetTempPath() + Path.GetRandomFileName();
-        Report.SaveAsPdf(50014, Filename, RiskAllocation);
-    end;
+    //     Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //     Message(Format(Bigtext));
+    //     // exitString:=BigText;
+    //     //MESSAGE(exitString);
+    //     MemoryStream.Close();
+    //     MemoryStream.Dispose();
+    //     FileStream.Close();
+    //     FileStream.Dispose();
+    //     _File.Delete(Filename);
+    // end;
 
 
-    procedure FnRiskClassificationByPro(var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        Filename := Path.GetTempPath() + Path.GetRandomFileName();
-        Report.SaveAsPdf(50013, Filename, ProductsSetup);
-
-        FileMode := 4;
-        FileAccess := 1;
-
-        FileStream := _File.Open(Filename, FileMode, FileAccess);
-
-        MemoryStream := MemoryStream.MemoryStream();
-
-        MemoryStream.SetLength(FileStream.Length);
-        FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
-
-        Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-        Message(Format(Bigtext));
-        // exitString:=BigText;
-        //MESSAGE(exitString);
-        MemoryStream.Close();
-        MemoryStream.Dispose();
-        FileStream.Close();
-        FileStream.Dispose();
-        _File.Delete(Filename);
-
-        //END;
-    end;
+    // procedure FnRiskClassification(var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //     Report.SaveAsPdf(50014, Filename, RiskAllocation);
+    // end;
 
 
-    procedure OutstadningLoans(var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        Filename := Path.GetTempPath() + Path.GetRandomFileName();
-        Report.SaveAsPdf(51516545, Filename, LoanApp);
+    // procedure FnRiskClassificationByPro(var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //     Report.SaveAsPdf(50013, Filename, ProductsSetup);
 
-        FileMode := 4;
-        FileAccess := 1;
+    //     FileMode := 4;
+    //     FileAccess := 1;
 
-        FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //     FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-        MemoryStream := MemoryStream.MemoryStream();
+    //     MemoryStream := MemoryStream.MemoryStream();
 
-        MemoryStream.SetLength(FileStream.Length);
-        FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //     MemoryStream.SetLength(FileStream.Length);
+    //     FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-        Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-        Message(Format(Bigtext));
-        // exitString:=BigText;
-        //MESSAGE(exitString);
-        MemoryStream.Close();
-        MemoryStream.Dispose();
-        FileStream.Close();
-        FileStream.Dispose();
-        _File.Delete(Filename);
+    //     Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //     Message(Format(Bigtext));
+    //     // exitString:=BigText;
+    //     //MESSAGE(exitString);
+    //     MemoryStream.Close();
+    //     MemoryStream.Dispose();
+    //     FileStream.Close();
+    //     FileStream.Dispose();
+    //     _File.Delete(Filename);
 
-        //END;
-    end;
+    //     //END;
+    // end;
 
 
-    procedure MemberDeposits(var Bigtext: BigText)
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        Filename := Path.GetTempPath() + Path.GetRandomFileName();
-        Report.SaveAsPdf(51516873, Filename, Members);
+    // procedure OutstadningLoans(var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //     Report.SaveAsPdf(51516545, Filename, LoanApp);
 
-        FileMode := 4;
-        FileAccess := 1;
+    //     FileMode := 4;
+    //     FileAccess := 1;
 
-        FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //     FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-        MemoryStream := MemoryStream.MemoryStream();
+    //     MemoryStream := MemoryStream.MemoryStream();
 
-        MemoryStream.SetLength(FileStream.Length);
-        FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //     MemoryStream.SetLength(FileStream.Length);
+    //     FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-        Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-        Message(Format(Bigtext));
-        // exitString:=BigText;
-        //MESSAGE(exitString);
-        MemoryStream.Close();
-        MemoryStream.Dispose();
-        FileStream.Close();
-        FileStream.Dispose();
-        _File.Delete(Filename);
+    //     Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //     Message(Format(Bigtext));
+    //     // exitString:=BigText;
+    //     //MESSAGE(exitString);
+    //     MemoryStream.Close();
+    //     MemoryStream.Dispose();
+    //     FileStream.Close();
+    //     FileStream.Dispose();
+    //     _File.Delete(Filename);
 
-        //END;
-    end;
+    //     //END;
+    // end;
+
+
+    // procedure MemberDeposits(var Bigtext: BigText)
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //     Report.SaveAsPdf(51516873, Filename, Members);
+
+    //     FileMode := 4;
+    //     FileAccess := 1;
+
+    //     FileStream := _File.Open(Filename, FileMode, FileAccess);
+
+    //     MemoryStream := MemoryStream.MemoryStream();
+
+    //     MemoryStream.SetLength(FileStream.Length);
+    //     FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+
+    //     Bigtext.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //     Message(Format(Bigtext));
+    //     // exitString:=BigText;
+    //     //MESSAGE(exitString);
+    //     MemoryStream.Close();
+    //     MemoryStream.Dispose();
+    //     FileStream.Close();
+    //     FileStream.Dispose();
+    //     _File.Delete(Filename);
+
+    //     //END;
+    // end;
 
 
     procedure FnGenerateLoansAppraisal(LoanNo: Text): Text
@@ -703,7 +703,7 @@ Codeunit 51516119 AdminPortal
         LoanApp.Reset;
         LoanApp.SetRange(LoanApp."Loan  No.", LoanNo);
         if LoanApp.Find('-') then
-            Report.SaveAsPdf(Report::"Loan Appraisal Draft", filename, LoanApp);
+            // Report.SaveAsPdf(Report::"Loan Appraisal Draft", filename, LoanApp);
 
         exit(filename);
     end;
@@ -810,7 +810,7 @@ Codeunit 51516119 AdminPortal
         Paymentheader.Reset;
         Paymentheader.SetRange("No.", No);
         if Paymentheader.Find('-') then
-            Report.SaveAsPdf(Report::"Payment Voucher New", filename, Paymentheader);
+            // Report.SaveAsPdf(Report::"Payment Voucher New", filename, Paymentheader);
         exit(filename);
     end;
 
@@ -825,52 +825,52 @@ Codeunit 51516119 AdminPortal
         Members.SetRange(Members."No.", No);
         Members.SetRange(Members."Date Filter", DateFilter);
         if Members.Find('-') then
-            Report.SaveAsPdf(Report::"FORM 3 - DEPOSITS Return", filename, Members);
+            // Report.SaveAsPdf(Report::"FORM 3 - DEPOSITS Return", filename, Members);
         exit(filename);
     end;
 
 
-    procedure fnGenerateLoans(LoanNo: Code[50]; DateFilter: Date; var BigText: BigText) exitString: Text
-    var
-        Filename: Text[100];
-        Convert: dotnet Convert;
-        Path: dotnet Path;
-        _File: dotnet File;
-        FileAccess: dotnet FileAccess;
-        FileMode: dotnet FileMode;
-        MemoryStream: dotnet MemoryStream;
-        FileStream: dotnet FileStream;
-        Outputstream: OutStream;
-    begin
-        LoanApp.Reset;
-        LoanApp.SetRange("Loan  No.", LoanNo);
-        if LoanApp.Find('-') then begin
+    // procedure fnGenerateLoans(LoanNo: Code[50]; DateFilter: Date; var BigText: BigText) exitString: Text
+    // var
+    //     Filename: Text[100];
+    //     Convert: dotnet Convert;
+    //     Path: dotnet Path;
+    //     _File: dotnet File;
+    //     FileAccess: dotnet FileAccess;
+    //     FileMode: dotnet FileMode;
+    //     MemoryStream: dotnet MemoryStream;
+    //     FileStream: dotnet FileStream;
+    //     Outputstream: OutStream;
+    // begin
+    //     LoanApp.Reset;
+    //     LoanApp.SetRange("Loan  No.", LoanNo);
+    //     if LoanApp.Find('-') then begin
 
-            Filename := Path.GetTempPath() + Path.GetRandomFileName();
-            Report.SaveAsPdf(51516545, Filename, LoanApp);
+    //         Filename := Path.GetTempPath() + Path.GetRandomFileName();
+    //         Report.SaveAsPdf(51516545, Filename, LoanApp);
 
-            FileMode := 4;
-            FileAccess := 1;
+    //         FileMode := 4;
+    //         FileAccess := 1;
 
-            FileStream := _File.Open(Filename, FileMode, FileAccess);
+    //         FileStream := _File.Open(Filename, FileMode, FileAccess);
 
-            MemoryStream := MemoryStream.MemoryStream();
+    //         MemoryStream := MemoryStream.MemoryStream();
 
-            MemoryStream.SetLength(FileStream.Length);
-            FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
+    //         MemoryStream.SetLength(FileStream.Length);
+    //         FileStream.Read(MemoryStream.GetBuffer(), 0, FileStream.Length);
 
-            BigText.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
-            Message(Format(BigText));
-            // exitString:=BigText;
-            //MESSAGE(exitString);
-            MemoryStream.Close();
-            MemoryStream.Dispose();
-            FileStream.Close();
-            FileStream.Dispose();
-            _File.Delete(Filename);
+    //         BigText.AddText((Convert.ToBase64String(MemoryStream.GetBuffer())));
+    //         Message(Format(BigText));
+    //         // exitString:=BigText;
+    //         //MESSAGE(exitString);
+    //         MemoryStream.Close();
+    //         MemoryStream.Dispose();
+    //         FileStream.Close();
+    //         FileStream.Dispose();
+    //         _File.Delete(Filename);
 
-        end;
-    end;
+    //     end;
+    // end;
 
 
     procedure FnGenerateMemberDeposits(DateFilter: Date; No: Code[10]; CurrentShares: Code[10]): Text
@@ -888,7 +888,7 @@ Codeunit 51516119 AdminPortal
 
         if Members.Find('-') then begin
             Message('test3');
-            Report.SaveAsPdf(Report::"ANNEX 3 - MEMBER Deposits", filename, Members);
+            // Report.SaveAsPdf(Report::"ANNEX 3 - MEMBER Deposits", filename, Members);
             Message('test4');
         end;
         exit(filename);
@@ -1024,55 +1024,55 @@ Codeunit 51516119 AdminPortal
     end;
 
 
-    procedure SendEmail(ToEmail: Text[250]; EmailSubject: Text[250]; EmailBody: Text[250])
-    begin
-        if ToEmail <> '' then begin
-            CompanyInformation.Get;
-            SMTPSetup.Get;
-            SMTPMail.CreateMessage(CompanyInformation.Name, CompanyInformation."E-Mail", ToEmail, EmailSubject, '', true);
-            //SMTPMail.AppendBody('************DO NOT REPLY*************');
-            SMTPMail.AppendBody('<br><br>');
-            SMTPMail.AppendBody('Dear Sir/Madam');
-            SMTPMail.AppendBody('<br><br>');
-            SMTPMail.AppendBody(EmailBody);
-            SMTPMail.AppendBody('<br>');
-            SMTPMail.AppendBody('CHUNA SACCO SOCIETY LTD.');
-            SMTPMail.AppendBody('<br><br>');
-            SMTPMail.AppendBody('Thanks & Regards');
-            SMTPMail.AppendBody('<br><br>');
+    // procedure SendEmail(ToEmail: Text[250]; EmailSubject: Text[250]; EmailBody: Text[250])
+    // begin
+    //     if ToEmail <> '' then begin
+    //         CompanyInformation.Get;
+    //         SMTPSetup.Get;
+    //         SMTPMail.CreateMessage(CompanyInformation.Name, CompanyInformation."E-Mail", ToEmail, EmailSubject, '', true);
+    //         //SMTPMail.AppendBody('************DO NOT REPLY*************');
+    //         SMTPMail.AppendBody('<br><br>');
+    //         SMTPMail.AppendBody('Dear Sir/Madam');
+    //         SMTPMail.AppendBody('<br><br>');
+    //         SMTPMail.AppendBody(EmailBody);
+    //         SMTPMail.AppendBody('<br>');
+    //         SMTPMail.AppendBody('CHUNA SACCO SOCIETY LTD.');
+    //         SMTPMail.AppendBody('<br><br>');
+    //         SMTPMail.AppendBody('Thanks & Regards');
+    //         SMTPMail.AppendBody('<br><br>');
 
-            SMTPMail.AppendBody('<br><br>');
-            // SMTPMail.AppendBody(SMTPSetup.sen);
-            SMTPMail.AppendBody('<br><br>');
-            SMTPMail.AppendBody('<HR>');
-            SMTPMail.AppendBody('This is a system generated mail. For any complains/ compliments kindly  reply to this email ID or call ' + CompanyInformation."Phone No." + '.');
-            SMTPMail.Send;
+    //         SMTPMail.AppendBody('<br><br>');
+    //         // SMTPMail.AppendBody(SMTPSetup.sen);
+    //         SMTPMail.AppendBody('<br><br>');
+    //         SMTPMail.AppendBody('<HR>');
+    //         SMTPMail.AppendBody('This is a system generated mail. For any complains/ compliments kindly  reply to this email ID or call ' + CompanyInformation."Phone No." + '.');
+    //         SMTPMail.Send;
 
-        end;
-    end;
+    //     end;
+    // end;
 
 
-    procedure FnGenerateRisk(SasraCategory: Option; DateFilter: Date): Text
-    begin
-        filename := FILEFOLDER;
-        filename += '.pdf';
-        if Exists(filename) then
-            Erase(filename);
-        //RiskAllocation.RESET;
-        Message('test');
-        LoanApp.Reset;
-        LoanApp.SetRange("Loans Category", RiskAllocation."Sasra Category");
-        // RiskAllocation.SETFILTER("Sasra Category",'%1|%2|%3|%4',RiskAllocation."Sasra Category"::Perfoming,RiskAllocation."Sasra Category"::Watch,RiskAllocation."Sasra Category"::Loss,RiskAllocation."Sasra Category"::Doubtful);
+    //     procedure FnGenerateRisk(SasraCategory: Option; DateFilter: Date): Text
+    //     begin
+    //         filename := FILEFOLDER;
+    //         filename += '.pdf';
+    //         if Exists(filename) then
+    //             Erase(filename);
+    //         //RiskAllocation.RESET;
+    //         Message('test');
+    //         LoanApp.Reset;
+    //         LoanApp.SetRange("Loans Category", RiskAllocation."Sasra Category");
+    //         // RiskAllocation.SETFILTER("Sasra Category",'%1|%2|%3|%4',RiskAllocation."Sasra Category"::Perfoming,RiskAllocation."Sasra Category"::Watch,RiskAllocation."Sasra Category"::Loss,RiskAllocation."Sasra Category"::Doubtful);
 
-        Message('test');
-        LoanApp.SetFilter(LoanApp."Date filter", '..' + Format(DateFilter));
-        Message('testt%1', LoanApp."Date filter");
-        if LoanApp.Find('-') then
-            Message('test');
-        Report.SaveAsPdf(Report::"FORM 4 - Loan Classifications", filename, RiskAllocation);
-        Message('test');
-        exit(filename);
+    //         Message('test');
+    //         LoanApp.SetFilter(LoanApp."Date filter", '..' + Format(DateFilter));
+    //         Message('testt%1', LoanApp."Date filter");
+    //         if LoanApp.Find('-') then
+    //             Message('test');
+    //         Report.SaveAsPdf(Report::"FORM 4 - Loan Classifications", filename, RiskAllocation);
+    //         Message('test');
+    //         exit(filename);
 
-    end;
+    //     end;
 }
 

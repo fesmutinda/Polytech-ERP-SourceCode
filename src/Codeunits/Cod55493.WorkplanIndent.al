@@ -18,7 +18,7 @@ Codeunit 55493 "Workplan Indent"
     end;
 
     var
-        GLAcc: Record 55756;
+        GLAcc: Record "G/L Account";
         Window: Dialog;
         AccNo: array[10] of Code[20];
         i: Integer;
@@ -39,7 +39,7 @@ Codeunit 55493 "Workplan Indent"
                 repeat
                     Window.Update(1, "Activity Code");
 
-                    if "Account Type" = "account type"::"4" then begin
+                    if "Account Type" = "account type"::Total then begin
                         if i < 1 then
                             Error(
                               Text005,
@@ -51,7 +51,7 @@ Codeunit 55493 "Workplan Indent"
                     Indentation := i;
                     Modify;
 
-                    if "Account Type" = "account type"::"3" then begin
+                    if "Account Type" = "account type"::Posting then begin
                         i := i + 1;
                         AccNo[i] := "Activity Code";
                     end;

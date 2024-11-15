@@ -85,8 +85,8 @@ Codeunit 55484 "Budgetary Control"
                         if not Item.Get(PurchLine."No.") then
                             Error('Item Does not Exist');
 
-                        Item.TestField(Item."Item G/L Budget Account");
-                        BudgetGL := Item."Item G/L Budget Account";
+                        // Item.TestField(Item."Item G/L Budget Account");
+                        // BudgetGL := Item."Item G/L Budget Account";
                     end;
                     //  MESSAGE('FOUND');
                     if PurchLine.Type = PurchLine.Type::"Fixed Asset" then begin
@@ -523,7 +523,7 @@ Codeunit 55484 "Budgetary Control"
     end;
 
 
-    procedure CheckPayments(var PaymentHeader: Record 51516112)
+    procedure CheckPayments(var PaymentHeader: Record "Payment Header")
     var
         PayLine: Record 51516113;
         Commitments: Record 51516036;
@@ -552,12 +552,12 @@ Codeunit 55484 "Budgetary Control"
         if BCSetup.Mandatory then//budgetary control is mandatory
           begin
             //check if the dates are within the specified range in relation to the payment header table
-            if (PaymentHeader.Date < BCSetup."Current Budget Start Date") then begin
-                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader.Date,
+            if (PaymentHeader."Date Posted" < BCSetup."Current Budget Start Date") then begin
+                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader."Date Posted",
                 BCSetup."Current Budget Start Date", BCSetup."Current Budget End Date");
             end
-            else if (PaymentHeader.Date > BCSetup."Current Budget End Date") then begin
-                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader.Date,
+            else if (PaymentHeader."Date Posted" > BCSetup."Current Budget End Date") then begin
+                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader."Date Posted",
                 BCSetup."Current Budget Start Date", BCSetup."Current Budget End Date");
             end;
             //Is budget Available
@@ -576,15 +576,15 @@ Codeunit 55484 "Budgetary Control"
             if PayLine.FindFirst then begin
                 repeat
                     //check the votebook now
-                    FirstDay := Dmy2date(1, Date2dmy(PaymentHeader.Date, 2), Date2dmy(PaymentHeader.Date, 3));
-                    CurrMonth := Date2dmy(PaymentHeader.Date, 2);
+                    FirstDay := Dmy2date(1, Date2dmy(PaymentHeader."Date Posted", 2), Date2dmy(PaymentHeader."Date Posted", 3));
+                    CurrMonth := Date2dmy(PaymentHeader."Date Posted", 2);
                     if CurrMonth = 12 then begin
-                        LastDay := Dmy2date(1, 1, Date2dmy(PaymentHeader.Date, 3) + 1);
+                        LastDay := Dmy2date(1, 1, Date2dmy(PaymentHeader."Date Posted", 3) + 1);
                         LastDay := CalcDate('-1D', LastDay);
                     end
                     else begin
                         CurrMonth := CurrMonth + 1;
-                        LastDay := Dmy2date(1, CurrMonth, Date2dmy(PaymentHeader.Date, 3));
+                        LastDay := Dmy2date(1, CurrMonth, Date2dmy(PaymentHeader."Date Posted", 3));
                         LastDay := CalcDate('-1D', LastDay);
                     end;
 
@@ -613,7 +613,7 @@ Codeunit 55484 "Budgetary Control"
                     Actuals."Posting Date", Actuals."Account No.");
                     Actuals.SetRange(Actuals."Analysis View Code", BCSetup."Analysis View Code");
                     Actuals.SetRange(Actuals."Dimension 1 Value Code", PayLine."Global Dimension 1 Code");
-                    Actuals.SetRange(Actuals."Dimension 2 Value Code", PayLine."Shortcut Dimension 2 Code");
+                    // Actuals.SetRange(Actuals."Dimension 2 Value Code", PayLine."Shortcut Dimension 2 Code");
                     //Actuals.SETRANGE(Actuals."Dimension 3 Value Code",PayLine."Shortcut Dimension 3 Code");
                     //Actuals.SETRANGE(Actuals."Dimension 4 Value Code",PayLine."Shortcut Dimension 4 Code");
                     Actuals.SetRange(Actuals."Posting Date", BCSetup."Current Budget Start Date", LastDay);
@@ -631,7 +631,7 @@ Codeunit 55484 "Budgetary Control"
                     Commitments.SetRange(Commitments."G/L Account No.", BudgetGL);
                     Commitments.SetRange(Commitments."Posting Date", BCSetup."Current Budget Start Date", LastDay);
                     Commitments.SetRange(Commitments."Shortcut Dimension 1 Code", PayLine."Global Dimension 1 Code");
-                    Commitments.SetRange(Commitments."Shortcut Dimension 2 Code", PayLine."Shortcut Dimension 2 Code");
+                    // Commitments.SetRange(Commitments."Shortcut Dimension 2 Code", PayLine."Shortcut Dimension 2 Code");
                     Commitments.SetRange(Commitments."Shortcut Dimension 3 Code", PayLine."Shortcut Dimension 3 Code");
                     Commitments.SetRange(Commitments."Shortcut Dimension 4 Code", PayLine."Shortcut Dimension 4 Code");
                     Commitments.CalcSums(Commitments.Amount);
@@ -649,16 +649,16 @@ Codeunit 55484 "Budgetary Control"
                     end;
 
                     //check if the actuals plus the amount is greater then the budget amount
-                    if ((CommitmentAmount + PayLine."NetAmount LCY" + ActualsAmount) > BudgetAmount)
+                    if ((CommitmentAmount + PayLine."Net Amount" + ActualsAmount) > BudgetAmount)
                     and not (BCSetup."Allow OverExpenditure") then begin
                         Error('The Amount Voucher No %1  %2 %3  Exceeds The Budget By %4',
-                        PayLine.No, PayLine.Type, PayLine.No,
-                          Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PayLine."NetAmount LCY"))));
+                        PayLine.No, PayLine."Payment Type", PayLine.No,
+                          Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PayLine."Net Amount"))));
                     end else begin
                         //ADD A CONFIRMATION TO ALLOW USER TO DECIDE WHETHER TO CONTINUE
-                        if ((CommitmentAmount + PayLine."NetAmount LCY" + ActualsAmount) > BudgetAmount) then begin
+                        if ((CommitmentAmount + PayLine."Net Amount" + ActualsAmount) > BudgetAmount) then begin
                             if not Confirm(Text0001 +
-                            Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PayLine."NetAmount LCY")))
+                            Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PayLine."Net Amount")))
                             + Text0002, true) then begin
                                 Error('Budgetary Checking Process Aborted');
                             end;
@@ -669,23 +669,23 @@ Codeunit 55484 "Budgetary Control"
                         EntryNo += 1;
                         Commitments."Line No." := EntryNo;
                         Commitments.Date := Today;
-                        Commitments."Posting Date" := PaymentHeader.Date;
+                        Commitments."Posting Date" := PaymentHeader."Date Posted";
                         if PaymentHeader."Payment Type" = PaymentHeader."payment type"::Normal then
                             Commitments."Document Type" := Commitments."document type"::"Payment Voucher"
                         else
                             Commitments."Document Type" := Commitments."document type"::PettyCash;
                         Commitments."Document No." := PaymentHeader."No.";
-                        Commitments.Amount := PayLine."NetAmount LCY";
+                        Commitments.Amount := PaymentHeader."Net Amount";
                         Commitments."Month Budget" := BudgetAmount;
                         Commitments."Month Actual" := ActualsAmount;
                         Commitments.Committed := true;
                         Commitments."Committed By" := UserId;
-                        Commitments."Committed Date" := PaymentHeader.Date;
+                        Commitments."Committed Date" := PaymentHeader."Date Posted";
                         Commitments."G/L Account No." := BudgetGL;
                         Commitments."Committed Time" := Time;
                         //                        Commitments."Committed Machine":=ENVIRON('COMPUTERNAME');
                         Commitments."Shortcut Dimension 1 Code" := PayLine."Global Dimension 1 Code";
-                        Commitments."Shortcut Dimension 2 Code" := PayLine."Shortcut Dimension 2 Code";
+                        // Commitments."Shortcut Dimension 2 Code" := PayLine."Shortcut Dimension 2 Code";
                         Commitments."Shortcut Dimension 3 Code" := PayLine."Shortcut Dimension 3 Code";
                         Commitments."Shortcut Dimension 4 Code" := PayLine."Shortcut Dimension 4 Code";
                         Commitments.Budget := BCSetup."Current Budget Code";
@@ -711,8 +711,8 @@ Codeunit 55484 "Budgetary Control"
 
     procedure CheckPaymentsPettyCash(var PaymentHeader: Record 51516000)
     var
-        PayLine: Record 51516001;
-        Commitments: Record 51516036;
+        PayLine: Record "Payment Line";
+        Commitments: Record Committment;
         Amount: Decimal;
         GLAcc: Record "G/L Account";
         Item: Record Item;
@@ -738,12 +738,12 @@ Codeunit 55484 "Budgetary Control"
         if BCSetup.Mandatory then//budgetary control is mandatory
           begin
             //check if the dates are within the specified range in relation to the payment header table
-            if (PaymentHeader.Date < BCSetup."Current Budget Start Date") then begin
-                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader.Date,
+            if (PaymentHeader."Date Posted" < BCSetup."Current Budget Start Date") then begin
+                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader."Date Posted",
                 BCSetup."Current Budget Start Date", BCSetup."Current Budget End Date");
             end
-            else if (PaymentHeader.Date > BCSetup."Current Budget End Date") then begin
-                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader.Date,
+            else if (PaymentHeader."Date Posted" > BCSetup."Current Budget End Date") then begin
+                Error('The Current Date %1 In The Payment Voucher Does Not Fall Within Budget Dates %2 - %3', PaymentHeader."Date Posted",
                 BCSetup."Current Budget Start Date", BCSetup."Current Budget End Date");
             end;
             //Is budget Available
@@ -762,15 +762,15 @@ Codeunit 55484 "Budgetary Control"
             if PayLine.FindFirst then begin
                 repeat
                     //check the votebook now
-                    FirstDay := Dmy2date(1, Date2dmy(PaymentHeader.Date, 2), Date2dmy(PaymentHeader.Date, 3));
-                    CurrMonth := Date2dmy(PaymentHeader.Date, 2);
+                    FirstDay := Dmy2date(1, Date2dmy(PaymentHeader."Date Posted", 2), Date2dmy(PaymentHeader."Date Posted", 3));
+                    CurrMonth := Date2dmy(PaymentHeader."Date Posted", 2);
                     if CurrMonth = 12 then begin
-                        LastDay := Dmy2date(1, 1, Date2dmy(PaymentHeader.Date, 3) + 1);
+                        LastDay := Dmy2date(1, 1, Date2dmy(PaymentHeader."Date Posted", 3) + 1);
                         LastDay := CalcDate('-1D', LastDay);
                     end
                     else begin
                         CurrMonth := CurrMonth + 1;
-                        LastDay := Dmy2date(1, CurrMonth, Date2dmy(PaymentHeader.Date, 3));
+                        LastDay := Dmy2date(1, CurrMonth, Date2dmy(PaymentHeader."Date Posted", 3));
                         LastDay := CalcDate('-1D', LastDay);
                     end;
 
@@ -799,7 +799,7 @@ Codeunit 55484 "Budgetary Control"
                     Actuals."Posting Date", Actuals."Account No.");
                     Actuals.SetRange(Actuals."Analysis View Code", BCSetup."Analysis View Code");
                     Actuals.SetRange(Actuals."Dimension 1 Value Code", PayLine."Global Dimension 1 Code");
-                    Actuals.SetRange(Actuals."Dimension 2 Value Code", PayLine."Shortcut Dimension 2 Code");
+                    // Actuals.SetRange(Actuals."Dimension 2 Value Code", PayLine."Shortcut Dimension 2 Code");
                     //Actuals.SETRANGE(Actuals."Dimension 3 Value Code",PayLine."Shortcut Dimension 3 Code");
                     //Actuals.SETRANGE(Actuals."Dimension 4 Value Code",PayLine."Shortcut Dimension 4 Code");
                     Actuals.SetRange(Actuals."Posting Date", BCSetup."Current Budget Start Date", LastDay);
@@ -817,7 +817,7 @@ Codeunit 55484 "Budgetary Control"
                     Commitments.SetRange(Commitments."G/L Account No.", BudgetGL);
                     Commitments.SetRange(Commitments."Posting Date", BCSetup."Current Budget Start Date", LastDay);
                     Commitments.SetRange(Commitments."Shortcut Dimension 1 Code", PayLine."Global Dimension 1 Code");
-                    Commitments.SetRange(Commitments."Shortcut Dimension 2 Code", PayLine."Shortcut Dimension 2 Code");
+                    // Commitments.SetRange(Commitments."Shortcut Dimension 2 Code", PayLine."Shortcut Dimension 2 Code");
                     Commitments.SetRange(Commitments."Shortcut Dimension 3 Code", PayLine."Shortcut Dimension 3 Code");
                     Commitments.SetRange(Commitments."Shortcut Dimension 4 Code", PayLine."Shortcut Dimension 4 Code");
                     Commitments.CalcSums(Commitments.Amount);
@@ -835,16 +835,16 @@ Codeunit 55484 "Budgetary Control"
                     end;
 
                     //check if the actuals plus the amount is greater then the budget amount
-                    if ((CommitmentAmount + PayLine."NetAmount LCY" + ActualsAmount) > BudgetAmount)
+                    if ((CommitmentAmount + PaymentHeader."Net Amount" + ActualsAmount) > BudgetAmount)
                     and not (BCSetup."Allow OverExpenditure") then begin
                         Error('The Amount Voucher No %1  %2 %3  Exceeds The Budget By %4',
-                        PayLine.No, PayLine.Type, PayLine.No,
-                          Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PayLine."NetAmount LCY"))));
+                        PayLine.No, PayLine."Payment Type", PayLine.No,
+                          Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PaymentHeader."Net Amount"))));
                     end else begin
                         //ADD A CONFIRMATION TO ALLOW USER TO DECIDE WHETHER TO CONTINUE
-                        if ((CommitmentAmount + PayLine."NetAmount LCY" + ActualsAmount) > BudgetAmount) then begin
+                        if ((CommitmentAmount + PaymentHeader."Net Amount" + ActualsAmount) > BudgetAmount) then begin
                             if not Confirm(Text0001 +
-                            Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PayLine."NetAmount LCY")))
+                            Format(Abs(BudgetAmount - (CommitmentAmount + ActualsAmount + PaymentHeader."Net Amount")))
                             + Text0002, true) then begin
                                 Error('Budgetary Checking Process Aborted');
                             end;
@@ -855,23 +855,23 @@ Codeunit 55484 "Budgetary Control"
                         EntryNo += 1;
                         Commitments."Line No." := EntryNo;
                         Commitments.Date := Today;
-                        Commitments."Posting Date" := PaymentHeader.Date;
+                        Commitments."Posting Date" := PaymentHeader."Date Posted";
                         if PaymentHeader."Payment Type" = PaymentHeader."payment type"::Normal then
                             Commitments."Document Type" := Commitments."document type"::"Payment Voucher"
                         else
                             Commitments."Document Type" := Commitments."document type"::PettyCash;
                         Commitments."Document No." := PaymentHeader."No.";
-                        Commitments.Amount := PayLine."NetAmount LCY";
+                        Commitments.Amount := PaymentHeader."Net Amount";
                         Commitments."Month Budget" := BudgetAmount;
                         Commitments."Month Actual" := ActualsAmount;
                         Commitments.Committed := true;
                         Commitments."Committed By" := UserId;
-                        Commitments."Committed Date" := PaymentHeader.Date;
+                        Commitments."Committed Date" := PaymentHeader."Date Posted";
                         Commitments."G/L Account No." := BudgetGL;
                         Commitments."Committed Time" := Time;
                         //                        Commitments."Committed Machine":=ENVIRON('COMPUTERNAME');
                         Commitments."Shortcut Dimension 1 Code" := PayLine."Global Dimension 1 Code";
-                        Commitments."Shortcut Dimension 2 Code" := PayLine."Shortcut Dimension 2 Code";
+                        // Commitments."Shortcut Dimension 2 Code" := PayLine."Shortcut Dimension 2 Code";
                         Commitments."Shortcut Dimension 3 Code" := PayLine."Shortcut Dimension 3 Code";
                         Commitments."Shortcut Dimension 4 Code" := PayLine."Shortcut Dimension 4 Code";
                         Commitments.Budget := BCSetup."Current Budget Code";
@@ -1127,7 +1127,7 @@ Codeunit 55484 "Budgetary Control"
     end;
 
 
-    procedure CheckFundsAvailability(Payments: Record 51516112)
+    procedure CheckFundsAvailability(Payments: Record payment)
     var
         BankAcc: Record "Bank Account";
         "Current Source A/C Bal.": Decimal;

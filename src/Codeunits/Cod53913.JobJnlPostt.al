@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 53913 "Job-Jnl.-Postt"
 {
-    TableNo = 53917;
+    TableNo = "Job Journal Line";
 
     trigger OnRun()
     begin
@@ -17,9 +17,9 @@ Codeunit 53913 "Job-Jnl.-Postt"
         Text003: label 'The journal lines were successfully posted.';
         Text004: label 'The journal lines were successfully posted. ';
         Text005: label 'You are now in the %1 journal.';
-        JobJnlTemplate: Record 53916;
-        JobJnlLine: Record 53917;
-        JobJnlPostbatch: Codeunit 53911;
+        JobJnlTemplate: Record "Job Journal Template";
+        JobJnlLine: Record "Job Journal Line";
+        JobJnlPostbatch: Codeunit "Job Jnl.-Post Batch";
         TempJnlBatchName: Code[10];
 
     local procedure "Code"()

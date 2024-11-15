@@ -6,7 +6,7 @@ Page 50013 "Posted Sacco Transfer Card"
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = Card;
-    SourceTable = "Imprest Lines";
+    SourceTable = "Sacco Transfers";
 
     layout
     {
@@ -20,42 +20,42 @@ Page 50013 "Posted Sacco Transfer Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                     Editable = TransactionDateEditable;
                 }
-                field("Approved By"; "Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Transaction Description"; "Transaction Description")
-                {
-                    ApplicationArea = Basic;
-                    Editable = RemarkEditable;
-                }
-                field("Source Account Type"; "Source Account Type")
+                // field("Transaction Description"; Rec."Transaction Description")
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = RemarkEditable;
+                // }
+                field("Source Account Type"; Rec."Source Account Type")
                 {
                     ApplicationArea = Basic;
                     Editable = SourceAccountTypeEditable;
                 }
-                field("Savings Account Type"; "Savings Account Type")
+                field("Savings Account Type"; Rec."Source Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account No."; "Source Account No.")
+                field("Source Account No."; Rec."Source Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = SourceAccountNoEditbale;
                 }
-                field("Source Account Name"; "Source Account Name")
+                field("Source Account Name"; Rec."Source Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Source Transaction Type"; "Source Transaction Type")
+                field("Source Transaction Type"; Rec."Source Transaction Type")
                 {
                     ApplicationArea = Basic;
                     Editable = SourceAccountTypeEditable;
@@ -63,7 +63,7 @@ Page 50013 "Posted Sacco Transfer Card"
                     trigger OnValidate()
                     begin
                         DepositDebitTypeVisible := false;
-                        if "Source Transaction Type" = "source transaction type"::"Deposit Contribution" then begin
+                        if Rec."Source Transaction Type" = Rec."source transaction type"::"Deposit Contribution" then begin
                             DepositDebitTypeVisible := true;
                         end;
                     end;
@@ -73,18 +73,18 @@ Page 50013 "Posted Sacco Transfer Card"
                     Caption = 'Deposit Debit Type';
                     Editable = false;
                     Visible = DepositDebitTypeVisible;
-                    field("Deposit Debit Options"; "Deposit Debit Options")
+                    field("Deposit Debit Options"; Rec. "Deposit Debit Options")
                     {
                         ApplicationArea = Basic;
                         Editable = VarDepositDebitTypeEditable;
                     }
                 }
-                field("Source Loan No"; "Source Loan No")
+                field("Source Loan No"; Rec."Source Loan No")
                 {
                     ApplicationArea = Basic;
                     Editable = SourceLoanNoEditable;
                 }
-                field("Schedule Total"; "Schedule Total")
+                field("Schedule Total"; Rec."Schedule Total")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -106,7 +106,7 @@ Page 50013 "Posted Sacco Transfer Card"
                     Editable = false;
                     Visible = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

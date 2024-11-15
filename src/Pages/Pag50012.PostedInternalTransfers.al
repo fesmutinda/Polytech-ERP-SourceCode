@@ -3,8 +3,8 @@ Page 50012 "Posted Internal Transfers"
 {
     CardPageID = "Posted Sacco Transfer Card";
     PageType = List;
-    SourceTable = "Imprest Lines";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTable = "Sacco Transfers";
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {
@@ -16,35 +16,35 @@ Page 50012 "Posted Internal Transfers"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date"; "Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Schedule Total"; "Schedule Total")
+                field("Schedule Total"; Rec."Schedule Total")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Approved; Approved)
+                field(Approved; Rec.Approved)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By"; "Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account No."; "Source Account No.")
+                field("Source Account No."; Rec."Source Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Transaction Type"; "Source Transaction Type")
+                field("Source Transaction Type"; Rec."Source Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account Name"; "Source Account Name")
+                field("Source Account Name"; Rec."Source Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }

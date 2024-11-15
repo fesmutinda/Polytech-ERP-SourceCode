@@ -234,19 +234,19 @@ Codeunit 51516039 "SurestepApprovalsCodeUnit"
 
     //7)--------------------------------------------------------------------Send MembershipExit  Applications request For Approval start
 
-    procedure SendMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exit")
-    begin
-        if FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(MembershipExit) then begin
-            FnOnSendMembershipExitApplicationForApproval(MembershipExit);
-        end;
-    end;
+    // procedure SendMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exit")
+    // begin
+    //     if FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(MembershipExit) then begin
+    //         FnOnSendMembershipExitApplicationForApproval(MembershipExit);
+    //     end;
+    // end;
 
-    local procedure FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(var "Membership Exist": Record "Membership Exit"): Boolean;
-    begin
-        if not IsMembershipApplicationExitApprovalsWorkflowEnabled("Membership Exit") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(var "Membership Exist": Record "Membership Exit"): Boolean;
+    // begin
+    //     if not IsMembershipApplicationExitApprovalsWorkflowEnabled("Membership Exit") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
     procedure CancelMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exit")
@@ -393,19 +393,19 @@ Codeunit 51516039 "SurestepApprovalsCodeUnit"
 
     //...............................................................................
     //New FOSA Accounts Applications
-    procedure SendNewFOSAAccountApplicationsRequestForApproval(NewFOSAAccountApplicationNo: Code[40]; var "Product Applications Details": Record "Product Applications Details")
-    begin
-        if FnCheckIfNewFOSAAccountApplicationApprovalsWorkflowEnabled("Product Applications Details") then begin
-            FnOnSendNewFOSAAccountApplicationForApproval("Product Applications Details");
-        end;
-    end;
+    // procedure SendNewFOSAAccountApplicationsRequestForApproval(NewFOSAAccountApplicationNo: Code[40]; var "Product Applications Details": Record "Product Applications Details")
+    // begin
+    //     if FnCheckIfNewFOSAAccountApplicationApprovalsWorkflowEnabled("Product Applications Details") then begin
+    //         FnOnSendNewFOSAAccountApplicationForApproval("Product Applications Details");
+    //     end;
+    // end;
 
-    local procedure FnCheckIfNewFOSAAccountApplicationApprovalsWorkflowEnabled(var "Product Applications Details": Record "Product Applications Details"): Boolean;
-    begin
-        if not IsNewFOSAAccountApplicationApprovalsWorkflowEnabled("Product Applications Details") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfNewFOSAAccountApplicationApprovalsWorkflowEnabled(var "Product Applications Details": Record "Product Applications Details"): Boolean;
+    // begin
+    //     if not IsNewFOSAAccountApplicationApprovalsWorkflowEnabled("Product Applications Details") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
     procedure CancelNewFOSAAccountApplicationsRequestForApproval(NewFOSAAccountApplicationNo: Code[40]; var "Product Applications Details": Record "Product Applications Details")
@@ -544,42 +544,42 @@ Codeunit 51516039 "SurestepApprovalsCodeUnit"
     begin
     end;
     //12 ATM Card Transactions................................................................................
-    procedure SendATMTransactionsRequestForApproval(ATMTransactions: Code[40]; var "ATM Card Applications": Record "ATM Card Applications")
-    begin
-        if FnCheckIfATMTransactionsApprovalsWorkflowEnabled("ATM Card Applications") then begin
-            FnOnSendATMTransactionsForApproval("ATM Card Applications");
-        end;
-    end;
+    // procedure SendATMTransactionsRequestForApproval(ATMTransactions: Code[40]; var "ATM Card Applications": Record "ATM Card Applications")
+    // begin
+    //     if FnCheckIfATMTransactionsApprovalsWorkflowEnabled("ATM Card Applications") then begin
+    //         FnOnSendATMTransactionsForApproval("ATM Card Applications");
+    //     end;
+    // end;
 
-    local procedure FnCheckIfATMTransactionsApprovalsWorkflowEnabled(var "ATM Card Applications": Record "ATM Card Applications"): Boolean;
-    begin
-        if not IsATMTransactionsApprovalsWorkflowEnabled("ATM Card Applications") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfATMTransactionsApprovalsWorkflowEnabled(var "ATM Card Applications": Record "ATM Card Applications"): Boolean;
+    // begin
+    //     if not IsATMTransactionsApprovalsWorkflowEnabled("ATM Card Applications") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
-    procedure CancelATMTransactionsRequestForApproval(ATMTransactions: Code[40]; var "ATM Card Applications": Record "ATM Card Applications")
-    begin
-        FnOnCancelATMTransactionsApprovalRequest("ATM Card Applications");
-    end;
+    // procedure CancelATMTransactionsRequestForApproval(ATMTransactions: Code[40]; var "ATM Card Applications": Record "ATM Card Applications")
+    // begin
+    //     FnOnCancelATMTransactionsApprovalRequest("ATM Card Applications");
+    // end;
 
-    local procedure IsATMTransactionsApprovalsWorkflowEnabled(var ATMTransactions: Record "ATM Card Applications"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(ATMTransactions, Psalmkitswfevents.RunWorkflowOnSendATMTransactionsForApprovalCode));
-    end;
+    // local procedure IsATMTransactionsApprovalsWorkflowEnabled(var ATMTransactions: Record "ATM Card Applications"): Boolean
+    // begin
+    //     exit(WorkflowManagement.CanExecuteWorkflow(ATMTransactions, Psalmkitswfevents.RunWorkflowOnSendATMTransactionsForApprovalCode));
+    // end;
 
-    [IntegrationEvent(false, false)]
+    // [IntegrationEvent(false, false)]
 
-    procedure FnOnSendATMTransactionsForApproval(var ATMTransactions: Record "ATM Card Applications")
-    begin
-    end;
+    // procedure FnOnSendATMTransactionsForApproval(var ATMTransactions: Record "ATM Card Applications")
+    // begin
+    // end;
 
-    [IntegrationEvent(false, false)]
+    // [IntegrationEvent(false, false)]
 
-    procedure FnOnCancelATMTransactionsApprovalRequest(var ATMTransactions: Record "ATM Card Applications")
-    begin
-    end;
+    // procedure FnOnCancelATMTransactionsApprovalRequest(var ATMTransactions: Record "ATM Card Applications")
+    // begin
+    // end;
     //13)--------------------------------------------------------------------Send BOSATransactions For Approval start
     procedure SendInternalTransfersTransactionsRequestForApproval(InternalTransfersTransactions: Code[40]; var SaccoTransfers: Record "Sacco Transfers")
     begin

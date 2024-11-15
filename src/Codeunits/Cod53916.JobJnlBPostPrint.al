@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 53916 "Job-Jnl.-B.Post+Print"
 {
-    TableNo = 53922;
+    TableNo = "Job Journal Line";
 
     trigger OnRun()
     begin
@@ -15,11 +15,11 @@ Codeunit 53916 "Job-Jnl.-B.Post+Print"
         Text001: label 'The journals were successfully posted.';
         Text002: label 'It was not possible to post all of the journals. ';
         Text003: label 'The journals that were not successfully posted are now marked.';
-        JobJnlTemplate: Record 53916;
-        JobJnlBatch: Record 53922;
-        JobJnlLine: Record 53917;
-        JobReg: Record 53923;
-        JobJnlPostbatch: Codeunit 53911;
+        JobJnlBatch: Record "Job Journal Batch";
+        JobJnlTemplate: Record "Job Journal Template";
+        JobJnlLine: Record "Job Journal Line";
+        JobReg: Record "Job Register";
+        JobJnlPostbatch: Codeunit "Job Jnl.-Post Batch";
         JnlWithErrors: Boolean;
 
     local procedure "Code"()

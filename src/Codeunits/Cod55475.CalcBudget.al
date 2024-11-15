@@ -20,7 +20,7 @@ Codeunit 55475 CalcBudget
         FixedAssetsDet: Record "Fixed Asset";
         FAPostingGRP: Record "FA Posting Group";
         BudgetGl: Code[20];
-        BCSetup: Record 55881;
+        BCSetup: Record "Budgetary Control Setup";
         gl: Record "G/L Account";
         items: Record Item;
         fa: Record "Fixed Asset";
@@ -32,13 +32,13 @@ Codeunit 55475 CalcBudget
         AvailableAmount: Decimal;
         Budget: Record "Analysis View Budget Entry";
         Actuals: Record "Analysis View Entry";
-        Committments: Record 55882;
+        Committments: Record Committment;
 
 
     procedure UpdateAnalysisView()
     var
         UpdateAnalysisView: Codeunit "Update Analysis View";
-        BudgetaryControl: Record 55881;
+        BudgetaryControl: Record "Budgetary Control Setup";
         AnalysisView: Record "Analysis View";
     begin
         //Update Budget Lines

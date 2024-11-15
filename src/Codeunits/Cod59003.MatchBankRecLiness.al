@@ -73,55 +73,55 @@ Codeunit 59003 "Match Bank Rec. Liness"
     end;
 
 
-    procedure MatchSingle(BankAccReconciliation: Record 59000; DateRange: Integer)
-    var
-        TempBankStatementMatchingBuffer: Record "Bank Statement Matching Buffer" temporary;
-        BankRecMatchCandidates: Query "Bank Rec. Match Candidates";
-        Window: Dialog;
-        Score: Integer;
-    begin
-        TempBankStatementMatchingBuffer.DeleteAll;
+    // procedure MatchSingle(BankAccReconciliation: Record 59000; DateRange: Integer)
+    // var
+    //     TempBankStatementMatchingBuffer: Record "Bank Statement Matching Buffer" temporary;
+    //     // BankRecMatchCandidates: Query "Bank Rec. Match Candidates";
+    //     Window: Dialog;
+    //     Score: Integer;
+    // begin
+    //     TempBankStatementMatchingBuffer.DeleteAll;
 
-        Window.Open(ProgressBarMsg);
-        SetMatchLengthTreshold(4);
-        SetNormalizingFactor(10);
-        BankRecMatchCandidates.SetRange(Rec_Line_Bank_Account_No, BankAccReconciliation."Bank Account No.");
-        BankRecMatchCandidates.SetRange(Rec_Line_Statement_No, BankAccReconciliation."Statement No.");
-        if BankRecMatchCandidates.Open then
-            while BankRecMatchCandidates.Read do begin
-                Score := 0;
+    //     Window.Open(ProgressBarMsg);
+    //     SetMatchLengthTreshold(4);
+    //     SetNormalizingFactor(10);
+    //     BankRecMatchCandidates.SetRange(Rec_Line_Bank_Account_No, BankAccReconciliation."Bank Account No.");
+    //     BankRecMatchCandidates.SetRange(Rec_Line_Statement_No, BankAccReconciliation."Statement No.");
+    //     if BankRecMatchCandidates.Open then
+    //         while BankRecMatchCandidates.Read do begin
+    //             Score := 0;
 
-                if BankRecMatchCandidates.Rec_Line_Difference = BankRecMatchCandidates.Remaining_Amount then
-                    Score += 13;
+    //             if BankRecMatchCandidates.Rec_Line_Difference = BankRecMatchCandidates.Remaining_Amount then
+    //                 Score += 13;
 
-                Score += GetDescriptionMatchScore(BankRecMatchCandidates.Rec_Line_Description, BankRecMatchCandidates.Description,
-                    BankRecMatchCandidates.Document_No, BankRecMatchCandidates.External_Document_No);
+    //             Score += GetDescriptionMatchScore(BankRecMatchCandidates.Rec_Line_Description, BankRecMatchCandidates.Description,
+    //                 BankRecMatchCandidates.Document_No, BankRecMatchCandidates.External_Document_No);
 
-                Score += GetDescriptionMatchScore(BankRecMatchCandidates.Rec_Line_RltdPty_Name, BankRecMatchCandidates.Description,
-                    BankRecMatchCandidates.Document_No, BankRecMatchCandidates.External_Document_No);
+    //             Score += GetDescriptionMatchScore(BankRecMatchCandidates.Rec_Line_RltdPty_Name, BankRecMatchCandidates.Description,
+    //                 BankRecMatchCandidates.Document_No, BankRecMatchCandidates.External_Document_No);
 
-                Score += GetDescriptionMatchScore(BankRecMatchCandidates.Rec_Line_Transaction_Info, BankRecMatchCandidates.Description,
-                    BankRecMatchCandidates.Document_No, BankRecMatchCandidates.External_Document_No);
+    //             Score += GetDescriptionMatchScore(BankRecMatchCandidates.Rec_Line_Transaction_Info, BankRecMatchCandidates.Description,
+    //                 BankRecMatchCandidates.Document_No, BankRecMatchCandidates.External_Document_No);
 
-                if BankRecMatchCandidates.Rec_Line_Transaction_Date <> 0D then
-                    case true of
-                        BankRecMatchCandidates.Rec_Line_Transaction_Date = BankRecMatchCandidates.Posting_Date:
-                            Score += 1;
-                        Abs(BankRecMatchCandidates.Rec_Line_Transaction_Date - BankRecMatchCandidates.Posting_Date) > DateRange:
-                            Score := 0;
-                    end;
+    //             if BankRecMatchCandidates.Rec_Line_Transaction_Date <> 0D then
+    //                 case true of
+    //                     BankRecMatchCandidates.Rec_Line_Transaction_Date = BankRecMatchCandidates.Posting_Date:
+    //                         Score += 1;
+    //                     Abs(BankRecMatchCandidates.Rec_Line_Transaction_Date - BankRecMatchCandidates.Posting_Date) > DateRange:
+    //                         Score := 0;
+    //                 end;
 
-                if Score > 2 then
-                    TempBankStatementMatchingBuffer.AddMatchCandidate(BankRecMatchCandidates.Rec_Line_Statement_Line_No,
-                      BankRecMatchCandidates.Entry_No, Score, 0, '');
-            end;
+    //             if Score > 2 then
+    //                 TempBankStatementMatchingBuffer.AddMatchCandidate(BankRecMatchCandidates.Rec_Line_Statement_Line_No,
+    //                   BankRecMatchCandidates.Entry_No, Score, 0, '');
+    //         end;
 
-        SaveOneToOneMatching(TempBankStatementMatchingBuffer, BankAccReconciliation."Bank Account No.",
-          BankAccReconciliation."Statement No.");
+    //     SaveOneToOneMatching(TempBankStatementMatchingBuffer, BankAccReconciliation."Bank Account No.",
+    //       BankAccReconciliation."Statement No.");
 
-        Window.Close;
-        ShowMatchSummary(BankAccReconciliation);
-    end;
+    //     Window.Close;
+    //     ShowMatchSummary(BankAccReconciliation);
+    // end;
 
     local procedure SaveOneToOneMatching(var TempBankStatementMatchingBuffer: Record "Bank Statement Matching Buffer" temporary; BankAccountNo: Code[20]; StatementNo: Code[20])
     var
