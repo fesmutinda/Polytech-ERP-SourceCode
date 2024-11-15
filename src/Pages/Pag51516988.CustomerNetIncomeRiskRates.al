@@ -10,15 +10,15 @@ Page 51516988 "Customer Net Income Risk Rates"
         {
             repeater(Group)
             {
-                field("Min Annual Income"; "Min Annual Income")
+                field("Min Annual Income"; Rec."Min Annual Income")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Annual Income"; "Max Annual Income")
+                field("Max Annual Income"; Rec."Max Annual Income")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Risk Rate"; "Risk Rate")
+                field("Risk Rate"; Rec."Risk Rate")
                 {
                     ApplicationArea = Basic;
                 }

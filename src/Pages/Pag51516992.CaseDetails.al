@@ -2,7 +2,7 @@
 Page 51516992 "Case Details"
 {
     PageType = ListPart;
-    SourceTable = 51516937;
+    SourceTable = "Case Details";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516992 "Case Details"
         {
             repeater(Group)
             {
-                field("Case No"; "Case No")
+                field("Case No"; Rec."Case No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Case Type"; "Case Type")
+                field("Case Type"; Rec."Case Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Case Details"; "Case Details")
+                field("Case Details"; Rec."Case Details")
                 {
                     ApplicationArea = Basic;
                 }

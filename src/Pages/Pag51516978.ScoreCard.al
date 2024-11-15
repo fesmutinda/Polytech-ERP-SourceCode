@@ -2,7 +2,7 @@
 Page 51516978 "Score Card"
 {
     PageType = List;
-    SourceTable = 51516925;
+    SourceTable = "Score Card Header";
 
     layout
     {
@@ -10,31 +10,31 @@ Page 51516978 "Score Card"
         {
             repeater(Group)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registration Date"; "Registration Date")
+                field("Registration Date"; Rec."Registration Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Approved"; "Date Approved")
+                field("Date Approved"; Rec."Date Approved")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Captured By"; "Captured By")
+                field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Modified By"; "Last Modified By")
+                field("Last Modified By"; Rec."Last Modified By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Modified Date"; "Last Modified Date")
+                field("Last Modified Date"; Rec."Last Modified Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Score"; "Total Score")
+                field("Total Score"; Rec."Total Score")
                 {
                     ApplicationArea = Basic;
                 }

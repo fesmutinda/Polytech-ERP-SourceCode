@@ -4,7 +4,7 @@ Page 51516984 "CRM Trainings"
     CardPageID = "CRM Training Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516929;
+    SourceTable = "CRM Trainings";
 
     layout
     {
@@ -12,35 +12,35 @@ Page 51516984 "CRM Trainings"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Start Date"; "Start Date")
+                field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("End Date"; "End Date")
+                field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Location; Location)
+                field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Provider; Provider)
+                field(Provider; Rec.Provider)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Need Source"; "Need Source")
+                field("Need Source"; Rec."Need Source")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                 }

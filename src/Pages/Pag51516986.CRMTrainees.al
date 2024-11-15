@@ -10,31 +10,31 @@ Page 51516986 "CRM Trainees"
         {
             repeater(Group)
             {
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member ID No"; "Member ID No")
+                field("Member ID No"; Rec."Member ID No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Phone No"; "Member Phone No")
+                field("Member Phone No"; Rec."Member Phone No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member House Group"; "Member House Group")
+                field("Member House Group"; Rec."Member House Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member House Group Name"; "Member House Group Name")
+                field("Member House Group Name"; Rec."Member House Group Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Attended; Attended)
+                field(Attended; Rec.Attended)
                 {
                     ApplicationArea = Basic;
                 }

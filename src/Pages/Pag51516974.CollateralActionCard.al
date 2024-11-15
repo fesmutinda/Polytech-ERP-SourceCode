@@ -10,64 +10,64 @@ Page 51516974 "Collateral Action Card"
         {
             group(General)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No."; "Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Type"; "Collateral Type")
+                field("Collateral Type"; Rec."Collateral Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Description"; "Collateral Description")
+                field("Collateral Description"; Rec."Collateral Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Posting Group"; "Collateral Posting Group")
+                field("Collateral Posting Group"; Rec."Collateral Posting Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Received"; "Date Received")
+                field("Date Received"; Rec."Date Received")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registered Owner"; "Registered Owner")
+                field("Registered Owner"; Rec."Registered Owner")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reference No"; "Reference No")
+                field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received By"; "Received By")
+                field("Received By"; Rec."Received By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Released"; "Date Released")
+                field("Date Released"; Rec."Date Released")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Released By"; "Released By")
+                field("Released By"; Rec."Released By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Picture; Picture)
+                field(Picture; Rec.Picture)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Last Collateral Action"; "Last Collateral Action")
+                field("Last Collateral Action"; Rec."Last Collateral Action")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -75,68 +75,68 @@ Page 51516974 "Collateral Action Card"
             }
             group("Insurance Details")
             {
-                field("Insurance Effective Date"; "Insurance Effective Date")
+                field("Insurance Effective Date"; Rec."Insurance Effective Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Expiration Date"; "Insurance Expiration Date")
+                field("Insurance Expiration Date"; Rec."Insurance Expiration Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Policy No."; "Insurance Policy No.")
+                field("Insurance Policy No."; Rec."Insurance Policy No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Annual Premium"; "Insurance Annual Premium")
+                field("Insurance Annual Premium"; Rec."Insurance Annual Premium")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Policy Coverage"; "Policy Coverage")
+                field("Policy Coverage"; Rec."Policy Coverage")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Value Insured"; "Total Value Insured")
+                field("Total Value Insured"; Rec."Total Value Insured")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Type"; "Insurance Type")
+                field("Insurance Type"; Rec."Insurance Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Vendor No."; "Insurance Vendor No.")
+                field("Insurance Vendor No."; Rec."Insurance Vendor No.")
                 {
                     ApplicationArea = Basic;
                 }
             }
             group("Depreciation Details")
             {
-                field("Asset Value"; "Asset Value")
+                field("Asset Value"; Rec."Asset Value")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Depreciation Completion Date"; "Depreciation Completion Date")
+                field("Depreciation Completion Date"; Rec."Depreciation Completion Date")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Expected Date of Loan Complition';
                     Editable = false;
                 }
-                field("Depreciation Percentage"; "Depreciation Percentage")
+                field("Depreciation Percentage"; Rec."Depreciation Percentage")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Collateral Depreciation Method"; "Collateral Depreciation Method")
+                field("Collateral Depreciation Method"; Rec."Collateral Depreciation Method")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Asset Depreciation Amount"; "Asset Depreciation Amount")
+                field("Asset Depreciation Amount"; Rec."Asset Depreciation Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Asset Value @Loan Completion"; "Asset Value @Loan Completion")
+                field("Asset Value @Loan Completion"; Rec."Asset Value @Loan Completion")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -145,7 +145,7 @@ Page 51516974 "Collateral Action Card"
             group("Actions")
             {
                 Caption = 'Actions';
-                field("Action"; Action)
+                field("Action"; Rec.Action)
                 {
                     ApplicationArea = Basic;
 
@@ -158,11 +158,11 @@ Page 51516974 "Collateral Action Card"
             group("Received at HQ")
             {
                 Visible = ReceivedAtHQVisible;
-                field("Received to HQ By"; "Received to HQ By")
+                field("Received to HQ By"; Rec."Received to HQ By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received to HQ On"; "Received to HQ On")
+                field("Received to HQ On"; Rec."Received to HQ On")
                 {
                     ApplicationArea = Basic;
                 }
@@ -170,19 +170,19 @@ Page 51516974 "Collateral Action Card"
             group("Strong Room")
             {
                 Visible = StrongRoomVisible;
-                field("Lodged to Strong Room By"; "Lodged to Strong Room By")
+                field("Lodged to Strong Room By"; Rec."Lodged to Strong Room By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lodged to Strong Room On"; "Lodged to Strong Room On")
+                field("Lodged to Strong Room On"; Rec."Lodged to Strong Room On")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved From Strong Room By"; "Retrieved From Strong Room By")
+                field("Retrieved From Strong Room By"; Rec."Retrieved From Strong Room By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved From Strong Room On"; "Retrieved From Strong Room On")
+                field("Retrieved From Strong Room On"; Rec."Retrieved From Strong Room On")
                 {
                     ApplicationArea = Basic;
                 }
@@ -190,27 +190,27 @@ Page 51516974 "Collateral Action Card"
             group(Lawyer)
             {
                 Visible = LawyerVisible;
-                field("Issued to Lawyer By"; "Issued to Lawyer By")
+                field("Issued to Lawyer By"; Rec."Issued to Lawyer By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issued to Lawyer On"; "Issued to Lawyer On")
+                field("Issued to Lawyer On"; Rec."Issued to Lawyer On")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lawyer Code"; "Lawyer Code")
+                field("Lawyer Code"; Rec."Lawyer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lawyer Name"; "Lawyer Name")
+                field("Lawyer Name"; Rec."Lawyer Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received From Lawyer By"; "Received From Lawyer By")
+                field("Received From Lawyer By"; Rec."Received From Lawyer By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received From Lawyer On"; "Received From Lawyer On")
+                field("Received From Lawyer On"; Rec."Received From Lawyer On")
                 {
                     ApplicationArea = Basic;
                 }
@@ -218,19 +218,19 @@ Page 51516974 "Collateral Action Card"
             group("Insurance Agent")
             {
                 Visible = InsuranceAgentVisible;
-                field("Issued to Insurance Agent By"; "Issued to Insurance Agent By")
+                field("Issued to Insurance Agent By"; Rec."Issued to Insurance Agent By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issued to Insurance Agent On"; "Issued to Insurance Agent On")
+                field("Issued to Insurance Agent On"; Rec."Issued to Insurance Agent On")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Agent Code"; "Insurance Agent Code")
+                field("Insurance Agent Code"; Rec."Insurance Agent Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Insurance Agent Name"; "Insurance Agent Name")
+                field("Insurance Agent Name"; Rec."Insurance Agent Name")
                 {
                     ApplicationArea = Basic;
                 }
@@ -238,23 +238,23 @@ Page 51516974 "Collateral Action Card"
             group(Branch)
             {
                 Visible = BranchVisible;
-                field("Dispatched to Branch By"; "Dispatched to Branch By")
+                field("Dispatched to Branch By"; Rec."Dispatched to Branch By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dispatched to Branch On"; "Dispatched to Branch On")
+                field("Dispatched to Branch On"; Rec."Dispatched to Branch On")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dispatch to Branch"; "Dispatch to Branch")
+                field("Dispatch to Branch"; Rec."Dispatch to Branch")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received at Branch By"; "Received at Branch By")
+                field("Received at Branch By"; Rec."Received at Branch By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Received at Branch On"; "Received at Branch On")
+                field("Received at Branch On"; Rec."Received at Branch On")
                 {
                     ApplicationArea = Basic;
                 }
@@ -262,11 +262,11 @@ Page 51516974 "Collateral Action Card"
             group("Issue to Member")
             {
                 Visible = IssuetoMemberVisible;
-                field("Released to Member By"; "Released to Member By")
+                field("Released to Member By"; Rec."Released to Member By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Released to Member on"; "Released to Member on")
+                field("Released to Member on"; Rec."Released to Member on")
                 {
                     ApplicationArea = Basic;
                 }
@@ -274,11 +274,11 @@ Page 51516974 "Collateral Action Card"
             group("Issued to Auctioneers")
             {
                 Visible = IssuetoAuctioneerVisible;
-                field("Issued to Auctioneer By"; "Issued to Auctioneer By")
+                field("Issued to Auctioneer By"; Rec."Issued to Auctioneer By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Issued to Auctioneer On"; "Issued to Auctioneer On")
+                field("Issued to Auctioneer On"; Rec."Issued to Auctioneer On")
                 {
                     ApplicationArea = Basic;
                 }
@@ -286,46 +286,46 @@ Page 51516974 "Collateral Action Card"
             group("Safe Custody")
             {
                 Visible = SafeCustodyVisible;
-                field("Package Type"; "Package Type")
+                field("Package Type"; Rec."Package Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lodged By(Custodian 1)"; "Lodged By(Custodian 1)")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Lodged By(Custodian 2)"; "Lodged By(Custodian 2)")
+                field("Lodged By(Custodian 1)"; Rec."Lodged By(Custodian 1)")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Lodged"; "Date Lodged")
+                field("Lodged By(Custodian 2)"; Rec."Lodged By(Custodian 2)")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Time Lodged"; "Time Lodged")
+                field("Date Lodged"; Rec."Date Lodged")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Released By(Custodian 1)"; "Released By(Custodian 1)")
+                field("Time Lodged"; Rec."Time Lodged")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Released By(Custodian 2)"; "Released By(Custodian 2)")
+                field("Released By(Custodian 1)"; Rec."Released By(Custodian 1)")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Released from SafeCustody"; "Date Released from SafeCustody")
+                field("Released By(Custodian 2)"; Rec."Released By(Custodian 2)")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Time Released from SafeCustody"; "Time Released from SafeCustody")
+                field("Date Released from SafeCustody"; Rec."Date Released from SafeCustody")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Time Released from SafeCustody"; Rec."Time Released from SafeCustody")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

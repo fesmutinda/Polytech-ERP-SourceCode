@@ -2,7 +2,7 @@
 Page 51516987 "Customer Risk Rating"
 {
     PageType = List;
-    SourceTable = 51516931;
+    SourceTable = "Customer Risk Rating";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516987 "Customer Risk Rating"
         {
             repeater(Group)
             {
-                field(Category; Category)
+                field(Category; Rec.Category)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Sub Category"; "Sub Category")
+                field("Sub Category"; Rec."Sub Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Inherent Risk Rating"; "Inherent Risk Rating")
+                field("Inherent Risk Rating"; Rec."Inherent Risk Rating")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Risk Score"; "Risk Score")
+                field("Risk Score"; Rec."Risk Score")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min Relationship Length(Years)"; "Min Relationship Length(Years)")
+                field("Min Relationship Length(Years)"; Rec."Min Relationship Length(Years)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Relationship Length(Years)"; "Max Relationship Length(Years)")
+                field("Max Relationship Length(Years)"; Rec."Max Relationship Length(Years)")
                 {
                     ApplicationArea = Basic;
                 }

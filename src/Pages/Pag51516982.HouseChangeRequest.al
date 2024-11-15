@@ -4,7 +4,7 @@ Page 51516982 "House Change Request"
     CardPageID = "House Change Request Change";
     Editable = false;
     PageType = List;
-    SourceTable = 51516927;
+    SourceTable = "House Group Change Request";
 
     layout
     {
@@ -12,47 +12,47 @@ Page 51516982 "House Change Request"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("House Group"; "House Group")
+                field("House Group"; Rec."House Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series"; "No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Cell"; "Destination Cell")
+                field("Destination Cell"; Rec."Destination Cell")
                 {
                     ApplicationArea = Basic;
                 }
-                field("House Group Name"; "House Group Name")
+                field("House Group Name"; Rec."House Group Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason For Changing Groups"; "Reason For Changing Groups")
+                field("Reason For Changing Groups"; Rec."Reason For Changing Groups")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Group Changed"; "Date Group Changed")
+                field("Date Group Changed"; Rec."Date Group Changed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Changed By"; "Changed By")
+                field("Changed By"; Rec."Changed By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Deposits on Date of Change"; "Deposits on Date of Change")
+                field("Deposits on Date of Change"; Rec."Deposits on Date of Change")
                 {
                     ApplicationArea = Basic;
                 }

@@ -3,105 +3,105 @@ Page 51516989 "Individual Customer Risk Rates"
 {
     Editable = false;
     PageType = CardPart;
-    SourceTable = 51516933;
+    SourceTable = "Individual Customer Risk Rate";
 
     layout
     {
         area(content)
         {
-            field("What is the customer category?"; "What is the customer category?")
+            field("What is the customer category?"; Rec."What is the customer category?")
             {
                 ApplicationArea = Basic;
             }
-            field("Customer Category Score"; "Customer Category Score")
+            field("Customer Category Score"; Rec."Customer Category Score")
             {
                 ApplicationArea = Basic;
             }
-            field("What is the Member residency?"; "What is the Member residency?")
+            field("What is the Member residency?"; Rec."What is the Member residency?")
             {
                 ApplicationArea = Basic;
             }
-            field("Member Residency Score"; "Member Residency Score")
+            field("Member Residency Score"; Rec."Member Residency Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Cust Employment Risk?"; "Cust Employment Risk?")
+            field("Cust Employment Risk?"; Rec."Cust Employment Risk?")
             {
                 ApplicationArea = Basic;
             }
-            field("Cust Employment Risk Score"; "Cust Employment Risk Score")
+            field("Cust Employment Risk Score"; Rec."Cust Employment Risk Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Cust Business Risk Industry?"; "Cust Business Risk Industry?")
+            field("Cust Business Risk Industry?"; Rec."Cust Business Risk Industry?")
             {
                 ApplicationArea = Basic;
             }
-            field("Cust Bus. Risk Industry Score"; "Cust Bus. Risk Industry Score")
+            field("Cust Bus. Risk Industry Score"; Rec."Cust Bus. Risk Industry Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Lenght Of Relationship?"; "Lenght Of Relationship?")
+            field("Lenght Of Relationship?"; Rec."Lenght Of Relationship?")
             {
                 ApplicationArea = Basic;
             }
-            field("Length Of Relation Score"; "Length Of Relation Score")
+            field("Length Of Relation Score"; Rec."Length Of Relation Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Cust Involved in Intern. Trade"; "Cust Involved in Intern. Trade")
+            field("Cust Involved in Intern. Trade"; Rec."Cust Involved in Intern. Trade")
             {
                 ApplicationArea = Basic;
             }
-            field("Involve in Inter. Trade Score"; "Involve in Inter. Trade Score")
+            field("Involve in Inter. Trade Score"; Rec."Involve in Inter. Trade Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Electronic Payments?"; "Electronic Payments?")
+            field("Electronic Payments?"; Rec."Electronic Payments?")
             {
                 ApplicationArea = Basic;
             }
-            field("Electronic Payments Score"; "Electronic Payments Score")
+            field("Electronic Payments Score"; Rec."Electronic Payments Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Account Type Taken?"; "Account Type Taken?")
+            field("Account Type Taken?"; Rec."Account Type Taken?")
             {
                 ApplicationArea = Basic;
             }
-            field("Account Type Taken Score"; "Account Type Taken Score")
+            field("Account Type Taken Score"; Rec."Account Type Taken Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Card Type Taken"; "Card Type Taken")
+            field("Card Type Taken"; Rec."Card Type Taken")
             {
                 ApplicationArea = Basic;
             }
-            field("Card Type Taken Score"; "Card Type Taken Score")
+            field("Card Type Taken Score"; Rec."Card Type Taken Score")
             {
                 ApplicationArea = Basic;
             }
-            field("Channel Taken?"; "Channel Taken?")
+            field("Channel Taken?"; Rec."Channel Taken?")
             {
                 ApplicationArea = Basic;
             }
-            field("Channel Taken Score"; "Channel Taken Score")
+            field("Channel Taken Score"; Rec."Channel Taken Score")
             {
                 ApplicationArea = Basic;
             }
-            field("GROSS CUSTOMER AML RISK RATING"; "GROSS CUSTOMER AML RISK RATING")
+            field("GROSS CUSTOMER AML RISK RATING"; Rec."GROSS CUSTOMER AML RISK RATING")
             {
                 ApplicationArea = Basic;
             }
-            field("BANK'S CONTROL RISK RATING"; "BANK'S CONTROL RISK RATING")
+            field("BANK'S CONTROL RISK RATING"; Rec."BANK'S CONTROL RISK RATING")
             {
                 ApplicationArea = Basic;
             }
-            field("CUSTOMER NET RISK RATING"; "CUSTOMER NET RISK RATING")
+            field("CUSTOMER NET RISK RATING"; Rec."CUSTOMER NET RISK RATING")
             {
                 ApplicationArea = Basic;
             }
-            field("Risk Rate Scale"; "Risk Rate Scale")
+            field("Risk Rate Scale"; Rec."Risk Rate Scale")
             {
                 ApplicationArea = Basic;
                 StyleExpr = FieldStyle;
@@ -119,14 +119,14 @@ Page 51516989 "Individual Customer Risk Rates"
     local procedure SetFieldStyle()
     begin
         FieldStyle := '';
-        if "Risk Rate Scale" = "risk rate scale"::"Low Risk" then begin
+        if Rec."Risk Rate Scale" = Rec."risk rate scale"::"Low Risk" then begin
             FieldStyle := 'Standard'
         end else
-            if "Risk Rate Scale" = "risk rate scale"::"Medium Risk" then begin
+            if Rec."Risk Rate Scale" = Rec."risk rate scale"::"Medium Risk" then begin
                 FieldStyle := 'Strong'
 
             end else
-                if "Risk Rate Scale" = "risk rate scale"::"High Risk" then
+                if Rec."Risk Rate Scale" = Rec."risk rate scale"::"High Risk" then
                     FieldStyle := 'Attention'
     end;
 }
