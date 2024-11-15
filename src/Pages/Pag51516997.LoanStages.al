@@ -2,7 +2,7 @@
 Page 51516997 "Loan Stages"
 {
     PageType = List;
-    SourceTable = 51516941;
+    SourceTable = "Loan Stages";
 
     layout
     {
@@ -10,11 +10,11 @@ Page 51516997 "Loan Stages"
         {
             repeater(Group)
             {
-                field("Loan Stage"; "Loan Stage")
+                field("Loan Stage"; Rec."Loan Stage")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Stage Description"; "Loan Stage Description")
+                field("Loan Stage Description"; Rec."Loan Stage Description")
                 {
                     ApplicationArea = Basic;
                 }

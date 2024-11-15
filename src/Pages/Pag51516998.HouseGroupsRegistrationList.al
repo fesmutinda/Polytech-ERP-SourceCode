@@ -4,7 +4,7 @@ Page 51516998 "House Groups Registration List"
     CardPageID = "House Group Registration Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516942;
+    SourceTable = "House Groups Registration";
 
     layout
     {
@@ -12,52 +12,52 @@ Page 51516998 "House Groups Registration List"
         {
             repeater(Group)
             {
-                field("Cell Group Code"; "Cell Group Code")
+                field("Cell Group Code"; Rec."Cell Group Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cell Group Name"; "Cell Group Name")
+                field("Cell Group Name"; Rec."Cell Group Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Formed"; "Date Formed")
+                field("Date Formed"; Rec."Date Formed")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Meeting Date"; "Meeting Date")
+                field("Meeting Date"; Rec."Meeting Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Group Leader"; "Group Leader")
+                field("Group Leader"; Rec."Group Leader")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Group Leader Name"; "Group Leader Name")
+                field("Group Leader Name"; Rec."Group Leader Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Assistant group Leader"; "Assistant group Leader")
+                field("Assistant group Leader"; Rec."Assistant group Leader")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Assistant Group Name"; "Assistant Group Name")
+                field("Assistant Group Name"; Rec."Assistant Group Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Meeting Place"; "Meeting Place")
+                field("Meeting Place"; Rec."Meeting Place")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No of Members"; "No of Members")
+                field("No of Members"; Rec."No of Members")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Credit Officer"; "Credit Officer")
+                field("Credit Officer"; Rec."Credit Officer")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Field Officer"; "Field Officer")
+                field("Field Officer"; Rec."Field Officer")
                 {
                     ApplicationArea = Basic;
                 }

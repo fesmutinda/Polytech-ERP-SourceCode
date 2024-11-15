@@ -5,7 +5,7 @@ Page 51516484 "Posted Checkoff Proc.-D List"
     Editable = false;
     PageType = List;
     SourceTable = "Checkoff Header-Distributed";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

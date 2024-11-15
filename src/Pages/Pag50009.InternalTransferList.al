@@ -5,8 +5,8 @@ Page 50009 "Internal Transfer List"
     Editable = false;
     PageType = List;
     ShowFilter = false;
-    SourceTable = "Imprest Lines";
-    SourceTableView = where(Posted=filter(No));
+    SourceTable = "Sacco Transfers";
+    SourceTableView = where(Posted = filter(false));
 
     layout
     {
@@ -14,99 +14,99 @@ Page 50009 "Internal Transfer List"
         {
             repeater(Group)
             {
-                field(No;No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Date";"Transaction Date")
+                field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Schedule Total";"Schedule Total")
+                field("Schedule Total"; Rec."Schedule Total")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Approved;Approved)
+                field(Approved; Rec.Approved)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Approved By";"Approved By")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted;Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. Series";"No. Series")
+                field("No. Series"; Rec."No. Series")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center";"Responsibility Center")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description";"Transaction Description")
+                // field("Transaction Description"; Rec."Transaction Description")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                field("Source Account Type"; Rec."Source Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account Type";"Source Account Type")
+                field("Source Account No."; Rec."Source Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account No.";"Source Account No.")
+                field("Source Transaction Type"; Rec."Source Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Transaction Type";"Source Transaction Type")
+                field("Source Account Name"; Rec."Source Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Account Name";"Source Account Name")
+                field("Source Loan No"; Rec."Source Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Source Loan No";"Source Loan No")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By";"Created By")
+                field(Debit; Rec.Debit)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Debit;Debit)
+                field(Refund; Rec.Refund)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Refund;Refund)
+                field("Guarantor Recovery"; Rec."Guarantor Recovery")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Guarantor Recovery";"Guarantor Recovery")
+                field("Payrol No."; Rec."Payrol No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payrol No.";"Payrol No.")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 1 Code";"Global Dimension 1 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Global Dimension 2 Code";"Global Dimension 2 Code")
+                field("Bosa Number"; Rec."Bosa Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bosa Number";"Bosa Number")
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status;Status)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Savings Account Type";"Savings Account Type")
+                field("Savings Account Type"; Rec."Source Account Type")
                 {
                     ApplicationArea = Basic;
                 }
@@ -120,14 +120,14 @@ Page 50009 "Internal Transfer List"
 
     trigger OnAfterGetRecord()
     begin
-        SetRange("Created By",UserId);
+        Rec.SetRange("Created By", UserId);
     end;
 
     trigger OnOpenPage()
     begin
-        SetRange("Created By",UserId);
-        FilterGroup(2);
-        FilterGroup(0);
+        Rec.SetRange("Created By", UserId);
+        Rec.FilterGroup(2);
+        Rec.FilterGroup(0);
     end;
 }
 

@@ -45,10 +45,10 @@ Page 50008 "Internal Transfer List(App)"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; Rec."Transaction Description")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Transaction Description"; Rec."Transaction Description")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Source Account Type"; Rec."Source Account Type")
                 {
                     ApplicationArea = Basic;
@@ -119,7 +119,7 @@ Page 50008 "Internal Transfer List(App)"
 
     trigger OnOpenPage()
     begin
-        SetRange("Created By", UserId);
+        Rec.SetRange("Created By", UserId);
     end;
 }
 

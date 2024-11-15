@@ -4,7 +4,7 @@ Page 51516489 "Salary Processing List"
     CardPageID = "Salary Processing Header";
     Editable = false;
     PageType = List;
-    SourceTable = "Salary Processing Headerr";
+    SourceTable = "Salary Processing Header";
     SourceTableView = where(Posted = const(No));
 
     layout

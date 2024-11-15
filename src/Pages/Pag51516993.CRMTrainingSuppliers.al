@@ -2,7 +2,7 @@
 Page 51516993 "CRM Training Suppliers"
 {
     PageType = ListPart;
-    SourceTable = 51516938;
+    SourceTable = "CRM Training Suppliers";
 
     layout
     {
@@ -10,21 +10,21 @@ Page 51516993 "CRM Training Suppliers"
         {
             repeater(Group)
             {
-                field("Supplier Vendor No"; "Supplier Vendor No")
+                field("Supplier Vendor No"; Rec."Supplier Vendor No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Trainer/Supplier No';
                 }
-                field("Supplier Name"; "Supplier Name")
+                field("Supplier Name"; Rec."Supplier Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Narration; Narration)
+                field(Narration; Rec.Narration)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Cost; Cost)
+                field(Cost; Rec.Cost)
                 {
                     ApplicationArea = Basic;
                 }
