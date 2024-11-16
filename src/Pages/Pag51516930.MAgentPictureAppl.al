@@ -8,7 +8,7 @@ Page 51516930 "M_Agent Picture-Appl"
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic, Suite;
                 ShowCaption = false;
@@ -57,7 +57,7 @@ Page 51516930 "M_Agent Picture-Appl"
                     FileName: Text;
                     ClientFileName: Text;
                 begin
-                    if Picture.Count > 0 then
+                    if Rec.Picture.Count > 0 then
                         if not Confirm(OverrideImageQst) then
                             exit;
 
@@ -65,9 +65,9 @@ Page 51516930 "M_Agent Picture-Appl"
                     if FileName = '' then
                         exit;
 
-                    Clear(Picture);
-                    Picture.ImportFile(FileName, ClientFileName);
-                    Modify(true);
+                    Clear(Rec.Picture);
+                    Rec.Picture.ImportFile(FileName, ClientFileName);
+                    Rec.Modify(true);
                     if FileManagement.DeleteServerFile(FileName) then;
                 end;
             }
@@ -88,12 +88,12 @@ Page 51516930 "M_Agent Picture-Appl"
                     ExportPath: Text;
                 begin
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "Account No" + Format(Picture.MediaId);
-                    Picture.ExportFile(ExportPath);
+                    ExportPath := TemporaryPath + Rec."Account No" + Format(Rec.Picture.MediaId);
+                    Rec.Picture.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "Account No", Names);
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."Account No", Rec.Names);
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -111,8 +111,8 @@ Page 51516930 "M_Agent Picture-Appl"
                     if not Confirm(DeleteImageQst) then
                         exit;
 
-                    Clear(Picture);
-                    Modify(true);
+                    Clear(Rec.Picture);
+                    Rec.Modify(true);
                 end;
             }
         }
@@ -131,7 +131,7 @@ Page 51516930 "M_Agent Picture-Appl"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Picture.Count <> 0;
+        DeleteExportEnabled := Rec.Picture.Count <> 0;
     end;
 
     trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
@@ -142,7 +142,7 @@ Page 51516930 "M_Agent Picture-Appl"
         if (PictureName = '') or (PictureFilePath = '') then
             exit;
 
-        if Picture.Count > 0 then
+        if Rec.Picture.Count > 0 then
             if not Confirm(OverrideImageQst) then begin
                 if Erase(PictureFilePath) then;
                 exit;
@@ -151,9 +151,9 @@ Page 51516930 "M_Agent Picture-Appl"
         File.Open(PictureFilePath);
         File.CreateInstream(Instream);
 
-        Clear(Picture);
-        Picture.ImportStream(Instream, PictureName);
-        Modify(true);
+        Clear(Rec.Picture);
+        Rec.Picture.ImportStream(Instream, PictureName);
+        Rec.Modify(true);
 
         File.Close;
         if Erase(PictureFilePath) then;

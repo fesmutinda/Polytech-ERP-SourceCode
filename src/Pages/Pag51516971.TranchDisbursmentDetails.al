@@ -26,10 +26,10 @@ Page 51516971 "Tranch Disbursment Details"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Description; Description)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic;

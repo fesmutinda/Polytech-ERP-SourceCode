@@ -2,7 +2,7 @@
 Page 51516943 "Safe Custody Custodians"
 {
     PageType = List;
-    SourceTable = 51516909;
+    SourceTable = "Safe Custody Custodians";
 
     layout
     {
@@ -10,15 +10,15 @@ Page 51516943 "Safe Custody Custodians"
         {
             repeater(Group)
             {
-                field("User ID"; "User ID")
+                field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Permision Type"; "Permision Type")
+                field("Permision Type"; Rec."Permision Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Custodian Of"; "Custodian Of")
+                field("Custodian Of"; Rec."Custodian Of")
                 {
                     ApplicationArea = Basic;
                 }

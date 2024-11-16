@@ -2,7 +2,7 @@
 Page 51516935 "Loan Other Charges"
 {
     PageType = List;
-    SourceTable = 51516656;
+    SourceTable = "Loan Other Charges";
 
     layout
     {
@@ -10,31 +10,31 @@ Page 51516935 "Loan Other Charges"
         {
             repeater(Group)
             {
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Type"; "Loan Type")
+                field("Loan Type"; Rec."Loan Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("G/L Account"; "G/L Account")
+                field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Description)
+                field(Description; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,12 +50,12 @@ Page 51516935 "Loan Other Charges"
     begin
 
         ObjLoans.Reset;
-        ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan No.");
+        ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan No.");
         if ObjLoans.FindSet then begin
 
-            if "Loan Type" = '' then
-                "Loan Type" := ObjLoans."Loan Product Type";
-            Modify(true);
+            if Rec."Loan Type" = '' then
+                Rec."Loan Type" := ObjLoans."Loan Product Type";
+            Rec.Modify(true);
             if ObjLoans."Loan Product Type" = '' then
                 Error('Please select the loan type');
         end;

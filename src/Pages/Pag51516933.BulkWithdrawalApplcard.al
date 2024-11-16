@@ -3,7 +3,7 @@ Page 51516933 "Bulk Withdrawal Appl card"
 {
     DeleteAllowed = false;
     PageType = Card;
-    SourceTable = 51516902;
+    SourceTable = "Bulk Withdrawal Application";
 
     layout
     {
@@ -11,42 +11,42 @@ Page 51516933 "Bulk Withdrawal Appl card"
         {
             group(General)
             {
-                field("Transaction No"; "Transaction No")
+                field("Transaction No"; Rec."Transaction No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                     Editable = MemberNoEditable;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = AccountNoEditable;
                 }
-                field("Amount to Withdraw"; "Amount to Withdraw")
+                field("Amount to Withdraw"; Rec."Amount to Withdraw")
                 {
                     ApplicationArea = Basic;
                     Editable = AmounttoWithdrawEditable;
                 }
-                field("Date for Withdrawal"; "Date for Withdrawal")
+                field("Date for Withdrawal"; Rec."Date for Withdrawal")
                 {
                     ApplicationArea = Basic;
                     Editable = WithdrawalDateEditable;
                 }
-                field("Fee on Withdrawal"; "Fee on Withdrawal")
+                field("Fee on Withdrawal"; Rec."Fee on Withdrawal")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Reason for Bulk Withdrawal"; "Reason for Bulk Withdrawal")
+                field("Reason for Bulk Withdrawal"; Rec."Reason for Bulk Withdrawal")
                 {
                     ApplicationArea = Basic;
                     Editable = ReasonEditable;
@@ -56,27 +56,27 @@ Page 51516933 "Bulk Withdrawal Appl card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Created"; "Date Created")
+                field("Date Created"; Rec."Date Created")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Noticed Updated"; "Noticed Updated")
+                field("Noticed Updated"; Rec."Noticed Updated")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Notice Updated By"; "Notice Updated By")
+                field("Notice Updated By"; Rec."Notice Updated By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Notified"; "Date Notified")
+                field("Date Notified"; Rec."Date Notified")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

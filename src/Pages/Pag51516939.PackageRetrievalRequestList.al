@@ -4,7 +4,7 @@ Page 51516939 "Package Retrieval Request List"
     CardPageID = "Package Retrieval Request Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516907;
+    SourceTable = "Package Retrieval Register";
 
     layout
     {
@@ -12,43 +12,43 @@ Page 51516939 "Package Retrieval Request List"
         {
             repeater(Group)
             {
-                field("Request No"; "Request No")
+                field("Request No"; Rec."Request No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package ID"; "Package ID")
+                field("Package ID"; Rec."Package ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Description"; "Package Description")
+                field("Package Description"; Rec."Package Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieval Requested By"; "Retrieval Requested By")
+                field("Retrieval Requested By"; Rec."Retrieval Requested By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requesting Agent Name"; "Requesting Agent Name")
+                field("Requesting Agent Name"; Rec."Requesting Agent Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Requesting Agent ID/Passport"; "Requesting Agent ID/Passport")
+                field("Requesting Agent ID/Passport"; Rec."Requesting Agent ID/Passport")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieval Request Date"; "Retrieval Request Date")
+                field("Retrieval Request Date"; Rec."Retrieval Request Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reason for Retrieval"; "Reason for Retrieval")
+                field("Reason for Retrieval"; Rec."Reason for Retrieval")
                 {
                     ApplicationArea = Basic;
                 }
@@ -56,11 +56,11 @@ Page 51516939 "Package Retrieval Request List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved By(Custodian 1)"; "Retrieved By(Custodian 1)")
+                field("Retrieved By(Custodian 1)"; Rec."Retrieved By(Custodian 1)")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Retrieved By(Custodian 2)"; "Retrieved By(Custodian 2)")
+                field("Retrieved By(Custodian 2)"; Rec."Retrieved By(Custodian 2)")
                 {
                     ApplicationArea = Basic;
                 }

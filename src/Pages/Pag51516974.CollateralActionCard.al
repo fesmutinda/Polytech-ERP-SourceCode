@@ -568,7 +568,7 @@ Page 51516974 "Collateral Action Card"
 
                 trigger OnAction()
                 begin
-                    if Action <> Action::"Booked to Safe Custody" then
+                    if Rec.Action <> Rec.Action::"Booked to Safe Custody" then
                         Error('This is action is only applicable to Safe Custody booking');
 
                     if (Rec."Lodged By(Custodian 1)" <> '') and (Rec."Lodged By(Custodian 2)" <> '') then
@@ -586,27 +586,27 @@ Page 51516974 "Collateral Action Card"
                                 Error('You are not authorized to lodge Packages')
                     end;
 
-                    if ("Lodged By(Custodian 1)" <> '') and ("Lodged By(Custodian 2)" <> '') then begin
-                        "Date Lodged" := Today;
-                        "Time Lodged" := Time;
+                    if (Rec."Lodged By(Custodian 1)" <> '') and (Rec."Lodged By(Custodian 2)" <> '') then begin
+                        Rec."Date Lodged" := Today;
+                        Rec."Time Lodged" := Time;
 
-                        //===========Create A Package in Safe Custody Module=======================
-                        if ObjNoSeries.Get then begin
-                            ObjNoSeries.TestField(ObjNoSeries."Safe Custody Package Nos");
-                            VarPackageNo := NoSeriesMgt.GetNextNo(ObjNoSeries."Safe Custody Package Nos", 0D, true);
+                        //     //===========Create A Package in Safe Custody Module=======================
+                        //     if ObjNoSeries.Get then begin
+                        //         ObjNoSeries.TestField(ObjNoSeries."Safe Custody Package Nos");
+                        //         VarPackageNo := NoSeriesMgt.GetNextNo(ObjNoSeries."Safe Custody Package Nos", 0D, true);
 
-                            ObjPackage.Init;
-                            ObjPackage."Package ID" := VarPackageNo;
-                            ObjPackage."Package Type" := "Package Type";
-                            ObjPackage."Charge Account" := "Charge Account";
-                            ObjPackage."Charge Account Name" := "Member Name";
-                            ObjPackage."Lodged By(Custodian 1)" := "Lodged By(Custodian 1)";
-                            ObjPackage."Lodged By(Custodian 2)" := "Lodged By(Custodian 2)";
-                            ObjPackage."Date Lodged" := "Date Lodged";
-                            ObjPackage."Time Lodged" := "Time Lodged";
-                            ObjPackage.Insert;
-                            Message('A Package has been created on Safe Custody Packages List# Package No%1', VarPackageNo);
-                        end;
+                        //         ObjPackage.Init;
+                        //         ObjPackage."Package ID" := VarPackageNo;
+                        //         ObjPackage."Package Type" := "Package Type";
+                        //         ObjPackage."Charge Account" := "Charge Account";
+                        //         ObjPackage."Charge Account Name" := "Member Name";
+                        //         ObjPackage."Lodged By(Custodian 1)" := "Lodged By(Custodian 1)";
+                        //         ObjPackage."Lodged By(Custodian 2)" := "Lodged By(Custodian 2)";
+                        //         ObjPackage."Date Lodged" := "Date Lodged";
+                        //         ObjPackage."Time Lodged" := "Time Lodged";
+                        //         ObjPackage.Insert;
+                        //         Message('A Package has been created on Safe Custody Packages List# Package No%1', VarPackageNo);
+                        //     end;
                     end;
                     //===========End Create A Package in Safe Custody Module=======================
 
@@ -632,27 +632,27 @@ Page 51516974 "Collateral Action Card"
 
                 trigger OnAction()
                 begin
-                    if Action <> Action::"Booked to Safe Custody" then
+                    if Rec.Action <> Rec.Action::"Booked to Safe Custody" then
                         Error('This is action is only applicable to Safe Custody booking');
 
-                    if ("Lodged By(Custodian 1)" <> '') and ("Lodged By(Custodian 2)" <> '') then
+                    if (Rec."Lodged By(Custodian 1)" <> '') and (Rec."Lodged By(Custodian 2)" <> '') then
                         Error('This Package has already been Retrieved');
 
                     ObjCustodians.Reset;
                     ObjCustodians.SetRange(ObjCustodians."User ID", UserId);
                     if ObjCustodians.FindSet = true then begin
-                        if ("Released By(Custodian 1)" = '') and ("Released By(Custodian 2)" <> UserId) then begin
-                            "Released By(Custodian 1)" := UserId
+                        if (Rec."Released By(Custodian 1)" = '') and (Rec."Released By(Custodian 2)" <> UserId) then begin
+                            Rec."Released By(Custodian 1)" := UserId
                         end else
-                            if ("Released By(Custodian 2)" = '') and ("Released By(Custodian 1)" <> UserId) then begin
-                                "Released By(Custodian 2)" := UserId
+                            if (Rec."Released By(Custodian 2)" = '') and (Rec."Released By(Custodian 1)" <> UserId) then begin
+                                Rec."Released By(Custodian 2)" := UserId
                             end else
                                 Error('You are not authorized to Retrieve Packages')
                     end;
 
-                    if ("Released By(Custodian 1)" <> '') and ("Released By(Custodian 2)" <> '') then begin
-                        "Date Released from SafeCustody" := Today;
-                        "Time Released from SafeCustody" := Time;
+                    if (Rec."Released By(Custodian 1)" <> '') and (Rec."Released By(Custodian 2)" <> '') then begin
+                        Rec."Date Released from SafeCustody" := Today;
+                        Rec."Time Released from SafeCustody" := Time;
                     end;
                 end;
             }
@@ -662,8 +662,8 @@ Page 51516974 "Collateral Action Card"
     trigger OnAfterGetCurrRecord()
     begin
         FnGetVisibility();
-        CalcFields("Last Collateral Action Entry");
-        if ObjCollateralMovement.Get("Last Collateral Action Entry") then begin
+        Rec.CalcFields("Last Collateral Action Entry");
+        if ObjCollateralMovement.Get(Rec."Last Collateral Action Entry") then begin
             "Last Collateral Action" := ObjCollateralMovement."Current Location";
         end;
     end;
@@ -700,13 +700,8 @@ Page 51516974 "Collateral Action Card"
         ObjPackageTypes: Record 51516908;
         LodgeFee: Decimal;
         LodgeFeeAccount: Code[20];
-<<<<<<< HEAD
-        SurestepFactory: Codeunit UnknownCodeunit51516009;
-        ObjNoSeries: Record 51516399;
-=======
-        SwizzsoftFactory: Codeunit UnknownCodeunit51516009;
-        ObjNoSeries: Record UnknownRecord51516399;
->>>>>>> a70ded79f043457f7f86d8f99a53b565838eeea4
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        ObjNoSeries: Record "Sacco No. Series";
         VarPackageNo: Code[20];
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjPackage: Record 51516904;

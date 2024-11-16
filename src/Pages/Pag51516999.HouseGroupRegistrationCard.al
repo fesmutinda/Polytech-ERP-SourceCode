@@ -142,8 +142,8 @@ Page 51516999 "House Group Registration Card"
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
 
-                    if ApprovalsMgmt.CheckHouseRegistrationApprovalsWorkflowEnabled(Rec) then
-                        ApprovalsMgmt.OnSendHouseRegistrationForApproval(Rec);
+                    // if ApprovalsMgmt.CheckHouseRegistrationApprovalsWorkflowEnabled(Rec) then
+                    //     ApprovalsMgmt.OnSendHouseRegistrationForApproval(Rec);
                 end;
             }
             action("Cancel Approval Request")
@@ -161,9 +161,9 @@ Page 51516999 "House Group Registration Card"
                     Approvalmgt: Codeunit "Approvals Mgmt.";
                 begin
                     if Confirm('Are you sure you want to cancel this approval request', false) = true then
-                        ApprovalsMgmt.OnCancelHouseRegistrationApprovalRequest(Rec);
-                    Status := Status::Open;
-                    Modify;
+                        // ApprovalsMgmt.OnCancelHouseRegistrationApprovalRequest(Rec);
+                    Rec.Status := Rec.Status::Open;
+                    Rec.Modify;
                 end;
             }
             action(Approval)

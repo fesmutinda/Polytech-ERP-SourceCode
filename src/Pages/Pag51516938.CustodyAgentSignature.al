@@ -6,13 +6,13 @@ Page 51516938 "Custody Agent Signature"
     InsertAllowed = false;
     LinksAllowed = false;
     PageType = CardPart;
-    SourceTable = 51516905;
+    SourceTable = "Safe Custody Agents Register";
 
     layout
     {
         area(content)
         {
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic;
             }
@@ -69,16 +69,16 @@ Page 51516938 "Custody Agent Signature"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("Agent ID");
+                    Rec.TestField("Agent ID");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "Agent ID" + Format(Signature.MediaId);
-                    Signature.ExportFile(ExportPath);
+                    ExportPath := TemporaryPath + Rec."Agent ID" + Format(Rec.Signature.MediaId);
+                    Rec.Signature.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "Agent ID", ConvertStr("Agent ID", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."Agent ID", ConvertStr(Rec."Agent ID", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -128,8 +128,8 @@ Page 51516938 "Custody Agent Signature"
     var
         CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("Agent ID");
+        Rec.Find;
+        Rec.TestField("Agent ID");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
@@ -146,11 +146,11 @@ Page 51516938 "Custody Agent Signature"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("Agent ID");
+        Rec.Find;
+        Rec.TestField("Agent ID");
         //TESTFIELD(Description);
 
-        if Signature.Count > 0 then
+        if Rec.Signature.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -159,17 +159,17 @@ Page 51516938 "Custody Agent Signature"
         if FileName = '' then
             Error('');
 
-        Clear(Signature);
-        Signature.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        Clear(Rec.Signature);
+        Rec.Signature.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Signature.Count <> 0;
+        DeleteExportEnabled := Rec.Signature.Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean
@@ -185,13 +185,13 @@ Page 51516938 "Custody Agent Signature"
 
     procedure DeleteItemPicture()
     begin
-        TestField("Agent ID");
+        Rec.TestField("Agent ID");
 
         if not Confirm(DeleteImageQst) then
             exit;
 
-        Clear(Signature);
-        Modify(true);
+        Clear(Rec.Signature);
+        Rec.Modify(true);
     end;
 
     trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)

@@ -2,7 +2,7 @@
 Page 51516934 "M_Withdrawal Share Cap Sell"
 {
     PageType = ListPart;
-    SourceTable = 51516903;
+    SourceTable = "M_Withdrawal Share Cap Sell";
 
     layout
     {
@@ -10,16 +10,16 @@ Page 51516934 "M_Withdrawal Share Cap Sell"
         {
             repeater(Group)
             {
-                field("Buyer Member No"; "Buyer Member No")
+                field("Buyer Member No"; Rec."Buyer Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Buyer Name"; "Buyer Name")
+                field("Buyer Name"; Rec."Buyer Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }

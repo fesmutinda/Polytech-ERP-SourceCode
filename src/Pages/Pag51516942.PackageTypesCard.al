@@ -2,7 +2,7 @@
 Page 51516942 "Package Types Card"
 {
     PageType = Card;
-    SourceTable = 51516908;
+    SourceTable = "Package Types";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516942 "Package Types Card"
         {
             group(General)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Description"; "Package Description")
+                field("Package Description"; Rec."Package Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Charge"; "Package Charge")
+                field("Package Charge"; Rec."Package Charge")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Charge Account"; "Package Charge Account")
+                field("Package Charge Account"; Rec."Package Charge Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Retrieval Fee"; "Package Retrieval Fee")
+                field("Package Retrieval Fee"; Rec."Package Retrieval Fee")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Retrieval Fee Account"; "Package Retrieval Fee Account")
+                field("Package Retrieval Fee Account"; Rec."Package Retrieval Fee Account")
                 {
                     ApplicationArea = Basic;
                 }

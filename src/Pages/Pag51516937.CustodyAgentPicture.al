@@ -12,7 +12,7 @@ Page 51516937 "Custody Agent Picture"
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic, Suite;
                 ShowCaption = false;
@@ -71,16 +71,16 @@ Page 51516937 "Custody Agent Picture"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("Agent ID");
+                    Rec.TestField("Agent ID");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "Agent ID" + Format(Picture.MediaId);
-                    Picture.ExportFile(ExportPath);
+                    ExportPath := TemporaryPath + Rec."Agent ID" + Format(Rec.Picture.MediaId);
+                    Rec.Picture.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "Agent ID", ConvertStr("Agent ID", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."Agent ID", ConvertStr(Rec."Agent ID", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -130,8 +130,8 @@ Page 51516937 "Custody Agent Picture"
     var
         CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("Agent ID");
+        Rec.Find;
+        Rec.TestField("Agent ID");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
@@ -148,11 +148,11 @@ Page 51516937 "Custody Agent Picture"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("Agent ID");
+        Rec.Find;
+        Rec.TestField("Agent ID");
         //TESTFIELD(Description);
 
-        if Picture.Count > 0 then
+        if Rec.Picture.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -161,17 +161,17 @@ Page 51516937 "Custody Agent Picture"
         if FileName = '' then
             Error('');
 
-        Clear(Picture);
-        Picture.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        Clear(Rec.Picture);
+        Rec.Picture.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Picture.Count <> 0;
+        DeleteExportEnabled := Rec.Picture.Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean
@@ -187,13 +187,13 @@ Page 51516937 "Custody Agent Picture"
 
     procedure DeleteItemPicture()
     begin
-        TestField("Agent ID");
+        Rec.TestField("Agent ID");
 
         if not Confirm(DeleteImageQst) then
             exit;
 
-        Clear(Picture);
-        Modify(true);
+        Clear(Rec.Picture);
+        Rec.Modify(true);
     end;
 
     trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)

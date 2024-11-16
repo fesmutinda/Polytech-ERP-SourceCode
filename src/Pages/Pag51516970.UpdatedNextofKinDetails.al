@@ -1,14 +1,14 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516970 "Updated Next of Kin Details"
 {
-    CardPageID = "Next of Kin Change Card2";
+    // CardPageID = "Next of Kin Change Card2";
     DelayedInsert = false;
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
-    SourceTable = 51516940;
+    SourceTable = "Next Of Kin Change";
     SourceTableView = where(Status = filter(Approved));
 
     layout
@@ -17,43 +17,43 @@ Page 51516970 "Updated Next of Kin Details"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Change Type"; "Change Type")
+                field("Change Type"; Rec."Change Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Captured By"; "Captured By")
+                field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Captured On"; "Captured On")
+                field("Captured On"; Rec."Captured On")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Change Effected"; "Change Effected")
+                field("Change Effected"; Rec."Change Effected")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }

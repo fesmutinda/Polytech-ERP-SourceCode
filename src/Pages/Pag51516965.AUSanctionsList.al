@@ -10,38 +10,38 @@ Page 51516965 "AU Sanctions List"
         {
             repeater(Group)
             {
-                field(UserId; UserId)
-                {
-                    ApplicationArea = Basic;
-                }
-                field(EmployerCode; Rec.EmployerCode)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Date of Birth"; Rec."Date of Birth")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Palace Of Birth"; Rec."Palace Of Birth")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Citizenship; Rec.Citizenship)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Listing Information"; Rec."Listing Information")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Control Date"; Rec."Control Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("AU Sactions kenya"; Rec."AU Sactions kenya")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(UserId; UserId)
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field(EmployerCode; Rec.EmployerCode)
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Date of Birth"; Rec."Date of Birth")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Palace Of Birth"; Rec."Palace Of Birth")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field(Citizenship; Rec.Citizenship)
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Listing Information"; Rec."Listing Information")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Control Date"; Rec."Control Date")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("AU Sactions kenya"; Rec."AU Sactions kenya")
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
     }

@@ -4,7 +4,7 @@ Page 51516941 "Package Types List"
     CardPageID = "Package Types Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51516908;
+    SourceTable = "Package Types";
 
     layout
     {
@@ -12,19 +12,19 @@ Page 51516941 "Package Types List"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Description"; "Package Description")
+                field("Package Description"; Rec."Package Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Charge"; "Package Charge")
+                field("Package Charge"; Rec."Package Charge")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Charge Account"; "Package Charge Account")
+                field("Package Charge Account"; Rec."Package Charge Account")
                 {
                     ApplicationArea = Basic;
                 }

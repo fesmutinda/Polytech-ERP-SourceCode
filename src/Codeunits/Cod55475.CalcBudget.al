@@ -39,15 +39,15 @@ Codeunit 55475 CalcBudget
     var
         UpdateAnalysisView: Codeunit "Update Analysis View";
         BudgetaryControl: Record "Budgetary Control Setup";
-        AnalysisView: Record "Analysis View";
+        AnalysisView: Record "Upd Analysis View Entry Buffer";
     begin
         //Update Budget Lines
         if BudgetaryControl.Get then begin
             if BudgetaryControl."Analysis View Code" <> '' then begin
                 AnalysisView.Reset;
-                AnalysisView.SetRange(AnalysisView.Code, BudgetaryControl."Analysis View Code");
+                AnalysisView.SetRange(AnalysisView.BusUnitCode, BudgetaryControl."Analysis View Code");
                 if AnalysisView.Find('-') then
-                    UpdateAnalysisView.UpdateAnalysisView_Budget(AnalysisView);
+                    UpdateAnalysisView.UpdateAnalysisViewEntry(AnalysisView);
             end;
         end;
     end;
@@ -116,8 +116,8 @@ Codeunit 55475 CalcBudget
                 if not Item.Get(CheckNo) then
                     //     ERROR('Item Does not Exist');
                     exit;
-                Item.TestField("Item G/L Budget Account");
-                BudgetGl := Item."Item G/L Budget Account";
+                // Item.TestField("Item G/L Budget Account");
+                // BudgetGl := Item."Item G/L Budget Account";
             end;
 
             if CheckType = Checktype::"Fixed Asset" then begin

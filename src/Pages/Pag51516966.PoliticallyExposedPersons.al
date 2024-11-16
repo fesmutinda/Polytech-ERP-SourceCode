@@ -2,7 +2,7 @@
 Page 51516966 "Politically Exposed Persons"
 {
     PageType = List;
-    SourceTable = 51516918;
+    SourceTable = "Politically Exposed Persons";
 
     layout
     {
@@ -10,27 +10,27 @@ Page 51516966 "Politically Exposed Persons"
         {
             repeater(Group)
             {
-                field("Code"; Code)
+                field("Code"; Rec.Code)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("County Code"; "County Code")
+                field("County Code"; Rec."County Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("County Name"; "County Name")
+                field("County Name"; Rec."County Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID/Passport No"; "ID/Passport No")
+                field("ID/Passport No"; Rec."ID/Passport No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Position Runing For"; "Position Runing For")
+                field("Position Runing For"; Rec."Position Runing For")
                 {
                     ApplicationArea = Basic;
                 }

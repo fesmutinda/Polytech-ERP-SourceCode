@@ -8,7 +8,7 @@ Page 51516929 "M_Agent Signature-Uploaded"
     {
         area(content)
         {
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic, Suite;
                 ShowCaption = false;

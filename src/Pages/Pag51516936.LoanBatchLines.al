@@ -2,7 +2,7 @@
 Page 51516936 "Loan Batch Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516645;
+    SourceTable = "Loan Dis Batch Lines";
 
     layout
     {
@@ -10,35 +10,35 @@ Page 51516936 "Loan Batch Lines"
         {
             repeater(Group)
             {
-                field("Batch No."; "Batch No.")
+                field("Batch No."; Rec."Batch No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mode Of Disbursement"; "Mode Of Disbursement")
+                field("Mode Of Disbursement"; Rec."Mode Of Disbursement")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account"; "Bank Account")
+                field("Bank Account"; Rec."Bank Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount to Disburse"; "Amount to Disburse")
+                field("Amount to Disburse"; Rec."Amount to Disburse")
                 {
                     ApplicationArea = Basic;
                 }
-                field("EFT Fees"; "EFT Fees")
+                field("EFT Fees"; Rec."EFT Fees")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Unallocated; Unallocated)
+                field(Unallocated; Rec.Unallocated)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Available Amount"; "Available Amount")
+                field("Available Amount"; Rec."Available Amount")
                 {
                     ApplicationArea = Basic;
                 }
