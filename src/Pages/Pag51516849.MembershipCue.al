@@ -10,31 +10,31 @@ Page 51516849 "Membership Cue"
         {
             cuegroup(Members)
             {
-                field("Active Members"; "Active Members")
+                field("Active Members"; Rec."Active Members")
                 {
                     ApplicationArea = Basic;
                     Image = "None";
                     Style = Favorable;
                     StyleExpr = true;
                 }
-                field("Dormant Members"; "Dormant Members")
+                field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic;
                     Image = PEople;
                 }
-                field("Non-Active Members"; "Non-Active Members")
+                field("Non-Active Members"; Rec."Non-Active Members")
                 {
                     ApplicationArea = Basic;
                     Image = PEople;
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Deceased Members"; "Deceased Members")
+                field("Deceased Members"; Rec."Deceased Members")
                 {
                     ApplicationArea = Basic;
                     Image = People;
                 }
-                field("Withdrawn Members"; "Withdrawn Members")
+                field("Withdrawn Members"; Rec."Withdrawn Members")
                 {
                     ApplicationArea = Basic;
                     Image = People;
@@ -42,14 +42,14 @@ Page 51516849 "Membership Cue"
             }
             cuegroup("Account Categories")
             {
-                field("Female Members"; "Female Members")
+                field("Female Members"; Rec."Female Members")
                 {
                     ApplicationArea = Basic;
                     Image = "None";
                     Style = Favorable;
                     StyleExpr = true;
                 }
-                field("Male Members"; "Male Members")
+                field("Male Members"; Rec."Male Members")
                 {
                     ApplicationArea = Basic;
                     Image = Library;
@@ -60,19 +60,19 @@ Page 51516849 "Membership Cue"
             cuegroup(Loans)
             {
                 Caption = 'Back Office Loans';
-                field("Normal Loan"; "Normal Loan")
+                field("Normal Loan"; Rec."Normal Loan")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Normal Loans';
                     Image = "None";
                 }
-                field(EMERGENCY; EMERGENCY)
+                field(EMERGENCY; Rec.EMERGENCY)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Emergency Loans';
                     Image = Chart;
                 }
-                field(SCHOOL; SCHOOL)
+                field(SCHOOL; Rec.SCHOOL)
                 {
                     ApplicationArea = Basic;
                     Caption = 'School Fees Loans';
@@ -82,27 +82,27 @@ Page 51516849 "Membership Cue"
             cuegroup("Front Office Loans")
             {
                 Caption = 'Front Office Loans';
-                field(ADVANCE1A; ADVANCE1A)
+                field(ADVANCE1A; Rec.ADVANCE1A)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Advance 1A';
                 }
-                field(ADVANCE1B; ADVANCE1B)
+                field(ADVANCE1B; Rec.ADVANCE1B)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Advance 1B';
                 }
-                field(ADVANCE1C; ADVANCE1C)
+                field(ADVANCE1C; Rec.ADVANCE1C)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Advance 1C';
                 }
-                field(SALARYADVANCE; SALARYADVANCE)
+                field(SALARYADVANCE; Rec.SALARYADVANCE)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Salary in Advance';
                 }
-                field(FOSALOAN; FOSALOAN)
+                field(FOSALOAN; Rec.FOSALOAN)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Fosa Loan';
@@ -117,10 +117,10 @@ Page 51516849 "Membership Cue"
 
     trigger OnOpenPage()
     begin
-        if not Get(UserId) then begin
-            Init;
-            "User ID" := UserId;
-            Insert;
+        if not Rec.Get(UserId) then begin
+            Rec.Init;
+            Rec."User ID" := UserId;
+            Rec.Insert;
         end;
     end;
 }

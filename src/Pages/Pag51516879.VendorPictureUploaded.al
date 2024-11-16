@@ -8,9 +8,9 @@ Page 51516879 "Vendor Picture-Uploaded"
     {
         area(content)
         {
-            field(Picture;Picture)
+            field(Picture; Rec."Picture 2")
             {
-                ApplicationArea = Basic,Suite;
+                ApplicationArea = Basic, Suite;
                 ShowCaption = false;
                 ToolTip = 'Specifies the picture that has been inserted for the member.';
             }
@@ -68,17 +68,17 @@ Page 51516879 "Vendor Picture-Uploaded"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("No.");
+                    Rec.TestField("No.");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "No." + Format(Picture.MediaId);
-                    Picture.ExportFile(ExportPath);
-                    FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer,TemporaryPath);
-                    TempNameValueBuffer.SetFilter(Name,StrSubstNo('%1*',ExportPath));
+                    ExportPath := TemporaryPath + Rec."No." + Format(Rec."Picture 2");
+                    Rec."Picture 2".Export(ExportPath);
+                    FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
+                    TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg',"No.",ConvertStr("No.",'"/\','___'));
-                    Download(TempNameValueBuffer.Name,DownloadImageTxt,'','',ToFile);
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."No.", ConvertStr(Rec."No.", '"/\', '___'));
+                    Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
             }
@@ -100,9 +100,9 @@ Page 51516879 "Vendor Picture-Uploaded"
     }
 
     var
-        [RunOnClient]
-        [WithEvents]
-        CameraProvider: dotnet CameraProvider;
+        // [RunOnClient]
+        // [WithEvents]
+        // CameraProvider: dotnet CameraProvider;
         CameraAvailable: Boolean;
         DeleteExportEnabled: Boolean;
         OverrideImageQst: label 'The existing picture will be replaced. Do you want to continue?';
@@ -113,18 +113,18 @@ Page 51516879 "Vendor Picture-Uploaded"
 
     procedure TakeNewPicture()
     var
-        CameraOptions: dotnet CameraOptions;
+    // CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
-          exit;
+            exit;
 
-        CameraOptions := CameraOptions.CameraOptions;
-        CameraOptions.Quality := 50;
-        CameraProvider.RequestPictureAsync(CameraOptions);
+        // CameraOptions := CameraOptions.CameraOptions;
+        // CameraOptions.Quality := 50;
+        // CameraProvider.RequestPictureAsync(CameraOptions);
     end;
 
     procedure ImportFromDevice()
@@ -133,35 +133,35 @@ Page 51516879 "Vendor Picture-Uploaded"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Picture.Count > 0 then
-          if not Confirm(OverrideImageQst) then
-            Error('');
+        if Rec."Picture 2".HasValue then // Count > 0 then
+            if not Confirm(OverrideImageQst) then
+                Error('');
 
         ClientFileName := '';
-        FileName := FileManagement.UploadFile(SelectPictureTxt,ClientFileName);
+        FileName := FileManagement.UploadFile(SelectPictureTxt, ClientFileName);
         if FileName = '' then
-          Error('');
+            Error('');
 
-        Clear(Picture);
-        Picture.ImportFile(FileName,ClientFileName);
-        if not Insert(true) then
-          Modify(true);
+        Clear(Rec."Picture 2");
+        Rec."Picture 2".Import(FileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Picture.Count <> 0;
+        DeleteExportEnabled := Rec."Picture 2".HasValue;
     end;
 
     procedure IsCameraAvailable(): Boolean
     begin
-        exit(CameraProvider.IsAvailable);
+        // exit(CameraProvider.IsAvailable);
     end;
 
     procedure SetHideActions()
@@ -172,17 +172,17 @@ Page 51516879 "Vendor Picture-Uploaded"
 
     procedure DeleteItemPicture()
     begin
-        TestField("No.");
+        Rec.TestField("No.");
 
         if not Confirm(DeleteImageQst) then
-          exit;
+            exit;
 
-        Clear(Picture);
-        Modify(true);
+        Clear(Rec."Picture 2");
+        Rec.Modify(true);
     end;
 
-    trigger Cameraprovider::PictureAvailable(PictureName: Text;PictureFilePath: Text)
-    begin
-    end;
+    // trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
+    // begin
+    // end;
 }
 

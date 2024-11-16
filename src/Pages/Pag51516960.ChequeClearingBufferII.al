@@ -5,11 +5,11 @@ Page 51516960 "Cheque Clearing BufferII"
     InsertAllowed = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = "Cheque Clearing Header";
+    SourceTable = Transactions;
     SourceTableView = where(Posted = filter(true),
-                            Type = filter("Cheque Deposit"),
-                            "Clear Cheque" = filter(No),
-                            "Bounce Cheque" = filter(No));
+                            // Type = filter("Cheque Deposit"),
+                            "Clear Cheque" = filter(false),
+                            "Bounce Cheque" = filter(false));
 
     layout
     {
@@ -37,7 +37,7 @@ Page 51516960 "Cheque Clearing BufferII"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -62,7 +62,7 @@ Page 51516960 "Cheque Clearing BufferII"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -134,7 +134,7 @@ Page 51516960 "Cheque Clearing BufferII"
                                     Transactions."Date Banked" := Today;
                                     Transactions."Time Banked" := Time;
                                     Transactions."Banking Posted" := true;
-                                    Transactions."Cheque Processed" := Transactions."cheque processed"::"1";
+                                    Transactions."Cheque Processed" := Transactions."Cheque Processed" = true;
                                     Transactions.Modify;
                                 until Transactions.Next = 0;
 

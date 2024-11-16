@@ -12,47 +12,47 @@ Page 51516836 "Loan Officer Details"
         {
             repeater(Group)
             {
-                field("Account No."; "Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Savings Target"; "Savings Target")
+                field("Savings Target"; Rec."Savings Target")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Target"; "Member Target")
+                field("Member Target"; Rec."Member Target")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Disbursement Target"; "Disbursement Target")
+                field("Disbursement Target"; Rec."Disbursement Target")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Target"; "Payment Target")
+                field("Payment Target"; Rec."Payment Target")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Exit Target"; "Exit Target")
+                field("Exit Target"; Rec."Exit Target")
                 {
                     ApplicationArea = Basic;
                 }
-                field("No. of Loans"; "No. of Loans")
+                field("No. of Loans"; Rec."No. of Loans")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status;Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Created; Created)
+                field(Created; Rec.Created)
                 {
                     ApplicationArea = Basic;
                 }

@@ -2,7 +2,7 @@
 Page 50011 "Sacco Transfer Schedule"
 {
     PageType = ListPart;
-    SourceTable = "Imprest Accounting Header";
+    SourceTable = "Sacco Transfers Schedule";
 
     layout
     {
@@ -10,36 +10,35 @@ Page 50011 "Sacco Transfer Schedule"
         {
             repeater(Control1102760000)
             {
-                field("Destination Account Type"; "Destination Account Type")
+                field("Destination Account Type"; Rec."Destination Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account No."; "Destination Account No.")
+                field("Destination Account No."; Rec."Destination Account No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Account Name"; "Destination Account Name")
+                field("Destination Account Name"; Rec."Destination Account Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Destination Type"; "Destination Type")
-                {
-                    ApplicationArea = Basic;
-                    OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,FOSA Shares,Additional Shares,Interest Due,Jiokoe Savings,Kanisa Savings';
-                }
-                field("Destination Loan"; "Destination Loan")
+                field("Destination Type"; Rec."Destination Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Amount; Amount)
+                field("Destination Loan"; Rec."Destination Loan")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cummulative Total Payment Loan"; "Cummulative Total Payment Loan")
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Transaction Description"; "Transaction Description")
+                field("Cummulative Total Payment Loan"; Rec."Cummulative Total Payment Loan")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Description;Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
@@ -54,30 +53,30 @@ Page 50011 "Sacco Transfer Schedule"
     trigger OnAfterGetRecord()
     begin
         SaccoHeader.Reset;
-        SaccoHeader.SetRange(SaccoHeader.No, "No.");
+        SaccoHeader.SetRange(SaccoHeader.No,Rec."No.");
         if SaccoHeader.FindSet then begin
-            if SaccoHeader.Status = SaccoHeader.Status::Open then begin
-                CurrPage.Editable := true
+          if SaccoHeader.Status=SaccoHeader.Status::Open then begin
+            CurrPage.Editable:=true
             end else
-                CurrPage.Editable := false;
-        end;
+            CurrPage.Editable:=false;
+          end;
     end;
 
     trigger OnOpenPage()
     begin
         SaccoHeader.Reset;
-        SaccoHeader.SetRange(SaccoHeader.No, "No.");
+        SaccoHeader.SetRange(SaccoHeader.No,Rec."No.");
         if SaccoHeader.FindSet then begin
-            if SaccoHeader.Status = SaccoHeader.Status::Open then begin
-                CurrPage.Editable := true
+          if SaccoHeader.Status=SaccoHeader.Status::Open then begin
+            CurrPage.Editable:=true
             end else
-                if (SaccoHeader.Status = SaccoHeader.Status::"Pending Approval") or (SaccoHeader.Status = SaccoHeader.Status::"Pending Approval") then begin
-                    CurrPage.Editable := false;
-                end;
-        end;
+            if (SaccoHeader.Status=SaccoHeader.Status::pending) or (SaccoHeader.Status=SaccoHeader.Status::pending) then begin
+            CurrPage.Editable:=false;
+              end;
+          end;
     end;
 
     var
-        SaccoHeader: Record "Imprest Line";
+        SaccoHeader: Record "Sacco Transfers";
 }
 

@@ -78,10 +78,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Administration Fee';
     // }
-    // value(19; "Insurance Contribution")
-    // {
-    //     Caption = 'Insurance Contribution';
-    // }
+    value(19; "Insurance Contribution")
+    {
+        Caption = 'Insurance Contribution';
+    }
     // value(20; Prepayment)
     // {
     //     Caption = 'Prepayment';
@@ -146,14 +146,14 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'M Pesa Charge ';
     // }
-    // value(36; "Insurance Charge")
-    // {
-    //     Caption = 'Insurance Charge';
-    // }
-    // value(37; "Insurance Paid")
-    // {
-    //     Caption = 'Insurance Paid';
-    // }
+    value(36; "Insurance Charge")
+    {
+        Caption = 'Insurance Charge';
+    }
+    value(37; "Insurance Paid")
+    {
+        Caption = 'Insurance Paid';
+    }
     // value(38; "FOSA Account")
     // {
     //     Caption = 'FOSA Account';

@@ -14,7 +14,7 @@ Page 51516841 "Change Request Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Type; Type)
+                field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic;
                     Editable = TypeEditable;
@@ -34,7 +34,7 @@ Page 51516841 "Change Request Card"
                             nxkinvisible := true;
                         end;
 
-                        if Type = Type::"Backoffice Change" then begin
+                        if Rec.Type = Rec.Type::"Backoffice Change" then begin
                             AccountVisible := true;
                             nxkinvisible := true;
                         end;
@@ -503,7 +503,7 @@ Page 51516841 "Change Request Card"
                     if (Rec.Status <> Rec.Status::Approved) then begin
                         Error('Change Request Must be Approved First');
                     end;
-                    if ((Rec.Type = Rec.Type::"Mobile Change") or (Rec.Type = Rec.Type::"ATM Change") or (Rec.Type = Rec.Type::"Agile Change") or (Type = Type::"Backoffice Change")) then begin
+                    if ((Rec.Type = Rec.Type::"Mobile Change") or (Rec.Type = Rec.Type::"ATM Change") or (Rec.Type = Rec.Type::"Agile Change") or (Rec.Type = Rec.Type::"Backoffice Change")) then begin
 
                         vend.Reset;
                         vend.SetRange(vend."No.", Rec."Account No");
@@ -584,11 +584,11 @@ Page 51516841 "Change Request Card"
 
                     if Rec.Type = Rec.Type::"Backoffice Change" then begin
                         Memb.Reset;
-                        Memb.SetRange(Memb."No.", "Account No");
+                        Memb.SetRange(Memb."No.", Rec."Account No");
                         if Memb.Find('-') then begin
                             if Rec."Name(New Value)" <> '' then
                                 Memb.Name := Rec."Name(New Value)";
-                            Memb."Global Dimension 2 Code" := Branch;
+                            Memb."Global Dimension 2 Code" := Rec.Branch;
                             if Rec."Address(New Value)" <> '' then
                                 Memb.Address := Rec."Address(New Value)";
                             if Rec."Email(New Value)" <> '' then
@@ -620,7 +620,7 @@ Page 51516841 "Change Request Card"
                             if Rec."Group Account No" <> '' then
                                 Memb."Group Account No" := Rec."Group Account No";
                             if Rec.pin2 <> '' then
-                                Memb.Pin := pin2;
+                                Memb.Pin := Rec.pin2;
                             if Rec.bankacc1 <> '' then
                                 Memb."Bank Account No." := Rec.bankacc1;
                             if Rec.bankcode1 <> '' then
@@ -708,8 +708,8 @@ Page 51516841 "Change Request Card"
                     if Rec.Status <> Rec.Status::Open then
                         Error(text001);
                     Rec.TestField("Reason for change");
-                    if ApprovalsMgmt.CheckChangeRequestApprovalsWorkflowEnabled(Rec) then
-                        ApprovalsMgmt.OnSendChangeRequestForApproval(Rec);
+                    // if ApprovalsMgmt.CheckChangeRequestApprovalsWorkflowEnabled(Rec) then
+                    //     ApprovalsMgmt.OnSendChangeRequestForApproval(Rec);
                 end;
             }
             action("Cancel Approval Request")
@@ -745,7 +745,7 @@ Page 51516841 "Change Request Card"
                 begin
                     DocumentType := Documenttype::ChangeRequest;
 
-                    ApprovalEntries.Setfilters(Database::"Change Request", DocumentType, No);
+                    ApprovalEntries.SetRecordFilters(Database::"Change Request", DocumentType, Rec.No);
                     ApprovalEntries.Run;
                 end;
             }
@@ -923,7 +923,7 @@ Page 51516841 "Change Request Card"
 
     local procedure UpdateControl()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             NameEditable := true;
             PictureEditable := true;
             SignatureEditable := true;
@@ -1007,7 +1007,7 @@ Page 51516841 "Change Request Card"
                 ReactivationFeeEditable := false;
                 AccountCategoryEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status =Rec. Status::Approved then begin
                     NameEditable := false;
                     PictureEditable := false;
                     SignatureEditable := false;

@@ -2,11 +2,11 @@
 Page 51516068 "Imprest List"
 {
     Caption = 'Staff Travel  List';
-    CardPageID = "Imprest Request";
+    // CardPageID = "Imprest Request";
     Editable = false;
     PageType = List;
     SourceTable = "Imprest Header";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {

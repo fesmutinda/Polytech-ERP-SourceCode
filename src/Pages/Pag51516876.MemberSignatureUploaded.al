@@ -13,7 +13,7 @@ Page 51516876 "Member Signature-Uploaded"
     {
         area(content)
         {
-            field(Signature; Signature)
+            field(Signature; Rec.Signature)
             {
                 ApplicationArea = Basic, Suite;
                 Editable = false;
@@ -44,11 +44,11 @@ Page 51516876 "Member Signature-Uploaded"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Signature.Count > 0 then
+        if Rec.Signature.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -57,10 +57,10 @@ Page 51516876 "Member Signature-Uploaded"
         if FileName = '' then
             Error('');
 
-        Clear(Signature);
-        Signature.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        Clear(Rec.Signature);
+        Rec.Signature.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;

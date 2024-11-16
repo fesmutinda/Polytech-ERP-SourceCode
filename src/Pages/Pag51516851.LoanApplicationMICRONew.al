@@ -128,7 +128,7 @@ Page 51516851 "Loan Application MICRO(New)"
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = 51516371;
     SourceTableView = where(Source = const(MICRO),
-                            Posted = const(No),
+                            Posted = const(false),
                             "Loan Status" = const(Application));
 
     layout
@@ -138,16 +138,16 @@ Page 51516851 "Loan Application MICRO(New)"
             group(General)
             {
                 Caption = 'General';
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Group Account"; "Group Account")
+                field("Group Account"; Rec."Group Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member';
@@ -164,86 +164,86 @@ Page 51516851 "Loan Application MICRO(New)"
 
                     end;
                 }
-                field("Client Name"; "Client Name")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Staff No"; "Staff No")
+                field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Staff No';
                     Editable = false;
                 }
-                field("Global Dimension 2 Code"; "Global Dimension 2 Code")
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("ID NO"; "ID NO")
+                field("ID NO"; Rec."ID NO")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Group"; "Member Group")
+                field("Member Group"; Rec."Member Group")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Group Name"; "Member Group Name")
+                field("Member Group Name"; Rec."Member Group Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                     Editable = ApplcDateEditable;
 
                     trigger OnValidate()
                     begin
-                        TestField(Posted, false);
+                        Rec.TestField(Posted, false);
                     end;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                     Editable = LProdTypeEditable;
                 }
-                field("Group Shares"; "Group Shares")
+                field("Group Shares"; Rec."Group Shares")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shares Balance"; "Shares Balance")
+                field("Shares Balance"; Rec."Shares Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pension No"; "Pension No")
+                field("Pension No"; Rec."Pension No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Installments; Installments)
+                field(Installments; Rec.Installments)
                 {
                     ApplicationArea = Basic;
                     Editable = InstallmentEditable;
 
                     trigger OnValidate()
                     begin
-                        TestField(Posted, false);
+                        Rec.TestField(Posted, false);
                     end;
                 }
-                field(Interest; Interest)
+                field(Interest; Rec.Interest)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Product Currency Code"; "Product Currency Code")
+                field("Product Currency Code"; Rec."Product Currency Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Enabled = true;
                 }
-                field("Requested Amount"; "Requested Amount")
+                field("Requested Amount"; Rec."Requested Amount")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Amount Applied';
@@ -251,16 +251,16 @@ Page 51516851 "Loan Application MICRO(New)"
 
                     trigger OnValidate()
                     begin
-                        TestField(Posted, false);
+                        Rec.TestField(Posted, false);
                     end;
                 }
-                field("Recommended Amount"; "Recommended Amount")
+                field("Recommended Amount"; Rec."Recommended Amount")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Qualifying Amount';
                     Enabled = false;
                 }
-                field("Approved Amount"; "Approved Amount")
+                field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Approved Amount';
@@ -268,36 +268,36 @@ Page 51516851 "Loan Application MICRO(New)"
 
                     trigger OnValidate()
                     begin
-                        TestField(Posted, false);
+                        Rec.TestField(Posted, false);
                     end;
                 }
-                field("Loan Purpose"; "Loan Purpose")
+                field("Loan Purpose"; Rec."Loan Purpose")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
                     Visible = false;
                 }
-                field("Repayment Method"; "Repayment Method")
+                field("Repayment Method"; Rec."Repayment Method")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Principle Repayment"; "Loan Principle Repayment")
+                field("Loan Principle Repayment"; Rec."Loan Principle Repayment")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Interest Repayment"; "Loan Interest Repayment")
+                field("Loan Interest Repayment"; Rec."Loan Interest Repayment")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Repayment; Repayment)
+                field(Repayment; Rec.Repayment)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Status"; "Loan Status")
+                field("Loan Status"; Rec."Loan Status")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -440,84 +440,84 @@ Page 51516851 "Loan Application MICRO(New)"
 
                     end;
                 }
-                field("Batch No."; "Batch No.")
+                field("Batch No."; Rec."Batch No.")
                 {
                     ApplicationArea = Basic;
                     Editable = BatchNoEditable;
                     Visible = false;
                 }
-                field("Captured By"; "Captured By")
+                field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Top Up Amount"; "Top Up Amount")
+                field("Top Up Amount"; Rec."Top Up Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Repayment Frequency"; "Repayment Frequency")
+                field("Repayment Frequency"; Rec."Repayment Frequency")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Mode of Disbursement"; "Mode of Disbursement")
+                field("Mode of Disbursement"; Rec."Mode of Disbursement")
                 {
                     ApplicationArea = Basic;
                     Editable = ModeofDisburesmentEdit;
                 }
-                field("Loan Disbursement Date"; "Loan Disbursement Date")
+                field("Loan Disbursement Date"; Rec."Loan Disbursement Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
 
                     trigger OnValidate()
                     begin
-                        if StrLen("Cheque No.") > 6 then
+                        if StrLen(Rec."Cheque No.") > 6 then
                             Error('Document No. cannot contain More than 6 Characters.');
                     end;
                 }
-                field("Repayment Start Date"; "Repayment Start Date")
+                field("Repayment Start Date"; Rec."Repayment Start Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Date of Completion"; "Expected Date of Completion")
+                field("Expected Date of Completion"; Rec."Expected Date of Completion")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("External EFT"; "External EFT")
+                field("External EFT"; Rec."External EFT")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Approval Status"; "Approval Status")
+                field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -562,7 +562,7 @@ Page 51516851 "Loan Application MICRO(New)"
                     trigger OnAction()
                     begin
                         LoanApp.Reset;
-                        LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                         if LoanApp.Find('-') then begin
                             Report.Run(51516896, true, false, LoanApp);
                         end;
@@ -576,8 +576,8 @@ Page 51516851 "Loan Application MICRO(New)"
 
                     trigger OnAction()
                     begin
-                        Posted := true;
-                        Modify;
+                        Rec.Posted := true;
+                        Rec.Modify;
                     end;
                 }
                 action("Loan Appraisal")
@@ -593,7 +593,7 @@ Page 51516851 "Loan Application MICRO(New)"
                     begin
 
                         LoanApp.Reset;
-                        LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                         if LoanApp.Find('-') then begin
                             Report.Run(51516452, true, false, LoanApp);
                         end;
@@ -616,55 +616,55 @@ Page 51516851 "Loan Application MICRO(New)"
                         //IF Posted=TRUE THEN
                         //ERROR('Loan has been posted, Can only preview schedule');
 
-                        if "Repayment Frequency" = "repayment frequency"::Daily then
+                        if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                             Evaluate(InPeriod, '1D')
-                        else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                             Evaluate(InPeriod, '1W')
-                        else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                             Evaluate(InPeriod, '1M')
-                        else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                        else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                             Evaluate(InPeriod, '1Q');
 
 
                         QCounter := 0;
                         QCounter := 3;
                         //EVALUATE(InPeriod,'1D');
-                        GrPrinciple := "Grace Period - Principle (M)";
-                        GrInterest := "Grace Period - Interest (M)";
-                        InitialGraceInt := "Grace Period - Interest (M)";
+                        GrPrinciple := Rec."Grace Period - Principle (M)";
+                        GrInterest := Rec."Grace Period - Interest (M)";
+                        InitialGraceInt := Rec."Grace Period - Interest (M)";
 
                         LoansR.Reset;
-                        LoansR.SetRange(LoansR."Loan  No.", "Loan  No.");
+                        LoansR.SetRange(LoansR."Loan  No.", Rec."Loan  No.");
                         if LoansR.Find('-') then begin
 
-                            TestField("Loan Disbursement Date");
-                            TestField("Repayment Start Date");
+                            Rec.TestField("Loan Disbursement Date");
+                            Rec.TestField("Repayment Start Date");
 
                             RSchedule.Reset;
-                            RSchedule.SetRange(RSchedule."Loan No.", "Loan  No.");
+                            RSchedule.SetRange(RSchedule."Loan No.", Rec."Loan  No.");
                             RSchedule.DeleteAll;
 
                             //LoanAmount:=LoansR."Approved Amount";
                             LoanAmount := LoansR."Approved Amount" + LoansR."Capitalized Charges";
                             InterestRate := LoansR.Interest;
                             RepayPeriod := LoansR.Installments;
-                            InitialInstal := LoansR.Installments + "Grace Period - Principle (M)";
+                            InitialInstal := LoansR.Installments + Rec."Grace Period - Principle (M)";
                             //LBalance:=LoansR."Approved Amount";
                             LBalance := LoansR."Approved Amount" + LoansR."Capitalized Charges";
-                            RunDate := "Repayment Start Date";//"Loan Disbursement Date";
-                                                              //RunDate:=CALCDATE('-1W',RunDate);
+                            RunDate := Rec."Repayment Start Date";//"Loan Disbursement Date";
+                                                                  //RunDate:=CALCDATE('-1W',RunDate);
                             InstalNo := 0;
                             //EVALUATE(RepayInterval,'1W');
                             //EVALUATE(RepayInterval,InPeriod);
 
                             //Repayment Frequency
-                            if "Repayment Frequency" = "repayment frequency"::Daily then
+                            if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                                 RunDate := CalcDate('-1D', RunDate)
-                            else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                                 RunDate := CalcDate('-1W', RunDate)
-                            else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                                 RunDate := CalcDate('-1M', RunDate)
-                            else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                                 RunDate := CalcDate('-1Q', RunDate);
                             //Repayment Frequency
 
@@ -676,28 +676,28 @@ Page 51516851 "Loan Application MICRO(New)"
 
 
                                 //Repayment Frequency
-                                if "Repayment Frequency" = "repayment frequency"::Daily then
+                                if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                                     RunDate := CalcDate('1D', RunDate)
-                                else if "Repayment Frequency" = "repayment frequency"::Weekly then
+                                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                                     RunDate := CalcDate('1W', RunDate)
-                                else if "Repayment Frequency" = "repayment frequency"::Monthly then
+                                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                                     RunDate := CalcDate('1M', RunDate)
-                                else if "Repayment Frequency" = "repayment frequency"::Quaterly then
+                                else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                                     RunDate := CalcDate('1Q', RunDate);
                                 //Repayment Frequency
 
                                 //kma
-                                if "Repayment Method" = "repayment method"::Amortised then begin
-                                    TestField(Interest);
-                                    TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::Amortised then begin
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.05, '>');
                                     LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 0.05, '>');
                                     LPrincipal := TotalMRepay - LInterest;
                                 end;
 
-                                if "Repayment Method" = "repayment method"::"Straight Line" then begin
-                                    TestField(Interest);
-                                    TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::"Straight Line" then begin
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.05, '>');
                                     LInterest := ROUND((InterestRate / 1200) * LoanAmount, 0.05, '>');
 
@@ -706,21 +706,21 @@ Page 51516851 "Loan Application MICRO(New)"
 
                                 end;
 
-                                if "Repayment Method" = "repayment method"::"Reducing Balance" then begin
-                                    TestField(Interest);
-                                    TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::"Reducing Balance" then begin
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.05, '>');
                                     LInterest := ROUND((InterestRate / 12 / 100) * LBalance, 0.05, '>');
                                 end;
 
-                                if "Repayment Method" = "repayment method"::Constants then begin
-                                    TestField(Repayment);
+                                if Rec."Repayment Method" = Rec."repayment method"::Constants then begin
+                                    Rec.TestField(Repayment);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.05, '>');
                                     //IF LBalance < Repayment THEN
                                     //LPrincipal:=LBalance
                                     //ELSE
                                     //LPrincipal:=Repayment;
-                                    LInterest := Interest;
+                                    LInterest := Rec.Interest;
                                 end;
                                 //kma
 
@@ -751,12 +751,12 @@ Page 51516851 "Loan Application MICRO(New)"
 
                                 RSchedule.Init;
                                 RSchedule."Repayment Code" := RepayCode;
-                                RSchedule."Loan No." := "Loan  No.";
+                                RSchedule."Loan No." := Rec."Loan  No.";
                                 RSchedule."Loan Amount" := LoanAmount;
                                 RSchedule."Instalment No" := InstalNo;
                                 RSchedule."Repayment Date" := RunDate;
-                                RSchedule."Member No." := "Client Code";
-                                RSchedule."Loan Category" := "Loan Product Type";
+                                RSchedule."Member No." := Rec."Client Code";
+                                RSchedule."Loan Category" := Rec."Loan Product Type";
                                 RSchedule."Monthly Repayment" := LInterest + LPrincipal;
                                 RSchedule."Monthly Interest" := LInterest;
                                 RSchedule."Principal Repayment" := LPrincipal;
@@ -772,7 +772,7 @@ Page 51516851 "Loan Application MICRO(New)"
                         Commit;
 
                         LoanApp.Reset;
-                        LoanApp.SetRange(LoanApp."Loan  No.", "Loan  No.");
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
                         if LoanApp.Find('-') then
                             Report.Run(51516852, true, false, LoanApp);
                     end;
@@ -1505,8 +1505,8 @@ Page 51516851 "Loan Application MICRO(New)"
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = Page "Loans Guarantee Details";
-                    RunPageLink = "Loan No" = field("Loan  No."),
-                                  "Member Cell" = field(Discard);
+                    // RunPageLink = "Loan No" = field("Loan  No."),
+                    //               "Member Cell" = field(Discard);
                 }
                 separator(Action1102755001)
                 {
@@ -1530,7 +1530,7 @@ Page 51516851 "Loan Application MICRO(New)"
                     begin
 
                         DocumentType := Documenttype::LoanApplication;
-                        ApprovalEntries.Setfilters(Database::"Loans Register", DocumentType, "Loan  No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Loans Register", DocumentType, Rec."Loan  No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -1550,13 +1550,13 @@ Page 51516851 "Loan Application MICRO(New)"
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
 
-                        if "Approved Amount" = 0 then Error('Loan Must Be Upraised before sending Approval');
+                        if Rec."Approved Amount" = 0 then Error('Loan Must Be Upraised before sending Approval');
 
-                        TestField("Requested Amount");
+                        Rec.TestField("Requested Amount");
                         //TESTFIELD("Recovery Mode");
 
 
-                        if "Approval Status" <> "approval status"::Open then
+                        if Rec."Approval Status" <> "approval status"::Open then
                             Error(Text001);
 
                         //IF ApprovalsMgmt.CheckLoanApplicationApprovalsWorkflowEnabled(Rec) THEN
@@ -1594,9 +1594,9 @@ Page 51516851 "Loan Application MICRO(New)"
                     begin
                         //ApprovalMgt.SendLoanApprRequest(Rec);
                         if Confirm('Are you sure you want to cancel the approval request', false) = true then begin
-                            "Loan Status" := "loan status"::Application;
-                            "Approval Status" := "approval status"::Open;
-                            Modify;
+                            Rec."Loan Status" := Rec."loan status"::Application;
+                            Rec."Approval Status" := "approval status"::Open;
+                            Rec.Modify;
                         end;
                     end;
                 }
@@ -1607,10 +1607,10 @@ Page 51516851 "Loan Application MICRO(New)"
     trigger OnAfterGetCurrRecord()
     begin
         UpdateControl();
-        OpenApprovalsEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalsEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowExist := true;
-        if Rec."Loan Status" = "loan status"::Approved then begin
+        if Rec."Loan Status" = Rec."loan status"::Approved then begin
             OpenApprovalsEntriesExist := false;
             CanCancelApprovalForRecord := false;
             EnabledApprovalWorkflowExist := false;
@@ -1639,18 +1639,18 @@ Page 51516851 "Loan Application MICRO(New)"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        Source := Source::MICRO;
+        Rec.Source := Rec.Source::MICRO;
     end;
 
     trigger OnNextRecord(Steps: Integer): Integer
     begin
-        if "Loan Status" = "loan status"::Approved then
+        if Rec."Loan Status" = Rec."loan status"::Approved then
             CurrPage.Editable := false;
     end;
 
     trigger OnOpenPage()
     begin
-        SetRange(Posted, false);
+        Rec.SetRange(Posted, false);
     end;
 
     var
@@ -1797,7 +1797,7 @@ Page 51516851 "Loan Application MICRO(New)"
     procedure UpdateControl()
     begin
 
-        if "Approval Status" = "approval status"::Open then begin
+        if Rec."Approval Status" = "approval status"::Open then begin
             MNoEditable := true;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -1820,7 +1820,7 @@ Page 51516851 "Loan Application MICRO(New)"
             //CopyofPayslipEditable:=TRUE;
         end;
 
-        if "Approval Status" = "approval status"::Pending then begin
+        if Rec."Approval Status" = Rec."approval status"::Pending then begin
             MNoEditable := false;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -1837,7 +1837,7 @@ Page 51516851 "Loan Application MICRO(New)"
 
         end;
 
-        if "Approval Status" = "approval status"::Rejected then begin
+        if Rec."Approval Status" = Rec."approval status"::Rejected then begin
             MNoEditable := false;
             //AccountNoEditable:=FALSE;
             ApplcDateEditable := false;
@@ -1855,7 +1855,7 @@ Page 51516851 "Loan Application MICRO(New)"
 
         end;
 
-        if "Approval Status" = "approval status"::Approved then begin
+        if Rec."Approval Status" = Rec."approval status"::Approved then begin
             MNoEditable := false;
             //AccountNoEditable:=FALSE;
             LoanStatusEditable := false;
@@ -1901,19 +1901,19 @@ Page 51516851 "Loan Application MICRO(New)"
 
         SMSMessage.Init;
         SMSMessage."Entry No" := iEntryNo;
-        SMSMessage."Batch No" := "Batch No.";
-        SMSMessage."Document No" := "Loan  No.";
-        SMSMessage."Account No" := "Account No";
+        SMSMessage."Batch No" := Rec."Batch No.";
+        SMSMessage."Document No" := Rec."Loan  No.";
+        SMSMessage."Account No" := Rec."Account No";
         SMSMessage."Date Entered" := Today;
         SMSMessage."Time Entered" := Time;
         SMSMessage.Source := 'LOANAPP';
         SMSMessage."Entered By" := UserId;
         SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-        SMSMessage."SMS Message" := 'Dear Member,Your Loan of amount ' + Format("Requested Amount") + ' for ' +
-        "Client Code" + ' ' + "Client Name" + ' has been received and is being Processed '
+        SMSMessage."SMS Message" := 'Dear Member,Your Loan of amount ' + Format(Rec."Requested Amount") + ' for ' +
+        Rec."Client Code" + ' ' + Rec."Client Name" + ' has been received and is being Processed '
         + compinfo.Name + ' ' + GenSetUp."Customer Care No";
         Cust.Reset;
-        Cust.SetRange(Cust."No.", "Client Code");
+        Cust.SetRange(Cust."No.", Rec."Client Code");
         if Cust.Find('-') then begin
             SMSMessage."Telephone No" := Cust."Mobile Phone No";
         end;
@@ -1924,15 +1924,15 @@ Page 51516851 "Loan Application MICRO(New)"
     local procedure FnSendReceivedLoanApplEmail(LoanNo: Code[20])
     var
         LoanRec: Record 51516371;
-        SMTPMail: Codeunit UnknownCodeunit400;
-        SMTPSetup: Record "SMTP Mail Setup";
+        // SMTPMail: Codeunit UnknownCodeunit400;
+        // SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];
         CompanyInfo: Record "Company Information";
         Cust: Record 51516364;
         Email: Text[50];
     begin
-        SMTPSetup.Get();
+        // SMTPSetup.Get();
 
         LoanRec.Reset;
         LoanRec.SetRange(LoanRec."Loan  No.", LoanNo);
@@ -1943,13 +1943,13 @@ Page 51516851 "Loan Application MICRO(New)"
             if Email = '' then begin
                 Error('Email Address Missing for LoanRecer Application number' + '-' + LoanRec."Loan  No.");
             end;
-            if Email <> '' then
-                SMTPMail.CreateMessage(SMTPSetup."Email Sender Name", SMTPSetup."Email Sender Address", Email, 'Loan Application', '', true);
-            SMTPMail.AppendBody(StrSubstNo(LoanAppMessage, LoanRec."Client Name", IDNo, UserId));
-            SMTPMail.AppendBody(SMTPSetup."Email Sender Name");
-            SMTPMail.AppendBody('<br><br>');
-            SMTPMail.AddAttachment(FileName, Attachment);
-            SMTPMail.Send;
+            // if Email <> '' then
+            //     SMTPMail.CreateMessage(SMTPSetup."Email Sender Name", SMTPSetup."Email Sender Address", Email, 'Loan Application', '', true);
+            // SMTPMail.AppendBody(StrSubstNo(LoanAppMessage, LoanRec."Client Name", IDNo, UserId));
+            // SMTPMail.AppendBody(SMTPSetup."Email Sender Name");
+            // SMTPMail.AppendBody('<br><br>');
+            // SMTPMail.AddAttachment(FileName, Attachment);
+            // SMTPMail.Send;
         end;
     end;
 
@@ -1959,7 +1959,7 @@ Page 51516851 "Loan Application MICRO(New)"
         Sms: Record 51516471;
     begin
         LGuarantors.Reset;
-        LGuarantors.SetRange(LGuarantors."Loan No", "Loan  No.");
+        LGuarantors.SetRange(LGuarantors."Loan No", Rec."Loan  No.");
         if LGuarantors.FindFirst then begin
             repeat
                 if Cust.Get(LGuarantors."Member No") then
@@ -1979,18 +1979,18 @@ Page 51516851 "Loan Application MICRO(New)"
 
                 SMSMessage.Init;
                 SMSMessage."Entry No" := iEntryNo;
-                SMSMessage."Batch No" := "Batch No.";
-                SMSMessage."Document No" := "Loan  No.";
-                SMSMessage."Account No" := "Account No";
+                SMSMessage."Batch No" := Rec."Batch No.";
+                SMSMessage."Document No" := Rec."Loan  No.";
+                SMSMessage."Account No" := Rec."Account No";
                 SMSMessage."Date Entered" := Today;
                 SMSMessage."Time Entered" := Time;
                 SMSMessage.Source := 'GUARANTORSHIP';
                 SMSMessage."Entered By" := UserId;
                 SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                SMSMessage."SMS Message" := 'Dear Member,You have guaranteed ' + Format("Client Name")
-                + ' ' + "Loan Product Type" + ' of KES. ' + Format("Approved Amount") + ',' + ' ' + 'Call,' + ' ' + compinfo."Phone No." + ',if in dispute .' + ' ' + compinfo.Name + ' ' + GenSetUp."Customer Care No";
+                SMSMessage."SMS Message" := 'Dear Member,You have guaranteed ' + Format(Rec."Client Name")
+                + ' ' + Rec."Loan Product Type" + ' of KES. ' + Format(Rec."Approved Amount") + ',' + ' ' + 'Call,' + ' ' + compinfo."Phone No." + ',if in dispute .' + ' ' + compinfo.Name + ' ' + GenSetUp."Customer Care No";
                 Cust.Reset;
-                Cust.SetRange(Cust."No.", "Client Code");
+                Cust.SetRange(Cust."No.", Rec."Client Code");
                 if Cust.Find('-') then begin
                     SMSMessage."Telephone No" := Cust."Mobile Phone No";
                 end;

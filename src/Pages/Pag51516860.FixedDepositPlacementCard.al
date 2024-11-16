@@ -10,132 +10,132 @@ Page 51516860 "Fixed Deposit Placement Card"
         {
             group(General)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                     Editable = VarMemberNoEditable;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Fixed Deposit Account No"; "Fixed Deposit Account No")
+                field("Fixed Deposit Account No"; Rec."Fixed Deposit Account No")
                 {
                     ApplicationArea = Basic;
                     Editable = VarAccountNoEditable;
                     ToolTip = 'Specify the Fixed Deposit Account to fix the amount';
                 }
-                field("Account to Tranfers FD Amount"; "Account to Tranfers FD Amount")
+                field("Account to Tranfers FD Amount"; Rec."Account to Tranfers FD Amount")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Account to Tranfers Fixed Deposit Amount';
                     Editable = VarAccounttoTransferFDAmount;
                     ToolTip = 'Specify the savings account to transfer the amount to be fixed';
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Fixed Deposit Type"; "Fixed Deposit Type")
+                field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
                     ApplicationArea = Basic;
                     Editable = VarFixedDepTypeEditable;
                 }
-                field("Fixed Duration"; "Fixed Duration")
+                field("Fixed Duration"; Rec."Fixed Duration")
                 {
                     ApplicationArea = Basic;
                     Editable = VarFDDurationEditable;
                 }
-                field("Fixed Deposit Start Date"; "Fixed Deposit Start Date")
+                field("Fixed Deposit Start Date"; Rec."Fixed Deposit Start Date")
                 {
                     ApplicationArea = Basic;
                     Editable = VarFDStartDateEditable;
                 }
-                field("Amount to Fix"; "Amount to Fix")
+                field("Amount to Fix"; Rec."Amount to Fix")
                 {
                     ApplicationArea = Basic;
                     Editable = VarAmountFixedEditable;
                 }
-                field("FD Interest Rate"; "FD Interest Rate")
+                field("FD Interest Rate"; Rec."FD Interest Rate")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("FD Maturity Date"; "FD Maturity Date")
+                field("FD Maturity Date"; Rec."FD Maturity Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Fixed Deposit Status"; "Fixed Deposit Status")
+                field("Fixed Deposit Status"; Rec."Fixed Deposit Status")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Interest Earned"; "Expected Interest Earned")
+                field("Expected Interest Earned"; Rec."Expected Interest Earned")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Tax After Term Period"; "Expected Tax After Term Period")
+                field("Expected Tax After Term Period"; Rec."Expected Tax After Term Period")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Expected Net After Term Period"; "Expected Net After Term Period")
+                field("Expected Net After Term Period"; Rec."Expected Net After Term Period")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Effected; Effected)
+                field(Effected; Rec.Effected)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Effected By"; "Effected By")
+                field("Effected By"; Rec."Effected By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Effected"; "Date Effected")
+                field("Date Effected"; Rec."Date Effected")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("FD Closed On"; "FD Closed On")
+                field("FD Closed On"; Rec."FD Closed On")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Date Closed';
                     Editable = false;
                 }
-                field("FD Closed By"; "FD Closed By")
+                field("FD Closed By"; Rec."FD Closed By")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Closed By';
                     Editable = false;
                 }
-                field(Closed; Closed)
+                field(Closed; Rec.Closed)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Earned to Date"; "Interest Earned to Date")
+                field("Interest Earned to Date"; Rec."Interest Earned to Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -169,21 +169,21 @@ Page 51516860 "Fixed Deposit Placement Card"
                 trigger OnAction()
                 begin
                     if Confirm('Are you sure you want to Place this Fixed Deposit?', false) = true then begin
-                        if ObjAccount.Get("Fixed Deposit Account No") then begin
-                            ObjAccount."Fixed Deposit Type" := "Fixed Deposit Type";
-                            ObjAccount."Fixed Deposit Start Date" := "Fixed Deposit Start Date";
-                            ObjAccount."Fixed Deposit Status" := "Fixed Deposit Status";
-                            ObjAccount."Fixed Duration" := "FD Duration";
-                            ObjAccount."FD Maturity Date" := "FD Maturity Date";
-                            ObjAccount."Interest rate" := "FD Interest Rate";
-                            ObjAccount."Expected Interest On Term Dep" := "Expected Interest Earned";
+                        if ObjAccount.Get(Rec."Fixed Deposit Account No") then begin
+                            ObjAccount."Fixed Deposit Type" := Rec."Fixed Deposit Type";
+                            ObjAccount."Fixed Deposit Start Date" := Rec."Fixed Deposit Start Date";
+                            ObjAccount."Fixed Deposit Status" := Rec."Fixed Deposit Status";
+                            ObjAccount."Fixed Duration" := Rec."FD Duration";
+                            ObjAccount."FD Maturity Date" := Rec."FD Maturity Date";
+                            ObjAccount."Interest rate" := Rec."FD Interest Rate";
+                            ObjAccount."Expected Interest On Term Dep" := Rec."Expected Interest Earned";
                         end;
                     end;
 
                     Message(FDEffectedSuccesfully);
-                    Effected := true;
-                    "Effected By" := UserId;
-                    "Date Effected" := WorkDate;
+                    Rec.Effected := true;
+                    Rec."Effected By" := UserId;
+                    Rec."Date Effected" := WorkDate;
                 end;
             }
             action("Send Approval Request")
@@ -202,8 +202,8 @@ Page 51516860 "Fixed Deposit Placement Card"
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
 
-                    if ApprovalsMgmt.CheckFixedDepositApprovalsWorkflowEnabled(Rec) then
-                        ApprovalsMgmt.OnSendFixedDepositForApproval(Rec);
+                    // if ApprovalsMgmt.CheckFixedDepositApprovalsWorkflowEnabled(Rec) then
+                    //     ApprovalsMgmt.OnSendFixedDepositForApproval(Rec);
                 end;
             }
             action("Cancel Approval Request")
@@ -220,10 +220,10 @@ Page 51516860 "Fixed Deposit Placement Card"
                 var
                     Approvalmgt: Codeunit "Approvals Mgmt.";
                 begin
-                    if Confirm('Are you sure you want to cancel this approval request', false) = true then
-                        ApprovalsMgmt.OnCancelFixedDepositApprovalRequest(Rec);
-                    Status := Status::Open;
-                    Modify;
+                    // if Confirm('Are you sure you want to cancel this approval request', false) = true then
+                    //     ApprovalsMgmt.OnCancelFixedDepositApprovalRequest(Rec);
+                    Rec.Status := Rec.Status::Open;
+                    Rec.Modify;
                 end;
             }
             action(Approval)
@@ -240,7 +240,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                     ApprovalEntries: Page "Approval Entries";
                 begin
                     DocumentType := Documenttype::FixedDeposit;
-                    ApprovalEntries.Setfilters(Database::"Fixed Deposit Placement", DocumentType, "Document No");
+                    ApprovalEntries.SetRecordFilters(Database::"Fixed Deposit Placement", DocumentType, Rec."Document No");
                     ApprovalEntries.Run;
                 end;
             }
@@ -257,7 +257,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                 begin
 
                     ObjVendors.Reset;
-                    ObjVendors.SetRange(ObjVendors."No.", "Account to Tranfers FD Amount");
+                    ObjVendors.SetRange(ObjVendors."No.", Rec."Account to Tranfers FD Amount");
                     if ObjVendors.Find('-') then begin
                         ObjVendors.CalcFields(ObjVendors.Balance, ObjVendors."Uncleared Cheques");
                         AvailableBal := (ObjVendors.Balance - ObjVendors."Uncleared Cheques");
@@ -269,14 +269,14 @@ Page 51516860 "Fixed Deposit Placement Card"
                     end;
 
 
-                    if AvailableBal < "Amount to Fix" then begin
+                    if AvailableBal <Rec. "Amount to Fix" then begin
                         Error('The FOSA Account has Less than the amount to Fix,Account balance is %1', AvailableBal);
                     end;
 
                     if Confirm('Do you want to effect this transfer from the Savings account', false) = true then
                         BATCH_TEMPLATE := 'GENERAL';
                     BATCH_NAME := 'DEFAULT';
-                    DOCUMENT_NO := "Document No";
+                    DOCUMENT_NO := Rec."Document No";
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                     GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -288,15 +288,15 @@ Page 51516860 "Fixed Deposit Placement Card"
                     //------------------------------------1. CREDIT FIXED DEPOSIT A/C---------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Fixed Deposit Account No", Today, "Amount to Fix" * -1, 'FOSA', '',
-                    'Fixed Deposit Amount- ' + '-' + "Document No", '');
+                    GenJournalLine."account type"::Vendor,Rec. "Fixed Deposit Account No", Today,Rec. "Amount to Fix" * -1, 'FOSA', '',
+                    'Fixed Deposit Amount- ' + '-' +Rec. "Document No", '');
                     //--------------------------------(Credit fixed Deposit A/C)---------------------------------------------
 
                     //------------------------------------2. DEBIT FOSA SAVINGS A/C---------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account to Tranfers FD Amount", Today, "Amount to Fix", 'FOSA', '',
-                    'Fixed Deposit Amount- ' + '-' + "Document No", '');
+                    GenJournalLine."account type"::Vendor,Rec. "Account to Tranfers FD Amount", Today, Rec."Amount to Fix", 'FOSA', '',
+                    'Fixed Deposit Amount- ' + '-' +Rec. "Document No", '');
                     //----------------------------------(Debit Fosa Savings Account)------------------------------------------------
 
                     GenJournalLine.Reset;
@@ -306,9 +306,9 @@ Page 51516860 "Fixed Deposit Placement Card"
                         Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
 
                     Message(FDEffectedSuccesfully);
-                    Effected := true;
-                    "Effected By" := UserId;
-                    "Date Effected" := WorkDate;
+                    Rec.Effected := true;
+                    Rec."Effected By" := UserId;
+                    Rec."Date Effected" := WorkDate;
                 end;
             }
             action(PostFixedDeposittoSavings)
@@ -324,7 +324,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                 begin
 
                     ObjVendors.Reset;
-                    ObjVendors.SetRange(ObjVendors."No.", "Fixed Deposit Account No");
+                    ObjVendors.SetRange(ObjVendors."No.", Rec."Fixed Deposit Account No");
                     if ObjVendors.Find('-') then begin
                         ObjVendors.CalcFields(ObjVendors.Balance, ObjVendors."Uncleared Cheques");
                         AvailableBal := (ObjVendors.Balance - ObjVendors."Uncleared Cheques");
@@ -336,14 +336,14 @@ Page 51516860 "Fixed Deposit Placement Card"
                     end;
 
 
-                    if AvailableBal < "Amount to Fix" then begin
+                    if AvailableBal <Rec. "Amount to Fix" then begin
                         Error('The FOSA Account has Less than the amount to Fix,Account balance is %1', AvailableBal);
                     end;
 
                     if Confirm('Do you want to effect this transfer from the Savings account', false) = true then
                         BATCH_TEMPLATE := 'GENERAL';
                     BATCH_NAME := 'DEFAULT';
-                    DOCUMENT_NO := "Document No";
+                    DOCUMENT_NO :=Rec. "Document No";
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                     GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -355,15 +355,15 @@ Page 51516860 "Fixed Deposit Placement Card"
                     //------------------------------------1. CREDIT FIXED DEPOSIT A/C---------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Fixed Deposit Account No", Today, "Amount to Fix" * -1, 'FOSA', '',
-                    'Fixed Deposit Amount- ' + '-' + "Document No", '');
+                    GenJournalLine."account type"::Vendor, Rec."Fixed Deposit Account No", Today, Rec."Amount to Fix" * -1, 'FOSA', '',
+                    'Fixed Deposit Amount- ' + '-' + Rec."Document No", '');
                     //--------------------------------(Credit fixed Deposit A/C)---------------------------------------------
 
                     //------------------------------------2. DEBIT FOSA SAVINGS A/C---------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account to Tranfers FD Amount", Today, "Amount to Fix", 'FOSA', '',
-                    'Fixed Deposit Amount- ' + '-' + "Document No", '');
+                    GenJournalLine."account type"::Vendor, Rec."Account to Tranfers FD Amount", Today,Rec. "Amount to Fix", 'FOSA', '',
+                    'Fixed Deposit Amount- ' + '-' + Rec."Document No", '');
                     //----------------------------------(Debit Fosa Savings Account)------------------------------------------------
 
                     GenJournalLine.Reset;
@@ -373,9 +373,9 @@ Page 51516860 "Fixed Deposit Placement Card"
                         Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
 
                     Message(FDTermination);
-                    Closed := true;
-                    "FD Closed By" := UserId;
-                    "FD Closed On" := WorkDate;
+                    Rec.Closed := true;
+                    Rec."FD Closed By" := UserId;
+                    Rec."FD Closed On" := WorkDate;
                 end;
             }
             action(RenewFixedDeposit)
@@ -391,16 +391,16 @@ Page 51516860 "Fixed Deposit Placement Card"
                 begin
                     if Confirm('Do you want to Renew this Fixed Deposit', false) = true then begin
                         ObjVendors.Reset;
-                        ObjVendors.SetRange(ObjVendors."No.", "Fixed Deposit Account No");
+                        ObjVendors.SetRange(ObjVendors."No.", Rec."Fixed Deposit Account No");
                         if ObjVendors.Find('-') then begin
 
-                            ObjVendors."Prevous Fixed Deposit Type" := "Fixed Deposit Type";
-                            ObjVendors."Prevous FD Deposit Status Type" := "FDR Deposit Status Type";
-                            ObjVendors."Prevous FD Maturity Date" := "FD Maturity Date";
-                            ObjVendors."Prevous FD Start Date" := "Fixed Deposit Start Date";
-                            ObjVendors."Prevous Fixed Duration" := "FD Duration";
-                            ObjVendors."Prevous Interest Rate FD" := "FD Interest Rate";
-                            ObjVendors."Prevous Expected Int On FD" := "Expected Interest Earned";
+                            ObjVendors."Prevous Fixed Deposit Type" := Rec."Fixed Deposit Type";
+                            ObjVendors."Prevous FD Deposit Status Type" :=Rec. "FDR Deposit Status Type";
+                            ObjVendors."Prevous FD Maturity Date" := Rec."FD Maturity Date";
+                            ObjVendors."Prevous FD Start Date" :=Rec."Fixed Deposit Start Date";
+                            ObjVendors."Prevous Fixed Duration" := Rec."FD Duration";
+                            ObjVendors."Prevous Interest Rate FD" := Rec."FD Interest Rate";
+                            ObjVendors."Prevous Expected Int On FD" :=Rec. "Expected Interest Earned";
                             ObjVendors."Date Renewed" := Today;
 
 
@@ -412,11 +412,11 @@ Page 51516860 "Fixed Deposit Placement Card"
                             ObjVendors."Interest rate" := 0;
                             ObjVendors."Amount to Transfer" := 0;
                             ObjVendors."Transfer Amount to Savings" := 0;
-                            ObjVendors."Fixed Deposit Status" := "fixed deposit status"::" ";
+                            ObjVendors."Fixed Deposit Status" := Rec."fixed deposit status"::" ";
 
 
                             ObjInterestBuffer.Reset;
-                            ObjInterestBuffer.SetRange(ObjInterestBuffer."Account No", "Fixed Deposit Account No");
+                            ObjInterestBuffer.SetRange(ObjInterestBuffer."Account No", Rec."Fixed Deposit Account No");
                             if ObjInterestBuffer.Find('-') then begin
                                 ObjInterestBuffer.DeleteAll;
                             end;
@@ -444,7 +444,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                 begin
 
                     ObjVendors.Reset;
-                    ObjVendors.SetRange(ObjVendors."No.", "Fixed Deposit Account No");
+                    ObjVendors.SetRange(ObjVendors."No.", Rec."Fixed Deposit Account No");
                     if ObjVendors.Find('-') then begin
                         ObjVendors.CalcFields(ObjVendors.Balance, ObjVendors."Uncleared Cheques");
                         AvailableBal := (ObjVendors.Balance - ObjVendors."Uncleared Cheques");
@@ -456,14 +456,14 @@ Page 51516860 "Fixed Deposit Placement Card"
                     end;
 
 
-                    if AvailableBal < "Amount to Fix" then begin
+                    if AvailableBal < Rec."Amount to Fix" then begin
                         Error('The FOSA Account has Less than the amount to Fix,Account balance is %1', AvailableBal);
                     end;
 
                     if Confirm('Do you want to Terminate this Fixed Deposit', false) = true then
                         BATCH_TEMPLATE := 'GENERAL';
                     BATCH_NAME := 'DEFAULT';
-                    DOCUMENT_NO := "Document No";
+                    DOCUMENT_NO := Rec."Document No";
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                     GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -475,15 +475,15 @@ Page 51516860 "Fixed Deposit Placement Card"
                     //------------------------------------1. DEBIT FIXED DEPOSIT A/C---------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Fixed Deposit Account No", Today, "Amount to Fix", 'FOSA', '',
-                    'Fixed Deposit Terminated- ' + '-' + "Document No", '');
+                    GenJournalLine."account type"::Vendor, Rec."Fixed Deposit Account No", Today,Rec. "Amount to Fix", 'FOSA', '',
+                    'Fixed Deposit Terminated- ' + '-' + Rec."Document No", '');
                     //--------------------------------(Debit fixed Deposit A/C)---------------------------------------------
 
                     //------------------------------------2. CREDIT FOSA SAVINGS A/C---------------------------------------------------------------------------------------------
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                    GenJournalLine."account type"::Vendor, "Account to Tranfers FD Amount", Today, "Amount to Fix" * -1, 'FOSA', '',
-                    'Fixed Deposit Terminated- ' + '-' + "Document No", '');
+                    GenJournalLine."account type"::Vendor,Rec. "Account to Tranfers FD Amount", Today, Rec."Amount to Fix" * -1, 'FOSA', '',
+                    'Fixed Deposit Terminated- ' + '-' + Rec."Document No", '');
                     //----------------------------------(Credit Fosa Savings Account)------------------------------------------------
 
                     GenJournalLine.Reset;
@@ -494,9 +494,9 @@ Page 51516860 "Fixed Deposit Placement Card"
 
 
                     Message(FDTermination);
-                    Closed := true;
-                    "FD Closed By" := UserId;
-                    "FD Closed On" := WorkDate;
+                    Rec.Closed := true;
+                    Rec."FD Closed By" := UserId;
+                    Rec."FD Closed On" := WorkDate;
                 end;
             }
             action(BreakCall)
@@ -511,7 +511,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                 trigger OnAction()
                 begin
                     ObjAccount.Reset;
-                    ObjAccount.SetRange(ObjAccount."No.", "Fixed Deposit Account No");
+                    ObjAccount.SetRange(ObjAccount."No.",Rec. "Fixed Deposit Account No");
                     if ObjAccount.Find('-') then
                         Report.Run(51516465, true, false, ObjAccount)
                 end;
@@ -521,7 +521,7 @@ Page 51516860 "Fixed Deposit Placement Card"
 
     trigger OnAfterGetRecord()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status =Rec. Status::Open then begin
             VarMemberNoEditable := true;
             VarAccountNoEditable := true;
             VarFixedDepTypeEditable := true;
@@ -529,7 +529,7 @@ Page 51516860 "Fixed Deposit Placement Card"
             VarAmountFixedEditable := true;
             VarFDDurationEditable := true
         end else
-            if Status = Status::"Pending Approval" then begin
+            if Rec.Status =Rec.Status::"Pending Approval" then begin
                 VarMemberNoEditable := false;
                 VarAccountNoEditable := false;
                 VarFixedDepTypeEditable := false;
@@ -537,7 +537,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                 VarAmountFixedEditable := false;
                 VarFDDurationEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status = Rec.Status::Approved then begin
                     VarMemberNoEditable := false;
                     VarAccountNoEditable := false;
                     VarFixedDepTypeEditable := false;
@@ -548,17 +548,17 @@ Page 51516860 "Fixed Deposit Placement Card"
 
 
         EnablePlaceFixedDeposit := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
 
-        if ((Rec.Status = Status::Approved)) then
+        if ((Rec.Status =Rec. Status::Approved)) then
             EnablePlaceFixedDeposit := true;
     end;
 
     trigger OnOpenPage()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             VarMemberNoEditable := true;
             VarAccountNoEditable := true;
             VarFixedDepTypeEditable := true;
@@ -567,7 +567,7 @@ Page 51516860 "Fixed Deposit Placement Card"
             VarAccounttoTransferFDAmount := true;
             VarFDDurationEditable := true
         end else
-            if Status = Status::"Pending Approval" then begin
+            if Rec.Status = Rec.Status::"Pending Approval" then begin
                 VarMemberNoEditable := false;
                 VarAccountNoEditable := false;
                 VarFixedDepTypeEditable := false;
@@ -576,7 +576,7 @@ Page 51516860 "Fixed Deposit Placement Card"
                 VarAccounttoTransferFDAmount := false;
                 VarFDDurationEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status = Rec.Status::Approved then begin
                     VarMemberNoEditable := false;
                     VarAccountNoEditable := false;
                     VarFixedDepTypeEditable := false;
@@ -587,11 +587,11 @@ Page 51516860 "Fixed Deposit Placement Card"
                 end;
 
         EnablePlaceFixedDeposit := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
 
-        if ((Rec.Status = Status::Approved)) then
+        if ((Rec.Status = Rec.Status::Approved)) then
             EnablePlaceFixedDeposit := true;
     end;
 

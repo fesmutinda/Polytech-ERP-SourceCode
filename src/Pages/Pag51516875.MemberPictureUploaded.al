@@ -9,7 +9,7 @@ Page 51516875 "Member Picture-Uploaded"
     {
         area(content)
         {
-            field(Picture; Picture)
+            field(Picture; Rec.Picture)
             {
                 ApplicationArea = Basic, Suite;
                 Editable = false;
@@ -52,16 +52,16 @@ Page 51516875 "Member Picture-Uploaded"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("No.");
+                    Rec.TestField("No.");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "No." + Format(Picture.MediaId);
-                    Picture.ExportFile(ExportPath);
+                    ExportPath := TemporaryPath + Rec."No." + Format(Rec.Picture.MediaId);
+                    Rec.Picture.ExportFile(ExportPath);
                     FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
                     TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg', "No.", ConvertStr("No.", '"/\', '___'));
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."No.", ConvertStr(Rec."No.", '"/\', '___'));
                     Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
@@ -81,11 +81,11 @@ Page 51516875 "Member Picture-Uploaded"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Picture.Count > 0 then
+        if Rec.Picture.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -94,10 +94,10 @@ Page 51516875 "Member Picture-Uploaded"
         if FileName = '' then
             Error('');
 
-        Clear(Picture);
-        Picture.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        Clear(Rec.Picture);
+        Rec.Picture.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;

@@ -12,31 +12,31 @@ Page 51516859 "Fixed Deposit Placement"
         {
             repeater(Group)
             {
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fixed Deposit Account No"; "Fixed Deposit Account No")
+                field("Fixed Deposit Account No"; Rec."Fixed Deposit Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Application Date"; "Application Date")
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Fixed Deposit Type"; "Fixed Deposit Type")
+                field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("FD Maturity Date"; "FD Maturity Date")
+                field("FD Maturity Date"; Rec."FD Maturity Date")
                 {
                     ApplicationArea = Basic;
                 }

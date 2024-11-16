@@ -45,7 +45,7 @@ Page 51516220 "HR Employee Attachments SF"
                 begin
                     if DocLink.Get(Rec."Employee No", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Employee No");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Employee No");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then
@@ -102,7 +102,7 @@ Page 51516220 "HR Employee Attachments SF"
                 begin
                     if DocLink.Get(Rec."Employee No", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Employee No");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Employee No");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then
@@ -131,7 +131,7 @@ Page 51516220 "HR Employee Attachments SF"
                 begin
                     if DocLink.Get(Rec."Employee No", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Employee No");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Employee No");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if not InteractTemplLanguage.FindFirst then
@@ -166,7 +166,7 @@ Page 51516220 "HR Employee Attachments SF"
                 begin
                     if DocLink.Get(Rec."Employee No", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Employee No");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Employee No");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then

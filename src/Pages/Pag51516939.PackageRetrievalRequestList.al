@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516939 "Package Retrieval Request List"
 {
-    CardPageID = "Package Retrieval Request Card";
+    // CardPageID = "Package Retrieval Request Card";
     Editable = false;
     PageType = List;
     SourceTable = "Package Retrieval Register";
@@ -52,7 +52,7 @@ Page 51516939 "Package Retrieval Request List"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }

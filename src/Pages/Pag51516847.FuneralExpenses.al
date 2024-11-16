@@ -10,95 +10,95 @@ Page 51516847 "Funeral Expenses."
             group(General)
             {
             }
-            field("No."; "No.")
+            field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Member No."; "Member No.")
+            field("Member No."; Rec."Member No.")
             {
                 ApplicationArea = Basic;
             }
-            field("Member Name"; "Member Name")
-            {
-                ApplicationArea = Basic;
-                Editable = false;
-            }
-            field("Member ID No"; "Member ID No")
+            field("Member Name"; Rec."Member Name")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Member Status"; "Member Status")
+            field("Member ID No"; Rec."Member ID No")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Death Date"; "Death Date")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Date Reported"; "Date Reported")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Reported By"; "Reported By")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Reporter ID No."; "Reporter ID No.")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Reporter Mobile No"; "Reporter Mobile No")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Reporter Address"; "Reporter Address")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Relationship With Deceased"; "Relationship With Deceased")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Received Burial Permit"; "Received Burial Permit")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Mode Of Disbursement"; "Mode Of Disbursement")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Paying Bank"; "Paying Bank")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Received Letter From Chief"; "Received Letter From Chief")
-            {
-                ApplicationArea = Basic;
-            }
-            field(Posted; Posted)
+            field("Member Status"; Rec."Member Status")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Date Posted"; "Date Posted")
+            field("Death Date"; Rec."Death Date")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Date Reported"; Rec."Date Reported")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Reported By"; Rec."Reported By")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Reporter ID No."; Rec."Reporter ID No.")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Reporter Mobile No"; Rec."Reporter Mobile No")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Reporter Address"; Rec."Reporter Address")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Relationship With Deceased"; Rec."Relationship With Deceased")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Received Burial Permit"; Rec."Received Burial Permit")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Mode Of Disbursement"; Rec."Mode Of Disbursement")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Paying Bank"; Rec."Paying Bank")
+            {
+                ApplicationArea = Basic;
+            }
+            field("Received Letter From Chief"; Rec."Received Letter From Chief")
+            {
+                ApplicationArea = Basic;
+            }
+            field(Posted; Rec.Posted)
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Time Posted"; "Time Posted")
+            field("Date Posted"; Rec."Date Posted")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field("Posted By"; "Posted By")
+            field("Time Posted"; Rec."Time Posted")
             {
                 ApplicationArea = Basic;
                 Editable = false;
             }
-            field(Status; Status)
+            field("Posted By"; Rec."Posted By")
+            {
+                ApplicationArea = Basic;
+                Editable = false;
+            }
+            field(Status; Rec.Status)
             {
                 ApplicationArea = Basic;
                 Editable = false;
@@ -205,7 +205,7 @@ Page 51516847 "Funeral Expenses."
 
     var
         LoanUserSetup: Record 51516167;
-        LoanManager: Codeunit UnknownCodeunit51516003;
+        LoanManager: Codeunit 51516003;
         Txt000: label 'User ID:%1 has not been setup for posting, Contact System Administrator';
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 

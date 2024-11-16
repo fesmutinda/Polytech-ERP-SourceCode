@@ -19,7 +19,7 @@ Page 51516933 "Bulk Withdrawal Appl card"
                 field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
-                    Editable = MemberNoEditable;
+                    // Editable = MemberNoEditable;
                 }
                 field("Member Name"; Rec."Member Name")
                 {
@@ -29,17 +29,17 @@ Page 51516933 "Bulk Withdrawal Appl card"
                 field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
-                    Editable = AccountNoEditable;
+                    Editable = false;
                 }
                 field("Amount to Withdraw"; Rec."Amount to Withdraw")
                 {
                     ApplicationArea = Basic;
-                    Editable = AmounttoWithdrawEditable;
+                    // Editable = AmounttoWithdrawEditable;
                 }
                 field("Date for Withdrawal"; Rec."Date for Withdrawal")
                 {
                     ApplicationArea = Basic;
-                    Editable = WithdrawalDateEditable;
+                    Editable = true;
                 }
                 field("Fee on Withdrawal"; Rec."Fee on Withdrawal")
                 {
@@ -49,9 +49,9 @@ Page 51516933 "Bulk Withdrawal Appl card"
                 field("Reason for Bulk Withdrawal"; Rec."Reason for Bulk Withdrawal")
                 {
                     ApplicationArea = Basic;
-                    Editable = ReasonEditable;
+                    Editable = true;
                 }
-                field(Status; Status)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -111,35 +111,35 @@ Page 51516933 "Bulk Withdrawal Appl card"
             action("Update Bulk Notice")
             {
                 ApplicationArea = Basic;
-                Enabled = EnablePosting;
+                Enabled = true;
                 Image = Post;
                 Promoted = true;
                 PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
-                    if Status <> Status::Approved then begin
+                    if Rec.Status <> Rec.Status::Approved then begin
                         Error('This document has to be approved');
                     end;
 
-                    if "Noticed Updated" = true then begin
+                    if Rec."Noticed Updated" = true then begin
                         Error('This Application has already been updated');
                     end;
 
 
                     if Confirm('Are you sure you want to updated the Bulk Withdrawal Details', false) = true then begin
-                        if Accounts.Get("Account No") then begin
-                            Accounts."Bulk Withdrawal Appl Done" := true;
-                            Accounts."Bulk Withdrawal App Done By" := UserId;
-                            Accounts."Bulk Withdrawal Appl Amount" := "Amount to Withdraw";
-                            Accounts."Bulk Withdrawal Fee" := "Fee on Withdrawal";
-                            Accounts."Bulk Withdrawal App Date For W" := "Date for Withdrawal";
-                            Accounts."Bulk Withdrawal Appl Date" := Today;
-                            Accounts.Modify;
+                        if Accounts.Get(Rec."Account No") then begin
+                            //     Accounts."Bulk Withdrawal Appl Done" := true;
+                            //     Accounts."Bulk Withdrawal App Done By" := UserId;
+                            //     Accounts."Bulk Withdrawal Appl Amount" := Rec."Amount to Withdraw";
+                            //     Accounts."Bulk Withdrawal Fee" := Rec."Fee on Withdrawal";
+                            //     Accounts."Bulk Withdrawal App Date For W" := Rec."Date for Withdrawal";
+                            //     Accounts."Bulk Withdrawal Appl Date" := Today;
+                            // Accounts.Modify;
 
-                            "Noticed Updated" := true;
-                            "Notice Updated By" := UserId;
-                            "Date Notified" := Today;
+                            Rec."Noticed Updated" := true;
+                            Rec."Notice Updated By" := UserId;
+                            Rec."Date Notified" := Today;
                         end;
                     end;
                     Message('Bulk Details Updated Succesfully');
@@ -162,7 +162,7 @@ Page 51516933 "Bulk Withdrawal Appl card"
                     begin
 
                         DocumentType := Documenttype::BulkWithdrawal;
-                        ApprovalEntries.Setfilters(Database::"Bulk Withdrawal Application", DocumentType, "Transaction No");
+                        ApprovalEntries.SetRecordFilters(Database::"Bulk Withdrawal Application", DocumentType, Rec."Transaction No");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -181,8 +181,8 @@ Page 51516933 "Bulk Withdrawal Appl card"
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
 
-                        if ApprovalsMgmt.CheckBulkWithdrawalApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnSendBulkWithdrawalForApproval(Rec)
+                        // if ApprovalsMgmt.CheckBulkWithdrawalApprovalsWorkflowEnabled(Rec) then
+                        //     ApprovalsMgmt.OnSendBulkWithdrawalForApproval(Rec)
                     end;
                 }
                 action("Cancel Approval Request")
@@ -198,8 +198,8 @@ Page 51516933 "Bulk Withdrawal Appl card"
                     var
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
-                        if ApprovalsMgmt.CheckBulkWithdrawalApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnCancelBulkWithdrawalApprovalRequest(Rec);
+                        // if ApprovalsMgmt.CheckBulkWithdrawalApprovalsWorkflowEnabled(Rec) then
+                        //     ApprovalsMgmt.OnCancelBulkWithdrawalApprovalRequest(Rec);
 
                     end;
                 }
@@ -212,15 +212,15 @@ Page 51516933 "Bulk Withdrawal Appl card"
         FnAddRecordRestriction();
 
         EnablePosting := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
-        if Rec.Status = Status::Approved then begin
+        if Rec.Status = Rec.Status::Approved then begin
             OpenApprovalEntriesExist := false;
             CanCancelApprovalForRecord := false;
             EnabledApprovalWorkflowsExist := false;
         end;
-        if (Rec.Status = Status::Approved) then
+        if (Rec.Status = Rec.Status::Approved) then
             EnablePosting := true;
     end;
 
@@ -253,7 +253,7 @@ Page 51516933 "Bulk Withdrawal Appl card"
 
     local procedure FnAddRecordRestriction()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             MemberNoEditable := true;
             SavingsProductEditable := true;
             AccountNoEditable := true;
@@ -261,7 +261,7 @@ Page 51516933 "Bulk Withdrawal Appl card"
             WithdrawalDateEditable := true;
             ReasonEditable := true
         end else
-            if Status = Status::"Pending Approval" then begin
+            if Rec.Status = Rec.Status::"Pending Approval" then begin
                 MemberNoEditable := false;
                 SavingsProductEditable := false;
                 AccountNoEditable := false;
@@ -269,7 +269,7 @@ Page 51516933 "Bulk Withdrawal Appl card"
                 WithdrawalDateEditable := false;
                 ReasonEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status = Rec.Status::Approved then begin
                     MemberNoEditable := false;
                     SavingsProductEditable := false;
                     AccountNoEditable := false;

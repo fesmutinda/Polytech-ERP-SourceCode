@@ -13,7 +13,7 @@ Page 50052 "Payment Lines Posted"
         {
             repeater(Control1102760000)
             {
-                field(Type; Rec.Type)
+                field(Type; Rec."Payment Type")
                 {
                     ApplicationArea = Basic;
                 }
@@ -22,15 +22,15 @@ Page 50052 "Payment Lines Posted"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Member Type"; Rec."Member Type")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Board Member No';
-                }
-                field("Board Member Name"; Rec."Board Member Name")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Member Type"; Rec."Member Type")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Board Member No';
+                // }
+                // field("Board Member Name"; Rec."Board Member Name")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
@@ -47,16 +47,16 @@ Page 50052 "Payment Lines Posted"
                     trigger OnValidate()
                     begin
                         Rec.TestField("Global Dimension 1 Code");
-                        Rec.TestField("Shortcut Dimension 2 Code");
+                        // Rec.TestField("Shortcut Dimension 2 Code");
 
-                        //check if the payment reference is for farmer purchase
-                        if Rec."Payment Reference" = Rec."payment reference"::"Farmer Purchase" then begin
-                            if Rec.Amount <> xRec.Amount then begin
-                                Error('Amount cannot be modified');
-                            end;
-                        end;
+                        // //check if the payment reference is for farmer purchase
+                        // if Rec."Payment Reference" = Rec."payment reference"::"Farmer Purchase" then begin
+                        //     if Rec.Amount <> xRec.Amount then begin
+                        //         Error('Amount cannot be modified');
+                        //     end;
+                        // end;
 
-                        Rec."Amount With VAT" := Rec.Amount;
+                        // Rec."Amount With VAT" := Rec.Amount;
                         /*IF "Account Type" IN ["Account Type"::Customer,"Account Type"::Vendor,
                         "Account Type"::"G/L Account","Account Type"::"Bank Account","Account Type"::"Fixed Asset"] THEN
                         
@@ -277,7 +277,7 @@ Page 50052 "Payment Lines Posted"
                 {
                     ApplicationArea = Basic;
                 }
-                field("W/Tax Rate"; Rec."W/Tax Rate")
+                field("W/Tax Rate"; Rec."W/TAX Code")
                 {
                     ApplicationArea = Basic;
                 }
@@ -300,10 +300,10 @@ Page 50052 "Payment Lines Posted"
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Remarks; Rec.Remarks)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Remarks; Rec.Remarks)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Refund Charge"; Rec."Refund Charge")
                 {
                     ApplicationArea = Basic;
@@ -313,10 +313,10 @@ Page 50052 "Payment Lines Posted"
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
                 {
                     ApplicationArea = Basic;
@@ -350,7 +350,7 @@ Page 50052 "Payment Lines Posted"
         Amt: Decimal;
         TotAmt: Decimal;
         ApplyInvoice: Codeunit "Purchase Header Apply";
-        AppliedEntries: Record 51516112;
+        // AppliedEntries: Record 51516112;
         VendEntries: Record "Vendor Ledger Entry";
         PInv: Record "Purch. Inv. Header";
         VATPaid: Decimal;

@@ -4,7 +4,7 @@ Page 50031 "Issue Input Card"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = "Loans reg";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {

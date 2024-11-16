@@ -205,7 +205,7 @@ Page 51516092 "Bank Acc. Statement Lines"
 
     local procedure ApplyEntries()
     var
-        BankAccReconApplyEntries: Codeunit "Bank Acc. Recon. Apply Entries";
+    // BankAccReconApplyEntries: Codeunit "Bank Acc. Recon. Apply Entries";
     begin
         /*
         "Ready for Application" := TRUE;

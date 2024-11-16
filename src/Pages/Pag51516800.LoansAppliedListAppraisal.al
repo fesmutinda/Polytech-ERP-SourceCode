@@ -1,17 +1,17 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516800 "Loans Applied  List(Appraisal)"
 {
-    CardPageID = "Loan Application Card(apria)";
+    // CardPageID = "Loan Application Card(apria)";
     DeleteAllowed = true;
     Editable = false;
     InsertAllowed = true;
     ModifyAllowed = true;
     PageType = List;
     SourceTable = 51516371;
-    SourceTableView = where(Posted = filter(No),
+    SourceTableView = where(Posted = filter(false),
                             "Approval Status" = filter(Open),
                             Source = filter(BOSA),
-                            Discard = filter(Yes),
+                            Discard = filter(true),
                             "Loan Status" = const(Appraisal));
 
     layout
@@ -20,36 +20,36 @@ Page 51516800 "Loans Applied  List(Appraisal)"
         {
             repeater(Control1000000010)
             {
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type"; "Loan Product Type")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Name"; "Client Name")
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID NO"; "ID NO")
+                field("ID NO"; Rec."ID NO")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Staff No"; "Staff No")
+                field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Payroll No';
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Status"; "Loan Status")
+                field("Loan Status"; Rec."Loan Status")
                 {
                     ApplicationArea = Basic;
                     Editable = true;
@@ -78,7 +78,7 @@ Page 51516800 "Loans Applied  List(Appraisal)"
         ObjUserSetup.SetRange("User ID", UserId);
         if ObjUserSetup.Find('-') then begin
             if ObjUserSetup."Approval Administrator" <> true then
-                SetRange("Captured By", UserId);
+                Rec.SetRange("Captured By", UserId);
         end;
     end;
 

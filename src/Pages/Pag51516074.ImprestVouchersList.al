@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516074 "Imprest Vouchers List"
 {
-    CardPageID = "Imprest Request";
+    // CardPageID = "Imprest Request";
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Imprest Header";
@@ -117,7 +117,7 @@ Page 51516074 "Imprest Vouchers List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::Imprest;
-                        ApprovalEntries.Setfilters(Database::"Imprest Header", DocumentType, Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Imprest Header", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -276,12 +276,12 @@ Page 51516074 "Imprest Vouchers List"
                         Text000: label 'Are you sure you want to Cancel this Document?';
                         Text001: label 'You have selected not to Cancel this Document';
                     begin
-                        Rec.TestField(Status, Rec.Status::"9");
+                        Rec.TestField(Status, Rec.Status::Pending);
                         if Confirm(Text000, true) then begin
                             //Post Committment Reversals
                             Doc_Type := Doc_type::Imprest;
                             BudgetControl.ReverseEntries(Doc_Type, Rec."No.");
-                            Rec.Status := Rec.Status::"5";
+                            Rec.Status := Rec.Status::Approved;
                             Rec.Modify;
                         end else
                             Error(Text001);
@@ -469,7 +469,7 @@ Page 51516074 "Imprest Vouchers List"
             Error('The Document has already been posted');
         end;
 
-        Rec.TestField(Status, Rec.Status::"9");
+        Rec.TestField(Status, Rec.Status::Pending);
 
         /*Check if the user has selected all the relevant fields*/
 

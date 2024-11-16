@@ -10,7 +10,7 @@ Page 51516855 "Loans List-MICRO(New)"
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = 51516371;
     SourceTableView = where(Source = const(MICRO),
-                            Posted = const(No),
+                            Posted = const(false),
                             "Loan Status" = const(Application));
 
     layout
@@ -27,73 +27,73 @@ Page 51516855 "Loans List-MICRO(New)"
                     OptionCaption = 'Yes';
                     ToolTip = 'OverDue Entry';
                 }
-                field("Loan  No."; "Loan  No.")
+                field("Loan  No."; Rec."Loan  No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Old Account No."; "Old Account No.")
+                field("Old Account No."; Rec."Old Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Group Code"; "Group Code")
+                field("Group Code"; Rec."Group Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan Product Type"; "Loan Product Type")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Advice Type"; "Advice Type")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Expected Date of Completion"; "Expected Date of Completion")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Application Date"; "Application Date")
+                field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Client Code"; "Client Code")
+                field("Advice Type"; Rec."Advice Type")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Expected Date of Completion"; Rec."Expected Date of Completion")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("BOSA No"; "BOSA No")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Issued Date"; "Issued Date")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Client Name"; "Client Name")
+                field("BOSA No"; Rec."BOSA No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Posted; Posted)
+                field("Client Name"; Rec."Client Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Account No"; "Account No")
+                field(Posted; Rec.Posted)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Remarks; Remarks)
+                field(Remarks;Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Approval Status"; "Approval Status")
+                field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = Basic;
                 }
@@ -270,14 +270,14 @@ Page 51516855 "Loans List-MICRO(New)"
 
     procedure GetVariables(var LoanNo: Code[20]; var LoanProductType: Code[20])
     begin
-        LoanNo := "Loan  No.";
-        LoanProductType := "Loan Product Type";
+        LoanNo := Rec."Loan  No.";
+        LoanProductType := Rec."Loan Product Type";
     end;
 
 
     procedure FormatField(Rec: Record 51516371) OK: Boolean
     begin
-        if "Outstanding Balance" > 0 then begin
+        if Rec."Outstanding Balance" > 0 then begin
             if (Rec."Expected Date of Completion" < Today) then
                 exit(true)
             else

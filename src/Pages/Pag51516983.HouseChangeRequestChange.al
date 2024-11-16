@@ -151,8 +151,8 @@ Page 51516983 "House Change Request Change"
                     end;
 
 
-                    if ApprovalsMgmt.CheckHouseChangeApprovalsWorkflowEnabled(Rec) then
-                        ApprovalsMgmt.OnSendHouseChangeForApproval(Rec);
+                    // if ApprovalsMgmt.CheckHouseChangeApprovalsWorkflowEnabled(Rec) then
+                    //     ApprovalsMgmt.OnSendHouseChangeForApproval(Rec);
                 end;
             }
             action("Cancel Approval Request")
@@ -170,7 +170,7 @@ Page 51516983 "House Change Request Change"
                     Approvalmgt: Codeunit "Approvals Mgmt.";
                 begin
                     if Confirm('Are you sure you want to cancel this approval request', false) = true then
-                        ApprovalsMgmt.OnCancelHouseChangeApprovalRequest(Rec);
+                        // ApprovalsMgmt.OnCancelHouseChangeApprovalRequest(Rec);
                     Rec.Status := Rec.Status::Open;
                     Rec.Modify;
                 end;
@@ -206,7 +206,7 @@ Page 51516983 "House Change Request Change"
                 trigger OnAction()
                 begin
                     ObjCust.Reset;
-                    ObjCust.SetRange(ObjCust."No.", "Member No");
+                    ObjCust.SetRange(ObjCust."No.", Rec."Member No");
                     if ObjCust.Find('-') then
                         Report.Run(51516503, true, false, ObjCust);
                 end;
@@ -238,25 +238,25 @@ Page 51516983 "House Change Request Change"
         DestinationHouseEditable := false;
         ReasonforChangeEditable := false;
 
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             MemberNoEditable := true;
             DestinationHouseEditable := true;
             ReasonforChangeEditable := true
         end else
-            if Status = Status::"Pending Approval" then begin
+            if Rec.Status = Rec.Status::"Pending Approval" then begin
                 MemberNoEditable := false;
                 DestinationHouseEditable := false;
                 ReasonforChangeEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status = Rec.Status::Approved then begin
                     MemberNoEditable := false;
                     DestinationHouseEditable := false;
                     ReasonforChangeEditable := false;
                 end;
 
         EnableCreateMember := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
 
         if ((Rec.Status = Rec.Status::Approved)) then
@@ -267,11 +267,11 @@ Page 51516983 "House Change Request Change"
     begin
 
         EnableCreateMember := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
         EnabledApprovalWorkflowsExist := true;
 
-        if ((Rec.Status = Status::Approved)) then
+        if ((Rec.Status = Rec.Status::Approved)) then
             EnableCreateMember := true;
     end;
 
@@ -314,8 +314,8 @@ Page 51516983 "House Change Request Change"
 
     local procedure FnGroupLeaderExitNotification()
     var
-        SMTPMail: Codeunit UnknownCodeunit400;
-        SMTPSetup: Record "SMTP Mail Setup";
+        // SMTPMail: Codeunit 400;
+        // SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];
         CompanyInfo: Record "Company Information";
@@ -323,7 +323,7 @@ Page 51516983 "House Change Request Change"
         ObjHouseGroups: Record 51516915;
         VarGroupOfficer: Code[50];
     begin
-        SMTPSetup.Get();
+        // SMTPSetup.Get();
 
         if ObjHouseGroups.Get(Rec."House Group") then begin
             VarGroupOfficer := ObjHouseGroups."Credit Officer";
@@ -336,12 +336,12 @@ Page 51516983 "House Change Request Change"
                 Error('Email Address Missing for User' + '-' + VarGroupOfficer);
             end;
             if ObjUser."Contact Email" <> '' then
-                SMTPMail.CreateMessage(SMTPSetup."Email Sender Name", SMTPSetup."Email Sender Address", ObjUser."Contact Email", 'Group Leader Group Exit Notification', '', true);
-            SMTPMail.AppendBody(StrSubstNo(ExitMessage, VarGroupOfficer, "Member Name", "House Group Name", "Document No", UserId));
-            SMTPMail.AppendBody(SMTPSetup."Email Sender Name");
-            SMTPMail.AppendBody('<br><br>');
-            SMTPMail.AddAttachment(FileName, Attachment);
-            SMTPMail.Send;
+            //     SMTPMail.CreateMessage(SMTPSetup."Email Sender Name", SMTPSetup."Email Sender Address", ObjUser."Contact Email", 'Group Leader Group Exit Notification', '', true);
+            // SMTPMail.AppendBody(StrSubstNo(ExitMessage, VarGroupOfficer, "Member Name", "House Group Name", "Document No", UserId));
+            // SMTPMail.AppendBody(SMTPSetup."Email Sender Name");
+            // SMTPMail.AppendBody('<br><br>');
+            // SMTPMail.AddAttachment(FileName, Attachment);
+            // SMTPMail.Send;
             Message('Email Sent');
         end;
     end;

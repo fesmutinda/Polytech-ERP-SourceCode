@@ -326,9 +326,9 @@ Table 51516552 "Change Request"
         {
             SubType = Bitmap;
         }
-        field(61; "signinature(New Value)"; Blob)
+        field(61; "signinature(New Value)"; Media)
         {
-            SubType = Bitmap;
+            // SubType = Bitmap;
         }
         field(62; "City(New Value)"; Code[30])
         {

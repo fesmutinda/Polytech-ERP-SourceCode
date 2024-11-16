@@ -2,7 +2,7 @@
 Page 51516063 "Voucher Payment Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516001;
+    SourceTable = "Payment Line";
 
     layout
     {
@@ -10,37 +10,37 @@ Page 51516063 "Voucher Payment Lines"
         {
             repeater(Control1102760000)
             {
-                field(Type;Rec.Type)
+                field(Type; Rec."Payment Type")
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                 }
-                field("Account No.";Rec."Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Account Name";Rec."Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Description';
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Global Dimension 1 Code";Rec."Global Dimension 1 Code")
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Shortcut Dimension 2 Code";Rec."Shortcut Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                    Editable = FieldEditable;
-                    Enabled = FieldEditable;
-                }
-                field(Amount;Amount)
+                // field("Shortcut Dimension 2 Code";Rec."Shortcut Dimension 2 Code")
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = FieldEditable;
+                //     Enabled = FieldEditable;
+                // }
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
@@ -49,264 +49,257 @@ Page 51516063 "Voucher Payment Lines"
                     trigger OnValidate()
                     begin
                         //check if the payment reference is for farmer purchase
-                        if "Payment Reference"="payment reference"::"Farmer Purchase" then
-                          begin
-                            if Amount<>xRec.Amount then
-                              begin
-                                Error('Amount cannot be modified');
-                              end;
-                          end;
+                        // if Rec."Payment Reference"=Rec."payment reference"::"Farmer Purchase" then
+                        //   begin
+                        //     if Rec.Amount<>xRec.Amount then
+                        //       begin
+                        //         Error('Amount cannot be modified');
+                        //       end;
+                        //   end;
 
-                        "Amount With VAT":=Amount;
-                        if "Account Type" in ["account type"::Customer,"account type"::Vendor,
-                        "account type"::"G/L Account","account type"::"Bank Account","account type"::"Fixed Asset"] then
+                        Rec."VAT Withheld Amount(LCY)" := Rec.Amount;
+                        if Rec."Account Type" in [Rec."account type"::Customer, Rec."account type"::Vendor,
+                        Rec."account type"::"G/L Account", Rec."account type"::"Bank Account", Rec."account type"::"Fixed Asset"] then
+                            case Rec."Account Type" of
+                                Rec."account type"::"G/L Account":
+                                    begin
 
-                        case "Account Type" of
-                          "account type"::"G/L Account":
-                            begin
+                                        Rec.TestField(Amount);
+                                        RecPayTypes.Reset;
+                                        // RecPayTypes.SetRange(RecPayTypes.Code,Type);
+                                        RecPayTypes.SetRange(RecPayTypes.Type, RecPayTypes.Type::Payment);
+                                        if RecPayTypes.Find('-') then begin
+                                            if RecPayTypes."VAT Chargeable" = RecPayTypes."vat chargeable"::Yes then begin
+                                                RecPayTypes.TestField(RecPayTypes."VAT Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, RecPayTypes."VAT Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    Rec."VAT Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    Rec."VAT Amount" := (Rec.Amount / ((TarriffCodes.Percentage + 100)) * TarriffCodes.Percentage);
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."VAT Amount" := 0;
+                                            end;
 
-                        Rec.TestField(Amount);
-                        RecPayTypes.Reset;
-                        RecPayTypes.SetRange(RecPayTypes.Code,Type);
-                        RecPayTypes.SetRange(RecPayTypes.Type,RecPayTypes.Type::Payment);
-                        if RecPayTypes.Find('-') then begin
-                        if RecPayTypes."VAT Chargeable"=RecPayTypes."vat chargeable"::Yes then
-                          begin
-                            RecPayTypes.TestField(RecPayTypes."VAT Code");
-                            TarriffCodes.Reset;
-                            TarriffCodes.SetRange(TarriffCodes.Code,RecPayTypes."VAT Code");
-                            if TarriffCodes.Find('-') then
-                              begin
-                                "VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
-                                "VAT Amount":=(Amount/((TarriffCodes.Percentage+100))*TarriffCodes.Percentage);
-                              end;
-                          end
-                        else
-                          begin
-                            "VAT Amount":=0;
-                          end;
+                                            if RecPayTypes."Withholding Tax Chargeable" = RecPayTypes."withholding tax chargeable"::Yes then begin
+                                                RecPayTypes.TestField(RecPayTypes."Withholding Tax Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, RecPayTypes."Withholding Tax Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    Rec."Withholding Tax Amount" := (Rec.Amount - Rec."VAT Amount") * (TarriffCodes.Percentage / 100);
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."Withholding Tax Amount" := 0;
+                                            end;
+                                        end;
+                                    end;
+                                Rec."account type"::Customer:
+                                    begin
 
-                        if RecPayTypes."Withholding Tax Chargeable"=RecPayTypes."withholding tax chargeable"::Yes then
-                          begin
-                            RecPayTypes.TestField(RecPayTypes."Withholding Tax Code");
-                            TarriffCodes.Reset;
-                            TarriffCodes.SetRange(TarriffCodes.Code,RecPayTypes."Withholding Tax Code");
-                            if TarriffCodes.Find('-') then
-                              begin
-                                "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
-                                "Withholding Tax Amount":=(Amount-"VAT Amount")*(TarriffCodes.Percentage/100);
-                              end;
-                          end
-                        else
-                          begin
-                            "Withholding Tax Amount":=0;
-                          end;
-                        end;
-                        end;
-                          "account type"::Customer:
-                            begin
+                                        Rec.TestField(Amount);
+                                        RecPayTypes.Reset;
+                                        RecPayTypes.SetRange(RecPayTypes.Code, Rec."Payment Type");
+                                        RecPayTypes.SetRange(RecPayTypes.Type, RecPayTypes.Type::Payment);
+                                        if RecPayTypes.Find('-') then begin
+                                            if RecPayTypes."VAT Chargeable" = RecPayTypes."vat chargeable"::Yes then begin
+                                                Rec.TestField("VAT Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, Rec."VAT Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    //"VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
+                                                    Rec."VAT Amount" := (Rec.Amount / ((TarriffCodes.Percentage + 100)) * TarriffCodes.Percentage);
+                                                    //
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."VAT Amount" := 0;
+                                            end;
 
-                        TestField(Amount);
-                        RecPayTypes.Reset;
-                        RecPayTypes.SetRange(RecPayTypes.Code,Type);
-                        RecPayTypes.SetRange(RecPayTypes.Type,RecPayTypes.Type::Payment);
-                        if RecPayTypes.Find('-') then begin
-                        if RecPayTypes."VAT Chargeable"=RecPayTypes."vat chargeable"::Yes then begin
-                        TestField("VAT Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,"VAT Code");
-                        if TarriffCodes.Find('-') then begin
-                        //"VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        "VAT Amount":=(Amount/((TarriffCodes.Percentage+100))*TarriffCodes.Percentage);
-                        //
-                        end;
-                        end
-                        else begin
-                        "VAT Amount":=0;
-                        end;
+                                            if RecPayTypes."Withholding Tax Chargeable" = RecPayTypes."withholding tax chargeable"::Yes then begin
+                                                Rec.TestField("Withholding Tax Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, Rec."Withholding Tax Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
 
-                        if RecPayTypes."Withholding Tax Chargeable"=RecPayTypes."withholding tax chargeable"::Yes then begin
-                        TestField("Withholding Tax Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,"Withholding Tax Code");
-                        if TarriffCodes.Find('-') then begin
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * (Rec.Amount - Rec."VAT Amount");
 
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*(Amount-"VAT Amount");
-
-                        end;
-                        end
-                        else begin
-                        "Withholding Tax Amount":=0;
-                        end;
-                        end;
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."Withholding Tax Amount" := 0;
+                                            end;
+                                        end;
 
 
 
+                                    end;
+                                Rec."account type"::Vendor:
+                                    begin
+
+                                        Rec.TestField(Amount);
+                                        RecPayTypes.Reset;
+                                        RecPayTypes.SetRange(RecPayTypes.Code, Rec."Payment Type");
+                                        RecPayTypes.SetRange(RecPayTypes.Type, RecPayTypes.Type::Payment);
+                                        if RecPayTypes.Find('-') then begin
+                                            if RecPayTypes."VAT Chargeable" = RecPayTypes."vat chargeable"::Yes then begin
+                                                Rec.TestField("VAT Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, Rec."VAT Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    Rec."VAT Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    //
+                                                    Rec."VAT Amount" := (Rec.Amount / ((TarriffCodes.Percentage + 100)) * TarriffCodes.Percentage);
+                                                    //
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."VAT Amount" := 0;
+                                            end;
+
+                                            if RecPayTypes."Withholding Tax Chargeable" = RecPayTypes."withholding tax chargeable"::Yes then begin
+                                                Rec.TestField("Withholding Tax Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, Rec."Withholding Tax Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    //
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * (Rec.Amount - Rec."VAT Amount");
+                                                    //
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."Withholding Tax Amount" := 0;
+                                            end;
+                                        end;
+
+
+                                    end;
+                                Rec."account type"::"Bank Account":
+                                    begin
+
+                                        Rec.TestField(Amount);
+                                        RecPayTypes.Reset;
+                                        RecPayTypes.SetRange(RecPayTypes.Code, Rec."Payment Type");
+                                        RecPayTypes.SetRange(RecPayTypes.Type, RecPayTypes.Type::Payment);
+                                        if RecPayTypes.Find('-') then begin
+                                            if RecPayTypes."VAT Chargeable" = RecPayTypes."vat chargeable"::Yes then begin
+                                                RecPayTypes.TestField(RecPayTypes."VAT Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, RecPayTypes."VAT Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    //
+                                                    Rec."VAT Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    Rec."VAT Amount" := (Rec.Amount / ((TarriffCodes.Percentage + 100)) * TarriffCodes.Percentage);
+                                                    //
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."VAT Amount" := 0;
+                                            end;
+
+                                            if RecPayTypes."Withholding Tax Chargeable" = RecPayTypes."withholding tax chargeable"::Yes then begin
+                                                RecPayTypes.TestField(RecPayTypes."Withholding Tax Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, RecPayTypes."Withholding Tax Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    //
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * (Rec.Amount - Rec."VAT Amount");
+                                                    //
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."Withholding Tax Amount" := 0;
+                                            end;
+                                        end;
+
+
+                                    end;
+                                Rec."account type"::"Fixed Asset":
+                                    begin
+
+                                        Rec.TestField(Amount);
+                                        RecPayTypes.Reset;
+                                        RecPayTypes.SetRange(RecPayTypes.Code, Rec."Payment Type");
+                                        RecPayTypes.SetRange(RecPayTypes.Type, RecPayTypes.Type::Payment);
+                                        if RecPayTypes.Find('-') then begin
+                                            if RecPayTypes."VAT Chargeable" = RecPayTypes."vat chargeable"::Yes then begin
+                                                RecPayTypes.TestField(RecPayTypes."VAT Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, RecPayTypes."VAT Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    //"VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
+                                                    Rec."VAT Amount" := (Rec.Amount / ((TarriffCodes.Percentage + 100)) * TarriffCodes.Percentage);
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."VAT Amount" := 0;
+                                            end;
+
+                                            if RecPayTypes."Withholding Tax Chargeable" = RecPayTypes."withholding tax chargeable"::Yes then begin
+                                                RecPayTypes.TestField(RecPayTypes."Withholding Tax Code");
+                                                TarriffCodes.Reset;
+                                                TarriffCodes.SetRange(TarriffCodes.Code, RecPayTypes."Withholding Tax Code");
+                                                if TarriffCodes.Find('-') then begin
+                                                    //
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * Rec.Amount;
+                                                    Rec."Withholding Tax Amount" := (TarriffCodes.Percentage / 100) * (Rec.Amount - Rec."VAT Amount");
+                                                    //
+                                                end;
+                                            end
+                                            else begin
+                                                Rec."Withholding Tax Amount" := 0;
+                                            end;
+                                        end;
+
+
+                                    end;
                             end;
-                          "account type"::Vendor:
-                            begin
-
-                        TestField(Amount);
-                        RecPayTypes.Reset;
-                        RecPayTypes.SetRange(RecPayTypes.Code,Type);
-                        RecPayTypes.SetRange(RecPayTypes.Type,RecPayTypes.Type::Payment);
-                        if RecPayTypes.Find('-') then begin
-                        if RecPayTypes."VAT Chargeable"=RecPayTypes."vat chargeable"::Yes then begin
-                        TestField("VAT Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,"VAT Code");
-                        if TarriffCodes.Find('-') then begin
-                        "VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        //
-                        "VAT Amount":=(Amount/((TarriffCodes.Percentage+100))*TarriffCodes.Percentage);
-                        //
-                        end;
-                        end
-                        else begin
-                        "VAT Amount":=0;
-                        end;
-
-                        if RecPayTypes."Withholding Tax Chargeable"=RecPayTypes."withholding tax chargeable"::Yes then begin
-                        TestField("Withholding Tax Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,"Withholding Tax Code");
-                        if TarriffCodes.Find('-') then begin
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        //
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*(Amount-"VAT Amount");
-                        //
-                        end;
-                        end
-                        else begin
-                        "Withholding Tax Amount":=0;
-                        end;
-                        end;
 
 
-                            end;
-                          "account type"::"Bank Account":
-                            begin
-
-                        TestField(Amount);
-                        RecPayTypes.Reset;
-                        RecPayTypes.SetRange(RecPayTypes.Code,Type);
-                        RecPayTypes.SetRange(RecPayTypes.Type,RecPayTypes.Type::Payment);
-                        if RecPayTypes.Find('-') then begin
-                        if RecPayTypes."VAT Chargeable"=RecPayTypes."vat chargeable"::Yes then begin
-                        RecPayTypes.TestField(RecPayTypes."VAT Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,RecPayTypes."VAT Code");
-                        if TarriffCodes.Find('-') then begin
-                        //
-                        "VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        "VAT Amount":=(Amount/((TarriffCodes.Percentage+100))*TarriffCodes.Percentage);
-                        //
-                        end;
-                        end
-                        else begin
-                        "VAT Amount":=0;
-                        end;
-
-                        if RecPayTypes."Withholding Tax Chargeable"=RecPayTypes."withholding tax chargeable"::Yes then begin
-                        RecPayTypes.TestField(RecPayTypes."Withholding Tax Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,RecPayTypes."Withholding Tax Code");
-                        if TarriffCodes.Find('-') then begin
-                        //
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*(Amount-"VAT Amount");
-                        //
-                        end;
-                        end
-                        else begin
-                        "Withholding Tax Amount":=0;
-                        end;
-                        end;
-
-
-                            end;
-                          "account type"::"Fixed Asset":
-                            begin
-
-                        TestField(Amount);
-                        RecPayTypes.Reset;
-                        RecPayTypes.SetRange(RecPayTypes.Code,Type);
-                        RecPayTypes.SetRange(RecPayTypes.Type,RecPayTypes.Type::Payment);
-                        if RecPayTypes.Find('-') then begin
-                        if RecPayTypes."VAT Chargeable"=RecPayTypes."vat chargeable"::Yes then begin
-                        RecPayTypes.TestField(RecPayTypes."VAT Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,RecPayTypes."VAT Code");
-                        if TarriffCodes.Find('-') then begin
-                        //"VAT Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        "VAT Amount":=(Amount/((TarriffCodes.Percentage+100))*TarriffCodes.Percentage);
-                        end;
-                        end
-                        else begin
-                        "VAT Amount":=0;
-                        end;
-
-                        if RecPayTypes."Withholding Tax Chargeable"=RecPayTypes."withholding tax chargeable"::Yes then begin
-                        RecPayTypes.TestField(RecPayTypes."Withholding Tax Code");
-                        TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,RecPayTypes."Withholding Tax Code");
-                        if TarriffCodes.Find('-') then begin
-                        //
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
-                        "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*(Amount-"VAT Amount");
-                        //
-                        end;
-                        end
-                        else begin
-                        "Withholding Tax Amount":=0;
-                        end;
-                        end;
-
-
-                            end;
-                        end;
-
-
-                        "Net Amount":=Amount-"Withholding Tax Amount";
-                        Validate("Net Amount");
+                        Rec."Net Amount" := Rec.Amount - Rec."Withholding Tax Amount";
+                        Rec.Validate("Net Amount");
                     end;
                 }
-                field(Remarks;Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = FieldEditable;
                     Enabled = FieldEditable;
                 }
-                field("Transaction Type";"Transaction Type")
+                field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No.";"Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("VAT Prod. Posting Group";"VAT Prod. Posting Group")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
-                field("Vendor Bank Account";"Vendor Bank Account")
+                field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("VAT Rate";"VAT Rate")
+                field("Vendor Bank Account"; Rec."Account No.")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Retention Code";"Retention Code")
+                field("VAT Rate"; Rec."VAT Rate")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Withholding Tax Code";"Withholding Tax Code")
+                field("Retention Code"; Rec."Retention Code")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
+                }
+                field("Withholding Tax Code"; Rec."Withholding Tax Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -315,57 +308,55 @@ Page 51516063 "Voucher Payment Lines"
                     trigger OnValidate()
                     begin
                         TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code,"Withholding Tax Code");
-                        if TarriffCodes.FindFirst then
-                          begin
-                        //    "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
-                            "Withholding Tax Amount":=("Amount With VAT"-"VAT Amount")*(TarriffCodes.Percentage/100);
-                          end
-                        else
-                          begin
-                            "Withholding Tax Amount":=0;
-                          end;
-                            "Net Amount":=Amount-"Withholding Tax Amount";
+                        TarriffCodes.SetRange(TarriffCodes.Code, "Withholding Tax Code");
+                        if TarriffCodes.FindFirst then begin
+                            //    "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
+                            Rec."Withholding Tax Amount" := (Rec."Amount With VAT" - Rec."VAT Amount") * (TarriffCodes.Percentage / 100);
+                        end
+                        else begin
+                            Rec."Withholding Tax Amount" := 0;
+                        end;
+                        Rec."Net Amount" := Rec.Amount - Rec."Withholding Tax Amount";
                     end;
                 }
-                field("VAT Amount";"VAT Amount")
+                field("VAT Amount"; Rec."VAT Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Withholding Tax Amount";"Withholding Tax Amount")
+                field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Retention  Amount";"Retention  Amount")
+                field("Retention  Amount"; Rec."Retention  Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Net Amount";"Net Amount")
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Apply to ID";"Apply to ID")
+                field("Apply to ID"; Rec."Apply to ID")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Lookup = true;
                     Visible = false;
                 }
-                field("Applies-to Doc. Type";"Applies-to Doc. Type")
+                field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applies-to Doc. No.";"Applies-to Doc. No.")
+                field("Applies-to Doc. No."; Rec."Applies-to Doc. No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Applies-to ID";"Applies-to ID")
+                field("Applies-to ID"; Rec."Applies-to ID")
                 {
                     ApplicationArea = Basic;
                 }
@@ -379,20 +370,20 @@ Page 51516063 "Voucher Payment Lines"
 
     trigger OnInit()
     begin
-          FieldEditable:=true;
+        FieldEditable := true;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-           PHeader.Reset;
-           PHeader.SetRange(PHeader."No.",No);
-           if PHeader.FindFirst then begin
-            if (PHeader.Status=PHeader.Status::Approved) or (PHeader.Status=PHeader.Status::"Pending Approval") then begin
-              FieldEditable:=false;
+        PHeader.Reset;
+        PHeader.SetRange(PHeader."No.", No);
+        if PHeader.FindFirst then begin
+            if (PHeader.Status = PHeader.Status::Approved) or (PHeader.Status = PHeader.Status::"Pending Approval") then begin
+                FieldEditable := false;
             end else begin
-              FieldEditable:=true;
+                FieldEditable := true;
             end;
-           end;
+        end;
     end;
 
     var

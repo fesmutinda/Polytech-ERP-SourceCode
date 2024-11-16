@@ -4,7 +4,7 @@ Page 51516924 "Lead card"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = 51516557;
-    SourceTableView = where(Send = const(No));
+    SourceTableView = where(Send = const(false));
 
     layout
     {
@@ -12,45 +12,45 @@ Page 51516924 "Lead card"
         {
             group(General)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Equiring As"; "Calling As")
+                field("Equiring As"; Rec."Calling As")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Equiring As';
                     OptionCaption = ',As Non Member,As Others>';
                 }
-                field("<Equiring For>"; "Calling For")
+                field("<Equiring For>"; Rec."Calling For")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Log Type';
                 }
-                field("Contact Mode"; "Contact Mode")
+                field("Contact Mode"; Rec."Contact Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Physical Meeting Location"; "Physical Meeting Location")
+                field("Physical Meeting Location"; Rec."Physical Meeting Location")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Lead Status"; "Lead Status")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Lead Region"; "Lead Region")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Captured By"; "Captured By")
+                field("Lead Status"; Rec."Lead Status")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Captured On"; "Captured On")
+                field("Lead Region"; Rec."Lead Region")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Captured By"; Rec."Captured By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Captured On"; Rec."Captured On")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -58,33 +58,33 @@ Page 51516924 "Lead card"
             }
             group("Lead Details")
             {
-                field("First Name"; "First Name")
+                field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Middle Name"; "Middle Name")
+                field("Middle Name"; Rec."Middle Name")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Middle Name';
                 }
-                field("Last Name"; "Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Phone No"; "Phone No")
+                field("Phone No"; Rec."Phone No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Mobile No';
                 }
-                field(Email; Email)
+                field(Email; Rec.Email)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Id Number"; "Passport No")
+                field("Id Number"; Rec."Passport No")
                 {
                     ApplicationArea = Basic;
                     Caption = 'ID No';
@@ -93,14 +93,14 @@ Page 51516924 "Lead card"
             group("Employment Info")
             {
                 Caption = 'Employment Info';
-                field(Control16; "Employment Info")
+                field(Control16; Rec."Employment Info")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
 
                     trigger OnValidate()
                     begin
-                        if "Employment Info" = "employment info"::Employed then begin
+                        if Rec."Employment Info" = Rec."employment info"::Employed then begin
                             EmployerCodeEditable := true;
                             DepartmentEditable := true;
                             TermsofEmploymentEditable := true;
@@ -119,7 +119,7 @@ Page 51516924 "Lead card"
 
 
                         end else
-                            if "Employment Info" = "employment info"::Contracting then begin
+                            if Rec."Employment Info" = Rec."employment info"::Contracting then begin
                                 ContractingEditable := true;
                                 EmployerCodeEditable := false;
                                 DepartmentEditable := false;
@@ -134,7 +134,7 @@ Page 51516924 "Lead card"
                                 PhysicalBussLocationEditable := false;
                                 YearOfCommenceEditable := false;
                             end else
-                                if "Employment Info" = "employment info"::Others then begin
+                                if Rec."Employment Info" = Rec."employment info"::Others then begin
                                     OthersEditable := true;
                                     ContractingEditable := false;
                                     EmployerCodeEditable := false;
@@ -145,7 +145,7 @@ Page 51516924 "Lead card"
                                     EmploymentDateEditable := false;
                                     EmployerAddressEditable := false
                                 end else
-                                    if "Employment Info" = "employment info"::"Self-Employed" then begin
+                                    if Rec."Employment Info" = Rec."employment info"::"Self-Employed" then begin
                                         OccupationEditable := true;
                                         EmployerCodeEditable := false;
                                         DepartmentEditable := false;
@@ -181,80 +181,80 @@ Page 51516924 "Lead card"
 
                     end;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                     Editable = EmployerCodeEditable;
                     ShowMandatory = true;
                 }
-                field("Employer Name"; "Employer Name")
+                field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = Basic;
                     Editable = EmployedEditable;
                 }
-                field("Employer Address"; "Employer Address")
+                field("Employer Address"; Rec."Employer Address")
                 {
                     ApplicationArea = Basic;
                     Editable = EmployerAddressEditable;
                 }
-                field(Department; Department)
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = Basic;
                     Caption = 'WorkStation / Depot';
                     Editable = DepartmentEditable;
                 }
-                field("Terms of Employment"; "Terms of Employment")
+                field("Terms of Employment"; Rec."Terms of Employment")
                 {
                     ApplicationArea = Basic;
                     Editable = TermsofEmploymentEditable;
                     ShowMandatory = true;
                 }
-                field("Date of Employment"; "Date of Employment")
+                field("Date of Employment"; Rec."Date of Employment")
                 {
                     ApplicationArea = Basic;
                     Editable = EmploymentDateEditable;
                 }
-                field("Position Held"; "Position Held")
+                field("Position Held"; Rec."Position Held")
                 {
                     ApplicationArea = Basic;
                     Editable = PositionHeldEditable;
                 }
-                field("Expected Monthly Income"; "Expected Monthly Income")
+                field("Expected Monthly Income"; Rec."Expected Monthly Income")
                 {
                     ApplicationArea = Basic;
                     Editable = MonthlyIncomeEditable;
                 }
-                field("Nature Of Business"; "Nature Of Business")
+                field("Nature Of Business"; Rec."Nature Of Business")
                 {
                     ApplicationArea = Basic;
                     Editable = NatureofBussEditable;
                 }
-                field(Industry; Industry)
+                field(Industry; Rec.Industry)
                 {
                     ApplicationArea = Basic;
                     Editable = IndustryEditable;
                 }
-                field("Business Name"; "Business Name")
+                field("Business Name"; Rec."Business Name")
                 {
                     ApplicationArea = Basic;
                     Editable = BusinessNameEditable;
                 }
-                field("Physical Business Location"; "Physical Business Location")
+                field("Physical Business Location"; Rec."Physical Business Location")
                 {
                     ApplicationArea = Basic;
                     Editable = PhysicalBussLocationEditable;
                 }
-                field("Year of Commence"; "Year of Commence")
+                field("Year of Commence"; Rec."Year of Commence")
                 {
                     ApplicationArea = Basic;
                     Editable = YearOfCommenceEditable;
                 }
-                field(Occupation; Occupation)
+                field(Occupation; Rec.Occupation)
                 {
                     ApplicationArea = Basic;
                     Editable = OccupationEditable;
                 }
-                field("Others Details"; "Others Details")
+                field("Others Details"; Rec."Others Details")
                 {
                     ApplicationArea = Basic;
                     Editable = OthersEditable;
@@ -263,21 +263,21 @@ Page 51516924 "Lead card"
             group("Referee Details")
             {
                 Caption = 'Referee Details';
-                field("Referee Member No"; "Referee Member No")
+                field("Referee Member No"; Rec."Referee Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Referee Name"; "Referee Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Referee ID No"; "Referee ID No")
+                field("Referee Name"; Rec."Referee Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Referee Mobile Phone No"; "Referee Mobile Phone No")
+                field("Referee ID No"; Rec."Referee ID No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Referee Mobile Phone No"; Rec."Referee Mobile Phone No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -311,7 +311,7 @@ Page 51516924 "Lead card"
 
                     //ERROR("Calling As");
                     //IF ("Calling As"="Calling As"::"As Non Member")OR ("Calling As"="Calling As"::"As Others") THEN BEGIN
-                    ok := Confirm('Create a lead  for ' + "First Name" + "Middle Name" + '.The lead will be allocated a new lead Number. Continue?');
+                    ok := Confirm('Create a lead  for ' + Rec."First Name" + Rec."Middle Name" + '.The lead will be allocated a new lead Number. Continue?');
                     if ok then begin
                         //Create Invest Account
                         if LeadSetup.Get then begin

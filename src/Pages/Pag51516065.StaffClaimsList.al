@@ -1,13 +1,13 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516065 "Staff Claims List"
 {
-    CardPageID = "Staff Claims";
+    // CardPageID = "Staff Claims";
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Staff Claims Header";
-    SourceTableView = where(Status = filter(<> Cancelled), Posted = const(No));
+    SourceTableView = where(Status = filter(<> Cancelled), Posted = const(false));
 
     layout
     {
@@ -184,7 +184,7 @@ Page 51516065 "Staff Claims List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::"Staff Claim";
-                        ApprovalEntries.Setfilters(Database::"Staff Claims Header", DocumentType, Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Staff Claims Header", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }

@@ -1,13 +1,13 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516071 "Imprest Acct. List"
 {
-    CardPageID = "Imprest Surrender";
+    // CardPageID = "Imprest Surrender";
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Cancellation,Category6_caption,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Imprest Surrender Header";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {
@@ -76,7 +76,7 @@ Page 51516071 "Imprest Acct. List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::ImprestSurrender;
-                        ApprovalEntries.Setfilters(Database::"Imprest Surrender Header", DocumentType, Rec.No);
+                        ApprovalEntries.SetRecordFilters(Database::"Imprest Surrender Header", DocumentType, Rec.No);
                         ApprovalEntries.Run;
                     end;
                 }
@@ -142,11 +142,11 @@ Page 51516071 "Imprest Acct. List"
                     trigger OnAction()
                     begin
                         //Post Committment Reversals
-                        Rec.TestField(Rec.Status, Rec.Status::"9");
+                        Rec.TestField(Rec.Status, Rec.Status::"Pending Approval");
                         if Confirm(Text002, true) then begin
                             Doc_Type := Doc_type::Imprest;
                             BudgetControl.ReverseEntries(Doc_Type, Rec."Imprest Issue Doc. No");
-                            Rec.Status := Rec.Status::"5";
+                            Rec.Status := Rec.Status::Approved;
                             Rec.Modify;
                         end;
                     end;
@@ -169,7 +169,7 @@ Page 51516071 "Imprest Acct. List"
 
 
 
-                    Rec.TestField(Status, Rec.Status::"9");
+                    Rec.TestField(Status, Rec.Status::Approved);
 
                     if Rec.Posted then
                         Error('The transaction has already been posted.');
@@ -334,7 +334,7 @@ Page 51516071 "Imprest Acct. List"
 
                     if JournalPostSuccessful.PostedSuccessfully then begin
                         Rec.Posted := true;
-                        Rec.Status := Rec.Status::"4";
+                        Rec.Status := Rec.Status::Approved;
                         Rec."Date Posted" := Today;
                         Rec."Time Posted" := Time;
                         Rec."Posted By" := UserId;
@@ -511,7 +511,7 @@ Page 51516071 "Imprest Acct. List"
     procedure UpdateforNoActualSpent()
     begin
         Rec.Posted := true;
-        Rec.Status := Rec.Status::"4";
+        Rec.Status := Rec.Status::Approved;
         Rec."Date Posted" := Today;
         Rec."Time Posted" := Time;
         Rec."Posted By" := UserId;

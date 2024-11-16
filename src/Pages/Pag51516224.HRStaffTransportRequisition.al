@@ -224,7 +224,7 @@ Page 51516224 "HR Staff Transport Requisition"
         EmpJobDesc: Text[30];
         HRJobs: Record 51516177;
         SupervisorName: Text[30];
-        SMTP: Codeunit 400;
+        // SMTP: Codeunit 400;
         URL: Text[500];
         dAlloc: Decimal;
         dEarnd: Decimal;

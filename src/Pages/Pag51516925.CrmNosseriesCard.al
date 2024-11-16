@@ -10,19 +10,19 @@ Page 51516925 "Crm Nos series Card"
         {
             group(General)
             {
-                field("Lead Nos"; "Lead Nos")
+                field("Lead Nos"; Rec."Lead Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("General Enquiries Nos"; "General Enquiries Nos")
+                field("General Enquiries Nos"; Rec."General Enquiries Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cases nos"; "Cases nos")
+                field("Cases nos"; Rec."Cases nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Crm logs Nos"; "Crm logs Nos")
+                field("Crm logs Nos"; Rec."Crm logs Nos")
                 {
                     ApplicationArea = Basic;
                 }

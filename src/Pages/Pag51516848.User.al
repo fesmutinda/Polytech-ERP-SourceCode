@@ -11,26 +11,26 @@ Page 51516848 User
         {
             repeater(Group)
             {
-                field("User Security ID";"User Security ID")
+                field("User Security ID"; Rec."User Security ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("User Name";"User Name")
+                field("User Name"; Rec."User Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Full Name";"Full Name")
+                field("Full Name"; Rec."Full Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(State;State)
+                field(State; Rec.State)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Branch Code";"Branch Code")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Branch Code"; Rec."Branch Code")
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
     }

@@ -98,9 +98,9 @@ Page 51516873 "Member Picture-App"
     }
 
     var
-        [RunOnClient]
-        [WithEvents]
-        CameraProvider: dotnet CameraProvider;
+        // [RunOnClient]
+        // [WithEvents]
+        // CameraProvider: dotnet CameraProvider;
         CameraAvailable: Boolean;
         DeleteExportEnabled: Boolean;
         OverrideImageQst: label 'The existing picture will be replaced. Do you want to continue?';
@@ -111,10 +111,10 @@ Page 51516873 "Member Picture-App"
 
     procedure TakeNewPicture()
     var
-        CameraOptions: dotnet CameraOptions;
+        // CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
@@ -133,11 +133,11 @@ Page 51516873 "Member Picture-App"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Picture.Count > 0 then
+        if Rec.Picture.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -146,17 +146,17 @@ Page 51516873 "Member Picture-App"
         if FileName = '' then
             Error('');
 
-        Clear(Picture);
-        Picture.ImportFile(FileName, ClientFileName);
-        if not Insert(true) then
-            Modify(true);
+        Clear(Rec.Picture);
+        Rec.Picture.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Picture.Count <> 0;
+        DeleteExportEnabled := Rec.Picture.Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean
@@ -172,17 +172,17 @@ Page 51516873 "Member Picture-App"
 
     procedure DeleteItemPicture()
     begin
-        TestField("No.");
+        Rec.TestField("No.");
 
         if not Confirm(DeleteImageQst) then
             exit;
 
-        Clear(Picture);
-        Modify(true);
+        Clear(Rec.Picture);
+        Rec.Modify(true);
     end;
 
-    trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
-    begin
-    end;
+    // trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
+    // begin
+    // end;
 }
 

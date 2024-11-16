@@ -11,23 +11,23 @@ Page 51516861 "Interest Earned"
         {
             repeater(Group)
             {
-                field(No; No)
+                field(No;Rec. No)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Date"; "Interest Date")
+                field("Interest Date"; Rec."Interest Date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }

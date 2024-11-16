@@ -348,20 +348,20 @@ Page 51516974 "Collateral Action Card"
                 trigger OnAction()
                 begin
 
-                    VarNoofYears := ROUND(("Depreciation Completion Date" - Today) / 365, 1, '>');
+                    VarNoofYears := ROUND((Rec."Depreciation Completion Date" - Today) / 365, 1, '>');
 
                     //===========Update Year 1 Depreciation==================================
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindSet = false then begin
-                        VarDepreciationValue := "Asset Value" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := Rec."Asset Value" * (Rec."Depreciation Percentage" / 100);
 
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', Today);
                         ObjCollateralDeprReg."Transaction Description" := 'Year 1 Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
-                        ObjCollateralDeprReg."Collateral NBV" := "Asset Value" - VarDepreciationValue;
+                        ObjCollateralDeprReg."Collateral NBV" := Rec."Asset Value" - VarDepreciationValue;
                         ObjCollateralDeprReg.Insert;
 
                     end;
@@ -371,21 +371,21 @@ Page 51516974 "Collateral Action Card"
                     //===========Update Year 2 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
 
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -397,20 +397,20 @@ Page 51516974 "Collateral Action Card"
                     //===========Update Year 3 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -422,20 +422,20 @@ Page 51516974 "Collateral Action Card"
                     //===========Update Year 4 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
-                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * ("Depreciation Percentage" / 100);
+                        VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
                     end;
 
                     ObjDepreciationRegister.Reset;
-                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", "Document No");
+                    ObjDepreciationRegister.SetRange(ObjDepreciationRegister."Document No", Rec."Document No");
                     if ObjDepreciationRegister.FindSet then begin
                         VarDepreciationNo := ObjDepreciationRegister.Count + 1;
                     end;
-                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= "Depreciation Completion Date" then begin
+                    if (CalcDate('1Y', ObjCollateralDeprReg."Transaction Date")) <= Rec."Depreciation Completion Date" then begin
                         ObjCollateralDeprReg.Init;
-                        ObjCollateralDeprReg."Document No" := "Document No";
+                        ObjCollateralDeprReg."Document No" := Rec."Document No";
                         ObjCollateralDeprReg."Transaction Date" := CalcDate('1Y', ObjCollateralDeprReg."Transaction Date");
                         ObjCollateralDeprReg."Transaction Description" := 'Year ' + Format(VarDepreciationNo) + ' Depreciation';
                         ObjCollateralDeprReg."Depreciation Amount" := VarDepreciationValue;
@@ -447,7 +447,7 @@ Page 51516974 "Collateral Action Card"
                     //===========Update Year 5 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
                         VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
@@ -472,7 +472,7 @@ Page 51516974 "Collateral Action Card"
                     //===========Update Year 6 Depreciation==================================
 
                     ObjCollateralDeprReg.Reset;
-                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", "Document No");
+                    ObjCollateralDeprReg.SetRange(ObjCollateralDeprReg."Document No", Rec."Document No");
                     if ObjCollateralDeprReg.FindLast then begin
                         VarCurrentNBV := ObjCollateralDeprReg."Collateral NBV";
                         VarDepreciationValue := ObjCollateralDeprReg."Collateral NBV" * (Rec."Depreciation Percentage" / 100);
@@ -517,7 +517,7 @@ Page 51516974 "Collateral Action Card"
                     if Confirm('Are you sure you want to charge package Lodging Fee', false) = true then begin
 
                         ObjVendors.Reset;
-                        ObjVendors.SetRange(ObjVendors."No.", "Charge Account");
+                        ObjVendors.SetRange(ObjVendors."No.", Rec."Charge Account");
                         if ObjVendors.Find('-') then begin
                             ObjVendors.CalcFields(ObjVendors.Balance, ObjVendors."Uncleared Cheques");
                             AvailableBal := (ObjVendors.Balance - ObjVendors."Uncleared Cheques");
@@ -541,7 +541,7 @@ Page 51516974 "Collateral Action Card"
                         BalAccountType := Balaccounttype::"G/L Account";
 
                         ObjPackageTypes.Reset;
-                        ObjPackageTypes.SetRange(ObjPackageTypes.Code, "Package Type");
+                        ObjPackageTypes.SetRange(ObjPackageTypes.Code, Rec."Package Type");
                         if ObjPackageTypes.FindSet then begin
                             LodgeFee := ObjPackageTypes."Package Charge";
                             LodgeFeeAccount := ObjPackageTypes."Package Charge Account";
@@ -550,7 +550,7 @@ Page 51516974 "Collateral Action Card"
                         if AvailableBal < LodgeFee then
                             Error('The Member has less than %1 Lodge Fee on their Account.Account Available Balance is %2', LodgeFee, AvailableBal);
 
-                        SwizzsoftFactory.FnCreateGnlJournalLineBalanced(JTemplate, JBatch, DocNo, LineNo, TransType, Accounttype::Vendor, "Charge Account", Today, 'Package Lodge Charge_' + Format("Document No"), Balaccounttype::"G/L Account", LodgeFeeAccount,
+                        SwizzsoftFactory.FnCreateGnlJournalLineBalanced(JTemplate, JBatch, DocNo, LineNo, TransType, Accounttype::Vendor, Rec."Charge Account", Today, 'Package Lodge Charge_' + Format(Rec."Document No"), Balaccounttype::"G/L Account", LodgeFeeAccount,
                         LodgeFee, 'BOSA', '');
 
                         SwizzsoftFactory.FnPostGnlJournalLine(JTemplate, JBatch);
@@ -664,7 +664,7 @@ Page 51516974 "Collateral Action Card"
         FnGetVisibility();
         Rec.CalcFields("Last Collateral Action Entry");
         if ObjCollateralMovement.Get(Rec."Last Collateral Action Entry") then begin
-            "Last Collateral Action" := ObjCollateralMovement."Current Location";
+            Rec."Last Collateral Action" := ObjCollateralMovement."Current Location";
         end;
     end;
 
@@ -719,28 +719,28 @@ Page 51516974 "Collateral Action Card"
         SafeCustodyVisible := false;
 
 
-        if Action = Action::"Receive at HQ" then begin
+        if Rec.Action = Rec.Action::"Receive at HQ" then begin
             ReceivedAtHQVisible := true;
         end;
-        if (Action = Action::"Dispatch to Branch") or (Action = Action::"Receive at Branch") then begin
+        if (Rec.Action = Rec.Action::"Dispatch to Branch") or (Rec.Action = Rec.Action::"Receive at Branch") then begin
             BranchVisible := true;
         end;
-        if (Action = Action::"Issue to Lawyer") or (Action = Action::"Receive From Lawyer") then begin
+        if (Rec.Action = Rec.Action::"Issue to Lawyer") or (Rec.Action = Rec.Action::"Receive From Lawyer") then begin
             LawyerVisible := true;
         end;
-        if Action = Action::"Issue to Auctioneer" then begin
+        if Rec.Action = Rec.Action::"Issue to Auctioneer" then begin
             IssuetoAuctioneerVisible := true;
         end;
-        if Action = Action::"Issue to Insurance Agent" then begin
+        if Rec.Action = Rec.Action::"Issue to Insurance Agent" then begin
             InsuranceAgentVisible := true;
         end;
-        if Action = Action::"Release to Member" then begin
+        if Rec.Action = Rec.Action::"Release to Member" then begin
             IssuetoMemberVisible := true;
         end;
-        if Action = Action::"Retrieve From Strong Room" then begin
+        if Rec.Action = Rec.Action::"Retrieve From Strong Room" then begin
             StrongRoomVisible := true;
         end;
-        if Action = Action::"Booked to Safe Custody" then begin
+        if Rec.Action = Rec.Action::"Booked to Safe Custody" then begin
             SafeCustodyVisible := true;
         end;
     end;

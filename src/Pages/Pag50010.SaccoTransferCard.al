@@ -22,17 +22,13 @@ Page 50010 "Sacco Transfer Card"
                     ApplicationArea = Basic;
                     Editable = TransactionDateEditable;
                 }
-                field("Member No"; Rec."Member No")
-                {
-                    ApplicationArea = Basic;
-                    Editable = VarMemberNoEditable;
-                }
-                field("Member Name"; Rec."Member Name")
+                field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    Visible = false;
                 }
-                field("Transaction Description"; Rec."Transaction Description")
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = RemarkEditable;
@@ -42,41 +38,25 @@ Page 50010 "Sacco Transfer Card"
                     ApplicationArea = Basic;
                     Editable = SourceAccountTypeEditable;
                 }
-                field("Source Account No."; Rec."Source Account No.")
+                field("Source Account No"; Rec."Source Account No")
                 {
                     ApplicationArea = Basic;
+                    Editable = SourceAccountNoEditbale;
+                }
+                field("Source Account Name"; Rec."Source Account Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Source Transaction Type"; Rec."Source Transaction Type")
                 {
                     ApplicationArea = Basic;
                     Editable = SourceAccountTypeEditable;
-
-                    trigger OnValidate()
-                    begin
-                        SourceLoanVisible := false;
-                        if (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Insurance Charged") or
-                            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Paid") or
-                            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Repayment") or
-                            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Due") or
-                            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Paid")
-                          then begin
-                            SourceLoanVisible := true;
-                        end;
-                    end;
                 }
                 field("Source Loan No"; Rec."Source Loan No")
                 {
                     ApplicationArea = Basic;
-                }
-                group(DepositDebitType)
-                {
-                    Caption = 'Deposit Debit Type';
-                    Visible = DepositDebitTypeVisible;
-                }
-                field("Header Amount"; Rec."Header Amount")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = SourceLoanNoEditable;
                 }
                 field("Schedule Total"; Rec."Schedule Total")
                 {
@@ -105,28 +85,10 @@ Page 50010 "Sacco Transfer Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Approved By"; Rec."Approved By")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = false;
-                }
             }
-            part(Control1102760014; "Posted Cash Payment Line")
+            part(Control1102760014; "Sacco Transfer Schedule")
             {
-                SubPageLink = "No." = field(No);
-            }
-        }
-        area(factboxes)
-        {
-            part(Control2; "Mwanangu Statistics FactBox")
-            {
-                SubPageLink = "No." = field("Source Account No.");
-            }
-            part(Control1; "Member Statistics FactBox")
-            {
-                Caption = 'BOSA Statistics FactBox';
-                SubPageLink = "No." = field("Source Account No.");
+                // SubPageLink = Rec."No." = field(No);
             }
         }
     }
@@ -138,68 +100,57 @@ Page 50010 "Sacco Transfer Card"
             group(Posting)
             {
                 Caption = 'Posting';
-                action("Send A&pproval Request")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Send A&pproval Request';
-                    Enabled = (not OpenApprovalEntriesExist) and EnabledApprovalWorkflowExist;
-                    Image = SendApprovalRequest;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedOnly = true;
-
-                    trigger OnAction()
-                    var
-                        Text001: label 'This Batch is already pending approval';
-                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-                    begin
-                        Rec.TestField("Transaction Description");
-                        if (("Schedule Total" > "Header Amount") and (Refund)) then
-                            Error('Scheduled Amount must be less or equal to Header Amount!');
-
-                        if (("Schedule Total" > "Header Amount") and
-                          (not (("Source Transaction Type" = "source transaction type"::"Loan Repayment")
-                          or ("Source Transaction Type" = "source transaction type"::"Interest Paid") or ("Source Transaction Type" = "source transaction type"::"Jiokoe Savings")))) then
-                            Error('Scheduled Amount must be less or equal to Header Amount!');
-                        if FnLimitNumberOfTransactions() then
-                            Error(Txt0001);
-                        if ApprovalsMgmt.CheckSaccoTransferApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnSendSaccoTransferForApproval(Rec);
-                    end;
-                }
-                action("Cancel Approval Request")
-                {
-                    ApplicationArea = Basic;
-                    Enabled = CanCancelApprovalFOrRecord;
-                    Image = CancelApprovalRequest;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedOnly = true;
-
-                    trigger OnAction()
-                    var
-                        ApprovalMgt: Codeunit "Approvals Mgmt.";
-                    begin
-                        if ApprovalsMgmt.CheckSaccoTransferApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnCancelSaccoTransferApprovalRequest(Rec);
-                    end;
-                }
                 action(Approvals)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Approvals';
-                    Image = Approvals;
+                    Image = Approval;
                     Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedOnly = true;
+                    PromotedCategory = process;
 
                     trigger OnAction()
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        DocumentType := Documenttype::SaccoTransfers;
-                        ApprovalEntries.Setfilters(Database::"Sacco Transfers", DocumentType, No);
-                        ApprovalEntries.Run;
+                    end;
+                }
+                action("Send A&pproval Request")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Send A&pproval Request';
+                    Image = SendApprovalRequest;
+                    Promoted = true;
+                    PromotedCategory = process;
+
+                    trigger OnAction()
+                    var
+                        Approvals: Codeunit SurestepApprovalsCodeUnit;
+                    begin
+                        if Confirm('Send Approval Request ?', false) = false then begin
+                            exit;
+                        end else begin
+                            Approvals.SendInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            CurrPage.Close();
+                        end;
+                    end;
+                }
+                action("Cancel Approval Request")
+                {
+                    ApplicationArea = Basic;
+                    Image = Cancel;
+                    Promoted = true;
+                    PromotedCategory = process;
+
+                    trigger OnAction()
+                    var
+                        Approvals: Codeunit SurestepApprovalsCodeUnit;
+                    begin
+                        if Confirm('Cancel Approval Request ?', false) = false then begin
+                            exit;
+                        end else begin
+                            Approvals.CancelInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            CurrPage.Close();
+                        end;
                     end;
                 }
                 action(Post)
@@ -208,42 +159,47 @@ Page 50010 "Sacco Transfer Card"
                     Caption = 'Post';
                     Image = Post;
                     Promoted = true;
-                    PromotedCategory = Category4;
+                    PromotedCategory = Process;
                     PromotedIsBig = true;
-                    PromotedOnly = true;
 
                     trigger OnAction()
                     begin
+                        Rec.TestField(Status, Rec.Status::Approved);
+                        //............................................................................
+                        Rec.CalcFields("Schedule Total");
+                        if (Vend.Get(Rec."Source Account No")) and (Rec."Source Account Type" = Rec."source account type"::Fosa) then begin
+                            Vend.CalcFields(Vend.Balance);
+                            if (Vend.Balance - Rec."Schedule Total") < 0 then begin
+                                if UserId in ['MAFANIKIOSACCO\EWAMBUA'] then
+                                    Message('Note that you will be overdrawing the account') else
+                                    Error('The Account balance will fall below zero !');
+                            end;
+                        end;
+                        //............................................................................
                         if FundsUSer.Get(UserId) then begin
                             Jtemplate := FundsUSer."Payment Journal Template";
                             Jbatch := FundsUSer."Payment Journal Batch";
+                        end else begin
+                            Error('Funds user setup setting does not exist');
                         end;
-                        if Posted = true then
+                        if Rec.Posted = true then
                             Error('This Shedule is already posted');
+                        Rec.TestField(Remarks);
 
-                        if Confirm('Are you sure you want to transfer schedule?', false) = true then begin
-
-                            //IF Approved=FALSE THEN
-                            //ERROR('This schedule is not approved');
-
+                        if Confirm('Are you sure you want to transfer schedule?', false) = false then begin
+                            exit;
+                        end else begin
                             // DELETE ANY LINE ITEM THAT MAY BE PRESENT
                             GenJournalLine.Reset;
                             GenJournalLine.SetRange(GenJournalLine."Journal Template Name", Jtemplate);
                             GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", Jbatch);
                             GenJournalLine.DeleteAll;
 
-
-                            //POSTING MAIN TRANSACTION
-
-                            //window.OPEN('Posting:,#1######################');
-
-
                             // UPDATE Source Account
                             GenJournalLine.Init;
                             GenJournalLine."Journal Template Name" := Jtemplate;
                             GenJournalLine."Journal Batch Name" := Jbatch;
                             GenJournalLine."Document No." := Rec.No;
-                            GenJournalLine.Description := Rec."Transaction Description" + ' ' + Rec."Source Account No.";
                             GenJournalLine."Line No." := GenJournalLine."Line No." + 10000;
                             if Rec."Source Account Type" = Rec."source account type"::Customer then begin
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
@@ -252,22 +208,22 @@ Page 50010 "Sacco Transfer Card"
                                 GenJournalLine."Loan No" := Rec."Source Loan No";
                             end else
                                 if Rec."Source Account Type" = Rec."source account type"::MEMBER then begin
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
-                                    GenJournalLine.Description := Rec."Transaction Description" + ' ' + Rec."Source Account No.";
                                     GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
                                     GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
-                                    GenJournalLine."Account No." := Rec."Source Account No.";
+                                    GenJournalLine."Account No." := Rec."Source Account No";
                                     GenJournalLine."Loan No" := Rec."Source Loan No";
                                 end else
 
-                                    if Rec."Source Account Type" = Rec."source account type"::MWANANGU then begin
+                                    if Rec."Source Account Type" = Rec."source account type"::Fosa then begin
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
-                                        GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
+                                        GenJournalLine."Shortcut Dimension 1 Code" := 'fOSA';
                                         GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
-                                        GenJournalLine."Account No." := Rec."Source Account No.";
+                                        // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
+                                        GenJournalLine."Account No." := Rec."Source Account No";
                                     end else
-                                        if Rec."Source Account Type" = Rec."source account type"::"G/L ACCOUNT" then begin
+                                        if Rec."Source Account Type" = Rec."Source Account Type"::"G/L ACCOUNT" then begin
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                             GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
                                             GenJournalLine."Shortcut Dimension 2 Code" := '01';
@@ -279,10 +235,11 @@ Page 50010 "Sacco Transfer Card"
                                                 GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
                                                 GenJournalLine."Account No." := Rec."Source Account No";
                                             end;
-                            GenJournalLine."Posting Date" := Rec."Transaction Date";
-                            GenJournalLine.Description := Rec."Transaction Description" + ' ' + Rec."Source Account No";
+                            GenJournalLine."Posting Date" := Today;
+                            GenJournalLine.Description := Rec.Remarks + ' ' + Rec."Source Account Name";
                             Rec.CalcFields("Schedule Total");
                             GenJournalLine.Amount := Rec."Schedule Total";
+                            //GenJournalLine.VALIDATE(GenJournalLine.Amount);
                             GenJournalLine.Insert;
 
 
@@ -304,46 +261,38 @@ Page 50010 "Sacco Transfer Card"
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                         GenJournalLine."Transaction Type" := BSched."Destination Type";
                                         GenJournalLine."Account No." := BSched."Destination Account No.";
-                                        GenJournalLine.Description := Rec."Transaction Description" + ' ' + Rec."Source Account No";
                                         GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
                                     end else
 
-                                        if BSched."Destination Account Type" = BSched."destination account type"::MWANANGU then begin
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
-                                            if ObjVendors.Get(Rec."Source Account No") then begin
-                                                ObjVendors.CalcFields(Balance);
-                                                if ObjVendors.Balance < 0 then
-                                                    Error('Account has insufficient Balance');
-                                            end;
+                                        if BSched."Destination Account Type" = BSched."destination account type"::FOSA then begin
+                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                             GenJournalLine."Transaction Type" := BSched."Destination Type";
+                                            // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
                                             GenJournalLine."Account No." := BSched."Destination Account No.";
-                                            GenJournalLine.Description := "Transaction Description" + ' ' + "Source Account No.";
                                             GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
                                         end else
                                             if BSched."Destination Account Type" = BSched."destination account type"::"G/L ACCOUNT" then begin
                                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                                 GenJournalLine."Account No." := BSched."Destination Account No.";
                                                 GenJournalLine."Shortcut Dimension 2 Code" := '01';
-                                                GenJournalLine.Description := "Transaction Description" + ' ' + "Source Account No.";
 
                                             end else
                                                 if BSched."Destination Account Type" = BSched."destination account type"::BANK then begin
                                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
                                                     GenJournalLine."Account No." := BSched."Destination Account No.";
-                                                    GenJournalLine.Description := "Transaction Description" + ' ' + "Source Account No.";
                                                     GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
                                                 end;
                                     GenJournalLine."Loan No" := BSched."Destination Loan";
                                     GenJournalLine.Validate(GenJournalLine."Loan No");
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := "Transaction Date";
-                                    GenJournalLine.Description := "Transaction Description" + ' ' + "Source Account No.";
+                                    GenJournalLine."Posting Date" := Today;
+                                    GenJournalLine.Description := Rec.Remarks;
                                     GenJournalLine.Amount := -BSched.Amount;
                                     //GenJournalLine.VALIDATE(GenJournalLine.Amount);
                                     GenJournalLine.Insert;
+                                //End Audit Entries
                                 until BSched.Next = 0;
                             end;
-
                             //Post
                             GenJournalLine.Reset;
                             GenJournalLine.SetRange("Journal Template Name", Jtemplate);
@@ -351,12 +300,9 @@ Page 50010 "Sacco Transfer Card"
                             if GenJournalLine.Find('-') then begin
                                 Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
                             end;
-
                             //Post
-                            Posted := true;
-                            Modify;
-                            Message('Transaction posted succesfully');
-
+                            Rec.Posted := true;
+                            Rec.Modify;
                         end;
                     end;
                 }
@@ -367,28 +313,42 @@ Page 50010 "Sacco Transfer Card"
                     Image = Print;
                     Promoted = true;
                     PromotedCategory = "Report";
-                    PromotedOnly = true;
 
                     trigger OnAction()
                     begin
                         BTRANS.Reset;
-                        BTRANS.SetRange(BTRANS.No, No);
+                        BTRANS.SetRange(BTRANS.No, Rec.No);
                         if BTRANS.Find('-') then begin
                             Report.Run(51516902, true, true, BTRANS);
                         end;
+                    end;
+                }
+                action("Page Vendor Statement")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Statement';
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
+
+                    trigger OnAction()
+                    begin
+                        Vend.Reset;
+                        Vend.SetRange(Vend."No.", Rec."Source Account No");
+                        if Vend.Find('-') then
+                            Report.Run(51516890, true, false, Vend);
+
                     end;
                 }
             }
             action("Members Statistics")
             {
                 ApplicationArea = Basic;
-                Caption = 'Member Details';
                 Image = Statistics;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedOnly = true;
                 RunObject = Page "Members Statistics";
-                RunPageLink = "No." = field("Source Account No.");
+                RunPageLink = "No." = field("Source Account No");
             }
         }
     }
@@ -396,52 +356,11 @@ Page 50010 "Sacco Transfer Card"
     trigger OnAfterGetCurrRecord()
     begin
         AddRecordRestriction();
-
-        EnablePost := false;
-        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
-        CanCancelApprovalFOrRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
-        EnabledApprovalWorkflowExist := true;
-        if Rec.Status = Status::Approved then begin
-            OpenApprovalEntriesExist := false;
-            CanCancelApprovalFOrRecord := false;
-            EnabledApprovalWorkflowExist := false;
-        end;
-        if Rec.Status = Status::Approved then
-            EnablePost := true;
-        SourceLoanVisible := false;
-        if (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Insurance Charged") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Paid")
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Insurance Paid") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Repayment") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Due") or
-          then begin
-            SourceLoanVisible := true;
-        end;
-        DepositDebitTypeVisible := false;
-        if "Source Transaction Type" = "source transaction type"::"Deposit Contribution" then begin
-            DepositDebitTypeVisible := true;
-        end;
-        "Transaction Date" := Today;
-        Modify;
     end;
 
     trigger OnAfterGetRecord()
     begin
         AddRecordRestriction();
-
-        DepositDebitTypeVisible := false;
-        if "Source Transaction Type" = "source transaction type"::"Deposit Contribution" then begin
-            DepositDebitTypeVisible := true;
-        end;
-        SourceLoanVisible := false;
-        if (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Insurance Charged") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Insurance Paid") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Repayment") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Due") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Paid")
-          then begin
-            SourceLoanVisible := true;
-        end;
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -449,35 +368,27 @@ Page 50010 "Sacco Transfer Card"
         Error('Not Allowed!');
     end;
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        Rec."Source Account Type" := Rec."source account type"::Fosa;
+    end;
+
     trigger OnOpenPage()
     begin
+        Rec."Source Account Type" := Rec."source account type"::Fosa;
         AddRecordRestriction();
-
-        DepositDebitTypeVisible := false;
-        if "Source Transaction Type" = "source transaction type"::"Deposit Contribution" then begin
-            DepositDebitTypeVisible := true;
-        end;
-        SourceLoanVisible := false;
-        if ("Source Transaction Type" = "source transaction type"::"Loan Insurance Charged") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Insurance Paid") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Loan Repayment") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Due") or
-            (Rec."Source Transaction Type" = Rec."source transaction type"::"Interest Paid")
-          then begin
-            SourceLoanVisible := true;
-        end;
     end;
 
     var
         users: Record User;
         GenJournalLine: Record "Gen. Journal Line";
         DefaultBatch: Record "Gen. Journal Batch";
-        BSched: Record "Imprest Header";
-        BTRANS: Record "Imprest Lines";
+        BSched: Record "Sacco Transfers Schedule";
+        BTRANS: Record "Sacco Transfers";
         DActivity: Code[20];
         DBranch: Code[20];
         UsersID: Record User;
-        FundsUSer: Record 51516031;
+        FundsUSer: Record "Funds User Setup";
         Jtemplate: Code[10];
         Jbatch: Code[10];
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions,FundsTransfer,SaccoTransfers;
@@ -488,81 +399,39 @@ Page 50010 "Sacco Transfer Card"
         SourceLoanNoEditable: Boolean;
         RemarkEditable: Boolean;
         TransactionDateEditable: Boolean;
-        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-        ObjSaccoTransfers: Record "Imprest Line";
-        OpenApprovalEntriesExist: Boolean;
-        EnabledApprovalWorkflowExist: Boolean;
-        CanCancelApprovalFOrRecord: Boolean;
-        EnablePost: Boolean;
-        Txt0001: label 'You cannot transfer another amount before three months elapse. ';
-        DepositDebitTypeVisible: Boolean;
-        ObjGensetup: Record 51516398;
-        BATCH_TEMPLATE: Code[50];
-        BATCH_NAME: Code[50];
-        DOCUMENT_NO: Code[50];
-        LineNo: Integer;
-        SFactory: Codeunit "Swizzsoft Factory";
-        VarExciseDuty: Decimal;
-        VarExciseDutyAccount: Code[30];
-        VarDepositDebitTypeEditable: Boolean;
-        ObjVendors: Record Vendor;
-        AvailableBal: Decimal;
-        ObjAccTypes: Record 51516436;
-        ObjMember: Record 51516364;
-        VarMemberNoEditable: Boolean;
-        ObjLoans: Record 51516371;
-        window: Dialog;
-        SourceLoanVisible: Boolean;
+        Vend: Record Vendor;
+        // Audit: Record "Audit Entries";
+        EntryNos: Integer;
 
     local procedure AddRecordRestriction()
     begin
-        if Status = Status::Open then begin
+        if Rec.Status = Rec.Status::Open then begin
             SourceAccountNoEditbale := true;
             SourceAccountNameEditable := true;
             SourceAccountTypeEditable := true;
             SourceLoanNoEditable := true;
             SourceTransactionType := true;
             TransactionDateEditable := true;
-            VarDepositDebitTypeEditable := true;
-            VarMemberNoEditable := true;
             RemarkEditable := true
         end else
-            if Status = Status::"Pending Approval" then begin
+            if Rec.Status = Rec.Status::pending then begin
                 SourceAccountNoEditbale := false;
                 SourceAccountNameEditable := false;
                 SourceAccountTypeEditable := false;
                 SourceLoanNoEditable := false;
                 SourceTransactionType := false;
                 TransactionDateEditable := false;
-                VarDepositDebitTypeEditable := false;
-                VarMemberNoEditable := false;
                 RemarkEditable := false
             end else
-                if Status = Status::Approved then begin
+                if Rec.Status = Rec.Status::Approved then begin
                     SourceAccountNoEditbale := false;
                     SourceAccountNameEditable := false;
                     SourceAccountTypeEditable := false;
                     SourceLoanNoEditable := false;
                     SourceTransactionType := false;
                     TransactionDateEditable := false;
-                    VarDepositDebitTypeEditable := false;
-                    VarMemberNoEditable := false;
                     RemarkEditable := false;
                 end;
-    end;
-
-    local procedure FnLimitNumberOfTransactions(): Boolean
-    begin
-        ObjSaccoTransfers.Reset;
-        ObjSaccoTransfers.SetRange("Savings Account Type", 'NIS');
-        ObjSaccoTransfers.SetRange("Source Account No.", Rec."Source Account No.");
-        ObjSaccoTransfers.SetRange(Posted, true);
-        ObjSaccoTransfers.SetCurrentkey(No);
-        if ObjSaccoTransfers.FindLast then begin
-            if (Rec."Transaction Date" - ObjSaccoTransfers."Transaction Date") > 30 then
-                exit(true);
-        end;
-        exit(false);
     end;
 }
 

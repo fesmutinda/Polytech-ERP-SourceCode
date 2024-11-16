@@ -28,15 +28,15 @@ Page 51516839 "MC Individual Application List"
     // //End allocate batch number
     // //IF Approvalmgt.SendAccOpeningRequest(Rec) THEN;
 
-    CardPageID = "MC Individual Application Card";
+    // CardPageID = "MC Individual Application Card";
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = 51516360;
     SourceTableView = where("Account Category" = filter(<> Group),
-                            "Group Account" = const(No),
-                            "Customer Posting Group" = const(MICRO),
+                            "Group Account" = const(false),
+                            // "Customer Posting Group" = const(MICRO),
                             Source = const(Micro));
 
     layout
@@ -45,88 +45,88 @@ Page 51516839 "MC Individual Application List"
         {
             repeater(Control1102755000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Search Name"; "Search Name")
+                field("Search Name"; Rec."Search Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Centre"; "Responsibility Centre")
+                field("Responsibility Centre"; Rec."Responsibility Centre")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer Type"; "Customer Type")
+                field("Customer Type"; Rec."Customer Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Gender; Gender)
+                field(Gender; Rec.Gender)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Category; Category)
+                field(Category; Rec.Category)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Account No"; "Bank Account No")
+                field("Bank Account No"; Rec."Bank Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Name"; "Bank Name")
+                field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Bank Code"; "Bank Code")
+                field("Bank Code"; Rec."Bank Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BOSA Account No."; "BOSA Account No.")
+                field("BOSA Account No."; Rec."BOSA Account No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Membership No.';
                 }
-                field("Recruited By"; "Recruited By")
+                field("Recruited By"; Rec."Recruited By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Category"; "Account Category")
+                field("Account Category"; Rec."Account Category")
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mobile Phone No"; "Mobile Phone No")
+                field("Mobile Phone No"; Rec."Mobile Phone No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Marital Status"; "Marital Status")
+                field("Marital Status"; Rec."Marital Status")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Monthly Contribution"; "Monthly Contribution")
+                field("Monthly Contribution"; Rec."Monthly Contribution")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field("E-Mail (Personal)"; "E-Mail (Personal)")
+                field("E-Mail (Personal)"; Rec."E-Mail (Personal)")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Source; Source)
+                field(Source; Rec.Source)
                 {
                     ApplicationArea = Basic;
                 }

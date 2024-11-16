@@ -10,43 +10,43 @@ Page 51516846 "Next of Kin-Change"
         {
             repeater(Group)
             {
-                field("Date of Birth"; "Date of Birth")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Address; Address)
+                field(Address; Rec.Address)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Telephone; Telephone)
+                field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Fax; Fax)
+                field(Fax; Rec.Fax)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Email; Email)
+                field(Email;Rec. Email)
                 {
                     ApplicationArea = Basic;
                 }
-                field("ID No."; "ID No.")
+                field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("%Allocation"; "%Allocation")
+                field("%Allocation"; Rec."%Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Total Allocation"; "Total Allocation")
+                field("Total Allocation"; Rec."Total Allocation")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maximun Allocation %"; "Maximun Allocation %")
+                field("Maximun Allocation %"; Rec."Maximun Allocation %")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Age; Age)
+                field(Age; Rec.Age)
                 {
                     ApplicationArea = Basic;
                 }
