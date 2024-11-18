@@ -565,7 +565,7 @@ Page 51516902 "Micro_Fin_Transactions_Posted"
         Text007: label 'Loan  Repayment Journal';
         Text008: label 'The transaction No. -%1 is already posted';
         Text009: label 'This Till is No. %1 not assigned to this Specific User. Please contact your system administrator';
-        ReceiptAllocations: Record 51516387;
+        ReceiptAllocations: Record "Receipt Allocation";
         Cust: Record 51516364;
         LoanApp: Record 51516371;
         LOustanding: Decimal;

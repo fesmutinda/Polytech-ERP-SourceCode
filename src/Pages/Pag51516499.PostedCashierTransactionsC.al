@@ -1831,7 +1831,7 @@ Page 51516499 "Posted Cashier Transactions C"
 
     procedure PostBOSAEntries()
     var
-        ReceiptAllocation: Record 51516387;
+        ReceiptAllocation: Record "Receipt Allocation";
     begin
         //BOSA Cash Book Entry
         if Rec."Account No" = '502-00-000300-00' then

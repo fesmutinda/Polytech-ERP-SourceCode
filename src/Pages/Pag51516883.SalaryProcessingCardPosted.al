@@ -509,7 +509,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     local procedure FnRunInterest(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
     begin
         if RunningBalance > 0 then begin
             LoanApp.Reset;
@@ -551,7 +551,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     local procedure FnRunPrinciple(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -613,7 +613,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     local procedure FnRunStandingOrders(ObjRcptBuffer: Record 51516460; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -702,7 +702,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     local procedure FnNonBosaStandingOrderTransaction(ObjRcptBuffer: Record 51516449; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
@@ -733,7 +733,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     local procedure FnBosaStandingOrderTransaction(ObjRcptBuffer: Record 51516449; RunningBalance: Decimal): Decimal
     var
         AmountToDeduct: Decimal;
-        ObjReceiptTransactions: Record 51516387;
+        ObjReceiptTransactions: Record "Receipt Allocation";
         varTotalRepay: Decimal;
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;

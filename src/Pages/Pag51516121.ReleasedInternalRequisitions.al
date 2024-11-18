@@ -462,7 +462,7 @@ Page 51516121 "Released Internal Requisitions"
                             DeleteCommitment.SetRange(DeleteCommitment."Document No.", Rec."No.");
                             DeleteCommitment.DeleteAll;
                         end;
-                        Commitment.CheckPurchase(Rec);
+                        // Commitment.CheckPurchase(Rec);
                         Message('Budget Availability Checking Complete');
                     end;
                 }
@@ -573,7 +573,7 @@ Page 51516121 "Released Internal Requisitions"
         DocPrint: Codeunit "Document-Print";
         UserMgt: Codeunit "User Management";
         ArchiveManagement: Codeunit ArchiveManagement;
-        Commitment: Codeunit 55484;
+        // Commitment: Codeunit 55484;
         BCSetup: Record 51516038;
         DeleteCommitment: Record 51516036;
         PurchLine: Record "Purchase Line";

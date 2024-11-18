@@ -3,6 +3,7 @@ Page 51516411 "Sacco General Set-Up"
 {
     PageType = Card;
     SourceTable = "Sacco General Set-Up";
+    Editable = true;
 
     layout
     {

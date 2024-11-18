@@ -111,13 +111,13 @@ Page 51516959 "Cheque Clearing Buffer"
         Vend: Record Vendor;
         LoanType: Record 51516381;
         BOSABank: Code[20];
-        ReceiptAllocations: Record 51516387;
+        ReceiptAllocations: Record "Receipt Allocation";
         StatusPermissions: Record 51516452;
 
 
     procedure PostBOSAEntries()
     var
-        ReceiptAllocation: Record 51516387;
+        ReceiptAllocation: Record "Receipt Allocation";
     begin
         //BOSA Cash Book Entry
         if Rec."Account No" = '502-00-000300-00' then

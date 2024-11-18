@@ -74,7 +74,7 @@ Page 51516269 "HR Leave Period List"
                 Image = CloseYear;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Codeunit 55582;
+                // RunObject = Codeunit 55582;
             }
         }
     }
