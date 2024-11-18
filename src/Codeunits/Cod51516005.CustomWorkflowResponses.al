@@ -21,16 +21,16 @@ Codeunit 51516005 "Custom Workflow Responses"
     begin
 
         //Payment Header
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPaymentDocForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPaymentDocForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPaymentDocForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPaymentApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPaymentApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //  SwizzsoftWFEvents.RunWorkflowOnSendPaymentDocForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPaymentDocForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPaymentDocForApprovalCode);
+        // // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        // //                                          SwizzsoftWFEvents.RunWorkflowOnCancelPaymentApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelPaymentApprovalRequestCode);
 
         //Membership Application
         WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
@@ -44,177 +44,177 @@ Codeunit 51516005 "Custom Workflow Responses"
         WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
                                                  SwizzsoftWFEvents.RunWorkflowOnCancelMembershipApplicationApprovalRequestCode);
         //Loan Application
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
 
         //Loan Disbursement
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanDisbursementForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanDisbursementForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanDisbursementForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanDisbursementApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanDisbursementApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanDisbursementForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanDisbursementForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanDisbursementForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanDisbursementApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanDisbursementApprovalRequestCode);
 
 
 
         //Standing Order
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendStandingOrderForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendStandingOrderForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendStandingOrderForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelStandingOrderApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelStandingOrderApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendStandingOrderForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendStandingOrderForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendStandingOrderForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelStandingOrderApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelStandingOrderApprovalRequestCode);
 
-        //Membership Withdrawal
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendMWithdrawalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendMWithdrawalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendMWithdrawalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMWithdrawalApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMWithdrawalApprovalRequestCode);
+        // //Membership Withdrawal
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendMWithdrawalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendMWithdrawalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendMWithdrawalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelMWithdrawalApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelMWithdrawalApprovalRequestCode);
 
         //ATM Card Application
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendATMCardForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendATMCardForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendATMCardForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelATMCardApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelATMCardApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendATMCardForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendATMCardForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendATMCardForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelATMCardApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelATMCardApprovalRequestCode);
 
         //Guarantor Recovery
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendGuarantorRecoveryForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelGuarantorRecoveryApprovalRequestCode);
 
         //Change Request
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendChangeRequestForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendChangeRequestForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendChangeRequestForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelChangeRequestApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelChangeRequestApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendChangeRequestForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendChangeRequestForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendChangeRequestForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelChangeRequestApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelChangeRequestApprovalRequestCode);
 
         //Treasury Transactions
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendTTransactionsForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendTTransactionsForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendTTransactionsForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelTTransactionsApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelTTransactionsApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendTTransactionsForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendTTransactionsForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendTTransactionsForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelTTransactionsApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelTTransactionsApprovalRequestCode);
 
 
-        //FOSA Account Application
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendFAccountApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendFAccountApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendFAccountApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelFAccountApplicationApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelFAccountApplicationApprovalRequestCode);
+        // //FOSA Account Application
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendFAccountApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendFAccountApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendFAccountApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelFAccountApplicationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelFAccountApplicationApprovalRequestCode);
 
 
 
         //Stores Requisition
 
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendSReqApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendSReqApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendSReqApplicationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelSReqApplicationApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelSReqApplicationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendSReqApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendSReqApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendSReqApplicationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelSReqApplicationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelSReqApplicationApprovalRequestCode);
 
         //Sacco Transfer
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendSaccoTransferForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendSaccoTransferForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendSaccoTransferForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelSaccoTransferApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelSaccoTransferApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendSaccoTransferForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendSaccoTransferForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendSaccoTransferForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelSaccoTransferApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        // SwizzsoftWFEvents.RunWorkflowOnCancelSaccoTransferApprovalRequestCode);
         //Cheque Discounting
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendChequeDiscountingForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendChequeDiscountingForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendChequeDiscountingForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelChequeDiscountingApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelChequeDiscountingApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendChequeDiscountingForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendChequeDiscountingForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendChequeDiscountingForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelChequeDiscountingApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelChequeDiscountingApprovalRequestCode);
 
-        //Imprest Requisition
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendImprestRequisitionForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendImprestRequisitionForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendImprestRequisitionForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelImprestRequisitionApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelImprestRequisitionApprovalRequestCode);
+        // //Imprest Requisition
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendImprestRequisitionForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendImprestRequisitionForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendImprestRequisitionForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelImprestRequisitionApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelImprestRequisitionApprovalRequestCode);
 
         //Imprest Surrender
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendImprestSurrenderForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendImprestSurrenderForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendImprestSurrenderForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelImprestSurrenderApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelImprestSurrenderApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendImprestSurrenderForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendImprestSurrenderForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendImprestSurrenderForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelImprestSurrenderApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelImprestSurrenderApprovalRequestCode);
 
         //Leave Application
         WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
@@ -228,136 +228,136 @@ Codeunit 51516005 "Custom Workflow Responses"
         WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
                                                  SwizzsoftWFEvents.RunWorkflowOnCancelLeaveApplicationApprovalRequestCode);
         //Bulk Withdrawal
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendBulkWithdrawalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendBulkWithdrawalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendBulkWithdrawalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendBulkWithdrawalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendBulkWithdrawalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendBulkWithdrawalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelBulkWithdrawalApprovalRequestCode);
 
         //Package Lodge
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPackageLodgeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPackageLodgeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPackageLodgeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPackageLodgeApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPackageLodgeApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPackageLodgeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPackageLodgeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPackageLodgeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelPackageLodgeApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelPackageLodgeApprovalRequestCode);
 
         //Package Retrieval
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPackageRetrievalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPackageRetrievalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPackageRetrievalForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPackageRetrievalApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPackageRetrievalApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPackageRetrievalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPackageRetrievalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPackageRetrievalForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelPackageRetrievalApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        // SwizzsoftWFEvents.RunWorkflowOnCancelPackageRetrievalApprovalRequestCode);
 
         //House Change
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendHouseChangeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendHouseChangeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendHouseChangeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelHouseChangeApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelHouseChangeApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendHouseChangeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendHouseChangeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendHouseChangeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelHouseChangeApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelHouseChangeApprovalRequestCode);
 
         //CRM Training
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendCRMTrainingForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendCRMTrainingForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendCRMTrainingForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelCRMTrainingApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelCRMTrainingApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendCRMTrainingForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendCRMTrainingForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendCRMTrainingForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelCRMTrainingApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelCRMTrainingApprovalRequestCode);
 
         //Petty Cash
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPettyCashForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPettyCashForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendPettyCashForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPettyCashApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelPettyCashApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPettyCashForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPettyCashForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendPettyCashForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelPettyCashApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //  SwizzsoftWFEvents.RunWorkflowOnCancelPettyCashApprovalRequestCode);
 
-        //Staff Claims
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendStaffClaimsForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendStaffClaimsForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendStaffClaimsForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelStaffClaimsApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelStaffClaimsApprovalRequestCode);
+        // //Staff Claims
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendStaffClaimsForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendStaffClaimsForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendStaffClaimsForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelStaffClaimsApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        // SwizzsoftWFEvents.RunWorkflowOnCancelStaffClaimsApprovalRequestCode);
 
         //Member Agent/NOK Change
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendMemberAgentNOKChangeForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelMemberAgentNOKChangeApprovalRequestCode);
 
         //House Registration
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendHouseRegistrationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendHouseRegistrationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendHouseRegistrationForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelHouseRegistrationApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelHouseRegistrationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendHouseRegistrationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendHouseRegistrationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendHouseRegistrationForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelHouseRegistrationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //  SwizzsoftWFEvents.RunWorkflowOnCancelHouseRegistrationApprovalRequestCode);
 
         //Loan Payoff
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanPayOffForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanPayOffForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanPayOffForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanPayOffApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanPayOffApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanPayOffForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanPayOffForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanPayOffForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanPayOffApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        //  SwizzsoftWFEvents.RunWorkflowOnCancelLoanPayOffApprovalRequestCode);
 
         //Fixed Deposit
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendFixedDepositForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendFixedDepositForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnSendFixedDepositForApprovalCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelFixedDepositApprovalRequestCode);
-        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-                                                 SwizzsoftWFEvents.RunWorkflowOnCancelFixedDepositApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendFixedDepositForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendFixedDepositForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnSendFixedDepositForApprovalCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelFixedDepositApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+        // SwizzsoftWFEvents.RunWorkflowOnCancelFixedDepositApprovalRequestCode);
 
         //-----------------------------End AddOn--------------------------------------------------------------------------------------
     end;
@@ -529,7 +529,7 @@ Codeunit 51516005 "Custom Workflow Responses"
         ATMCard.Reset;
         ATMCard.SetRange(ATMCard."No.", ATMCard."No.");
         if ATMCard.FindFirst then begin
-            ATMCard.Status := ATMCard.Status::"2";
+            // ATMCard.Status := ATMCard.Status::"2";
             ATMCard.Modify;
         end;
     end;
@@ -542,7 +542,7 @@ Codeunit 51516005 "Custom Workflow Responses"
         ATMCard.Reset;
         ATMCard.SetRange(ATMCard."No.", ATMCard."No.");
         if ATMCard.FindFirst then begin
-            ATMCard.Status := ATMCard.Status::"0";
+            // ATMCard.Status := ATMCard.Status::"0";
             ATMCard.Modify;
         end;
     end;
@@ -695,7 +695,7 @@ Codeunit 51516005 "Custom Workflow Responses"
         STransfer.Reset;
         STransfer.SetRange(STransfer.No, SaccoTransfer.No);
         if STransfer.FindFirst then begin
-            STransfer.Status := SaccoTransfer.Status::Approved;
+            // STransfer.Status := SaccoTransfer.Status::Approved;
             STransfer.Modify;
         end;
     end;
@@ -703,12 +703,12 @@ Codeunit 51516005 "Custom Workflow Responses"
 
     procedure ReOpenSaccoTransfer(var SaccoTransfer: Record "Imprest Lines")
     var
-        STransfer: Record "Imprest Line";
+        STransfer: Record "Imprest Lines";
     begin
         STransfer.Reset;
         STransfer.SetRange(STransfer.No, SaccoTransfer.No);
         if STransfer.FindFirst then begin
-            STransfer.Status := SaccoTransfer.Status::Open;
+            // STransfer.Status := SaccoTransfer.Status::Open;
             STransfer.Modify;
         end;
     end;

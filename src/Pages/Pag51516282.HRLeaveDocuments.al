@@ -60,7 +60,7 @@ Page 51516282 "HR Leave Documents"
                 begin
                     if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then
@@ -84,7 +84,7 @@ Page 51516282 "HR Leave Documents"
                 begin
                     if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if not InteractTemplLanguage.FindFirst then
@@ -117,7 +117,7 @@ Page 51516282 "HR Leave Documents"
                 begin
                     if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then
@@ -146,7 +146,7 @@ Page 51516282 "HR Leave Documents"
                 begin
                     if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if not InteractTemplLanguage.FindFirst then
@@ -181,7 +181,7 @@ Page 51516282 "HR Leave Documents"
                 begin
                     if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then
@@ -206,7 +206,7 @@ Page 51516282 "HR Leave Documents"
                 begin
                     if DocLink.Get(Rec."Doc No.", Rec."Document Description") then begin
                         InteractTemplLanguage.Reset;
-                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", "Doc No.");
+                        InteractTemplLanguage.SetRange(InteractTemplLanguage."Interaction Template Code", Rec."Doc No.");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage."Language Code", DocLink."Language Code (Default)");
                         InteractTemplLanguage.SetRange(InteractTemplLanguage.Description, DocLink."Document Description");
                         if InteractTemplLanguage.FindFirst then begin

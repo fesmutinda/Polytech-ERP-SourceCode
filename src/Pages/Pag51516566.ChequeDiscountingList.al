@@ -5,7 +5,7 @@ Page 51516566 "Cheque Discounting List"
     Editable = false;
     PageType = List;
     SourceTable = "Cheque Discounting";
-    SourceTableView = where(Posted = filter(No));
+    SourceTableView = where(Posted = filter(false));
 
     layout
     {

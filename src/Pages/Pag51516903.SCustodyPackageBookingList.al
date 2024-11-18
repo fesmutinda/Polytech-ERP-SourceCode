@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516903 "SCustody Package Booking List"
 {
-    CardPageID = "SCustody Package Booking Card";
+    // CardPageID = "SCustody Package Booking Card";
     PageType = List;
     SourceTable = 51516904;
 
@@ -11,39 +11,39 @@ Page 51516903 "SCustody Package Booking List"
         {
             repeater(Group)
             {
-                field("Package ID"; "Package ID")
+                field("Package ID"; Rec."Package ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Name"; "Member Name")
+                field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Type"; "Package Type")
+                field("Package Type"; Rec."Package Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Description"; "Package Description")
+                field("Package Description"; Rec."Package Description")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Custody Period"; "Custody Period")
+                field("Custody Period"; Rec."Custody Period")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Charge Account"; "Charge Account")
+                field("Charge Account"; Rec."Charge Account")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Maturity Instruction"; "Maturity Instruction")
+                field("Maturity Instruction"; Rec."Maturity Instruction")
                 {
                     ApplicationArea = Basic;
                 }
-                field("File Serial No"; "File Serial No")
+                field("File Serial No"; Rec."File Serial No")
                 {
                     ApplicationArea = Basic;
                 }

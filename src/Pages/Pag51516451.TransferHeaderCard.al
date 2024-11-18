@@ -229,8 +229,8 @@ Page 51516451 "Transfer Header Card"
 
                         EFTDetails.Reset;
                         EFTDetails.SetRange(EFTDetails."Header No", Rec.No);
-                        if EFTDetails.Find('-') then
-;
+                        // if EFTDetails.Find('-') then be
+                    end;
                 }
                 separator(Action1102760032)
                 {
@@ -343,9 +343,9 @@ Page 51516451 "Transfer Header Card"
 
 
                         EFTDetails.Reset;
-                        EFTDetails.SetRange(EFTDetails."Header No", No);
-                        if EFTDetails.Find('-') then
-;
+                        EFTDetails.SetRange(EFTDetails."Header No", Rec.No);
+                        // if EFTDetails.Find('-') then
+                    end;
                 }
             }
         }

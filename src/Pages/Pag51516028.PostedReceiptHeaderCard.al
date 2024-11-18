@@ -6,7 +6,7 @@ Page 51516028 "Posted Receipt Header Card"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "Receipt Header";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {
@@ -116,7 +116,7 @@ Page 51516028 "Posted Receipt Header Card"
                     ReceiptHeader.Reset;
                     ReceiptHeader.SetRange(ReceiptHeader."No.", DocNo);
                     if ReceiptHeader.FindFirst then begin
-                        Report.RunModal(Report::"Receipt Header", true, false, ReceiptHeader);
+                        // Report.RunModal(Report::"Receipt Header", true, false, ReceiptHeader);
                     end;
                 end;
             }
@@ -133,7 +133,7 @@ Page 51516028 "Posted Receipt Header Card"
         Amount: Decimal;
         "Amount(LCY)": Decimal;
         ReceiptLines: Record 51516003;
-        FundsManager: Codeunit UnknownCodeunit51516000;
+        FundsManager: Codeunit 51516000;
         JTemplate: Code[20];
         JBatch: Code[20];
         FundsUser: Record 51516031;

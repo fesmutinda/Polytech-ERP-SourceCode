@@ -538,11 +538,11 @@ Page 51516561 "Loans Approved Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field(GrossPay; Rec.GrossPay)
+                field(GrossPay; Rec."Gross Pay")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Nettakehome; Rec.Nettakehome)
+                field(Nettakehome; Rec."Net take Home")
                 {
                     ApplicationArea = Basic;
                 }
@@ -607,7 +607,7 @@ Page 51516561 "Loans Approved Card"
                     ApplicationArea = Basic;
                     Caption = 'Bank Loan Repayments';
                 }
-                field(TotalDeductions; Rec.TotalDeductions)
+                field(TotalDeductions; Rec."Total Deductions")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Total Deductions';
@@ -621,7 +621,7 @@ Page 51516561 "Loans Approved Card"
                     ApplicationArea = Basic;
                     Caption = 'Cleared Loan Repayment';
                 }
-                field(NetUtilizable; Rec.NetUtilizable)
+                field(NetUtilizable; Rec."Net Utilizable Amount")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Net Utilizable Amount';
@@ -921,7 +921,7 @@ Page 51516561 "Loans Approved Card"
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Document No." := Rec."Loan  No.";
                                     GenJournalLine."Posting Date" := Rec."Loan Disbursement Date";
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine.Description := 'loans Topup';
@@ -1012,7 +1012,7 @@ Page 51516561 "Loans Approved Card"
                         */
 
                         DocumentType := Documenttype::Loan;
-                        ApprovalEntries.Setfilters(Database::"Control-Information", DocumentType, Rec."Loan  No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Control-Information.", DocumentType, Rec."Loan  No.");
                         ApprovalEntries.Run;
 
                     end;

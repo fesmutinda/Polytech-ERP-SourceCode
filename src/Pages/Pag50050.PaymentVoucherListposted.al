@@ -1,16 +1,16 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 50050 "Payment Voucher List posted"
 {
-    CardPageID = "Payment Voucher Posted";
+    // CardPageID = "Payment Voucher Posted";
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
-    SourceTable = "Payments Header";
+    SourceTable = "Payment Header";
     SourceTableView = where("Payment Type" = filter(Normal),
-                            Posted = filter(Yes));
+                            Posted = filter(true));
 
     layout
     {
@@ -18,7 +18,7 @@ Page 50050 "Payment Voucher List posted"
         {
             repeater(Control1102755000)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -26,15 +26,15 @@ Page 50050 "Payment Voucher List posted"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Date; Rec.Date)
+                field(Date; Rec."Date Posted")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pay Mode"; Rec."Pay Mode")
+                field("Pay Mode"; Rec."Payment Mode")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No."; Rec."Cheque No.")
+                field("Cheque No."; Rec."Cheque No")
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,7 +50,7 @@ Page 50050 "Payment Voucher List posted"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Payment Narration"; Rec."Payment Narration")
+                field("Payment Narration"; Rec."Payment Description")
                 {
                     ApplicationArea = Basic;
                 }
@@ -66,10 +66,10 @@ Page 50050 "Payment Voucher List posted"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Current Status"; Rec."Current Status")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Current Status"; Rec."Current Status")
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
     }
@@ -123,6 +123,6 @@ Page 50050 "Payment Voucher List posted"
     end;
 
     var
-        PHeader2: Record 51516112;
+        PHeader2: Record "Payment Header";
 }
 

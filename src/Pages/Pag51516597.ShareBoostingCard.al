@@ -107,7 +107,7 @@ Page 51516597 "Share Boosting Card"
                         GenJournalLine."Document No." := Rec."Document No";
                         GenJournalLine."Posting Date" := Today;
                         //GenJournalLine."External Document No.":=MultipleCheque."Cheque No";
-                        GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                         GenJournalLine."Account No." := Rec."Member No";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Loan;

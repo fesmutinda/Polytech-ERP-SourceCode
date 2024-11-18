@@ -8,9 +8,9 @@ Page 51516700 "Cheque Clearing Process"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Transactions;
-    SourceTableView = where(Posted = filter(Yes),
-                            "Transaction Type" = const(CHEQDEPORD),
-                            "Cheque Processed" = const(No));
+    SourceTableView = where(Posted = filter(true),
+                            "Transaction Type" = const('CHEQDEPORD'),
+                            "Cheque Processed" = const(false));
 
     layout
     {

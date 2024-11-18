@@ -195,8 +195,8 @@ Page 51516281 "HR 360 Appraisal Card"
                     begin
                         HRAppHeader.Reset;
                         HRAppHeader.SetRange(HRAppHeader."Appraisal No", Rec."Appraisal No");
-                        if HRAppHeader.Find('-') then
-                            Report.Run(Report::"HR Appraisal Form", true, true, HRAppHeader);
+                        //     if HRAppHeader.Find('-') then
+                        //         // Report.Run(Report::"HR Appraisal Form", true, true, HRAppHeader);
                     end;
                 }
             }
@@ -331,7 +331,7 @@ Page 51516281 "HR 360 Appraisal Card"
         }
     }
 
-    trigger OnAfterGet()
+    trigger OnAfterGetRecord()
     begin
 
         //GET APPLICANT DETAILS FROM HR EMPLOYEES TABLE AND COPY THEM TO THE GOAL SETTING TABLE
@@ -367,18 +367,18 @@ Page 51516281 "HR 360 Appraisal Card"
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
         ShowWorkflowStatus: Boolean;
-        HRAppEvalAreas: 51516220;
-        HRAppLines: 51516217;
+        HRAppEvalAreas: Record 51516220;
+        HRAppLines:Record 51516217;
         Text0001: label 'Load Appraisal Sections?. \\NB: Existing Lines will be deleted';
-        HRAppLines2: 51516217;
-        HREmp: 51516160;
+        HRAppLines2: Record 51516217;
+        HREmp:Record 51516160;
         HREmpCard: Page "HR Employee Card";
-        HRAppHeader: 51516216;
+        HRAppHeader: Record 51516216;
         Text0002: label 'No job specific sections for [Job ID: %1] are defined';
         LastLineNo: Integer;
-        HRJobResp: 51516176;
-        HRSetup: 51516181;
-        HREmp2: 51516160;
+        HRJobResp:Record 51516176;
+        HRSetup:Record 51516181;
+        HREmp2:Record 51516160;
         SubPageVisible: Boolean;
         Text0003: label 'Change Appraisal Method to [%1]? \\NB: Existing Lines will be deleted';
 

@@ -5,7 +5,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
     Editable = false;
     PageType = Card;
     SourceTable = "Checkoff Header-Distributed";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {
@@ -120,7 +120,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
-                RunObject = XMLport 51516003;
+                // RunObject = XMLport 51516003;
             }
             group(ActionGroup1102755021)
             {
@@ -526,7 +526,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 begin
                     if Confirm('Are you sure  this Loan is Reversed?', true) = false then
                         exit;
-                    Rec.Reversed := Reversed::"1";
+                    Rec.Reversed := Rec.Reversed=true ;
                     Rec.Modify;
                 end;
             }
@@ -543,7 +543,7 @@ Page 51516485 "Posted Checkoff Proc. Header-D"
                 begin
                     if Confirm('Are you sure  you want to Unmark this Loan?', true) = false then
                         exit;
-                    Rec.Reversed := Reversed::"0";
+                    Rec.Reversed := Rec.Reversed=true;
                     Rec.Modify;
                 end;
             }

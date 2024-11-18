@@ -1,12 +1,12 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516623 "Loan Application FOSA(Approv)"
 {
-    CardPageID = "Loans Appl Card FOSA (Approv)";
+    // CardPageID = "Loans Appl Card FOSA (Approv)";
     Editable = false;
     PageType = List;
     SourceTable = "Loans Register";
     SourceTableView = where("Approval Status" = filter(Approved),
-                            Posted = filter(No),
+                            Posted = filter(false),
                             Source = const(FOSA));
 
     layout
@@ -198,7 +198,7 @@ Page 51516623 "Loan Application FOSA(Approv)"
                 trigger OnAction()
                 begin
                     if Usersetup.Get(UserId) then begin
-                        if Usersetup."Release Loans" = false then
+                        if Usersetup."Can POST Loans" = false then
                             Error('You dont have permissions to Release a Loan! ')
                     end;
                     LoanApp.Reset;
@@ -225,7 +225,7 @@ Page 51516623 "Loan Application FOSA(Approv)"
                 trigger OnAction()
                 begin
                     if Usersetup.Get(UserId) then begin
-                        if Usersetup."Release Loans" = false then
+                        if Usersetup."Can POST Loans" = false then
                             Error('You dont have permissions to Release a Loan! ')
                     end;
                     LoanApp.Reset;
@@ -439,7 +439,7 @@ Page 51516623 "Loan Application FOSA(Approv)"
             RemarksEditable := false;
         end;
 
-        if Rec."Approval Status" = "approval status"::Pending then begin
+        if Rec."Approval Status" = Rec."approval status"::Pending then begin
             MNoEditable := false;
             ApplcDateEditable := false;
             LoanStatusEditable := false;

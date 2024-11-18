@@ -90,7 +90,7 @@ Page 51516517 "Bulk SMS Header"
                             //ALL
                             if BulkHeader."SMS Type" = BulkHeader."sms type"::Everyone then begin
                                 Vend.Reset;
-                                Vend.SetRange(Vend."Creditor Type", Vend."creditor type"::"Savings Account");
+                                // Vend.SetRange(Vend."Creditor Type", Vend."creditor type"::"Savings Account");
                                 Vend.SetRange(Vend."Vendor Posting Group", 'SAVINGS');
                                 if Vend.Find('-') then begin
                                     repeat
@@ -131,7 +131,7 @@ Page 51516517 "Bulk SMS Header"
                                     repeat
 
                                         Vend.Reset;
-                                        Vend.SetRange(Vend."Creditor Type", Vend."creditor type"::"Savings Account");
+                                        // Vend.SetRange(Vend."Creditor Type", Vend."creditor type"::"Savings Account");
                                         Vend.SetRange(Vend."Vendor Posting Group", 'SAVINGS');
                                         Vend.SetRange(Vend."Global Dimension 1 Code", BulkLines.Code);
                                         if Vend.Find('-') then begin

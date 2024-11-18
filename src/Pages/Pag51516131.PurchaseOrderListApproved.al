@@ -267,7 +267,7 @@ Page 51516131 "Purchase Order List-Approved"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }

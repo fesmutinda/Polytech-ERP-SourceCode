@@ -65,7 +65,7 @@ Page 51516269 "HR Leave Period List"
                 Image = CreateYear;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report 51516233;
+                // RunObject = Report 51516233;
             }
             action("C&lose Year")
             {

@@ -6,7 +6,7 @@ Page 51516037 "Posted FD Processing Card"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "FD Processing";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {
@@ -518,7 +518,7 @@ Page 51516037 "Posted FD Processing Card"
     procedure UpdateControls()
     begin
 
-        if Posted = true then begin
+        if Rec.Posted = true then begin
             //      NameEditable:=FALSE;
             //      NoEditable:=FALSE;
             //      AddressEditable:=FALSE;

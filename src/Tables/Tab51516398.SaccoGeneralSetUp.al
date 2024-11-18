@@ -395,6 +395,9 @@ Table 51516398 "Sacco General Set-Up"
         field(109; "Comission On Cash Clearance(%)"; Decimal)
         {
         }
+        field(1061; "Send SMS Notifications"; Boolean)
+        {
+        }
         field(110; "SMS Fee Amount"; Decimal)
         {
         }
@@ -775,6 +778,7 @@ Table 51516398 "Sacco General Set-Up"
         {
             DataClassification = ToBeClassified;
         }
+        field(222; "Top up Account"; Code[20]) { }
     }
 
     keys

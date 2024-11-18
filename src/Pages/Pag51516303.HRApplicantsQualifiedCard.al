@@ -81,7 +81,7 @@ Page 51516303 "HR Applicants Qualified Card"
                         //IF CONFIRM('Send this Requisition for Approval?',TRUE)=FALSE THEN EXIT;
                         if not Confirm(Text002, false) then exit;
 
-                        Rec.TestField(Qualified, Qualified::"1");
+                        Rec.TestField(Qualified, Rec.Qualified = true);
                         HRJobApplications.SetRange(HRJobApplications."Application No", Rec."Application No");
                         CurrPage.SetSelectionFilter(HRJobApplications);
                         if HRJobApplications.Find('-') then
@@ -91,11 +91,11 @@ Page 51516303 "HR Applicants Qualified Card"
                         if HREmailParameters.Find('-') then begin
                             repeat
                                 HRJobApplications.TestField(HRJobApplications."E-Mail");
-                                SMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HRJobApplications."E-Mail",
-                                HREmailParameters.Subject, 'Dear' + ' ' + HRJobApplications."First Name" + ' ' + HREmailParameters.Body + ' ' + HRJobApplications."Job Applied for Description" + ' ' + 'applied on' + Format("Date Applied") + ' ' + HREmailParameters."Body 2" +//,TRUE);
-                                Format(HRJobApplications."Date of Interview") + ' ' + 'Starting ' + ' ' + Format(HRJobApplications."From Time") + ' ' + 'to' + Format(HRJobApplications."To Time") + ' ' + 'at' + HRJobApplications.Venue + '.', true);
-                                //HREmailParameters.Body,TRUE);
-                                SMTP.Send();
+                            // SMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HRJobApplications."E-Mail",
+                            // HREmailParameters.Subject, 'Dear' + ' ' + HRJobApplications."First Name" + ' ' + HREmailParameters.Body + ' ' + HRJobApplications."Job Applied for Description" + ' ' + 'applied on' + Format(Rec."Date Applied") + ' ' + HREmailParameters."Body 2" +//,TRUE);
+                            // Format(HRJobApplications."Date of Interview") + ' ' + 'Starting ' + ' ' + Format(HRJobApplications."From Time") + ' ' + 'to' + Format(HRJobApplications."To Time") + ' ' + 'at' + HRJobApplications.Venue + '.', true);
+                            //HREmailParameters.Body,TRUE);
+                            // SMTP.Send();
                             until HRJobApplications.Next = 0;
 
                             if Confirm('Do you want to send this invitation alert?', false) = true then begin
@@ -115,6 +115,6 @@ Page 51516303 "HR Applicants Qualified Card"
         Text002: label 'Are you sure you want to Send this Interview invitation?';
         HRJobApplications: Record "HR Job Applications";
         HREmailParameters: Record "HR E-Mail Parameters";
-        SMTP: Codeunit 400;
+    // SMTP: Codeunit 400;
 }
 

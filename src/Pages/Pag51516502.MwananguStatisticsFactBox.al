@@ -51,7 +51,7 @@ Page 51516502 "Mwanangu Statistics FactBox"
 
         if (Rec."Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
             if UserSetup.Get(UserId) then begin
-                if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
+                // if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
             end;
 
         end;
@@ -190,8 +190,8 @@ Page 51516502 "Mwanangu Statistics FactBox"
             FieldStyle := 'Attention';
 
         FieldStyleL := '';
-        if Rec."Account Special Instructions" <> '' then
-            FieldStyleL := 'Attention';
+        // if Rec."Account Special Instructions" <> '' then
+        //     FieldStyleL := 'Attention';
     end;
 }
 

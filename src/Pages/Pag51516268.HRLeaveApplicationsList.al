@@ -2,7 +2,7 @@
 Page 51516268 "HR Leave Applications List"
 {
     ApplicationArea = Basic;
-    CardPageID = "HR Leave Application Card";
+    // CardPageID = "HR Leave Application Card";
     DeleteAllowed = true;
     ModifyAllowed = true;
     PageType = List;

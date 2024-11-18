@@ -6,9 +6,9 @@ Page 51516453 "Banking Schedule Cheques"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = Transactions;
-    SourceTableView = where(Type = const("Cheque Deposit"),
-                            Posted = const(Yes),
-                            "Banking Posted" = const(No));
+    SourceTableView = where(Type = const('"Cheque Deposit"'),
+                            Posted = const(true),
+                            "Banking Posted" = const(false));
 
     layout
     {
@@ -173,7 +173,7 @@ Page 51516453 "Banking Schedule Cheques"
                 PromotedCategory = "Report";
                 PromotedIsBig = true;
                 PromotedOnly = true;
-                RunObject = Report 51516434;
+                // RunObject = Report 51516434;
             }
         }
     }

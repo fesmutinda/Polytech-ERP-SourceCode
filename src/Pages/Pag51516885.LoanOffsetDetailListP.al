@@ -14,79 +14,79 @@ Page 51516885 "Loan Offset Detail List-P"
         {
             repeater(Group)
             {
-                field("Loan No."; "Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                 }
-                field("Loan Top Up"; "Loan Top Up")
+                field("Loan Top Up"; Rec."Loan Top Up")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Client Code"; "Client Code")
+                field("Client Code"; Rec."Client Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Enabled = false;
                 }
-                field("Loan Type"; "Loan Type")
+                field("Loan Type"; Rec."Loan Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Principle Top Up"; "Principle Top Up")
+                field("Principle Top Up"; Rec."Principle Top Up")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Age"; "Loan Age")
+                field("Loan Age"; Rec."Loan Age")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Remaining Installments"; "Remaining Installments")
+                field("Remaining Installments"; Rec."Remaining Installments")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Top Up"; "Interest Top Up")
+                field("Interest Top Up"; Rec."Interest Top Up")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Monthly Repayment"; "Monthly Repayment")
+                field("Monthly Repayment"; Rec."Monthly Repayment")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Paid"; "Interest Paid")
+                field("Interest Paid"; Rec."Interest Paid")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Rate"; "Interest Rate")
+                field("Interest Rate"; Rec."Interest Rate")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Commision; Commision)
+                field(Commision; Rec.Commision)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Levy';
                     Editable = false;
                 }
-                field("Interest Due at Clearance"; "Interest Due at Clearance")
+                field("Interest Due at Clearance"; Rec."Interest Due at Clearance")
                 {
                     ApplicationArea = Basic;
                     Caption = ' Interest Due';
                     Visible = false;
                 }
-                field("Total Top Up"; "Total Top Up")
+                field("Total Top Up"; Rec."Total Top Up")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Total Recovery(P+I+Leavy)';
@@ -95,13 +95,13 @@ Page 51516885 "Loan Offset Detail List-P"
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Partial Bridged"; "Partial Bridged")
+                field("Partial Bridged"; Rec."Partial Bridged")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Visible = false;
                 }
-                field("Staff No"; "Staff No")
+                field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;

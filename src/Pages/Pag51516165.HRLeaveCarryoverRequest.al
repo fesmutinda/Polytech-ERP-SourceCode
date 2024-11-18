@@ -95,7 +95,7 @@ Page 51516165 "HR Leave Carryover Request"
                     ApprovalEntries: Page "Approval Entries";
                 begin
                     DocumentType := Documenttype::Job;
-                    ApprovalEntries.Setfilters(Database::"HR Appraisal Header", DocumentType, Rec."Application Code");
+                    ApprovalEntries.SetRecordFilters(Database::"HR Appraisal Header", DocumentType, Rec."Application Code");
                     ApprovalEntries.Run;
                 end;
             }

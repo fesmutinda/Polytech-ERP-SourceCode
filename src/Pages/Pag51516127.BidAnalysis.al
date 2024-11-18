@@ -14,29 +14,29 @@ Page 51516127 "Bid Analysis"
                 {
                     ApplicationArea = Basic;
                 }
-                field(ItemNoFilter; Rec.ItemNoFilter)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Item No.';
+                // field(ItemNoFilter; Rec.ItemNoFilter )
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Item No.';
 
-                    trigger OnLookup(var Text: Text): Boolean
-                    var
-                        ItemList: Page "Item List";
-                    begin
-                        ItemList.LookupMode := true;
-                        if ItemList.RunModal = Action::LookupOK then
-                            Text := ItemList.GetSelectionFilter
-                        else
-                            exit(false);
+                //     trigger OnLookup(var Text: Text): Boolean
+                //     var
+                //         ItemList: Page "Item List";
+                //     begin
+                //         ItemList.LookupMode := true;
+                //         if ItemList.RunModal = Action::LookupOK then
+                //             Text := ItemList.GetSelectionFilter
+                //         else
+                //             exit(false);
 
-                        exit(true);
-                    end;
+                //         exit(true);
+                //     end;
 
-                    trigger OnValidate()
-                    begin
-                        //ItemNoFilterOnAfterValidate;
-                    end;
-                }
+                //     trigger OnValidate()
+                //     begin
+                //         //ItemNoFilterOnAfterValidate;
+                //     end;
+                // }
             }
             part(Control1102755004; "Bid Analysis SubForm")
             {

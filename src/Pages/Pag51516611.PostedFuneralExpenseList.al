@@ -8,7 +8,7 @@ Page 51516611 "Posted Funeral Expense List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "Funeral Expense Payment";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

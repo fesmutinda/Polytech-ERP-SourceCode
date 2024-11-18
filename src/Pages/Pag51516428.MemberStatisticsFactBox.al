@@ -88,12 +88,12 @@ Page 51516428 "Member Statistics FactBox"
                     ApplicationArea = Basic;
                     Caption = 'Loan Insurance';
                 }
-                field("Group Shares"; Rec."Group Shares")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = false;
-                }
+                // field("Group Shares"; Rec."Group Shares")
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = false;
+                //     Visible = false;
+                // }
                 field("Dividend Amount"; Rec."Dividend Amount")
                 {
                     ApplicationArea = Basic;
@@ -140,7 +140,7 @@ Page 51516428 "Member Statistics FactBox"
     begin
         if (Rec."Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
             if UserSetup.Get(UserId) then begin
-                if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
+                // if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
             end;
 
         end;

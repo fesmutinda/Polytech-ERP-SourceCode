@@ -18,7 +18,7 @@ Codeunit 55482 "Doc CancelMgt"
         //Date:10th Dec 2008
         //COPYRIGHT:KOGELO DEVELOPERS
         Rec.TestField(Rec.Status,Rec.Status::Released);
-        Rec.TestField(Rec.Cancelled,false);
+        // Rec.TestField(Rec.Cancelled,false);
         Rec.Mark:=true;
 
         //new addition
@@ -49,10 +49,10 @@ Codeunit 55482 "Doc CancelMgt"
               until SalesLine.Next=0;
             end;
         //update the document to show that it was cancelled
-        Cancelled:=true;
-        "Cancelled By":=UserId;
-        "Cancelled Date":=Today;
-        Modify;
+        // Cancelled:=true;
+        // "Cancelled By":=UserId;
+        // "Cancelled Date":=Today;
+        // Modify;
         end;
 
         //ReleaseDoc.PerformManualRelease(Rec);
@@ -71,7 +71,7 @@ Codeunit 55482 "Doc CancelMgt"
         //COPYRIGHT:KOGELO DEVELOPERS
 
         Rec.TestField(Rec.Status,Rec.Status::Released);
-        Rec.TestField(Rec.Cancelled,false);
+        // Rec.TestField(Rec.Cancelled,false);
 
         Rec.Mark:=true;
 
@@ -101,10 +101,10 @@ Codeunit 55482 "Doc CancelMgt"
                     PurchLine.Modify;
               until PurchLine.Next=0;
             end;
-        Cancelled:=true;
-        "Cancelled By":=UserId;
-        "Cancelled Date":=Today;
-        Modify;
+        // Cancelled:=true;
+        // "Cancelled By":=UserId;
+        // "Cancelled Date":=Today;
+        // Modify;
         end;
     end;
 }

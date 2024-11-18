@@ -195,10 +195,10 @@ Page 51516113 "Stores Order List"
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Archived; Rec.Archived)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Archived; Rec.Archived)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Job Queue Status"; Rec."Job Queue Status")
                 {
                     ApplicationArea = Basic;
@@ -279,7 +279,7 @@ Page 51516113 "Stores Order List"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -546,8 +546,8 @@ Page 51516113 "Stores Order List"
 
                     trigger OnAction()
                     begin
-                        if Rec.Archived = false then
-                            Error('Kindly Archive document for refferal later. Thanks');
+                        // if Rec.Archived = false then
+                        //     Error('Kindly Archive document for refferal later. Thanks');
 
                         REC.SendToPosting(Codeunit::"Purch.-Post (Yes/No)");
                     end;
@@ -565,8 +565,8 @@ Page 51516113 "Stores Order List"
 
                     trigger OnAction()
                     begin
-                        if Archived = false then
-                            Error('Kindly Archive document for refferal later. Thanks');
+                        // if Archived = false then
+                        //     Error('Kindly Archive document for refferal later. Thanks');
 
                         Rec.SendToPosting(Codeunit::"Purch.-Post + Print");
                     end;

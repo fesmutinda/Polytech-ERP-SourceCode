@@ -6,9 +6,9 @@ Page 51516440 "Cashier Trans Authorisations"
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = Transactions;
-    SourceTableView = where("Supervisor Checked" = const(No),
-                            "Needs Approval" = const(Yes),
-                            "Post Attempted" = const(Yes));
+    SourceTableView = where("Supervisor Checked" = const(false),
+                            // "Needs Approval" = const(true),
+                            "Post Attempted" = const(true));
 
     layout
     {
@@ -93,8 +93,8 @@ Page 51516440 "Cashier Trans Authorisations"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Account Card';
-                    RunObject = Page "FOSA Account Card";
-                    RunPageLink = "No." = field("Account No");
+                    // RunObject = Page "FOSA Account Card";
+                    // RunPageLink = "No." = field("Account No");
                 }
             }
         }
@@ -110,7 +110,7 @@ Page 51516440 "Cashier Trans Authorisations"
 
                 trigger OnAction()
                 begin
-                    MailContent := 'Transaction of Kshs.' + ' ' + Format(Rec.Amount) + ' ' + 'for' + ' ' + "Account Name" +
+                    MailContent := 'Transaction of Kshs.' + ' ' + Format(Rec.Amount) + ' ' + 'for' + ' ' + Rec."Account Name" +
                     ' ' + 'has been authorized.';
 
 

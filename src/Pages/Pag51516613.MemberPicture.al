@@ -109,15 +109,15 @@ Page 51516613 "Member Picture"
 
     trigger OnOpenPage()
     begin
-        CameraAvailable := CameraProvider.IsAvailable;
-        if CameraAvailable then
-            CameraProvider := CameraProvider.Create;
+        // CameraAvailable := CameraProvider.IsAvailable;
+        // if CameraAvailable then
+        //     CameraProvider := CameraProvider.Create;
     end;
 
     var
-        [RunOnClient]
-        [WithEvents]
-        CameraProvider: dotnet CameraProvider;
+        // [RunOnClient]
+        // [WithEvents]
+        // CameraProvider: dotnet CameraProvider;
         CameraAvailable: Boolean;
         OverrideImageQst: label 'The existing picture will be replaced. Do you want to continue?';
         DeleteImageQst: label 'Are you sure you want to delete the picture?';
@@ -128,7 +128,7 @@ Page 51516613 "Member Picture"
 
     procedure TakeNewPicture()
     var
-        CameraOptions: dotnet CameraOptions;
+        // CameraOptions: dotnet CameraOptions;
     begin
         Rec.Find;
         Rec.TestField("No.");
@@ -137,9 +137,9 @@ Page 51516613 "Member Picture"
         if not CameraAvailable then
             exit;
 
-        CameraOptions := CameraOptions.CameraOptions;
-        CameraOptions.Quality := 50;
-        CameraProvider.RequestPictureAsync(CameraOptions);
+        // CameraOptions := CameraOptions.CameraOptions;
+        // CameraOptions.Quality := 50;
+        // CameraProvider.RequestPictureAsync(CameraOptions);
     end;
 
     procedure ImportFromDevice()
@@ -176,7 +176,7 @@ Page 51516613 "Member Picture"
 
     procedure IsCameraAvailable(): Boolean
     begin
-        exit(CameraProvider.IsAvailable);
+        // exit(CameraProvider.IsAvailable);
     end;
 
     procedure SetHideActions()
@@ -196,8 +196,8 @@ Page 51516613 "Member Picture"
         Rec.Modify(true);
     end;
 
-    trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
-    begin
-    end;
+    // trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
+    // begin
+    // end;
 }
 

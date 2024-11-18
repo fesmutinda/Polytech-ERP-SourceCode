@@ -9,7 +9,7 @@
             "server": "http://localhost:8080/BC240/",
             "serverInstance": "BC240",
             "authentication": "Windows",
-            "port": 8049,
+            "port": 7049,
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "breakOnError": "All",

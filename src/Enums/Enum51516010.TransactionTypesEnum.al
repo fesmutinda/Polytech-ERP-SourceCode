@@ -224,10 +224,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
 
     // }
-    // value(55; "Loan Insurance Paid")
-    // {
+    value(55; "Loan Insurance Paid")
+    {
 
-    // }
+    }
     value(56; Junior_1)
     {
 

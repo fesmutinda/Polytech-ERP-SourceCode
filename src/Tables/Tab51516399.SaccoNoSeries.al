@@ -543,6 +543,7 @@ Table 51516399 "Sacco No. Series"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+        field(51516065; "Loan Appeal Numbers"; Code[20]) { }
     }
 
     keys

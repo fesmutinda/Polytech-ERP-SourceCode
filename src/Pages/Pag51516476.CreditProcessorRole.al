@@ -61,7 +61,5 @@ Page 51516476 "Credit Processor Role"
                 RunObject = Page "HR Job Responsibilities";
             }
         }
-Page "HR Applicant Referees";
-Page ""HR ;
-    ""
-
+    }
+}

@@ -139,7 +139,7 @@ Page 51516584 "Standing Orders - List Approve"
                 trigger OnAction()
                 begin
                     Rec.TestField("Source Account No.");
-                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                    if Rec."Destination Account Type" <> Rec."destination account type"::BOSA then
                         Rec.TestField("Destination Account No.");
                     Rec.TestField("Effective/Start Date");
                     Rec.TestField(Frequency);
@@ -207,7 +207,7 @@ Page 51516584 "Standing Orders - List Approve"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::STO;
-                        ApprovalEntries.Setfilters(Database::"HR Commitee Members", DocumentType, Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"HR Commitee Members", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -225,14 +225,14 @@ Page 51516584 "Standing Orders - List Approve"
                         Approvalmgt: Codeunit "Approvals Mgmt.";
                     begin
                         Rec.TestField("Source Account No.");
-                        if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                        if Rec."Destination Account Type" <> Rec."destination account type"::BOSA then
                             Rec.TestField("Destination Account No.");
 
                         Rec.TestField("Effective/Start Date");
                         Rec.TestField(Frequency);
                         Rec.TestField("Next Run Date");
 
-                        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+                        if Rec."Destination Account Type" =Rec."destination account type"::BOSA then begin
                             Rec.CalcFields("Allocated Amount");
                             if Rec.Amount <> Rec."Allocated Amount" then
                                 Error('Allocated amount must be equal to amount');
@@ -280,7 +280,7 @@ Page 51516584 "Standing Orders - List Approve"
                 trigger OnAction()
                 begin
                     Rec.TestField("Source Account No.");
-                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                    if Rec."Destination Account Type" <>Rec."destination account type"::BOSA then
                         Rec.TestField("Destination Account No.");
                     Rec.TestField("Effective/Start Date");
                     Rec.TestField(Frequency);

@@ -97,7 +97,7 @@ Page 51516016 "Processed Guarantor Sub Card"
                 begin
                     DocumentType := Documenttype::GuarantorSubstitution;
 
-                    ApprovalEntries.Setfilters(Database::"Guarantorship Substitution H", DocumentType, Rec."Document No");
+                    ApprovalEntries.SetRecordFilters(Database::"Guarantorship Substitution H", DocumentType, Rec."Document No");
                     ApprovalEntries.Run;
                 end;
             }

@@ -162,17 +162,17 @@ Page 51516114 "Stores Order"
                     ApplicationArea = Basic;
                     Importance = Additional;
                 }
-                field(Type; Rec.Type)
+                field(Type; Rec."Document Type")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Requisition No."; Rec."Requisition No.")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = false;
-                }
+                // field("Requisition No."; Rec."Requisition No.")
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = false;
+                //     Visible = false;
+                // }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
@@ -573,7 +573,7 @@ Page 51516114 "Stores Order"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -825,7 +825,7 @@ Page 51516114 "Stores Order"
                         if Rec.Status = Rec.Status::Released then
                             Error('This document has already been released. This functionality is available for open documents only');
                         if SomeLinesCommitted then begin
-                            if not Confirm('Some or All the Lines Are already Committed do you want to continue', true, "Document Type") then
+                            if not Confirm('Some or All the Lines Are already Committed do you want to continue', true, Rec."Document Type") then
                                 Error('Budget Availability Check and Commitment Aborted');
                             DeleteCommitment.Reset;
                             DeleteCommitment.SetRange(DeleteCommitment."Document Type", DeleteCommitment."document type"::LPO);
@@ -872,7 +872,7 @@ Page 51516114 "Stores Order"
                     trigger OnAction()
                     begin
 
-                        if not Confirm('Are you sure you want to Cancel All Commitments Done for this document', true, "Document Type") then
+                        if not Confirm('Are you sure you want to Cancel All Commitments Done for this document', true, Rec."Document Type") then
                             Error('Budget Availability Check and Commitment Aborted');
 
                         DeleteCommitment.Reset;
@@ -885,7 +885,7 @@ Page 51516114 "Stores Order"
                         PurchLine.SetRange(PurchLine."Document No.", Rec."No.");
                         if PurchLine.Find('-') then begin
                             repeat
-                                PurchLine.Committed := false;
+                                // PurchLine.Committed := false;
                                 PurchLine.Modify;
                             until PurchLine.Next = 0;
                         end;
@@ -938,7 +938,7 @@ Page 51516114 "Stores Order"
                         ArchiveManagement.ArchivePurchDocument(Rec);
                         CurrPage.Update(false);
 
-                        Rec.Archived := true;
+                        // Rec.Archived := true;
                         Rec.Modify;
                     end;
                 }
@@ -1058,8 +1058,8 @@ Page 51516114 "Stores Order"
 
                     trigger OnAction()
                     begin
-                        if Rec.Archived = false then
-                            Error('Kindly Archive document for refferal later. Thanks');
+                        // if Rec.Archived = false then
+                        //     Error('Kindly Archive document for refferal later. Thanks');
 
                         Post(Codeunit::"Purch.-Post (Yes/No)");
                     end;
@@ -1077,8 +1077,8 @@ Page 51516114 "Stores Order"
 
                     trigger OnAction()
                     begin
-                        if Rec.Archived = false then
-                            Error('Kindly Archive document for refferal later. Thanks');
+                        // if Rec.Archived = false then
+                        //     Error('Kindly Archive document for refferal later. Thanks');
 
                         Post(Codeunit::"Purch.-Post + Print");
                     end;
@@ -1128,11 +1128,11 @@ Page 51516114 "Stores Order"
                     trigger OnAction()
                     begin
                         UserSet.Reset;
-                        UserSet.SetRange(UserSet."Archiving User", UserId);
-                        if not UserSet.Find('-') then begin
-                            Error('Sorry you have no permission to Arhchive Unused Order,');
-                        end;
-                        Rec."Archive Unused Doc" := true;
+                        // UserSet.SetRange(UserSet."Archiving User", UserId);
+                        // if not UserSet.Find('-') then begin
+                        //     Error('Sorry you have no permission to Arhchive Unused Order,');
+                        // end;
+                        // Rec."Archive Unused Doc" := true;
                         Rec.Modify;
                     end;
                 }
@@ -1389,7 +1389,7 @@ Page 51516114 "Stores Order"
             PurchLines.Reset;
             PurchLines.SetRange(PurchLines."Document Type", Rec."Document Type");
             PurchLines.SetRange(PurchLines."Document No.", Rec."No.");
-            PurchLines.SetRange(PurchLines.Committed, true);
+            // PurchLines.SetRange(PurchLines.Committed, true);
             if PurchLines.Find('-') then
                 Exists := true
             else

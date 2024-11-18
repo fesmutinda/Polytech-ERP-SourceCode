@@ -63,7 +63,7 @@ Page 51516285 "HR Medical Schemes Card"
                     Image = PersonInCharge;
                     Promoted = true;
                     PromotedCategory = Category4;
-                    RunObject = Page "HR Medical Scheme Members List";
+                    // RunObject = Page "HR Medical Scheme Members List";
                 }
             }
         }

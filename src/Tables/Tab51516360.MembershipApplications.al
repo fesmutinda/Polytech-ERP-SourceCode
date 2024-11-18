@@ -38,6 +38,24 @@ Table 51516360 "Membership Applications"
                 FnCreateDefaultSavingsProducts();
             end;
         }
+        field(19191; "Registration Type"; Option) { OptionMembers = New,Old; }
+        field(292992; "Full Name"; Text[50])
+        {
+            Caption = 'Name';
+
+            trigger OnLookup()
+            begin
+                FnCreateDefaultSavingsProducts();
+            end;
+
+            trigger OnValidate()
+            begin
+                if ("Search Name" = UpperCase(xRec.Name)) or ("Search Name" = '') then
+                    "Search Name" := Name;
+                Name := UpperCase(Name);
+                FnCreateDefaultSavingsProducts();
+            end;
+        }
         field(3; "Search Name"; Code[50])
         {
             Caption = 'Search Name';
@@ -150,8 +168,8 @@ Table 51516360 "Membership Applications"
         }
         field(68002; Status; Option)
         {
-            OptionCaption = 'Open,Pending Approval,Approved,Rejected';
-            OptionMembers = Open,"Pending Approval",Approved,Rejected;
+            OptionCaption = 'Open,Pending Approval,Approved,Rejected,Closed';
+            OptionMembers = Open,"Pending Approval",Approved,Rejected,Closed;
         }
         field(68003; "Employer Code"; Code[20])
         {
@@ -308,6 +326,7 @@ Table 51516360 "Membership Applications"
         field(68018; "Monthly Contribution"; Decimal)
         {
         }
+        field(68900; "Identification Image"; Media) { }
         field(68019; "Investment B/F"; Decimal)
         {
         }
@@ -371,6 +390,7 @@ Table 51516360 "Membership Applications"
         field(68037; Picture; MediaSet)
         {
         }
+        field(9009; "Approval Status"; Option) { OptionMembers = open,closed,Rejected; }
         field(68038; "Postal Code"; Code[20])
         {
             TableRelation = "Post Code";
@@ -542,6 +562,7 @@ Table 51516360 "Membership Applications"
         field(68064; "Created By"; Text[60])
         {
         }
+        field(68800; "Time Created"; Time) { }
         field(68065; "Assigned No."; Code[30])
         {
             CalcFormula = lookup("Member Register"."No." where("ID No." = field("ID No.")));
@@ -556,6 +577,8 @@ Table 51516360 "Membership Applications"
         field(68068; "Copy of Current Payslip"; Boolean)
         {
         }
+        field(68098; "Membership Application Date"; Date) { }
+        field(68099; "Membership Application Status"; Option) { OptionMembers = "",Approved,Closed; }
         field(68069; "Member Registration Fee Receiv"; Boolean)
         {
         }

@@ -4,7 +4,7 @@ Page 51516338 "HR Medical Claims List-posted"
     CardPageID = "HR Medical Claim Card";
     PageType = List;
     SourceTable = "HR Medical Claims";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {

@@ -85,7 +85,7 @@ Page 51516512 "ATM Transactions Info"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Entry No"; "Rec.Entry No")
+                field("Entry No"; Rec."Entry No")
                 {
                     ApplicationArea = Basic;
                 }

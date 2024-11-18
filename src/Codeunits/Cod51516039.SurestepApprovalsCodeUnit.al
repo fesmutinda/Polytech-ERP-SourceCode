@@ -93,7 +93,7 @@ Codeunit 51516039 "SurestepApprovalsCodeUnit"
 
     local procedure IsLoanApplicationApprovalsWorkflowEnabled(var LoansRegister: Record "Loans Register"): Boolean
     begin
-        exit(WorkflowManagement.CanExecuteWorkflow(LoansRegister, Psalmkitswfevents.RunWorkflowOnSendLoanApplicationForApprovalCode));
+        // exit(WorkflowManagement.CanExecuteWorkflow(LoansRegister, Psalmkitswfevents.RunWorkflowOnSendLoanApplicationForApprovalCode));
     end;
 
 

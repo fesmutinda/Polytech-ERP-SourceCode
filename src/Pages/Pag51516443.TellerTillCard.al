@@ -110,10 +110,10 @@ Page 51516443 "Teller Till Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Max Cheque Deposit Limit"; Rec."Max Cheque Deposit Limit")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Max Cheque Deposit Limit"; Rec."Max Cheque Deposit Limit")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;

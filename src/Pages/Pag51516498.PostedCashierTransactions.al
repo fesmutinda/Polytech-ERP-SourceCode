@@ -8,7 +8,7 @@ Page 51516498 "Posted Cashier Transactions"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Transactions;
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

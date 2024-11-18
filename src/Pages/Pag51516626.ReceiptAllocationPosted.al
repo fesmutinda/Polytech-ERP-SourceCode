@@ -8,7 +8,7 @@ Page 51516626 "Receipt Allocation(Posted)"
     ModifyAllowed = false;
     PageType = Card;
     ShowFilter = false;
-    SourceTable = "Cheque Discounting";
+    SourceTable = "Receipt Allocation";
 
     layout
     {

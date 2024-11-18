@@ -15,96 +15,96 @@ Page 51516883 "Salary Processing Card(Posted)"
         {
             group(General)
             {
-                field(No; No)
+                field(No; Rec.No)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Entered By"; "Entered By")
+                field("Entered By"; Rec."Entered By")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date Entered"; "Date Entered")
+                field("Date Entered"; Rec."Date Entered")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Posting date"; "Posting date")
+                field("Posting date"; Rec."Posting date")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Document No"; "Document No")
+                field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Exempt Loan Repayment"; "Exempt Loan Repayment")
+                field("Exempt Loan Repayment"; Rec."Exempt Loan Repayment")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Remarks; Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Total Count"; "Total Count")
+                field("Total Count"; Rec."Total Count")
                 {
                     ApplicationArea = Basic;
                     Enabled = false;
                     Style = Strong;
                     StyleExpr = true;
                 }
-                field("Posted By"; "Posted By")
+                field("Posted By"; Rec."Posted By")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Account Type"; "Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account No"; "Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No."; "Cheque No.")
+                field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Posted)
+                field(Posted; Rec.Posted)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Amount; Amount)
+                field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Scheduled Amount"; "Scheduled Amount")
+                field("Scheduled Amount"; Rec."Scheduled Amount")
                 {
                     ApplicationArea = Basic;
                     Style = Strong;
                     StyleExpr = true;
                 }
-                field("Employer Code"; "Employer Code")
+                field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Discard; Discard)
+                field(Discard; Rec.Discard)
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Pre-Post Blocked Status Update"; "Pre-Post Blocked Status Update")
+                field("Pre-Post Blocked Status Update"; Rec."Pre-Post Blocked Status Update")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Pre-Post Blocked Status Updated';
                     Editable = false;
                     Visible = false;
                 }
-                field("Post-Post Blocked Statu Update"; "Post-Post Blocked Statu Update")
+                field("Post-Post Blocked Statu Update"; Rec."Post-Post Blocked Statu Update")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Post-Post Blocked Status Updated';
@@ -140,12 +140,12 @@ Page 51516883 "Salary Processing Card(Posted)"
                         if Confirm('This Action will clear all the Lines for the current Salary Document. Do you want to Continue') = false then
                             exit;
                         salarybuffer.Reset;
-                        salarybuffer.SetRange(salarybuffer."Salary Header No.", No);
+                        salarybuffer.SetRange(salarybuffer."Salary Header No.", Rec.No);
                         salarybuffer.DeleteAll;
 
                         BATCH_TEMPLATE := 'GENERAL';
                         BATCH_NAME := 'CHECKOFF';
-                        DOCUMENT_NO := Remarks;
+                        DOCUMENT_NO := Rec.Remarks;
                         GenJournalLine.Reset;
                         GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                         GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
@@ -160,7 +160,7 @@ Page 51516883 "Salary Processing Card(Posted)"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedOnly = true;
-                    RunObject = XMLport UnknownXMLport51516009;
+                    // RunObject = XMLport UnknownXMLport51516009;
                 }
                 action("Validate Data")
                 {
@@ -173,10 +173,10 @@ Page 51516883 "Salary Processing Card(Posted)"
 
                     trigger OnAction()
                     begin
-                        TestField(No);
-                        TestField("Document No");
+                        Rec.TestField(No);
+                        Rec.TestField("Document No");
                         salarybuffer.Reset;
-                        salarybuffer.SetRange("Salary Header No.", No);
+                        salarybuffer.SetRange("Salary Header No.", Rec.No);
                         if salarybuffer.Find('-') then begin
                             repeat
                                 salarybuffer."Account Name" := '';
@@ -184,7 +184,7 @@ Page 51516883 "Salary Processing Card(Posted)"
                             until salarybuffer.Next = 0;
                         end;
                         salarybuffer.Reset;
-                        salarybuffer.SetRange("Salary Header No.", No);
+                        salarybuffer.SetRange("Salary Header No.", Rec.No);
                         if salarybuffer.Find('-') then begin
                             repeat
                                 ObjVendor.Reset;
@@ -212,22 +212,22 @@ Page 51516883 "Salary Processing Card(Posted)"
                         if Confirm('Are you sure you want to Transfer this Salary to Journals ?') = false then
                             exit;
 
-                        TestField("Document No");
-                        TestField(Amount);
-                        Datefilter := '..' + Format("Posting date");
-                        if Amount <> "Scheduled Amount" then
+                        Rec.TestField("Document No");
+                        Rec.TestField(Amount);
+                        Datefilter := '..' + Format(Rec."Posting date");
+                        if Rec.Amount <> Rec."Scheduled Amount" then
                             Error('Scheduled Amount must be equal to the Cheque Amount');
 
                         BATCH_TEMPLATE := 'GENERAL';
                         BATCH_NAME := 'SALARIES';
-                        DOCUMENT_NO := "Document No";
+                        DOCUMENT_NO := Rec."Document No";
                         GenJournalLine.Reset;
                         GenJournalLine.SetRange("Journal Template Name", BATCH_TEMPLATE);
                         GenJournalLine.SetRange("Journal Batch Name", BATCH_NAME);
                         GenJournalLine.DeleteAll;
                         ObjGenSetup.Get();
                         salarybuffer.Reset;
-                        salarybuffer.SetRange("Salary Header No.", No);
+                        salarybuffer.SetRange("Salary Header No.", Rec.No);
                         if salarybuffer.Find('-') then begin
                             Window.Open('Processing Salary: @1@@@@@@@@@@@@@@@' + 'Record:#2###############');
                             TotalCount := salarybuffer.Count;
@@ -251,7 +251,7 @@ Page 51516883 "Salary Processing Card(Posted)"
                         //Balancing Journal Entry
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                        "Account Type", "Account No", "Posting date", Amount, 'FOSA', "Document No", DOCUMENT_NO, '');
+                        Rec."Account Type", Rec."Account No", Rec."Posting date", Rec.Amount, 'FOSA', Rec."Document No", DOCUMENT_NO, '');
                         Message('Salary journals Successfully Generated. BATCH NO=SALARIES.');
                         Window.Close;
                     end;
@@ -269,10 +269,10 @@ Page 51516883 "Salary Processing Card(Posted)"
                     begin
                         if Confirm('Are you sure you want to mark this process as Complete ?') = false then
                             exit;
-                        TestField("Document No");
-                        TestField(Amount);
+                        Rec.TestField("Document No");
+                        Rec.TestField(Amount);
                         salarybuffer.Reset;
-                        salarybuffer.SetRange("Salary Header No.", No);
+                        salarybuffer.SetRange("Salary Header No.", Rec.No);
                         if salarybuffer.Find('-') then begin
                             Window.Open('Processing Salary: @1@@@@@@@@@@@@@@@' + 'Record:#2###############');
                             TotalCount := salarybuffer.Count;
@@ -291,8 +291,8 @@ Page 51516883 "Salary Processing Card(Posted)"
                                 end
                             until salarybuffer.Next = 0;
                         end;
-                        Posted := true;
-                        "Posted By" := UserId;
+                        Rec.Posted := true;
+                        Rec."Posted By" := UserId;
                         Message('Process Completed Successfully. Account Holders will receive Salary processing notification via SMS');
                         Window.Close;
                     end;
@@ -314,7 +314,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     trigger OnAfterGetCurrRecord()
     begin
         ObjVendorLedger.Reset;
-        ObjVendorLedger.SetRange(ObjVendorLedger."Document No.", "Document No");
+        ObjVendorLedger.SetRange(ObjVendorLedger."Document No.", Rec."Document No");
         if ObjVendorLedger.Find('-') then
             ActionEnabled := true;
     end;
@@ -366,7 +366,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     begin
         LineNo := LineNo + 10000;
         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-        GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", "Posting date", ObjSalaryLines.Amount * -1, 'FOSA', "Document No", 'Salary', '');
+        GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", Rec."Posting date", ObjSalaryLines.Amount * -1, 'FOSA', Rec."Document No", 'Salary', '');
         exit(RunningBalance);
     end;
 
@@ -379,23 +379,23 @@ Page 51516883 "Salary Processing Card(Posted)"
             //---------EARN-------------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::"G/L Account", Charges."GL Account", "Posting date", Charges."Charge Amount" * -1, 'FOSA', "Document No",
+            GenJournalLine."account type"::"G/L Account", Charges."GL Account", Rec."Posting date", Charges."Charge Amount" * -1, 'FOSA', Rec."Document No",
             'Processing Fee', '');
             //-----------RECOVER--------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", "Posting date", Charges."Charge Amount", 'FOSA', "Document No",
+            GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", Rec."Posting date", Charges."Charge Amount", 'FOSA', Rec."Document No",
             'Processing Fee', '');
             SalProcessingFee := Charges."Charge Amount";
             RunningBalance := RunningBalance - SalProcessingFee;
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::"G/L Account", ObjGenSetup."Excise Duty Account", "Posting date", SalProcessingFee * -0.1, 'FOSA', "Document No",
+            GenJournalLine."account type"::"G/L Account", ObjGenSetup."Excise Duty Account", Rec."Posting date", SalProcessingFee * -0.1, 'FOSA', Rec."Document No",
             'Salary Processing', '');
             //--------------RECOVER------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", "Posting date", SalProcessingFee * 0.1, 'FOSA', "Document No",
+            GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", Rec."Posting date", SalProcessingFee * 0.1, 'FOSA', Rec."Document No",
             'Excise Duty(10%)', '');
             RunningBalance := RunningBalance - SalProcessingFee * 0.1;
         end;
@@ -404,12 +404,12 @@ Page 51516883 "Salary Processing Card(Posted)"
             //--------------EARN----------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::"G/L Account", Charges."GL Account", "Posting date", Charges."Charge Amount" * -1, 'FOSA', "Document No",
+            GenJournalLine."account type"::"G/L Account", Charges."GL Account", Rec."Posting date", Charges."Charge Amount" * -1, 'FOSA', Rec."Document No",
             'Salary Processing', '');
             //--------------RECOVER------------------
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-            GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", "Posting date", Charges."Charge Amount", 'FOSA', "Document No",
+            GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", Rec."Posting date", Charges."Charge Amount", 'FOSA', Rec."Document No",
             'SMS Charges', '');
             RunningBalance := RunningBalance - Charges."Charge Amount";
         end;
@@ -439,12 +439,12 @@ Page 51516883 "Salary Processing Card(Posted)"
                             //-------------PAY----------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                            GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct * -1, 'FOSA', DOCUMENT_NO,
+                            GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, 'FOSA', DOCUMENT_NO,
                             Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             //-------------RECOVER------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct, 'FOSA', DOCUMENT_NO,
+                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct, 'FOSA', DOCUMENT_NO,
                             Format(GenJournalLine."transaction type"::"Interest Paid") + '-' + LoanApp."Loan Product Type", LoanApp."Loan  No.");
 
                             RunningBalance := RunningBalance - AmountToDeduct;
@@ -491,12 +491,12 @@ Page 51516883 "Salary Processing Card(Posted)"
                             //---------------------PAY-------------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                            GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct * -1, 'FOSA', DOCUMENT_NO,
+                            GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, 'FOSA', DOCUMENT_NO,
                             Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                             //--------------------RECOVER-----------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct, 'FOSA', DOCUMENT_NO,
+                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct, 'FOSA', DOCUMENT_NO,
                             Format(GenJournalLine."transaction type"::"Loan Repayment") + '-' + LoanApp."Loan Product Type", LoanApp."Loan  No.");
                             RunningBalance := RunningBalance - AmountToDeduct;
                         end;
@@ -530,12 +530,12 @@ Page 51516883 "Salary Processing Card(Posted)"
                                         AmountToDeduct := RunningBalance;
                                     LineNo := LineNo + 10000;
                                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                    GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct * -1, Format(LoanApp.Source), DOCUMENT_NO,
+                                    GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, Format(LoanApp.Source), DOCUMENT_NO,
                                     Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
 
                                     LineNo := LineNo + 10000;
                                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                                    GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct, Format(LoanApp.Source), DOCUMENT_NO,
+                                    GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct, Format(LoanApp.Source), DOCUMENT_NO,
                                     Format(GenJournalLine."transaction type"::"Interest Paid") + '-' + LoanApp."Loan Product Type", LoanApp."Loan  No.");
                                     RunningBalance := RunningBalance - AmountToDeduct;
                                 end;
@@ -591,12 +591,12 @@ Page 51516883 "Salary Processing Card(Posted)"
                                         //-------------PAY------------------
                                         LineNo := LineNo + 10000;
                                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                                        GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct * -1, Format(LoanApp.Source), DOCUMENT_NO,
+                                        GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, Format(LoanApp.Source), DOCUMENT_NO,
                                         Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                                         //-------------RECOVER---------------
                                         LineNo := LineNo + 10000;
                                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                                        GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", "Posting date", AmountToDeduct, Format(LoanApp.Source), DOCUMENT_NO,
+                                        GenJournalLine."account type"::Vendor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct, Format(LoanApp.Source), DOCUMENT_NO,
                                         Format(GenJournalLine."transaction type"::"Loan Repayment") + '-' + LoanApp."Loan Product Type", LoanApp."Loan  No.");
                                         RunningBalance := RunningBalance - AmountToDeduct;
                                     end;
@@ -714,14 +714,14 @@ Page 51516883 "Salary Processing Card(Posted)"
             if ObjVendor.Get(ObjRcptBuffer."Destination Account No.") then begin
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", "Posting date", ObjRcptBuffer.Amount, 'FOSA', ObjRcptBuffer."No.",
+                GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", Rec."Posting date", ObjRcptBuffer.Amount, 'FOSA', ObjRcptBuffer."No.",
                 'Standing Order to ' + ObjVendor."Account Type", '');
             end;
             //-------------PAY----------------------------
             if ObjVendor.Get(ObjRcptBuffer."Source Account No.") then begin
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                GenJournalLine."account type"::Vendor, ObjRcptBuffer."Destination Account No.", "Posting date", ObjRcptBuffer.Amount * -1, 'FOSA', ObjRcptBuffer."No.",
+                GenJournalLine."account type"::Vendor, ObjRcptBuffer."Destination Account No.", Rec."Posting date", ObjRcptBuffer.Amount * -1, 'FOSA', ObjRcptBuffer."No.",
                 'Standing Order From ' + ObjVendor."Account Type", '');
                 RunningBalance := RunningBalance - ObjRcptBuffer.Amount;
             end;
@@ -751,13 +751,13 @@ Page 51516883 "Salary Processing Card(Posted)"
                         if LoanApp.Get(ObjReceiptTransactions."Loan No.") then begin
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                            GenJournalLine."account type"::Investor, LoanApp."Client Code", "Posting date", (ObjReceiptTransactions.Amount - ObjReceiptTransactions."Interest Amount") * -1,
+                            GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting date", (ObjReceiptTransactions.Amount - ObjReceiptTransactions."Interest Amount") * -1,
                             'FOSA', ObjRcptBuffer."No.", Format(GenJournalLine."transaction type"::"Loan Repayment"), ObjReceiptTransactions."Loan No.");
 
                             //-------------PAY Principal----------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", "Posting date",
+                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", Rec."Posting date",
                             ObjReceiptTransactions.Amount - ObjReceiptTransactions."Interest Amount", 'FOSA', ObjRcptBuffer."No.",
                             Format(GenJournalLine."transaction type"::"Loan Repayment") + '-' + ObjReceiptTransactions."Loan Product Name", '');
 
@@ -766,13 +766,13 @@ Page 51516883 "Salary Processing Card(Posted)"
                             //-------------RECOVER Interest-----------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                            GenJournalLine."account type"::Investor, LoanApp."Client Code", "Posting date", ObjReceiptTransactions."Interest Amount" * -1,
+                            GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting date", ObjReceiptTransactions."Interest Amount" * -1,
                             'FOSA', ObjRcptBuffer."No.", Format(GenJournalLine."transaction type"::"Loan Repayment"), ObjReceiptTransactions."Loan No.");
 
                             //-------------PAY Interest----------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", "Posting date",
+                            GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", Rec."Posting date",
                             ObjReceiptTransactions."Interest Amount", 'FOSA', ObjRcptBuffer."No.",
                             Format(GenJournalLine."transaction type"::"Loan Repayment") + '-' + ObjReceiptTransactions."Loan Product Name", '');
 
@@ -784,13 +784,13 @@ Page 51516883 "Salary Processing Card(Posted)"
                         //-------------RECOVER BOSA NONLoan Transactions-----------------------
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, ObjReceiptTransactions."Transaction Type",
-                        GenJournalLine."account type"::Investor, ObjRcptBuffer."BOSA Account No.", "Posting date", ObjReceiptTransactions.Amount * -1,
+                        GenJournalLine."account type"::Customer, ObjRcptBuffer."BOSA Account No.", Rec."Posting date", ObjReceiptTransactions.Amount * -1,
                         'FOSA', ObjRcptBuffer."No.", Format(ObjReceiptTransactions."Transaction Type"), '');
 
                         //-------------PAY BOSA NONLoan Transaction----------------------------
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, ObjReceiptTransactions."transaction type"::" ",
-                        GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", "Posting date", ObjReceiptTransactions.Amount,
+                        GenJournalLine."account type"::Vendor, ObjRcptBuffer."Source Account No.", Rec."Posting date", ObjReceiptTransactions.Amount,
                         'FOSA', ObjRcptBuffer."No.", Format(ObjReceiptTransactions."Transaction Type"), '');
 
                         RunningBalance := RunningBalance - ObjReceiptTransactions.Amount;
@@ -807,7 +807,7 @@ Page 51516883 "Salary Processing Card(Posted)"
     local procedure FnRegisterProcessedStandingOrder(ObjStandingOrders: Record 51516449; AmountToDeduct: Decimal)
     begin
         ObjSTORegister.Reset;
-        ObjSTORegister.SetRange("Document No.", No);
+        ObjSTORegister.SetRange("Document No.", Rec.No);
         if ObjSTORegister.Find('-') then
             ObjSTORegister.DeleteAll;
 
@@ -834,7 +834,7 @@ Page 51516883 "Salary Processing Card(Posted)"
         ObjSTORegister."Amount Deducted" := AmountToDeduct;
         if ObjStandingOrders."Destination Account Type" = ObjStandingOrders."destination account type"::External then
             ObjSTORegister.EFT := true;
-        ObjSTORegister."Document No." := No;
+        ObjSTORegister."Document No." := Rec.No;
         ObjSTORegister.Insert(true);
     end;
 }

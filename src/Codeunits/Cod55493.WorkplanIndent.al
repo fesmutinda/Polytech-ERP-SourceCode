@@ -37,23 +37,23 @@ Codeunit 55493 "Workplan Indent"
         with GLAcc do
             if Find('-') then
                 repeat
-                    Window.Update(1, "Activity Code");
+                    // Window.Update(1, "Activity Code");
 
-                    if "Account Type" = "account type"::Total then begin
-                        if i < 1 then
-                            Error(
-                              Text005,
-                              "Activity Code");
-                        Totaling := AccNo[i] + '..' + "Activity Code";
-                        i := i - 1;
-                    end;
+                    // if "Account Type" = "account type"::Total then begin
+                    //     if i < 1 then
+                    //         Error(
+                    //           Text005,
+                    //           "Activity Code");
+                    //     Totaling := AccNo[i] + '..' + "Activity Code";
+                    //     i := i - 1;
+                    // end;
 
                     Indentation := i;
                     Modify;
 
                     if "Account Type" = "account type"::Posting then begin
                         i := i + 1;
-                        AccNo[i] := "Activity Code";
+                        // AccNo[i] := "Activity Code";
                     end;
                 until Next = 0;
 

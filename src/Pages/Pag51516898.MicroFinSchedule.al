@@ -12,75 +12,75 @@ Page 51516898 "Micro_Fin_Schedule"
         {
             repeater(Group)
             {
-                field("Account Number"; "Account Number")
+                field("Account Number"; Rec."Account Number")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; "Account Name")
+                field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Amount Received"; "Amount Received")
+                field("Amount Received"; Rec."Amount Received")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Registration Fee"; "Registration Fee")
+                field("Registration Fee"; Rec."Registration Fee")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Entrance Fee';
                 }
-                field("Deposits Contribution"; "Deposits Contribution")
+                field("Deposits Contribution"; Rec."Deposits Contribution")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Deposits';
                 }
-                field("Share Capital"; "Share Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Shares';
                 }
-                field("Loans No."; "Loans No.")
+                field("Loans No."; Rec."Loans No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Loan No.';
                 }
-                field("Group Code"; "Group Code")
+                field("Group Code"; Rec."Group Code")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Interest Amount"; "Interest Amount")
+                field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Principle Amount"; "Principle Amount")
+                field("Principle Amount"; Rec."Principle Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Principle Amount"; "Expected Principle Amount")
+                field("Expected Principle Amount"; Rec."Expected Principle Amount")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Expected Interest"; "Expected Interest")
+                field("Expected Interest"; Rec."Expected Interest")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Savings; Savings)
+                field(Savings; Rec.Savings)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cumulative Savings';
                 }
-                field(OutBal; OutBal)
+                field(OutBal; Rec.OutBal)
                 {
                     ApplicationArea = Basic;
                     Caption = 'OutBal';
                 }
-                field("Outstanding Balance"; "Outstanding Balance")
+                field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Excess Amount"; "Excess Amount")
+                field("Excess Amount"; Rec."Excess Amount")
                 {
                     ApplicationArea = Basic;
                 }

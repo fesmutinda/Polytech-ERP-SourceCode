@@ -25,7 +25,7 @@ Page 51516280 "HR Manager Activities"
                     {
                         ApplicationArea = Basic;
                         Caption = 'Leave Application Card';
-                        RunObject = Page "HR Leave Application Card";
+                        // RunObject = Page "HR Leave Application Card";
                     }
                     action("Employee Card")
                     {

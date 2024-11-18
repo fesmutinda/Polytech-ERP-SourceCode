@@ -4,7 +4,7 @@ Page 51516654 "Checkoff Processing Headerx"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = "Checkoff Header-Distributedx";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {
@@ -38,7 +38,7 @@ Page 51516654 "Checkoff Processing Headerx"
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field(Remarks; Rec."Date Filter"Remarks)
+                field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -101,7 +101,7 @@ Page 51516654 "Checkoff Processing Headerx"
             part("Checkoff Lines-Distributed"; "Checkoff Processing Lines-D")
             {
                 Caption = 'Checkoff Lines-Distributed';
-                SubPageLink = "Staff Not Found" = field(No);
+                SubPageLink = "Staff/Payroll No" = field(No);
             }
         }
     }
@@ -145,7 +145,7 @@ Page 51516654 "Checkoff Processing Headerx"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
-                RunObject = XMLport 51516003;
+                // RunObject = XMLport 51516003;
             }
             group(ActionGroup1102755021)
             {
@@ -421,7 +421,7 @@ Page 51516654 "Checkoff Processing Headerx"
         DOCUMENT_NO: Code[40];
         GenJournalLine: Record "Gen. Journal Line";
         ActionEnabled: Boolean;
-        XMLCheckOff: XmlPort 51516003;
+        // XMLCheckOff: XmlPort 51516003;
         Window: Dialog;
         TotalCount: Integer;
         Counter: Integer;
@@ -522,7 +522,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                                 GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", AmountReceived * -1, 'BOSA', Rec."Document No",
+                                 GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", AmountReceived * -1, 'BOSA', Rec."Document No",
                                  Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal := RunBal + (AmountReceived * -1);
                     end;
@@ -573,7 +573,7 @@ Page 51516654 "Checkoff Processing Headerx"
                         //MESSAGE('Loan number %1 interest %2 and runbal %3',LoanApp."Loan  No.",InterestToPost,RunBal);
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                 GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                 GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                  Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                         RunBal -= InterestToPost;
                     end;
@@ -611,7 +611,7 @@ Page 51516654 "Checkoff Processing Headerx"
                         //MESSAGE('Loan number %1 principle %2 and runbal %3',LoanApp."Loan  No.",PrincipleToPost,RunBal);
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                         GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                         GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                          Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal -= PrincipleToPost;
                         LCount -= 1;
@@ -636,7 +636,7 @@ Page 51516654 "Checkoff Processing Headerx"
         if AmountReceived > 0 then begin
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Deposit Contribution",
-             GenJournalLine."account type"::Member, AccountNo, Rec."Posting Date", AmountReceived * -1, 'BOSA', Rec."Document No",
+             GenJournalLine."account type"::Customer, AccountNo, Rec."Posting Date", AmountReceived * -1, 'BOSA', Rec."Document No",
              Format(GenJournalLine."transaction type"::"Deposit Contribution"), '');
         end;
     end;
@@ -647,7 +647,7 @@ Page 51516654 "Checkoff Processing Headerx"
         if AmountReceived > 0 then begin
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Benevolent Fund",
-             GenJournalLine."account type"::Member, AccountNo, Rec."Posting Date", AmountReceived * -1, 'BOSA', Rec."Document No",
+             GenJournalLine."account type"::Customer, AccountNo, Rec."Posting Date", AmountReceived * -1, 'BOSA', Rec."Document No",
              Format(GenJournalLine."transaction type"::"Benevolent Fund"), '');
         end;
     end;
@@ -696,7 +696,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                     GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                     GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                      Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             //RunBal:=RunBal-InterestToPost;
 
@@ -735,7 +735,7 @@ Page 51516654 "Checkoff Processing Headerx"
                                 //MESSAGE('Loan number %1 principle %2 and runbal %3',LoanApp."Loan  No.",PrincipleToPost,RunBal);
                                 LineNo := LineNo + 10000;
                                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                                 GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                                 GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                                  Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                                 RunBal -= PrincipleToPost;
                                 LCount -= 1;
@@ -757,7 +757,7 @@ Page 51516654 "Checkoff Processing Headerx"
         if RunBal > 0 then begin
             LineNo := LineNo + 10000;
             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Unallocated Funds",
-              GenJournalLine."account type"::Member, AccountNo, Rec."Posting Date", RunBal * -1, 'BOSA', Rec."Document No",
+              GenJournalLine."account type"::Customer, AccountNo, Rec."Posting Date", RunBal * -1, 'BOSA', Rec."Document No",
               Format(GenJournalLine."transaction type"::"Unallocated Funds") + ' - ' + LoanNo, '');
         end;
     end;
@@ -785,7 +785,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                 LineNo := LineNo + 10000;
                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Unallocated Funds",
-                            GenJournalLine."account type"::Member, AccountNo, Rec."Posting Date", RunBal * -1, 'BOSA', Rec."Document No",
+                            GenJournalLine."account type"::Customer, AccountNo, Rec."Posting Date", RunBal * -1, 'BOSA', Rec."Document No",
                             Format(GenJournalLine."transaction type"::"Unallocated Funds"), LoanApp."Loan  No.");
 
             end;
@@ -825,7 +825,7 @@ Page 51516654 "Checkoff Processing Headerx"
                             end;
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                     GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                     GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                      Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             RunBal := RunBal - InterestToPost;
                         end;
@@ -869,7 +869,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                         GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                         GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                          Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal := RunBal - PrincipleToPost;
                         LCount := LCount - 1;
@@ -914,7 +914,7 @@ Page 51516654 "Checkoff Processing Headerx"
                             end;
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                            GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                            GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                             Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             RunBal := RunBal - InterestToPost;
                         end;
@@ -957,7 +957,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                        GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                        GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                         Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal := RunBal - PrincipleToPost;
                         LCount := LCount - 1;
@@ -1004,7 +1004,7 @@ Page 51516654 "Checkoff Processing Headerx"
                             end;
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                     GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                     GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                      Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             RunBal := RunBal - InterestToPost;
                         end;
@@ -1048,7 +1048,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                         GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                         GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                          Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal := RunBal - PrincipleToPost;
                         LCount := LCount - 1;
@@ -1095,7 +1095,7 @@ Page 51516654 "Checkoff Processing Headerx"
                             end;
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                     GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                     GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                      Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             RunBal := RunBal - InterestToPost;
                         end;
@@ -1139,7 +1139,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                         GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                         GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                          Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal := RunBal - PrincipleToPost;
                         LCount := LCount - 1;
@@ -1188,7 +1188,7 @@ Page 51516654 "Checkoff Processing Headerx"
                             end;
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                     GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                     GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                      Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             RunBal := RunBal - InterestToPost;
                         end;
@@ -1232,7 +1232,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                         GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                         GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                          Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                         RunBal := RunBal - PrincipleToPost;
                         LCount := LCount - 1;
@@ -1288,7 +1288,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                 GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                 GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                  Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                         RunBal := RunBal - Interest;
 
@@ -1338,7 +1338,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                         GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                         GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                          Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
 
 
@@ -1393,7 +1393,7 @@ Page 51516654 "Checkoff Processing Headerx"
                             end;
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                     GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
+                                     GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", InterestToPost * -1, 'BOSA', Rec."Document No",
                                      Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             RunBal := RunBal - InterestToPost;
                         end;
@@ -1439,7 +1439,7 @@ Page 51516654 "Checkoff Processing Headerx"
 
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                             GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
+                             GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting Date", PrincipleToPost * -1, 'BOSA', Rec."Document No",
                              Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                             RunBal := RunBal - PrincipleToPost;
                             LCount := LCount - 1;

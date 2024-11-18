@@ -120,7 +120,7 @@ Page 51516610 "Funeral Expense Card"
                     ApprovalEntries: Page "Approval Entries";
                 begin
                     DocumentType := Documenttype::"Member Closure";
-                    ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, Rec."No.");
+                    ApprovalEntries.SetRecordFilters(Database::"HR Leave Register", DocumentType, Rec."No.");
                     ApprovalEntries.Run;
                 end;
             }
@@ -202,13 +202,13 @@ Page 51516610 "Funeral Expense Card"
                     GenJournalLine."Document No." := Rec."No.";
                     GenJournalLine."Posting Date" := Today;
                     GenJournalLine."External Document No." := Rec."No.";
-                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                     GenJournalLine."Account No." := Rec."Member No.";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
                     GenJournalLine.Description := 'Funeral Rider';
                     GenJournalLine.Amount := Generalsetup."Funeral Expense Amount";
                     GenJournalLine.Validate(GenJournalLine.Amount);
-                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"48";
+                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Benevolent Fund";
                     GenJournalLine."Bal. Account No." := Rec."Paying Bank";
                     GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"Bank Account";
                     GenJournalLine."Shortcut Dimension 1 Code" := DActivity;

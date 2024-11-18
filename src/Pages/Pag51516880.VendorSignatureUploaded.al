@@ -8,9 +8,9 @@ Page 51516880 "Vendor Signature-Uploaded"
     {
         area(content)
         {
-            field(Signature;Signature)
+            field(Signature; Rec.Signature)
             {
-                ApplicationArea = Basic,Suite;
+                ApplicationArea = Basic, Suite;
                 ShowCaption = false;
                 ToolTip = 'Specifies the picture that has been inserted for the signature.';
             }
@@ -68,17 +68,17 @@ Page 51516880 "Vendor Signature-Uploaded"
                     ToFile: Text;
                     ExportPath: Text;
                 begin
-                    TestField("No.");
+                    Rec.TestField("No.");
                     //TESTFIELD(Description);
 
                     NameValueBuffer.DeleteAll;
-                    ExportPath := TemporaryPath + "No." + Format(Signature.MediaId);
-                    Signature.ExportFile(ExportPath);
-                    FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer,TemporaryPath);
-                    TempNameValueBuffer.SetFilter(Name,StrSubstNo('%1*',ExportPath));
+                    ExportPath := TemporaryPath + Rec."No." + Format(Rec.Signature.MediaId);
+                    Rec.Signature.ExportFile(ExportPath);
+                    FileManagement.GetServerDirectoryFilesList(TempNameValueBuffer, TemporaryPath);
+                    TempNameValueBuffer.SetFilter(Name, StrSubstNo('%1*', ExportPath));
                     TempNameValueBuffer.FindFirst;
-                    ToFile := StrSubstNo('%1 %2.jpg',"No.",ConvertStr("No.",'"/\','___'));
-                    Download(TempNameValueBuffer.Name,DownloadImageTxt,'','',ToFile);
+                    ToFile := StrSubstNo('%1 %2.jpg', Rec."No.", ConvertStr(Rec."No.", '"/\', '___'));
+                    Download(TempNameValueBuffer.Name, DownloadImageTxt, '', '', ToFile);
                     if FileManagement.DeleteServerFile(TempNameValueBuffer.Name) then;
                 end;
             }
@@ -100,9 +100,9 @@ Page 51516880 "Vendor Signature-Uploaded"
     }
 
     var
-        [RunOnClient]
-        [WithEvents]
-        CameraProvider: dotnet CameraProvider;
+        // [RunOnClient]
+        // [WithEvents]
+        // CameraProvider: dotnet CameraProvider;
         CameraAvailable: Boolean;
         DeleteExportEnabled: Boolean;
         OverrideImageQst: label 'The existing picture will be replaced. Do you want to continue?';
@@ -113,18 +113,18 @@ Page 51516880 "Vendor Signature-Uploaded"
 
     procedure TakeNewPicture()
     var
-        CameraOptions: dotnet CameraOptions;
+    // CameraOptions: dotnet CameraOptions;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
         if not CameraAvailable then
-          exit;
+            exit;
 
-        CameraOptions := CameraOptions.CameraOptions;
-        CameraOptions.Quality := 50;
-        CameraProvider.RequestPictureAsync(CameraOptions);
+        // CameraOptions := CameraOptions.CameraOptions;
+        // CameraOptions.Quality := 50;
+        // CameraProvider.RequestPictureAsync(CameraOptions);
     end;
 
     procedure ImportFromDevice()
@@ -133,35 +133,35 @@ Page 51516880 "Vendor Signature-Uploaded"
         FileName: Text;
         ClientFileName: Text;
     begin
-        Find;
-        TestField("No.");
+        Rec.Find;
+        Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Signature.Count > 0 then
-          if not Confirm(OverrideImageQst) then
-            Error('');
+        if Rec.Signature.HasValue then//Count > 0 then
+            if not Confirm(OverrideImageQst) then
+                Error('');
 
         ClientFileName := '';
-        FileName := FileManagement.UploadFile(SelectPictureTxt,ClientFileName);
+        FileName := FileManagement.UploadFile(SelectPictureTxt, ClientFileName);
         if FileName = '' then
-          Error('');
+            Error('');
 
-        Clear(Signature);
-        Signature.ImportFile(FileName,ClientFileName);
-        if not Insert(true) then
-          Modify(true);
+        Clear(Rec.Signature);
+        Rec.Signature.ImportFile(FileName, ClientFileName);
+        if not Rec.Insert(true) then
+            Rec.Modify(true);
 
         if FileManagement.DeleteServerFile(FileName) then;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Signature.Count <> 0;
+        DeleteExportEnabled := Rec.Signature.HasValue;//Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean
     begin
-        exit(CameraProvider.IsAvailable);
+        // exit(CameraProvider.IsAvailable);
     end;
 
     procedure SetHideActions()
@@ -172,17 +172,17 @@ Page 51516880 "Vendor Signature-Uploaded"
 
     procedure DeleteItemPicture()
     begin
-        TestField("No.");
+        Rec.TestField("No.");
 
         if not Confirm(DeleteImageQst) then
-          exit;
+            exit;
 
-        Clear(Signature);
-        Modify(true);
+        Clear(Rec.Signature);
+        Rec.Modify(true);
     end;
 
-    trigger Cameraprovider::PictureAvailable(PictureName: Text;PictureFilePath: Text)
-    begin
-    end;
+    // trigger Cameraprovider::PictureAvailable(PictureName: Text; PictureFilePath: Text)
+    // begin
+    // end;
 }
 

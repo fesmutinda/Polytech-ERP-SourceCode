@@ -65,7 +65,7 @@ Page 51516115 "Item Groups"
                 Promoted = true;
                 PromotedCategory = Process;
                 RunObject = Page "Item Categories";
-                RunPageLink = Field51516000 = field(Code);
+                // RunPageLink = Field51516000 = field(Code);
             }
         }
     }

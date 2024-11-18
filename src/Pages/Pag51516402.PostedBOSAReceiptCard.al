@@ -5,7 +5,7 @@ Page 51516402 "Posted BOSA Receipt Card"
     Editable = false;
     PageType = Card;
     SourceTable = "Receipts & Payments";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {
@@ -170,7 +170,7 @@ Page 51516402 "Posted BOSA Receipt Card"
                                     ReceiptAllocations.Init;
                                     ReceiptAllocations."Document No" := Rec."Transaction No.";
                                     ReceiptAllocations."Member No" := Rec."Account No.";
-                                    ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"35";
+                                    ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Standing Order Charges";
                                     ReceiptAllocations."Loan No." := '';
 
                                     // M Pesa Tarriff
@@ -219,7 +219,7 @@ Page 51516402 "Posted BOSA Receipt Card"
                                                 ReceiptAllocations.Init;
                                                 ReceiptAllocations."Document No" := Rec."Transaction No.";
                                                 ReceiptAllocations."Member No" := Rec."Account No.";
-                                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"37";
+                                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Registration Fee";
                                                 ReceiptAllocations."Loan No." := Loans."Loan  No.";
                                                 ReceiptAllocations."Loan ID" := Loans."Loan Product Type";
                                                 ReceiptAllocations.Amount := Loans."Loans Insurance";
@@ -330,7 +330,7 @@ Page 51516402 "Posted BOSA Receipt Card"
                                 ReceiptAllocations."Document No" := Rec."Transaction No.";
                                 ReceiptAllocations."Member No" := Rec."Account No.";
 
-                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"35";
+                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Registration Fee";
                                 ReceiptAllocations."Total Amount" := Rec.Amount;
                                 ReceiptAllocations."Loan No." := '';
 
@@ -368,7 +368,7 @@ Page 51516402 "Posted BOSA Receipt Card"
                             ReceiptAllocations.Init;
                             ReceiptAllocations."Document No" := Rec."Transaction No.";
                             ReceiptAllocations."Member No" := Rec."Account No.";
-                            ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"38";
+                            ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Unallocated Funds";
                             //GenJournalLine.Description:= 'BT'+'-'+Remarks+'-'+FORMAT("Mode of Payment")+'-'+"Cheque No.";
                             ReceiptAllocations."Loan No." := ' ';
                             ReceiptAllocations."Total Amount" := Rec.Amount;

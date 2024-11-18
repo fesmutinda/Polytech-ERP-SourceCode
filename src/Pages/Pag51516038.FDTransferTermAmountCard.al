@@ -4,7 +4,7 @@ Page 51516038 "FD Transfer Term Amount Card"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = "FD Processing";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {

@@ -172,7 +172,7 @@ Page 51516034 "Posted Funds Transfer Card"
     end;
 
     var
-        FundsManager: Codeunit UnknownCodeunit51516000;
+        FundsManager: Codeunit 51516000;
         FundsUser: Record 51516031;
         JTemplate: Code[50];
         JBatch: Code[50];

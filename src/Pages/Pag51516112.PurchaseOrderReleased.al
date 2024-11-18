@@ -7,8 +7,8 @@ Page 51516112 "Purchase Order-Released"
     PageType = List;
     SourceTable = "Purchase Header";
     SourceTableView = where("Document Type" = const(Order),
-                            Status = const(Released),
-                            Printed = filter(No));
+                            Status = const(Released));
+                            // Printed = filter(false));
 
     layout
     {
@@ -191,10 +191,10 @@ Page 51516112 "Purchase Order-Released"
                     ApplicationArea = Basic;
                     Visible = JobQueueActive;
                 }
-                field(Printed; Rec.Printed)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Printed; Rec.Printed)
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
         area(factboxes)
@@ -270,7 +270,7 @@ Page 51516112 "Purchase Order-Released"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }

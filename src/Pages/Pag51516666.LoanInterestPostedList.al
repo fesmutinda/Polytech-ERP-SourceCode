@@ -7,9 +7,9 @@ Page 51516666 "Loan Interest Posted List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "Loans Interest";
-    SourceTableView = where(Posted = const(Yes),
-                            Transferred = const(Yes),
-                            Reversed = const(No));
+    SourceTableView = where(Posted = const(true),
+                            Transferred = const(true),
+                            Reversed = const(false));
 
     layout
     {
@@ -49,7 +49,7 @@ Page 51516666 "Loan Interest Posted List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Loan No."; "Rec. No.")
+                field("Loan No."; Rec."No")
                 {
                     ApplicationArea = Basic;
                 }
@@ -100,7 +100,7 @@ Page 51516666 "Loan Interest Posted List"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                RunObject = Report 51516579;
+                // RunObject = Report 51516579;
             }
             action("Option ")
             {
@@ -113,7 +113,7 @@ Page 51516666 "Loan Interest Posted List"
                 Promoted = true;
                 PromotedCategory = Category4;
                 PromotedIsBig = true;
-                RunObject = Report 51516580;
+                // RunObject = Report 51516580;
             }
         }
     }

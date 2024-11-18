@@ -134,6 +134,7 @@ Table 51516564 "Guarantorship Substitution L"
         {
             DataClassification = ToBeClassified;
         }
+        field(23; "Substitute Member Deposits"; Decimal) { }
     }
 
     keys

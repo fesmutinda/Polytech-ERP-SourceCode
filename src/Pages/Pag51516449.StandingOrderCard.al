@@ -42,19 +42,19 @@ Page 51516449 "Standing Order Card"
                     begin
                         ReceiptAllVisible := false;
                         DestinationAccountsVisible := false;
-                        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+                        if Rec."Destination Account Type" = Rec."destination account type"::BOSA then begin
                             ReceiptAllVisible := true;
                             DestinationAccountsVisible := false;
                         end;
 
-                        if Rec."Destination Account Type" = "destination account type"::Internal then begin
+                        if Rec."Destination Account Type" = Rec."destination account type"::Internal then begin
                             ReceiptAllVisible := false;
                             DestinationAccountsVisible := true;
                         end;
 
 
                         BankDetailsVisible := false;
-                        if Rec."Destination Account Type" = "destination account type"::External then begin
+                        if Rec."Destination Account Type" = Rec."destination account type"::External then begin
                             BankDetailsVisible := true;
                             DestinationAccountsVisible := true;
                         end;
@@ -268,7 +268,7 @@ Page 51516449 "Standing Order Card"
                 trigger OnAction()
                 begin
                     Rec.TestField("Source Account No.");
-                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                    if Rec."Destination Account Type" <> Rec."destination account type"::BOSA then
                         Rec.TestField("Destination Account No.");
                     Rec.TestField("Effective/Start Date");
                     Rec.TestField(Frequency);
@@ -338,7 +338,7 @@ Page 51516449 "Standing Order Card"
                     begin
                         DocumentType := Documenttype::StandingOrder;
 
-                        ApprovalEntries.Setfilters(Database::"Standing Orders", DocumentType, "No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Standing Orders", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -357,14 +357,14 @@ Page 51516449 "Standing Order Card"
                     begin
                         Rec.TestField("Source Account No.");
                         Rec.TestField("Standing Order Description");
-                        if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                        if Rec."Destination Account Type" <> Rec."destination account type"::BOSA then
                             Rec.TestField("Destination Account No.");
 
                         Rec.TestField("Effective/Start Date");
                         Rec.TestField(Frequency);
                         Rec.TestField("Next Run Date");
 
-                        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+                        if Rec."Destination Account Type" = Rec."destination account type"::BOSA then begin
                             Rec.CalcFields("Allocated Amount");
                             if Rec.Amount <> Rec."Allocated Amount" then
                                 Error('Allocated amount must be equal to amount');
@@ -374,8 +374,8 @@ Page 51516449 "Standing Order Card"
                             Error(Text001);
                         Message('Sent for Approval');
 
-                        if ApprovalsMgmt.CheckStandingOrderApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnSendStandingOrderForApproval(Rec);
+                        // if ApprovalsMgmt.CheckStandingOrderApprovalsWorkflowEnabled(Rec) then
+                        //     ApprovalsMgmt.OnSendStandingOrderForApproval(Rec);
                     end;
                 }
                 action("Cancel Approval Request")
@@ -391,8 +391,8 @@ Page 51516449 "Standing Order Card"
                         Approvalmgt: Codeunit "Approvals Mgmt.";
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        if ApprovalsMgmt.CheckStandingOrderApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnCancelStandingOrderApprovalRequest(Rec);
+                        // if ApprovalsMgmt.CheckStandingOrderApprovalsWorkflowEnabled(Rec) then
+                        //     ApprovalsMgmt.OnCancelStandingOrderApprovalRequest(Rec);
                     end;
                 }
             }
@@ -412,7 +412,7 @@ Page 51516449 "Standing Order Card"
                 trigger OnAction()
                 begin
                     Rec.TestField("Source Account No.");
-                    if Rec."Destination Account Type" <> "destination account type"::BOSA then
+                    if Rec."Destination Account Type" <> Rec."destination account type"::BOSA then
                         Rec.TestField("Destination Account No.");
                     Rec.TestField("Effective/Start Date");
                     Rec.TestField(Frequency);
@@ -461,19 +461,19 @@ Page 51516449 "Standing Order Card"
 
         ReceiptAllVisible := false;
         DestinationAccountsVisible := false;
-        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+        if Rec."Destination Account Type" = Rec."destination account type"::BOSA then begin
             ReceiptAllVisible := true;
             DestinationAccountsVisible := false;
         end;
 
-        if Rec."Destination Account Type" = "destination account type"::Internal then begin
+        if Rec."Destination Account Type" = Rec."destination account type"::Internal then begin
             ReceiptAllVisible := false;
             DestinationAccountsVisible := true;
         end;
 
 
         BankDetailsVisible := false;
-        if Rec."Destination Account Type" = "destination account type"::External then begin
+        if Rec."Destination Account Type" = Rec."destination account type"::External then begin
             BankDetailsVisible := true;
             DestinationAccountsVisible := true;
         end;
@@ -514,12 +514,12 @@ Page 51516449 "Standing Order Card"
             CurrPage.Editable := false;
 
         ReceiptAllVisible := false;
-        if Rec."Destination Account Type" = "destination account type"::BOSA then begin
+        if Rec."Destination Account Type" = Rec."destination account type"::BOSA then begin
             ReceiptAllVisible := true;
         end;
 
         BankDetailsVisible := false;
-        if Rec."Destination Account Type" = "destination account type"::External then begin
+        if Rec."Destination Account Type" = Rec."destination account type"::External then begin
             BankDetailsVisible := true;
         end;
 

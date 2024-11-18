@@ -4,7 +4,7 @@ Page 51516030 "Funds Transfer List"
     CardPageID = "Funds Transfer Card";
     PageType = List;
     SourceTable = "Funds Transfer Header";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {

@@ -1799,7 +1799,7 @@ Page 51516854 "Loan Application MICRO(Posted)"
             //CopyofPayslipEditable:=TRUE;
         end;
 
-        if Rec."Approval Status" =Rec. "approval status"::Pending then begin
+        if Rec."Approval Status" = Rec."approval status"::Pending then begin
             MNoEditable := false;
             ApplcDateEditable := false;
             LoanStatusEditable := false;
@@ -1816,7 +1816,7 @@ Page 51516854 "Loan Application MICRO(Posted)"
 
         end;
 
-        if Rec."Approval Status" =Rec. "approval status"::Rejected then begin
+        if Rec."Approval Status" = Rec."approval status"::Rejected then begin
             MNoEditable := false;
             //AccountNoEditable:=FALSE;
             ApplcDateEditable := false;
@@ -1889,7 +1889,7 @@ Page 51516854 "Loan Application MICRO(Posted)"
         SMSMessage."Entered By" := UserId;
         SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
         SMSMessage."SMS Message" := 'Dear Member,Your Loan of amount ' + Format(Rec."Requested Amount") + ' for ' +
-        Rec."Client Code" + ' ' +Rec. "Client Name" + ' has been received and is being Processed '
+        Rec."Client Code" + ' ' + Rec."Client Name" + ' has been received and is being Processed '
         + compinfo.Name + ' ' + GenSetUp."Customer Care No";
         Cust.Reset;
         Cust.SetRange(Cust."No.", Rec."Client Code");
@@ -1903,7 +1903,7 @@ Page 51516854 "Loan Application MICRO(Posted)"
     local procedure FnSendReceivedLoanApplEmail(LoanNo: Code[20])
     var
         LoanRec: Record 51516371;
-        // SMTPMail: Codeunit UnknownCodeunit400;
+        // SMTPMail: Codeunit 400;
         // SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];
@@ -1938,7 +1938,7 @@ Page 51516854 "Loan Application MICRO(Posted)"
         Sms: Record 51516471;
     begin
         LGuarantors.Reset;
-        LGuarantors.SetRange(LGuarantors."Loan No",Rec. "Loan  No.");
+        LGuarantors.SetRange(LGuarantors."Loan No", Rec."Loan  No.");
         if LGuarantors.FindFirst then begin
             repeat
                 if Cust.Get(LGuarantors."Member No") then

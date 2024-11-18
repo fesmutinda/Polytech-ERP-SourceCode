@@ -105,7 +105,7 @@ Page 51516343 "Cheque Transactions Card."
                 var
                     DestinationFile: Text[100];
                 begin
-                    DestinationFile := FileMgt.OpenFileDialog('Family Cheque file', '*.J70', UserId + '(*.*)|(*.J70)');
+                    // DestinationFile := FileMgt.OpenFileDialog('Family Cheque file', '*.J70', UserId + '(*.*)|(*.J70)');
 
                     Message(DestinationFile);
                     //UPLOADINTOSTREAM('Import','','All Files (*.*)|*.*',DestinationFile,USERID+'(*.*)|(*.J70)');

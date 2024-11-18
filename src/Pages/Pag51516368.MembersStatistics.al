@@ -97,7 +97,7 @@ Page 51516368 "Members Statistics"
                 ApplicationArea = Basic;
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report 51516412;
+                // RunObject = Report 51516412;
 
                 trigger OnAction()
                 begin
@@ -123,7 +123,7 @@ Page 51516368 "Members Statistics"
 
         if (Rec."Assigned System ID" <> '') then begin //AND ("Assigned System ID"<>USERID)
             if UserSetup.Get(UserId) then begin
-                if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
+                // if UserSetup."View Special Accounts" = false then Error('You do not have permission to view this account Details, Contact your system administrator! ')
             end;
 
         end;

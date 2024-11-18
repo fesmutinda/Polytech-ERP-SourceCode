@@ -570,7 +570,7 @@ Page 51516560 "Loans Approved List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := Rec."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Document No." := Rec."Loan  No.";
@@ -579,7 +579,7 @@ Page 51516560 "Loans Approved List"
                                     GenJournalLine.Description := 'Principal Amount';
                                     GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                                     GenJournalLine."Loan No" := LoanApps."Loan  No.";
                                     GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
                                     GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
@@ -606,7 +606,7 @@ Page 51516560 "Loans Approved List"
                                                     GenJournalLine."Document No." := Rec."Loan  No.";
                                                     GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                                     GenJournalLine.Description := 'Off Set By - ' + LoanApps."Loan  No.";
@@ -656,7 +656,7 @@ Page 51516560 "Loans Approved List"
                                                         GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                         GenJournalLine."Journal Batch Name" := 'LOANS';
                                                         GenJournalLine."Line No." := LineNo;
-                                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                                         GenJournalLine."Account No." := LoanApps."Client Code";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                                         GenJournalLine."Document No." := Rec."Loan  No.";
@@ -890,7 +890,7 @@ Page 51516560 "Loans Approved List"
                                     GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := Rec."Client Code";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Document No." := Rec."Loan  No.";
@@ -899,7 +899,7 @@ Page 51516560 "Loans Approved List"
                                     GenJournalLine.Description := 'Principal Amount';
                                     GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                                     GenJournalLine."Loan No" := LoanApps."Loan  No.";
                                     GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
                                     GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
@@ -926,7 +926,7 @@ Page 51516560 "Loans Approved List"
                                                     GenJournalLine."Document No." := Rec."Loan  No.";
                                                     GenJournalLine."Posting Date" := Rec."Posting Date";
                                                     GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                                     GenJournalLine.Description := 'Off Set By - ' + LoanApps."Loan  No.";
@@ -951,7 +951,7 @@ Page 51516560 "Loans Approved List"
                                                         GenJournalLine."Journal Template Name" := 'PAYMENTS';
                                                         GenJournalLine."Journal Batch Name" := 'LOANS';
                                                         GenJournalLine."Line No." := LineNo;
-                                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                                         GenJournalLine."Account No." := LoanApps."Client Code";
                                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                                         GenJournalLine."Document No." := Rec."Loan  No.";
@@ -1054,7 +1054,7 @@ Page 51516560 "Loans Approved List"
                         GenJournalLine.SetRange("Journal Template Name", 'PAYMENTS');
                         GenJournalLine.SetRange("Journal Batch Name", 'LOANS');
                         if GenJournalLine.Find('-') then begin
-                            Codeunit.Run(Codeunit::Codeunit50013, GenJournalLine);
+                            // Codeunit.Run(Codeunit::50013, GenJournalLine);
                         end;
 
                         //Post New
@@ -1100,7 +1100,7 @@ Page 51516560 "Loans Approved List"
                         */
 
                         DocumentType := Documenttype::Loan;
-                        ApprovalEntries.Setfilters(Database::"Salary Step/Notch Transactions", DocumentType, Rec."Loan  No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Salary Step/Notch Transactions", DocumentType, Rec."Loan  No.");
                         ApprovalEntries.Run;
 
                     end;

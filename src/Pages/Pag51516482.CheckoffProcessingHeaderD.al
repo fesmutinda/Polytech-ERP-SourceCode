@@ -4,7 +4,7 @@ Page 51516482 "Checkoff Processing Header-D"
     DeleteAllowed = false;
     PageType = Card;
     SourceTable = "Checkoff Header-Distributed";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {
@@ -163,7 +163,7 @@ Page 51516482 "Checkoff Processing Header-D"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedOnly = true;
-                RunObject = XMLport 51516003;
+                // RunObject = XMLport 51516003;
 
                 trigger OnAction()
                 begin
@@ -357,7 +357,7 @@ Page 51516482 "Checkoff Processing Header-D"
                 trigger OnAction()
                 begin
                     ReptProcHeader.Reset;
-                    ReptProcHeader.SetRange(ReptProcHeader.No, No);
+                    ReptProcHeader.SetRange(ReptProcHeader.No, Rec.No);
                     if ReptProcHeader.Find('-') then
                         Report.Run(51516542, true, false, ReptProcHeader);
                 end;
@@ -449,18 +449,18 @@ Page 51516482 "Checkoff Processing Header-D"
                                 UnallocatedFunds := 0;
                                 //Deposits
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Benevolent Fund", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Benevolent Fund", GenJournalLine."account type"::Customer,
                                                                      ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Deposit contribution", 'BOSA', '', 'Deposit contribution Checkoff for ' +
                                                                      KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
                                 //share capital
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Share Capital", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Shares Capital", GenJournalLine."account type"::Customer,
                                                                      ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Shares Capital", 'BOSA', '', 'Shares capital checkofffor '
                                                                      + KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
 
                                 //Reg/fess
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Registration Fee", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Registration Fee", GenJournalLine."account type"::Customer,
                                                                      ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Entrance Fees", 'BOSA', '', 'Registration fees checkoff for' +
                                                                      KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
                                 LNNO := '';
@@ -541,13 +541,13 @@ Page 51516482 "Checkoff Processing Header-D"
 
                                         end;
                                         LineNo := LineNo + 10000;
-                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Loan Repayment", GenJournalLine."account type"::Member,
+                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Loan Repayment", GenJournalLine."account type"::Customer,
                                                                                     ReceiptLine."Member No.", Rec."Loan CutOff Date", -UpdatePrinciple, 'BOSA', '', 'loan repayment checkoff for ' +
                                                                                     KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", LNNO);//LoanApp."Loan  No.");
                                                                                                                                                                                                               //Int normal loan
                                         LineNo := LineNo + 10000;
                                         //AmountToPay:=FnGetLoanInterestToPay(ReceiptLine."Int normal loan",ReceiptLine."NLoan No");
-                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Interest Paid", GenJournalLine."account type"::Member,
+                                        SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Interest Paid", GenJournalLine."account type"::Customer,
                                                                               ReceiptLine."Member No.", Rec."Loan CutOff Date", -UpdateInterest, 'BOSA', '', 'Interest payment checkoff for ' +
                                                                               KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", LNNO);//LLoanApp."Loan  No.");
                                     until LoanProductsSetup.Next = 0;
@@ -557,7 +557,7 @@ Page 51516482 "Checkoff Processing Header-D"
 
                                 //Unallocated Funds
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Unallocated Funds", GenJournalLine."account type"::Member,
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Unallocated Funds", GenJournalLine."account type"::Customer,
                                                                   ReceiptLine."Member No.", Rec."Loan CutOff Date", -UnallocatedFunds, 'BOSA', '', 'Unallocated Funds checkoff for ' +
                                                                   KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
 
@@ -763,7 +763,7 @@ Page 51516482 "Checkoff Processing Header-D"
         DOCUMENT_NO: Code[40];
         GenJournalLine: Record "Gen. Journal Line";
         ActionEnabled: Boolean;
-        XMLCheckOff: XmlPort 51516003;
+        // XMLCheckOff: XmlPort 51516003;
         Window: Dialog;
         TotalCount: Integer;
         Counter: Integer;
@@ -822,12 +822,12 @@ Page 51516482 "Checkoff Processing Header-D"
         ObjMembersReg: Record 51516364;
     begin
         ObjMembersReg.Reset;
-        ObjMembersReg.SetRange(ObjMembersReg."Personal No", PayrollNo);
-        ObjMembersReg.SetRange(ObjMembersReg."Employer Code", EmployerCode);
-        if ObjMembersReg.Find('-') then begin
-            MemberNo := ObjMembersReg."No.";
-        end;
-        exit(MemberNo);
+        // ObjMembersReg.SetRange(ObjMembersReg."Personal No", PayrollNo);
+        // ObjMembersReg.SetRange(ObjMembersReg."Employer Code", EmployerCode);
+        // if ObjMembersReg.Find('-') then begin
+        //     MemberNo := ObjMembersReg."No.";
+        // end;
+        // exit(MemberNo);
     end;
 
     local procedure KnGetPeriodDescription(Period: Date): Text

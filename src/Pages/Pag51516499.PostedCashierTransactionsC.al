@@ -8,7 +8,7 @@ Page 51516499 "Posted Cashier Transactions C"
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = Transactions;
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {
@@ -45,7 +45,7 @@ Page 51516499 "Posted Cashier Transactions C"
 
                         CalcAvailableBal;
 
-                        Clear(AccP.Picture);
+                        Clear(AccP."Picture 2");
                         Clear(AccP.Signature);
                         if AccP.Get(Rec."Account No") then begin
                             /*//Hide Accounts
@@ -56,12 +56,12 @@ Page 51516499 "Posted Cashier Transactions C"
                             END;
                             END; */
                             //Hide Accounts
-                            AccP.CalcFields(AccP.Picture, AccP.Signature);
+                            AccP.CalcFields(AccP."Picture 2", AccP.Signature);
                         end;
 
                         Rec.CalcFields("Uncleared Cheques");
                         if AccP.Get(Rec."Account No") then begin
-                            Rec.Picture := AccP.Picture;
+                            // Rec.Picture := AccP."Picture 2";
 
                         end;
 
@@ -311,8 +311,8 @@ Page 51516499 "Posted Cashier Transactions C"
                     Caption = 'Account Card';
                     Image = Vendor;
                     Promoted = true;
-                    RunObject = Page "FOSA Account Card";
-                    RunPageLink = "No." = field("Account No");
+                    // RunObject = Page "FOSA Account Card";
+                    // RunPageLink = "No." = field("Account No");
                 }
                 separator(Action1102760031)
                 {
@@ -349,7 +349,7 @@ Page 51516499 "Posted Cashier Transactions C"
                     Rec.TestField(Posted);
 
                     Trans.Reset;
-                    Trans.SetRange(Trans.No, No);
+                    Trans.SetRange(Trans.No, Rec.No);
                     if Trans.Find('-') then begin
                         if Rec.Type = 'Cash Deposit' then
                             Report.Run(51516498, true, true, Trans)
@@ -453,7 +453,7 @@ Page 51516499 "Posted Cashier Transactions C"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        Clear(Acc.Picture);
+        Clear(Acc."Picture 2");
         Clear(Acc.Signature);
 
         Rec."Needs Approval" := Rec."needs approval"::No;
@@ -633,7 +633,7 @@ Page 51516499 "Posted Cashier Transactions C"
                         repeat
                             if TransactionCharges."Use Percentage" = true then begin
                                 TransactionCharges.TestField("Percentage of Amount");
-                                TCharges := TCharges + (TransactionCharges."Percentage of Amount" / 100) * "Book Balance";
+                                TCharges := TCharges + (TransactionCharges."Percentage of Amount" / 100) * Rec."Book Balance";
                             end else begin
                                 TCharges := TCharges + TransactionCharges."Charge Amount";
                             end;
@@ -831,7 +831,7 @@ Page 51516499 "Posted Cashier Transactions C"
             Rec."Posted By" := UserId;
             if ChequeTypes."Clearing  Days" = 0 then begin
                 Rec.Status := Rec.Status::Honoured;
-                Rec."Cheque Processed" := Rec."cheque processed"::"1";
+                Rec."Cheque Processed" := Rec."Cheque Processed" = true;
                 Rec."Date Cleared" := Today;
             end;
 
@@ -1104,7 +1104,7 @@ Page 51516499 "Posted Cashier Transactions C"
                     Rec."Authorisation Requirement" := 'Encashment - Over draft';
                     Rec.Modify;
                     Message('You cannot issue an encashment more than the available balance unless authorised.');
-                    MailContent := 'Withdrawal transaction' + 'TR. No.' + ' ' + Rec.No + ' ' + 'of Kshs' + ' ' + Format(Amount) + ' ' + 'for'
+                    MailContent := 'Withdrawal transaction' + 'TR. No.' + ' ' + Rec.No + ' ' + 'of Kshs' + ' ' + Format(Rec.Amount) + ' ' + 'for'
                     + ' ' + Rec."Account Name" + ' ' + 'needs your authorization';
                     SendEmail;
 
@@ -1336,7 +1336,7 @@ Page 51516499 "Posted Cashier Transactions C"
                     if Rec."Branch Transaction" = false then begin
                         Rec."Authorisation Requirement" := 'Over draft';
                         Rec.Modify;
-                        MailContent := 'Withdrawal transaction' + 'TR. No.' + ' ' + Rec.No + ' ' + 'of Kshs' + ' ' + Format(Amount) + ' ' + 'for'
+                        MailContent := 'Withdrawal transaction' + 'TR. No.' + ' ' + Rec.No + ' ' + 'of Kshs' + ' ' + Format(Rec.Amount) + ' ' + 'for'
                         + ' ' + Rec."Account Name" + ' ' + 'needs your approval';
                         SendEmail;
                         Message('You cannot withdraw more than the available balance unless authorised.');
@@ -1544,11 +1544,11 @@ Page 51516499 "Posted Cashier Transactions C"
                     GenJournalLine."Document No." := Rec.No;
                     GenJournalLine."Line No." := LineNo;
                     GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
-                    GenJournalLine."Account No." := "Account No";
-                    if "Account No" = '00-0000000000' then
-                        GenJournalLine."External Document No." := "ID No";
+                    GenJournalLine."Account No." := Rec."Account No";
+                    if Rec."Account No" = '00-0000000000' then
+                        GenJournalLine."External Document No." := Rec."ID No";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
-                    GenJournalLine."Posting Date" := "Transaction Date";
+                    GenJournalLine."Posting Date" := Rec."Transaction Date";
                     GenJournalLine.Description := TransactionCharges.Description;
                     GenJournalLine.Validate(GenJournalLine."Currency Code");
                     //IF (TransactionCharges."Charge Code",'<>SD') AND (Amount > 20000)  THEN
@@ -1576,7 +1576,7 @@ Page 51516499 "Posted Cashier Transactions C"
 
 
         TransactionCharges.Reset;
-        TransactionCharges.SetRange(TransactionCharges."Transaction Type", "Transaction Type");
+        TransactionCharges.SetRange(TransactionCharges."Transaction Type", Rec."Transaction Type");
         TransactionCharges.SetRange(TransactionCharges."Charge Code", '0001');
         if TransactionCharges.Find('-') then begin
             //IF TransactionCharges."Charge Code"='0001' THEN

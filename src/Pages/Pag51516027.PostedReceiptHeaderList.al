@@ -7,7 +7,7 @@ Page 51516027 "Posted Receipt Header List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "Receipt Header";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {

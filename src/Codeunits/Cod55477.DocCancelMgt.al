@@ -58,7 +58,7 @@ Codeunit 55477 "Doc-CancelMgt"
         //This function cancels a Purchase Document irrespective of the type
 
         Rec.TestField(Rec.Status, Rec.Status::Released);
-        Rec.TestField(Rec.Cancelled, false);
+        // Rec.TestField(Rec.Cancelled, false);
 
         Rec.Mark := true;
 
@@ -84,9 +84,9 @@ Codeunit 55477 "Doc-CancelMgt"
                     PurchLine.Modify;
                 until PurchLine.Next = 0;
             end;
-            Cancelled := true;
-            "Cancelled By" := UserId;
-            "Cancelled Date" := Today;
+            // Canceled := true;
+            // "Cancelled By" := UserId;
+            // "Cancelled Date" := Today;
             Modify;
         end;
 

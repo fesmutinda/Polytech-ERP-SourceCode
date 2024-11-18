@@ -6,7 +6,7 @@ Page 51516398 "Posted Loans Batch Card"
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Loan Disburesment-Batching";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {
@@ -43,8 +43,7 @@ Page 51516398 "Posted Loans Batch Card"
             {
                 ApplicationArea = Basic;
             }
-            field(Rec."Document No.";
-                Rec."Document No.")
+            field("Document No."; Rec."Document No.")
             {
                 ApplicationArea = Basic;
 
@@ -91,7 +90,7 @@ Page 51516398 "Posted Loans Batch Card"
                     Image = SuggestPayment;
                     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                     //PromotedCategory = Process;
-                    RunObject = Report 51516231;
+                    // RunObject = Report 51516231;
 
                     trigger OnAction()
                     begin
@@ -112,7 +111,7 @@ Page 51516398 "Posted Loans Batch Card"
                     Image = Customer;
                     Promoted = true;
                     PromotedCategory = Process;
-                    RunObject = Report 51516279;
+                    // RunObject = Report 51516279;
 
                     trigger OnAction()
                     begin
@@ -184,7 +183,7 @@ Page 51516398 "Posted Loans Batch Card"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::Batches;
-                        ApprovalEntries.Setfilters(Database::"Salary Step/Notch Transactions", DocumentType, "Batch No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Salary Step/Notch Transactions", DocumentType, Rec."Batch No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -447,7 +446,7 @@ Page 51516398 "Posted Loans Batch Card"
                                 GenJournalLine."Journal Template Name" := 'GENERAL';
                                 GenJournalLine."Journal Batch Name" := 'LOANS';
                                 GenJournalLine."Line No." := LineNo;
-                                GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                 GenJournalLine."Account No." := LoanApps."Client Code";
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := Rec."Document No.";
@@ -455,7 +454,7 @@ Page 51516398 "Posted Loans Batch Card"
                                 GenJournalLine.Description := 'Principal Amount';
                                 GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                 GenJournalLine.Validate(GenJournalLine.Amount);
-                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                                 GenJournalLine."Loan No" := LoanApps."Loan  No.";
                                 GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
                                 GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
@@ -474,9 +473,9 @@ Page 51516398 "Posted Loans Batch Card"
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
-                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
+                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                                     GenJournalLine."Document No." := Rec."Document No.";
                                     GenJournalLine."Posting Date" := Rec."Posting Date";
@@ -500,7 +499,7 @@ Page 51516398 "Posted Loans Batch Card"
                                     GenJournalLine."Journal Template Name" := 'GENERAL';
                                     GenJournalLine."Journal Batch Name" := 'LOANS';
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
                                     GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Deposit Contribution";
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
@@ -547,7 +546,7 @@ Page 51516398 "Posted Loans Batch Card"
                                             GenJournalLine."Document No." := Rec."Document No.";
                                             GenJournalLine."Posting Date" := Rec."Posting Date";
                                             GenJournalLine."External Document No." := LoanApps."Loan  No.";
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Investor;
+                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                             GenJournalLine."Account No." := LoanApps."Client Code";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             GenJournalLine.Description := 'Off Set By - ' + LoanApps."Loan  No.";
@@ -1077,7 +1076,7 @@ Page 51516398 "Posted Loans Batch Card"
 
                     trigger OnAction()
                     begin
-                        if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::RTGS) or (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::"5") then
+                        if (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::RTGS) or (Rec."Mode Of Disbursement" = Rec."mode of disbursement"::RTGS) then
                             Error('This Payment was made by other modes other than Cheque.');
                         //Print Cheque
                         Rec.Reset;

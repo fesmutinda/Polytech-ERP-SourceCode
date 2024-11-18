@@ -7,8 +7,8 @@ Page 51516336 "Bank Acc. Statement Lines H"
     Editable = false;
     LinksAllowed = false;
     PageType = ListPart;
-    SourceTable = "Payments Header Board";
-    SourceTableView = where(Field20 = const(0));
+    SourceTable = "Bank Acc. Statement Linevb";// "Payments Header Board";
+    // SourceTableView = where(Field20 = const(0));
 
     layout
     {
@@ -196,7 +196,7 @@ Page 51516336 "Bank Acc. Statement Lines H"
 
     local procedure ApplyEntries()
     var
-        BankAccReconApplyEntries: Codeunit "Bank Acc. Recon. Apply Entries";
+    // BankAccReconApplyEntries: Codeunit "Bank Acc. Recon. Apply Entries";
     begin
         /*
         "Ready for Application" := TRUE;
@@ -222,8 +222,8 @@ Page 51516336 "Bank Acc. Statement Lines H"
 
     local procedure SetUserInteractions()
     begin
-        StyleTxt := GetStyle;
-        ApplyEntriesAllowed := Type = Type::"1";
+        StyleTxt := Rec.GetStyle;
+        ApplyEntriesAllowed := Rec.Type = Rec.Type::"Bank Account Ledger Entry";
     end;
 
 

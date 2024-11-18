@@ -7,7 +7,7 @@ Page 51516148 "HR Medical Claims-Posted"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "HR Medical Claims";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

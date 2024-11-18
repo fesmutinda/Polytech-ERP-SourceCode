@@ -5,7 +5,7 @@ Page 51516400 "BOSA Receipt Card"
     Editable = true;
     PageType = Card;
     SourceTable = "Receipts & Payments";
-    SourceTableView = where(Posted = filter(No));
+    SourceTableView = where(Posted = filter(false));
 
     layout
     {
@@ -115,7 +115,7 @@ Page 51516400 "BOSA Receipt Card"
             }
             part("Receipt Line"; "Individual Member Risk Rating")
             {
-                SubPageLink = "Document No" = field(Rec."Transaction No.");
+                SubPageLink = "Membership Application No" = field("Transaction No.");
                 Visible = false;
             }
         }
@@ -289,7 +289,7 @@ Page 51516400 "BOSA Receipt Card"
                             GenJournalLine."Document No." := Rec."Transaction No.";
                             GenJournalLine."External Document No." := Rec."Cheque No.";
                             GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                             GenJournalLine."Account No." := Rec."Account No.";
                             GenJournalLine.Validate(GenJournalLine."Account No.");
                             GenJournalLine."Posting Date" := Rec."Cheque Date";
@@ -310,7 +310,7 @@ Page 51516400 "BOSA Receipt Card"
                             GenJournalLine."Document No." := Rec."Transaction No.";
                             GenJournalLine."External Document No." := Rec."Cheque No.";
                             GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                             GenJournalLine."Account No." := Recruiter;
                             GenJournalLine.Validate(GenJournalLine."Account No.");
                             GenJournalLine."Posting Date" := Rec."Cheque Date";
@@ -461,7 +461,7 @@ Page 51516400 "BOSA Receipt Card"
                         else if Rec."Account Type" = Rec."account type"::Member then
                             GenJournalLine."Account Type" := Rec."Account Type"
                         else if Rec."Account Type" = Rec."account type"::Micro then
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                         GenJournalLine."Account No." := Rec."Account No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         //GenJournalLine."Posting Date":="Cheque Date";
@@ -527,7 +527,7 @@ Page 51516400 "BOSA Receipt Card"
                                             GenJournalLine."Posting Date" := Rec."Cheque Date";
                                             ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
                                             ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                             GenJournalLine."Account No." := ReceiptAllocations."Member No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             if (Rec."Receipt Mode" = Rec."receipt mode"::"Standing order") and (ReceiptAllocations."Transaction Type" = ReceiptAllocations."transaction type"::"Mwanangu Savings") then begin
@@ -554,7 +554,7 @@ Page 51516400 "BOSA Receipt Card"
                         ChargeAmount := 0;
                         if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::Vendor) or
                          (Rec."Account Type" = Rec."account type"::Micro) then begin
-                            if Rec."Receipt Mode" = Rec."receipt mode"::"5" then begin
+                            if Rec."Receipt Mode" = Rec."receipt mode"::"Deposit Slip" then begin
                                 ReceiptAllocations.Reset;
                                 ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                                 ReceiptAllocations.SetFilter(ReceiptAllocations."Transaction Type", '%1', ReceiptAllocations."transaction type"::"Loan Repayment");
@@ -595,7 +595,7 @@ Page 51516400 "BOSA Receipt Card"
                                             GenJournalLine."Journal Batch Name" := 'FTRANS';
                                             GenJournalLine."Document No." := Rec."Transaction No.";
                                             GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                             GenJournalLine."Account No." := Rec."Account No.";
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             GenJournalLine."Loan No" := Loans."Loan  No.";
@@ -717,7 +717,7 @@ Page 51516400 "BOSA Receipt Card"
         IntDate: Date;
         CheckExistingBill: Boolean;
         InterestAmount: Decimal;
-        ManagePrint: Codeunit ApplicationManagement;
+        // ManagePrint: Codeunit ApplicationManagement;
         GenJournalLine: Record "Gen. Journal Line";
         InterestPaid: Decimal;
         PaymentAmount: Decimal;
@@ -1412,7 +1412,7 @@ Page 51516400 "BOSA Receipt Card"
                 GenJournalLine."Journal Template Name" := 'GENERAL';
                 GenJournalLine."Journal Batch Name" := 'INT DUE';
                 GenJournalLine."Line No." := LineNo;
-                GenJournalLine."Account Type" := GenJournalLine."account type"::Member;
+                GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                 GenJournalLine."Account No." := loanapp."Client Code";
                 GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Due";
                 GenJournalLine.Validate(GenJournalLine."Account No.");

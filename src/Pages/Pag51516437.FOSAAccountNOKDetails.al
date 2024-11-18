@@ -67,12 +67,12 @@ Page 51516437 "FOSA Account  NOK Details"
 
     trigger OnAfterGetRecord()
     begin
-        "Maximun Allocation %" := 100;
+        Rec."Maximun Allocation %" := 100;
     end;
 
     trigger OnOpenPage()
     begin
-        "Maximun Allocation %" := 100;
+       Rec. "Maximun Allocation %" := 100;
     end;
 
     var

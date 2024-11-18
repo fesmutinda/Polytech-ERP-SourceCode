@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51516563 "Guarantorship Substitution H"
 {
-    LookupPageID = 51516012;
+    // LookupPageID = 51516012;
 
     fields
     {
@@ -133,8 +133,8 @@ Table 51516563 "Guarantorship Substitution H"
         }
         field(8; Status; Option)
         {
-            OptionCaption = 'Open,Pending,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            OptionCaption = 'Open,Pending,Approved,Rejected,Closed';
+            OptionMembers = Open,Pending,Approved,Rejected,Closed;
         }
         field(9; "Created By"; Code[20])
         {

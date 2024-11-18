@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516905 "SCustody Agent List"
 {
-    CardPageID = "SCustody Agent Card";
+    // CardPageID = "SCustody Agent Card";
     Editable = false;
     PageType = List;
     SourceTable = 51516905;
@@ -12,31 +12,31 @@ Page 51516905 "SCustody Agent List"
         {
             repeater(Group)
             {
-                field("Package ID"; "Package ID")
+                field("Package ID"; Rec."Package ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agent ID"; "Agent ID")
+                field("Agent ID"; Rec."Agent ID")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agent Member No"; "Agent Member No")
+                field("Agent Member No"; Rec."Agent Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Agent Name"; "Agent Name")
+                field("Agent Name"; Rec."Agent Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Is Owner"; "Is Owner")
+                field("Is Owner"; Rec."Is Owner")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Created By"; "Created By")
+                field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Appointed"; "Date Appointed")
+                field("Date Appointed"; Rec."Date Appointed")
                 {
                     ApplicationArea = Basic;
                 }

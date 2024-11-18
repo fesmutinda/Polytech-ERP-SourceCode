@@ -111,14 +111,14 @@ Page 51516521 "Loan Trunch Disburesment"
                             //------------------------------------1. DEBIT MEMBER LOAN A/C---------------------------------------------------------------------------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::Loan,
-                            GenJournalLine."account type"::Member, Rec."Member No", Rec."Issue Date", Rec."Amount to Disburse", '', Rec."Loan No",
+                            GenJournalLine."account type"::Customer, Rec."Member No", Rec."Issue Date", Rec."Amount to Disburse", '', Rec."Loan No",
                             'Trunch Disbursment- ' + Rec."Loan No", Rec."Loan No");
                             //--------------------------------(Debit Member Loan Account)------------------------------------------------------------------------------------------------
 
                             //------------------------------------2. CREDIT MEMBER FOSA A/C---------------------------------------------------------------------------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-                            GenJournalLine."account type"::Vendor, Rec."FOSA Account", Rec."Issue Date", Rec."Amount to Disburse" * -1, 'BOSA', Rec."Loan No",
+                            GenJournalLine."account type"::Customer, Rec."FOSA Account", Rec."Issue Date", Rec."Amount to Disburse" * -1, 'BOSA', Rec."Loan No",
                             'Trunch Disbursment- ' + Rec."Loan No", Rec."Loan No");
                             //----------------------------------(Credit Member Fosa Account)------------------------------------------------
 
@@ -158,10 +158,10 @@ Page 51516521 "Loan Trunch Disburesment"
                         Text001: label 'This transaction is already pending approval';
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
-                        if ApprovalMgt.CheckTrunchApprovalsWorkflowEnabled(Rec) then begin
-                            ApprovalMgt.OnSendTrunchForApproval(Rec);
-                            Message('here');
-                        end
+                        // if ApprovalMgt.CheckTrunchApprovalsWorkflowEnabled(Rec) then begin
+                        // //     ApprovalMgt.OnSendTrunchForApproval(Rec);
+                        //     Message('here');
+                        // end
                     end;
                 }
                 action("Cancel Approval Request")
@@ -178,7 +178,7 @@ Page 51516521 "Loan Trunch Disburesment"
                     var
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
-                        ApprovalMgt.OnCancelTrunchApprovalRequest(Rec);
+                        // ApprovalMgt.OnCancelTrunchApprovalRequest(Rec);
                     end;
                 }
                 action(Approval)

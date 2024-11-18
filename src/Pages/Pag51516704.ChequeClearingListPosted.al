@@ -5,7 +5,7 @@ Page 51516704 "Cheque Clearing List-Posted"
     Editable = false;
     PageType = List;
     SourceTable = "Cheque Clearing Header";
-    SourceTableView = where(Posted = const(Yes));
+    SourceTableView = where(Posted = const(true));
 
     layout
     {

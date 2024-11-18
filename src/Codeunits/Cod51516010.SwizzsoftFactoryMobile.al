@@ -265,17 +265,17 @@ Codeunit 51516010 "Swizzsoft FactoryMobile"
     end;
 
 
-    procedure FnGetMemberBranch(MemberNo: Code[100]) MemberBranch: Code[100]
-    var
-        ObjMemberLocal: Record 51516364;
-    begin
-        ObjMemberLocal.Reset;
-        ObjMemberLocal.SetRange(ObjMemberLocal."No.",MemberNo);
-        if ObjMemberLocal.Find('-') then begin
-          MemberBranch:=ObjMemberLocal."Global Dimension 2 Code";
-          end;
-          exit(MemberBranch);
-    end;
+    // procedure FnGetMemberBranch(MemberNo: Code[100]) MemberBranch: Code[100]
+    // var
+    //     ObjMemberLocal: Record 51516364;
+    // begin
+    //     ObjMemberLocal.Reset;
+    //     ObjMemberLocal.SetRange(ObjMemberLocal."No.",MemberNo);
+    //     if ObjMemberLocal.Find('-') then begin
+    //       MemberBranch:=ObjMemberLocal."Global Dimension 2 Code";
+    //       end;
+    //       exit(MemberBranch);
+    // end;
 
     local procedure FnReturnRetirementDate(MemberNo: Code[50]): Date
     var
@@ -378,13 +378,13 @@ Codeunit 51516010 "Swizzsoft FactoryMobile"
     end;
 
 
-    procedure FnGetPhoneNumber(ObjLoans: Record 51516371): Code[50]
-    begin
-        ObjMembers.Reset;
-        ObjMembers.SetRange("No.",ObjLoans."BOSA No");
-        if ObjMembers.Find('-') then
-          exit(ObjMembers."Phone No.");
-    end;
+    // procedure FnGetPhoneNumber(ObjLoans: Record 51516371): Code[50]
+    // begin
+    //     ObjMembers.Reset;
+    //     ObjMembers.SetRange("No.",ObjLoans."BOSA No");
+    //     if ObjMembers.Find('-') then
+    //       exit(ObjMembers."Phone No.");
+    // end;
 
     local procedure FnBoosterLoansDisbursement(ObjLoanDetails: Record 51516371): Code[40]
     var

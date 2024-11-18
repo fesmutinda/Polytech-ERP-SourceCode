@@ -5,7 +5,7 @@ Page 51516599 "Posted Share Boosting List"
     Editable = false;
     PageType = List;
     SourceTable = "Loan PayOff";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

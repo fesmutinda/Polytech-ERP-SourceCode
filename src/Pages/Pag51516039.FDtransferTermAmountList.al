@@ -5,7 +5,7 @@ Page 51516039 "FD transfer Term Amount List"
     DeleteAllowed = false;
     PageType = List;
     SourceTable = "FD Processing";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {

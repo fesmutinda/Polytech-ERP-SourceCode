@@ -172,6 +172,7 @@ Table 51516926 "Default Notices Register"
         {
             DataClassification = ToBeClassified;
         }
+        field(36; "Days In Arrears"; Duration) { }
     }
 
     keys

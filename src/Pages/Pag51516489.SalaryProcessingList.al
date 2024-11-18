@@ -5,7 +5,7 @@ Page 51516489 "Salary Processing List"
     Editable = false;
     PageType = List;
     SourceTable = "Salary Processing Header";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {
@@ -61,7 +61,7 @@ Page 51516489 "Salary Processing List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque No."; Rec."Cheque No.")
+                field("Cheque No."; Rec."Document No")
                 {
                     ApplicationArea = Basic;
                 }

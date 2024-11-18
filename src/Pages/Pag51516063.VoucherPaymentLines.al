@@ -265,12 +265,12 @@ Page 51516063 "Voucher Payment Lines"
                         Rec.Validate("Net Amount");
                     end;
                 }
-                field(Remarks; Rec.Remarks)
-                {
-                    ApplicationArea = Basic;
-                    Editable = FieldEditable;
-                    Enabled = FieldEditable;
-                }
+                // field(Remarks; Rec.Remarks)
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = FieldEditable;
+                //     Enabled = FieldEditable;
+                // }
                 field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
@@ -289,7 +289,7 @@ Page 51516063 "Voucher Payment Lines"
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("VAT Rate"; Rec."VAT Rate")
+                field("VAT Rate"; Rec."VAT Amount")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -308,14 +308,14 @@ Page 51516063 "Voucher Payment Lines"
                     trigger OnValidate()
                     begin
                         TarriffCodes.Reset;
-                        TarriffCodes.SetRange(TarriffCodes.Code, "Withholding Tax Code");
-                        if TarriffCodes.FindFirst then begin
-                            //    "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
-                            Rec."Withholding Tax Amount" := (Rec."Amount With VAT" - Rec."VAT Amount") * (TarriffCodes.Percentage / 100);
-                        end
-                        else begin
-                            Rec."Withholding Tax Amount" := 0;
-                        end;
+                        // TarriffCodes.SetRange(TarriffCodes.Code, "Withholding Tax Code");
+                        // if TarriffCodes.FindFirst then begin
+                        //     //    "Withholding Tax Amount":=(TarriffCodes.Percentage/100)*Amount;
+                        //     Rec."Withholding Tax Amount" := (Rec."Amount With VAT" - Rec."VAT Amount") * (TarriffCodes.Percentage / 100);
+                        // end
+                        // else begin
+                        Rec."Withholding Tax Amount" := 0;
+                        // end;
                         Rec."Net Amount" := Rec.Amount - Rec."Withholding Tax Amount";
                     end;
                 }
@@ -331,23 +331,23 @@ Page 51516063 "Voucher Payment Lines"
                     Editable = false;
                     Visible = false;
                 }
-                field("Retention  Amount"; Rec."Retention  Amount")
-                {
-                    ApplicationArea = Basic;
-                    Visible = false;
-                }
+                // field("Retention  Amount"; Rec."Retention  Amount")
+                // {
+                //     ApplicationArea = Basic;
+                //     Visible = false;
+                // }
                 field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Apply to ID"; Rec."Apply to ID")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Lookup = true;
-                    Visible = false;
-                }
+                // field("Apply to ID"; Rec."Apply to ID")
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = false;
+                //     Lookup = true;
+                //     Visible = false;
+                // }
                 field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
                 {
                     ApplicationArea = Basic;
@@ -376,7 +376,7 @@ Page 51516063 "Voucher Payment Lines"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         PHeader.Reset;
-        PHeader.SetRange(PHeader."No.", No);
+        PHeader.SetRange(PHeader."No.", Rec.No);
         if PHeader.FindFirst then begin
             if (PHeader.Status = PHeader.Status::Approved) or (PHeader.Status = PHeader.Status::"Pending Approval") then begin
                 FieldEditable := false;

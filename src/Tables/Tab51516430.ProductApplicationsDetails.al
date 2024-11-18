@@ -3,8 +3,8 @@ Table 51516430 "Product Applications Details"
 {
     Caption = 'Product Applications Details';
     DataCaptionFields = "No.", Name;
-    DrillDownPageID = "Product Applications List";
-    LookupPageID = "Product Applications List";
+    // DrillDownPageID = "Product Applications List";
+    // LookupPageID = "Product Applications List";
     Permissions = TableData "Vendor Ledger Entry" = r;
 
     fields
@@ -1015,7 +1015,7 @@ Table 51516430 "Product Applications Details"
                     "Search Name" := Cust."Search Name";
                     Address := Cust.Address;
                     "Address 2" := Cust."Home Address";
-                    "Staff No" := Cust."Personal No";
+                    // "Staff No" := Cust.staff "Personal No";
                     City := Cust.City;
                     "Employer Code" := Cust."Employer Code";
                     Section := Cust."Station/Department";
@@ -1093,14 +1093,14 @@ Table 51516430 "Product Applications Details"
 
             trigger OnValidate()
             begin
-                if AccountTypes.Get("Account Type") then begin
-                    AccountTypes.TestField(AccountTypes."Posting Group");
-                    "Vendor Posting Group" := AccountTypes."Posting Group";
-                    if AccountTypes."Activity Code" = AccountTypes."activity code"::FOSA then
-                        "Global Dimension 1 Code" := 'FOSA'
-                    else
-                        "Global Dimension 1 Code" := 'MICRO';
-                end;
+                // if AccountTypes.Get("Account Type") then begin
+                //     AccountTypes.TestField(AccountTypes."Posting Group");
+                //     "Vendor Posting Group" := AccountTypes."Posting Group";
+                //     if AccountTypes."Activity Code" = AccountTypes."activity code"::FOSA then
+                //         "Global Dimension 1 Code" := 'FOSA'
+                //     else
+                //         "Global Dimension 1 Code" := 'MICRO';
+                // end;
 
                 if "Account Type" = 'JUNIOR' then
                     "Date of Birth" := 0D;
@@ -1431,8 +1431,8 @@ Table 51516430 "Product Applications Details"
         UsersID: Record User;
         FDType: Record "Fixed Deposit Type";
         Cust: Record Customer;
-        NOKBOSA: Record "Members NOK Details";
-        NOKApp: Record "Product App Kin Details";
+        NOKBOSA: Record "Members Next Kin Details";// "Members NOK Details";
+        NOKApp: Record "Member App Next Of kin";//"Product App Kin Details";
         GenSetUp: Record "Sacco General Set-Up";
         VendorFDR: Record Vendor;
         ParentEditable: Boolean;

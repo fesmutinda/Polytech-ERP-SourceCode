@@ -21,7 +21,7 @@ Page 51516383 "Receipt Allocation-BOSA"
                 field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
-                    LookupPageID = "Fosa Account List";
+                    // LookupPageID = "Fosa Account List";
                     Visible = false;
                 }
                 field("Transaction Type"; Rec."Transaction Type")

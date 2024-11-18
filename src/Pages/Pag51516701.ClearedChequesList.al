@@ -8,9 +8,9 @@ Page 51516701 "Cleared Cheques List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Transactions;
-    SourceTableView = where(Posted = filter(Yes),
-                            "Transaction Type" = const(CHEQDEPORD),
-                            "Cheque Processed" = const(Yes));
+    SourceTableView = where(Posted = filter(true),
+                            "Transaction Type" = const('CHEQDEPORD'),
+                            "Cheque Processed" = const(true));
 
     layout
     {

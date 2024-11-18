@@ -5,7 +5,7 @@ Page 51516333 "prPayroll Periods"
     Editable = false;
     InsertAllowed = false;
     PageType = Card;
-    SourceTable = 51516266;
+    SourceTable = "prPayroll Periods.";
 
     layout
     {
@@ -118,7 +118,7 @@ Page 51516333 "prPayroll Periods"
     }
 
     var
-        PayPeriod: Record 51516266;
+        PayPeriod: Record "prPayroll Periods.";
         strPeriodName: Text[30];
         Text000: label '''Leave without saving changes?''';
         Text001: label '''You selected %1.''';
@@ -132,7 +132,7 @@ Page 51516333 "prPayroll Periods"
         PayrollCode: Code[10];
         NoofRecords: Integer;
         i: Integer;
-        ContrInfo: Record 51516161;
+        ContrInfo: Record "Control-Information.";
 
 
     procedure fnGetOpenPeriod()

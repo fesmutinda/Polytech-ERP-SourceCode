@@ -647,7 +647,7 @@ Page 51516852 "Loan Application MICRO(Apprai)"
                             //LBalance:=LoansR."Approved Amount";
                             LBalance := LoansR."Approved Amount" + LoansR."Capitalized Charges";
                             RunDate := Rec."Repayment Start Date";//"Loan Disbursement Date";
-                                                              //RunDate:=CALCDATE('-1W',RunDate);
+                                                                  //RunDate:=CALCDATE('-1W',RunDate);
                             InstalNo := 0;
                             //EVALUATE(RepayInterval,'1W');
                             //EVALUATE(RepayInterval,InPeriod);
@@ -655,11 +655,11 @@ Page 51516852 "Loan Application MICRO(Apprai)"
                             //Repayment Frequency
                             if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                                 RunDate := CalcDate('-1D', RunDate)
-                            else if Rec. "Repayment Frequency" = Rec."repayment frequency"::Weekly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                                 RunDate := CalcDate('-1W', RunDate)
                             else if Rec."Repayment Frequency" = Rec."repayment frequency"::Monthly then
                                 RunDate := CalcDate('-1M', RunDate)
-                            else if Rec."Repayment Frequency" =Rec. "repayment frequency"::Quaterly then
+                            else if Rec."Repayment Frequency" = Rec."repayment frequency"::Quaterly then
                                 RunDate := CalcDate('-1Q', RunDate);
                             //Repayment Frequency
 
@@ -671,7 +671,7 @@ Page 51516852 "Loan Application MICRO(Apprai)"
 
 
                                 //Repayment Frequency
-                                if Rec."Repayment Frequency" =Rec. "repayment frequency"::Daily then
+                                if Rec."Repayment Frequency" = Rec."repayment frequency"::Daily then
                                     RunDate := CalcDate('1D', RunDate)
                                 else if Rec."Repayment Frequency" = Rec."repayment frequency"::Weekly then
                                     RunDate := CalcDate('1W', RunDate)
@@ -683,16 +683,16 @@ Page 51516852 "Loan Application MICRO(Apprai)"
 
                                 //kma
                                 if Rec."Repayment Method" = Rec."repayment method"::Amortised then begin
-                                   Rec. TestField(Interest);
-                                   Rec. TestField(Installments);
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.05, '>');
                                     LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 0.05, '>');
                                     LPrincipal := TotalMRepay - LInterest;
                                 end;
 
-                                if Rec."Repayment Method" =Rec."repayment method"::"Straight Line" then begin
-                                   Rec. TestField(Interest);
-                                   Rec. TestField(Installments);
+                                if Rec."Repayment Method" = Rec."repayment method"::"Straight Line" then begin
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.05, '>');
                                     LInterest := ROUND((InterestRate / 1200) * LoanAmount, 0.05, '>');
 
@@ -702,14 +702,14 @@ Page 51516852 "Loan Application MICRO(Apprai)"
                                 end;
 
                                 if Rec."Repayment Method" = Rec."repayment method"::"Reducing Balance" then begin
-                                   Rec. TestField(Interest);
-                                   Rec. TestField(Installments);
+                                    Rec.TestField(Interest);
+                                    Rec.TestField(Installments);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.05, '>');
                                     LInterest := ROUND((InterestRate / 12 / 100) * LBalance, 0.05, '>');
                                 end;
 
-                                if Rec."Repayment Method" =Rec. "repayment method"::Constants then begin
-                                   Rec. TestField(Repayment);
+                                if Rec."Repayment Method" = Rec."repayment method"::Constants then begin
+                                    Rec.TestField(Repayment);
                                     LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.05, '>');
                                     //IF LBalance < Repayment THEN
                                     //LPrincipal:=LBalance
@@ -1585,9 +1585,9 @@ Page 51516852 "Loan Application MICRO(Apprai)"
                     begin
                         //ApprovalMgt.SendLoanApprRequest(Rec);
                         if Confirm('Are you sure you want to cancel the approval request', false) = true then begin
-                           Rec. "Loan Status" := Rec."loan status"::Application;
-                           Rec. "Approval Status" := "approval status"::Open;
-                           Rec. Modify;
+                            Rec."Loan Status" := Rec."loan status"::Application;
+                            Rec."Approval Status" := "approval status"::Open;
+                            Rec.Modify;
                         end;
                     end;
                 }
@@ -1632,7 +1632,7 @@ Page 51516852 "Loan Application MICRO(Apprai)"
 
     trigger OnOpenPage()
     begin
-       Rec. SetRange(Posted, false);
+        Rec.SetRange(Posted, false);
     end;
 
     var
@@ -1902,7 +1902,7 @@ Page 51516852 "Loan Application MICRO(Apprai)"
     local procedure FnSendReceivedLoanApplEmail(LoanNo: Code[20])
     var
         LoanRec: Record 51516371;
-        // SMTPMail: Codeunit UnknownCodeunit400;
+        // SMTPMail: Codeunit 400;
         // SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];
@@ -1937,7 +1937,7 @@ Page 51516852 "Loan Application MICRO(Apprai)"
         Sms: Record 51516471;
     begin
         LGuarantors.Reset;
-        LGuarantors.SetRange(LGuarantors."Loan No",Rec. "Loan  No.");
+        LGuarantors.SetRange(LGuarantors."Loan No", Rec."Loan  No.");
         if LGuarantors.FindFirst then begin
             repeat
                 if Cust.Get(LGuarantors."Member No") then

@@ -95,7 +95,7 @@ Page 51516263 "HR Setup List"
                 Image = Planning;
                 Promoted = true;
                 PromotedCategory = Category4;
-                RunObject = Page "HR Policies";
+                // RunObject = Page "HR Policies";
             }
             action("E-Mail Parameters")
             {

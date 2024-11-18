@@ -131,7 +131,7 @@ Page 51516136 "Loan Rescheduling card"
                         // IF Loans.FIND('-') THEN
                         //  REPORT.RUN(51516231,TRUE,FALSE,Loans);
 
-                        SFactory.FnGenerateRepaymentSchedule(Rec."Loan No");
+                        // SFactory.FnGenerateRepaymentSchedule(Rec."Loan No");
 
 
                         LoanApp.Reset;
@@ -162,7 +162,7 @@ Page 51516136 "Loan Rescheduling card"
         RepayCode: Code[30];
         WhichDay: Integer;
         TotalMRepay: Decimal;
-        SFactory: Codeunit "SURESTEP Factory";
+        SFactory: Codeunit "Swizzsoft Factory";
         LoanApp: Record 51516371;
 
     local procedure FnRescheduleLoan()

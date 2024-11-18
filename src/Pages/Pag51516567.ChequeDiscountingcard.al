@@ -256,8 +256,8 @@ Page 51516567 "Cheque Discounting card"
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
 
-                        if ApprovalsMgmt.CheckChequeDiscountingApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnSendChequeDiscountingForApproval(Rec)
+                        // if ApprovalsMgmt.CheckChequeDiscountingApprovalsWorkflowEnabled(Rec) then
+                        //     ApprovalsMgmt.OnSendChequeDiscountingForApproval(Rec)
                     end;
                 }
                 action("Cancel Approval Request")
@@ -275,8 +275,8 @@ Page 51516567 "Cheque Discounting card"
                     var
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
-                        if ApprovalsMgmt.CheckChequeDiscountingApprovalsWorkflowEnabled(Rec) then
-                            ApprovalsMgmt.OnCancelChequeDiscountingApprovalRequest(Rec);
+                        // if ApprovalsMgmt.CheckChequeDiscountingApprovalsWorkflowEnabled(Rec) then
+                        //     ApprovalsMgmt.OnCancelChequeDiscountingApprovalRequest(Rec);
                     end;
                 }
                 action(Approval)
@@ -295,7 +295,7 @@ Page 51516567 "Cheque Discounting card"
                     begin
 
                         DocumentType := Documenttype::ChequeDiscounting;
-                        ApprovalEntries.Setfilters(Database::"Cheque Discounting", DocumentType, Rec."Transaction No");
+                        ApprovalEntries.SetRecordFilters(Database::"Cheque Discounting", DocumentType, Rec."Transaction No");
                         ApprovalEntries.Run;
                     end;
                 }

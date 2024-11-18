@@ -144,14 +144,14 @@ Page 50270 "Loan Products Setup List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Pepea Deposits"; Rec."Pepea Deposits")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Sacco Deposits"; Rec."Sacco Deposits")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Pepea Deposits"; Rec."Pepea Deposits")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Sacco Deposits"; Rec."Sacco Deposits")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Charge Interest Upfront"; Rec."Charge Interest Upfront")
                 {
                     ApplicationArea = Basic;

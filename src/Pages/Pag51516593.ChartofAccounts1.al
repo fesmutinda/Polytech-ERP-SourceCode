@@ -250,7 +250,7 @@ Page 51516593 "Chart of Accounts 1"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Id; Rec.Id)
+                field(Id; Rec."No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -266,10 +266,10 @@ Page 51516593 "Chart of Accounts 1"
                 {
                     ApplicationArea = Basic;
                 }
-                field(test; Rec.test)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(test; Rec.test)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Grant Expense"; Rec."Grant Expense")
                 {
                     ApplicationArea = Basic;

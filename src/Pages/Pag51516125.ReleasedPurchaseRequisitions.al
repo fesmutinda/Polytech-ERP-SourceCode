@@ -141,7 +141,7 @@ Page 51516125 "Released Purchase Requisitions"
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Responsible Officer"; Rec."Responsible Officer")
+                field("Responsible Officer"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                     Caption = '<Procurement Officer>';
@@ -245,7 +245,7 @@ Page 51516125 "Released Purchase Requisitions"
                     var
                         ApprovalEntries: Page "Approval Entries";
                     begin
-                        ApprovalEntries.Setfilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"Purchase Header", Rec."Document Type", Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }
@@ -278,7 +278,7 @@ Page 51516125 "Released Purchase Requisitions"
                 Image = Print;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = Report 60004;
+                // RunObject = Report 60004;
 
                 trigger OnAction()
                 begin
@@ -372,10 +372,10 @@ Page 51516125 "Released Purchase Requisitions"
         PurchLines: Record "Purchase Line";
     begin
         if BCSetup.Get() then begin
-            if not BCSetup.Mandatory then begin
-                Exists := false;
-                exit;
-            end;
+            // if not BCSetup.Mandatory then begin
+            //     Exists := false;
+            //     exit;
+            // end;
         end else begin
             Exists := false;
             exit;
@@ -385,7 +385,7 @@ Page 51516125 "Released Purchase Requisitions"
             PurchLines.Reset;
             PurchLines.SetRange(PurchLines."Document Type", Rec."Document Type");
             PurchLines.SetRange(PurchLines."Document No.", Rec."No.");
-            PurchLines.SetRange(PurchLines.Committed, false);
+            // PurchLines.SetRange(PurchLines.Committed, false);
             if PurchLines.Find('-') then
                 Exists := true;
         end else

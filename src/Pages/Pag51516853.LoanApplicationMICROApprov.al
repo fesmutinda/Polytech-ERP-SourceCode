@@ -1250,7 +1250,7 @@ Page 51516853 "Loan Application MICRO(Approv)"
     local procedure FnSendReceivedLoanApplEmail(LoanNo: Code[20])
     var
         LoanRec: Record 51516371;
-        // SMTPMail: Codeunit UnknownCodeunit400;
+        // SMTPMail: Codeunit 400;
         // SMTPSetup: Record "SMTP Mail Setup";
         FileName: Text[100];
         Attachment: Text[250];

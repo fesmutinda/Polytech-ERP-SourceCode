@@ -2,7 +2,7 @@
 Page 50220 "Membership Application List"
 {
     ApplicationArea = Basic;
-    CardPageID = "Membership Application Card";
+    // CardPageID = "Membership Application Card";
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
@@ -58,12 +58,12 @@ Page 50220 "Membership Application List"
                     ShowMandatory = true;
                     Visible = false;
                 }
-                field("Payroll/Staff No"; Rec."Payroll/Staff No")
+                field("Payroll/Staff No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("User ID"; Rec."User ID")
+                field("User ID"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
                     Visible = false;
@@ -239,7 +239,7 @@ Page 50220 "Membership Application List"
                             Cust.Location := Rec.Location;
                             Cust."Sub-Location" := Rec."Sub-Location";
                             Cust.District := Rec.District;
-                            Cust."Payroll/Staff No" := Rec."Payroll/Staff No";
+                            Cust."Payroll/Staff No" := Rec."Payroll No";
                             Cust."ID No." := Rec."ID No.";
                             Cust."Mobile Phone No" := Rec."Mobile Phone No";
                             Cust."Marital Status" := Rec."Marital Status";
@@ -360,8 +360,8 @@ Page 50220 "Membership Application List"
                                     AccountSign.Signatory := AccountSignApp.Signatory;
                                     AccountSign."Must Sign" := AccountSignApp."Must Sign";
                                     AccountSign."Must be Present" := AccountSignApp."Must be Present";
-                                    AccountSign.Picture := AccountSignApp.Picture;
-                                    AccountSign.Signature := AccountSignApp.Signature;
+                                    // AccountSign.Picture := AccountSignApp.Picture;
+                                    // AccountSign.Signature := AccountSignApp.Signature;
                                     AccountSign."Expiry Date" := AccountSignApp."Expiry Date";
                                     //AccountSign."Mobile No.":=AccountSignApp."Mobile No.";
                                     AccountSign.Insert;
@@ -405,7 +405,7 @@ Page 50220 "Membership Application List"
     trigger OnOpenPage()
     begin
 
-        Rec.SetRange("User ID", UserId);
+        // Rec.SetRange("User ID", UserId);
     end;
 
     var
@@ -414,7 +414,7 @@ Page 50220 "Membership Application List"
         Accounts: Record Vendor;
         AcctNo: Code[20];
         NextOfKinApp: Record "Member App Next Of kin";
-        NextofKinFOSA: Record "Members Next Kin Details";
+        // NextofKinFOSA: Record "Members Next Kin Details";
         AccountSign: Record "Member Account Signatories";
         AccountSignApp: Record "Member App Signatories";
         Acc: Record Vendor;

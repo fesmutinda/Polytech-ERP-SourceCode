@@ -56,14 +56,14 @@ Page 51516172 "HR Job Occupants"
                 Image = "Report";
                 Promoted = true;
                 PromotedCategory = "Report";
-                RunObject = Report 55582;
+                // RunObject = Report 55582;
             }
         }
     }
 
     trigger OnOpenPage()
     begin
-        if IsEmpty then
+        if Rec.IsEmpty then
             Error('No jobs have been setup');
     end;
 

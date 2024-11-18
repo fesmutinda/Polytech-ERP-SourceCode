@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Codeunit 55487 "User Setup Management BRr"
 {
-    Permissions = TableData Location=r,
-                  TableData "Responsibility Center"=r;
+    Permissions = TableData Location = r,
+                  TableData "Responsibility Center" = r;
 
     trigger OnRun()
     begin
@@ -47,13 +47,13 @@ Codeunit 55487 "User Setup Management BRr"
     procedure GetSalesFilter2(UserCode: Code[50]): Code[10]
     begin
         if not HasGotSalesUserSetup then begin
-          CompanyInfo.Get;
-          SalesUserRespCenter := CompanyInfo."Responsibility Center";
-          UserLocation := CompanyInfo."Location Code";
-          if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup."Sales Resp. Ctr. Filter" <> '' then
-              SalesUserRespCenter := UserSetup."Sales Resp. Ctr. Filter";
-          HasGotSalesUserSetup := true;
+            CompanyInfo.Get;
+            SalesUserRespCenter := CompanyInfo."Responsibility Center";
+            UserLocation := CompanyInfo."Location Code";
+            if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+                if UserSetup."Sales Resp. Ctr. Filter" <> '' then
+                    SalesUserRespCenter := UserSetup."Sales Resp. Ctr. Filter";
+            HasGotSalesUserSetup := true;
         end;
         exit(SalesUserRespCenter);
     end;
@@ -62,13 +62,13 @@ Codeunit 55487 "User Setup Management BRr"
     procedure GetPurchasesFilter2(UserCode: Code[50]): Code[10]
     begin
         if not HasGotPurchUserSetup then begin
-          CompanyInfo.Get;
-          PurchUserRespCenter := CompanyInfo."Responsibility Center";
-          UserLocation := CompanyInfo."Location Code";
-          if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup."Purchase Resp. Ctr. Filter" <> '' then
-              PurchUserRespCenter := UserSetup."Purchase Resp. Ctr. Filter";
-          HasGotPurchUserSetup := true;
+            CompanyInfo.Get;
+            PurchUserRespCenter := CompanyInfo."Responsibility Center";
+            UserLocation := CompanyInfo."Location Code";
+            if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+                if UserSetup."Purchase Resp. Ctr. Filter" <> '' then
+                    PurchUserRespCenter := UserSetup."Purchase Resp. Ctr. Filter";
+            HasGotPurchUserSetup := true;
         end;
         exit(PurchUserRespCenter);
     end;
@@ -77,38 +77,38 @@ Codeunit 55487 "User Setup Management BRr"
     procedure GetServiceFilter2(UserCode: Code[50]): Code[10]
     begin
         if not HasGotServUserSetup then begin
-          CompanyInfo.Get;
-          ServUserRespCenter := CompanyInfo."Responsibility Center";
-          UserLocation := CompanyInfo."Location Code";
-          if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup."Service Resp. Ctr. Filter" <> '' then
-              ServUserRespCenter := UserSetup."Service Resp. Ctr. Filter";
-          HasGotServUserSetup := true;
+            CompanyInfo.Get;
+            ServUserRespCenter := CompanyInfo."Responsibility Center";
+            UserLocation := CompanyInfo."Location Code";
+            if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+                if UserSetup."Service Resp. Ctr. Filter" <> '' then
+                    ServUserRespCenter := UserSetup."Service Resp. Ctr. Filter";
+            HasGotServUserSetup := true;
         end;
         exit(ServUserRespCenter);
     end;
 
 
-    procedure GetRespCenter(DocType: Option Sales,Purchase,Service;AccRespCenter: Code[10]): Code[10]
+    procedure GetRespCenter(DocType: Option Sales,Purchase,Service; AccRespCenter: Code[10]): Code[10]
     var
         AccType: Text[50];
     begin
         case DocType of
-          Doctype::Sales:
-            begin
-              AccType := Text000;
-              UserRespCenter := GetSalesFilter;
-            end;
-          Doctype::Purchase:
-            begin
-              AccType := Text001;
-              UserRespCenter := GetPurchasesFilter;
-            end;
-          Doctype::Service:
-            begin
-              AccType := Text000;
-              UserRespCenter := GetServiceFilter;
-            end;
+            Doctype::Sales:
+                begin
+                    AccType := Text000;
+                    UserRespCenter := GetSalesFilter;
+                end;
+            Doctype::Purchase:
+                begin
+                    AccType := Text001;
+                    UserRespCenter := GetPurchasesFilter;
+                end;
+            Doctype::Service:
+                begin
+                    AccType := Text000;
+                    UserRespCenter := GetServiceFilter;
+                end;
         end;
         /*IF (AccRespCenter <> '') AND
            (UserRespCenter <> '') AND
@@ -119,36 +119,39 @@ Codeunit 55487 "User Setup Management BRr"
             Text003,
             AccType,RespCenter.TABLECAPTION,AccRespCenter,UserRespCenter);*/
         if UserRespCenter = '' then
-          exit(AccRespCenter)
+            exit(AccRespCenter)
         else
-          exit(UserRespCenter);
+            exit(UserRespCenter);
 
     end;
 
 
-    procedure CheckRespCenter(DocType: Option Sales,Purchase,Service;AccRespCenter: Code[10]): Boolean
+    procedure CheckRespCenter(DocType: Option Sales,Purchase,Service; AccRespCenter: Code[10]): Boolean
     begin
-        exit(CheckRespCenter2(DocType,AccRespCenter,UserId));
+        exit(CheckRespCenter2(DocType, AccRespCenter, UserId));
     end;
 
 
-    procedure CheckRespCenter2(DocType: Option Sales,Purchase,Service;AccRespCenter: Code[20];UserCode: Code[50]): Boolean
+    procedure CheckRespCenter2(DocType: Option Sales,Purchase,Service; AccRespCenter: Code[20]; UserCode: Code[50]): Boolean
     begin
         case DocType of
-          Doctype::Sales: UserRespCenter := GetSalesFilter2(UserCode);
-          Doctype::Purchase: UserRespCenter := GetPurchasesFilter2(UserCode);
-          Doctype::Service: UserRespCenter := GetServiceFilter2(UserCode);
+            Doctype::Sales:
+                UserRespCenter := GetSalesFilter2(UserCode);
+            Doctype::Purchase:
+                UserRespCenter := GetPurchasesFilter2(UserCode);
+            Doctype::Service:
+                UserRespCenter := GetServiceFilter2(UserCode);
         end;
         if (UserRespCenter <> '') and
            (AccRespCenter <> UserRespCenter)
         then
-          exit(false)
+            exit(false)
         else
-          exit(true);
+            exit(true);
     end;
 
 
-    procedure GetLocation(DocType: Option Sales,Purchase,Service;AccLocation: Code[10];RespCenterCode: Code[10]): Code[10]
+    procedure GetLocation(DocType: Option Sales,Purchase,Service; AccLocation: Code[10]; RespCenterCode: Code[10]): Code[10]
     begin
         /*CASE DocType OF
           DocType::Sales: UserRespCenter := GetSalesFilter;
@@ -169,39 +172,39 @@ Codeunit 55487 "User Setup Management BRr"
     end;
 
 
-    procedure GetSetDimensions(UserCode: Code[50];DimensionNo: Integer): Code[50]
+    procedure GetSetDimensions(UserCode: Code[50]; DimensionNo: Integer): Code[50]
     begin
-          DimensionVal:='';
-           case DimensionNo of
-           1:
-           begin
-           if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup."Global Dimension 1 Code" <> '' then
-              DimensionVal := UserSetup."Global Dimension 1 Code";
-           exit(DimensionVal);
-           end;
-           2:
-           begin
-           if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup.tetst <> '' then
-              DimensionVal := UserSetup.tetst;
-           exit(DimensionVal);
-           end;
-           3:
-           begin
-           if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup."Shortcut Dimension 3 Code" <> '' then
-              DimensionVal := UserSetup."Shortcut Dimension 3 Code";
-           exit(DimensionVal);
-           end;
-           4:
-           begin
-           if (UserSetup.Get(UserCode)) and (UserCode <> '') then
-            if UserSetup."Shortcut Dimension 4 Code" <> '' then
-              DimensionVal := UserSetup."Shortcut Dimension 4 Code";
-           exit(DimensionVal);
-           end;
-          end;
+        DimensionVal := '';
+        case DimensionNo of
+            1:
+                begin
+                    if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+                        if UserSetup."Global Dimension 1 Code" <> '' then
+                            DimensionVal := UserSetup."Global Dimension 1 Code";
+                    exit(DimensionVal);
+                end;
+            // 2:
+            //     begin
+            //         if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+            //             if UserSetup.tetst <> '' then
+            //                 DimensionVal := UserSetup.tetst;
+            //         exit(DimensionVal);
+            //     end;
+            // 3:
+            //     begin
+            //         if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+            //             if UserSetup."Shortcut Dimension 3 Code" <> '' then
+            //                 DimensionVal := UserSetup."Shortcut Dimension 3 Code";
+            //         exit(DimensionVal);
+            //     end;
+            // 4:
+            //     begin
+            //         if (UserSetup.Get(UserCode)) and (UserCode <> '') then
+            //             if UserSetup."Shortcut Dimension 4 Code" <> '' then
+            //                 DimensionVal := UserSetup."Shortcut Dimension 4 Code";
+            //         exit(DimensionVal);
+            //     end;
+        end;
     end;
 }
 

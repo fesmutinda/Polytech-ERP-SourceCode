@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516408 "Membership Exit List"
 {
-    CardPageID = "Membership Exit Card";
+    // CardPageID = "Membership Exit Card";
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = true;
@@ -9,7 +9,7 @@ Page 51516408 "Membership Exit List"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption';
     SourceTable = "Membership Exit";
-    SourceTableView = where(Posted = filter(No));
+    SourceTableView = where(Posted = filter(false));
 
     layout
     {
@@ -81,7 +81,7 @@ Page 51516408 "Membership Exit List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::"Member Closure";
-                        ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"HR Leave Register", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }

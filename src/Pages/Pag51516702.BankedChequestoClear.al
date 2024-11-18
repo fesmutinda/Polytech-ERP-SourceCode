@@ -6,10 +6,10 @@ Page 51516702 "Banked Cheques to Clear"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = Transactions;
-    SourceTableView = where(Type = const("Cheque Deposit"),
-                            Posted = const(Yes),
-                            "Banking Posted" = const(Yes),
-                            "Cheque Processed" = const(No));
+    SourceTableView = where(Type = const('"Cheque Deposit"'),
+                            Posted = const(true),
+                            "Banking Posted" = const(true),
+                            "Cheque Processed" = const(false));
 
     layout
     {
@@ -241,7 +241,7 @@ Page 51516702 "Banked Cheques to Clear"
                 PromotedCategory = "Report";
                 PromotedIsBig = true;
                 PromotedOnly = true;
-                RunObject = Report 51516434;
+                // RunObject = Report 51516434;
             }
         }
     }

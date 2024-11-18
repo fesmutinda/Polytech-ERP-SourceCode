@@ -5,7 +5,7 @@ Page 51516492 "Processed Salary List"
     Editable = false;
     PageType = List;
     SourceTable = "Salary Processing Headerr";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

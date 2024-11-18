@@ -141,7 +141,7 @@ Page 51516490 "Salary Processing Header"
                         if Confirm('This Action will clear all the Lines for the current Salary Document. Do you want to Continue') = false then
                             exit;
                         salarybuffer.Reset;
-                        salarybuffer.SetRange(salarybuffer."Salary Header No.", No);
+                        salarybuffer.SetRange(salarybuffer."Salary Header No.", Rec.No);
                         salarybuffer.DeleteAll;
 
                         BATCH_TEMPLATE := 'GENERAL';
@@ -161,7 +161,7 @@ Page 51516490 "Salary Processing Header"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedOnly = true;
-                    RunObject = XMLport 51516009;
+                    // RunObject = XMLport 51516009;
                 }
                 action("Validate Data")
                 {
@@ -361,7 +361,7 @@ Page 51516490 "Salary Processing Header"
     begin
         LineNo := LineNo + 10000;
         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::" ",
-        GenJournalLine."account type"::Vendor, ObjSalaryLines."Account No.", Rec."Posting date", ObjSalaryLines.Amount * -1, 'FOSA', EXTERNAL_DOC_NO, Format("Transaction Type"), '');
+        GenJournalLine."account type"::Customer, ObjSalaryLines."Account No.", Rec."Posting date", ObjSalaryLines.Amount * -1, 'FOSA', EXTERNAL_DOC_NO, Format(Rec."Transaction Type"), '');
         exit(RunningBalance);
     end;
 
@@ -441,7 +441,7 @@ Page 51516490 "Salary Processing Header"
                             //-------------PAY----------------------------
                             LineNo := LineNo + 10000;
                             SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                            GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, 'FOSA', EXTERNAL_DOC_NO,
+                            GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, 'FOSA', EXTERNAL_DOC_NO,
                             Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
                             //-------------RECOVER------------------------
                             LineNo := LineNo + 10000;
@@ -494,7 +494,7 @@ Page 51516490 "Salary Processing Header"
                                 //---------------------PAY-------------------------------
                                 LineNo := LineNo + 10000;
                                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                                GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, 'FOSA', EXTERNAL_DOC_NO,
+                                GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, 'FOSA', EXTERNAL_DOC_NO,
                                 Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                                 //--------------------RECOVER-----------------------------
                                 LineNo := LineNo + 10000;
@@ -537,7 +537,7 @@ Page 51516490 "Salary Processing Header"
                                         AmountToDeduct := RunningBalance;
                                     LineNo := LineNo + 10000;
                                     SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                    GenJournalLine."account type"::Investor, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, Format(LoanApp.Source), EXTERNAL_DOC_NO,
+                                    GenJournalLine."account type"::Customer, ObjRcptBuffer."Account No.", Rec."Posting date", AmountToDeduct * -1, Format(LoanApp.Source), EXTERNAL_DOC_NO,
                                     Format(GenJournalLine."transaction type"::"Interest Paid"), LoanApp."Loan  No.");
 
                                     LineNo := LineNo + 10000;
@@ -604,7 +604,7 @@ Page 51516490 "Salary Processing Header"
                                         //-------------PAY------------------
                                         LineNo := LineNo + 10000;
                                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                                        GenJournalLine."account type"::Member, LoanApp."Client Code", Rec."Posting date", AmountToDeduct * -1, Format(LoanApp.Source), EXTERNAL_DOC_NO,
+                                        GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting date", AmountToDeduct * -1, Format(LoanApp.Source), EXTERNAL_DOC_NO,
                                         Format(GenJournalLine."transaction type"::"Loan Repayment"), LoanApp."Loan  No.");
                                         //-------------RECOVER---------------
                                         LineNo := LineNo + 10000;
@@ -769,7 +769,7 @@ Page 51516490 "Salary Processing Header"
                             LoanApp.CalcFields("Outstanding Balance");
                             if LoanApp."Outstanding Balance" > 0 then begin
                                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Loan Repayment",
-                                GenJournalLine."account type"::Investor, LoanApp."Client Code", Rec."Posting date", (ObjReceiptTransactions.Amount - ObjReceiptTransactions."Interest Amount") * -1,
+                                GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting date", (ObjReceiptTransactions.Amount - ObjReceiptTransactions."Interest Amount") * -1,
                                 'FOSA', ObjRcptBuffer."No.", Format(GenJournalLine."transaction type"::"Loan Repayment"), ObjReceiptTransactions."Loan No.");
 
                                 //-------------PAY Principal----------------------------
@@ -784,7 +784,7 @@ Page 51516490 "Salary Processing Header"
                                 //-------------RECOVER Interest-----------------------
                                 LineNo := LineNo + 10000;
                                 SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, GenJournalLine."transaction type"::"Interest Paid",
-                                GenJournalLine."account type"::Investor, LoanApp."Client Code", Rec."Posting date", ObjReceiptTransactions."Interest Amount" * -1,
+                                GenJournalLine."account type"::Customer, LoanApp."Client Code", Rec."Posting date", ObjReceiptTransactions."Interest Amount" * -1,
                                 'FOSA', ObjRcptBuffer."No.", Format(GenJournalLine."transaction type"::"Interest Paid"), ObjReceiptTransactions."Loan No.");
 
                                 //-------------PAY Interest----------------------------
@@ -803,7 +803,7 @@ Page 51516490 "Salary Processing Header"
                         //-------------RECOVER BOSA NONLoan Transactions-----------------------
                         LineNo := LineNo + 10000;
                         SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME, DOCUMENT_NO, LineNo, ObjReceiptTransactions."Transaction Type",
-                        GenJournalLine."account type"::Investor, ObjRcptBuffer."BOSA Account No.", Rec."Posting date", ObjReceiptTransactions.Amount * -1,
+                        GenJournalLine."account type"::Customer, ObjRcptBuffer."BOSA Account No.", Rec."Posting date", ObjReceiptTransactions.Amount * -1,
                         'FOSA', ObjRcptBuffer."No.", Format(ObjReceiptTransactions."Transaction Type"), '');
 
                         //-------------PAY BOSA NONLoan Transaction----------------------------

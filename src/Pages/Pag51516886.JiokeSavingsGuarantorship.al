@@ -10,32 +10,32 @@ Page 51516886 "Jioke Savings Guarantorship"
         {
             repeater(Group)
             {
-                field("Loan No"; "Loan No")
+                field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member No"; "Member No")
+                field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Name; Name)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                 }
-                field("Jiokoe Savings"; "Jiokoe Savings")
+                field("Jiokoe Savings"; Rec."Jiokoe Savings")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Amount Guaranteed"; "Amount Guaranteed")
+                field("Amount Guaranteed"; Rec."Amount Guaranteed")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Liability; Liability)
+                field(Liability; Rec.Liability)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Loan Balance"; "Loan Balance")
+                field("Loan Balance"; Rec."Loan Balance")
                 {
                     ApplicationArea = Basic;
                 }

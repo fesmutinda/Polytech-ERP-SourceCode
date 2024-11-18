@@ -333,31 +333,32 @@ Codeunit 51516008 SwizzAutomation
     end;
 
 
-    procedure FnAdhoc()
-    begin
-        Cust.Reset;
-        Cust.SetRange(Cust."Global Dimension 1 Code", 'BOSA');
-        if Cust.Find('-') then begin
-            repeat
-                Report.Run(51516419, false, false, Cust); //DORMANCY
+    // procedure FnAdhoc()
+    // begin
+    //     Cust.Reset;
+    //     Cust.SetRange(Cust."Global Dimension 1 Code", 'BOSA');
+    //     if Cust.Find('-') then begin
+    //         repeat
+    //             Report.Run(51516419, false, false, Cust); //DORMANCY
 
-                Loans.Reset;
-                Loans.SetRange(Loans."BOSA No", Cust."No.");
-                Loans.SetRange(Loans.Posted, true);
-                if Loans.Find('-') then begin
-                    repeat
-                        Report.Run(51516234, false, false, Loans); //LOAN AGEING
-                        Report.Run(51516456, false, false, Loans); //RELEASE COLLATERAL
-                    until Loans.Next = 0;
-                end;
+    //             Loans.Reset;
+    //             Loans.SetRange(Loans."BOSA No", Cust."No.");
+    //             Loans.SetRange(Loans.Posted, true);
+    //             if Loans.Find('-') then begin
+    //                 repeat
+    //                     Report.Run(51516234, false, false, Loans); //LOAN AGEING
+    //                     Report.Run(51516456, false, false, Loans); //RELEASE COLLATERAL
+    //                 until Loans.Next = 0;
+    //             end;
 
-                objVendor.Reset;
-                objVendor.SetRange(objVendor."BOSA Account No", Cust."No.");
-                if objVendor.Find('-') then begin
-                    Report.Run(51516460, false, false, objVendor);
-                end;
-            until Cust.Next = 0;
-        end;
-    end;
+    //             objVendor.Reset;
+    //             objVendor.SetRange(objVendor."BOSA Account No", Cust.""Account No");
+    //             if objVendor.Find('-') then begin
+    //                 Report.Run(51516460, false, false, objVendor);
+    //             end;
+    //         until Cust.Next = 0;
+    //     end;
+    // end;
+
 }
 

@@ -167,7 +167,7 @@ Page 51516031 "Funds Transfer Card"
                     */
 
                     FHeader.Reset;
-                    FHeader.SetRange(FHeader."No.", "No.");
+                    FHeader.SetRange(FHeader."No.", Rec."No.");
                     if FHeader.FindFirst then
                         Report.Run(51516011, true, true, FHeader);
 
@@ -186,7 +186,7 @@ Page 51516031 "Funds Transfer Card"
                     ApprovalEntries: Page "Approval Entries";
                 begin
                     DocumentType := Documenttype::FundsTransfer;
-                    ApprovalEntries.Setfilters(Database::"Funds Transfer Header", DocumentType, "No.");
+                    ApprovalEntries.SetRecordFilters(Database::"Funds Transfer Header", DocumentType, Rec."No.");
                     ApprovalEntries.Run;
                 end;
             }
@@ -202,8 +202,8 @@ Page 51516031 "Funds Transfer Card"
                 var
                     Text001: label 'This request is already pending approval';
                 begin
-                    if ApprovalsMgmt.CheckFundsTransferApprovalsWorkflowEnabled(Rec) then
-                        ApprovalsMgmt.OnSendFundsTransferForApproval(Rec);
+                    // if ApprovalsMgmt.CheckFundsTransferApprovalsWorkflowEnabled(Rec) then
+                    //     ApprovalsMgmt.OnSendFundsTransferForApproval(Rec);
                 end;
             }
             action("Cancel Approval Request")
@@ -219,7 +219,7 @@ Page 51516031 "Funds Transfer Card"
                     Approvalmgt: Codeunit "Approvals Mgmt.";
                 begin
                     if Confirm('Are you sure you want to cancel this approval request', false) = true then begin
-                        ApprovalsMgmt.OnCancelFundsTransferApprovalRequest(Rec);
+                        // ApprovalsMgmt.OnCancelFundsTransferApprovalRequest(Rec);
                     end;
                 end;
             }
@@ -229,11 +229,11 @@ Page 51516031 "Funds Transfer Card"
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         //"Pay Mode":="Pay Mode"::Cash;
-        "Transfer Type" := "transfer type"::InterBank;
+        Rec."Transfer Type" :=Rec. "transfer type"::InterBank;
     end;
 
     var
-        FundsManager: Codeunit UnknownCodeunit51516000;
+        FundsManager: Codeunit 51516000;
         FundsUser: Record 51516031;
         JTemplate: Code[50];
         JBatch: Code[50];
@@ -244,20 +244,20 @@ Page 51516031 "Funds Transfer Card"
 
     local procedure CheckRequiredItems()
     begin
-        TestField("Posting Date");
-        TestField("Paying Bank Account");
-        TestField("Amount to Transfer");
-        TestField("Global Dimension 2 Code");
-        if "Pay Mode" = "pay mode"::Cheque then
-            TestField("Cheque/Doc. No");
-        if "Pay Mode" = "pay mode"::"Standing Order" then
-            "Cheque/Doc. No" := '';
-        TestField(Description);
+        Rec.TestField("Posting Date");
+        Rec.TestField("Paying Bank Account");
+        Rec.TestField("Amount to Transfer");
+        Rec.TestField("Global Dimension 2 Code");
+        if Rec."Pay Mode" = Rec."pay mode"::Cheque then
+           Rec. TestField("Cheque/Doc. No");
+        if Rec."Pay Mode" = Rec."pay mode"::"Standing Order" then
+            Rec."Cheque/Doc. No" := '';
+        Rec.TestField(Description);
         //TESTFIELD("Cheque/Doc. No");
         //TESTFIELD("Transfer To");
 
         FLine.Reset;
-        FLine.SetRange(FLine."Document No", "No.");
+        FLine.SetRange(FLine."Document No",Rec. "No.");
         FLine.SetFilter(FLine."Amount to Receive", '<>%1', 0);
         if FLine.FindSet then begin
             repeat

@@ -9,7 +9,7 @@ Page 51516426 "Posted Member Withdrawal List"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption';
     SourceTable = "Membership Exit";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {
@@ -74,7 +74,7 @@ Page 51516426 "Posted Member Withdrawal List"
                         ApprovalEntries: Page "Approval Entries";
                     begin
                         DocumentType := Documenttype::"Member Closure";
-                        ApprovalEntries.Setfilters(Database::"HR Leave Register", DocumentType, Rec."No.");
+                        ApprovalEntries.SetRecordFilters(Database::"HR Leave Register", DocumentType, Rec."No.");
                         ApprovalEntries.Run;
                     end;
                 }

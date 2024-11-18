@@ -5,7 +5,7 @@ Page 51516352 "Checkof Proc-D List pol posted"
     Editable = false;
     PageType = List;
     SourceTable = "CheckoffHeader-Dist poly";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

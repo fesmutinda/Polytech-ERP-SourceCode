@@ -1127,24 +1127,24 @@ Codeunit 55484 "Budgetary Control"
     end;
 
 
-    procedure CheckFundsAvailability(Payments: Record payment)
-    var
-        BankAcc: Record "Bank Account";
-        "Current Source A/C Bal.": Decimal;
-    begin
-        //get the source account balance from the database table
-        BankAcc.Reset;
-        BankAcc.SetRange(BankAcc."No.", Payments."Paying Bank Account");
-        BankAcc.SetRange(BankAcc."Bank Type", BankAcc."bank type"::Cash);
-        if BankAcc.FindFirst then begin
-            BankAcc.CalcFields(BankAcc.Balance);
-            "Current Source A/C Bal." := BankAcc.Balance;
-            if ("Current Source A/C Bal." - Payments."Total Net Amount") < 0 then begin
-                Error('The transaction will result in a negative balance in the BANK ACCOUNT. %1:%2', BankAcc."No.",
-                BankAcc.Name);
-            end;
-        end;
-    end;
+    // procedure CheckFundsAvailability(Payments: Record "Payment")
+    // var
+    //     BankAcc: Record "Bank Account";
+    //     "Current Source A/C Bal.": Decimal;
+    // begin
+    //     //get the source account balance from the database table
+    //     BankAcc.Reset;
+    //     BankAcc.SetRange(BankAcc."No.", Payments."Paying Bank Account");
+    //     BankAcc.SetRange(BankAcc."Bank Type", BankAcc."bank type"::Cash);
+    //     if BankAcc.FindFirst then begin
+    //         BankAcc.CalcFields(BankAcc.Balance);
+    //         "Current Source A/C Bal." := BankAcc.Balance;
+    //         if ("Current Source A/C Bal." - Payments."Total Net Amount") < 0 then begin
+    //             Error('The transaction will result in a negative balance in the BANK ACCOUNT. %1:%2', BankAcc."No.",
+    //             BankAcc.Name);
+    //         end;
+    //     end;
+    // end;
 
 
     procedure UpdateAnalysisView()

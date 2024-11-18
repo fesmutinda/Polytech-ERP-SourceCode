@@ -1,12 +1,12 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Page 51516446 "Teller & Treasury Trans List"
 {
-    CardPageID = "Teller & Treasury Trans Card";
+    // CardPageID = "Teller & Treasury Trans Card";
     DeleteAllowed = false;
     Editable = false;
     PageType = List;
     SourceTable = "Treasury Transactions";
-    SourceTableView = where(Posted = filter(No));
+    SourceTableView = where(Posted = filter(false));
 
     layout
     {

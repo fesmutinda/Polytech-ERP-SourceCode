@@ -25,10 +25,10 @@ Codeunit 51516004 "Custom Workflow Events"
                                     Database::"Membership Applications", 'An Approval request for  Membership Application is canceled.', 0, false);
         //-------------------------------------------End Approval Events-------------------------------------------------------------
         //Loans Application
-        WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanApplicationForApprovalCode,
-                            Database::"Loans Register", 'Approval of Loan Application is Requested.', 0, false);
-        WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanApplicationApprovalRequestCode,
-                                    Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
+        // WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanApplicationForApprovalCode,
+        //                     Database::"Loans Register", 'Approval of Loan Application is Requested.', 0, false);
+        // WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanApplicationApprovalRequestCode,
+                                    // Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
 
         //-----Member exit
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipExitApplicationForApprovalCode,
@@ -123,12 +123,12 @@ Codeunit 51516004 "Custom Workflow Events"
 
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
 
-        //2. Loan Application
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
+        // //2. Loan Application
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
 
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
 
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
+        // WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
 
         //3. BOSA Transfers
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendBOSATransForApprovalCode);
@@ -302,44 +302,44 @@ Codeunit 51516004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelMembershipExitApplicationApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMembershipExitApplicationForApproval', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMembershipExitApplicationForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendMembershipExitApplicationForApproval(var MembershipWithdrawals: Record "Membership Withdrawals")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, "Membership Withdrawals");
-    end;
+    // procedure RunWorkflowOnSendMembershipExitApplicationForApproval(var MembershipWithdrawals: Record "Membership Withdrawals")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, "Membership Withdrawals");
+    // end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipExitApplicationApprovalRequest', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipExitApplicationApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelMembershipExitApplicationApprovalRequest(var MembershipWithdrawals: Record "Membership Withdrawals")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode, "Membership Withdrawals");
-    end;
-    //2. Loan Applications
-    procedure RunWorkflowOnSendLoanApplicationForApprovalCode(): Code[128]//
-    begin
-        exit(UpperCase('RunWorkflowOnSendLoanApplicationForApproval'));
-    end;
+    // procedure RunWorkflowOnCancelMembershipExitApplicationApprovalRequest(var MembershipWithdrawals: Record "Membership Withdrawals")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode, "Membership Withdrawals");
+    // end;
+    // //2. Loan Applications
+    // procedure RunWorkflowOnSendLoanApplicationForApprovalCode(): Code[128]//
+    // begin
+    //     exit(UpperCase('RunWorkflowOnSendLoanApplicationForApproval'));
+    // end;
 
 
-    procedure RunWorkflowOnCancelLoanApplicationApprovalRequestCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkflowOnCancelLoanApplicationApprovalRequest'));
-    end;
+    // procedure RunWorkflowOnCancelLoanApplicationApprovalRequestCode(): Code[128]
+    // begin
+    //     exit(UpperCase('RunWorkflowOnCancelLoanApplicationApprovalRequest'));
+    // end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLoanApplicationForApproval', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLoanApplicationForApproval', '', false, false)]
 
-    procedure RunWorkflowOnSendLoanApplicationForApproval(var LoansRegister: Record "Loans Register")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanApplicationForApprovalCode, LoansRegister);
-    end;
+    // // procedure RunWorkflowOnSendLoanApplicationForApproval(var LoansRegister: Record "Loans Register")
+    // // begin
+    // //     WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanApplicationForApprovalCode, LoansRegister);
+    // // end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLoanApplicationApprovalRequest', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLoanApplicationApprovalRequest', '', false, false)]
 
-    procedure RunWorkflowOnCancelLoanApplicationApprovalRequest(var LoansRegister: Record "Loans Register")
-    begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanApplicationApprovalRequestCode, LoansRegister);
-    end;
+    // procedure RunWorkflowOnCancelLoanApplicationApprovalRequest(var LoansRegister: Record "Loans Register")
+    // begin
+    //     WorkflowManagement.HandleEvent(RunWorkflowOnCancelLoanApplicationApprovalRequestCode, LoansRegister);
+    // end;
     //...................................................................................................
 
     //3. BOSA Transfers

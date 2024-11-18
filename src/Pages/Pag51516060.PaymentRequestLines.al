@@ -2,7 +2,7 @@
 Page 51516060 "Payment Request Lines"
 {
     PageType = ListPart;
-    SourceTable = 51516001;
+    SourceTable = "Payment Line";
 
     layout
     {
@@ -10,7 +10,7 @@ Page 51516060 "Payment Request Lines"
         {
             repeater(Control1102760000)
             {
-                field(Type; Rec.Type)
+                field(Type; Rec."Account Type")
                 {
                     ApplicationArea = Basic;
                 }
@@ -28,10 +28,10 @@ Page 51516060 "Payment Request Lines"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Shortcut Dimension 3 Code"; Rec."Shortcut Dimension 3 Code")
                 {
                     ApplicationArea = Basic;
@@ -41,10 +41,10 @@ Page 51516060 "Payment Request Lines"
                     ApplicationArea = Basic;
                     Visible = false;
                 }
-                field("Invoice No."; Rec."Invoice No.")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Invoice No."; Rec."Invoice No.")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
@@ -52,13 +52,13 @@ Page 51516060 "Payment Request Lines"
                     trigger OnValidate()
                     begin
                         //check if the payment reference is for farmer purchase
-                        if Rec."Payment Reference" = Rec."payment reference"::rEC."Farmer Purchase" then begin
-                            if Rec.Amount <> xRec.Amount then begin
-                                Error('Amount cannot be modified');
-                            end;
-                        end;
+                        // if Rec."Payment Reference" = Rec."payment reference"::rEC."Farmer Purchase" then begin
+                        //     if Rec.Amount <> xRec.Amount then begin
+                        //         Error('Amount cannot be modified');
+                        //     end;
+                        // end;
 
-                        "Amount With VAT" := Amount;
+                      //  Rec. "Amount With VAT" := Rec.Amount;
                         /*IF "Account Type" IN ["Account Type"::Customer,"Account Type"::Vendor,
                         "Account Type"::"G/L Account","Account Type"::"Bank Account","Account Type"::"Fixed Asset"] THEN
                         
@@ -275,10 +275,10 @@ Page 51516060 "Payment Request Lines"
 
                     end;
                 }
-                field("Due Date"; "Due Date")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Due Date"; Rec."Due Date")
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
     }

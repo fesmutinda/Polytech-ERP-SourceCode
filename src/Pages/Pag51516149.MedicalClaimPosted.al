@@ -6,7 +6,7 @@ Page 51516149 "Medical Claim Posted"
     ModifyAllowed = false;
     PageType = Card;
     SourceTable = "HR Medical Claims";
-    SourceTableView = where(Posted = filter(Yes));
+    SourceTableView = where(Posted = filter(true));
 
     layout
     {

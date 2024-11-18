@@ -130,14 +130,14 @@ Page 51516051 "Funds User Setup"
                 {
                     ApplicationArea = Basic;
                 }
-                field("FosaTrans Journal Template"; Rec."FosaTrans Journal Template")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("FosaTrans Journal Batch"; Rec."FosaTrans Journal Batch")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("FosaTrans Journal Template"; Rec."FosaTrans Journal Template")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("FosaTrans Journal Batch"; Rec."FosaTrans Journal Batch")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Post Payment Voucher"; Rec."Post Payment Voucher")
                 {
                     ApplicationArea = Basic;

@@ -8,7 +8,7 @@ Page 51516036 "Posted FD Processing List"
     PageType = List;
     SourceTable = "FD Processing";
     SourceTableView = order(ascending)
-                      where(Posted = const(Yes));
+                      where(Posted = const(true));
 
     layout
     {

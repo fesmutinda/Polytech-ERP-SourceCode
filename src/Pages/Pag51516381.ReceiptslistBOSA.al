@@ -5,7 +5,7 @@ Page 51516381 "Receipts list-BOSA"
     Editable = false;
     PageType = List;
     SourceTable = "Receipts & Payments";
-    SourceTableView = where(Posted = const(No));
+    SourceTableView = where(Posted = const(false));
 
     layout
     {

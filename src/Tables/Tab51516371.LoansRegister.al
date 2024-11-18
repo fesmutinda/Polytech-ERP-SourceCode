@@ -697,6 +697,7 @@ Table 51516371 "Loans Register"
         {
             Editable = false;
         }
+        field(10101; Appraised; Boolean) { }
         field(8; "Requested Amount"; Decimal)
         {
 
@@ -3064,6 +3065,7 @@ Table 51516371 "Loans Register"
         field(69080; "Loan Processing Fee"; Decimal)
         {
         }
+        field(902020; "Loan Dirbusement Fee"; Decimal) { }
         field(69081; "Loan Appraisal Fee"; Decimal)
         {
         }
@@ -3357,6 +3359,7 @@ Table 51516371 "Loans Register"
         field(69140; "Interest In Arrears"; Decimal)
         {
         }
+        field(61615000; "Principal In Arrears"; Decimal) { }
         field(69141; "Private Member"; Boolean)
         {
         }
