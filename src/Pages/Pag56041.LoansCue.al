@@ -48,7 +48,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loan List";
                 }
-                field("ASSET LOAN"; Rec."ASSET LOAN")
+                field("EMERGENCY LOAN"; Rec."EMERGENCY LOAN")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -56,7 +56,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field("COLLEGE LOAN"; Rec."COLLEGE LOAN")
+                field("SUPER EMERGENCY LOAN"; Rec."SUPER EMERGENCY LOAN")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -64,7 +64,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field("QUICK CASH"; Rec."QUICK CASH")
+                field("QUICK LOAN"; Rec."QUICK LOAN")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -72,7 +72,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field(SCH_FEES; Rec.SCH_FEES)
+                field("SUPER QUICK"; Rec."SUPER QUICK")
                 {
                     ApplicationArea = Basic;
                     Caption = 'SCHOOL FEES LOAN';
@@ -81,7 +81,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field(EMERGENCY; Rec.EMERGENCY)
+                field("SCHOOL FEES"; Rec."SCHOOL FEES")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -92,7 +92,7 @@ Page 56041 "Loans Cue"
 
 
 
-                field(KARIBU; Rec.KARIBU)
+                field("SUPER SCHOOL FEES"; Rec."SUPER SCHOOL FEES")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -100,7 +100,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field(LIKIZO; Rec.LIKIZO)
+                field("M-POLYTECH"; Rec."M-POLYTECH")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -108,7 +108,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field(MAKEOVER; Rec.MAKEOVER)
+                field("DEVELOPMENT LOAN"; Rec."DEVELOPMENT LOAN")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -117,7 +117,7 @@ Page 56041 "Loans Cue"
                     DrillDownPageId = "Loans Posted List";
 
                 }
-                field(NORMAL; Rec.NORMAL)
+                field("NORMAL LOAN"; Rec."NORMAL LOAN")
                 {
                     ApplicationArea = Basic;
                     Image = none;
@@ -125,7 +125,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field(PREMIUM; Rec.PREMIUM)
+                field("DEVELOPMENT LOAN 1"; Rec.PREMIUM)
                 {
                     ApplicationArea = Basic;
                     Image = none;
