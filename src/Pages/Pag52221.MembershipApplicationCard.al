@@ -13,134 +13,36 @@ Page 52221 "Membership Application Card"
                 Caption = 'General Info';
                 field("No."; Rec."No.")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = all;
                     Editable = false;
                     Caption = 'Application No';
                 }
-                field("Account To Open"; Rec."Account Type")
+                field("Assigned No."; Rec."Assigned No.")
                 {
-                    ApplicationArea = Basic;
-                    trigger OnValidate()
-                    begin
-                        FnUpdateControls();
-                    end;
-                }
-
-                field("Application Category"; Rec."Application Category")
-                {
-                    ApplicationArea = Basic;
+                    ApplicationArea = all;
+                    Editable = false;
+                    Caption = 'Assigned No';
                 }
                 field("Account Category"; Rec."Account Category")
                 {
-                    ApplicationArea = Basic;
-                    Enabled = Not JuniourAccountType;
-                    trigger OnValidate()
-                    begin
-                        FnUpdateControls();
-                    end;
+                    ApplicationArea = all;
+                    Editable = true;
+                    Caption = 'Account Category';
                 }
-                // field("IPRS Status"; Rec."IPRS Status")
-                // {
-                //     ApplicationArea = Basic;
-                //     Enabled = false;
-                //     Style = Attention;
-
-                //     trigger OnValidate()
-                //     begin
-
-                //     end;
-                // }
-                // field("IPRS Significance"; Rec."IPRS Significance")
-                // {
-                //     ApplicationArea = Basic;
-                //     Enabled = false;
-                //     Style = Attention;
-                //     trigger OnValidate()
-                //     begin
-
-                //     end;
-                // }
-            }
-            group("Group Application Form")
-            {
-                Visible = IsGroupApplication;
-                field("BOSA Account No."; Rec."BOSA Account No.")
-
+                field("Joint Account Name"; Rec."Joint Account Name")
                 {
                     ApplicationArea = all;
-
+                    Editable = true;
+                    Caption = 'Joint Account Name';
+                    Visible = IsJointApplication;
                 }
-                // field(GroupName; Name)
-                // {
-                //     ApplicationArea = all;
-                //     Caption = 'Group Name';
-                // }
-
-                field("ID No."; Rec."ID No.")
-                {
-                    ApplicationArea = all;
-
-                }
-                field("Account Type"; Rec."Account Type")
-                {
-                    ApplicationArea = all;
-                }
-                field("Employer Type"; Rec."Employer Type")
-                {
-                    ApplicationArea = ALL;
-                }
-                field("Village/Residence"; Rec."Village/Residence")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Residence';
-
-                }
-                field("Postal Code"; Rec."Postal Code")
-                {
-                    ApplicationArea = all;
-                }
-
-                field("Group Phone No."; Rec."Phone No.")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Phone No';
-
-                }
-                field("Group Marital Status"; Rec."Marital Status")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Marital Status';
-
-                }
-                field("Sales Code"; Rec."Sales Code")
-                {
-                    ApplicationArea = all;
-                    Caption = 'MC Officer';
-                }
-                field("Salesperson Name"; Rec."Salesperson Name")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Mc Officer Name';
-                }
-                field("Registration Date"; Rec."Registration Date")
-                {
-                    ApplicationArea = all;
-
-                }
-
-
-
-            }
-            group("Applicant Form")
-            {
-                Caption = 'Application Form';
-                Visible = (IsIndividualApplication) AND not (JuniourAccountType);
                 field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
+                        Rec.Name := Rec."First Name" + ' ' + Rec."Middle Name" + ' ' + Rec."Last Name";
                     end;
                 }
                 field("Middle Name"; Rec."Middle Name")
@@ -149,7 +51,7 @@ Page 52221 "Membership Application Card"
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
-
+                        Rec.Name := Rec."First Name" + ' ' + Rec."Middle Name" + ' ' + Rec."Last Name";
                     end;
                 }
                 field("Last Name"; Rec."Last Name")
@@ -158,13 +60,226 @@ Page 52221 "Membership Application Card"
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
+                        Rec.Name := Rec."First Name" + ' ' + Rec."Middle Name" + ' ' + Rec."Last Name";
                     end;
                 }
-                field(Name; Rec."Full Name")
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
+                field("Payroll No"; Rec."Payroll No")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Address"; Rec.Address)
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Postal Code"; Rec."Postal Code")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field(Town; Rec.Town)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Country/Region Code"; Rec."Country/Region Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(County; Rec.County)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Mobile Phone No"; Rec."Mobile Phone No")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Telephone Number"; Rec."Secondary Mobile No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("E-Mail Address"; Rec."E-Mail (Personal)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Date of Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                    Caption = 'Date Of Birth';
+                }
+                field(Age; Rec.Age)
+                {
+                    Editable = false;
+                    ApplicationArea = Basic;
+                }
+                field("ID No."; Rec."ID No.")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                }
+                field("Passport No."; Rec."Passport No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("KRA PIN"; Rec."KRA PIN")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                }
+                field(Gender; Rec.Gender)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Marital Status"; Rec."Marital Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("How Did you know about us ?"; Rec."How Did you know of KANISA")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'How Did you know about Us?';
+
+                    trigger OnValidate()
+                    begin
+                    end;
+                }
+                field("Recruited By"; Rec."Recruited By")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Recruiter Name"; Rec."Recruiter Name")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Captured By"; Rec."Captured By")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Created By"; Rec."Created By")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Application Category"; Rec."Application Category")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Registration Date"; Rec."Registration Date")
+                {
+                    ApplicationArea = all;
+
+                }
+                field("Customer Posting Group"; Rec."Customer Posting Group")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = all;
+                }
+                field("Monthly Contribution"; Rec."Monthly Contribution")
+                {
+                    ApplicationArea = all;
+                }
+                field("Activity Code Code"; Rec."Global Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Branch Code Code"; Rec."Global Dimension 2 Code")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                    Editable = true;
+                }
+                field(Station; Rec.Section)
+                {
+                    Caption = 'Station';
+                    ApplicationArea = Basic;
+                }
+                field("Station Name"; Rec."Station Name")
+                {
+                    ApplicationArea = all;
+                }
+                field("Member's Residence"; Rec."Member's Residence")
+                {
+                    ApplicationArea = all;
+                }
+            }
+            group("Employment Details")
+            {
+                Caption = 'Employment Details';
+                Visible = true;
+                field("Employment Info"; Rec."Employment Info")
+                {
+                    ApplicationArea = all;
+                }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                    Visible = MemberIsEmployed;
+                }
+                field(Department; Rec.Department)
+                {
+                    Caption = 'Employer Name';
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Visible = MemberIsEmployed;
+                }
+                field("Terms of Employment"; Rec."Terms of Employment")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                    Editable = true;
+                }
+                field(Occupation; Rec.Occupation)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Others Details"; Rec."Others Details")
+                {
+                    ApplicationArea = all;
+                }
+            }
+            group("Bank Details")
+            {
+                Caption = 'Bank Details';
+                Visible = true;
+                field("Bank Code"; Rec."Bank Code")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                    Editable = true;
+                }
+                field("Bank Name"; Rec."Bank Name")
+                {
+                    ApplicationArea = Basic;
+                    // ShowMandatory = true;
+                    Editable = false;
+                }
+                field("Bank Branch"; Rec."Bank Branch")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Bank Account No"; Rec."Bank Account No")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                }
+            }
+            group("Applicant Form")
+            {
+                Caption = 'Application Form';
+                Visible = (IsIndividualApplication) AND not (JuniourAccountType);
+
 
                 field("Country of Residence"; Rec."Home Country")
                 {
@@ -191,27 +306,9 @@ Page 52221 "Membership Application Card"
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
-                field("Member's Residence"; Rec."Member's Residence")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Current Residence';
-                }
                 field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
-                }
-                // field("Receive Notifications"; Rec."Receive Notifications")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                field("E-Mail Address"; Rec."E-Mail (Personal)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Date of Birth"; Rec."Date of Birth")
-                {
-                    ApplicationArea = Basic;
-                    ShowMandatory = true;
                 }
                 field("Identity Type"; Rec."Identification Document")
                 {
@@ -245,27 +342,8 @@ Page 52221 "Membership Application Card"
                         ShowMandatory = true;
                     }
                 }
-                field(Gender; Rec.Gender)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Marital Status"; Rec."Marital Status")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("How Did you know about us ?"; Rec."How Did you know of KANISA")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'How Did you know about Us?';
 
-                    trigger OnValidate()
-                    begin
-                    end;
-                }
-                field("Recruited By"; Rec."Recruited By")
-                {
-                    ApplicationArea = Basic;
-                }
+
                 field("Membership Application Date"; Rec."Membership Application Date")
                 {
                     ApplicationArea = Basic;
@@ -277,17 +355,7 @@ Page 52221 "Membership Application Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
-                {
-                    ApplicationArea = Basic;
-                    ShowMandatory = true;
-                    Editable = true;
-                }
+
                 field("Member Share Class"; Rec."Member Share Class")
                 {
                     ApplicationArea = Basic;
@@ -312,42 +380,15 @@ Page 52221 "Membership Application Card"
                 {
                     Caption = '';
                     Visible = (MemberIsEmployed) and Not (JuniourAccountType);
-                    field("Employer Code"; Rec."Employer Code")
-                    {
-                        ApplicationArea = Basic;
-                        trigger OnValidate()
-                        begin
-                        end;
-                    }
-                    field("Terms of Employment"; Rec."Terms of Employment")
-                    {
-                        ApplicationArea = Basic;
-                        trigger OnValidate()
-                        begin
-                        end;
-                    }
-                    field("Payroll No"; Rec."Payroll No")
-                    {
-                        ApplicationArea = Basic;
-                        ShowMandatory = true;
-                    }
-                    field(Occupation; Rec.Occupation)
-                    {
-                        ApplicationArea = Basic;
-                        trigger OnValidate()
-                        begin
-                        end;
-                    }
+
+
+
                     field(Designation; Rec.Designation)
                     {
                         ApplicationArea = Basic;
                         trigger OnValidate()
                         begin
                         end;
-                    }
-                    field("KRA Pin"; Rec."KRA Pin")
-                    {
-                        ApplicationArea = Basic;
                     }
                 }
                 group("IsSelfEmployed")
@@ -583,31 +624,13 @@ Page 52221 "Membership Application Card"
         IsCustomerType := false;
         RegisteringAsGroupMember := false;
         RegisteringAsCorporate := false;
-        if (rec."Account Category" = Rec."Account Category"::Single) then begin
-            IsIndividualApplication := true;
+        if (rec."Account Category" = Rec."Account Category"::Joint) then begin
+            IsJointApplication := true;
             Rec."Global Dimension 1 Code" := 'BOSA';
         end else
-            if (rec."Account Category" = Rec."Account Category"::Group) then begin
-                IsGroupApplication := true;
-                Rec."Global Dimension 1 Code" := 'MICRO';
-                RegisteringAsGroupMember := true;
-            end else
-                if (rec."Account Category" = Rec."Account Category"::Joint) then begin
-                    IsJointApplication := true;
-                    Rec."Global Dimension 1 Code" := 'BOSA';
-                end else
-                    if (rec."Account Category" = Rec."Account Category"::Corporate) then begin
-                        IsCooporateApplication := true;
-                        RegisteringAsCorporate := true;
-                        Rec."Global Dimension 1 Code" := 'BOSA';
-                    end else
-                        // if (rec."Account Type" = rec."Account Type"::"Junior Account") then begin
-                        //     JuniourAccountType := true;
-                        // end;
-                        //.........
-                        if rec."Employment Info" = rec."Employment Info"::Employed then begin
-                            MemberIsEmployed := true;
-                        end;
+            if rec."Employment Info" = rec."Employment Info"::Employed then begin
+                MemberIsEmployed := true;
+            end;
         //.........
         if rec."Employment Info" = rec."Employment Info"::"Self Employed" then begin
             MemberIsSelfEmployed := true;
@@ -635,7 +658,6 @@ Page 52221 "Membership Application Card"
             Rec."Identification Document" := Rec."Identification Document"::"Birth Certificate";
             Rec."Marital Status" := Rec."Marital Status"::Single;
             Rec."Registration Type" := Rec."Registration Type"::New;
-            Rec."Account Category" := Rec."Account Category"::Single;
             rec."Terms of Employment" := Rec."Terms of Employment"::" ";
         end ELSE
             IF Rec."Account Type" = Rec."Account Type"::Single THEN begin

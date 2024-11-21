@@ -195,14 +195,14 @@ Table 51360 "Membership Applications"
                 if "Date of Birth" > Today then
                     Error('Date of birth cannot be greater than today');
 
-                if "Account Category" <> "account category"::Parish then begin
-                    if "Date of Birth" <> 0D then begin
-                        if GenSetUp.Get() then begin
-                            if CalcDate(GenSetUp."Min. Member Age", "Date of Birth") > Today then
-                                Error('Applicant bellow the mininmum membership age of %1', GenSetUp."Min. Member Age");
-                        end;
+                // if "Account Category" <> "account category"::Parish then begin
+                if "Date of Birth" <> 0D then begin
+                    if GenSetUp.Get() then begin
+                        if CalcDate(GenSetUp."Min. Member Age", "Date of Birth") > Today then
+                            Error('Applicant bellow the mininmum membership age of %1', GenSetUp."Min. Member Age");
                     end;
                 end;
+                // end;
                 Age := Dates.DetermineAge("Date of Birth", Today);
                 GenSetUp.Get();
                 "Retirement Age" := CalcDate(GenSetUp."Retirement Age", "Date of Birth");
@@ -461,6 +461,7 @@ Table 51360 "Membership Applications"
                 Banks.SetRange(Banks.Code, "Bank Code");
                 if Banks.Find('-') then
                     "Bank Name" := Banks."Bank Name";
+                "Bank Branch" := Banks.Branch;
             end;
         }
         field(68047; "Bank Name"; Code[70])
@@ -584,8 +585,8 @@ Table 51360 "Membership Applications"
         }
         field(68070; "Account Category"; Option)
         {
-            OptionCaption = 'Single,Joint,Corporate,Group,Parish,Church,Church Department';
-            OptionMembers = Single,Joint,Corporate,Group,Parish,Church,"Church Department";
+            OptionCaption = 'Individual,Joint';
+            OptionMembers = Individual,Joint;
         }
         field(68071; "Copy of KRA Pin"; Boolean)
         {

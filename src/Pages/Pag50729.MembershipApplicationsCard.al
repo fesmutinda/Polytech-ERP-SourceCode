@@ -809,22 +809,14 @@ page 50729 "Membership Applications Card"
         MemberIsSelfEmployed := false;
         RegisteringAsMember := false;
         JuniourAccountType := false;
-        if (rec."Account Category" = Rec."Account Category"::single) then begin
+        if (rec."Account Category" = Rec."Account Category"::Individual) then begin
             IsIndividualApplication := true;
             Rec."Global Dimension 1 Code" := 'BOSA';
         end else
-            if (rec."Account Category" = Rec."Account Category"::Group) then begin
-                IsGroupApplication := true;
-                Rec."Global Dimension 1 Code" := 'MICRO';
-            end else
-                if (rec."Account Category" = Rec."Account Category"::Joint) then begin
-                    IsJointApplication := true;
-                    Rec."Global Dimension 1 Code" := 'BOSA';
-                end else
-                    if (rec."Account Category" = Rec."Account Category"::Corporate) then begin
-                        IsCooporateApplication := true;
-                        Rec."Global Dimension 1 Code" := 'BOSA';
-                    end;
+            if (rec."Account Category" = Rec."Account Category"::Joint) then begin
+                IsJointApplication := true;
+                Rec."Global Dimension 1 Code" := 'BOSA';
+            end;// else
         //.........
         // if rec."Type Of Employment" = rec."Type Of Employment"::Employed then begin
         //     MemberIsEmployed := true;
