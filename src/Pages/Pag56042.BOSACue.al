@@ -3,8 +3,9 @@ Page 56042 "BOSA Cue"
 {
     PageType = CardPart;
     SourceTable = "Members Cues";
-    UsageCategory = Lists;
-    ApplicationArea = Basic;
+    /* UsageCategory = Lists;
+    ApplicationArea = Basic; */
+    RefreshOnActivate = true;
 
     layout
     {
@@ -31,7 +32,7 @@ Page 56042 "BOSA Cue"
 
                     ApplicationArea = Basic;
                     Image = none;
-                    Style = Favorable;
+                    Style = StandardAccent;
                     StyleExpr = true;
                     DrillDownPageId = "Member List";
                 }
@@ -50,7 +51,7 @@ Page 56042 "BOSA Cue"
                 {
                     ApplicationArea = Basic;
                     Image = none;
-                    Style = Favorable;
+                    Style = Attention;
                     StyleExpr = true;
                     DrillDownPageId = "Member List";
                 }
@@ -58,7 +59,7 @@ Page 56042 "BOSA Cue"
                 {
                     ApplicationArea = Basic;
                     Image = none;
-                    Style = Favorable;
+                    Style = Unfavorable;
                     StyleExpr = true;
                     DrillDownPageId = "Member List";
                 }
@@ -67,7 +68,7 @@ Page 56042 "BOSA Cue"
                 {
                     ApplicationArea = Basic;
                     Image = none;
-                    Style = Favorable;
+                    Style = StrongAccent;
                     StyleExpr = true;
                     DrillDownPageId = "Member List";
                 }
