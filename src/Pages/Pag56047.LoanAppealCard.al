@@ -23,8 +23,8 @@ Page 56047 "Loan Appeal Card"
                 {
                     ToolTip = 'Specifies the value of the Loan Number field.';
                     ApplicationArea = all;
-
                 }
+
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = all;
