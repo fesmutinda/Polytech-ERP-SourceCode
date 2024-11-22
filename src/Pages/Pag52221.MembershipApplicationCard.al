@@ -28,6 +28,10 @@ Page 52221 "Membership Application Card"
                     ApplicationArea = all;
                     Editable = true;
                     Caption = 'Account Category';
+                    trigger OnValidate()
+                    begin
+                        FnUpdateControls();
+                    end;
                 }
                 field("Joint Account Name"; Rec."Joint Account Name")
                 {
@@ -485,7 +489,7 @@ Page 52221 "Membership Application Card"
                     Caption = 'Signatories';
                     Image = Group;
                     Promoted = true;
-                    Enabled = (IsGroupApplication) OR (IsCooporateApplication) OR (IsJointApplication) and (Not JuniourAccountType);
+                    Enabled = IsIndividualApplication;// (IsGroupApplication) OR (IsCooporateApplication) OR (IsJointApplication) and (Not JuniourAccountType);
                     PromotedCategory = Process;
                     RunObject = Page "Membership App Signatories";
                     RunPageLink = "Account No" = field("No.");
@@ -624,6 +628,9 @@ Page 52221 "Membership Application Card"
         IsCustomerType := false;
         RegisteringAsGroupMember := false;
         RegisteringAsCorporate := false;
+        if (Rec."Account Category" = Rec."Account Category"::Individual) then begin
+            IsIndividualApplication := true;
+        end;
         if (rec."Account Category" = Rec."Account Category"::Joint) then begin
             IsJointApplication := true;
             Rec."Global Dimension 1 Code" := 'BOSA';
