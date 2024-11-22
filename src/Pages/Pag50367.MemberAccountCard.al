@@ -13,396 +13,271 @@ page 50367 "Member Account Card"
     {
         area(content)
         {
-            //...................Regular Accounts Form
-            group(RegularAccounts)
+            group("Account Details")
             {
-                Caption = 'General';
-                Editable = true;
-                Visible = IsRegularAccount and not IsJuniorAccount;
-                group("Account Details")
+                Caption = 'General Info';
+                field("Member No."; Rec."No.")
                 {
-                    field("No."; Rec."No.")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    // field("First Name"; Rec."First Name")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Style = StrongAccent;
-                    // }
-                    // field("Middle Name"; Rec."Middle Name")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Style = StrongAccent;
-                    // }
-                    // field("Last Name"; Rec."Last Name")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Style = StrongAccent;
-                    // }
-                    field("Full Name"; Rec.Name)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Full Name';
-                        Style = StrongAccent;
-                    }
-                    field("Identity Type"; Rec."Identification Document")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    field("Identity No"; Rec."ID No.")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-
-                    field(Gender; Rec.Gender)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    field("Date of Birth"; Rec."Date of Birth")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Date of Birth';
-                        Editable = false;
-                    }
-                    field(CurrentAge; CurrentAge)
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Age';
-                        Style = StrongAccent;
-                        Editable = false;
-                    }
-                    field("Savings Account No"; Rec."FOSA Account No.")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Enabled = false;
-                        Style = StandardAccent;
-                        trigger OnValidate()
-                        begin
-
-                        end;
-                    }
-                    field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
-                    {
-                        ApplicationArea = Basic;
-                    }
-
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
                 }
-                group("Location Details")
+                field("Account Category"; Rec."Account Category")
                 {
-                    // field("Country of Residence"; Rec."Country of Residence")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'Country';
-                    //     Editable = false;
-                    // }
-                    // field("County of Residence"; Rec."County of Residence")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'County';
-                    //     Editable = false;
-                    // }
-                    // field("Sub County"; Rec."Sub County")
-                    // {
-                    //     ApplicationArea = Basic;
-                    // }
-                    field(Location; Rec.Location)
-                    {
-                        ApplicationArea = Basic;
-                    }
-                    field("Member's Residence"; Rec."Member's Residence")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Current Residency';
-                    }
-
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
                 }
-                group(Contacts)
+                field("Joint Account Name"; Rec."Joint Account Name")
                 {
-                    field("Phone No."; Rec."Phone No.")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Mobile No.';
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    field("E-Mail"; Rec."E-Mail")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                    }
-                    // field("Receives Notifications"; Rec."Receive Notifications")
-                    // {
-                    //     ApplicationArea = Basic;
-                    // }
-
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
+                    Visible = false;
                 }
-                group("Employment Details")
+                field("Member Name"; Rec.Name)
                 {
-                    Visible = TypeIsEmployed;
-                    field("Employer Code"; Rec."Employer Code")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    field("Terms of Employment"; Rec."Terms of Employment")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                    }
-                    field(Occupation; Rec.Occupation)
-                    {
-                        ApplicationArea = Basic;
-                    }
-                    field(Designation; Rec.Designation)
-                    {
-                        ApplicationArea = Basic;
-                    }
-                    field("Payroll No."; Rec."Personal No")
-                    {
-                        ApplicationArea = Basic;
-                    }
-                    field("KRA Pin"; Rec.Pin)
-                    {
-                        ApplicationArea = Basic;
-                    }
-                    // field("Pension No"; "Pension No")
-                    // {
-                    //     ApplicationArea = Basic;
-                    // }
-
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
                 }
-                group("Creation Details")
+                field("Application No."; Rec."Application No.")
                 {
-                    field("Registration Date"; Rec."Registration Date")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    field(Account; Rec."Account Category")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Account Type';
-                    }
-                    field("Account Category"; Rec."Account Category")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Account Category';
-                    }
-                    field("Customer Type"; Rec."Customer Type")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Membership Type';
-                    }
-                    field("Account Status"; Rec.Status)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        trigger OnValidate()
-                        begin
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Caption = 'Application No';
+                    Style = StrongAccent;
+                }
+                field("Payroll No"; Rec."Personal No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
+                }
+                field("Postal Code"; Rec.Address)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
+                }
 
-                        end;
-                    }
-                    // field("FOSA Accounts"; Rec."Member Savings Accounts")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     trigger OnValidate()
-                    //     begin
+                field(City; Rec.City)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
+                }
+                field("Country/Region Code"; Rec."Country/Region Code")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Country/Region Code';
+                    Editable = false;
+                }
 
-                    //     end;
-                    // }
+                field("Pension No"; Rec."Pension No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Identification Document"; Rec."Identification Document")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Identification Document';
+                    Editable = false;
+                }
+                field("ID No."; Rec."ID No.")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'ID Number';
+                    Editable = false;
+                }
+                field(Gender; Rec.Gender)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Caption = 'Gender';
+                    Style = StrongAccent;
+                }
+                field("KRA Pin"; Rec.Pin)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Marital Status"; Rec."Marital Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Dateof Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Date of Birth';
+                    Editable = false;
+                }
+                field(Disabled; Rec.Disabled)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Application Date"; Rec."Application Date")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
+                }
+                field("Registration Date"; Rec."Registration Date")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Style = StrongAccent;
+                }
+                field("Account Status"; Rec.Status)
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    trigger OnValidate()
+                    begin
+
+                    end;
+                }
+                field("Activity Code"; Rec."Global Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Activity';
+                }
+                field("Branch Code"; Rec."Global Dimension 2 Code")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Branch';
+                }
+                field("Customer Posting Group"; Rec."Customer Posting Group")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Blocked; Rec.Blocked)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Last Date Modified"; Rec."Last Date Modified")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Last Payment Date"; Rec."Last Payment Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Section; Rec.Section)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Created By"; Rec."Created By")
+                {
+                    ApplicationArea = Basic;
+                }
+            }
+            group(Contacts)
+            {
+                Caption = 'Contact Info';
+                field("E-Mail"; Rec."E-Mail")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Email Indemnified"; Rec."Email Indemnified")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Send E-Statements"; Rec."Send E-Statements")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Mobile Phone No"; rec."Mobile Phone No")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Mobile Phone No';
+                    Style = StrongAccent;
+                    Editable = false;
+                }
+                field("Phone No."; Rec."Phone No.")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Enabled = false;
+                    Style = StandardAccent;
+                    trigger OnValidate()
+                    begin
+
+                    end;
+                }
+                field("Contact Person Phone"; Rec."Contact Person Phone")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Contact Person"; Rec."Contact Person")
+                {
+                    ApplicationArea = Basic;
                 }
 
             }
-
-            //....................Junior Accounts Form
-            group(JuniorAccounts)
+            group("Employment Details")
             {
-                Caption = 'General';
-                Editable = true;
-                Visible = IsJuniorAccount and not IsRegularAccount;
-                group("Junior Account Details")
+                Caption = 'Employment Details';
+                Visible = true;
+                field("Employment Info"; Rec."Employment Info")
                 {
-                    Caption = 'Account Details';
-                    field("No"; Rec."No.")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'No.';
-                        Editable = false;
-                        Style = StrongAccent;
-                    }
-                    // field("FirstName"; Rec."First Name")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Caption = 'First Name';
-                    //     Style = StrongAccent;
-                    // }
-                    // field("MiddleName"; Rec."Middle Name")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Caption = 'Middle Name';
-                    //     Style = StrongAccent;
-                    // }
-                    // field("LastName"; Rec."Last Name")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Caption = 'Last Name';
-                    //     Style = StrongAccent;
-                    // }
-                    field("FullName"; Rec.Name)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Full Name';
-                        Style = StrongAccent;
-                    }
-                    // field("Birth Certificate No"; Rec."Birth Certificate No")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Style = StrongAccent;
-                    // }
-                    field(JGender; Rec.Gender)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Gender';
-                        Style = StrongAccent;
-                    }
-                    field("Dateof Birth"; Rec."Date of Birth")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Date of Birth';
-                        Editable = false;
-                    }
-                    field(CurrentAgeJ; CurrentAge)
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Age';
-                        Style = StrongAccent;
-                        Editable = false;
-                    }
-                    field("SavingsAccount No"; Rec."FOSA Account No.")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Enabled = false;
-                        Caption = 'Savings Account No';
-                        Style = StandardAccent;
-                        trigger OnValidate()
-                        begin
-
-                        end;
-                    }
-                    field("Global Dimension2 Code"; Rec."Global Dimension 2 Code")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Branch';
-                    }
-
+                    ApplicationArea = all;
                 }
-                group("LocationDetails")
+                field("Employer Code"; Rec."Employer Code")
                 {
-                    Caption = 'Location Details';
-                    // field("Countryof Residence"; Rec."Country of Residence")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'Country';
-                    //     Editable = false;
-                    // }
-                    // field("Countyof Residence"; Rec."County of Residence")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'County';
-                    //     Editable = false;
-                    // }
-                    // field("SubCounty"; Rec."Sub County")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'Sub-County';
-                    // }
-                    field(Locations; Rec.Location)
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Location';
-                    }
-                    field("Member'sResidence"; Rec."Member's Residence")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Current Residency';
-                    }
-
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                    // Visible = MemberIsEmployed;
                 }
-                group("CreationDetails")
+                field(Department; Rec.Department)
                 {
-                    Caption = 'Creation Details';
-                    field("RegistrationDate"; Rec."Registration Date")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Registration Date';
-                        Style = StrongAccent;
-                    }
-                    field(Accountss; Rec."Account Category")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Account Type';
-                    }
-                    field("AccountCategory"; Rec."Account Category")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Account Category';
-                    }
-                    field("CustomerType"; Rec."Customer Type")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Membership Type';
-                    }
-                    field("AccountStatus"; Rec.Status)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                        Caption = 'Account Status';
-                        trigger OnValidate()
-                        begin
-
-                        end;
-                    }
-                    // field("FOSA =Accounts"; Rec."Member Savings Accounts")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Editable = false;
-                    //     Caption = 'FOSA Accounts';
-                    //     trigger OnValidate()
-                    //     begin
-
-                    //     end;
-                    // }
+                    Caption = 'Employer Name';
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    // Visible = MemberIsEmployed;
+                }
+                field("Terms of Employment"; Rec."Terms of Employment")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                    Editable = true;
+                }
+                field(Occupation; Rec.Occupation)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Others Details"; Rec."Others Details")
+                {
+                    ApplicationArea = all;
+                }
+            }
+            group("Bank Account Details")
+            {
+                Caption = 'Bank Account Details';
+                Visible = true;
+                field("Bank Code"; Rec."Bank Code")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                    Editable = true;
+                }
+                field("Bank Name"; Rec."Bank Account Name")
+                {
+                    ApplicationArea = Basic;
+                    // ShowMandatory = true;
+                    Editable = false;
+                }
+                field("Bank Branch"; Rec."Bank Branch Code")
+                {
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Bank Account No"; Rec."Bank Account No.")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
                 }
             }
 
