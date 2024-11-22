@@ -1,7 +1,7 @@
 page 50330 "Membership Applications List"
 {
     ApplicationArea = Basic;
-    CardPageID = "Membership Applications Card";
+    CardPageID = "Membership Application Card";
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;

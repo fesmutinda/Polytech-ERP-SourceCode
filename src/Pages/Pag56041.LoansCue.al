@@ -125,7 +125,7 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-                field("DEVELOPMENT LOAN 1"; Rec.PREMIUM)
+                field("DEVELOPMENT LOAN 1"; Rec."DEVELOPMENT LOAN 1")
                 {
                     ApplicationArea = Basic;
                     Image = none;
