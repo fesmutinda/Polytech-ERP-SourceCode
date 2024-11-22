@@ -6,7 +6,7 @@ Report 50060 MemberReport
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem(Customer; Customer)
+        dataitem("Member Register"; "Member Register")
         {
             DataItemTableView = sorting("No.") order(descending);
             RequestFilterFields = "No.", "Date Filter", Status;
@@ -44,10 +44,10 @@ Report 50060 MemberReport
             var
             begin
                 Cust.SetFilter(Cust."Date Filter", Datefilter);
-                if cust.get(Customer."No.") then begin
+                if cust.get("Member Register"."No.") then begin
                     cust.SetAutoCalcFields(Cust."Current Shares");
                     Deposits := cust."Current Shares";
-                    ShareCapital := Cust."Share Capital";
+                    ShareCapital := Cust."Share Capital B Class";
                     LoanBalance := Cust."Outstanding Balance";
                 end;
                 EntryNo := EntryNo + 1;
@@ -76,7 +76,7 @@ Report 50060 MemberReport
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        Datefilter := Customer.GetFilter("Date Filter");
+        Datefilter := "Member Register".GetFilter("Date Filter");
     end;
 
     var
@@ -86,5 +86,5 @@ Report 50060 MemberReport
         ShareCapital: Decimal;
         Deposits: Decimal;
         Datefilter: Text[100];
-        Cust: Record Customer;
+        Cust: Record "Member Register";
 }
