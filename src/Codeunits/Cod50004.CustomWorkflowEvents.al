@@ -4,7 +4,7 @@ Codeunit 50004 "Custom Workflow Events"
 
     trigger OnRun()
     begin
-        //AddEventsToLib();
+        OnAddWorkflowEventsToLibrary();
     end;
 
     var

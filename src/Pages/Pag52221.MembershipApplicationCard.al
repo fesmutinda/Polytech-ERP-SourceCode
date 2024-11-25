@@ -199,7 +199,7 @@ Page 52221 "Membership Application Card"
                 field("Branch Code Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    // ShowMandatory = true;
                     Editable = true;
                 }
                 field(Station; Rec.Section)
@@ -288,12 +288,12 @@ Page 52221 "Membership Application Card"
                 field("Country of Residence"; Rec."Home Country")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 field("County of Residence"; Rec."County")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 // field("Sub County"; Rec."Sub County")
                 // {
@@ -303,12 +303,12 @@ Page 52221 "Membership Application Card"
                 field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 field("Sub-Location"; Rec."Sub-Location")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 field("Phone No."; Rec."Phone No.")
                 {
@@ -537,7 +537,7 @@ Page 52221 "Membership Application Card"
                     var
                         ApprovalCodeunit: Codeunit SurestepApprovalsCodeUnit;
                     begin
-                        Rec.TESTFIELD("Global Dimension 2 Code");
+                        //Rec.TESTFIELD("Global Dimension 2 Code");
                         Rec.TESTFIELD("Monthly Contribution");
                         if Confirm('Are you sure to send ' + Format(REC."Full Name") + ' Membership Application for Approval ?', false) = false then begin
                             exit;
