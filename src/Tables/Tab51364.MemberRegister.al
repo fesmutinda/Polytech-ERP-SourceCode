@@ -1636,7 +1636,7 @@ Table 51364 "Member Register"
 
             trigger OnValidate()
             begin
-                //SURESTEP - Check Min Contractual Shares
+                //Swizzsoft - Check Min Contractual Shares
                 /*IF GenSetUp."Contactual Shares (%)" <> 0 THEN BEGIN
                 IF "Monthly Contribution" <> 0 THEN BEGIN
                 GenSetUp.GET(0);
@@ -1671,7 +1671,7 @@ Table 51364 "Member Register"
                 "Advice Type":="Advice Type"::"Shares Adjustment";
                 END;
                 
-                //SURESTEP - Check Min Contractual Shares
+                //Swizzsoft - Check Min Contractual Shares
                 
                 "Previous Share Contribution":=xRec."Monthly Contribution"; */
 

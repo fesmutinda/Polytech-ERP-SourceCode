@@ -14,8 +14,15 @@ Codeunit 50004 "Custom Workflow Events"
         SwizzsoftWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
+    procedure TestPublish()
+    begin
+        Message('Custom Workflow Events logged.');
+    end;
+
     procedure AddEventsToLib()
     begin
+
+
 
         //---------------------------------------------1. Approval Events--------------------------------------------------------------
         //Membership Application
