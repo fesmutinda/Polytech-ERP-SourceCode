@@ -4,7 +4,7 @@ Codeunit 50004 "Custom Workflow Events"
 
     trigger OnRun()
     begin
-        AddEventsToLib();
+        //AddEventsToLib();
     end;
 
     var
@@ -14,7 +14,9 @@ Codeunit 50004 "Custom Workflow Events"
         SurestepWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
-    procedure AddEventsToLib()
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
+
+    procedure OnAddWorkflowEventsToLibrary()
     begin
 
         //---------------------------------------------1. Approval Events--------------------------------------------------------------
@@ -28,7 +30,7 @@ Codeunit 50004 "Custom Workflow Events"
         // WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanApplicationForApprovalCode,
         //                     Database::"Loans Register", 'Approval of Loan Application is Requested.', 0, false);
         // WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanApplicationApprovalRequestCode,
-                                    // Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
+        // Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
 
         //-----Member exit
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipExitApplicationForApprovalCode,
@@ -112,7 +114,10 @@ Codeunit 50004 "Custom Workflow Events"
     end;
 
 
-    procedure AddEventsPredecessor()
+
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
+
+    procedure OnAddWorkflowEventPredecessorsToLibrary()
     begin
         //--------1.Approval,Rejection,Delegation Predecessors----------------------
         //1. Membership Application

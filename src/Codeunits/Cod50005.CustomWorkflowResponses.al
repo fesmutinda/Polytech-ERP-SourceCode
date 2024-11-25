@@ -403,12 +403,11 @@ Codeunit 50005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReOpenMembershipApplication(var MemberApplication: Record "Membership Applications")
-    var
-        MembershipApp: Record "Membership Applications";
+    procedure ReOpenMembershipApplication(MembershipApp: Record "Membership Applications")
+
     begin
         MembershipApp.Reset;
-        MembershipApp.SetRange(MembershipApp."No.", MemberApplication."No.");
+        MembershipApp.SetRange(MembershipApp."No.", MembershipApp."No.");
         if MembershipApp.FindFirst then begin
             MembershipApp.Status := MembershipApp.Status::Open;
             MembershipApp.Modify;
