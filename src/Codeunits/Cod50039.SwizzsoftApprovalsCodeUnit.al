@@ -468,19 +468,19 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
     end;
     //..................................................................................................
     //10)--------------------------------------------------------------------Send Teller request For Approval start
-    procedure SendTellerTransactionsRequestForApproval(TellerTransactions: Code[40]; var Transactions: Record Transactions)
-    begin
-        if FnCheckIfTellerTransactionsApprovalsWorkflowEnabled(Transactions) then begin
-            FnOnSendTellerTransactionsForApproval(Transactions);
-        end;
-    end;
+    // procedure SendTellerTransactionsRequestForApproval(TellerTransactions: Code[40]; var Transactions: Record Transactions)
+    // begin
+    //     if FnCheckIfTellerTransactionsApprovalsWorkflowEnabled(Transactions) then begin
+    //         FnOnSendTellerTransactionsForApproval(Transactions);
+    //     end;
+    // end;
 
-    local procedure FnCheckIfTellerTransactionsApprovalsWorkflowEnabled(var Transactions: Record Transactions): Boolean;
-    begin
-        if not IsTellerTransactionsApprovalsWorkflowEnabled(Transactions) then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfTellerTransactionsApprovalsWorkflowEnabled(var Transactions: Record Transactions): Boolean;
+    // begin
+    //     if not IsTellerTransactionsApprovalsWorkflowEnabled(Transactions) then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
     procedure CancelTellerTransactionsRequestForApproval(TellerTransactions: Code[40]; var Transactions: Record Transactions)
@@ -488,10 +488,10 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
         FnOnCancelTellerTransactionsApprovalRequest(Transactions);
     end;
 
-    local procedure IsTellerTransactionsApprovalsWorkflowEnabled(var TellerTransactions: Record Transactions): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(TellerTransactions, Psalmkitswfevents.RunWorkflowOnSendTellerTransactionsForApprovalCode));
-    end;
+    // local procedure IsTellerTransactionsApprovalsWorkflowEnabled(var TellerTransactions: Record Transactions): Boolean
+    // begin
+    //     exit(WorkflowManagement.CanExecuteWorkflow(TellerTransactions, Psalmkitswfevents.RunWorkflowOnSendTellerTransactionsForApprovalCode));
+    // end;
 
     [IntegrationEvent(false, false)]
 
@@ -507,19 +507,19 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
     //------------------------------------------------------------------------------------------------------
     //11)Send STO For Approval Workflow
-    procedure SendSTOTransactionsRequestForApproval(STOTransactions: Code[40]; var "Standing Orders": Record "Standing Orders")
-    begin
-        if FnCheckIfSTOTransactionsApprovalsWorkflowEnabled("Standing Orders") then begin
-            FnOnSendSTOTransactionsForApproval("Standing Orders");
-        end;
-    end;
+    // procedure SendSTOTransactionsRequestForApproval(STOTransactions: Code[40]; var "Standing Orders": Record "Standing Orders")
+    // begin
+    //     if FnCheckIfSTOTransactionsApprovalsWorkflowEnabled("Standing Orders") then begin
+    //         FnOnSendSTOTransactionsForApproval("Standing Orders");
+    //     end;
+    // end;
 
-    local procedure FnCheckIfSTOTransactionsApprovalsWorkflowEnabled(var "Standing Orders": Record "Standing Orders"): Boolean;
-    begin
-        if not IsSTOTransactionsApprovalsWorkflowEnabled("Standing Orders") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfSTOTransactionsApprovalsWorkflowEnabled(var "Standing Orders": Record "Standing Orders"): Boolean;
+    // begin
+    //     if not IsSTOTransactionsApprovalsWorkflowEnabled("Standing Orders") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
     procedure CancelSTOTransactionsRequestForApproval(STOTransactions: Code[40]; var "Standing Orders": Record "Standing Orders")
@@ -527,10 +527,10 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
         FnOnCancelSTOTransactionsApprovalRequest("Standing Orders");
     end;
 
-    local procedure IsSTOTransactionsApprovalsWorkflowEnabled(var STOTransactions: Record "Standing Orders"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(STOTransactions, Psalmkitswfevents.RunWorkflowOnSendSTOTransactionsForApprovalCode));
-    end;
+    // local procedure IsSTOTransactionsApprovalsWorkflowEnabled(var STOTransactions: Record "Standing Orders"): Boolean
+    // begin
+    //     exit(WorkflowManagement.CanExecuteWorkflow(STOTransactions, Psalmkitswfevents.RunWorkflowOnSendSTOTransactionsForApprovalCode));
+    // end;
 
     [IntegrationEvent(false, false)]
 
@@ -581,19 +581,19 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
     // begin
     // end;
     //13)--------------------------------------------------------------------Send BOSATransactions For Approval start
-    procedure SendInternalTransfersTransactionsRequestForApproval(InternalTransfersTransactions: Code[40]; var SaccoTransfers: Record "Sacco Transfers")
-    begin
-        if FnCheckIfInternalTransfersTransactionsApprovalsWorkflowEnabled(SaccoTransfers) then begin
-            FnOnSendInternalTransfersTransactionsForApproval(SaccoTransfers);
-        end;
-    end;
+    // procedure SendInternalTransfersTransactionsRequestForApproval(InternalTransfersTransactions: Code[40]; var SaccoTransfers: Record "Sacco Transfers")
+    // begin
+    //     if FnCheckIfInternalTransfersTransactionsApprovalsWorkflowEnabled(SaccoTransfers) then begin
+    //         FnOnSendInternalTransfersTransactionsForApproval(SaccoTransfers);
+    //     end;
+    // end;
 
-    local procedure FnCheckIfInternalTransfersTransactionsApprovalsWorkflowEnabled(var SaccoTransfers: Record "Sacco Transfers"): Boolean;
-    begin
-        if not IsInternalTransfersTransactionsApprovalsWorkflowEnabled(SaccoTransfers) then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfInternalTransfersTransactionsApprovalsWorkflowEnabled(var SaccoTransfers: Record "Sacco Transfers"): Boolean;
+    // begin
+    //     if not IsInternalTransfersTransactionsApprovalsWorkflowEnabled(SaccoTransfers) then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
     procedure CancelInternalTransfersTransactionsRequestForApproval(InternalTransfersTransactions: Code[40]; var SaccoTransfers: Record "Sacco Transfers")
@@ -601,10 +601,10 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
         FnOnCancelInternalTransfersTransactionsApprovalRequest(SaccoTransfers);
     end;
 
-    local procedure IsInternalTransfersTransactionsApprovalsWorkflowEnabled(var InternalTransfersTransactions: Record "Sacco Transfers"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(InternalTransfersTransactions, Psalmkitswfevents.RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode));
-    end;
+    // local procedure IsInternalTransfersTransactionsApprovalsWorkflowEnabled(var InternalTransfersTransactions: Record "Sacco Transfers"): Boolean
+    // begin
+    //     exit(WorkflowManagement.CanExecuteWorkflow(InternalTransfersTransactions, Psalmkitswfevents.RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode));
+    // end;
 
     [IntegrationEvent(false, false)]
 
@@ -620,19 +620,19 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
 
     //14)--------------------------------------------------------------------Send Payment voucher For Approval start
-    procedure SendPaymentVoucherTransactionsRequestForApproval(PaymentVoucherTransactions: Code[40]; var PaymentHeader: Record "Payment Header")
-    begin
-        if FnCheckIfPaymentVoucherTransactionsApprovalsWorkflowEnabled(PaymentHeader) then begin
-            FnOnSendPaymentVoucherTransactionsForApproval(PaymentHeader);
-        end;
-    end;
+    // procedure SendPaymentVoucherTransactionsRequestForApproval(PaymentVoucherTransactions: Code[40]; var PaymentHeader: Record "Payment Header")
+    // begin
+    //     if FnCheckIfPaymentVoucherTransactionsApprovalsWorkflowEnabled(PaymentHeader) then begin
+    //         FnOnSendPaymentVoucherTransactionsForApproval(PaymentHeader);
+    //     end;
+    // end;
 
-    local procedure FnCheckIfPaymentVoucherTransactionsApprovalsWorkflowEnabled(var PaymentHeader: Record "Payment Header"): Boolean;
-    begin
-        if not IsPaymentVoucherTransactionsApprovalsWorkflowEnabled(PaymentHeader) then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfPaymentVoucherTransactionsApprovalsWorkflowEnabled(var PaymentHeader: Record "Payment Header"): Boolean;
+    // begin
+    //     if not IsPaymentVoucherTransactionsApprovalsWorkflowEnabled(PaymentHeader) then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
     procedure CancelPaymentVoucherTransactionsRequestForApproval(PaymentVoucherTransactions: Code[40]; var PaymentHeader: Record "Payment Header")
@@ -640,10 +640,10 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
         FnOnCancelPaymentVoucherTransactionsApprovalRequest(PaymentHeader);
     end;
 
-    local procedure IsPaymentVoucherTransactionsApprovalsWorkflowEnabled(var PaymentVoucherTransactions: Record "Payment Header"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(PaymentVoucherTransactions, Psalmkitswfevents.RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode));
-    end;
+    // local procedure IsPaymentVoucherTransactionsApprovalsWorkflowEnabled(var PaymentVoucherTransactions: Record "Payment Header"): Boolean
+    // begin
+    //     exit(WorkflowManagement.CanExecuteWorkflow(PaymentVoucherTransactions, Psalmkitswfevents.RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode));
+    // end;
 
     [IntegrationEvent(false, false)]
 
