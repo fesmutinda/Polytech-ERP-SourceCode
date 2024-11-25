@@ -129,7 +129,7 @@ Page 56003 "Sacco Transfer Card"
                         if Confirm('Send Approval Request ?', false) = false then begin
                             exit;
                         end else begin
-                            Approvals.SendInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            //Approvals.SendInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
                             CurrPage.Close();
                         end;
                     end;
