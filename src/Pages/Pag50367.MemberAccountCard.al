@@ -353,7 +353,7 @@ page 50367 "Member Account Card"
 
                         if Rec."Current Shares" >= Rec."Outstanding Balance" then begin
                             if Confirm('Are you sure you want to create a Withdrawal Application for this Member', false) = true then begin
-                                SurestepFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
+                                SwizzsoftFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
                             end;
                         end else
                             Error('The withdraw Application has been denied');
@@ -615,6 +615,6 @@ page 50367 "Member Account Card"
         TypeIsEmployed: Boolean;
         IsRegularAccount: Boolean;
         IsJuniorAccount: Boolean;
-        SurestepFactory: Codeunit "Swizzsoft Factory";
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
 }
 

@@ -990,6 +990,13 @@ Page 56043 "Polytech Sacco Role Center"
                         RunPageView = WHERE(status = CONST(open));
                         RunPageMode = Edit;
                     }
+                    action(NewAccountTest)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Test Account Opening';
+                        RunObject = page "Membership Application Test";
+                        RunPageMode = Edit;
+                    }
                     action(NewAccountPending)
                     {
                         ApplicationArea = All;
@@ -1271,37 +1278,37 @@ Page 56043 "Polytech Sacco Role Center"
             {
                 Caption = 'Credit Management';
                 ToolTip = 'Manage BOSA Loans Module';
-                // group("BOSA Loans Management")
-                // {
-                //     Caption = 'New BOSA Loans Applications';
-                //     ToolTip = 'BOSA Loans'' Management Module';
-                //     action("BOSA Loan Application")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'BOSA Loan Application List';
-                //         Image = Loaners;
-                //         RunObject = Page "Loan List-New Application BOSA";
-                //         ToolTip = 'Open BOSA Loan Applications List';
-                //         RunPageView = where(Posted = const(false), "Loan Status" = const(Application));
-                //     }
-                //     action("Pending BOSA Loan Application")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'BOSA Loans Pending Approval';
-                //         Image = CreditCard;
-                //         RunObject = Page "LoanList-Pending Approval BOSA";
+                group("BOSA Loans Management")
+                {
+                    Caption = 'New BOSA Loans Applications';
+                    ToolTip = 'BOSA Loans'' Management Module';
+                    action("BOSA Loan Application")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'BOSA Loan Application List';
+                        Image = Loaners;
+                        RunObject = Page "Loans Application List(Approv)";// "Loan List-New Application BOSA";
+                        ToolTip = 'Open BOSA Loan Applications List';
+                        RunPageView = where(Posted = const(false), "Loan Status" = const(Application));
+                    }
+                    action("Pending BOSA Loan Application")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'BOSA Loans Pending Approval';
+                        Image = CreditCard;
+                        RunObject = Page "Loans  List- pending approval";// "LoanList-Pending Approval BOSA";
 
-                //         ToolTip = 'Open the list of BOSA Loans Pending Approval';
+                        ToolTip = 'Open the list of BOSA Loans Pending Approval';
 
-                //     }
-                //     action("Approved Loans")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'BOSA Loans Pending Disbursement.';
-                //         RunObject = Page "Loan Application BOSA-Approved";
-                //         ToolTip = 'Open the list of Approved Loans Pending Disbursement.';
-                //     }
-                // }
+                    }
+                    action("Approved Loans")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'BOSA Loans Pending Disbursement.';
+                        // RunObject = Page "Loan Application BOSA-Approved";
+                        ToolTip = 'Open the list of Approved Loans Pending Disbursement.';
+                    }
+                }
 
 
                 group("Loan Batching")

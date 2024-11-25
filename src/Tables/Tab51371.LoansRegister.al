@@ -4441,10 +4441,12 @@ Table 51371 "Loans Register"
         field(51516256; "Sub-sector"; Code[10])
         {
             DataClassification = ToBeClassified;
+            // TableRelation = "Main Sector".Code;
         }
         field(51516257; "Specific-Sector"; Code[10])
         {
             DataClassification = ToBeClassified;
+            // TableRelation = "Main Sector".Code;
         }
         field(51516258; "Insider-board"; Boolean)
         {

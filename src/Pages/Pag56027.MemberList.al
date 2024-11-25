@@ -238,11 +238,11 @@ Page 56027 "Member List"
     //     EMailBody := 'Dear <b>' + '</b>,</br></br>'+
     //         'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted.' +'<br></br>'+
     //         'Congratulations';
-    //     SurestepFactory.SendMail(Emailaddress, EmailSubject, EmailBody);
+    //     SwizzsoftFactory.SendMail(Emailaddress, EmailSubject, EmailBody);
     // end;
 
     var
-        SurestepFactory: Codeunit "swizzsoft Factory";
+        SwizzsoftFactory: Codeunit "swizzsoft Factory";
         Cust: Record "Member Register";
         GeneralSetup: Record "Sacco General Set-Up";
         Gnljnline: Record "Gen. Journal Line";

@@ -34,7 +34,7 @@ Table 51362 "Member App Signatories"
         field(8; "Must be Present"; Boolean)
         {
         }
-        field(9; Picture; MediaSet)
+        field(9; Picture; Media)
         {
             Caption = 'Picture';
         }

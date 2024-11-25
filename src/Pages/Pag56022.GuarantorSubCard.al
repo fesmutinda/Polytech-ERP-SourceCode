@@ -99,7 +99,7 @@ Page 56022 "Guarantor Sub Card"
 
                     trigger OnAction()
                     var
-                        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+                        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
                         text001: label 'This batch is already pending approval';
                         GuarantorshipSubstitutionL: Record "Guarantorship Substitution L";
                     begin
@@ -154,7 +154,7 @@ Page 56022 "Guarantor Sub Card"
                     trigger OnAction()
                     var
                         text001: label 'This batch is already pending approval';
-                        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+                        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
                     begin
                         if Rec.Status <> Rec.Status::Pending then
                             Error(text001);
