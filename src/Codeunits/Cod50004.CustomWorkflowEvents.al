@@ -11,7 +11,7 @@ Codeunit 50004 "Custom Workflow Events"
         WFHandler: Codeunit "Workflow Event Handling";
         WorkflowManagement: Codeunit "Workflow Management";
         WFEventHandler: Codeunit "Workflow Event Handling";
-        SurestepWFEvents: Codeunit "Custom Workflow Events";
+        SwizzsoftWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
     procedure AddEventsToLib()
@@ -28,7 +28,7 @@ Codeunit 50004 "Custom Workflow Events"
         // WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanApplicationForApprovalCode,
         //                     Database::"Loans Register", 'Approval of Loan Application is Requested.', 0, false);
         // WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanApplicationApprovalRequestCode,
-                                    // Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
+        // Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
 
         //-----Member exit
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipExitApplicationForApprovalCode,
@@ -275,14 +275,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelMembershipApplicationApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMembershipApplicationForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendMembershipApplicationForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendMembershipApplicationForApproval(var MembershipApplication: Record "Membership Applications")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, MembershipApplication);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipApplicationApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelMembershipApplicationApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelMembershipApplicationApprovalRequest(var MembershipApplication: Record "Membership Applications")
     begin
@@ -302,14 +302,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelMembershipExitApplicationApprovalRequest'));
     end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMembershipExitApplicationForApproval', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendMembershipExitApplicationForApproval', '', false, false)]
 
     // procedure RunWorkflowOnSendMembershipExitApplicationForApproval(var MembershipWithdrawals: Record "Membership Withdrawals")
     // begin
     //     WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, "Membership Withdrawals");
     // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipExitApplicationApprovalRequest', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelMembershipExitApplicationApprovalRequest', '', false, false)]
 
     // procedure RunWorkflowOnCancelMembershipExitApplicationApprovalRequest(var MembershipWithdrawals: Record "Membership Withdrawals")
     // begin
@@ -327,14 +327,14 @@ Codeunit 50004 "Custom Workflow Events"
     //     exit(UpperCase('RunWorkflowOnCancelLoanApplicationApprovalRequest'));
     // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLoanApplicationForApproval', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendLoanApplicationForApproval', '', false, false)]
 
     // // procedure RunWorkflowOnSendLoanApplicationForApproval(var LoansRegister: Record "Loans Register")
     // // begin
     // //     WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanApplicationForApprovalCode, LoansRegister);
     // // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLoanApplicationApprovalRequest', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelLoanApplicationApprovalRequest', '', false, false)]
 
     // procedure RunWorkflowOnCancelLoanApplicationApprovalRequest(var LoansRegister: Record "Loans Register")
     // begin
@@ -354,14 +354,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelBOSATransApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendBOSATransForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendBOSATransForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendBOSATransForApproval(var BOSATransfers: Record "BOSA Transfers")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendBOSATransForApprovalCode, BOSATransfers);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelBOSATransApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelBOSATransApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelBOSATransApprovalRequest(var BOSATransfers: Record "BOSA Transfers")
     begin
@@ -380,14 +380,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelLoanBatchApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLoanBatchForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendLoanBatchForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendLoanBatchForApproval(var LoanDisburesmentBatching: Record "Loan Disburesment-Batching")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendLoanBatchForApprovalCode, LoanDisburesmentBatching);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLoanBatchApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelLoanBatchApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelLoanBatchApprovalRequest(var LoanDisburesmentBatching: Record "Loan Disburesment-Batching")
     begin
@@ -420,14 +420,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelMemberChangeRequestApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendMemberChangeRequestForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendMemberChangeRequestForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendMemberChangeRequestForApproval(var ChangeRequest: Record "Change Request")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendMemberChangeRequestForApprovalCode, ChangeRequest);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMemberChangeRequestApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelMemberChangeRequestApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelMemberChangeRequestApprovalRequest(var ChangeRequest: Record "Change Request")
     begin
@@ -445,14 +445,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelLeaveApplicationApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendLeaveApplicationForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendLeaveApplicationForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendLeaveApplicationForApproval(var LeaveApplication: Record "HR Leave Application")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendLeaveApplicationForApprovalCode, LeaveApplication);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelLeaveApplicationApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelLeaveApplicationApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelLeaveApplicationApprovalRequest(var LeaveApplication: Record "HR Leave Application")
     begin
@@ -471,14 +471,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelGuarantorSubApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendGuarantorSubForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendGuarantorSubForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendGuarantorSubForApproval(var GuarantorSubstitution: Record "Guarantorship Substitution H")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendGuarantorSubForApprovalCode, GuarantorSubstitution);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelGuarantorSubApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelGuarantorSubApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelGuarantorSubApprovalRequest(var GuarantorSubstitution: Record "Guarantorship Substitution H")
     begin
@@ -510,14 +510,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelPettyCashReimbersementApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendPettyCashReimbersementForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendPettyCashReimbersementForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendPettyCashReimbersementForApproval(var PettyCashReimbersement: Record "Funds Transfer Header")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendPettyCashReimbersementForApprovalCode, PettyCashReimbersement);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelPettyCashReimbersementApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelPettyCashReimbersementApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelPettyCashReimbersementApprovalRequest(var PettyCashReimbersement: Record "Funds Transfer Header")
     begin
@@ -593,14 +593,14 @@ Codeunit 50004 "Custom Workflow Events"
     //     exit(UpperCase('RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequest'));
     // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendNewFOSAAccountApplicationForApproval', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendNewFOSAAccountApplicationForApproval', '', false, false)]
 
     // procedure RunWorkflowOnSendNewFOSAAccountApplicationForApproval(var NewFOSAAccountApplication: Record "Product Applications Details")
     // begin
     //     WorkflowManagement.HandleEvent(RunWorkflowOnSendNewFOSAAccountApplicationForApprovalCode, NewFOSAAccountApplication);
     // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelNewFOSAAccountApplicationApprovalRequest', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelNewFOSAAccountApplicationApprovalRequest', '', false, false)]
 
     // procedure RunWorkflowOnCancelNewFOSAAccountApplicationApprovalRequest(var NewFOSAAccountApplication: Record "Product Applications Details")
     // begin
@@ -618,14 +618,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelTellerTransactionsApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendTellerTransactionsForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendTellerTransactionsForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendTellerTransactionsForApproval(var TellerTransactions: Record Transactions)
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendTellerTransactionsForApprovalCode, TellerTransactions);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelTellerTransactionsApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelTellerTransactionsApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelTellerTransactionsApprovalRequest(var TellerTransactions: Record Transactions)
     begin
@@ -644,14 +644,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelSTOTransactionsApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendSTOTransactionsForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendSTOTransactionsForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendSTOTransactionsForApproval(var STOTransactions: Record "Standing Orders")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendSTOTransactionsForApprovalCode, STOTransactions);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelSTOTransactionsApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelSTOTransactionsApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelSTOTransactionsApprovalRequest(var STOTransactions: Record "Standing Orders")
     begin
@@ -669,14 +669,14 @@ Codeunit 50004 "Custom Workflow Events"
     //     exit(UpperCase('RunWorkflowOnCancelATMTransactionsApprovalRequest'));
     // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendATMTransactionsForApproval', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendATMTransactionsForApproval', '', false, false)]
 
     // procedure RunWorkflowOnSendATMTransactionsForApproval(var ATMTransactions: Record "ATM Card Applications")
     // begin
     //     WorkflowManagement.HandleEvent(RunWorkflowOnSendATMTransactionsForApprovalCode, ATMTransactions);
     // end;
 
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelATMTransactionsApprovalRequest', '', false, false)]
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelATMTransactionsApprovalRequest', '', false, false)]
 
     // procedure RunWorkflowOnCancelATMTransactionsApprovalRequest(var ATMTransactions: Record "ATM Card Applications")
     // begin
@@ -695,14 +695,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendInternalTransfersTransactionsForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendInternalTransfersTransactionsForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendInternalTransfersTransactionsForApproval(var InternalTransfersTransactions: Record "Sacco Transfers")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode, InternalTransfersTransactions);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelInternalTransfersTransactionsApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelInternalTransfersTransactionsApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelInternalTransfersTransactionsApprovalRequest(var InternalTransfersTransactions: Record "Sacco Transfers")
     begin
@@ -721,14 +721,14 @@ Codeunit 50004 "Custom Workflow Events"
         exit(UpperCase('RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequest'));
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnSendPaymentVoucherTransactionsForApproval', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnSendPaymentVoucherTransactionsForApproval', '', false, false)]
 
     procedure RunWorkflowOnSendPaymentVoucherTransactionsForApproval(var PaymentVoucherTransactions: Record "Payment Header")
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode, PaymentVoucherTransactions);
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelPaymentVoucherTransactionsApprovalRequest', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::SwizzsoftApprovalsCodeUnit, 'FnOnCancelPaymentVoucherTransactionsApprovalRequest', '', false, false)]
 
     procedure RunWorkflowOnCancelPaymentVoucherTransactionsApprovalRequest(var PaymentVoucherTransactions: Record "Payment Header")
     begin

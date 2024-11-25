@@ -34,7 +34,7 @@ page 50839 "MC Individual Application List"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = 51360;
-    SourceTableView = where("Account Category" = filter(<> Joint),
+    SourceTableView = where("Account Category" = filter(<> Corporate),
                             "Group Account" = const(false),
                             // "Customer Posting Group" = const(MICRO),
                             Source = const(Micro));

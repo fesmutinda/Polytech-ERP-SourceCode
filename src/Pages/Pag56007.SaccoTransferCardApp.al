@@ -124,7 +124,7 @@ Page 56007 "Sacco Transfer Card(App)"
 
                     trigger OnAction()
                     var
-                        Approvals: Codeunit SurestepApprovalsCodeUnit;
+                        Approvals: Codeunit SwizzsoftApprovalsCodeUnit;
                     begin
                         if Confirm('Send Approval Request ?', false) = false then begin
                             exit;
@@ -143,7 +143,7 @@ Page 56007 "Sacco Transfer Card(App)"
 
                     trigger OnAction()
                     var
-                        Approvals: Codeunit SurestepApprovalsCodeUnit;
+                        Approvals: Codeunit SwizzsoftApprovalsCodeUnit;
                     begin
                         if Confirm('Cancel Approval Request ?', false) = false then begin
                             exit;

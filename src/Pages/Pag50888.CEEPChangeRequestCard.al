@@ -344,7 +344,7 @@ page 50888 "CEEP Change Request Card"
 
                 trigger OnAction()
                 var
-                    SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+                    SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
                 begin
 
                     if Rec.Status <> Rec.Status::Open then
@@ -486,7 +486,7 @@ page 50888 "CEEP Change Request Card"
         DOCUMENT_NO: code[50];
         SFactory: Codeunit "Swizzsoft Factory";
         ChoosenSgnatory: Boolean;
-        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
 
 
     local procedure UpdateControl()

@@ -85,7 +85,7 @@ page 50875 "Member Picture-Uploaded"
         Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Rec.Picture.Count > 0 then
+        if Rec.Picture.HasValue then//.Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 

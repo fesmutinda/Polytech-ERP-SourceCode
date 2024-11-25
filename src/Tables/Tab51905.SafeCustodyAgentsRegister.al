@@ -32,7 +32,7 @@ Table 51905 "Safe Custody Agents Register"
                     "Agent Postal Address" := ObjCust.Address;
                     "Agent Postal Code" := ObjCust."Post Code";
                     "Agent Physical Address" := ObjCust."Member's Residence";
-                    Picture := ObjCust.Picture;
+                    "Picture." := ObjCust.Picture;
                     Signature := ObjCust.Signature;
                 end;
             end;
@@ -69,6 +69,9 @@ Table 51905 "Safe Custody Agents Register"
         {
         }
         field(14; Picture; MediaSet)
+        {
+        }
+        field(140; "Picture."; Media)
         {
         }
         field(15; Signature; MediaSet)

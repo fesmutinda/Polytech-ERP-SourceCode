@@ -152,6 +152,9 @@ Table 51552 "Change Request"
         field(9; Picture; MediaSet)
         {
         }
+        field(940; "Picture."; Media)
+        {
+        }
         field(10; signinature; MediaSet)
         {
         }
