@@ -18,7 +18,7 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
 
     var
-        Psalmkitswfevents: Codeunit "Custom Workflow Events";
+        Psalmkitswfevents: Codeunit "Custom Workflow Events Devc";
         NoWorkflowEnabledErr: Label 'No Approval workflow for this record type is enabled';
         WorkflowManagement: Codeunit "Workflow Management";
 
