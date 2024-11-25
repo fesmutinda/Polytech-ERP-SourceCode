@@ -32,7 +32,7 @@ Table 51406 "BOSA Transfers"
         }
         field(90190; Status; Option)
         {
-            OptionMembers = " ",Approved,Open;
+            OptionMembers = " ",Approved,"Pending Approval",Open;
         }
         field(10101; Description; code[20]) { }
         field(6; Posted; Boolean)

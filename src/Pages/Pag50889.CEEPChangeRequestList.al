@@ -45,7 +45,7 @@ page 50889 "CEEP Change Request List"
 
     trigger OnOpenPage()
     begin
-        IF UserId <> 'SURESTEP' THEN begin
+        IF UserId <> 'Swizzsoft' THEN begin
             Rec.SetRange(Rec."Captured by", UserId);
         end;
 

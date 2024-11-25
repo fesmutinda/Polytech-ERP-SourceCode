@@ -39,8 +39,37 @@ Table 51509 "Membership Reg. Products Appli"
         field(5; "Product Name"; Text[50])
         {
         }
+        field(10; "Applicant ID"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(11; "Applicant Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(12; "Applicant Gender"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "",Male,Female;
+            OptionCaption = ' ,Male,Female';
+
+        }
+        field(13; "Applicant Age"; Integer)
+        {
+            DataClassification = ToBeClassified;
+
+        }
         field(6; "Default Product"; Boolean)
         {
+        }
+        field(9; "Product Category"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ",BOSA;
+            OptionCaption = ' ,BOSA';
+
         }
     }
 

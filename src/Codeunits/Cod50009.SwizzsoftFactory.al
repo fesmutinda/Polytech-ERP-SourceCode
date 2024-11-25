@@ -217,6 +217,363 @@ Codeunit 50009 "Swizzsoft Factory"
         exit(branchCode);
     end;
 
+    procedure FnGetMemberApplicationAMLRiskRating(MemberNo: Code[20])
+    var
+        VarCategoryScore: Integer;
+        VarResidencyScore: Integer;
+        VarNatureofBusinessScore: Integer;
+        VarEntityScore: Integer;
+        VarIndustryScore: Integer;
+        VarLenghtOfRelationshipScore: Integer;
+        VarInternationalTradeScore: Integer;
+        VarElectronicPaymentScore: Integer;
+        // VarCardTypeScore: Integer;
+        VarAccountTypeScore: Integer;
+        // VarChannelTakenScore: Integer;
+        VarAccountTypeOption: Option "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","KSA/Imara/MJA/Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        MemberTotalRiskRatingScore: Decimal;
+        MemberNetRiskScore: Decimal;
+        ObjMemberDueDiligence: Record "Member Due Diligence Measures";
+        ObjDueDiligenceSetup: Record "Member Due Diligence Measures";
+        VarRiskRatingDescription: Text[50];
+        VarRefereeScore: Decimal;
+        VarRefereeRiskRate: Text;
+        ObjCustRiskRates: Record "Customer Risk Rating";
+        ObjRefereeSetup: Record "Referee Risk Rating Scale";
+        ObjMemberRiskRate: Record "Individual Customer Risk Rate";
+        ObjControlRiskRating: Record "Control Risk Rating";
+        VarControlRiskRating: Decimal;
+        ObjMembershipApplication: Record "Membership Applications";
+        VarAccountTypeScoreVer1: Decimal;
+        VarAccountTypeScoreVer2: Decimal;
+        VarAccountTypeScoreVer3: Decimal;
+        ObjMemberRiskRating: Record "Individual Customer Risk Rate2";
+        ObjNetRiskScale: Record "Member Gross Risk Rating Scale";
+        ObjProductsApp: Record "Membership Reg. Products Appli";// "Membership Applied Products";
+        ObjProductRiskRating: Record "Product Risk Rating";
+        VarAccountTypeOptionVer1: Option "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","KSA/Imara/MJA/Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        VarAccountTypeOptionVer2: Option "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","KSA/Imara/MJA/Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        VarAccountTypeOptionVer3: Option "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","KSA/Imara/MJA/Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+    begin
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::Individuals);
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication."Individual Category");
+            if ObjCustRiskRates.FindSet then begin
+                VarCategoryScore := ObjCustRiskRates."Risk Score";
+
+            end;
+        end;
+
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::Entities);
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication.Entities);
+            if ObjCustRiskRates.FindSet then begin
+                VarEntityScore := ObjCustRiskRates."Risk Score";
+
+            end;
+        end;
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::"Residency Status");
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication."Member Residency Status");
+            if ObjCustRiskRates.FindSet then begin
+                VarResidencyScore := ObjCustRiskRates."Risk Score";
+            end;
+        end;
+
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            //=============================================================Exisiting Referee
+            ObjMemberRiskRate.Reset;
+            ObjMemberRiskRate.SetRange(ObjMemberRiskRate."Membership Application No", ObjMembershipApplication."Referee Member No");
+            if ObjMemberRiskRate.FindSet then begin
+                if ObjMembershipApplication."Referee Member No" <> '' then begin
+
+                    ObjRefereeSetup.Reset;
+                    if ObjRefereeSetup.FindSet then begin
+                        repeat
+                            if (ObjMemberRiskRate."GROSS CUSTOMER AML RISK RATING" >= ObjRefereeSetup."Minimum Risk Rate") and
+                              (ObjMemberRiskRate."GROSS CUSTOMER AML RISK RATING" <= ObjRefereeSetup."Maximum Risk Rate") then begin
+                                VarRefereeScore := ObjRefereeSetup.Score;
+                                VarRefereeRiskRate := ObjRefereeSetup.Description;
+                            end;
+                        until ObjRefereeSetup.Next = 0;
+                    end;
+                end;
+
+                //=============================================================No Referee
+                if ObjMembershipApplication."Referee Member No" = '' then begin
+                    ObjRefereeSetup.Reset;
+                    ObjRefereeSetup.SetFilter(ObjRefereeSetup.Description, '%1', 'Others with no referee');
+                    if ObjRefereeSetup.FindSet then begin
+                        VarRefereeScore := ObjRefereeSetup.Score;
+                        VarRefereeRiskRate := 'Others with no referee';
+                    end;
+                end;
+            end;
+
+
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::"Residency Status");
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication."Member Residency Status");
+            if ObjCustRiskRates.FindSet then begin
+                VarResidencyScore := ObjCustRiskRates."Risk Score";
+            end;
+        end;
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::Industry);
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication."Industry Type");
+            if ObjCustRiskRates.FindSet then begin
+                VarIndustryScore := ObjCustRiskRates."Risk Score";
+            end;
+        end;
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::"Length Of Relationship");
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication."Length Of Relationship");
+            if ObjCustRiskRates.FindSet then begin
+                VarLenghtOfRelationshipScore := ObjCustRiskRates."Risk Score";
+            end;
+        end;
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjCustRiskRates.Reset;
+            ObjCustRiskRates.SetRange(ObjCustRiskRates.Category, ObjCustRiskRates.Category::"International Trade");
+            ObjCustRiskRates.SetRange(ObjCustRiskRates."Sub Category", ObjMembershipApplication."International Trade");
+            if ObjCustRiskRates.FindSet then begin
+                VarInternationalTradeScore := ObjCustRiskRates."Risk Score";
+            end;
+        end;
+
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.FindSet then begin
+            ObjProductRiskRating.Reset;
+            ObjProductRiskRating.SetCurrentkey(ObjProductRiskRating."Product Type Code");
+            ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Category", ObjProductRiskRating."product category"::"Electronic Payment");
+            ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Type Code", ObjMembershipApplication."Electronic Payment");
+            if ObjProductRiskRating.FindSet then begin
+                VarElectronicPaymentScore := ObjProductRiskRating."Risk Score";
+            end;
+        end;
+
+
+        //ObjProductRiskRating.GET();
+        // ObjMembershipApplication.Reset;
+        // ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        // if ObjMembershipApplication.FindSet then begin
+
+        //     ObjProductRiskRating.Reset;
+        //     ObjProductRiskRating.SetCurrentkey(ObjProductRiskRating."Product Type Code");
+        //     ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Category", ObjProductRiskRating."product category"::Cards);
+        //     ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Type Code", ObjMembershipApplication."Cards Type Taken");
+        //     if ObjProductRiskRating.FindSet then begin
+        //         VarCardTypeScore := ObjProductRiskRating."Risk Score";
+        //     end;
+        // end;
+
+        ObjProductRiskRating.Reset;
+        ObjProductRiskRating.SetCurrentkey(ObjProductRiskRating."Product Type Code");
+        ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Category", ObjProductRiskRating."product category"::Accounts);
+        ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Type Code", ObjMembershipApplication."Accounts Type Taken");
+        if ObjProductRiskRating.FindSet then begin
+            VarAccountTypeScore := ObjProductRiskRating."Risk Score";
+        end;
+
+        // ObjProductRiskRating.Reset;
+        // ObjProductRiskRating.SetCurrentkey(ObjProductRiskRating."Product Type Code");
+        // ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Category", ObjProductRiskRating."product category"::Others);
+        // ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Type Code", ObjMembershipApplication."Others(Channels)");
+        // if ObjProductRiskRating.FindSet then begin
+        //     VarChannelTakenScore := ObjProductRiskRating."Risk Score";
+        // end;
+
+        ObjProductsApp.Reset;
+        ObjProductsApp.SetRange(ObjProductsApp."Membership Applicaton No", MemberNo);
+        // ObjProductsApp.SetFilter(ObjProductsApp."Product Category", '<>%1', ObjProductsApp."Product Category"::FOSA);
+        if ObjProductsApp.FindSet then begin
+            repeat
+                ObjProductRiskRating.Reset;
+                ObjProductRiskRating.SetCurrentkey(ObjProductRiskRating."Product Type");
+                ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Category", ObjProductRiskRating."product category"::Accounts);
+                ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Type", ObjProductRiskRating."product type"::Credit);
+                if ObjProductRiskRating.FindSet then begin
+                    VarAccountTypeScoreVer1 := ObjProductRiskRating."Risk Score";
+                    VarAccountTypeOptionVer1 := ObjProductRiskRating."product type"::Credit;
+                    VarAccountTypeScore := ObjProductRiskRating."Risk Score";
+                    VarAccountTypeOption := ObjProductRiskRating."product type"::Credit;
+                end;
+            until ObjProductsApp.Next = 0;
+        end;
+
+        ObjProductsApp.Reset;
+        ObjProductsApp.SetRange(ObjProductsApp."Membership Applicaton No", MemberNo);
+        // ObjProductsApp.SetFilter(ObjProductsApp."Product Category", '%1', ObjProductsApp."Product Category"::FOSA);
+        //ObjProductsApp.SetFilter(ObjProductsApp.Product, '<>%1|%2', '503', '506');
+        if ObjProductsApp.FindSet then begin
+
+            repeat
+                ObjProductRiskRating.Reset;
+                ObjProductRiskRating.SetCurrentkey(ObjProductRiskRating."Product Type");
+                ObjProductRiskRating.SetRange(ObjProductRiskRating."Product Category", ObjProductRiskRating."product category"::Accounts);
+                ObjProductRiskRating.SetFilter(ObjProductRiskRating."Product Type Code", '%1', ObjProductRiskRating."Product Type Code"::"FOSA(KSA");// 'Ordinary Savings');
+                if ObjProductRiskRating.FindSet then begin
+                    VarAccountTypeScoreVer2 := ObjProductRiskRating."Risk Score";
+                    VarAccountTypeOptionVer2 := ObjProductRiskRating."product type"::Both;
+                    VarAccountTypeScore := ObjProductRiskRating."Risk Score";
+                    VarAccountTypeOption := ObjProductRiskRating."product type"::Both;
+                end;
+            until ObjProductsApp.Next = 0;
+        end;
+
+
+
+
+        if (VarAccountTypeScoreVer1 > VarAccountTypeScoreVer2) and (VarAccountTypeScoreVer1 > VarAccountTypeScoreVer3) then begin
+            VarAccountTypeScore := VarAccountTypeScoreVer1;
+            VarAccountTypeOption := VarAccountTypeOptionVer1
+        end else
+            if (VarAccountTypeScoreVer2 > VarAccountTypeScoreVer1) and (VarAccountTypeScoreVer2 > VarAccountTypeScoreVer3) then begin
+                VarAccountTypeScore := VarAccountTypeScoreVer2;
+                VarAccountTypeOption := VarAccountTypeOptionVer2
+            end else
+                if (VarAccountTypeScoreVer3 > VarAccountTypeScoreVer1) and (VarAccountTypeScoreVer3 > VarAccountTypeScoreVer2) then begin
+                    VarAccountTypeScore := VarAccountTypeScoreVer3;
+                    VarAccountTypeOption := VarAccountTypeOptionVer3
+                end;
+
+
+        //Create Entries on Membership Risk Rating Table
+        ObjMemberRiskRating.Reset;
+        ObjMemberRiskRating.SetRange(ObjMemberRiskRating."Membership Application No", MemberNo);
+        if ObjMemberRiskRating.FindSet then begin
+            ObjMemberRiskRating.DeleteAll;
+        end;
+
+
+        //===============================================Get Control Risk Rating
+        ObjControlRiskRating.Reset;
+        if ObjControlRiskRating.FindSet then begin
+            ObjControlRiskRating.CalcSums(ObjControlRiskRating."Control Weight Aggregate");
+            VarControlRiskRating := ObjControlRiskRating."Control Weight Aggregate";
+        end;
+
+
+
+
+        ObjMemberRiskRating.Init;
+        ObjMemberRiskRating."Membership Application No" := MemberNo;
+
+        ObjMemberRiskRating."What is the Customer Category?" := ObjMembershipApplication."Individual Category";
+        ObjMemberRiskRating."Customer Category Score" := VarCategoryScore;
+        ObjMemberRiskRating."What is the Member residency?" := ObjMembershipApplication."Member Residency Status";
+        ObjMemberRiskRating."Member Residency Score" := VarResidencyScore;
+        ObjMemberRiskRating."Cust Employment Risk?" := ObjMembershipApplication.Entities;
+        ObjMemberRiskRating."Cust Employment Risk Score" := VarEntityScore;
+        ObjMemberRiskRating."Cust Business Risk Industry?" := ObjMembershipApplication."Industry Type";
+        ObjMemberRiskRating."Cust Bus. Risk Industry Score" := VarIndustryScore;
+        ObjMemberRiskRating."Lenght Of Relationship?" := ObjMembershipApplication."Length Of Relationship";
+        ObjMemberRiskRating."Length Of Relation Score" := VarLenghtOfRelationshipScore;
+        ObjMemberRiskRating."Cust Involved in Intern. Trade" := ObjMembershipApplication."International Trade";
+        ObjMemberRiskRating."Involve in Inter. Trade Score" := VarInternationalTradeScore;
+        ObjMemberRiskRating."Account Type Taken?" := Format(VarAccountTypeOption);
+        ObjMemberRiskRating."Account Type Taken Score" := VarAccountTypeScore;
+        //ObjMemberRiskRating."Card Type Taken" := ObjMembershipApplication."Cards Type Taken";
+        // ObjMemberRiskRating."Card Type Taken Score" := VarCardTypeScore;
+        // ObjMemberRiskRating."Channel Taken?" := ObjMembershipApplication."Others(Channels)";
+        // ObjMemberRiskRating."Channel Taken Score" := VarChannelTakenScore;
+        ObjMemberRiskRating."Electronic Payments?" := ObjMembershipApplication."Electronic Payment";
+        ObjMemberRiskRating."Referee Score" := VarRefereeScore;
+        ObjMemberRiskRating."Member Referee Rate" := VarRefereeRiskRate;
+        ObjMemberRiskRating."Electronic Payments Score" := VarElectronicPaymentScore;
+        MemberTotalRiskRatingScore := VarCategoryScore + VarEntityScore + VarIndustryScore + VarInternationalTradeScore + VarRefereeScore + VarLenghtOfRelationshipScore + VarResidencyScore + VarAccountTypeScore
+        + VarElectronicPaymentScore;
+        ObjMemberRiskRating."GROSS CUSTOMER AML RISK RATING" := MemberTotalRiskRatingScore;
+        ObjMemberRiskRating."BANK'S CONTROL RISK RATING" := VarControlRiskRating;
+        ObjMemberRiskRating."CUSTOMER NET RISK RATING" := ROUND(ObjMemberRiskRating."GROSS CUSTOMER AML RISK RATING" / ObjMemberRiskRating."BANK'S CONTROL RISK RATING", 0.01, '>');
+        MemberNetRiskScore := MemberTotalRiskRatingScore / VarControlRiskRating;
+        ObjMemberRiskRating.Insert(true);
+
+
+        ObjNetRiskScale.Reset;
+        if ObjNetRiskScale.FindSet then begin
+            repeat
+                if (MemberTotalRiskRatingScore >= ObjNetRiskScale."Minimum Risk Rate") and (MemberTotalRiskRatingScore <= ObjNetRiskScale."Maximum Risk Rate") then begin
+                    ObjMemberRiskRating."Risk Rate Scale" := ObjNetRiskScale."Risk Scale";
+                    VarRiskRatingDescription := ObjNetRiskScale.Description;
+                end;
+            until ObjNetRiskScale.Next = 0;
+        end else begin
+            ObjMemberRiskRating."Risk Rate Scale" := MemberTotalRiskRatingScore;
+        end;
+
+        ObjMemberRiskRating.Validate(ObjMemberRiskRating."Membership Application No");
+        ObjMemberRiskRating.Modify;
+
+
+        ObjMemberDueDiligence.Reset;
+        ObjMemberDueDiligence.SetRange(ObjMemberDueDiligence."Member No", MemberNo);
+        if ObjMemberDueDiligence.FindSet then begin
+            ObjMemberDueDiligence.DeleteAll;
+        end;
+
+        ObjDueDiligenceSetup.Reset;
+        ObjDueDiligenceSetup.SetRange(ObjDueDiligenceSetup."Risk Rating Level", ObjMemberRiskRating."Risk Rate Scale");
+        if ObjDueDiligenceSetup.FindSet then begin
+            repeat
+                ObjMemberDueDiligence.Init;
+                ObjMemberDueDiligence."Member No" := MemberNo;
+                if ObjMembershipApplication.Get(MemberNo) then begin
+                    ObjMemberDueDiligence."Member Name" := ObjMembershipApplication.Name;
+                end;
+                ObjMemberDueDiligence."Due Diligence No" := ObjDueDiligenceSetup."Due Diligence No";
+                ObjMemberDueDiligence."Risk Rating Level" := ObjMemberRiskRating."Risk Rate Scale";
+                ObjMemberDueDiligence."Risk Rating Scale" := VarRiskRatingDescription;
+                ObjMemberDueDiligence."Due Diligence Type" := ObjDueDiligenceSetup."Due Diligence Type";
+                ObjMemberDueDiligence."Due Diligence Measure" := ObjDueDiligenceSetup."Due Diligence Measure";
+                ObjMemberDueDiligence.Insert;
+            until ObjDueDiligenceSetup.Next = 0;
+        end;
+
+        ObjMembershipApplication.Reset;
+        ObjMembershipApplication.SetRange(ObjMembershipApplication."No.", MemberNo);
+        if ObjMembershipApplication.Find('-') then begin
+            if (MemberNetRiskScore > 0) and (MemberNetRiskScore < 4) then begin
+                ObjMembershipApplication."Member Risk Level" := ObjMembershipApplication."Member Risk Level"::"Low Risk";
+            end else
+                if (MemberNetRiskScore > 4) and (MemberNetRiskScore < 8) then begin
+                    ObjMembershipApplication."Member Risk Level" := ObjMembershipApplication."Member Risk Level"::"Medium Risk";
+                end else
+                    ObjMembershipApplication."Member Risk Level" := ObjMembershipApplication."Member Risk Level"::"High Risk";
+
+            ObjMembershipApplication."Due Diligence Measure" := Format(MemberNetRiskScore);
+            //ObjMembershipApplication."Due Diligence Measure" := ObjDueDiligenceSetup."Due Diligence Type";
+            ObjMembershipApplication.Modify;
+        end;
+    end;
 
     procedure FnSendSMS(SMSSource: Text; SMSBody: Text; CurrentAccountNo: Text; MobileNumber: Text)
     var

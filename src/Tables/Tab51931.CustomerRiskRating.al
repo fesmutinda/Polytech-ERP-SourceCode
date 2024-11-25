@@ -9,8 +9,11 @@ Table 51931 "Customer Risk Rating"
             OptionCaption = ' ,Individuals,Entities,Residency Status,Industry,Length Of Relationship,International Trade';
             OptionMembers = " ",Individuals,Entities,"Residency Status",Industry,"Length Of Relationship","International Trade";
         }
-        field(2; "Sub Category"; Text[50])
+        field(2; "Sub Category"; Option)
         {
+            Description = 'What Is the Industry Type?';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
         }
         field(3; "Inherent Risk Rating"; Option)
         {
