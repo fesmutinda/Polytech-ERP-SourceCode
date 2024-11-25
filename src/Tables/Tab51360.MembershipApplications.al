@@ -371,6 +371,13 @@ Table 51360 "Membership Applications"
         field(68031; Section; Code[20])
         {
             TableRelation = "Member Section"."No.";
+            trigger OnValidate()
+            begin
+                Stations.SetRange("No.", Rec.Section);
+                if (Stations.Find('-')) then begin
+                    "Station Name" := Stations.Section;
+                end;
+            end;
         }
         field(68032; "No. Series"; Code[10])
         {
@@ -591,8 +598,9 @@ Table 51360 "Membership Applications"
         }
         field(68070; "Account Category"; Option)
         {
-            OptionCaption = 'Individual,Junior,Joint,Corporate,Business,Other';
-            OptionMembers = Individual,Junior,Joint,Corporate,Business,Other;
+            // OptionCaption = 'Individual,Junior,Joint,Corporate,Business,Other';
+            // OptionMembers = Individual,Junior,Joint,Corporate,Business,Other;
+            OptionMembers = Individual,Corporate,Business,Other;
         }
         field(68071; "Copy of KRA Pin"; Boolean)
         {
@@ -798,8 +806,7 @@ Table 51360 "Membership Applications"
         }
         field(68121; "Employment Info"; Option)
         {
-            OptionCaption = ' ,"Self Employed",Employed,UnEmployed,Contracting,Others';
-            OptionMembers = " ","Self Employed",Employed,UnEmployed,Contracting,Others;
+            OptionMembers = " ","Self Employed",Employed,UnEmployed,Others;
         }
         field(68122; "Contracting Details"; Text[30])
         {
@@ -1443,6 +1450,16 @@ Table 51360 "Membership Applications"
         {
             DataClassification = ToBeClassified;
         }
+        field(69230; "Income Levels"; Option)
+        {
+            OptionCaption = '0-20000,20001-50000,50001-100000,Over 100000';
+            OptionMembers = "0-20000","20001-50000","50001-100000","Over 100000";
+        }
+        field(69231; "Source of Funds"; Option)
+        {
+            OptionMembers = Salary,Business,Pension,Others;
+        }
+        field(69232; "Specific Source of Funds"; code[50]) { }
     }
 
     keys
@@ -1579,6 +1596,7 @@ Table 51360 "Membership Applications"
         Text016: label 'You cannot change the contents of the %1 field because this %2 has one or more posted ledger entries.';
         NoSeriesMgt: Codeunit NoSeriesManagement;
         PostCode: Record "Post Code";
+        Stations: Record "Member Section";
         User: Record User;
         Employer: Record "Sacco Employers";
         DataSheet: Record "Data Sheet Main";
