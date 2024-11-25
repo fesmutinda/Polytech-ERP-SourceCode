@@ -1,5 +1,5 @@
 //Replacing Workflow Integration codeunit for membership functions
-codeunit 51115 "SurestepApprovalsCodeUnit"
+Codeunit 50039 "SurestepApprovalsCodeUnit"
 {
 
     trigger OnRun()
@@ -10,13 +10,15 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     var
         MembApplicationTable: Record "Membership Applications";
         LoanApplications: Record "Loans Register";
+        FOSAAccountsApp: record "Product Applications Details";
         LoanBatches: Record "Loan Disburesment-Batching";
         GuarantorSubstitution: Record "Guarantorship Substitution H";
-        PaymentVoucher: Record "Payment Header";
+        LeaveApplications: Record "HR Leave Application";
         FundsTransferHeader: Record "Funds Transfer Header";
-        FOSAProductApplicationTable: Record "Accounts Applications Details";
-        LoanRecoveryApplicationTable: Record "Loan Recovery Header";
-        Psalmkitswfevents: Codeunit "Custom Workflow Events Devc";
+
+
+    var
+        Psalmkitswfevents: Codeunit "Custom Workflow Events";
         NoWorkflowEnabledErr: Label 'No Approval workflow for this record type is enabled';
         WorkflowManagement: Codeunit "Workflow Management";
 
@@ -91,7 +93,7 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
 
     local procedure IsLoanApplicationApprovalsWorkflowEnabled(var LoansRegister: Record "Loans Register"): Boolean
     begin
-        exit(WorkflowManagement.CanExecuteWorkflow(LoansRegister, Psalmkitswfevents.RunWorkflowOnSendLoanApplicationForApprovalCode));
+        // exit(WorkflowManagement.CanExecuteWorkflow(LoansRegister, Psalmkitswfevents.RunWorkflowOnSendLoanApplicationForApprovalCode));
     end;
 
 
@@ -187,45 +189,7 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     begin
     end;
     //------------------------------------------------------------------------------------------------------
-    //5)--------------------------------------------------------------------Send Loan TopUp request For Approval start
-    procedure SendLoanTopUpRequestForApproval(DocNo: Code[40]; var "Loan Top Up.": Record "Loan Top Up.")
-    begin
-        if FnCheckIfLoanTopUpApprovalsWorkflowEnabled("Loan Top Up.") then begin
-            FnOnSendLoanTopUpForApproval("Loan Top Up.");
-        end;
-    end;
 
-    local procedure FnCheckIfLoanTopUpApprovalsWorkflowEnabled(var "Loan Top Up.": Record "Loan Top Up."): Boolean;
-    begin
-        if not IsLoanTopUpApprovalsWorkflowEnabled("Loan Top Up.") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
-
-    //.
-    procedure CancelLoanTopUpRequestForApproval(LoanTopUp: Code[40]; var "Loan Top Up.": Record "Loan Top Up.")
-    begin
-        FnOnCancelLoanTopUpApprovalRequest("Loan Top Up.");
-    end;
-
-
-    local procedure IsLoanTopUpApprovalsWorkflowEnabled(var LoanTopUp: Record "Loan Top Up."): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(LoanTopUp, Psalmkitswfevents.RunWorkflowOnSendLoanTopUpForApprovalCode));
-    end;
-
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnSendLoanTopUpForApproval(var LoanTopUp: Record "Loan Top Up.")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnCancelLoanTopUpApprovalRequest(var LoanTopUp: Record "Loan Top Up.")
-    begin
-    end;
     //------------------------------------------------------------------------------------------------------
     //6)--------------------------------------------------------------------Send Change request For Approval start
     procedure SendMemberChangeRequestForApproval(DocNo: Code[40]; var "Change Request": Record "Change Request")
@@ -268,70 +232,30 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     end;
 
 
-    //Send MemberReapplication Card
-
-    procedure SendMemberReapplicationRequestForApproval(DocNo: Code[40]; var MemberReapplication: Record "Member Reapplication")
-    begin
-        if FnCheckIfMemberMemberReapplicationApprovalsWorkflowEnabled(MemberReapplication) then begin
-            FnOnSendMemberReapplicationForApproval(MemberReapplication);
-        end;
-    end;
-
-    local procedure FnCheckIfMemberMemberReapplicationApprovalsWorkflowEnabled(var MemberReapplication: Record "Member Reapplication"): Boolean;
-    begin
-        if not IsMemberReapplicationApprovalsWorkflowEnabled(MemberReapplication) then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
-
-    //.
-    procedure CancelMemberReapplicationRequestForApproval(MemberRea: Code[40]; var MemberReapplication: Record "Member Reapplication")
-    begin
-        FnOnCancelMemberReapplicationApprovalRequest(MemberReapplication);
-    end;
-
-
-    local procedure IsMemberReapplicationApprovalsWorkflowEnabled(var MemberReapplication: Record "Member Reapplication"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(MemberReapplication, Psalmkitswfevents.RunWorkflowOnSendMemberReapplicationForApprovalCode));
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnSendMemberReapplicationForApproval(var MemberReapplication: Record "Member Reapplication")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnCancelMemberReapplicationApprovalRequest(var MemberReapplication: Record "Member Reapplication")
-    begin
-    end;
-    //------------------------------------------------------------------------------------------------------
     //7)--------------------------------------------------------------------Send MembershipExit  Applications request For Approval start
 
-    procedure SendMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exist")
-    begin
-        if FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled("Membership Exist") then begin
-            FnOnSendMembershipExitApplicationForApproval("Membership Exist");
-        end;
-    end;
+    // procedure SendMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exit")
+    // begin
+    //     if FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(MembershipExit) then begin
+    //         FnOnSendMembershipExitApplicationForApproval(MembershipExit);
+    //     end;
+    // end;
 
-    local procedure FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(var "Membership Exist": Record "Membership Exist"): Boolean;
-    begin
-        if not IsMembershipApplicationExitApprovalsWorkflowEnabled("Membership Exist") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
+    // local procedure FnCheckIfMembershipExitApplicationApprovalsWorkflowEnabled(var "Membership Exist": Record "Membership Exit"): Boolean;
+    // begin
+    //     if not IsMembershipApplicationExitApprovalsWorkflowEnabled("Membership Exit") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
 
     //.
-    procedure CancelMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exist")
+    procedure CancelMembershipExitApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Exist": Record "Membership Exit")
     begin
         FnOnCancelMembershipExitApplicationApprovalRequest("Membership Exist");
     end;
 
 
-    local procedure IsMembershipApplicationExitApprovalsWorkflowEnabled(var "Membership Exist": Record "Membership Exist"): Boolean
+    local procedure IsMembershipApplicationExitApprovalsWorkflowEnabled(var "Membership Exist": Record "Membership Exit"): Boolean
     begin
         exit(WorkflowManagement.CanExecuteWorkflow("Membership Exist", Psalmkitswfevents.RunWorkflowOnSendMembershipExitApplicationForApprovalCode));
     end;
@@ -340,16 +264,55 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
 
     [IntegrationEvent(false, false)]
 
-    procedure FnOnSendMembershipExitApplicationForApproval(var "Membership Exist": Record "Membership Exist")
+    procedure FnOnSendMembershipExitApplicationForApproval(var "Membership Exist": Record "Membership Exit")
     begin
     end;
 
     [IntegrationEvent(false, false)]
 
-    procedure FnOnCancelMembershipExitApplicationApprovalRequest(var "Membership Exist": Record "Membership Exist")
+    procedure FnOnCancelMembershipExitApplicationApprovalRequest(var "Membership Exist": Record "Membership Exit")
+    begin
+    end;
+    //------------------------------------------------------------------------------------------------------
+    //7)--------------------------------------------------------------------Send Membership Applications request For Approval start
+    procedure SendLeaveApplicationsRequestForApproval(LeaveApplicationNo: Code[40]; var "HR Leave Application": Record "HR Leave Application")
+    begin
+        if FnCheckIfLeaveApplicationApprovalsWorkflowEnabled("HR Leave Application") then begin
+            FnOnSendLeaveApplicationForApproval("HR Leave Application");
+        end;
+    end;
+
+    local procedure FnCheckIfLeaveApplicationApprovalsWorkflowEnabled(var "HR Leave Application": Record "HR Leave Application"): Boolean;
+    begin
+        if not IsLeaveApplicationApprovalsWorkflowEnabled("HR Leave Application") then
+            Error(NoWorkflowEnabledErr);
+        exit(true);
+    end;
+
+    //.
+    procedure CancelLeaveApplicationsRequestForApproval(LeaveApplicationNo: Code[40]; var "HR Leave Application": Record "HR Leave Application")
+    begin
+        FnOnCancelLeaveApplicationApprovalRequest("HR Leave Application");
+    end;
+
+
+    local procedure IsLeaveApplicationApprovalsWorkflowEnabled(var LeaveApplication: Record "HR Leave Application"): Boolean
+    begin
+        exit(WorkflowManagement.CanExecuteWorkflow(LeaveApplication, Psalmkitswfevents.RunWorkflowOnSendLeaveApplicationForApprovalCode));
+    end;
+
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnSendLeaveApplicationForApproval(var LeaveApplication: Record "HR Leave Application")
     begin
     end;
 
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnCancelLeaveApplicationApprovalRequest(var LeaveApplication: Record "HR Leave Application")
+    begin
+    end;
     //8)--------------------------------------------------------------------Guarantor Substitution request For Approval start
     procedure SendGuarantorSubRequestForApproval(GuarantorSubNo: Code[40]; var "Guarantorship Substitution H": Record "Guarantorship Substitution H")
     begin
@@ -387,44 +350,6 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     [IntegrationEvent(false, false)]
 
     procedure FnOnCancelGuarantorSubApprovalRequest(var GuarantorSubstitution: Record "Guarantorship Substitution H")
-    begin
-    end;
-    //=============================================================================
-    procedure SendPaymentVoucherRequestForApproval(PaymentVoucher: Code[40]; var "Payment Header": Record "Payment Header")
-    begin
-        if FnCheckIfPaymentVoucherApprovalsWorkflowEnabled("Payment Header") then begin
-            FnOnSendPaymentVoucherForApproval("Payment Header");
-        end;
-    end;
-
-    local procedure FnCheckIfPaymentVoucherApprovalsWorkflowEnabled(var "Payment Header": Record "Payment Header"): Boolean;
-    begin
-        if not IsPaymentVoucherApprovalsWorkflowEnabled("Payment Header") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
-
-    //.
-    procedure CancelPaymentVoucherRequestForApproval(PaymentVoucher: Code[40]; var "Payment Header": Record "Payment Header")
-    begin
-        FnOnCancelPaymentVoucherApprovalRequest("Payment Header");
-    end;
-
-
-    local procedure IsPaymentVoucherApprovalsWorkflowEnabled(var PaymentVoucher: Record "Payment Header"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(PaymentVoucher, Psalmkitswfevents.RunWorkflowOnSendPaymentVoucherForApprovalCode));
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnSendPaymentVoucherForApproval(var PaymentVoucher: Record "Payment Header")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnCancelPaymentVoucherApprovalRequest(var PaymentVoucher: Record "Payment Header")
     begin
     end;
 
@@ -465,84 +390,45 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     procedure FnOnCancelPettyCashReimbersementApprovalRequest(var PettyCashReimbersement: Record "Funds Transfer Header")
     begin
     end;
-    //-----------------------------------------------------------------Fosa Product Application
-    procedure SendFOSAProductApplicationsRequestForApproval(FOSAProductApplicationNo: Code[40]; var "Accounts Applications Details": Record "Accounts Applications Details")
-    begin
-        if FnCheckIfFOSAProductApplicationApprovalsWorkflowEnabled("Accounts Applications Details") then begin
-            FnOnSendFOSAProductApplicationForApproval("Accounts Applications Details");
-        end;
-    end;
 
-    local procedure FnCheckIfFOSAProductApplicationApprovalsWorkflowEnabled(var "Accounts Applications Details": Record "Accounts Applications Details"): Boolean;
-    begin
-        if not IsFOSAProductApplicationApprovalsWorkflowEnabled("Accounts Applications Details") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
-
-    //.
-    procedure CancelFOSAProductApplicationsRequestForApproval(FOSAProductApplicationNo: Code[40]; var "Accounts Applications Details": Record "Accounts Applications Details")
-    begin
-        FnOnCancelFOSAProductApplicationApprovalRequest("Accounts Applications Details");
-    end;
-
-
-    local procedure IsFOSAProductApplicationApprovalsWorkflowEnabled(var FOSAProductApplication: Record "Accounts Applications Details"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(FOSAProductApplication, Psalmkitswfevents.RunWorkflowOnSendFOSAProductApplicationForApprovalCode));
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnSendFOSAProductApplicationForApproval(var FOSAProductApplication: Record "Accounts Applications Details")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnCancelFOSAProductApplicationApprovalRequest(var FOSAProductApplication: Record "Accounts Applications Details")
-    begin
-    end;
-    //11)-------------Send Loan Recovery Applications request For Approval start
-    procedure SendLoanRecoveryApplicationsRequestForApproval(LoanRecoveryApplicationNo: Code[40]; var "Loan Recovery Header": Record "Loan Recovery Header")
-    begin
-        if FnCheckIfLoanRecoveryApplicationApprovalsWorkflowEnabled("Loan Recovery Header") then begin
-            FnOnSendLoanRecoveryApplicationForApproval("Loan Recovery Header");
-        end;
-    end;
-
-    local procedure FnCheckIfLoanRecoveryApplicationApprovalsWorkflowEnabled(var "Loan Recovery Header": Record "Loan Recovery Header"): Boolean;
-    begin
-        if not IsLoanRecoveryApplicationApprovalsWorkflowEnabled("Loan Recovery Header") then
-            Error(NoWorkflowEnabledErr);
-        exit(true);
-    end;
-
-    //.
-    procedure CancelLoanRecoveryApplicationsRequestForApproval(LoanRecoveryApplicationNo: Code[40]; var "Loan Recovery Header": Record "Loan Recovery Header")
-    begin
-        FnOnCancelLoanRecoveryApplicationApprovalRequest("Loan Recovery Header");
-    end;
-
-
-    local procedure IsLoanRecoveryApplicationApprovalsWorkflowEnabled(var LoanRecoveryApplication: Record "Loan Recovery Header"): Boolean
-    begin
-        exit(WorkflowManagement.CanExecuteWorkflow(LoanRecoveryApplication, Psalmkitswfevents.RunWorkflowOnSendLoanRecoveryApplicationForApprovalCode));
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnSendLoanRecoveryApplicationForApproval(var LoanRecoveryApplication: Record "Loan Recovery Header")
-    begin
-    end;
-
-    [IntegrationEvent(false, false)]
-
-    procedure FnOnCancelLoanRecoveryApplicationApprovalRequest(var LoanRecoveryApplication: Record "Loan Recovery Header")
-    begin
-    end;
     //...............................................................................
-    //6)--------------------------------------------------------------------Send Change request For Approval start
+    //New FOSA Accounts Applications
+    // procedure SendNewFOSAAccountApplicationsRequestForApproval(NewFOSAAccountApplicationNo: Code[40]; var "Product Applications Details": Record "Product Applications Details")
+    // begin
+    //     if FnCheckIfNewFOSAAccountApplicationApprovalsWorkflowEnabled("Product Applications Details") then begin
+    //         FnOnSendNewFOSAAccountApplicationForApproval("Product Applications Details");
+    //     end;
+    // end;
+
+    // local procedure FnCheckIfNewFOSAAccountApplicationApprovalsWorkflowEnabled(var "Product Applications Details": Record "Product Applications Details"): Boolean;
+    // begin
+    //     if not IsNewFOSAAccountApplicationApprovalsWorkflowEnabled("Product Applications Details") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
+
+    //.
+    procedure CancelNewFOSAAccountApplicationsRequestForApproval(NewFOSAAccountApplicationNo: Code[40]; var "Product Applications Details": Record "Product Applications Details")
+    begin
+        FnOnCancelNewFOSAAccountApplicationApprovalRequest("Product Applications Details");
+    end;
+
+
+
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnSendNewFOSAAccountApplicationForApproval(var NewFOSAAccountApplication: Record "Product Applications Details")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnCancelNewFOSAAccountApplicationApprovalRequest(var NewFOSAAccountApplication: Record "Product Applications Details")
+    begin
+    end;
+    //..................................................................................................
+
     procedure SendCEEPChangeRequestForApproval(DocNo: Code[40]; var "Change Request": Record "CEEP Change Request")
     begin
         if FnCheckIfCEEPChangeRequestApprovalsWorkflowEnabled("Change Request") then begin
@@ -563,7 +449,6 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
         FnOnCancelCEEPChangeRequestApprovalRequest("Change Request");
     end;
 
-
     local procedure IsCEEPChangeRequestApprovalsWorkflowEnabled(var ChangeRequest: Record "CEEP Change Request"): Boolean
     begin
         exit(WorkflowManagement.CanExecuteWorkflow(ChangeRequest, Psalmkitswfevents.RunWorkflowOnSendCEEPChangeRequestForApprovalCode));
@@ -579,6 +464,196 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     [IntegrationEvent(false, false)]
 
     procedure FnOnCancelCEEPChangeRequestApprovalRequest(var ChangeRequest: Record "CEEP Change Request")
+    begin
+    end;
+    //..................................................................................................
+    //10)--------------------------------------------------------------------Send Teller request For Approval start
+    procedure SendTellerTransactionsRequestForApproval(TellerTransactions: Code[40]; var Transactions: Record Transactions)
+    begin
+        if FnCheckIfTellerTransactionsApprovalsWorkflowEnabled(Transactions) then begin
+            FnOnSendTellerTransactionsForApproval(Transactions);
+        end;
+    end;
+
+    local procedure FnCheckIfTellerTransactionsApprovalsWorkflowEnabled(var Transactions: Record Transactions): Boolean;
+    begin
+        if not IsTellerTransactionsApprovalsWorkflowEnabled(Transactions) then
+            Error(NoWorkflowEnabledErr);
+        exit(true);
+    end;
+
+    //.
+    procedure CancelTellerTransactionsRequestForApproval(TellerTransactions: Code[40]; var Transactions: Record Transactions)
+    begin
+        FnOnCancelTellerTransactionsApprovalRequest(Transactions);
+    end;
+
+    local procedure IsTellerTransactionsApprovalsWorkflowEnabled(var TellerTransactions: Record Transactions): Boolean
+    begin
+        exit(WorkflowManagement.CanExecuteWorkflow(TellerTransactions, Psalmkitswfevents.RunWorkflowOnSendTellerTransactionsForApprovalCode));
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnSendTellerTransactionsForApproval(var TellerTransactions: Record Transactions)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnCancelTellerTransactionsApprovalRequest(var TellerTransactions: Record Transactions)
+    begin
+    end;
+
+    //------------------------------------------------------------------------------------------------------
+    //11)Send STO For Approval Workflow
+    procedure SendSTOTransactionsRequestForApproval(STOTransactions: Code[40]; var "Standing Orders": Record "Standing Orders")
+    begin
+        if FnCheckIfSTOTransactionsApprovalsWorkflowEnabled("Standing Orders") then begin
+            FnOnSendSTOTransactionsForApproval("Standing Orders");
+        end;
+    end;
+
+    local procedure FnCheckIfSTOTransactionsApprovalsWorkflowEnabled(var "Standing Orders": Record "Standing Orders"): Boolean;
+    begin
+        if not IsSTOTransactionsApprovalsWorkflowEnabled("Standing Orders") then
+            Error(NoWorkflowEnabledErr);
+        exit(true);
+    end;
+
+    //.
+    procedure CancelSTOTransactionsRequestForApproval(STOTransactions: Code[40]; var "Standing Orders": Record "Standing Orders")
+    begin
+        FnOnCancelSTOTransactionsApprovalRequest("Standing Orders");
+    end;
+
+    local procedure IsSTOTransactionsApprovalsWorkflowEnabled(var STOTransactions: Record "Standing Orders"): Boolean
+    begin
+        exit(WorkflowManagement.CanExecuteWorkflow(STOTransactions, Psalmkitswfevents.RunWorkflowOnSendSTOTransactionsForApprovalCode));
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnSendSTOTransactionsForApproval(var STOTransactions: Record "Standing Orders")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnCancelSTOTransactionsApprovalRequest(var STOTransactions: Record "Standing Orders")
+    begin
+    end;
+    //12 ATM Card Transactions................................................................................
+    // procedure SendATMTransactionsRequestForApproval(ATMTransactions: Code[40]; var "ATM Card Applications": Record "ATM Card Applications")
+    // begin
+    //     if FnCheckIfATMTransactionsApprovalsWorkflowEnabled("ATM Card Applications") then begin
+    //         FnOnSendATMTransactionsForApproval("ATM Card Applications");
+    //     end;
+    // end;
+
+    // local procedure FnCheckIfATMTransactionsApprovalsWorkflowEnabled(var "ATM Card Applications": Record "ATM Card Applications"): Boolean;
+    // begin
+    //     if not IsATMTransactionsApprovalsWorkflowEnabled("ATM Card Applications") then
+    //         Error(NoWorkflowEnabledErr);
+    //     exit(true);
+    // end;
+
+    //.
+    // procedure CancelATMTransactionsRequestForApproval(ATMTransactions: Code[40]; var "ATM Card Applications": Record "ATM Card Applications")
+    // begin
+    //     FnOnCancelATMTransactionsApprovalRequest("ATM Card Applications");
+    // end;
+
+    // local procedure IsATMTransactionsApprovalsWorkflowEnabled(var ATMTransactions: Record "ATM Card Applications"): Boolean
+    // begin
+    //     exit(WorkflowManagement.CanExecuteWorkflow(ATMTransactions, Psalmkitswfevents.RunWorkflowOnSendATMTransactionsForApprovalCode));
+    // end;
+
+    // [IntegrationEvent(false, false)]
+
+    // procedure FnOnSendATMTransactionsForApproval(var ATMTransactions: Record "ATM Card Applications")
+    // begin
+    // end;
+
+    // [IntegrationEvent(false, false)]
+
+    // procedure FnOnCancelATMTransactionsApprovalRequest(var ATMTransactions: Record "ATM Card Applications")
+    // begin
+    // end;
+    //13)--------------------------------------------------------------------Send BOSATransactions For Approval start
+    procedure SendInternalTransfersTransactionsRequestForApproval(InternalTransfersTransactions: Code[40]; var SaccoTransfers: Record "Sacco Transfers")
+    begin
+        if FnCheckIfInternalTransfersTransactionsApprovalsWorkflowEnabled(SaccoTransfers) then begin
+            FnOnSendInternalTransfersTransactionsForApproval(SaccoTransfers);
+        end;
+    end;
+
+    local procedure FnCheckIfInternalTransfersTransactionsApprovalsWorkflowEnabled(var SaccoTransfers: Record "Sacco Transfers"): Boolean;
+    begin
+        if not IsInternalTransfersTransactionsApprovalsWorkflowEnabled(SaccoTransfers) then
+            Error(NoWorkflowEnabledErr);
+        exit(true);
+    end;
+
+    //.
+    procedure CancelInternalTransfersTransactionsRequestForApproval(InternalTransfersTransactions: Code[40]; var SaccoTransfers: Record "Sacco Transfers")
+    begin
+        FnOnCancelInternalTransfersTransactionsApprovalRequest(SaccoTransfers);
+    end;
+
+    local procedure IsInternalTransfersTransactionsApprovalsWorkflowEnabled(var InternalTransfersTransactions: Record "Sacco Transfers"): Boolean
+    begin
+        exit(WorkflowManagement.CanExecuteWorkflow(InternalTransfersTransactions, Psalmkitswfevents.RunWorkflowOnSendInternalTransfersTransactionsForApprovalCode));
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnSendInternalTransfersTransactionsForApproval(var InternalTransfersTransactions: Record "Sacco Transfers")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnCancelInternalTransfersTransactionsApprovalRequest(var InternalTransfersTransactions: Record "Sacco Transfers")
+    begin
+    end;
+
+
+    //14)--------------------------------------------------------------------Send Payment voucher For Approval start
+    procedure SendPaymentVoucherTransactionsRequestForApproval(PaymentVoucherTransactions: Code[40]; var PaymentHeader: Record "Payment Header")
+    begin
+        if FnCheckIfPaymentVoucherTransactionsApprovalsWorkflowEnabled(PaymentHeader) then begin
+            FnOnSendPaymentVoucherTransactionsForApproval(PaymentHeader);
+        end;
+    end;
+
+    local procedure FnCheckIfPaymentVoucherTransactionsApprovalsWorkflowEnabled(var PaymentHeader: Record "Payment Header"): Boolean;
+    begin
+        if not IsPaymentVoucherTransactionsApprovalsWorkflowEnabled(PaymentHeader) then
+            Error(NoWorkflowEnabledErr);
+        exit(true);
+    end;
+
+    //.
+    procedure CancelPaymentVoucherTransactionsRequestForApproval(PaymentVoucherTransactions: Code[40]; var PaymentHeader: Record "Payment Header")
+    begin
+        FnOnCancelPaymentVoucherTransactionsApprovalRequest(PaymentHeader);
+    end;
+
+    local procedure IsPaymentVoucherTransactionsApprovalsWorkflowEnabled(var PaymentVoucherTransactions: Record "Payment Header"): Boolean
+    begin
+        exit(WorkflowManagement.CanExecuteWorkflow(PaymentVoucherTransactions, Psalmkitswfevents.RunWorkflowOnSendPaymentVoucherTransactionsForApprovalCode));
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnSendPaymentVoucherTransactionsForApproval(var PaymentVoucherTransactions: Record "Payment Header")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+
+    procedure FnOnCancelPaymentVoucherTransactionsApprovalRequest(var PaymentVoucherTransactions: Record "Payment Header")
     begin
     end;
 }

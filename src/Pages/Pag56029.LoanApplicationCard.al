@@ -193,7 +193,10 @@ Page 56029 "Loan Application Card"
                 field("Main Sector"; Rec."Main-Sector")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    ShowMandatory = false;
+                    Style = Ambiguous;
+                    Editable = MNoEditable;
+
 
                     trigger OnValidate()
                     begin
@@ -203,8 +206,10 @@ Page 56029 "Loan Application Card"
                 field("Sub-Sector"; Rec."Sub-Sector")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
-                    TableRelation = "Sub Sector".Code where(No = field("Main-Sector"));
+                    ShowMandatory = false;
+                    Style = Ambiguous;
+                    Editable = MNoEditable;
+
 
                     trigger OnValidate()
                     begin
@@ -214,8 +219,10 @@ Page 56029 "Loan Application Card"
                 field("Specific Sector"; Rec."Specific-Sector")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
-                    TableRelation = "Specific Sector".Code where(No = field("Sub-Sector"));
+                    ShowMandatory = false;
+                    Style = Ambiguous;
+                    Editable = MNoEditable;
+
 
                     trigger OnValidate()
                     begin
@@ -592,7 +599,7 @@ Page 56029 "Loan Application Card"
         NewLNApplicNo: Code[10];
         Cust: Record Customer;
         EmailCodeunit: Codeunit Emailcodeunit;
-        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        SurestepFactory: Codeunit "Swizzsoft Factory";
         LoanApp: Record "Loans Register";
         TestAmt: Decimal;
         CustRec: Record Customer;
@@ -698,7 +705,7 @@ Page 56029 "Loan Application Card"
 
         EnabledApprovalWorkflowsExist: Boolean;
         RecordApproved: Boolean;
-        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
+        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         CanCancelApprovalForRecord: Boolean;
 
 

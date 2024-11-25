@@ -630,7 +630,7 @@ page 50841 "Change Request Card"
                                 Memb."Group Account Name" := Rec."Group Account Name";
                             if Rec."Employer Code(New)" <> '' then
                                 Memb."Employer Code" := Rec."Employer Code(New)";
-                            Memb.Picture := Rec."Picture.";
+                            Memb.Picture := Rec.Picture;
                             Memb.Status := Rec."Status.(New)";
                             Memb.Modify;
 

@@ -9,7 +9,7 @@
             "server": "http://localhost:8080/BC240/",
             "serverInstance": "BC240",
             "authentication": "UserPassword",
-            "startupObjectId": 56043,
+            "startupObjectId": 22,
             "startupObjectType": "Page",
             "port": 7049,
             "breakOnError": "All",
@@ -17,8 +17,8 @@
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": false,
             "tenant": "default",
-            "schemaUpdateMode": "ForceSync",
-            "usePublicURLFromServer": true
+            "schemaUpdateMode": "ForceSync"/* ,
+            "usePublicURLFromServer": true */
         }
     ]
 }

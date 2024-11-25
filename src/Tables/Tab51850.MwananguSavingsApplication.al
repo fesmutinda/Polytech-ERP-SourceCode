@@ -545,7 +545,7 @@ Table 51850 "Mwanangu Savings Application"
                         Validate("VAT Bus. Posting Group", GenBusPostingGrp."Def. VAT Bus. Posting Group");
             end;
         }
-        field(89; Picture; Media)
+        field(89; Picture; MediaSet)
         {
             Caption = 'Picture';
         }

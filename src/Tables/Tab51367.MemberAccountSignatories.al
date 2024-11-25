@@ -39,11 +39,11 @@ Table 51367 "Member Account Signatories"
         field(8; "Must be Present"; Boolean)
         {
         }
-        field(9; Picture; Media)
+        field(9; Picture; Blob)
         {
             Caption = 'Picture';
         }
-        field(10; Signature; MediaSet)
+        field(10; Signature; Blob)
         {
             Caption = 'Signature';
         }

@@ -119,10 +119,9 @@ Table 51360 "Membership Applications"
                 DimValue.Reset;
                 DimValue.SetRange(DimValue.Code, "Global Dimension 2 Code");
                 if DimValue.Find('-') then begin
-                    "Member Branch Code" := DimValue.Code;//"Branch Codes";
-                    "Global Dimension 2 Code" := DimValue.Code;
+                    "Member Branch Code" := 'NAIROBI';//DimValue."Branch Codes";
                 end;
-                // FnCreateDefaultSavingsProducts();
+                FnCreateDefaultSavingsProducts();
             end;
         }
         field(10; "Customer Posting Group"; Code[10])
@@ -388,13 +387,8 @@ Table 51360 "Membership Applications"
         field(68036; Category; Code[20])
         {
         }
-        field(68037; Picture; Media)
+        field(68037; Picture; MediaSet)
         {
-        }
-        field(69216; Nationality; Option)
-        {
-            DataClassification = ToBeClassified;
-            OptionMembers = Kenyan,"Non-Kenyan";
         }
         field(9009; "Approval Status"; Option) { OptionMembers = open,closed,Rejected; }
         field(68038; "Postal Code"; Code[20])
@@ -591,8 +585,8 @@ Table 51360 "Membership Applications"
         }
         field(68070; "Account Category"; Option)
         {
-            OptionCaption = 'Individual,Junior,Joint,Corporate,Business,Other';
-            OptionMembers = Individual,Junior,Joint,Corporate,Business,Other;
+            OptionCaption = 'Individual,Joint';
+            OptionMembers = Individual,Joint;
         }
         field(68071; "Copy of KRA Pin"; Boolean)
         {
@@ -1249,147 +1243,6 @@ Table 51360 "Membership Applications"
         {
             DataClassification = ToBeClassified;
         }
-        field(69209; IPRS; Code[20])
-        { }
-        field(69493; "Individual Category."; Text[40])
-        {
-            Description = 'What is the customer category?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter(Individuals));
-            ValidateTableRelation = false;
-        }
-        field(69492; "Member Residency Status."; Text[20])
-        {
-            Description = 'What is the customer''s residency status?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter("Residency Status"));
-            ValidateTableRelation = false;
-        }
-
-        field(69183; "AutoFill Agency Details"; Boolean)
-        {
-        }
-        field(69192; "AutoFill Mobile Details"; Boolean)
-        {
-        }
-        field(69193; "Individual Category"; Option)
-        {
-            Description = 'What Is the Industry Type?';
-            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
-            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
-        }
-        field(69300; "Member Residency Status"; Option)
-        {
-            Description = 'What Is the Industry Type?';
-            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
-            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
-        }
-        field(69194; Entities; Option)
-        {
-            Description = 'What Is the Industry Type?';
-            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
-            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
-        }
-        field(69195; "Industry Type"; Option)
-        {
-            Description = 'What Is the Industry Type?';
-            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
-            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
-        }
-        field(69196; "Length Of Relationship"; Option)
-        {
-            Description = 'What Is the Industry Type?';
-            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
-            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
-        }
-        field(69197; "International Trade"; Option)
-        {
-            Description = 'Is the customer involved in International Trade?';
-            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
-            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
-        }
-        field(69198; "Electronic Payment"; Option)
-        {
-            Description = 'Does the customer engage in electronic payments?';
-            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
-            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
-        }
-        field(69199; "Accounts Type Taken"; Option)
-        {
-            Description = 'Which account type is the customer taking?';
-            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
-            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
-        }
-        field(69200; "Cards Type Taken"; Option)
-        {
-            Description = 'Which card is the customer taking?';
-            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
-            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
-        }
-        field(69201; "Others(Channels)"; Text[50])
-        {
-            Description = 'Which products or channels is the customer taking?';
-            TableRelation = "Product Risk Rating"."Product Type Code" where("Product Category" = filter(Others));
-            ValidateTableRelation = false;
-        }
-        field(69206; "Member Risk Level"; Option)
-        {
-            OptionCaption = 'Low Risk,Medium Risk,High Risk';
-            OptionMembers = "Low Risk","Medium Risk","High Risk";
-        }
-        field(69207; "Due Diligence Measure"; Text[50])
-        {
-        }
-        field(69308; "Referee Member No"; Code[20])
-        {
-
-        }
-        field(69220; "Share Of Ownership One"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69221; "Source of Income Member One"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69222; "Source of IncomeMember Two"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69223; JointRelationship; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69224; "Reasontocreatingajointaccount"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69225; "Birth Certficate No."; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69176; "Second Member Name"; Text[30])
-        {
-        }
-        field(69177; "ID NO/Passport 2"; Code[30])
-        {
-        }
-        field(69217; "Guardian No."; Code[50])
-        {
-            TableRelation = "Member Register"."No.";
-            DataClassification = ToBeClassified;
-
-            trigger OnValidate()
-            begin
-                Cust.Reset;
-                Cust.SetRange(Cust."No.", "Guardian No.");
-                if Cust.Find('-') then begin
-                    "Guardian Name" := Cust.Name;
-                end;
-            end;
-        }
-        field(69218; "Guardian Name"; Text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
         field(69171; "Bank Branch"; Code[30])
         {
             DataClassification = ToBeClassified;
@@ -1408,38 +1261,6 @@ Table 51360 "Membership Applications"
             DataClassification = ToBeClassified;
         }
         field(69174; "Send E-Statements"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69226; "Share Of Ownership Two"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69227; "Nature of Business"; Option)
-        {
-            OptionCaption = 'Sole Proprietorship, Partnership';
-            OptionMembers = "Sole Proprietorship"," Partnership";
-        }
-        field(69214; "Official Designation"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69215; "Date Employed"; Date)
-        {
-
-        }
-        field(69208; "Sms Notification"; Boolean)
-        {
-        }
-        field(69210; "User ID"; Code[40])
-        {
-
-            trigger OnValidate()
-            begin
-                "User ID" := UserId;
-            end;
-        }
-        field(69219; "Client Computer Name"; Text[50])
         {
             DataClassification = ToBeClassified;
         }

@@ -612,7 +612,7 @@ Table 51364 "Member Register"
                         Validate("VAT Bus. Posting Group", GenBusPostingGrp."Def. VAT Bus. Posting Group");
             end;
         }
-        field(89; Picture; Media)
+        field(89; Picture; MediaSet)
         {
             Caption = 'Picture';
         }
@@ -1506,11 +1506,6 @@ Table 51364 "Member Register"
         {
             Caption = 'Signature';
         }
-        field(140; Image; Media)
-        {
-            Caption = 'Image';
-            ExtendedDatatype = Person;
-        }
         field(68031; "Passport No."; Code[5])
         {
         }
@@ -1636,7 +1631,7 @@ Table 51364 "Member Register"
 
             trigger OnValidate()
             begin
-                //Swizzsoft - Check Min Contractual Shares
+                //SURESTEP - Check Min Contractual Shares
                 /*IF GenSetUp."Contactual Shares (%)" <> 0 THEN BEGIN
                 IF "Monthly Contribution" <> 0 THEN BEGIN
                 GenSetUp.GET(0);
@@ -1671,7 +1666,7 @@ Table 51364 "Member Register"
                 "Advice Type":="Advice Type"::"Shares Adjustment";
                 END;
                 
-                //Swizzsoft - Check Min Contractual Shares
+                //SURESTEP - Check Min Contractual Shares
                 
                 "Previous Share Contribution":=xRec."Monthly Contribution"; */
 
@@ -3228,136 +3223,6 @@ Table 51364 "Member Register"
                                                                                   "Member No" = field("No.")));
             FieldClass = FlowField;
         }
-        field(69431; "Date Employed"; Date)
-        {
-
-        }
-        field(69432; "Guardian No."; Code[50])
-        {
-            TableRelation = Customer."No.";
-            DataClassification = ToBeClassified;
-
-            // trigger OnValidate()
-            // begin
-            //     Cust.Reset;
-            //     Cust.SetRange(Cust."No.", "Guardian No.");
-            //     if Cust.Find('-') then begin
-            //         "Guardian Name" := Cust.Name;
-            //     end;
-            // end;
-        }
-        field(69433; "Guardian Name"; Text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69434; "Don't Charge Interest"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69435; "Re-instated"; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69436; "Dormantancy Date"; Date)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69437; "Source of Income Member One"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69462; "Share Of Ownership One"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69438; "Source of IncomeMember Two"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69439; JointRelationship; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69440; "Reasontocreatingajointaccount"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69441; "Birth Certficate No."; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69448; "Mobile No. 3"; Code[20])
-        {
-        }
-        field(62173; "Sms Notification"; Boolean)
-        {
-        }
-        field(69903; Age; Text[50])
-        {
-        }
-
-        field(69209; IPRS; Code[20])
-        {
-
-        }
-        field(69417; "Member Residency Status."; Text[20])
-        {
-            Description = 'What is the customer''s residency status?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter("Residency Status"));
-
-            ValidateTableRelation = false;
-        }
-        field(69418; "Individual Category."; Text[40])
-        {
-            Description = 'What is the customer category?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter(Individuals));
-
-            ValidateTableRelation = false;
-        }
-        field(69419; "Entities."; Text[35])
-        {
-            Description = 'What is the Entity Type?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter(Entities));
-
-            ValidateTableRelation = false;
-        }
-        field(68926; "Payroll/Staff No"; Code[20])
-        {
-
-            trigger OnValidate()
-            begin
-
-
-            end;
-        }
-        field(69459; "Share Of Ownership Two"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(69461; "Second Member Name"; Text[30])
-        {
-        }
-
-        //
-        field(69442; "Registration No"; Code[30])
-        {
-        }
-        field(69443; "ID NO/Passport 2"; Code[30])
-        {
-        }
-        field(69444; "Registration office"; Text[30])
-        {
-            TableRelation = Location.Code;
-        }
-        field(69445; "Picture 2."; Blob)
-        {
-            SubType = Bitmap;
-        }
-        field(69446; "Signature  2."; Blob)
-        {
-            SubType = Bitmap;
-        }
-
     }
 
     keys
@@ -3671,7 +3536,7 @@ Table 51364 "Member Register"
         DataSheet: Record "Data Sheet Main";
         Employer: Record "Sacco Employers";
         Parishes: Record "Member's Parishes";
-        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        SurestepFactory: Codeunit "Swizzsoft Factory";
         ObjCellGroup: Record "Member House Groups";
 
 

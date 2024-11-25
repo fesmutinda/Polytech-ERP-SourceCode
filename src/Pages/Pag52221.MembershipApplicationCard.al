@@ -8,7 +8,7 @@ Page 52221 "Membership Application Card"
     {
         area(content)
         {
-            group("Application Header")
+            group("General Info")
             {
                 Caption = 'General Info';
                 field("No."; Rec."No.")
@@ -33,22 +33,20 @@ Page 52221 "Membership Application Card"
                         FnUpdateControls();
                     end;
                 }
-                field("Application Category"; Rec."Application Category")
+                field("Joint Account Name"; Rec."Joint Account Name")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = all;
+                    Editable = true;
+                    Caption = 'Joint Account Name';
+                    Visible = IsJointApplication;
                 }
-            }
-            group("Applicant Details")
-            {
-                Caption = 'Applicant Details';
-
                 field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
-                        Rec.Name := Rec."First Name";//+ ' ' + Rec."Middle Name" + ' ' + Rec."Last Name";
+                        Rec.Name := Rec."First Name" + ' ' + Rec."Middle Name" + ' ' + Rec."Last Name";
                     end;
                 }
                 field("Middle Name"; Rec."Middle Name")
@@ -57,10 +55,10 @@ Page 52221 "Membership Application Card"
                     ShowMandatory = true;
                     trigger OnValidate()
                     begin
-                        Rec.Name := Rec."First Name" + ' ' + Rec."Middle Name";//+ ' ' + Rec."Last Name";
+                        Rec.Name := Rec."First Name" + ' ' + Rec."Middle Name" + ' ' + Rec."Last Name";
                     end;
                 }
-                field("Surname"; Rec."Last Name")
+                field("Last Name"; Rec."Last Name")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
@@ -74,28 +72,11 @@ Page 52221 "Membership Application Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Date of Birth"; Rec."Date of Birth")
+                field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
-                    Caption = 'Date Of Birth';
                 }
-                field(Age; Rec.Age)
-                {
-                    Editable = false;
-                    ApplicationArea = Basic;
-                }
-                field(Gender; Rec.Gender)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Marital Status"; Rec."Marital Status")
-                {
-                    ApplicationArea = Basic;
-                }
-            }
-            group("Contact Details")
-            {
                 field("Address"; Rec.Address)
                 {
                     ApplicationArea = Basic;
@@ -131,29 +112,17 @@ Page 52221 "Membership Application Card"
                 {
                     ApplicationArea = Basic;
                 }
-            }
-            group("Corporate Details")
-            {
-                Caption = 'Corporate Details';
-                field("Joint Account Name"; Rec."Joint Account Name")
-                {
-                    ApplicationArea = all;
-                    Editable = true;
-                    Caption = 'Joint Account Name';
-                    Visible = IsJointApplication;
-                }
-            }
-            group("General Info")
-            {
-                Caption = 'General Info 2';
-
-
-                field("Payroll No"; Rec."Payroll No")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
                     ShowMandatory = true;
+                    Caption = 'Date Of Birth';
                 }
-
+                field(Age; Rec.Age)
+                {
+                    Editable = false;
+                    ApplicationArea = Basic;
+                }
                 field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = all;
@@ -168,8 +137,14 @@ Page 52221 "Membership Application Card"
                     ApplicationArea = all;
                     ShowMandatory = true;
                 }
-
-
+                field(Gender; Rec.Gender)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Marital Status"; Rec."Marital Status")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("How Did you know about us ?"; Rec."How Did you know of KANISA")
                 {
                     ApplicationArea = Basic;
@@ -195,7 +170,10 @@ Page 52221 "Membership Application Card"
                 {
                     ApplicationArea = Basic;
                 }
-
+                field("Application Category"; Rec."Application Category")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Registration Date"; Rec."Registration Date")
                 {
                     ApplicationArea = all;
@@ -310,12 +288,12 @@ Page 52221 "Membership Application Card"
                 field("Country of Residence"; Rec."Home Country")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 field("County of Residence"; Rec."County")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 // field("Sub County"; Rec."Sub County")
                 // {
@@ -325,12 +303,12 @@ Page 52221 "Membership Application Card"
                 field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 field("Sub-Location"; Rec."Sub-Location")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    //ShowMandatory = true;
                 }
                 field("Phone No."; Rec."Phone No.")
                 {
@@ -557,7 +535,7 @@ Page 52221 "Membership Application Card"
                     PromotedCategory = Process;
                     trigger OnAction()
                     var
-                        ApprovalCodeunit: Codeunit SwizzsoftApprovalsCodeUnit;
+                        ApprovalCodeunit: Codeunit SurestepApprovalsCodeUnit;
                     begin
                         //Rec.TESTFIELD("Global Dimension 2 Code");
                         Rec.TESTFIELD("Monthly Contribution");
@@ -653,7 +631,7 @@ Page 52221 "Membership Application Card"
         if (Rec."Account Category" = Rec."Account Category"::Individual) then begin
             IsIndividualApplication := true;
         end;
-        if (rec."Account Category" = Rec."Account Category"::Corporate) then begin
+        if (rec."Account Category" = Rec."Account Category"::Joint) then begin
             IsJointApplication := true;
             Rec."Global Dimension 1 Code" := 'BOSA';
         end else

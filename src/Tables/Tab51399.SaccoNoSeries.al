@@ -359,10 +359,6 @@ Table 51399 "Sacco No. Series"
         {
             TableRelation = "No. Series";
         }
-        field(51516096; "Top Up Loan Nos"; Code[10])
-        {
-            TableRelation = "No. Series";
-        }
         field(51516011; "Deposits Account No(HQ)"; Code[20])
         {
         }
@@ -501,10 +497,6 @@ Table 51399 "Sacco No. Series"
             TableRelation = "No. Series";
         }
         field(51516054; "BD Training Nos"; Code[20])
-        {
-            TableRelation = "No. Series";
-        }
-        field(51516090; "Member Re-Application No.s"; Code[20])
         {
             TableRelation = "No. Series";
         }

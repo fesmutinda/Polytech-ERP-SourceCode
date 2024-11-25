@@ -103,8 +103,8 @@ Table 51056 "Funds Transfer Header"
         field(25; Status; Option)
         {
             Editable = false;
-            OptionCaption = 'New,Open,Pending Approval,Approved,Cancelled,Posted';
-            OptionMembers = New,Open,"Pending Approval",Approved,Cancelled,Posted;
+            OptionCaption = 'New,Pending Approval,Approved,Cancelled,Posted';
+            OptionMembers = New,"Pending Approval",Approved,Cancelled,Posted;
         }
         field(26; "Cheque/Doc. No"; Code[20])
         {

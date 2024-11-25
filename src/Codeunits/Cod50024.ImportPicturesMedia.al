@@ -11,7 +11,7 @@ Codeunit 50024 "Import Pictures Media"
         ObjMember.Reset;
         ObjMember.SetRange("No.", '');
 
-        if ObjMember.Picture.HasValue then// > 0 then
+        if ObjMember.Picture.Count > 0 then
             /*IF NOT CONFIRM(OverrideImageQst) THEN
               ERROR('');*/
 
