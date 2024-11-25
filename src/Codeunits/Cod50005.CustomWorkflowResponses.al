@@ -389,9 +389,9 @@ Codeunit 50005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReleaseMembershipApplication(var MembershipApplication: Record 51360)
+    procedure ReleaseMembershipApplication(var MembershipApplication: Record "Membership Applications")
     var
-        MembershipApp: Record 51360;
+        MembershipApp: Record "Membership Applications";
     begin
 
         MembershipApp.Reset;
@@ -403,9 +403,9 @@ Codeunit 50005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReOpenMembershipApplication(var MemberApplication: Record 51360)
+    procedure ReOpenMembershipApplication(var MemberApplication: Record "Membership Applications")
     var
-        MembershipApp: Record 51360;
+        MembershipApp: Record "Membership Applications";
     begin
         MembershipApp.Reset;
         MembershipApp.SetRange(MembershipApp."No.", MemberApplication."No.");
@@ -416,9 +416,9 @@ Codeunit 50005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReleaseLoanApplication(var LoanApplication: Record 51371)
+    procedure ReleaseLoanApplication(var LoanApplication: Record "Loans Register")
     var
-        LoanB: Record 51371;
+        LoanB: Record "Loans Register";
     begin
         LoanB.Reset;
         LoanB.SetRange(LoanB."Loan  No.", LoanApplication."Loan  No.");
@@ -430,9 +430,9 @@ Codeunit 50005 "Custom Workflow Responses"
     end;
 
 
-    procedure ReOpenLoanApplication(var LoanApplication: Record 51371)
+    procedure ReOpenLoanApplication(var LoanApplication: Record "Loans Register")
     var
-        LoanB: Record 51371;
+        LoanB: Record "Loans Register";
     begin
         LoanB.Reset;
         LoanB.SetRange(LoanB."Loan  No.", LoanApplication."Loan  No.");

@@ -15,7 +15,7 @@
             "breakOnError": "All",
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
-            "enableSqlInformationDebugger": true,
+            "enableSqlInformationDebugger": false,
             "tenant": "default",
             "schemaUpdateMode": "ForceSync",
             "usePublicURLFromServer": true
