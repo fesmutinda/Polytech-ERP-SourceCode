@@ -4,7 +4,7 @@ Codeunit 50004 "Custom Workflow Events"
 
     trigger OnRun()
     begin
-        AddEventsToLib();
+        //AddEventsToLib();
     end;
 
     var
@@ -13,11 +13,6 @@ Codeunit 50004 "Custom Workflow Events"
         WFEventHandler: Codeunit "Workflow Event Handling";
         SwizzsoftWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
-
-    procedure TestPublish()
-    begin
-        Message('Custom Workflow Events logged.');
-    end;
 
     procedure AddEventsToLib()
     begin
@@ -119,7 +114,10 @@ Codeunit 50004 "Custom Workflow Events"
     end;
 
 
-    procedure AddEventsPredecessor()
+
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
+
+    procedure OnAddWorkflowEventPredecessorsToLibrary()
     begin
         //--------1.Approval,Rejection,Delegation Predecessors----------------------
         //1. Membership Application
