@@ -1581,6 +1581,11 @@ Table 51371 "Loans Register"
         field(53101; "Cheque Date"; Date)
         {
         }
+        field(69309; "Overdraft Installements"; Option)
+        {
+            OptionCaption = ' ,1,2,3,Loan';
+            OptionMembers = " ","1 Month","2 Months","3 Month","Loan";
+        }
         field(53102; "Outstanding Balance"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
@@ -3317,6 +3322,36 @@ Table 51371 "Loans Register"
         }
         field(69130; "Non Payroll Payments"; Decimal)
         {
+        }
+        field(51516296; "Deboost Loan Applied"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516297; "Deboost Commision"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516298; "Deboost Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68111; "Legal Cost"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68110; "Valuation Cost"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(1601; "Asset Valuation Cost"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(1602; "Legal Fees"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
         }
         field(69131; "Gross Pay"; Decimal)
         {

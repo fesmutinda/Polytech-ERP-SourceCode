@@ -1263,5 +1263,104 @@ Codeunit 50009 "Swizzsoft Factory"
 
         Commit;
     end;
+
+    procedure FnRecoverOnLoanOverdrafts(ClientCode: Code[50])
+    var
+        LoansRegister: Record "Loans Register";
+        GenJournalLine: Record "Gen. Journal Line";
+        LineNo: Integer;
+        VendorTable: record Vendor;
+    begin
+        LoansRegister.Reset();
+        LoansRegister.SetRange(LoansRegister."Client Code", ClientCode);
+        LoansRegister.SetAutoCalcFields(LoansRegister."Outstanding Balance", LoansRegister."Oustanding Interest");
+        LoansRegister.SetFilter(LoansRegister."Outstanding Balance", '>%1', 0);
+        LoansRegister.SetRange(LoansRegister."Overdraft Installements", LoansRegister."Overdraft Installements"::Loan);
+        if LoansRegister.Find('-') then begin
+            //...............................Remove Amount from Vendor
+            LineNo := LineNo + 1000;
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := 'GENERAL';
+            GenJournalLine."Journal Batch Name" := 'ARECOVERY';
+            GenJournalLine."Document No." := LoansRegister."Loan  No.";
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
+            VendorTable.Reset();
+            VendorTable.SetRange(VendorTable."BOSA Account No", ClientCode);
+            if VendorTable.Find('-') then begin
+                GenJournalLine."Account No." := VendorTable."No.";
+            end;
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := Today;
+            GenJournalLine.Description := 'Overdraft On Loan Recovered';
+            GenJournalLine.Validate(GenJournalLine."Currency Code");
+            GenJournalLine.Amount := LoansRegister."Oustanding Interest" + LoansRegister."Outstanding Balance";
+            GenJournalLine."External Document No." := LoansRegister."Loan  No.";
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
+            GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranch(ClientCode);
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+            //...............................Repay Loan Interest
+            LineNo := LineNo + 1000;
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := 'GENERAL';
+            GenJournalLine."Journal Batch Name" := 'ARECOVERY';
+            GenJournalLine."Document No." := LoansRegister."Loan  No.";
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
+            GenJournalLine."Account No." := ClientCode;
+            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Paid";
+            GenJournalLine."Loan No" := LoansRegister."Loan  No.";
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := Today;
+            GenJournalLine.Description := 'Overdraft Interest Paid On Loan Recovery';
+            GenJournalLine.Validate(GenJournalLine."Currency Code");
+            GenJournalLine.Amount := -LoansRegister."Oustanding Interest";
+            GenJournalLine."External Document No." := LoansRegister."Loan  No.";
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
+            GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranch(ClientCode);
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+            //...............................Repay Loan Interest
+            LineNo := LineNo + 1000;
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := 'GENERAL';
+            GenJournalLine."Journal Batch Name" := 'ARECOVERY';
+            GenJournalLine."Document No." := LoansRegister."Loan  No.";
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
+            GenJournalLine."Account No." := ClientCode;
+            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::Repayment;
+            GenJournalLine."Loan No" := LoansRegister."Loan  No.";
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := Today;
+            GenJournalLine.Description := 'Overdraft Principle Paid On Loan Recovery';
+            GenJournalLine.Validate(GenJournalLine."Currency Code");
+            GenJournalLine.Amount := -LoansRegister."Outstanding Balance";
+            GenJournalLine."External Document No." := LoansRegister."Loan  No.";
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
+            GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranch(ClientCode);
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+
+            GenJournalLine.RESET;
+            GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
+            GenJournalLine.SETRANGE("Journal Batch Name", 'ARECOVERY');
+            if GenJournalLine.Find('-') then begin
+                CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post Batch", GenJournalLine);
+            end;
+        end;
+
+    end;
+
 }
 

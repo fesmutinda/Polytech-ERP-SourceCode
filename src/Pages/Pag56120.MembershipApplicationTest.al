@@ -1,5 +1,5 @@
 
-page 56120 "Membership Application Test"
+page 56120 "Membership Application List"
 {
     ApplicationArea = Basic;
     CardPageID = "Member Application Card";

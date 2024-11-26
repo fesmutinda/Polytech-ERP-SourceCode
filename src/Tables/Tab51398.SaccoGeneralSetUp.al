@@ -218,12 +218,22 @@ Table 51398 "Sacco General Set-Up"
         {
             FieldClass = FlowFilter;
         }
+        field(1602; "Legal Fees"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
         field(68; "Loan Transfer Fees Account"; Code[20])
         {
             TableRelation = "G/L Account";
         }
         field(69; "Rejoining Fees Account"; Code[20])
         {
+            TableRelation = "G/L Account";
+        }
+        field(1601; "Asset Valuation Cost"; Code[50])
+        {
+            DataClassification = ToBeClassified;
             TableRelation = "G/L Account";
         }
         field(70; "Boosting Fees Account"; Code[20])
@@ -778,7 +788,8 @@ Table 51398 "Sacco General Set-Up"
         {
             DataClassification = ToBeClassified;
         }
-        field(222; "Top up Account"; Code[20]) { }
+        field(222; "Top up Account"; Code[20]) { }//"Banks Charges"
+        field(223; "Banks Charges"; Code[20]) { }//"Banks Charges"
     }
 
     keys
