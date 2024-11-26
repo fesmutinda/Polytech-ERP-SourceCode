@@ -1,4 +1,4 @@
-codeunit 50040 "Custom Workflow Events"
+codeunit 50004 "Custom Workflow Events"
 {
 
     trigger OnRun()

@@ -381,11 +381,18 @@ Table 51371 "Loans Register"
             trigger OnValidate()
             var
                 RefDate: Date;
+                MembReg: Record "Member Register";
             begin
                 //Sacco Deductions
                 //"Total Deductions":=("Monthly Contribution"+ "Loan Principle Repayment"+"Loan Interest Repayment");
                 //MESSAGE('0101 %1',"Total Deductions");
 
+
+                MembReg.Reset;
+                MembReg.SetRange(MembReg."No.", "Client Code");
+                if MembReg.FindFirst() then begin
+                    "Client Name" := MembReg.Name;
+                end;
 
                 LoanApp.Reset;
                 LoanApp.SetRange(LoanApp."Client Code", "Client Code");

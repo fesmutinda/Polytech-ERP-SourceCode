@@ -546,10 +546,19 @@ Page 52221 "Membership Application Card"
                     begin
                         //Rec.TESTFIELD("Global Dimension 2 Code");
                         Rec.TESTFIELD("Monthly Contribution");
-                        if Confirm('Are you sure to send ' + Format(REC."Full Name") + ' Membership Application for Approval ?', false) = false then begin
+
+                        /* if Confirm('Are you sure you want to send ' + Format(REC."Full Name") + ' Membership Application for Approval ?') = true then begin
+                            ApprovalCodeunit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+                            CurrPage.Close();
+                        end; */
+
+
+                        if Confirm('Are you sure to send ' + Format(REC."Full Name") + ' Membership Application for Approval ?', true) = false then begin
                             exit;
                         end else begin
                             ApprovalCodeunit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+                            Commit();
+
                             CurrPage.Close();
                         end;
                     end;
