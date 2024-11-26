@@ -1178,6 +1178,14 @@ page 56110 "Member Application Card"
                     RunObject = Page "Membership App Kin Details";
                     RunPageLink = "Account No" = field("No.");
                 }
+                action("Member Nominees")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Member Nominees';
+                    Image = Relationship;
+                    RunObject = Page "Membership App Nominee Detail";
+                    RunPageLink = "Account No" = field("No.");
+                }
                 action("Account Signatories")
                 {
                     ApplicationArea = Basic;
@@ -1238,7 +1246,7 @@ page 56110 "Member Application Card"
                             Rec.TestField(Gender);
                             Rec.TestField("Customer Posting Group");
                             Rec.TestField("Global Dimension 1 Code");
-                            Rec.TestField("Global Dimension 2 Code");
+                            // Rec.TestField("Global Dimension 2 Code");
                         end else
 
                             if (Rec."Account Category" = Rec."account category"::Corporate) then begin
@@ -1249,7 +1257,7 @@ page 56110 "Member Application Card"
                                 ///TESTFIELD("Account Category");
                                 Rec.TestField("Customer Posting Group");
                                 Rec.TestField("Global Dimension 1 Code");
-                                Rec.TestField("Global Dimension 2 Code");
+                                // Rec.TestField("Global Dimension 2 Code");
                                 //TESTFIELD("Copy of constitution");
 
                             end;
@@ -1418,6 +1426,9 @@ page 56110 "Member Application Card"
                 {
                 }
                 actionref("Next of Kin_Promoted"; "Next of Kin")
+                {
+                }
+                actionref("Member Nominees_Promoted"; "Member Nominees")
                 {
                 }
                 actionref("Account Signatories _Promoted"; "Account Signatories")
