@@ -10,7 +10,7 @@ codeunit 51116 "Custom Workflow Events Devc"
         WFHandler: Codeunit "Workflow Event Handling";
         WorkflowManagement: Codeunit "Workflow Management";
         WFEventHandler: Codeunit "Workflow Event Handling";
-        SurestepWFEvents: Codeunit "Custom Workflow Events Devc";
+        SurestepWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
     procedure AddEventsToLib()

@@ -16,7 +16,7 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
         FundsTransferHeader: Record "Funds Transfer Header";
         FOSAProductApplicationTable: Record "Accounts Applications Details";
         LoanRecoveryApplicationTable: Record "Loan Recovery Header";
-        Psalmkitswfevents: Codeunit "Custom Workflow Events Devc";
+        Psalmkitswfevents: Codeunit "Custom Workflow Events";
         NoWorkflowEnabledErr: Label 'No Approval workflow for this record type is enabled';
         WorkflowManagement: Codeunit "Workflow Management";
 

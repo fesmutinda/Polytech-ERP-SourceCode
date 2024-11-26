@@ -997,12 +997,14 @@ page 56110 "Member Application Card"
                             Rec.TestField(Name);
                             Rec.TestField("ID No.");
                             Rec.TestField("Mobile Phone No");
-                            Rec.TestField(Picture);
-                            Rec.TestField(Signature);
-                            Rec.TestField(Gender);
-                            Rec.TestField("Customer Posting Group");
-                            Rec.TestField("Global Dimension 1 Code");
-                            Rec.TestField("Global Dimension 2 Code");
+                            //COMMENTED OUT FOR TESTS KLEIN
+
+                            // Rec.TestField(Picture);
+                            // Rec.TestField(Signature);
+                            // Rec.TestField(Gender);
+                            // Rec.TestField("Customer Posting Group");
+                            // Rec.TestField("Global Dimension 1 Code");
+                            // Rec.TestField("Global Dimension 2 Code");
                         end else
 
                             if (Rec."Account Category" = Rec."account category"::Corporate) then begin

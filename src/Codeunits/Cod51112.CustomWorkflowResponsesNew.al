@@ -1,4 +1,4 @@
-Codeunit 51112 "Custom Workflow Responses New"
+/* Codeunit 51112 "Custom Workflow Responses New"
 {
 
     trigger OnRun()
@@ -108,4 +108,4 @@ Codeunit 51112 "Custom Workflow Responses New"
         WFResponseHandler: Codeunit "Workflow Response Handling";
         MsgToSend: Text[250];
         CompanyInfo: Record "Company Information";
-}
+} */

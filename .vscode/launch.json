@@ -8,7 +8,7 @@
             "environmentType": "OnPrem",
             "server": "http://localhost:8080/BC240/",
             "serverInstance": "BC240",
-            "authentication": "UserPassword",
+            "authentication": "Windows",
             "startupObjectId": 56043,
             "startupObjectType": "Page",
             "port": 7049,
@@ -17,8 +17,8 @@
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": false,
             "tenant": "default",
-            "schemaUpdateMode": "ForceSync"/* ,
-            "usePublicURLFromServer": true */
+            "schemaUpdateMode": "ForceSync",
+            "usePublicURLFromServer": true
         }
     ]
 }
