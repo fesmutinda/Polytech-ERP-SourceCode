@@ -8,7 +8,7 @@ page 56120 "Membership Application Test"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Membership Applications";
-    // SourceTableView = where(Status = const(Open));
+    SourceTableView = where(Status = const(Open));
     UsageCategory = Lists;
 
     layout

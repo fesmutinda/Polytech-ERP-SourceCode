@@ -34,22 +34,22 @@ page 50364 "Membership App Nominee Detail"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Address; Rec.Address)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Address; Rec.Address)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field(Telephone; Rec.Telephone)
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Rec.Description)
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Email; Rec.Email)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Description; Rec.Description)
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field(Email; Rec.Email)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
