@@ -146,7 +146,7 @@ Page 50145 "Member Re-Application Page"
         }
     }
     var
-        Cust: Record Customer;
+        Cust: Record "Member Register";
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
 
 }

@@ -2247,15 +2247,15 @@ page 56110 "Member Application Card"
     begin
 
         Emailaddress := Rec."E-Mail (Personal)";
-        EmailSubject := 'Devco Membership Application';
+        EmailSubject := 'Polytech Membership Application';
 
         // EMailBody := 'Dear <b>' + Name + '</b>,</br></br>' +
-        // 'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted. Your Membership Number is' + MemberNumber + '<br></br>' +
+        // 'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted. Your Membership Number is' + MemberNumber + '<br></br>' +
         // 'Thank You For Choosing to Save With Us' +'</br>' +
         // 'Kind regards,'+ '<br></br>' +
-        // 'Devco Sacco' ;
+        // 'Polytech Sacco' ;
         EMailBody := 'Dear <b>' + Rec.Name + '</b>,</br></br>' +
-       'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted.' + '<br></br>' +
+       'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted.' + '<br></br>' +
        'Congratulations';
         //     Companyinfo.Name + '</br>' + Companyinfo.Address + '</br>' + Companyinfo.City + '</br>' +
         //    Companyinfo."Post Code" + '</br>' + Companyinfo."Country/Region Code" + '</br>' +

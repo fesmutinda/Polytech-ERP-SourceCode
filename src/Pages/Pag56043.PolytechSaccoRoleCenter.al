@@ -654,7 +654,7 @@ Page 56043 "Polytech Sacco Role Center"
                     ToolTip = 'Display Financial Statements.';
                     Visible = true;
 
-                    action("Devco Trial Balance")
+                    action("Polytech Trial Balance")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Summarised Trial Balance';
@@ -976,9 +976,26 @@ Page 56043 "Polytech Sacco Role Center"
                     Caption = 'Member Accounts';
                     RunObject = Page "Member List";
                     ToolTip = 'View Member Accounts';
-                    Visible = false;
+                    Visible = true;
                 }
 
+                group("Membership Re-Application")
+                {
+                    action("Member Re-Application List")
+                    {
+
+                        RunObject = page "Member Re-Application List";
+                        Enabled = true;
+                        ApplicationArea = all;
+                    }
+                    action("Member Re-Application posted")
+                    {
+                        RunObject = page "MemberRe-ApplicationListPosted";
+                        Enabled = true;
+                        Caption = ' Member Re-Application Posted';
+                        ApplicationArea = all;
+                    }
+                }
                 group("Account Opening New")
                 {
                     Caption = 'Membership Registration';
@@ -988,13 +1005,6 @@ Page 56043 "Polytech Sacco Role Center"
                         Caption = 'New Account Opening';
                         RunObject = page "Membership Application List";
                         RunPageView = WHERE(status = CONST(open));
-                        RunPageMode = Edit;
-                    }
-                    action(NewAccountTest)
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Test Account Opening';
-                        RunObject = page "Membership Application Test";
                         RunPageMode = Edit;
                     }
                     action(NewAccountPending)
@@ -1074,45 +1084,6 @@ Page 56043 "Polytech Sacco Role Center"
 
                 }
 
-                // group("Account Opening")
-                // {
-                //     Caption = 'Membership Registration';
-                //     action(NewAccountOpening)
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'New Account Opening';
-                //         RunObject = page "Membership Application List";
-                //         RunPageView = WHERE(status = CONST(open));
-                //         RunPageMode = Edit;
-                //     }
-                //     action(NewAccountPending)
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Applications Pending Approval';
-                //         RunObject = page "Membership Application-Pending";
-                //         RunPageView = WHERE(status = CONST(pending));
-                //         RunPageMode = View;
-                //     }
-
-                //     action(NewApprovedAccounts)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Applications Pending Creation';
-                //         RunObject = Page "Member Applications -Approved";
-                //         RunPageMode = View;
-                //         RunPageView = WHERE(status = CONST(approved));
-                //     }
-                //     action("CreatedAccounts")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Closed Membership Applications';
-                //         RunObject = Page "Member Applications -Closed";
-                //         RunPageMode = View;
-                //         RunPageView = WHERE(status = CONST(closed));
-                //     }
-
-                // }
-
                 group("Membership Exit")
                 {
 
@@ -1123,149 +1094,131 @@ Page 56043 "Polytech Sacco Role Center"
 
                     }
 
-                    // action("Approved Membership Exit")
-                    // {
-                    //     ApplicationArea = all;
-                    //     RunObject = page "Membership Exit List-Posted";
-                    //     RunPageView = where(status = const(Approved), posted = const(false));
-                    // }
+                    action("Approved Membership Exit")
+                    {
+                        ApplicationArea = all;
+                        RunObject = page "Membership Exit List-Posted";
+                        RunPageView = where(status = const(Approved), posted = const(false));
+                    }
 
-                    // action("Posted Membership Exit")
-                    // {
-                    //     ApplicationArea = all;
-                    //     RunObject = page "Membership Exit List-Posted";
-                    //     RunPageView = where(Posted = const(true));
-                    // }
+                    action("Posted Membership Exit")
+                    {
+                        ApplicationArea = all;
+                        RunObject = page "Membership Exit List-Posted";
+                        RunPageView = where(Posted = const(true));
+                    }
 
 
                 }
 
-                // group("Membership Re-Application")
-                // {
-                //     action("Member Re-Application List")
-                //     {
 
-                //         RunObject = page "Member Re-Application List";
-                //         Enabled = true;
-                //         ApplicationArea = all;
-                //     }
-                //     action("Member Re-Application posted")
-                //     {
+                group("Member Reports")
+                {
 
-                //         RunObject = page "MemberRe-ApplicationListPosted";
-                //         Enabled = true;
-                //         Caption = ' Member Re-Application Posted';
-                //         ApplicationArea = all;
-                //     }
-                // }
+                    Caption = 'Membership Reports';
+                    action("Sacco Membership Reports")
+                    {
+                        ApplicationArea = all;
+                        RunObject = report "Member Accounts List";
+                        ToolTip = 'Members Register';
 
-                // group("Member Reports")
-                // {
+                    }
+                    action("Member Account Balances Report")
+                    {
+                        ApplicationArea = all;
+                        RunObject = report "Member Account  balances";
+                        ToolTip = 'Member Account Summary Report.';
+                    }
+                    action(MembersavingReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Member savings columnar report.';
+                        RunObject = report "Member savings report";
 
-                //     Caption = 'Membership Reports';
-                //     action("Sacco Membership Reports")
-                //     {
-                //         ApplicationArea = all;
-                //         RunObject = report "Member Accounts List";
-                //         ToolTip = 'Members Register';
+                    }
+                    action(memberwithoutsharecapitalReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Members without minimum share capital report.';
+                        RunObject = report MemberwithoutMinshapitalreport;
 
-                //     }
-                //     action("Member Account Balances Report")
-                //     {
-                //         ApplicationArea = all;
-                //         RunObject = report "Member Account  balances";
-                //         ToolTip = 'Member Account Summary Report.';
-                //     }
-                //     action(MembersavingReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Member savings columnar report.';
-                //         RunObject = report "Member savings report";
+                    }
 
-                //     }
-                //     action(memberwithoutsharecapitalReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Members without minimum share capital report.';
-                //         RunObject = report MemberwithoutMinshapitalreport;
+                    action(MemberwithoutPassportReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Members without passports report.';
+                        RunObject = report Memberswithoutpassportsreport;
 
-                //     }
+                    }
+                    action(MemberwithoutSignatureReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = ' Members without signature report.';
+                        RunObject = report Memberwithoutsignaturereport;
 
-                //     action(MemberwithoutPassportReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Members without passports report.';
-                //         RunObject = report Memberswithoutpassportsreport;
+                    }
+                    action(MemberApplicationReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Member application report';
+                        RunObject = report MembershipApplicationReport;
+                    }
+                    action(MemberswithoutLoanReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Members Without Loan report';
+                        RunObject = report MemberwithoutLoanReport;
+                    }
+                    action(MembersReport)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Members report';
+                        RunObject = report MemberReport;
+                        ToolTip = 'Members Report Contains all Members status';
+                    }
+                    action("Membership Closure Report")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Membership Exit Reports';
+                        RunObject = report "Membership Closure Report";
 
-                //     }
-                //     action(MemberwithoutSignatureReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = ' Members without signature report.';
-                //         RunObject = report Memberwithoutsignaturereport;
-
-                //     }
-                //     action(MemberApplicationReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Member application report';
-                //         RunObject = report MembershipApplicationReport;
-                //     }
-                //     action(MemberswithoutLoanReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Members Without Loan report';
-                //         RunObject = report MemberwithoutLoanReport;
-                //     }
-                //     action(MembersReport)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Members report';
-                //         RunObject = report MemberReport;
-                //         ToolTip = 'Members Report Contains all Members status';
-                //     }
-                //     action("Membership Closure Report")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Membership Exit Reports';
-                //         RunObject = report "Membership Closure Report";
-
-                //     }
+                    }
 
 
-                //     //
-                //     action("Member Next Of Kin Details")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Benificiary Report';
-                //         RunObject = report "Next of Kin Details Report";
-                //     }
-                //     action("Members Without Next of Kin")
-                //     {
-                //         ApplicationArea = All;
-                //         RunObject = report MemberWithoutNextOfKin;
-                //     }
-                //     action("Member shares Report")
-                //     {
-                //         ApplicationArea = all;
-                //         RunObject = report "Member Share Capital Statement";
-                //     }
-                //     action("Member Deposits Report")
-                //     {
-                //         ApplicationArea = all;
-                //         RunObject = report "Members Deposits Statement";
-                //     }
-                //     action("Member Detailed Statement")
-                //     {
-                //         ApplicationArea = all;
-                //         RunObject = report "Member Detailed Statement";
-                //     }
-                //     action("Member Accounts Statement")
-                //     {
-                //         ApplicationArea = all;
-                //         RunObject = report "Member Account Statement";
-                //     }
-                // }
+                    //
+                    action("Member Next Of Kin Details")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Benificiary Report';
+                        RunObject = report "Next of Kin Details Report";
+                    }
+                    action("Members Without Next of Kin")
+                    {
+                        ApplicationArea = All;
+                        // RunObject = report MemberWithoutNextOfKin;
+                    }
+                    action("Member shares Report")
+                    {
+                        ApplicationArea = all;
+                        RunObject = report "Member Share Capital Statement";
+                    }
+                    action("Member Deposits Report")
+                    {
+                        ApplicationArea = all;
+                        RunObject = report "Members Deposits Statement";
+                    }
+                    action("Member Detailed Statement")
+                    {
+                        ApplicationArea = all;
+                        RunObject = report "Member Detailed Statement";
+                    }
+                    action("Member Accounts Statement")
+                    {
+                        ApplicationArea = all;
+                        RunObject = report "Member Account Statement";
+                    }
+                }
 
 
 

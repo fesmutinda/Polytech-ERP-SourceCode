@@ -2303,6 +2303,9 @@ Table 51364 "Member Register"
         field(69048; "Rejoining Date"; Date)
         {
         }
+        field(6948; "Rejoined By"; code[24])
+        {
+        }
         field(69049; "Active Loans Guarantor"; Integer)
         {
             CalcFormula = count("Loans Guarantee Details" where("Member No" = field("No."),

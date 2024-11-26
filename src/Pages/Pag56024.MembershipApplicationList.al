@@ -2,7 +2,7 @@
 Page 56024 "Membership Application List"
 {
     ApplicationArea = Basic;
-    CardPageID = "Membership Application Card";
+    CardPageID = "Member Application Card";// "Membership Application Card";
     DeleteAllowed = false;
     Editable = false;
     PageType = List;

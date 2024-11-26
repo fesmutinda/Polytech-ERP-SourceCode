@@ -779,6 +779,10 @@ Table 51398 "Sacco General Set-Up"
             DataClassification = ToBeClassified;
         }
         field(222; "Top up Account"; Code[20]) { }
+        field(223; "Banks Charges"; Code[20])
+        {
+            TableRelation = "G/L Account";
+        }
     }
 
     keys

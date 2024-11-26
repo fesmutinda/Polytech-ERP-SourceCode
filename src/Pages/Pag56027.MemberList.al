@@ -236,7 +236,7 @@ Page 56027 "Member List"
     //     Emailaddress := ;
     //     EmailSubject := 'wee wacha';
     //     EMailBody := 'Dear <b>' + '</b>,</br></br>'+
-    //         'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted.' +'<br></br>'+
+    //         'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted.' +'<br></br>'+
     //         'Congratulations';
     //     SwizzsoftFactory.SendMail(Emailaddress, EmailSubject, EmailBody);
     // end;

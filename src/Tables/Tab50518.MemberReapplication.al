@@ -23,7 +23,7 @@ table 50518 "Member Reapplication"
         field(2; "Member No."; Code[50])
         {
             Caption = 'Member No.';
-            TableRelation = Customer."No." where("Customer Type" = const(Member), Status = const(Withdrawal));
+            TableRelation = "Member Register"."No." where("Customer Type" = const(Member), Status = const(Withdrawal));
             trigger OnValidate()
             var
                 myInt: Integer;
@@ -31,8 +31,8 @@ table 50518 "Member Reapplication"
                 if cust.get("Member No.") then
                     "Member Name" := cust.Name;
                 "Status on Exit" := cust.Status;
-                cust.CalcFields("Share Capital");
-                "Share Capital" := Cust."Share Capital";
+                cust.CalcFields("Shares Retained");//"Share Capital");
+                "Share Capital" := Cust."Shares Retained";
 
             end;
         }
@@ -109,7 +109,7 @@ table 50518 "Member Reapplication"
     end;
 
     var
-        cust: Record Customer;
+        cust: Record "Member Register";
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
 
