@@ -964,6 +964,26 @@ Page 56043 "Polytech Sacco Role Center"
                     Visible = true;
                 }
 
+<<<<<<< HEAD
+=======
+                group("Membership Re-Application")
+                {
+                    action("Member Re-Application List")
+                    {
+
+                        RunObject = page "Member Re-Application List";
+                        Enabled = true;
+                        ApplicationArea = all;
+                    }
+                    action("Member Re-Application posted")
+                    {
+                        // RunObject = page "MemberRe-ApplicationListPosted";
+                        Enabled = true;
+                        Caption = ' Member Re-Application Posted';
+                        ApplicationArea = all;
+                    }
+                }
+>>>>>>> 76f569cb75caf44e28ae843630fefab57607bd86
                 group("Account Opening New")
                 {
                     Caption = 'Membership Registration';
@@ -989,7 +1009,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         Caption = 'Applications Pending Creation';
                         RunObject = page "Membership Application List";
-                        RunPageView = WHERE(status = CONST(approved));
+                        RunPageView = WHERE(status = CONST(Approved));
                     }
                     action("CreatedAccounts")
                     {
@@ -1083,7 +1103,7 @@ Page 56043 "Polytech Sacco Role Center"
 
                     }
 
-                    action("Approved Membership Exit")
+                    /* action("Approved Membership Exit")
                     {
                         ApplicationArea = all;
                         RunObject = page "Membership Exit List-Posted";
@@ -1095,13 +1115,13 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         RunObject = page "Membership Exit List-Posted";
                         RunPageView = where(Posted = const(true));
-                    }
+                    } */
 
 
                 }
 
 
-                group("Member Reports")
+                /* group("Member Reports")
                 {
 
                     Caption = 'Membership Reports';
@@ -1207,8 +1227,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         RunObject = report "Member Account Statement";
                     }
-                }
-
+                } */
 
 
             }

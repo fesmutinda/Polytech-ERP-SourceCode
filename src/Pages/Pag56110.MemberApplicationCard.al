@@ -861,58 +861,59 @@ page 56110 "Member Application Card"
                         Editable = RecruitedEditable;
                     }
                 }
-                group("Employed")
+
+            }
+            group("Employed")
+            {
+                Visible = employedMember;
+                field("Payroll No"; Rec."Payroll No")
                 {
-                    Visible = employedMember;
-                    field("Payroll No"; Rec."Payroll No")
-                    {
-                        ApplicationArea = Basic;
-                        ShowMandatory = true;
-                    }
-                    field("Employer Code"; Rec."Employer Code")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = EmployerCodeEditable;
-                    }
-                    field("Employer Name"; Rec."Employer Name")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                    }
-                    field(Department; Rec.Department)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field("Office Branch"; Rec."Office Branch")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field("Official Designation"; Rec."Official Designation")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field(Station; Rec.Section)
-                    {
-                        Caption = 'Station';
-                        ApplicationArea = Basic;
-                    }
-                    field("Station Name"; Rec."Station Name")
-                    {
-                        ApplicationArea = all;
-                    }
-                    field("Date Employed"; Rec."Date Employed")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field("Terms of Employment"; Rec."Terms of Employment")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic;
+                    Editable = EmployerCodeEditable;
+                }
+                field("Employer Name"; Rec."Employer Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Department; Rec.Department)
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field("Office Branch"; Rec."Office Branch")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field("Official Designation"; Rec."Official Designation")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field(Station; Rec.Section)
+                {
+                    Caption = 'Station';
+                    ApplicationArea = Basic;
+                }
+                field("Station Name"; Rec."Station Name")
+                {
+                    ApplicationArea = all;
+                }
+                field("Date Employed"; Rec."Date Employed")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field("Terms of Employment"; Rec."Terms of Employment")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
                 }
             }
 
@@ -1283,13 +1284,8 @@ page 56110 "Member Application Card"
                         if Rec.Status <> Rec.Status::Open then
                             Error(Text001);
 
-                        //................................
-
-                        if Confirm('Are you sure you want to send Membership Application for approval', false) = true then begin
-                            SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(Rec."No.", Rec);
-                            // ApprovalCodeUnit.OnSendMembershipApplicationForApproval(Rec);
-                            Rec.Status := Rec.Status::"Pending Approval";
-                        end;
+                        //.................................
+                        SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
                         //.................................
 
                     end;
@@ -1338,11 +1334,12 @@ page 56110 "Member Application Card"
                         //     Error('ID No is Mandatory');
                         // end;
 
-                        if Rec."Global Dimension 2 Code" = '' then begin
+                        // // if Rec."Global Dimension 2 Code" = '' then begin
 
-                            Error('Branch Code is Mandatory');
+                        // //     Error('Branch Code is Mandatory');
 
-                        end;
+                        // end;
+
                         Cust.Reset;
                         Cust.SetRange(Cust."ID No.", Rec."ID No.");
                         Cust.SetRange(Cust."Customer Type", Cust."customer type"::Member);
@@ -1350,11 +1347,11 @@ page 56110 "Member Application Card"
                             if (Cust."No." <> Rec."No.") then
                                 Error('Member has already been created');
                         end;
-                        if Confirm('Are you Swizz you want to create account application?', false) = false then begin
+                        if Confirm('Are you sure you want to create a new account from application?', false) = false then begin
                             Message('Aborted');
                             exit;
                         end ELSE begin
-                            dialogBox.Open('Creating New BOSA Account for applicant ' + Format(MembApp.Name));
+                            dialogBox.Open('Creating New BOSA Account for applicant ' + Format(Rec.Name));
                             FnCreateBOSAMemberAccounts();
                             dialogBox.Close();
 
@@ -1374,7 +1371,7 @@ page 56110 "Member Application Card"
                             FnCreateAccountSignatories(Cust."No.");
                             dialogBox.Close();
 
-                            dialogBox.Open('Registering Account Group Members for ' + Format(MembApp.Name));
+                            dialogBox.Open('Registering Account Group Members for ' + Format(Rec.Name));
                             FnCreateGroupMembers();
                             dialogBox.Close();
 
@@ -1386,7 +1383,7 @@ page 56110 "Member Application Card"
                             FnSendSMSOnAccountOpening();
                             //-----
                             Message('Account created successfully.');
-                            Message('The Member Sacco no is %1', Cust."No.");
+                            Message('The Member Sacco No is %1', Cust."No.");
 
                             //...............................modify the status of the application to closed
                             rec.Status := Rec.Status::Closed;
@@ -1674,7 +1671,9 @@ page 56110 "Member Application Card"
         Jooint: Boolean;
         BusinessAccount: Boolean;
         Vendor: Record Vendor;
-        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
+
+        CustomWFEvents: Codeunit "Custom Workflow Events";
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         RecordApproved: Boolean;

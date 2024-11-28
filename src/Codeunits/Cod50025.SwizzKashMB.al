@@ -6217,7 +6217,6 @@ Codeunit 50025 SwizzKashMB
               if Members."ID No."<> '' then begin
 
                 if Members."Mobile Phone No"<> '' then begin
-
                   SurePESAApplications.Reset;
                 //  SurePESAApplications.SETRANGE(SurePESAApplications."Account No",Members."No.");
                   if SurePESAApplications.Find('+') then begin
