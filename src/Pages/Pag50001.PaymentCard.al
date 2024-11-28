@@ -287,7 +287,7 @@ Page 50001 "Payment Card"
 
     var
         FundsUser: Record "Funds User Setup";
-        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
+        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         FundsManager: Codeunit "Funds Management";
         JTemplate: Code[20];
         JBatch: Code[20];

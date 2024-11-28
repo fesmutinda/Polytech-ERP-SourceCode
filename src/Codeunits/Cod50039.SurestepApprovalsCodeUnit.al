@@ -1,5 +1,5 @@
 //Replacing Workflow Integration codeunit for membership functions
-codeunit 51115 "SurestepApprovalsCodeUnit"
+codeunit 50039 "SurestepApprovalsCodeUnit"
 {
 
     trigger OnRun()
@@ -16,6 +16,8 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
         FundsTransferHeader: Record "Funds Transfer Header";
         FOSAProductApplicationTable: Record "Accounts Applications Details";
         LoanRecoveryApplicationTable: Record "Loan Recovery Header";
+
+    var
         Psalmkitswfevents: Codeunit "Custom Workflow Events";
         NoWorkflowEnabledErr: Label 'No Approval workflow for this record type is enabled';
         WorkflowManagement: Codeunit "Workflow Management";

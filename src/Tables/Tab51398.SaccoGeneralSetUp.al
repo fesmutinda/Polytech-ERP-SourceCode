@@ -235,6 +235,16 @@ Table 51398 "Sacco General Set-Up"
                 TestNoEntriesExist(FieldCaption("Boosting Fees Account"), "Boosting Fees Account");
             end;
         }
+        field(1601; "Asset Valuation Cost"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(1602; "Legal Fees"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
         field(71; "Bridging Commision Account"; Code[20])
         {
             TableRelation = "G/L Account";

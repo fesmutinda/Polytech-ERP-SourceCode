@@ -785,21 +785,6 @@ Page 56043 "Polytech Sacco Role Center"
 
             }
 
-            // group("Safe Custody management")
-            // {
-            //     action("Safe Custody Custodians")
-            //     {
-            //         ApplicationArea = All;
-
-            //         RunObject = page "Safe Custodian List";
-            //     }
-            //     action("Safe Custody Custodian Register")
-            //     {
-            //         ApplicationArea = All;
-
-            //         RunObject = page ApplyNewSafeCustody;
-            //     }
-            // }
 
             group("Cash Management New")
             {
@@ -979,23 +964,6 @@ Page 56043 "Polytech Sacco Role Center"
                     Visible = true;
                 }
 
-                group("Membership Re-Application")
-                {
-                    action("Member Re-Application List")
-                    {
-
-                        RunObject = page "Member Re-Application List";
-                        Enabled = true;
-                        ApplicationArea = all;
-                    }
-                    action("Member Re-Application posted")
-                    {
-                        RunObject = page "MemberRe-ApplicationListPosted";
-                        Enabled = true;
-                        Caption = ' Member Re-Application Posted';
-                        ApplicationArea = all;
-                    }
-                }
                 group("Account Opening New")
                 {
                     Caption = 'Membership Registration';
@@ -1030,7 +998,28 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = page "Membership Applications List";
                         RunPageView = WHERE(status = CONST(closed));
                     }
+                    action("Debug Workflows")
+                    {
+                        RunObject = codeunit "Workflow Initialization";
+                    }
 
+                }
+                group("Membership Re-Application")
+                {
+                    action("Member Re-Application List")
+                    {
+
+                        RunObject = page "Member Re-Application List";
+                        Enabled = true;
+                        ApplicationArea = all;
+                    }
+                    action("Member Re-Application posted")
+                    {
+                        RunObject = page "MemberRe-ApplicationListPosted";
+                        Enabled = true;
+                        Caption = ' Member Re-Application Posted';
+                        ApplicationArea = all;
+                    }
                 }
                 group(MembershipManagementn)
                 {
@@ -1233,14 +1222,14 @@ Page 56043 "Polytech Sacco Role Center"
                 ToolTip = 'Manage BOSA Loans Module';
                 group("BOSA Loans Management")
                 {
-                    Caption = 'New BOSA Loans Applications';
+                    Caption = 'BOSA Loans Applications';
                     ToolTip = 'BOSA Loans'' Management Module';
                     action("BOSA Loan Application")
                     {
                         ApplicationArea = All;
                         Caption = 'BOSA Loan Application List';
                         Image = Loaners;
-                        RunObject = Page "Loans Application List(Approv)";// "Loan List-New Application BOSA";
+                        RunObject = Page "Loans Applied  List";
                         ToolTip = 'Open BOSA Loan Applications List';
                         RunPageView = where(Posted = const(false), "Loan Status" = const(Application));
                     }
@@ -1249,7 +1238,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'BOSA Loans Pending Approval';
                         Image = CreditCard;
-                        RunObject = Page "Loans  List- pending approval";// "LoanList-Pending Approval BOSA";
+                        RunObject = Page "Loans Applied  List(Appraisal)";// "LoanList-Pending Approval BOSA";
 
                         ToolTip = 'Open the list of BOSA Loans Pending Approval';
 
@@ -1258,11 +1247,11 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'BOSA Loans Pending Disbursement.';
-                        // RunObject = Page "Loan Application BOSA-Approved";
+                        // RunObject = Page "Loans Approved List";// "Loan Application BOSA-Approved";
+                        RunObject = Page "Loan Application BOSA-Approved";
                         ToolTip = 'Open the list of Approved Loans Pending Disbursement.';
                     }
                 }
-
 
                 group("Loan Batching")
                 {

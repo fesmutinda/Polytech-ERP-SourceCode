@@ -167,7 +167,7 @@ page 56120 "Membership Application Test"
                         //if Approvalmgt.SendApproval(Table_id,"No.",Doc_Type,Status)then;
                         //End allocate batch number
 
-                        SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+                        // SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
 
                     end;
                 }
@@ -427,7 +427,7 @@ page 56120 "Membership Application Test"
         NextOfKin: Record "Members Next Kin Details";
         PictureExists: Boolean;
         UserMgt: Codeunit "User Setup Management";
-        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+        // SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         //Notification: Codeunit "SMTP Mail";
         NotificationE: Codeunit Mail;
         MailBody: Text[250];

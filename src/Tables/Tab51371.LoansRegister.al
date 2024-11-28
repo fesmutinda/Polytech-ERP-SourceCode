@@ -2795,6 +2795,11 @@ Table 51371 "Loans Register"
         field(69028; "Insurance 0.25"; Decimal)
         {
         }
+        field(69409; "Overdraft Installements"; Option)
+        {
+            OptionCaption = ' ,1,2,3,Loan';
+            OptionMembers = " ","1 Month","2 Months","3 Month","Loan";
+        }
         field(69029; "Total TopUp Commission"; Decimal)
         {
             CalcFormula = sum("Loan Offset Details".Commision where("Loan No." = field("Loan  No."),
@@ -4407,6 +4412,34 @@ Table 51371 "Loans Register"
             DataClassification = ToBeClassified;
         }
         field(51516247; "Lumpsum Amount Charge"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68110; "Valuation Cost"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68111; "Legal Cost"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516296; "Deboost Loan Applied"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516297; "Deboost Commision"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516298; "Deboost Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68112; "Appealed Loan"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68113; "Exempt From Payroll Deduction"; Boolean)
         {
             DataClassification = ToBeClassified;
         }

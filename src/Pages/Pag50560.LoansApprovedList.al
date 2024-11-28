@@ -6,7 +6,11 @@ page 50560 "Loans Approved List"
     Editable = false;
     PageType = List;
     SourceTable = "Loans Register";
-
+    SourceTableView = where(Posted = filter(false),
+                            "Approval Status" = filter(Open),
+                            Source = filter(BOSA),
+                            Discard = filter(true),
+                            "Loan Status" = const(Approved));
     layout
     {
         area(content)

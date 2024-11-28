@@ -403,7 +403,7 @@ Table 51360 "Membership Applications"
             DataClassification = ToBeClassified;
             OptionMembers = Kenyan,"Non-Kenyan";
         }
-        field(9009; "Approval Status"; Option) { OptionMembers = open,closed,Rejected; }
+        field(9009; "Approval Status"; Option) { OptionMembers = open,closed,Rejected,Approved; }
         field(68038; "Postal Code"; Code[20])
         {
             TableRelation = "Post Code";
@@ -592,7 +592,7 @@ Table 51360 "Membership Applications"
         {
         }
         field(68098; "Membership Application Date"; Date) { }
-        field(68099; "Membership Application Status"; Option) { OptionMembers = "",Approved,Closed; }
+        field(68099; "Membership Application Status"; Option) { OptionMembers = "",Open,Pending,Approved,Closed; }
         field(68069; "Member Registration Fee Receiv"; Boolean)
         {
         }

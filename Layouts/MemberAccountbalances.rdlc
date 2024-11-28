@@ -1288,30 +1288,6 @@ End Function
         <Field Name="LikizoContributionFormat">
           <DataField>LikizoContributionFormat</DataField>
         </Field>
-        <Field Name="Alpha_Savings">
-          <DataField>Alpha_Savings</DataField>
-        </Field>
-        <Field Name="Alpha_SavingsFormat">
-          <DataField>Alpha_SavingsFormat</DataField>
-        </Field>
-        <Field Name="Junior_Savings_One">
-          <DataField>Junior_Savings_One</DataField>
-        </Field>
-        <Field Name="Junior_Savings_OneFormat">
-          <DataField>Junior_Savings_OneFormat</DataField>
-        </Field>
-        <Field Name="Junior_Savings_Two">
-          <DataField>Junior_Savings_Two</DataField>
-        </Field>
-        <Field Name="Junior_Savings_TwoFormat">
-          <DataField>Junior_Savings_TwoFormat</DataField>
-        </Field>
-        <Field Name="Junior_Savings_Three">
-          <DataField>Junior_Savings_Three</DataField>
-        </Field>
-        <Field Name="Junior_Savings_ThreeFormat">
-          <DataField>Junior_Savings_ThreeFormat</DataField>
-        </Field>
         <Field Name="ASAT">
           <DataField>ASAT</DataField>
         </Field>

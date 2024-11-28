@@ -362,39 +362,120 @@ page 50367 "Member Account Card"
                 }
 
 
+                action("Detailed Statement")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Detailed Statement';
+                    Image = Report;
+                    Promoted = true;
+                    PromotedCategory = "Report";
 
-                // action("Fosa Member is  Guaranteed")
-                // {
-                //     ApplicationArea = Basic;
-                //     Image = JobPurchaseInvoice;
-                //     Promoted = true;
-                //     PromotedCategory = Report;
-                //     trigger OnAction()
-                //     begin
-                //         Cust.Reset;
-                //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
-                //         if Cust.Find('-') then
-                //             Report.Run(51516512, true, false, Cust);
-                //     end;
-                // }
-                // action("Fosa Member is  a Guarantor")
-                // {
-                //     ApplicationArea = Basic;
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(50223, true, false, Cust);
+                    end;
+                }
+                action("Deposit Statement")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Deposit Statement';
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
 
-                //     Image = JobPurchaseInvoice;
-                //     Promoted = true;
-                //     PromotedCategory = Report;
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then begin
+                            Report.Run(50224, true, false, Cust);
+                        END;
+                    end;
+                }
+                action("Shares Statement")
+                {
+                    ApplicationArea = Basic;
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
 
-                //     trigger OnAction()
-                //     begin
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(50225, true, false, Cust);
+                    end;
+                }
+                action("Loans Statement")
+                {
+                    ApplicationArea = Basic;
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
 
-                //         Cust.Reset;
-                //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
-                //         if Cust.Find('-') then
-                //             Report.Run(Report::"Fosa Memb Loans Guaranted", true, false, Cust);
-                //     end;
-                // }
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(50227, true, false, Cust);
+                    end;
+                }
+                action("Loans Perfomance Statement")
+                {
+                    ApplicationArea = Basic;
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
 
+                    trigger OnAction()
+                    var
+                        LoansReg: Record "Loans Register";
+                    begin
+                        LoansReg.Reset;
+                        LoansReg.SetRange(LoansReg."Client Code", Rec."No.");
+                        if LoansReg.Find('-') then
+                            Report.Run(50207, true, false, LoansReg);
+                    end;
+                }
+                action("Member Shares Status")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Member Shares Status';
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
+                    Visible = false;
+
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(137, true, false, Cust);
+                    end;
+                }
+                action("Loans Guaranteed Statement")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Loans Guaranteed Statement';
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
+
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then begin
+                            Report.Run(50226, true, false, Cust);
+                        END;
+                    end;
+                }
                 action("Member is  a Guarantor")
                 {
                     ApplicationArea = Basic;
@@ -426,101 +507,6 @@ page 50367 "Member Account Card"
                         if Cust.Find('-') then
                             Report.Run(51516504, true, false, Cust);
                     end;
-                }
-                action("Detailed Statement")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Detailed Statement';
-                    Image = Report;
-                    Promoted = true;
-                    PromotedCategory = Report;
-
-                    trigger OnAction()
-                    begin
-                        Cust.Reset;
-                        Cust.SetRange(Cust."No.", Rec."No.");
-                        if Cust.Find('-') then
-                            Report.Run(51516886, true, false, Cust);
-                    end;
-                }
-                action("Deposit Statement")
-                {
-                    ApplicationArea = Basic;
-                    Image = "Report";
-                    Promoted = true;
-                    PromotedCategory = Report;
-
-                    trigger OnAction()
-                    begin
-                        Cust.Reset;
-                        Cust.SetRange(Cust."No.", Rec."No.");
-                        if Cust.Find('-') then
-                            Report.Run(51516522, true, false, Cust);
-                    end;
-                }
-                group("Loan Statements")
-                {
-                    action("BOSA Loans Statement")
-                    {
-                        ApplicationArea = Basic;
-                        Image = "Report";
-                        Promoted = true;
-                        PromotedCategory = Report;
-
-                        trigger OnAction()
-                        begin
-                            Cust.Reset;
-                            Cust.SetRange(Cust."No.", Rec."No.");
-                            if Cust.Find('-') then
-                                Report.Run(51516531, true, false, Cust);
-                        end;
-                    }
-                    // action("FOSA Loan Statement")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Image = "Report";
-                    //     Promoted = true;
-                    //     PromotedCategory = Report;
-
-                    //     trigger OnAction()
-                    //     begin
-                    //         Cust.Reset;
-                    //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
-                    //         if Cust.Find('-') then
-                    //             Report.Run(51516533, true, false, Cust);
-                    //     end;
-                    // }
-                    action("Historical BOSA Loan Statement")
-                    {
-                        ApplicationArea = Basic;
-                        Promoted = true;
-                        Caption = 'All BOSA Loan Statement';
-                        PromotedCategory = Report;
-
-                        trigger OnAction()
-                        begin
-                            Cust.Reset;
-                            Cust.SetRange(Cust."No.", Rec."No.");
-                            if Cust.Find('-') then
-                                Report.Run(51516017, true, false, Cust);
-                        end;
-                    }
-                    // action("Historical FOSA Loan Statement")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Promoted = true;
-                    //     Caption = 'All FOSA Loan Statement';
-                    //     PromotedCategory = Report;
-
-                    //     trigger OnAction()
-                    //     begin
-                    //         Cust.Reset;
-                    //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
-                    //         if Cust.Find('-') then
-                    //             Report.Run(51516018, true, false, Cust);
-                    //     end;
-                    // }
-
                 }
                 // action("FOSA Statement")
                 // {
@@ -609,7 +595,7 @@ page 50367 "Member Account Card"
     end;
 
     var
-        Cust: record customer;
+        Cust: record "Member Register";
         Vend: record Vendor;
         CurrentAge: Text;
         TypeIsEmployed: Boolean;

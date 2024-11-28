@@ -1280,12 +1280,16 @@ page 56110 "Member Application Card"
 
 
 
-
                         if Rec.Status <> Rec.Status::Open then
                             Error(Text001);
 
-                        //.................................
-                        SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+                        //................................
+
+                        if Confirm('Are you sure you want to send Membership Application for approval', false) = true then begin
+                            SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(Rec."No.", Rec);
+                            // ApprovalCodeUnit.OnSendMembershipApplicationForApproval(Rec);
+                            Rec.Status := Rec.Status::"Pending Approval";
+                        end;
                         //.................................
 
                     end;
@@ -1670,9 +1674,7 @@ page 56110 "Member Application Card"
         Jooint: Boolean;
         BusinessAccount: Boolean;
         Vendor: Record Vendor;
-        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
-
-        CustomWFEvents: Codeunit "Custom Workflow Events";
+        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         RecordApproved: Boolean;

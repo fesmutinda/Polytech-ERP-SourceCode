@@ -542,7 +542,7 @@ Page 52221 "Membership Application Card"
                     PromotedCategory = Process;
                     trigger OnAction()
                     var
-                        ApprovalCodeunit: Codeunit SwizzsoftApprovalsCodeUnit;
+                        ApprovalCodeunit: Codeunit SurestepApprovalsCodeUnit;
                     begin
                         //Rec.TESTFIELD("Global Dimension 2 Code");
                         Rec.TESTFIELD("Monthly Contribution");

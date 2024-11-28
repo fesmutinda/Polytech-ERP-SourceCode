@@ -124,7 +124,7 @@ Page 56007 "Sacco Transfer Card(App)"
 
                     trigger OnAction()
                     var
-                        Approvals: Codeunit SwizzsoftApprovalsCodeUnit;
+                        Approvals: Codeunit SurestepApprovalsCodeUnit;
                     begin
                         if Confirm('Send Approval Request ?', false) = false then begin
                             exit;
@@ -143,12 +143,12 @@ Page 56007 "Sacco Transfer Card(App)"
 
                     trigger OnAction()
                     var
-                        Approvals: Codeunit SwizzsoftApprovalsCodeUnit;
+                        Approvals: Codeunit SurestepApprovalsCodeUnit;
                     begin
                         if Confirm('Cancel Approval Request ?', false) = false then begin
                             exit;
                         end else begin
-                            Approvals.CancelInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            // Approvals.CancelInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
                             CurrPage.Close();
                         end;
                     end;
