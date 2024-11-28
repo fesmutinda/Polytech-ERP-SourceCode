@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1000000000">
+          <DataField>ReportForNavId_1000000000</DataField>
+        </Field>
+        <Field Name="TransactionNo_Receipts">
+          <DataField>TransactionNo_Receipts</DataField>
+        </Field>
+        <Field Name="AccountNo_Receipts">
+          <DataField>AccountNo_Receipts</DataField>
+        </Field>
+        <Field Name="Name_Receipts">
+          <DataField>Name_Receipts</DataField>
+        </Field>
+        <Field Name="Amount_Receipts">
+          <DataField>Amount_Receipts</DataField>
+        </Field>
+        <Field Name="Amount_ReceiptsFormat">
+          <DataField>Amount_ReceiptsFormat</DataField>
+        </Field>
+        <Field Name="ChequeNo_Receipts">
+          <DataField>ChequeNo_Receipts</DataField>
+        </Field>
+        <Field Name="ChequeDate_Receipts">
+          <DataField>ChequeDate_Receipts</DataField>
+        </Field>
+        <Field Name="Posted_Receipts">
+          <DataField>Posted_Receipts</DataField>
+        </Field>
+        <Field Name="TransactionDate_Receipts">
+          <DataField>TransactionDate_Receipts</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1000000009">
+          <DataField>ReportForNavId_1000000009</DataField>
+        </Field>
+        <Field Name="DocumentNo_Allocations">
+          <DataField>DocumentNo_Allocations</DataField>
+        </Field>
+        <Field Name="TransactionType_Allocations">
+          <DataField>TransactionType_Allocations</DataField>
+        </Field>
+        <Field Name="LoanNo_Allocations">
+          <DataField>LoanNo_Allocations</DataField>
+        </Field>
+        <Field Name="Amount_Allocations">
+          <DataField>Amount_Allocations</DataField>
+        </Field>
+        <Field Name="Amount_AllocationsFormat">
+          <DataField>Amount_AllocationsFormat</DataField>
+        </Field>
+        <Field Name="InterestAmount_Allocations">
+          <DataField>InterestAmount_Allocations</DataField>
+        </Field>
+        <Field Name="InterestAmount_AllocationsFormat">
+          <DataField>InterestAmount_AllocationsFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

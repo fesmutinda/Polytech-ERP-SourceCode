@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="SharesClosingBal">
+          <DataField>SharesClosingBal</DataField>
+        </Field>
+        <Field Name="SharesClosingBalFormat">
+          <DataField>SharesClosingBalFormat</DataField>
+        </Field>
+        <Field Name="LoanClosingBal">
+          <DataField>LoanClosingBal</DataField>
+        </Field>
+        <Field Name="LoanClosingBalFormat">
+          <DataField>LoanClosingBalFormat</DataField>
+        </Field>
+        <Field Name="InterestClosingBal">
+          <DataField>InterestClosingBal</DataField>
+        </Field>
+        <Field Name="InterestClosingBalFormat">
+          <DataField>InterestClosingBalFormat</DataField>
+        </Field>
+        <Field Name="TotalAmountCollected">
+          <DataField>TotalAmountCollected</DataField>
+        </Field>
+        <Field Name="TotalAmountCollectedFormat">
+          <DataField>TotalAmountCollectedFormat</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="Mobile_Phone_No_">
+          <DataField>Mobile_Phone_No_</DataField>
+        </Field>
+        <Field Name="ID_No_">
+          <DataField>ID_No_</DataField>
+        </Field>
+        <Field Name="SharesBD">
+          <DataField>SharesBD</DataField>
+        </Field>
+        <Field Name="SharesBDFormat">
+          <DataField>SharesBDFormat</DataField>
+        </Field>
+        <Field Name="LoanBD">
+          <DataField>LoanBD</DataField>
+        </Field>
+        <Field Name="LoanBDFormat">
+          <DataField>LoanBDFormat</DataField>
+        </Field>
+        <Field Name="InterestBD">
+          <DataField>InterestBD</DataField>
+        </Field>
+        <Field Name="InterestBDFormat">
+          <DataField>InterestBDFormat</DataField>
+        </Field>
+        <Field Name="SharesCollected">
+          <DataField>SharesCollected</DataField>
+        </Field>
+        <Field Name="SharesCollectedFormat">
+          <DataField>SharesCollectedFormat</DataField>
+        </Field>
+        <Field Name="LoanCollected">
+          <DataField>LoanCollected</DataField>
+        </Field>
+        <Field Name="LoanCollectedFormat">
+          <DataField>LoanCollectedFormat</DataField>
+        </Field>
+        <Field Name="InterestCollected">
+          <DataField>InterestCollected</DataField>
+        </Field>
+        <Field Name="InterestCollectedFormat">
+          <DataField>InterestCollectedFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
