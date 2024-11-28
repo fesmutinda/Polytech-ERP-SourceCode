@@ -18,7 +18,7 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
 
     var
-        Psalmkitswfevents: Codeunit "Custom Workflow Events Devc";
+        Psalmkitswfevents: Codeunit "Custom Workflow Events";
         NoWorkflowEnabledErr: Label 'No Approval workflow for this record type is enabled';
         WorkflowManagement: Codeunit "Workflow Management";
 
@@ -47,6 +47,7 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
     local procedure IsMembershipApplicationApprovalsWorkflowEnabled(var MembershipApplication: Record "Membership Applications"): Boolean
     begin
+        //Message('Enabled ExecuteWKFL');
         exit(WorkflowManagement.CanExecuteWorkflow(MembershipApplication, Psalmkitswfevents.RunWorkflowOnSendMembershipApplicationForApprovalCode));
     end;
 

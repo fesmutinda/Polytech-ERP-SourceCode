@@ -21,6 +21,23 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
         WorkflowManagement: Codeunit "Workflow Management";
 
 
+    [EventSubscriber(ObjectType::Codeunit, 1535, 'OnPopulateApprovalEntryArgument', '', false, false)]
+    local procedure OnPopulateApprovalEntryArgument(VAR RecRef: RecordRef; VAR ApprovalEntryArgument: Record "Approval Entry"; WorkflowStepInstance: Record "Workflow Step Instance")
+    var
+        TbMembApps: Record "Membership Applications";
+    begin
+        CASE RecRef.NUMBER OF
+            DATABASE::"Membership Applications":
+                begin
+                    RecRef.SetTable(TbMembApps);
+                    ApprovalEntryArgument."Document No." := TbMembApps."No.";
+                    ApprovalEntryArgument."Document Type" := 12;
+                end;
+        end;
+    end;
+
+
+
     //1)--------------------------------------------------------------------Send Membership Applications request For Approval start
     procedure SendMembershipApplicationsRequestForApproval(MemberApplicationNo: Code[40]; var "Membership Applications": Record "Membership Applications")
     begin

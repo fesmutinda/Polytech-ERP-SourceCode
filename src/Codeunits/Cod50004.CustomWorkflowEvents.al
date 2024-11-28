@@ -224,6 +224,7 @@ codeunit 50004 "Custom Workflow Events"
     //A)Membership Applications
     procedure RunWorkflowOnSendMembershipApplicationForApprovalCode(): Code[128]//
     begin
+        //Message('RunWorkflowOnSendMembershipForAppCode runs here 50004');
         exit(UpperCase('RunWorkflowOnSendMembershipApplicationForApproval'));
     end;
 
@@ -237,7 +238,9 @@ codeunit 50004 "Custom Workflow Events"
 
     procedure RunWorkflowOnSendMembershipApplicationForApproval(var MembershipApplication: Record "Membership Applications")
     begin
+        //Message('Handle SendMember Event');
         WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, MembershipApplication);
+
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipApplicationApprovalRequest', '', false, false)]

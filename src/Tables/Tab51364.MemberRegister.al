@@ -2790,16 +2790,16 @@ Table 51364 "Member Register"
 
             end;
         }
-        field(69154; "Member House Group Name"; Code[20])
+        field(69154; "Member House Group Name"; Code[70])
         {
         }
         field(69155; "No Of Group Members."; Integer)
         {
         }
-        field(69156; "Group Account Name"; Code[20])
+        field(69156; "Group Account Name"; Code[50])
         {
         }
-        field(69157; "Business Loan Officer"; Code[20])
+        field(69157; "Business Loan Officer"; Code[50])
         {
         }
         field(69158; "Group Account"; Boolean)
@@ -2815,7 +2815,7 @@ Table 51364 "Member Register"
         field(69161; "Micro Group Code"; Code[10])
         {
         }
-        field(69162; "Loan Officer Name"; Code[15])
+        field(69162; "Loan Officer Name"; Code[50])
         {
         }
         field(69163; "BOSA Account No."; Code[15])

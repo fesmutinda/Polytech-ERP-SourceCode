@@ -990,7 +990,7 @@ Page 56043 "Polytech Sacco Role Center"
                     }
                     action("Member Re-Application posted")
                     {
-                        RunObject = page "MemberRe-ApplicationListPosted";
+                        // RunObject = page "MemberRe-ApplicationListPosted";
                         Enabled = true;
                         Caption = ' Member Re-Application Posted';
                         ApplicationArea = all;
@@ -1021,7 +1021,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         Caption = 'Applications Pending Creation';
                         RunObject = page "Membership Application List";
-                        RunPageView = WHERE(status = CONST(approved));
+                        RunPageView = WHERE(status = CONST(Approved));
                     }
                     action("CreatedAccounts")
                     {
@@ -1094,7 +1094,7 @@ Page 56043 "Polytech Sacco Role Center"
 
                     }
 
-                    action("Approved Membership Exit")
+                    /* action("Approved Membership Exit")
                     {
                         ApplicationArea = all;
                         RunObject = page "Membership Exit List-Posted";
@@ -1106,13 +1106,13 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         RunObject = page "Membership Exit List-Posted";
                         RunPageView = where(Posted = const(true));
-                    }
+                    } */
 
 
                 }
 
 
-                group("Member Reports")
+                /* group("Member Reports")
                 {
 
                     Caption = 'Membership Reports';
@@ -1218,8 +1218,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         RunObject = report "Member Account Statement";
                     }
-                }
-
+                } */
 
 
             }
