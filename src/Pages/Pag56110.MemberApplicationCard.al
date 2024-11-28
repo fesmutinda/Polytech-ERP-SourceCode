@@ -36,6 +36,12 @@ page 56110 "Member Application Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
+                field("Assigned No"; Rec."Assigned No.")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                    Caption = 'Assigned No';
+                }
                 field(Title; Rec.Title)
                 {
                     ApplicationArea = Basic;
@@ -158,7 +164,12 @@ page 56110 "Member Application Card"
                             Error('Mobile No. Can not be more or less than 15 Characters');
                     end;
                 }
-
+                field("Identity Type"; Rec."Identification Document")
+                {
+                    ApplicationArea = Basic;
+                    Editable = IDNoEditable;
+                    ShowMandatory = true;
+                }
                 field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic;
@@ -230,17 +241,6 @@ page 56110 "Member Application Card"
                     Editable = EmailEdiatble;
                     ShowMandatory = false;
                 }
-                field("Recruited By"; Rec."Recruited By")
-                {
-                    ApplicationArea = Basic;
-                    Editable = RecruitedEditable;
-                }
-                field("Recruiter Name"; Rec."Recruiter Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-
-                }
                 field(Location; Rec.Location)
                 {
                     ApplicationArea = Basic;
@@ -273,6 +273,89 @@ page 56110 "Member Application Card"
                     Editable = CopyofKRAPinEditable;
                     ShowMandatory = true;
                     Visible = false;
+                }
+            }
+            group(Business)
+            {
+                Visible = BusinessAccount;
+                Caption = 'Business Details';
+                field("Business No."; Rec."No.")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Caption = 'Business Account Application Number';
+                }
+                field("Assigned No."; Rec."Assigned No.")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                    Caption = 'Assigned No';
+                }
+                field("Business Name"; Rec.Name)
+                {
+                    ApplicationArea = Basic;
+                    Editable = BusinessAccount;
+                    Caption = 'Business Name';
+                    ShowMandatory = true;
+                }
+                field(BusinessEmail; Rec."E-Mail (Personal)")
+                {
+                    ApplicationArea = Basic;
+                    Editable = EmailEdiatble;
+                    caption = 'Group Email';
+                    ShowMandatory = true;
+                }
+                field(BusinessKRAPin; Rec."KRA Pin")
+                {
+                    ApplicationArea = Basic;
+                    Style = Attention;
+                    StyleExpr = true;
+                    Editable = NameEditable;
+                    Caption = 'Group KRA Pin';
+                }
+                field("Mobile Phone No Business"; Rec."Mobile Phone No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = PhoneEditable;
+                    ShowMandatory = true;
+
+                    trigger OnValidate()
+                    begin
+                        if StrLen(Rec."Mobile Phone No") <> 10 then
+                            Error('Mobile No. Can not be more or less than 10 Characters');
+                    end;
+                }
+                field("Mobile Phone No 2 Business"; Rec."Mobile No. 2")
+                {
+                    ApplicationArea = Basic;
+                    Editable = PhoneEditable;
+
+                    trigger OnValidate()
+                    begin
+                        if StrLen(Rec."Mobile No. 2") <> 10 then
+                            Error('Mobile No. Can not be more or less than 15 Characters');
+                    end;
+                }
+                field(BusinessAddress; Rec.Address)
+                {
+                    ApplicationArea = Basic;
+                    Editable = RecruitedEditable;
+                }
+                field("Nature of Business."; Rec."Nature of Business")
+                {
+                    Caption = 'Group Nature of Business';
+                    ApplicationArea = Basic;
+                    Editable = RecruitedEditable;
+                }
+                field("Business Recruited By"; Rec."Recruited By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = RecruitedEditable;
+                }
+                field("Business Recruiter Name"; Rec."Recruiter Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
                 }
             }
             group(Junior)
@@ -347,17 +430,21 @@ page 56110 "Member Application Card"
                 }
 
             }
-
-
             group(JointAccountOne)
             {
                 Visible = Jooint;
-                Caption = 'Member One Details';
+                Caption = 'Director One Details';
                 field("JointNo."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                     Caption = 'Joint No.';
+                }
+                field("Assigned J No."; Rec."Assigned No.")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                    Caption = 'Assigned No';
                 }
                 field(JointTitle; Rec.Title)
                 {
@@ -446,7 +533,7 @@ page 56110 "Member Application Card"
 
             group(JointAccountTwo)
             {
-                Caption = 'Member Two Details';
+                Caption = 'Director Two Details';
                 Visible = Jooint;
                 field("Member Title"; Rec.Title2)
                 {
@@ -659,18 +746,20 @@ page 56110 "Member Application Card"
                 field("Bank Code"; Rec."Bank Code")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Bank Name';
+                    Caption = 'Bank Code';
                     ShowMandatory = true;
                     NotBlank = true;
                 }
                 field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = Basic;
-                    Visible = false;
+                    Caption = 'Bank Name';
+                    Editable = false;
                 }
                 field("Bank Branch"; Rec."Bank Branch")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Bank Account No"; Rec."Bank Account No")
                 {
@@ -680,45 +769,150 @@ page 56110 "Member Application Card"
             group("Employment Details")
             {
                 Visible = Individual;
-                field("Employer Code"; Rec."Employer Code")
+                field("Employment Info"; Rec."Employment Info")
                 {
                     ApplicationArea = Basic;
                     Editable = EmployerCodeEditable;
+                    trigger OnValidate()
+                    begin
+                        if Rec."Employment Info" = Rec."Employment Info"::Employed then begin
+                            employedMember := true;
+                            selfEmployedMember := false;
+                        end else
+                            if Rec."Employment Info" = Rec."Employment Info"::" " then begin
+                                employedMember := false;
+                                selfEmployedMember := false;
+                            end else
+                                if Rec."Employment Info" = Rec."Employment Info"::Others then begin
+                                    employedMember := false;
+                                    selfEmployedMember := false;
+                                end else
+                                    if Rec."Employment Info" = Rec."Employment Info"::"Self Employed" then begin
+                                        employedMember := false;
+                                        selfEmployedMember := true;
+                                    end else
+                                        if Rec."Employment Info" = Rec."Employment Info"::UnEmployed then begin
+                                            employedMember := false;
+                                            selfEmployedMember := false;
+                                        end;
+                    end;
                 }
-                field("Employer Name"; Rec."Employer Name")
+                field("Income Levels"; Rec."Income Levels")
                 {
+                    Caption = 'Estimated Monthly Income Levels';
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = EmployerCodeEditable;
                 }
-                field("Payroll/Staff No"; Rec."Payroll No")
+                field("Source of Funds"; Rec."Source of Funds")
                 {
+                    Visible = not employedMember and not selfEmployedMember;
+                    Caption = 'Source of Funds';
                     ApplicationArea = Basic;
-                    Editable = NameEditable;
+                    Editable = EmployerCodeEditable;
+                    trigger OnValidate()
+                    begin
+                        if Rec."Source of Funds" = Rec."Source of Funds"::Others then begin
+                            otherFundsSource := true;
+                        end else begin
+                            otherFundsSource := false;
+                        end;
+                    end;
                 }
-                field(Department; Rec.Department)
+                field("Specific Source of Funds"; Rec."Specific Source of Funds")
                 {
+                    Visible = otherFundsSource;
+                    Caption = 'Specific Source of Funds';
                     ApplicationArea = Basic;
-                    Editable = NameEditable;
+                    Editable = EmployerCodeEditable;
                 }
-                field("Office Branch"; Rec."Office Branch")
+                group("Self Employed")
                 {
-                    ApplicationArea = Basic;
-                    Editable = NameEditable;
+                    Visible = selfEmployedMember;//not employedMember;
+                    field("Business Name."; Rec.Name)
+                    {
+                        ApplicationArea = Basic;
+                        Editable = BusinessAccount;
+                        Caption = 'Business Name';
+                        ShowMandatory = true;
+                    }
+                    field("Street/Building/Estate"; Rec.Address)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Street/Building/Estate';
+                        Editable = RecruitedEditable;
+                    }
+                    field("Office Number"; Rec."Mobile Phone No")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = PhoneEditable;
+                        ShowMandatory = true;
+                        Caption = 'Office Number';
+
+                        trigger OnValidate()
+                        begin
+                            if StrLen(Rec."Mobile Phone No") <> 10 then
+                                Error('Mobile No. Can not be more or less than 10 Characters');
+                        end;
+                    }
+                    field("Nature of Busines"; Rec."Nature of Business")
+                    {
+                        Caption = 'Nature of Business';
+                        ApplicationArea = Basic;
+                        Editable = RecruitedEditable;
+                    }
                 }
-                field("Official Designation"; Rec."Official Designation")
+                group("Employed")
                 {
-                    ApplicationArea = Basic;
-                    Editable = NameEditable;
-                }
-                field("Date Employed"; Rec."Date Employed")
-                {
-                    ApplicationArea = Basic;
-                    Editable = NameEditable;
-                }
-                field("Terms of Employment"; Rec."Terms of Employment")
-                {
-                    ApplicationArea = Basic;
-                    Editable = NameEditable;
+                    Visible = employedMember;
+                    field("Payroll No"; Rec."Payroll No")
+                    {
+                        ApplicationArea = Basic;
+                        ShowMandatory = true;
+                    }
+                    field("Employer Code"; Rec."Employer Code")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = EmployerCodeEditable;
+                    }
+                    field("Employer Name"; Rec."Employer Name")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = false;
+                    }
+                    field(Department; Rec.Department)
+                    {
+                        ApplicationArea = Basic;
+                        Editable = NameEditable;
+                    }
+                    field("Office Branch"; Rec."Office Branch")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = NameEditable;
+                    }
+                    field("Official Designation"; Rec."Official Designation")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = NameEditable;
+                    }
+                    field(Station; Rec.Section)
+                    {
+                        Caption = 'Station';
+                        ApplicationArea = Basic;
+                    }
+                    field("Station Name"; Rec."Station Name")
+                    {
+                        ApplicationArea = all;
+                    }
+                    field("Date Employed"; Rec."Date Employed")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = NameEditable;
+                    }
+                    field("Terms of Employment"; Rec."Terms of Employment")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = NameEditable;
+                    }
                 }
             }
 
@@ -726,10 +920,38 @@ page 56110 "Member Application Card"
             group("Other Information")
             {
                 Caption = 'Other Information';
+                field("How Did you know about us ?"; Rec."How Did you know of KANISA")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'How Did you know about Us?';
+
+                    trigger OnValidate()
+                    begin
+                    end;
+                }
                 field("Monthly Contribution"; Rec."Monthly Contribution")
                 {
                     ApplicationArea = Basic;
                     Editable = MonthlyContributionEdit;
+                }
+                field("Recruited By"; Rec."Recruited By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = RecruitedEditable;
+                }
+                field("Recruiter Name"; Rec."Recruiter Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+
+                }
+                field("Captured By"; Rec."Captured By")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Created By"; Rec."Created By")
+                {
+                    ApplicationArea = Basic;
                 }
                 field(Status; Rec.Status)
                 {
@@ -746,12 +968,12 @@ page 56110 "Member Application Card"
                     ApplicationArea = Basic;
                     Editable = true;// CustPostingGroupEdit;
                 }
-                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                field("Activity Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = GlobalDim2Editable;
                 }
-                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                field("Branch Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
                     Editable = GlobalDim2Editable;
@@ -783,7 +1005,7 @@ page 56110 "Member Application Card"
 
             group("Member Risk Ratings")
             {
-                Visible = Individual;
+                Visible = false;// Individual;
                 group("Member Risk Rate")
                 {
                     field("Individual Category"; Rec."Individual Category")
@@ -869,22 +1091,36 @@ page 56110 "Member Application Card"
         //factbox
         area(factboxes)
         {
-            part(Control149; "Member Picture")
+            part(Control149; "Applicant Picture")
             {
 
                 ApplicationArea = all;
                 SubPageLink = "No." = FIELD("No.");
-                Visible = true;
+                // Visible = Individual;
+                Enabled = true;
 
             }
-
-            part(Control150; "Member Signature")
+            part(Control150; "Applicant Document")
             {
-
                 ApplicationArea = all;
                 SubPageLink = "No." = FIELD("No.");
-                Visible = true;
+                Visible = Individual;
+                Enabled = true;
             }
+            part(Control151; "Applicant Signature")
+            {
+                ApplicationArea = all;
+                SubPageLink = "No." = FIELD("No.");
+                //   Visible = (Individual) AND NOT (JuniourAccountType);
+                Enabled = true;
+            }
+            // part(Control152; "Applicant Logo")
+            // {
+            //     ApplicationArea = all;
+            //     SubPageLink = "No." = FIELD("No.");
+            //     Visible = (IsCooporateApplication);
+            //     Enabled = true;
+            // }
         }
 
     }
@@ -903,7 +1139,7 @@ page 56110 "Member Application Card"
                     RunObject = page "Membership App Products";// "Member Applied Products List";
                     RunPageLink = "Membership Applicaton No" = field("No.");
                     Enabled = true;
-                    Visible = false;
+                    Visible = true;
 
                     trigger OnAction()
                     begin
@@ -942,6 +1178,14 @@ page 56110 "Member Application Card"
                     RunObject = Page "Membership App Kin Details";
                     RunPageLink = "Account No" = field("No.");
                 }
+                action("Member Nominees")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Member Nominees';
+                    Image = Relationship;
+                    RunObject = Page "Membership App Nominee Detail";
+                    RunPageLink = "Account No" = field("No.");
+                }
                 action("Account Signatories")
                 {
                     ApplicationArea = Basic;
@@ -949,7 +1193,7 @@ page 56110 "Member Application Card"
                     Image = Group;
                     RunObject = Page "Membership App Signatories";
                     RunPageLink = "Account No" = field("No.");
-
+                    Visible = Jooint;
                 }
                 action("Group Account Members")
                 {
@@ -997,13 +1241,11 @@ page 56110 "Member Application Card"
                             Rec.TestField(Name);
                             Rec.TestField("ID No.");
                             Rec.TestField("Mobile Phone No");
-                            //COMMENTED OUT FOR TESTS KLEIN
-
-                            // Rec.TestField(Picture);
-                            // Rec.TestField(Signature);
-                            // Rec.TestField(Gender);
-                            // Rec.TestField("Customer Posting Group");
-                            // Rec.TestField("Global Dimension 1 Code");
+                            Rec.TestField(Picture);
+                            Rec.TestField(Signature);
+                            Rec.TestField(Gender);
+                            Rec.TestField("Customer Posting Group");
+                            Rec.TestField("Global Dimension 1 Code");
                             // Rec.TestField("Global Dimension 2 Code");
                         end else
 
@@ -1015,12 +1257,12 @@ page 56110 "Member Application Card"
                                 ///TESTFIELD("Account Category");
                                 Rec.TestField("Customer Posting Group");
                                 Rec.TestField("Global Dimension 1 Code");
-                                Rec.TestField("Global Dimension 2 Code");
+                                // Rec.TestField("Global Dimension 2 Code");
                                 //TESTFIELD("Copy of constitution");
 
                             end;
 
-                        if (Rec."Account Category" = Rec."account category"::Individual) or (Rec."Account Category" = Rec."account category"::Junior) or (Rec."Account Category" = Rec."account category"::Joint) then begin
+                        if (Rec."Account Category" = Rec."account category"::Individual) then begin//end or (Rec."Account Category" = Rec."account category"::Junior) or (Rec."Account Category" = Rec."account category"::Joint) then begin
                             NOkApp.Reset;
                             NOkApp.SetRange(NOkApp."Account No", Rec."No.");
                             if NOkApp.Find('-') = false then begin
@@ -1038,12 +1280,16 @@ page 56110 "Member Application Card"
 
 
 
-
                         if Rec.Status <> Rec.Status::Open then
                             Error(Text001);
 
-                        //.................................
-                        SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+                        //................................
+
+                        if Confirm('Are you sure you want to send Membership Application for approval', false) = true then begin
+                            SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(Rec."No.", Rec);
+                            // ApprovalCodeUnit.OnSendMembershipApplicationForApproval(Rec);
+                            Rec.Status := Rec.Status::"Pending Approval";
+                        end;
                         //.................................
 
                     end;
@@ -1088,9 +1334,9 @@ page 56110 "Member Application Card"
                         if Rec.Status <> Rec.Status::Approved then
                             Error('This application has not been approved');
                         ///.................
-                        if (Rec."ID No." = '') and (Rec."Account Category" <> Rec."Account Category"::Junior) then begin
-                            Error('ID No is Mandatory');
-                        end;
+                        // if (Rec."ID No." = '') and (Rec."Account Category" <> Rec."Account Category"::Junior) then begin
+                        //     Error('ID No is Mandatory');
+                        // end;
 
                         if Rec."Global Dimension 2 Code" = '' then begin
 
@@ -1156,6 +1402,7 @@ page 56110 "Member Application Card"
                 }
                 action("Member Risk Rating")
                 {
+                    Visible = false;
                     ApplicationArea = Basic;
                     Caption = 'Get Member Risk Rating';
                     Image = Reconcile;
@@ -1183,6 +1430,9 @@ page 56110 "Member Application Card"
                 {
                 }
                 actionref("Next of Kin_Promoted"; "Next of Kin")
+                {
+                }
+                actionref("Member Nominees_Promoted"; "Member Nominees")
                 {
                 }
                 actionref("Account Signatories _Promoted"; "Account Signatories")
@@ -1327,6 +1577,9 @@ page 56110 "Member Application Card"
         IDNoEditable: Boolean;
         RegistrationDateEdit: Boolean;
         OfficeBranchEditable: Boolean;
+        employedMember: Boolean;
+        selfEmployedMember: Boolean;
+        otherFundsSource: Boolean;
         DeptEditable: Boolean;
         SectionEditable: Boolean;
         OccupationEditable: Boolean;
@@ -1419,10 +1672,9 @@ page 56110 "Member Application Card"
 
         NationalRe: Boolean;
         Jooint: Boolean;
+        BusinessAccount: Boolean;
         Vendor: Record Vendor;
-        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
-
-        CustomWFEvents: Codeunit "Custom Workflow Events";
+        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         OpenApprovalEntriesExist: Boolean;
         EnabledApprovalWorkflowsExist: Boolean;
         RecordApproved: Boolean;
@@ -1446,6 +1698,7 @@ page 56110 "Member Application Card"
             Junior := false;
             commonDetails := true;
             Jooint := false;
+            BusinessAccount := false;
             NameEditable := true;
             AddressEditable := true;
             GlobalDim1Editable := false;
@@ -1516,178 +1769,243 @@ page 56110 "Member Application Card"
 
 
 
-        end else
-            if Rec."Account Category" = Rec."account category"::Junior then begin
-                groupAcc := false;
-                Junior := true;
+        end else if Rec."Account Category" = Rec."account category"::other then begin
+            groupAcc := false;
+            Individual := true;
+            Junior := false;
+            commonDetails := true;
+            Jooint := false;
+            BusinessAccount := false;
+            NameEditable := true;
+            AddressEditable := true;
+            GlobalDim1Editable := false;
+            GlobalDim2Editable := true;
+            CustPostingGroupEdit := false;
+            PhoneEditable := true;
+            MaritalstatusEditable := true;
+            IDNoEditable := true;
+            PhoneEditable := true;
+            RegistrationDateEdit := true;
+            OfficeBranchEditable := true;
+            DeptEditable := true;
+            SectionEditable := true;
+            OccupationEditable := true;
+            DesignationEdiatble := true;
+            EmployerCodeEditable := true;
+            DOBEditable := true;
+            EmailEdiatble := true;
+            StaffNoEditable := true;
+            GenderEditable := true;
+            MonthlyContributionEdit := true;
+            PostCodeEditable := true;
+            CityEditable := true;
+            WitnessEditable := true;
+            BankCodeEditable := true;
+            BranchCodeEditable := true;
+            BankAccountNoEditable := true;
+            VillageResidence := true;
+            TitleEditable := true;
+            PostalCodeEditable := true;
+            HomeAddressPostalCodeEditable := true;
+            HomeTownEditable := true;
+            RecruitedEditable := true;
+            ContactPEditable := true;
+            ContactPRelationEditable := true;
+            ContactPOccupationEditable := true;
+            CopyOFIDEditable := true;
+            CopyofPassportEditable := true;
+            SpecimenEditable := true;
+            ContactPPhoneEditable := true;
+            HomeAdressEditable := true;
+            PictureEditable := true;
+            SignatureEditable := true;
+            PayslipEditable := true;
+            RegistrationFeeEditable := true;
+            CopyofKRAPinEditable := true;
+            membertypeEditable := true;
+            FistnameEditable := true;
+            registrationeditable := false;
+            EstablishdateEditable := false;
+            RegistrationofficeEditable := false;
+            Picture2Editable := true;
+            Signature2Editable := false;
+            title2Editable := false;
+            emailaddresEditable := false;
+            gender2editable := false;
+            HomePostalCode2Editable := false;
+            town2Editable := false;
+            passpoetEditable := false;
+            maritalstatus2Editable := false;
+            payrollno2editable := false;
+            Employercode2Editable := false;
+            address3Editable := false;
+            Employername2Editable := false;
+            ageEditable := false;
+            CopyofconstitutionEditable := false;
+            commonDetails := true;
+
+
+
+        end else if Rec."Account Category" = Rec."account category"::Business then begin
+            Individual := false;
+            BusinessAccount := true;
+            Jooint := false;
+            Junior := false;
+            groupAcc := false;
+            NameEditable := true;
+            AddressEditable := true;
+            GlobalDim1Editable := false;
+            commonDetails := false;
+            GlobalDim2Editable := true;
+            CustPostingGroupEdit := false;
+            PhoneEditable := true;
+            MaritalstatusEditable := false;
+            IDNoEditable := false;
+            PhoneEditable := true;
+            RegistrationDateEdit := true;
+            OfficeBranchEditable := true;
+            DeptEditable := false;
+            SectionEditable := false;
+            OccupationEditable := false;
+            DesignationEdiatble := false;
+            EmployerCodeEditable := false;
+            DOBEditable := false;
+            EmailEdiatble := true;
+            StaffNoEditable := false;
+            GenderEditable := false;
+            MonthlyContributionEdit := true;
+            PostCodeEditable := true;
+            CityEditable := true;
+            WitnessEditable := true;
+            BankCodeEditable := true;
+            BranchCodeEditable := true;
+            BankAccountNoEditable := true;
+            VillageResidence := true;
+            TitleEditable := false;
+            PostalCodeEditable := true;
+            HomeAddressPostalCodeEditable := true;
+            HomeTownEditable := true;
+            RecruitedEditable := true;
+            ContactPEditable := true;
+            ContactPRelationEditable := true;
+            ContactPOccupationEditable := true;
+            CopyOFIDEditable := true;
+            CopyofPassportEditable := true;
+            SpecimenEditable := true;
+            ContactPPhoneEditable := true;
+            HomeAdressEditable := true;
+            PictureEditable := true;
+            SignatureEditable := false;
+            PayslipEditable := false;
+            RegistrationFeeEditable := true;
+            CopyofKRAPinEditable := true;
+            membertypeEditable := true;
+            registrationeditable := true;
+            EstablishdateEditable := true;
+            RegistrationofficeEditable := true;
+            Picture2Editable := false;
+            Signature2Editable := false;
+            FistnameEditable := false;
+            registrationeditable := true;
+            EstablishdateEditable := true;
+            RegistrationofficeEditable := true;
+            Picture2Editable := true;
+            Signature2Editable := false;
+            title2Editable := false;
+            emailaddresEditable := false;
+            gender2editable := false;
+            HomePostalCode2Editable := false;
+            town2Editable := false;
+            passpoetEditable := false;
+            maritalstatus2Editable := false;
+            payrollno2editable := false;
+            Employercode2Editable := false;
+            address3Editable := false;
+            Employername2Editable := false;
+            CopyofconstitutionEditable := true;
+        end
+        else
+            if Rec."Account Category" = Rec."account category"::Corporate then begin
                 Individual := false;
-                Jooint := false;
+                groupAcc := false;
+                Junior := false;
+                Jooint := true;
+                BusinessAccount := false;
+                commonDetails := false;
+                NameEditable := true;
+                AddressEditable := true;
+                GlobalDim1Editable := false;
+                GlobalDim2Editable := true;
+                CustPostingGroupEdit := false;
+                PhoneEditable := true;
+                MaritalstatusEditable := true;
+                IDNoEditable := true;
+                PhoneEditable := true;
+                RegistrationDateEdit := true;
+                OfficeBranchEditable := true;
+                DeptEditable := true;
+                SectionEditable := true;
+                OccupationEditable := true;
+                DesignationEdiatble := true;
+                EmployerCodeEditable := true;
+                DOBEditable := true;
+                EmailEdiatble := true;
+                StaffNoEditable := true;
+                GenderEditable := true;
+                MonthlyContributionEdit := true;
+                PostCodeEditable := true;
+                CityEditable := true;
+                WitnessEditable := true;
+                BankCodeEditable := true;
+                BranchCodeEditable := true;
+                BankAccountNoEditable := true;
+                VillageResidence := true;
+                TitleEditable := false;
+                PostalCodeEditable := true;
+                HomeAddressPostalCodeEditable := true;
+                HomeTownEditable := true;
+                RecruitedEditable := true;
+                ContactPEditable := true;
+                ContactPRelationEditable := true;
+                ContactPOccupationEditable := true;
+                CopyOFIDEditable := true;
+                CopyofPassportEditable := true;
+                SpecimenEditable := true;
+                ContactPPhoneEditable := true;
+                HomeAdressEditable := true;
+                PictureEditable := true;
+                SignatureEditable := true;
+                PayslipEditable := true;
+                RegistrationFeeEditable := true;
+                CopyofKRAPinEditable := true;
+                membertypeEditable := true;
                 FistnameEditable := true;
-                commonDetails := true;
-
-            end
-            else
-                if Rec."Account Category" = Rec."account category"::Corporate then begin
-                    Individual := false;
-                    Jooint := false;
-                    Junior := false;
-                    groupAcc := true;
-                    NameEditable := true;
-                    AddressEditable := true;
-                    GlobalDim1Editable := false;
-                    commonDetails := false;
-                    GlobalDim2Editable := true;
-                    CustPostingGroupEdit := false;
-                    PhoneEditable := true;
-                    MaritalstatusEditable := false;
-                    IDNoEditable := false;
-                    PhoneEditable := true;
-                    RegistrationDateEdit := true;
-                    OfficeBranchEditable := true;
-                    DeptEditable := false;
-                    SectionEditable := false;
-                    OccupationEditable := false;
-                    DesignationEdiatble := false;
-                    EmployerCodeEditable := false;
-                    DOBEditable := false;
-                    EmailEdiatble := true;
-                    StaffNoEditable := false;
-                    GenderEditable := false;
-                    MonthlyContributionEdit := true;
-                    PostCodeEditable := true;
-                    CityEditable := true;
-                    WitnessEditable := true;
-                    BankCodeEditable := true;
-                    BranchCodeEditable := true;
-                    BankAccountNoEditable := true;
-                    VillageResidence := true;
-                    TitleEditable := false;
-                    PostalCodeEditable := true;
-                    HomeAddressPostalCodeEditable := true;
-                    HomeTownEditable := true;
-                    RecruitedEditable := true;
-                    ContactPEditable := true;
-                    ContactPRelationEditable := true;
-                    ContactPOccupationEditable := true;
-                    CopyOFIDEditable := true;
-                    CopyofPassportEditable := true;
-                    SpecimenEditable := true;
-                    ContactPPhoneEditable := true;
-                    HomeAdressEditable := true;
-                    PictureEditable := true;
-                    SignatureEditable := false;
-                    PayslipEditable := false;
-                    RegistrationFeeEditable := true;
-                    CopyofKRAPinEditable := true;
-                    membertypeEditable := true;
-                    registrationeditable := true;
-                    EstablishdateEditable := true;
-                    RegistrationofficeEditable := true;
-                    Picture2Editable := false;
-                    Signature2Editable := false;
-                    FistnameEditable := false;
-                    registrationeditable := true;
-                    EstablishdateEditable := true;
-                    RegistrationofficeEditable := true;
-                    Picture2Editable := true;
-                    Signature2Editable := false;
-                    title2Editable := false;
-                    emailaddresEditable := false;
-                    gender2editable := false;
-                    HomePostalCode2Editable := false;
-                    town2Editable := false;
-                    passpoetEditable := false;
-                    maritalstatus2Editable := false;
-                    payrollno2editable := false;
-                    Employercode2Editable := false;
-                    address3Editable := false;
-                    Employername2Editable := false;
-                    CopyofconstitutionEditable := true;
-
-
-
-                end else
-                    //Account types.
-                    if Rec."Account Category" = Rec."account category"::Joint then begin
-                        Individual := false;
-                        groupAcc := false;
-                        Junior := false;
-                        Jooint := true;
-                        commonDetails := false;
-                        NameEditable := true;
-                        AddressEditable := true;
-                        GlobalDim1Editable := false;
-                        GlobalDim2Editable := true;
-                        CustPostingGroupEdit := false;
-                        PhoneEditable := true;
-                        MaritalstatusEditable := true;
-                        IDNoEditable := true;
-                        PhoneEditable := true;
-                        RegistrationDateEdit := true;
-                        OfficeBranchEditable := true;
-                        DeptEditable := true;
-                        SectionEditable := true;
-                        OccupationEditable := true;
-                        DesignationEdiatble := true;
-                        EmployerCodeEditable := true;
-                        DOBEditable := true;
-                        EmailEdiatble := true;
-                        StaffNoEditable := true;
-                        GenderEditable := true;
-                        MonthlyContributionEdit := true;
-                        PostCodeEditable := true;
-                        CityEditable := true;
-                        WitnessEditable := true;
-                        BankCodeEditable := true;
-                        BranchCodeEditable := true;
-                        BankAccountNoEditable := true;
-                        VillageResidence := true;
-                        TitleEditable := false;
-                        PostalCodeEditable := true;
-                        HomeAddressPostalCodeEditable := true;
-                        HomeTownEditable := true;
-                        RecruitedEditable := true;
-                        ContactPEditable := true;
-                        ContactPRelationEditable := true;
-                        ContactPOccupationEditable := true;
-                        CopyOFIDEditable := true;
-                        CopyofPassportEditable := true;
-                        SpecimenEditable := true;
-                        ContactPPhoneEditable := true;
-                        HomeAdressEditable := true;
-                        PictureEditable := true;
-                        SignatureEditable := true;
-                        PayslipEditable := true;
-                        RegistrationFeeEditable := true;
-                        CopyofKRAPinEditable := true;
-                        membertypeEditable := true;
-                        FistnameEditable := true;
-                        registrationeditable := true;
-                        EstablishdateEditable := true;
-                        RegistrationofficeEditable := true;
-                        Picture2Editable := true;
-                        Signature2Editable := true;
-                        registrationeditable := true;
-                        EstablishdateEditable := true;
-                        RegistrationofficeEditable := true;
-                        Picture2Editable := true;
-                        Signature2Editable := true;
-                        title2Editable := true;
-                        emailaddresEditable := true;
-                        gender2editable := true;
-                        HomePostalCode2Editable := true;
-                        town2Editable := true;
-                        passpoetEditable := true;
-                        maritalstatus2Editable := true;
-                        payrollno2editable := true;
-                        Employercode2Editable := true;
-                        address3Editable := true;
-                        Employername2Editable := true;
-                        mobile3editable := true;
-                        CopyofconstitutionEditable := true;
-                        IDNoEditable := true;
-                        dateofbirth2 := true
-                    end;
+                registrationeditable := true;
+                EstablishdateEditable := true;
+                RegistrationofficeEditable := true;
+                Picture2Editable := true;
+                Signature2Editable := true;
+                registrationeditable := true;
+                EstablishdateEditable := true;
+                RegistrationofficeEditable := true;
+                Picture2Editable := true;
+                Signature2Editable := true;
+                title2Editable := true;
+                emailaddresEditable := true;
+                gender2editable := true;
+                HomePostalCode2Editable := true;
+                town2Editable := true;
+                passpoetEditable := true;
+                maritalstatus2Editable := true;
+                payrollno2editable := true;
+                Employercode2Editable := true;
+                address3Editable := true;
+                Employername2Editable := true;
+                mobile3editable := true;
+                CopyofconstitutionEditable := true;
+                IDNoEditable := true;
+                dateofbirth2 := true
+            end;
 
 
         if Rec.Status = Rec.Status::Approved then begin
@@ -1888,6 +2206,7 @@ page 56110 "Member Application Card"
             CopyofconstitutionEditable := true;
 
         end;
+
     end;
 
 
@@ -1930,15 +2249,15 @@ page 56110 "Member Application Card"
     begin
 
         Emailaddress := Rec."E-Mail (Personal)";
-        EmailSubject := 'Devco Membership Application';
+        EmailSubject := 'Polytech Membership Application';
 
         // EMailBody := 'Dear <b>' + Name + '</b>,</br></br>' +
-        // 'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted. Your Membership Number is' + MemberNumber + '<br></br>' +
+        // 'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted. Your Membership Number is' + MemberNumber + '<br></br>' +
         // 'Thank You For Choosing to Save With Us' +'</br>' +
         // 'Kind regards,'+ '<br></br>' +
-        // 'Devco Sacco' ;
+        // 'Polytech Sacco' ;
         EMailBody := 'Dear <b>' + Rec.Name + '</b>,</br></br>' +
-       'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted.' + '<br></br>' +
+       'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted.' + '<br></br>' +
        'Congratulations';
         //     Companyinfo.Name + '</br>' + Companyinfo.Address + '</br>' + Companyinfo.City + '</br>' +
         //    Companyinfo."Post Code" + '</br>' + Companyinfo."Country/Region Code" + '</br>' +
@@ -2083,78 +2402,6 @@ page 56110 "Member Application Card"
 
     end;
 
-    // local procedure FnCreateFOSAMemberAccounts()
-    // var
-
-    // begin
-    //     IncrementNo := '';
-    //     MemberAppliedProducts.Reset();
-    //     MemberAppliedProducts.SetRange(MemberAppliedProducts."Membership Applicaton No", "No.");
-    //     if MemberAppliedProducts.Find('-') then begin
-    //         repeat
-    //             if "Fosa Account No" = '' then begin
-    //                 AcctNo := FnGetFosaAccountTypeNumber(MemberAppliedProducts."Product Code", MembApp."Global Dimension 2 Code", BOSAACC);
-    //                 Accounts.Init;
-    //                 Accounts."No." := AcctNo;
-    //                 Accounts."Date of Birth" := "Date of Birth";
-    //                 Accounts.Name := UpperCase(Name);
-    //                 Accounts."Creditor Type" := Accounts."creditor type"::Account;
-    //                 Accounts."Staff No" := "Payroll/Staff No";
-    //                 Accounts."ID No." := "ID No.";
-    //                 Accounts."Phone No." := "Mobile Phone No";
-    //                 Accounts."MPESA Mobile No" := "Mobile Phone No";
-    //                 Accounts."Registration Date" := "Registration Date";
-    //                 Accounts."Post Code" := "Postal Code";
-    //                 Accounts.County := City;
-    //                 Accounts."BOSA Account No" := Cust."No.";
-    //                 Accounts."Marital Status" := "Marital Status";
-    //                 Accounts.Image := Picture;
-    //                 Accounts.Signature := Signature;
-    //                 Accounts."Passport No." := "Passport No.";
-    //                 Accounts."Company Code" := "Employer Code";
-    //                 Accounts.Status := Accounts.Status::New;
-    //                 Accounts."Account Type" := MemberAppliedProducts."Product Code";
-    //                 Accounts."Date of Birth" := "Date of Birth";
-    //                 Accounts."Global Dimension 1 Code" := 'FOSA';
-    //                 Accounts."Global Dimension 2 Code" := "Global Dimension 2 Code";
-    //                 Accounts.Address := Address;
-    //                 Accounts."Address 2" := "Address 2";
-    //                 Accounts."Registration Date" := Today;
-    //                 Accounts.Status := Accounts.Status::Active;
-    //                 Accounts.Section := Section;
-    //                 Accounts."Home Address" := "Home Address";
-    //                 Accounts.District := District;
-    //                 Accounts.Location := Location;
-    //                 Accounts."Sub-Location" := "Sub-Location";
-    //                 Accounts."Registration Date" := Today;
-    //                 Accounts."Monthly Contribution" := "Monthly Contribution";
-    //                 Accounts."E-Mail" := "E-Mail (Personal)";
-    //                 Accounts."Vendor Posting Group" := FnGetPostingGroup(MemberAppliedProducts."Product Code");
-    //                 Accounts.Insert;
-
-    //                 //Update BOSA with FOSA Account
-    //                 if Cust.Get(BOSAACC) then begin
-    //                     Cust."FOSA Account" := AcctNo;
-    //                     Cust.Modify;
-    //                 end;
-    //             end;
-    //         until MemberAppliedProducts.Next = 0;
-    //     end;
-
-
-    // end;
-
-    // local procedure FnGetFosaAccountTypeNumber(ProductCode: Code[40]; Dimension2: Code[10]; BOSAAC: code[40]): Code[20]
-    // var
-    //     SavingsAccountTypes: Record "Account Types-Saving Products";
-    // begin
-    //     SavingsAccountTypes.Reset();
-    //     SavingsAccountTypes.SetRange(SavingsAccountTypes.Code, ProductCode);
-    //     if SavingsAccountTypes.find('-') then begin
-    //         exit(format(SavingsAccountTypes."Account No Prefix" + "Global Dimension 2 Code" + BOSAAC));
-    //     end;
-    // end;
-
     local procedure FnGetPostingGroup(ProductCode: Code[40]): Code[20]
     var
         SavingsAccountTypes: Record "Account Types-Saving Products";
@@ -2242,52 +2489,6 @@ page 56110 "Member Application Card"
         end;
     end;
 
-    // local procedure FnAutoCreateATMApplication()
-    // begin
-    //     if GenSetUp."Auto Fill Msacco Application" = true then begin
-    //         MpesaAppH.Init;
-    //         MpesaAppH.No := '';
-    //         MpesaAppH."Date Entered" := Today;
-    //         MpesaAppH."Time Entered" := Time;
-    //         MpesaAppH."Entered By" := UserId;
-    //         MpesaAppH."Document Serial No" := "ID No.";
-    //         MpesaAppH."Document Date" := Today;
-    //         MpesaAppH."Customer ID No" := "ID No.";
-    //         MpesaAppH."Customer Name" := Name;
-    //         MpesaAppH."MPESA Mobile No" := "Phone No.";
-    //         MpesaAppH."App Status" := MpesaAppH."app status"::Pending;
-    //         MpesaAppH.Insert(true);
-
-    //         MpesaAppNo := MpesaAppH.No;
-    //         MpesaAppD.Init;
-    //         MpesaAppD."Application No" := MpesaAppNo;
-    //         MpesaAppD."Account Type" := MpesaAppD."account type"::Vendor;
-    //         MpesaAppD."Account No." := AcctNo;
-    //         MpesaAppD.Description := Name;
-    //         MpesaAppD.Insert;
-    //     end;
-    // end;
-
-    // local procedure FnAutoCreateMobileApplication()
-    // var
-    //     MobileApplications: Record "SwizzPESA Applications";
-    // begin
-    //     MobileApplications.reset;
-    //     MobileApplications.Init();
-    //     MobileApplications."No." := FnGenerateNextNumberSeries();
-    //     MobileApplications."Account No" := AcctNo;
-    //     MobileApplications."Account Name" := rec.Name;
-    //     MobileApplications.Telephone := rec."Phone No.";
-    //     MobileApplications."ID No" := rec."ID No.";
-    //     MobileApplications.Status := MobileApplications.Status::Application;
-    //     MobileApplications."Date Applied" := Today;
-    //     MobileApplications."Time Applied" := Time;
-    //     MobileApplications."Created By" := UserId;
-    //     MobileApplications.Sent := false;
-    //     MobileApplications."No. Series" := 'SwizzPESA';
-    //     MobileApplications.Insert(true);
-
-    // end;
 
     local procedure FnGenerateNextNumberSeries(): Code[20]
     var
@@ -2299,25 +2500,6 @@ page 56110 "Member Application Card"
         EXIT(NoSeriesManagement.GetNextNo(SaccoNoSeries."SwizzKash Reg No.", 0D, true));
         exit('Error generating No series of mobile applications');
     end;
-
-    // local procedure FnAutoCreateAgencyApplication()
-    // var
-    //     AgencyTable: Record "Agency Members App";
-    // begin
-    //     AgencyTable.Init();
-    //     AgencyTable."Account No" := AcctNo;
-    //     AgencyTable."Account Name" := Name;
-    //     AgencyTable.Telephone := "Phone No.";
-    //     AgencyTable."ID No" := "ID No.";
-    //     AgencyTable.Status := AgencyTable.Status::Application;
-    //     AgencyTable."Date Applied" := Today;
-    //     AgencyTable."Time Applied" := Time;
-    //     AgencyTable."Created By" := UserId;
-    //     AgencyTable.Sent := false;
-    //     AgencyTable."No. Series" := '';
-    //     AgencyTable.SentToServer := false;
-    //     AgencyTable.Insert(true);
-    // end;
 
     local procedure FnSendSMSOnAccountOpening()
     var
@@ -2375,4 +2557,3 @@ page 56110 "Member Application Card"
     end;
 
 }
-
