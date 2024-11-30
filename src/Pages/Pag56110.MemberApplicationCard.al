@@ -1288,11 +1288,11 @@ page 56110 "Member Application Card"
                         //.................................
                         if confirm('Are you sure you want to send this Document for Approval', false) = true then begin
                             SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
-                            Message('Approval Submitted Successfully');
-                            // Rec.Status := rec.Status::"Pending Approval";
-                            // rec.modify;
+                            Message('Approval Request Sent!');
+                            rec.Status := Rec.Status::"Pending Approval";
+                            rec.Modify(true);
                             //Commit();
-                            //CurrPage.Close();
+                            CurrPage.Close();
                         end;
                         //.................................
 
@@ -2291,7 +2291,7 @@ page 56110 "Member Application Card"
         END;
 
 
-        //NewMembNo := Saccosetup."Last Memb No.";
+        NewMembNo := Saccosetup."Last Memb No.";
 
 
 

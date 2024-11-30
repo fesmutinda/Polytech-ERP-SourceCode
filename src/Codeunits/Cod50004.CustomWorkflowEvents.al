@@ -10,12 +10,12 @@ codeunit 50004 "Custom Workflow Events"
         WFHandler: Codeunit "Workflow Event Handling";
         WorkflowManagement: Codeunit "Workflow Management";
         WFEventHandler: Codeunit "Workflow Event Handling";
-        SurestepWFEvents: Codeunit "Custom Workflow Events";
+        //SurestepWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
-    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
+    //[EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
 
-    procedure OnAddWorkflowEventsToLibrary()
+    procedure AddWorkflowEventsToLibrary()
     begin
 
         //---------------------------------------------1. Approval Events--------------------------------------------------------------
@@ -109,8 +109,8 @@ codeunit 50004 "Custom Workflow Events"
         //-------------------------------------------End Approval Events-------------------------------------------------------------
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
-    local procedure OnAddWorkflowEventPredecessorsToLibrary()
+    //[EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
+    local procedure AddWorkflowEventPredecessorsToLibrary()
     begin
         //--------1.Approval,Rejection,Delegation Predecessors----------------------
         //1. Membership Application
@@ -224,7 +224,6 @@ codeunit 50004 "Custom Workflow Events"
     //A)Membership Applications
     procedure RunWorkflowOnSendMembershipApplicationForApprovalCode(): Code[128]//
     begin
-        //Message('RunWorkflowOnSendMembershipForAppCode runs here 50004');
         exit(UpperCase('RunWorkflowOnSendMembershipApplicationForApproval'));
     end;
 

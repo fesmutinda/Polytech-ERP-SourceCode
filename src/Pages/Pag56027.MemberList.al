@@ -9,7 +9,7 @@ Page 56027 "Member List"
     PageType = List;
     SourceTable = "Member Register";
     SourceTableView = sorting("No.")
-                      order(ascending)
+                      order(descending)
                       where("Customer Type" = filter(Member),
                             "Customer Posting Group" = filter('MEMBER'));
     UsageCategory = Lists;
@@ -136,7 +136,7 @@ Page 56027 "Member List"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(50223, true, false, Cust);
+                            Report.Run(50051, true, false, Cust);
                     end;
                 }
                 action(GStatement)

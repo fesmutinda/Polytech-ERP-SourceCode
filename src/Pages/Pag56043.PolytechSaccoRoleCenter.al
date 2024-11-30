@@ -1044,7 +1044,14 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = Page "Member List";
                         ToolTip = 'View Member Accounts';
                     }
-                    group("Account Opening")
+                    /* action(GroupMembersList)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Group/Corporate Applic List';
+                        RunObject = Page "Group/Corporate Applic List";
+                        ToolTip = 'View Member Accounts';
+                    } */
+                    /* group("Account Opening")
                     {
                         Caption = 'Membership Registration';
                         action(NewAccountOpeningn)
@@ -1079,7 +1086,7 @@ Page 56043 "Polytech Sacco Role Center"
                             RunPageView = WHERE(status = CONST(closed));
                         }
 
-                    }
+                    } */
 
 
                 }
