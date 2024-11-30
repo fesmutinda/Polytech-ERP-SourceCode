@@ -114,16 +114,15 @@ Table 51360 "Membership Applications"
             Caption = 'Global Dimension 2 Code';
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2));
 
-            trigger OnValidate()
-            begin
-                DimValue.Reset;
-                DimValue.SetRange(DimValue.Code, "Global Dimension 2 Code");
-                if DimValue.Find('-') then begin
-                    "Member Branch Code" := DimValue.Code;//"Branch Codes";
-                    "Global Dimension 2 Code" := DimValue.Code;
-                end;
-                // FnCreateDefaultSavingsProducts();
-            end;
+            // trigger OnValidate()
+            // begin
+            //     DimValue.Reset;
+            //     DimValue.SetRange(DimValue.Code, "Global Dimension 2 Code");
+            //     if DimValue.Find('-') then begin
+            //         "Member Branch Code" := DimValue.Code;//"Branch Codes";
+            //         "Global Dimension 2 Code" := DimValue.Code;
+            //     end;
+            // end;
         }
         field(10; "Customer Posting Group"; Code[10])
         {
@@ -1527,6 +1526,7 @@ Table 51360 "Membership Applications"
         "Recruited By" := UserId;
         "Monthly Contribution" := GenSetUp."Min. Contribution";
         "Global Dimension 1 Code" := 'BOSA';
+        "Global Dimension 2 Code" := 'Nairobi';
         "Captured By" := UserId;
 
 
@@ -1549,10 +1549,10 @@ Table 51360 "Membership Applications"
         UsersRec.Reset;
         UsersRec.SetRange(UsersRec."User ID", UserId);
         if UsersRec.Find('-') then begin
-            "Global Dimension 2 Code" := UsersRec."Branch";
+            //  "Global Dimension 2 Code" := UsersRec."Branch";
         end;
 
-        Validate("Global Dimension 2 Code");
+        // Validate("Global Dimension 2 Code");
 
     end;
 

@@ -1071,7 +1071,7 @@ page 56110 "Member Application Card"
                         StyleExpr = CoveragePercentStyle;
 
                     }
-                    field("Due Diligence MeaSwizz"; Rec."Due Diligence MeaSure")
+                    field("Due Diligence Measure"; Rec."Due Diligence MeaSure")
                     {
                         ApplicationArea = Basic;
                         Editable = false;
@@ -1081,7 +1081,7 @@ page 56110 "Member Application Card"
                 }
                 part(Control27; "Member Due Diligence MeaSure")
                 {
-                    Caption = 'Due Diligence MeaSwizz';
+                    Caption = 'Due Diligence Measure';
                     SubPageLink = "Member No" = field("No.");
                     SubPageView = sorting("Due Diligence No");
                     Visible = false;
@@ -1144,7 +1144,7 @@ page 56110 "Member Application Card"
                     trigger OnAction()
                     begin
 
-                        //on opening page,make Swizz that the accounts set as default are automatically filled in start
+                        //on opening page,make sure that the accounts set as default are automatically filled in start
                         AccoutTypes.RESET;
                         AccoutTypes.SETRANGE(AccoutTypes."Default Account", TRUE);
                         IF AccoutTypes.Find('-') THEN BEGIN
@@ -1165,7 +1165,7 @@ page 56110 "Member Application Card"
                                 END;
                             UNTIL AccoutTypes.Next = 0;
                         END;
-                        //on opening page,make Swizz that the accounts set as default are automatically filled in start
+                        //on opening page,make sure that the accounts set as default are automatically filled in start
 
 
                     end;
@@ -1334,12 +1334,11 @@ page 56110 "Member Application Card"
                         if Rec.Status <> Rec.Status::Approved then
                             Error('This application has not been approved');
                         ///.................
-                        // if (Rec."ID No." = '') and (Rec."Account Category" <> Rec."Account Category"::Junior) then begin
-                        //     Error('ID No is Mandatory');
-                        // end;
+                        if (Rec."ID No." = '') and (Rec."Account Category" <> Rec."Account Category"::Corporate) then begin
+                            Error('ID No is Mandatory');
+                        end;
 
                         if Rec."Global Dimension 2 Code" = '' then begin
-
                             Error('Branch Code is Mandatory');
 
                         end;
@@ -1350,7 +1349,7 @@ page 56110 "Member Application Card"
                             if (Cust."No." <> Rec."No.") then
                                 Error('Member has already been created');
                         end;
-                        if Confirm('Are you Swizz you want to create account application?', false) = false then begin
+                        if Confirm('Are you sure you want to create account application?', false) = false then begin
                             Message('Aborted');
                             exit;
                         end ELSE begin
@@ -1497,6 +1496,8 @@ page 56110 "Member Application Card"
         RestrictInsert: ErrorInfo;
     begin
         Rec."Responsibility Centre" := UserMgt.GetSalesFilter;
+        Rec."Monthly Contribution" := GenSetUp."Min. Contribution";
+        Rec."User ID" := UserId;
         //rec.Reset();
         // Rec.SetRange(rec.Status, Rec.Status::Open);
         // Rec.SetRange(Rec."User ID", UserId);
@@ -1560,7 +1561,7 @@ page 56110 "Member Application Card"
         GenSetUp: Record "Sacco General Set-Up";
         ClearingAcctNo: Code[20];
         AdvrAcctNo: Code[20];
-        DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member CloSwizz","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",StandingOrder,HRJob,HRLeave,"HRTransport Request",HRTraining,"HREmp Requsition",MicroTrans,"Account Reactivation","Overdraft ",BLA,"Member Editable","FOSA Opening","Loan Batching",Leave,"Imprest Requisition","Imprest Surrender","Stores Requisition","Funds Transfer","Change Request","Staff Claims","BOSA Transfer","Loan Tranche","Loan TopUp","Memb Opening","Member Withdrawal";
+        DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",StandingOrder,HRJob,HRLeave,"HRTransport Request",HRTraining,"HREmp Requsition",MicroTrans,"Account Reactivation","Overdraft ",BLA,"Member Editable","FOSA Opening","Loan Batching",Leave,"Imprest Requisition","Imprest Surrender","Stores Requisition","Funds Transfer","Change Request","Staff Claims","BOSA Transfer","Loan Tranche","Loan TopUp","Memb Opening","Member Withdrawal";
         AccountTypes: Record "Account Types-Saving Products";
         DivAcctNo: Code[20];
         NameEditable: Boolean;
@@ -2378,7 +2379,7 @@ page 56110 "Member Application Card"
         Cust."Individual Category." := Rec."Individual Category.";
         Cust."Entities" := Rec.Entities;
         // Cust."Member Risk Level" := (Rec."Member Risk Level");
-        // Cust."Due Diligence MeaSwizz" := Format(Rec."Due Diligence MeaSwizz");
+        // Cust."Due Diligence Measure" := Format(Rec."Due Diligence Measure");
         Cust."Member Residency Status." := Rec."Member Residency Status.";
         Cust."Industry Type" := Rec."Industry Type";
         // Cust."Length Of Relationship" := Rec."Length Of Relationship";

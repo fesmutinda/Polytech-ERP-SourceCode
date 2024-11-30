@@ -1017,57 +1017,6 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                     }
                 }
-                group(MembershipManagementn)
-                {
-                    Caption = 'Membership Management';
-                    Image = member;
-
-                    action(MembersListn)
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Member Accounts';
-                        RunObject = Page "Member List";
-                        ToolTip = 'View Member Accounts';
-                    }
-                    group("Account Opening")
-                    {
-                        Caption = 'Membership Registration';
-                        action(NewAccountOpeningn)
-                        {
-                            ApplicationArea = All;
-                            Caption = 'New Account Opening';
-                            RunObject = page "Membership Application List";
-                            RunPageView = WHERE(status = CONST(open));
-                            RunPageMode = Edit;
-                        }
-                        action(NewAccountPendingn)
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Applications Pending Approval';
-                            RunObject = page "Membership Applications List";
-                            RunPageView = WHERE(status = CONST("Pending Approval"));
-                            RunPageMode = View;
-                        }
-
-                        action(NewApprovedAccountsn)
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Applications Pending Creation';
-                            RunObject = page "Membership Applications List";
-                            RunPageView = WHERE(status = CONST(approved));
-                        }
-                        action("CreatedAccountsn")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Closed Membership Applications';
-                            RunObject = page "Membership Applications List";
-                            RunPageView = WHERE(status = CONST(closed));
-                        }
-
-                    }
-
-
-                }
 
                 group("Membership Exit")
                 {

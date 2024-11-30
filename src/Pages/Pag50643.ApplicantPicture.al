@@ -157,7 +157,8 @@ page 50643 "Applicant Picture"
                 exit;
 
         if Camera.GetPicture(PictureInstream, PictureDescription) then begin
-            Clear(rec.Picture);
+            // Clear(rec.Picture);
+            rec.Picture.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
             Rec.Modify(true)
         end;
     end;

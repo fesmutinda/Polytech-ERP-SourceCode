@@ -160,7 +160,8 @@ page 50703 "Applicant Signature"
                 exit;
 
         if Camera.GetPicture(PictureInstream, PictureDescription) then begin
-            Clear(rec.Signature);
+            // Clear(rec.Signature);
+            rec.Picture.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
             Rec.Modify(true)
         end;
     end;
