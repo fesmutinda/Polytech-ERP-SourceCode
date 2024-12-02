@@ -25,11 +25,17 @@ Report 50052 MemberReport
             column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
-            column(No; "No.") { }
-            column(Name; Name) { }
-            column(ID_No_; "ID No.") { }
-            column(EntryNo; EntryNo) { }
-            column(Monthly_Contribution; "Monthly Contribution") { }
+            column(No; "No.")
+            {
+            }
+            column(Name; Name)
+            { }
+            column(ID_No_; "ID No.")
+            { }
+            column(EntryNo; EntryNo)
+            { }
+            column(Monthly_Contribution; "Monthly Contribution")
+            { }
             column(Deposits; Deposits) { }
             column(ShareCapital; ShareCapital) { }
             column(LoanBalance; LoanBalance) { }

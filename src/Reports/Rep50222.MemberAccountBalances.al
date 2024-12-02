@@ -7,12 +7,27 @@ Report 50222 "Member Account  Balances"
 
     dataset
     {
-        dataitem(member; Customer)
+        dataitem(member; "Member Register")
         {
             RequestFilterFields = "No.", Name, "Date Filter";
             /* column(ReportForNavId_1102755077; 1102755077)
             {
             } */
+            column(CompanyName; CompanyInfo.Name)
+            {
+            }
+            column(CompanyAddress; CompanyInfo.Address)
+            {
+            }
+            column(CompanyPhone; CompanyInfo."Phone No.")
+            {
+            }
+            column(CompanyPic; CompanyInfo.Picture)
+            {
+            }
+            column(CompanyEmail; CompanyInfo."E-Mail")
+            {
+            }
             column(No_member; member."No.")
             {
             }
@@ -28,21 +43,21 @@ Report 50222 "Member Account  Balances"
             column(OutstandingBalance_member; Member."Outstanding Balance")
             {
             }
-            column(Shares_capital; Member."Share Capital")
+            /* column(Shares_capital; Member."Share Capital")
             {
-            }
+            } */
 
             column(Outstanding_Interest; Member."Outstanding Interest")
             {
             }
-            column(LikizoContribution; Member."Likizo Contribution")
+            /* column(LikizoContribution; Member."Likizo Contribution")
             {
 
             }
             column(Alpha_Savings; Member."Alpha Savings") { }
             column(Junior_Savings_One; "Junior Savings One") { }
             column(Junior_Savings_Two; "Junior Savings Two") { }
-            column(Junior_Savings_Three; "Junior Savings Three") { }
+            column(Junior_Savings_Three; "Junior Savings Three") { } */
 
 
             column(ASAT; ASAT)
@@ -52,10 +67,10 @@ Report 50222 "Member Account  Balances"
             trigger OnAfterGetRecord()
             begin
 
-                CalcFields("Current Shares", "Share Capital", "Outstanding Balance", "Outstanding Interest", "Alpha Savings", "Junior Savings One", "Likizo Contribution");
+                CalcFields("Current Shares", /* "Share Capital", */ "Outstanding Balance", "Outstanding Interest"/* , "Alpha Savings", "Junior Savings One", "Likizo Contribution" */);
                 LoansBal := "Outstanding Balance";
                 CurrentShares := "Current Shares";
-                SharesCap := "Share Capital";
+                //SharesCap := "Share Capital";
                 InterestBal := "Outstanding Interest";
 
 
@@ -88,6 +103,7 @@ Report 50222 "Member Account  Balances"
         SharesCap: Decimal;
         HousingShares: Decimal;
         LikizoShares: Decimal;
+        CompanyInfo: Record "Company Information";
 
         LoansBal: Decimal;
         InterestBal: Decimal;

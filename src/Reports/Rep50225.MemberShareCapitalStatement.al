@@ -1,10 +1,11 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Report 50225 "Member Share Capital Statement"
 {
-    RDLCLayout = './Layouts/MemberShareCapitalStatement.rdl';
-    UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     Caption = 'Member Share Capital Statement';
+    RDLCLayout = './Layouts/MemberShareCapitalStatement.rdl';
+    UsageCategory = ReportsAndAnalysis;
+
 
 
     dataset
@@ -12,25 +13,25 @@ Report 50225 "Member Share Capital Statement"
         dataitem("Member Register"; "Member Register")
         {
             RequestFilterFields = "No.", "Loan Product Filter", "Outstanding Balance", "Date Filter";
-            column(Payroll_Staff_No; "Member Register"."Payroll/Staff No")
+            column(Payroll_Staff_No; "Payroll/Staff No")
             {
             }
-            column(Employer_Name; "Member Register"."Employer Name")
+            column(Employer_Name; "Employer Name")
             {
             }
-            column(PayrollStaffNo_Members; "Member Register"."Payroll/Staff No")
+            column(PayrollStaffNo_Members; "Payroll/Staff No")
             {
             }
-            column(No_Members; "Member Register"."No.")
+            column(No_Members; "No.")
             {
             }
-            column(MobilePhoneNo_MembersRegister; "Member Register"."Mobile Phone No")
+            column(MobilePhoneNo_MembersRegister; "Mobile Phone No")
             {
             }
-            column(Name_Members; "Member Register".Name)
+            column(Name_Members; Name)
             {
             }
-            column(EmployerCode_Members; "Member Register"."Employer Code")
+            column(EmployerCode_Members; "Employer Code")
             {
             }
             column(EmployerName; EmployerName)
@@ -39,19 +40,19 @@ Report 50225 "Member Share Capital Statement"
             // column(PageNo_Members; CurrReport.PageNo)
             // {
             // }
-            column(Registration_Date; "Member Register"."Registration Date")
+            column(Registration_Date; "Registration Date")
             {
             }
-            column(Shares_Retained; "Member Register"."Shares Retained")
+            column(Shares_Retained; "Shares Retained")
             {
             }
             column(ShareCapBF; ShareCapBF)
             {
             }
-            column(IDNo_Members; "Member Register"."ID No.")
+            column(IDNo_Members; "ID No.")
             {
             }
-            column(GlobalDimension2Code_Members; "Member Register"."Global Dimension 2 Code")
+            column(GlobalDimension2Code_Members; "Global Dimension 2 Code")
             {
             }
             column(Company_Name; Company.Name)
@@ -74,10 +75,10 @@ Report 50225 "Member Share Capital Statement"
             {
             }
 
-            dataitem(Share; "Cust. Ledger Entry")
+            dataitem(Share; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
-                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Shares Capital"), Reversed = filter(false));
+                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Share Capital"), Reversed = filter(false));
                 column(openBalances; OpenBalance)
                 {
                 }
@@ -99,7 +100,7 @@ Report 50225 "Member Share Capital Statement"
                 column(DebitAmount_Shares; Share."Debit Amount")
                 {
                 }
-                column(Amount_Shares; Share."Amount Posted")
+                column(Amount_Shares; Share.Amount) //"Amount Posted"
                 {
                 }
                 column(TransactionType_Shares; Share."Transaction Type")
@@ -120,14 +121,14 @@ Report 50225 "Member Share Capital Statement"
 
                 trigger OnAfterGetRecord()
                 begin
-                    CLosingBalance := CLosingBalance - Share."Amount Posted";
+                    CLosingBalance := CLosingBalance - Share.Amount;
                     BankCodeShares := GetBankCode(Share);
                     //...................................
-                    if Share."Amount Posted" < 0 then begin
-                        Share."Credit Amount" := (Share."Amount Posted" * -1);
+                    if Share.Amount < 0 then begin
+                        Share."Credit Amount" := (Share.Amount * -1);
                     end else
-                        if Share."Amount Posted" > 0 then begin
-                            Share."Debit Amount" := (Share."Amount Posted");
+                        if Share.Amount > 0 then begin
+                            Share."Debit Amount" := (Share.Amount);
                         end;
                 end;
 
@@ -141,7 +142,7 @@ Report 50225 "Member Share Capital Statement"
             trigger OnAfterGetRecord()
             begin
                 SaccoEmp.Reset;
-                SaccoEmp.SetRange(SaccoEmp.Code, "Member Register"."Employer Code");
+                SaccoEmp.SetRange(SaccoEmp.Code, "Employer Code");
                 if SaccoEmp.Find('-') then
                     EmployerName := SaccoEmp.Description;
 
@@ -172,13 +173,13 @@ Report 50225 "Member Share Capital Statement"
             trigger OnPreDataItem()
             begin
                 /*
-                IF "Member Register".GETFILTER("Member Register"."Date Filter") <> '' THEN
-                DateFilterBF:='..'+ FORMAT(CALCDATE('-1D',"Member Register".GETRANGEMIN("Member Register"."Date Filter")));
+                IF GETFILTER("Date Filter") <> '' THEN
+                DateFilterBF:='..'+ FORMAT(CALCDATE('-1D',GETRANGEMIN("Date Filter")));
                 */
 
-                if "Member Register".GetFilter("Member Register"."Date Filter") <> '' then
-                    DateFilterBF := '..' + Format(CalcDate('-1D', "Member Register".GetRangeMin("Member Register"."Date Filter")));
-                //DateFilterBF:='..'+ FORMAT("Member Register".GETRANGEMIN("Member Register"."Date Filter"));
+                if GetFilter("Date Filter") <> '' then
+                    DateFilterBF := '..' + Format(CalcDate('-1D', GetRangeMin("Date Filter")));
+                //DateFilterBF:='..'+ FORMAT(GETRANGEMIN("Date Filter"));
 
             end;
         }
@@ -279,7 +280,7 @@ Report 50225 "Member Share Capital Statement"
         LonRepaymentSchedule: Record "Loan Repayment Schedule";
 
 
-    local procedure GetBankCode(MembLedger: Record "Cust. Ledger Entry"): Text
+    local procedure GetBankCode(MembLedger: Record "Member Ledger Entry"): Text
     var
         BankLedger: Record "Bank Account Ledger Entry";
     begin

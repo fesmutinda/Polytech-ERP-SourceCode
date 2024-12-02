@@ -1,8 +1,10 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Report 50303 "Member Shares Certificate"
 {
+    ApplicationArea = All;
     DefaultLayout = RDLC;
     RDLCLayout = './Layouts/MemberSharesCertificate.rdl';
+    UsageCategory = ReportsAndAnalysis;
 
     dataset
     {
@@ -36,31 +38,31 @@ Report 50303 "Member Shares Certificate"
             column(USERID; UserId)
             {
             }
-            column(PayrollStaffNo_Members; "Members Register"."Payroll/Staff No")
+            column(PayrollStaffNo_Members; "Payroll/Staff No")
             {
             }
-            column(No_Members; "Members Register"."No.")
+            column(No_Members; "No.")
             {
             }
-            column(Name_Members; "Members Register".Name)
+            column(Name_Members; Name)
             {
             }
-            column(EmployerCode_Members; "Members Register"."Employer Code")
+            column(EmployerCode_Members; "Employer Code")
             {
             }
             column(PageNo_Members; CurrReport.PageNo)
             {
             }
-            column(Shares_Retained; "Members Register"."Shares Retained")
+            column(Shares_Retained; "Shares Retained")
             {
             }
             column(ShareCapBF; ShareCapBF)
             {
             }
-            column(IDNo_Members; "Members Register"."ID No.")
+            column(IDNo_Members; "ID No.")
             {
             }
-            column(GlobalDimension2Code_Members; "Members Register"."Global Dimension 2 Code")
+            column(GlobalDimension2Code_Members; "Global Dimension 2 Code")
             {
             }
             column(Company_Name; Company.Name)
@@ -91,7 +93,7 @@ Report 50303 "Member Shares Certificate"
             trigger OnAfterGetRecord()
             begin
                 MembersReg.Reset;
-                MembersReg.SetRange(MembersReg."No.", "Members Register"."No.");
+                MembersReg.SetRange(MembersReg."No.", "No.");
                 MembersReg.SetAutocalcFields(MembersReg."Current Shares", MembersReg."Share Capital");
                 if MembersReg.Find('-') then begin
                     TotalCurrectshares := 0;

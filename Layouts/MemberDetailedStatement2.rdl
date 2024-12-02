@@ -8,7 +8,7 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>45db3f2f-e5de-4336-b0f2-5e1d84d0ca7f</rd:DataSourceID>
+      <rd:DataSourceID>0c0ad72c-123c-421f-a103-ee61e23e0354</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -28,14 +28,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyName</rd:DefaultName>
-            <Top>0.14459in</Top>
-            <Left>1.96899in</Left>
+            <Top>0.73715in</Top>
+            <Left>2.00124in</Left>
             <Height>0.25222in</Height>
-            <Width>4.77499in</Width>
+            <Width>5.44999in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -60,14 +62,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyAddress</rd:DefaultName>
-            <Top>0.42459in</Top>
-            <Left>1.98287in</Left>
+            <Top>1.01715in</Top>
+            <Left>2.01512in</Left>
             <Height>0.25in</Height>
-            <Width>4.76111in</Width>
+            <Width>5.43611in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -93,14 +97,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyPhone</rd:DefaultName>
-            <Top>0.70237in</Top>
-            <Left>1.98287in</Left>
+            <Top>1.29493in</Top>
+            <Left>2.01512in</Left>
             <Height>0.25694in</Height>
-            <Width>4.76111in</Width>
+            <Width>5.43611in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -126,14 +132,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyEmail</rd:DefaultName>
-            <Top>1.00097in</Top>
-            <Left>1.96899in</Left>
+            <Top>1.59353in</Top>
+            <Left>2.00124in</Left>
             <Height>0.25in</Height>
-            <Width>4.77499in</Width>
+            <Width>5.43611in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -151,10 +159,10 @@
             <Value>=First(Fields!Company_Picture.Value, "DataSet_Result")</Value>
             <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>0.14459in</Top>
-            <Left>0.32316in</Left>
+            <Top>0.73715in</Top>
+            <Left>0.37208in</Left>
             <Height>1.10638in</Height>
-            <Width>1.30972in</Width>
+            <Width>1.47638in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -164,48 +172,12 @@
               <PaddingRight>2pt</PaddingRight>
             </Style>
           </Image>
-          <Textbox Name="Textbox5">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>MEMBER DEPOSITS CONTRIBUTIONS STATEMENT</Value>
-                    <Style>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Color>SeaGreen</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.43153in</Top>
-            <Left>1.37871in</Left>
-            <Height>0.24306in</Height>
-            <Width>5.13194in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Line Name="Line1">
-            <Top>1.39098in</Top>
-            <Left>0.25in</Left>
+            <Top>1.98354in</Top>
+            <Left>0.12846in</Left>
             <Height>0in</Height>
-            <Width>6.85653in</Width>
-            <ZIndex>6</ZIndex>
+            <Width>7.30889in</Width>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -213,11 +185,11 @@
             </Style>
           </Line>
           <Line Name="Line2">
-            <Top>3.10056in</Top>
-            <Left>0.25in</Left>
+            <Top>3.69312in</Top>
+            <Left>0.12846in</Left>
             <Height>0in</Height>
-            <Width>6.85653in</Width>
-            <ZIndex>7</ZIndex>
+            <Width>7.32277in</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -228,25 +200,25 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.87333in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.16502in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.96363in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.96363in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.96363in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.96363in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.96363in</Width>
+                  <Width>1.04611in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -255,7 +227,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox39">
+                        <Textbox Name="Textbox24">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -271,7 +243,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox39</rd:DefaultName>
+                          <rd:DefaultName>Textbox24</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -294,7 +266,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Transaction Type</Value>
+                                  <Value>Transaction</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -484,13 +456,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="PostingDate_Shares">
+                        <Textbox Name="Deposits_Description">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>PostingDate</Label>
                                   <Value>=Fields!PostingDate_Shares.Value</Value>
                                   <Style />
                                 </TextRun>
@@ -498,7 +471,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>PostingDate_Shares</rd:DefaultName>
+                          <rd:DefaultName>Deposits_Description</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -671,7 +644,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CLosingBalances.Value</Value>
+                                  <Value />
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -718,15 +691,35 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>3.34931in</Top>
-            <Left>0.25in</Left>
+            <Top>3.94187in</Top>
+            <Left>0.12846in</Left>
             <Height>0.5in</Height>
-            <Width>6.8565in</Width>
-            <ZIndex>8</ZIndex>
+            <Width>7.32277in</Width>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
             </Style>
           </Tablix>
           <Textbox Name="Textbox60">
@@ -736,7 +729,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DEPOSIT CONTRIBUTION</Value>
+                    <Value>SHARE CAPITAL</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -746,16 +739,51 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox60</rd:DefaultName>
-            <Top>3.12015in</Top>
-            <Left>0.25in</Left>
+            <Top>3.71271in</Top>
+            <Left>0.12152in</Left>
             <Height>0.22917in</Height>
-            <Width>6.85653in</Width>
-            <ZIndex>9</ZIndex>
+            <Width>7.31583in</Width>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <BackgroundColor>Gold</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MEMBER ACCOUNT STATEMENT</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.03972in</Top>
+            <Left>1.06555in</Left>
+            <Height>0.24306in</Height>
+            <Width>6.04027in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -777,8 +805,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.68222in</Top>
-            <Left>0.36569in</Left>
+            <Top>2.36153in</Top>
+            <Left>0.38583in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>10</ZIndex>
@@ -807,10 +835,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.68222in</Top>
-            <Left>5.19263in</Left>
+            <Top>2.36153in</Top>
+            <Left>5.50443in</Left>
             <Height>0.25in</Height>
-            <Width>1.9139in</Width>
+            <Width>1.74723in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -837,10 +865,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.68222in</Top>
-            <Left>1.53986in</Left>
+            <Top>2.36153in</Top>
+            <Left>1.55999in</Left>
             <Height>0.25in</Height>
-            <Width>2.31667in</Width>
+            <Width>2.425in</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -867,8 +895,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.68222in</Top>
-            <Left>3.98154in</Left>
+            <Top>2.36153in</Top>
+            <Left>4.25167in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>13</ZIndex>
@@ -897,8 +925,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.94611in</Top>
-            <Left>0.36569in</Left>
+            <Top>2.62542in</Top>
+            <Left>0.38583in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>14</ZIndex>
@@ -927,10 +955,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.94611in</Top>
-            <Left>1.53986in</Left>
+            <Top>2.62542in</Top>
+            <Left>1.55999in</Left>
             <Height>0.25in</Height>
-            <Width>2.31667in</Width>
+            <Width>2.425in</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -957,8 +985,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.96in</Top>
-            <Left>3.98153in</Left>
+            <Top>2.63931in</Top>
+            <Left>4.25166in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>16</ZIndex>
@@ -979,18 +1007,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>=First(Fields!PageNo_Members.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.96in</Top>
-            <Left>5.18346in</Left>
+            <Top>2.63931in</Top>
+            <Left>5.49526in</Left>
             <Height>0.25in</Height>
-            <Width>1.9139in</Width>
+            <Width>1.74723in</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -1017,8 +1047,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.21in</Top>
-            <Left>3.98153in</Left>
+            <Top>2.88931in</Top>
+            <Left>4.25166in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>18</ZIndex>
@@ -1039,18 +1069,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!USER1.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!USER2.Value, "DataSet_Result")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.21in</Top>
-            <Left>5.18346in</Left>
+            <Top>2.88931in</Top>
+            <Left>5.49526in</Left>
             <Height>0.25in</Height>
-            <Width>1.9139in</Width>
+            <Width>1.74723in</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -1077,8 +1109,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.19611in</Top>
-            <Left>0.36569in</Left>
+            <Top>2.87542in</Top>
+            <Left>0.38583in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>20</ZIndex>
@@ -1106,10 +1138,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.19611in</Top>
-            <Left>1.53986in</Left>
+            <Top>2.87542in</Top>
+            <Left>1.55999in</Left>
             <Height>0.25in</Height>
-            <Width>2.31667in</Width>
+            <Width>2.425in</Width>
             <ZIndex>21</ZIndex>
             <Style>
               <Border>
@@ -1136,8 +1168,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.44611in</Top>
-            <Left>0.36569in</Left>
+            <Top>3.12542in</Top>
+            <Left>0.38583in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>22</ZIndex>
@@ -1166,10 +1198,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.44611in</Top>
-            <Left>1.53986in</Left>
+            <Top>3.12542in</Top>
+            <Left>1.55999in</Left>
             <Height>0.25in</Height>
-            <Width>2.31667in</Width>
+            <Width>2.425in</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
@@ -1196,8 +1228,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.46in</Top>
-            <Left>3.98153in</Left>
+            <Top>3.13931in</Top>
+            <Left>4.25166in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>24</ZIndex>
@@ -1222,14 +1254,16 @@
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.46in</Top>
-            <Left>5.18346in</Left>
+            <Top>3.13931in</Top>
+            <Left>5.49526in</Left>
             <Height>0.25in</Height>
-            <Width>1.9139in</Width>
+            <Width>1.74723in</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
@@ -1256,8 +1290,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.69611in</Top>
-            <Left>0.36569in</Left>
+            <Top>3.37542in</Top>
+            <Left>0.38583in</Left>
             <Height>0.25in</Height>
             <Width>1.05833in</Width>
             <ZIndex>26</ZIndex>
@@ -1286,10 +1320,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.69611in</Top>
-            <Left>1.53986in</Left>
+            <Top>3.37542in</Top>
+            <Left>1.55999in</Left>
             <Height>0.25in</Height>
-            <Width>1.71212in</Width>
+            <Width>2.425in</Width>
             <ZIndex>27</ZIndex>
             <Style>
               <Border>
@@ -1316,10 +1350,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.72389in</Top>
-            <Left>3.98153in</Left>
+            <Top>3.38931in</Top>
+            <Left>4.24333in</Left>
             <Height>0.25in</Height>
-            <Width>1.26027in</Width>
+            <Width>1.19166in</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -1342,14 +1376,16 @@
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.71in</Top>
-            <Left>5.33624in</Left>
+            <Top>3.38931in</Top>
+            <Left>5.50443in</Left>
             <Height>0.25in</Height>
-            <Width>1.76112in</Width>
+            <Width>1.73806in</Width>
             <ZIndex>29</ZIndex>
             <Style>
               <Border>
@@ -1362,15 +1398,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>4.39222in</Height>
+        <Height>4.81667in</Height>
         <Style />
       </Body>
-      <Width>10.09722in</Width>
+      <Width>8.03333in</Width>
       <Page>
-        <LeftMargin>0.4in</LeftMargin>
-        <RightMargin>0.4in</RightMargin>
         <TopMargin>0.4in</TopMargin>
-        <BottomMargin>0.4in</BottomMargin>
+        <BottomMargin>0.5in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -1441,8 +1475,8 @@ End Function
         <Field Name="EmployerName">
           <DataField>EmployerName</DataField>
         </Field>
-        <Field Name="Registration_Date">
-          <DataField>Registration_Date</DataField>
+        <Field Name="PageNo_Members">
+          <DataField>PageNo_Members</DataField>
         </Field>
         <Field Name="Shares_Retained">
           <DataField>Shares_Retained</DataField>
@@ -1458,6 +1492,9 @@ End Function
         </Field>
         <Field Name="IDNo_Members">
           <DataField>IDNo_Members</DataField>
+        </Field>
+        <Field Name="Registration_Date">
+          <DataField>Registration_Date</DataField>
         </Field>
         <Field Name="GlobalDimension2Code_Members">
           <DataField>GlobalDimension2Code_Members</DataField>
@@ -1479,6 +1516,207 @@ End Function
         </Field>
         <Field Name="Company_Email">
           <DataField>Company_Email</DataField>
+        </Field>
+        <Field Name="Outstanding_Balance">
+          <DataField>Outstanding_Balance</DataField>
+        </Field>
+        <Field Name="Outstanding_BalanceFormat">
+          <DataField>Outstanding_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Interest">
+          <DataField>Outstanding_Interest</DataField>
+        </Field>
+        <Field Name="Outstanding_InterestFormat">
+          <DataField>Outstanding_InterestFormat</DataField>
+        </Field>
+        <Field Name="Current_Shares">
+          <DataField>Current_Shares</DataField>
+        </Field>
+        <Field Name="Current_SharesFormat">
+          <DataField>Current_SharesFormat</DataField>
+        </Field>
+        <Field Name="PrincipleBF">
+          <DataField>PrincipleBF</DataField>
+        </Field>
+        <Field Name="PrincipleBFFormat">
+          <DataField>PrincipleBFFormat</DataField>
+        </Field>
+        <Field Name="LoanNumber">
+          <DataField>LoanNumber</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="RequestedAmount">
+          <DataField>RequestedAmount</DataField>
+        </Field>
+        <Field Name="RequestedAmountFormat">
+          <DataField>RequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+        </Field>
+        <Field Name="InterestFormat">
+          <DataField>InterestFormat</DataField>
+        </Field>
+        <Field Name="Installments">
+          <DataField>Installments</DataField>
+        </Field>
+        <Field Name="LoanPrincipleRepayment">
+          <DataField>LoanPrincipleRepayment</DataField>
+        </Field>
+        <Field Name="LoanPrincipleRepaymentFormat">
+          <DataField>LoanPrincipleRepaymentFormat</DataField>
+        </Field>
+        <Field Name="ApprovedAmount_Loans">
+          <DataField>ApprovedAmount_Loans</DataField>
+        </Field>
+        <Field Name="ApprovedAmount_LoansFormat">
+          <DataField>ApprovedAmount_LoansFormat</DataField>
+        </Field>
+        <Field Name="LoanProductTypeName_Loans">
+          <DataField>LoanProductTypeName_Loans</DataField>
+        </Field>
+        <Field Name="Repayment_Loans">
+          <DataField>Repayment_Loans</DataField>
+        </Field>
+        <Field Name="Repayment_LoansFormat">
+          <DataField>Repayment_LoansFormat</DataField>
+        </Field>
+        <Field Name="ModeofDisbursement_Loans">
+          <DataField>ModeofDisbursement_Loans</DataField>
+        </Field>
+        <Field Name="PostingDate_loan">
+          <DataField>PostingDate_loan</DataField>
+        </Field>
+        <Field Name="DocumentNo_loan">
+          <DataField>DocumentNo_loan</DataField>
+        </Field>
+        <Field Name="Description_loan">
+          <DataField>Description_loan</DataField>
+        </Field>
+        <Field Name="DebitAmount_Loan">
+          <DataField>DebitAmount_Loan</DataField>
+        </Field>
+        <Field Name="DebitAmount_LoanFormat">
+          <DataField>DebitAmount_LoanFormat</DataField>
+        </Field>
+        <Field Name="CreditAmount_Loan">
+          <DataField>CreditAmount_Loan</DataField>
+        </Field>
+        <Field Name="CreditAmount_LoanFormat">
+          <DataField>CreditAmount_LoanFormat</DataField>
+        </Field>
+        <Field Name="Amount_Loan">
+          <DataField>Amount_Loan</DataField>
+        </Field>
+        <Field Name="Amount_LoanFormat">
+          <DataField>Amount_LoanFormat</DataField>
+        </Field>
+        <Field Name="openBalance_loan">
+          <DataField>openBalance_loan</DataField>
+        </Field>
+        <Field Name="openBalance_loanFormat">
+          <DataField>openBalance_loanFormat</DataField>
+        </Field>
+        <Field Name="CLosingBalance_loan">
+          <DataField>CLosingBalance_loan</DataField>
+        </Field>
+        <Field Name="CLosingBalance_loanFormat">
+          <DataField>CLosingBalance_loanFormat</DataField>
+        </Field>
+        <Field Name="TransactionType_loan">
+          <DataField>TransactionType_loan</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="PrincipleBF_loans">
+          <DataField>PrincipleBF_loans</DataField>
+        </Field>
+        <Field Name="PrincipleBF_loansFormat">
+          <DataField>PrincipleBF_loansFormat</DataField>
+        </Field>
+        <Field Name="LoanType_loan">
+          <DataField>LoanType_loan</DataField>
+        </Field>
+        <Field Name="Loan_Description">
+          <DataField>Loan_Description</DataField>
+        </Field>
+        <Field Name="BalAccountNo_loan">
+          <DataField>BalAccountNo_loan</DataField>
+        </Field>
+        <Field Name="BankCodeLoan">
+          <DataField>BankCodeLoan</DataField>
+        </Field>
+        <Field Name="User7">
+          <DataField>User7</DataField>
+        </Field>
+        <Field Name="PostingDate_Interest">
+          <DataField>PostingDate_Interest</DataField>
+        </Field>
+        <Field Name="DocumentNo_Interest">
+          <DataField>DocumentNo_Interest</DataField>
+        </Field>
+        <Field Name="Description_Interest">
+          <DataField>Description_Interest</DataField>
+        </Field>
+        <Field Name="DebitAmount_Interest">
+          <DataField>DebitAmount_Interest</DataField>
+        </Field>
+        <Field Name="DebitAmount_InterestFormat">
+          <DataField>DebitAmount_InterestFormat</DataField>
+        </Field>
+        <Field Name="CreditAmount_Interest">
+          <DataField>CreditAmount_Interest</DataField>
+        </Field>
+        <Field Name="CreditAmount_InterestFormat">
+          <DataField>CreditAmount_InterestFormat</DataField>
+        </Field>
+        <Field Name="Amount_Interest">
+          <DataField>Amount_Interest</DataField>
+        </Field>
+        <Field Name="Amount_InterestFormat">
+          <DataField>Amount_InterestFormat</DataField>
+        </Field>
+        <Field Name="OpeningBalInt">
+          <DataField>OpeningBalInt</DataField>
+        </Field>
+        <Field Name="OpeningBalIntFormat">
+          <DataField>OpeningBalIntFormat</DataField>
+        </Field>
+        <Field Name="ClosingBalInt">
+          <DataField>ClosingBalInt</DataField>
+        </Field>
+        <Field Name="ClosingBalIntFormat">
+          <DataField>ClosingBalIntFormat</DataField>
+        </Field>
+        <Field Name="TransactionType_Interest">
+          <DataField>TransactionType_Interest</DataField>
+        </Field>
+        <Field Name="LoanNo_Interest">
+          <DataField>LoanNo_Interest</DataField>
+        </Field>
+        <Field Name="InterestBF">
+          <DataField>InterestBF</DataField>
+        </Field>
+        <Field Name="InterestBFFormat">
+          <DataField>InterestBFFormat</DataField>
+        </Field>
+        <Field Name="BalAccountNo_Interest">
+          <DataField>BalAccountNo_Interest</DataField>
+        </Field>
+        <Field Name="BankCodeInterest">
+          <DataField>BankCodeInterest</DataField>
+        </Field>
+        <Field Name="User8">
+          <DataField>User8</DataField>
+        </Field>
+        <Field Name="LoanNo_ApprovedAMount">
+          <DataField>LoanNo_ApprovedAMount</DataField>
+        </Field>
+        <Field Name="LoanNo_ApprovedAMountFormat">
+          <DataField>LoanNo_ApprovedAMountFormat</DataField>
         </Field>
         <Field Name="openBalances">
           <DataField>openBalances</DataField>
@@ -1533,6 +1771,192 @@ End Function
         </Field>
         <Field Name="USER1">
           <DataField>USER1</DataField>
+        </Field>
+        <Field Name="OpenBalancesHousingShares">
+          <DataField>OpenBalancesHousingShares</DataField>
+        </Field>
+        <Field Name="OpenBalancesHousingSharesFormat">
+          <DataField>OpenBalancesHousingSharesFormat</DataField>
+        </Field>
+        <Field Name="CLosingBalancesHousingShares">
+          <DataField>CLosingBalancesHousingShares</DataField>
+        </Field>
+        <Field Name="CLosingBalancesHousingSharesFormat">
+          <DataField>CLosingBalancesHousingSharesFormat</DataField>
+        </Field>
+        <Field Name="Description_HousingShares">
+          <DataField>Description_HousingShares</DataField>
+        </Field>
+        <Field Name="DocumentNo_HousingShares">
+          <DataField>DocumentNo_HousingShares</DataField>
+        </Field>
+        <Field Name="PostingDate_HousingShares">
+          <DataField>PostingDate_HousingShares</DataField>
+        </Field>
+        <Field Name="CreditAmount_HousingShares">
+          <DataField>CreditAmount_HousingShares</DataField>
+        </Field>
+        <Field Name="CreditAmount_HousingSharesFormat">
+          <DataField>CreditAmount_HousingSharesFormat</DataField>
+        </Field>
+        <Field Name="DebitAmount_HousingShares">
+          <DataField>DebitAmount_HousingShares</DataField>
+        </Field>
+        <Field Name="DebitAmount_HousingSharesFormat">
+          <DataField>DebitAmount_HousingSharesFormat</DataField>
+        </Field>
+        <Field Name="Amount_HousingShares">
+          <DataField>Amount_HousingShares</DataField>
+        </Field>
+        <Field Name="Amount_HousingSharesFormat">
+          <DataField>Amount_HousingSharesFormat</DataField>
+        </Field>
+        <Field Name="TransactionType_HousingShares">
+          <DataField>TransactionType_HousingShares</DataField>
+        </Field>
+        <Field Name="BalAccountNo_HousingShares">
+          <DataField>BalAccountNo_HousingShares</DataField>
+        </Field>
+        <Field Name="BankCodeHousingShares">
+          <DataField>BankCodeHousingShares</DataField>
+        </Field>
+        <Field Name="OpeningBal">
+          <DataField>OpeningBal</DataField>
+        </Field>
+        <Field Name="OpeningBalFormat">
+          <DataField>OpeningBalFormat</DataField>
+        </Field>
+        <Field Name="ClosingBal">
+          <DataField>ClosingBal</DataField>
+        </Field>
+        <Field Name="ClosingBalFormat">
+          <DataField>ClosingBalFormat</DataField>
+        </Field>
+        <Field Name="TransactionType_Deposits">
+          <DataField>TransactionType_Deposits</DataField>
+        </Field>
+        <Field Name="Amount_Deposits">
+          <DataField>Amount_Deposits</DataField>
+        </Field>
+        <Field Name="Amount_DepositsFormat">
+          <DataField>Amount_DepositsFormat</DataField>
+        </Field>
+        <Field Name="Description_Deposits">
+          <DataField>Description_Deposits</DataField>
+        </Field>
+        <Field Name="DocumentNo_Deposits">
+          <DataField>DocumentNo_Deposits</DataField>
+        </Field>
+        <Field Name="PostingDate_Deposits">
+          <DataField>PostingDate_Deposits</DataField>
+        </Field>
+        <Field Name="DebitAmount_Deposits">
+          <DataField>DebitAmount_Deposits</DataField>
+        </Field>
+        <Field Name="DebitAmount_DepositsFormat">
+          <DataField>DebitAmount_DepositsFormat</DataField>
+        </Field>
+        <Field Name="CreditAmount_Deposits">
+          <DataField>CreditAmount_Deposits</DataField>
+        </Field>
+        <Field Name="CreditAmount_DepositsFormat">
+          <DataField>CreditAmount_DepositsFormat</DataField>
+        </Field>
+        <Field Name="Deposits_Description">
+          <DataField>Deposits_Description</DataField>
+        </Field>
+        <Field Name="BalAccountNo_Deposits">
+          <DataField>BalAccountNo_Deposits</DataField>
+        </Field>
+        <Field Name="BankCodeDeposits">
+          <DataField>BankCodeDeposits</DataField>
+        </Field>
+        <Field Name="USER2">
+          <DataField>USER2</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755055">
+          <DataField>ReportForNavId_1102755055</DataField>
+        </Field>
+        <Field Name="OpenBalancesDividend">
+          <DataField>OpenBalancesDividend</DataField>
+        </Field>
+        <Field Name="OpenBalancesDividendFormat">
+          <DataField>OpenBalancesDividendFormat</DataField>
+        </Field>
+        <Field Name="CLosingBalancesDividend">
+          <DataField>CLosingBalancesDividend</DataField>
+        </Field>
+        <Field Name="CLosingBalancesDividendFormat">
+          <DataField>CLosingBalancesDividendFormat</DataField>
+        </Field>
+        <Field Name="Description_Dividend">
+          <DataField>Description_Dividend</DataField>
+        </Field>
+        <Field Name="DocumentNo_Dividend">
+          <DataField>DocumentNo_Dividend</DataField>
+        </Field>
+        <Field Name="PostingDate_Dividend">
+          <DataField>PostingDate_Dividend</DataField>
+        </Field>
+        <Field Name="CreditAmount_Dividend">
+          <DataField>CreditAmount_Dividend</DataField>
+        </Field>
+        <Field Name="CreditAmount_DividendFormat">
+          <DataField>CreditAmount_DividendFormat</DataField>
+        </Field>
+        <Field Name="DebitAmount_Dividend">
+          <DataField>DebitAmount_Dividend</DataField>
+        </Field>
+        <Field Name="DebitAmount_DividendFormat">
+          <DataField>DebitAmount_DividendFormat</DataField>
+        </Field>
+        <Field Name="Amount_Dividend">
+          <DataField>Amount_Dividend</DataField>
+        </Field>
+        <Field Name="Amount_DividendFormat">
+          <DataField>Amount_DividendFormat</DataField>
+        </Field>
+        <Field Name="TransactionType_Dividend">
+          <DataField>TransactionType_Dividend</DataField>
+        </Field>
+        <Field Name="BalAccountNo_Dividend">
+          <DataField>BalAccountNo_Dividend</DataField>
+        </Field>
+        <Field Name="BankCodeDividend">
+          <DataField>BankCodeDividend</DataField>
+        </Field>
+        <Field Name="USER3">
+          <DataField>USER3</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1000000042">
+          <DataField>ReportForNavId_1000000042</DataField>
+        </Field>
+        <Field Name="LoanNumb">
+          <DataField>LoanNumb</DataField>
+        </Field>
+        <Field Name="MembersNo">
+          <DataField>MembersNo</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="LBalance">
+          <DataField>LBalance</DataField>
+        </Field>
+        <Field Name="LBalanceFormat">
+          <DataField>LBalanceFormat</DataField>
+        </Field>
+        <Field Name="Shares">
+          <DataField>Shares</DataField>
+        </Field>
+        <Field Name="SharesFormat">
+          <DataField>SharesFormat</DataField>
+        </Field>
+        <Field Name="LoansGuaranteed">
+          <DataField>LoansGuaranteed</DataField>
+        </Field>
+        <Field Name="Substituted">
+          <DataField>Substituted</DataField>
         </Field>
       </Fields>
       <Query>

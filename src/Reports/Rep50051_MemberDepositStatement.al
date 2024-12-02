@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Report 50051 "Members Deposits Statement"
 {
+    ApplicationArea = All;
     RDLCLayout = './Layouts/MemberDepositsStatement.rdl';
-    ApplicationArea = all;
     UsageCategory = ReportsAndAnalysis;
 
     dataset
@@ -16,19 +16,23 @@ Report 50051 "Members Deposits Statement"
             column(Employer_Name; "Employer Name")
             {
             }
-            column(PayrollStaffNo_Members; TbMembReg."Payroll/Staff No")
+            column(PayrollStaffNo_Members; "Payroll/Staff No")
             {
             }
-            column(No_Members; TbMembReg."No.")
+            column(No_Members; "No.")
             {
             }
-            column(MobilePhoneNo_MembersRegister; TbMembReg."Mobile Phone No")
+            column(MobilePhoneNo_MembersRegister; "Mobile Phone No")
             {
             }
-            column(Name_Members; TbMembReg.Name)
+            column(Name_Members; Name)
             {
             }
-            column(EmployerCode_Members; TbMembReg."Employer Code")
+            column(Registration_Date; "Registration Date")
+            {
+
+            }
+            column(EmployerCode_Members; "Employer Code")
             {
             }
             column(EmployerName; EmployerName)
@@ -37,16 +41,16 @@ Report 50051 "Members Deposits Statement"
             column(PageNo_Members; CurrReport.PageNo)
             {
             }
-            column(Shares_Retained; TbMembReg."Shares Retained")
+            column(Shares_Retained; "Shares Retained")
             {
             }
             column(ShareCapBF; ShareCapBF)
             {
             }
-            column(IDNo_Members; TbMembReg."ID No.")
+            column(IDNo_Members; "ID No.")
             {
             }
-            column(GlobalDimension2Code_Members; TbMembReg."Global Dimension 2 Code")
+            column(GlobalDimension2Code_Members; "Global Dimension 2 Code")
             {
             }
             column(Company_Name; Company.Name)
@@ -67,7 +71,7 @@ Report 50051 "Members Deposits Statement"
             column(Company_Email; Company."E-Mail")
             {
             }
-            dataitem(Deposits; "Cust. Ledger Entry")
+            dataitem(Deposits; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
                 DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Deposit Contribution"), Reversed = filter(false));
@@ -80,7 +84,7 @@ Report 50051 "Members Deposits Statement"
                 column(TransactionType_Deposits; Deposits."Transaction Type")
                 {
                 }
-                column(Amount_Deposits; Deposits."Amount Posted")
+                column(Amount_Deposits; Deposits.Amount)
                 {
                 }
                 column(Description_Deposits; Deposits.Description)
@@ -113,15 +117,23 @@ Report 50051 "Members Deposits Statement"
 
                 trigger OnAfterGetRecord()
                 begin
-                    ClosingBal := ClosingBal - Deposits."Amount Posted";
+                    ClosingBal := ClosingBal - Deposits.Amount;
                     BankCodeDeposits := GetBankCode(Deposits);
                     //........................
-                    if Deposits."Amount Posted" < 0 then begin
-                        Deposits."Credit Amount" := (Deposits."Amount Posted" * -1);
+                    if Deposits.Amount < 0 then begin
+                        Deposits."Credit Amount" := (Deposits.Amount * -1);
                     end else
-                        if Deposits."Amount Posted" > 0 then begin
-                            Deposits."Debit Amount" := (Deposits."Amount Posted");
-                        end
+                        if Deposits.Amount > 0 then begin
+                            Deposits."Debit Amount" := (Deposits.Amount);
+                        end;
+
+                    MembLedgerEntry.Reset();
+                    MembLedgerEntry.SetRange("Customer No.", TbMembReg."No.");
+                    if MembLedgerEntry.Find('-') then
+                        if MembLedgerEntry.IsEmpty() then begin
+                            CurrReport.Skip();
+                        end;
+
                 end;
 
                 trigger OnPreDataItem()
@@ -143,7 +155,7 @@ Report 50051 "Members Deposits Statement"
                 column(TransactionType_Deposits; Deposits."Transaction Type")
                 {
                 }
-                column(Amount_Deposits; Deposits."Amount Posted")
+                column(Amount_Deposits; Deposits.Amount)
                 {
                 }
                 column(Description_Deposits; Deposits.Description)
@@ -176,14 +188,14 @@ Report 50051 "Members Deposits Statement"
 
                 // trigger OnAfterGetRecord()
                 // begin
-                //     ClosingBal := ClosingBal - Deposits."Amount Posted";
+                //     ClosingBal := ClosingBal - Deposits.Amount;
                 //     BankCodeDeposits := GetBankCode(Deposits);
                 //     //........................
-                //     if Deposits."Amount Posted" < 0 then begin
-                //         Deposits."Credit Amount" := (Deposits."Amount Posted" * -1);
+                //     if Deposits.Amount < 0 then begin
+                //         Deposits."Credit Amount" := (Deposits.Amount * -1);
                 //     end else
-                //         if Deposits."Amount Posted" > 0 then begin
-                //             Deposits."Debit Amount" := (Deposits."Amount Posted");
+                //         if Deposits.Amount > 0 then begin
+                //             Deposits."Debit Amount" := (Deposits.Amount);
                 //         end
                 // end;
 
@@ -197,7 +209,7 @@ Report 50051 "Members Deposits Statement"
             trigger OnAfterGetRecord()
             begin
                 SaccoEmp.Reset;
-                SaccoEmp.SetRange(SaccoEmp.Code, TbMembReg."Employer Code");
+                SaccoEmp.SetRange(SaccoEmp.Code, "Employer Code");
                 if SaccoEmp.Find('-') then
                     EmployerName := SaccoEmp.Description;
 
@@ -226,13 +238,13 @@ Report 50051 "Members Deposits Statement"
             trigger OnPreDataItem()
             begin
                 /*
-                IF TbMembReg.GETFILTER(TbMembReg."Date Filter") <> '' THEN
-                DateFilterBF:='..'+ FORMAT(CALCDATE('-1D',TbMembReg.GETRANGEMIN(TbMembReg."Date Filter")));
+                IF GETFILTER("Date Filter") <> '' THEN
+                DateFilterBF:='..'+ FORMAT(CALCDATE('-1D',GETRANGEMIN("Date Filter")));
                 */
 
-                if TbMembReg.GetFilter(TbMembReg."Date Filter") <> '' then
-                    DateFilterBF := '..' + Format(CalcDate('-1D', TbMembReg.GetRangeMin(TbMembReg."Date Filter")));
-                //DateFilterBF:='..'+ FORMAT(TbMembReg.GETRANGEMIN(TbMembReg."Date Filter"));
+                if GetFilter("Date Filter") <> '' then
+                    DateFilterBF := '..' + Format(CalcDate('-1D', GetRangeMin("Date Filter")));
+                //DateFilterBF:='..'+ FORMAT(GETRANGEMIN("Date Filter"));
 
             end;
         }
@@ -332,9 +344,10 @@ Report 50051 "Members Deposits Statement"
         ApprovedAmount_Interest: Decimal;
         LonRepaymentSchedule: Record "Loan Repayment Schedule";
         TbMembReg: Record "Member Register";
+        MembLedgerEntry: Record "Member Ledger Entry";
 
 
-    local procedure GetBankCode(MembLedger: Record "Cust. Ledger Entry"): Text
+    local procedure GetBankCode(MembLedger: Record "Member Ledger Entry"): Text
     var
         BankLedger: Record "Bank Account Ledger Entry";
     begin

@@ -1,9 +1,9 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Report 50223 "Member Detailed Statement"
 {
-    UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     RDLCLayout = './Layouts/MemberDetailedStatement.rdl';
+    UsageCategory = ReportsAndAnalysis;
 
     dataset
     {
@@ -45,6 +45,10 @@ Report 50223 "Member Detailed Statement"
             }
             column(IDNo_Members; "Member Register"."ID No.")
             {
+            }
+            column(Registration_Date; "Registration Date")
+            {
+
             }
             column(GlobalDimension2Code_Members; "Member Register"."Global Dimension 2 Code")
             {
@@ -109,10 +113,10 @@ Report 50223 "Member Detailed Statement"
                 column(ModeofDisbursement_Loans; Loans."Mode of Disbursement")
                 {
                 }
-                dataitem(loan; "Cust. Ledger Entry")
+                dataitem(loan; "Member Ledger Entry")
                 {
                     DataItemLink = "Customer No." = field("Client Code"), "Loan No" = field("Loan  No."), "Posting Date" = field("Date filter");
-                    DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter(Loan | Repayment), "Loan No" = filter(<> ''), Reversed = filter(false));
+                    DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter(Loan | "Loan Repayment"), "Loan No" = filter(<> ''), Reversed = filter(false));
                     column(PostingDate_loan; loan."Posting Date")
                     {
                     }
@@ -128,7 +132,7 @@ Report 50223 "Member Detailed Statement"
                     column(CreditAmount_Loan; loan."Credit Amount")
                     {
                     }
-                    column(Amount_Loan; loan."Amount Posted")
+                    column(Amount_Loan; loan."Amount to Apply") //Amount posted
                     {
                     }
                     column(openBalance_loan; OpenBalanceLoan)
@@ -164,14 +168,14 @@ Report 50223 "Member Detailed Statement"
 
                     trigger OnAfterGetRecord()
                     begin
-                        ClosingBalanceLoan := ClosingBalanceLoan - loan."Amount Posted";
+                        ClosingBalanceLoan := ClosingBalanceLoan - loan.Amount;
                         BankCodeLoan := GetBankCode(loan);
                         //.................................
-                        if loan."Amount Posted" < 0 then begin
-                            loan."Credit Amount" := (loan."Amount Posted" * -1);
+                        if loan.Amount < 0 then begin
+                            loan."Credit Amount" := (loan.Amount * -1);
                         end else
-                            if loan."Amount Posted" > 0 then begin
-                                loan."Debit Amount" := (loan."Amount Posted");
+                            if loan.Amount > 0 then begin
+                                loan."Debit Amount" := (loan.Amount);
                             end
 
                     end;
@@ -183,7 +187,7 @@ Report 50223 "Member Detailed Statement"
                         OpeningBalInt := InterestBF;
                     end;
                 }
-                dataitem(Interests; "Cust. Ledger Entry")
+                dataitem(Interests; "Member Ledger Entry")
                 {
                     DataItemLink = "Customer No." = field("Client Code"), "Loan No" = field("Loan  No."), "Posting Date" = field("Date filter");
                     DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter("Interest Due" | "Interest Paid"), "Loan No" = filter(<> ''), Reversed = filter(false));
@@ -204,7 +208,7 @@ Report 50223 "Member Detailed Statement"
                     column(CreditAmount_Interest; Interests."Credit Amount")
                     {
                     }
-                    column(Amount_Interest; Interests."Amount Posted")
+                    column(Amount_Interest; Interests.Amount)
                     {
                     }
                     column(OpeningBalInt; OpeningBalInt)
@@ -237,7 +241,7 @@ Report 50223 "Member Detailed Statement"
 
                     trigger OnAfterGetRecord()
                     begin
-                        ClosingBalInt := ClosingBalInt + Interests."Amount Posted";
+                        ClosingBalInt := ClosingBalInt + Interests.Amount;
                         BankCodeInterest := GetBankCode(Interests);
                         //...................Get TotalInterestDue
                         ApprovedAmount_Interest := 0;
@@ -250,11 +254,11 @@ Report 50223 "Member Detailed Statement"
                             until LonRepaymentSchedule.Next = 0;
                         end;
                         //..................
-                        if Interests."Amount Posted" < 0 then begin
-                            Interests."Credit Amount" := (Interests."Amount Posted" * -1);
+                        if Interests.Amount < 0 then begin
+                            Interests."Credit Amount" := (Interests.Amount * -1);
                         end else
-                            if Interests."Amount Posted" > 0 then begin
-                                Interests."Debit Amount" := (Interests."Amount Posted");
+                            if Interests.Amount > 0 then begin
+                                Interests."Debit Amount" := (Interests.Amount);
                             end
                     end;
 
@@ -290,10 +294,10 @@ Report 50223 "Member Detailed Statement"
                 end;
             }
 
-            dataitem(Share; "Cust. Ledger Entry")
+            dataitem(Share; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
-                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Shares Capital"), Reversed = filter(false));
+                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Share Capital"), Reversed = filter(false));
                 column(openBalances; OpenBalance)
                 {
                 }
@@ -315,7 +319,7 @@ Report 50223 "Member Detailed Statement"
                 column(DebitAmount_Shares; Share."Debit Amount")
                 {
                 }
-                column(Amount_Shares; Share."Amount Posted")
+                column(Amount_Shares; Share.Amount)
                 {
                 }
                 column(TransactionType_Shares; Share."Transaction Type")
@@ -336,14 +340,21 @@ Report 50223 "Member Detailed Statement"
 
                 trigger OnAfterGetRecord()
                 begin
-                    CLosingBalance := CLosingBalance - Share."Amount Posted";
+                    CLosingBalance := CLosingBalance - Share.Amount;
                     BankCodeShares := GetBankCode(Share);
                     //...................................
-                    if Share."Amount Posted" < 0 then begin
-                        Share."Credit Amount" := (Share."Amount Posted" * -1);
+                    if Share.Amount < 0 then begin
+                        Share."Credit Amount" := (Share.Amount * -1);
                     end else
-                        if Share."Amount Posted" > 0 then begin
-                            Share."Debit Amount" := (Share."Amount Posted");
+                        if Share.Amount > 0 then begin
+                            Share."Debit Amount" := (Share.Amount);
+                        end;
+
+                    MembLedgerEntry.Reset();
+                    MembLedgerEntry.SetRange("Customer No.", TbMembReg."No.");
+                    if MembLedgerEntry.Find('-') then
+                        if MembLedgerEntry.IsEmpty() then begin
+                            CurrReport.Skip();
                         end;
                 end;
 
@@ -354,10 +365,10 @@ Report 50223 "Member Detailed Statement"
                 end;
             }
 
-            dataitem(HousingShares; "Cust. Ledger Entry")
+            dataitem(HousingShares; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
-                DataItemTableView = sorting("Transaction Type", "Loan No", "Posting Date") where("Transaction Type" = const(Investment), Reversed = filter(false));
+                DataItemTableView = sorting("Transaction Type", "Loan No", "Posting Date") where("Transaction Type" = const("Benevolent Fund"), Reversed = filter(false)); //"Benevolent Fund" from Investment
 
                 column(OpenBalancesHousingShares; OpenBalancesHousingShares)
                 {
@@ -380,7 +391,7 @@ Report 50223 "Member Detailed Statement"
                 column(DebitAmount_HousingShares; HousingShares."Debit Amount")
                 {
                 }
-                column(Amount_HousingShares; HousingShares."Amount Posted")
+                column(Amount_HousingShares; HousingShares.Amount)
                 {
                 }
                 column(TransactionType_HousingShares; HousingShares."Transaction Type")
@@ -395,14 +406,14 @@ Report 50223 "Member Detailed Statement"
 
                 trigger OnAfterGetRecord()
                 begin
-                    ClosingBalanceHousingShares := ClosingBalanceHousingShares - HousingShares."Amount Posted";
+                    ClosingBalanceHousingShares := ClosingBalanceHousingShares - HousingShares.Amount;
                     BankCodeHousingShares := GetBankCode(HousingShares);
                     //............................................................
-                    if HousingShares."Amount Posted" < 0 then begin
-                        HousingShares."Credit Amount" := (HousingShares."Amount Posted" * -1);
+                    if HousingShares.Amount < 0 then begin
+                        HousingShares."Credit Amount" := (HousingShares.Amount * -1);
                     end else
-                        if HousingShares."Amount Posted" > 0 then begin
-                            HousingShares."Debit Amount" := (HousingShares."Amount Posted");
+                        if HousingShares.Amount > 0 then begin
+                            HousingShares."Debit Amount" := (HousingShares.Amount);
                         end
                 end;
 
@@ -439,7 +450,7 @@ Report 50223 "Member Detailed Statement"
             //     column(DebitAmount_PepeaShares; PepeaShares."Debit Amount")
             //     {
             //     }
-            //     column(Amount_PepeaShares; PepeaShares."Amount Posted")
+            //     column(Amount_PepeaShares; PepeaShares.Amount)
             //     {
             //     }
             //     column(TransactionType_PepeaShares; PepeaShares."Transaction Type")
@@ -454,14 +465,14 @@ Report 50223 "Member Detailed Statement"
 
             //     trigger OnAfterGetRecord()
             //     begin
-            //         ClosingBalancePepeaShares := ClosingBalancePepeaShares - PepeaShares."Amount Posted";
+            //         ClosingBalancePepeaShares := ClosingBalancePepeaShares - PepeaShares.Amount;
             //         BankCodePepeaShares := GetBankCode(PepeaShares);
             //         //............................................................
-            //         if PepeaShares."Amount Posted" < 0 then begin
-            //             PepeaShares."Credit Amount" := (PepeaShares."Amount Posted" * -1);
+            //         if PepeaShares.Amount < 0 then begin
+            //             PepeaShares."Credit Amount" := (PepeaShares.Amount * -1);
             //         end else
-            //             if PepeaShares."Amount Posted" > 0 then begin
-            //                 PepeaShares."Debit Amount" := (PepeaShares."Amount Posted");
+            //             if PepeaShares.Amount > 0 then begin
+            //                 PepeaShares."Debit Amount" := (PepeaShares.Amount);
             //             end
             //     end;
 
@@ -498,7 +509,7 @@ Report 50223 "Member Detailed Statement"
             //     column(DebitAmount_FOSAShares; FOSAShares."Debit Amount")
             //     {
             //     }
-            //     column(Amount_FOSAShares; FOSAShares."Amount Posted")
+            //     column(Amount_FOSAShares; FOSAShares.Amount)
             //     {
             //     }
             //     column(TransactionType_FOSAShares; FOSAShares."Transaction Type")
@@ -513,14 +524,14 @@ Report 50223 "Member Detailed Statement"
 
             //     trigger OnAfterGetRecord()
             //     begin
-            //         ClosingBalanceFOSAShares := ClosingBalanceFOSAShares - FOSAShares."Amount Posted";
+            //         ClosingBalanceFOSAShares := ClosingBalanceFOSAShares - FOSAShares.Amount;
             //         BankCodeFOSAShares := GetBankCode(FOSAShares);
             //         //............................................................
-            //         if FOSAShares."Amount Posted" < 0 then begin
-            //             FOSAShares."Credit Amount" := (FOSAShares."Amount Posted" * -1);
+            //         if FOSAShares.Amount < 0 then begin
+            //             FOSAShares."Credit Amount" := (FOSAShares.Amount * -1);
             //         end else
-            //             if FOSAShares."Amount Posted" > 0 then begin
-            //                 FOSAShares."Debit Amount" := (FOSAShares."Amount Posted");
+            //             if FOSAShares.Amount > 0 then begin
+            //                 FOSAShares."Debit Amount" := (FOSAShares.Amount);
             //             end
             //     end;
 
@@ -531,7 +542,7 @@ Report 50223 "Member Detailed Statement"
             //     end;
             // }
 
-            dataitem(Deposits; "Cust. Ledger Entry")
+            dataitem(Deposits; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
                 DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Deposit Contribution"), Reversed = filter(false));
@@ -544,7 +555,7 @@ Report 50223 "Member Detailed Statement"
                 column(TransactionType_Deposits; Deposits."Transaction Type")
                 {
                 }
-                column(Amount_Deposits; Deposits."Amount Posted")
+                column(Amount_Deposits; Deposits.Amount)
                 {
                 }
                 column(Description_Deposits; Deposits.Description)
@@ -578,14 +589,14 @@ Report 50223 "Member Detailed Statement"
                 trigger OnAfterGetRecord()
                 begin
 
-                    ClosingBal := ClosingBal - Deposits."Amount Posted";
+                    ClosingBal := ClosingBal - Deposits.Amount;
                     BankCodeDeposits := GetBankCode(Deposits);
                     //........................
-                    if Deposits."Amount Posted" < 0 then begin
-                        Deposits."Credit Amount" := (Deposits."Amount Posted" * -1);
+                    if Deposits.Amount < 0 then begin
+                        Deposits."Credit Amount" := (Deposits.Amount * -1);
                     end else
-                        if Deposits."Amount Posted" > 0 then begin
-                            Deposits."Debit Amount" := (Deposits."Amount Posted");
+                        if Deposits.Amount > 0 then begin
+                            Deposits."Debit Amount" := (Deposits.Amount);
                         end
                 end;
 
@@ -595,7 +606,7 @@ Report 50223 "Member Detailed Statement"
                     OpeningBal := SharesBF;
                 end;
             }
-            dataitem(Dividend; "Cust. Ledger Entry")//
+            dataitem(Dividend; "Member Ledger Entry")//
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
                 DataItemTableView = sorting("Transaction Type", "Loan No", "Posting Date") where("Transaction Type" = const(dividend), Reversed = filter(false));
@@ -641,7 +652,7 @@ Report 50223 "Member Detailed Statement"
 
                 trigger OnAfterGetRecord()
                 begin
-                    ClosingBalanceDividend := ClosingBalanceDividend - Dividend."Amount Posted";
+                    ClosingBalanceDividend := ClosingBalanceDividend - Dividend.Amount;
                     BankCodeDividend := GetBankCode(Dividend);
                 end;
 
@@ -822,8 +833,11 @@ Report 50223 "Member Detailed Statement"
         ApprovedAmount_Interest: Decimal;
         LonRepaymentSchedule: Record "Loan Repayment Schedule";
 
+        MembLedgerEntry: Record "Member Ledger Entry";
+        TbMembReg: Record "Member Register";
 
-    local procedure GetBankCode(MembLedger: Record "Cust. Ledger Entry"): Text
+
+    local procedure GetBankCode(MembLedger: Record "Member Ledger Entry"): Text
     var
         BankLedger: Record "Bank Account Ledger Entry";
     begin

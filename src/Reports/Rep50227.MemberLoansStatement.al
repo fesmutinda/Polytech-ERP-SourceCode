@@ -113,10 +113,10 @@ Report 50227 "Member Loans Statement"
                 column(ModeofDisbursement_Loans; Loans."Mode of Disbursement")
                 {
                 }
-                dataitem(loan; "Cust. Ledger Entry")
+                dataitem(loan; "Member Ledger Entry")
                 {
                     DataItemLink = "Customer No." = field("Client Code"), "Loan No" = field("Loan  No."), "Posting Date" = field("Date filter");
-                    DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter(Loan | Repayment), "Loan No" = filter(<> ''), Reversed = filter(false));
+                    DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter(Loan | "Loan Repayment"), "Loan No" = filter(<> ''), Reversed = filter(false));
                     column(PostingDate_loan; loan."Posting Date")
                     {
                     }
@@ -167,19 +167,45 @@ Report 50227 "Member Loans Statement"
                     }
 
                     trigger OnAfterGetRecord()
+                    var
+                        postingDateLoans: Date;
+                        transactionType: Text;
+                        docNo: Text;
+                        debitLoans: decimal;
+                        LoanRec: Record "Member Ledger Entry";
                     begin
 
-                        ClosingBalanceLoan := ClosingBalanceLoan - loan."Amount Posted";
+
+                        ClosingBalanceLoan := ClosingBalanceLoan - loan."Amount to Apply"; //
                         BankCodeLoan := GetBankCode(loan);
                         //.................................
-                        if loan."Amount Posted" < 0 then begin
-                            loan."Credit Amount" := (loan."Amount Posted" * -1);
+                        if loan."Amount to Apply" < 0 then begin
+                            loan."Credit Amount" := (loan."Amount to Apply" * -1);
                         end else
-                            if loan."Amount Posted" > 0 then begin
-                                loan."Debit Amount" := (loan."Amount Posted");
+                            if loan."Amount to Apply" > 0 then begin
+                                loan."Debit Amount" := (loan."Amount to Apply");
                             end;
                         //....................................Get Balance Ya corner
-                        RunningBal := RunningBal + loan."Amount Posted";
+                        RunningBal := RunningBal + loan."Amount to Apply";
+                        // end;
+
+
+                        //-------------------------------------------------------------------
+                        /* LoanRec.reset;
+                        LoanRec.SetFilter(LoanRec."Date filter", DateFilter);
+                        LoanRec.SetRange(LoanRec.Posted, true);
+                        //LoanRec.SetAutoCalcFields(LoanRec."Outstanding Balance");
+                        LoanRec.SetRange(LoanRec."Customer No.", "Loan No");
+                        IF LoanRec.Find('-') then begin
+                            repeat
+
+                            //..................................
+
+                            until LoanRec.Next = 0;
+                        end else
+                            CurrReport.Skip();
+                        VarNo := VarNo + 1; */
+
                     end;
 
                     trigger OnPreDataItem()
@@ -189,7 +215,7 @@ Report 50227 "Member Loans Statement"
                         OpeningBalInt := InterestBF;
                     end;
                 }
-                dataitem(Interests; "Cust. Ledger Entry")
+                dataitem(Interests; "Member Ledger Entry")
                 {
                     DataItemLink = "Customer No." = field("Client Code"), "Loan No" = field("Loan  No."), "Posting Date" = field("Date filter");
                     DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter("Interest Due" | "Interest Paid"), "Loan No" = filter(<> ''), Reversed = filter(false));
@@ -243,7 +269,7 @@ Report 50227 "Member Loans Statement"
 
                     trigger OnAfterGetRecord()
                     begin
-                        ClosingBalInt := ClosingBalInt + Interests."Amount Posted";
+                        ClosingBalInt := ClosingBalInt + Interests."Amount to Apply";
                         BankCodeInterest := GetBankCode(Interests);
                         //...................Get TotalInterestDue
                         ApprovedAmount_Interest := 0;
@@ -256,14 +282,14 @@ Report 50227 "Member Loans Statement"
                             until LonRepaymentSchedule.Next = 0;
                         end;
                         //..................
-                        if Interests."Amount Posted" < 0 then begin
-                            Interests."Credit Amount" := (Interests."Amount Posted" * -1);
+                        if Interests."Amount to Apply" < 0 then begin
+                            Interests."Credit Amount" := (Interests."Amount to Apply" * -1);
                         end else
-                            if Interests."Amount Posted" > 0 then begin
-                                Interests."Debit Amount" := (Interests."Amount Posted");
+                            if Interests."Amount to Apply" > 0 then begin
+                                Interests."Debit Amount" := (Interests."Amount to Apply");
                             end;
                         runningInt := 0;
-                        runningInt := runningInt + "Amount Posted";
+                        runningInt := runningInt + "Amount to Apply";
                     end;
 
                     trigger OnPreDataItem()
@@ -317,15 +343,13 @@ Report 50227 "Member Loans Statement"
                 if DateFilterBF <> '' then begin
                     Cust.Reset;
                     Cust.SetRange(Cust."Customer No.", "No.");
-                    //ABEL COMMENT
                     Cust.SetFilter(Cust."Date Filter", DateFilterBF);
-                    //ABEL COMMENT
                     if Cust.Find('-') then begin
-                        // Cust.CalcFields(Cust.sha, Cust."Current Shares", Cust."Insurance Fund", Cust."Holiday Savings");
-                        // SharesBF := Cust."Current Shares";
-                        // ShareCapBF := Cust."Shares Retained";
-                        // RiskBF := Cust."Insurance Fund";
-                        // HolidayBF := Cust."Holiday Savings";
+                        // MemberCalcFields(Membersha, Member"Current Shares", Member"Insurance Fund", Member"Holiday Savings");
+                        // SharesBF := Member"Current Shares";
+                        // ShareCapBF := Member"Shares Retained";
+                        // RiskBF := Member"Insurance Fund";
+                        // HolidayBF := Member"Holiday Savings";
                     end;
                 end;
             end;
@@ -373,7 +397,7 @@ Report 50227 "Member Loans Statement"
         CLosingBalance: Decimal;
         OpenBalanceXmas: Decimal;
         CLosingBalanceXmas: Decimal;
-        Cust: Record "Cust. Ledger Entry";
+        Cust: Record "Member Ledger Entry";
         OpeningBal: Decimal;
         ClosingBal: Decimal;
         FirstRec: Boolean;
@@ -442,7 +466,7 @@ Report 50227 "Member Loans Statement"
         LonRepaymentSchedule: Record "Loan Repayment Schedule";
 
 
-    local procedure GetBankCode(MembLedger: Record "Cust. Ledger Entry"): Text
+    local procedure GetBankCode(MembLedger: Record "Member Ledger Entry"): Text
     var
         BankLedger: Record "Bank Account Ledger Entry";
     begin
