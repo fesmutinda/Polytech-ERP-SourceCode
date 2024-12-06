@@ -18,7 +18,7 @@ Table 51495 "Loan trunch Disburesment"
         }
         field(2; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -123,7 +123,7 @@ Table 51495 "Loan trunch Disburesment"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoansRec: Record "Loans Register";
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;

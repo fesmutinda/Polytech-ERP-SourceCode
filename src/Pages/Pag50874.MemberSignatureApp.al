@@ -138,7 +138,7 @@ page 50874 "Member Signature-App"
         Rec.TestField("No.");
         //TESTFIELD(Description);
 
-        if Rec.Signature.Count > 0 then
+        if Rec.Signature.HasValue then// > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -157,7 +157,7 @@ page 50874 "Member Signature-App"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.Signature.Count <> 0;
+        DeleteExportEnabled := Rec.Signature.HasValue;// Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean

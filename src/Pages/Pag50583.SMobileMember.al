@@ -2,7 +2,7 @@
 page 50583 "S-Mobile Member"
 {
     PageType = List;
-    SourceTable = "Member Register";
+    SourceTable = Customer;
 
     layout
     {

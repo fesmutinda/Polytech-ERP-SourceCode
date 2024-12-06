@@ -20,7 +20,7 @@ Table 51521 "SwizzKash Applications"
         field(2; "Account No"; Code[30])
         {
             Editable = true;
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -131,6 +131,6 @@ Table 51521 "SwizzKash Applications"
     var
         SaccoNoSeries: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Accounts: Record "Member Register";
+        Accounts: Record Customer;
 }
 

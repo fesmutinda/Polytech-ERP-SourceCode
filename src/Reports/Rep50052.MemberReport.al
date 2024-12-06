@@ -6,7 +6,7 @@ Report 50052 MemberReport
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem("Member Register"; "Member Register")
+        dataitem(Customer; Customer)
         {
             DataItemTableView = sorting("No.") order(descending);
             RequestFilterFields = "No.", "Date Filter", Status;
@@ -97,5 +97,5 @@ Report 50052 MemberReport
         ShareCapital: Decimal;
         Deposits: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record "Member Register";
+        TbMembRegister: Record Customer;
 }

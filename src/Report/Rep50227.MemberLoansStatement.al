@@ -7,7 +7,7 @@ Report 50227 "Member Loans Statement"
 
     dataset
     {
-        dataitem(Customer; "Member Register")
+        dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.", "Loan Product Filter", "Outstanding Balance";
             column(Payroll_Staff_No; "Payroll/Staff No")

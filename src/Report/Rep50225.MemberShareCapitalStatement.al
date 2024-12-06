@@ -6,7 +6,7 @@ Report 50225 "Member Share Capital Statement"
 
     dataset
     {
-        dataitem(Customer; "Member Register")
+        dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.", "Loan Product Filter", "Outstanding Balance", "Date Filter";
             column(Payroll_Staff_No; "Payroll/Staff No")

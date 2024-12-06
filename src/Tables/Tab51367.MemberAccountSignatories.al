@@ -43,7 +43,7 @@ Table 51367 "Member Account Signatories"
         {
             Caption = 'Picture';
         }
-        field(10; Signature; MediaSet)
+        field(10; Signature; Media)
         {
             Caption = 'Signature';
         }
@@ -60,7 +60,7 @@ Table 51367 "Member Account Signatories"
         }
         field(14; "BOSA No."; Code[30])
         {
-            TableRelation = "Member Register"."No." where("Group Account" = filter(false),
+            TableRelation = Customer."No." where("Group Account" = filter(false),
                                                            "Global Dimension 1 Code" = filter('MICRO'),
                                                            "Group Account No" = field("Account No"));
 
@@ -129,6 +129,6 @@ Table 51367 "Member Account Signatories"
     end;
 
     var
-        CUST: Record "Member Register";
+        CUST: Record Customer;
 }
 

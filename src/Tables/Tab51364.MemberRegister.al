@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Table 51364 "Member Register"
+Table 51364 "Member Register Depricated"
 {
     Caption = 'Members Register';
     DataCaptionFields = "No.", Name;
@@ -224,7 +224,7 @@ Table 51364 "Member Register"
         field(33; "Invoice Disc. Code"; Code[20])
         {
             Caption = 'Invoice Disc. Code';
-            TableRelation = Customer;
+            TableRelation = "Member Register Depricated";
             //This property is currently not supported
             //TestTableRelation = false;
             ValidateTableRelation = false;
@@ -278,7 +278,7 @@ Table 51364 "Member Register"
         field(45; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
-            TableRelation = Customer;
+            TableRelation = "Member Register Depricated";
         }
         field(46; Priority; Integer)
         {
@@ -2327,7 +2327,7 @@ Table 51364 "Member Register"
         }
         field(69054; "Last Share Certificate No"; Integer)
         {
-            CalcFormula = max("Member Register"."Share Certificate No");
+            CalcFormula = max(Customer."Share Certificate No");
             FieldClass = FlowField;
         }
         field(69055; "No Of Days"; Integer)
@@ -2804,7 +2804,7 @@ Table 51364 "Member Register"
         }
         field(69159; "Group Account No"; Code[15])
         {
-            TableRelation = "Member Register"."No." where("Group Account" = filter(true));
+            TableRelation = Customer."No." where("Group Account" = filter(true));
         }
         field(69160; "FOSA Account"; Code[15])
         {
@@ -2849,20 +2849,20 @@ Table 51364 "Member Register"
         }
         field(69169; "No of Group Members"; Integer)
         {
-            CalcFormula = count("Member Register" where("Group Account No" = field("No.")));
+            CalcFormula = count(Customer where("Group Account No" = field("No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(69170; "No of Active Group Members"; Integer)
         {
-            CalcFormula = count("Member Register" where("Group Account No" = field("No."),
+            CalcFormula = count(Customer where("Group Account No" = field("No."),
                                                          Status = filter(Active)));
             Editable = false;
             FieldClass = FlowField;
         }
         field(69171; "No of Dormant Group Members"; Integer)
         {
-            CalcFormula = count("Member Register" where("Group Account No" = field("No."),
+            CalcFormula = count(Customer where("Group Account No" = field("No."),
                                                          Status = filter(Dormant)));
             Editable = false;
             FieldClass = FlowField;
@@ -2943,7 +2943,7 @@ Table 51364 "Member Register"
         }
         field(69189; "Referee Member No"; Code[15])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -3659,7 +3659,7 @@ Table 51364 "Member Register"
         GenSetUp: Record "Sacco General Set-Up";
         MinShares: Decimal;
         MovementTracker: Record "Movement Tracker";
-        Cust: Record "Member Register";
+        Cust: Record "Member Register Depricated";
         Vend: Record Vendor;
         CustFosa: Code[20];
         Vend2: Record Vendor;
@@ -3689,9 +3689,9 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure AssistEdit(OldCust: Record "Member Register"): Boolean
+    procedure AssistEdit(OldCust: Record Customer): Boolean
     var
-        Cust: Record "Member Register";
+        Cust: Record "Member Register Depricated";
     begin
         with Cust do begin
             Cust := Rec;
@@ -3744,7 +3744,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CheckBlockedMembOnDocs(Cust2: Record "Member Register"; DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"; Shipment: Boolean; Transaction: Boolean)
+    procedure CheckBlockedMembOnDocs(Cust2: Record "Member Register Depricated"; DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"; Shipment: Boolean; Transaction: Boolean)
     begin
         with Cust2 do begin
             if ((Blocked = Blocked::All) or
@@ -3759,7 +3759,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CheckBlockedMembOnJnls(Cust2: Record "Member Register"; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund; Transaction: Boolean)
+    procedure CheckBlockedMembOnJnls(Cust2: Record "Member Register Depricated"; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund; Transaction: Boolean)
     begin
         with Cust2 do begin
             if (Blocked = Blocked::All) or
@@ -3770,7 +3770,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CheckBlockedCustOnJnls(Cust2: Record "Member Register"; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge",Reminder,Refund; Transaction: Boolean)
+    procedure CheckBlockedCustOnJnls(Cust2: Record "Member Register Depricated"; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge",Reminder,Refund; Transaction: Boolean)
     begin
         with Cust2 do begin
             if (Blocked = Blocked::All) or
@@ -3781,7 +3781,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CustBlockedErrorMessage(Cust2: Record "Member Register"; Transaction: Boolean)
+    procedure CustBlockedErrorMessage(Cust2: Record "Member Register Depricated"; Transaction: Boolean)
     var
         "Action": Text[30];
     begin
@@ -3844,7 +3844,7 @@ Table 51364 "Member Register"
 
     procedure GetSalesLCY(): Decimal
     var
-        CustomerSalesYTD: Record "Member Register";
+        CustomerSalesYTD: Record "Member Register Depricated";
         AccountingPeriod: Record "Accounting Period";
         StartDate: Date;
         EndDate: Date;

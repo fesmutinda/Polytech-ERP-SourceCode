@@ -32,7 +32,7 @@ XmlPort 50012 "Export EFT"
                     if cust.Get("Loans Register"."Client Code") then begin
                         //"Loans Register"."Bank code" := cust."Bank Code";
                         "Loans Register"."Bank No" := cust."Bank Account No.";
-                        "Loans Register"."Bank Branch" := cust."Bank Branch";
+                        "Loans Register"."Bank Branch" := cust."Bank Branch Code";
                         "Loans Register".Modify;
                     end;
                 end;

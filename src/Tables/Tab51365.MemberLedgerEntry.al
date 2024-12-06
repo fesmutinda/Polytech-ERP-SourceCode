@@ -14,7 +14,7 @@ Table 51365 "Member Ledger Entry"
         field(3; "Customer No."; Code[20])
         {
             Caption = 'Customer No.';
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(4; "Posting Date"; Date)
         {

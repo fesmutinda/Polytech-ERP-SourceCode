@@ -62,6 +62,6 @@ Table 51489 "Online Users"
     }
 
     var
-        memb: Record "Member Register";
+        memb: Record Customer;
 }
 

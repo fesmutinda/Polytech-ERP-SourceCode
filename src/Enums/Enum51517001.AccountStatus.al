@@ -45,5 +45,6 @@ enum 51517001 "Account Status"
     {
         Caption = 'Defaulter';
     }
-    value(11; "Awaiting Exit") { }
+    value(11; "Awaiting Withdrawal") { Caption = 'Awaiting Withdrawal'; }
+    value(12; Applicant) { Caption = 'Applicant'; }
 }

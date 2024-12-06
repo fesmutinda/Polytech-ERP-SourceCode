@@ -48,7 +48,7 @@ Table 51432 "FOSA Account App Signatories"
         }
         field(12; "BOSA No."; Code[30])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(13; "Email Address"; Text[50])
         {

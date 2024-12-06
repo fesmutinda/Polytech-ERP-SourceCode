@@ -18,7 +18,7 @@ Table 51926 "Default Notices Register"
         }
         field(2; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -205,7 +205,7 @@ Table 51926 "Default Notices Register"
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjAccount: Record Vendor;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjLoans: Record "Loans Register";
         ObjSwizzsoft: Codeunit "Swizzsoft Factory.";
         VarAmountInArrears: Decimal;

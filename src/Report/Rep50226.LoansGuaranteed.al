@@ -7,7 +7,7 @@ Report 50226 "Loans Guaranteed"
 
     dataset
     {
-        dataitem(Members; "Member Register")
+        dataitem(Members; Customer)
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.";
@@ -181,9 +181,9 @@ Report 50226 "Loans Guaranteed"
 
     var
         Loans: Record "Loans Register";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Shares: Decimal;
-        Cust2: Record "Member Register";
+        Cust2: Record Customer;
         LoanGaurantors: Record "Loans Guarantee Details";
         LCount: Integer;
         A: Decimal;

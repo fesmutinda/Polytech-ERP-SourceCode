@@ -78,7 +78,7 @@ Table 51711 "Savings Guarantorship"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         SavBal: Decimal;
         Amont: Decimal;
         SwizzsoftFactory: Codeunit "Swizzsoft Factory.";

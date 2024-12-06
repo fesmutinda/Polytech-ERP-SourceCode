@@ -105,6 +105,6 @@ Page 56025 "Membership App Signatories"
     var
         MemberApp: Record "Membership Applications";
         ReltnShipTypeEditable: Boolean;
-        CUST: Record "Member Register";
+        CUST: Record Customer;
 }
 

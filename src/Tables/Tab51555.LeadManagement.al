@@ -674,7 +674,7 @@ Table 51555 "Lead Management"
         }
         field(5108; "member no"; Code[20])
         {
-            TableRelation = "Member Register";
+            TableRelation = Customer;
         }
         field(5109; "Lost Reasons"; Option)
         {
@@ -820,7 +820,7 @@ Table 51555 "Lead Management"
         }
         field(69188; "Referee Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -869,7 +869,7 @@ Table 51555 "Lead Management"
         LDSetup: Record "Crm General Setup.";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         PostCode: Integer;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         ObjEmployers: Record "Sacco Employers";
 }
 

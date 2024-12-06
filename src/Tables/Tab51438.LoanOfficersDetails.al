@@ -10,7 +10,7 @@ Table 51438 "Loan Officers Details"
         field(2; "Sales Code"; Code[10])
         {
             TableRelation = if ("Sales Code Type" = const(Staff)) "HR Employees"
-            else if ("Sales Code Type" = const(Others)) "Member Register";
+            else if ("Sales Code Type" = const(Others)) Customer;
 
             trigger OnValidate()
             begin
@@ -83,7 +83,7 @@ Table 51438 "Loan Officers Details"
             Caption = 'Account No.';
             TableRelation = if ("Account Type" = const(Staff)) "HR Employees"
             else if ("Account Type" = const(Customer)) Customer
-            else if ("Account Type" = const(Member)) "Member Register"
+            else if ("Account Type" = const(Member)) Customer
             else if ("Account Type" = const(Vendor)) Vendor;
 
             trigger OnValidate()
@@ -168,12 +168,12 @@ Table 51438 "Loan Officers Details"
 
     var
         HR: Record "HR Employees";
-        Custs: Record "Member Register";
+        Custs: Record Customer;
         GLAcc: Record "G/L Account";
         Cust: Record Customer;
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        Mem: Record "Member Register";
+        Mem: Record Customer;
 }
 

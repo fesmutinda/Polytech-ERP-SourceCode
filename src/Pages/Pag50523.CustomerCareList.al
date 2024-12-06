@@ -4,7 +4,7 @@ page 50523 "Customer Care List"
     CardPageID = "Customer Care Card";
     Editable = false;
     PageType = List;
-    SourceTable = "Member Register";
+    SourceTable = Customer;
 
     layout
     {

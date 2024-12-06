@@ -64,7 +64,7 @@ Table 51434 "Witness Details"
         }
         field(14; "BOSA No."; Code[30])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -109,7 +109,7 @@ Table 51434 "Witness Details"
     }
 
     var
-        CUST: Record "Member Register";
-        ObjMembers: Record "Member Register";
+        CUST: Record Customer;
+        ObjMembers: Record Customer;
 }
 

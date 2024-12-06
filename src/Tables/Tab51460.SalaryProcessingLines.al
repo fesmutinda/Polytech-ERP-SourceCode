@@ -11,7 +11,7 @@ Table 51460 "Salary Processing Lines"
         }
         field(2; "Account No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
             // TableRelation = Vendor."No." where ("Creditor Type"=const("Savings Account"));
             ValidateTableRelation = false;
 

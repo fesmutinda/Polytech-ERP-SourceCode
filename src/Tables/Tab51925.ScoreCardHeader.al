@@ -6,7 +6,7 @@ Table 51925 "Score Card Header"
     {
         field(1; "Member No"; Code[50])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin

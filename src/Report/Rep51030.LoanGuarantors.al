@@ -7,7 +7,7 @@ Report 51030 "Loan Guarantors"
 
     dataset
     {
-        dataitem(Members; "Member Register")
+        dataitem(Members; Customer)
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.";

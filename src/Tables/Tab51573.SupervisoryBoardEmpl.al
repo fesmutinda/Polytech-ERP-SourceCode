@@ -7,7 +7,7 @@ Table 51573 "Supervisory$Board$Empl"
         field(1; "Member No"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -43,6 +43,6 @@ Table 51573 "Supervisory$Board$Empl"
     }
 
     var
-        MemberRegister: Record "Member Register";
+        MemberRegister: Record Customer;
 }
 

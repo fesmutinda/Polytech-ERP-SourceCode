@@ -24,7 +24,7 @@ Table 51513 "Cheque Discounting"
         }
         field(4; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -269,8 +269,8 @@ Table 51513 "Cheque Discounting"
     end;
 
     var
-        Cust: Record "Member Register";
-        CustM: Record "Member Register";
+        Cust: Record Customer;
+        CustM: Record Customer;
         Account: Record Vendor;
         AccountTypes: Record "Account Types-Saving Products";
         ATMApp: Record "Members Nominee Temp";

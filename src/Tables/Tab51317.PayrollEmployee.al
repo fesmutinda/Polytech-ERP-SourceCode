@@ -436,7 +436,7 @@ Table 51317 "Payroll Employee."
         field(99; "Member No."; Code[15])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin

@@ -54,7 +54,7 @@ Table 51654 "Checkoff Lines-Distributed2"
         }
         field(16; "Member No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -362,6 +362,6 @@ Table 51654 "Checkoff Lines-Distributed2"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

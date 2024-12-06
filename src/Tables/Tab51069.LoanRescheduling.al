@@ -20,7 +20,7 @@ Table 51069 "Loan Rescheduling"
         field(2; "Member No"; Code[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Member Register"."No." where("Outstanding Balance" = filter(> 0));
+            TableRelation = Customer."No." where("Outstanding Balance" = filter(> 0));
         }
         field(3; "Loan No"; Code[30])
         {

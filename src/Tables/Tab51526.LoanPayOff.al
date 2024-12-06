@@ -18,7 +18,7 @@ Table 51526 "Loan PayOff"
         }
         field(2; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -106,6 +106,6 @@ Table 51526 "Loan PayOff"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

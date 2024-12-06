@@ -27,13 +27,13 @@ Table 51070 "Holiday Savings Table"
         }
         field(6; "Member Name"; Text[100])
         {
-            CalcFormula = lookup("Member Register".Name where("No." = field("Member No")));
+            CalcFormula = lookup(Customer.Name where("No." = field("Member No")));
             FieldClass = FlowField;
-            TableRelation = "Member Register".Name;
+            TableRelation = Customer.Name;
         }
         field(7; "Payroll No"; Code[100])
         {
-            CalcFormula = lookup("Member Register"."Personal No" where("No." = field("Member No")));
+            CalcFormula = lookup(Customer."Personal No" where("No." = field("Member No")));
             FieldClass = FlowField;
         }
     }

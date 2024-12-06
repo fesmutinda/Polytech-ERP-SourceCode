@@ -11,7 +11,7 @@ Table 51705 "Checkoff Advice Lines"
         }
         field(2; MemberNo; Code[15])
         {
-            TableRelation = "Member Register";
+            TableRelation = Customer;
         }
         field(3; "Employer Code"; Code[20])
         {

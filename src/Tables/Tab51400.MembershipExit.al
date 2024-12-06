@@ -18,7 +18,7 @@ Table 51400 "Membership Exit"
         }
         field(2; "Member No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -261,7 +261,7 @@ Table 51400 "Membership Exit"
         }
         field(30; "Sell Share Capital to"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -391,7 +391,7 @@ Table 51400 "Membership Exit"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Loans: Record "Loans Register";
         MemLed: Record "Member Ledger Entry";
         IntTotal: Decimal;

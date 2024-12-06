@@ -23,7 +23,7 @@ Table 51512 "Loan Collateral Register"
         }
         field(3; "Member No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -383,7 +383,7 @@ Table 51512 "Loan Collateral Register"
     var
         NoSeriesmgt: Codeunit NoSeriesManagement;
         SalesSetup: Record "Sacco No. Series";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         ObjFAPostingGroup: Record "FA Posting Group";
         ObjCollMovement: Record "Collateral Movement Register";
         ObjAccount: Record Vendor;

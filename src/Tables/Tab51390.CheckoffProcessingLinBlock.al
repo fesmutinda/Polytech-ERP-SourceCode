@@ -103,7 +103,7 @@ Table 51390 "Checkoff Processing Lin(Block)"
         }
         field(25; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No." where("Customer Type" = filter(Member));
+            TableRelation = Customer."No." where("Customer Type" = filter(Member));
 
             trigger OnValidate()
             begin
@@ -197,7 +197,7 @@ Table 51390 "Checkoff Processing Lin(Block)"
     end;
 
     var
-        memb: Record "Member Register";
+        memb: Record Customer;
         loans: Record "Loans Register";
 }
 

@@ -6,7 +6,7 @@ Table 51099 "Dividends Registerd"
     {
         field(1; "Member No"; Code[50])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(2; "Dividend year"; Code[50])
         {

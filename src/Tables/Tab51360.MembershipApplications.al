@@ -312,7 +312,7 @@ Table 51360 "Membership Applications"
         {
             OptionMembers = " ",Single,Married,Devorced,Widower,Widow;
         }
-        field(68015; Signature; MediaSet)
+        field(68015; Signature; Media)
         {
         }
         field(68016; "Passport No."; Code[50])
@@ -497,7 +497,7 @@ Table 51360 "Membership Applications"
         }
         field(68051; "Recruited By"; Code[30])
         {
-            TableRelation = if ("How Did you know of KANISA" = filter("Another Member")) "Member Register"."No.";
+            TableRelation = if ("How Did you know of KANISA" = filter("Another Member")) Customer."No.";
 
             trigger OnValidate()
             begin
@@ -578,7 +578,7 @@ Table 51360 "Membership Applications"
         field(68800; "Time Created"; Time) { }
         field(68065; "Assigned No."; Code[30])
         {
-            CalcFormula = lookup("Member Register"."No." where("ID No." = field("ID No.")));
+            CalcFormula = lookup(Customer."No." where("ID No." = field("ID No.")));
             FieldClass = FlowField;
         }
         field(68066; "Home Town"; Text[60])
@@ -908,7 +908,7 @@ Table 51360 "Membership Applications"
         }
         field(68140; "Group Account No"; Code[20])
         {
-            TableRelation = "Member Register"."No." where("Group Account" = filter(true));
+            TableRelation = Customer."No." where("Group Account" = filter(true));
 
             trigger OnValidate()
             begin
@@ -948,7 +948,7 @@ Table 51360 "Membership Applications"
         }
         field(68142; "BOSA Account No."; Code[20])
         {
-            TableRelation = "Member Register" where("Customer Posting Group" = filter('MEMBER'));
+            TableRelation = Customer where("Customer Posting Group" = filter('MEMBER'));
 
             trigger OnValidate()
             begin
@@ -1000,7 +1000,7 @@ Table 51360 "Membership Applications"
                     "Marital Status" := CustMember."Marital Status";
                     Gender := CustMember.Gender;
                     "E-Mail (Personal)" := CustMember."E-Mail";
-                    Picture := CustMember.Picture;
+                    Picture := CustMember.Image;
                     Signature := CustMember.Signature;
                     "Global Dimension 2 Code" := CustMember."Global Dimension 2 Code";
                     //"Member Category":=CustMember."Member Category";
@@ -1380,7 +1380,7 @@ Table 51360 "Membership Applications"
         }
         field(69217; "Guardian No."; Code[50])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
             DataClassification = ToBeClassified;
 
             trigger OnValidate()
@@ -1586,7 +1586,7 @@ Table 51360 "Membership Applications"
         GenSetUp: Record "Sacco General Set-Up";
         MinShares: Decimal;
         MovementTracker: Record "Movement Tracker";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Vend: Record Vendor;
         CustFosa: Code[20];
         Vend2: Record Vendor;
@@ -1606,7 +1606,7 @@ Table 51360 "Membership Applications"
         DAge: DateFormula;
         HREmployee: Record "HR Employees";
         DimValue: Record "Dimension Value";
-        CustMember: Record "Member Register";
+        CustMember: Record Customer;
         ObjMemberApplication: Record "Membership Applications";
         Section: Record Stations;
 

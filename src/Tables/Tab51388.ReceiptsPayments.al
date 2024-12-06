@@ -10,12 +10,12 @@ Table 51388 "Receipts & Payments"
         field(2; "Account No."; Code[30])
         {
             NotBlank = true;
-            TableRelation = if ("Account Type" = const(Member)) "Member Register"."No." where("Customer Type" = filter(Member))
+            TableRelation = if ("Account Type" = const(Member)) Customer."No." where("Customer Type" = filter(Member))
             else if ("Account Type" = const(Debtor)) Customer."No."
             else if ("Account Type" = const("G/L Account")) "G/L Account"."No."
-            else if ("Account Type" = const("FOSA Loan")) "Member Register"."No." where("Customer Type" = const(Member))
+            else if ("Account Type" = const("FOSA Loan")) Customer."No." where("Customer Type" = const(Member))
             // else if ("Account Type" = const(Vendor)) Vendor."No." where("Creditor Type" = filter("Savings Account"))
-            else if ("Account Type" = const(Micro)) "Member Register"."No." where("Customer Posting Group" = filter('MICRO'));
+            else if ("Account Type" = const(Micro)) Customer."No." where("Customer Posting Group" = filter('MICRO'));
 
             trigger OnValidate()
             begin
@@ -314,7 +314,7 @@ Table 51388 "Receipts & Payments"
         NoSeriesMgt: Codeunit NoSeriesManagement;
         BOSARcpt: Record "Receipts & Payments";
         GLAcct: Record "G/L Account";
-        Mem: Record "Member Register";
+        Mem: Record Customer;
         Vend: Record Vendor;
         GLAcc: Record "G/L Account";
         PayLine: Record "Payment Line";

@@ -1026,7 +1026,7 @@ Table 51850 "Mwanangu Savings Application"
         }
         field(68012; "BOSA Account No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -1050,7 +1050,7 @@ Table 51850 "Mwanangu Savings Application"
                     "Country/Region Code" := Cust."Country/Region Code";
                     "E-Mail" := Cust."E-Mail";
                     "ID No." := Cust."ID No.";
-                    Picture := Cust.Picture;
+                    Picture := Cust.Image;
                     "Marital Status" := Cust."Marital Status";
                     Signature := Cust.Signature;
                     "Formation/Province" := Cust."Formation/Province";
@@ -1109,7 +1109,7 @@ Table 51850 "Mwanangu Savings Application"
                 end;
             end;
         }
-        field(68013; Signature; MediaSet)
+        field(68013; Signature; Media)
         {
         }
         field(68014; "Passport No."; Code[50])
@@ -1452,7 +1452,7 @@ Table 51850 "Mwanangu Savings Application"
         }
         field(69184; "Referee Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -1698,7 +1698,7 @@ Table 51850 "Mwanangu Savings Application"
         AccountTypes: Record "Account Types-Saving Products";
         UsersID: Record User;
         FDType: Record "Fixed Deposit Type";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         NOKBOSA: Record "Members Nominee";
         NOKApp: Record "FOSA Account App Kin Details";
         GenSetUp: Record "Sacco General Set-Up";

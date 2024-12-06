@@ -11,7 +11,7 @@ Codeunit 50024 "Import Pictures Media"
         ObjMember.Reset;
         ObjMember.SetRange("No.", '');
 
-        if ObjMember.Picture.HasValue then// > 0 then
+        if ObjMember.Image.HasValue then// > 0 then
             /*IF NOT CONFIRM(OverrideImageQst) THEN
               ERROR('');*/
 
@@ -20,8 +20,8 @@ Codeunit 50024 "Import Pictures Media"
         if FileName = '' then
             Error('');
 
-        Clear(ObjMember.Picture);
-        ObjMember.Picture.ImportFile(FileName, ClientFileName);
+        Clear(ObjMember.Image);
+        ObjMember.Image.ImportFile(FileName, ClientFileName);
         if not ObjMember.Insert(true) then
             ObjMember.Modify(true);
 
@@ -33,6 +33,6 @@ Codeunit 50024 "Import Pictures Media"
         CameraAvailable: Boolean;
         DeleteExportEnabled: Boolean;
         HideActions: Boolean;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
 }
 

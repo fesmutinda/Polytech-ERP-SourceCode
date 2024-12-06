@@ -80,7 +80,7 @@ tableextension 56013 CustLedgerEntryExt extends "Cust. Ledger Entry"
         }
         field(68017; "Payroll No"; Code[15])
         {
-            CalcFormula = lookup("Member Register"."Personal No" where("No." = field("Customer No.")));
+            CalcFormula = lookup(Customer."Payroll/Staff No" where("No." = field("Customer No.")));
             FieldClass = FlowField;
             Editable = false;
         }

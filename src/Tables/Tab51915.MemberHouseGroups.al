@@ -102,7 +102,7 @@ Table 51915 "Member House Groups"
         }
         field(19; "No of Members"; Integer)
         {
-            CalcFormula = count("Member Register" where("Member House Group" = field("Cell Group Code")));
+            CalcFormula = count(Customer where("Member House Group" = field("Cell Group Code")));
             FieldClass = FlowField;
         }
         field(20; "Credit Officer"; Code[20])
@@ -173,6 +173,6 @@ Table 51915 "Member House Groups"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
 }
 

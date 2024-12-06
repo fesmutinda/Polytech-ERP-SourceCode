@@ -324,7 +324,7 @@ Table 51380 "Loan Calculator"
         }
         field(23; "Member No"; Code[20])
         {
-            TableRelation = "Member Register";
+            TableRelation = Customer;
 
             trigger OnValidate()
             begin
@@ -442,7 +442,7 @@ Table 51380 "Loan Calculator"
         LBalance: Decimal;
         BosaLoans: Record "Loans Register";
         FosaLoans: Record Vendor;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Psalary: Decimal;
         Msalary: Decimal;
 }

@@ -56,7 +56,7 @@ Table 51121 "CheckoffLinesDist poly"
         }
         field(16; "Member No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -669,6 +669,6 @@ Table 51121 "CheckoffLinesDist poly"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

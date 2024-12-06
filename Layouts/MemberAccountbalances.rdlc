@@ -97,12 +97,6 @@ End Function
         <Field Name="Outstanding_InterestFormat">
           <DataField>Outstanding_InterestFormat</DataField>
         </Field>
-        <Field Name="LikizoContribution">
-          <DataField>LikizoContribution</DataField>
-        </Field>
-        <Field Name="LikizoContributionFormat">
-          <DataField>LikizoContributionFormat</DataField>
-        </Field>
         <Field Name="ASAT">
           <DataField>ASAT</DataField>
         </Field>

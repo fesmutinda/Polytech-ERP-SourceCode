@@ -41,8 +41,8 @@ tableextension 50047 "CustomerExt" extends Customer
         }
         field(68000; "Customer Type"; Option)
         {
-
-            OptionMembers = " ",Member,Checkoff,Investments,Property,MicroFinance;
+            OptionCaption = ' ,Member,FOSA,Investments,Property,MicroFinance';
+            OptionMembers = " ",Member,FOSA,Investments,Property,MicroFinance;
         }
         field(68001; "Registration Date"; Date)
         {
@@ -90,13 +90,11 @@ tableextension 50047 "CustomerExt" extends Customer
             Editable = false;
             FieldClass = FlowField;
         }
-        field(68012; Status; enum "Account Status")
+        field(68012; Status; Option)
         {
-            trigger OnValidate()
-            begin
+            OptionCaption = 'Active,Non-Active,Blocked,Dormant,Re-instated,Deceased,Withdrawal,Retired,Termination,Resigned,Ex-Company,Casuals,Family Member,Defaulter,Applicant,Rejected,New,Awaiting Withdrawal';
+            OptionMembers = Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member",Defaulter,Applicant,Rejected,New,"Awaiting Withdrawal";
 
-
-            end;
         }
         field(68013; "FOSA Account"; Code[20])
         {
@@ -297,7 +295,7 @@ tableextension 50047 "CustomerExt" extends Customer
             Editable = false;
             FieldClass = FlowField;
         }
-        field(68047; "Holiday Monthly Contribution"; Decimal)
+        field(68047; "Holiday Contribution"; Decimal)
         {
 
             trigger OnValidate()
@@ -529,6 +527,10 @@ tableextension 50047 "CustomerExt" extends Customer
         field(68099; "Closure Remarks"; Text[40])
         {
         }
+        field(692145; "Bank Account Name"; Text[15])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(68100; "Bank Account No."; Code[120])
         {
         }
@@ -701,7 +703,7 @@ tableextension 50047 "CustomerExt" extends Customer
         field(68167; "Bank Name"; Text[160])
         {
         }
-        field(68168; "Bank Branch"; Text[60])
+        field(68168; "Bank Branch Code"; Text[60])
         {
         }
         field(68169; "Customer Paypoint"; Code[10])
@@ -1263,35 +1265,6 @@ tableextension 50047 "CustomerExt" extends Customer
         {
 
         }
-
-        field(69217; "Member Residency Status"; Text[20])
-        {
-            Description = 'What is the customer''s residency status?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter("Residency Status"));
-
-            ValidateTableRelation = false;
-        }
-        field(69218; "Individual Category"; Text[40])
-        {
-            Description = 'What is the customer category?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter(Individuals));
-
-            ValidateTableRelation = false;
-        }
-        field(69219; Entities; Text[35])
-        {
-            Description = 'What is the Entity Type?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter(Entities));
-
-            ValidateTableRelation = false;
-        }
-        field(69220; "Industry Type"; Text[40])
-        {
-            Description = 'What Is the Industry Type?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter(Industry));
-
-            ValidateTableRelation = false;
-        }
         field(69221; "Length Of Relationship"; Text[35])
         {
             Description = 'What Is the Lenght Of the Relationship';
@@ -1299,44 +1272,12 @@ tableextension 50047 "CustomerExt" extends Customer
 
             ValidateTableRelation = false;
         }
-        field(69222; "International Trade"; Text[35])
-        {
-            Description = 'Is the customer involved in International Trade?';
-            TableRelation = "Customer Risk Rating"."Sub Category" where(Category = filter("International Trade"));
 
-            ValidateTableRelation = false;
-        }
-        field(69223; "Electronic Payment"; Text[20])
-        {
-            Description = 'Does the customer engage in electronic payments?';
-            TableRelation = "Product Risk Rating"."Product Type Code" where("Product Category" = filter("Electronic Payment"));
-
-            ValidateTableRelation = false;
-        }
-        field(69209; IPRS; Code[20])
+        field(69322; IPRS; Code[20])
         {
 
         }
-        field(69224; "Accounts Type Taken"; Text[40])
-        {
-            Description = 'Which account type is the customer taking?';
-            TableRelation = "Product Risk Rating"."Product Type Code" where("Product Category" = filter(Accounts));
 
-            ValidateTableRelation = false;
-        }
-        field(69225; "Cards Type Taken"; Text[15])
-        {
-            Description = 'Which card is the customer taking?';
-            TableRelation = "Product Risk Rating"."Product Type Code" where("Product Category" = filter(Cards));
-
-            ValidateTableRelation = false;
-        }
-        field(69226; "Others(Channels)"; Text[40])
-        {
-            Description = 'Which products or channels is the customer taking?';
-            TableRelation = "Product Risk Rating"."Product Type Code" where("Product Category" = filter(Others));
-            ValidateTableRelation = false;
-        }
         field(69227; "Enquiries Made"; Integer)
         {
             CalcFormula = count("General Equiries." where("Calling For" = const(Enquiry), "Lead Status" = const(Closed), "Member No" = field("No.")));
@@ -1551,10 +1492,6 @@ tableextension 50047 "CustomerExt" extends Customer
         {
             DataClassification = ToBeClassified;
         }
-        field(69463; "Nature of Business"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
         field(69464; Age; Text[120])
         {
             DataClassification = ToBeClassified;
@@ -1576,16 +1513,356 @@ tableextension 50047 "CustomerExt" extends Customer
             FieldClass = FlowField;
         }
 
+        field(69202; "Personal No"; Code[20])
+        {
 
+            trigger OnValidate()
+            var
+                Vend: Record Vendor;
+            begin
+                Vend.Reset;
+                Vend.SetRange("BOSA Account No", "No.");
+                if Vend.Find('-') then begin
+                    Vend."Personal No." := "Personal No";
+                    Vend.Modify;
+                end
+            end;
+        }
+        field(69203; "Group Account No"; Code[15])
+        {
+            TableRelation = Customer."No." where("Group Account" = filter(true));
+        }
+        field(69204; "Nature Of Business"; Option)
+        {
+            OptionCaption = 'Sole Proprietorship, Partnership';
+            OptionMembers = "Sole Proprietorship"," Partnership";
+        }
+        field(69205; "FOSA Account No."; Code[20])
+        {
+            TableRelation = Vendor."No.";
+        }
+        field(69206; "Expected Monthly Income"; Decimal)
+        {
+        }
+        field(69207; "Industry Type"; Option)
+        {
+            Description = 'What Is the Industry Type?';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
+        }
+        field(69208; "Lenght Of Relationship"; Option)
+        {
+            Description = 'What Is the Lenght Of the Relationship';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 to 1 Year,1 to 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
+        }
+        field(69209; "International Trade"; Option)
+        {
+            Description = 'Is the customer involved in International Trade?';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
+        }
+        field(69210; "Electronic Payment"; Option)
+        {
+            Description = 'Does the customer engage in electronic payments?';
+            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
+            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        }
+        field(69211; "Accounts Type Taken"; Option)
+        {
+            Description = 'Which account type is the customer taking?';
+            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
+            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        }
+        field(69212; "Cards Type Taken"; Option)
+        {
+            Description = 'Which card is the customer taking?';
+            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
+            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        }
+        field(69213; "Others(Channels)"; Option)
+        {
+            Description = 'Which products or channels is the customer taking?';
+            OptionCaption = 'International Wire Transfers,Local Wire Transfers,Mobile Transfers,None of the Above,Fixed/Call Deposit Accounts,FOSA(KSA,Imara, MJA,Heritage),Account with Sealed Safe deposit,Account with  Open Safe Deposit,All Loan Accounts,BOSA, Ufalme,ATM Debit,Credit,Both,None,Non-face to face channels,Unsolicited Account Origination e.g. Walk-Ins,Cheque book,Others';
+            OptionMembers = "International Wire Transfers","Local Wire Transfers","Mobile Transfers","None of the Above","Fixed/Call Deposit Accounts","FOSA(KSA",Imara," MJA","Heritage)","Account with Sealed Safe deposit","Account with  Open Safe Deposit","All Loan Accounts",BOSA," Ufalme","ATM Debit",Credit,Both,"None","Non-face to face channels","Unsolicited Account Origination e.g. Walk-Ins","Cheque book",Others;
+        }
+        field(69214; "No of BD Trainings Attended"; Integer)
+        {
+            CalcFormula = count("CRM Traineees" where("Member No" = field("No."),
+                                                       Attended = filter(true)));
+            FieldClass = FlowField;
+        }
+        field(69216; "House Group Status"; Option)
+        {
+            OptionCaption = 'Active,Exiting the Group';
+            OptionMembers = Active,"Exiting the Group";
+        }
+        field(69217; "Member Residency Status"; Option)
+        {
+            Description = 'What is the customer''s residency status?';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
+        }
+        field(69218; "Individual Category"; Option)
+        {
+            Description = 'What is the customer category?';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
+        }
+        field(69219; Entities; Option)
+        {
+            Description = 'What is the Entity Type?';
+            OptionCaption = 'Politically Exposed Persons (PEPs),High Net worth,Other,Publicly Held Companies,Privately Held Companies,Domestic Government Entities,Churches,SMEs,Schools,Welfare Groups,Financial entities Regulated by local regulators,Resident,Non-Resident,Money Services Businesses,Charities and Non-Profit Organizations,Trusts,Real Estate Agencies,High Value Goods Businesses,Precious Metals Businesses,Cash Intensive Businesses,Art Galleries & related businesses,Professional Service Providers,None of the above industries,0 – 1 Year,1 – 3 Years,Trade/Export Finance,Local Trade';
+            OptionMembers = "Politically Exposed Persons (PEPs)","High Net worth",Other,"Publicly Held Companies","Privately Held Companies","Domestic Government Entities",Churches,SMEs,Schools,"Welfare Groups","Financial entities Regulated by local regulators",Resident,"Non-Resident","Money Services Businesses","Charities and Non-Profit Organizations",Trusts,"Real Estate Agencies","High Value Goods Businesses","Precious Metals Businesses","Cash Intensive Businesses","Art Galleries & related businesses","Professional Service Providers","None of the above industries","0 – 1 Year","1 – 3 Years","Trade/Export Finance","Local Trade";
+        }
+        field(69220; "Jiokoe Savings"; Decimal)
+        {
+            CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
+                                                                   "Transaction Type" = filter("Jiokoe Savings"),
+                                                                   "Posting Date" = field("Date Filter")));
+            FieldClass = FlowField;
+        }
+        field(69222; "Certificate No"; Code[20])
+        {
+        }
+        field(69300; "Member Share Class"; Option)
+        {
+            OptionCaption = ' ,Class A,Class B';
+            OptionMembers = " ","Class A","Class B";
+        }
+        field(69301; "Last Boosting Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(69302; "Member House Group"; Code[15])
+        {
+            TableRelation = "Member House Groups"."Cell Group Code";
+
+            trigger OnValidate()
+            var
+                ObjCellGroup: Record "Member House Groups";
+            begin
+                if ObjCellGroup.Get("Member House Group") then begin
+                    "Member House Group Name" := ObjCellGroup."Cell Group Name";
+                end;
+                /*CellGroups.RESET;
+                CellGroups.SETRANGE(CellGroups."Cell Group Code","Member Cell Group");
+                IF CellGroups.FIND('-') THEN BEGIN
+                "Member Cell Group Name":=CellGroups."Cell Group Name";
+                END;*/
+
+            end;
+        }
+        field(69303; "Member House Group Name"; Code[20])
+        {
+        }
+        field(69304; "No Of Group Members."; Integer)
+        {
+        }
+        field(69305; "Total Committed Shares"; Decimal)
+        {
+            CalcFormula = sum("Loans Guarantee Details"."Amont Guaranteed" where("Member No" = field("No."),
+                                                                                  "Outstanding Balance" = filter(<> 0)));
+            FieldClass = FlowField;
+        }
+        field(69306; "Existing Loan Repayments"; Decimal)
+        {
+            CalcFormula = sum("Loans Register".Repayment where("Client Code" = field("No.")));
+            FieldClass = FlowField;
+        }
+        field(69307; "Existing Fosa Loan Repayments"; Decimal)
+        {
+            CalcFormula = sum("Loans Register".Repayment where("Client Code" = field("FOSA Account No.")));
+            FieldClass = FlowField;
+        }
+        field(69308; Disabled; Boolean)
+        {
+        }
+        field(69309; TLoansGuaranteed; Decimal)
+        {
+            CalcFormula = sum("Loans Guarantee Details"."Amont Guaranteed" where("Member No" = field("No."),
+                                                                                  "Outstanding Balance" = filter(<> 0)));
+            FieldClass = FlowField;
+        }
+        field(69310; TLoansGuaranteedS; Decimal)
+        {
+            CalcFormula = sum("Loans Guarantee Details"."Amont Guaranteed" where("Member No" = field("No."),
+                                                                                  "Outstanding Balance" = filter(<> 0),
+                                                                                  "Self Guarantee" = filter(true)));
+            FieldClass = FlowField;
+        }
+        field(69311; "Member's Residence"; Code[25])
+        {
+        }
+        field(69312; "Date of Employment"; Date)
+        {
+        }
+        field(69313; "Position Held"; Code[15])
+        {
+        }
+        field(69314; Industry; Code[15])
+        {
+        }
+        field(69315; "Business Name"; Code[20])
+        {
+        }
+        field(69316; "Physical Business Location"; Code[15])
+        {
+        }
+        field(69317; "Year of Commence"; Date)
+        {
+        }
+        field(69318; "Identification Document"; Option)
+        {
+            OptionCaption = 'Nation ID Card,Passport Card,Aliens Card,Birth Certificate,Company Reg. No,Driving License';
+            OptionMembers = "Nation ID Card","Passport Card","Aliens Card","Birth Certificate","Company Reg. No","Driving License";
+        }
+        field(69319; "Referee Member No"; Code[15])
+        {
+            TableRelation = Customer."No.";
+
+            trigger OnValidate()
+            var
+                Cust: Record Customer;
+            begin
+                if Cust.Get("Referee Member No") then begin
+                    "Referee Name" := Cust.Name;
+                    "Referee Mobile Phone No" := Cust."Mobile Phone No";
+                    "Referee ID No" := Cust."ID No.";
+                end;
+            end;
+        }
+        field(69320; "Referee Name"; Code[30])
+        {
+            Editable = false;
+        }
+        field(69321; "Referee ID No"; Code[15])
+        {
+            Editable = false;
+        }
+        field(693221; "Referee Mobile Phone No"; Code[15])
+        {
+            Editable = false;
+        }
+        field(69323; "Email Indemnified"; Boolean)
+        {
+        }
+        field(69324; "Send E-Statements"; Boolean)
+        {
+        }
+        field(69325; "Terms Of Employment"; Option)
+        {
+            OptionCaption = ' ,Permanent,Temporary,Contract,Private,Probation';
+            OptionMembers = " ",Permanent,"Temporary",Contract,Private,Probation;
+        }
+        field(69326; "Employment Info"; Option)
+        {
+            OptionCaption = ' ,Employed,UnEmployed,Contracting,Others';
+            OptionMembers = " ",Employed,UnEmployed,Contracting,Others;
+        }
+        field(69327; "Joint Account Name"; Text[30])
+        {
+        }
+        field(69328; "Application No."; Code[10])
+        {
+        }
+        field(69329; "Member Category"; Option)
+        {
+            OptionCaption = 'New Application,Account Reactivation,Transfer';
+            OptionMembers = "New Application","Account Reactivation",Transfer;
+        }
+        field(69330; "Pension No"; Code[15])
+        {
+        }
+        field(69331; "Application Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(69332; "Created By"; Code[40])
+        {
+        }
+        field(69333; "Modified By"; Code[15])
+        {
+        }
+        field(69334; "Modified On"; Date)
+        {
+        }
+        field(69335; "Others Details"; Text[15])
+        {
+        }
+        field(69336; Products; Option)
+        {
+            OptionCaption = 'BOSA Account,BOSA+Current Account,BOSA+Smart Saver,BOSA+Fixed Deposit,Smart Saver Only,Current Only,Fixed  Deposit Only,Fixed+Smart Saver,Fixed+Current,Current+Smart Saver';
+            OptionMembers = "BOSA Account","BOSA+Current Account","BOSA+Smart Saver","BOSA+Fixed Deposit","Smart Saver Only","Current Only","Fixed  Deposit Only","Fixed+Smart Saver","Fixed+Current","Current+Smart Saver";
+        }
+        field(69337; "Additional Shares"; Decimal)
+        {
+            CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
+                                                                   "Posting Date" = field("Date Filter"),
+                                                                   "Document No." = field("Document No. Filter"),
+                                                                   "Transaction Type" = const("Additional Shares")));
+            FieldClass = FlowField;
+        }
+        field(69338; "Loans Recoverd from Guarantors"; Decimal)
+        {
+            CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
+                                                                   "Recovery Transaction Type" = filter("Guarantor Recoverd"),
+                                                                   "Document No." = field("Document No. Filter"),
+                                                                   "Posting Date" = field("Date Filter")));
+            FieldClass = FlowField;
+        }
+        field(69339; "Assigned System ID"; Code[15])
+        {
+            TableRelation = User."User Name";
+        }
+        field(69340; "Member Loan Liability"; Decimal)
+        {
+            CalcFormula = sum("Loans Guarantee Details"."Amont Guaranteed" where("Outstanding Balance" = filter(> 0),
+                                                                                  "Member No" = field("No.")));
+            FieldClass = FlowField;
+        }
+        field(69341; "Holiday Savings"; Decimal)
+        {
+            CalcFormula = - sum("Member Ledger Entry".Amount where("Transaction Type" = filter("Holiday Savings"),
+                                                                   "Customer No." = field("No."),
+                                                                   "Posting Date" = field("Date Filter")));
+            FieldClass = FlowField;
+        }
+        field(69342; "Risk Fund"; Decimal)
+        {
+            CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
+                                                                   "Transaction Type" = const("Benevolent Fund"),
+                                                                   "Posting Date" = field("Date Filter"),
+                                                                   "Document No." = field("Document No. Filter")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(69343; "Members Parish"; Code[10])
+        {
+            TableRelation = "Member's Parishes".Code;
+
+            trigger OnValidate()
+            var
+                Parishes: Record "Member's Parishes";
+            begin
+                Parishes.Reset;
+                Parishes.SetRange(Parishes.Code, "Members Parish");
+                if Parishes.Find('-') then begin
+                    "Parish Name" := Parishes.Description;
+                    "Member Share Class" := Parishes."Share Class";
+                end;
+            end;
+        }
+        field(69344; "Parish Name"; Text[10])
+        {
+        }
+        field(69345; colleges; Code[2])
+        {
+            DataClassification = ToBeClassified;
+            // TableRelation = "Checkoff Calender.".Field1;
+        }
 
     }
-
-    // [Scope('personalization')]
-    //  [EventSubscriber(ObjectType::Table, Table::21, 'OnAddressLineChanged', '', true, true)]
-    // procedure TestNoSeries()
-    // begin
-
-    // end;
 
 
 }

@@ -15,7 +15,7 @@ Table 51903 "M_Withdrawal Share Cap Sell"
         }
         field(4; "Buyer Member No"; Code[30])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -45,6 +45,6 @@ Table 51903 "M_Withdrawal Share Cap Sell"
     }
 
     var
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
 }
 

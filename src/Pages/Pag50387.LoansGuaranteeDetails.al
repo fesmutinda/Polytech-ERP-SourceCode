@@ -82,7 +82,7 @@ page 50387 "Loans Guarantee Details"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         EmployeeCode: Code[20];
         CStatus: Option Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member","New (Pending Confirmation)","Defaulter Recovery";
         LoanApps: Record "Loans Register";

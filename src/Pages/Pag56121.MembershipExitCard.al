@@ -301,7 +301,7 @@ Page 56121 "Membership Exit Card"
     var
         Closure: Integer;
         Text001: label 'Not Approved';
-        cust: Record "Member Register";
+        cust: Record Customer;
         UBFRefund: Decimal;
         Generalsetup: Record "Sacco General Set-Up";
         Totalavailable: Decimal;
@@ -342,7 +342,7 @@ Page 56121 "Membership Exit Card"
         Doc_Type: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"," ","Purchase Requisition",RFQ,"Store Requisition","Payment Voucher",MembershipApplication,LoanApplication,LoanDisbursement,ProductApplication,StandingOrder,MembershipWithdrawal,ATMCard,GuarantorRecovery,ChangeRequest,TreasuryTransactions,FundsTransfer,SaccoTransfers,ChequeDiscounting,ImprestRequisition,ImprestSurrender,LeaveApplication,BulkWithdrawal,PackageLodging,PackageRetrieval;
         PTEN: Text;
         DataSheet: Record "Data Sheet Main";
-        Customer: Record "Member Register";
+        Customer: Record Customer;
         GenSetUp: Record "Sacco General Set-Up";
         compinfo: Record "Company Information";
         SMSMessage: Record "SMS Messages";
@@ -359,9 +359,9 @@ Page 56121 "Membership Exit Card"
         JVBalAccountNo: Code[20];
         TransferFee: Decimal;
         AvailableBal: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         VarMemberAvailableAmount: Decimal;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjGensetup: Record "Sacco General Set-Up";
         VarWithdrawalFee: Decimal;
         VarTaxonWithdrawalFee: Decimal;
@@ -461,7 +461,7 @@ Page 56121 "Membership Exit Card"
         Doc_No: Code[20];
         DActivity: code[20];
         DBranch: Code[50];
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Generalsetup: Record "Sacco General Set-Up";
         RunningBal: Decimal;
         SFactory: Codeunit "Swizzsoft Factory";
@@ -602,7 +602,7 @@ Page 56121 "Membership Exit Card"
         Doc_No: Code[20];
         DActivity: code[20];
         DBranch: Code[50];
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Generalsetup: Record "Sacco General Set-Up";
         RunningBal: Decimal;
         SFactory: Codeunit "Swizzsoft Factory";

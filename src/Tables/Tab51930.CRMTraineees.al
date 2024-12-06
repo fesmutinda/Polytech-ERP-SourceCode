@@ -9,7 +9,7 @@ Table 51930 "CRM Traineees"
         }
         field(2; "Member No"; Code[30])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -55,7 +55,7 @@ Table 51930 "CRM Traineees"
     }
 
     var
-        Cust: Record "Member Register";
-        ObjCust: Record "Member Register";
+        Cust: Record Customer;
+        ObjCust: Record Customer;
 }
 

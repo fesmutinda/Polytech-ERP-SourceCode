@@ -11,7 +11,7 @@ Table 51429 "Loans Board Approvals"
         field(2; "Committee Member No."; Code[10])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Member Register"."No." where(colleges = const('1'));
+            TableRelation = Customer."No." where(colleges = const('1'));
         }
         field(3; Status; Option)
         {

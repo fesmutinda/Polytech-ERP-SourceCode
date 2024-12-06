@@ -14,7 +14,7 @@ Table 51372 "Loans Guarantee Details"
         field(2; "Member No"; Code[20])
         {
             NotBlank = false;
-            TableRelation = "Member Register"."No." where(Status = filter(Active | "Re-instated"));
+            TableRelation = Customer."No." where(Status = filter(Active | "Re-instated"));
 
             trigger OnValidate()
             var
@@ -448,7 +448,7 @@ Table 51372 "Loans Guarantee Details"
         }
         field(22; "Substituted Guarantor"; Code[80])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -627,7 +627,7 @@ Table 51372 "Loans Guarantee Details"
         MDeposit: Decimal;
         MAmounttoG: Decimal;
         MLoanReg: Record "Loans Register";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoanGuarantors: Record "Loans Guarantee Details";
         Loans: Record "Loans Register";
         LoansR: Record "Loans Register";
@@ -637,14 +637,14 @@ Table 51372 "Loans Guarantee Details"
         StatusPermissions: Record "Status Change Permision";
         Employer: Record "Sacco Employers";
         loanG: Record "Loans Guarantee Details";
-        CustomerRecord: Record "Member Register";
+        CustomerRecord: Record Customer;
         MemberSaccoAge: Date;
         ComittedShares: Decimal;
         LoanApp: Record "Loans Register";
         DefaultInfo: Text;
         ok: Boolean;
         SharesVariance: Decimal;
-        MemberCust: Record "Member Register";
+        MemberCust: Record Customer;
         LnGuarantor: Record "Loans Register";
         LoanApps: Record "Loans Register";
         Text0001: label 'This Member has an Outstanding Defaulter Loan which has never been serviced';

@@ -6,7 +6,7 @@ Report 50073 "Next of Kin Details Report"
 
     dataset
     {
-        dataitem("Members Register"; "Member Register")
+        dataitem("Members Register"; Customer)
         {
             RequestFilterFields = "No.", "Employer Code", Gender, "Registration Date", Status, "Current Shares", "Shares Retained", "Account Category";
             column(ReportForNavId_1000000000; 1000000000)

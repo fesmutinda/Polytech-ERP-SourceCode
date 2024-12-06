@@ -1165,7 +1165,7 @@ page 50561 "Loans Approved Card"
         ScheduleCode: Code[20];
         PreviewShedule: Record "Loan Repayment Schedule";
         PeriodInterval: Code[10];
-        CustomerRecord: Record "Member Register";
+        CustomerRecord: Record Customer;
         Gnljnline: Record "Gen. Journal Line";
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         CumInterest: Decimal;
@@ -1175,10 +1175,10 @@ page 50561 "Loans Approved Card"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoanApp: Record "Loans Register";
         TestAmt: Decimal;
-        CustRec: Record "Member Register";
+        CustRec: Record Customer;
         CustPostingGroup: Record "Customer Posting Group";
         GenSetUp: Record "Sales & Receivables Setup";
         PCharges: Record "Loan Product Charges";
@@ -1214,7 +1214,7 @@ page 50561 "Loans Approved Card"
         DActivity: Code[20];
         DBranch: Code[20];
         TotalTopupComm: Decimal;
-        CustE: Record "Member Register";
+        CustE: Record Customer;
         DocN: Text[50];
         DocM: Text[100];
         DNar: Text[250];
@@ -1229,7 +1229,7 @@ page 50561 "Loans Approved Card"
         DiscountingAmount: Decimal;
         StatusPermissions: Record "Status Change Permision";
         BridgedLoans: Record "Loan Special Clearance";
-        SMSMessage: Record "Member Register";
+        SMSMessage: Record Customer;
         InstallNo2: Integer;
         currency: Record "Currency Exchange Rate";
         CURRENCYFACTOR: Decimal;

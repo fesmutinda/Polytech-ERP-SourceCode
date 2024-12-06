@@ -31,11 +31,11 @@ Table 51552 "Change Request"
         }
         field(3; "Account No"; Code[50])
         {
-            TableRelation = if (Type = const("Backoffice Change")) "Member Register"."No."
+            TableRelation = if (Type = const("Backoffice Change")) Customer."No."
             else if (Type = const("Mobile Change")) Vendor."No."
             else if (Type = const("ATM Change")) Vendor."No."
             else if (Type = const("Agile Change")) Vendor."No." where("Vendor Posting Group" = filter(<> 'TCREDITORS'))
-            else if (Type = filter("Microfinance Change")) "Member Register"."No.";
+            else if (Type = filter("Microfinance Change")) Customer."No.";
 
             trigger OnValidate()
             begin
@@ -300,7 +300,7 @@ Table 51552 "Change Request"
         }
         field(52; "Group Account No"; Code[30])
         {
-            TableRelation = "Member Register"."No." where("Group Account" = filter(true));
+            TableRelation = Customer."No." where("Group Account" = filter(true));
         }
         field(53; "Group Account Name"; Code[30])
         {
@@ -511,7 +511,7 @@ Table 51552 "Change Request"
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         vend: Record Vendor;
-        Memb: Record "Member Register";
+        Memb: Record Customer;
         MemberCell: Record "Hexa Binary";
         MediaId: Guid;
 }

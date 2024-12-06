@@ -2,7 +2,7 @@
 page 50661 "Un Allocated Funds List"
 {
     PageType = List;
-    SourceTable = "Member Register";
+    SourceTable = Customer;
     SourceTableView = where("Un-allocated Funds" = filter(> 0));
 
     layout

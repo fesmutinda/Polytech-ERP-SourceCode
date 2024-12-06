@@ -41,7 +41,7 @@ Table 51363 "Member Group Details"
         }
         field(12; "BOSA No."; Code[30])
         {
-            TableRelation = "Member Register";
+            TableRelation = Customer;
 
             trigger OnValidate()
             begin
@@ -99,6 +99,6 @@ Table 51363 "Member Group Details"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

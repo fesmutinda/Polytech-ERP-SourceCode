@@ -6,7 +6,7 @@ Table 51319 "Payroll Employee Transactions."
     {
         field(9; "Sacco Membership No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(10; "No."; Code[20])
         {
@@ -235,7 +235,7 @@ Table 51319 "Payroll Employee Transactions."
         }
         field(43; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(44; "Loan Repayment Amount"; Decimal)
         {
@@ -287,7 +287,7 @@ Table 51319 "Payroll Employee Transactions."
         Loans: Record "Loans Register";
         HR: Record "Payroll Employee.";
         SCARD: Record "Payroll Employee.";
-        MEMB: Record "Member Register";
+        MEMB: Record Customer;
 
     local procedure FnGetInterestRate(LoanProductCode: Code[40]) InterestRate: Decimal
     var

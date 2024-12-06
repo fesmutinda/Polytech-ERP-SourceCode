@@ -7,7 +7,7 @@ page 50367 "Member Account Card"
     DeleteAllowed = false;
     PageType = Card;
     RefreshOnActivate = true;
-    SourceTable = "Member Register";
+    SourceTable = Customer;
 
     layout
     {
@@ -600,7 +600,7 @@ page 50367 "Member Account Card"
             CurrentAge := '';
             CurrentAge := Dates.DetermineAge(Rec."Date Of Birth", Today);
         end;
-        if rec."Account Category" = rec."Account Category"::Single then begin//end "Regular Account" then begin
+        if rec."Account Category" = rec."Account Category"::Individual then begin//end "Regular Account" then begin
             IsRegularAccount := true;
         end;
         if rec."Account Category" = rec."Account Category"::Corporate then begin

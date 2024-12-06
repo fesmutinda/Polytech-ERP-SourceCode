@@ -707,7 +707,7 @@ page 50382 "Receipts Header-BOSA"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;
         BOSARcpt: Record "Receipts & Payments";

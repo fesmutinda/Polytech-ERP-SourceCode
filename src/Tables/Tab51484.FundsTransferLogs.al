@@ -51,7 +51,7 @@ Table 51484 "Funds Transfer Logs"
         }
         field(6; "Member No"; Code[100])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(7; "No. Series"; Code[100])
         {

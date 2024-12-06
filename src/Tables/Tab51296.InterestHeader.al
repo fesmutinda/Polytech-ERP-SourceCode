@@ -185,6 +185,6 @@ Table 51296 "Interest Header"
         NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetup: Record "User Setup";
         NoSetup: Record "Sacco No. Series";
-        CUST: Record "Member Register";
+        CUST: Record Customer;
 }
 

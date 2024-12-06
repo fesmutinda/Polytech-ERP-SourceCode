@@ -9,7 +9,7 @@ Table 51560 "Member Agent Details"
         field(1; "Account No"; Code[20])
         {
             NotBlank = true;
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(2; Names; Text[50])
         {
@@ -43,7 +43,7 @@ Table 51560 "Member Agent Details"
         }
         field(12; "BOSA No."; Code[30])
         {
-            TableRelation = "Member Register";
+            TableRelation = Customer;
 
             trigger OnValidate()
             begin
@@ -145,7 +145,7 @@ Table 51560 "Member Agent Details"
     end;
 
     var
-        CUST: Record "Member Register";
+        CUST: Record Customer;
         NoSeriesmgt: Codeunit NoSeriesManagement;
         SalesSetup: Record "Sacco No. Series";
 }

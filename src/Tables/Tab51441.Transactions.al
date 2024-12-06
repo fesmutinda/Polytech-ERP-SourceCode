@@ -605,7 +605,7 @@ Table 51441 Transactions
         }
         field(78; "BOSA Account No"; Code[20])
         {
-            TableRelation = "Member Register"."No." where("Customer Type" = filter(Member | MicroFinance),
+            TableRelation = Customer."No." where("Customer Type" = filter(Member | MicroFinance),
                                                            Status = const(Active));
             ValidateTableRelation = false;
 
@@ -979,7 +979,7 @@ Table 51441 Transactions
         }
         field(62005; "Member No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -1727,7 +1727,7 @@ Table 51441 Transactions
         PaymentMethod: Record "Payment Method";
         TransactionTypes: Record "Transaction Types";
         Denominations: Record Denominations;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         i: Integer;
         PublicHoliday: Integer;
         weekday: Integer;

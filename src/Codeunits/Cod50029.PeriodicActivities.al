@@ -18,7 +18,7 @@ Codeunit 50029 "Periodic Activities"
         InterestAmount: Decimal;
         iEntryNo: Integer;
         Temp: Record "Funds User Setup";
-        CreditAccounts: Record "Member Register";
+        CreditAccounts: Record Customer;
         GenerationDate: Date;
         LoansRegisterTable: Record "Loans Register";
         ProductCode: Code[10];

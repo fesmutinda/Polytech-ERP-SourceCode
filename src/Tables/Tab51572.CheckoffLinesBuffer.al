@@ -54,7 +54,7 @@ Table 51572 "Checkoff Lines-Buffer"
         }
         field(16; "Member No."; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -348,6 +348,6 @@ Table 51572 "Checkoff Lines-Buffer"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

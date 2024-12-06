@@ -13,7 +13,7 @@ Table 51407 "BOSA TransferS Schedule"
             else if ("Source Type" = filter(Vendor)) Vendor."No."
             else if ("Source Type" = filter(Bank)) "Bank Account"."No."
             else if ("Source Type" = filter("G/L ACCOUNT")) "G/L Account"."No."
-            else if ("Source Type" = filter(MEMBER)) "Member Register"."No.";
+            else if ("Source Type" = filter(MEMBER)) Customer."No.";
 
             trigger OnValidate()
             begin
@@ -80,7 +80,7 @@ Table 51407 "BOSA TransferS Schedule"
             TableRelation = if ("Destination Account Type" = const(FOSA)) Vendor."No."
             else if ("Destination Account Type" = const(BANK)) "Bank Account"."No."
             else if ("Destination Account Type" = const("G/L ACCOUNT")) "G/L Account"."No."
-            else if ("Destination Account Type" = const(MEMBER)) "Member Register"."No.";
+            else if ("Destination Account Type" = const(MEMBER)) Customer."No.";
 
             trigger OnValidate()
             begin
@@ -235,11 +235,11 @@ Table 51407 "BOSA TransferS Schedule"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Vend: Record Vendor;
         Bank: Record "Bank Account";
         Bosa: Record "BOSA Transfers";
         "G/L": Record "G/L Account";
-        memb: Record "Member Register";
+        memb: Record Customer;
 }
 

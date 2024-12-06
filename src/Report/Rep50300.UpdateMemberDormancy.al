@@ -18,7 +18,7 @@ Report 50300 "Update Member Dormancy"
                 Lastdate: Date;
             begin
                 IF (Customer.Status = Customer.Status::Withdrawal) OR (Customer.Status = Customer.Status::Deceased)
-                 or (Customer.Status = Customer.Status::"Awaiting Exit") or (Customer.Status = Customer.Status::Blocked) THEN
+                 or (Customer.Status = Customer.Status::"Awaiting Withdrawal") or (Customer.Status = Customer.Status::Blocked) THEN
                     CurrReport.SKIP;
                 GenSetup.GET();
                 Cust.Reset();

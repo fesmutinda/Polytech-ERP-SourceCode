@@ -373,15 +373,15 @@ Table 51371 "Loans Register"
         }
         field(4; "Client Code"; Code[50])
         {
-            TableRelation = if (Source = const(BOSA)) "Member Register"."No." where(Status = filter(Active))
-            else if (Source = const(FOSA)) "Member Register"."No."
-            else if (Source = const(MICRO)) "Member Register"."No." where("Group Account" = field("Group Account"))
-            else if (Source = filter(" ")) "Member Register"."No.";
+            TableRelation = if (Source = const(BOSA)) Customer."No." where(Status = filter(Active))
+            else if (Source = const(FOSA)) Customer."No."
+            else if (Source = const(MICRO)) Customer."No." where("Group Account" = field("Group Account"))
+            else if (Source = filter(" ")) Customer."No.";
 
             trigger OnValidate()
             var
                 RefDate: Date;
-                MembReg: Record "Member Register";
+                MembReg: Record Customer;
             begin
                 //Sacco Deductions
                 //"Total Deductions":=("Monthly Contribution"+ "Loan Principle Repayment"+"Loan Interest Repayment");
@@ -2112,7 +2112,7 @@ Table 51371 "Loans Register"
         }
         field(68001; "BOSA No"; Code[20])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(68002; "Staff No"; Code[20])
         {
@@ -3380,7 +3380,7 @@ Table 51371 "Loans Register"
         field(69137; "Witnessed By"; Code[20])
         {
             Enabled = false;
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -3678,7 +3678,7 @@ Table 51371 "Loans Register"
         }
         field(69197; "Member Group"; Code[15])
         {
-            TableRelation = "Member Register"."No." where("Group Account" = filter(true));
+            TableRelation = Customer."No." where("Group Account" = filter(true));
 
             trigger OnValidate()
             begin
@@ -3837,7 +3837,7 @@ Table 51371 "Loans Register"
         }
         field(69216; "Group Account"; Boolean)
         {
-            TableRelation = "Member Register"."No." where("Customer Posting Group" = const('MICRO'),
+            TableRelation = Customer."No." where("Customer Posting Group" = const('MICRO'),
                                                             "Group Account" = const(true));
             trigger OnValidate()
             begin
@@ -4652,7 +4652,7 @@ Table 51371 "Loans Register"
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         LoanType: Record "Loan Products Setup";
-        CustomerRecord: Record "Member Register";
+        CustomerRecord: Record Customer;
         i: Integer;
         PeriodDueDate: Date;
         Gnljnline: Record "Gen. Journal Line";
@@ -4689,9 +4689,9 @@ Table 51371 "Loans Register"
         TCharges: Decimal;
         LAppCharges: Record "Loan Applicaton Charges";
         Vendor: Record Vendor;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Vend: Record Vendor;
-        Cust2: Record "Member Register";
+        Cust2: Record Customer;
         TotalMRepay: Decimal;
         LPrincipal: Decimal;
         LInterest: Decimal;
@@ -4706,7 +4706,7 @@ Table 51371 "Loans Register"
         Batches: Record "Loan Disburesment-Batching";
         MovementTracker: Record "Movement Tracker";
         SpecialComm: Decimal;
-        CustR: Record "Member Register";
+        CustR: Record Customer;
         RAllocation: Record "Receipt Allocation";
         "Standing Orders": Record "Standing Orders";
         StatusPermissions: Record "Status Change Permision";
@@ -4738,14 +4738,14 @@ Table 51371 "Loans Register"
         loannums: Integer;
         Enddates: Date;
         LoanTypes: Record "Loan Products Setup";
-        Customer: Record "Member Register";
+        Customer: Record Customer;
         DataSheet: Record "Data Sheet Main";
         Loans: Record "Loans Register";
         Chargeable: Decimal;
         Saccodeduct: Decimal;
         SaccoDedInt: Decimal;
         LoanAppeal: Record "Loans Register";
-        HREmp: Record "Member Register";
+        HREmp: Record Customer;
         LoansRec: Record "Loans Register";
         TotalLoanOutstanding: Decimal;
         LineNoG: Integer;
@@ -4755,7 +4755,7 @@ Table 51371 "Loans Register"
         Dates: Codeunit "Dates Calculation";
         ObjCellGroup: Record "Member House Groups";
         ObjGuarantors: Record "Loans Guarantee Details";
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjProductCharge: Record "Loan Product Charges";
         LInsurance: Decimal;
         ObjDepositHistory: Record "Member Deposits Saving History";
@@ -5476,7 +5476,7 @@ Table 51371 "Loans Register"
 
     local procedure FnCalculateQualifyingDeposits(EndDate: Date; MemberNo: Code[10])
     var
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         Datefilter: Text;
         QualifyingAmount: Decimal;
     begin
@@ -5484,7 +5484,7 @@ Table 51371 "Loans Register"
 
     local procedure fngetmonthlycontrib(MemberNo: Code[20]) Contrib: Decimal
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
     begin
 
         Contrib := 0;

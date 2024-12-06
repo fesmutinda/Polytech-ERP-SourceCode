@@ -730,7 +730,7 @@ page 50400 "BOSA Receipt Card"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;
         BOSARcpt: Record "Receipts & Payments";
@@ -974,7 +974,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -1013,7 +1013,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
     begin
         GenSetup.Get();
         if RunningBalance > 0 then begin
@@ -1051,7 +1051,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
     begin
         if RunningBalance > 0 then begin
             GenSetup.Get();
@@ -1089,7 +1089,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
     begin
         ObjMember.Reset;
         ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
@@ -1119,7 +1119,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
@@ -1166,7 +1166,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings";
@@ -1198,7 +1198,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
@@ -1231,7 +1231,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -1270,7 +1270,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
-        ObjMember: Record "Member Register";
+        ObjMember: Record Customer;
         RegFee: Decimal;
     begin
         /*IF RunningBalance > 0 THEN
@@ -1317,7 +1317,7 @@ page 50400 "BOSA Receipt Card"
         PDate: Date;
         LoanType: Record "Loan Products Setup";
         PostDate: Date;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LineNo: Integer;
         DocNo: Code[20];
         GenJournalLine: Record "Gen. Journal Line";
@@ -1337,7 +1337,7 @@ page 50400 "BOSA Receipt Card"
         Varbeginmonth: Date;
         DateTest: Date;
         VarAmount: Decimal;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         Date_OutBal: Date;
         OutBal: Decimal;
         BeginMonth_Date: Date;

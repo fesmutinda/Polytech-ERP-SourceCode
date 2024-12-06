@@ -18,7 +18,7 @@ Table 51945 "Fixed Deposit Placement"
         }
         field(2; "Member No"; Code[30])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
 
             trigger OnValidate()
             begin
@@ -209,6 +209,6 @@ Table 51945 "Fixed Deposit Placement"
         ObjGenSetup: Record "Sacco General Set-Up";
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
 }
 

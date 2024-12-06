@@ -45,7 +45,7 @@ Table 51507 "Account Agents App Details"
         }
         field(12; "BOSA No."; Code[30])
         {
-            TableRelation = "Member Register";
+            TableRelation = Customer;
         }
         field(13; "Email Address"; Text[50])
         {
