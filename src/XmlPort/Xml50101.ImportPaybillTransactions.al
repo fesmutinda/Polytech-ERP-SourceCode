@@ -19,7 +19,7 @@ XmlPort 50101 "Import Paybill Transactions"
                 fieldelement(Amount; "Cust. Ledger Entry".Amount)
                 {
                 }
-                fieldelement(Header_No; "Cust. Ledger Entry"."Transaction Type2")
+                fieldelement(Header_No; "Cust. Ledger Entry"."Transaction Type")
                 {
                 }
                 fieldelement(Transaction_No; "Cust. Ledger Entry"."Posting Date")

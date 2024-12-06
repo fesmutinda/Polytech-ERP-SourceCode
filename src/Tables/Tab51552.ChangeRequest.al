@@ -180,8 +180,8 @@ Table 51552 "Change Request"
         }
         field(17; Status; Option)
         {
-            OptionCaption = 'Open,Pending,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            OptionCaption = 'Open,"Pending Approval",Approved,Rejected';
+            OptionMembers = Open,"Pending Approval",Approved,Rejected;
         }
         field(18; "Account Type"; Code[30])
         {

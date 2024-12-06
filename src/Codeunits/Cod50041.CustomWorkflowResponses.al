@@ -461,7 +461,7 @@ codeunit 50041 "Custom Workflow Responses"
             Database::"Change Request":
                 begin
                     RecRef.SetTable(ChangeRequest);
-                    ChangeRequest.Validate(Status, ChangeRequest.Status::Pending);
+                    ChangeRequest.Validate(Status, ChangeRequest.Status::"Pending Approval");
                     ChangeRequest.Modify(true);
                     IsHandled := true;
                 end;
@@ -601,7 +601,7 @@ codeunit 50041 "Custom Workflow Responses"
             Database::"Change Request":
                 begin
                     RecRef.SetTable(ChangeRequest);
-                    ChangeRequest.Validate(status, ChangeRequest.Status::Pending);
+                    ChangeRequest.Validate(status, ChangeRequest.Status::"Pending Approval");
                     ChangeRequest.Modify(true);
                     Variant := ChangeRequest;
                 end;

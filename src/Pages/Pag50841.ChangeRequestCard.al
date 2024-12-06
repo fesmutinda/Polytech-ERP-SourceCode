@@ -965,7 +965,7 @@ page 50841 "Change Request Card"
             TypeEditable := true;
             AccountCategoryEditable := true
         end else
-            if Rec.Status = Rec.Status::Pending then begin
+            if Rec.Status = Rec.Status::"Pending Approval" then begin
                 NameEditable := false;
                 PictureEditable := false;
                 SignatureEditable := false;
