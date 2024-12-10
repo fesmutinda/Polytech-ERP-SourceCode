@@ -46,7 +46,7 @@ Codeunit 50009 "Swizzsoft Factory"
         BAND3: Decimal;
         BAND4: Decimal;
         BAND5: Decimal;
-        ObjMembershipWithdrawal: Record 51400;
+        ObjMembershipWithdrawal: Record "Membership Exist"; //from MembershipExit
         ObjSalesSetup: Record 51399;
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjNoSeriesManagement: Codeunit NoSeriesManagement;

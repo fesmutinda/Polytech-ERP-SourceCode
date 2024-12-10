@@ -1,8 +1,8 @@
 /* Report 50057 "MemberWithoutNextOfKin"
 {
     ApplicationArea = All;
-    Caption = 'Members without Next report.';
-    RDLCLayout = './Layouts/MemberWithoutNextOfKin.rdlc';
+    Caption = 'Members Without Next report.';
+    RDLCLayout = './Layouts/MemberWithoutNextOfKin.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

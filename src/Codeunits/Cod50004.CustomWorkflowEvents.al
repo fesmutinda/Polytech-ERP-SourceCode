@@ -13,7 +13,7 @@ codeunit 50004 "Custom Workflow Events"
         //SurestepWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
-    //[EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
 
     procedure AddWorkflowEventsToLibrary()
     begin
@@ -31,7 +31,7 @@ codeunit 50004 "Custom Workflow Events"
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMemberReapplicationForApprovalCode,
                             Database::"Member Reapplication", 'Approval of Membership RE-Application is Requested.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelMemberReapplicationApprovalRequestCode,
-                                    Database::"Member Reapplication", 'An Approval request for  Re-Membership Application is canceled.', 0, false);
+                                    Database::"Member Reapplication", 'An Approval request for Re-Membership Application is canceled.', 0, false);
         //-----Member exit
         WFHandler.AddEventToLibrary(RunWorkflowOnSendMembershipExitApplicationForApprovalCode,
         Database::"Membership Exist", 'Approval of Membership Exit is Requested.', 0, false);
@@ -109,7 +109,7 @@ codeunit 50004 "Custom Workflow Events"
         //-------------------------------------------End Approval Events-------------------------------------------------------------
     end;
 
-    //[EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
     local procedure AddWorkflowEventPredecessorsToLibrary()
     begin
         //--------1.Approval,Rejection,Delegation Predecessors----------------------
@@ -131,11 +131,11 @@ codeunit 50004 "Custom Workflow Events"
 
         //Membership withdrawal
 
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendMembershipExitApplicationForApprovalCode);
 
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnRejectApprovalRequestCode, RunWorkflowOnSendMembershipExitApplicationForApprovalCode);
 
-        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMembershipApplicationForApprovalCode);
+        WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendMembershipExitApplicationForApprovalCode);
 
         //2. Loan Application
         WFHandler.AddEventPredecessor(WFHandler.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendLoanApplicationForApprovalCode);
@@ -248,6 +248,7 @@ codeunit 50004 "Custom Workflow Events"
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnCancelMembershipApplicationApprovalRequestCode, MembershipApplication);
     end;
+
     //1)Membership Exit Application
     procedure RunWorkflowOnSendMembershipExitApplicationForApprovalCode(): Code[128]//
     begin
@@ -264,7 +265,7 @@ codeunit 50004 "Custom Workflow Events"
 
     procedure RunWorkflowOnSendMembershipExitApplicationForApproval(var "Membership Exist": Record "Membership Exist")
     begin
-        WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipApplicationForApprovalCode, "Membership Exist");
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendMembershipExitApplicationForApprovalCode, "Membership Exist");
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::SurestepApprovalsCodeUnit, 'FnOnCancelMembershipExitApplicationApprovalRequest', '', false, false)]
@@ -273,6 +274,7 @@ codeunit 50004 "Custom Workflow Events"
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode, "Membership Exist");
     end;
+
     //2. Loan Applications
     procedure RunWorkflowOnSendLoanApplicationForApprovalCode(): Code[128]//
     begin

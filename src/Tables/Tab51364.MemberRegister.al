@@ -1813,7 +1813,7 @@ Table 51364 "Member Register"
         field(68066; "Withdrawal Posted"; Boolean)
         {
         }
-        field(68069; "Loan No. Filter"; Code[10])
+        field(68069; "Loan No. Filter"; Code[20])
         {
             FieldClass = FlowFilter;
             TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("No."));

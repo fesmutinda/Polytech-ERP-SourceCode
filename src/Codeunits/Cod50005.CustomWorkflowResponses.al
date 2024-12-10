@@ -12,13 +12,14 @@ Codeunit 50005 "Custom Workflow Responses" //FROM 50041
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
 
-    /* procedure AddResponsesToLib()
+    procedure AddResponsesToLib()
     begin
-    end; */
+        OnAddWorkflowResponsePredecessorsToLibrary()
+    end;
 
-    //[EventSubscriber(ObjectType::Codeunit, 1521, 'OnAddWorkflowResponsePredecessorsToLibrary', '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, 1521, 'OnAddWorkflowResponsePredecessorsToLibrary', '', false, false)]
 
-    procedure AddResponsePredecessors()
+    procedure OnAddWorkflowResponsePredecessorsToLibrary()
     begin
 
         //Payment Header
@@ -45,16 +46,29 @@ Codeunit 50005 "Custom Workflow Responses" //FROM 50041
         WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
                                                  SwizzsoftWFEvents.RunWorkflowOnCancelMembershipApplicationApprovalRequestCode);
         //Loan Application
-        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
-        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
-        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
-        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
-        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
-        //                                          SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
-        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
-        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
-        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
-        //                                          SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendLoanApplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnCancelLoanApplicationApprovalRequestCode);
+
+        // Membership Reapplication
+        //Membership Application
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendMemberReapplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendMemberReapplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendMemberReapplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMembershipApplicationApprovalRequestCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMembershipApplicationApprovalRequestCode);
 
         //Loan Disbursement
         // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
@@ -93,6 +107,22 @@ Codeunit 50005 "Custom Workflow Responses" //FROM 50041
         //                                          SwizzsoftWFEvents.RunWorkflowOnCancelMWithdrawalApprovalRequestCode);
         // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
         //                                          SwizzsoftWFEvents.RunWorkflowOnCancelMWithdrawalApprovalRequestCode);
+
+
+        //Membership Exit
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendMembershipExitApplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CreateApprovalRequestsCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendMembershipExitApplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SendApprovalRequestForApprovalCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnSendMembershipExitApplicationForApprovalCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.OpenDocumentCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode);
+        WFResponseHandler.AddResponsePredecessor(WFResponseHandler.CancelAllApprovalRequestsCode,
+                                                 SwizzsoftWFEvents.RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode);
+        // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.ReleaseDocumentCode,
+        //                                                  SwizzsoftWFEvents.RunWorkflowOnCancelMembershipExitApplicationApprovalRequestCode);
+
 
         //ATM Card Application
         // WFResponseHandler.AddResponsePredecessor(WFResponseHandler.SetStatusToPendingApprovalCode,
@@ -414,6 +444,32 @@ Codeunit 50005 "Custom Workflow Responses" //FROM 50041
             MembershipApp.Modify;
         end;
     end;
+
+    procedure ReleaseMembershipExit(var MembershipExt: Record "Membership Exist")
+    var
+    //MembershipExt: Record "Membership Exist";
+    begin
+
+        MembershipExt.Reset;
+        MembershipExt.SetRange(MembershipExt."No.", MembershipExt."No.");
+        if MembershipExt.FindFirst then begin
+            MembershipExt.Status := MembershipExt.Status::Approved;
+            MembershipExt.Modify;
+        end;
+    end;
+
+
+    procedure ReOpenMembershipExit(MembershipApp: Record "Membership Exist")
+
+    begin
+        MembershipApp.Reset;
+        MembershipApp.SetRange(MembershipApp."No.", MembershipApp."No.");
+        if MembershipApp.FindFirst then begin
+            MembershipApp.Status := MembershipApp.Status::Open;
+            MembershipApp.Modify;
+        end;
+    end;
+
 
 
     procedure ReleaseLoanApplication(var LoanApplication: Record "Loans Register")

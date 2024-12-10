@@ -265,9 +265,6 @@ Page 56029 "Loan Application Card"
                     trigger OnValidate()
                     begin
                         UpdateControl();
-
-
-
                     end;
                 }
                 field("Approval Status"; Rec."Approval Status")

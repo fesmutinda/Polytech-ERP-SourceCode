@@ -18,7 +18,8 @@ table 50138 "Membership Exist"
         }
         field(2; "Member No."; Code[20])
         {
-            TableRelation = Customer;
+            // TableRelation = Customer;
+            TableRelation = "Member Register";
 
             trigger OnValidate()
             begin

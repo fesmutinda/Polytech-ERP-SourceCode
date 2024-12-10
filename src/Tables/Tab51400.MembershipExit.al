@@ -30,7 +30,7 @@ Table 51400 "Membership Exit"
                 //*********************Restrict No of Withdrawals******************************//
                 Closure.Reset;
                 Closure.SetRange(Closure."Member No.", "Member No.");
-                Closure.SetRange(Closure.Posted, false);
+                Closure.SetRange(Closure.Posted, true);
                 if Closure.Find('-') then begin
                     Error('The Member has another withdrawal application Closure No %1', Closure."No.");
                 end;

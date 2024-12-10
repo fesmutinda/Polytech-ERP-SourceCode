@@ -1312,7 +1312,7 @@ page 56110 "Member Application Card"
                     begin
                         if Confirm('Cancel Approval?', false) = true then begin
                             SrestepApprovalsCodeUnit.CancelMembershipApplicationsRequestForApproval(rec."No.", Rec);
-
+                            Message('Approval Request Canceled!');
                         end;
                     end;
                 }

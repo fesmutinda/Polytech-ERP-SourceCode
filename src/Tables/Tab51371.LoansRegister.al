@@ -4476,7 +4476,43 @@ Table 51371 "Loans Register"
         {
             TableRelation = "G/L Account"."No.";
         }
-        field(51516262; "Total Loan"; Decimal) { }
+        field(51516262; "Total Loan"; Decimal)
+        {
+
+        }
+
+        field(69310; "Scheduled Principle Payments"; Decimal)
+        {
+            CalcFormula = sum("Loan Repayment Schedule"."Principal Repayment" where("Loan No." = field("Loan  No."),
+                                                                                     "Repayment Date" = field("Date filter")));
+            FieldClass = FlowField;
+        }
+        field(69311; "Schedule Loan Amount Issued"; Decimal)
+        {
+            CalcFormula = lookup("Loan Repayment Schedule"."Loan Amount" where("Loan No." = field("Loan  No.")));
+            FieldClass = FlowField;
+        }
+        field(69312; "Schedule Installments"; Integer)
+        {
+            CalcFormula = count("Loan Repayment Schedule" where("Loan No." = field("Loan  No.")));
+            FieldClass = FlowField;
+        }
+        field(69313; "Scheduled Interest Payments"; Decimal)
+        {
+            CalcFormula = sum("Loan Repayment Schedule"."Monthly Interest" where("Loan No." = field("Loan  No."),
+                                                                                     "Repayment Date" = field("Date filter")));
+            FieldClass = FlowField;
+        }
+        field(69318; "Total Loan Issued"; Decimal)
+        {
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Loan No" = field("Loan  No."),
+                                                                  "Transaction Type" = filter(Loan),
+                                                                  "Posting Date" = field("Date filter"),
+                                                                  Reversed = const(false)));
+            Editable = false;
+            FieldClass = FlowField;
+        }
     }
 
     keys

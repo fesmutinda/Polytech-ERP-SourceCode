@@ -1101,7 +1101,7 @@ Page 56043 "Polytech Sacco Role Center"
 
                     }
 
-                    /* action("Approved Membership Exit")
+                    action("Approved Membership Exit")
                     {
                         ApplicationArea = all;
                         RunObject = page "Membership Exit List-Posted";
@@ -1113,7 +1113,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         RunObject = page "Membership Exit List-Posted";
                         RunPageView = where(Posted = const(true));
-                    } */
+                    }
 
 
                 }

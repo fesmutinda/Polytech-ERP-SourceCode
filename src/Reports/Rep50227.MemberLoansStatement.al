@@ -3,7 +3,7 @@ Report 50227 "Member Loans Statement"
 {
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './Layouts/MemberLoansStatement.rdl';
+    RDLCLayout = './Layouts/MemberLoansStatement2.rdl'; //1 is custom to Nav layout
 
     dataset
     {

@@ -82,7 +82,10 @@ table 50518 "Member Reapplication"
             OptionCaption = 'Open,Pending,Approved';
             OptionMembers = Open,Pending,Approved;
         }
-        field(14; Reactivated; Boolean) { }
+        field(14; Reactivated; Boolean)
+        {
+
+        }
         field(15; "Share Capital"; Decimal)
         {
             DataClassification = ToBeClassified;

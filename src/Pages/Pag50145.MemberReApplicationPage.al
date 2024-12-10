@@ -120,9 +120,9 @@ Page 50145 "Member Re-Application Page"
                     myInt: Integer;
                 begin
                     if Rec.Status <> Rec.Status::Open then
-                        Message('The document has already been sent for approval');
-                    //else
-                    //SrestepApprovalsCodeUnit.SendMemberReapplicationRequestForApproval(rec."No.", rec);
+                        Message('The document has already been sent for approval')
+                    else
+                        SrestepApprovalsCodeUnit.SendMemberReapplicationRequestForApproval(rec."No.", rec);
                 end;
 
             }
@@ -139,7 +139,7 @@ Page 50145 "Member Re-Application Page"
 
                 begin
                     if Confirm('Cancel Approval?', false) = true then begin
-                        //SrestepApprovalsCodeUnit.CancelMemberReapplicationRequestForApproval(rec."No.", Rec);
+                        SrestepApprovalsCodeUnit.CancelMemberReapplicationRequestForApproval(rec."No.", Rec);
                     end;
                 end;
             }

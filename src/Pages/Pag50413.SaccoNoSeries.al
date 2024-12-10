@@ -3,6 +3,7 @@ page 50413 "Sacco No. Series"
 {
     DeleteAllowed = false;
     Editable = true;
+    ApplicationArea = All;
     SourceTable = "Sacco No. Series";
 
     layout

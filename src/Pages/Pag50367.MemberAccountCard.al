@@ -326,7 +326,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.FindFirst then begin
-                            Report.Run(51516279, true, false, Cust);
+                            Report.Run(50279, true, false, Cust);
                         end;
                     end;
                 }
@@ -349,10 +349,19 @@ page 50367 "Member Account Card"
 
                     trigger OnAction()
                     begin
-                        Rec.CalcFields(Rec."Current Shares", "Outstanding Balance");
 
+
+
+
+                        Rec.CalcFields(Rec."Current Shares", "Outstanding Balance");
                         if Rec."Current Shares" >= Rec."Outstanding Balance" then begin
                             if Confirm('Are you sure you want to create a Withdrawal Application for this Member', false) = true then begin
+                                TbExit.Reset;
+                                TbExit.SetRange(TbExit."Member No.", Rec."No.");
+                                if TbExit.Find('-') then begin
+                                    Error('The withdraw Application already exists.');
+                                    CurrPage.Close();
+                                end;
                                 SwizzsoftFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
                             end;
                         end else
@@ -648,5 +657,6 @@ page 50367 "Member Account Card"
         IsRegularAccount: Boolean;
         IsJuniorAccount: Boolean;
         SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        TbExit: Record "Membership Exist";
 }
 
