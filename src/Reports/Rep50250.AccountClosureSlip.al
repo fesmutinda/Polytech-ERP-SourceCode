@@ -25,7 +25,19 @@ Report 50250 "Account Closure Slip"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
+            column(Company_Name; Companyinfo.Name)
+            {
+            }
+            column(Company_Picture; Companyinfo.Picture)
+            {
+            }
             column(COMPANYPIC; Companyinfo.Picture)
+            {
+            }
+            column(Company_Address; Companyinfo.Address)
+            {
+            }
+            column(Company_Phone; Companyinfo."Phone No.")
             {
             }
             column(Members__No__; "No.")

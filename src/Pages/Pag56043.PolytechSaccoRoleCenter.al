@@ -469,7 +469,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = all;
                         Image = Journal;
-                        // RunObject = page "Receipt Header List";
+                        RunObject = page "Receipt Header List";
                     }
                     action("Posted Receipts")
                     {

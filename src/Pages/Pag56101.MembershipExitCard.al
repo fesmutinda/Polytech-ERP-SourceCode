@@ -221,7 +221,6 @@ Page 56101 "Membership Exit Card"
                         FnSendWithdrawalApplicationSMS();
                         //...................................................
 
-
                     end;
                 }
                 action("Cancel Approval Request")
@@ -281,6 +280,9 @@ Page 56101 "Membership Exit Card"
                         end; */
                         if Rec."Closure Type" = Rec."Closure Type"::"Member Exit - Normal" then begin
                             FnRunPostNormalExitApplication(Rec."Member No.");
+                        end;
+                        if Rec."Closure Type" = Rec."Closure Type"::"Member Exit - Deceased" then begin
+                            FnRunPostDeceasedExitApplication(Rec."Member No.");
                         end;
                         FnSendWithdrawalApplicationSMS
                     end;
@@ -566,12 +568,13 @@ Page 56101 "Membership Exit Card"
                         end;
 
                     until Loans.Next = 0;
+                    //Message('Loans to be recovered total is %1', LoanTobeRecovered);
 
                 end;
 
                 //Bank Charges
                 LineNo := LineNo + 10000;
-                SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::" ", GenJournalLine."Account Type"::"G/L Account", VarCrAccNo/* GenSetUp."Banks Charges" */, Rec."Posting Date", Rec."EFT Charge" * -1, 'BOSA', MemberNo, 'Bank Charges for exit', '');
+                SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::" ", GenJournalLine."Account Type"::"G/L Account", VarCrAccNo/*GenSetUp."Banks Charges"*/, Rec."Posting Date", Rec."EFT Charge" * -1, 'BOSA', MemberNo, 'Bank Charges for exit', '');
                 RunningBal := RunningBal - Rec."EFT Charge";
 
 

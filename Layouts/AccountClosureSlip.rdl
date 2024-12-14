@@ -47,11 +47,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=ReportItems!ACCOUNT_CLOSURE_SLIPCaption.Value</Value>
+                    <Value>ACCOUNT CLOSURE SLIP</Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Consolas</FontFamily>
+                      <FontSize>0.11667in</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#ce9178</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -73,7 +76,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=ReportItems!P_O_BOX_75629___00200__NAIROBICaption.Value</Value>
+                    <Value>=First(Fields!Company_Address.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -101,7 +104,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=ReportItems!COMPANYNAME.Value</Value>
+                    <Value>=First(Fields!Company_Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -200,8 +203,8 @@
           </Textbox>
           <Image Name="Image1">
             <Source>Database</Source>
-            <Value>=First(Fields!COMPANYPIC.Value, "DataSet_Result")</Value>
-            <MIMEType>image/jpeg</MIMEType>
+            <Value>=First(Fields!Company_Picture.Value, "DataSet_Result")</Value>
+            <MIMEType>image/png</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Left>0.20949cm</Left>
             <Height>2.05562cm</Height>
@@ -4327,10 +4330,10 @@
       <Page>
         <PageHeight>27.94cm</PageHeight>
         <PageWidth>21.59cm</PageWidth>
-        <LeftMargin>0cm</LeftMargin>
-        <RightMargin>0cm</RightMargin>
-        <TopMargin>0cm</TopMargin>
-        <BottomMargin>0cm</BottomMargin>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
@@ -4393,8 +4396,20 @@ End Function
         <Field Name="COMPANYNAME">
           <DataField>COMPANYNAME</DataField>
         </Field>
+        <Field Name="Company_Name">
+          <DataField>Company_Name</DataField>
+        </Field>
+        <Field Name="Company_Picture">
+          <DataField>Company_Picture</DataField>
+        </Field>
         <Field Name="COMPANYPIC">
           <DataField>COMPANYPIC</DataField>
+        </Field>
+        <Field Name="Company_Address">
+          <DataField>Company_Address</DataField>
+        </Field>
+        <Field Name="Company_Phone">
+          <DataField>Company_Phone</DataField>
         </Field>
         <Field Name="Members__No__">
           <DataField>Members__No__</DataField>

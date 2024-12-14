@@ -1858,6 +1858,45 @@ Codeunit 50000 "Funds Management"
 
     end;
 
+    procedure PostPropertyReceipt("Receipt Header": Record "Receipt Header"; "Journal Template": Code[20]; "Journal Batch": Code[20]; "Property No": Code[20]; Receipt: Code[20]; Cust: Code[20]; CustName: Text[50]; Amount: Decimal): Boolean
+    var
+        ReceiptLine: Record "Receipt Line";
+        ReceiptHeader: Record "Receipt Header";
+        ReceiptLine2: Record "Receipt Line";
+        ReceiptHeader2: Record "Receipt Header";
+    begin
+        //Post the Receipt
+        PostReceipt("Receipt Header", "Journal Template", "Journal Batch");
+        Commit;
+        //Update Property
+        if UpdateProperty("Property No", Receipt, Cust, CustName, Amount) then begin
+            exit(true);
+        end else begin
+            exit(false);
+        end;
+    end;
+
+    local procedure UpdateProperty(PropertyCode: Code[20]; "Receipt No": Code[20]; "Customer No": Code[20]; "Customer Name": Text[50]; Amount: Decimal): Boolean
+    var
+        FA: Record "Fixed Asset";
+    begin
+        FA.Reset;
+        FA.SetRange(FA."No.", PropertyCode);
+        if FA.FindFirst then begin
+            FA.Receipted := true;
+            FA."Receipt No" := "Receipt No";
+            FA."Customer No" := "Customer No";
+            FA."Customer Name" := "Customer Name";
+            FA."Customer Balance" := FA."Customer Balance" - Amount;
+            if FA.Modify then begin
+                Message('Property Payment Successfull. Customer:' + Format("Customer Name"));
+                exit(true);
+            end else begin
+                exit(false);
+            end;
+        end;
+    end;
+
     local procedure UpdateBankStmt(RefNo: Code[20]; "Posting Date": Date; ReceiptNo: Code[20])
     var
         ImportedStmt: Record 51050;

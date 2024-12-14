@@ -4513,6 +4513,32 @@ Table 51371 "Loans Register"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(69091; "Boosting Shares"; Decimal)
+        {
+            CalcFormula = sum("Boosting Shares"."Boosting Amount" where("Loan No." = field("Loan  No."),
+                                                                         "Client Code" = field("Client Code")));
+            FieldClass = FlowField;
+        }
+        field(68110; "Valuation Cost"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(68111; "Legal Cost"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516297; "Deboost Commision"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516298; "Deboost Amount"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(51516296; "Deboost Loan Applied"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

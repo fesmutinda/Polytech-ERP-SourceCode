@@ -404,7 +404,7 @@ page 50402 "Posted BOSA Receipt Card"
                     BOSARcpt.Reset;
                     BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
-                        Report.Run(51516486, true, true, BOSARcpt)
+                        Report.Run(50247, true, true, BOSARcpt)
                 end;
             }
         }
@@ -424,7 +424,8 @@ page 50402 "Posted BOSA Receipt Card"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record "Member Register";
+        //Cust: Record "Member Register";
+        Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;
         BOSARcpt: Record "Receipts & Payments";

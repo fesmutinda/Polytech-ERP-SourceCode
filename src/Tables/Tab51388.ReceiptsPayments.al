@@ -10,7 +10,7 @@ Table 51388 "Receipts & Payments"
         field(2; "Account No."; Code[30])
         {
             NotBlank = true;
-            TableRelation = if ("Account Type" = const(Member)) "Member Register"."No." where("Customer Type" = filter(Member))
+            TableRelation = if ("Account Type" = const(Member)) Customer."No." where("Customer Type" = filter(Member))
             else if ("Account Type" = const(Debtor)) Customer."No."
             else if ("Account Type" = const("G/L Account")) "G/L Account"."No."
             else if ("Account Type" = const("FOSA Loan")) "Member Register"."No." where("Customer Type" = const(Member))

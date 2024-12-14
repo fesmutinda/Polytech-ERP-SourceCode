@@ -192,6 +192,10 @@ Table 51374 "Loan Collateral Details"
         {
             DataClassification = ToBeClassified;
         }
+        field(23; "Name"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

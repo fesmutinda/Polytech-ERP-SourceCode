@@ -664,7 +664,7 @@ page 50400 "BOSA Receipt Card"
                     BOSARcpt.Reset;
                     BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
-                        Report.Run(51516486, true, true, BOSARcpt)
+                        Report.Run(50247, true, true, BOSARcpt)
                 end;
             }
             action("Process Interest Due")
@@ -730,7 +730,8 @@ page 50400 "BOSA Receipt Card"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record "Member Register";
+        //Cust: Record "Member Register";
+        Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;
         BOSARcpt: Record "Receipts & Payments";
@@ -1355,7 +1356,7 @@ page 50400 "BOSA Receipt Card"
         IntDate := Rec."Cheque Date";
         BalDate := Rec."Cheque Date";
         PostDate := CalcDate('CM', Rec."Cheque Date");
-        //MESSAGE('date to post is %1',IntDate  );
+        //MESSAGE('date to post is %1', IntDate);
 
         GenJournalLine.Reset;
         GenJournalLine.SetRange("Journal Template Name", 'GENERAL');
@@ -1368,7 +1369,7 @@ page 50400 "BOSA Receipt Card"
         //loanapp.SETFILTER( loanapp."Date filter",'<=%1',Date_OutBal);
         if loanapp.Find('-') then begin
             repeat
-                Message('loan no is %1', loanapp."Loan  No.");
+                //Message('loan no is %1', loanapp."Loan  No.");
                 CLedger.Reset;
                 CLedger.SetRange(CLedger."Loan No", loanapp."Loan  No.");
                 CLedger.SetRange("Transaction Type", CLedger."transaction type"::"Interest Due");
@@ -1391,7 +1392,7 @@ page 50400 "BOSA Receipt Card"
 
                     LoanRec.CalcFields("Outstanding Balance");
                     LoanBalance := LoanRec."Outstanding Balance";
-                    //  MESSAGE('LoanBalance %1',LoanBalance);
+                    MESSAGE('LoanBalance %1', LoanBalance);
 
                     if LoanBalance < 0 then
                         LoanBalance := 0;
@@ -1422,7 +1423,7 @@ page 50400 "BOSA Receipt Card"
 
                 GenJournalLine.Amount := ROUND(InterestAmount, 1, '=');
 
-                //MESSAGE(FORMAT(GenJournalLine.Amount));
+                MESSAGE(FORMAT(GenJournalLine.Amount));
 
                 GenJournalLine.Validate(GenJournalLine.Amount);
                 if LoanType.Get(loanapp."Loan Product Type") then begin
