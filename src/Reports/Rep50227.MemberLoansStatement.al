@@ -7,7 +7,7 @@ Report 50227 "Member Loans Statement"
 
     dataset
     {
-        dataitem("Member Register"; "Member Register")
+        dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.", "Loan Product Filter", "Outstanding Balance";
             column(Payroll_Staff_No; "Payroll/Staff No")
@@ -16,19 +16,19 @@ Report 50227 "Member Loans Statement"
             column(Employer_Name; "Employer Name")
             {
             }
-            column(PayrollStaffNo_Members; "Member Register"."Payroll/Staff No")
+            column(PayrollStaffNo_Members; Customer."Payroll/Staff No")
             {
             }
-            column(No_Members; "Member Register"."No.")
+            column(No_Members; Customer."No.")
             {
             }
-            column(MobilePhoneNo_MembersRegister; "Member Register"."Mobile Phone No")
+            column(MobilePhoneNo_MembersRegister; Customer."Mobile Phone No")
             {
             }
-            column(Name_Members; "Member Register".Name)
+            column(Name_Members; Customer.Name)
             {
             }
-            column(EmployerCode_Members; "Member Register"."Employer Code")
+            column(EmployerCode_Members; Customer."Employer Code")
             {
             }
             column(EmployerName; EmployerName)
@@ -37,16 +37,16 @@ Report 50227 "Member Loans Statement"
             column(PageNo_Members; CurrReport.PageNo)
             {
             }
-            column(Shares_Retained; "Member Register"."Shares Retained")
+            column(Shares_Retained; Customer."Shares Retained")
             {
             }
             column(ShareCapBF; ShareCapBF)
             {
             }
-            column(IDNo_Members; "Member Register"."ID No.")
+            column(IDNo_Members; Customer."ID No.")
             {
             }
-            column(GlobalDimension2Code_Members; "Member Register"."Global Dimension 2 Code")
+            column(GlobalDimension2Code_Members; Customer."Global Dimension 2 Code")
             {
             }
             column(Company_Name; Company.Name)
@@ -320,7 +320,7 @@ Report 50227 "Member Loans Statement"
                     //Loans.CALCFIELDS("Outstanding Balance");
                     //Loans.SETFILTER("Outstanding Balance",'<>%1',0);
 
-                    Loans.SetFilter(Loans."Date filter", "Member Register".GetFilter("Member Register"."Date Filter"));
+                    Loans.SetFilter(Loans."Date filter", Customer.GetFilter(Customer."Date Filter"));
                 end;
             }
 
@@ -328,7 +328,7 @@ Report 50227 "Member Loans Statement"
             trigger OnAfterGetRecord()
             begin
                 SaccoEmp.Reset;
-                SaccoEmp.SetRange(SaccoEmp.Code, "Member Register"."Employer Code");
+                SaccoEmp.SetRange(SaccoEmp.Code, Customer."Employer Code");
                 if SaccoEmp.Find('-') then
                     EmployerName := SaccoEmp.Description;
 
@@ -357,13 +357,13 @@ Report 50227 "Member Loans Statement"
             trigger OnPreDataItem()
             begin
                 /*
-                IF "Member Register".GETFILTER("Member Register"."Date Filter") <> '' THEN
-                DateFilterBF:='..'+ FORMAT(CALCDATE('-1D',"Member Register".GETRANGEMIN("Member Register"."Date Filter")));
+                IF Customer.GETFILTER(Customer."Date Filter") <> '' THEN
+                DateFilterBF:='..'+ FORMAT(CALCDATE('-1D',Customer.GETRANGEMIN(Customer."Date Filter")));
                 */
 
-                if "Member Register".GetFilter("Member Register"."Date Filter") <> '' then
-                    DateFilterBF := '..' + Format(CalcDate('-1D', "Member Register".GetRangeMin("Member Register"."Date Filter")));
-                //DateFilterBF:='..'+ FORMAT("Member Register".GETRANGEMIN("Member Register"."Date Filter"));
+                if Customer.GetFilter(Customer."Date Filter") <> '' then
+                    DateFilterBF := '..' + Format(CalcDate('-1D', Customer.GetRangeMin(Customer."Date Filter")));
+                //DateFilterBF:='..'+ FORMAT(Customer.GETRANGEMIN(Customer."Date Filter"));
 
             end;
         }

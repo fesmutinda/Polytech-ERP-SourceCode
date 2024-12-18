@@ -5,7 +5,7 @@ page 50428 "Member Statistics FactBox"
     Editable = false;
     PageType = CardPart;
     SaveValues = true;
-    SourceTable = "Member Register";
+    SourceTable = Customer;
 
     layout
     {
@@ -52,7 +52,7 @@ page 50428 "Member Statistics FactBox"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member Deposits';
-                    Image = Star;
+                    //Image = Star;
                     Importance = Promoted;
                     Style = StrongAccent;
                     StyleExpr = true;

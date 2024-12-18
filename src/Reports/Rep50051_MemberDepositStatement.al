@@ -7,7 +7,7 @@ Report 50051 "Members Deposits Statement"
 
     dataset
     {
-        dataitem("Member Register"; "Member Register")
+        dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.", "Loan Product Filter", "Outstanding Balance", "Date Filter";
             column(Payroll_Staff_No; "Payroll/Staff No")
@@ -145,7 +145,7 @@ Report 50051 "Members Deposits Statement"
             /* dataitem(ShareCapital; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
-                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Share Capital"), Reversed = filter(false));
+                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Shares Capital"), Reversed = filter(false));
                 column(OpeningBal; OpeningBal)
                 {
                 }
@@ -343,7 +343,7 @@ Report 50051 "Members Deposits Statement"
         BankCodeVanShares: Code[50];
         ApprovedAmount_Interest: Decimal;
         LonRepaymentSchedule: Record "Loan Repayment Schedule";
-        TbMembReg: Record "Member Register";
+        TbMembReg: Record Customer;
         MembLedgerEntry: Record "Member Ledger Entry";
 
 

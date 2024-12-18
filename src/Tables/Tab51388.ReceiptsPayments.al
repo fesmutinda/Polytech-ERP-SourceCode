@@ -10,25 +10,25 @@ Table 51388 "Receipts & Payments"
         field(2; "Account No."; Code[30])
         {
             NotBlank = true;
-            TableRelation = if ("Account Type" = const(Member)) Customer."No." where("Customer Type" = filter(Member))
-            else if ("Account Type" = const(Debtor)) Customer."No."
-            else if ("Account Type" = const("G/L Account")) "G/L Account"."No."
-            else if ("Account Type" = const("FOSA Loan")) "Member Register"."No." where("Customer Type" = const(Member))
+            TableRelation = if ("Account Type" = const(Customer)) Customer."No." where("Customer Type" = filter(Member))
+            //else if ("Account Type" = const(Debtor)) Customer."No."
+            else if ("Account Type" = const("G/L Account")) "G/L Account"."No.";
+            //else if ("Account Type" = const("FOSA Loan")) "Customer"."No." where("Customer Type" = const(Member))
             // else if ("Account Type" = const(Vendor)) Vendor."No." where("Creditor Type" = filter("Savings Account"))
-            else if ("Account Type" = const(Micro)) "Member Register"."No." where("Customer Posting Group" = filter('MICRO'));
+            //else if ("Account Type" = const(Micro)) "Customer"."No." where("Customer Posting Group" = filter('MICRO'));
 
             trigger OnValidate()
             begin
                 //TESTFIELD(Source);
 
-                if ("Account Type" = "account type"::"FOSA Loan") or
-                   ("Account Type" = "account type"::Debtor) then begin
-                    if Cust.Get("Account No.") then begin
-                        Name := Cust.Name;
+                /*  if ("Account Type" = "account type"::"FOSA Loan") or
+                    ("Account Type" = "account type"::Debtor) then begin
+                     if Cust.Get("Account No.") then begin
+                         Name := Cust.Name;
 
-                    end;
-                end;
-                if ("Account Type" = "account type"::Member) or ("Account Type" = "account type"::Micro) then begin
+                     end;
+                 end; */
+                if ("Account Type" = "account type"::Customer) /* or ("Account Type" = "account type"::Micro )*/ then begin
                     if Mem.Get("Account No.") then
                         Name := Mem.Name;
                     "Member ID No" := Mem."ID No.";
@@ -128,8 +128,9 @@ Table 51388 "Receipts & Payments"
         }
         field(14; "Account Type"; Option)
         {
-            OptionCaption = 'Member,Debtor,G/L Account,FOSA Loan,Customer,Vendor,Micro';
-            OptionMembers = Member,Debtor,"G/L Account","FOSA Loan",Customer,Vendor,Micro;
+            /* OptionCaption = 'Member,Debtor,G/L Account,FOSA Loan,Customer,Vendor,Micro';
+            OptionMembers = Member,Debtor,"G/L Account","FOSA Loan",Customer,Vendor,Micro; */
+            OptionMembers = Customer,"G/L Account",Vendor;
         }
         field(15; "Transaction Slip Type"; Option)
         {
@@ -314,7 +315,8 @@ Table 51388 "Receipts & Payments"
         NoSeriesMgt: Codeunit NoSeriesManagement;
         BOSARcpt: Record "Receipts & Payments";
         GLAcct: Record "G/L Account";
-        Mem: Record "Member Register";
+        //Mem: Record "Member Register";
+        Mem: Record Customer;
         Vend: Record Vendor;
         GLAcc: Record "G/L Account";
         PayLine: Record "Payment Line";

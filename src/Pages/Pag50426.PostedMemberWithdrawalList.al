@@ -98,7 +98,7 @@ page 50426 "Posted Member Withdrawal List"
 
     var
         Closure: Integer;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         UBFRefund: Decimal;
         Generalsetup: Record "Sacco General Set-Up";
         Totalavailable: Decimal;

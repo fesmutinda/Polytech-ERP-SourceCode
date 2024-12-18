@@ -2,7 +2,7 @@
 Report 50055 "Loan Defaulter Final Notice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/Loan Defaulter Final Notice.rdlc';
+    RDLCLayout = './Layouts/LoanDefaulterFinalNotice.rdl';
 
     dataset
     {

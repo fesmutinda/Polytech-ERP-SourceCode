@@ -1622,6 +1622,24 @@ Page 56043 "Polytech Sacco Role Center"
 
                     group(demandnotices)
                     {
+                        group(DemandNoticesLists)
+                        {
+                            action("Loan 1st Demand Notice List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "Loan 1st Demand Notices List";
+                            }
+                            action("Loan 2st Demand Notice List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "Loan 2nd Demand Notices List";
+                            }
+                            action("Loan 3rd Demand Notice List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "Loan 3rd Demand Notices List";
+                            }
+                        }
 
                         group(DemandReports)
                         {
@@ -1630,7 +1648,6 @@ Page 56043 "Polytech Sacco Role Center"
                                 Caption = 'Loan Defaulter 1st Notice';
                                 RunObject = report "Loan Defaulter 1st Notice";
                                 Image = Report;
-
                             }
                             action(Ldemandnotice2)
                             {

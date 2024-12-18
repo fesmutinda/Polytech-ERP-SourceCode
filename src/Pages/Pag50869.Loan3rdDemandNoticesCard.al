@@ -147,7 +147,7 @@ page 50869 "Loan 3rd Demand Notices Card"
                             ObjLoans.Reset;
                             ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                             if ObjLoans.FindSet then begin
-                                Report.Run(51516925, true, true, ObjLoans);
+                                Report.Run(50053, true, true, ObjLoans);
                             end;
                         end;
 
@@ -303,7 +303,7 @@ page 50869 "Loan 3rd Demand Notices Card"
                             ObjLoans.Reset;
                             ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                             if ObjLoans.FindSet then begin
-                                Report.Run(51516915, true, true, ObjLoans);
+                                Report.Run(50054, true, true, ObjLoans);
                             end;
                         end;
                         // //
@@ -366,7 +366,7 @@ page 50869 "Loan 3rd Demand Notices Card"
                         ObjLoans.Reset;
                         ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
-                            Report.Run(51516916, true, true, ObjLoans);
+                            Report.Run(50055, true, true, ObjLoans);
                         end;
                     end;
                 }
@@ -491,7 +491,7 @@ page 50869 "Loan 3rd Demand Notices Card"
         GenSetup: Record 51398;
         DocNo: Code[20];
         LineNo: Integer;
-        TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
+        TransType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor;
         BalAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";

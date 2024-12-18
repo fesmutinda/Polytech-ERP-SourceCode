@@ -134,7 +134,7 @@ Table 51654 "Checkoff Lines-Distributed2"
         field(38; "Deposit contribution"; Decimal)
         {
         }
-        field(39; "Share Capital"; Decimal)
+        field(39; "Shares Capital"; Decimal)
         {
         }
         field(41; "Insurance Contribution"; Decimal)

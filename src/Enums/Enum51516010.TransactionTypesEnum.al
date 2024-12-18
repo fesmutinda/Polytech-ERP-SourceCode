@@ -256,5 +256,20 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Debtors to Ex-Members';
     // }
-    value(63; "Loan Repayment") { }
+    value(63; "Loan Repayment")
+    {
+
+    }
+    value(64; "Mwanangu Savings")
+    {
+
+    }
+    value(65; "Recovery Account")
+    {
+
+    }
+    value(66; "Standing Order Charges")
+    {
+
+    }
 }

@@ -2,7 +2,7 @@
 Report 50053 "Loan Defaulter 1st Notice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/Loan Defaulter 1st Notice.rdlc';
+    RDLCLayout = './Layouts/LoanDefaulter_1stNotice.rdl';
 
     dataset
     {

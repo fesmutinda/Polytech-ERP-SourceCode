@@ -10,7 +10,7 @@ Report 50225 "Member Share Capital Statement"
 
     dataset
     {
-        dataitem("Member Register"; "Member Register")
+        dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.", "Loan Product Filter", "Outstanding Balance", "Date Filter";
             column(Payroll_Staff_No; "Payroll/Staff No")
@@ -78,7 +78,7 @@ Report 50225 "Member Share Capital Statement"
             dataitem(Share; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
-                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Share Capital"), Reversed = filter(false));
+                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Shares Capital"), Reversed = filter(false));
                 column(openBalances; OpenBalance)
                 {
                 }

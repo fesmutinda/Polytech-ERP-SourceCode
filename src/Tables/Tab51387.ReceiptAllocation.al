@@ -15,11 +15,11 @@ Table 51387 "Receipt Allocation"
             NotBlank = true;
             TableRelation = "Member Register"."No.";
         }
-        field(3; "Transaction Type"; Option)
+        field(3; "Transaction Type"; Enum TransactionTypesEnum)
         {
-            OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,Standing Order Charges,Additional Shares,Interest Due,Jiokoe Savings,Holiday savings';
-            OptionMembers = " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","Standing Order Charges","Additional Shares","Interest Due","Jiokoe Savings","Holiday savings";
-
+            /* OptionCaption = ' ,Registration Fee,Shares Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,Standing Order Charges,Additional Shares,Interest Due,Jiokoe Savings,Holiday savings';
+            OptionMembers = " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","Standing Order Charges","Additional Shares","Interest Due","Jiokoe Savings","Holiday savings";
+ */
             trigger OnValidate()
             begin
                 "Loan No." := '';
@@ -35,7 +35,7 @@ Table 51387 "Receipt Allocation"
                     Cust.CalcFields("Current Shares", "Shares Retained");
                     if "Transaction Type" = "transaction type"::"Deposit Contribution" then
                         "Amount Balance" := Cust."Current Shares";
-                    if "Transaction Type" = "transaction type"::"Share Capital" then
+                    if "Transaction Type" = "transaction type"::"Shares Capital" then
                         "Amount Balance" := Cust."Shares Retained";
                     if "Transaction Type" = "transaction type"::"Jiokoe Savings" then
                         "Amount Balance" := Cust."Jiokoe Savings";
@@ -233,17 +233,14 @@ Table 51387 "Receipt Allocation"
 
     keys
     {
-        key(Key1; "Document No", "Transaction Type", "Loan No.")
+        key(Key1; "Document No", "Transaction Type", Amount, "Account Type", "Account No", "Member No", "Loan No.")
         {
             Clustered = true;
         }
-        key(Key2; "Member No")
+        key(Key2; "Loan No.")
         {
         }
-        key(Key3; "Loan No.")
-        {
-        }
-        key(Key4; "Account No")
+        key(Key3; "Account No")
         {
         }
     }
@@ -254,7 +251,8 @@ Table 51387 "Receipt Allocation"
 
     var
         Loans: Record "Loans Register";
-        Cust: Record "Member Register";
+        //Cust: Record "Member Register";
+        Cust: Record Customer;
         PTEN: Text;
         DataSheet: Record "Data Sheet Main";
         Customer: Record "Member Register";
@@ -269,7 +267,7 @@ Table 51387 "Receipt Allocation"
         VarEndYear: Date;
         VarInsuranceMonths: Integer;
         VarInsuranceAmount: Decimal;
-        VarTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid";
+        VarTransactionType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid";
         VarAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor;
         VarBalAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor;
         VarBalAccountNo: Code[20];

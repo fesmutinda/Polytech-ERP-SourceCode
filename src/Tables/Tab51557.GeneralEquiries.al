@@ -43,7 +43,7 @@ Table 51557 "General Equiries."
                     City := ObjCust.City;
                     "Company No" := ObjCust."Employer Code";
                     "Company Name" := ObjCust."Employer Name";
-                    "Share Capital" := ObjCust."Shares Retained";
+                    "Shares Capital" := ObjCust."Shares Retained";
                     Source := ObjCust."Customer Posting Group";
                     "Employment Info" := ObjCust."Employment Info";
                     "Employer Code" := ObjCust."Employer Code";
@@ -125,7 +125,7 @@ Table 51557 "General Equiries."
                 end;
             end;
         }
-        field(16; "Share Capital"; Decimal)
+        field(16; "Shares Capital"; Decimal)
         {
         }
         field(17; Source; Code[20])
@@ -508,7 +508,8 @@ Table 51557 "General Equiries."
         NoSeriesMgt: Codeunit NoSeriesManagement;
         Loans: Record "Loans Register";
         GenSetUp: Record "Sacco General Set-Up";
-        Cust: Record "Member Register";
+        //Cust: Record "Member Register";
+        Cust: Record Customer;
         PVApp: Record "Member Ledger Entry";
         UserMgt: Codeunit "User Setup Management";
         PRD: Record Customer;

@@ -88,7 +88,7 @@ Table 51121 "CheckoffLinesDist poly"
         field(23; "Transaction Type"; Option)
         {
             OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,FOSA Account,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,FOSA Shares,Additional Shares,Interest Due,Capital Reserve';
-            OptionMembers = " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Capital Reserve";
+            OptionMembers = " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Capital Reserve";
         }
         field(24; "Special Code"; Code[50])
         {
@@ -336,7 +336,7 @@ Table 51121 "CheckoffLinesDist poly"
         {
             DataClassification = ToBeClassified;
         }
-        field(85; "Share Capital"; Decimal)
+        field(85; "Shares Capital"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -584,7 +584,7 @@ Table 51121 "CheckoffLinesDist poly"
         }
         field(346; "SHARE TOTAL AMOUNT"; Decimal)
         {
-            CalcFormula = sum("CheckoffLinesDistributed poly"."Share Capital" where("Receipt Header No" = field("Receipt Header No")));
+            CalcFormula = sum("CheckoffLinesDistributed poly"."Shares Capital" where("Receipt Header No" = field("Receipt Header No")));
             FieldClass = FlowField;
         }
         field(347; "DEPOSIT TOTAL AMOUNT"; Decimal)

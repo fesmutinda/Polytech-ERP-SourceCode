@@ -139,7 +139,7 @@ page 50402 "Posted BOSA Receipt Card"
                         ReceiptAllocations.DeleteAll;
 
 
-                        if Rec."Account Type" = Rec."account type"::Member then begin
+                        if Rec."Account Type" = Rec."account type"::Customer then begin
 
                             BosaSetUp.Get();
                             RunBal := Rec.Amount;

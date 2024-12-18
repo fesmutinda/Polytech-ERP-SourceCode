@@ -1227,7 +1227,7 @@ page 56110 "Member Application Card"
                             Cust.SetRange(Cust."ID No.", Rec."ID No.");
                             Cust.SetRange(Cust."Customer Type", Cust."customer type"::Member);
                             if Cust.Find('-') then begin
-                                if (Cust."No." <> Rec."No.") and (Cust."Account Category" = Cust."account category"::Single) then
+                                if (Cust."No." <> Rec."No.") and (Cust."Account Category" = Cust."account category"::Individual) then //Single
                                     Error('Member has already been created. Kindly Confirm the ID Number to proceed.');
                             end;
                         end;
@@ -1541,7 +1541,7 @@ page 56110 "Member Application Card"
         MemberAppliedProducts: Record "Membership Reg. Products Appli";// "Membership Applied Products";
         ObjProductsApp: Record "Membership Reg. Products Appli";
         StatusPermissions: Record "Status Change Permision";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Accounts: Record Vendor;
         //AcctNo: Code[20];
         NextOfKinApp: Record "Member App Next Of kin";
@@ -2379,14 +2379,14 @@ page 56110 "Member Application Card"
         Cust.Age := Rec.Age;
 
         Cust.Image := Rec.Picture;
-        Cust.Signature := Rec.Signature;
+        //Cust.Signature := Rec.Signature;
         Cust.IPRS := Rec.IPRS;
         //========================================================================Member Risk Rating
-        Cust."Individual Category." := Rec."Individual Category.";
+        // Cust."Individual Category." := Rec."Individual Category.";
         Cust."Entities" := Rec.Entities;
         // Cust."Member Risk Level" := (Rec."Member Risk Level");
         // Cust."Due Diligence MeaSwizz" := Format(Rec."Due Diligence MeaSwizz");
-        Cust."Member Residency Status." := Rec."Member Residency Status.";
+        //Cust."Member Residency Status." := Rec."Member Residency Status.";
         Cust."Industry Type" := Rec."Industry Type";
         // Cust."Length Of Relationship" := Rec."Length Of Relationship";
         Cust."International Trade" := Rec."International Trade";

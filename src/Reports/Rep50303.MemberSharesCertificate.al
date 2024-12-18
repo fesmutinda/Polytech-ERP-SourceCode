@@ -8,7 +8,7 @@ Report 50303 "Member Shares Certificate"
 
     dataset
     {
-        dataitem("Members Register"; "Member Register")
+        dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.", "Date Filter";
             column(ReportForNavId_1102755000; 1102755000)
@@ -94,17 +94,17 @@ Report 50303 "Member Shares Certificate"
             begin
                 MembersReg.Reset;
                 MembersReg.SetRange(MembersReg."No.", "No.");
-                MembersReg.SetAutocalcFields(MembersReg."Current Shares", MembersReg."Share Capital");
+                MembersReg.SetAutocalcFields(MembersReg."Current Shares", MembersReg."Shares Capital");
                 if MembersReg.Find('-') then begin
                     TotalCurrectshares := 0;
                     TotalSharecap := 0;
 
-                    TotalShares := MembersReg."Current Shares" + MembersReg."Share Capital";
+                    TotalShares := MembersReg."Current Shares" + MembersReg."Shares Capital";
                     CertificateNo := 'DEVS' + Format(MembersReg."No.");
                     IDnoMember := MembersReg."ID No.";
                     FullName := MembersReg.Name;
                     TotalCurrectshares := MembersReg."Current Shares";
-                    TotalSharecap := MembersReg."Share Capital";
+                    TotalSharecap := MembersReg."Shares Capital";
 
                     //................................................
                     //Amount into words

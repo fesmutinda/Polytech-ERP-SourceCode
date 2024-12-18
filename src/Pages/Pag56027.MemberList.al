@@ -7,7 +7,8 @@ Page 56027 "Member List"
     Editable = false;
     DeleteAllowed = true;
     PageType = List;
-    SourceTable = "Member Register";
+    //SourceTable = "Member Register";
+    SourceTable = Customer;
     SourceTableView = sorting("No.")
                       order(descending)
                       where("Customer Type" = filter(Member),
@@ -243,7 +244,7 @@ Page 56027 "Member List"
 
     var
         SwizzsoftFactory: Codeunit "swizzsoft Factory";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         GeneralSetup: Record "Sacco General Set-Up";
         Gnljnline: Record "Gen. Journal Line";
         TotalRecovered: Decimal;

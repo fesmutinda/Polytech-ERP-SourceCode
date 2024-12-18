@@ -1641,7 +1641,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(12/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(12/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1692,7 +1692,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(12/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(12/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1736,7 +1736,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(11/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(11/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1779,7 +1779,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(10/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(10/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1821,7 +1821,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(9/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(9/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1863,7 +1863,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(8/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(8/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1905,7 +1905,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(7/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(7/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1949,7 +1949,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(6/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(6/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -1993,7 +1993,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(5/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(5/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -2037,7 +2037,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(4/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(4/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -2080,7 +2080,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(3/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(3/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -2123,7 +2123,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(2/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(2/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);
@@ -2166,7 +2166,7 @@ Codeunit 50123 BackOfficePORTAL
         // DivProg."Net Dividends":=DivProg."Gross Dividends"-DivProg."Witholding Tax";
         // DivProg."Qualifying Shares":=(Cust."Current Shares"*-1)*(1/12);
         // DivProg.Shares:=Cust."Current Shares"*-1;
-        // DivProg."Share Capital":=Cust."Shares Retained"*-1;
+        // DivProg."Shares Capital":=Cust."Shares Retained"*-1;
         // DivProg."Gross  Share cap Dividend":=CapDiv;
         // DivProg."Qualifying Share Capital":=(Cust."Shares Retained"*-1)*(1/12);
         // DivProg."Wtax Share Cap Dividend":=CapDiv*(GenSetup."Withholding Tax (%)"/100);

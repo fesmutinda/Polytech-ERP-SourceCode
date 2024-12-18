@@ -1,72 +1,46 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Report 50226 "Loans Guaranteed"
 {
+    DefaultLayout = RDLC;
     ApplicationArea = all;
-    RDLCLayout = './Layouts/LoansGuaranteed.rdl';
-    UsageCategory = ReportsAndAnalysis;
-    Caption = 'Loans Guaranteed Report';
+    RDLCLayout = './Layouts/Loans Guaranteed.rdlc';
 
     dataset
     {
-        dataitem("Member Register"; "Member Register")
+        dataitem(Members; Customer)
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.";
-            // column(ReportForNavId_7301; 7301)
-            // {
-            // }
-            column(Company_Name; Company.Name)
+            column(ReportForNavId_7301; 7301)
             {
             }
-            column(Company_Address; Company.Address)
+            column(No_Members; Members."No.")
             {
             }
-            column(Company_Picture; Company.Picture)
+            column(Name_Members; Members.Name)
             {
             }
-            column(Company_Phone; Company."Phone No.")
+            column(CurrentShares_Members; Members."Current Shares")
             {
             }
-            column(Company_SMS; Company."Phone No.")
-            {
-            }
-            column(Company_Email; Company."E-Mail")
-            {
-            }
-
-            column(No_Members; "Member Register"."No.")
-            {
-            }
-            column(Name_Members; "Member Register".Name)
-            {
-            }
-            column(CurrentShares_Members; "Member Register"."Current Shares")
-            {
-            }
-            column(Status_Members; "Member Register".Status)
+            column(Status_Members; Members.Status)
             {
             }
             dataitem("Loan Guarantors"; "Loans Guarantee Details")
             {
                 DataItemLink = "Member No" = field("No.");
-                DataItemTableView = where("Outstanding Balance" = filter(> 0), Substituted = FILTER(false));
-                //RequestFilterFields = Substituted, "Amont Guaranteed";
-                RequestFilterFields = "Member No", "Loan No";
-
-                column(LoanNo_LoanGuarantors; "Loan Guarantors"."Loan No")
+                DataItemTableView = where("Outstanding Balance" = filter(> 0));
+                RequestFilterFields = Substituted, "Amont Guaranteed";
+                column(ReportForNavId_5140; 5140)
                 {
                 }
-                column(Loan_Product; "Loan Guarantors"."Loan Product")
+                column(LoanNo_LoanGuarantors; "Loan Guarantors"."Loan No")
                 {
                 }
                 column(MemberNo_LoanGuarantors; "Loan Guarantors"."Member No")
                 {
                 }
                 column(Name_LoanGuarantors; "Loan Guarantors".Name)
-                {
-                }
-
-                column(AmontGuaranteed_LoanGuarantors; "Loan Guarantors"."Amont Guaranteed")
                 {
                 }
                 column(LoanBalance_LoanGuarantors; "Loan Guarantors"."Loans Outstanding")
@@ -90,7 +64,9 @@ Report 50226 "Loans Guaranteed"
                 column(NewUpload_LoanGuarantors; "Loan Guarantors"."New Upload")
                 {
                 }
-
+                column(AmontGuaranteed_LoanGuarantors; "Loan Guarantors"."Amont Guaranteed")
+                {
+                }
                 column(StaffPayrollNo_LoanGuarantors; "Loan Guarantors"."Staff/Payroll No.")
                 {
                 }
@@ -106,9 +82,9 @@ Report 50226 "Loans Guaranteed"
                 column(OutstandingBalance_LoanGuarantors; "Loan Guarantors"."Outstanding Balance")
                 {
                 }
-                // column(MemberGuaranteed_LoanGuarantors; "Loan Guarantors"."Transferable shares")
-                // {
-                // }
+                column(MemberGuaranteed_LoanGuarantors; "Loan Guarantors"."Transferable shares")
+                {
+                }
                 column(MemberGuar; MemberGuar)
                 {
                 }
@@ -122,9 +98,9 @@ Report 50226 "Loans Guaranteed"
                 {
                     DataItemLink = "Loan  No." = field("Loan No");
                     DataItemTableView = sorting("Loan  No.") order(ascending) where(Posted = const(true));
-                    /* column(ReportForNavId_1120054000; 1120054000)
+                    column(ReportForNavId_1120054000; 1120054000)
                     {
-                    } */
+                    }
                     column(ClientCode_LoansRegister; "Loans Register"."Client Code")
                     {
                     }
@@ -157,7 +133,7 @@ Report 50226 "Loans Guaranteed"
 
                         end;
 
-                        if Cust.Get("Member Register"."No.") then begin
+                        if Cust.Get(Members."No.") then begin
                             Cust.CalcFields(Cust."Current Shares");
                             Shares := -1 * Cust."Current Shares";
 
@@ -194,15 +170,12 @@ Report 50226 "Loans Guaranteed"
 
     trigger OnPreReport()
     begin
-        if "Member Register"."Date Filter" = 0D then begin
+        if Members."Date Filter" = 0D then begin
             Currdate := Today
         end
         else begin
-            Currdate := "Member Register"."Date Filter";
+            Currdate := Members."Date Filter";
         end;
-
-        Company.Get();
-        Company.CalcFields(Company.Picture);
 
     end;
 
@@ -237,6 +210,5 @@ Report 50226 "Loans Guaranteed"
         Period: Decimal;
         expected: Decimal;
         Currdate: Date;
-        Company: Record "Company Information";
 }
 

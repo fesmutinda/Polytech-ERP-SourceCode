@@ -136,7 +136,7 @@ page 50382 "Receipts Header-BOSA"
                         ReceiptAllocations.DeleteAll;
 
 
-                        if Rec."Account Type" = Rec."account type"::Member then begin
+                        if Rec."Account Type" = Rec."account type"::Customer then begin
 
                             BosaSetUp.Get();
                             RunBal := Rec.Amount;
@@ -416,14 +416,14 @@ page 50382 "Receipts Header-BOSA"
                     //TESTFIELD("Cheque No.");
                     //TESTFIELD("Cheque Date");
 
-                    if (Rec."Account Type" = Rec."account type"::"G/L Account") or
-                       (Rec."Account Type" = Rec."account type"::Debtor) then
+                    if (Rec."Account Type" = Rec."account type"::"G/L Account") /* or
+                       (Rec."Account Type" = Rec."account type"::Debtor) */ then
                         TransType := 'Withdrawal'
                     else
                         TransType := 'Deposit';
 
                     BOSABank := Rec."Employer No.";
-                    if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::"FOSA Loan") then begin
+                    if (Rec."Account Type" = Rec."account type"::Customer)/*  or (Rec."Account Type" = Rec."account type"::"FOSA Loan") */ then begin
 
                         if Rec.Amount <> Rec."Allocated Amount" then
                             Error('Receipt amount must be equal to the allocated amount.');
@@ -460,7 +460,7 @@ page 50382 "Receipts Header-BOSA"
                     if GenJournalLine.Amount <> 0 then
                         GenJournalLine.Insert;
 
-                    if (Rec."Account Type" <> Rec."account type"::Member) and (Rec."Account Type" <> Rec."account type"::"FOSA Loan") and (Rec."Account Type" <> Rec."account type"::Vendor) then begin
+                    if (Rec."Account Type" <> Rec."account type"::Customer) /* and (Rec."Account Type" <> Rec."account type"::"FOSA Loan") */ and (Rec."Account Type" <> Rec."account type"::Vendor) then begin
                         LineNo := LineNo + 10000;
 
                         GenJournalLine.Init;
@@ -471,11 +471,11 @@ page 50382 "Receipts Header-BOSA"
                         GenJournalLine."Line No." := LineNo;
                         if Rec."Account Type" = Rec."account type"::"G/L Account" then
                             GenJournalLine."Account Type" := Rec."Account Type"
-                        else if Rec."Account Type" = Rec."account type"::Debtor then
-                            GenJournalLine."Account Type" := Rec."Account Type"
+                        // else if Rec."Account Type" = Rec."account type"::Debtor then
+                        //     GenJournalLine."Account Type" := Rec."Account Type"
                         else if Rec."Account Type" = Rec."account type"::Vendor then
                             GenJournalLine."Account Type" := Rec."Account Type"
-                        else if Rec."Account Type" = Rec."account type"::Member then
+                        else if Rec."Account Type" = Rec."account type"::Customer then
                             GenJournalLine."Account Type" := Rec."Account Type";
                         GenJournalLine."Account No." := Rec."Account No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
@@ -497,7 +497,7 @@ page 50382 "Receipts Header-BOSA"
 
                     GenSetup.Get();
 
-                    if (Rec."Account Type" = Rec."account type"::Member) or (Rec."Account Type" = Rec."account type"::"FOSA Loan") or (Rec."Account Type" = Rec."account type"::Vendor) then begin
+                    if (Rec."Account Type" = Rec."account type"::Customer) /* or (Rec."Account Type" = Rec."account type"::"FOSA Loan") */ or (Rec."Account Type" = Rec."account type"::Vendor) then begin
 
                         ReceiptAllocations.Reset;
                         ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
@@ -550,7 +550,7 @@ page 50382 "Receipts Header-BOSA"
                                         end;
                                     end;
 
-                                    if Rec."Account Type" = Rec."account type"::Member then begin
+                                    if Rec."Account Type" = Rec."account type"::Customer then begin
                                         GenJournalLine."Posting Date" := Rec."Transaction Date";
                                         GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
                                         GenJournalLine."Shortcut Dimension 2 Code" := '01';
@@ -707,7 +707,7 @@ page 50382 "Receipts Header-BOSA"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;
         BOSARcpt: Record "Receipts & Payments";

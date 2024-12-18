@@ -2662,7 +2662,7 @@ Codeunit 50030 "Poly Factory"
     end;
 
 
-    procedure knInsertDataSheetMain(MemberNo: Code[20]; PayrollNo: Code[30]; EmployerCode: Code[70]; AdjustmentType: Option " ","Registration Fee","Rejoining Fee","Deposit Contriution","Share Capital","Insurance Contribution","Stock Payment","By Laws","Loan Adjustment","Demand Savings"; AdjustmentDate: Date; AdjustmentAmount: Decimal; LoanNo: Code[20]; LoanProductType: Code[40]; PrevAmount: Decimal)
+    procedure knInsertDataSheetMain(MemberNo: Code[20]; PayrollNo: Code[30]; EmployerCode: Code[70]; AdjustmentType: Option " ","Registration Fee","Rejoining Fee","Deposit Contriution","Shares Capital","Insurance Contribution","Stock Payment","By Laws","Loan Adjustment","Demand Savings"; AdjustmentDate: Date; AdjustmentAmount: Decimal; LoanNo: Code[20]; LoanProductType: Code[40]; PrevAmount: Decimal)
     var
         DataSheetMain: Record 51417;
     begin

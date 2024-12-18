@@ -2,33 +2,33 @@
 Report 50279 "Members Card"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/members_card.rdl';
+    RDLCLayout = './Layouts/members card.rdl';
     UsageCategory = ReportsAndAnalysis;
 
 
     dataset
     {
-        dataitem("Members Register"; "Member Register")
+        dataitem(Customer; Customer)
         {
             column(ReportForNavId_2; 2)
             {
             }
-            column(InvNo; "Members Register"."No.")
+            column(InvNo; Customer."No.")
             {
             }
-            column(InvName; "Members Register".Name)
+            column(InvName; Customer.Name)
             {
             }
-            column(InvEmail; "Members Register"."E-Mail (Personal)")
+            column(InvEmail; Customer."E-Mail (Personal)")
             {
             }
-            column(InvId; "Members Register"."ID No.")
+            column(InvId; Customer."ID No.")
             {
             }
-            column(InvPicture; "Members Register".Image)
+            column(InvPicture; Customer.Image)
             {
             }
-            column(Siignature; "Members Register".Signature)
+            column(Siignature; Customer.Signature)
             {
             }
             column(CName; CompInfo.Name)

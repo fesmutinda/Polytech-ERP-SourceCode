@@ -226,7 +226,7 @@ Page 56100 "Membership Exit List"
         ShareCapSellPageVisible: Boolean;
         //ObjShareCapSell: Record "Share Capital Sell";
         SurestepFactory: Codeunit "SURESTEP Factory";
-        JVTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
+        JVTransactionType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         JVAccountType: Enum "Gen. Journal Account Type";
         TemplateName: Code[20];
         BatchName: Code[20];
@@ -345,7 +345,7 @@ Page 56100 "Membership Exit List"
     //         if ObjShareCapSell.FindSet then begin
     //             repeat
     //                 LineNo := LineNo + 10000;
-    //                 SurestepFactory.FnCreateGnlJournalLine(TemplateName, BatchName, "No.", LineNo, GenJournalLine."transaction type"::"Share Capital",
+    //                 SurestepFactory.FnCreateGnlJournalLine(TemplateName, BatchName, "No.", LineNo, GenJournalLine."transaction type"::"Shares Capital",
     //                 GenJournalLine."account type"::Vendor, ObjShareCapSell."Buyer Share Capital Account", "Posting Date",
     //                 (ObjShareCapSell.Amount * -1), 'BOSA', "No.", 'Share Capital Purchase From ' + Format(ObjShareCapSell."Selling Member No"), '', GenJournalLine."application source"::" ");
     //                 VarBuyerMemberNos := VarBuyerMemberNos + ObjShareCapSell."Buyer Member No" + ', ';
@@ -355,7 +355,7 @@ Page 56100 "Membership Exit List"
     //         LineNo := LineNo + 10000;
     //         //=========================================================================================================Debit Seller Account
     //         CalcFields("Share Capital to Sell");
-    //         SurestepFactory.FnCreateGnlJournalLine(TemplateName, BatchName, "No.", LineNo, GenJournalLine."transaction type"::"Share Capital",
+    //         SurestepFactory.FnCreateGnlJournalLine(TemplateName, BatchName, "No.", LineNo, GenJournalLine."transaction type"::"Shares Capital",
     //         GenJournalLine."account type"::Vendor, "Seller Share Capital Account", "Posting Date",
     //             ("Share Capital to Sell"), 'BOSA', "No.", 'Share Capital Sell to ' + VarBuyerMemberNos, '', GenJournalLine."application source"::" ");
 

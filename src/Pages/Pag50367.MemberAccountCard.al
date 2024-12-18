@@ -7,7 +7,7 @@ page 50367 "Member Account Card"
     DeleteAllowed = false;
     PageType = Card;
     RefreshOnActivate = true;
-    SourceTable = "Member Register";
+    SourceTable = Customer;
 
     layout
     {
@@ -306,7 +306,8 @@ page 50367 "Member Account Card"
                     Image = CustomerLedger;
                     Promoted = true;
                     PromotedCategory = Process;
-                    RunObject = Page "Member Ledger Entries";
+                    //RunObject = Page "Member Ledger Entries";
+                    RunObject = page "Customer Ledger Entries";
                     RunPageLink = "Customer No." = field("No.");
                     RunPageView = sorting("Customer No.");
 
@@ -641,7 +642,7 @@ page 50367 "Member Account Card"
             CurrentAge := '';
             CurrentAge := Dates.DetermineAge(Rec."Date Of Birth", Today);
         end;
-        if rec."Account Category" = rec."Account Category"::Single then begin//end "Regular Account" then begin
+        if rec."Account Category" = rec."Account Category"::Individual then begin//end "Regular Account" then begin
             IsRegularAccount := true;
         end;
         if rec."Account Category" = rec."Account Category"::Corporate then begin
@@ -650,7 +651,8 @@ page 50367 "Member Account Card"
     end;
 
     var
-        Cust: record "Member Register";
+        //Cust: record "Member Register";
+        Cust: Record Customer;
         Vend: record Vendor;
         CurrentAge: Text;
         TypeIsEmployed: Boolean;

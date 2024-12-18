@@ -336,7 +336,7 @@ page 50899 "Micro_Fin_Transactions"
 
                                     //*****************************Shares Recovery*****************
                                     if DistributedAmt > 0 then begin
-                                        if Transact."Share Capital" > 0 then begin
+                                        if Transact."Shares Capital" > 0 then begin
                                             LineNo := LineNo + 10000;
                                             GenJournalLine.Init;
                                             GenJournalLine."Journal Template Name" := Jtemplate;
@@ -349,7 +349,7 @@ page 50899 "Micro_Fin_Transactions"
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             GenJournalLine."Posting Date" := Rec."Transaction Date";
                                             GenJournalLine.Description := Rec."Payment Description";
-                                            GenJournalLine.Amount := -Transact."Share Capital";
+                                            GenJournalLine.Amount := -Transact."Shares Capital";
                                             GenJournalLine.Validate(GenJournalLine.Amount);
                                             GenJournalLine."Loan No" := Transact."Loan No.";
                                             GenJournalLine."Shortcut Dimension 1 Code" := Rec."Activity Code";
@@ -482,7 +482,7 @@ page 50899 "Micro_Fin_Transactions"
                             //Shares
 
                             if DistributedAmt > 0 then begin
-                                if Transact."Share Capital" > 0 then begin
+                                if Transact."Shares Capital" > 0 then begin
 
                                     LineNo := LineNo + 10000;
                                     GenJournalLine.Init;
@@ -497,7 +497,7 @@ page 50899 "Micro_Fin_Transactions"
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine.Description := 'Shares-' + Transact."Account Number";
-                                    GenJournalLine.Amount := -Transact."Share Capital";
+                                    GenJournalLine.Amount := -Transact."Shares Capital";
                                     ;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
                                     GenJournalLine."Shortcut Dimension 1 Code" := Rec."Activity Code";

@@ -25,11 +25,16 @@ Report 50050 MembershipApplicationReport
             column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
-            column(No; "No.") { }
-            column(Name; Name) { }
-            column(ID_No_; "ID No.") { }
-            column(EntryNo; EntryNo) { }
-            column(Mobile_Phone_No; "Mobile Phone No") { }
+            column(No; "No.")
+            { }
+            column(Name; Name)
+            { }
+            column(ID_No_; "ID No.")
+            { }
+            column(EntryNo; EntryNo)
+            { }
+            column(Mobile_Phone_No; "Mobile Phone No")
+            { }
 
 
 
@@ -76,6 +81,6 @@ Report 50050 MembershipApplicationReport
         EntryNo: Integer;
         Sharecapital: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record "Member Register";
+        TbMembRegister: Record Customer;
         Gensetup: Record "Sacco General Set-Up";
 }

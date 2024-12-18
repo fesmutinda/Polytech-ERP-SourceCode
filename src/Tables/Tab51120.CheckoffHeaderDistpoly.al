@@ -272,7 +272,7 @@ Table 51120 "CheckoffHeader-Dist poly"
         }
         field(46; "SHARE TOTAL AMOUNT"; Decimal)
         {
-            CalcFormula = sum("CheckoffLinesDistributed poly"."Share Capital" where("Receipt Header No" = field(No)));
+            CalcFormula = sum("CheckoffLinesDistributed poly"."Shares Capital" where("Receipt Header No" = field(No)));
             FieldClass = FlowField;
 
             trigger OnValidate()

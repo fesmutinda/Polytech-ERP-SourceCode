@@ -449,7 +449,7 @@ Codeunit 50025 SwizzKashMB
                 MemberLedgerEntry.SetCurrentkey(MemberLedgerEntry."Entry No.");
                 MemberLedgerEntry.Ascending(false);
                 MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Account);
-                MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+                MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
                 Mrowcount:=MemberLedgerEntry.Count;
                 if MemberLedgerEntry.Find('-') then begin
                   repeat
@@ -1220,7 +1220,7 @@ Codeunit 50025 SwizzKashMB
         
             MemberLedgerEntry.Reset;
               MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Members."No.");
-              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
               if MemberLedgerEntry.Find('-') then begin
         
             BOSATransSchedule.Reset;
@@ -2208,7 +2208,7 @@ Codeunit 50025 SwizzKashMB
           if Members.Find('-') then begin
               MemberLedgerEntry.Reset;
               MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Members."No.");
-              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
               if MemberLedgerEntry.Find('-') then
                 repeat
                     amount:=amount+MemberLedgerEntry.Amount;
@@ -2386,7 +2386,7 @@ Codeunit 50025 SwizzKashMB
           if Members.Find('-') then begin
               MemberLedgerEntry.Reset;
               MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Members."No.");
-              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
               if MemberLedgerEntry.Find('-') then begin
                 repeat
                     samount:=samount+MemberLedgerEntry.Amount;
@@ -6829,7 +6829,7 @@ Codeunit 50025 SwizzKashMB
                           ',"balance":"'+Format(memberTable."Current Shares",0,'<Precision,2:2><Integer><Decimals>')+'" }';
 
             accountsList+=',{ "accountId":"' + memberTable."No."+
-                          '", "accountName":"Share Capital"'+
+                          '", "accountName":"Shares Capital"'+
                           ',"balance":"'+Format(memberTable."Shares Retained",0,'<Precision,2:2><Integer><Decimals>')+'" }';
 
             accountsList+=',{ "accountId":"' + memberTable."No."+
@@ -6967,7 +6967,7 @@ Codeunit 50025 SwizzKashMB
             memberledgerentryTable.SetRange(memberledgerentryTable."Transaction Type", memberledgerentryTable."transaction type"::"Benevolent Fund");
           end
           else if accountType = 'SHA' then begin
-            memberledgerentryTable.SetRange(memberledgerentryTable."Transaction Type", memberledgerentryTable."transaction type"::"Share Capital");
+            memberledgerentryTable.SetRange(memberledgerentryTable."Transaction Type", memberledgerentryTable."transaction type"::"Shares Capital");
           end;
 
           if memberledgerentryTable.Find('-') then begin

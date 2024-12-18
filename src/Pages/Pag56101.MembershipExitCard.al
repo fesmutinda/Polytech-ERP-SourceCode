@@ -73,7 +73,7 @@ Page 56101 "Membership Exit Card"
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Shares Capital")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -368,7 +368,7 @@ Page 56101 "Membership Exit Card"
         ShareCapSellPageVisible: Boolean;
         // ObjShareCapSell: Record "Share Capital Sell";
         SurestepFactory: Codeunit "SURESTEP Factory";
-        JVTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
+        JVTransactionType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         JVAccountType: Enum "Gen. Journal Account Type";
         TemplateName: Code[20];
         BatchName: Code[20];
@@ -634,7 +634,7 @@ Page 56101 "Membership Exit Card"
         DActivity: code[20];
         DBranch: Code[50];
         Cust: Record customer;
-        Cust2: Record "Member Register";
+        Cust2: Record Customer;
         Generalsetup: Record "Sacco General Set-Up";
         RunningBal: Decimal;
         SFactory: Codeunit "SURESTEP Factory";

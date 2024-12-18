@@ -27,7 +27,7 @@ Page 50145 "Member Re-Application Page"
                     ToolTip = 'Specifies the value of the Member Name field.';
                     Editable = false;
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Shares Capital")
                 {
                     ApplicationArea = all;
                     Editable = false;
@@ -146,7 +146,7 @@ Page 50145 "Member Re-Application Page"
         }
     }
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
 
 }

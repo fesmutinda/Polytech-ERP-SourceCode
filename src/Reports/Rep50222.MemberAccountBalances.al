@@ -43,7 +43,7 @@ Report 50222 "Member Account  Balances"
             column(OutstandingBalance_member; Member."Outstanding Balance")
             {
             }
-            /* column(Shares_capital; Member."Share Capital")
+            /* column(Shares_capital; Member."Shares Capital")
             {
             } */
 
@@ -67,10 +67,10 @@ Report 50222 "Member Account  Balances"
             trigger OnAfterGetRecord()
             begin
 
-                CalcFields("Current Shares", /* "Share Capital", */ "Outstanding Balance", "Outstanding Interest"/* , "Alpha Savings", "Junior Savings One", "Likizo Contribution" */);
+                CalcFields("Current Shares", /* "Shares Capital", */ "Outstanding Balance", "Outstanding Interest"/* , "Alpha Savings", "Junior Savings One", "Likizo Contribution" */);
                 LoansBal := "Outstanding Balance";
                 CurrentShares := "Current Shares";
-                //SharesCap := "Share Capital";
+                //SharesCap := "Shares Capital";
                 InterestBal := "Outstanding Interest";
 
 
