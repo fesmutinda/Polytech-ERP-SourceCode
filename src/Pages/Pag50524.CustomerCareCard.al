@@ -165,7 +165,7 @@ page 50524 "Customer Care Card"
                     ApplicationArea = Basic;
                     Caption = 'Benevolent Fund';
                 }
-                field("FOSA  Account Bal"; Rec."FOSA  Account Bal")
+                field("FOSA Account Bal"; Rec."FOSA Account Bal")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

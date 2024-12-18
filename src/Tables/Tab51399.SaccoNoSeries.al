@@ -333,6 +333,10 @@ Table 51399 "Sacco No. Series"
         {
             TableRelation = "No. Series";
         }
+        field(51516105; "OVerdraft Nos"; Code[20])
+        {
+            TableRelation = "No. Series";
+        }
         field(51516004; "Change Request No"; Code[20])
         {
             TableRelation = "No. Series";

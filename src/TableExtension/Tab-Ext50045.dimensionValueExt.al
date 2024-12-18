@@ -6,7 +6,7 @@ tableextension 50045 "dimensionValueExt" extends "Dimension Value"
         {
             TableRelation = "G/L Account"."No.";
         }
-        field(51516221; "Overdraft Account Commission"; Code[10])
+        field(51516221; "Overdraft Account Co mmission"; Code[10])
         {
             TableRelation = "G/L Account"."No.";
         }

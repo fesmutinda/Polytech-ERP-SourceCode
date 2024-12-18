@@ -488,6 +488,9 @@ Table 51398 "Sacco General Set-Up"
         field(135; "E-Loan Qualification (%)"; Decimal)
         {
         }
+        field(1946; "Overdraft Limit"; Decimal)
+        {
+        }
         field(136; "Charge FOSA Registration Fee"; Boolean)
         {
         }
@@ -790,6 +793,39 @@ Table 51398 "Sacco General Set-Up"
         }
         field(222; "Top up Account"; Code[20]) { }//"Banks Charges"
         field(223; "Banks Charges"; Code[20]) { }//"Banks Charges"
+        field(932; "Form Fee"; Decimal)
+        {
+        }
+        field(935; "Form Fee Account"; Code[30])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(933; "Passcard Fee"; Decimal)
+        {
+        }
+        field(936; "Membership Form Acct"; Code[30])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(937; "Ceep Reg Fee"; Decimal)
+        {
+        }
+        field(938; "Ceep Reg Acct"; Code[30])
+        {
+            TableRelation = "G/L Account";
+        }
+
+        field(942; "Unpaid Cheques Fee"; Decimal)
+        {
+        }
+        field(943; "Unpaid Cheques Fee Account"; Code[20])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(944; "Cheque Processing Fee"; Decimal)
+        {
+        }
+
     }
 
     keys

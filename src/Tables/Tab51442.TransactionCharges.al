@@ -34,6 +34,11 @@ Table 51442 "Transaction Charges"
         field(4; "Charge Amount"; Decimal)
         {
         }
+        field(62; "Charge Type"; Option)
+        {
+            OptionCaption = 'Flat Amount,Percentage of Amount,Staggered';
+            OptionMembers = "Flat Amount","Percentage of Amount",Staggered;
+        }
         field(5; "Percentage of Amount"; Decimal)
         {
 
@@ -112,6 +117,13 @@ Table 51442 "Transaction Charges"
         }
         field(27; "Transaction Code"; Code[20])
         {
+        }
+        field(28; "Charge Excise Duty"; Boolean)
+        {
+        }
+        field(29; "Staggered Charge Code"; Code[20])
+        {
+            TableRelation = "Tarrif Header".Code;
         }
     }
 

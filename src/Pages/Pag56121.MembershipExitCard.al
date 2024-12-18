@@ -536,7 +536,7 @@ Page 56121 "Membership Exit Card"
                                 LoanTobeRecovered := Loans."Outstanding Balance" else
                                 LoanTobeRecovered := RunningBal;
                             LineNo := LineNo + 10000;
-                            SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::Repayment, GenJournalLine."Account Type"::Customer, Loans."Client Code", Rec."Posting Date", LoanTobeRecovered * -1,
+                            SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::"Loan Repayment", GenJournalLine."Account Type"::Customer, Loans."Client Code", Rec."Posting Date", LoanTobeRecovered * -1,
                             'BOSA', Loans."Loan  No.", 'Loan Balance paid on exit - ' + Loans."Loan  No.", Loans."Loan  No.");
                             RunningBal := RunningBal - LoanTobeRecovered;
                         end;
@@ -675,7 +675,7 @@ Page 56121 "Membership Exit Card"
                                 LoanTobeRecovered := RunningBal else
                                 LoanTobeRecovered := Loans."Outstanding Balance";
                             LineNo := LineNo + 10000;
-                            SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::Repayment, GenJournalLine."Account Type"::Customer, Loans."Client Code", Rec."Posting Date", LoanTobeRecovered * -1, 'BOSA', Loans."Loan  No.", 'Loan Balance paid on exit - ' + Loans."Loan  No.", Loans."Loan  No.");
+                            SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::"Loan Repayment", GenJournalLine."Account Type"::Customer, Loans."Client Code", Rec."Posting Date", LoanTobeRecovered * -1, 'BOSA', Loans."Loan  No.", 'Loan Balance paid on exit - ' + Loans."Loan  No.", Loans."Loan  No.");
                             RunningBal := RunningBal - LoanTobeRecovered;
                         end;
                     until Loans.Next = 0;

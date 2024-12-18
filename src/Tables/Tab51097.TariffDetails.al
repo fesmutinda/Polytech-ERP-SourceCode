@@ -20,6 +20,17 @@ Table 51097 "Tariff Details"
         {
             Editable = true;
         }
+        field(5; "Use Percentage"; Boolean)
+        {
+        }
+        field(6; Percentage; Decimal)
+        {
+        }
+        field(7; "Transaction Type"; Code[30])
+        {
+            Editable = true;
+            TableRelation = "Transaction Types".Code;
+        }
     }
 
     keys

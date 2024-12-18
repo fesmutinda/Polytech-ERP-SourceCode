@@ -103,26 +103,6 @@ Page 56043 "Polytech Sacco Role Center"
 
     actions
     {
-
-        // area(processing)
-        // {
-
-        //     Description = 'Periodic Activities';
-        //     action("Process Monthly Interest")
-        //     {
-        //         ApplicationArea = all;
-        //         Caption = 'Process Monthly Interest';
-        //         Image = Process;
-        //         RunObject = report "Post Monthly Interest.";
-        //     }
-        //     action("Process Monthly Checkoff")
-        //     {
-        //         ApplicationArea = all;
-        //         Caption = 'Process Monthly Checkoff';
-        //         Image = Process;
-        //         RunObject = page "Bosa Receipts H List-Checkoff";
-        //     }
-        // }
         area(reporting)
         {
 
@@ -950,7 +930,6 @@ Page 56043 "Polytech Sacco Role Center"
             }
 
             //.................................START OF MEMBERSHIP MANAGEMENT..................................
-
             group(MembershipManagement)
             {
                 Caption = 'Membership Management';
@@ -1041,8 +1020,6 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = page "Membership Exit List-Posted";
                         RunPageView = where(Posted = const(true));
                     }
-
-
                 }
 
 
@@ -1053,8 +1030,10 @@ Page 56043 "Polytech Sacco Role Center"
                     action("Sacco Membership Reports")
                     {
                         ApplicationArea = all;
-                        RunObject = report "Member Accounts List";
-                        ToolTip = 'Members Register';
+                        Caption = 'Member Accounts';
+                        RunObject = Page "Member List";
+                        ToolTip = 'View Member Accounts';
+                        Visible = true;
 
                     }
                     action("Member Account Balances Report")
@@ -1067,14 +1046,14 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = all;
                         Caption = 'Member savings columnar report.';
-                        RunObject = report "Member savings report";
+                        // RunObject = report "Member savings report";
 
                     }
                     action(memberwithoutsharecapitalReport)
                     {
                         ApplicationArea = all;
                         Caption = 'Members without minimum share capital report.';
-                        RunObject = report MemberwithoutMinshapitalreport;
+                        // RunObject = report MemberwithoutMinshapitalreport;
 
                     }
 
@@ -1082,14 +1061,14 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = all;
                         Caption = 'Members without passports report.';
-                        RunObject = report Memberswithoutpassportsreport;
+                        // RunObject = report Memberswithoutpassportsreport;
 
                     }
                     action(MemberwithoutSignatureReport)
                     {
                         ApplicationArea = all;
                         Caption = ' Members without signature report.';
-                        RunObject = report Memberwithoutsignaturereport;
+                        // RunObject = report Memberwithoutsignaturereport;
 
                     }
                     action(MemberApplicationReport)
@@ -1150,7 +1129,7 @@ Page 56043 "Polytech Sacco Role Center"
                     action("Member Accounts Statement")
                     {
                         ApplicationArea = all;
-                        RunObject = report "Member Account Statement";
+                        RunObject = report "Members Deposits Statement";// "Member Account Statement";
                     }
                 }
 
@@ -1167,14 +1146,14 @@ Page 56043 "Polytech Sacco Role Center"
                 ToolTip = 'Manage BOSA Loans Module';
                 group("BOSA Loans Management")
                 {
-                    Caption = 'BOSA Loans Applications';
+                    Caption = 'New BOSA Loans Applications';
                     ToolTip = 'BOSA Loans'' Management Module';
                     action("BOSA Loan Application")
                     {
                         ApplicationArea = All;
                         Caption = 'BOSA Loan Application List';
                         Image = Loaners;
-                        RunObject = Page "Loans Applied  List";
+                        RunObject = Page "Loan List-New Application BOSA";
                         ToolTip = 'Open BOSA Loan Applications List';
                         RunPageView = where(Posted = const(false), "Loan Status" = const(Application));
                     }
@@ -1183,7 +1162,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'BOSA Loans Pending Approval';
                         Image = CreditCard;
-                        RunObject = Page "Loans Applied  List(Appraisal)";// "LoanList-Pending Approval BOSA";
+                        RunObject = Page "LoanList-Pending Approval BOSA";
 
                         ToolTip = 'Open the list of BOSA Loans Pending Approval';
 
@@ -1192,7 +1171,6 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'BOSA Loans Pending Disbursement.';
-                        // RunObject = Page "Loans Approved List";// "Loan Application BOSA-Approved";
                         RunObject = Page "Loan Application BOSA-Approved";
                         ToolTip = 'Open the list of Approved Loans Pending Disbursement.';
                     }

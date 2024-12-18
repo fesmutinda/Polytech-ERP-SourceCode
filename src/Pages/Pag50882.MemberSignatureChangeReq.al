@@ -109,21 +109,24 @@ page 50882 "Member Signature-Change Req"
         SelectPictureTxt: label 'Select a picture to upload';
         DownloadImageTxt: label 'Download image';
         HideActions: Boolean;
+        Camera: Codeunit Camera;
+        MimeTypeTok: Label 'image/jpeg', Locked = true;
 
     procedure TakeNewPicture()
     var
-    // CameraOptions: dotnet CameraOptions;
+        PictureInstream: InStream;
+        PictureDescription: Text;
     begin
-        Rec.Find;
-        Rec.TestField(No);
-        //TESTFIELD(Description);
+        Rec.TestField(Rec."No");
 
-        if not CameraAvailable then
-            exit;
+        if Rec."Picture".HasValue() then
+            if not Confirm(OverrideImageQst) then
+                exit;
 
-        // CameraOptions := CameraOptions.CameraOptions;
-        // CameraOptions.Quality := 50;
-        // CameraProvider.RequestPictureAsync(CameraOptions);
+        if Camera.GetPicture(PictureInstream, PictureDescription) then begin
+            rec.signinature.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
+            Rec.Modify(true)
+        end;
     end;
 
     procedure ImportFromDevice()
@@ -136,7 +139,7 @@ page 50882 "Member Signature-Change Req"
         Rec.TestField(No);
         //TESTFIELD(Description);
 
-        if Rec.signinature.Count > 0 then
+        if Rec.signinature.HasValue then// .Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -155,7 +158,7 @@ page 50882 "Member Signature-Change Req"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.signinature.Count <> 0;
+        DeleteExportEnabled := Rec.signinature.HasValue;//then// .Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean

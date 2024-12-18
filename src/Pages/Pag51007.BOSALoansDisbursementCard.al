@@ -282,8 +282,11 @@ Page 51007 "BOSA Loans Disbursement Card"
                     PromotedIsBig = true;
                     Promoted = true;
                     PromotedCategory = Process;
-                    Visible = false;
+                    Visible = true;
                     trigger OnAction()
+                    var
+                        FundsUserSetup: Record "Funds User Setup";
+                        CustLed: Record "Cust. Ledger Entry";
                     begin
                         If FnCanPostLoans(UserId) = false then begin
                             Error('Prohibited ! You are not allowed to POST this Loan');
@@ -301,13 +304,22 @@ Page 51007 "BOSA Loans Disbursement Card"
                             exit;
                         end
                         else begin
+                            // FundsUserSetup.GET(USERID);
+                            // TemplateName := FundsUserSetup."Payment Journal Template";
+                            // BatchName := FundsUserSetup."Payment Journal Batch";
+
                             TemplateName := 'GENERAL';
                             BatchName := 'LOANS';
                             LoanApps.Reset;
                             LoanApps.SetRange(LoanApps."Loan  No.", Rec."Loan  No.");
                             if LoanApps.FindSet then begin
                                 repeat
+                                    // CustLed.Reset();
+                                    // CustLed.Init();
+                                    // CustLed."Entry No." := CustLed."Entry No." + 2000;
+
                                     FnInsertBOSALines(LoanApps, LoanApps."Loan  No.");
+                                    // exit;
                                     GenJournalLine.RESET;
                                     GenJournalLine.SETRANGE("Journal Template Name", TemplateName);
                                     GenJournalLine.SETRANGE("Journal Batch Name", BatchName);
@@ -316,7 +328,7 @@ Page 51007 "BOSA Loans Disbursement Card"
                                         FnSendNotifications(); //Send Notifications
                                         Rec."Loan Status" := Rec."Loan Status"::Issued;
                                         Rec.Posted := true;
-                                        Rec."Captured By" := UserId;
+                                        Rec."Posted By" := UserId;
                                         Rec."Posting Date" := Today;
                                         Rec."Issued Date" := Rec."Loan Disbursement Date";
                                         Rec."Approval Status" := Rec."Approval Status"::Approved;
@@ -775,7 +787,7 @@ Page 51007 "BOSA Loans Disbursement Card"
         SMSMessages.Source := 'LOAN APPL';
         SMSMessages."Entered By" := USERID;
         SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
-        SMSMessages."SMS Message" := 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") + ' has been received. Devco Sacco Ltd.';
+        SMSMessages."SMS Message" := 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") + ' has been received. Polytech Sacco Ltd.';
         Cust.RESET;
         IF Cust.GET(Rec."Client Code") THEN
             if Cust."Mobile Phone No" <> '' then begin
@@ -810,7 +822,7 @@ Page 51007 "BOSA Loans Disbursement Card"
                     SMSMessages.Source := 'LOAN GUARANTORS';
                     SMSMessages."Entered By" := USERID;
                     SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
-                    IF LoanApp.GET(LoanGuar."Loan No") THEN SMSMessages."SMS Message" := 'You have guaranteed an amount of ' + FORMAT(LoanGuar."Amont Guaranteed") + ' to ' + Rec."Client Name" + '  ' + 'Loan Type ' + Rec."Loan Product Type" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Devco Sacco Ltd. Call 0726050260 if in dispute';
+                    IF LoanApp.GET(LoanGuar."Loan No") THEN SMSMessages."SMS Message" := 'You have guaranteed an amount of ' + FORMAT(LoanGuar."Amont Guaranteed") + ' to ' + Rec."Client Name" + '  ' + 'Loan Type ' + Rec."Loan Product Type" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0726050260 if in dispute';
                     ;
                     SMSMessages."Telephone No" := Cust."Phone No.";
                     SMSMessages.INSERT;
@@ -916,7 +928,7 @@ Page 51007 "BOSA Loans Disbursement Card"
             IF LoanTopUp.FIND('-') THEN BEGIN
                 repeat
                     LineNo := LineNo + 10000;
-                    SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."Loan  No.", LineNo, GenJournalLine."Transaction Type"::Repayment, GenJournalLine."Account Type"::Customer, LoanApps."Client Code", DirbursementDate, LoanTopUp."Principle Top Up" * -1, 'BOSA', LoanApps."Loan  No.", 'Loan OffSet By - ' + LoanApps."Loan  No.", LoanTopUp."Loan Top Up");
+                    SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."Loan  No.", LineNo, GenJournalLine."Transaction Type"::"Loan Repayment", GenJournalLine."Account Type"::Customer, LoanApps."Client Code", DirbursementDate, LoanTopUp."Principle Top Up" * -1, 'BOSA', LoanApps."Loan  No.", 'Loan OffSet By - ' + LoanApps."Loan  No.", LoanTopUp."Loan Top Up");
                     //..................Recover Interest On Top Up
                     LineNo := LineNo + 10000;
                     SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."Loan  No.", LineNo, GenJournalLine."Transaction Type"::"Interest Paid", GenJournalLine."Account Type"::Customer, LoanApps."Client Code", DirbursementDate, LoanTopUp."Interest Top Up" * -1, 'BOSA', LoanApps."Loan  No.", 'Interest Due Paid on top up - ', LoanTopUp."Loan Top Up");
@@ -938,6 +950,7 @@ Page 51007 "BOSA Loans Disbursement Card"
         PCharges.SETRANGE(PCharges."Product Code", Rec."Loan Product Type");
         IF PCharges.FIND('-') THEN BEGIN
             REPEAT
+                //Credit G/L
                 PCharges.TESTFIELD(PCharges."G/L Account");
                 LineNo := LineNo + 10000;
                 GenJournalLine.INIT;

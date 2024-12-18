@@ -4,7 +4,10 @@ page 50844 "Updated Change Request List"
     CardPageID = "Updated Change Request Card";
     Editable = false;
     PageType = List;
-    SourceTable = 51552;
+    UsageCategory = Lists;
+    DeleteAllowed = false;
+    ApplicationArea = All;
+    SourceTable = "Change Request";
     SourceTableView = where(Changed = const(true));
 
     layout
@@ -161,4 +164,5 @@ page 50844 "Updated Change Request List"
     {
     }
 }
+
 

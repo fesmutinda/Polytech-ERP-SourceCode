@@ -134,7 +134,7 @@ table 50051 "BOSA Transfer Schedule"
                     else
                         if "Transaction Type" = "transaction type"::Loan then
                             Description := 'Loan' else
-                            if "Transaction Type" = "transaction type"::Repayment then
+                            if "Transaction Type" = "transaction type"::"Loan Repayment" then
                                 Description := 'Loan Repayment' else
                                 if "Transaction Type" = "transaction type"::Withdrawal then
                                     Description := 'Withdrawal' else

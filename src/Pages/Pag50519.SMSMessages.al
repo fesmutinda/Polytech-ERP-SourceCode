@@ -60,9 +60,9 @@ page 50519 "SMS Messages"
 
     trigger OnInit()
     begin
-        if Usersetup.Get(UserId) then begin
-            if Usersetup."View Payroll" = false then Error('You dont have permissions for SMS Page Due To Opt, Contact your system administrator! ')
-        end;
+        // if Usersetup.Get(UserId) then begin
+        //     if Usersetup."View Payroll" = false then Error('You dont have permissions for SMS Page Due To Opt, Contact your system administrator! ')
+        // end;
     end;
 
     var

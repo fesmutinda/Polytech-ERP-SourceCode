@@ -17,8 +17,8 @@ Table 51387 "Receipt Allocation"
         }
         field(3; "Transaction Type"; Option)
         {
-            OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,Standing Order Charges,Additional Shares,Interest Due,Jiokoe Savings,Holiday savings';
-            OptionMembers = " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","Standing Order Charges","Additional Shares","Interest Due","Jiokoe Savings","Holiday savings";
+            OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,Standing Order Charges,Additional Shares,Interest Due,Jiokoe Savings,Holiday savings,Withdrawal';
+            OptionMembers = " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","Standing Order Charges","Additional Shares","Interest Due","Jiokoe Savings","Holiday savings",Withdrawal;
 
             trigger OnValidate()
             begin

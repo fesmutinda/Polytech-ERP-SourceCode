@@ -60,7 +60,7 @@ page 50703 "Applicant Signature"
                 begin
                     Rec.TestField(Rec."No.");
                     if UploadIntoStream(DialogTittle, '', 'All Files (*.*)|*.*', FileName, InstreamFile) then begin
-                        if Rec."Signature  2".HasValue() then begin
+                        if Rec."Signature".HasValue() then begin
                             if Confirm(OverrideImageQst, false) = false then begin
                                 exit;
                             end else begin
@@ -161,14 +161,14 @@ page 50703 "Applicant Signature"
 
         if Camera.GetPicture(PictureInstream, PictureDescription) then begin
             // Clear(rec.Signature);
-            rec.Picture.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
+            rec.Signature.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
             Rec.Modify(true)
         end;
     end;
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec."Signature  2".HasValue;
+        DeleteExportEnabled := Rec."Signature".HasValue;
     end;
 }
 

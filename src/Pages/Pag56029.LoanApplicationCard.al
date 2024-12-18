@@ -45,12 +45,12 @@ Page 56029 "Loan Application Card"
                 field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic;
-                    Editable = AccountNoEditable;
+                    // Editable = AccountNoEditable;
                     Style = StrongAccent;
-                    Visible = false;
+                    Visible = true;
                 }
 
-                field("Account Category"; Rec."Loans Category")
+                field("Account Category"; Rec."Member Category")
                 {
                     ApplicationArea = all;
                     Visible = false;
@@ -68,12 +68,12 @@ Page 56029 "Loan Application Card"
                     Editable = false;
                 }
 
-                // field(Mulitiplier; Rec.Mulitiplier)
-                // {
-                //     ApplicationArea = Basic;
-                //     Editable = true;
-                //     Style = StrongAccent;
-                // }
+                field(Mulitiplier; Rec."Loan Deposit Multiplier")
+                {
+                    ApplicationArea = Basic;
+                    Editable = true;
+                    Style = StrongAccent;
+                }
                 // field("Deposits Mulitiplier"; Rec."Deposits Mulitiplier")
                 // {
                 //     ApplicationArea = Basic;
@@ -95,11 +95,11 @@ Page 56029 "Loan Application Card"
                         Rec.TestField(Posted, false);
                     end;
                 }
-                // field("Estimated Years to Retire"; Rec."Estimated Years to Retire")
-                // {
-                //     ApplicationArea = all;
-                //     Editable = false;
-                // }
+                field("Estimated Years to Retire"; Rec."Estimated Years to Retire")
+                {
+                    ApplicationArea = all;
+                    Editable = false;
+                }
                 field(Installments; Rec.Installments)
                 {
                     ApplicationArea = Basic;
@@ -130,46 +130,46 @@ Page 56029 "Loan Application Card"
                         Rec.TestField(Posted, false);
                     end;
                 }
-                // field("Deboost Loan"; Rec."Deboost Loan Applied")
-                // {
-                //     ApplicationArea = all;
-                //     trigger OnValidate()
-                //     var
-                //         myInt: Integer;
-                //         Loanoffeset: Record "Loan Offset Details";
-                //         OffesetAmount: Decimal;
-                //     begin
-                //         if Rec."Deboost Loan Applied" = true then begin
-                //             begin
-                //                 OffesetAmount := 0;
-                //                 Loanoffeset.Reset();
-                //                 Loanoffeset.SetRange(Loanoffeset."Loan No.", Rec."Loan  No.");
-                //                 if Loanoffeset.FindSet() then begin
-                //                     repeat
-                //                         OffesetAmount := OffesetAmount + Loanoffeset."Principle Top Up"
-                //                     Until Loanoffeset.Next = 0;
-                //                 end;
-                //                 if (Rec."Member Deposits" * Rec.Mulitiplier) < ((rec."Requested Amount" + Rec."Existing Loan") - OffesetAmount) then begin
-                //                     Rec."Deboost Amount" := ((((rec."Requested Amount" + (Rec."Existing Loan" - OffesetAmount))) - (Rec."Member Deposits" * 3)) / 3);
-                //                     Rec."Deboost Commision" := Rec."Deboost Amount" * 0.05;
-                //                     //Message('Debost amount %1 %2', "Deboost Amount", "Deboost Commision");
-                //                     rec.Modify;
-                //                 end;
-                //             end;
-                //         end;
-                //     end;
-                // }
-                // field("Deboost Amount"; Rec."Deboost Amount")
-                // {
-                //     ApplicationArea = all;
-                //     Editable = true;
+                field("Deboost Loan"; Rec."Deboost Loan Applied")
+                {
+                    ApplicationArea = all;
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                        Loanoffeset: Record "Loan Offset Details";
+                        OffesetAmount: Decimal;
+                    begin
+                        if Rec."Deboost Loan Applied" = true then begin
+                            begin
+                                OffesetAmount := 0;
+                                Loanoffeset.Reset();
+                                Loanoffeset.SetRange(Loanoffeset."Loan No.", Rec."Loan  No.");
+                                if Loanoffeset.FindSet() then begin
+                                    repeat
+                                        OffesetAmount := OffesetAmount + Loanoffeset."Principle Top Up"
+                                    Until Loanoffeset.Next = 0;
+                                end;
+                                if (Rec."Member Deposits" * Rec."Loan Deposit Multiplier") < ((rec."Requested Amount" + Rec."Existing Loan") - OffesetAmount) then begin
+                                    Rec."Deboost Amount" := ((((rec."Requested Amount" + (Rec."Existing Loan" - OffesetAmount))) - (Rec."Member Deposits" * 3)) / 3);
+                                    Rec."Deboost Commision" := Rec."Deboost Amount" * 0.05;
+                                    //Message('Debost amount %1 %2', "Deboost Amount", "Deboost Commision");
+                                    rec.Modify;
+                                end;
+                            end;
+                        end;
+                    end;
+                }
+                field("Deboost Amount"; Rec."Deboost Amount")
+                {
+                    ApplicationArea = all;
+                    Editable = true;
 
-                // }
-                // field("Deboost Commision"; Rec."Deboost Commision")
-                // {
-                //     ApplicationArea = all;
-                //     Editable = true;
-                // }
+                }
+                field("Deboost Commision"; Rec."Deboost Commision")
+                {
+                    ApplicationArea = all;
+                    Editable = true;
+                }
 
                 field("Approved Amount"; Rec."Approved Amount")
                 {
@@ -193,7 +193,10 @@ Page 56029 "Loan Application Card"
                 field("Main Sector"; Rec."Main-Sector")
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
+                    ShowMandatory = false;
+                    Style = Ambiguous;
+                    Editable = MNoEditable;
+
 
                     trigger OnValidate()
                     begin
@@ -249,14 +252,14 @@ Page 56029 "Loan Application Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                // field("Valuation Cost"; Rec."Valuation Cost")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                // field("Legal Cost"; Rec."Legal Cost")
-                // {
+                field("Valuation Cost"; Rec."Valuation Cost")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Legal Cost"; Rec."Legal Cost")
+                {
 
-                // }
+                }
                 field("Loan Status"; Rec."Loan Status")
                 {
                     ApplicationArea = Basic;
@@ -332,13 +335,13 @@ Page 56029 "Loan Application Card"
                     Editable = false;
                 }
             }
-            // part(Control1000000003; "Loans CheckRisk List")
-            // {
-            //     Caption = 'Loan Risk Checking';
-            //     ApplicationArea = Basic;
-            //     SubPageLink = "Client Code" = field("Client Code");
-            //     Editable = false;
-            // }
+            part(Control1000000003; "Loans CheckRisk List")
+            {
+                Caption = 'Loan Risk Checking';
+                ApplicationArea = Basic;
+                SubPageLink = "Client Code" = field("Client Code");
+                Editable = false;
+            }
             part(Control1000000004; "Loans Guarantee Details")
             {
                 Caption = 'Guarantors  Detail';
@@ -410,7 +413,7 @@ Page 56029 "Loan Application Card"
                     PromotedCategory = Process;
                     trigger OnAction()
                     var
-                    // SystemGenSet: Codeunit "System General Setup";
+                        SystemGenSet: Codeunit "System General Setup";
                     begin
                         //................Ensure than you cant have two loans same product
                         // SystemGenSet.FnCheckNoOfLoansLimit("Loan  No.", "Loan Product Type", "Client Code");
@@ -544,7 +547,7 @@ Page 56029 "Loan Application Card"
     begin
         Rec.Source := Rec.Source::BOSA;
         Rec."Mode of Disbursement" := Rec."mode of disbursement"::"Cheque";
-        Rec."Mode of Disbursement" := Rec."Mode Of Disbursement"::"Bank Transfer";
+        Rec."Mode of Disbursement" := Rec."Mode Of Disbursement"::Cash;
     end;
 
     trigger OnNextRecord(Steps: Integer): Integer
@@ -592,7 +595,7 @@ Page 56029 "Loan Application Card"
         NewLNApplicNo: Code[10];
         Cust: Record Customer;
         EmailCodeunit: Codeunit Emailcodeunit;
-        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        SurestepFactory: Codeunit "Swizzsoft Factory";
         LoanApp: Record "Loans Register";
         TestAmt: Decimal;
         CustRec: Record Customer;
@@ -698,7 +701,7 @@ Page 56029 "Loan Application Card"
 
         EnabledApprovalWorkflowsExist: Boolean;
         RecordApproved: Boolean;
-        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
+        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         CanCancelApprovalForRecord: Boolean;
 
 
@@ -900,7 +903,7 @@ Page 56029 "Loan Application Card"
                 Emailaddress := Cust."E-Mail (Personal)";
                 EmailSubject := 'Loan Application Approval';
                 EMailBody := 'Dear <b>' + '</b>,</br></br>' + 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
-                          ' has been Approved by Credit. Devco Sacco Ltd.' + '<br></br>' +
+                          ' has been Approved by Credit. Polytech Sacco Ltd.' + '<br></br>' +
 'Congratulations';
                 EmailCodeunit.SendMail(Emailaddress, EmailSubject, EmailBody);
             end;
@@ -931,7 +934,7 @@ Page 56029 "Loan Application Card"
         SMSMessages."Entered By" := USERID;
         SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
         SMSMessages."SMS Message" := 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
-                                  ' has been Approved by Credit. Devco Sacco Ltd.';
+                                  ' has been Approved by Credit. Polytech Sacco Ltd.';
         Cust.RESET;
         IF Cust.GET(Rec."Client Code") THEN
             if Cust."Mobile Phone No" <> '' then begin
@@ -970,7 +973,7 @@ Page 56029 "Loan Application Card"
                     IF LoanApp.GET(LoanGuar."Loan No") THEN
                         SMSMessages."SMS Message" := 'You have guaranteed an amount of ' + FORMAT(LoanGuar."Amont Guaranteed")
                         + ' to ' + Rec."Client Name" + '  ' +
-                        'Loan Type ' + Rec."Loan Product Type" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Devco Sacco Ltd. Call 0726050260 if in dispute';
+                        'Loan Type ' + Rec."Loan Product Type" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0726050260 if in dispute';
                     ;
                     SMSMessages."Telephone No" := Cust."Phone No.";
                     SMSMessages.INSERT;

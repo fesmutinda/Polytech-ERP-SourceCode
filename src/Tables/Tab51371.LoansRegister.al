@@ -691,6 +691,7 @@ Table 51371 "Loans Register"
                 if ObjLoanOffsets.Find('-') then
                     ObjLoanOffsets.DeleteAll;
 
+                // Rec."Account No" := Rec."Client Code";
             end;
         }
         field(5; "Group Code"; Code[20])
@@ -1204,16 +1205,16 @@ Table 51371 "Loans Register"
                 Validate("Repayment Start Date");
             end;
         }
-        field(35; "Mode of Disbursement"; Option)
+        field(35; "Mode of Disbursement"; Enum "Mode Of Disbursement")// Option)
         {
-            OptionCaption = ' ,Cheque,Bank Transfer,EFT,RTGS,Cheque NonMember';
-            OptionMembers = " ",Cheque,"Bank Transfer",EFT,RTGS,"Cheque NonMember";
+            // OptionCaption = ' ,Cheque,Bank Transfer,EFT,RTGS,Cheque NonMember';
+            // OptionMembers = " ",Cheque,"Bank Transfer",EFT,RTGS,"Cheque NonMember";
 
             trigger OnValidate()
             begin
-                if "Mode of Disbursement" = "mode of disbursement"::"Bank Transfer" then begin
-                    //TESTFIELD("Account No");
-                end;
+                // if "Mode of Disbursement" = "mode of disbursement"::"Bank Transfer" then begin
+                //     //TESTFIELD("Account No");
+                // end;
             end;
         }
         field(53; "Affidavit - Item 1 Details"; Text[5])
@@ -1484,6 +1485,10 @@ Table 51371 "Loans Register"
         field(53067; Posted; Boolean)
         {
             Editable = true;
+        }
+        field(54959; "Posted By"; Code[25])
+        {
+
         }
         field(53068; "Product Code"; Code[25])
         {
@@ -4300,7 +4305,7 @@ Table 51371 "Loans Register"
         {
             TableRelation = "Loans Register"."Loan  No.";
         }
-        field(51516225; "Bank Account"; Code[15])
+        field(51516225; "Bank Account"; Code[35])
         {
             DataClassification = ToBeClassified;
         }
@@ -4512,6 +4517,10 @@ Table 51371 "Loans Register"
             TableRelation = "G/L Account"."No.";
         }
         field(51516262; "Total Loan"; Decimal) { }
+        Field(51516299; "Estimated Years to Retire"; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

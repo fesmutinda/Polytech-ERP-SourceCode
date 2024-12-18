@@ -103,27 +103,31 @@ page 50881 "Member Picture-Change Req"
         // [WithEvents]
         // CameraProvider: dotnet CameraProvider;
         CameraAvailable: Boolean;
+        Camera: Codeunit Camera;
         DeleteExportEnabled: Boolean;
         OverrideImageQst: label 'The existing picture will be replaced. Do you want to continue?';
         DeleteImageQst: label 'Are you sure you want to delete the picture?';
         SelectPictureTxt: label 'Select a picture to upload';
         DownloadImageTxt: label 'Download image';
         HideActions: Boolean;
+        MimeTypeTok: Label 'image/jpeg', Locked = true;
 
     procedure TakeNewPicture()
     var
-    // CameraOptions: dotnet CameraOptions;
+        PictureInstream: InStream;
+        PictureDescription: Text;
     begin
-        Rec.Find;
-        Rec.TestField(No);
-        //TESTFIELD(Description);
+        Rec.TestField(Rec."No");
 
-        if not CameraAvailable then
-            exit;
+        if Rec."Picture".HasValue() then
+            if not Confirm(OverrideImageQst) then
+                exit;
 
-        // CameraOptions := CameraOptions.CameraOptions;
-        // CameraOptions.Quality := 50;
-        // CameraProvider.RequestPictureAsync(CameraOptions);
+        if Camera.GetPicture(PictureInstream, PictureDescription) then begin
+            // Clear(rec.Picture);
+            rec.Picture.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
+            Rec.Modify(true)
+        end;
     end;
 
     procedure ImportFromDevice()
@@ -136,7 +140,7 @@ page 50881 "Member Picture-Change Req"
         Rec.TestField(No);
         //TESTFIELD(Description);
 
-        if Rec.Picture.Count > 0 then
+        if Rec.Picture.HasValue then// Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -155,7 +159,7 @@ page 50881 "Member Picture-Change Req"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.Picture.Count <> 0;
+        DeleteExportEnabled := Rec.Picture.HasValue;//Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean

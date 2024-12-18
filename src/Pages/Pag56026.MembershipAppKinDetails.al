@@ -23,10 +23,10 @@ Page 56026 "Membership App Kin Details"
                     ApplicationArea = Basic;
                     Editable = true;
                 }
-                field(Beneficiary; Rec.Beneficiary)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Beneficiary; Rec.Beneficiary)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic;
@@ -39,22 +39,23 @@ Page 56026 "Membership App Kin Details"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Fax; Rec.Fax)
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Email; Rec.Email)
-                {
-                    ApplicationArea = Basic;
-                }
+                // field(Fax; Rec.Fax)
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field(Email; Rec.Email)
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("ID No."; Rec."ID No.")
                 {
+                    Caption = 'Id/Birth Cert No.';
                     ApplicationArea = Basic;
                 }
-                field("%Allocation"; Rec."%Allocation")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("%Allocation"; Rec."%Allocation")
+                // {
+                //     ApplicationArea = Basic;
+                // }
 
 
             }

@@ -2766,7 +2766,7 @@ Codeunit 50025 SwizzKashMB
               case PaybillTrans."Key Word" of
                 'DEP': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Deposit Contribution";
                 'SHA': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
-                'JIO': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Jiokoe Savings";
+                // 'JIO': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Jiokoe Savings";
                 'HOL': GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Holiday savings";
               end;
               GenJournalLine."Shortcut Dimension 1 Code":=Members."Global Dimension 1 Code";

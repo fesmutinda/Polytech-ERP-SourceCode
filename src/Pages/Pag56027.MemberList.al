@@ -41,13 +41,18 @@ Page 56027 "Member List"
                     Caption = 'Mobile Phone';
 
                 }
-                field("Date of Birth"; Rec."Date of Birth")
+                field("Payroll No"; Rec."Personal No")
                 {
-                    ApplicationArea = Basic;
+                    Caption = 'Payroll No';
+                    ApplicationArea = basic;
                 }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = basic;
+                }
+                field("Date of Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = Basic;
                 }
                 field("Shares Retained"; Rec."Shares Retained")
                 {
@@ -236,7 +241,7 @@ Page 56027 "Member List"
     //     Emailaddress := ;
     //     EmailSubject := 'wee wacha';
     //     EMailBody := 'Dear <b>' + '</b>,</br></br>'+
-    //         'On behalf of Devco Sacco am pleased to inform you that your application for membership has been accepted.' +'<br></br>'+
+    //         'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted.' +'<br></br>'+
     //         'Congratulations';
     //     SwizzsoftFactory.SendMail(Emailaddress, EmailSubject, EmailBody);
     // end;

@@ -50,9 +50,11 @@ page 50367 "Member Account Card"
                 }
                 field("Payroll No"; Rec."Personal No")
                 {
+                    Caption = 'Payroll No';
                     ApplicationArea = Basic;
                     Editable = false;
                     Style = StrongAccent;
+                    Visible = true;
                 }
                 field("Postal Code"; Rec.Address)
                 {
@@ -320,13 +322,13 @@ page 50367 "Member Account Card"
                     Image = Card;
                     Promoted = true;
                     PromotedCategory = Process;
-
+                    Visible = false;
                     trigger OnAction()
                     begin
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.FindFirst then begin
-                            Report.Run(51516279, true, false, Cust);
+                            Report.Run(50279, true, false, Cust);
                         end;
                     end;
                 }
@@ -337,9 +339,21 @@ page 50367 "Member Account Card"
                     Image = Relationship;
                     Promoted = true;
                     PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = Page "Members Kin Details List";
+                    RunPageLink = "Account No" = field("No.");
+                }
+                action("Members Nominee Details List")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Members Nominee Details';
+                    Image = Relationship;
+                    Promoted = true;
+                    PromotedCategory = Process;
                     RunObject = Page "Members Nominee Details List";
                     RunPageLink = "Account No" = field("No.");
                 }
+
                 action("Create Withdrawal Application")
                 {
                     ApplicationArea = Basic;
@@ -349,10 +363,19 @@ page 50367 "Member Account Card"
 
                     trigger OnAction()
                     begin
-                        Rec.CalcFields(Rec."Current Shares", "Outstanding Balance");
 
+
+
+
+                        Rec.CalcFields(Rec."Current Shares", "Outstanding Balance");
                         if Rec."Current Shares" >= Rec."Outstanding Balance" then begin
                             if Confirm('Are you sure you want to create a Withdrawal Application for this Member', false) = true then begin
+                                TbExit.Reset;
+                                TbExit.SetRange(TbExit."Member No.", Rec."No.");
+                                if TbExit.Find('-') then begin
+                                    Error('The withdraw Application already exists.');
+                                    CurrPage.Close();
+                                end;
                                 SwizzsoftFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
                             end;
                         end else
@@ -360,41 +383,6 @@ page 50367 "Member Account Card"
 
                     end;
                 }
-
-
-
-                // action("Fosa Member is  Guaranteed")
-                // {
-                //     ApplicationArea = Basic;
-                //     Image = JobPurchaseInvoice;
-                //     Promoted = true;
-                //     PromotedCategory = Report;
-                //     trigger OnAction()
-                //     begin
-                //         Cust.Reset;
-                //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
-                //         if Cust.Find('-') then
-                //             Report.Run(51516512, true, false, Cust);
-                //     end;
-                // }
-                // action("Fosa Member is  a Guarantor")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     Image = JobPurchaseInvoice;
-                //     Promoted = true;
-                //     PromotedCategory = Report;
-
-                //     trigger OnAction()
-                //     begin
-
-                //         Cust.Reset;
-                //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
-                //         if Cust.Find('-') then
-                //             Report.Run(Report::"Fosa Memb Loans Guaranted", true, false, Cust);
-                //     end;
-                // }
-
                 action("Member is  a Guarantor")
                 {
                     ApplicationArea = Basic;
@@ -409,7 +397,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(51516503, true, false, Cust);
+                            Report.Run(50226, true, false, Cust);
                     end;
                 }
                 action("Member is  Guaranteed")
@@ -424,7 +412,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(51516504, true, false, Cust);
+                            Report.Run(50225, true, false, Cust);
                     end;
                 }
                 action("Detailed Statement")
@@ -440,7 +428,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(51516886, true, false, Cust);
+                            Report.Run(50223, true, false, Cust);
                     end;
                 }
                 action("Deposit Statement")
@@ -455,7 +443,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(51516522, true, false, Cust);
+                            Report.Run(50051, true, false, Cust);
                     end;
                 }
                 group("Loan Statements")
@@ -472,7 +460,7 @@ page 50367 "Member Account Card"
                             Cust.Reset;
                             Cust.SetRange(Cust."No.", Rec."No.");
                             if Cust.Find('-') then
-                                Report.Run(51516531, true, false, Cust);
+                                Report.Run(50227, true, false, Cust);
                         end;
                     }
                     // action("FOSA Loan Statement")
@@ -490,21 +478,39 @@ page 50367 "Member Account Card"
                     //             Report.Run(51516533, true, false, Cust);
                     //     end;
                     // }
-                    action("Historical BOSA Loan Statement")
+
+                    action("Loans Perfomance Statement")
                     {
                         ApplicationArea = Basic;
+                        Image = "Report";
                         Promoted = true;
-                        Caption = 'All BOSA Loan Statement';
-                        PromotedCategory = Report;
+                        PromotedCategory = "Report";
 
                         trigger OnAction()
+                        var
+                            LoansReg: Record "Loans Register";
                         begin
-                            Cust.Reset;
-                            Cust.SetRange(Cust."No.", Rec."No.");
-                            if Cust.Find('-') then
-                                Report.Run(51516017, true, false, Cust);
+                            LoansReg.Reset;
+                            LoansReg.SetRange(LoansReg."Client Code", Rec."No.");
+                            if LoansReg.Find('-') then
+                                Report.Run(50207, true, false, LoansReg);
                         end;
                     }
+                    /*  action("Historical BOSA Loan Statement")
+                     {
+                         ApplicationArea = Basic;
+                         Promoted = true;
+                         Caption = 'All BOSA Loan Statement';
+                         PromotedCategory = Report;
+
+                         trigger OnAction()
+                         begin
+                             Cust.Reset;
+                             Cust.SetRange(Cust."No.", Rec."No.");
+                             if Cust.Find('-') then
+                                 Report.Run(51516017, true, false, Cust);
+                         end;
+                     } */
                     // action("Historical FOSA Loan Statement")
                     // {
                     //     ApplicationArea = Basic;
@@ -522,23 +528,7 @@ page 50367 "Member Account Card"
                     // }
 
                 }
-                // action("FOSA Statement")
-                // {
-                //     ApplicationArea = Basic;
-                //     Promoted = true;
-                //     PromotedCategory = Report;
-                //     Caption = 'FOSA Account Statement';
 
-                //     trigger OnAction()
-                //     begin
-                //         Vend.Reset;
-                //         Vend.SetRange(Vend."No.", "FOSA Account No.");
-                //         if Vend.Find('-') then
-                //             Report.Run(51516890, true, false, Vend);
-                //     end;
-
-
-                // }
                 action("Share Capital Statement")
                 {
                     ApplicationArea = Basic;
@@ -550,7 +540,21 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(51516533, true, false, Cust);
+                            Report.Run(50225, true, false, Cust);
+                    end;
+                }
+                action("Shares Certificate")
+                {
+                    ApplicationArea = Basic;
+                    Promoted = true;
+                    PromotedCategory = "Report";
+
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(50303, true, false, Cust);
                     end;
                 }
 
@@ -609,12 +613,13 @@ page 50367 "Member Account Card"
     end;
 
     var
-        Cust: record customer;
+        Cust: record Customer;
         Vend: record Vendor;
         CurrentAge: Text;
         TypeIsEmployed: Boolean;
         IsRegularAccount: Boolean;
         IsJuniorAccount: Boolean;
         SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        TbExit: Record "Membership Exist";
 }
 

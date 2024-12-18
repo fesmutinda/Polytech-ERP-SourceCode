@@ -655,6 +655,39 @@ Codeunit 50009 "Swizzsoft Factory"
             MinimumBalance := ObjProducts."Minimum Balance";
     end;
 
+    procedure FnCreateGnlJournalLineBalancedCashier(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50]; BalancingAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member; BalancingAccountNo: Code[40]; OverdraftNo: Code[100]; OverDraftTransaction: Option " ","Overdraft Granted","Overdraft Paid","Interest Accrued","Interest paid")
+    var
+        GenJournalLine: Record "Gen. Journal Line";
+    begin
+        GenJournalLine.Init;
+        GenJournalLine."Journal Template Name" := TemplateName;
+        GenJournalLine."Journal Batch Name" := BatchName;
+        GenJournalLine."Document No." := DocumentNo;
+        GenJournalLine."External Document No." := ExternalDocumentNo;
+        GenJournalLine."Line No." := LineNo;
+        GenJournalLine."Transaction Type" := TransactionType;
+        GenJournalLine."Account Type" := AccountType;
+        GenJournalLine."Account No." := AccountNo;
+        GenJournalLine.Validate(GenJournalLine."Account No.");
+        GenJournalLine."Posting Date" := TransactionDate;
+        GenJournalLine.Description := TransactionDescription;
+        GenJournalLine.Validate(GenJournalLine."Currency Code");
+        GenJournalLine.Amount := TransactionAmount;
+        GenJournalLine.Validate(GenJournalLine.Amount);
+        GenJournalLine."Bal. Account Type" := BalancingAccountType;
+        GenJournalLine."Bal. Account No." := BalancingAccountNo;
+        GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+        GenJournalLine."Shortcut Dimension 1 Code" := DimensionActivity;
+        GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranchUsingFosaAccount(AccountNo);
+        GenJournalLine."Overdraft codes" := OverDraftTransaction;
+        GenJournalLine."Overdraft NO" := OverdraftNo;
+        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+        if GenJournalLine.Amount <> 0 then
+            GenJournalLine.Insert;
+    end;
+
+
     local procedure FnGetMemberLoanBalance(LoanNo: Code[50]; DateFilter: Date; TotalBalance: Decimal)
     begin
         ObjLoans.Reset;
@@ -972,10 +1005,24 @@ Codeunit 50009 "Swizzsoft Factory"
             exit(ObjpayeCharges.Percentage / 100);
     end;
 
+    procedure FnGetMemberBranchUsingFosaAccount(MemberNo: Code[100]) MemberBranch: Code[100]
+    var
+        ObjMemberLocal: Record Customer;
+    begin
+        ObjMemberLocal.Reset;
+        ObjMemberLocal.SetRange(ObjMemberLocal."FOSA Account", MemberNo);
+        if ObjMemberLocal.Find('-') then begin
+            MemberBranch := ObjMemberLocal."Global Dimension 2 Code";
+        end;
+        exit(MemberBranch);
+
+    end;
+
+
 
     procedure FnCalculatePaye(Chargeable: Decimal) PAYE: Decimal
     var
-        TAXABLEPAY: Record 51478;
+        TAXABLEPAY: Record "PAYE Brackets Credit";
         Taxrelief: Decimal;
         OTrelief: Decimal;
     begin
@@ -1053,6 +1100,36 @@ Codeunit 50009 "Swizzsoft Factory"
             until TAXABLEPAY.Next = 0;
         end;
         exit(BAND1 + BAND2 + BAND3 + BAND4 + BAND5 - 1280);
+    end;
+
+    procedure FnCreateGnlJournalLineBalanced(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50]; BalancingAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member; BalancingAccountNo: Code[40])
+    var
+        GenJournalLine: Record "Gen. Journal Line";
+    begin
+        GenJournalLine.Init;
+        GenJournalLine."Journal Template Name" := TemplateName;
+        GenJournalLine."Journal Batch Name" := BatchName;
+        GenJournalLine."Document No." := DocumentNo;
+        GenJournalLine."External Document No." := ExternalDocumentNo;
+        GenJournalLine."Line No." := LineNo;
+        GenJournalLine."Transaction Type" := TransactionType;
+        GenJournalLine."Account Type" := AccountType;
+        GenJournalLine."Account No." := AccountNo;
+        GenJournalLine.Validate(GenJournalLine."Account No.");
+        GenJournalLine."Posting Date" := TransactionDate;
+        GenJournalLine.Description := TransactionDescription;
+        GenJournalLine.Validate(GenJournalLine."Currency Code");
+        GenJournalLine.Amount := TransactionAmount;
+        GenJournalLine.Validate(GenJournalLine.Amount);
+        GenJournalLine."Bal. Account Type" := BalancingAccountType;
+        GenJournalLine."Bal. Account No." := BalancingAccountNo;
+        GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+        GenJournalLine."Shortcut Dimension 1 Code" := DimensionActivity;
+        GenJournalLine."Shortcut Dimension 2 Code" := FnGetUserBranch();
+        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+        if GenJournalLine.Amount <> 0 then
+            GenJournalLine.Insert;
     end;
 
 
@@ -1336,7 +1413,7 @@ Codeunit 50009 "Swizzsoft Factory"
             GenJournalLine."Line No." := LineNo;
             GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
             GenJournalLine."Account No." := ClientCode;
-            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::Repayment;
+            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Loan Repayment";
             GenJournalLine."Loan No" := LoansRegister."Loan  No.";
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := Today;

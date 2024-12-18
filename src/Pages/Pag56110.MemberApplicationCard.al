@@ -530,7 +530,6 @@ page 56110 "Member Application Card"
                     Editable = Employername2Editable;
                 }
             }
-
             group(JointAccountTwo)
             {
                 Caption = 'Director Two Details';
@@ -824,6 +823,10 @@ page 56110 "Member Application Card"
                     Caption = 'Specific Source of Funds';
                     ApplicationArea = Basic;
                     Editable = EmployerCodeEditable;
+                    trigger OnValidate()
+                    begin
+
+                    end;
                 }
                 group("Self Employed")
                 {
@@ -861,61 +864,60 @@ page 56110 "Member Application Card"
                         Editable = RecruitedEditable;
                     }
                 }
-                group("Employed")
+            }
+            group("Employed")
+            {
+                Visible = employedMember;
+                field("Payroll No"; Rec."Payroll No")
                 {
-                    Visible = employedMember;
-                    field("Payroll No"; Rec."Payroll No")
-                    {
-                        ApplicationArea = Basic;
-                        ShowMandatory = true;
-                    }
-                    field("Employer Code"; Rec."Employer Code")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = EmployerCodeEditable;
-                    }
-                    field("Employer Name"; Rec."Employer Name")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = false;
-                    }
-                    field(Department; Rec.Department)
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field("Office Branch"; Rec."Office Branch")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field("Official Designation"; Rec."Official Designation")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field(Station; Rec.Section)
-                    {
-                        Caption = 'Station';
-                        ApplicationArea = Basic;
-                    }
-                    field("Station Name"; Rec."Station Name")
-                    {
-                        ApplicationArea = all;
-                    }
-                    field("Date Employed"; Rec."Date Employed")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
-                    field("Terms of Employment"; Rec."Terms of Employment")
-                    {
-                        ApplicationArea = Basic;
-                        Editable = NameEditable;
-                    }
+                    ApplicationArea = Basic;
+                    ShowMandatory = true;
+                }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic;
+                    Editable = EmployerCodeEditable;
+                }
+                field("Employer Name"; Rec."Employer Name")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field(Department; Rec.Department)
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field("Office Branch"; Rec."Office Branch")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field("Official Designation"; Rec."Official Designation")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field(Station; Rec.Section)
+                {
+                    Caption = 'Station';
+                    ApplicationArea = Basic;
+                }
+                field("Station Name"; Rec."Station Name")
+                {
+                    ApplicationArea = all;
+                }
+                field("Date Employed"; Rec."Date Employed")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
+                }
+                field("Terms of Employment"; Rec."Terms of Employment")
+                {
+                    ApplicationArea = Basic;
+                    Editable = NameEditable;
                 }
             }
-
 
             group("Other Information")
             {
@@ -1002,7 +1004,6 @@ page 56110 "Member Application Card"
                     }
                 }
             }
-
             group("Member Risk Ratings")
             {
                 Visible = false;// Individual;
@@ -1367,6 +1368,10 @@ page 56110 "Member Application Card"
 
                             dialogBox.Open('Registering Next Of Kin for ' + Format(MembApp.Name));
                             FnCreateNextOfKinDetails(Cust."No.");
+                            dialogBox.Close();
+
+                            dialogBox.Open('Registering Nominees for ' + Format(MembApp.Name));
+                            FnCreateNomineeDetails(Cust."No.");
                             dialogBox.Close();
 
                             dialogBox.Open('Registering Account Signatories for ' + Format(MembApp.Name));
@@ -2439,6 +2444,37 @@ page 56110 "Member Application Card"
                 NextofKinBOSA.Insert;
 
             until NextOfKinApp.Next = 0;
+        end;
+    end;
+
+    local procedure FnCreateNomineeDetails(MemberNo: text[70])
+    var
+        // NextofKinBOSA: Record "Members Next Kin Details";
+        nomineeApp: Record "Member App Nominee";
+        membersNominee: Record "Members Nominee";
+    begin
+
+        nomineeApp.Reset;
+        nomineeApp.SetRange(nomineeApp."Account No", Rec."No.");
+        if nomineeApp.Find('-') then begin
+            repeat
+                //......................................BOSA
+                membersNominee.Init;
+                membersNominee."Account No" := MemberNo;
+                membersNominee.Name := nomineeApp.Name;
+                membersNominee.Relationship := nomineeApp.Relationship;
+                membersNominee.Beneficiary := nomineeApp.Beneficiary;
+                membersNominee."Date of Birth" := nomineeApp."Date of Birth";
+                // membersNominee.Address := nomineeApp.Address;
+                membersNominee.Telephone := nomineeApp.Telephone;
+                // membersNominee.Fax := nomineeApp.Fax;
+                // membersNominee.Email := nomineeApp.Email;
+                membersNominee."ID No." := nomineeApp."ID No.";
+                membersNominee."%Allocation" := nomineeApp."%Allocation";
+                membersNominee."Next Of Kin Type" := NextOfKin.Type;
+                membersNominee.Insert;
+
+            until nomineeApp.Next = 0;
         end;
     end;
 

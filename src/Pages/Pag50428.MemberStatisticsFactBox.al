@@ -11,6 +11,11 @@ page 50428 "Member Statistics FactBox"
     {
         area(content)
         {
+            field(Image; Rec.Image)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Member No.';
+            }
             field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;
@@ -20,15 +25,7 @@ page 50428 "Member Statistics FactBox"
             {
                 ApplicationArea = Basic;
             }
-            field("Personal No"; Rec."Personal No")
-            {
-                ApplicationArea = Basic;
-            }
             field("ID No."; Rec."ID No.")
-            {
-                ApplicationArea = Basic;
-            }
-            field("Passport No."; Rec."Passport No.")
             {
                 ApplicationArea = Basic;
             }

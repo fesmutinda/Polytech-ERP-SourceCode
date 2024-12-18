@@ -14,10 +14,7 @@ enum 51516010 "TransactionTypesEnum"
     {
         Caption = 'Loan';
     }
-    value(3; Repayment)
-    {
-        Caption = 'Repayment';
-    }
+    value(3; "Loan Repayment") { }
     value(4; Withdrawal)
     {
         Caption = 'Withdrawal';
@@ -110,10 +107,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Welfare Contribution 2';
     // }
-    value(27; "Loan Penalty")
-    {
-        Caption = 'Loan Penalty';
-    }
+    // value(27; "Loan Penalty")
+    // {
+    //     Caption = 'Loan Penalty';
+    // }
     // value(28; "Loan Guard")
     // {
     //     Caption = 'Loan Guard';
@@ -146,10 +143,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'M Pesa Charge ';
     // }
-    value(36; "Insurance Charge")
-    {
-        Caption = 'Insurance Charge';
-    }
+    // value(36; "Insurance Charge")
+    // {
+    //     Caption = 'Insurance Charge';
+    // }
     value(37; "Insurance Paid")
     {
         Caption = 'Insurance Paid';
@@ -183,34 +180,6 @@ enum 51516010 "TransactionTypesEnum"
         Caption = 'CIC shares';
 
     }
-    // value(45; "COOP Shares")
-    // {
-    //     Caption = 'COOP Shares';
-    // }
-    // value(46; "Pepea Shares")
-    // {
-    //     Caption = 'Pepea Shares';
-    // }
-    // value(47; "Tamba Shares")
-    // {
-    //     Caption = 'Tambaa Shares';
-    // }
-    // value(48; "Lift Shares")
-    // {
-    //     Caption = 'Lift Shares';
-    // }
-    // value(49; "Changamka Shares")
-    // {
-    //     Caption = 'Changamka Shares';
-    // }
-    value(50; "0")
-    {
-        Caption = '';
-    }
-    value(51; Investment)
-    {
-        Caption = 'Housing Shares';
-    }
     value(52; "Holiday Savings")
     {
         Caption = 'Holiday Savings';
@@ -228,33 +197,5 @@ enum 51516010 "TransactionTypesEnum"
     {
 
     }
-    value(56; Junior_1)
-    {
 
-    }
-    value(57; Junior_2)
-    {
-
-    }
-
-    value(58; "Jiokoe Savings")
-    {
-    }
-    value(59; Junior3)
-    {
-
-    }
-    // value(60; "SchFee Shares")
-    // {
-    // }
-
-    // value(61; "Debtors to Members")
-    // {
-    //     Caption = 'Debtors to Members(AI)';
-    // }
-    // value(62; "Debtors to Ex-Members")
-    // {
-    //     Caption = 'Debtors to Ex-Members';
-    // }
-    value(63; "Loan Repayment") { }
 }

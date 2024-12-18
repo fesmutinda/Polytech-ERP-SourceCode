@@ -3,7 +3,7 @@ page 50843 "Updated Change Request Card"
 {
     Editable = false;
     PageType = Card;
-    SourceTable = 51552;
+    SourceTable = "Change Request";
 
     layout
     {
@@ -27,23 +27,23 @@ page 50843 "Updated Change Request Card"
                         AtmVisible := false;
                         nxkinvisible := false;
 
-                        if Rec.Type = Rec.Type::"Mobile Change" then begin
-                            MobileVisible := true;
-                        end;
+                        // if Type = Type::"M-Banking Change" then begin
+                        //     MobileVisible := true;
+                        // end;
 
-                        if Rec.Type = Rec.Type::"ATM Change" then begin
-                            AtmVisible := true;
-                        end;
+                        // if Type = Type::"ATM Change" then begin
+                        //     AtmVisible := true;
+                        // end;
 
-                        if Rec.Type = Rec.Type::"Backoffice Change" then begin
+                        if Rec.Type = Rec.Type::"BOSA Change" then begin
                             AccountVisible := true;
                             nxkinvisible := true;
                         end;
 
-                        if Rec.Type = Rec.Type::"Agile Change" then begin
-                            AccountVisible := true;
-                            nxkinvisible := true;
-                        end;
+                        // if Type = Type::"FOSA Change" then begin
+                        //     AccountVisible := true;
+                        //     nxkinvisible := true;
+                        // end;
                     end;
                 }
                 field("Account No"; Rec."Account No")
@@ -409,289 +409,7 @@ page 50843 "Updated Change Request Card"
     {
         area(processing)
         {
-            action(Approvals)
-            {
-                ApplicationArea = Basic;
-                Caption = 'Approvals';
-                Image = Approval;
-                Promoted = true;
-                PromotedCategory = Category4;
 
-                trigger OnAction()
-                var
-                    ApprovalEntries: Page "Approval Entries";
-                begin
-                    DocumentType := Documenttype::ChangeRequest;
-
-                    ApprovalEntries.SetRecordFilters(Database::"Change Request", DocumentType, Rec.No);
-                    ApprovalEntries.Run;
-                end;
-            }
-            action("Send Approval Request")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Send A&pproval Request';
-                Image = SendApprovalRequest;
-                Promoted = true;
-                PromotedCategory = Category4;
-
-                trigger OnAction()
-                var
-                    text001: label 'This batch is already pending approval';
-                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-                begin
-                    if Rec.Status <> Rec.Status::Open then
-                        Error(text001);
-
-                    //IF ApprovalsMgmt.CheckChangeRequestApprovalsWorkflowEnabled(Rec) THEN
-                    // ApprovalsMgmt.OnSendChangeRequestForApproval(Rec);
-                end;
-            }
-            action("Cancel Approval Request")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Cancel A&pproval Request';
-                Image = Cancel;
-                Promoted = true;
-                PromotedCategory = Category4;
-
-                trigger OnAction()
-                var
-                    text001: label 'This batch is already pending approval';
-                    ApprovalMgt: Codeunit "Approvals Mgmt.";
-                begin
-                    if Rec.Status <> Rec.Status::Open then
-                        Error(text001);
-
-                    //End allocate batch number
-                    //ApprovalMgt.CancelClosureApprovalRequest(Rec);
-                end;
-            }
-            separator(Action1000000047)
-            {
-            }
-            action(Populate)
-            {
-                ApplicationArea = Basic;
-                Caption = 'Populate';
-                Image = GetLines;
-                Promoted = true;
-                PromotedCategory = Process;
-
-                trigger OnAction()
-                begin
-                    /*IF ("No. Series"="No. Series"::"1") OR ("No. Series"="No. Series"::"2") THEN BEGIN
-                     ERROR('Only Backoffice change or Agile Change allows you to Populate Next of Kin');
-                    END;
-                    IF ("No. Series"="No. Series"::"3") THEN BEGIN
-
-                    END;
-
-                  IF ("No. Series"="No. Series"::"4") THEN BEGIN
-                    ProductNxK.RESET;
-                    ProductNxK.SETRANGE(ProductNxK."Account No",Posted);
-                    IF ProductNxK.FIND('-') THEN
-                      MESSAGE(FORMAT(Posted));
-                      REPEAT;
-                        Kinchangedetails.INIT;
-                        Kinchangedetails."Member No":=Posted;
-                        Kinchangedetails."Dividend year":=ProductNxK.Name;
-                        Kinchangedetails.Amount:=ProductNxK.Relationship;
-                        Kinchangedetails."Member Name":=ProductNxK.Beneficiary;
-                        Kinchangedetails.Message:=ProductNxK."Date of Birth";
-                        Kinchangedetails."Message Sent":=ProductNxK.Address;
-                        Kinchangedetails."Account No.":=ProductNxK.Telephone;
-                        Kinchangedetails.Fax:=ProductNxK.Fax;
-                        Kinchangedetails.Email:=ProductNxK.Email;
-                        Kinchangedetails."ID No.":=ProductNxK."ID No.";
-                        Kinchangedetails."%Allocation":=ProductNxK."%Allocation";
-                        Kinchangedetails.INSERT;
-
-                      UNTIL ProductNxK.NEXT=0;
-                      MESSAGE('Next of Kin Details Populated Successfully');
-                    END;
-                    */
-
-                end;
-            }
-            separator(Action1000000055)
-            {
-            }
-            action("Next of Kin")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Next of Kin';
-                Image = View;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = Page "Next of Kin-Change";
-                RunPageLink = "Account No" = field("Account No");
-            }
-            action("Update Changes")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Update Changes';
-                Image = UpdateShipment;
-                Promoted = true;
-                PromotedCategory = Process;
-
-                trigger OnAction()
-                begin
-                    if (Rec.Status <> Rec.Status::Approved) then begin
-                        Error('Change Request Must be Approved First');
-                    end;
-
-                    if ((Rec.Type = Rec.Type::"Mobile Change") or (Rec.Type = Rec.Type::"ATM Change") or (Rec.Type = Rec.Type::"Agile Change")) then begin
-                        vend.Reset;
-                        vend.SetRange(vend."No.", Rec."Account No");
-                        if vend.Find('-') then
-                            vend.CalcFields(vend."Picture 3", vend.Signature);
-                        vend.Name := Rec.Name;
-                        vend."Global Dimension 2 Code" := Rec.Branch;
-                        vend.Address := Rec."Address(New Value)";
-                        vend."Picture 3" := Rec."Picture(New Value)";
-                        vend.Signature := Rec."signinature(New Value)";
-                        vend."E-Mail" := Rec."Email(New Value)";
-                        vend."Mobile Phone No" := Rec."Mobile No(New Value)";
-                        vend."S-Mobile No" := Rec."S-Mobile No(New Value)";
-                        vend."ATM Collector Name" := Rec."ATM Collector Name";
-                        vend."ID No." := Rec."ID No(New Value)";
-                        vend."Personal No." := Rec."Personal No(New Value)";
-                        vend."Account Type" := Rec."Account Type(New Value)";
-                        vend.City := Rec."City(New Value)";
-                        vend.Section := Rec."Section(New Value)";
-                        vend."Card Expiry Date" := Rec."Card Expiry Date";
-                        vend."Card No." := Rec."Card No(New Value)";
-                        vend."Card Valid From" := Rec."Card Valid From";
-                        vend."Card Valid To" := Rec."Card Valid To";
-                        vend."Marital Status" := Rec."Marital Status(New Value)";
-                        vend."Responsibility Center" := Rec."Responsibility Centers";
-                        vend.Modify;
-
-                        if (Rec.Type = Rec.Type::"Agile Change") then begin
-                            ProductNxK.Reset;
-                            ProductNxK.SetRange(ProductNxK."Account No", Rec."Account No");
-                            if ProductNxK.Find('-') then
-                                repeat
-                                    ;
-
-                                    ProductNxK.Name := Kinchangedetails.Name;
-                                    ProductNxK.Relationship := Kinchangedetails.Relationship;
-                                    ProductNxK.Beneficiary := Kinchangedetails.Beneficiary;
-                                    ProductNxK."Date of Birth" := Kinchangedetails."Date of Birth";
-                                    ProductNxK.Address := Kinchangedetails.Address;
-                                    ProductNxK.Telephone := Kinchangedetails.Telephone;
-                                    //ProductNxK.Fax:=Kinchangedetails.Fax;
-                                    ProductNxK.Email := Kinchangedetails.Email;
-                                    ProductNxK."ID No." := Kinchangedetails."ID No.";
-                                    ProductNxK."%Allocation" := Kinchangedetails."%Allocation";
-                                    ProductNxK.Modify;
-
-                                until ProductNxK.Next = 0;
-
-                        end
-
-                    end;
-
-
-                    if Rec.Type = Rec.Type::"Backoffice Change" then begin
-                        Memb.Reset;
-                        Memb.SetRange(Memb."No.", Rec."Account No");
-                        if Memb.Find('-') then begin
-
-                            Memb.CalcFields(Memb.Picture, Memb.Signature);
-                            Memb.Name := Rec.Name;
-                            Memb."Global Dimension 2 Code" := Rec.Branch;
-                            Memb.Address := Rec."Address(New Value)";
-                            //Memb.Picture:=Picture;
-                            //Memb.Signature:=signinature;
-                            Memb."E-Mail" := Rec."Email(New Value)";
-                            Memb."Mobile Phone No" := Rec."Mobile No(New Value)";
-                            Memb."ID No." := Rec."ID No(New Value)";
-                            Memb."Personal No" := Rec."Personal No(New Value)";
-                            Memb.City := Rec."City(New Value)";
-                            Memb.Section := Rec."Section(New Value)";
-                            Memb."Marital Status" := Rec."Marital Status(New Value)";
-                            Memb."Responsibility Center" := Rec."Responsibility Centers";
-                            Memb.Status := Rec."Member Account Status(NewValu)";
-                            //Memb."Account Category":="Account Category(New Value)";
-                            Memb.Modify;
-
-
-                            MemberNxK.Reset;
-                            MemberNxK.SetRange(MemberNxK."Account No", Rec."Account No");
-                            if MemberNxK.Find('-') then
-                                repeat
-                                    ;
-
-                                    MemberNxK.Name := Kinchangedetails.Name;
-                                    MemberNxK.Relationship := Kinchangedetails.Relationship;
-                                    MemberNxK.Beneficiary := Kinchangedetails.Beneficiary;
-                                    MemberNxK."Date of Birth" := Kinchangedetails."Date of Birth";
-                                    MemberNxK.Address := Kinchangedetails.Address;
-                                    MemberNxK.Telephone := Kinchangedetails.Telephone;
-                                    MemberNxK.Email := Kinchangedetails.Email;
-                                    MemberNxK."ID No." := Kinchangedetails."ID No.";
-                                    MemberNxK."%Allocation" := Kinchangedetails."%Allocation";
-                                    MemberNxK.Modify;
-
-                                until MemberNxK.Next = 0;
-
-                            if Rec."Charge Reactivation Fee" = true then begin
-                                if Confirm('The System Is going to Charge Reactivation Fee', false) = true then begin
-                                    GenSetUp.Get();
-                                    GenJournalLine.Reset;
-                                    GenJournalLine.SetRange(GenJournalLine."Journal Template Name", 'PURCHASES');
-                                    GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", 'FTRANS');
-                                    if GenJournalLine.FindSet then begin
-                                        GenJournalLine.DeleteAll;
-                                    end;
-
-                                    LineNo := LineNo + 10000;
-                                    GenJournalLine.Reset;
-                                    GenJournalLine.SetRange("Journal Template Name", 'PURCHASES');
-                                    GenJournalLine.SetRange("Journal Batch Name", 'FTRANS');
-                                    GenJournalLine.DeleteAll;
-
-                                    GenJournalLine.Init;
-                                    GenJournalLine."Journal Template Name" := 'PURCHASES';
-                                    GenJournalLine."Journal Batch Name" := 'FTRANS';
-                                    GenJournalLine."Line No." := GenJournalLine."Line No." + 1000;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Employee;
-                                    GenJournalLine."Account No." := Rec."Account No";
-                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Loan;
-                                    GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine."Document No." := Rec.No;
-                                    GenJournalLine.Description := 'Account Reactivation Fee' + ' ' + Rec.No;
-                                    GenJournalLine.Amount := GenSetUp."Rejoining Fee";
-                                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                                    GenJournalLine."Bal. Account No." := GenSetUp."Rejoining Fees Account";
-                                    GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    if GenJournalLine.Amount <> 0 then
-                                        GenJournalLine.Insert;
-
-                                    GenJournalLine.Reset;
-                                    GenJournalLine.SetRange(GenJournalLine."Journal Template Name", 'PURCHASES');
-                                    GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", 'FTRANS');
-                                    if GenJournalLine.FindSet then begin
-                                        Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
-                                    end;
-                                    Message('Reactivation Fee Charged Successfuly');
-                                end;
-                            end;
-
-
-
-                        end;
-
-                    end;
-
-                    Rec.Changed := true;
-                    Rec.Modify;
-                    Message('Changes have been updated Successfully');
-                end;
-            }
         }
     }
 
@@ -702,23 +420,23 @@ page 50843 "Updated Change Request Card"
         AtmVisible := false;
         nxkinvisible := false;
 
-        if Rec.Type = Rec.Type::"Mobile Change" then begin
-            MobileVisible := true;
-        end;
+        // if Type = Type::"M-Banking Change" then begin
+        //     MobileVisible := true;
+        // end;
 
-        if Rec.Type = Rec.Type::"ATM Change" then begin
-            AtmVisible := true;
-        end;
+        // if Type = Type::"ATM Change" then begin
+        //     AtmVisible := true;
+        // end;
 
-        if Rec.Type = Rec.Type::"Backoffice Change" then begin
+        if Rec.Type = Rec.Type::"BOSA Change" then begin
             AccountVisible := true;
             nxkinvisible := true;
         end;
 
-        if Rec.Type = Rec.Type::"Agile Change" then begin
-            AccountVisible := true;
-            nxkinvisible := true;
-        end;
+        // if Type = Type::"FOSA Change" then begin
+        //     AccountVisible := true;
+        //     nxkinvisible := true;
+        // end;
 
         UpdateControl();
     end;
@@ -730,41 +448,41 @@ page 50843 "Updated Change Request Card"
         AtmVisible := false;
         nxkinvisible := false;
 
-        if Rec.Type = Rec.Type::"Mobile Change" then begin
-            MobileVisible := true;
-        end;
+        // if Type = Type::"M-Banking Change" then begin
+        //     MobileVisible := true;
+        // end;
 
-        if Rec.Type = Rec.Type::"ATM Change" then begin
-            AtmVisible := true;
-        end;
+        // if Type = Type::"ATM Change" then begin
+        //     AtmVisible := true;
+        // end;
 
-        if Rec.Type = Rec.Type::"Backoffice Change" then begin
+        if Rec.Type = Rec.Type::"BOSA Change" then begin
             AccountVisible := true;
             nxkinvisible := true;
         end;
 
-        if Rec.Type = Rec.Type::"Agile Change" then begin
-            AccountVisible := true;
-            nxkinvisible := true;
-        end;
+        // if Type = Type::"FOSA Change" then begin
+        //     AccountVisible := true;
+        //     nxkinvisible := true;
+        // end;
 
         UpdateControl();
     end;
 
     var
         vend: Record Vendor;
-        Memb: Record 51364;
+        Memb: Record Customer;
         MobileVisible: Boolean;
         AtmVisible: Boolean;
         AccountVisible: Boolean;
-        ProductNxK: Record 51433;
-        MembNxK: Record 51366;
-        cloudRequest: Record 51552;
+        ProductNxK: Record "FOSA Account NOK Details";
+        //MembNxK: Record "Members Next of Kin";
+        cloudRequest: Record "Change Request";
         nxkinvisible: Boolean;
-        Kinchangedetails: Record 51366;
+        Kinchangedetails: Record "Members Next Kin Details";
         DocumentType: Option " ",Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Withdrawal","Membership Reg","Loan Batches","Payment Voucher","Petty Cash",Loan,Interbank,Checkoff,"Savings Product Opening","Standing Order",ChangeRequest;
-        MemberNxK: Record 51366;
-        GenSetUp: Record 51398;
+        MemberNxK: Record "Members Next Kin Details";
+        GenSetUp: Record "Sacco General Set-Up";
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
         NameEditable: Boolean;
@@ -851,7 +569,7 @@ page 50843 "Updated Change Request Card"
             TypeEditable := true;
             AccountCategoryEditable := true
         end else
-            if Rec.Status = Rec.Status::"Pending Approval" then begin
+            if Rec.Status = Rec.Status::Pending then begin
                 NameEditable := false;
                 PictureEditable := false;
                 SignatureEditable := false;
@@ -937,4 +655,3 @@ page 50843 "Updated Change Request Card"
                 end;
     end;
 }
-

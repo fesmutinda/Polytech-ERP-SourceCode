@@ -141,7 +141,7 @@ page 50623 "Loan Application FOSA(Approv)"
 
                     if Rec."Mode of Disbursement" = Rec."mode of disbursement"::"Bank Transfer" then
                         SFactory.FnDisburseToCurrentAccount(Rec, LineNo);
-                    if ((Rec."Mode of Disbursement" = Rec."mode of disbursement"::Cheque) or (Rec."Mode of Disbursement" = Rec."mode of disbursement"::EFT) or (Rec."Mode of Disbursement" = Rec."mode of disbursement"::RTGS)) then
+                    if ((Rec."Mode of Disbursement" = Rec."mode of disbursement"::Cheque) or (Rec."Mode of Disbursement" = Rec."mode of disbursement"::EFT)) then// or (Rec."Mode of Disbursement" = Rec."mode of disbursement"::RTGS)) then
                         SFactory.FnDisburseToExternalAccount(Rec, LineNo);
 
                     SFactory.FnPostGnlJournalLine(BATCH_TEMPLATE, BATCH_NAME);

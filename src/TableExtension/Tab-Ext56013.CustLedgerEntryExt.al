@@ -16,7 +16,7 @@ tableextension 56013 CustLedgerEntryExt extends "Cust. Ledger Entry"
                 if Loans.Find('-') then begin
                     if Loans.Source = Loans.Source::FOSA then begin
                         "FOSA Account No." := Loans."Client Code";
-                        Modify;
+                        // Modify;
                     end;
                 end;
             end;
@@ -58,7 +58,7 @@ tableextension 56013 CustLedgerEntryExt extends "Cust. Ledger Entry"
         }
         field(68012; "Total Credits"; Decimal)
         {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Repayment),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter("Loan Repayment"),
                                                                   "Loan Type" = field("Loan Type"),
                                                                   "Posting Date" = field("Posting Date")));
             FieldClass = FlowField;
@@ -111,6 +111,37 @@ tableextension 56013 CustLedgerEntryExt extends "Cust. Ledger Entry"
         }
         field(51516066; "Time Created"; Time)
         {
+        }
+
+
+        field(7700; "BLoan Officer No."; Code[20])
+        {
+        }
+        field(7701; "Loan Product Description"; Text[100])
+        {
+        }
+        field(7702; Source; Option)
+        {
+            OptionCaption = 'BOSA,FOSA,Investment,MICRO';
+            OptionMembers = BOSA,FOSA,Investment,MICRO;
+            InitValue = "BOSA";
+        }
+        field(7703; "Staff/Payroll No."; Code[20])
+        {
+        }
+        field(7704; "Last Date Modified"; Date)
+        {
+        }
+        field(7705; "Loan product Type"; Code[20])
+        {
+        }
+        field(7706; "Employer Code"; Code[50])
+        {
+        }
+        field(7707; "Transaction Source"; Option)
+        {
+            OptionCaption = ',Salary Processing,Checkoff Processing,Cashier Receipt,BackOffice Receipt,Autorecovery,Funds Transfer';
+            OptionMembers = ,"Salary Processing","Checkoff Processing","Cashier Receipt","BackOffice Receipt",Autorecovery,"Funds Transfer";
         }
     }
     keys

@@ -268,6 +268,7 @@ codeunit 51115 "SurestepApprovalsCodeUnit"
     end;
 
 
+
     //Send MemberReapplication Card
 
     procedure SendMemberReapplicationRequestForApproval(DocNo: Code[40]; var MemberReapplication: Record "Member Reapplication")
