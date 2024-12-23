@@ -123,8 +123,8 @@ Table 51550 "Loan Recovery Header"
         }
         field(17; Status; Option)
         {
-            OptionCaption = 'Open,Pending,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            OptionCaption = 'Open,Pending,Approved,Rejected,Closed';
+            OptionMembers = Open,Pending,Approved,Rejected,Closed;
         }
         field(18; "Current Shares"; Decimal)
         {
@@ -285,6 +285,26 @@ Table 51550 "Loan Recovery Header"
         {
             DataClassification = ToBeClassified;
         }
+        //////////////////////////////////here
+
+        field(141; "Date Entered"; Date)
+        {
+        }
+        field(5; "Time Entered"; time)
+        {
+        }
+        field(71; "Entered By"; Code[40])
+        {
+        }
+
+        field(181; "Notify Member(s)"; Boolean)
+        {
+            trigger OnValidate()
+            var
+            begin
+            end;
+        }
+
     }
 
     keys

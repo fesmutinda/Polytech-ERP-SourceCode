@@ -973,7 +973,7 @@ Page 56029 "Loan Application Card"
                     IF LoanApp.GET(LoanGuar."Loan No") THEN
                         SMSMessages."SMS Message" := 'You have guaranteed an amount of ' + FORMAT(LoanGuar."Amont Guaranteed")
                         + ' to ' + Rec."Client Name" + '  ' +
-                        'Loan Type ' + Rec."Loan Product Type" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0726050260 if in dispute';
+                        'Loan Type ' + Rec."Loan Product Type Name" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0726050260 if in dispute';
                     ;
                     SMSMessages."Telephone No" := Cust."Phone No.";
                     SMSMessages.INSERT;

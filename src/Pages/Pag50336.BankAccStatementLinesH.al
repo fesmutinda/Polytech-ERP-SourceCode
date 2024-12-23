@@ -208,9 +208,9 @@ page 50336 "Bank Acc. Statement Lines H"
     end;
 
 
-    procedure GetSelectedRecords(var TempBankAccReconciliationLine: Record 51012 temporary)
+    procedure GetSelectedRecords(var TempBankAccReconciliationLine: Record "Funds User Setup" temporary)
     var
-        BankAccReconciliationLine: Record 51012;
+        BankAccReconciliationLine: Record "Funds User Setup";
     begin
         CurrPage.SetSelectionFilter(BankAccReconciliationLine);
         if BankAccReconciliationLine.FindSet then

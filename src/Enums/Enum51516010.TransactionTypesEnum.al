@@ -197,5 +197,6 @@ enum 51516010 "TransactionTypesEnum"
     {
 
     }
+    value(56; "Mwanangu Savings") { Caption = 'Mwanangu Savings'; }
 
 }

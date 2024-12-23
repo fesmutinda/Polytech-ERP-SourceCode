@@ -103,9 +103,10 @@ Table 51113 "Payment Line"
                 Validate("Account Type");
             end;
         }
-        field(16; "Account Type"; enum "Gen. Journal Account Type")
+        field(16; "Account Type"; Enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
+
             trigger OnValidate()
             begin
                 Validate("Account No.");
@@ -125,9 +126,7 @@ Table 51113 "Payment Line"
             else
             if ("Account Type" = const("Fixed Asset")) "Fixed Asset"
             else
-            if ("Account Type" = const("IC Partner")) "IC Partner"
-            else
-            if ("Account Type" = const(Customer)) Customer;
+            if ("Account Type" = const("IC Partner")) "IC Partner";
 
             trigger OnValidate()
             begin
@@ -152,6 +151,13 @@ Table 51113 "Payment Line"
                         "Account Name" := Vendor.Name;
                     end;
                 end;
+                //    if "Account Type"="account type":: Investor then begin
+                //       Investor.Reset;
+                //       Investor.SetRange(Investor.Code,"Account No.");
+                //       if Investor.FindFirst then begin
+                //         "Account Name":=Investor.Description;
+                //       end;
+                //    end;
 
                 if "Account No." = '' then
                     "Account Name" := '';
@@ -406,7 +412,6 @@ Table 51113 "Payment Line"
         field(62; Date; Date)
         {
         }
-        field(64; "Withholding Tax Amount"; Decimal) { }
         field(50000; Names; Text[30])
         {
         }
@@ -414,11 +419,38 @@ Table 51113 "Payment Line"
         {
             TableRelation = if ("Transaction Type" = const(Loan)) "Loans Register"."Loan  No." where("Client Code" = field("Account No."));
         }
-        field(50002; "Transaction Type"; enum TransactionTypesEnum)
+        field(50002; "Transaction Type"; Option)
         {
+            OptionCaption = ' ,Registration Fee,Loan,Repayment,Withdrawal,Interest Due,Interest Paid,Benevolent Fund,Deposit Contribution,Penalty Charged,Application Fee,Appraisal Fee,Investment,Unallocated Funds,Shares Capital,Loan Adjustment,Dividend,Withholding Tax,Administration Fee,Insurance Contribution,Prepayment,Withdrawable Deposits,Xmas Contribution,Penalty Paid,Dev Shares,Co-op Shares,Welfare Contribution 2,Loan Penalty,Loan Guard,Lukenya,Konza,Juja,Housing Water,Housing Title,Housing Main,M Pesa Charge ,Insurance Charge,Insurance Paid';
+            OptionMembers = " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Benevolent Fund","Deposit Contribution","Penalty Charged","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Shares Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee","Insurance Contribution",Prepayment,"Withdrawable Deposits","Xmas Contribution","Penalty Paid","Dev Shares","Co-op Shares","Welfare Contribution 2","Loan Penalty","Loan Guard",Lukenya,Konza,Juja,"Housing Water","Housing Title","Housing Main","M Pesa Charge ","Insurance Charge","Insurance Paid";
         }
         field(50003; "Refund Charge"; Decimal)
         {
+        }
+        field(51516430; "Investor Interest Code"; Code[20])
+        {
+            //  TableRelation = if ("Account Type"=const(Investor)) "Investor Amounts"."Interest Code" where ("Investor No"=field("Account No."));
+        }
+        field(51516431; "Investment Date"; Date)
+        {
+            // TableRelation = if ("Account Type"=const(Investor)) "Investor Amounts"."Investment Date" where ("Investor No"=field("Account No."),
+            //                                                                                                 "Interest Code"=field("Investor Interest Code"));
+
+            trigger OnValidate()
+            begin
+                InvestorAmounts.Reset;
+                InvestorAmounts.SetRange(InvestorAmounts."Investor No", "Account No.");
+                InvestorAmounts.SetRange(InvestorAmounts."Interest Code", "Investor Interest Code");
+                InvestorAmounts.SetRange(InvestorAmounts."Investment Date", "Investment Date");
+                if InvestorAmounts.FindFirst then begin
+                    InterestCodes.Reset;
+                    InterestCodes.SetRange(InterestCodes.Code, InvestorAmounts."Interest Code");
+                    if InterestCodes.FindFirst then begin
+                        Amount := (InvestorAmounts.Amount) * (InterestCodes.Percentage / 100);
+                        Validate(Amount);
+                    end;
+                end;
+            end;
         }
         field(51516432; "Withholding Tax Code"; Code[20])
         {
@@ -459,5 +491,7 @@ Table 51113 "Payment Line"
         CurrExchRate: Record "Currency Exchange Rate";
         Loans: Record "Loans Register";
         Cust: Record Customer;
+        InvestorAmounts: Record "Investor Amounts";
+        InterestCodes: Record "Interest Rates";
 }
 

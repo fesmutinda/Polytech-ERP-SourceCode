@@ -281,10 +281,10 @@ Page 56013 "Payment Lines Posted"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic;

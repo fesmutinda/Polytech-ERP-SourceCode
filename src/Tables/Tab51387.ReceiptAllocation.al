@@ -1,6 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51387 "Receipt Allocation"
 {
+
     DrillDownPageId = "Receipt Allocation-BOSA";
     LookupPageId = "Receipt Allocation-BOSA";
 
@@ -15,43 +16,46 @@ Table 51387 "Receipt Allocation"
             NotBlank = true;
             TableRelation = Customer."No.";
         }
-        field(3; "Transaction Type"; Option)
+        field(3; "Transaction Type"; enum TransactionTypesEnum)
         {
-            OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,Standing Order Charges,Additional Shares,Interest Due,Jiokoe Savings,Holiday savings,Withdrawal';
-            OptionMembers = " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","Standing Order Charges","Additional Shares","Interest Due","Jiokoe Savings","Holiday savings",Withdrawal;
 
             trigger OnValidate()
             begin
                 "Loan No." := '';
                 Amount := 0;
-                if "Transaction Type" = "transaction type"::"Mwanangu Savings" then
-                    "Global Dimension 1 Code" := 'FOSA';
+                // if "Transaction Type" = "transaction type"::"FOSA Account" then
+                //     "Global Dimension 1 Code" := 'FOSA';
 
-                if (("Transaction Type" <> "transaction type"::"Mwanangu Savings") and ("Transaction Type" <> "transaction type"::" ")) then begin
-                    "Account Type" := "account type"::Member
+                if ("Transaction Type" <> "transaction type"::" ") then begin
+                    "Account Type" := "account type"::Customer
                 end else
                     "Account Type" := "account type"::Vendor;
-                if Cust.Get("Member No") then begin
-                    Cust.CalcFields("Current Shares", "Shares Retained");
-                    if "Transaction Type" = "transaction type"::"Deposit Contribution" then
-                        "Amount Balance" := Cust."Current Shares";
-                    if "Transaction Type" = "transaction type"::"Share Capital" then
-                        "Amount Balance" := Cust."Shares Retained";
-                    if "Transaction Type" = "transaction type"::"Jiokoe Savings" then
-                        "Amount Balance" := Cust."Jiokoe Savings";
-                end;
+
+                /*
+                IF "Account Type"="Account Type"::Customer THEN
+                  BEGIN
+                      IF ObjMember.GET("Member No") THEN
+                        BEGIN
+                          IF ObjMember.Status<>ObjMember.Status::Active THEN
+                            BEGIN
+                              ERROR('Member Account is not Active,Current Status is %1',ObjMember.Status);
+                              END;
+                          END;
+                
+                END;*/
+
             end;
         }
         field(4; "Loan No."; Code[20])
         {
-            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Member No"),
-                                                                "Outstanding Loan" = filter(<> 0));
+            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Member No"));
+            //"Outstanding Balance" = filter(<> 0));
 
             trigger OnValidate()
             begin
 
-                if Loans.Get("Loan No.") then begin
-                    Loans.CalcFields(Loans."Outstanding Balance", Loans."Oustanding Interest");
+                if Loans.Get("Loan No.") and ("Transaction Type" = "transaction type"::"Loan Repayment") then begin
+                    Loans.CalcFields(Loans."Outstanding Balance");
                     if Loans."Outstanding Balance" > 0 then begin
                         Amount := Loans."Loan Principle Repayment";
                         if Loans."Outstanding Balance" < Loans."Loan Principle Repayment" then
@@ -60,8 +64,9 @@ Table 51387 "Receipt Allocation"
                         "Interest Amount" := Loans."Loan Interest Repayment";
                     end;
                     if "Transaction Type" = "transaction type"::"Interest Paid" then begin
-                        Amount := Loans."Oustanding Interest";
-                        "Amount Balance" := Loans."Oustanding Interest";
+                        Amount := Loans."Loan Interest Repayment";
+                        if ((SFactory.FnGetInterestDueTodate(Loans) - Loans."Interest Paid") < Loans."Loan Interest Repayment") or ((SFactory.FnGetInterestDueTodate(Loans) - Loans."Interest Paid") > Loans."Loan Interest Repayment") then
+                            Amount := SFactory.FnGetInterestDueTodate(Loans) - Loans."Interest Paid";
                     end;
 
                 end;
@@ -76,26 +81,51 @@ Table 51387 "Receipt Allocation"
 
             trigger OnValidate()
             begin
-                // // IF (("Transaction Type" = "Transaction Type"::"Interest Paid") OR ("Transaction Type" = "Transaction Type"::Loan)OR ("Transaction Type" = "Transaction Type"::"Loan Repayment")) THEN BEGIN
-                // // IF "Loan No." = '' THEN
-                // // ERROR('You must specify loan no. for loan transactions.');
-                // // END;
-                //*****************************************************************************************************8interest
-                if (("Transaction Type" = "transaction type"::"Interest Paid") or ("Transaction Type" = "transaction type"::"Loan Repayment")) then begin
+                if (("Transaction Type" = "transaction type"::"Interest Paid") or ("Transaction Type" = "transaction type"::Loan) or ("Transaction Type" = "transaction type"::"Loan Repayment")) then begin
                     if "Loan No." = '' then
                         Error('You must specify loan no. for loan transactions.');
                 end;
-                if "Member No" = '' then begin
-                    Error('You must specify Member Number');
-                end;
-                if "Transaction Type" = "transaction type"::" " then begin
-                    Error('you must enter Transaction Type First');
+
+                if Loans.Get("Loan No.") then begin
+                    Loans.CalcFields(Loans."Outstanding Balance");
+                    if Loans.Posted = true then begin
+
+                        // if Amount > Loans."Outstanding Balance" then
+                        //     Error('Principle Repayment cannot be more than the loan oustanding balance,Currrent Balance is %1', Loans."Outstanding Balance");
+                    end;
                 end;
 
-                "Amount Bal AF" := "Amount Bal BC" + Amount;
-                if ("Transaction Type" = "transaction type"::"Interest Paid") or ("Transaction Type" = "transaction type"::"Loan Repayment") then begin
-                    "Amount Bal AF" := "Amount Bal BC" - Amount;
-                end;
+                "Total Amount" := Amount + "Interest Amount";
+
+
+
+                GenSetup.Get();
+
+
+                // if Loans.Get("Loan No.") then begin
+                //     Loans.CalcFields(Loans."Outstanding Balance");
+                //     if Loans.Posted = true then begin
+                //         if Loans."Loan Under Debt Collection" = true then begin
+                //             Message('Loan is Under Debt Collection!');
+                //             if Confirm('Charge Debt Collection Fee?', false) = true then begin
+                //                 TestField("Cummulative Total Payment Loan");
+
+                //                 ObjReceiptAll.Init;
+                //                 ObjReceiptAll."Document No" := "Document No";
+                //                 ObjReceiptAll.Amount := "Cummulative Total Payment Loan" * Loans."Loan Debt Collector Interest %";
+                //                 ObjReceiptAll."Total Amount" := "Cummulative Total Payment Loan" * Loans."Loan Debt Collector Interest %";
+                //                 ObjReceiptAll."Mpesa Account Type" := ObjReceiptAll."mpesa account type"::Customer;
+                //                 ObjReceiptAll."Mpesa Account No" := Loans."Loan Debt Collector";
+                //                 ObjReceiptAll."Loan No." := "Loan No.";
+                //                 ObjReceiptAll."Member No" := "Member No";
+                //                 ObjReceiptAll.Insert;
+                //             end;
+                //         end;
+                //     end;
+                // end;
+
+
+
             end;
         }
         field(6; "Interest Amount"; Decimal)
@@ -103,11 +133,20 @@ Table 51387 "Receipt Allocation"
 
             trigger OnValidate()
             begin
-                if ("Transaction Type" = "transaction type"::"Loan Repayment") then begin
+                if ("Transaction Type" = "transaction type"::"Registration Fee") then begin
                     if "Loan No." = '' then
                         Error('You must specify loan no. for loan transactions.');
                 end;
-                "Total Amount" := Amount + "Interest Amount";
+                /*
+                IF Loans.GET("Loan No.") THEN BEGIN
+                Loans.CALCFIELDS(Loans."Oustanding Interest");
+                IF "Interest Amount" > (Loans."Oustanding Interest"+SFactory.FnGetInterestDueFiltered(Loans,'..'+FORMAT(TODAY))) THEN
+                ERROR('Interest Repayment cannot be more than the loan oustanding balance.');
+                END;
+                */
+
+                "Total Amount" := Amount + "Interest Amount" + "Loan Insurance";
+
             end;
         }
         field(7; "Total Amount"; Decimal)
@@ -152,16 +191,6 @@ Table 51387 "Receipt Allocation"
         field(50003; "Un Allocated Amount"; Decimal)
         {
         }
-        field(50020; "Amount Bal BC"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-            Editable = false;
-        }
-        field(50021; "Amount Bal AF"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-            Editable = false;
-        }
         field(51516150; "Global Dimension 1 Code"; Code[20])
         {
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1));
@@ -184,8 +213,10 @@ Table 51387 "Receipt Allocation"
         field(51516155; "Mpesa Account No"; Code[20])
         {
             TableRelation = if ("Mpesa Account Type" = filter(Member)) Customer."No."
-            else if ("Mpesa Account Type" = filter(Vendor)) Vendor."No."
-            else if ("Mpesa Account Type" = filter("G/L Account")) "G/L Account"."No.";
+            else
+            if ("Mpesa Account Type" = filter(Vendor)) Vendor."No."
+            else
+            if ("Mpesa Account Type" = filter("G/L Account")) "G/L Account"."No.";
         }
         field(51516156; "Cummulative Total Payment Loan"; Decimal)
         {
@@ -202,48 +233,57 @@ Table 51387 "Receipt Allocation"
         {
             TableRelation = if ("Account Type" = const("G/L Account")) "G/L Account" where("Account Type" = const(Posting),
                                                                                           Blocked = const(false))
-            else if ("Account Type" = const(Customer)) Customer
-            else if ("Account Type" = const(Vendor)) Vendor where("BOSA Account No" = field("Member No"))
-            else if ("Account Type" = const(Member)) "BOSA Accounts No Buffer" where("Member No" = field("Member No"));
+            else
+            if ("Account Type" = const(Customer)) Customer
+            else
+            if ("Account Type" = const(Vendor)) Vendor where("BOSA Account No" = field("Member No"), Status = filter(<> Closed | Deceased), Blocked = filter(<> All | Payment));
 
             trigger OnValidate()
             begin
-                ObjAccountNoBuffer.Reset;
-                ObjAccountNoBuffer.SetRange(ObjAccountNoBuffer."Account No", "Account No");
-                if ObjAccountNoBuffer.FindSet then begin
-                    "Transaction Type" := ObjAccountNoBuffer."Transaction Type";
+
+                if "Account Type" = "account type"::Vendor then begin
+                    if ObjAccount.Get("Account No") then begin
+                        if ObjAccount.Status <> ObjAccount.Status::Active then begin
+                            Error('Account is not Active,Current Status is %1', ObjAccount.Status);
+                        end;
+                    end;
+
                 end;
             end;
         }
-        field(51516161; "Account Type"; Option)
+        field(51516161; "Account Type"; enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
-            InitValue = Member;
-            OptionCaption = 'G/L Account,Customer,FOSA Account/Vendor,Bank Account,Fixed Asset,IC Partner,Employee,BOSA Account,Investor';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor;
+            // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Employee,Member,Investor';
+            // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor;
+
+            trigger OnValidate()
+            begin
+                // if "Account Type" = "account type"::Vendor then begin
+                //     "Transaction Type" := "transaction type"::"FOSA Account";
+                // end;
+            end;
         }
         field(51516162; "Loan PayOff Amount"; Decimal)
         {
         }
-        field(51516163; "Allocated Ammount"; Decimal)
+        field(51516163; Description; Text[100])
         {
-            DataClassification = ToBeClassified;
         }
+
+
     }
 
     keys
     {
-        key(Key1; "Document No", "Transaction Type", "Loan No.")
+        key(Key1; "Document No", "Transaction Type", Amount, "Account Type", "Account No", "Member No", "Loan No.")
         {
             Clustered = true;
         }
-        key(Key2; "Member No")
+        key(Key2; "Loan No.")
         {
         }
-        key(Key3; "Loan No.")
-        {
-        }
-        key(Key4; "Account No")
+        key(Key3; "Account No")
         {
         }
     }
@@ -260,32 +300,23 @@ Table 51387 "Receipt Allocation"
         Customer: Record Customer;
         LoansR: Record "Loans Register";
         GenSetup: Record "Sacco General Set-Up";
-        ReceiptAll: Record "Receipt Allocation";
         ReceiptH: Record "Receipts & Payments";
-        SFactory: Codeunit "Swizzsoft Factory.";
-        ObjAccountNoBuffer: Record "BOSA Accounts No Buffer";
+        SFactory: Codeunit "SURESTEP Factory";
         ObjLoans: Record "Loans Register";
         ObjProductCharges: Record "Loan Product Charges";
         VarEndYear: Date;
         VarInsuranceMonths: Integer;
         VarInsuranceAmount: Decimal;
-        VarTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid";
-        VarAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor;
-        VarBalAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor;
+        VarTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid",Repayment,"Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid";
+        VarAccountType: Enum "Gen. Journal Account Type";
+        VarBalAccountType: Enum "Gen. Journal Account Type";
         VarBalAccountNo: Code[20];
-        ObjSwizzsoft: Codeunit "Swizzsoft Factory.";
+        ObjSurestep: Codeunit "SURESTEP Factory";
         ObjLoanType: Record "Loan Products Setup";
         ObjReceiptAll: Record "Receipt Allocation";
+        ObjAccount: Record Vendor;
+        ObjMember: Record Customer;
 
-    local procedure FnGetFosaAccount(AccountType: Code[100]): Code[100]
-    var
-        ObjSavingsProducts: Record Vendor;
-    begin
-        ObjSavingsProducts.Reset;
-        ObjSavingsProducts.SetRange("Account Type", AccountType);
-        ObjSavingsProducts.SetRange("BOSA Account No", "Member No");
-        if ObjSavingsProducts.Find('-') then
-            exit(ObjSavingsProducts."No.");
-    end;
+
 }
 

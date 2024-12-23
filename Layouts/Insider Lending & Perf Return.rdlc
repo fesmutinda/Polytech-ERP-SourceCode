@@ -12979,8 +12979,14 @@ End Function
         <Field Name="InsiderBoard_LoansRegister">
           <DataField>InsiderBoard_LoansRegister</DataField>
         </Field>
+        <Field Name="InsiderBoard_LoansRegisterFormat">
+          <DataField>InsiderBoard_LoansRegisterFormat</DataField>
+        </Field>
         <Field Name="insiderEmployee_LoansRegister">
           <DataField>insiderEmployee_LoansRegister</DataField>
+        </Field>
+        <Field Name="insiderEmployee_LoansRegisterFormat">
+          <DataField>insiderEmployee_LoansRegisterFormat</DataField>
         </Field>
         <Field Name="t">
           <DataField>t</DataField>
@@ -13135,8 +13141,14 @@ End Function
         <Field Name="LInsiderBoard_LoansRegister">
           <DataField>LInsiderBoard_LoansRegister</DataField>
         </Field>
+        <Field Name="LInsiderBoard_LoansRegisterFormat">
+          <DataField>LInsiderBoard_LoansRegisterFormat</DataField>
+        </Field>
         <Field Name="LinsiderEmployee_LoansRegister">
           <DataField>LinsiderEmployee_LoansRegister</DataField>
+        </Field>
+        <Field Name="LinsiderEmployee_LoansRegisterFormat">
+          <DataField>LinsiderEmployee_LoansRegisterFormat</DataField>
         </Field>
         <Field Name="Lt">
           <DataField>Lt</DataField>

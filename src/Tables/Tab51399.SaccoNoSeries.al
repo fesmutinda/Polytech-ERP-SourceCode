@@ -555,7 +555,31 @@ Table 51399 "Sacco No. Series"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
-        field(51516065; "Loan Appeal Numbers"; Code[20]) { }
+        field(51516065; "Loan Appeal Numbers"; Code[20]) { TableRelation = "No. Series"; }
+        field(51516066; "Share Capital Transfer No.s"; Code[20])
+        {
+            TableRelation = "No. Series";
+        }
+        field(51516067; "Guarantor Sub No."; Code[10])
+        {
+            TableRelation = "No. Series";
+        }
+        field(51515158; "Tracker no"; Code[30])
+        {
+            TableRelation = "No. Series";
+        }
+        field(51516068; "Top Up Nos"; Code[10])
+        {
+            TableRelation = "No. Series";
+        }
+        field(51516069; "Activation Nos"; Code[30])
+        {
+            TableRelation = "No. Series";
+        }
+        field(51516070; "Loan Recovery Nos"; Code[10])
+        {
+            TableRelation = "No. Series";
+        }
     }
 
     keys

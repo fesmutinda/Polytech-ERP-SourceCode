@@ -76,6 +76,12 @@ Table 51471 "SMS Messages"
         {
             DataClassification = ToBeClassified;
         }
+        field(23; "System Date"; Date)
+        {
+        }
+        field(22; "System Time"; Time)
+        {
+        }
     }
 
     keys

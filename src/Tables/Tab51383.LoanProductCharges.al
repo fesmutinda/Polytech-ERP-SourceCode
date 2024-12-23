@@ -94,6 +94,10 @@ Table 51383 "Loan Product Charges"
         {
             DataClassification = ToBeClassified;
         }
+        field(19; "Charge Excise"; Boolean)
+        {
+        }
+
     }
 
     keys

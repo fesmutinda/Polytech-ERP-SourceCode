@@ -1,12 +1,16 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Page 50000 "Payment List."
+#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+Page 50000 "Payment List"
 {
+    ApplicationArea = Basic;
     CardPageID = "Payment Card";
     DeleteAllowed = false;
+    RefreshOnActivate = true;
     PageType = List;
-    SourceTable = 51000;
+    SourceTable = "Payment Header";
     SourceTableView = where("Payment Type" = const(Normal),
-                            Posted = const(false));
+                            Posted = const(false),
+                            "Investor Payment" = const(false));
+    UsageCategory = Lists;
 
     layout
     {
@@ -38,19 +42,7 @@ Page 50000 "Payment List."
                 {
                     ApplicationArea = Basic;
                 }
-                field("Net Amount"; Rec."Net Amount")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Net Amount(LCY)"; Rec."Net Amount(LCY)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Status; Rec.Status)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Cheque No"; Rec."Cheque No")
+                field(Cashier; Rec.Cashier)
                 {
                     ApplicationArea = Basic;
                 }
@@ -64,7 +56,13 @@ Page 50000 "Payment List."
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
+        Rec."Payment Mode" := Rec."payment mode"::Cheque;
         Rec."Payment Type" := Rec."payment type"::Normal;
+    end;
+
+    trigger OnOpenPage()
+    begin
+        Rec.SetRange(Cashier, UserId);
     end;
 }
 

@@ -136,7 +136,7 @@ page 50028 "Posted Receipt Header Card"
         FundsManager: Codeunit "Funds Management";
         JTemplate: Code[20];
         JBatch: Code[20];
-        FundsUser: Record 51031;
+        FundsUser: Record "Funds User Setup";
         PostingVisible: Boolean;
         MoveVisible: Boolean;
         PageEditable: Boolean;

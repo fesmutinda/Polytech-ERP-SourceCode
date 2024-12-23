@@ -234,7 +234,7 @@ page 50031 "Funds Transfer Card"
 
     var
         FundsManager: Codeunit "Funds Management";
-        FundsUser: Record 51031;
+        FundsUser: Record "Funds User Setup";
         JTemplate: Code[50];
         JBatch: Code[50];
         FHeader: Record 51056;

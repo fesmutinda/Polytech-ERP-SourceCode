@@ -1743,10 +1743,10 @@ Codeunit 50000 "Funds Management"
                             ReceiptLine2."Time Posted" := Time;
                             ReceiptLine2.Modify;
                             UpdateBankStmt(ReceiptLine2."Cheque No", ReceiptHeader2."Posting Date", ReceiptHeader2."No.");
-                            if ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"1" then
+                            if ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::Normal then
                                 UpdateApplicant(ReceiptLine2."Applicant No", ReceiptHeader2."No.");
 
-                            if (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"2") or (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"2") then
+                            if (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::Investor) or (ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::Investor) then
                                 UpdateMemberYears(ReceiptLine2."Account Code", ReceiptLine2."Fee Type", ReceiptLine2."Fee SubType",
                                 ReceiptLine2."Fee Description", ReceiptLine2."From Year", ReceiptLine2.ToYear, ReceiptHeader2.Date);
                         until ReceiptLine2.Next = 0;
@@ -1795,7 +1795,7 @@ Codeunit 50000 "Funds Management"
                 exit;
             end;
             //End Reverse
-            if ReceiptHeader."Receipt Category" = ReceiptHeader."receipt category"::"1" then
+            if ReceiptHeader."Receipt Category" = ReceiptHeader."receipt category"::Normal then
                 ReverseApplicantUpdate(ReceiptHeader."Account No", ReceiptHeader."No.");
             //Update Header as Reversed
             ReceiptHeader2.Reversed := true;
@@ -1814,7 +1814,7 @@ Codeunit 50000 "Funds Management"
                     ReceiptLine."Reversal Time" := Time;
                     ReceiptLine.Modify;
                     ReverseBankStmtUpdate(ReceiptLine."Cheque No", ReceiptHeader2."Posting Date", ReceiptHeader2."No.");
-                    if ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::"2" then
+                    if ReceiptHeader2."Receipt Category" = ReceiptHeader2."receipt category"::Normal then
                         ReverseMemberYears(ReceiptHeader2."Account No", ReceiptLine."Fee Type", ReceiptLine."Fee SubType",
                                            ReceiptLine."Fee Description", ReceiptLine."From Year", ReceiptLine.ToYear);
                 until ReceiptLine.Next = 0;
@@ -2071,9 +2071,47 @@ Codeunit 50000 "Funds Management"
         //*************************************End add Line NetAmounts**********************************************************//
     end;
 
+    procedure PostPropertyReceipt("Receipt Header": Record "Receipt Header"; "Journal Template": Code[20]; "Journal Batch": Code[20]; "Property No": Code[20]; Receipt: Code[20]; Cust: Code[20]; CustName: Text[50]; Amount: Decimal): Boolean
+    var
+        ReceiptLine: Record "Receipt Line";
+        ReceiptHeader: Record "Receipt Header";
+        ReceiptLine2: Record "Receipt Line";
+        ReceiptHeader2: Record "Receipt Header";
+    begin
+        //Post the Receipt
+        PostReceipt("Receipt Header", "Journal Template", "Journal Batch");
+        Commit;
+        //Update Property
+        if UpdateProperty("Property No", Receipt, Cust, CustName, Amount) then begin
+            exit(true);
+        end else begin
+            exit(false);
+        end;
+    end;
 
     procedure PostImprest()
     begin
+    end;
+
+    local procedure UpdateProperty(PropertyCode: Code[20]; "Receipt No": Code[20]; "Customer No": Code[20]; "Customer Name": Text[50]; Amount: Decimal): Boolean
+    var
+        FA: Record "Fixed Asset";
+    begin
+        FA.Reset;
+        FA.SetRange(FA."No.", PropertyCode);
+        if FA.FindFirst then begin
+            FA.Receipted := true;
+            FA."Receipt No" := "Receipt No";
+            FA."Customer No" := "Customer No";
+            FA."Customer Name" := "Customer Name";
+            FA."Customer Balance" := FA."Customer Balance" - Amount;
+            if FA.Modify then begin
+                Message('Property Payment Successfull. Customer:' + Format("Customer Name"));
+                exit(true);
+            end else begin
+                exit(false);
+            end;
+        end;
     end;
 
 

@@ -21,7 +21,7 @@ Codeunit 50122 "KSACCO Postings"
         GenJournalLine: Record "Gen. Journal Line";
         InsuranceAcc: Text;
         InsuranceIncomeAcc: Text;
-        FundsUserSetup: Record 51031;
+        FundsUserSetup: Record "Funds User Setup";
         Customer: Record Customer;
         SaccoEmployers: Record 51401;
 

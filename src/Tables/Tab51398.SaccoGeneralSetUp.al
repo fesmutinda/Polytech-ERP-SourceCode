@@ -259,6 +259,16 @@ Table 51398 "Sacco General Set-Up"
         field(74; "Interest on Deposits (%)"; Decimal)
         {
         }
+        field(1605; "Proposed Honoraria"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(15678; "Interest on Share Capital(%)"; Decimal)
+        {
+        }
+        field(1551; "Interest On Current Shares"; Decimal)
+        {
+        }
         field(75; "Days for Checkoff"; DateFormula)
         {
         }
@@ -824,6 +834,14 @@ Table 51398 "Sacco General Set-Up"
         }
         field(944; "Cheque Processing Fee"; Decimal)
         {
+        }
+        field(945; "GO Live Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(1603; "Benevolent Fund Contribution"; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
 
     }

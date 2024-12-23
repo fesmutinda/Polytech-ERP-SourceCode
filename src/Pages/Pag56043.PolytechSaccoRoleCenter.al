@@ -190,13 +190,9 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Budget vs Actuals';
                         Image = Journal;
-                        // RunObject = report "Actual Vs Budget";
+                        RunObject = report "Actual Vs Budget";
                     }
                 }
-
-
-
-
 
                 action("General Journals")
                 {
@@ -274,7 +270,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Voucher Cash Payment';
-                        RunObject = Page "Payment List.";
+                        RunObject = Page "Payment List";
                         Visible = false;
 
                     }
@@ -283,7 +279,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Cash Payments';
-                        RunObject = Page "Cash Payment List posted";
+                        RunObject = Page "Cash Payment List";
                         Visible = false;
 
                     }
@@ -318,7 +314,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Bank Reconcilations Summary Report';
-                        // RunObject = report BankReconiliationsummary;
+                        RunObject = report BankReconiliationsummary;
                         //Visible = false;
 
                     }
@@ -338,118 +334,118 @@ Page 56043 "Polytech Sacco Role Center"
                 }
                 //........................................................................................................................................           
 
-                // group("SASRA Reports")
-                // {
-                //     Caption = 'SASRA Reports';
-                //     ToolTip = 'which highlights the operations and performance of the SACCO industry during the year ended';
-                //     Visible = true;
-                //     action("Capital Adequacy Return")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Capital Adequacy Return';
-                //         RunObject = report "CAPITAL ADEQUACY RETURN";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //     }
+                group("SASRA Reports")
+                {
+                    Caption = 'SASRA Reports';
+                    ToolTip = 'which highlights the operations and performance of the SACCO industry during the year ended';
+                    Visible = true;
+                    action("Capital Adequacy Return")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Capital Adequacy Return';
+                        RunObject = report "CAPITAL ADEQUACY RETURN";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                    }
 
-                //     action("Investiment Return")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Investiment Return';
-                //         RunObject = report "RETURN ON INVESTMENT";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Liquidity Statement")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Liquidity Statement';
-                //         RunObject = report Liquidity;
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Form2F Statement of CompIncome")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Statement of comprehensive Income';
-                //         RunObject = report "Form2F Statement of CompIncome";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Deposits Return-SASRA")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Statement of Deposits Return';
-                //         Image = Report;
-                //         RunObject = report "Deposit returnN";
-                //     }
-                //     action("Statement of Financial Position")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Statement of Financial Position';
-                //         RunObject = report "STATEMENT OF FINANCIAL P";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Other Disclosures")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Other Disclosures';
-                //         RunObject = report "Other Disclosures";
-                //     }
-                //     action("Insider Lending Report")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Insider Lending Report';
-                //         RunObject = report "Insider Lending & Perf Return";
-                //         ToolTip = 'View or Generate Agency Returns for a given period.';
-                //         // Visible = false;
-                //     }
+                    action("Investiment Return")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Investiment Return';
+                        RunObject = report "RETURN ON INVESTMENT";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Liquidity Statement")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Liquidity Statement';
+                        RunObject = report Liquidity;
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Form2F Statement of CompIncome")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Statement of comprehensive Income';
+                        RunObject = report "Form2F Statement of CompIncome";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Deposits Return-SASRA")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Statement of Deposits Return';
+                        Image = Report;
+                        RunObject = report "Deposit returnN";
+                    }
+                    action("Statement of Financial Position")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Statement of Financial Position';
+                        RunObject = report "STATEMENT OF FINANCIAL P";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Other Disclosures")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Other Disclosures';
+                        RunObject = report "Other Disclosures";
+                    }
+                    action("Insider Lending Report")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Insider Lending Report';
+                        RunObject = report "Insider Lending & Perf Return";
+                        ToolTip = 'View or Generate Agency Returns for a given period.';
+                        // Visible = false;
+                    }
 
-                //     action("Loans Defaulter Aging-SASRA")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Loans Defaulter Aging';
-                //         RunObject = report "SASRA Loans Classification";
-                //     }
+                    action("Loans Defaulter Aging-SASRA")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Loans Defaulter Aging';
+                        RunObject = report "SASRA Loans Classification";
+                    }
 
-                //     // action("Sectorial Lending Report")
-                //     // {
-                //     //     ApplicationArea = Basic, Suite;
-                //     //     Caption = 'Sectorial Lending Report';
-                //     //     RunObject = report "SECTORAL LENDING";
-                //     //     ToolTip = 'View or Generate Agency Returns for a given period.';
-                //     //     // Visible = false;
-                //     // }
+                    // action("Sectorial Lending Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sectorial Lending Report';
+                    //     RunObject = report "SECTORAL LENDING";
+                    //     ToolTip = 'View or Generate Agency Returns for a given period.';
+                    //     // Visible = false;
+                    // }
 
-                //     action("Risk Class of Assets")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Risk Classification and Loan Provisioning';
-                //         RunObject = report "Risk Class Of Assets & Prov";
-                //     }
+                    action("Risk Class of Assets")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Risk Classification and Loan Provisioning';
+                        RunObject = report "Risk Class Of Assets & Prov";
+                    }
 
-                //     // action("Loans Provisioning Summary-SASRA")
-                //     // {
-                //     //     ApplicationArea = Basic, Suite;
-                //     //     Caption = 'Loans Provisioning Summary';
-                //     //     RunObject = report "Loans Provisioning Summarys";
-                //     // }
-                //     action("Loan Sectorial Lendng-SASRA")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Loan Sectorial Lending';
-                //         RunObject = REPORT "Loan Sectoral Lending Report";
-                //     }
+                    // action("Loans Provisioning Summary-SASRA")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loans Provisioning Summary';
+                    //     RunObject = report "Loans Provisioning Summarys";
+                    // }
+                    action("Loan Sectorial Lendng-SASRA")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Loan Sectorial Lending';
+                        RunObject = REPORT "Loan Sectoral Lending Report";
+                    }
 
-                // }
-                // //..........................................................................................................................................
+                }
+                //..........................................................................................................................................
                 group("Receipt Processing")
                 {
                     action("Create Receipt")
                     {
                         ApplicationArea = all;
                         Image = Journal;
-                        // RunObject = page "Receipt Header List";
+                        RunObject = page "Receipt Header List";
                     }
                     action("Posted Receipts")
                     {
@@ -469,7 +465,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Payment Vouchers Posting';
                         Image = Journal;
-                        RunObject = Page "Payment List.";
+                        RunObject = Page "Payment List";
 
                     }
 
@@ -478,7 +474,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted Payment Vouchers';
                         Image = Journal;
-                        // RunObject = Page "Posted Payment List";
+                        RunObject = Page "Posted Payment List";
 
                     }
 
@@ -486,14 +482,14 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Petty Cash Payment';
-                        // RunObject = page "PettyCash Payment List";
+                        RunObject = page "PettyCash Payment List";
                     }
 
                     action("Posted Petty Cash")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted Petty Cash';
-                        // RunObject = page "Posted PettyCash Payment List";
+                        RunObject = page "Posted PettyCash Payment List";
 
                     }
 
@@ -524,34 +520,33 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Electronic Funds Tranfer';
-                        // RunObject = Page "EFT list";
+                        RunObject = Page "EFT list";
                     }
 
                 }
                 //............................................................................................
 
-                // group("Other Financials")
-                // {
-                //     action("Trade Creditors")
-                //     {
-                //         ApplicationArea = basic, Suite;
-                //         // RunObject = page TradeCreditors;
+                group("Other Financials")
+                {
+                    action("Trade Creditors")
+                    {
+                        ApplicationArea = basic, Suite;
+                        RunObject = page TradeCreditors;
 
-                //     }
-                //     // action("Ex-Member Creditors")
-                //     // {
-                //     //     ApplicationArea = basic, Suite;
-                //     //     RunObject = page Ex_MemberCreditors;
+                    }
+                    // action("Ex-Member Creditors")
+                    // {
+                    //     ApplicationArea = basic, Suite;
+                    //     RunObject = page Ex_MemberCreditors;
 
-                //     // }
-                //     action(EmployerReceivables)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Employer Receivables';
-                //         RunObject = page EmployerReceivables;
-                //     }
-                // }
-
+                    // }
+                    action(EmployerReceivables)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Employer Receivables';
+                        RunObject = page EmployerReceivables;
+                    }
+                }
                 group("Assets Management")
                 {
                     Caption = 'Assets Management';
@@ -614,7 +609,7 @@ Page 56043 "Polytech Sacco Role Center"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Fixed Assets Book Value';
-                            // RunObject = report FixeAssetbookValueReport;
+                            RunObject = report FixeAssetbookValueReport;
 
                         }
 
@@ -634,11 +629,11 @@ Page 56043 "Polytech Sacco Role Center"
                     ToolTip = 'Display Financial Statements.';
                     Visible = true;
 
-                    action("Polytech Trial Balance")
+                    action("Devco Trial Balance")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Summarised Trial Balance';
-                        // RunObject = report "Trial Balance2016";
+                        RunObject = report "Trial Balance2016";
                         ToolTip = 'Generate Trial Balance for a given period.';
                     }
                     action("Account Schedules")
@@ -654,7 +649,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Liquidity Report';
                         Image = Journal;
-                        // RunObject = report Liquidity;
+                        RunObject = report Liquidity;
                         ToolTip = 'Generate Liquidity Report for a given period.';
                         Visible = false;
                     }
@@ -663,65 +658,64 @@ Page 56043 "Polytech Sacco Role Center"
 
 
                 //.......................................................................................................................................
-                // group("Mkopo Reports")
-                // {
-                //     Caption = 'Mkopo Reports';
-                //     action(SaccoInformationReport)
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Sacco Information Report';
-                //         RunObject = report "Sacco Information";
+                group("Mkopo Reports")
+                {
+                    Caption = 'Mkopo Reports';
+                    action(SaccoInformationReport)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Sacco Information Report';
+                        RunObject = report "Sacco Information";
 
-                //     }
-                //     action("Statement of Directors'RE")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Statement of Directors Responsibilities';
-                //         RunObject = report "Statement of Directors'RE";
-                //     }
-                //     action(Reportofthedirectors)
-                //     {
-                //         ApplicationArea = All;
-                //         RunObject = report "REPORT OF THE DIRECTORS";
-                //         Caption = 'Report of the Directors';
-                //     }
-                //     action("Financial Statical Information")
-                //     {
-                //         ApplicationArea = All;
+                    }
+                    action("Statement of Directors'RE")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Statement of Directors Responsibilities';
+                        // RunObject = report "Statement of Directors'RE";
+                    }
+                    action(Reportofthedirectors)
+                    {
+                        ApplicationArea = All;
+                        // RunObject = report "REPORT OF THE DIRECTORS";
+                        Caption = 'Report of the Directors';
+                    }
+                    action("Financial Statical Information")
+                    {
+                        ApplicationArea = All;
 
-                //         RunObject = report FinancialStaticalInformation;
-                //     }
-                //     action("Statement of Financial Position Mkopo")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Satement of Financial Position';
-                //         RunObject = report "State of financial Position";
-                //     }
-                //     action("Statement of profit or loss and other comprehensive income")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Statement of profit or loss and other comprehensive income';
-                //         RunObject = report StatementProfitorloss;
-                //     }
-                //     action("Statement of changes of Equity Current")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Statement of Changes im Equity';
-                //         // RunObject = report StatementOfChangesInEquity;
-                //     }
-                //     // action("Statement of changes of Equity Previous")
-                //     // {
-                //     //     ApplicationArea = All;
-                //     //     RunObject = report StatchangesinequityPrevious;
-                //     // }
-                //     action("Statement OF Cash Flows")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Cash Flows';
-                //         // RunObject = report cashFlows;
-                //     }
-                // }
-
+                        // RunObject = report FinancialStaticalInformation;
+                    }
+                    action("Statement of Financial Position Mkopo")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Satement of Financial Position';
+                        // RunObject = report "State of financial Position";
+                    }
+                    action("Statement of profit or loss and other comprehensive income")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Statement of profit or loss and other comprehensive income';
+                        // RunObject = report StatementProfitorloss;
+                    }
+                    action("Statement of changes of Equity Current")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Statement of Changes im Equity';
+                        // RunObject = report StatementOfChangesInEquity;
+                    }
+                    // action("Statement of changes of Equity Previous")
+                    // {
+                    //     ApplicationArea = All;
+                    //     RunObject = report StatchangesinequityPrevious;
+                    // }
+                    action("Statement OF Cash Flows")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Cash Flows';
+                        // RunObject = report cashFlows;
+                    }
+                }
                 //.......................................................................................................................................
 
                 //..................................................................................................................................
@@ -764,7 +758,6 @@ Page 56043 "Polytech Sacco Role Center"
                 // }
 
             }
-
 
             group("Cash Management New")
             {
@@ -1388,8 +1381,6 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = page "BOSA Receipts List";
                     }
 
-
-                    //"Receipts list-BOSA"
                     action(" Posted Bosa Receipt")
                     {
                         ApplicationArea = All;
@@ -1397,7 +1388,6 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = page "Posted BOSA Receipts List";
                     }
                 }
-
 
                 //.............................Collateral Management..........................................
 
@@ -1467,8 +1457,8 @@ Page 56043 "Polytech Sacco Role Center"
                     action("Member Loans Guaranteed")
                     {
                         ApplicationArea = Basic, Suite;
-                        RunObject = Page "Loans Guarantee Details";
-                        // RunObject = report "Loans Guaranteed";
+                        // RunObject = Page "Loans Guarantee Details";
+                        RunObject = report "Loans Guaranteed";
                     }
 
                     action("Members Loan  Guarantors")
@@ -1490,41 +1480,41 @@ Page 56043 "Polytech Sacco Role Center"
                     Caption = 'Defaulter Management';
 
 
-                    // group(loanRecovery)
-                    // {
-                    //     Caption = 'Loan Recovery';
-                    //     action(LoanRecovList)
-                    //     {
-                    //         Caption = 'Open Loan Recovery List';
-                    //         RunObject = page "Loan Recovery List";
-                    //         RunPageView = WHERE(Status = CONST(open));
+                    group(loanRecovery)
+                    {
+                        Caption = 'Loan Recovery';
+                        action(LoanRecovList)
+                        {
+                            Caption = 'Open Loan Recovery List';
+                            RunObject = page "Loan Recovery List";
+                            RunPageView = WHERE(Status = CONST(open));
 
-                    //     }
-                    //     action(PLoanRecovList)
-                    //     {
-                    //         Caption = 'Pending Approval Loan Recovery List';
-                    //         RunObject = page "Loan Recovery";
-                    //         RunPageView = WHERE(Status = CONST(pending));
-
-
-                    //     }
-                    //     action(ALoanRecovList)
-                    //     {
-                    //         Caption = 'Approved Loan Recovery List';
-                    //         RunObject = page "Loan Recovery";
-                    //         RunPageView = WHERE(Status = CONST(approved));
+                        }
+                        action(PLoanRecovList)
+                        {
+                            Caption = 'Pending Approval Loan Recovery List';
+                            RunObject = page "Loan Recovery";
+                            RunPageView = WHERE(Status = CONST(pending));
 
 
-                    //     }
-                    //     action(PostedLoanRecovList)
-                    //     {
-                    //         Caption = 'Posted Loan Recovery List';
-                    //         RunObject = page "Loan Recovery";
-                    //         RunPageView = WHERE(Status = CONST(closed));
-                    //         Visible = false;
+                        }
+                        action(ALoanRecovList)
+                        {
+                            Caption = 'Approved Loan Recovery List';
+                            RunObject = page "Loan Recovery";
+                            RunPageView = WHERE(Status = CONST(approved));
 
-                    //     }
-                    // }
+
+                        }
+                        action(PostedLoanRecovList)
+                        {
+                            Caption = 'Posted Loan Recovery List';
+                            RunObject = page "Loan Recovery";
+                            RunPageView = WHERE(Status = CONST(closed));
+                            Visible = false;
+
+                        }
+                    }
 
                     group(demandnotices)
                     {
@@ -1550,15 +1540,8 @@ Page 56043 "Polytech Sacco Role Center"
                                 RunObject = report "Loan Defaulter Final Notice";
                                 Image = Report;
                             }
-                            // action("Update Defaulter aging")
-                            // {
-                            //     ApplicationArea = Basic, Suite;
-                            //     RunObject = report "Loans Aging Report New-SASRA";
-                            // }
                         }
                     }
-
-
 
                 }
 
@@ -1568,223 +1551,199 @@ Page 56043 "Polytech Sacco Role Center"
 
 
                 //...............................................Start of BOSA Reports.........................
-                // group("BOSA Reports")
-                // {
-                //     action("New Members Report")
-                //     {
-                //         Caption = 'New Members Report';
-                //         RunObject = report "New Member Accounts";
-                //     }
-                //     action("Sacco Loan Disbursements")
-                //     {
-                //         Caption = 'Loan Disbursements Report';
-                //         RunObject = report "Sacco Loan Disbursements";
-                //     }
-                //     action("Loan Totals Per Category")
-                //     {
-                //         Caption = 'Loan Totals Per Category';
-                //         RunObject = report "Loan Totals Per Employer";
-                //     }
-                //     action("Loans Portfolio Reports")
-                //     {
-                //         Caption = 'Loans Portfolio Reports';
-                //         RunObject = report "Loans Potfolio Analysis";
-                //     }
-                //     action("Loans Portfolio Concentration Reports")
-                //     {
-                //         Caption = 'Loans Portfolio Concentration Reports';
-                //         RunObject = report "Loan Portifolio Concentration";
-                //     }
-                //     action("Loans Underpaid/OverPaid")
-                //     {
-                //         Caption = 'Loans Underpaid/OverPaid';
-                //         RunObject = report "Loans Underpaid";
-                //     }
-                // }
-
+                group("BOSA Reports")
+                {
+                    action("New Members Report")
+                    {
+                        Caption = 'New Members Report';
+                        // RunObject = report "New Member Accounts";
+                    }
+                    action("Sacco Loan Disbursements")
+                    {
+                        Caption = 'Loan Disbursements Report';
+                        // RunObject = report "Sacco Loan Disbursements";
+                    }
+                    action("Loan Totals Per Category")
+                    {
+                        Caption = 'Loan Totals Per Category';
+                        // RunObject = report "Loan Totals Per Employer";
+                    }
+                    action("Loans Portfolio Reports")
+                    {
+                        Caption = 'Loans Portfolio Reports';
+                        // RunObject = report "Loans Potfolio Analysis";
+                    }
+                    action("Loans Portfolio Concentration Reports")
+                    {
+                        Caption = 'Loans Portfolio Concentration Reports';
+                        // RunObject = report "Loan Portifolio Concentration";
+                    }
+                    action("Loans Underpaid/OverPaid")
+                    {
+                        Caption = 'Loans Underpaid/OverPaid';
+                        // RunObject = report "Loans Underpaid";
+                    }
+                }
                 //.....................................End Of BOSA
 
 
                 //..............................................................................................
 
-                // group(BOSAPeriodicActivities)
-                // {
-                //     Caption = 'Periodic Activities';
+                group(BOSAPeriodicActivities)
+                {
+                    Caption = 'Periodic Activities';
+                    group(LoanDefaulter)
+                    {
+                        Caption = 'Loan Defaulter Notices';
+                        action(LoanDefaulter1st)
+                        {
+                            Caption = 'Loan Defaulter 1st Notice';
+                            Image = Setup;
+                            RunObject = report "Loan Defaulter 1st Notice";
+                        }
+                        action(LoanDefaulter2nd)
+                        {
+                            Caption = 'loan Defaulter 2nd Notice';
+                            Image = Setup;
+                            RunObject = report "Loan Defaulter 2nd Notice";
+                        }
+                        action("Loan Defaulter Final Notice")
+                        {
 
-                //     action("Update Member Dormancy")
-                //     {
-                //         RunObject = report "Update Member Dormancy";
-                //         ApplicationArea = all;
-                //         Visible = false;
-                //     }
-                //     group(LoanDefaulter)
-                //     {
-                //         Caption = 'Loan Defaulter Notices';
-                //         action(LoanDefaulter1st)
-                //         {
-                //             Caption = 'Loan Defaulter 1st Notice';
-                //             Image = Setup;
-                //             RunObject = report "Loan Defaulter 1st Notice";
-                //         }
-                //         action(LoanDefaulter2nd)
-                //         {
-                //             Caption = 'loan Defaulter 2nd Notice';
-                //             Image = Setup;
-                //             RunObject = report "Loan Defaulter 2nd Notice";
-                //         }
-                //         action("Loan Defaulter Final Notice")
-                //         {
+                            Image = Setup;
+                            RunObject = report "Loan Defaulter Final Notice";
+                        }
 
-                //             Image = Setup;
-                //             RunObject = report "Loan Defaulter Final Notice";
-                //         }
+                    }
+                    group(CheckOffDistributed)
+                    {
+                        Caption = 'Checkoff Processing-Distributed';
+                        Visible = false;
+                        action("Checkoff Processing List")
+                        {
+                            Caption = 'Checkoff Processing List';
+                            Image = Setup;
+                            RunObject = page "Checkoff Processing-D List";
+                        }
+                        action(CheckoffProcessingDistributed)
+                        {
+                            Caption = 'Checkoff Processing-Distributed';
+                            Image = Setup;
+                            RunObject = page "Transfer Schedule";
+                        }
+                    }
+                    group(CheckOffBlocked)
+                    {
+                        Caption = 'Checkoff Processing-Blocked';
+                        action("Checkoff Processing List Blocked")
+                        {
+                            Caption = 'Employer Checkoff Remittance';
+                            Image = Setup;
+                            RunObject = page "Bosa Receipts H List-Checkoff";
+                        }
+                        action("Posted Employer Checkoff Remittance")
+                        {
+                            Caption = 'Posted Employer Checkoff Remittance';
+                            Image = Setup;
+                            RunObject = page "Posted Bosa Rcpt List-Checkof";
+                        }
+                        action("Import Sacco Jnl")
+                        {
+                            Caption = 'Import Sacco Jnl';
+                            Image = Setup;
+                            RunObject = xmlport "Import Sacco Jnl";
+                            visible = false;
+                        }
+                    }
+                    group(CheckOffAdvice)
+                    {
+                        Caption = 'Check-Off Advice';
+                        action("Check off Adivice-Breakdown")
+                        {
+                            Image = Setup;
+                            // RunObject = report "Check Off Advice";
+                        }
+                        action("Check off Adivice-Lumpsum")
+                        {
+                            Image = Setup;
+                            // RunObject = report "Check Off Advice-Lumpsum";
+                        }
 
-                //     }
-                //     group(CheckOffDistributed)
-                //     {
-                //         Caption = 'Checkoff Processing-Distributed';
-                //         Visible = false;
-                //         action("Checkoff Processing List")
-                //         {
-                //             Caption = 'Checkoff Processing List';
-                //             Image = Setup;
-                //             RunObject = page "Checkoff Processing-D List";
-                //         }
-                //         action(CheckoffProcessingDistributed)
-                //         {
-                //             Caption = 'Checkoff Processing-Distributed';
-                //             Image = Setup;
-                //             RunObject = page "Transfer Schedule";
-                //         }
-                //     }
-                //     group(CheckOffBlocked)
-                //     {
-                //         Caption = 'Checkoff Processing-Blocked';
-                //         action("Checkoff Processing List Blocked")
-                //         {
-                //             Caption = 'Employer Checkoff Remittance';
-                //             Image = Setup;
-                //             RunObject = page "Bosa Receipts H List-Checkoff";
-                //         }
-                //         action("Posted Employer Checkoff Remittance")
-                //         {
-                //             Caption = 'Posted Employer Checkoff Remittance';
-                //             Image = Setup;
-                //             RunObject = page "Posted Bosa Rcpt List-Checkof";
-                //         }
-                //         action("Import Sacco Jnl")
-                //         {
-                //             Caption = 'Import Sacco Jnl';
-                //             Image = Setup;
-                //             RunObject = xmlport "Import Sacco Jnl";
-                //             visible = false;
-                //         }
-                //     }
-                //     group(CheckOffAdvice)
-                //     {
-                //         Caption = 'Check-Off Advice';
-                //         action("Check off Adivice-Breakdown")
-                //         {
-                //             Image = Setup;
-                //             RunObject = report "Check Off Advice";
-                //         }
-                //         action("Check off Adivice-Lumpsum")
-                //         {
-                //             Image = Setup;
-                //             RunObject = report "Check Off Advice-Lumpsum";
-                //         }
+                    }
+                    group(MonthlyInterestProcessing)
+                    {
+                        Caption = 'Monthly Interest Processing';
+                        action("Post Monthly Interest")
+                        {
+                            Caption = 'Post Monthly Interest';
+                            Image = Setup;
+                            // RunObject = report "Post Monthly Interest.";
+                            ToolTip = 'Used to process Loans Monthly Interest';
+                        }
+                    }
+                    group(Dividends)
+                    {
+                        Caption = 'Dividends';
+                        group(Prorated)
+                        {
+                            Caption = 'Prorated';
+                            action("Dividends Processing-Prorated")
+                            {
+                                Caption = 'Dividends Processing-Prorated';
+                                Image = Setup;
+                                // RunObject = report "Dividend Processing-Prorated";
+                            }
+                            action("Dividends Register")
+                            {
+                                Caption = 'Dividends Register';
+                                Image = Setup;
+                                // RunObject = report "Dividend Register";
+                            }
+                            action(DividendProgressionSlip)
+                            {
+                                Caption = 'Dividend Progression Slip';
+                                Image = Setup;
+                                // RunObject = report "Dividends Progressionslip";
+                                Visible = false;
+                            }
+                            action("Dividends Payments Report")
+                            {
+                                ApplicationArea = all;
+                                // RunObject = Report "Dividends Payments";
 
-                //     }
-                //     group(MonthlyInterestProcessing)
-                //     {
-                //         Caption = 'Monthly Interest Processing';
-                //         action("Post Monthly Interest")
-                //         {
-                //             Caption = 'Post Monthly Interest';
-                //             Image = Setup;
-                //             RunObject = report "Post Monthly Interest.";
-                //             ToolTip = 'Used to process Loans Monthly Interest';
-                //         }
-                //     }
-                //     group(Dividends)
-                //     {
-                //         Caption = 'Dividends';
-                //         // group("Flat Rate")
-                //         // {
-                //         //     Caption = 'Flat Rate';
-                //         //     action("Dividends Processing-Flat Rate")
-                //         //     {
-                //         //         Caption = 'Dividends Processing-Flat Rate';
-                //         //         Image = Setup;
-                //         //         RunObject = report "Dividend Processing-Flat Rate";
-                //         //     }
-                //         //     action("Dividends Processing Flat Rate-List")
-                //         //     {
-                //         //         Caption = 'Dividends Processing Flat Rate-List';
-                //         //         Image = Setup;
-                //         //         RunObject = page "Dividends Processing Flat Rate";
-                //         //     }
-                //         // }
-                //         group(Prorated)
-                //         {
-                //             Caption = 'Prorated';
-                //             action("Dividends Processing-Prorated")
-                //             {
-                //                 Caption = 'Dividends Processing-Prorated';
-                //                 Image = Setup;
-                //                 RunObject = report "Dividend Processing-Prorated";
-                //             }
-                //             action("Dividends Register")
-                //             {
-                //                 Caption = 'Dividends Register';
-                //                 Image = Setup;
-                //                 RunObject = report "Dividend Register";
-                //             }
-                //             action(DividendProgressionSlip)
-                //             {
-                //                 Caption = 'Dividend Progression Slip';
-                //                 Image = Setup;
-                //                 RunObject = report "Dividends Progressionslip";
-                //                 Visible = false;
-                //             }
-                //             action("Dividends Payments Report")
-                //             {
-                //                 ApplicationArea = all;
-                //                 RunObject = Report "Dividends Payments";
+                            }
+                        }
+                        group("Share capital Manangement")
+                        {
+                            action("Share Capital Recovery")
+                            {
+                                Image = ReceiveLoaner;
+                                ApplicationArea = all;
+                                Caption = 'Recover Sharecapital from Deposits';
+                                // RunObject = report "Share Capital Recovery";
+                            }
+                            group(SharecapitalTrading)
+                            {
+                                action(SharecapitalTradingList)
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    RunObject = page "Share Capital Trading List";
+                                    Caption = 'Sharecapital Trading List';
+                                }
+                                action(SharecapitalTradingListPosted)
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    RunObject = page "Share Capital Trading Posted";
+                                    Caption = 'Sharecapital Trading List Posted';
 
-                //             }
-                //         }
-                //         group("Share capital Manangement")
-                //         {
-                //             action("Share Capital Recovery")
-                //             {
-                //                 Image = ReceiveLoaner;
-                //                 ApplicationArea = all;
-                //                 Caption = 'Recover Sharecapital from Deposits';
-                //                 RunObject = report "Share Capital Recovery";
-                //             }
-                //             group(SharecapitalTrading)
-                //             {
-                //                 action(SharecapitalTradingList)
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     RunObject = page "Share Capital Trading List";
-                //                     Caption = 'Sharecapital Trading List';
-                //                 }
-                //                 action(SharecapitalTradingListPosted)
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     RunObject = page "Share Capital Trading Posted";
-                //                     Caption = 'Sharecapital Trading List Posted';
-
-                //                 }
-                //             }
-                //         }
+                                }
+                            }
+                        }
 
 
 
-                //     }
-                // }
+                    }
+                }
 
             }
 
@@ -1799,6 +1758,86 @@ Page 56043 "Polytech Sacco Role Center"
             group(SwizzKash)
             {
                 Caption = 'Alternative Channels';
+                group(SwizzKashActivities)
+                {
+                    Caption = 'Mobile Banking';
+                    Image = Receivables;
+                    ToolTip = 'Mobile Banking .';
+
+                    action("SwizzKashApplications")
+                    {
+                        Caption = 'M-Banking Applications';
+                        Image = Calls;
+                        RunObject = page "SwizzKash Applications";
+                        RunPageView = WHERE(status = filter('<>closed'));
+                        ToolTip = 'Membership Applicaton for SwizzKash.';
+                    }
+                    action("RegisteredSwizzKashMembers")
+                    {
+                        Caption = 'M-Banking Registered Members';
+                        Image = PostedReceipt;
+                        RunObject = page "SwizzKash Mobile Members";
+                        RunPageView = WHERE(status = CONST(Approved));
+                        ToolTip = 'Member Receipts for payments done.';
+
+                    }
+                    action("M-Banking PIN Reset")
+                    {
+                        Caption = 'M-Banking PIN Reset';
+                        Image = PostedReceipt;
+                        RunObject = page "Mobile PIN Reset";
+                        ToolTip = 'Member Receipts for payments done.';
+
+                    }
+                    action("PM-Banking PIN Reset")
+                    {
+                        Caption = 'Pending M-Banking PIN Reset';
+                        Image = PostedReceipt;
+                        RunObject = page "SwizzKash pending PIN Reset";
+                        RunPageView = WHERE("PIN Requested" = CONST(true));
+                        ToolTip = 'Member Receipts for payments done.';
+
+                    }
+
+                    action("SurePesaTransactions")
+                    {
+                        Caption = 'M-Banking Transactions';
+                        Image = PostedReceipt;
+                        RunObject = page "SwizzKash Transactions";
+                        ToolTip = 'Surepesa Transactions.';
+
+                    }
+                    action("Mobile Loans")
+                    {
+                        Caption = 'Mobile Loans';
+                        Image = PostedReceipt;
+                        RunObject = page "Mobile Loans";
+                        ToolTip = 'View Mobile Loans List.';
+                    }
+
+                }
+                group("Paybill Management")
+                {
+                    Caption = 'Paybill Deposits';
+                    Image = Receivables;
+                    ToolTip = 'Manage Paybill Deposits.';
+                    action("All Paybill Deposits")
+                    {
+                        Caption = 'All Paybill Transactions';
+                        Image = PostedReceipt;
+                        RunObject = page "SwizzKash Paybill Trans";
+                        ToolTip = 'View Paybill Deposits.';
+
+                    }
+                    action("Import Paybills")
+                    {
+                        Image = PostedReceipt;
+                        RunObject = page "SwizzKash Paybill Buffer";
+
+                    }
+
+                }
+
 
 
                 group("SMS Messages")
@@ -2214,7 +2253,7 @@ Page 56043 "Polytech Sacco Role Center"
             }
             group("Human Resources")
             {
-                Visible = true;
+                Visible = false;
                 group("Employee Management")
                 {
                     action("EmployeesList")
@@ -2351,148 +2390,168 @@ Page 56043 "Polytech Sacco Role Center"
                 }
             }
 
-            Group(SaccoPayroll)
+            group("Swizz Payroll Management")
             {
-                Caption = 'Payroll Management';
-                group(payrollEmployees)
+                group("Payroll Employees")
                 {
-                    Caption = 'Payroll Employee';
-                    action(payrollemp)
+                    action("Payroll Employee List")
                     {
-                        Caption = 'Payroll Employee list';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
                         RunObject = page "Payroll Employee List.";
-                        tooltip = 'Open Payroll Employees list';
+                        ApplicationArea = All;
+
                     }
-                    action(HREmployeeList)
+                    action("Payroll Earnings List.")
                     {
-                        Caption = 'HR Employee List';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-                        RunObject = page "HR Employee List";
-                        tooltip = 'HR  Employees list';
+                        RunObject = page "Payroll Earnings List.";
+                        ApplicationArea = All;
+
                     }
+                    action("Payroll Deductions List.")
+                    {
+                        RunObject = page "Payroll Deductions List.";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
+                    action("Payroll Employee Earnings.")
+                    {
+                        RunObject = page "Payroll Employee Earnings.";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
+                    action("Payroll Employee Deductions.")
+                    {
+                        RunObject = page "Payroll Employee Deductions.";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
+
                 }
-                // group(PayrollReports)
-                // {
-                //     Caption = 'Payroll Reports';
-                //     action(PayrollSummary)
-                //     {
-                //         Caption = 'Payroll Employees Report';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "Payroll Employees Report.";
-                //     }
-                //     action(CompanyPayrollSummary)
-                //     {
-                //         Caption = 'payroll Allowances Report';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "payroll Allowances Report.";
-
-                //     }
-                //     action(AllDeductionsReport)
-                //     {
-                //         Caption = 'payroll Deductions Report';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "payroll Deductions Report.";
-
-                //     }
-                //     action(AllEarningsReport)
-                //     {
-                //         Caption = 'PayrollSummary List';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "PayrollSummary List.";
-
-                //     }
-                //     action(DeductionsReport)
-                //     {
-                //         Caption = 'Payroll Bank Schedule';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "Bank Schedule..";
-
-                //     }
-                //     action(PAYESchedule)
-                //     {
-                //         Caption = 'PAYE Schedule';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "Paye Schedule W..";
-
-                //     }
-                //     action(NHIFSchedule)
-                //     {
-                //         Caption = 'NHIF Schedule';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "NHIF Schedule W..";
-
-                //     }
-                //     action(NSSFSchedule)
-                //     {
-                //         Caption = 'NSSF Schedule';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "NSSF Schedule W..";
-
-                //     }
-                //     action(HousingLevySchedule)
-                //     {
-                //         Caption = 'Housing Levy Schedule';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "Housing Levy Schedule";
-
-                //     }
-                //     action(P9Report)
-                //     {
-                //         Caption = 'P9 Report';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report P9Report;
-                //     }
-                //     action(UpdateP9Report)
-                //     {
-                //         Caption = 'Update P9 Report';
-                //         ApplicationArea = basic, suite;
-                //         Image = Report;
-                //         RunObject = report "Update P9Rports";
-                //     }
-                // }
-
-                group(payrollperiodicactivities)
+                group("Payrolll Periodic Activities")
                 {
-                    Caption = 'Payroll Periodic Activities';
-                    action(payrollperiods)
+                    action("Payroll Periods")
                     {
-                        Caption = 'Payroll Periods';
-                        ApplicationArea = basic, suite;
                         RunObject = page "Payroll Periods.";
+                        ApplicationArea = All;
+
                     }
-                    action(Transfertojournal)
+                    action("Transfer Payroll to journal")
                     {
-                        Caption = 'Payroll journal transfer';
-                        ApplicationArea = basic, suite;
                         // RunObject = report "Payroll JournalTransfer.";
+                        ApplicationArea = All;
+
                     }
-                    action(Payrolnettransfer)
+                    action("General Journal")
                     {
-                        Caption = 'Payroll Net Transfer To FOSA';
-                        ApplicationArea = basic, suite;
-                        // RunObject = report "NET Salary Transfer To FOSA.";
-                    }
-                    action(GoToFOSA)
-                    {
-                        Caption = 'Go To General Journal';
-                        ApplicationArea = basic, suite;
                         RunObject = page "General Journal";
+                        ApplicationArea = All;
+                        Visible = false;
+
                     }
 
                 }
+                group(Reports1)
+                {
+                    Caption = 'Reports';
+                    action("Payroll Employees Report")
+                    {
+                        // RunObject = report "Payroll Employees Report.";
+                        ApplicationArea = All;
+                    }
+                    // action("Payroll allowances Report")
+                    // {
+                    //     RunObject = report "payroll Allowances Report.";
+                    //     ApplicationArea = all;
+                    // }
+                    // action("payroll Deductions Report.")
+                    // {
+                    //     RunObject = report "payroll Deductions Report.";
+                    //     ApplicationArea = All;
+                    // }
+                    action("NHIF Report")
+                    {
+                        // RunObject = report "NHIF Schedule W..";
+
+                        ApplicationArea = all;
+                    }
+                    action("NSSF Report")
+                    {
+                        // RunObject = report "NSSF Schedule W..";
+                        ApplicationArea = all;
+                    }
+                    action("Payroll Summary")
+                    {
+                        // RunObject = report "Payroll Summary";
+                        ApplicationArea = All;
+                    }
+                    action("Payroll Payee")
+                    {
+                        // RunObject = report "PAYE Schedule";
+                        ApplicationArea = All;
+                    }
+                    action("P9 Report")
+                    {
+                        // RunObject = report "P9 Report";
+                        ApplicationArea = All;
+                    }
+                    action("Staff Salaries Report")
+                    {
+                        // RunObject = report "Staff Salaries Report";
+                        Caption = 'Staff Loan Report';
+                        ApplicationArea = all;
+                    }
+
+
+                }
+                group(Setup1)
+                {
+                    Caption = 'Payroll Setup';
+                    action("Payroll PAYE Setup")
+                    {
+                        RunObject = page "Payroll PAYE Setup.";
+                        ApplicationArea = All;
+                    }
+                    action("Payroll NSSF Setup")
+                    {
+                        RunObject = page "Payroll NSSF Setup.";
+                        ApplicationArea = All;
+                    }
+                    action("Payroll NHIF Setup")
+                    {
+                        RunObject = page "Payroll NHIF Setup.";
+                        ApplicationArea = All;
+                    }
+                    action("Payroll Posting Group")
+                    {
+                        RunObject = page "Payroll Posting Group.";
+                        ApplicationArea = All;
+                    }
+                    action("Payroll Transaction List")
+                    {
+                        RunObject = page "Payroll Transaction List.";
+                        ApplicationArea = All;
+                    }
+                    // action("Salary Grade Structures")
+                    // {
+                    //     RunObject = page "Salary grade Structures";
+                    //     ApplicationArea = All;
+                    // }
+                    action("Payroll Period Transactions")
+                    {
+                        RunObject = page "Payroll Period Transaction.";
+                        ApplicationArea = All;
+                    }
+                    action("Payroll General Setup LIST")
+                    {
+                        RunObject = page "Payroll General Setup LIST.";
+                        ApplicationArea = All;
+                    }
+
+
+                }
+
             }
 
 #if not CLEAN18

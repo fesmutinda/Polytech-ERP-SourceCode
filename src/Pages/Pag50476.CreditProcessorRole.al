@@ -53,7 +53,7 @@ page 50476 "Credit Processor Role"
             action("Members  List")
             {
                 ApplicationArea = Basic;
-                RunObject = Page "Staff Leave Claim Lines";
+                // RunObject = Page "Staff Leave Claim Lines";
             }
             action("Bosa Loans")
             {

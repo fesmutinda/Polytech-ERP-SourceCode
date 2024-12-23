@@ -10,35 +10,42 @@ Table 51388 "Receipts & Payments"
         field(2; "Account No."; Code[30])
         {
             NotBlank = true;
-            TableRelation = if ("Account Type" = const(Member)) Customer."No." where("Customer Type" = filter(Member))
-            else if ("Account Type" = const(Debtor)) Customer."No."
-            else if ("Account Type" = const("G/L Account")) "G/L Account"."No."
-            else if ("Account Type" = const("FOSA Loan")) Customer."No." where("Customer Type" = const(Member))
-            // else if ("Account Type" = const(Vendor)) Vendor."No." where("Creditor Type" = filter("Savings Account"))
-            else if ("Account Type" = const(Micro)) Customer."No." where("Customer Posting Group" = filter('MICRO'));
+            TableRelation = if ("Account Type" = const(Customer)) Customer."No." where("Customer Type" = filter(Member));
+            //  where(ISNormalMember = filter(true)
+            // , "Employer Checkoff" = filter(false))
+            // else
+            // if ("Account Type" = const(Debtor)) Customer."No." where(ISNormalMember = filter(false))
+            // else
+            // if ("Account Type" = const("G/L Account")) "G/L Account"."No."
+            // else
+            // if ("Account Type" = const("FOSA Loan")) Customer."No." where(ISNormalMember = filter(true))
+            // else
+            // if ("Account Type" = const(Vendor)) Vendor."No." where("Creditor Type" = filter("FOSA Account"),
+            //                                                                            Status = filter(<> Closed | Deceased),
+            //                                                                            Blocked = filter(<> Payment | All))
+            // else
+            // if ("Account Type" = const("IC Partner")) Customer."No." where("Customer Posting Group" = filter('MICRO'));
 
             trigger OnValidate()
             begin
                 //TESTFIELD(Source);
 
-                if ("Account Type" = "account type"::"FOSA Loan") or
-                   ("Account Type" = "account type"::Debtor) then begin
-                    if Cust.Get("Account No.") then begin
-                        Name := Cust.Name;
+                // if ("Account Type" = "account type"::"FOSA Loan") or
+                //    ("Account Type" = "account type"::Debtor) then begin
+                //     if Cust.Get("Account No.") then begin
+                //         Name := Cust.Name;
 
-                    end;
-                end;
-                if ("Account Type" = "account type"::Member) or ("Account Type" = "account type"::Micro) then begin
+                //     end;
+                // end;
+                if ("Account Type" = "account type"::Customer) then begin
                     if Mem.Get("Account No.") then
                         Name := Mem.Name;
-                    "Member ID No" := Mem."ID No.";
-                    "Registration Date" := Mem."Registration Date";
                 end;
 
-                if ("Account Type" = "account type"::Vendor) then begin
-                    if Vend.Get("Account No.") then
-                        Name := Vend.Name;
-                end;
+                // if ("Account Type" = "account type"::Vendor) then begin
+                //     if Vend.Get("Account No.") then
+                //         Name := Vend.Name;
+                // end;
 
                 if ("Account Type" = "account type"::"G/L Account") then begin
                     if GLAcct.Get("Account No.") then begin
@@ -81,14 +88,8 @@ Table 51388 "Receipts & Payments"
         field(8; "Employer No."; Code[20])
         {
             Editable = true;
-            TableRelation = "Bank Account"."No.";
-
-            trigger OnValidate()
-            begin
-
-                if Banks.Get("Employer No.") then
-                    "Bank Name" := Banks.Name;
-            end;
+            TableRelation = if (Source = const(BOSA),
+                                "Receipt Mode" = filter(Cheque | "Deposit Slip" | Mpesa | "Standing order" | EFT | Cash)) "Bank Account"."No.";
         }
         field(9; "User ID"; Code[50])
         {
@@ -96,8 +97,7 @@ Table 51388 "Receipts & Payments"
         }
         field(10; "Allocated Amount"; Decimal)
         {
-            CalcFormula = sum("Receipt Allocation".Amount where("Document No" = field("Transaction No."),
-                                                                 "Member No" = field("Account No.")));
+            CalcFormula = sum("Receipt Allocation".Amount where("Document No" = field("Transaction No.")));
             Editable = false;
             FieldClass = FlowField;
 
@@ -114,11 +114,6 @@ Table 51388 "Receipts & Payments"
         field(12; "Transaction Time"; Time)
         {
             Editable = false;
-
-            trigger OnValidate()
-            begin
-                "Transaction Date" := Today;
-            end;
         }
         field(13; "No. Series"; Code[10])
         {
@@ -128,13 +123,14 @@ Table 51388 "Receipts & Payments"
         }
         field(14; "Account Type"; Option)
         {
-            OptionCaption = 'Member,Debtor,G/L Account,FOSA Loan,Customer,Vendor,Micro';
-            OptionMembers = Member,Debtor,"G/L Account","FOSA Loan",Customer,Vendor,Micro;
+
+
+            OptionMembers = Customer,"G/L Account",Vendor;
         }
         field(15; "Transaction Slip Type"; Option)
         {
-            OptionCaption = ' ,Standing Order,Direct Debit,Direct Deposit,Cheque,M-Pesa';
-            OptionMembers = " ","Standing Order","Direct Debit","Direct Deposit",Cheque,"M-Pesa";
+            OptionCaption = ' ,Standing Order,Direct Debit,Direct Deposit,Cash,Cheque,M-Pesa';
+            OptionMembers = " ","Standing Order","Direct Debit","Direct Deposit",Cash,Cheque,"M-Pesa";
         }
         field(16; "Bank Name"; Code[50])
         {
@@ -150,15 +146,15 @@ Table 51388 "Receipts & Payments"
         }
         field(50002; Source; Option)
         {
-            OptionCaption = 'BOSA';
-            OptionMembers = BOSA;
+            OptionCaption = 'BOSA,FOSA,MICRO';
+            OptionMembers = BOSA,FOSA,MICRO;
         }
         field(50003; "Receipt Mode"; Option)
         {
-            OptionCaption = 'Cheque,Mpesa,Standing order,Deposit Slip,EFT';
-            OptionMembers = Cheque,Mpesa,"Standing order","Deposit Slip",EFT;
+            OptionCaption = 'Cash,Cheque,Mpesa,Standing order,Deposit Slip,EFT';
+            OptionMembers = Cash,Cheque,Mpesa,"Standing order","Deposit Slip",EFT;
         }
-        field(50004; Remarks; Text[75])
+        field(50004; Remarks; Text[50])
         {
         }
         field(50005; "Code"; Code[20])
@@ -223,20 +219,8 @@ Table 51388 "Receipts & Payments"
         }
         field(50015; "Excess Transaction Type"; Option)
         {
-            OptionCaption = 'Deposit Contribution,Jiokoe Savings,Unallocated Funds';
-            OptionMembers = "Deposit Contribution","Jiokoe Savings","Unallocated Funds";
-        }
-        field(50016; "Registration Date"; Date)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50017; "Member ID No"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50018; "Interest due"; Boolean)
-        {
-            DataClassification = ToBeClassified;
+            OptionCaption = 'Deposit Contribution,Safari Saving,Silver Savings,Junior Savings';
+            OptionMembers = "Deposit Contribution","Safari Saving","Silver Savings","Junior Savings";
         }
     }
 
@@ -269,6 +253,8 @@ Table 51388 "Receipts & Payments"
     end;
 
     trigger OnInsert()
+    var
+        ReceiptAllocation: Record "Receipt Allocation";
     begin
         if "Transaction No." = '' then begin
             NoSetup.Get();
@@ -277,11 +263,11 @@ Table 51388 "Receipts & Payments"
         end;
 
         "User ID" := UserId;
-        "Transaction Date" := Today;
+        "Transaction Date" := "Transaction Date";
         "Transaction Time" := Time;
         Source := Source::BOSA;
-        "Global Dimension 2 Code" := SFactory.FnGetUserBranch();
         "Global Dimension 1 Code" := 'BOSA';
+        "Global Dimension 2 Code" := SFactory.FnGetUserBranch();
 
         Banks.Reset;
         Banks.SetRange(Banks.CashierID, UserId);
@@ -290,6 +276,10 @@ Table 51388 "Receipts & Payments"
             "Employer No." := Banks."No.";
             "Bank Name" := Banks.Name;
         end;
+
+        ReceiptAllocation.Reset;
+        ReceiptAllocation.SetRange("Document No", Rec."Transaction No.");
+        ReceiptAllocation.DeleteAll;
     end;
 
     trigger OnModify()
@@ -317,8 +307,8 @@ Table 51388 "Receipts & Payments"
         Mem: Record Customer;
         Vend: Record Vendor;
         GLAcc: Record "G/L Account";
-        PayLine: Record "Payment Line";
+        // PayLine: Record "Payment Line.";
         Banks: Record "Bank Account";
-        SFactory: Codeunit "Swizzsoft Factory.";
+        SFactory: Codeunit "SURESTEP Factory";
 }
 

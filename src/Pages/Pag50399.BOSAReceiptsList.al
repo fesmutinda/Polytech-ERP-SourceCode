@@ -2,8 +2,11 @@
 page 50399 "BOSA Receipts List"
 {
     CardPageID = "BOSA Receipt Card";
-    Editable = false;
+    Editable = true;
     PageType = List;
+    UsageCategory = Lists;
+    DeleteAllowed = true;
+    ApplicationArea = All;
     SourceTable = "Receipts & Payments";
     SourceTableView = where(Posted = filter(false));
 
@@ -63,12 +66,13 @@ page 50399 "BOSA Receipts List"
         ObjUserSetup.Reset;
         ObjUserSetup.SetRange("User ID", UserId);
         if ObjUserSetup.Find('-') then begin
-            //IF ObjUserSetup."Approval Administrator"<>TRUE THEN
-            Rec.SetRange("User ID", UserId);
+            if ObjUserSetup."Approval Administrator" <> true then
+                Rec.SetRange("User ID", UserId);
         end;
     end;
 
     var
         ObjUserSetup: Record "User Setup";
 }
+
 

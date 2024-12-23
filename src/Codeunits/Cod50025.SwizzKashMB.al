@@ -87,7 +87,7 @@ Codeunit 50025 SwizzKashMB
         LoanGuaranteeDetails: Record 51372;
         bosaNo: Text[20];
         RanNo: Text[20];
-        PaybillTrans: Record 51098;
+        PaybillTrans: Record "SwizzKash MPESA Trans";
         PaybillRecon: Code[10];
         Rschedule: Record 51375;
         ChargeAmount: Decimal;
@@ -114,7 +114,7 @@ Codeunit 50025 SwizzKashMB
         Mrowcount: Integer;
         SwizzKashCharge: Decimal;
         TotalCharges: Decimal;
-        SwizzKashTrans: Record 51522;
+        SwizzKashTrans: Record "SwizzKash Transactions";
         SwizzKashCommACC: Code[50];
         MPESARecon: Code[50];
         ExxcDuty: label '40415';

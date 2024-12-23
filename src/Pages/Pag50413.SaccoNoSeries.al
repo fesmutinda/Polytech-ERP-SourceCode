@@ -1,9 +1,12 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50413 "Sacco No. Series"
 {
+    ApplicationArea = Basic;
     DeleteAllowed = false;
+    InsertAllowed = false;
     Editable = true;
     SourceTable = "Sacco No. Series";
+    UsageCategory = Administration;
 
     layout
     {
@@ -12,24 +15,28 @@ page 50413 "Sacco No. Series"
             group(General)
             {
                 Caption = 'General';
-                field("Primary Key"; Rec."Primary Key")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
+
                 field("SMS Request Series"; Rec."SMS Request Series")
                 {
                     ApplicationArea = Basic;
                 }
             }
-            group(Credit)
+            group(BOSA)
             {
-                Caption = 'Credit';
+                Caption = 'BOSA';
                 field("Member Application Nos"; Rec."Member Application Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Micro Loans"; Rec."Micro Loans")
+                field("Top Up Loan Nos"; Rec."Top Up Loan Nos")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loan Appeal Numbers"; Rec."Loan Appeal Numbers")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Guarantor Sub No."; Rec."Guarantor Sub No.")
                 {
                     ApplicationArea = Basic;
                 }
@@ -37,15 +44,7 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-            }
-            group("Member Sub Accounts")
-            {
-                Caption = 'Member Sub Accounts';
                 field("BOSA Loans Nos"; Rec."BOSA Loans Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("E-Loan Nos"; Rec."E-Loan Nos")
                 {
                     ApplicationArea = Basic;
                 }
@@ -65,40 +64,12 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Check Off Advisor"; Rec."Check Off Advisor")
+                field("Share Capital Transfer No.s"; Rec."Share Capital Transfer No.s")
                 {
                     ApplicationArea = Basic;
                 }
+
                 field("Bosa Transaction Nos"; Rec."Bosa Transaction Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Paybill Processing"; Rec."Paybill Processing")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Checkoff-Proc Distributed Nos"; Rec."Checkoff-Proc Distributed Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Checkoff Proc Block Nos"; Rec."Checkoff Proc Block Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(BosaNumber; Rec.BosaNumber)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Member No Used';
-                }
-                field("Loan PayOff Nos"; Rec."Loan PayOff Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Microfinance Last No Used"; Rec."Microfinance Last No Used")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("MicroFinance Account Prefix"; Rec."MicroFinance Account Prefix")
                 {
                     ApplicationArea = Basic;
                 }
@@ -110,66 +81,79 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Collateral Register No"; Rec."Collateral Register No")
+                field("Micro Group Nos."; Rec."Micro Group Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("SwizzKash Reg No."; Rec."SwizzKash Reg No.")
+                field("Teller Bulk Trans Nos."; Rec."Teller Bulk Trans Nos.")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Safe Custody Package Nos"; Rec."Safe Custody Package Nos")
+                field("Paybill Processing"; Rec."Paybill Processing")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Safe Custody Agent Nos"; Rec."Safe Custody Agent Nos")
+                field(BosaNumber; Rec.BosaNumber)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Bosa member Number';
+                    Visible = false;
+                }
+                field("Member Re-Application No.s"; Rec."Member Re-Application No.s")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Safe Custody Item Nos"; Rec."Safe Custody Item Nos")
+                field("Checkoff-Proc Distributed Nos"; Rec."Checkoff-Proc Distributed Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Package Retrieval Nos"; Rec."Package Retrieval Nos")
+                field("Tracker no"; Rec."Tracker no")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Cell Group Nos"; Rec."Member Cell Group Nos")
+                field("Activation Nos"; Rec."Activation Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("House Change Request No"; Rec."House Change Request No")
+                field("Top Up Nos"; Rec."Top Up Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("BD Training Nos"; Rec."BD Training Nos")
+                field("OVerdraft Nos"; Rec."OVerdraft Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Reschedule No.s"; Rec."Reschedule No.s")
+                field("Last Memb No."; Rec."Last Memb No.")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+
+                }
+                field("Loan Recovery Nos"; Rec."Loan Recovery Nos")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Member Agent/NOK Change"; Rec."Member Agent/NOK Change")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("House Group Application"; Rec."House Group Application")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("House Group Nos"; Rec."House Group Nos")
+                field("Change Request No"; Rec."Change Request No")
                 {
                     ApplicationArea = Basic;
                 }
             }
-            group("Banking Services")
+            group(FOSA)
             {
-                Caption = 'Banking Services';
+                Caption = 'FOSA';
+                Visible = false;
                 field("FOSA Loans Nos"; Rec."FOSA Loans Nos")
                 {
                     ApplicationArea = Basic;
                 }
+                // field("Member Periodics Nos"; Rec."Member Periodics Nos")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Okoa No."; Rec."Okoa No.")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Transaction Nos."; Rec."Transaction Nos.")
                 {
                     ApplicationArea = Basic;
@@ -214,10 +198,6 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Salary Processing Nos"; Rec."Salary Processing Nos")
-                {
-                    ApplicationArea = Basic;
-                }
                 field("Salaries Nos."; Rec."Salaries Nos.")
                 {
                     ApplicationArea = Basic;
@@ -226,10 +206,10 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Cheque Clearing Nos"; Rec."Cheque Clearing Nos")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Banking Shares Nos"; Rec."Banking Shares Nos")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Cheque Application Nos"; Rec."Cheque Application Nos")
                 {
                     ApplicationArea = Basic;
@@ -238,39 +218,16 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Customer Care Log Nos"; Rec."Customer Care Log Nos")
+
+                field("Receipts Nos"; Rec."Receipts Nos")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = all;
                 }
-                field("S_Mobile Registration Nos"; Rec."S_Mobile Registration Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Trunch Disbursment Nos"; Rec."Trunch Disbursment Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Change Request No"; Rec."Change Request No")
+                field("Member Agent/NOK Change"; Rec."Member Agent/NOK Change")
                 {
                     ApplicationArea = Basic;
                 }
                 field("Agent Serial Nos"; Rec."Agent Serial Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("ATM Card Batch Nos"; Rec."ATM Card Batch Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Demand Notice Nos"; Rec."Demand Notice Nos")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Fixed Deposit Placement"; Rec."Fixed Deposit Placement")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Guarantor Substitution"; Rec."Guarantor Substitution")
                 {
                     ApplicationArea = Basic;
                 }
@@ -341,6 +298,7 @@ page 50413 "Sacco No. Series"
             }
             group(Investor)
             {
+                Visible = false;
                 Caption = 'Investor';
                 field("Investor Application Nos"; Rec."Investor Application Nos")
                 {
@@ -350,16 +308,40 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Paybill No."; Rec."Paybill No.")
+            }
+            group("S-PESA")
+            {
+                Caption = 'S-PESA';
+                Visible = false;
+                field("MPESA Change Nos"; Rec."MPESA Change Nos")
                 {
                     ApplicationArea = Basic;
+                }
+                field("MPESA Application Nos"; Rec."MPESA Application Nos")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Change MPESA PIN Nos"; Rec."Change MPESA PIN Nos")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Change MPESA Application Nos"; Rec."Change MPESA Application Nos")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("SurePESA Registration Nos"; Rec."SwizzKash Reg No.")
+                {
+                    ApplicationArea = all;
                 }
             }
         }
     }
 
-    actions
-    {
-    }
+    trigger OnInit()
+
+    begin
+        if Rec.IsEmpty() then
+            Rec.Insert();
+    end;
 }
 

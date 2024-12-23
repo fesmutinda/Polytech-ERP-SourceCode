@@ -34,7 +34,7 @@ Codeunit 50030 "Poly Factory"
         Jnlinepost: Codeunit "Gen. Jnl.-Post Line";
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
         EntryNo: Integer;
-        Temp: Record 51031;
+        Temp: Record "Funds User Setup";
         Jtemplate: Code[30];
         JBatch: Code[30];
         KentourFactory: Codeunit "Poly Factory";

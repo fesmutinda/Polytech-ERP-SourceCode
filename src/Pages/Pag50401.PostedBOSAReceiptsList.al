@@ -1,12 +1,15 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50401 "Posted BOSA Receipts List"
 {
+    ApplicationArea = Basic;
     CardPageID = "Posted BOSA Receipt Card";
     DeleteAllowed = false;
+    InsertAllowed = false;
     Editable = false;
     PageType = List;
     SourceTable = "Receipts & Payments";
     SourceTableView = where(Posted = filter(true));
+    UsageCategory = Tasks;
 
     layout
     {
@@ -42,13 +45,10 @@ page 50401 "Posted BOSA Receipts List"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Posted; Rec.Posted)
+                field("Cheque Date"; Rec."Cheque Date")
                 {
                     ApplicationArea = Basic;
-                }
-                field("Transaction Date"; Rec."Transaction Date")
-                {
-                    ApplicationArea = Basic;
+                    Caption = 'Posting Date';
                 }
             }
         }
@@ -58,4 +58,3 @@ page 50401 "Posted BOSA Receipts List"
     {
     }
 }
-

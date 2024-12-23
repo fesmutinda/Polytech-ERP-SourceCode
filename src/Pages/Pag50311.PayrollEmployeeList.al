@@ -93,9 +93,9 @@ page 50311 "Payroll Employee List."
     trigger OnInit()
     begin
         //TODO
-        if Usersetup.Get(UserId) then begin
-            if Usersetup."View Payroll" = false then Error('You dont have permissions for payroll, Contact your system administrator! ')
-        end;
+        // if Usersetup.Get(UserId) then begin
+        //     if Usersetup."View Payroll" = false then Error('You dont have permissions for payroll, Contact your system administrator! ')
+        // end;
     end;
 
     var

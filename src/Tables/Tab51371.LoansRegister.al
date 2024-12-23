@@ -2220,6 +2220,22 @@ Table 51371 "Loans Register"
         {
             FieldClass = FlowFilter;
         }
+        field(680155; "Total Insurance Paid"; Decimal)
+        {
+
+        }
+        field(680156; "Total Penalty Paid"; Decimal)
+        {
+
+        }
+        field(680157; "Total Interest Paid"; Decimal)
+        {
+
+        }
+        field(680158; "Insurance Payoff"; Decimal)
+        {
+
+        }
         field(68012; "Cheque No."; Code[10])
         {
 
@@ -2639,8 +2655,8 @@ Table 51371 "Loans Register"
         }
         field(69001; "Loans Category-SASRA"; Option)
         {
-            OptionCaption = 'Perfoming,Watch,Substandard,Doubtful,Loss';
-            OptionMembers = Perfoming,Watch,Substandard,Doubtful,Loss;
+            OptionCaption = '" ",Perfoming,Watch,Substandard,Doubtful,Loss';
+            OptionMembers = " ",Perfoming,Watch,Substandard,Doubtful,Loss;
         }
         field(69002; "Bela Branch"; Code[10])
         {
@@ -3660,6 +3676,9 @@ Table 51371 "Loans Register"
         field(69189; "No of Months in Arrears"; Integer)
         {
         }
+        field(69989; "No of Days in Arrears"; Integer)
+        {
+        }//"No of Days in Arrears"
         field(69190; "No of Active Loans"; Integer)
         {
         }
@@ -4518,6 +4537,10 @@ Table 51371 "Loans Register"
         }
         field(51516262; "Total Loan"; Decimal) { }
         Field(51516299; "Estimated Years to Retire"; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(9968096; "Loans Category Previous Year"; Enum LoansCategorySASRA)
         {
             DataClassification = ToBeClassified;
         }

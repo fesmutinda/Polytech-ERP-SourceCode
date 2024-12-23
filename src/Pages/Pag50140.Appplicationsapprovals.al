@@ -5,7 +5,7 @@ page 50140 "Appplications approvals"
     Editable = false;
     PageType = List;
     SourceTable = "SwizzKash Applications";
-    SourceTableView = where(Status = filter(" Pending Approval"));
+    SourceTableView = where(Status = filter("Pending Approval"));
 
     layout
     {
@@ -69,7 +69,7 @@ page 50140 "Appplications approvals"
 
                 trigger OnAction()
                 begin
-                    if Rec.Status = Rec.Status::" Pending Approval" then begin
+                    if Rec.Status = Rec.Status::"Pending Approval" then begin
                         if Vendor.Get(Rec."Account No") then begin
                             Vendor."S-Mobile No" := Rec.Telephone;
                             Vendor.Modify;

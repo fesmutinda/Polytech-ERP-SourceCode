@@ -1,12 +1,10 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50519 "SMS Messages"
 {
-    DeleteAllowed = false;
-    Editable = false;
-    InsertAllowed = false;
-    ModifyAllowed = false;
+    ApplicationArea = Basic;
     PageType = List;
     SourceTable = "SMS Messages";
+    UsageCategory = Lists;
 
     layout
     {
@@ -45,10 +43,17 @@ page 50519 "SMS Messages"
                 field("Sent To Server"; Rec."Sent To Server")
                 {
                     ApplicationArea = Basic;
+
                 }
-                field("Bulk SMS Balance"; Rec."Bulk SMS Balance")
+                field("System Date"; Rec."System Date")
                 {
                     ApplicationArea = Basic;
+
+                }
+                field("System Time"; Rec."System Time")
+                {
+                    ApplicationArea = Basic;
+
                 }
             }
         }
@@ -57,15 +62,5 @@ page 50519 "SMS Messages"
     actions
     {
     }
-
-    trigger OnInit()
-    begin
-        // if Usersetup.Get(UserId) then begin
-        //     if Usersetup."View Payroll" = false then Error('You dont have permissions for SMS Page Due To Opt, Contact your system administrator! ')
-        // end;
-    end;
-
-    var
-        Usersetup: Record "User Setup";
 }
 

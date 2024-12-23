@@ -832,7 +832,7 @@ page 50114 "Stores Order"
                             DeleteCommitment.SetRange(DeleteCommitment."Document No.", Rec."No.");
                             DeleteCommitment.DeleteAll;
                         end;
-                        Commitment.CheckPurchase(Rec);
+                        // Commitment.CheckPurchase(Rec);
 
                         Message('Commitments done Successfully for Doc. No %1', Rec."No.");
 
@@ -1289,7 +1289,7 @@ page 50114 "Stores Order"
         BCSetup: Record "Budgetary Control Setup";
         AllFieldsEntered: Boolean;
         DeleteCommitment: Record Committment;
-        Commitment: Codeunit "Budgetary Control";
+        // Commitment: Codeunit "Budgetary Control";
         PurchLine: Record "Purchase Line";
         UserSet: Record "User Setup";
         PHeader: Record "Purchase Header";

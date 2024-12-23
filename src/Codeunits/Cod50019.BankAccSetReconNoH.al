@@ -41,7 +41,7 @@ Codeunit 50019 "Bank Acc. Set Recon.-No. H"
     procedure RemoveApplication(var BankAccLedgEntry: Record "Bank Account Ledger Entry")
     var
         BankAccReconLine: Record "Bank Acc. Reconciliation Line";
-        BankAccStatementLine: Record 51012;
+        BankAccStatementLine: Record "Funds User Setup";
     begin
         BankAccLedgEntry.LockTable;
         CheckLedgEntry.LockTable;

@@ -12,6 +12,12 @@ Table 51002 "Receipt Header"
         {
             Editable = true;
         }
+        field(1111; "Document Type"; Option)
+        {
+            Editable = false;
+            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund,Receipt';
+            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund,Receipt;
+        }
         field(12; "Posting Date"; Date)
         {
         }
@@ -207,8 +213,8 @@ Table 51002 "Receipt Header"
         }
         field(54; "Receipt Category"; Option)
         {
-            OptionCaption = ' ,1,2';
-            OptionMembers = " ","1","2";
+            OptionCaption = 'Normal,Investor,Property';
+            OptionMembers = Normal,Investor,Property;
         }
         field(55; "Account No"; Code[20])
         {
@@ -216,6 +222,34 @@ Table 51002 "Receipt Header"
         field(56; "Withholding Tax Code"; Code[20])
         {
             DataClassification = ToBeClassified;
+        }
+        field(51516831; "Property Code"; Code[20])
+        {
+            Description = 'Project Management Field';
+            // TableRelation = "Fixed Asset"."No." where ("Project No."=field("Project Code"),
+            //                                            "Property Asset"=const(true),
+            //                                            Receipted=const(false));
+
+            trigger OnValidate()
+            begin
+                if "Property Code" <> '' then begin
+                    FA.Reset;
+                    FA.SetRange(FA."No.", "Property Code");
+                    if FA.FindFirst then begin
+                        "Property Name" := FA.Description;
+                    end;
+                end;
+            end;
+        }
+        field(51516832; "Project Name"; Text[50])
+        {
+            Description = 'Project Management Field';
+            Editable = false;
+        }
+        field(51516833; "Property Name"; Text[50])
+        {
+            Description = 'Project Management Field';
+            Editable = false;
         }
     }
 
@@ -276,6 +310,7 @@ Table 51002 "Receipt Header"
         FundsTransTypes: Record "Funds Transaction Types";
         Amount: Decimal;
         "Amount(LCY)": Decimal;
+        FA: Record "Fixed Asset";
         ReceiptLines: Record "Receipt Line";
         "G/LAcc": Record "G/L Account";
         Customer: Record Customer;

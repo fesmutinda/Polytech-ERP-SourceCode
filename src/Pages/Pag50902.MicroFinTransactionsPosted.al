@@ -555,7 +555,7 @@ page 50902 "Micro_Fin_Transactions_Posted"
         TotDiff: Decimal;
         Text001: label 'Account type Must be Bank Acount. The current Value is -%1 in transaction No. -%2.';
         Text002: label 'There is nothing to Post in transaction No. -%1. The current amount value is -%2.';
-        Temp: Record 51031;
+        Temp: Record "Funds User Setup";
         Jtemplate: Code[30];
         JBatch: Code[30];
         Text003: label 'Ensure The Receipt Journal Template is set up in cash Office set up';

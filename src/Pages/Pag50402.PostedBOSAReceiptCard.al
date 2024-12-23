@@ -1,8 +1,9 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50402 "Posted BOSA Receipt Card"
 {
-    DeleteAllowed = false;
-    Editable = false;
+    DeleteAllowed = true;
+    Editable = true;
+    InsertAllowed = false;
     PageType = Card;
     SourceTable = "Receipts & Payments";
     SourceTableView = where(Posted = filter(true));
@@ -47,7 +48,6 @@ page 50402 "Posted BOSA Receipt Card"
                 field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = Basic;
-                    ShowMandatory = true;
                 }
                 field("Allocated Amount"; Rec."Allocated Amount")
                 {
@@ -64,13 +64,11 @@ page 50402 "Posted BOSA Receipt Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Teller Till / Bank  No.';
-                    ShowMandatory = true;
                 }
                 field("Cheque No."; Rec."Cheque No.")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cheque / Slip  No.';
-                    ShowMandatory = true;
                 }
                 field("Cheque Date"; Rec."Cheque Date")
                 {
@@ -97,6 +95,11 @@ page 50402 "Posted BOSA Receipt Card"
                     Editable = true;
                 }
             }
+            // part("Receipt Allocation"; "Posted Receipt Allocation-BOSA")
+            // {
+            //     ApplicationArea = all;
+            //     SubPageLink = "Member No" = field("Account No."), "Transaction No." = field("Transaction No.");
+            // }
         }
     }
 
@@ -111,6 +114,7 @@ page 50402 "Posted BOSA Receipt Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Cash/Cheque Clearance';
+                    visible = false;
 
                     trigger OnAction()
                     begin
@@ -124,6 +128,7 @@ page 50402 "Posted BOSA Receipt Card"
                 action("Suggest Payments")
                 {
                     ApplicationArea = Basic;
+                    Visible = false;
                     Caption = 'Suggest Monthy Repayments';
 
                     trigger OnAction()
@@ -131,7 +136,7 @@ page 50402 "Posted BOSA Receipt Card"
 
                         Rec.TestField(Posted, false);
                         Rec.TestField("Account No.");
-                        rec.TestField(Amount);
+                        Rec.TestField(Amount);
                         //Cust.CALCFIELDS(Cust."Registration Fee Paid");
 
                         ReceiptAllocations.Reset;
@@ -139,7 +144,7 @@ page 50402 "Posted BOSA Receipt Card"
                         ReceiptAllocations.DeleteAll;
 
 
-                        if Rec."Account Type" = Rec."account type"::Member then begin
+                        if Rec."Account Type" = Rec."account type"::Customer then begin
 
                             BosaSetUp.Get();
                             RunBal := Rec.Amount;
@@ -166,31 +171,38 @@ page 50402 "Posted BOSA Receipt Card"
                                     end;
                                 end;
                                 //********** Mpesa Charges
-                                if Rec."Receipt Mode" = Rec."receipt mode"::"Standing order" then begin
+                                if Rec."Receipt Mode" = Rec."receipt mode"::Mpesa then begin
                                     ReceiptAllocations.Init;
                                     ReceiptAllocations."Document No" := Rec."Transaction No.";
                                     ReceiptAllocations."Member No" := Rec."Account No.";
-                                    ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Standing Order Charges";
+                                    ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::" ";
                                     ReceiptAllocations."Loan No." := '';
 
                                     // M Pesa Tarriff
 
                                     if Rec.Amount <= 2499 then
                                         ReceiptAllocations."Total Amount" := 55
-                                    else if Rec.Amount <= 4999 then
-                                        ReceiptAllocations."Total Amount" := 75
-                                    else if Rec.Amount <= 9999 then
-                                        ReceiptAllocations."Total Amount" := 105
-                                    else if Rec.Amount <= 19999 then
-                                        ReceiptAllocations."Total Amount" := 130
-                                    else if Rec.Amount <= 34999 then
-                                        ReceiptAllocations."Total Amount" := 185
-                                    else if Rec.Amount <= 49999 then
-                                        ReceiptAllocations."Total Amount" := 220
-                                    else if Rec.Amount <= 70000 then
-                                        ReceiptAllocations."Total Amount" := 240
-                                    else if Rec.Amount > 70000 then
-                                        Error('Sorry the Maximum M - Pesa transaction Amount is Ksha. 70,000');
+                                    else
+                                        if Rec.Amount <= 4999 then
+                                            ReceiptAllocations."Total Amount" := 75
+                                        else
+                                            if Rec.Amount <= 9999 then
+                                                ReceiptAllocations."Total Amount" := 105
+                                            else
+                                                if Rec.Amount <= 19999 then
+                                                    ReceiptAllocations."Total Amount" := 130
+                                                else
+                                                    if Rec.Amount <= 34999 then
+                                                        ReceiptAllocations."Total Amount" := 185
+                                                    else
+                                                        if Rec.Amount <= 49999 then
+                                                            ReceiptAllocations."Total Amount" := 220
+                                                        else
+                                                            if Rec.Amount <= 70000 then
+                                                                ReceiptAllocations."Total Amount" := 240
+                                                            else
+                                                                if Rec.Amount > 70000 then
+                                                                    Error('Sorry the Maximum M - Pesa transaction Amount is Ksha. 70,000');
 
 
                                     ReceiptAllocations.Amount := ReceiptAllocations."Total Amount";
@@ -205,7 +217,7 @@ page 50402 "Posted BOSA Receipt Card"
                                     Loans.Reset;
                                     Loans.SetCurrentkey(Loans.Source, Loans."Client Code");
                                     Loans.SetRange(Loans."Client Code", Rec."Account No.");
-                                    Loans.SetRange(Loans.Source, Loans.Source::" ");
+                                    Loans.SetRange(Loans.Source, Loans.Source::BOSA);
                                     if Loans.Find('-') then begin
                                         repeat
 
@@ -219,7 +231,7 @@ page 50402 "Posted BOSA Receipt Card"
                                                 ReceiptAllocations.Init;
                                                 ReceiptAllocations."Document No" := Rec."Transaction No.";
                                                 ReceiptAllocations."Member No" := Rec."Account No.";
-                                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Registration Fee";
+                                                // ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Loan Insurance Paid";
                                                 ReceiptAllocations."Loan No." := Loans."Loan  No.";
                                                 ReceiptAllocations."Loan ID" := Loans."Loan Product Type";
                                                 ReceiptAllocations.Amount := Loans."Loans Insurance";
@@ -253,7 +265,7 @@ page 50402 "Posted BOSA Receipt Card"
                                                 ReceiptAllocations.Init;
                                                 ReceiptAllocations."Document No" := Rec."Transaction No.";
                                                 ReceiptAllocations."Member No" := Rec."Account No.";
-                                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Insurance Contribution";
+                                                //  ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Insurance Contribution";
                                                 ReceiptAllocations."Loan No." := Loans."Loan  No.";
                                                 ReceiptAllocations.Amount := Loans."Oustanding Interest";
                                                 //ReceiptAllocations.Amount:=Loans."Loan Interest Repayment";
@@ -309,28 +321,28 @@ page 50402 "Posted BOSA Receipt Card"
                                     if BosaSetUp."Monthly Share Contributions" > 0 then begin
                                         //IF CONFIRM('This member has reached a maximum share contribution of Kshs. 5,000/=. Do you want to post this transaction as shares contribution?',TRUE)=TRUE THEN
                                         //IF CONFIRM(Text001,TRUE) THEN BEGIN
-                                        ReceiptAllocations.Init;
-                                        ReceiptAllocations."Document No" := Rec."Transaction No.";
-                                        ReceiptAllocations."Member No" := Rec."Account No.";
-                                        ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Recovery Account";
-                                        ReceiptAllocations."Loan No." := '';
-                                        ReceiptAllocations.Amount := ROUND(BosaSetUp."Monthly Share Contributions", 0.01);
-                                        ReceiptAllocations."Total Amount" := ReceiptAllocations.Amount;
-                                        ReceiptAllocations."Global Dimension 1 Code" := 'BOSA';
-                                        ReceiptAllocations."Global Dimension 2 Code" := 'NAIROBI';
-                                        ReceiptAllocations.Insert;
+                                        // ReceiptAllocations.Init;
+                                        // ReceiptAllocations."Document No" := "Transaction No.";
+                                        // ReceiptAllocations."Member No" := "Account No.";
+                                        // ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Recovery Account";
+                                        // ReceiptAllocations."Loan No." := '';
+                                        // ReceiptAllocations.Amount := ROUND(BosaSetUp."Monthly Share Contributions", 0.01);
+                                        // ReceiptAllocations."Total Amount" := ReceiptAllocations.Amount;
+                                        // ReceiptAllocations."Global Dimension 1 Code" := 'BOSA';
+                                        // ReceiptAllocations."Global Dimension 2 Code" := 'NAIROBI';
+                                        // ReceiptAllocations.Insert;
                                     end;
                                 end;
                             end;
                         end;
 
                         if Rec."Account Type" = Rec."account type"::Vendor then begin
-                            if Rec."Receipt Mode" = Rec."receipt mode"::"Standing order" then begin
+                            if Rec."Receipt Mode" = Rec."receipt mode"::Mpesa then begin
                                 ReceiptAllocations.Init;
                                 ReceiptAllocations."Document No" := Rec."Transaction No.";
                                 ReceiptAllocations."Member No" := Rec."Account No.";
 
-                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Registration Fee";
+                                ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::" ";
                                 ReceiptAllocations."Total Amount" := Rec.Amount;
                                 ReceiptAllocations."Loan No." := '';
 
@@ -339,20 +351,27 @@ page 50402 "Posted BOSA Receipt Card"
                                 MpesaCharge := 0;
                                 if Rec.Amount <= 2499 then
                                     ReceiptAllocations."Total Amount" := 55
-                                else if Rec.Amount <= 4999 then
-                                    ReceiptAllocations."Total Amount" := 75
-                                else if Rec.Amount <= 9999 then
-                                    ReceiptAllocations."Total Amount" := 105
-                                else if Rec.Amount <= 19999 then
-                                    ReceiptAllocations."Total Amount" := 130
-                                else if Rec.Amount <= 34999 then
-                                    ReceiptAllocations."Total Amount" := 185
-                                else if Rec.Amount <= 49999 then
-                                    ReceiptAllocations."Total Amount" := 220
-                                else if Rec.Amount <= 70000 then
-                                    ReceiptAllocations."Total Amount" := 240
-                                else if Rec.Amount > 70000 then
-                                    Error('Sorry the Maximum M - Pesa transaction Amount is Ksha. 70,000');
+                                else
+                                    if Rec.Amount <= 4999 then
+                                        ReceiptAllocations."Total Amount" := 75
+                                    else
+                                        if Rec.Amount <= 9999 then
+                                            ReceiptAllocations."Total Amount" := 105
+                                        else
+                                            if Rec.Amount <= 19999 then
+                                                ReceiptAllocations."Total Amount" := 130
+                                            else
+                                                if Rec.Amount <= 34999 then
+                                                    ReceiptAllocations."Total Amount" := 185
+                                                else
+                                                    if Rec.Amount <= 49999 then
+                                                        ReceiptAllocations."Total Amount" := 220
+                                                    else
+                                                        if Rec.Amount <= 70000 then
+                                                            ReceiptAllocations."Total Amount" := 240
+                                                        else
+                                                            if Rec.Amount > 70000 then
+                                                                Error('Sorry the Maximum M - Pesa transaction Amount is Ksha. 70,000');
                                 MpesaCharge := ReceiptAllocations."Total Amount";
                                 ReceiptAllocations.Amount := ReceiptAllocations."Total Amount";
 
@@ -368,7 +387,12 @@ page 50402 "Posted BOSA Receipt Card"
                             ReceiptAllocations.Init;
                             ReceiptAllocations."Document No" := Rec."Transaction No.";
                             ReceiptAllocations."Member No" := Rec."Account No.";
-                            ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::"Unallocated Funds";
+                            ReceiptAllocations."Transaction Type" := ReceiptAllocations."transaction type"::" ";
+                            ;
+                            ;
+                            ;
+                            ;
+                            ;
                             //GenJournalLine.Description:= 'BT'+'-'+Remarks+'-'+FORMAT("Mode of Payment")+'-'+"Cheque No.";
                             ReceiptAllocations."Loan No." := ' ';
                             ReceiptAllocations."Total Amount" := Rec.Amount;
@@ -404,7 +428,7 @@ page 50402 "Posted BOSA Receipt Card"
                     BOSARcpt.Reset;
                     BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
-                        Report.Run(51516486, true, true, BOSARcpt)
+                        Report.Run(50247, true, true, BOSARcpt)
                 end;
             }
         }
@@ -443,4 +467,3 @@ page 50402 "Posted BOSA Receipt Card"
         CurrPage.Update := true;
     end;
 }
-

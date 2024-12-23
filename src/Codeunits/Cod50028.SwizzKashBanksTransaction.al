@@ -25,12 +25,11 @@ Codeunit 50028 "SwizzKash Banks Transaction"
         dashboardDataFilter: Date;
         VendorLedgerEntry: Record "Vendor Ledger Entry";
         MemberLedgerEntry: Record 51365;
-        SurePESAApplications: Record 51521;
         GenJournalLine: Record "Gen. Journal Line";
         GenBatches: Record "Gen. Journal Batch";
         LineNo: Integer;
         GLPosting: Codeunit "Gen. Jnl.-Post Line";
-        SurePESATrans: Record 51522;
+        // SurePESATrans: Record 51522;
         GenLedgerSetup: Record "General Ledger Setup";
         Charges: Record 51439;
         MobileCharges: Decimal;
@@ -52,7 +51,7 @@ Codeunit 50028 "SwizzKash Banks Transaction"
         MPESACharge: Decimal;
         TotalCharges: Decimal;
         ExxcDuty: label '01-1-0275';
-        PaybillTrans: Record 51098;
+        // PaybillTrans: Record 51098;
         PaybillRecon: Code[30];
         fosaConst: label 'SAVINGS';
         accountsFOSA: Text[1023];

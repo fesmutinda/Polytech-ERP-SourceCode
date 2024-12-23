@@ -1679,7 +1679,7 @@ Page 56144 "CashierTransactionCard-Posted"
             SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
             if Rec.Amount <> 0 then begin
                 SMSMessage."SMS Message" := 'You have done a Transaction of KSHS. ' +
-                Format(Rec.Amount) + ' of type ' + TransDesc + ' on ' + Format(Today) + ' ' + Format(Time) + ' to your Account at JAMII YETU SACCO'; //'CompanyInfo.Name ' .';
+                Format(Rec.Amount) + ' of type ' + TransDesc + ' on ' + Format(Today) + ' ' + Format(Time) + ' to your Account at Polytech Sacco'; //'CompanyInfo.Name ' .';
             end;
             if Vend1."MPESA Mobile No" <> '' then begin
                 //SMSMessage."Telephone No":=Vend1."MPESA Mobile No";
@@ -1957,7 +1957,7 @@ Page 56144 "CashierTransactionCard-Posted"
             SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
             if Rec.Amount <> 0 then begin
                 SMSMessage."SMS Message" := 'You have done a Bankers Cheque Transaction of KSHS. ' +
-                Format(Rec.Amount) + ' of type ' + TransDesc + ' on ' + Format(Today) + ' ' + Format(Time) + ' from your Account at JAMII YETU SACCO';
+                Format(Rec.Amount) + ' of type ' + TransDesc + ' on ' + Format(Today) + ' ' + Format(Time) + ' from your Account at Polytech Sacco';
             end;
             if Vend1."MPESA Mobile No" <> '' then begin
                 // SMSMessage."Telephone No":=Vend1."MPESA Mobile No";
@@ -2920,7 +2920,7 @@ Page 56144 "CashierTransactionCard-Posted"
                 SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
                 if Rec.Amount <> 0 then begin
                     SMSMessage."SMS Message" := 'You have done a Transaction of KSHS. ' +
-                    Format(Rec.Amount) + ' of type ' + TransDesc + ' on ' + Format(Today) + ' ' + Format(Time) + ' to your Account at JAMII YETU SACCO'; //'CompanyInfo.Name ' .';
+                    Format(Rec.Amount) + ' of type ' + TransDesc + ' on ' + Format(Today) + ' ' + Format(Time) + ' to your Account at Polytech Sacco'; //'CompanyInfo.Name ' .';
                 end;
                 if Vend1."MPESA Mobile No" <> '' then begin
                     //SMSMessage."Telephone No":=Vend1."MPESA Mobile No";
@@ -2956,11 +2956,11 @@ Page 56144 "CashierTransactionCard-Posted"
              IF TransDesc='Cash Deposit' THEN BEGIN
                 SMSMessage."SMS Message":='You have done a transaction of KSHS. '+FORMAT(Amount)+
                                       ' of type '+TransDesc+
-                                      ' on '+FORMAT(TODAY) + ' ' +FORMAT(TIME)+' to your Account at JAMII YETU SACCO.';
+                                      ' on '+FORMAT(TODAY) + ' ' +FORMAT(TIME)+' to your Account at Polytech Sacco.';
               END ELSE BEGIN
                  SMSMessage."SMS Message":='You have done a transaction of KSHS. '+FORMAT(Amount)+
                                       ' of type '+TransDesc+
-                                      ' on '+FORMAT(TODAY) + ' ' +FORMAT(TIME)+' from your Account at JAMII YETU SACCO.';
+                                      ' on '+FORMAT(TODAY) + ' ' +FORMAT(TIME)+' from your Account at Polytech Sacco.';
              END;
             END;
 

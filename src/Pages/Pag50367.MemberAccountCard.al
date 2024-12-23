@@ -306,11 +306,11 @@ page 50367 "Member Account Card"
                     ApplicationArea = Basic;
                     Caption = 'Member Ledger Entries';
                     Image = CustomerLedger;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    RunObject = Page "Member Ledger Entries";
+                    RunObject = Page "Customer Ledger Entries";
                     RunPageLink = "Customer No." = field("No.");
                     RunPageView = sorting("Customer No.");
+                    Promoted = true;
+                    PromotedCategory = process;
 
                 }
             }
