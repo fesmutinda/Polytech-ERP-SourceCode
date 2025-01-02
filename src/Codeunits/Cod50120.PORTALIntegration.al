@@ -11,7 +11,7 @@ Codeunit 50120 PORTALIntegration
     end;
 
     var
-        objMember: Record 51364;
+        objMember: Record Customer;
         Vendor: Record Vendor;
         VendorLedgEntry: Record 51365;
         FILESPATH: label 'D:\Kentours Revised\KENTOURS\Kentours\Kentours\Downloads\';
@@ -51,7 +51,7 @@ Codeunit 50120 PORTALIntegration
         Questinnaires: Record 51912;
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
-        Cust: Record 51364;
+        Cust: Record Customer;
         StartDate: Date;
         DateFilter: Text[100];
         FromDate: Date;
@@ -60,11 +60,11 @@ Codeunit 50120 PORTALIntegration
         ToDateS: Text[100];
         DivTotal: Decimal;
         CDeposits: Decimal;
-        CustDiv: Record 51364;
+        CustDiv: Record Customer;
         DivProg: Record 51393;
         CDiv: Decimal;
         BDate: Date;
-        CustR: Record 51364;
+        CustR: Record Customer;
         CapDiv: Decimal;
         DivCapTotal: Decimal;
         RunningPeriod: Code[10];

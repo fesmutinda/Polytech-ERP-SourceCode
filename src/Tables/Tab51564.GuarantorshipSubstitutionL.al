@@ -115,7 +115,7 @@ Table 51564 "Guarantorship Substitution L"
         }
         field(19; "Substitute Member"; Code[20])
         {
-            TableRelation = "Member Register"."No." where(Status = const(Active));
+            TableRelation = Customer."No." where(Status = const(Active));
 
             trigger OnValidate()
             begin
@@ -160,7 +160,7 @@ Table 51564 "Guarantorship Substitution L"
         Loans: Record "Loans Register";
         Loantypes: Record "Loan Products Setup";
         Interest: Decimal;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoansTop: Record "Loans Register";
         GenSetUp: Record "Sacco General Set-Up";
         ObjLoanGuar: Record "Loans Guarantee Details";

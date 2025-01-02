@@ -19,7 +19,7 @@ Codeunit 50028 "SwizzKash Banks Transaction"
         Loans: Integer;
         LoansRegister: Record 51371;
         LoanProductsSetup: Record 51381;
-        Members: Record 51364;
+        Members: Record Customer;
         dateExpression: Text[20];
         DetailedVendorLedgerEntry: Record "Detailed Vendor Ledg. Entry";
         dashboardDataFilter: Date;
@@ -534,7 +534,7 @@ Codeunit 50028 "SwizzKash Banks Transaction"
 
     procedure fnSetMemberPhoto()
     var
-        MemberApp: Record 51364;
+        MemberApp: Record Customer;
     begin
         MembApp.Get(MembApp."No.");
         MembApp.Picture.ImportFile('E:\IPRS\PHotos\' + MembApp."ID No." + '.jpg', 'Demo image for item ');

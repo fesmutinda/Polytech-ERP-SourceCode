@@ -1289,8 +1289,8 @@ page 56110 "Member Application Card"
                         if confirm('Are you sure you want to send this Document for Approval', false) = true then begin
                             SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
                             Message('Approval Request Sent!');
-                            rec.Status := Rec.Status::"Pending Approval";
-                            rec.Modify(true);
+                            /* rec.Status := Rec.Status::"Pending Approval";
+                            rec.Modify(true); */
                             //Commit();
                             CurrPage.Close();
                         end;

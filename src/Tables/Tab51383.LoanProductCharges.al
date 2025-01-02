@@ -86,6 +86,10 @@ Table 51383 "Loan Product Charges"
             DataClassification = ToBeClassified;
             TableRelation = "G/L Account"."No.";
         }
+        field(18; "Amount2"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

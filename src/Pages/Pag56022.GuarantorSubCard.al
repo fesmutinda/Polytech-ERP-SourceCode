@@ -99,7 +99,7 @@ Page 56022 "Guarantor Sub Card"
 
                     trigger OnAction()
                     var
-                        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
+                        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
                         text001: label 'This batch is already pending approval';
                         GuarantorshipSubstitutionL: Record "Guarantorship Substitution L";
                     begin
@@ -109,12 +109,12 @@ Page 56022 "Guarantor Sub Card"
                         Rec.TestField("Loanee Member No");
                         Rec.TestField("Loan Guaranteed");
 
-                        GuarantorshipSubstitutionL.Reset;
-                        GuarantorshipSubstitutionL.SetRange("Document No", Rec."Document No");
-                        GuarantorshipSubstitutionL.FindFirst;
+                        // GuarantorshipSubstitutionL.Reset;
+                        // GuarantorshipSubstitutionL.SetRange("Document No", Rec."Document No");
+                        // GuarantorshipSubstitutionL.FindFirst;
 
 
-                        LGuarantor.Reset;
+                        /* LGuarantor.Reset;
                         LGuarantor.SetRange(LGuarantor."Loan No", Rec."Loan Guaranteed");
                         LGuarantor.SetRange(LGuarantor."Member No", Rec."Substituting Member");
                         if LGuarantor.FindSet then begin
@@ -131,12 +131,13 @@ Page 56022 "Guarantor Sub Card"
                             //End Add All Replaced Amounts
                             Commited := LGuarantor."Amont Guaranteed";
                             if TotalReplaced < Commited then
-                                Error('Guarantors replaced do not cover the whole amount');
-                        end;
+                                Error('Guarantors replaced do not cover the whole amount'); 
+                        end;*/
 
                         //Approval code  here
                         if Confirm('Send Approval Request?', false) = true then begin
                             SrestepApprovalsCodeUnit.SendGuarantorSubRequestForApproval(rec."Document No", Rec);
+                            Message('Approval Request sent!');
                         end;
                         //...................
                     end;
@@ -178,9 +179,9 @@ Page 56022 "Guarantor Sub Card"
                     begin
 
                         Rec.TestField(Status, Rec.Status::Approved);
-                        if Rec."Created By" <> UserId then begin
-                            Error('Restricted! you can only process a record you created!');
-                        end;
+                        // if Rec."Created By" <> UserId then begin
+                        //     Error('Restricted! you can only process a record you created!');
+                        // end;
                         LGuarantor.Reset;
                         LGuarantor.SetRange(LGuarantor."Loan No", Rec."Loan Guaranteed");
                         LGuarantor.SetRange(LGuarantor."Member No", Rec."Substituting Member");

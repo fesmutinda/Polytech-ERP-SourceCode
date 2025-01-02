@@ -209,9 +209,6 @@ Page 56101 "Membership Exit Card"
                         if confirm('Are you sure you want to send this exit record for Approval?', false) = true then begin
                             SrestepApprovalsCodeUnit.SendMembershipExitApplicationsRequestForApproval(rec."No.", Rec);
                             Message('Approval Request Sent!');
-                            /* rec.Status := Rec.Status::Pending;
-                            rec.Modify(true); */
-                            //Commit();
                             CurrPage.Close();
                         end;
 
@@ -574,7 +571,7 @@ Page 56101 "Membership Exit Card"
 
                 //Bank Charges
                 LineNo := LineNo + 10000;
-                SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::" ", GenJournalLine."Account Type"::"G/L Account", VarCrAccNo/*GenSetUp."Banks Charges"*/, Rec."Posting Date", Rec."EFT Charge" * -1, 'BOSA', MemberNo, 'Bank Charges for exit', '');
+                SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Doc_No, LineNo, GenJournalLine."Transaction Type"::" ", GenJournalLine."Account Type"::"G/L Account", GenSetUp."Banks Charges", Rec."Posting Date", Rec."EFT Charge" * -1, 'BOSA', MemberNo, 'Bank Charges for exit', '');
                 RunningBal := RunningBal - Rec."EFT Charge";
 
 

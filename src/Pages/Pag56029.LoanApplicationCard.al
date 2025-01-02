@@ -419,6 +419,7 @@ Page 56029 "Loan Application Card"
                         end else begin
                             SrestepApprovalsCodeUnit.SendLoanApplicationsRequestForApproval(rec."Loan  No.", Rec);
                             FnSendLoanApprovalNotifications();
+                            Message('Approval Request sent!');
                             CurrPage.close();
                         end;
                     end;
@@ -695,7 +696,7 @@ Page 56029 "Loan Application Card"
 
         EnabledApprovalWorkflowsExist: Boolean;
         RecordApproved: Boolean;
-        SrestepApprovalsCodeUnit: Codeunit SwizzsoftApprovalsCodeUnit;
+        SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         CanCancelApprovalForRecord: Boolean;
 
 

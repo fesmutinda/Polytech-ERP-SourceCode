@@ -1,4 +1,4 @@
-tableextension 50048 "FaPostingrpEXT" extends "FA Posting Group"
+tableextension 50086 "FaPostingrpEXT" extends "FA Posting Group"
 {
     fields
     {

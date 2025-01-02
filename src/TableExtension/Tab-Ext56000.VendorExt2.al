@@ -1,12 +1,8 @@
-tableextension 56000 VendorExt extends Vendor
+tableextension 56000 VendorExt2 extends Vendor
 {
     fields
     {
-        field(68000; "Creditor Type"; Option)
-        {
-            OptionMembers = " ",Account;
-        }
-        field(68001; "Personal No."; Code[20])
+        field(689901; "Personal No."; Code[20])
         {
         }
         field(68002; "ID No."; Code[50])
@@ -669,7 +665,7 @@ tableextension 56000 VendorExt extends Vendor
         field(69050; "Outstanding Loans"; Decimal)
         {
             CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("FOSA Account No." = field("No."),
-                                                                  "Transaction Type" = filter(Loan | Repayment | "Loan Adjustment"),
+                                                                  "Transaction Type" = filter(Loan | "Loan Repayment" | "Loan Adjustment"),
                                                                   "Posting Date" = field("Date Filter")));
             FieldClass = FlowField;
         }
@@ -1197,7 +1193,7 @@ tableextension 56000 VendorExt extends Vendor
         }
         field(69211; "Outstanding Loan FOSA"; Decimal)
         {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Loan | Repayment),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Loan | "Loan Repayment"),
                                                                   "Posting Date" = field("Date Filter"),
                                                                   "FOSA Account No." = field("No."),
                                                                   "Loan No" = filter('F*')));
@@ -1254,26 +1250,13 @@ tableextension 56000 VendorExt extends Vendor
             Editable = false;
             FieldClass = FlowField;
         }
-        field(6907003; "Outstanding FOSA Loan"; Decimal)
-        {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("BOSA Account No"),
-                                                                  "Transaction Type" = filter(Loan | Repayment), Reversed = const(false), "Loan Type" = filter(<> 'GROUPLOAN' | 'SMEC')));
-            FieldClass = FlowField;
-        }
-        field(6907004; "Outstanding FOSA Interest"; Decimal)
-        {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter("Interest Due" | "Interest Paid"),
-                                                                          "Posting Date" = field("Date Filter"),
-                                                                          "Customer No." = field("BOSA Account No"), "Loan Type" = filter(<> 'GROUPLOAN' | 'SMEC')));
-            FieldClass = FlowField;
-        }
-        field(6907005; "Total Active Loans"; Integer)
+        field(6927905; "Total Active Loans"; Integer)
         {
             CalcFormula = count("Loans Register" WHERE("Account No" = FIELD("No."), "Total Loan" = filter(<> 0)));
             Editable = false;
             FieldClass = FlowField;
         }
-        field(6907006; "Total Debits"; Decimal)
+        field(690906; "Total Debits"; Decimal)
         {
             CalcFormula = - sum("Detailed Vendor Ledg. Entry"."Debit Amount" WHERE("Vendor No." = FIELD("No."),
                                                                            "Initial Entry Global Dim. 1" = FIELD("Global Dimension 1 Filter"),
@@ -1490,7 +1473,7 @@ tableextension 56000 VendorExt extends Vendor
         //......... .........
         field(69070113; "Outstanding BOSA Balance"; Decimal)
         {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Loan | Repayment),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Loan | "Loan Repayment"),
                                                                           "Posting Date" = field("Date Filter"),
                                                                           "Customer No." = field("BOSA Account No"), Reversed = const(false)));
             Editable = false;
@@ -1505,7 +1488,7 @@ tableextension 56000 VendorExt extends Vendor
         field(68083; "FOSA Outstanding Balance"; Decimal)
         {
             CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("No."),
-                                                                  "Transaction Type" = filter(Loan | Repayment), Reversed = const(false), "Loan Type" = filter(<> 'GROUPLOAN')));
+                                                                  "Transaction Type" = filter(Loan | "Loan Repayment"), Reversed = const(false), "Loan Type" = filter(<> 'GROUPLOAN')));
             FieldClass = FlowField;
         }
         field(68084; "FOSA Oustanding Interest"; Decimal)
@@ -1516,7 +1499,7 @@ tableextension 56000 VendorExt extends Vendor
         }
         field(68226; "MICRO Outstanding Principle"; Decimal)
         {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Loan | Repayment),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Transaction Type" = filter(Loan | "Loan Repayment"),
                                                                           "Posting Date" = field("Date Filter"),
                                                                           "Customer No." = field("No."), "Loan Type" = filter('GROUPLOAN')));
             FieldClass = FlowField;

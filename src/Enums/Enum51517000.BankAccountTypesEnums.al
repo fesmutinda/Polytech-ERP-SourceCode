@@ -16,4 +16,8 @@ enum 51517000 "BankAccountTypesEnums"
     {
         Caption = 'Treasury';
     }
+    value(3; "Petty Cash")
+    {
+        Caption = 'Petty Cash';
+    }
 }

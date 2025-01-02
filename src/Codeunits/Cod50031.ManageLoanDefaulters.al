@@ -12,7 +12,7 @@ Codeunit 50031 ManageLoanDefaulters
         ActualLoanBal: Decimal;
         AmountDisbursed: Decimal;
         LastLoanPayDate: Date;
-        cust: Record 51364;
+        cust: Record Customer;
         SMSMessage: Record 51471;
         iEntryNo: Integer;
         LoanGuar: Record 51372;

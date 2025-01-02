@@ -146,7 +146,7 @@ page 50400 "BOSA Receipt Card"
                 separator(Action1102760032)
                 {
                 }
-                action("Suggest Payments")
+                action("Suggest2 Payments")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Suggest Monthy Repayments';
@@ -154,6 +154,61 @@ page 50400 "BOSA Receipt Card"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedOnly = true;
+
+                    trigger OnAction()
+                    var
+                        ObjTransactions: Record "Receipt Allocation";
+                        RunBal: Decimal;
+                        Datefilter: Text;
+                    begin
+
+                        Rec.TestField(Posted, false);
+                        Rec.TestField("Account No.");
+                        Rec.TestField(Amount);
+                        // ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,FOSA Account
+
+                        ObjTransactions.Reset;
+                        ObjTransactions.SetRange(ObjTransactions."Document No", Rec."Transaction No.");
+                        if ObjTransactions.Find('-') then
+                            ObjTransactions.DeleteAll;
+
+                        Datefilter := '..' + Format(Rec."Transaction Date");
+                        RunBal := 0;
+                        RunBal := Rec.Amount;
+                        RunBal := FnRunEntranceFee(Rec, RunBal);
+                        RunBal := FnRunInterest(Rec, RunBal);
+                        RunBal := FnRunInsuranceContribution(Rec, RunBal);
+                        RunBal := FnRunPrinciple(Rec, RunBal);
+                        RunBal := FnRunShareCapital(Rec, RunBal);
+                        RunBal := FnRunDepositContribution(Rec, RunBal);
+
+                        // RunBal := FnRunBenevolentFund(Rec, RunBal);
+
+                        if RunBal > 0 then begin
+                            if Confirm('Excess Money will allocated to ' + Format(Rec."Excess Transaction Type") + '.Do you want to Continue?', true) = false then
+                                exit;
+                            case Rec."Excess Transaction Type" of
+                                Rec."excess transaction type"::"Deposit Contribution":
+                                    FnRunDepositContributionFromExcess(Rec, RunBal);
+                            end;
+
+                        end;
+
+
+                        Rec.CalcFields("Allocated Amount");
+                        Rec."Un allocated Amount" := (Rec.Amount - Rec."Allocated Amount");
+                        Rec.Modify;
+                    end;
+                }
+                action("Suggest Payments")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Suggest Monthly Repayments';
+                    Image = Suggest;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    Visible = false;
 
                     trigger OnAction()
                     var
@@ -381,7 +436,7 @@ page 50400 "BOSA Receipt Card"
                             repeat
                                 Loans.CalcFields("Outstanding Balance");
                                 if Loans."Outstanding Balance" > 0 then
-                                    Message('Loan No is %1', Loans."Loan  No.");
+                                    //Message('Loan No: here is %1', Loans."Loan  No.");
 
                                 CLedger.Reset;
                                 CLedger.SetRange(CLedger."Loan No", Loans."Loan  No.");
@@ -389,7 +444,7 @@ page 50400 "BOSA Receipt Card"
                                 CLedger.SetFilter("Posting Date", '%1..%2', CalcDate('-CM', IntDate), CalcDate('CM', IntDate));
                                 CLedger.SetRange(Reversed, false);
                                 if CLedger.Find('-') then begin
-                                    Message('Loan1212 %1| as Interest Changed is %2', CLedger."Loan No", CLedger.Amount);
+                                    Message('Loan1212 %1| as Interest Change-d is %2', CLedger."Loan No", CLedger.Amount);
 
                                     if CLedger.Amount < 0 then
                                         Error('Kindly Run Loan interest Due');
@@ -399,7 +454,6 @@ page 50400 "BOSA Receipt Card"
                         end;
 
                     end;
-                    ///  MESSAGE('here 2');
 
 
                     //******************************************************************************8888888888888888
@@ -483,7 +537,7 @@ page 50400 "BOSA Receipt Card"
 
                     if (Rec."Account Type" = Rec."account type"::Customer) or (Rec."Account Type" = Rec."account type"::Vendor)/*  or
                      (Rec."Account Type" = Rec."account type"::Micro) */ then begin
-                        if (Rec."Receipt Mode" = Rec."receipt mode"::Cheque) /* or (Rec."Receipt Mode" = Rec."receipt mode"::"Deposit Slip") */ or (Rec."Receipt Mode" = Rec."receipt mode"::EFT) or (Rec."Receipt Mode" = Rec."receipt mode"::Mpesa) or (Rec."Receipt Mode" = Rec."receipt mode"::"Standing order")
+                        if (Rec."Receipt Mode" = Rec."receipt mode"::Cheque) or (Rec."Receipt Mode" = Rec."receipt mode"::"Deposit Slip") or (Rec."Receipt Mode" = Rec."receipt mode"::EFT) or (Rec."Receipt Mode" = Rec."receipt mode"::Mpesa) or (Rec."Receipt Mode" = Rec."receipt mode"::"Standing order")
                             then begin
                             ReceiptAllocations.Reset;
                             ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
@@ -535,7 +589,6 @@ page 50400 "BOSA Receipt Card"
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
                                         GenJournalLine."Account No." := GenSetup."FOSA MPESA COmm A/C";
                                     end;
-                                    Message('Member No is %1 -TransType is :%2 Dimension is %3', ReceiptAllocations."Member No", ReceiptAllocations."Transaction Type", Rec."Global Dimension 1 Code");
                                     //end;
                                     //end;
                                     GenJournalLine.Amount := -ReceiptAllocations.Amount;
@@ -552,7 +605,7 @@ page 50400 "BOSA Receipt Card"
                                     GenJournalLine."Loan No" := ReceiptAllocations."Loan No.";
                                     if GenJournalLine.Amount <> 0 then
                                         GenJournalLine.Insert;
-                                    Message('GenJournalLine.Desc is %1', GenJournalLine.Description);
+                                //Message('GenJournalLine.Desc is %1', GenJournalLine.Description);
                                 until ReceiptAllocations.Next = 0;
                             end;
                         end;
@@ -594,6 +647,8 @@ page 50400 "BOSA Receipt Card"
                                             if GenJournalLine.Amount <> 0 then
                                                 GenJournalLine.Insert;
 
+                                            //Message('Loan Repay No. is %1', ReceiptAllocations."Loan No.");
+
                                             //**********************End credit external Gl Account**********************
                                             //****************************** credit loan Account ***********************
                                             LineNo := LineNo + 10000;
@@ -632,14 +687,13 @@ page 50400 "BOSA Receipt Card"
                     GenJournalLine.SetRange("Journal Template Name", 'GENERAL');
                     GenJournalLine.SetRange("Journal Batch Name", 'FTRANS');
                     if GenJournalLine.Find('-') then begin
-                        //Codeunit.Run(Codeunit::"Gen. Jnl.-Post Sacco", GenJournalLine);
-                        Message('%1 Acc Type', GenJournalLine."Account Type");
+                        Codeunit.Run(Codeunit::"Gen. Jnl.-Post Sacco", GenJournalLine);
                     end;
                     //Post New
-                    /* Message('Transaction posted successfully');
+                    Message('Transaction posted successfully');
                     Rec.Posted := true;
                     Rec.Modify;
-                    Commit; */
+                    Commit;
                     BOSARcpt.Reset;
                     BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
@@ -740,7 +794,7 @@ page 50400 "BOSA Receipt Card"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        //Cust: Record "Member Register";
+        //Cust: Record 3;
         Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;
@@ -836,11 +890,12 @@ page 50400 "BOSA Receipt Card"
                                 AmountToDeduct := RunningBalance;
                             ObjReceiptTransactions.Init;
                             ObjReceiptTransactions."Document No" := ObjRcptBuffer."Transaction No.";
-                            ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Member; //Customer before
+                            ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Customer; //Customer before
                             ObjReceiptTransactions."Member No" := ObjRcptBuffer."Account No.";
-                            ObjReceiptTransactions."Loan No." := LoanApp."Loan  No.";
                             ObjReceiptTransactions."Transaction Type" := ObjReceiptTransactions."transaction type"::"Interest Paid";
                             ObjReceiptTransactions.Validate(ObjReceiptTransactions."Transaction Type");
+                            ObjReceiptTransactions."Loan No." := LoanApp."Loan  No.";
+
                             ObjReceiptTransactions."Global Dimension 1 Code" := 'BOSA';
                             ObjReceiptTransactions."Global Dimension 2 Code" := SwizzsoftFactory.FnGetMemberBranch(ObjRcptBuffer."Account No.");
                             ObjReceiptTransactions.Amount := AmountToDeduct;
@@ -890,11 +945,13 @@ page 50400 "BOSA Receipt Card"
                                     AmountToDeduct := RunningBalance;
                                 ObjReceiptTransactions.Init;
                                 ObjReceiptTransactions."Document No" := ObjRcptBuffer."Transaction No.";
-                                ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Member;
+                                ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Customer;
                                 ObjReceiptTransactions."Member No" := LoanApp."Client Code";
                                 ObjReceiptTransactions."Transaction Type" := ObjReceiptTransactions."transaction type"::"Loan Repayment";
                                 ObjReceiptTransactions.Validate(ObjReceiptTransactions."Transaction Type");
                                 ObjReceiptTransactions."Loan No." := LoanApp."Loan  No.";
+                                //Message('Loan No is %1', ObjReceiptTransactions."Loan No.");
+
                                 ObjReceiptTransactions.Validate(ObjReceiptTransactions."Loan No.");
                                 ObjReceiptTransactions."Global Dimension 1 Code" := Format(LoanApp.Source);
                                 ObjReceiptTransactions."Global Dimension 2 Code" := SwizzsoftFactory.FnGetMemberBranch(ObjRcptBuffer."Account No.");
@@ -925,16 +982,18 @@ page 50400 "BOSA Receipt Card"
             GenSetup.Get();
             ObjMember.Reset;
             ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
-            //ObjMember.SETFILTER(ObjMember."Registration Date",'>%1',20190110D); //To Ensure deduction is for New Members Only
+            ObjMember.SETFILTER(ObjMember."Registration Date", '>%1', 20190110D); //To Ensure deduction is for New Members Only
             if ObjMember.Find('-') then begin
                 ObjMember.CalcFields(ObjMember."Registration Fee Paid");
-                if ObjMember."Registration Fee Paid" < 0 then begin
+                if ObjMember."Registration Fee Paid" <= 0 then begin
                     //IF ObjMember."Registration Date" <>0D THEN
                     // BEGIN
 
+                    Message('Reg Fee Amount paid is %1', ObjMember."Registration Fee Paid");
                     AmountToDeduct := 0;
                     //AmountToDeduct:=ABS(ObjMember."Registration Fee Paid");
                     AmountToDeduct := Abs(GenSetup."BOSA Registration Fee Amount");
+                    //Message('Reg Fee Amount To Deduct: %1', AmountToDeduct);
                     if RunningBalance <= AmountToDeduct then
                         AmountToDeduct := RunningBalance;
                     ObjReceiptTransactions.Init;
@@ -948,6 +1007,7 @@ page 50400 "BOSA Receipt Card"
                     if ObjReceiptTransactions.Amount <> 0 then
                         ObjReceiptTransactions.Insert(true);
                     RunningBalance := RunningBalance - Abs(ObjReceiptTransactions.Amount);
+                    Message('Amount Running is %1: after Reg fee paid of %2', RunningBalance, ObjReceiptTransactions.Amount);
                     // END;
                 end;
             end;
@@ -1023,6 +1083,44 @@ page 50400 "BOSA Receipt Card"
         exit(RunningBalance);
         //
         //END;
+    end;
+
+    local procedure FnRunInsuranceContribution(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
+    var
+        AmountToDeduct: Decimal;
+        ObjReceiptTransactions: Record "Receipt Allocation";
+        varTotalRepay: Decimal;
+        varMultipleLoan: Decimal;
+        varLRepayment: Decimal;
+        PRpayment: Decimal;
+        ObjMember: Record Customer;
+    begin
+        GenSetup.Get();
+        if RunningBalance > 0 then begin
+            ObjMember.Reset;
+            ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
+            if ObjMember.Find('-') then begin
+                //if ObjMember."Registration Date" <> 0D then begin
+                AmountToDeduct := 0;
+                AmountToDeduct := GenSetup."Benevolent Fund Contribution";
+                if RunningBalance <= AmountToDeduct then
+                    AmountToDeduct := RunningBalance;
+                ObjReceiptTransactions.Init;
+                ObjReceiptTransactions."Document No" := ObjRcptBuffer."Transaction No.";
+                ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Customer;
+
+                ObjReceiptTransactions."Member No" := ObjRcptBuffer."Account No.";
+                ObjReceiptTransactions."Transaction Type" := ObjReceiptTransactions."transaction type"::"Benevolent Fund";
+                ObjReceiptTransactions."Global Dimension 1 Code" := 'BOSA';
+                ObjReceiptTransactions."Global Dimension 2 Code" := SwizzsoftFactory.FnGetMemberBranch(ObjRcptBuffer."Account No.");
+                ObjReceiptTransactions.Amount := AmountToDeduct;
+                if ObjReceiptTransactions.Amount <> 0 then
+                    ObjReceiptTransactions.Insert(true);
+                RunningBalance := RunningBalance - Abs(ObjReceiptTransactions.Amount);
+                //end;
+            end;
+            exit(RunningBalance);
+        end;
     end;
 
     local procedure FnRunDepositContribution(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal
@@ -1429,7 +1527,7 @@ page 50400 "BOSA Receipt Card"
         //loanapp.SETFILTER( loanapp."Date filter",'<=%1',Date_OutBal);
         if loanapp.Find('-') then begin
             repeat
-                //Message('loan no is %1', loanapp."Loan  No.");
+                Message('loan no is %1', loanapp."Loan  No.");
                 CLedger.Reset;
                 CLedger.SetRange(CLedger."Loan No", loanapp."Loan  No.");
                 CLedger.SetRange("Transaction Type", CLedger."transaction type"::"Interest Due");
@@ -1438,7 +1536,7 @@ page 50400 "BOSA Receipt Card"
                 CLedger.SetRange(Reversed, false);
                 if CLedger.Find('-') then begin
                     // MESSAGE('cl');
-                    //  MESSAGE ('Loan %1| as Interest Changed is %2',CLedger."Loan No",CLedger.Amount);
+                    MESSAGE('Loan %1| as Interest Changed is %2', CLedger."Loan No", CLedger.Amount);
                     Error('Loan as Interest Due');
                 end;
 

@@ -4,6 +4,7 @@ page 50501 "Loans  List All"
     Editable = false;
     PageType = List;
     SourceTable = "Loans Register";
+    CardPageId = "Loans Posted Card";
 
     layout
     {

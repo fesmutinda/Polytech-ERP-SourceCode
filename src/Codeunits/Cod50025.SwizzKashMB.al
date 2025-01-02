@@ -4694,7 +4694,7 @@ Codeunit 50025 SwizzKashMB
         docNo: Code[50];
         NotificationDate: Date;
         EloanAmt: Decimal;
-        ObjMember: Record 51364;
+        ObjMember: Record Customer;
         varMemberNo: Code[50];
         rolledover: Decimal;
         Intcount: Integer;
@@ -5092,7 +5092,7 @@ Codeunit 50025 SwizzKashMB
         loanNotificationDate: Date;
         amtsecondnotice: Decimal;
         amtcompare: Decimal;
-        memb: Record 51364;
+        memb: Record Customer;
         Loanbal: Decimal;
         repayamt: Decimal;
         amtloan: Decimal;
@@ -6745,7 +6745,7 @@ Codeunit 50025 SwizzKashMB
     procedure GetMinistatementApp(phoneNumber: Text[20]) response: Text
     var
         statementList: Text;
-        memberTable: Record 51364;
+        memberTable: Record Customer;
         runCount: Integer;
         statementCount: Integer;
         vendorTable: Record Vendor;
@@ -6806,7 +6806,7 @@ Codeunit 50025 SwizzKashMB
 
     procedure GetMemberAccounts(phoneNumber: Text[20]) response: Text
     var
-        memberTable: Record 51364;
+        memberTable: Record Customer;
         accountsList: Text;
         vendorTable: Record Vendor;
         bosaAccounts: Text;
@@ -6856,7 +6856,7 @@ Codeunit 50025 SwizzKashMB
     var
         guarantorsList: Text;
         vendorTable: Record Vendor;
-        memberTable: Record 51364;
+        memberTable: Record Customer;
     begin
 
         response:='{ "StatusCode":"2","StatusDescription":"ERROR","guarantorsList": [] }';
@@ -6900,7 +6900,7 @@ Codeunit 50025 SwizzKashMB
     var
         guaranteedList: Text;
         vendorTable: Record Vendor;
-        memberTable: Record 51364;
+        memberTable: Record Customer;
         memberName: Text;
     begin
 
@@ -6944,7 +6944,7 @@ Codeunit 50025 SwizzKashMB
 
     procedure GetBalance(phoneNumber: Text[20];accountType: Text) response: Text
     var
-        membersTable: Record 51364;
+        membersTable: Record Customer;
         memberledgerentryTable: Record 51365;
         vendorTable: Record Vendor;
         amount: Decimal;
@@ -7047,7 +7047,7 @@ Codeunit 50025 SwizzKashMB
     procedure GetOutstandingLoans(phoneNumber: Text[20]) response: Text
     var
         outstandingloansList: Text;
-        membersTable: Record 51364;
+        membersTable: Record Customer;
         loanProductsTable: Record 51381;
     begin
         begin

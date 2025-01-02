@@ -23,7 +23,7 @@ Codeunit 50032 SwizzKashMobile
     end;
 
     var
-        Members: Record 51364;
+        Members: Record Customer;
         LoansRegister: Record 51371;
         MemberLedgerEntry: Record 51365;
         LoanProducttype: Record 51381;

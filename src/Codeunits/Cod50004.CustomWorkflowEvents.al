@@ -1,9 +1,9 @@
-codeunit 50004 "Custom Workflow Events"
+codeunit 50004 "Custom Workflow Events old"//04-05 now on 40-41
 {
 
     trigger OnRun()
     begin
-        //AddEventsToLib();
+        AddWorkflowEventsToLibrary();
     end;
 
     var
@@ -13,7 +13,7 @@ codeunit 50004 "Custom Workflow Events"
         //SurestepWFEvents: Codeunit "Custom Workflow Events";
         WFResponseHandler: Codeunit "Workflow Response Handling";
 
-    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
+    //[EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventsToLibrary', '', false, false)]
 
     procedure AddWorkflowEventsToLibrary()
     begin
@@ -109,8 +109,8 @@ codeunit 50004 "Custom Workflow Events"
         //-------------------------------------------End Approval Events-------------------------------------------------------------
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
-    local procedure AddWorkflowEventPredecessorsToLibrary()
+    //[EventSubscriber(ObjectType::Codeunit, 1520, 'OnAddWorkflowEventPredecessorsToLibrary', '', false, false)]
+    procedure AddWorkflowEventPredecessorsToLibrary()
     begin
         //--------1.Approval,Rejection,Delegation Predecessors----------------------
         //1. Membership Application

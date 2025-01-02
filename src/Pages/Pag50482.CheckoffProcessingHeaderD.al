@@ -819,7 +819,7 @@ page 50482 "Checkoff Processing Header-D"
 
     local procedure FnGetMemberNo(PayrollNo: Code[30]; EmployerCode: Code[30]) MemberNo: Code[20]
     var
-        ObjMembersReg: Record 51364;
+        ObjMembersReg: Record Customer;
     begin
         ObjMembersReg.Reset;
         // ObjMembersReg.SetRange(ObjMembersReg."Personal No", PayrollNo);

@@ -215,9 +215,6 @@ Page 56043 "Polytech Sacco Role Center"
                 }
 
 
-
-
-
                 action("General Journals")
                 {
                     ApplicationArea = Basic, Suite;
@@ -233,17 +230,12 @@ Page 56043 "Polytech Sacco Role Center"
                     ToolTip = 'Process incoming and outgoing payments. Set up bank accounts and service connections for electronic banking.  ';
                     Visible = true;
 
-
-
-
                     action("G/L Register")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'G/L Register';
                         Image = Journal;
                         RunObject = Page "G/L Registers";
-
-
                     }
 
                     action("Chart of Accounts")
@@ -353,115 +345,113 @@ Page 56043 "Polytech Sacco Role Center"
 
                     }
 
-
-
                 }
                 //........................................................................................................................................           
 
-                // group("SASRA Reports")
-                // {
-                //     Caption = 'SASRA Reports';
-                //     ToolTip = 'which highlights the operations and performance of the SACCO industry during the year ended';
-                //     Visible = true;
-                //     action("Capital Adequacy Return")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Capital Adequacy Return';
-                //         RunObject = report "CAPITAL ADEQUACY RETURN";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //     }
+                group("SASRA Reports")
+                {
+                    Caption = 'SASRA Reports';
+                    ToolTip = 'which highlights the operations and performance of the SACCO industry during the year ended';
+                    Visible = true;
+                    action("Capital Adequacy Return")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Capital Adequacy Return';
+                        RunObject = report "CAPITAL ADEQUACY RETURN";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                    }
 
-                //     action("Investiment Return")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Investiment Return';
-                //         RunObject = report "RETURN ON INVESTMENT";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Liquidity Statement")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Liquidity Statement';
-                //         RunObject = report Liquidity;
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Form2F Statement of CompIncome")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Statement of comprehensive Income';
-                //         RunObject = report "Form2F Statement of CompIncome";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Deposits Return-SASRA")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Statement of Deposits Return';
-                //         Image = Report;
-                //         RunObject = report "Deposit returnN";
-                //     }
-                //     action("Statement of Financial Position")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Statement of Financial Position';
-                //         RunObject = report "STATEMENT OF FINANCIAL P";
-                //         ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
-                //         // Visible = false;
-                //     }
-                //     action("Other Disclosures")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Other Disclosures';
-                //         RunObject = report "Other Disclosures";
-                //     }
-                //     action("Insider Lending Report")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Insider Lending Report';
-                //         RunObject = report "Insider Lending & Perf Return";
-                //         ToolTip = 'View or Generate Agency Returns for a given period.';
-                //         // Visible = false;
-                //     }
+                    action("Investiment Return")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Investiment Return';
+                        RunObject = report "RETURN ON INVESTMENT";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Liquidity Statement")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Liquidity Statement';
+                        RunObject = report Liquidity;
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Form2F Statement of CompIncome")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Statement of comprehensive Income';
+                        RunObject = report "Form2F Statement of CompIncome";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Deposits Return-SASRA")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Statement of Deposits Return';
+                        Image = Report;
+                        RunObject = report "Deposit returnN";
+                    }
+                    action("Statement of Financial Position")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Statement of Financial Position';
+                        RunObject = report "STATEMENT OF FINANCIAL P";
+                        ToolTip = 'View or Generate Deposit Return SASRA for a given period.';
+                        // Visible = false;
+                    }
+                    action("Other Disclosures")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Other Disclosures';
+                        RunObject = report "Other Disclosures";
+                    }
+                    action("Insider Lending Report")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Insider Lending Report';
+                        RunObject = report "Insider Lending & Perf Return";
+                        ToolTip = 'View or Generate Agency Returns for a given period.';
+                        // Visible = false;
+                    }
 
-                //     action("Loans Defaulter Aging-SASRA")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Loans Defaulter Aging';
-                //         RunObject = report "SASRA Loans Classification";
-                //     }
+                    action("Loans Defaulter Aging-SASRA")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Loans Defaulter Aging';
+                        RunObject = report "SASRA Loans Classification";
+                    }
 
-                //     // action("Sectorial Lending Report")
-                //     // {
-                //     //     ApplicationArea = Basic, Suite;
-                //     //     Caption = 'Sectorial Lending Report';
-                //     //     RunObject = report "SECTORAL LENDING";
-                //     //     ToolTip = 'View or Generate Agency Returns for a given period.';
-                //     //     // Visible = false;
-                //     // }
+                    // action("Sectorial Lending Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sectorial Lending Report';
+                    //     RunObject = report "SECTORAL LENDING";
+                    //     ToolTip = 'View or Generate Agency Returns for a given period.';
+                    //     // Visible = false;
+                    // }
 
-                //     action("Risk Class of Assets")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Risk Classification and Loan Provisioning';
-                //         RunObject = report "Risk Class Of Assets & Prov";
-                //     }
+                    action("Risk Class of Assets")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Risk Classification and Loan Provisioning';
+                        RunObject = report "Risk Class Of Assets & Prov";
+                    }
 
-                //     // action("Loans Provisioning Summary-SASRA")
-                //     // {
-                //     //     ApplicationArea = Basic, Suite;
-                //     //     Caption = 'Loans Provisioning Summary';
-                //     //     RunObject = report "Loans Provisioning Summarys";
-                //     // }
-                //     action("Loan Sectorial Lendng-SASRA")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Loan Sectorial Lending';
-                //         RunObject = REPORT "Loan Sectoral Lending Report";
-                //     }
+                    // action("Loans Provisioning Summary-SASRA")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loans Provisioning Summary';
+                    //     RunObject = report "Loans Provisioning Summarys";
+                    // }
+                    // action("Loan Sectorial Lendng-SASRA")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loan Sectorial Lending';
+                    //     RunObject = REPORT "Loan Sectoral Lending Report";
+                    // }
 
-                // }
+                }
                 // //..........................................................................................................................................
                 group("Receipt Processing")
                 {
@@ -498,7 +488,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted Payment Vouchers';
                         Image = Journal;
-                        // RunObject = Page "Posted Payment List";
+                        RunObject = Page "Posted Payment List";
 
                     }
 
@@ -506,14 +496,14 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Petty Cash Payment';
-                        // RunObject = page "PettyCash Payment List";
+                        RunObject = page "PettyCash Payment List";
                     }
 
                     action("Posted Petty Cash")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted Petty Cash';
-                        // RunObject = page "Posted PettyCash Payment List";
+                        RunObject = page "Posted PettyCash Payment List";
 
                     }
 
@@ -544,7 +534,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Electronic Funds Tranfer';
-                        // RunObject = Page "EFT list";
+                        //RunObject = Page "EFT list";
                     }
 
                 }
@@ -674,7 +664,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Liquidity Report';
                         Image = Journal;
-                        // RunObject = report Liquidity;
+                        RunObject = report Liquidity;
                         ToolTip = 'Generate Liquidity Report for a given period.';
                         Visible = false;
                     }
@@ -683,64 +673,64 @@ Page 56043 "Polytech Sacco Role Center"
 
 
                 //.......................................................................................................................................
-                // group("Mkopo Reports")
-                // {
-                //     Caption = 'Mkopo Reports';
-                //     action(SaccoInformationReport)
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Sacco Information Report';
-                //         RunObject = report "Sacco Information";
+                group("Mkopo Reports")
+                {
+                    Caption = 'Mkopo Reports';
+                    action(SaccoInformationReport)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Sacco Information Report';
+                        RunObject = report "Sacco Information";
 
-                //     }
-                //     action("Statement of Directors'RE")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Statement of Directors Responsibilities';
-                //         RunObject = report "Statement of Directors'RE";
-                //     }
-                //     action(Reportofthedirectors)
-                //     {
-                //         ApplicationArea = All;
-                //         RunObject = report "REPORT OF THE DIRECTORS";
-                //         Caption = 'Report of the Directors';
-                //     }
-                //     action("Financial Statical Information")
-                //     {
-                //         ApplicationArea = All;
+                    }
+                    action("Statement of Directors'RE")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Statement of Directors Responsibilities';
+                        RunObject = report "Statement of Directors'RE";
+                    }
+                    action(Reportofthedirectors)
+                    {
+                        ApplicationArea = All;
+                        RunObject = report "REPORT OF THE DIRECTORS";
+                        Caption = 'Report of the Directors';
+                    }
+                    action("Financial Statical Information")
+                    {
+                        ApplicationArea = All;
 
-                //         RunObject = report FinancialStaticalInformation;
-                //     }
-                //     action("Statement of Financial Position Mkopo")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Satement of Financial Position';
-                //         RunObject = report "State of financial Position";
-                //     }
-                //     action("Statement of profit or loss and other comprehensive income")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Statement of profit or loss and other comprehensive income';
-                //         RunObject = report StatementProfitorloss;
-                //     }
-                //     action("Statement of changes of Equity Current")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Statement of Changes im Equity';
-                //         // RunObject = report StatementOfChangesInEquity;
-                //     }
-                //     // action("Statement of changes of Equity Previous")
-                //     // {
-                //     //     ApplicationArea = All;
-                //     //     RunObject = report StatchangesinequityPrevious;
-                //     // }
-                //     action("Statement OF Cash Flows")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Cash Flows';
-                //         // RunObject = report cashFlows;
-                //     }
-                // }
+                        RunObject = report FinancialStaticalInformation;
+                    }
+                    //     action("Statement of Financial Position Mkopo")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Satement of Financial Position';
+                    //         RunObject = report "State of financial Position";
+                    //     }
+                    //     action("Statement of profit or loss and other comprehensive income")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Statement of profit or loss and other comprehensive income';
+                    //         RunObject = report StatementProfitorloss;
+                    //     }
+                    //     action("Statement of changes of Equity Current")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Statement of Changes im Equity';
+                    //         // RunObject = report StatementOfChangesInEquity;
+                    //     }
+                    //     // action("Statement of changes of Equity Previous")
+                    //     // {
+                    //     //     ApplicationArea = All;
+                    //     //     RunObject = report StatchangesinequityPrevious;
+                    //     // }
+                    //     action("Statement OF Cash Flows")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Cash Flows';
+                    //         // RunObject = report cashFlows;
+                    //     }
+                }
 
                 //.......................................................................................................................................
 
@@ -990,7 +980,7 @@ Page 56043 "Polytech Sacco Role Center"
                     }
                     action("Member Re-Application posted")
                     {
-                        // RunObject = page "MemberRe-ApplicationListPosted";
+                        RunObject = page "MemberRe-ApplicationListPosted";
                         Enabled = true;
                         Caption = ' Member Re-Application Posted';
                         ApplicationArea = all;
@@ -1044,13 +1034,13 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = Page "Member List";
                         ToolTip = 'View Member Accounts';
                     }
-                    /* action(GroupMembersList)
+                    action(GroupMembersList)
                     {
                         ApplicationArea = all;
                         Caption = 'Group/Corporate Applic List';
-                        RunObject = Page "Group/Corporate Applic List";
+                        //RunObject = Page "Group/Corporate Applic List";
                         ToolTip = 'View Member Accounts';
-                    } */
+                    }
                     /* group("Account Opening")
                     {
                         Caption = 'Membership Registration';
@@ -1246,7 +1236,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = All;
                         Caption = 'BOSA Loan Application List';
                         Image = Loaners;
-                        RunObject = Page "Loans Application List(Approv)";// "Loan List-New Application BOSA";
+                        RunObject = Page "Loan List-New Application BOSA";
                         ToolTip = 'Open BOSA Loan Applications List';
                         RunPageView = where(Posted = const(false), "Loan Status" = const(Application));
                     }
@@ -1255,7 +1245,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'BOSA Loans Pending Approval';
                         Image = CreditCard;
-                        RunObject = Page "Loans  List- pending approval";// "LoanList-Pending Approval BOSA";
+                        RunObject = Page "LoanList-Pending Approval BOSA";
 
                         ToolTip = 'Open the list of BOSA Loans Pending Approval';
 
@@ -1264,11 +1254,10 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'BOSA Loans Pending Disbursement.';
-                        // RunObject = Page "Loan Application BOSA-Approved";
+                        RunObject = Page "Loan Application BOSA-Approved";
                         ToolTip = 'Open the list of Approved Loans Pending Disbursement.';
                     }
                 }
-
 
                 group("Loan Batching")
                 {
@@ -1447,16 +1436,16 @@ Page 56043 "Polytech Sacco Role Center"
 
                     }
 
-                    // action(ApprovedTransfers)
-                    // {
-                    //     ApplicationArea = basic, suite;
-                    //     Caption = 'Approved Transfer List';
-                    //     Image = Customer;
-                    //     RunObject = page "BOSA Transfer Posted";
-                    //     ToolTip = 'BOSA Transfer Posted';
-                    //     RunPageView = where(Posted = const(false), approved = const(true));
+                    action(ApprovedTransfers)
+                    {
+                        ApplicationArea = basic, suite;
+                        Caption = 'Approved Transfer List';
+                        Image = Customer;
+                        RunObject = page "BOSA Transfer Posted";
+                        ToolTip = 'BOSA Transfer Posted';
+                        RunPageView = where(Posted = const(false), approved = const(true));
 
-                    // }
+                    }
                     action(PostedTransfers)
                     {
                         ApplicationArea = basic, suite;
@@ -1561,15 +1550,15 @@ Page 56043 "Polytech Sacco Role Center"
                     action("Member Loans Guaranteed")
                     {
                         ApplicationArea = Basic, Suite;
-                        RunObject = Page "Loans Guarantee Details";
-                        // RunObject = report "Loans Guaranteed";
+                        //RunObject = Page "Loans Guarantee Details";
+                        RunObject = report "Loans Guaranteed";
                     }
 
                     action("Members Loan  Guarantors")
                     {
                         ApplicationArea = Basic, Suite;
                         // RunObject = Page "Loans Guarantee Details";
-                        // RunObject = report "Loan Guarantors";
+                        RunObject = report "Loan Guarantors";
                     }
 
 

@@ -138,7 +138,7 @@ Codeunit 50015 "Payroll Processing"
         prEmployerDeductions: Record 51327;
         JournalPostingType: Option " ","G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Staff,"None",Member;
         JournalAcc: Code[20];
-        Customer: Record 51364;
+        Customer: Record Customer;
         JournalPostAs: Option " ",Debit,Credit;
         IsCashBenefit: Decimal;
         Teltax: Decimal;

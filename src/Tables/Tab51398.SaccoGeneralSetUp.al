@@ -783,6 +783,27 @@ Table 51398 "Sacco General Set-Up"
         {
             TableRelation = "G/L Account";
         }
+        field(225; "Benevolent Fund Contribution"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(1601; "Asset Valuation Cost"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(1602; "Legal Fees"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(1603; "Overdraft Limit"; Decimal)
+        {
+        }
+        field(1605; "Proposed Honoraria"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
