@@ -138,4 +138,3 @@ page 50315 "Payroll Earnings Card."
         Rec."Transaction Type" := Rec."transaction type"::Income;
     end;
 }
-

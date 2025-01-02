@@ -2,6 +2,8 @@
 page 50320 "Payroll NSSF Setup."
 {
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll NSSF Setup.";
 
     layout

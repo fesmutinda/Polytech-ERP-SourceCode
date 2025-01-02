@@ -3,6 +3,8 @@ page 50334 "Payroll General Setup LIST."
 {
     CardPageID = "Payroll General Setup.";
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll General Setup.";
 
     layout
@@ -47,6 +49,10 @@ page 50334 "Payroll General Setup LIST."
                 {
                     ApplicationArea = Basic;
                 }
+                field("Staff Net Pay G/L Account"; Rec."Staff Net Pay G/L Account")
+                {
+                    ApplicationArea = Basic;
+                }
             }
         }
     }
@@ -55,4 +61,3 @@ page 50334 "Payroll General Setup LIST."
     {
     }
 }
-

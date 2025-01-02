@@ -1,14 +1,29 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51335 "prPeriod Transactions."
 {
-    // DrillDownPageID = UnknownPage51516198;
-    // LookupPageID = UnknownPage51516198;
+    // version Payroll ManagementV1.0(Surestep Systems)
+
+    DrillDownPageID = "Payroll Period Transaction.";
+    LookupPageID = "Payroll Period Transaction.";
 
     fields
     {
-        field(1; "Employee Code"; Code[50])
+        //periods.validate(employeecode)
+        //period.modify;
+        field(1; "Employee Code"; Code[100])
         {
-            TableRelation = "HR Employees"."No.";
+            TableRelation = "Payroll Employee."."No.";
+            trigger OnValidate()
+            var
+                PrEmp: Record "Payroll Employee.";
+            begin
+                PrEmp.Reset();
+                PrEmp.SetRange("No.", "Employee Code");
+                if PrEmp.FindFirst() then begin
+                    "Payroll Category" := PrEmp."Payroll Categories";
+                end;
+            end;
+
         }
         field(2; "Transaction Code"; Text[30])
         {
@@ -49,11 +64,12 @@ Table 51335 "prPeriod Transactions."
         }
         field(13; "Payroll Period"; Date)
         {
+            TableRelation = "Payroll Calender."."Date Opened";
         }
         field(14; Membership; Code[50])
         {
         }
-        field(15; "Reference No"; Text[20])
+        field(15; "Reference No"; Text[40])
         {
         }
         field(16; "Department Code"; Code[20])
@@ -98,8 +114,8 @@ Table 51335 "prPeriod Transactions."
         field(27; "coop parameters"; Option)
         {
             Description = 'to be able to report the different coop contributions -Dennis';
-            OptionCaption = 'None,Shares,Loan,Loan Interest,Emergency Loan,Emergency Loan Interest,School Fees Loan,School Fees Loan Interest,Welfare,Pension,NSSF,Overtime,Security Fund,Risk Fund,NHIF,Housing Levy';
-            OptionMembers = "None",Shares,Loan,"Loan Interest","Emergency Loan","Emergency Loan Interest","School Fees Loan","School Fees Loan Interest",Welfare,Pension,NSSF,Overtime,"Security Fund","Risk Fund",NHIF,"Housing Levy";
+            OptionMembers = "None",Shares,Loan,"Share Capital",Likizo,"Loan Interest","Emergency Loan","Emergency Loan Interest",Welfare,Pension,NSSF,Overtime,"Insurance Contribution"
+            ,"Loan Application Fee Paid","Loan Insurance Paid";
         }
         field(28; "Payroll Code"; Code[20])
         {
@@ -110,21 +126,46 @@ Table 51335 "prPeriod Transactions."
             Description = 'Bank Transfer,Cheque,Cash,SACCO';
             OptionMembers = " ","Bank Transfer",Cheque,Cash,SACCO;
         }
-        field(30; "Fosa Account No."; Code[100])
+        field(30; "Fosa Account No."; Code[50])
         {
-            CalcFormula = lookup("Payroll Employee."."Bank Account No" where("No." = field("Employee Code")));
+            CalcFormula = Lookup("Payroll Employee."."Bank Account No" WHERE("No." = FIELD("Employee Code")));
             FieldClass = FlowField;
         }
-        field(31; "Not Found"; Boolean)
+        field(31; Organization; Code[50])
         {
+            DataClassification = ToBeClassified;
         }
+        field(32; "Employee Contribution(vol)"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(33; "Zamara No"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(34; "Code"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(35; "Policy No"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(36; "ALLOWANCE NEW"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(37; "Payroll Category"; Enum PayrollCategories)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
     {
-        key(Key1; "Employee Code", "Transaction Code", "Period Month", "Period Year", Membership, "Reference No")
+        key(Key1; "Employee Code", "Transaction Code", "Period Month", "Period Year", Membership, "Reference No", "Loan Number")
         {
-            Clustered = true;
             SumIndexFields = Amount;
         }
         key(Key2; "Employee Code", "Period Month", "Period Year", "Group Order", "Sub Group Order", Membership, "Reference No")
@@ -155,5 +196,17 @@ Table 51335 "prPeriod Transactions."
     fieldgroups
     {
     }
+
+    trigger OnInsert()
+    var
+
+
+    begin
+        if "Employee Code" <> '' then begin
+            Validate("Employee Code");
+        end;
+
+
+    end;
 }
 

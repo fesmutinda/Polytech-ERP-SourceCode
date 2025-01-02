@@ -3,6 +3,8 @@ page 50323 "Payroll Transaction List."
 {
     CardPageID = "payroll Transaction Code.";
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll Transaction Code.";
 
     layout
@@ -39,12 +41,32 @@ page 50323 "Payroll Transaction List."
                 field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Debit Account';
                 }
                 field("G/L Account Name"; Rec."G/L Account Name")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Debit Account Name';
                 }
+                // field("Credit Account"; "Credit Account")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Credit Account';
+                // }
+                // field("Credit Account Name"; "Credit Account Name")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("IsCo-Op/LnRep"; Rec."IsCo-Op/LnRep")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Is Sacco Deduction';
+                }
+                field("Loan Product"; Rec."Loan Product")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loan Product Name"; Rec."Loan Product Name")
                 {
                     ApplicationArea = Basic;
                 }
@@ -56,4 +78,3 @@ page 50323 "Payroll Transaction List."
     {
     }
 }
-

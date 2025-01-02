@@ -42,11 +42,11 @@ Page 56029 "Loan Application Card"
                         // end;
                     end;
                 }
-                field("Account No"; Rec."Account No")
+                field("Loan Product Name"; Rec."Loan Product Type Name")
                 {
                     ApplicationArea = Basic;
-                    // Editable = AccountNoEditable;
                     Style = StrongAccent;
+                    Editable = false;
                     Visible = true;
                 }
 
@@ -824,7 +824,7 @@ Page 56029 "Loan Application Card"
             SMSMessage.Source := 'LOANS';
             SMSMessage."Entered By" := UserId;
             SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-            SMSMessage."SMS Message" := 'Your Loan Application of amount ' + Format(Rec."Requested Amount") + ' for ' +
+            SMSMessage."SMS Message" := 'Your ' + Format(Rec."Loan Product Type Name") + ' Loan Application of amount ' + Format(Rec."Requested Amount") + ' for ' +
             Rec."Client Code" + ' ' + Rec."Client Name" + ' has been received and is being Processed ' + compinfo.Name + ' ' + GenSetUp."Customer Care No";
             Cust.Reset;
             Cust.SetRange(Cust."No.", Rec."Client Code");
@@ -902,7 +902,7 @@ Page 56029 "Loan Application Card"
             if Cust."E-Mail (Personal)" <> ' ' then begin
                 Emailaddress := Cust."E-Mail (Personal)";
                 EmailSubject := 'Loan Application Approval';
-                EMailBody := 'Dear <b>' + '</b>,</br></br>' + 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
+                EMailBody := 'Dear <b>' + '</b>,</br></br>' + 'Your ' + Rec."Loan Product Type Name" + ' loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
                           ' has been Approved by Credit. Polytech Sacco Ltd.' + '<br></br>' +
 'Congratulations';
                 EmailCodeunit.SendMail(Emailaddress, EmailSubject, EmailBody);
@@ -933,7 +933,7 @@ Page 56029 "Loan Application Card"
         SMSMessages.Source := 'LOAN APPL';
         SMSMessages."Entered By" := USERID;
         SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
-        SMSMessages."SMS Message" := 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
+        SMSMessages."SMS Message" := 'Your' + Format(Rec."Loan Product Type Name") + 'loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
                                   ' has been Approved by Credit. Polytech Sacco Ltd.';
         Cust.RESET;
         IF Cust.GET(Rec."Client Code") THEN

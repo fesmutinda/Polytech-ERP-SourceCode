@@ -126,6 +126,10 @@ Table 51334 "Payroll General Setup."
         field(40; BasedOnTimesheet; Boolean)
         {
         }
+        field(41; "Staff Net Pay G/L Account"; Code[30])
+        {
+            TableRelation = "G/L Account";
+        }
     }
 
     keys
@@ -140,4 +144,3 @@ Table 51334 "Payroll General Setup."
     {
     }
 }
-

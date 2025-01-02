@@ -1,6 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51398 "Sacco General Set-Up"
 {
+    DrillDownPageId = "Sacco General Set-Up";
 
     fields
     {
@@ -842,6 +843,54 @@ Table 51398 "Sacco General Set-Up"
         field(1603; "Benevolent Fund Contribution"; Decimal)
         {
             DataClassification = ToBeClassified;
+        }
+        field(1604; "Withdrawal Period"; DateFormula)
+        {
+        }
+        field(1606; "Withdrawal Commision"; Decimal)
+        {
+        }
+        field(1607; "FOSA Account Type"; Code[20])
+        {
+            TableRelation = "Account Types-Saving Products".Code;
+        }
+        field(1608; "Auto Fill Msacco Application"; Boolean)
+        {
+        }
+        field(1609; "Auto Fill ATM Application"; Boolean)
+        {
+        }
+        field(1610; "Allow Multiple Receipts"; Boolean)
+        {
+        }
+        field(1611; "Group Account No"; Code[10])
+        {
+        }
+        field(1612; "Cheque Processing Fee Account"; Code[30])
+        {
+            TableRelation = "G/L Account"."No.";
+        }
+        field(1613; "Dividends Paying Bank Account"; Code[20])
+        {
+            TableRelation = "Bank Account"."No.";
+        }
+        field(1614; "Interest On PreferentialShares"; Decimal)
+        {
+        }
+        field(1615; "Interest On LiftShares"; Decimal)
+        {
+        }
+        field(1616; "Interest On TambaaShares"; Decimal)
+        {
+        }
+        field(1617; "Interest On PepeaShares"; Decimal)
+        {
+        }
+        field(1618; "Interest On HousingShares"; Decimal)
+        {
+        }
+        field(1619; "Dividends Capitalization Rate"; Decimal)
+        {
         }
 
     }

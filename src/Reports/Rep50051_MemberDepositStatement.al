@@ -145,7 +145,7 @@ Report 50051 "Members Deposits Statement"
             /* dataitem(ShareCapital; "Member Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");
-                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Share Capital"), Reversed = filter(false));
+                DataItemTableView = sorting("Posting Date") where("Transaction Type" = const("Shares Capital"), Reversed = filter(false));
                 column(OpeningBal; OpeningBal)
                 {
                 }

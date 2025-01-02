@@ -1,15 +1,15 @@
-Report 50050 MembershipApplicationReport
+/* Report 50057 "MemberWithoutNextOfKin"
 {
     ApplicationArea = All;
-    Caption = 'Membership Application Report';
-    RDLCLayout = './Layouts/MembershipApplicationReport.rdl';
+    Caption = 'Members Without Next report.';
+    RDLCLayout = './Layouts/MemberWithoutNextOfKin.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem("Membership Applications"; "Membership Applications")
+        dataitem(Customer; "Member Register")
         {
             DataItemTableView = sorting("No.") order(descending);
-            RequestFilterFields = Status;
+
             column(CompanyName; CompanyInfo.Name)
             {
             }
@@ -37,9 +37,14 @@ Report 50050 MembershipApplicationReport
             trigger OnAfterGetRecord();
             var
             begin
-
-                ;
                 EntryNo := EntryNo + 1;
+                NextOfKin.Reset();
+                NextOfKin.SetRange(NextOfKin."Account No", "No.");
+                if NextOfKin.Find('-') then
+                    if NextOfKin.IsEmpty = false then begin
+                        CurrReport.Skip();
+                    end;
+
             end;
 
         }
@@ -65,17 +70,15 @@ Report 50050 MembershipApplicationReport
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        CompanyInfo.CALCFIELDS(CompanyInfo.Picture);
-        Datefilter := TbMembRegister.GetFilter("Date Filter");
-
+        Datefilter := Customer.GetFilter("Date Filter");
     end;
-
 
     var
         CompanyInfo: Record "Company Information";
         EntryNo: Integer;
         Sharecapital: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record Customer;
         Gensetup: Record "Sacco General Set-Up";
+    //NextOfKin: Record "Accounts Next Of Kin Details";
 }
+ */

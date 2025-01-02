@@ -2,6 +2,8 @@
 page 50321 "Payroll Posting Group."
 {
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll Posting Groups.";
 
     layout
@@ -22,7 +24,7 @@ page 50321 "Payroll Posting Group."
                 {
                     ApplicationArea = Basic;
                 }
-                field("Income Tax Account"; Rec."Income Tax Account")
+                field("PAYE Account"; Rec."PAYE Account")
                 {
                     ApplicationArea = Basic;
                 }
@@ -40,6 +42,10 @@ page 50321 "Payroll Posting Group."
                 {
                     ApplicationArea = Basic;
                 }
+                field("Salary Processing Control"; Rec."Salary Processing Control")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Operating Overtime"; Rec."Operating Overtime")
                 {
                     ApplicationArea = Basic;
@@ -52,6 +58,16 @@ page 50321 "Payroll Posting Group."
                 {
                     ApplicationArea = Basic;
                 }
+                field("Housing Levy"; Rec."Employer Housing Levy")
+                {
+                    ApplicationArea = all;
+                    Caption = ' Housing Employer Account';
+                }
+                field(" Employee Housing Levy"; Rec."EmployeeHousingLevy")
+                {
+                    ApplicationArea = all;
+
+                }
                 field("Pay Period Filter"; Rec."Pay Period Filter")
                 {
                     ApplicationArea = Basic;
@@ -61,6 +77,10 @@ page 50321 "Payroll Posting Group."
                     ApplicationArea = Basic;
                 }
                 field("Pension Employee Acc"; Rec."Pension Employee Acc")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Gross Pay"; Rec."Gross Pay")
                 {
                     ApplicationArea = Basic;
                 }
@@ -97,6 +117,10 @@ page 50321 "Payroll Posting Group."
                     ApplicationArea = Basic;
                 }
                 field("PAYE Benefit A/C"; Rec."PAYE Benefit A/C")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Income Tax Account"; Rec."Income Tax Account")
                 {
                     ApplicationArea = Basic;
                 }

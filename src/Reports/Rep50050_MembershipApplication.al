@@ -1,15 +1,15 @@
-Report 50052 MemberReport
+Report 50050 MembershipApplicationReport
 {
     ApplicationArea = All;
-    Caption = 'Member Report';
-    RDLCLayout = './Layouts/MembersReport.rdl';
+    Caption = 'Membership Application Report';
+    RDLCLayout = './Layouts/MembershipApplicationReport.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem(Customer; Customer)
+        dataitem("Membership Applications"; "Membership Applications")
         {
             DataItemTableView = sorting("No.") order(descending);
-            RequestFilterFields = "No.", "Date Filter", Status;
+            RequestFilterFields = Status;
             column(CompanyName; CompanyInfo.Name)
             {
             }
@@ -26,40 +26,24 @@ Report 50052 MemberReport
             {
             }
             column(No; "No.")
-            {
-            }
+            { }
             column(Name; Name)
             { }
             column(ID_No_; "ID No.")
             { }
             column(EntryNo; EntryNo)
             { }
-            column(Monthly_Contribution; "Monthly Contribution")
+            column(Mobile_Phone_No; "Mobile Phone No")
             { }
-            column(Deposits; Deposits) { }
-            column(ShareCapital; ShareCapital) { }
-            column(LoanBalance; LoanBalance) { }
-            column(Status; Status) { }
-            column(Address; Address) { }
-            column(Mobile_Phone_No; "Mobile Phone No") { }
 
-            trigger OnPreDataItem()
-            var
-                myInt: Integer;
-            begin
-                Deposits := 0;
-            end;
+
+
 
             trigger OnAfterGetRecord();
             var
             begin
-                TbMembRegister.SetFilter(TbMembRegister."Date Filter", Datefilter);
-                if TbMembRegister.get(TbMembRegister."No.") then begin
-                    TbMembRegister.SetAutoCalcFields(TbMembRegister."Current Shares");
-                    Deposits := TbMembRegister."Current Shares";
-                    //ShareCapital := TbMembRegister."Share Capital";
-                    LoanBalance := TbMembRegister."Outstanding Balance";
-                end;
+
+                ;
                 EntryNo := EntryNo + 1;
             end;
 
@@ -88,14 +72,15 @@ Report 50052 MemberReport
         CompanyInfo.Get();
         CompanyInfo.CALCFIELDS(CompanyInfo.Picture);
         Datefilter := TbMembRegister.GetFilter("Date Filter");
+
     end;
+
 
     var
         CompanyInfo: Record "Company Information";
         EntryNo: Integer;
-        LoanBalance: Decimal;
-        ShareCapital: Decimal;
-        Deposits: Decimal;
+        Sharecapital: Decimal;
         Datefilter: Text[100];
         TbMembRegister: Record Customer;
+        Gensetup: Record "Sacco General Set-Up";
 }

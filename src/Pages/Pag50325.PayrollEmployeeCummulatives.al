@@ -21,11 +21,11 @@ page 50325 "Payroll Employee Cummulatives."
                 {
                     ApplicationArea = Basic;
                 }
-                field(Firstname; Rec.Firstname)
+                field(Firstname; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                 }
-                field(Lastname; Rec.Lastname)
+                field(Lastname; Rec.Surname)
                 {
                     ApplicationArea = Basic;
                 }

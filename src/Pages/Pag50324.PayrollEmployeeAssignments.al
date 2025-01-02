@@ -21,12 +21,12 @@ page 50324 "Payroll Employee Assignments."
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Firstname; Rec.Firstname)
+                field(Firstname; Rec."First Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field(Lastname; Rec.Lastname)
+                field(Lastname; Rec.Surname)
                 {
                     ApplicationArea = Basic;
                     Editable = false;

@@ -2200,6 +2200,10 @@ Table 51371 "Loans Register"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(68113; "Exempt From Payroll Deduction"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(68009; "Oustanding Interest to Date"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
@@ -2927,7 +2931,11 @@ Table 51371 "Loans Register"
         }
         field(69046; "Member Deposits"; Decimal)
         {
+            CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                   "Transaction Type" = filter("Deposit Contribution"),
+                                                                   "Posting Date" = field("Date Filter"), Reversed = const(false)));
             Editable = false;
+            FieldClass = FlowField;
         }
         field(69047; "Levy On Jaza Deposits"; Decimal)
         {

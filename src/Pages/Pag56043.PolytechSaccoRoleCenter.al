@@ -629,7 +629,7 @@ Page 56043 "Polytech Sacco Role Center"
                     ToolTip = 'Display Financial Statements.';
                     Visible = true;
 
-                    action("Devco Trial Balance")
+                    action("Polytech Trial Balance")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Summarised Trial Balance';
@@ -972,24 +972,6 @@ Page 56043 "Polytech Sacco Role Center"
                     }
 
                 }
-                group("Membership Re-Application")
-                {
-                    action("Member Re-Application List")
-                    {
-
-                        RunObject = page "Member Re-Application List";
-                        Enabled = true;
-                        ApplicationArea = all;
-                    }
-                    action("Member Re-Application posted")
-                    {
-                        RunObject = page "MemberRe-ApplicationListPosted";
-                        Enabled = true;
-                        Caption = ' Member Re-Application Posted';
-                        ApplicationArea = all;
-                    }
-                }
-
                 group("Membership Exit")
                 {
 
@@ -1013,9 +995,27 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = page "Membership Exit List-Posted";
                         RunPageView = where(Posted = const(true));
                     }
+
+
                 }
+                group("Membership Re-Application")
+                {
+                    action("Member Re-Application List")
+                    {
 
+                        RunObject = page "Member Re-Application List";
+                        Enabled = true;
+                        ApplicationArea = all;
+                    }
+                    action("Member Re-Application posted")
+                    {
 
+                        RunObject = page "MemberRe-ApplicationListPosted";
+                        Enabled = true;
+                        Caption = ' Member Re-Application Posted';
+                        ApplicationArea = all;
+                    }
+                }
                 group("Member Reports")
                 {
 
@@ -1125,8 +1125,6 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = report "Members Deposits Statement";// "Member Account Statement";
                     }
                 }
-
-
 
             }
 
@@ -1307,21 +1305,6 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = Page "Change Request List";
                         ToolTip = 'Change Member Details';
                     }
-
-                    group(ReportsChangereq)
-                    {
-                        caption = 'Change Request Reports ';
-                        action(ChangeReqMobile)
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Change Req(mobile)';
-                            Visible = false;
-                            // Promoted = true;
-                            // PromotedCategory = Process;
-                            //RunObject = report "Change Request Report(Mobile)";
-                        }
-                    }
-
                     action(updatedchangereqslist)
                     {
                         ApplicationArea = All;
@@ -1746,11 +1729,6 @@ Page 56043 "Polytech Sacco Role Center"
                 }
 
             }
-
-
-            //.................... END OF TELLER ACTIVITIES MAIN MENU .........................................
-
-
 
 
             //....................... START OF ALTERNATIVE CHANNELS MAIN MENU ...................................
@@ -2392,72 +2370,44 @@ Page 56043 "Polytech Sacco Role Center"
 
             group("Swizz Payroll Management")
             {
-                group("Payroll Employees")
+                group("Payroll Employees.")
                 {
-                    action("Payroll Employee List")
+                    action("Payroll Employee List.")
                     {
                         RunObject = page "Payroll Employee List.";
                         ApplicationArea = All;
 
                     }
-                    action("Payroll Earnings List.")
+                    action("Payroll Earnings List")
                     {
                         RunObject = page "Payroll Earnings List.";
                         ApplicationArea = All;
 
                     }
-                    action("Payroll Deductions List.")
-                    {
-                        RunObject = page "Payroll Deductions List.";
-                        ApplicationArea = All;
-                        Visible = false;
-
-                    }
-                    action("Payroll Employee Earnings.")
-                    {
-                        RunObject = page "Payroll Employee Earnings.";
-                        ApplicationArea = All;
-                        Visible = false;
-
-                    }
-                    action("Payroll Employee Deductions.")
-                    {
-                        RunObject = page "Payroll Employee Deductions.";
-                        ApplicationArea = All;
-                        Visible = false;
-
-                    }
 
                 }
-                group("Payrolll Periodic Activities")
+                group("Payrolll Periodic Activities.")
                 {
-                    action("Payroll Periods")
+                    action("Payroll Periods.")
                     {
                         RunObject = page "Payroll Periods.";
                         ApplicationArea = All;
 
                     }
-                    action("Transfer Payroll to journal")
+                    action("Transfer Payroll to journal.")
                     {
-                        // RunObject = report "Payroll JournalTransfer.";
+                        RunObject = report "Payroll JournalTransfer.";
                         ApplicationArea = All;
-
-                    }
-                    action("General Journal")
-                    {
-                        RunObject = page "General Journal";
-                        ApplicationArea = All;
-                        Visible = false;
 
                     }
 
                 }
-                group(Reports1)
+                group(Reports)
                 {
                     Caption = 'Reports';
-                    action("Payroll Employees Report")
+                    action("Payroll Employees Report.")
                     {
-                        // RunObject = report "Payroll Employees Report.";
+                        RunObject = report "Payroll Employees Report.";
                         ApplicationArea = All;
                     }
                     // action("Payroll allowances Report")
@@ -2470,42 +2420,42 @@ Page 56043 "Polytech Sacco Role Center"
                     //     RunObject = report "payroll Deductions Report.";
                     //     ApplicationArea = All;
                     // }
-                    action("NHIF Report")
+                    action("NHIF Report.")
                     {
-                        // RunObject = report "NHIF Schedule W..";
+                        RunObject = report "NHIF Schedule W..";
 
                         ApplicationArea = all;
                     }
-                    action("NSSF Report")
+                    action("NSSF Report.")
                     {
-                        // RunObject = report "NSSF Schedule W..";
+                        RunObject = report "NSSF Schedule W..";
                         ApplicationArea = all;
                     }
-                    action("Payroll Summary")
+                    action("Payroll Summary.")
                     {
-                        // RunObject = report "Payroll Summary";
+                        RunObject = report "Payroll Summary";
                         ApplicationArea = All;
                     }
-                    action("Payroll Payee")
+                    action("Payroll Payee.")
                     {
-                        // RunObject = report "PAYE Schedule";
+                        RunObject = report "PAYE Schedule";
                         ApplicationArea = All;
                     }
-                    action("P9 Report")
+                    action("P9 Report.")
                     {
-                        // RunObject = report "P9 Report";
+                        RunObject = report "P9 Report";
                         ApplicationArea = All;
                     }
-                    action("Staff Salaries Report")
+                    action("Staff Salaries Report.")
                     {
-                        // RunObject = report "Staff Salaries Report";
+                        RunObject = report "Staff Salaries Report";
                         Caption = 'Staff Loan Report';
                         ApplicationArea = all;
                     }
 
 
                 }
-                group(Setup1)
+                group(Setup)
                 {
                     Caption = 'Payroll Setup';
                     action("Payroll PAYE Setup")
@@ -2553,11 +2503,6 @@ Page 56043 "Polytech Sacco Role Center"
                 }
 
             }
-
-#if not CLEAN18
-
-
-#if not CLEAN18
             group(SetupAndExtensions)
             {
 
@@ -3279,11 +3224,11 @@ Page 56043 "Polytech Sacco Role Center"
 
         }
 
-#endif
+        // #endif
 
     }
 
 }
 
 
-#endif
+// #endif

@@ -2,7 +2,11 @@
 page 50319 "Payroll NHIF Setup."
 {
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll NHIF Setup.";
+    SourceTableView = sorting("Lower Limit")
+                      order(ascending);
 
     layout
     {
@@ -38,4 +42,3 @@ page 50319 "Payroll NHIF Setup."
     {
     }
 }
-

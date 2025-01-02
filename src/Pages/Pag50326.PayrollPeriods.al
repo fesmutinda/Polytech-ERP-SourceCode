@@ -1,7 +1,10 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50326 "Payroll Periods."
 {
-    DeleteAllowed = false;
+    ApplicationArea = Basic, Suite;
+    Caption = 'Payroll Periods.';
+    UsageCategory = Tasks;
+    DeleteAllowed = true;
     Editable = false;
     PageType = Card;
     SourceTable = "Payroll Calender.";
@@ -12,40 +15,43 @@ page 50326 "Payroll Periods."
         {
             repeater(Control1102755000)
             {
+                ShowCaption = false;
                 field("Period Month"; Rec."Period Month")
                 {
-                    ApplicationArea = Basic;
-                    Editable = true;
+                    ApplicationArea = All;
+
                 }
                 field("Period Year"; Rec."Period Year")
                 {
-                    ApplicationArea = Basic;
-                    Editable = true;
+                    ApplicationArea = All;
+
                 }
                 field("Period Name"; Rec."Period Name")
                 {
-                    ApplicationArea = Basic;
-                    Editable = true;
+                    ApplicationArea = All;
+
                 }
                 field("Date Opened"; Rec."Date Opened")
                 {
-                    ApplicationArea = Basic;
-                    Editable = true;
+                    ApplicationArea = All;
+
                 }
                 field("Date Closed"; Rec."Date Closed")
                 {
-                    ApplicationArea = Basic;
-                    Editable = true;
+                    ApplicationArea = All;
+
                 }
                 field(Closed; Rec.Closed)
                 {
-                    ApplicationArea = Basic;
-                    Editable = false;
+
+                    ApplicationArea = All;
+
                 }
                 field("Payroll Code"; Rec."Payroll Code")
                 {
-                    ApplicationArea = Basic;
                     Editable = false;
+                    ApplicationArea = All;
+                    Visible = false;
                 }
             }
         }
@@ -57,7 +63,7 @@ page 50326 "Payroll Periods."
         {
             action("Close Period")
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
                 Caption = 'Close Period';
                 Image = ClosePeriod;
                 Promoted = true;
@@ -73,36 +79,33 @@ page 50326 "Payroll Periods."
                     fnGetOpenPeriod;
 
                     Question := 'Once a period has been closed it can NOT be opened.\It is assumed that you have PAID out salaries.\'
-                    + 'Do still want to close [' + strPeriodName + ']';
-
-                    //For Multiple Payroll
-                    ContrInfo.Get();
-                    if ContrInfo."Multiple Payroll" then begin
-                        PayrollDefined := '';
-                        PayrollType.SetCurrentkey(EntryNo);
-                        if PayrollType.FindFirst then begin
-                            NoofRecords := PayrollType.Count;
-                            repeat
-                                i += 1;
-                                PayrollDefined := PayrollDefined + '&' + PayrollType."Payroll Code";
-                                if i < NoofRecords then
-                                    PayrollDefined := PayrollDefined + ','
-                            until PayrollType.Next = 0;
-                        end;
+                    + 'Still want to close [' + strPeriodName + ']';
+                    PayrollDefined := '';
+                    // PayrollType.SetCurrentKey("Payroll Code");
+                    // if PayrollType.FindFirst then begin
+                    //     NoofRecords := PayrollType.Count;
+                    //     repeat
+                    //         i += 1;
+                    //         PayrollDefined := PayrollDefined + '&' + PayrollType."Payroll Code";
+                    //         if i < NoofRecords then
+                    //             PayrollDefined := PayrollDefined + ','
+                    //     until PayrollType.Next = 0;
+                    // end;
 
 
-                        Selection := StrMenu(PayrollDefined, 3);
-                        PayrollType.Reset;
-                        PayrollType.SetRange(PayrollType.EntryNo, Selection);
-                        if PayrollType.Find('-') then begin
-                            PayrollCode := PayrollType."Payroll Code";
-                        end;
-                    end;
+                    // Selection := StrMenu(PayrollDefined, 3);
+                    // PayrollType.Reset;
+                    // PayrollType.SetRange(PayrollType.EntryNo, Selection);
+                    // if PayrollType.Find('-') then begin
+                    //     PayrollCode := PayrollType."Payroll Code";
+                    // end;
+                    // end;
                     //End Multiple Payroll
 
 
 
-                    Answer := Dialog.Confirm(Question, false);
+
+                    Answer := DIALOG.Confirm(Question, false);
                     if Answer = true then begin
                         Clear(objOcx);
                         objOcx.fnClosePayrollPeriod(dtOpenPeriod, PayrollCode);
@@ -113,14 +116,27 @@ page 50326 "Payroll Periods."
 
                 end;
             }
+            // action("Create Period")
+            // {
+            //     ApplicationArea = All;
+            //     Visible = false;
+            //     trigger OnAction()
+            //     begin
+            //         ContrInfo.Init();
+
+            //         ContrInfo."Primary Key" := ' ';
+            //         ContrInfo.Name := 'Polytech';
+            //         ContrInfo.Insert();
+            //     end;
+            // }
         }
     }
 
     var
         PayPeriod: Record "Payroll Calender.";
         strPeriodName: Text[30];
-        Text000: label '''Leave without saving changes?''';
-        Text001: label '''You selected %1.''';
+        Text000: Label '''Leave without saving changes?''';
+        Text001: Label '''You selected %1.''';
         Question: Text[250];
         Answer: Boolean;
         objOcx: Codeunit "Payroll Processing";
@@ -133,16 +149,13 @@ page 50326 "Payroll Periods."
         i: Integer;
         ContrInfo: Record "Control-Information.";
 
-
     procedure fnGetOpenPeriod()
     begin
-
-        //Get the open/current period
+        // PayPeriod.Reset();
         PayPeriod.SetRange(PayPeriod.Closed, false);
-        if PayPeriod.Find('-') then begin
+        if PayPeriod.FindLast() then begin
             strPeriodName := PayPeriod."Period Name";
             dtOpenPeriod := PayPeriod."Date Opened";
         end;
     end;
 }
-

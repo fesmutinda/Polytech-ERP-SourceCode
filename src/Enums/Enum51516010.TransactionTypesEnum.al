@@ -180,6 +180,10 @@ enum 51516010 "TransactionTypesEnum"
         Caption = 'CIC shares';
 
     }
+    value(50; "0")
+    {
+        Caption = '';
+    }
     value(52; "Holiday Savings")
     {
         Caption = 'Holiday Savings';

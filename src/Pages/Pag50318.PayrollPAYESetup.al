@@ -2,6 +2,8 @@
 page 50318 "Payroll PAYE Setup."
 {
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll PAYE Setup.";
 
     layout

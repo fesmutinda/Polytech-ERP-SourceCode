@@ -1,12 +1,13 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51319 "Payroll Employee Transactions."
 {
+    // version Payroll ManagementV1.0(Surestep Systems)
+
 
     fields
     {
         field(9; "Sacco Membership No."; Code[20])
         {
-            TableRelation = Customer."No.";
         }
         field(10; "No."; Code[20])
         {
@@ -22,6 +23,12 @@ Table 51319 "Payroll Employee Transactions."
                 if PayrollTrans.FindFirst then begin
                     "Transaction Name" := PayrollTrans."Transaction Name";
                     "Transaction Type" := PayrollTrans."Transaction Type";
+                    "IsCoop/LnRep" := PayrollTrans."IsCo-Op/LnRep";
+                    "Interest Rate" := PayrollTrans."Interest Rate";
+                    if PayrollTrans."% of Basic" > 0 then begin
+                        if SCARD.Get("No.") then
+                            Amount := (PayrollTrans."% of Basic" / 100) * SCARD."Basic Pay";
+                    end;
 
                 end;
 
@@ -39,7 +46,7 @@ Table 51319 "Payroll Employee Transactions."
                     SCARD.SetRange(SCARD."No.", "No.");
                     if SCARD.Find('-') then begin
                         if SCARD."Is Management" then
-                            Amount := ROUND(((SCARD."Basic Pay" * (25 / 100))), 0.1, '<');
+                            Amount := Round(((SCARD."Basic Pay" * (25 / 100))), 0.1, '<');
                     end;
                 end;
 
@@ -64,13 +71,13 @@ Table 51319 "Payroll Employee Transactions."
                     end;
                 end;
 
-                if "Transaction Code" = 'D001' then begin
-                    if MEMB.Get("No.") then begin
-                        MEMB.CalcFields(MEMB."Current Shares");
-                        Balance := MEMB."Current Shares" * -1;
+                /* if "Transaction Code"='D001' then begin
+                 if MEMB.Get("No.") then begin
+                 MEMB.CalcFields(MEMB."Current Shares");
+                 Balance:= MEMB."Current Shares"*-1;
 
-                    end;
-                end;
+                 end;
+                 end;*/
             end;
         }
         field(12; "Transaction Name"; Text[100])
@@ -93,7 +100,7 @@ Table 51319 "Payroll Employee Transactions."
                     if Employee."Currency Code" = '' then
                         "Amount(LCY)" := Amount
                     else
-                        "Amount(LCY)" := ROUND(CurrExchRate.ExchangeAmtFCYToLCY(Today, Employee."Currency Code", Amount, Employee."Currency Factor"));
+                        "Amount(LCY)" := Round(CurrExchRate.ExchangeAmtFCYToLCY(Today, Employee."Currency Code", Amount, Employee."Currency Factor"));
                 end;
             end;
         }
@@ -109,7 +116,7 @@ Table 51319 "Payroll Employee Transactions."
         }
         field(18; "Period Month"; Integer)
         {
-            Editable = false;
+            Editable = true;
         }
         field(19; "Period Year"; Integer)
         {
@@ -140,7 +147,7 @@ Table 51319 "Payroll Employee Transactions."
                     if Employee."Currency Code" = '' then
                         "Employer Amount(LCY)" := "Employer Amount"
                     else
-                        "Employer Amount(LCY)" := ROUND(CurrExchRate.ExchangeAmtFCYToLCY(Today, Employee."Currency Code", "Employer Amount", Employee."Currency Factor"));
+                        "Employer Amount(LCY)" := Round(CurrExchRate.ExchangeAmtFCYToLCY(Today, Employee."Currency Code", "Employer Amount", Employee."Currency Factor"));
                 end;
             end;
         }
@@ -187,24 +194,27 @@ Table 51319 "Payroll Employee Transactions."
         }
         field(33; "Loan Number"; Code[20])
         {
-            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Sacco Membership No."),
-                                                                "Outstanding Balance" = filter(> 0));
+            // TableRelation = "Loans Register"."Loan  No." WHERE("Client Code" = FIELD("No."),
+            //                                                 "Loan Product Type" = FIELD("Transaction Code"));
 
-            trigger OnValidate()
-            begin
+            // trigger OnValidate()
+            // begin
 
-                if Loans.Get("Loan Number") then begin
-                    Loans.CalcFields(Loans."Outstanding Balance", Loans."Oustanding Interest");
-                    Balance := Loans."Outstanding Balance";
-                    "Amtzd Loan Repay Amt" := Loans.Repayment;
-                    //Amount:=Loans."Loan Principle Repayment";
-                    "Original Amount" := Loans."Approved Amount";
-                    //"Outstanding Interest":=Loans."Oustanding Interest"+Loans."Interest Buffer";
-                    "Outstanding Interest" := Loans."Loan Interest Repayment";//Loans."Oustanding Interest";
-                                                                              //MESSAGE('%1-%2-%3',Balance,"Amtzd Loan Repay Amt",Amount);
-                    Modify
-                end;
-            end;
+            //     // if Loans.Get("Loan Number") then begin
+            //     Loans.CalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest");
+            //     if Loans."Outstanding Balance" > 0 then begin
+            //         Balance := Loans."Outstanding Balance";
+            //         "Amtzd Loan Repay Amt" := Loans.Repayment;
+            //         Amount := Loans."Loan Principle Repayment";
+            //         "Original Amount" := Loans."Approved Amount";
+            //         //"Outstanding Interest":=Loans."Oustanding Interest"+Loans."Interest Buffer";
+            //         //"Outstanding Interest":=Loans."Loan Interest Repayment";//Loans."Oustanding Interest";
+            //         MESSAGE('%1-%2-%3', Balance, "Amtzd Loan Repay Amt", Amount);
+            //         rec.Modify;
+            //     end;
+
+            //     // end;
+            // end;
         }
         field(34; "Payroll Code"; Code[20])
         {
@@ -235,7 +245,6 @@ Table 51319 "Payroll Employee Transactions."
         }
         field(43; "Member No"; Code[20])
         {
-            TableRelation = Customer."No.";
         }
         field(44; "Loan Repayment Amount"; Decimal)
         {
@@ -254,13 +263,39 @@ Table 51319 "Payroll Employee Transactions."
         field(46; "Interest Charged"; Decimal)
         {
         }
+        field(47; "cummulative month"; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(48; "Policy No"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(59; "Interest Rate"; Decimal)
+        { }
+        // field(60; InterestPaid; Boolean)
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
+        // field(70; LoanPaid; Boolean)
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
+        field(71; Appfee; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(72; InsuranceCharged; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
     {
-        key(Key1; "No.", "Payroll Period", "Transaction Code", "Entry No")
+        key(Key1; "No.", "Payroll Period", "Transaction Code", "Loan Number")
         {
-            Clustered = true;
         }
     }
 
@@ -277,6 +312,7 @@ Table 51319 "Payroll Employee Transactions."
             "Period Year" := PayrollCalender."Period Year";
             "Payroll Period" := PayrollCalender."Date Opened";
         end;
+        "Entry No" := "Entry No" + 1;
     end;
 
     var
@@ -287,7 +323,7 @@ Table 51319 "Payroll Employee Transactions."
         Loans: Record "Loans Register";
         HR: Record "Payroll Employee.";
         SCARD: Record "Payroll Employee.";
-        MEMB: Record Customer;
+    //MEMB: Record "Member Register";
 
     local procedure FnGetInterestRate(LoanProductCode: Code[40]) InterestRate: Decimal
     var
@@ -303,7 +339,7 @@ Table 51319 "Payroll Employee Transactions."
 
     local procedure FnLoanInterestExempted(LoanNo: Code[50]) Found: Boolean
     var
-        ObjExemptedLoans: Record "Loan Repay Schedule-Calc";
+        ObjExemptedLoans: Record "Loan Repayment Calculator";
     begin
         ObjExemptedLoans.Reset;
         ObjExemptedLoans.SetRange(ObjExemptedLoans."Loan Category", LoanNo);
@@ -314,7 +350,6 @@ Table 51319 "Payroll Employee Transactions."
         exit(Found);
     end;
 
-
     procedure fnCalcLoanInterest(InterestRate: Decimal; RecoveryMethod: Option Reducing,"Straight line",Amortized; LoanAmount: Decimal; Balance: Decimal) LnInterest: Decimal
     var
         curLoanInt: Decimal;
@@ -323,17 +358,17 @@ Table 51319 "Payroll Employee Transactions."
     begin
         curLoanInt := 0;
         if InterestRate > 0 then begin
-            if RecoveryMethod = Recoverymethod::"Straight line" then
+            if RecoveryMethod = RecoveryMethod::"Straight line" then
                 curLoanInt := (InterestRate / 1200) * LoanAmount;
 
-            if RecoveryMethod = Recoverymethod::Reducing then
+            if RecoveryMethod = RecoveryMethod::Reducing then
                 curLoanInt := (InterestRate / 1200) * Balance;
 
-            if RecoveryMethod = Recoverymethod::Amortized then
+            if RecoveryMethod = RecoveryMethod::Amortized then
                 curLoanInt := (InterestRate / 1200) * Balance;
         end else
             curLoanInt := 0;
-        LnInterest := ROUND(curLoanInt, 1);
+        LnInterest := Round(curLoanInt, 1);
     end;
 
     local procedure FnLoan(LoanNo: Code[50]; PayrollPeriod: Date) Interest: Decimal
@@ -350,9 +385,9 @@ Table 51319 "Payroll Employee Transactions."
             ObjLoans.CalcFields(ObjLoans."Oustanding Interest");
             if not FnLoanInterestExempted(LoanNo) then begin
 
-                //MESSAGE('%1 %2 %3 %4',FnGetInterestRate(ObjLoans."Loan Product Type"),FORMAT(ObjLoans."Repayment Method"),ObjLoans."Approved Amount",ObjLoans."Outstanding Balance");
-                //Interest:=fnCalcLoanInterest(FnGetInterestRate(ObjLoans."Loan Product Type"),ObjLoans."Repayment Method",ObjLoans."Approved Amount",ObjLoans."Outstanding Balance");
-                //"Interest Charged":=ObjLoans."Oustanding Interest";//Interest;
+                MESSAGE('%1 %2 %3 %4', FnGetInterestRate(ObjLoans."Loan Product Type"), FORMAT(ObjLoans."Repayment Method"), ObjLoans."Approved Amount", ObjLoans."Outstanding Balance");
+                Interest := fnCalcLoanInterest(FnGetInterestRate(ObjLoans."Loan Product Type"), ObjLoans."Repayment Method", ObjLoans."Approved Amount", ObjLoans."Outstanding Balance");
+                "Interest Charged" := ObjLoans."Oustanding Interest";//Interest;
             end;
         end;
         exit(Interest);

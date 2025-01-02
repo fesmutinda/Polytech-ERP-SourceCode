@@ -31,10 +31,6 @@ page 50327 "payroll Transaction Code."
                     {
                         ApplicationArea = Basic;
                     }
-                    field("Notice Days Payment"; Rec."Notice Days Payment")
-                    {
-                        ApplicationArea = Basic;
-                    }
                 }
                 group(Control1102756039)
                 {
@@ -87,10 +83,6 @@ page 50327 "payroll Transaction Code."
                     ApplicationArea = Basic;
                     Caption = 'Formula';
                 }
-                field("Leave Reimbursement"; Rec."Leave Reimbursement")
-                {
-                    ApplicationArea = Basic;
-                }
                 label(Control1102756053)
                 {
                     ApplicationArea = Basic;
@@ -117,7 +109,24 @@ page 50327 "payroll Transaction Code."
                 field("G/L Account"; Rec."G/L Account")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Debit Account';
                 }
+                field("G/L Account Name"; Rec."G/L Account Name")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Debit Account Name';
+                }
+                // field("Credit Account"; "Credit Account")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Credit Account';
+                // }
+                // field("Credit Account Name"; "Credit Account Name")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Credit Account Name';
+                //     Editable = false;
+                // }
                 field(SubLedger; Rec.SubLedger)
                 {
                     ApplicationArea = Basic;
@@ -187,22 +196,24 @@ page 50327 "payroll Transaction Code."
                     ApplicationArea = Basic;
                     ValuesAllowed = Amortized;
                 }
-                group("Coop Reporting")
+                group("Sacco Deduction Settings")
                 {
-                    Caption = 'Coop Reporting';
+                    Caption = 'Sacco Deduction Settings';
                     field("Co-Op Parameters"; Rec."Co-Op Parameters")
                     {
                         ApplicationArea = Basic;
+                        Caption = 'Sacco Deduction Type';
                     }
-                }
-                label(Control1102756083)
-                {
-                    ApplicationArea = Basic;
-                    CaptionClass = Text19015031;
-                }
-                field("IsCo-Op/LnRep"; Rec."IsCo-Op/LnRep")
-                {
-                    ApplicationArea = Basic;
+                    field("IsCo-Op/LnRep"; Rec."IsCo-Op/LnRep")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Is Sacco Deduction';
+                    }
+                    field("Loan Product"; Rec."Loan Product")
+                    {
+                        ApplicationArea = Basic;
+
+                    }
                 }
             }
         }

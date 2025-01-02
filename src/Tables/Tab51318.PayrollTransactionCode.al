@@ -95,8 +95,9 @@ Table 51318 "Payroll Transaction Code."
         }
         field(31; "Co-Op Parameters"; Option)
         {
-            OptionCaption = 'none,shares,loan,loan Interest,Emergency loan,Emergency loan Interest,School Fees loan,School Fees loan Interest,Welfare,Pension,NSSF,Overtime,DevShare,NHIF,FOSA,Insurance Contribution,Jiokoe Savings,Share Capital';
-            OptionMembers = "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF,Overtime,DevShare,NHIF,FOSA,"Insurance Contribution","Jiokoe Savings","Share Capital";
+
+            OptionMembers = "None",Shares,Loan,"Share Capital",Likizo,"Loan Interest","Emergency Loan","Emergency Loan Interest",Welfare,Pension,NSSF,Overtime,"Insurance Contribution"
+            ,"Loan Application Fee Paid","Loan Insurance Paid";
         }
         field(32; "IsCo-Op/LnRep"; Boolean)
         {
@@ -153,11 +154,66 @@ Table 51318 "Payroll Transaction Code."
         field(48; "Exclude in NHIF"; Boolean)
         {
         }
-        field(49; "Leave Reimbursement"; Boolean)
+        field(49; "Formula for Management Prov"; Code[50])
         {
         }
-        field(50; "Notice Days Payment"; Boolean)
+        field(50; "Transaction Specification"; Option)
         {
+            OptionCaption = ' ,Leave Allowance,Acting Allowance';
+            OptionMembers = " ","Leave Allowance","Acting Allowance";
+        }
+        field(51; "Sacco Code"; Code[100])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = customer."No.";
+        }
+        field(52; "Grouping Type"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ",Helb,"Bank Loan",Sacco,Welfare,Insurance;
+        }
+        field(53; "% of Basic"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(54; Months; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(55; "pay period"; Duration)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(56; "Employee Name"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(57; "Insurance Code"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            ;
+        }
+        field(58; "Bank code"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(59; "Welfare code"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = customer."No.";
+        }
+        field(60; "Is Loan Account"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(61; "Loan Product"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(62; "Loan Product Name"; text[50])
+        {
+            DataClassification = ToBeClassified;
         }
     }
 
@@ -165,7 +221,6 @@ Table 51318 "Payroll Transaction Code."
     {
         key(Key1; "Transaction Code")
         {
-            Clustered = true;
         }
         key(Key2; "Transaction Name")
         {
@@ -185,12 +240,12 @@ Table 51318 "Payroll Transaction Code."
     trigger OnInsert()
     begin
         if "Transaction Code" = '' then begin
-            if "Transaction Type" = "transaction type"::Income then begin
+            if "Transaction Type" = "Transaction Type"::Income then begin
                 Setup.Get;
                 Setup.TestField(Setup."Earnings No");
                 NoSeriesMgt.InitSeries(Setup."Earnings No", xRec."No. Series", 0D, "Transaction Code", "No. Series");
             end;
-            if "Transaction Type" = "transaction type"::Deduction then begin
+            if "Transaction Type" = "Transaction Type"::Deduction then begin
                 Setup.Get;
                 Setup.TestField(Setup."Deductions No");
                 NoSeriesMgt.InitSeries(Setup."Deductions No", xRec."No. Series", 0D, "Transaction Code", "No. Series");

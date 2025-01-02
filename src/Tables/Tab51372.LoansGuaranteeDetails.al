@@ -413,6 +413,10 @@ Table 51372 "Loans Guarantee Details"
                                                                   "Loan No" = field("Loan No")));
             FieldClass = FlowField;
         }
+        field(41; "Transferable shares"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
         field(17; "Total Loans Guaranteed"; Decimal)
         {
             CalcFormula = sum("Loans Guarantee Details"."Original Amount" where("Loan No" = field("Loan No"),

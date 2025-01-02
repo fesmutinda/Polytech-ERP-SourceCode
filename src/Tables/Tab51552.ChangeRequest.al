@@ -1,10 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51552 "Change Request"
 {
-
-    DrillDownPageId = "Change Request List";
-    LookupPageId = "Change Request List";
-
+    DrillDownPageID = 50842;
+    LookupPageID = 50842;
 
     fields
     {
@@ -23,9 +21,9 @@ Table 51552 "Change Request"
         }
         field(2; Type; Option)
         {
-            // OptionCaption = ',BOSA Change';
-            OptionMembers = "BOSA Change";
-            InitValue = "BOSA Change";
+            OptionCaption = ' ,Mobile Change,ATM Change,Backoffice Change,Agile Change,Microfinance Change';
+            OptionMembers = " ","Mobile Change","ATM Change","Backoffice Change","Agile Change","Microfinance Change";
+
             trigger OnValidate()
             begin
                 "Account No" := '';
@@ -33,47 +31,52 @@ Table 51552 "Change Request"
         }
         field(3; "Account No"; Code[50])
         {
-            TableRelation = Customer."No." where("Customer Posting Group" = filter('MEMBER'));
+            TableRelation = if (Type = const("Backoffice Change")) Customer."No."
+            else if (Type = const("Mobile Change")) Vendor."No."
+            else if (Type = const("ATM Change")) Vendor."No."
+            else if (Type = const("Agile Change")) Vendor."No." where("Vendor Posting Group" = filter(<> 'TCREDITORS'))
+            else if (Type = filter("Microfinance Change")) Customer."No.";
+
             trigger OnValidate()
             begin
                 Clear(Picture);
-                // if ((Type = Type::"M-Banking Change") or (Type = Type::"ATM Change") or (Type = Type::"FOSA Change")) then begin
-                //     vend.Reset;
-                //     vend.SetRange(vend."No.", "Account No");
-                //     if vend.Find('-') then begin
-                //         Name := vend.Name;
-                //         Branch := vend."Global Dimension 2 Code";
-                //         Address := vend.Address;
-                //         Picture := vend.Image;
-                //         signinature := vend.Signature;
-                //         Email := vend."E-Mail";
-                //         "Mobile No" := vend."Mobile Phone No";
-                //         "Phone No." := vend."Phone No.";
-                //         "Mpesa mobile No." := vend."MPESA Mobile No";
-                //         "SMS Notification" := vend."Sms Notification";
-                //         "Mobile No" := vend."Mobile Phone No";
-                //         "ID No" := vend."ID No.";
-                //         "Personal No" := vend."Employer P/F";
-                //         "Account Type" := vend."Account Type";
-                //         City := vend.City;
-                //         Section := vend.Section;
-                //         "Card Expiry Date" := vend."Card Expiry Date";
-                //         "Card No" := vend."Card No.";
-                //         "Card Valid From" := vend."Card Valid From";
-                //         "Card Valid To" := vend."Card Valid To";
-                //         "Marital Status" := vend."Marital Status";
-                //         "Reason for change" := vend."Reason For Blocking Account";
-                //         Blocked := vend.Blocked;
-                //         "Blocked (New)" := vend.Blocked;
-                //         "Status." := vend.Status;
-                //         "Status.(New)" := vend.Status;
+                if ((Type = Type::"Mobile Change") or (Type = Type::"ATM Change") or (Type = Type::"Agile Change")) then begin
+                    vend.Reset;
+                    vend.SetRange(vend."No.", "Account No");
+                    if vend.Find('-') then begin
+                        Name := vend.Name;
+                        Branch := vend."Global Dimension 2 Code";
+                        Address := vend.Address;
+                        // Picture := vend."Picture 2";
+                        // signinature := vend."Specimen Signature";
+                        Email := vend."E-Mail";
+                        "Mobile No" := vend."Mobile Phone No";
+                        "S-Mobile No" := vend."S-Mobile No";
+                        "ATM Collector Name" := vend."ATM Collector Name";
+                        "ID No" := vend."ID No.";
+                        "Personal No" := vend."Personal No.";
+                        "Account Type" := vend."Account Type";
+                        City := vend.City;
+                        Section := vend.Section;
+                        "Card Expiry Date" := vend."Card Expiry Date";
+                        "Card No" := vend."Card No.";
+                        "Card Valid From" := vend."Card Valid From";
+                        "Card Valid To" := vend."Card Valid To";
+                        "Marital Status" := vend."Marital Status";
+                        "Reason for change" := vend."Reason For Blocking Account";
+                        "Phone No.(Old)" := vend."Phone No.";
+                        "Mobile No" := vend."Mobile Phone No";
+                        Blocked := vend.Blocked;
+                        "Blocked (New)" := vend.Blocked;
+                        "Status." := vend.Status;
+                        "Status.(New)" := vend.Status;
+                    end;
 
 
-                //     end;
+                end;
 
 
-                // end;
-                if Type = Type::"BOSA Change" then begin
+                if Type = Type::"Backoffice Change" then begin
                     Memb.Reset;
                     Memb.SetRange(Memb."No.", "Account No");
                     if Memb.Find('-') then begin
@@ -84,32 +87,51 @@ Table 51552 "Change Request"
                         Email := Memb."E-Mail";
                         "Mobile No" := Memb."Mobile Phone No";
                         "ID No" := Memb."ID No.";
-                        "Personal No" := Memb."Payroll/Staff No";
-                        "Post Code" := Memb."Post Code";
+                        "Personal No" := Memb."Personal No";
                         City := Memb.City;
-                        "SMS Notification" := Memb."Sms Notification";
                         Section := Memb.Section;
                         "Marital Status" := Memb."Marital Status";
                         "Monthly Contributions" := Memb."Monthly Contribution";
+                        // "Signing Instructions":=Memb."Signing Instructions";
                         "Member Account Status" := Memb.Status;
+                        "Group Account No" := Memb."Group Account No";
+                        "Group Account Name" := Memb."Group Account Name";
                         "Member Account Status" := Memb.Status;
                         "Employer Code" := Memb."Employer Code";
                         "Status." := Memb.Status;
-                        "Date Of Birth" := Memb."Date of Birth";
-                        Occupation := Memb.Occupation;
-                        Blocked := Memb.Blocked;
-                        Picture := Memb.Image;
-                        signinature := Memb.Signature;
-                        "Bank Code(Old)" := Memb."Bank Code";
-                        "Bank Account No(Old)" := Memb."Bank Account No.";
-                        "KRA Pin(Old)" := Memb.Pin;
-                        "Account Category" := Memb."Account Category";
-                        "Bank Branch Name" := Memb."Bank Branch Name";
-                        "Bank Name" := Memb."Bank Name";
-                        "Bank Branch Code" := Memb."Bank Branch Code";
+                        pin := Memb.Pin;
+                        "bank accno" := Memb."Bank Account No.";
+                        "Bank code" := Memb."Bank Code";
+                        "Status.(New)" := Memb.Status;
+
+                    end;
+
+                    //Microfinance Change
+                    if Type = Type::"Microfinance Change" then begin
+                        Memb.Reset;
+                        Memb.SetRange(Memb."No.", "Account No");
+                        if Memb.Find('-') then begin
+
+                            Name := Memb.Name;
+                            Branch := Memb."Global Dimension 2 Code";
+                            Address := Memb.Address;
+                            Email := Memb."E-Mail";
+                            "Mobile No" := Memb."Mobile Phone No";
+                            "ID No" := Memb."ID No.";
+                            "Personal No" := Memb."Personal No";
+                            City := Memb.City;
+                            Section := Memb.Section;
+                            "Marital Status" := Memb."Marital Status";
+                            "Monthly Contributions" := Memb."Monthly Contribution";
+                            //"Signing Instructions":=Memb."Signing Instructions";
+                            "Member Account Status" := Memb.Status;
+                            "Group Account No" := Memb."Group Account No";
+                            "Group Account Name" := Memb."Group Account Name";
+
+                        end;
+
                     end;
                 end;
-
             end;
         }
         field(4; "Mobile No"; Code[50])
@@ -127,16 +149,19 @@ Table 51552 "Change Request"
         field(8; Branch; Code[30])
         {
         }
-        field(9; Picture; Media)
+        field(9; Picture; MediaSet)
         {
         }
-        field(10; signinature; Media)
+        field(940; "Picture."; Media)
+        {
+        }
+        field(10; signinature; MediaSet)
         {
         }
         field(11; City; Code[30])
         {
         }
-        field(12; "E-mail"; Code[100])
+        field(12; "E-mail"; Code[30])
         {
         }
         field(13; "Personal No"; Code[30])
@@ -161,21 +186,11 @@ Table 51552 "Change Request"
         field(18; "Account Type"; Code[30])
         {
         }
-        field(19; "Account Category"; Option)
+        field(19; "Account Category"; Code[30])
         {
-            OptionCaption = 'Single,Joint,Corporate,Group,Parish,Church,Church Department,Staff';
-            OptionMembers = Single,Joint,Corporate,Group,Parish,Church,"Church Department",Staff;
         }
-        field(20; Email; Text[100])
+        field(20; Email; Code[40])
         {
-            trigger OnValidate()
-            var
-                myInt: Integer;
-                MailManagement: Codeunit "Mail Management";
-            begin
-                MailManagement.ValidateEmailAddressField(Email);
-
-            end;
         }
         field(21; Section; Code[40])
         {
@@ -201,7 +216,7 @@ Table 51552 "Change Request"
         field(28; "Signing Instructions"; Text[40])
         {
         }
-        field(29; "S-Mobile No"; Code[10])
+        field(29; "S-Mobile No"; Code[20])
         {
         }
         field(30; "ATM Approve"; Code[30])
@@ -290,18 +305,13 @@ Table 51552 "Change Request"
         field(53; "Group Account Name"; Code[30])
         {
         }
-        field(54; "Member Account Status"; Enum "Account Status")
+        field(54; "Member Account Status"; Option)
         {
+            OptionCaption = 'Active,Non-Active,Blocked,Dormant,Re-instated,Deceased,Withdrawal,Retired,Termination,Resigned,Ex-Company,Casuals,Family Member,Defaulter,Applicant,Rejected,New,Awaiting Withdrawal';
+            OptionMembers = Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member",Defaulter,Applicant,Rejected,New,"Awaiting Withdrawal";
         }
         field(55; "Mobile No(New Value)"; Code[50])
         {
-            trigger OnValidate()
-            var
-                myInt: Integer;
-            begin
-                // if not SFactory.FnValidatePhoneNo("Mobile No(New Value)") then
-                //     Error('Invalid Mobile phone number');
-            end;
         }
         field(56; "Name(New Value)"; Text[40])
         {
@@ -315,25 +325,19 @@ Table 51552 "Change Request"
         field(59; "Branch(New Value)"; Code[30])
         {
         }
-        field(60; "Picture(New Value)"; Media)
+        field(60; "Picture(New Value)"; Blob)
         {
+            SubType = Bitmap;
         }
         field(61; "signinature(New Value)"; Media)
         {
+            // SubType = Bitmap;
         }
         field(62; "City(New Value)"; Code[30])
         {
         }
-        field(63; "E-mail(New Value)"; Text[250])
+        field(63; "E-mail(New Value)"; Code[30])
         {
-            trigger OnValidate()
-            var
-                myInt: Integer;
-                MailManagement: Codeunit "Mail Management";
-            begin
-                MailManagement.ValidateEmailAddressField("E-mail(New Value)");
-
-            end;
         }
         field(64; "Personal No(New Value)"; Code[30])
         {
@@ -357,12 +361,10 @@ Table 51552 "Change Request"
         field(69; "Account Type(New Value)"; Code[30])
         {
         }
-        field(70; "Account Category(New Value)"; Option)
+        field(70; "Account Category(New Value)"; Code[30])
         {
-            OptionCaption = 'Single,Joint,Corporate,Group,Parish,Church,Church Department,Staff';
-            OptionMembers = Single,Joint,Corporate,Group,Parish,Church,"Church Department",Staff;
         }
-        field(71; "Email(New Value)"; Text[250])
+        field(71; "Email(New Value)"; Code[40])
         {
         }
         field(72; "Section(New Value)"; Code[40])
@@ -386,7 +388,7 @@ Table 51552 "Change Request"
         field(78; "Signing Instructions(NewValue)"; Text[40])
         {
         }
-        field(79; "S-Mobile No(New Value)"; Code[10])
+        field(79; "S-Mobile No(New Value)"; Code[20])
         {
         }
         field(80; "ATM No.(New Value)"; Date)
@@ -395,35 +397,29 @@ Table 51552 "Change Request"
         field(81; "Monthly Contributions(NewValu)"; Decimal)
         {
         }
-        field(82; "Member Account Status(NewValu)"; enum "Account Status")
+        field(82; "Member Account Status(NewValu)"; Option)
         {
+            OptionCaption = ' ,Active,Non-Active,Blocked,Dormant,Re-instated,Deceased,Withdrawn,Retired,Termination,Resigned,Ex-Company,Casuals,Family Member,Defaulter,Applicant,Rejected,New';
+            OptionMembers = " ",Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawn,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member",Defaulter,Applicant,Rejected,New;
         }
         field(83; "Charge Reactivation Fee"; Boolean)
         {
         }
-        field(84; "Phone No."; Code[20])
+        field(84; "Phone No.(Old)"; Code[20])
         {
         }
         field(85; "Phone No.(New)"; Code[20])
-
         {
-            trigger Onvalidate()
-            var
-                myInt: Integer;
-            begin
-                // if not SFactory.FnValidatePhoneNo("Phone No.(New)") then
-                //     error('Inavalid Phone Number entered');
-            end;
         }
-        field(86; Blocked; enum "Vendor Blocked")
+        field(86; Blocked; Option)
         {
-            // OptionCaption = ' ,Ship,Invoice,All';
-            // OptionMembers = " ",Ship,Invoice,All;
+            OptionCaption = ' ,Payment,All';
+            OptionMembers = " ",Payment,All;
         }
-        field(87; "Blocked (New)"; enum "Vendor Blocked")
+        field(87; "Blocked (New)"; Option)
         {
-            // OptionCaption = ' ,Ship,Invoice,All';
-            // OptionMembers = " ",Ship,Invoice,All;
+            OptionCaption = ' ,Payment,All';
+            OptionMembers = " ",Payment,All;
         }
         field(88; "Status (New Value)"; Option)
         {
@@ -439,13 +435,17 @@ Table 51552 "Change Request"
             DataClassification = ToBeClassified;
             TableRelation = "Sacco Employers".Code;
         }
-        field(91; "Status."; Enum "Account Status")
+        field(91; "Status."; Option)
         {
             DataClassification = ToBeClassified;
+            OptionCaption = 'Active,Non-Active,Blocked,Dormant,Re-instated,Deceased,Withdrawal,Retired,Termination,Resigned,Ex-Company,Casuals,Family Member,Defaulter,Applicant,Rejected,New,Awaiting Withdrawal';
+            OptionMembers = Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member",Defaulter,Applicant,Rejected,New,"Awaiting Withdrawal";
         }
-        field(92; "Status.(New)"; Enum "Account Status")
+        field(92; "Status.(New)"; Option)
         {
             DataClassification = ToBeClassified;
+            OptionCaption = 'Active,Non-Active,Blocked,Dormant,Re-instated,Deceased,Withdrawal,Retired,Termination,Resigned,Ex-Company,Casuals,Family Member,Defaulter,Applicant,Rejected,New,Awaiting Withdrawal';
+            OptionMembers = Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member",Defaulter,Applicant,Rejected,New,"Awaiting Withdrawal";
         }
         field(93; "Retirement Date"; Date)
         {
@@ -455,163 +455,30 @@ Table 51552 "Change Request"
         {
             DataClassification = ToBeClassified;
         }
-        field(95; "Date Of Birth"; Date)
-        {
-            DataClassification = ToBeClassified;
-
-            trigger OnValidate()
-            begin
-                if "Date Of Birth" <> 0D then begin
-                    Age := Dates.DetermineAge("Date Of Birth", Today);
-                end;
-            end;
-        }
-        field(96; Disabled; Boolean)
+        field(95; pin; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(97; "Occupation(New)"; Code[40])
+        field(96; pin2; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(98; Occupation; Code[40])
+        field(97; "bank accno"; Code[16])
         {
             DataClassification = ToBeClassified;
         }
-        field(99; "Bank Code(Old)"; Code[200])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = Banks."Bank Code";
-
-            trigger OnValidate()
-            var
-                Banks: Record Banks;
-            begin
-
-                /*Banks.RESET;
-                Banks.SETRANGE(Banks.Code,"Bank Code");
-                IF Banks.FIND('-') THEN
-                  "Bank Name":=Banks."Bank Name";*/
-
-            end;
-        }
-        field(100; "Bank Code(New)"; Code[200])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = Banks."Bank Code";
-
-            trigger OnValidate()
-            var
-                Banks: Record Banks;
-            begin
-
-                Banks.Reset;
-                Banks.SetRange(Banks."Bank Code", "Bank Code(New)");
-                if Banks.Find('-') then
-                    "Bank Name (New)" := Banks."Bank Name";
-            end;
-        }
-        field(101; "Bank Account No(Old)"; Code[200])
+        field(98; "Bank code"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(102; "Bank Account No(New)"; Code[200])
+        field(99; bankacc1; Code[16])
         {
             DataClassification = ToBeClassified;
         }
-        field(103; "KRA Pin(Old)"; Code[20])
+        field(100; bankcode1; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(104; "KRA Pin(New)"; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(105; Age; Text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(106; Gender; Option)
-        {
-            DataClassification = ToBeClassified;
-            OptionCaption = ' ,Male, Female';
-            OptionMembers = " ",Male," Female";
-        }
-        field(107; "Bank Name"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(108; "Bank Name (New)"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(109; "Bank Branch Name"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(110; "Bank Branch Name(New)"; Text[100])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(111; "Bank Branch Code"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(112; "Bank Branch Code(New)"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = "Bank Branch"."Branch No";
-
-            trigger OnValidate()
-            begin
-                Bankbranch.Reset;
-                Bankbranch.SetRange(Bankbranch."Branch No", "Bank Branch Code(New)");
-                if Bankbranch.Find('-') then
-                    "Bank Branch Name(New)" := Bankbranch."Branch Name";
-            end;
-        }
-        field(113; "Post Code"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(114; "Post Code (New)"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = "Post Code".Code;
-
-            trigger OnValidate()
-            begin
-                PostCodes.Reset;
-                PostCodes.SetRange(PostCodes.Code, "Post Code (New)");
-                if PostCodes.Find('-') then
-                    "City(New Value)" := PostCodes.City;
-            end;
-        }
-        field(115; "Position In the Sacco"; enum "Position In the Sacco")
-        {
-
-        }
-        field(116; "Position In the Sacco(New)"; enum "Position In the Sacco")
-        {
-
-        }
-        field(117; "SMS Notification"; Boolean)
-        {
-
-        }
-        field(118; "SMS Notification (New)"; Boolean)
-        {
-
-        }
-        field(119; "Mpesa mobile No."; Code[20])
-        {
-
-        }
-        field(120; "Mpesa mobile No.(New)"; Code[20])
-        {
-
-        }
-
     }
 
     keys
@@ -646,10 +513,5 @@ Table 51552 "Change Request"
         vend: Record Vendor;
         Memb: Record Customer;
         MemberCell: Record "Hexa Binary";
-        SFactory: Codeunit "Swizzsoft Factory";
         MediaId: Guid;
-        Dates: Codeunit "Dates Calculation";
-        MemmberExit: Record "Membership Withdrawals";
-        Bankbranch: Record "Bank Branch";
-        PostCodes: Record "Post Code";
 }

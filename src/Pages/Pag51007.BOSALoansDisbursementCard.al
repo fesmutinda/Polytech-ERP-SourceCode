@@ -714,7 +714,7 @@ Page 51007 "BOSA Loans Disbursement Card"
             SMSMessage.Source := 'LOANS';
             SMSMessage."Entered By" := UserId;
             SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-            SMSMessage."SMS Message" := 'Your Loan Application of amount ' + Format(Rec."Requested Amount") + ' for ' + Rec."Client Code" + ' ' + Rec."Client Name" + ' has been received and is being Processed ' + compinfo.Name + ' ' + GenSetUp."Customer Care No";
+            SMSMessage."SMS Message" := 'Your' + Format(Rec."Loan Product Type Name") + 'Loan Application of amount ' + Format(Rec."Requested Amount") + ' for ' + Rec."Client Code" + ' ' + Rec."Client Name" + ' has been received and is being Processed ' + compinfo.Name + ' ' + GenSetUp."Customer Care No";
             Cust.Reset;
             Cust.SetRange(Cust."No.", Rec."Client Code");
             if Cust.Find('-') then begin
@@ -787,7 +787,7 @@ Page 51007 "BOSA Loans Disbursement Card"
         SMSMessages.Source := 'LOAN APPL';
         SMSMessages."Entered By" := USERID;
         SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
-        SMSMessages."SMS Message" := 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") + ' has been received. Polytech Sacco Ltd.';
+        SMSMessages."SMS Message" := 'Your' + Format(Rec."Loan Product Type Name") + 'loan application of KSHs.' + FORMAT(Rec."Requested Amount") + ' has been received. Polytech Sacco Ltd.';
         Cust.RESET;
         IF Cust.GET(Rec."Client Code") THEN
             if Cust."Mobile Phone No" <> '' then begin
@@ -1013,7 +1013,7 @@ Page 51007 "BOSA Loans Disbursement Card"
         LoansR.SetRange(LoansR."Loan  No.", Rec."Loan  No.");
         if LoansR.Find('-') then begin
             msg := '';
-            msg := 'Dear Member, Your ' + Format(LoansR."Loan Product Type") + ' loan application of KSHs.' + Format(Rec."Requested Amount") + ' has been processed and it will be deposited to your Bank Account.';
+            msg := 'Dear Member, Your ' + Format(LoansR."Loan Product Type Name") + ' loan application of KSHs.' + Format(Rec."Requested Amount") + ' has been processed and it will be deposited to your Bank Account.';
             PhoneNo := FnGetPhoneNo(Rec."Client Code");
             SendSMSMessage(Rec."Client Code", msg, PhoneNo);
         end;

@@ -1,7 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51324 "Payroll Posting Groups."
 {
-
+    DrillDownPageId = "Payroll Posting Group.";
+    LookupPageId = "Payroll Posting Group.";
     fields
     {
         field(10; "Posting Code"; Code[10])
@@ -14,7 +15,7 @@ Table 51324 "Payroll Posting Groups."
         {
             TableRelation = "G/L Account";
         }
-        field(13; "Income Tax Account"; Code[50])
+        field(13; "PAYE Account"; Code[50])
         {
             TableRelation = "G/L Account";
         }
@@ -56,6 +57,7 @@ Table 51324 "Payroll Posting Groups."
         }
         field(23; "Earnings and deductions"; Code[50])
         {
+            TableRelation = "G/L Account";
         }
         field(24; "Staff Benevolent"; Code[50])
         {
@@ -87,6 +89,54 @@ Table 51324 "Payroll Posting Groups."
         {
             TableRelation = "G/L Account";
         }
+        field(32; "Salary Processing Control"; Code[20])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(33; "Gratuity Employer Acc"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(34; "NITA Expense"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(35; "Shortcut Dimension 1 Code"; code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(36; "NITA Liability"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(37; "Gratuity Employee Acc"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(38; "Income Tax Account"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(39; "Gross Pay"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(40; "EmployeeHousingLevy"; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
+        field(41; "Employer Housing Levy"; Code[50])
+        {
+
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account";
+        }
     }
 
     keys
@@ -101,4 +151,5 @@ Table 51324 "Payroll Posting Groups."
     {
     }
 }
+
 

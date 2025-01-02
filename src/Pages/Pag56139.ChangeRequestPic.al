@@ -169,7 +169,7 @@ Page 56139 "Change Request Pic"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.Picture.HasValue;
+        DeleteExportEnabled := Rec.Picture.Count > 0;
     end;
 }
 

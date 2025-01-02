@@ -203,6 +203,11 @@ table 50138 "Membership Exist"
         }
         field(34; "Share Capital"; Decimal)
         {
+            // CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Member No."),
+            //                                                        "Transaction Type" = const("Shares Capital"),
+            //                                                        Reversed = const(false)));
+            // Editable = false;
+            // FieldClass = FlowField;
         }
         field(35; "Share Capital to Sell"; Decimal)
         {

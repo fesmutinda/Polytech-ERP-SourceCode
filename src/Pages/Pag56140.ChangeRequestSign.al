@@ -169,7 +169,7 @@ Page 56140 "Change Request Sign"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.Picture.HasValue;
+        DeleteExportEnabled := Rec.Picture.Count > 0;
     end;
 }
 

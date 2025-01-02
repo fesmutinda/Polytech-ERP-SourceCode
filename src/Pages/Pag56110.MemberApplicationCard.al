@@ -2233,7 +2233,7 @@ page 56110 "Member Application Card"
         SMSMessages."Account No" := Rec."No.";
         SMSMessages."Date Entered" := Today;
         SMSMessages."Time Entered" := Time;
-        SMSMessages.Source := 'MOBILETRAN';
+        SMSMessages.Source := 'MEMBERREGISTRATION';
         SMSMessages."Entered By" := UserId;
         SMSMessages."System Created Entry" := true;
         SMSMessages."Document No" := Rec."No.";
@@ -2554,15 +2554,15 @@ page 56110 "Member Application Card"
         SMSMessages.Reset();
         SMSMessages."Entry No" := iEntryNo;
         SMSMessages."Batch No" := '';
-        SMSMessages."Document No" := 'MEMBERREGISTRATION';
+        SMSMessages."Document No" := Rec."No.";
         SMSMessages."Account No" := Cust."No.";
         SMSMessages."Date Entered" := Today;
         SMSMessages."Time Entered" := Time;
-        SMSMessages.Source := 'SYSTEM GENERATED';
+        SMSMessages.Source := 'MEMBERREGISTRATION';
         SMSMessages."Entered By" := UserId;
         SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
         SMSMessages."SMS Message" := SMSToSend;
-        SMSMessages."Telephone No" := Rec."Phone No.";
+        SMSMessages."Telephone No" := Rec."Mobile Phone No";
         SMSMessages.Insert();
     end;
 

@@ -150,3 +150,4 @@ Page 50145 "Member Re-Application Page"
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
 
 }
+

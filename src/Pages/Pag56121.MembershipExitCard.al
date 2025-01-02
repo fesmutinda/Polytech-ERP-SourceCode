@@ -26,7 +26,7 @@ Page 56121 "Membership Exit Card"
                 {
                     ApplicationArea = Basic;
 
-                    Editable = false;
+                    // Editable = false;
                 }
                 field("Member Name"; Rec."Member Name")
                 {
@@ -350,7 +350,7 @@ Page 56121 "Membership Exit Card"
         ShareCapitalTransferVisible: Boolean;
         ShareCapSellPageVisible: Boolean;
         // ObjShareCapSell: Record "Share Capital Sell";
-        SurestepFactory: Codeunit "Swizzsoft Factory";
+        SurestepFactory: Codeunit "SURESTEP Factory";
         JVTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         JVAccountType: Enum "Gen. Journal Account Type";
         TemplateName: Code[20];
@@ -461,10 +461,10 @@ Page 56121 "Membership Exit Card"
         Doc_No: Code[20];
         DActivity: code[20];
         DBranch: Code[50];
-        Cust: Record Customer;
+        Cust: Record customer;
         Generalsetup: Record "Sacco General Set-Up";
         RunningBal: Decimal;
-        SFactory: Codeunit "Swizzsoft Factory";
+        SFactory: Codeunit "SURESTEP Factory";
         InterestTobeRecovered: Decimal;
         LoanTobeRecovered: Decimal;
     begin
@@ -489,7 +489,7 @@ Page 56121 "Membership Exit Card"
                 NetMemberAmounts := 0;
                 InterestTobeRecovered := 0;
                 LoanTobeRecovered := 0;
-                // GenSetUp.Validate(GenSetUp."Banks Charges");
+                GenSetUp.Validate(GenSetUp."Banks Charges");
                 //................................................
                 DActivity := Cust."Global Dimension 1 Code";
                 DBranch := Cust."Global Dimension 2 Code";
@@ -602,10 +602,10 @@ Page 56121 "Membership Exit Card"
         Doc_No: Code[20];
         DActivity: code[20];
         DBranch: Code[50];
-        Cust: Record Customer;
+        Cust: Record customer;
         Generalsetup: Record "Sacco General Set-Up";
         RunningBal: Decimal;
-        SFactory: Codeunit "Swizzsoft Factory";
+        SFactory: Codeunit "SURESTEP Factory";
         InterestTobeRecovered: Decimal;
         LoanTobeRecovered: Decimal;
     begin
