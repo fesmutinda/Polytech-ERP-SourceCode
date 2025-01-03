@@ -1,13 +1,12 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Page 50013 "PettyCash Payment Card"
+Page 50707 PaymentCard
 {
+    DeleteAllowed = false;
     PageType = Card;
-    SourceTable = "Payment Header";
-
     RefreshOnActivate = true;
-    Caption = 'Petty Cash Application';
-    SourceTableView = where("Payment Type" = const("Petty Cash"),
-                            Posted = const(false));
+    SourceTable = "Payment Header";
+    SourceTableView = where(Posted = const(false));
+
 
     layout
     {
@@ -22,8 +21,13 @@ Page 50013 "PettyCash Payment Card"
                 field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Date';
                 }
                 field("Posting Date"; Rec."Posting Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Payment Mode"; Rec."Payment Mode")
                 {
                     ApplicationArea = Basic;
                 }
@@ -44,6 +48,14 @@ Page 50013 "PettyCash Payment Card"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Cheque Type"; Rec."Cheque Type")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Cheque No"; Rec."Cheque No")
+                {
+                    ApplicationArea = Basic;
+                }
                 field(Payee; Rec.Payee)
                 {
                     ApplicationArea = Basic;
@@ -53,22 +65,6 @@ Page 50013 "PettyCash Payment Card"
                     ApplicationArea = Basic;
                 }
                 field("Payment Description"; Rec."Payment Description")
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Amount; Rec.Amount)
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Amount(LCY)"; Rec."Amount(LCY)")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Net Amount"; Rec."Net Amount")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Net Amount(LCY)"; Rec."Net Amount(LCY)")
                 {
                     ApplicationArea = Basic;
                 }
@@ -83,6 +79,48 @@ Page 50013 "PettyCash Payment Card"
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
+                }
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic;
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update();
+                    end;
+
+                }
+                // field("Amount(LCY)"; "Amount(LCY)")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("VAT Amount"; "VAT Amount")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("VAT Amount(LCY)"; "VAT Amount(LCY)")
+                // {
+                //     ApplicationArea = Basic;
+                //     Visible = false;
+                // }
+                // field("WithHolding Tax Amount"; "WithHolding Tax Amount")
+                // {
+                //     ApplicationArea = Basic;
+                //     Visible = false;
+                // }
+                // field("WithHolding Tax Amount(LCY)"; "WithHolding Tax Amount(LCY)")
+                // {
+                //     ApplicationArea = Basic;
+                //     Visible = false;
+                // }
+                // field("Net Amount"; "Net Amount")
+                // {
+                //     ApplicationArea = Basic;
+                //     Visible = false;
+                // }
+                field("Net Amount(LCY)"; Rec."Net Amount(LCY)")
+                {
+                    ApplicationArea = Basic;
+                    Visible = false;
                 }
                 field(Status; Rec.Status)
                 {
@@ -110,7 +148,7 @@ Page 50013 "PettyCash Payment Card"
                     ApplicationArea = Basic;
                 }
             }
-            part(Control35; "PettyCash Payment Line")
+            part(Control35; "Payment Line")
             {
                 SubPageLink = "Document No" = field("No.");
             }
@@ -119,7 +157,7 @@ Page 50013 "PettyCash Payment Card"
 
     actions
     {
-        area(creation)
+        area(Navigation)
         {
             action("Post Payment")
             {
@@ -146,14 +184,13 @@ Page 50013 "PettyCash Payment Card"
             action("Post and Print")
             {
                 ApplicationArea = Basic;
-                Image = PostPrint;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+                Image = PostPrint;
 
                 trigger OnAction()
                 begin
-                    CheckRequiredItems;
                     if FundsUser.Get(UserId) then begin
                         FundsUser.TestField(FundsUser."Payment Journal Template");
                         FundsUser.TestField(FundsUser."Payment Journal Batch");
@@ -164,47 +201,13 @@ Page 50013 "PettyCash Payment Card"
                         PHeader.Reset;
                         PHeader.SetRange(PHeader."No.", Rec."No.");
                         if PHeader.FindFirst then begin
-                            Report.RunModal(Report::"PettyCash Voucher", true, false, PHeader);
+                            Report.RunModal(Report::"Payment Voucher", true, false, PHeader);
                         end;
                     end else begin
                         Error('User Account Not Setup, Contact the System Administrator');
                     end
                 end;
             }
-            action("Send Approval Request")
-            {
-                ApplicationArea = Basic;
-                Image = SendApprovalRequest;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
-                trigger OnAction()
-                var
-                    Text001: label 'This request is already pending approval';
-                begin
-                    rec.CalcFields(Amount);
-                    if Rec.Status <> Rec.Status::New then
-                        Error(Text001);
-
-                    if Confirm('Send  Approval request?', false) = true then begin
-                        SrestepApprovalsCodeUnit.SendPaymentVoucherRequestForApproval(rec."No.", Rec);
-                        Message('Approval Request Sent!');
-                        CurrPage.Close();
-
-                    end;
-
-                end;
-            }
-            action("Cancel Approval Request")
-            {
-                ApplicationArea = Basic;
-            }
-            action(Approvals)
-            {
-                ApplicationArea = Basic;
-            }
-
             action(Refresh)
             {
 
@@ -218,6 +221,43 @@ Page 50013 "PettyCash Payment Card"
                     CurrPage.Update();
                 end;
             }
+            action("Send Approval Request")
+            {
+                Image = SendApprovalRequest;
+                ApplicationArea = Basic;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    rec.CalcFields(Amount);
+                    if Rec.Amount <> 0 then begin
+                        if Confirm('Send  Approval request?', false) = true then begin
+                            SrestepApprovalsCodeUnit.SendPaymentVoucherRequestForApproval(rec."No.", Rec);
+                        end else
+                            Message('Amount can Not be 0');
+                    end;
+
+                end;
+            }
+            action("Cancel Approval Request")
+            {
+                ApplicationArea = Basic;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CancelApprovalRequest;
+
+                trigger OnAction()
+                begin
+
+                    if Confirm('Cancel  Approval request?', false) = true then begin
+                        SrestepApprovalsCodeUnit.CancelPaymentVoucherRequestForApproval(rec."No.", Rec);
+                    end;
+                end;
+            }
+
             action(Print)
             {
                 ApplicationArea = Basic;
@@ -231,30 +271,29 @@ Page 50013 "PettyCash Payment Card"
                     PHeader.Reset;
                     PHeader.SetRange(PHeader."No.", Rec."No.");
                     if PHeader.FindFirst then begin
-                        Report.RunModal(Report::"PettyCash Voucher", true, false, PHeader);
+                        Report.RunModal(Report::"Payment Voucher", true, false, PHeader);
                     end;
                 end;
             }
+
         }
     }
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        Rec."Payment Mode" := Rec."payment mode"::Cash;
-        Rec."Payment Type" := Rec."payment type"::"Petty Cash";
+        Rec."Payment Mode" := Rec."payment mode"::Cheque;
+        Rec."Payment Type" := Rec."payment type"::Normal;
     end;
 
     var
         FundsUser: Record "Funds User Setup";
-        FundsManager: Codeunit "Funds Management";
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+        FundsManager: Codeunit "Funds Management";
         JTemplate: Code[20];
         JBatch: Code[20];
         DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,TransportRequest,Maintenance,Fuel,ImporterExporter,"Import Permit","Export Permit",TR,"Safari Notice","Student Applications","Water Research","Consultancy Requests","Consultancy Proposals","Meals Bookings","General Journal","Student Admissions","Staff Claim",KitchenStoreRequisition,"Leave Application","Staff Advance","Staff Advance Accounting";
         TableID: Integer;
-        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         PHeader: Record "Payment Header";
-        X: page "Accountant Role Center";
 
     local procedure CheckRequiredItems()
     begin

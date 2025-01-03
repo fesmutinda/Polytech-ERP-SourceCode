@@ -691,19 +691,12 @@ codeunit 50041 "Custom Workflow Responses"
                 begin
                     RecRef.SetTable(LoansRegister);
                     LoansRegister."Approval Status" := LoansRegister."Approval Status"::Approved;
-                    LoansRegister."loan status" := LoansRegister."loan status"::Approved;
+                    //LoansRegister."loan status" := LoansRegister."loan status"::Approved;
                     //LoansRegister.Validate("Approval Status", LoansRegister."Approval Status"::Approved);
-                    //LoansRegister.Validate("loan status", LoansRegister."loan status"::Approved);
+                    LoansRegister.Validate("loan status", LoansRegister."loan status"::Approved);
                     LoansRegister.Modify(true);
                     Handled := true;
                 end;
-
-            // LogMessage := StrSubstNo('Loan with ID %1 updated: Approval Status = %2, Loan Status = %3',
-            //              LoansRegister."Loan ID",
-            //              LoansRegister."Approval Status",
-            //              LoansRegister."loan status");
-
-            // Log.Write(LogMessage);
 
             //BOSA Transfers
             DATABASE::"BOSA Transfers":

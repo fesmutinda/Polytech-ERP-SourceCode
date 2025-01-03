@@ -1,4 +1,4 @@
-Codeunit 50005 "Custom Workflow Responses old" //Back to 50041
+Codeunit 50005 "Custom Workflow Responses 2" //Back to 50041
 {
 
     trigger OnRun()

@@ -1,5 +1,5 @@
 #pragma warning disable AL0729
-page 50002 "Applicant Document"
+page 50011 "Applicant Document"
 {
     DeleteAllowed = false;
     InsertAllowed = false;
