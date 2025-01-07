@@ -921,7 +921,7 @@
                   <TextRun>
                     <Value>=First(Fields!DOCNAME.Value)</Value>
                     <Style>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -948,7 +948,7 @@
                   <TextRun>
                     <Value>=First(Fields!Payments_Header__No__.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1376,7 +1376,7 @@
                     <TextRun>
                       <Value>=First(Fields!CompanyInfoName.Value, "DataSet_Result")</Value>
                       <Style>
-                        <FontSize>28pt</FontSize>
+                        <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>

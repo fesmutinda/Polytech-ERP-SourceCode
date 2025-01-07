@@ -58,12 +58,15 @@ Codeunit 50000 "Funds Management"
         GenJnlLine."Account Type" := GenJnlLine."account type"::"Bank Account";
         GenJnlLine."Account No." := PaymentHeader."Bank Account";
         GenJnlLine.Validate(GenJnlLine."Account No.");
+
         GenJnlLine."Currency Code" := PaymentHeader."Currency Code";
         GenJnlLine.Validate(GenJnlLine."Currency Code");
         GenJnlLine."Currency Factor" := PaymentHeader."Currency Factor";
         GenJnlLine.Validate("Currency Factor");
         GenJnlLine.Amount := -(PaymentHeader."Net Amount");  //Credit Amount
         GenJnlLine.Validate(GenJnlLine.Amount);
+        //Message('Account No Bank is %1, Amount of %2', GenJnlLine."Account No.", GenJnlLine.Amount);
+
         GenJnlLine."Bal. Account Type" := GenJnlLine."bal. account type"::"G/L Account";
         GenJnlLine."Bal. Account No." := '';
         GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
@@ -94,7 +97,7 @@ Codeunit 50000 "Funds Management"
 
         //***********************************************Add Payment Lines**************************************************************//
         PaymentLine.Reset;
-        PaymentLine.SetRange(PaymentLine.No, PaymentHeader."No.");
+        PaymentLine.SetRange(PaymentLine."Document No", PaymentHeader."No.");
         PaymentLine.SetFilter(PaymentLine.Amount, '<>%1', 0);
         if PaymentLine.FindSet then begin
             repeat
@@ -108,7 +111,7 @@ Codeunit 50000 "Funds Management"
                 GenJnlLine."Source Code" := SourceCode;
                 GenJnlLine."Line No." := LineNo;
                 GenJnlLine."Posting Date" := PaymentHeader."Posting Date";
-                GenJnlLine."Document No." := PaymentLine.No;
+                GenJnlLine."Document No." := PaymentLine."Document No";
                 if CustomerLinesExist(PaymentHeader) then
                     GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                 else
@@ -123,6 +126,7 @@ Codeunit 50000 "Funds Management"
                 GenJnlLine.Validate("Currency Factor");
                 GenJnlLine.Amount := PaymentLine."Net Amount";  //Debit Amount
                 GenJnlLine.Validate(GenJnlLine.Amount);
+
                 GenJnlLine."Bal. Account Type" := GenJnlLine."bal. account type"::"G/L Account";
                 GenJnlLine."Bal. Account No." := '';
                 GenJnlLine.Validate(GenJnlLine."Bal. Account No.");
@@ -134,6 +138,7 @@ Codeunit 50000 "Funds Management"
                 GenJnlLine.Validate(GenJnlLine."VAT Bus. Posting Group");
                 GenJnlLine."VAT Prod. Posting Group" := PaymentLine."VAT Prod. Posting Group";
                 GenJnlLine.Validate(GenJnlLine."VAT Prod. Posting Group");
+
                 GenJnlLine."Shortcut Dimension 1 Code" := PaymentHeader."Global Dimension 1 Code";
                 GenJnlLine.Validate(GenJnlLine."Shortcut Dimension 1 Code");
                 GenJnlLine."Shortcut Dimension 2 Code" := PaymentHeader."Global Dimension 2 Code";
@@ -175,7 +180,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -228,7 +233,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := PaymentLine."Account Type";
                         GenJnlLine."Account No." := PaymentLine."Account No.";
@@ -284,7 +289,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -337,7 +342,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := PaymentLine."Account Type";
                         GenJnlLine."Account No." := PaymentLine."Account No.";
@@ -513,7 +518,7 @@ Codeunit 50000 "Funds Management"
 
         //***********************************************Add Payment Lines**************************************************************//
         PaymentLine.Reset;
-        PaymentLine.SetRange(PaymentLine.No, PaymentHeader."No.");
+        PaymentLine.SetRange(PaymentLine."Document No", PaymentHeader."No.");
         PaymentLine.SetFilter(PaymentLine.Amount, '<>%1', 0);
         if PaymentLine.FindSet then begin
             repeat
@@ -527,7 +532,7 @@ Codeunit 50000 "Funds Management"
                 GenJnlLine."Source Code" := SourceCode;
                 GenJnlLine."Line No." := LineNo;
                 GenJnlLine."Posting Date" := PaymentHeader."Posting Date";
-                GenJnlLine."Document No." := PaymentLine.No;
+                GenJnlLine."Document No." := PaymentLine."Document No";
                 if CustomerLinesExist(PaymentHeader) then
                     GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                 else
@@ -594,7 +599,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";
@@ -647,7 +652,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := GenJnlLine."account type"::"G/L Account";
                         TaxCodes.TestField(TaxCodes."Liability Account");
@@ -704,7 +709,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := TaxCodes."Account Type";
                         GenJnlLine."Account No." := TaxCodes."Account No";      //Debit Expense
@@ -757,7 +762,7 @@ Codeunit 50000 "Funds Management"
                             GenJnlLine."Document Type" := GenJnlLine."document type"::" "
                         else
                             GenJnlLine."Document Type" := GenJnlLine."document type"::Payment;
-                        GenJnlLine."Document No." := PaymentLine.No;
+                        GenJnlLine."Document No." := PaymentLine."Document No";
                         GenJnlLine."External Document No." := PaymentHeader."Cheque No";
                         GenJnlLine."Account Type" := GenJnlLine."account type"::"G/L Account";
                         TaxCodes.TestField(TaxCodes."Liability Account");

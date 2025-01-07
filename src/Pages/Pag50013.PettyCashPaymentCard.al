@@ -140,6 +140,7 @@ Page 50013 "PettyCash Payment Card"
                         FundsManager.PostPayment(Rec, JTemplate, JBatch);
                     end else begin
                         Error('User Account Not Setup, Contact the System Administrator');
+                        //Message('UserId set is %1, JTemplate is %2, JBatch is %3', UserId, JTemplate, JBatch);
                     end
                 end;
             }
@@ -188,7 +189,7 @@ Page 50013 "PettyCash Payment Card"
                         Error(Text001);
 
                     if Confirm('Send  Approval request?', false) = true then begin
-                        SrestepApprovalsCodeUnit.SendPaymentVoucherRequestForApproval(rec."No.", Rec);
+                        SrestepApprovalsCodeUnit.SendPaymentVoucherRequestForApproval(Rec."No.", Rec);
                         Message('Approval Request Sent!');
                         CurrPage.Close();
 

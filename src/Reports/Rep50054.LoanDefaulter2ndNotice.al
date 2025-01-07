@@ -24,9 +24,29 @@ Report 50054 "Loan Defaulter 2nd Notice"
             column(LoanProductType_LoansRegister; "Loans Register"."Loan Product Type")
             {
             }
+            column(LoanProductTypeName_LoansRegister; "Loans Register"."Loan Product Type Name")
+            {
+            }
             column(ClientCode_Loans; "Loans Register"."Client Code")
             {
             }
+
+            column(LoanNo_LoansPrinciple; "Loans Register"."Approved Amount")
+            {
+            }
+            column(LoanNo_LoanDate; "Loans Register"."Issued Date")
+            {
+            }
+            column(LoanNo_LoanPeriod; "Loans Register"."Instalment Period")
+            {
+            }
+            column(LoanNo_LoanPeriodInt; "Loans Register".Installments)
+            {
+            }
+            column(recoverNoticedate; recoverNoticedate)
+            {
+            }
+
             dataitem("Members Register"; Customer)
             {
                 DataItemLink = "No." = field("Client Code");
@@ -68,7 +88,11 @@ Report 50054 "Loan Defaulter 2nd Notice"
                 }
                 dataitem("Default Notices Register"; "Default Notices Register")
                 {
-                    column(ReportForNavId_1120054001; 1120054001)
+                    DataItemLink = "Member No" = field("No.");
+                    column(Loan_Outstanding_Balance; "Loan Outstanding Balance")
+                    {
+                    }
+                    column(Outstanding_Interest_DefaultNoticesRegister; "Default Notices Register"."Outstanding Interest")
                     {
                     }
                     column(AmountInArrears_DefaultNoticesRegister; "Default Notices Register"."Amount In Arrears")
@@ -77,7 +101,16 @@ Report 50054 "Loan Defaulter 2nd Notice"
                     column(DaysInArrears_DefaultNoticesRegister; "Default Notices Register"."Days In Arrears")
                     {
                     }
+
                 }
+                trigger OnAfterGetRecord()
+                begin
+                    // workString := CONVERTSTR(Customer.Name, ' ', ',');
+                    // DearM := SELECTSTR(1, workString);
+                    // //LastPDate := 0D;
+                    // Balance := 0;
+                    // SharesB := 0;
+                end;
             }
         }
     }
@@ -111,5 +144,6 @@ Report 50054 "Loan Defaulter 2nd Notice"
         DOCNAME: Text[30];
         CompanyInfo: Record "Company Information";
         Lofficer: Text;
+        recoverNoticedate: Date;
 }
 

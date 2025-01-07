@@ -142,8 +142,6 @@ Report 50055 "Loan Defaulter Final Notice"
             begin
                 //  Penaltcharge:=0.05*("<LoansRec>"."Current Shares"+"<LoansRec>"."Share Purchase");
 
-                //MESSAGE('Kiongozi',Penaltcharge) ;
-
                 AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
                 OutstandingInt := "Oustanding Interest";
                 LoanNo := "Loan  No.";
