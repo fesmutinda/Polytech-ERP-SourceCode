@@ -1139,8 +1139,8 @@ page 56110 "Member Application Card"
                     Image = Accounts;
                     RunObject = page "Membership App Products";// "Member Applied Products List";
                     RunPageLink = "Membership Applicaton No" = field("No.");
-                    Enabled = true;
-                    Visible = true;
+                    Enabled = false;
+                    Visible = false;
 
                     trigger OnAction()
                     begin

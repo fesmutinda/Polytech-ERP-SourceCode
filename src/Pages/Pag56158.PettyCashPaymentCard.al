@@ -256,7 +256,7 @@ Page 56158 "PettyCash Payment Card"
 
     local procedure CheckRequiredItems()
     begin
-        Rec.TestField(Status, Rec.Status::Approved);
+        // Rec.TestField(Status, Rec.Status::Approved);
         Rec.TestField("Posting Date");
         Rec.TestField(Payee);
         Rec.TestField("Bank Account");

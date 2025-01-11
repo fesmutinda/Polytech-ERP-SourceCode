@@ -201,14 +201,14 @@ pageextension 50876 "BankAccountListExt" extends "Bank Account List"
 
     trigger OnOpenPage()
     begin
-        // AuditLog.FnReadingsMadeAudit(UserId, 'Accessed and read the bank accounts listing page');
+        AuditLog.FnReadingsMadeAudit(UserId, 'Accessed and read the bank accounts listing page');
     end;
 
     trigger OnClosePage()
     begin
-        // AuditLog.FnReadingsMadeAudit(UserId, 'Closed bank accounts listing page');
+        AuditLog.FnReadingsMadeAudit(UserId, 'Closed bank accounts listing page');
     end;
 
     var
-    // AuditLog: Codeunit "Audit Log Codeunit";
+        AuditLog: Codeunit "Audit Log Codeunit";
 }

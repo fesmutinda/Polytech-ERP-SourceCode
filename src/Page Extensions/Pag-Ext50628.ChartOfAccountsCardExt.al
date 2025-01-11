@@ -114,16 +114,16 @@ pageextension 50628 "ChartOfAccountsCardExt" extends "G/L Account Card"
     }
     trigger OnOpenPage()
     begin
-        // AuditLog.FnReadingsMadeAudit(UserId, 'Accessed and read the G/L account page no-' + Format(Rec."No.") + ' Name-' + Format(Rec.Name));
+        AuditLog.FnReadingsMadeAudit(UserId, 'Accessed and read the G/L account page no-' + Format(Rec."No.") + ' Name-' + Format(Rec.Name));
     end;
 
     trigger OnClosePage()
     begin
-        // AuditLog.FnReadingsMadeAudit(UserId, 'Closed G/L account page no-' + Format(Rec."No.") + ' Name-' + Format(Rec.Name));
+        AuditLog.FnReadingsMadeAudit(UserId, 'Closed G/L account page no-' + Format(Rec."No.") + ' Name-' + Format(Rec.Name));
     end;
 
     var
-        // AuditLog: Codeunit "Audit Log Codeunit";
+        AuditLog: Codeunit "Audit Log Codeunit";
         GlEntry: Record "G/L Entry";
         Edit: Boolean;
 

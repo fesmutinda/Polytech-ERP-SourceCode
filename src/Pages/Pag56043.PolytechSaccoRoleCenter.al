@@ -1990,27 +1990,6 @@ Page 56043 "Polytech Sacco Role Center"
                 }
             }
 
-            group("Banking Services")
-            {
-                Visible = false;
-                action("Cashier Transactions")
-                {
-                    Caption = 'cashier transactions';
-                    ApplicationArea = basic, suite;
-                    Image = Payment;
-                    //RunObject = page "Cashier Transactions - List";
-                    ToolTip = 'cashier transaction list';
-                }
-                action("banking Setup")
-                {
-                    Caption = 'Transaction Type - List';
-                    ApplicationArea = basic, suite;
-                    Image = Setup;
-                    //RunObject = page "Transaction Type - List";
-                    ToolTip = 'Transaction Type - List';
-                }
-            }
-
 
             //......................... START OF CRM Main MENU ...............................................
             // group(SaccoCRM)
@@ -2936,65 +2915,66 @@ Page 56043 "Polytech Sacco Role Center"
 
 
             }
-            // group("Audit Trails")
-            // {
-            //     action("Session Tracker")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         RunObject = report "Session Tracker";
-            //     }
-            //     action("Transaction Log")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         RunObject = report "System Transaction Log";
-            //     }
-            //     action("Posting Audit Trail")
-            //     {
-            //         ApplicationArea = all;
-            //         RunObject = report "Ledger enries audit Trail";
-            //     }
-            //     action("Read Log")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         RunObject = report "System Change Entry Log";
-            //         Caption = 'System Change Entry Log';
-            //     }
+            group("Audit Trails")
+            {
+                action("Session Tracker")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "Session Tracker";
+                }
+                action("Transaction Log")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "System Transaction Log";
+                }
+                action("Posting Audit Trail")
+                {
+                    ApplicationArea = all;
+                    RunObject = report "Ledger enries audit Trail";
+                }
+                action("Read Log")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "System Change Entry Log";
+                    Caption = 'System Change Entry Log';
+                }
 
-            //     action("User ID")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         RunObject = report "User";
-            //         Caption = 'User ID';
-            //     }
+                action("User ID")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "User";
+                    Caption = 'User ID';
+                }
 
-            //     action("Log Reg")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         RunObject = report "LogReg";
-            //         Caption = 'Log Reg';
-            //     }
+                action("Log Reg")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "LogReg";
+                    Caption = 'Log Reg';
+                }
 
-            //     action("Log Reg Minutes")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         // RunObject = report "LogRegMinutes";
-            //         Caption = 'Log Reg Minutes';
-            //     }
+                action("Log Reg Minutes")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "LogRegMinutes";
+                    Caption = 'Log Reg Minutes';
+                }
 
-            //     action("Approval Details")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         // RunObject = report "Approval Details";
-            //         Caption = 'Approval Details';
-            //     }
+                action("Approval Details")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "Approval Details";
+                    Caption = 'Approval Details';
+                }
 
-            //     action("Approval Details Rec")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         // RunObject = report "Approval Details rec";
-            //         Caption = 'Approval Details Rec';
-            //     }
-            // }
+                action("Approval Details Rec")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = report "Approval Details rec";
+                    Caption = 'Approval Details Rec';
+                }
+            }
+
 
             group("Periodic Processes")
             {

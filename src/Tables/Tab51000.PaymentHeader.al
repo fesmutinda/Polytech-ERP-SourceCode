@@ -88,7 +88,7 @@ Table 51000 "Payment Header"
             Editable = false;
             FieldClass = FlowField;
         }
-        field(27; "Bank Account"; Code[10])
+        field(27; "Bank Account"; Code[20])
         {
             TableRelation = "Bank Account"."No.";
             trigger OnValidate()

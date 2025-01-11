@@ -91,25 +91,26 @@ pageextension 50619 "UserSetUpExt" extends "User Setup"
     {
 
     }
-    // trigger OnOpenPage()
-    // begin
-    //     AuditLog.FnReadingsMadeAudit(UserId, 'Accessed and read the user setup listing page');
-    // end;
+    trigger OnOpenPage()
+    begin
+        AuditLog.FnReadingsMadeAudit(UserId, 'Accessed and read the user setup listing page');
+    end;
 
-    // trigger OnClosePage()
-    // begin
-    //     AuditLog.FnReadingsMadeAudit(UserId, 'Closed user setup listing page');
-    // end;
+    trigger OnClosePage()
+    begin
+        AuditLog.FnReadingsMadeAudit(UserId, 'Closed user setup listing page');
+    end;
 
-    // trigger OnModifyRecord(): Boolean
-    // begin
-    //     begin
-    //         AuditLog.FnModificationMadeAudit(UserId, 'Changed user setup for ' + "User ID" + CopyStr('from settings=' + Format(xRec), 1, 2048));
-    //         AuditLog.FnModificationMadeAudit(UserId, 'Changed user setup for ' + "User ID" + CopyStr('to settings=' + Format(Rec), 1, 2048));
-    //     end;
-    // end;
+    trigger OnModifyRecord(): Boolean
+    begin
+        begin
+            AuditLog.FnModificationMadeAudit(UserId, 'Changed user setup for ' + UserId + CopyStr('from settings=' + Format(xRec), 1, 2048));
+            AuditLog.FnModificationMadeAudit(UserId, 'Changed user setup for ' + "UserID" + CopyStr('to settings=' + Format(Rec), 1, 2048));
+        end;
+    end;
+
     var
-    // AuditLog: Codeunit "Audit Log Codeunit";
+        AuditLog: Codeunit "Audit Log Codeunit";
 
     var
         myInt: Integer;

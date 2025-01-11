@@ -43,7 +43,7 @@ Table 51113 "Payment Line"
             AutoIncrement = true;
             MinValue = 1000;
         }
-        field(11; "Document No"; Code[10])
+        field(11; "Document No"; Code[20])
         {
             Editable = false;
             NotBlank = true;
