@@ -177,14 +177,8 @@ Table 51360 "Membership Applications"
 
             trigger OnValidate()
             begin
-                /*Employer.GET("Employer Code");
-                "Employer Name":=Employer.Description;*/
-                Employer.Reset;
-                Employer.SetRange(Employer.Code, "Employer Code");
-                if Employer.Find('-') then begin
-                    "Employer Name" := Employer.Description;
-                end;
-
+                Employer.Get("Employer Code");
+                "Employer Name" := Employer.Description;
             end;
         }
         field(68004; "Date of Birth"; Date)

@@ -6,7 +6,7 @@ Table 51401 "Sacco Employers"
 
     fields
     {
-        field(1; "Code"; Code[20])
+        field(1; "Code"; Code[50])
         {
             NotBlank = true;
 
@@ -28,26 +28,26 @@ Table 51401 "Sacco Employers"
         }
         field(5; "No. of Members"; Integer)
         {
-            CalcFormula = count(Customer where(Status = filter(Active | Dormant | "Re-instated" | Termination | Resigned),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER')));
+            CalcFormula = count(Customer where(Status = filter(Active | Dormant | "Re-instated" | Termination),
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER')));
             FieldClass = FlowField;
         }
         field(6; Male; Integer)
         {
-            CalcFormula = count(Customer where(Status = filter(Active | Dormant | "Re-instated" | Termination | Resigned),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER'),
-                                                         Gender = const(" ")));
+            CalcFormula = count(Customer where(Status = filter(Active | Dormant | "Re-instated" | Termination),
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER'),
+                                                          Gender = const(" ")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(7; Female; Integer)
         {
-            CalcFormula = count(Customer where(Status = filter(Active | Dormant | "Re-instated" | Termination | Resigned),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER'),
-                                                         Gender = const(Male)));
+            CalcFormula = count(Customer where(Status = filter(Active | Dormant | "Re-instated" | Termination),
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER'),
+                                                          Gender = const(Male)));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -60,52 +60,43 @@ Table 51401 "Sacco Employers"
         field(10; "Active Members"; Integer)
         {
             CalcFormula = count(Customer where(Status = filter(Active),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER')));
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER')));
             Editable = false;
             FieldClass = FlowField;
         }
         field(11; "Dormant Members"; Integer)
         {
             CalcFormula = count(Customer where(Status = filter(Dormant),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER')));
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER')));
             Editable = false;
             FieldClass = FlowField;
         }
         field(12; Withdrawn; Integer)
         {
             CalcFormula = count(Customer where(Status = filter(Withdrawal),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER')));
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER')));
             Editable = false;
             FieldClass = FlowField;
         }
         field(13; Deceased; Integer)
         {
             CalcFormula = count(Customer where(Status = filter(Deceased),
-                                                         "Employer Code" = field(Code),
-                                                         "Customer Posting Group" = const('MEMBER')));
+                                                          "Employer Code" = field(Code),
+                                                          "Customer Posting Group" = const('MEMBER')));
             Editable = false;
             FieldClass = FlowField;
         }
         field(14; "Join Date"; Date)
         {
         }
-        field(15; AccountNo; Code[10])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = Customer where("Customer Posting Group" = const('EMPLOYER'));
-        }
-        field(16; "Last Interest Period"; Date)
-        {
-            DataClassification = ToBeClassified;
-        }
     }
 
     keys
     {
-        key(Key1; "Code", Description)
+        key(Key1; "Code")
         {
             Clustered = true;
         }
