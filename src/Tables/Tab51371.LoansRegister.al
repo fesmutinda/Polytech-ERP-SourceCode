@@ -4545,6 +4545,14 @@ Table 51371 "Loans Register"
         {
             DataClassification = ToBeClassified;
         }
+        field(69300; "Overdraft Installements"; Option)
+        {
+            OptionCaption = ' ,1,2,3,Loan';
+            OptionMembers = " ","1 Month","2 Months","3 Month","Loan";
+        }
+        field(69301; "Check Int"; Boolean)
+        {
+        }
     }
 
     keys

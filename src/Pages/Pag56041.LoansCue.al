@@ -46,7 +46,7 @@ Page 56041 "Loans Cue"
                     Image = none;
                     Style = Favorable;
                     StyleExpr = true;
-                    DrillDownPageId = "Loan List";
+                    DrillDownPageId = "LoanList-Pending Approval BOSA";
                 }
                 field("EMERGENCY LOAN"; Rec."EMERGENCY LOAN")
                 {
@@ -89,7 +89,6 @@ Page 56041 "Loans Cue"
                     StyleExpr = true;
                     DrillDownPageId = "Loans Posted List";
                 }
-
 
 
                 field("SUPER SCHOOL FEES"; Rec."SUPER SCHOOL FEES")

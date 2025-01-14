@@ -47,6 +47,32 @@ Report 50054 "Loan Defaulter 2nd Notice"
             {
             }
 
+            column(GNo; GNo)
+            {
+            }
+            column(Gname; Gname)
+            {
+            }
+            column(AllGnames; AllGnames)
+            {
+            }
+            column(AllGNos; AllGNos)
+            {
+            }
+
+            dataitem("Loans Guarantee Details"; "Loans Guarantee Details")
+            {
+                DataItemLink = "Loan No" = field("Loan  No.");
+                column(Name; Name)
+                {
+                }
+                column(Member_No; "Member No")
+                {
+                }
+
+            }
+
+
             dataitem("Members Register"; Customer)
             {
                 DataItemLink = "No." = field("Client Code");
@@ -112,6 +138,94 @@ Report 50054 "Loan Defaulter 2nd Notice"
                     // SharesB := 0;
                 end;
             }
+
+            trigger OnAfterGetRecord()
+            var
+                LoanGuar: Record "Loans Guarantee Details";
+
+            begin
+                LoanGuar.Reset;
+                LoanGuar.SetRange(LoanGuar."Loan No", "Loans Register"."Loan  No.");
+                if LoanGuar.Find('-') then begin
+                    repeat
+                        Gname := LoanGuar.Name;
+                        GNo := LoanGuar."Member No";
+                        MESSAGE('g name is %1', LoanGuar.Name)
+                    until LoanGuar.Next = 0;
+                end;
+
+            end;
+            /* trigger OnAfterGetRecord()
+            var
+                LoanGuar: Record "Loans Guarantee Details";
+
+            begin
+                LoanGuar.Reset;
+                LoanGuar.SetRange(LoanGuar."Loan No", "Loans Register"."Loan  No.");
+                if LoanGuar.Find('-') then begin
+                    AllGnames := '';
+                    AllGNos := '';
+                    repeat
+                        AllGnames := AllGnames + LoanGuar.Name + ', ';
+                        AllGNos := AllGNos + LoanGuar."Member No" + ', ';
+                    until LoanGuar.Next = 0;
+
+                    // Remove trailing comma and space
+                    AllGnames := CopyStr(AllGnames, 1, StrLen(AllGnames) - 2);
+                    AllGNos := CopyStr(AllGNos, 1, StrLen(AllGNos) - 2);
+
+                    // MESSAGE('Gnames: %1\nGNos: %2', AllGnames, AllGNos);
+                end;
+            end;
+ */
+            /*  trigger OnAfterGetRecord()
+             var
+                 LoanGuar: Record "Loans Guarantee Details";
+
+             begin
+                 LoanGuar.Reset;
+                 LoanGuar.SetRange(LoanGuar."Loan No", "Loans Register"."Loan  No.");
+                 Index := 1;
+                 if LoanGuar.Find('-') then begin
+                     repeat
+                         if Index <= ArrayLen(Gnames) then begin
+                             Gnames[Index] := LoanGuar.Name;
+                             GNos[Index] := LoanGuar."Member No";
+                             Index += 1;
+                         end;
+                     until LoanGuar.Next = 0;
+
+                     // Example: Display all values in the array
+                     //     for Index := 1 to ArrayLen(Gnames) do
+                     //         if Gnames[Index] <> '' then
+                     //             MESSAGE('Name: %1, Member No: %2', Gnames[Index], GNos[Index]);
+                 end;
+             end;
+  */
+            /*  trigger OnAfterGetRecord()
+             var
+                 LoanGuar: Record "Loans Guarantee Details";
+                 TempLoanGuar: Record "Loans Guarantee Details" temporary;
+
+             begin
+                 LoanGuar.Reset;
+                 LoanGuar.SetRange(LoanGuar."Loan No", "Loans Register"."Loan  No.");
+                 if LoanGuar.Find('-') then begin
+                     repeat
+                         TempLoanGuar.Init();
+                         TempLoanGuar.Name := LoanGuar.Name;
+                         Gname := TempLoanGuar.Name;
+                         TempLoanGuar."Member No" := LoanGuar."Member No";
+                         GNo := TempLoanGuar."Member No";
+                         TempLoanGuar.Insert();
+                     until LoanGuar.Next = 0;
+
+                     // The TempLoanGuar table now contains all the records for the report
+                     MESSAGE('Temporary table populated.');
+                 end;
+             end;
+  */
+
         }
     }
 
@@ -145,5 +259,16 @@ Report 50054 "Loan Defaulter 2nd Notice"
         CompanyInfo: Record "Company Information";
         Lofficer: Text;
         recoverNoticedate: Date;
+        Gname: Text;
+        GNo: Code[20];
+
+        Gnames: array[100] of Text[100];
+        GNos: array[100] of Text[100];
+        Index: Integer;
+
+        AllGnames: Text;
+        AllGNos: Text;
+
+
 }
 

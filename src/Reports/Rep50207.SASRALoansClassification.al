@@ -2,7 +2,7 @@
 Report 50207 "SASRA Loans Classification"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/SASRALoansClassification.rdl';
+    RDLCLayout = './Layouts/SASRA Loans Classification.rdlc';
     dataset
     {
         dataitem("Loans Register"; "Loans Register")
@@ -48,9 +48,9 @@ Report 50207 "SASRA Loans Classification"
             column(RequestedAmount_LoansRegister; "Loans Register"."Requested Amount")
             {
             }
-            // column(ApprovedAmount_LoansRegister; "Loans Register"."Schedule Loan Amount Issued")
-            // {
-            // }
+            column(ApprovedAmount_LoansRegister; "Loans Register"."Schedule Loan Amount Issued")
+            {
+            }
             column(OutstandingBalance_LoansRegister; "Loans Register"."Outstanding Balance")
             {
             }

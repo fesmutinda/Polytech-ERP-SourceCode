@@ -1664,7 +1664,25 @@ Page 56043 "Polytech Sacco Role Center"
 
 
                 //.......................................End of Defaulter Management .................................
+                group("Interest Calculation")
+                {
+                    action("Loan Interest List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "Loan Interest List";
+                    }
+                    action("Loan Interest Posted List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Loan Interest Posted List";
+                    }
+                    action("Loans Interest Posted Report")
+                    {
+                        ApplicationArea = all;
+                        //RunObject = report "Loans Interest Posted";
+                    }
 
+                }
 
 
                 //...............................................Start of BOSA Reports.........................
@@ -3096,10 +3114,23 @@ Page 56043 "Polytech Sacco Role Center"
             {
                 action("Generate Loan Schedule")
                 {
-                    // RunObject = codeunit "Regenerate loan repayment sch";
+                    RunObject = codeunit "Regenerate loan repayment sch";
                     image = CostAccountingDimensions;
                     ToolTip = 'Generate Loan Performance Classification and New Schedule';
                     Enabled = true;
+                }
+                /* action("Generate Monthly FOSA Interest")
+                {
+                    RunObject = REPORT "Generate Monthly FOSA Interest";
+                    Visible = false;
+                } */
+                action("Main Automation")
+                {
+                    //Caption = 'RunInterest';
+                    Image = Accounts;
+                    ApplicationArea = Basic, Suite;
+                    RunObject = codeunit "Main Automation";
+                    Visible = true;
                 }
 
 

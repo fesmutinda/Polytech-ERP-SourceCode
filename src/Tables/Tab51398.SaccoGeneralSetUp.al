@@ -804,6 +804,9 @@ Table 51398 "Sacco General Set-Up"
         {
             DataClassification = ToBeClassified;
         }
+        field(1599; "Last Loan Interest Run Date"; Date)
+        {
+        }
     }
 
     keys

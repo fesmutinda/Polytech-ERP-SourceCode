@@ -234,7 +234,7 @@ page 50865 "Loan 2nd  Demand Notices Card"
                         if LoanGuar.Find('-') then begin
 
                             repeat
-                                ;
+
 
                                 //IF SendSMS = TRUE THEN BEGIN
                                 //SMS MESSAGE

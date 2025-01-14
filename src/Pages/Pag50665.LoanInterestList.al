@@ -96,7 +96,7 @@ page 50665 "Loan Interest List"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                // RunObject = Report 51516579;
+                //RunObject = Report 51516579;
             }
             action("Option ")
             {
@@ -117,7 +117,7 @@ page 50665 "Loan Interest List"
     var
         Option: Option "Generate Only","Generate & Post";
         PeriodicActivities: Codeunit "Periodic Activities";
-        members: Record "Member Register";
+        members: Record Customer;
         GenBatches: Record "Gen. Journal Batch";
         PDate: Date;
         LoanType: Record "Loan Products Setup";
@@ -144,6 +144,6 @@ page 50665 "Loan Interest List"
         InterestAmount: Decimal;
         iEntryNo: Integer;
         Temp: Record "Funds User Setup";
-        CreditAccounts: Record "Member Register";
+        CreditAccounts: Record Customer;
 }
 

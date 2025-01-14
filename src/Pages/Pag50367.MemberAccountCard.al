@@ -364,6 +364,9 @@ page 50367 "Member Account Card"
                                     CurrPage.Close();
                                 end;
                                 SwizzsoftFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
+                                Rec.Status := Rec.Status::"Awaiting Withdrawal";
+                                Rec.Modify();
+
                             end;
                         end else
                             Error('The withdraw Application has been denied');
@@ -429,13 +432,13 @@ page 50367 "Member Account Card"
                     Image = JobPurchaseInvoice;
                     Promoted = true;
                     PromotedCategory = Report;
-                    trigger OnAction()
+                    /* trigger OnAction()
                     begin
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(50225, true, false, Cust);
-                    end;
+                            Report.Run(50226, true, false, Cust);
+                    end; */
                 }
                 action("Detailed Statement")
                 {
