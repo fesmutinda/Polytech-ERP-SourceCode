@@ -1,6 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
 table 50138 "Membership Exist"
 {
+    DrillDownPageId = "Membership Exit List";  //Important incase you are running to view a page e.g in approval
+    LookupPageId = "Membership Exit List";
 
     fields
     {
@@ -18,7 +20,8 @@ table 50138 "Membership Exist"
         }
         field(2; "Member No."; Code[20])
         {
-            TableRelation = Customer;
+            // TableRelation = Customer;
+            TableRelation = "Member Register";
 
             trigger OnValidate()
             begin
@@ -47,7 +50,7 @@ table 50138 "Membership Exist"
                     "Member Deposits" := Cust."Current Shares";
                     "FOSA Account No." := Cust."FOSA Account";
                     "Unpaid Dividends" := Cust."Dividend Amount";
-                    "Share Capital" := Cust."Shares Retained";
+                    "Shares Capital" := Cust."Shares Retained";
 
                     GenSetup.Get();
 
@@ -201,7 +204,7 @@ table 50138 "Membership Exist"
                 "Tax: Share Capital Transfer Fe" := "Share Capital Transfer Fee" * (GenSetup."Excise Duty(%)" / 100);
             end;
         }
-        field(34; "Share Capital"; Decimal)
+        field(34; "Shares Capital"; Decimal)
         {
             // CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Member No."),
             //                                                        "Transaction Type" = const("Shares Capital"),

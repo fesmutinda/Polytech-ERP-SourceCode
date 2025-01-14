@@ -303,7 +303,11 @@ page 50411 "Sacco General Set-Up"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Outgoing Mail Server"; Rec."Outgoing Mail Server")
+                field("Banks Charges"; Rec."Banks Charges")
+                {
+                    ApplicationArea = basic;
+                }
+                field("Withdrawal Fee"; Rec."Withdrawal Fee")
                 {
                     ApplicationArea = Basic;
                 }

@@ -134,7 +134,7 @@ page 50400 "BOSA Receipt Card"
                 separator(Action1102760032)
                 {
                 }
-                action("Suggest Payments")
+                action("Suggest2 Payments")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Suggest Monthy Repayments';
@@ -226,11 +226,11 @@ page 50400 "BOSA Receipt Card"
                             Error('Receipt amount must be equal to the allocated amount.');
                     end;
 
+
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", Jtemplate);
                     GenJournalLine.SetRange("Journal Batch Name", Jbatch);
                     GenJournalLine.DeleteAll;
-
 
                     LineNo := LineNo + 10000;
                     GenJournalLine.Init;
@@ -239,6 +239,7 @@ page 50400 "BOSA Receipt Card"
                     GenJournalLine."Document No." := Rec."Transaction No.";
                     GenJournalLine."External Document No." := Rec."Cheque No.";
                     GenJournalLine."Line No." := LineNo;
+
                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
                     GenJournalLine."Account No." := Rec."Employer No.";
                     GenJournalLine.Validate(GenJournalLine."Account No.");
@@ -246,8 +247,8 @@ page 50400 "BOSA Receipt Card"
                     //GenJournalLine."Posting Date":="Transaction Date";
                     GenJournalLine.Description := Rec."Account No." + '-' + Rec.Name;
                     GenJournalLine.Validate(GenJournalLine."Currency Code");
-                    ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
-                    ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
+                    /*  ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
+                     ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code"; */
                     if TransType = 'Withdrawal' then
                         GenJournalLine.Amount := -Rec.Amount
                     else
@@ -379,7 +380,7 @@ page 50400 "BOSA Receipt Card"
                     BOSARcpt.Reset;
                     BOSARcpt.SetRange(BOSARcpt."Transaction No.", Rec."Transaction No.");
                     if BOSARcpt.Find('-') then
-                        Report.Run(50259, true, true, BOSARcpt)
+                    Report.Run(50259, true, true, BOSARcpt)
                 end;
             }
         }
@@ -589,10 +590,13 @@ page 50400 "BOSA Receipt Card"
                                 ObjReceiptTransactions.Init;
                                 ObjReceiptTransactions."Document No" := ObjRcptBuffer."Transaction No.";
                                 ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Customer;
+                                ObjReceiptTransactions."Account Type" := ObjReceiptTransactions."account type"::Customer;
                                 ObjReceiptTransactions."Member No" := LoanApp."Client Code";
                                 ObjReceiptTransactions."Transaction Type" := ObjReceiptTransactions."transaction type"::"Loan Repayment";
                                 ObjReceiptTransactions.Validate(ObjReceiptTransactions."Transaction Type");
                                 ObjReceiptTransactions."Loan No." := LoanApp."Loan  No.";
+                                //Message('Loan No is %1', ObjReceiptTransactions."Loan No.");
+
                                 ObjReceiptTransactions.Validate(ObjReceiptTransactions."Loan No.");
                                 ObjReceiptTransactions."Global Dimension 1 Code" := Format(LoanApp.Source);
                                 ObjReceiptTransactions."Global Dimension 2 Code" := SURESTEPFactory.FnGetMemberBranch(ObjRcptBuffer."Account No.");
@@ -622,6 +626,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
+        ObjMember: Record Customer;
         ObjMember: Record Customer;
     begin
         if RunningBalance > 0 then begin
@@ -665,6 +670,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
+        ObjMember: Record Customer;
         ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
@@ -720,6 +726,7 @@ page 50400 "BOSA Receipt Card"
         varLRepayment: Decimal;
         PRpayment: Decimal;
         ObjMember: Record Customer;
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
     begin
@@ -760,6 +767,7 @@ page 50400 "BOSA Receipt Card"
         varLRepayment: Decimal;
         PRpayment: Decimal;
         ObjMember: Record Customer;
+        ObjMember: Record Customer;
     begin
         GenSetup.Get();
         if RunningBalance > 0 then begin
@@ -797,6 +805,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
+        ObjMember: Record Customer;
         ObjMember: Record Customer;
     begin
         if RunningBalance > 0 then begin
@@ -837,6 +846,7 @@ page 50400 "BOSA Receipt Card"
         varLRepayment: Decimal;
         PRpayment: Decimal;
         ObjMember: Record Customer;
+        ObjMember: Record Customer;
     begin
         ObjMember.Reset;
         ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
@@ -868,10 +878,11 @@ page 50400 "BOSA Receipt Card"
         varLRepayment: Decimal;
         PRpayment: Decimal;
         ObjMember: Record Customer;
+        ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Enum TransactionTypesEnum;
-    begin
+    begi               n
 
         ObjMember.Reset;
         ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
@@ -915,6 +926,7 @@ page 50400 "BOSA Receipt Card"
         varMultipleLoan: Decimal;
         varLRepayment: Decimal;
         PRpayment: Decimal;
+        ObjMember: Record Customer;
         ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;

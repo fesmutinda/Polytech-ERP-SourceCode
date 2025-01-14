@@ -1,4 +1,4 @@
-codeunit 51116 "Custom Workflow Events Devc"
+codeunit 51116 "Custom Workflow Events"
 {
 
     trigger OnRun()
@@ -37,9 +37,9 @@ codeunit 51116 "Custom Workflow Events Devc"
                                     Database::"Membership Exist", 'An Approval request for Exit Application is canceled.', 0, false);
         //Loans Application
         WFHandler.AddEventToLibrary(RunWorkflowOnSendLoanApplicationForApprovalCode,
-                            Database::"Loans Register", 'Approval of Loan Application is Requested.', 0, false);
+                            Database::"Loans Register", 'Approval of Loan Application is Requested Now.', 0, false);
         WFHandler.AddEventToLibrary(RunWorkflowOnCancelLoanApplicationApprovalRequestCode,
-                                    Database::"Loans Register", 'An Approval request for  Loan Application is canceled.', 0, false);
+                                    Database::"Loans Register", 'An Approval-Request for  Loan Application is Canceled.', 0, false);
         //-------------------------------------------End Approval Events-------------------------------------------------------------
         //BOSA Transfers
         WFHandler.AddEventToLibrary(RunWorkflowOnSendBOSATransForApprovalCode,

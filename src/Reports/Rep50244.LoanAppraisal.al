@@ -2,7 +2,7 @@
 Report 50244 "Loan Appraisal"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layout/Loan Appraisal.rdlc';
+    RDLCLayout = './Layouts/Loan_Appraisal.rdl';
     UsageCategory = ReportsandAnalysis;
 
     dataset
@@ -74,9 +74,9 @@ Report 50244 "Loan Appraisal"
             column(Netdisbursed; Netdisbursed)
             {
             }
-            // column(AmountBoosted_LoansRegister; "Loans Register"."Boosting Shares")
-            // {
-            // }
+            column(AmountBoosted_LoansRegister; "Loans Register"."Boosting Shares")
+            {
+            }
             column(TotalBridgeAmount; TotalBridgeAmount)
             {
             }
@@ -901,7 +901,7 @@ Report 50244 "Loan Appraisal"
                     SalDetails.Reset;
                     SalDetails.SetRange(SalDetails."Loan No", "Loans Register"."Loan  No.");
                     SalDetails.SetRange(SalDetails."Client Code", "Loans Register"."Client Code");
-                    SalDetails.SetFilter(SalDetails.Code, 'POLYTECH');
+                    SalDetails.SetFilter(SalDetails.Code, 'DEVCO');
                     if SalDetails.Find('-') then begin
                         TotalRepayments := SalDetails.Amount;
 
@@ -973,7 +973,7 @@ Report 50244 "Loan Appraisal"
                     SalDetails.SetRange(SalDetails."Client Code", "Loans Register"."Client Code");
                     SalDetails.SetRange(SalDetails."Loan No", "Loans Register"."Loan  No.");
                     SalDetails.SetRange(SalDetails.Type, SalDetails.Type::Deductions);
-                    // SalDetails.SetRange(SalDetails.Statutory, true);
+                    SalDetails.SetRange(SalDetails.Statutory, true);
                     if SalDetails.Find('-') then begin
                         repeat
                             StatDeductions := StatDeductions + SalDetails.Amount;
@@ -989,7 +989,7 @@ Report 50244 "Loan Appraisal"
                     SalDetails.SetRange(SalDetails."Client Code", "Loans Register"."Client Code");
                     SalDetails.SetRange(SalDetails."Loan No", "Loans Register"."Loan  No.");
                     SalDetails.SetRange(SalDetails.Type, SalDetails.Type::Deductions);
-                    // SalDetails.SetRange(SalDetails.Statutory, false);
+                    SalDetails.SetRange(SalDetails.Statutory, false);
                     if SalDetails.Find('-') then begin
                         repeat
                             OTHERDEDUCTIONS := OTHERDEDUCTIONS + SalDetails.Amount;
@@ -1563,7 +1563,7 @@ Report 50244 "Loan Appraisal"
         DeboosterAmount: Decimal;
         TotalBridgeAmount: Decimal;
         TopCommision: Decimal;
-        SFactory: Codeunit "Swizzsoft Factory";
+        SFactory: Codeunit "SURESTEP Factory";
         Booster: Decimal;
         Prembal: Decimal;
 

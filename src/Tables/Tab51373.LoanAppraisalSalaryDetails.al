@@ -46,6 +46,9 @@ Table 51373 "Loan Appraisal Salary Details"
         {
             TableRelation = "Loans Register";
         }
+        field(7; Statutory; Boolean)
+        {
+        }
     }
 
     keys

@@ -164,6 +164,9 @@ page 50703 "Applicant Signature"
             rec.Signature.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
             Rec.Modify(true)
         end;
+        rec.Signature.ImportStream(PictureInstream, PictureDescription);
+        if not Rec.Modify(true) then
+            Rec.Insert(true);
     end;
 
     local procedure SetEditableOnPictureActions()

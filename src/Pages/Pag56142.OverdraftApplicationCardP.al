@@ -297,7 +297,7 @@ Page 56142 "Over draft Application Card-P"
         Landvisible: Boolean;
         Salaryvisible: Boolean;
         Motorvisible: Boolean;
-        SFactory: Codeunit "Swizzsoft Factory";
+        SFactory: Codeunit "SURESTEP Factory";
         EditableField: Boolean;
         BATCH_TEMPLATE: Code[100];
         BATCH_NAME: Code[100];

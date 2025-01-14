@@ -42,10 +42,10 @@ codeunit 56019 "SureAccountCharges"
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine."Posting Date" := Today;
         GenJournalLine.Description := 'Form Fee';
-        GenJournalLine.Amount := GenSetup."Form Fee";
+        //GenJournalLine.Amount := GenSetup."Form Fee";
         GenJournalLine.Validate(GenJournalLine.Amount);
         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-        GenJournalLine."Bal. Account No." := GenSetup."Form Fee Account";
+        //GenJournalLine."Bal. Account No." := GenSetup."Form Fee Account";
         GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
         GenJournalLine."Shortcut Dimension 1 Code" := globdim1;
         GenJournalLine."Shortcut Dimension 2 Code" := globdim2;
@@ -66,10 +66,10 @@ codeunit 56019 "SureAccountCharges"
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine."Posting Date" := Today;
         GenJournalLine.Description := 'PassCard Fee';
-        GenJournalLine.Amount := GenSetup."Passcard Fee";
+        //GenJournalLine.Amount := GenSetup."Passcard Fee";
         GenJournalLine.Validate(GenJournalLine.Amount);
         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-        GenJournalLine."Bal. Account No." := GenSetup."Membership Form Acct";
+        //GenJournalLine."Bal. Account No." := GenSetup."Membership Form Acct";
         GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
         GenJournalLine."Shortcut Dimension 1 Code" := globdim1;
         GenJournalLine."Shortcut Dimension 2 Code" := globdim2;
@@ -89,7 +89,7 @@ codeunit 56019 "SureAccountCharges"
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine."Posting Date" := Today;
         GenJournalLine.Description := 'Form Ex Duty';
-        GenJournalLine.Amount := (GenSetup."Form Fee") * (GenSetup."Excise Duty(%)" / 100);
+        //GenJournalLine.Amount := (GenSetup."Form Fee") * (GenSetup."Excise Duty(%)" / 100);
         GenJournalLine.Validate(GenJournalLine.Amount);
         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
         GenJournalLine."Bal. Account No." := GenSetup."Excise Duty Account";
@@ -113,7 +113,7 @@ codeunit 56019 "SureAccountCharges"
         GenJournalLine.Validate(GenJournalLine."Account No.");
         GenJournalLine."Posting Date" := Today;
         GenJournalLine.Description := 'PassCard Ex Duty';
-        GenJournalLine.Amount := (GenSetup."Passcard Fee") * (GenSetup."Excise Duty(%)" / 100);
+        //GenJournalLine.Amount := (GenSetup."Passcard Fee") * (GenSetup."Excise Duty(%)" / 100);
         GenJournalLine.Validate(GenJournalLine.Amount);
         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
         GenJournalLine."Bal. Account No." := GenSetup."Excise Duty Account";
@@ -214,10 +214,10 @@ codeunit 56019 "SureAccountCharges"
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := Today;
             GenJournalLine.Description := 'Ceep Reg Fee';
-            GenJournalLine.Amount := GenSetup."Ceep Reg Fee";
+            //GenJournalLine.Amount := GenSetup."Ceep Reg Fee";
             GenJournalLine.Validate(GenJournalLine.Amount);
             GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-            GenJournalLine."Bal. Account No." := GenSetup."Ceep Reg Acct";
+            //GenJournalLine."Bal. Account No." := GenSetup."Ceep Reg Acct";
             GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
             GenJournalLine."Shortcut Dimension 1 Code" := globdim1;
             GenJournalLine."Shortcut Dimension 2 Code" := globdim2;
@@ -238,7 +238,7 @@ codeunit 56019 "SureAccountCharges"
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := Today;
             GenJournalLine.Description := 'Ceep Ex Duty';
-            GenJournalLine.Amount := GenSetup."Ceep Reg Fee" * (GenSetup."Excise Duty(%)" / 100);
+            //GenJournalLine.Amount := GenSetup."Ceep Reg Fee" * (GenSetup."Excise Duty(%)" / 100);
             GenJournalLine.Validate(GenJournalLine.Amount);
             GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
             GenJournalLine."Bal. Account No." := GenSetup."Excise Duty Account";

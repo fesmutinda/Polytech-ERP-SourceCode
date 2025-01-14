@@ -1,7 +1,7 @@
 //This codeunit helps in modifying records and isnerting records the way you want them to be before posting to the respective member /customer posting group accounts.
 
 //NB:check line 78,this code is used to check the posting group the system will use in posting the loan
-codeunit 50015 "PostCustomerExtension"
+codeunit 51113 "PostCustomerExtension"
 {
     var
         LoanApp: Record "Loans Register";
@@ -17,7 +17,7 @@ codeunit 50015 "PostCustomerExtension"
     [EventSubscriber(ObjectType::codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterInsertDtldCustLedgEntry', '', false, false)]
     procedure InsertCustomfieldstodetailedcustledgerentry(GenJournalLine: Record "Gen. Journal Line"; var DtldCustLedgEntry: Record "Detailed Cust. Ledg. Entry")
     var
-        sfactory: Codeunit "Swizzsoft Factory";
+        sfactory: Codeunit "SURESTEP Factory";
     begin
         //Fields to autopopopulate data b4 the posting process is started;
         DtldCustLedgEntry.LockTable();
@@ -25,6 +25,7 @@ codeunit 50015 "PostCustomerExtension"
         DtldCustLedgEntry."Loan No" := GenJournalLine."Loan No";
         DtldCustLedgEntry."Loan Type" := GenJournalLine."Loan Product Type";
         DtldCustLedgEntry."Amount Posted" := GenJournalLine.Amount;
+        DtldCustLedgEntry."Document No." := GenJournalLine."Document No.";
         DtldCustLedgEntry."Transaction Date" := Today;
         DtldCustLedgEntry."Created On" := CurrentDateTime;
         DtldCustLedgEntry."Time Created" := Time;
@@ -70,7 +71,7 @@ codeunit 50015 "PostCustomerExtension"
     local procedure PostMemb(var GenJournalLine: Record "Gen. Journal Line"; Balancing: Boolean)
     var
         CreatedPostingGroup: Code[50];
-        SurestepFactory: Codeunit "Swizzsoft Factory";
+        SurestepFactory: Codeunit "SURESTEP Factory";
         LoanProductSetUpList: record "Loan Products Setup";
     begin
         MemberReg.Reset();
@@ -102,7 +103,7 @@ codeunit 50015 "PostCustomerExtension"
                 end;
             end;
         end;
-        if (GenJournalLine."Transaction Type" = GenJournalLine."transaction type"::"Loan Repayment") then begin
+        if (GenJournalLine."Transaction Type" = GenJournalLine."transaction type"::Repayment) then begin
             if GenJournalLine."Loan No" = '' then begin
                 Error('Loan No Field is empty! Loan No must be specified for %1', GenJournalLine."Account No.");
             end;
@@ -294,7 +295,7 @@ codeunit 50015 "PostCustomerExtension"
             GenJournalLine."Shortcut Dimension 1 Code" := FnGetActivity(GenJournalLine."Loan No");
             GenJournalLine.Modify();
         end else
-            if (GenJournalLine."Loan No" = '') and (GenJournalLine."Transaction Type" <> GenJournalLine."Transaction Type"::" ") then begin
+            if (GenJournalLine."Loan No" = '') and (GenJournalLine."Transaction Type" <> GenJournalLine."Transaction Type"::"0") then begin
                 GenJournalLine."Shortcut Dimension 1 Code" := '';
                 GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
                 GenJournalLine.Modify();
@@ -314,12 +315,12 @@ codeunit 50015 "PostCustomerExtension"
         end else
             if CustomerPostingGroup.find('-') = false then begin
                 //......Create Customer Posting Group
-                CustomerPostingGroupCreate.Init();
-                CustomerPostingGroupCreate.Code := PostingCode;
-                CustomerPostingGroupCreate."Account Type" := 'MEMBER';
-                CustomerPostingGroupCreate.Description := PostingCode + ' Posting Group';
-                CustomerPostingGroupCreate."Receivables Account" := ReceivableInterestAccount;
-                CustomerPostingGroupCreate.Insert();
+                // CustomerPostingGroupCreate.Init();
+                // CustomerPostingGroupCreate.Code := PostingCode;
+                // CustomerPostingGroupCreate."Account Type" := 'MEMBER';
+                // CustomerPostingGroupCreate.Description := PostingCode + ' Posting Group';
+                // CustomerPostingGroupCreate."Receivables Account" := ReceivableInterestAccount;
+                // CustomerPostingGroupCreate.Insert();
                 exit(CustomerPostingGroupCreate.Code);
             end;
     end;
@@ -337,7 +338,7 @@ codeunit 50015 "PostCustomerExtension"
 
     local procedure CheckDimensions(var GenJournalLine: Record "Gen. Journal Line"; Balancing: Boolean)
     var
-        SurestepFactory: Codeunit "Swizzsoft Factory";
+        SurestepFactory: Codeunit "SURESTEP Factory";
     begin
         if GenJournalLine."Shortcut Dimension 2 Code" = '' then begin
             GenJournalLine."Shortcut Dimension 2 Code" := '';
@@ -357,26 +358,13 @@ codeunit 50015 "PostCustomerExtension"
         end;
     end;
 
-    procedure GetMaxEntryNo(): Integer
-    var
-        CustLedgerEntry: Record "Cust. Ledger Entry";
-        MaxEntryNo: Integer;
-    begin
-        if CustLedgerEntry.FindLast() then
-            MaxEntryNo := CustLedgerEntry."Entry No.";
-
-        // Message('Max Entry No.: %1', MaxEntryNo);
-        exit(MaxEntryNo);
-    end;
-
     [EventSubscriber(ObjectType::Codeunit, codeunit::"Gen. Jnl.-Post Line", 'OnAfterInitCustLedgEntry', '', false, false)]
     procedure InsertCustomTransactionFields(GenJournalLine: Record "Gen. Journal Line"; var CustLedgerEntry: Record "Cust. Ledger Entry")
     var
         cust: Record Customer;
-        sfactory: Codeunit "Swizzsoft Factory";
+        sfactory: Codeunit "SURESTEP Factory";
     begin
         CustLedgerEntry.LockTable();
-        CustLedgerEntry."Entry No." := GetMaxEntryNo() + 1;
         CustLedgerEntry."Transaction Type" := GenJournalLine."Transaction Type";
         CustLedgerEntry."Loan No" := GenJournalLine."Loan No";
         CustLedgerEntry."Loan product Type" := FnGetLoanProductType(GenJournalLine."Loan No");

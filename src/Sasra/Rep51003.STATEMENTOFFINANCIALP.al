@@ -479,7 +479,7 @@ Report 51003 "STATEMENT OF FINANCIAL P"
                 //current year surplus
                 CurrentYearSurplus := 0;
                 GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '20800');
+                GLAccount.SetRange(GLAccount."No.", '599999');//'20800' Surplus/Deficit
                 GLAccount.SetFilter(GLAccount."Date Filter", '<=%1', Asat);
                 if GLAccount.FindSet then begin
                     GLAccount.CalcFields(GLAccount."Net Change");
@@ -493,8 +493,8 @@ Report 51003 "STATEMENT OF FINANCIAL P"
                 Taxes := (((InvestmentinCompaniesshares * 0.50) * 0.30));
                 Taxes := Taxes - Taxpaid;
 
-                DividendPayable := ((Nonwithdrawabledeposits * SaccoGen."Interest On Current Shares") * 0.01) + ((ShareCapital * SaccoGen."Interest on Share Capital(%)") * 0.01);
-                ProposedHonoraria := (((Nonwithdrawabledeposits * SaccoGen."Interest On Current Shares") * 0.01) * (SaccoGen."Proposed Honoraria" * 0.01));
+                DividendPayable := ((Nonwithdrawabledeposits * SaccoGen."Share Interest (%)") * 0.01) + ((ShareCapital * SaccoGen."Share Interest (%)") * 0.01);
+                ProposedHonoraria := (((Nonwithdrawabledeposits * SaccoGen."Retained Shares") * 0.01) * (SaccoGen."Proposed Honoraria" * 0.01));
                 CurrentYearSurplus := CurrentYearSurplus + (DividendPayable + Taxes);
                 StatturyAdjustment := -(0.20 * CurrentYearSurplus);
                 CurrentYearSurplus := (CurrentYearSurplus + (StatturyAdjustment + ProposedHonoraria));

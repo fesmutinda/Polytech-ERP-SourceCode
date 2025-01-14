@@ -475,6 +475,7 @@ Page 56031 "Loans Posted Card"
         LineNo: Integer;
         GnljnlineCopy: Record "Gen. Journal Line";
         NewLNApplicNo: Code[10];
+        //Cust: Record Customer;
         Cust: Record Customer;
         LoanApp: Record "Loans Register";
         TestAmt: Decimal;

@@ -161,6 +161,9 @@ page 50643 "Applicant Picture"
             rec.Picture.ImportStream(PictureInstream, PictureDescription, MimeTypeTok);
             Rec.Modify(true)
         end;
+        rec.Picture.ImportStream(PictureInstream, PictureDescription);
+        if not Rec.Modify(true) then
+            Rec.Insert(true);
     end;
 
     local procedure SetEditableOnPictureActions()

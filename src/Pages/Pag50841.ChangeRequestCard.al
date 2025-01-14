@@ -630,7 +630,7 @@ page 50841 "Change Request Card"
                                 Memb."Group Account Name" := Rec."Group Account Name";
                             if Rec."Employer Code(New)" <> '' then
                                 Memb."Employer Code" := Rec."Employer Code(New)";
-                            Memb.Picture := Rec."Picture.";
+                            Memb."Picture 2" := Rec."Picture(New Value)";
                             Memb.Status := Rec."Status.(New)";
                             Memb.Modify;
 
@@ -698,6 +698,8 @@ page 50841 "Change Request Card"
                 Promoted = true;
                 PromotedCategory = Category4;
                 PromotedOnly = true;
+                Enabled = (not OpenApprovalEntriesExist) AND EnabledApprovalWorkflowsExist AND (not RecordApproved);
+
 
                 trigger OnAction()
                 var
@@ -728,6 +730,7 @@ page 50841 "Change Request Card"
                 Promoted = true;
                 PromotedCategory = Category4;
                 PromotedOnly = true;
+                Enabled = CanCancelApprovalForRecord;
 
                 trigger OnAction()
                 var
@@ -844,6 +847,10 @@ page 50841 "Change Request Card"
             nxkinvisible := true;
         end;
 
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(REC.RecordId);//Return No and allow sending of approval request.
+
+        EnabledApprovalWorkflowsExist := true;
+        //............................
 
         UpdateControl();
     end;
@@ -868,13 +875,17 @@ page 50841 "Change Request Card"
             nxkinvisible := true;
         end;
 
+        UpdateControl();
+    end;
 
+    trigger OnAfterGetCurrRecord()
+    begin
         UpdateControl();
     end;
 
     var
         vend: Record Vendor;
-        Memb: Record 51364;
+        Memb: Record Customer;
         MobileVisible: Boolean;
         AtmVisible: Boolean;
         AccountVisible: Boolean;
@@ -928,6 +939,13 @@ page 50841 "Change Request Card"
         AccountCategoryEditable: Boolean;
         ReactivationFeeEditable: Boolean;
         RetirementDateEditable: Boolean;
+
+        //Approval Controls
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        OpenApprovalEntriesExist: Boolean;
+        EnabledApprovalWorkflowsExist: Boolean;
+        RecordApproved: Boolean;
+        CanCancelApprovalForRecord: Boolean;
 
     local procedure UpdateControl()
     begin
@@ -1013,6 +1031,7 @@ page 50841 "Change Request Card"
                 AccountNoEditable := false;
                 TypeEditable := false;
                 ReactivationFeeEditable := false;
+                CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
                 AccountCategoryEditable := false
             end else
                 if Rec.Status = Rec.Status::Approved then begin
@@ -1055,6 +1074,8 @@ page 50841 "Change Request Card"
                     AccountNoEditable := false;
                     ReactivationFeeEditable := false;
                     TypeEditable := false;
+                    RecordApproved := true;
+                    CanCancelApprovalForRecord := false;
                     AccountCategoryEditable := false
                 end;
     end;

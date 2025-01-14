@@ -87,7 +87,7 @@ page 50526 "Customer Care Log"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Shares Capital")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

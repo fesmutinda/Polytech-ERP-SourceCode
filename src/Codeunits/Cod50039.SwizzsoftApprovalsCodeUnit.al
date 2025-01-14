@@ -47,6 +47,7 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
     local procedure IsMembershipApplicationApprovalsWorkflowEnabled(var MembershipApplication: Record "Membership Applications"): Boolean
     begin
+        //Message('Enabled ExecuteWKFL');
         exit(WorkflowManagement.CanExecuteWorkflow(MembershipApplication, Psalmkitswfevents.RunWorkflowOnSendMembershipApplicationForApprovalCode));
     end;
 
@@ -93,7 +94,7 @@ Codeunit 50039 "SwizzsoftApprovalsCodeUnit"
 
     local procedure IsLoanApplicationApprovalsWorkflowEnabled(var LoansRegister: Record "Loans Register"): Boolean
     begin
-        // exit(WorkflowManagement.CanExecuteWorkflow(LoansRegister, Psalmkitswfevents.RunWorkflowOnSendLoanApplicationForApprovalCode));
+        exit(WorkflowManagement.CanExecuteWorkflow(LoansRegister, Psalmkitswfevents.RunWorkflowOnSendLoanApplicationForApprovalCode));
     end;
 
 

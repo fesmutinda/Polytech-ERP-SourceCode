@@ -5,6 +5,7 @@ page 50413 "Sacco No. Series"
     DeleteAllowed = false;
     InsertAllowed = false;
     Editable = true;
+    ApplicationArea = All;
     SourceTable = "Sacco No. Series";
     UsageCategory = Administration;
 

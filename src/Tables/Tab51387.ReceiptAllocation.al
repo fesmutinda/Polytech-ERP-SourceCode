@@ -277,12 +277,15 @@ Table 51387 "Receipt Allocation"
     keys
     {
         key(Key1; "Document No", "Transaction Type", Amount, "Account Type", "Account No", "Member No", "Loan No.")
+        key(Key1; "Document No", "Transaction Type", Amount, "Account Type", "Account No", "Member No", "Loan No.")
         {
             Clustered = true;
         }
         key(Key2; "Loan No.")
+        key(Key2; "Loan No.")
         {
         }
+        key(Key3; "Account No")
         key(Key3; "Account No")
         {
         }

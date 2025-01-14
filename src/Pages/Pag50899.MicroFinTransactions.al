@@ -336,7 +336,7 @@ page 50899 "Micro_Fin_Transactions"
 
                                     //*****************************Shares Recovery*****************
                                     if DistributedAmt > 0 then begin
-                                        if Transact."Share Capital" > 0 then begin
+                                        if Transact."Shares Capital" > 0 then begin
                                             LineNo := LineNo + 10000;
                                             GenJournalLine.Init;
                                             GenJournalLine."Journal Template Name" := Jtemplate;
@@ -349,7 +349,7 @@ page 50899 "Micro_Fin_Transactions"
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             GenJournalLine."Posting Date" := Rec."Transaction Date";
                                             GenJournalLine.Description := Rec."Payment Description";
-                                            GenJournalLine.Amount := -Transact."Share Capital";
+                                            GenJournalLine.Amount := -Transact."Shares Capital";
                                             GenJournalLine.Validate(GenJournalLine.Amount);
                                             GenJournalLine."Loan No" := Transact."Loan No.";
                                             GenJournalLine."Shortcut Dimension 1 Code" := Rec."Activity Code";
@@ -482,7 +482,7 @@ page 50899 "Micro_Fin_Transactions"
                             //Shares
 
                             if DistributedAmt > 0 then begin
-                                if Transact."Share Capital" > 0 then begin
+                                if Transact."Shares Capital" > 0 then begin
 
                                     LineNo := LineNo + 10000;
                                     GenJournalLine.Init;
@@ -497,7 +497,7 @@ page 50899 "Micro_Fin_Transactions"
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine.Description := 'Shares-' + Transact."Account Number";
-                                    GenJournalLine.Amount := -Transact."Share Capital";
+                                    GenJournalLine.Amount := -Transact."Shares Capital";
                                     ;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
                                     GenJournalLine."Shortcut Dimension 1 Code" := Rec."Activity Code";
@@ -612,7 +612,7 @@ page 50899 "Micro_Fin_Transactions"
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None",JV,"Member Closure","Account Opening",Batches,"Payment Voucher","Petty Cash",Requisition,Loan,Interbank,Imprest,Checkoff,"FOSA Account Opening",StandingOrder,HRJob,HRLeave,"HRTransport Request",HRTraining,"HREmp Requsition",MicroTrans;
         DistributedAmt: Decimal;
         MicrSchedule: Record 51896;
-        CustMember: Record 51364;
+        CustMember: Record Customer;
         GensetUp: Record 51398;
         ChangeStatus: Boolean;
         DepDifference: Decimal;
@@ -630,7 +630,7 @@ page 50899 "Micro_Fin_Transactions"
         Text008: label 'The transaction No. -%1 is already posted';
         Text009: label 'This Till is No. %1 not assigned to this Specific User. Please contact your system administrator';
         ReceiptAllocations: Record "Receipt Allocation";
-        Cust: Record 51364;
+        Cust: Record Customer;
         LoanApp: Record 51371;
         LOustanding: Decimal;
 }

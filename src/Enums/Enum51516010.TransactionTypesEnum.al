@@ -201,6 +201,48 @@ enum 51516010 "TransactionTypesEnum"
     {
 
     }
-    value(56; "Mwanangu Savings") { Caption = 'Mwanangu Savings'; }
+    value(56; Junior_1)
+    {
 
+    }
+    value(57; Junior_2)
+    {
+
+    }
+
+    value(58; "Jiokoe Savings")
+    {
+    }
+    value(59; Junior3)
+    {
+
+    }
+    // value(60; "SchFee Shares")
+    // {
+    // }
+
+    // value(61; "Debtors to Members")
+    // {
+    //     Caption = 'Debtors to Members(AI)';
+    // }
+    // value(62; "Debtors to Ex-Members")
+    // {
+    //     Caption = 'Debtors to Ex-Members';
+    // }
+    value(63; "Loan Repayment")
+    {
+
+    }
+    value(64; "Mwanangu Savings")
+    {
+
+    }
+    value(65; "Recovery Account")
+    {
+
+    }
+    value(66; "Standing Order Charges")
+    {
+
+    }
 }

@@ -100,8 +100,8 @@ Table 51475 "HISA Allocation"
                 /*IF ("Transaction Type" = "Transaction Type"::"Shares Capital") THEN BEGIN
                 IF Cust.GET("Member No") THEN BEGIN
                 Cust.CALCFIELDS(Cust."Shares Retained");
-                IF Amount > (Cust."Share Capital"+Cust."Shares Retained") THEN
-                ERROR('You can only receive the oustanding Share Capital amount of %1',(Cust."Share Capital"+Cust."Shares Retained"));
+                IF Amount > (Cust."Shares Capital"+Cust."Shares Retained") THEN
+                ERROR('You can only receive the oustanding Share Capital amount of %1',(Cust."Shares Capital"+Cust."Shares Retained"));
                 END;
                 END;   */
 

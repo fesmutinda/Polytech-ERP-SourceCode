@@ -37,8 +37,8 @@ Codeunit 50009 "Swizzsoft Factory"
         ObjBanks: Record "Bank Account";
         ObjLoanProductSetup: Record 51381;
         ObjProductCharges: Record 51383;
-        ObjMembers: Record 51364;
-        ObjMembers2: Record 51364;
+        ObjMembers: Record Customer;
+        ObjMembers2: Record Customer;
         ObjGenSetUp: Record 51398;
         ObjCompInfo: Record "Company Information";
         BAND1: Decimal;
@@ -46,7 +46,7 @@ Codeunit 50009 "Swizzsoft Factory"
         BAND3: Decimal;
         BAND4: Decimal;
         BAND5: Decimal;
-        ObjMembershipWithdrawal: Record 51400;
+        ObjMembershipWithdrawal: Record "Membership Exist"; //from MembershipExit
         ObjSalesSetup: Record 51399;
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjNoSeriesManagement: Codeunit NoSeriesManagement;
@@ -610,7 +610,7 @@ Codeunit 50009 "Swizzsoft Factory"
     end;
 
 
-    procedure FnCreateGnlJournalLine(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50])
+    procedure FnCreateGnlJournalLine(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50])
     var
         GenJournalLine: Record "Gen. Journal Line";
     begin
@@ -782,7 +782,7 @@ Codeunit 50009 "Swizzsoft Factory"
 
     procedure FnGetMemberBranch(MemberNo: Code[100]) MemberBranch: Code[100]
     var
-        ObjMemberLocal: Record 51364;
+        ObjMemberLocal: Record Customer;
     begin
         ObjMemberLocal.Reset;
         ObjMemberLocal.SetRange(ObjMemberLocal."No.", MemberNo);
@@ -794,7 +794,7 @@ Codeunit 50009 "Swizzsoft Factory"
 
     local procedure FnReturnRetirementDate(MemberNo: Code[50]): Date
     var
-        ObjMembers: Record 51364;
+        ObjMembers: Record Customer;
     begin
         ObjGenSetUp.Get();
         ObjMembers.Reset;
@@ -829,7 +829,7 @@ Codeunit 50009 "Swizzsoft Factory"
 
     procedure FnGetFosaAccount(MemberNo: Code[50]) FosaAccount: Code[50]
     var
-        ObjMembers: Record 51364;
+        ObjMembers: Record Customer;
     begin
         ObjMembers.Reset;
         ObjMembers.SetRange(ObjMembers."No.", MemberNo);
@@ -866,7 +866,7 @@ Codeunit 50009 "Swizzsoft Factory"
     end;
 
 
-    procedure FnCreateGnlJournalLineBalanced(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionDescription: Text; BalancingAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; BalancingAccountNo: Code[50]; TransactionAmount: Decimal; DimensionActivity: Code[40]; LoanNo: Code[20])
+    procedure FnCreateGnlJournalLineBalanced(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionDescription: Text; BalancingAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; BalancingAccountNo: Code[50]; TransactionAmount: Decimal; DimensionActivity: Code[40]; LoanNo: Code[20])
     var
         GenJournalLine: Record "Gen. Journal Line";
     begin
@@ -934,7 +934,7 @@ Codeunit 50009 "Swizzsoft Factory"
         loanTypes: Record 51381;
         ObjLoanX: Record 51371;
         LoansRec: Record 51371;
-        Cust: Record 51364;
+        Cust: Record Customer;
     begin
         loanTypes.Reset;
         loanTypes.SetRange(loanTypes.Code, 'BLOAN');

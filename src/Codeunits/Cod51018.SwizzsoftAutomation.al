@@ -29,7 +29,7 @@ codeunit 51018 "SwizzsoftAutomation"
         DocumentNo: Code[100];
         ObjMembers: Record Customer;
         ObjLoans: Record "Loans Register";
-        SFactory: Codeunit "Swizzsoft Factory";
+        SFactory: Codeunit "SURESTEP Factory";
         BATCH_TEMPLATE: Code[100];
         BATCH_NAME: Code[100];
         DOCUMENT_NO: Code[100];

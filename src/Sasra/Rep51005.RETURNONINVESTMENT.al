@@ -197,7 +197,7 @@ Report 51005 "RETURN ON INVESTMENT"
                 //TotalAssets
                 TotalAssets := 0;
                 GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '14300');
+                GLAccount.SetRange(GLAccount."No.", '199999');//14300
                 GLAccount.SetFilter(GLAccount."Date Filter", '<=%1', AsAt);
                 if GLAccount.FindSet then begin
                     GLAccount.CalcFields(GLAccount."Net Change");

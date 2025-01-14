@@ -2,7 +2,7 @@
 Report 50055 "Loan Defaulter Final Notice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/Loan Defaulter Final Notice.rdlc';
+    RDLCLayout = './Layouts/LoanDefaulterFinalNotice.rdl';
 
     dataset
     {
@@ -141,8 +141,6 @@ Report 50055 "Loan Defaulter Final Notice"
             trigger OnAfterGetRecord()
             begin
                 //  Penaltcharge:=0.05*("<LoansRec>"."Current Shares"+"<LoansRec>"."Share Purchase");
-
-                //MESSAGE('Kiongozi',Penaltcharge) ;
 
                 AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
                 OutstandingInt := "Oustanding Interest";

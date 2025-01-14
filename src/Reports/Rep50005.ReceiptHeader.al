@@ -2,7 +2,7 @@
 Report 50005 "Receipt Header"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/Receipt Header.rdlc';
+    RDLCLayout = './Layouts/Receipt Header.rdl';
 
     dataset
     {

@@ -1,6 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51000 "Payment Header"
 {
+    DrillDownPageId = PaymentList;
+    LookupPageId = PaymentList;
 
     fields
     {
@@ -90,7 +92,14 @@ Table 51000 "Payment Header"
         }
         field(27; "Bank Account"; Code[20])
         {
+            /* TableRelation = if ("Payment Type" = const(Normal)) "Bank Account"."No." where("Account Type" = filter(<> 'Petty Cash'),
+                                                                                          "Account Type" = const(" "))
+            else
+            // if ("Payment Type" = const("Petty Cash")) "Bank Account"."No." where("Account Type" = const("Petty Cash"));
+            if ("Payment Type" = const("Petty Cash")) "Bank Account"."No." where("No." = filter('BANK_0013')); */
             TableRelation = "Bank Account"."No.";
+
+
             trigger OnValidate()
             begin
                 BankAccount.Reset;

@@ -122,7 +122,7 @@ Table 51372 "Loans Guarantee Details"
 
                     end else begin
                         if "Self Guarantee" = false then
-                            Message('deposi is %1', Shares);
+                            //Message('deposi is %1', Shares);
                         Amont := Shares * 1 - SwizzsoftFactory.FnGetMemberLiability("Member No");
                         //MESSAGE('amont is %1',Amont);
                         "TotalLoan Guaranteed" := Cust.TLoansGuaranteed;
@@ -223,6 +223,8 @@ Table 51372 "Loans Guarantee Details"
                     until LoanGuarantors.Next = 0;
                 end;
                 ///END;
+                /// 
+                /// ------------------------------------------------------------------
                 Message('Amount Guarantee is Still In Application Process %1', MDeposit);
 
 
@@ -369,7 +371,8 @@ Table 51372 "Loans Guarantee Details"
                 // MESSAGE('MAmounttoG is %1',MAmounttoG);
 
                 vardiff := (Amont - MAmounttoG);
-                Message(Format(Amont));
+
+                //Message(Format(Amont));
 
 
                 if "Self Guarantee" = true then begin
@@ -508,7 +511,7 @@ Table 51372 "Loans Guarantee Details"
         field(30; "Member Cell"; Code[10])
         {
         }
-        field(31; "Share capital"; Decimal)
+        field(31; "Shares Capital"; Decimal)
         {
         }
         field(32; "TotalLoan Guaranteed"; Decimal)
@@ -542,6 +545,10 @@ Table 51372 "Loans Guarantee Details"
                                                                               Substituted = filter(false)));
             Description = '//>Sum total guaranteed amount for each loan';
             FieldClass = FlowField;
+        }
+        field(41; "Transferable shares"; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
         field(69161; "Total Committed Shares"; Decimal)
         {

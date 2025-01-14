@@ -211,17 +211,33 @@ Table 51002 "Receipt Header"
         {
             Editable = false;
         }
+        field(51516833; "Property Name"; Text[50])
+        {
+            Description = 'Project Management Field';
+            Editable = false;
+        }
         field(54; "Receipt Category"; Option)
         {
             OptionCaption = 'Normal,Investor,Property';
             OptionMembers = Normal,Investor,Property;
         }
+        // field(51516834; "Receipt Category"; Option)
+        // {
+        //     OptionCaption = 'Normal,Investor,Property';
+        //     OptionMembers = Normal,Investor,Property;
+        // }
         field(55; "Account No"; Code[20])
         {
         }
         field(56; "Withholding Tax Code"; Code[20])
         {
             DataClassification = ToBeClassified;
+        }
+        field(59; "Document Type"; Option)
+        {
+            Editable = false;
+            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund,Receipt';
+            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund,Receipt;
         }
         field(51516831; "Property Code"; Code[20])
         {
@@ -240,16 +256,6 @@ Table 51002 "Receipt Header"
                     end;
                 end;
             end;
-        }
-        field(51516832; "Project Name"; Text[50])
-        {
-            Description = 'Project Management Field';
-            Editable = false;
-        }
-        field(51516833; "Property Name"; Text[50])
-        {
-            Description = 'Project Management Field';
-            Editable = false;
         }
     }
 
@@ -317,5 +323,6 @@ Table 51002 "Receipt Header"
         RHeader: Record "Receipt Header";
         CurrExchRate: Record "Currency Exchange Rate";
         Banks: Record "Bank Account";
+        FA: Record "Fixed Asset";
 }
 

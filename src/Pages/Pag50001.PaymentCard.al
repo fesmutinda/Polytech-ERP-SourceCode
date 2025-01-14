@@ -143,7 +143,7 @@ Page 50001 "Payment Card"
                     ApplicationArea = Basic;
                 }
             }
-            part(Control35; "Payment Lines Posted")
+            part(Control35; "Payment Line")
             {
                 SubPageLink = "Document No" = field("No.");
             }

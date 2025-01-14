@@ -166,6 +166,12 @@ End Function
         <Field Name="OutstandingBalance_LoanGuarantorsFormat">
           <DataField>OutstandingBalance_LoanGuarantorsFormat</DataField>
         </Field>
+        <Field Name="MemberGuaranteed_LoanGuarantors">
+          <DataField>MemberGuaranteed_LoanGuarantors</DataField>
+        </Field>
+        <Field Name="MemberGuaranteed_LoanGuarantorsFormat">
+          <DataField>MemberGuaranteed_LoanGuarantorsFormat</DataField>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource</DataSourceName>

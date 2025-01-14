@@ -1,7 +1,7 @@
 tableextension 50047 "CustomerExt" extends Customer
 {
-    // DrillDownPageId = "Member List";
-    // LookupPageId = "Member List";
+    DrillDownPageId = "Member List";
+    LookupPageId = "Member List";
     fields
     {
 
@@ -49,7 +49,7 @@ tableextension 50047 "CustomerExt" extends Customer
         }
         field(68002; "Current Loan"; Decimal)
         {
-            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("No."),
+            CalcFormula = sum("Member Ledger Entry"."Amount" where("Customer No." = field("No."),
                                                                   "Transaction Type" = const(Loan),
                                                                   "Posting Date" = field("Date Filter"),
                                                                   "Document No." = field("Document No. Filter"), "Posting Date" = field("Date Filter"), Reversed = const(false)));
@@ -571,7 +571,7 @@ tableextension 50047 "CustomerExt" extends Customer
         {
             FieldClass = Normal;
         }
-        field(68116; "Share Capital"; Decimal)
+        field(68116; "Shares Capital"; Decimal)
         {
             CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("No."),
                                                                    "Transaction Type" = filter("Shares Capital"),

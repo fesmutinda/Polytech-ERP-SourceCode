@@ -431,7 +431,7 @@ Table 51556 "Cases Management"
                       City:=Cust.City;
                       "Company No":=Cust."Employer Code";
                       "Company Name":=Cust."Employer Name";
-                      "Share Capital":=Cust."Shares Retained";
+                      "Shares Capital":=Cust."Shares Retained";
                        Source:=Cust."Customer Posting Group";
                       "Employment Info":=Cust."Employment Info";
                       "Employer Code":=Cust."Employer Code";
@@ -472,7 +472,7 @@ Table 51556 "Cases Management"
         field(69208; Description; Text[250])
         {
         }
-        field(69209; "Share Capital"; Decimal)
+        field(69209; "Shares Capital"; Decimal)
         {
         }
         field(69210; "ID No"; Code[20])

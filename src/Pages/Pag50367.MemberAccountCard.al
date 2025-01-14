@@ -796,6 +796,7 @@ page 50367 "Member Account Card"
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.FindFirst then begin
                             Report.Run(50279, true, false, Cust);
+                            Report.Run(50279, true, false, Cust);
                         end;
                     end;
                 }
@@ -874,12 +875,17 @@ page 50367 "Member Account Card"
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
                             Report.Run(50226, true, false, Cust);
+                        Report.Run(50226, true, false, Cust);
                     end;
                 }
                 action("Member is  Guaranteed")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member is  Guaranteed';
+                    Image = JobPurchaseInvoice;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    /* trigger OnAction()
                     Image = "Report";
 
                     trigger OnAction()
@@ -887,6 +893,8 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
+                            Report.Run(50226, true, false, Cust);
+                    end; */
                             Report.Run(50225, true, false, Cust);
                     end;
                 }
@@ -898,7 +906,7 @@ page 50367 "Member Account Card"
                     Visible = false;
                     PromotedCategory = Process;
                     RunObject = Page "Member Monthly Contributions";
-                    RunPageLink = "No." = field("No.");
+                                    RunPageLink = "No." = field("No.");
                 }
                 group(ActionGroup1102755018)
                 {
@@ -908,18 +916,20 @@ page 50367 "Member Account Card"
                     ApplicationArea = Basic;
                     Caption = 'Detailed Statement';
                     Image = Report;
-                    Promoted = true;
-                    PromotedCategory = "Report";
+                                Promoted = true;
+                                PromotedCategory = "Report";
 
-                    trigger OnAction()
-                    begin
-                        Cust.Reset;
-                        Cust.SetRange(Cust."No.", Rec."No.");
-                        if Cust.Find('-') then
-                            Report.Run(50223, true, false, Cust);
-                    end;
+    trigger OnAction()
+    begin
+        Cust.Reset;
+        Cust.SetRange(Cust."No.", Rec."No.");
+        if Cust.Find('-') then
+            Report.Run(50223, true, false, Cust);
+        Report.Run(50223, true, false, Cust);
+    end;
                 }
                 action("Deposit Statement")
+>>>>>>> kelvinupdates
                 {
                     ApplicationArea = Basic;
                     Caption = 'Deposit Statement';
@@ -945,6 +955,225 @@ page 50367 "Member Account Card"
 
                     trigger OnAction()
                     begin
+<<<<<<< HEAD
+
+                        if (Rec."Current Shares" * -1) > 0 then
+                            Error('Please recover the loans from the members shares before recovering from gurantors.');
+
+                        if Confirm('Are you absolutely sure you want to recover the loans from the guarantors as loans?') = false then
+                            exit;
+
+                        RoundingDiff := 0;
+
+                        //delete journal line
+                        Gnljnline.Reset;
+                        Gnljnline.SetRange("Journal Template Name", 'GENERAL');
+                        Gnljnline.SetRange("Journal Batch Name", 'LOANS');
+                        Gnljnline.DeleteAll;
+                        //end of deletion
+
+                        TotalRecovered := 0;
+
+                        DActivity := Rec."Global Dimension 1 Code";
+                        DBranch := Rec."Global Dimension 2 Code";
+
+                        Rec.CalcFields("Outstanding Balance", "Accrued Interest", "Insurance Fund", "Current Shares");
+
+
+                        if Rec."Closing Deposit Balance" = 0 then
+                            Rec."Closing Deposit Balance" := Rec."Current Shares" * -1;
+                        if Rec."Closing Loan Balance" = 0 then
+                            Rec."Closing Loan Balance" := Rec."Outstanding Balance" + Rec."FOSA Outstanding Balance";
+                        if Rec."Closing Insurance Balance" = 0 then
+                            Rec."Closing Insurance Balance" := Rec."Insurance Fund" * -1;
+                        Rec."Withdrawal Posted" := true;
+                        Rec.Modify;
+
+
+                        Rec.CalcFields("Outstanding Balance", "Accrued Interest", "Current Shares");
+
+
+
+                        LoansR.Reset;
+                        LoansR.SetRange(LoansR."Client Code", Rec."No.");
+                        LoansR.SetRange(LoansR.Source, LoansR.Source::BOSA);
+                        if LoansR.Find('-') then begin
+                            repeat
+
+                                LoansR.CalcFields(LoansR."Outstanding Balance", LoansR."Oustanding Interest", LoansR."No. Of Guarantors");
+
+                                //No Shares recovery
+                                if LoansR."Recovered Balance" = 0 then begin
+                                    LoansR."Recovered Balance" := LoansR."Outstanding Balance";
+                                end;
+                                LoansR."Recovered From Guarantor" := true;
+                                LoansR."Guarantor Amount" := LoansR."Outstanding Balance";
+                                LoansR.Modify;
+
+                                if ((LoansR."Outstanding Balance" + LoansR."Oustanding Interest") > 0) and (LoansR."No. Of Guarantors" > 0) then begin
+
+                                    LoanAllocation := ROUND((LoansR."Outstanding Balance") / LoansR."No. Of Guarantors", 0.01) +
+                                                    ROUND((LoansR."Oustanding Interest") / LoansR."No. Of Guarantors", 0.01);
+
+
+                                    LGurantors.Reset;
+                                    LGurantors.SetRange(LGurantors."Loan No", LoansR."Loan  No.");
+                                    LGurantors.SetRange(LGurantors.Substituted, false);
+                                    if LGurantors.Find('-') then begin
+                                        repeat
+
+
+                                            Loans.Reset;
+                                            Loans.SetRange(Loans."Client Code", LGurantors."Member No");
+                                            Loans.SetRange(Loans."Loan Product Type", 'L07');
+                                            Loans.SetRange(Loans.Posted, false);
+                                            if Loans.Find('-') then
+                                                Loans.DeleteAll;
+
+
+                                            Loans.Init;
+                                            Loans."Loan  No." := '';
+                                            Loans.Source := Loans.Source::BOSA;
+                                            Loans."Client Code" := LGurantors."Member No";
+                                            Loans."Loan Product Type" := 'L07';
+                                            Loans.Validate(Loans."Client Code");
+                                            Loans."Application Date" := Today;
+                                            Loans.Validate(Loans."Loan Product Type");
+                                            if (LoansR."Approved Amount" > 0) and (LoansR.Installments > 0) then
+                                                Loans.Installments := ROUND((LoansR."Outstanding Balance")
+                                                                          / (LoansR."Approved Amount" / LoansR.Installments), 1, '>');
+                                            Loans."Requested Amount" := LoanAllocation;
+                                            Loans."Approved Amount" := LoanAllocation;
+                                            Loans.Validate(Loans."Approved Amount");
+                                            Loans."Loan Status" := Loans."loan status"::Approved;
+                                            Loans."Issued Date" := Today;
+                                            Loans."Loan Disbursement Date" := Today;
+                                            Loans."Repayment Start Date" := Today;
+                                            Loans."Batch No." := Rec."Batch No.";
+                                            Loans."BOSA No" := LGurantors."Member No";
+                                            Loans."Recovered Loan" := LoansR."Loan  No.";
+                                            Loans.Insert(true);
+
+                                            Loans.Reset;
+                                            Loans.SetRange(Loans."Client Code", LGurantors."Member No");
+                                            Loans.SetRange(Loans."Loan Product Type", 'L07');
+                                            Loans.SetRange(Loans.Posted, false);
+                                            if Loans.Find('-') then begin
+
+                                                LineNo := LineNo + 10000;
+
+                                                GenJournalLine.Init;
+                                                GenJournalLine."Journal Template Name" := 'GENERAL';
+                                                GenJournalLine."Journal Batch Name" := 'LOANS';
+                                                GenJournalLine."Line No." := LineNo;
+                                                GenJournalLine."Document No." := 'GL-' + LoansR."Client Code";
+                                                GenJournalLine."Posting Date" := Today;
+                                                GenJournalLine."External Document No." := LoansR."Loan  No.";
+                                                GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Customer;
+                                                GenJournalLine."Account No." := LGurantors."Member No";
+                                                GenJournalLine.Validate(GenJournalLine."Account No.");
+                                                GenJournalLine.Description := 'Principle Amount';
+                                                GenJournalLine.Amount := LoanAllocation;
+                                                GenJournalLine.Validate(GenJournalLine.Amount);
+                                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Loan;
+                                                GenJournalLine."Loan No" := Loans."Loan  No.";
+                                                GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+                                                GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+                                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                                if GenJournalLine.Amount <> 0 then
+                                                    GenJournalLine.Insert;
+
+
+                                                Loans.Posted := true;
+                                                Loans.Modify;
+
+
+                                                //Off Set BOSA Loans
+
+                                                //Principle
+                                                LineNo := LineNo + 10000;
+
+                                                GenJournalLine.Init;
+                                                GenJournalLine."Journal Template Name" := 'GENERAL';
+                                                GenJournalLine."Journal Batch Name" := 'LOANS';
+                                                GenJournalLine."Line No." := LineNo;
+                                                GenJournalLine."Document No." := 'GL-' + LoansR."Client Code";
+                                                GenJournalLine."Posting Date" := Today;
+                                                GenJournalLine."External Document No." := Loans."Loan  No.";
+                                                GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Customer;
+                                                GenJournalLine."Account No." := LoansR."Client Code";
+                                                GenJournalLine.Validate(GenJournalLine."Account No.");
+                                                GenJournalLine.Description := 'Cleared by Guarantor loan: ' + Loans."Loan  No.";
+                                                GenJournalLine.Amount := -ROUND(LoansR."Outstanding Balance" / LoansR."No. Of Guarantors", 0.01);
+                                                GenJournalLine.Validate(GenJournalLine.Amount);
+                                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Loan Repayment";
+                                                GenJournalLine."Loan No" := LoansR."Loan  No.";
+                                                GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+                                                GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+                                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                                if GenJournalLine.Amount <> 0 then
+                                                    GenJournalLine.Insert;
+
+
+
+                                                //Interest
+                                                LineNo := LineNo + 10000;
+
+                                                GenJournalLine.Init;
+                                                GenJournalLine."Journal Template Name" := 'GENERAL';
+                                                GenJournalLine."Journal Batch Name" := 'LOANS';
+                                                GenJournalLine."Line No." := LineNo;
+                                                GenJournalLine."Document No." := 'GL-' + LoansR."Client Code";
+                                                GenJournalLine."Posting Date" := Today;
+                                                GenJournalLine."External Document No." := Loans."Loan  No.";
+                                                GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Customer;
+                                                GenJournalLine."Account No." := LoansR."Client Code";
+                                                GenJournalLine.Validate(GenJournalLine."Account No.");
+                                                GenJournalLine.Description := 'Cleared by Guarantor loan: ' + Loans."Loan  No.";
+                                                GenJournalLine.Amount := -ROUND(LoansR."Oustanding Interest" / LoansR."No. Of Guarantors", 0.01);
+                                                GenJournalLine.Validate(GenJournalLine.Amount);
+                                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Paid";
+                                                GenJournalLine."Loan No" := LoansR."Loan  No.";
+                                                GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+                                                GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+                                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                                if GenJournalLine.Amount <> 0 then
+                                                    GenJournalLine.Insert;
+
+
+
+                                                LoansR.Advice := true;
+                                                LoansR.Modify;
+
+                                            end;
+
+                                        until LGurantors.Next = 0;
+                                    end;
+                                end;
+
+                            until LoansR.Next = 0;
+                        end;
+
+
+                        Rec."Defaulted Loans Recovered" := true;
+                        Rec.Modify;
+
+
+                        //Post New
+                        GenJournalLine.Reset;
+                        GenJournalLine.SetRange("Journal Template Name", 'GENERAL');
+                        GenJournalLine.SetRange("Journal Batch Name", 'LOANS');
+                        if GenJournalLine.Find('-') then begin
+                            Codeunit.Run(Codeunit::"Gen. Jnl.-Post Batch", GenJournalLine);
+                        end;
+
+
+
+                        Message('Loan recovery from guarantors posted successfully.');
+=======
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
@@ -973,6 +1202,38 @@ page 50367 "Member Account Card"
                     Promoted = true;
                     PromotedCategory = "Report";
 
+                    //     trigger OnAction()
+                    //     begin
+                    //         Cust.Reset;
+                    //         Cust.SetRange(Cust."FOSA Account No.", "FOSA Account No.");
+                    //         if Cust.Find('-') then
+                    //             Report.Run(51516533, true, false, Cust);
+                    //     end;
+                    // }
+
+                    action("Loans Perfomance Statement")
+                    {
+                        ApplicationArea = Basic;
+                        Image = "Report";
+                        Promoted = true;
+                        PromotedCategory = "Report";
+
+                        trigger OnAction()
+                        var
+                            LoansReg: Record "Loans Register";
+                        begin
+                            LoansReg.Reset;
+                            LoansReg.SetRange(LoansReg."Client Code", Rec."No.");
+                            if LoansReg.Find('-') then
+                                Report.Run(50207, true, false, LoansReg);
+                        end;
+                    }
+                    /*  action("Historical BOSA Loan Statement")
+                     {
+                         ApplicationArea = Basic;
+                         Promoted = true;
+                         Caption = 'All BOSA Loan Statement';
+                         PromotedCategory = Report;
                     trigger OnAction()
                     var
                         LoansReg: Record "Loans Register";

@@ -30,7 +30,7 @@ Table 51365 "Member Ledger Entry"
         {
             Caption = 'Document No.';
         }
-        field(7; Description; Text[150])
+        field(7; Description; Text[100])
         {
             Caption = 'Description';
         }
@@ -459,10 +459,11 @@ Table 51365 "Member Ledger Entry"
         {
             Caption = 'Prepayment';
         }
-        field(68000; "Transaction Type"; Option)
+        field(68000; "Transaction Type"; option/* Enum TransactionTypesEnum */)
         {
-            OptionCaption = ' ,Registration Fee,Share Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,FOSA Shares,Additional Shares,Interest Due,Jiokoe Savings,Holiday Savings';
-            OptionMembers = " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings","Holiday Savings";
+            OptionCaption = ' ,Registration Fee,Shares Capital,Interest Paid,Loan Repayment,Deposit Contribution,Insurance Contribution,Benevolent Fund,Loan,Unallocated Funds,Dividend,Mwanangu Savings,Loan Insurance Charged,Loan Insurance Paid,Recovery Account,FOSA Shares,Additional Shares,Interest Due,Jiokoe Savings,Holiday Savings';
+            OptionMembers = " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings","Holiday Savings";
+
         }
         field(68001; "Loan No"; Code[20])
         {
@@ -502,7 +503,7 @@ Table 51365 "Member Ledger Entry"
         }
         field(68011; "Total Debits"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Transaction Type" = filter("Share Capital"),
+            CalcFormula = sum("Member Ledger Entry".Amount where("Transaction Type" = filter("Shares Capital"),
                                                                   "Loan Type" = field("Loan Type"),
                                                                   "Posting Date" = field("Posting Date")));
             FieldClass = FlowField;

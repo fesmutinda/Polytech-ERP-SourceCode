@@ -27,7 +27,7 @@ Page 50145 "Member Re-Application Page"
                     ToolTip = 'Specifies the value of the Member Name field.';
                     Editable = false;
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Shares Capital")
                 {
                     ApplicationArea = all;
                     Editable = false;
@@ -38,6 +38,10 @@ Page 50145 "Member Re-Application Page"
                     ApplicationArea = all;
                     Editable = false;
                     Caption = 'Workflow Status';
+                    trigger OnValidate()
+                    begin
+                        UpdateControl();
+                    end;
 
                 }
                 field("Reason for Re-Application"; Rec."Reason for Re-Application")
@@ -104,7 +108,7 @@ Page 50145 "Member Re-Application Page"
                         Cust."Reason For Membership Withdraw" := ' ';
                         Cust."Re-instated" := true;
                         Cust."Rejoining Date" := Rec."Re-Application On";
-                        Cust."Rejoined By" := Rec."Re-Application By";
+                        //Cust.rejoined := Rec."Re-Application By";
                         Cust.Modify();
                     end;
                     Rec.Reactivated := true;
@@ -115,12 +119,14 @@ Page 50145 "Member Re-Application Page"
             {
                 Promoted = true;
                 PromotedCategory = Process;
+                Enabled = (not OpenApprovalEntriesExist) AND EnabledApprovalWorkflowsExist AND (not RecordApproved);
+
                 trigger OnAction()
                 var
                     myInt: Integer;
                 begin
                     if Rec.Status <> Rec.Status::Open then
-                        Message('The docuement has already be send for approval')
+                        Message('The document has already been sent for approval')
                     else
                         SrestepApprovalsCodeUnit.SendMemberReapplicationRequestForApproval(rec."No.", rec);
                 end;
@@ -131,6 +137,8 @@ Page 50145 "Member Re-Application Page"
                 ApplicationArea = Basic;
                 Caption = 'Cancel Approval Request';
                 Image = Cancel;
+                Enabled = CanCancelApprovalForRecord;
+
 
                 Promoted = true;
                 PromotedCategory = Process;
@@ -148,6 +156,39 @@ Page 50145 "Member Re-Application Page"
     var
         Cust: Record Customer;
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
+
+        //Approval Controls
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        OpenApprovalEntriesExist: Boolean;
+        EnabledApprovalWorkflowsExist: Boolean;
+        RecordApproved: Boolean;
+        CanCancelApprovalForRecord: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(REC.RecordId);//Return No and allow sending of approval request.
+
+        EnabledApprovalWorkflowsExist := true;
+        //............................
+        UpdateControl();
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        UpdateControl();
+    end;
+
+    local procedure UpdateControl()
+    begin
+        if Rec.Status = Rec.Status::Pending then begin
+            CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(Rec.RecordId);
+        end else
+            if Rec.Status = Rec.Status::Approved then begin
+                RecordApproved := true;
+                CanCancelApprovalForRecord := false;
+            end;
+    end;
+
 
 }
 

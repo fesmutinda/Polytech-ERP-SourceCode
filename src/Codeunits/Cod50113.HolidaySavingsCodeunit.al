@@ -16,13 +16,13 @@ Codeunit 50113 "Holiday Savings Codeunit"
 
     procedure FnProcessHolidaySavings(MemberNo: Code[50]; StartDate: Date; PostingDate: Date)
     var
-        MembersTable: Record 51364;
+        MembersTable: Record Customer;
         MonthAmountSaved: Decimal;
         InterestEarned: Decimal;
         SaccoGeneralSetUp: Record 51398;
         NewMonth: Date;
         MemberHolidaySaving: Decimal;
-        MembersTable2: Record 51364;
+        MembersTable2: Record Customer;
     begin
         StartDate := CalcDate('-CM', StartDate);
         InterestEarned := 0;

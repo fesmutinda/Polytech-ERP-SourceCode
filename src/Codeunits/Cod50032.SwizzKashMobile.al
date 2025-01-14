@@ -23,7 +23,7 @@ Codeunit 50032 SwizzKashMobile
     end;
 
     var
-        Members: Record 51364;
+        Members: Record Customer;
         LoansRegister: Record 51371;
         MemberLedgerEntry: Record 51365;
         LoanProducttype: Record 51381;
@@ -41,7 +41,7 @@ Codeunit 50032 SwizzKashMobile
         Members.Reset;
         Members.SetRange(Members."No.", FnGetMemberNo(phoneNumber));
         if Members.Find('-') then begin
-            shareCap := MemberLedgerEntry."transaction type"::"Share Capital";
+            shareCap := MemberLedgerEntry."transaction type"::"Shares Capital";
             depContribution := MemberLedgerEntry."transaction type"::"Deposit Contribution";
             loanRepayment := MemberLedgerEntry."transaction type"::"Loan Repayment";
 

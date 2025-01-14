@@ -11,7 +11,7 @@ Codeunit 50122 "KSACCO Postings"
         SwizzsoftFactory: Codeunit "Swizzsoft Factory.";
         LoansGuaranteeDetails: Record 51372;
         LoansReg: Record 51371;
-        MemberRegister: Record 51364;
+        MemberRegister: Record Customer;
         MembersNominee: Record 51366;
         NextofKinAccountSign: Record 51353;
         LoanProductsSetup: Record 51381;
@@ -36,7 +36,7 @@ Codeunit 50122 "KSACCO Postings"
         DocNo: Code[30];
         GenSetup: Record 51398;
         LineNo: Integer;
-        TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
+        TransType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee,Member,Investor;
         BalAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Employee;
         ObjPackageTypes: Record 51908;
@@ -138,7 +138,7 @@ Codeunit 50122 "KSACCO Postings"
 
     local procedure TransfeeNOK()
     var
-        members: Record 51364;
+        members: Record Customer;
         InsuranceAmt: Decimal;
         InsuranceAmt2: Decimal;
     begin

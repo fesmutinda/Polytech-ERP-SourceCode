@@ -268,9 +268,6 @@ Page 56029 "Loan Application Card"
                     trigger OnValidate()
                     begin
                         UpdateControl();
-
-
-
                     end;
                 }
                 field("Approval Status"; Rec."Approval Status")
@@ -425,6 +422,7 @@ Page 56029 "Loan Application Card"
                         end else begin
                             SrestepApprovalsCodeUnit.SendLoanApplicationsRequestForApproval(rec."Loan  No.", Rec);
                             FnSendLoanApprovalNotifications();
+                            Message('Approval Request sent!');
                             CurrPage.close();
                         end;
                     end;
@@ -902,8 +900,8 @@ Page 56029 "Loan Application Card"
             if Cust."E-Mail (Personal)" <> ' ' then begin
                 Emailaddress := Cust."E-Mail (Personal)";
                 EmailSubject := 'Loan Application Approval';
-                EMailBody := 'Dear <b>' + '</b>,</br></br>' + 'Your ' + Rec."Loan Product Type Name" + ' loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
-                          ' has been Approved by Credit. Polytech Sacco Ltd.' + '<br></br>' +
+                EMailBody := 'Dear <b>' + '</b>,</br></br>' + 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
+                          ' has been Approved by Credit. Devco Sacco Ltd.' + '<br></br>' +
 'Congratulations';
                 EmailCodeunit.SendMail(Emailaddress, EmailSubject, EmailBody);
             end;
@@ -933,8 +931,8 @@ Page 56029 "Loan Application Card"
         SMSMessages.Source := 'LOAN APPL';
         SMSMessages."Entered By" := USERID;
         SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
-        SMSMessages."SMS Message" := 'Your' + Format(Rec."Loan Product Type Name") + 'loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
-                                  ' has been Approved by Credit. Polytech Sacco Ltd.';
+        SMSMessages."SMS Message" := 'Your loan application of KSHs.' + FORMAT(Rec."Requested Amount") +
+                                  ' has been Approved by Credit. Devco Sacco Ltd.';
         Cust.RESET;
         IF Cust.GET(Rec."Client Code") THEN
             if Cust."Mobile Phone No" <> '' then begin
@@ -973,7 +971,7 @@ Page 56029 "Loan Application Card"
                     IF LoanApp.GET(LoanGuar."Loan No") THEN
                         SMSMessages."SMS Message" := 'You have guaranteed an amount of ' + FORMAT(LoanGuar."Amont Guaranteed")
                         + ' to ' + Rec."Client Name" + '  ' +
-                        'Loan Type ' + Rec."Loan Product Type Name" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0726050260 if in dispute';
+                        'Loan Type ' + Rec."Loan Product Type" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Devco Sacco Ltd. Call 0726050260 if in dispute';
                     ;
                     SMSMessages."Telephone No" := Cust."Phone No.";
                     SMSMessages.INSERT;

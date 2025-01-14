@@ -449,7 +449,7 @@ Codeunit 50025 SwizzKashMB
                 MemberLedgerEntry.SetCurrentkey(MemberLedgerEntry."Entry No.");
                 MemberLedgerEntry.Ascending(false);
                 MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Account);
-                MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+                MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
                 Mrowcount:=MemberLedgerEntry.Count;
                 if MemberLedgerEntry.Find('-') then begin
                   repeat
@@ -1220,7 +1220,7 @@ Codeunit 50025 SwizzKashMB
         
             MemberLedgerEntry.Reset;
               MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Members."No.");
-              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
               if MemberLedgerEntry.Find('-') then begin
         
             BOSATransSchedule.Reset;
@@ -2208,7 +2208,7 @@ Codeunit 50025 SwizzKashMB
           if Members.Find('-') then begin
               MemberLedgerEntry.Reset;
               MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Members."No.");
-              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
               if MemberLedgerEntry.Find('-') then
                 repeat
                     amount:=amount+MemberLedgerEntry.Amount;
@@ -2386,7 +2386,7 @@ Codeunit 50025 SwizzKashMB
           if Members.Find('-') then begin
               MemberLedgerEntry.Reset;
               MemberLedgerEntry.SetRange(MemberLedgerEntry."Customer No.",Members."No.");
-              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Share Capital");
+              MemberLedgerEntry.SetRange(MemberLedgerEntry."Transaction Type",MemberLedgerEntry."transaction type"::"Shares Capital");
               if MemberLedgerEntry.Find('-') then begin
                 repeat
                     samount:=samount+MemberLedgerEntry.Amount;
@@ -4694,7 +4694,7 @@ Codeunit 50025 SwizzKashMB
         docNo: Code[50];
         NotificationDate: Date;
         EloanAmt: Decimal;
-        ObjMember: Record 51364;
+        ObjMember: Record Customer;
         varMemberNo: Code[50];
         rolledover: Decimal;
         Intcount: Integer;
@@ -5092,7 +5092,7 @@ Codeunit 50025 SwizzKashMB
         loanNotificationDate: Date;
         amtsecondnotice: Decimal;
         amtcompare: Decimal;
-        memb: Record 51364;
+        memb: Record Customer;
         Loanbal: Decimal;
         repayamt: Decimal;
         amtloan: Decimal;
@@ -6217,7 +6217,6 @@ Codeunit 50025 SwizzKashMB
               if Members."ID No."<> '' then begin
 
                 if Members."Mobile Phone No"<> '' then begin
-
                   SurePESAApplications.Reset;
                 //  SurePESAApplications.SETRANGE(SurePESAApplications."Account No",Members."No.");
                   if SurePESAApplications.Find('+') then begin
@@ -6746,7 +6745,7 @@ Codeunit 50025 SwizzKashMB
     procedure GetMinistatementApp(phoneNumber: Text[20]) response: Text
     var
         statementList: Text;
-        memberTable: Record 51364;
+        memberTable: Record Customer;
         runCount: Integer;
         statementCount: Integer;
         vendorTable: Record Vendor;
@@ -6807,7 +6806,7 @@ Codeunit 50025 SwizzKashMB
 
     procedure GetMemberAccounts(phoneNumber: Text[20]) response: Text
     var
-        memberTable: Record 51364;
+        memberTable: Record Customer;
         accountsList: Text;
         vendorTable: Record Vendor;
         bosaAccounts: Text;
@@ -6830,7 +6829,7 @@ Codeunit 50025 SwizzKashMB
                           ',"balance":"'+Format(memberTable."Current Shares",0,'<Precision,2:2><Integer><Decimals>')+'" }';
 
             accountsList+=',{ "accountId":"' + memberTable."No."+
-                          '", "accountName":"Share Capital"'+
+                          '", "accountName":"Shares Capital"'+
                           ',"balance":"'+Format(memberTable."Shares Retained",0,'<Precision,2:2><Integer><Decimals>')+'" }';
 
             accountsList+=',{ "accountId":"' + memberTable."No."+
@@ -6857,7 +6856,7 @@ Codeunit 50025 SwizzKashMB
     var
         guarantorsList: Text;
         vendorTable: Record Vendor;
-        memberTable: Record 51364;
+        memberTable: Record Customer;
     begin
 
         response:='{ "StatusCode":"2","StatusDescription":"ERROR","guarantorsList": [] }';
@@ -6901,7 +6900,7 @@ Codeunit 50025 SwizzKashMB
     var
         guaranteedList: Text;
         vendorTable: Record Vendor;
-        memberTable: Record 51364;
+        memberTable: Record Customer;
         memberName: Text;
     begin
 
@@ -6945,7 +6944,7 @@ Codeunit 50025 SwizzKashMB
 
     procedure GetBalance(phoneNumber: Text[20];accountType: Text) response: Text
     var
-        membersTable: Record 51364;
+        membersTable: Record Customer;
         memberledgerentryTable: Record 51365;
         vendorTable: Record Vendor;
         amount: Decimal;
@@ -6968,7 +6967,7 @@ Codeunit 50025 SwizzKashMB
             memberledgerentryTable.SetRange(memberledgerentryTable."Transaction Type", memberledgerentryTable."transaction type"::"Benevolent Fund");
           end
           else if accountType = 'SHA' then begin
-            memberledgerentryTable.SetRange(memberledgerentryTable."Transaction Type", memberledgerentryTable."transaction type"::"Share Capital");
+            memberledgerentryTable.SetRange(memberledgerentryTable."Transaction Type", memberledgerentryTable."transaction type"::"Shares Capital");
           end;
 
           if memberledgerentryTable.Find('-') then begin
@@ -7048,7 +7047,7 @@ Codeunit 50025 SwizzKashMB
     procedure GetOutstandingLoans(phoneNumber: Text[20]) response: Text
     var
         outstandingloansList: Text;
-        membersTable: Record 51364;
+        membersTable: Record Customer;
         loanProductsTable: Record 51381;
     begin
         begin

@@ -48,7 +48,7 @@ page 50640 "Data Sheet Lines"
                     ApplicationArea = Basic;
                     Caption = 'Expected Principal Balance(Post-ChkOff)';
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Shares Capital")
                 {
                     ApplicationArea = Basic;
                 }

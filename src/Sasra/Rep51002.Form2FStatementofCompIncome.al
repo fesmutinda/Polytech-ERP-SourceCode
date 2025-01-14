@@ -492,8 +492,8 @@ Report 51002 "Form2F Statement of CompIncome"
                 end;
 
                 SaccoGen.Get();
-                nterestExpenseonDeposits := -((MemberDeposits * SaccoGen."Interest on Deposits (%)") * 0.01);//"Interest On Current Shares") * 0.01);
-                DividendExpenses := -((Sharecapital * SaccoGen."Share Interest (%)") * 0.01);// "Interest on Share Capital(%)") * 0.01);
+                nterestExpenseonDeposits := -((MemberDeposits * SaccoGen."Share Interest (%)") * 0.01);//"Interest On Current Shares"
+                DividendExpenses := -((Sharecapital * SaccoGen."Retained Shares") * 0.01);//"Interest on Share Capital(%)"
 
                 NetFinancialIncomeLoss := 0;
                 FinancialIncome := 0;

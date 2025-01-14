@@ -3,7 +3,7 @@ Codeunit 51111 "Custom Workflow Events New"
 
     trigger OnRun()
     begin
-        AddEventsToLib();
+        //AddEventsToLib();
     end;
 
     procedure AddEventsToLib()

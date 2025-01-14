@@ -218,7 +218,7 @@ Report 50477 "Loans Repayment Schedule New"
     end;
 
     var
-        SFactory: Codeunit "Swizzsoft Factory";
+        SFactory: Codeunit "SURESTEP Factory";
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
         TotalFor: label 'Total for ';

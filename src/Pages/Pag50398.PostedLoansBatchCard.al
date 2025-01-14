@@ -345,7 +345,6 @@ page 50398 "Posted Loans Batch Card"
         DBranch: Code[20];
         UsersID: Record User;
         TotalTopupComm: Decimal;
-        Notification: Codeunit Mail;
         CustE: Record Customer;
         DocN: Text[50];
         DocM: Text[100];

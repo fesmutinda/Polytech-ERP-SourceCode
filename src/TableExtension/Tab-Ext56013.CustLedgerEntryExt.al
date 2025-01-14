@@ -149,9 +149,9 @@ tableextension 56013 CustLedgerEntryExt extends "Cust. Ledger Entry"
         key(Key36; "Transaction Type")
         {
         }
-        key(Key37; "Amount Posted")
+        /* key(Key37; "Amount Posted")
         {
-        }
+        } */
     }
     trigger OnInsert()
     begin

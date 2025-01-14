@@ -192,7 +192,7 @@ Table 51099 "Dividends Registerd"
         {
             DataClassification = ToBeClassified;
         }
-        field(52; "Share Capital"; Boolean)
+        field(52; "Shares Capital"; Boolean)
         {
             DataClassification = ToBeClassified;
         }

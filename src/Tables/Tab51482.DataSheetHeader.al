@@ -84,7 +84,7 @@ Table 51482 "Data Sheet Header"
         }
         field(16; "Total Share Capital"; Decimal)
         {
-            CalcFormula = sum("Data Sheet Lines"."Share Capital" where("Data Sheet Header" = field(Code)));
+            CalcFormula = sum("Data Sheet Lines"."Shares Capital" where("Data Sheet Header" = field(Code)));
             FieldClass = FlowField;
         }
         field(17; "Interest Accrued?"; Boolean)

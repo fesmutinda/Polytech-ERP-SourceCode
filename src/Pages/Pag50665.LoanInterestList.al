@@ -96,7 +96,7 @@ page 50665 "Loan Interest List"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                // RunObject = Report 51516579;
+                //RunObject = Report 51516579;
             }
             action("Option ")
             {

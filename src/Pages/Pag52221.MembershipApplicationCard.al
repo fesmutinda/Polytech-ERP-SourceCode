@@ -516,22 +516,7 @@ Page 52221 "Membership Application Card"
                     RunObject = Page "Membership App Signatories";
                     RunPageLink = "Account No" = field("No.");
                 }
-                // action("Account Guardian")
-                // {
-                //     ApplicationArea = Basic;
-                //     Caption = 'Account Guardian';
-                //     Image = EmployeeAgreement;
-                //     Promoted = true;
-                //     Enabled = IsIndividualApplication and JuniourAccountType;
-                //     PromotedCategory = Process;
-                //     RunObject = Page "Account Guardian Application";
-                //     RunPageLink = "Application No" = field("No.");
-                //     trigger OnAction()
-                //     var
-                //     begin
 
-                //     end;
-                // }
                 action("Agent Details")
                 {
                     ApplicationArea = Basic;
@@ -578,10 +563,6 @@ Page 52221 "Membership Application Card"
                         end;
                     end;
                 }
-
-
-
-
 
             }
 
