@@ -194,7 +194,7 @@ Table 51389 "Checkoff Processing H(Block)"
     var
         NoSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        cust: Record "Member Register";
+        cust: Record Customer;
         "GL Account": Record "G/L Account";
         BANKACC: Record "Bank Account";
 

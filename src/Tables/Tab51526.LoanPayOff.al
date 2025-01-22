@@ -106,6 +106,6 @@ Table 51526 "Loan PayOff"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

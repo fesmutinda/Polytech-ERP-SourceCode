@@ -18,7 +18,7 @@ Codeunit 50029 "Periodic Activities"
         InterestAmount: Decimal;
         iEntryNo: Integer;
         Temp: Record "Funds User Setup";
-        CreditAccounts: Record "Member Register";
+        CreditAccounts: Record Customer;
         GenerationDate: Date;
         LoansRegisterTable: Record "Loans Register";
         ProductCode: Code[10];
@@ -332,7 +332,7 @@ Codeunit 50029 "Periodic Activities"
         DailyLoansInterestBuffer: Record 51297;
     begin
         //............................................................
-        Message('here');
+        Message('here userid is %1', UserId);
         //....Check for missing bal accounts and update interestbuffer
         Temp.Get(UserId);
         if Temp.Get(UserId) then begin
@@ -361,7 +361,7 @@ Codeunit 50029 "Periodic Activities"
                 Jtemplate := Temp."FundsTransfer Template Name";
                 //ERROR('template %1',Jtemplate);//PAYMENTS
                 JBatch := Temp."FundsTransfer Batch Name";
-                //ERROR('batch %1',JBatch);//muthui
+                //ERROR('batch %1',JBatch);//
             end;
             if Jtemplate = '' then
                 Error('Interest Template for user ' + Format(UserId) + 'is not Setup');
@@ -439,6 +439,7 @@ Codeunit 50029 "Periodic Activities"
             repeat
                 Codeunit.Run(Codeunit::"Gen. Jnl.-Post Line", GenJournalLine);
             until GenJournalLine.Next = 0;
+            Message('Interest Posted Successfully!!');
         end;
         //......................................................................
 

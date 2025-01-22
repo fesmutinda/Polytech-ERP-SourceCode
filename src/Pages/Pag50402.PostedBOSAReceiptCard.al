@@ -424,7 +424,7 @@ page 50402 "Posted BOSA Receipt Card"
         LOustanding: Decimal;
         TotalCommision: Decimal;
         TotalOustanding: Decimal;
-        //Cust: Record "Member Register";
+        //Cust: Record Customer;
         Cust: Record Customer;
         BOSABank: Code[20];
         LineNo: Integer;

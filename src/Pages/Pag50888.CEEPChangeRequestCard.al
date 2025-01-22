@@ -657,7 +657,7 @@ page 50888 "CEEP Change Request Card"
 
     local procedure FnUpdateMemberDetails()
     var
-        CustomerTable: Record "Member Register";
+        CustomerTable: Record Customer;
         LoansReg: Record "Loans Register";
         PreviousAccountSignatories: record "Member Account Signatories";
         NewAccountSignatories: Record "Change Request New Signatories";

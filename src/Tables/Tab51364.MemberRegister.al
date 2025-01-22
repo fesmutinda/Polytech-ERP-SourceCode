@@ -2361,6 +2361,9 @@ Table 51364 "Member Register"
         field(69062; "Net Dividend Payable"; Decimal)
         {
         }
+        field(75000; "Dividend Processed Date"; Date)
+        {
+        }
         field(69063; "Tax on Dividend"; Decimal)
         {
         }
@@ -3662,7 +3665,7 @@ Table 51364 "Member Register"
         GenSetUp: Record "Sacco General Set-Up";
         MinShares: Decimal;
         MovementTracker: Record "Movement Tracker";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Vend: Record Vendor;
         CustFosa: Code[20];
         Vend2: Record Vendor;
@@ -3747,7 +3750,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CheckBlockedMembOnDocs(Cust2: Record "Member Register"; DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"; Shipment: Boolean; Transaction: Boolean)
+    procedure CheckBlockedMembOnDocs(Cust2: Record Customer; DocType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order"; Shipment: Boolean; Transaction: Boolean)
     begin
         with Cust2 do begin
             if ((Blocked = Blocked::All) or
@@ -3762,7 +3765,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CheckBlockedMembOnJnls(Cust2: Record "Member Register"; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund; Transaction: Boolean)
+    procedure CheckBlockedMembOnJnls(Cust2: Record Customer; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund; Transaction: Boolean)
     begin
         with Cust2 do begin
             if (Blocked = Blocked::All) or
@@ -3773,7 +3776,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CheckBlockedCustOnJnls(Cust2: Record "Member Register"; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge",Reminder,Refund; Transaction: Boolean)
+    procedure CheckBlockedCustOnJnls(Cust2: Record Customer; DocType: Option " ",Payment,Invoice,"Credit Memo","Finance Charge",Reminder,Refund; Transaction: Boolean)
     begin
         with Cust2 do begin
             if (Blocked = Blocked::All) or
@@ -3784,7 +3787,7 @@ Table 51364 "Member Register"
     end;
 
 
-    procedure CustBlockedErrorMessage(Cust2: Record "Member Register"; Transaction: Boolean)
+    procedure CustBlockedErrorMessage(Cust2: Record Customer; Transaction: Boolean)
     var
         "Action": Text[30];
     begin

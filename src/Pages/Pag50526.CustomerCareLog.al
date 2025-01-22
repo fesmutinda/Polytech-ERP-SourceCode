@@ -255,7 +255,7 @@ page 50526 "Customer Care Log"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         PvApp: Record "Responsibility Center BR";
         CustCare: Record "Customer Care Logs";
         CQuery: Record "Customer Care Logs";

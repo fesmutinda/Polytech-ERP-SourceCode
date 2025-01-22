@@ -90,7 +90,7 @@ Table 51023 "CEEP Change Request"
             TableRelation = Customer."No." where("Customer Posting Group" = const('MICRO'), "Group Account" = const(false));
             trigger OnValidate()
             var
-                Cust: Record "Member Register";
+                Cust: Record Customer;
             begin
                 Cust.Reset();
                 Cust.SetRange(Cust."No.", "CEEP Member No");

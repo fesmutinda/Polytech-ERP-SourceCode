@@ -43,6 +43,6 @@ Table 51573 "Supervisory$Board$Empl"
     }
 
     var
-        MemberRegister: Record "Member Register";
+        MemberRegister: Record Customer;
 }
 

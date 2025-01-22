@@ -123,7 +123,7 @@ Table 51495 "Loan trunch Disburesment"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoansRec: Record "Loans Register";
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;

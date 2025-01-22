@@ -47,31 +47,19 @@ Report 50054 "Loan Defaulter 2nd Notice"
             {
             }
 
+            //
+            column(AmountInArrears; AmountInArrears) { }
+            column(LoanOutstanding_Balance; "LoanOutstanding Balance") { }
+            column(LoanOutstanding_Interest; "LOutstanding Interest") { }
+            column(LInstallments; LInstallments) { }
+            column(RemainingPeriod; RemainingPeriod) { }
+
             column(GNo; GNo)
             {
             }
             column(Gname; Gname)
             {
             }
-            column(AllGnames; AllGnames)
-            {
-            }
-            column(AllGNos; AllGNos)
-            {
-            }
-
-            dataitem("Loans Guarantee Details"; "Loans Guarantee Details")
-            {
-                DataItemLink = "Loan No" = field("Loan  No.");
-                column(Name; Name)
-                {
-                }
-                column(Member_No; "Member No")
-                {
-                }
-
-            }
-
 
             dataitem("Members Register"; Customer)
             {
@@ -112,49 +100,70 @@ Report 50054 "Loan Defaulter 2nd Notice"
                 column(loansOFFICER; Lofficer)
                 {
                 }
-                dataitem("Default Notices Register"; "Default Notices Register")
-                {
-                    DataItemLink = "Member No" = field("No.");
-                    column(Loan_Outstanding_Balance; "Loan Outstanding Balance")
-                    {
-                    }
-                    column(Outstanding_Interest_DefaultNoticesRegister; "Default Notices Register"."Outstanding Interest")
-                    {
-                    }
-                    column(AmountInArrears_DefaultNoticesRegister; "Default Notices Register"."Amount In Arrears")
-                    {
-                    }
-                    column(DaysInArrears_DefaultNoticesRegister; "Default Notices Register"."Days In Arrears")
-                    {
-                    }
 
-                }
-                trigger OnAfterGetRecord()
-                begin
-                    // workString := CONVERTSTR(Customer.Name, ' ', ',');
-                    // DearM := SELECTSTR(1, workString);
-                    // //LastPDate := 0D;
-                    // Balance := 0;
-                    // SharesB := 0;
-                end;
+                // trigger OnAfterGetRecord()
+                // begin
+                //     // workString := CONVERTSTR(Customer.Name, ' ', ',');
+                //     // DearM := SELECTSTR(1, workString);
+                //     // //LastPDate := 0D;
+                //     // Balance := 0;
+                //     // SharesB := 0;
+                // end;
+
+
             }
-
+            dataitem("Loans Register1"; "Loans Register")
+            {
+                DataItemLink = "Loan  No." = field("Loan  No.");
+                dataitem("Loans Guarantee Details"; "Loans Guarantee Details")
+                {
+                    DataItemLink = "Loan No" = field("Loan  No.");
+                    column(ReportForNavId_1102755009; 1102755009)
+                    {
+                    }
+                    column(MemberNo_LoanGuarantors; "Loans Guarantee Details"."Member No")
+                    {
+                    }
+                    column(Name_LoanGuarantors; "Loans Guarantee Details".Name)
+                    {
+                    }
+                }
+            }
             trigger OnAfterGetRecord()
             var
                 LoanGuar: Record "Loans Guarantee Details";
 
             begin
-                LoanGuar.Reset;
+                /* LoanGuar.Reset;
                 LoanGuar.SetRange(LoanGuar."Loan No", "Loans Register"."Loan  No.");
-                if LoanGuar.Find('-') then begin
+                if LoanGuar.FindSet() then begin
                     repeat
                         Gname := LoanGuar.Name;
                         GNo := LoanGuar."Member No";
-                        MESSAGE('g name is %1', LoanGuar.Name)
+                    //MESSAGE('Guar No is %1 Name of %2', GNo, Gname)
                     until LoanGuar.Next = 0;
-                end;
+                end; */
 
+                RemainingPeriod := Round(ObjLoans.Installments - ObjSwizzsoft.KnGetCurrentPeriodForLoan("Loan  No."));
+
+                ObjLoans.Reset();
+                ObjLoans.SetRange("Loan  No.", "Loans Register"."Loan  No.");
+                if ObjLoans.FindLast() then begin
+                    ObjLoans.CalcFields(ObjLoans."Outstanding Balance", "Oustanding Interest");
+                    LInstallments := ObjLoans.Installments;
+                    DisbursementDate := ObjLoans."Loan Disbursement Date";
+                    ExpectedCompleteDate := ObjLoans."Expected Date of Completion";
+                    AmountInArrears := ROUND(ObjSwizzsoft.FnGetLoanInArrears("Loans Register"."Loan  No.", ObjLoans."Outstanding Balance"), 1, '=') + ObjLoans."Oustanding Interest";
+                    "LoanOutstanding Balance" := ObjLoans."Outstanding Balance";
+                    "LoanIssued" := ObjLoans."Approved Amount";
+                    "LOutstanding Interest" := ObjLoans."Oustanding Interest";
+                    "Loan Product Name" := ObjLoans."Loan Product Type Name";
+                    //Message('Amount in Arrears is %1 + %2 = %3 disbursed on %4', "LOutstanding Interest", "LoanOutstanding Balance", AmountInArrears, DisbursementDate);
+                end;
+                recoverNoticedate := CALCDATE('1M', TODAY);
             end;
+
+
             /* trigger OnAfterGetRecord()
             var
                 LoanGuar: Record "Loans Guarantee Details";
@@ -259,8 +268,19 @@ Report 50054 "Loan Defaulter 2nd Notice"
         CompanyInfo: Record "Company Information";
         Lofficer: Text;
         recoverNoticedate: Date;
+        RemainingPeriod: Integer;
         Gname: Text;
         GNo: Code[20];
+        ObjLoans: Record "Loans Register";
+        "Loan Product Name": Text;
+        "LOutstanding Interest": Decimal;
+        LoanIssued: Decimal;
+        "LoanOutstanding Balance": Decimal;
+        AmountInArrears: Decimal;
+        LInstallments: Integer;
+        ExpectedCompleteDate: date;
+        DisbursementDate: date;
+        ObjSwizzsoft: Codeunit "Swizzsoft Factory.";
 
         Gnames: array[100] of Text[100];
         GNos: array[100] of Text[100];

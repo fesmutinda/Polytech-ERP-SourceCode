@@ -234,19 +234,19 @@ Table 51013 "Payment Line Board"
 
     var
         Loans: Record "Loans reg";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         ReceiptsPayments: Record "Receipt Header";
         RecTypes: Record "Receipt Header";
         DimMgt: Codeunit DimensionManagement;
         GLAccount: Record "G/L Account";
-        Member: Record "Member Register";
+        Member: Record Customer;
         HREmp: Record "HR Employees";
-        Members: Record "Member Register";
+        Members: Record Customer;
         HREmployees: Record "HR Employees";
         EmpGrade: Code[20];
         PaymentsHeaderBoard: Record "Payments Header Board";
         TariffCodes: Record "Tariff Codes";
-        SavingsAccounts: Record "Member Register";
+        SavingsAccounts: Record Customer;
 
 
     procedure ValidateShortcutDimCode(FieldNumber: Integer; var ShortcutDimCode: Code[20])
@@ -257,7 +257,7 @@ Table 51013 "Payment Line Board"
 
     procedure getDestinationRateAndAmounts()
     var
-        Members: Record "Member Register";
+        Members: Record Customer;
         HREmployees: Record "HR Employees";
         EmpGrade: Code[20];
         TariffCodes: Record "Tariff Codes";

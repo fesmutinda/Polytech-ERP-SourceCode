@@ -315,7 +315,7 @@ Table 51388 "Receipts & Payments"
         NoSeriesMgt: Codeunit NoSeriesManagement;
         BOSARcpt: Record "Receipts & Payments";
         GLAcct: Record "G/L Account";
-        //Mem: Record "Member Register";
+        //Mem: Record Customer;
         Mem: Record Customer;
         Vend: Record Vendor;
         GLAcc: Record "G/L Account";

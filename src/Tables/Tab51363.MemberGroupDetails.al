@@ -99,6 +99,6 @@ Table 51363 "Member Group Details"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

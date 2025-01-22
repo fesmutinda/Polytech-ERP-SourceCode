@@ -282,7 +282,7 @@ Page 50397 "BOSA Loans Disbursement Card"
                     PromotedIsBig = true;
                     Promoted = true;
                     PromotedCategory = Process;
-                    Visible = false;
+                    Visible = RecordApproved;
                     trigger OnAction()
                     begin
                         If FnCanPostLoans(UserId) = false then begin

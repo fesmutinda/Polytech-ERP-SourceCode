@@ -807,6 +807,17 @@ Table 51398 "Sacco General Set-Up"
         field(1599; "Last Loan Interest Run Date"; Date)
         {
         }
+
+        field(1606; "Interest On Current Shares"; Decimal)
+        {
+        }
+        field(1607; "Interest on Share Capital(%)"; Decimal)
+        {
+        }
+        field(1608; "Dividends Paying Bank Account"; Code[20])
+        {
+            TableRelation = "Bank Account"."No.";
+        }
     }
 
     keys

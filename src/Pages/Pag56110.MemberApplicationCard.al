@@ -967,7 +967,7 @@ page 56110 "Member Application Card"
                 field("Customer Posting Group"; Rec."Customer Posting Group")
                 {
                     ApplicationArea = Basic;
-                    Editable = true;// CustPostingGroupEdit;
+                    Editable = CustPostingGroupEdit;
                 }
                 field("Activity Code"; Rec."Global Dimension 1 Code")
                 {

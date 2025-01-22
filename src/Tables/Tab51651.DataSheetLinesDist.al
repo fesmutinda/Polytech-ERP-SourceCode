@@ -179,7 +179,7 @@ Table 51651 "Data Sheet Lines-Dist"
     var
         Month: Integer;
         StatusPermissions: Record "Status Change Permision";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         PTEN: Code[20];
         Date2: Date;
 }

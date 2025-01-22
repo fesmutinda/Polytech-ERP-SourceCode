@@ -82,11 +82,11 @@ Page 50394 "Loan Disburesment Batch Card"
             //     ApplicationArea = Basic;
             //     Editable = ChequeNoEditable;
             // }
-            /*  part(""; "Loans Sub-Page List Disburse")
-             {
-                 Editable = false;
-                 SubPageLink = "Batch No." = field("Batch No.");
-             } */
+            part(""; "Loans Sub-Page List Disburse")
+            {
+                Editable = false;
+                SubPageLink = "Batch No." = field("Batch No.");
+            }
         }
     }
     actions

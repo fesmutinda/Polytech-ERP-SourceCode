@@ -1,4 +1,4 @@
-/* #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
+#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0424, AW0006 // ForNAV settings
 //.6.3.0.2259")
 //_6_3_0_2259; ForNavReport51516378_v6_3_0_2259)    
 
@@ -10,7 +10,7 @@ Report 50378 "Dividend Processing-Prorated"
 
     dataset
     {
-        dataitem(Customer; Customer)
+        dataitem(Customer; "Member Register")
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.", Status;
@@ -21,7 +21,6 @@ Report 50378 "Dividend Processing-Prorated"
             column(COMPANYNAME; COMPANYNAME)
             {
             }
-
             column(UserId; UserId)
             {
             }
@@ -882,7 +881,8 @@ Report 50378 "Dividend Processing-Prorated"
         CurrReport_PAGENOCaptionLbl: label 'Page';
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
-        Cust: Record Customer;
+        //Cust: Record Customer;
+        Cust: Record "Member Register";
         "From Date": Date;
         DateFilter: Text[100];
         FromDate: Date;
@@ -941,4 +941,3 @@ Report 50378 "Dividend Processing-Prorated"
 
 
 }
- */

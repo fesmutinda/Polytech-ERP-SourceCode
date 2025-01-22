@@ -86,6 +86,6 @@ Table 51425 "Checkoff Processing Details(B)"
 
     var
         ObjLoans: Record "Loans Register";
-        ObjMembers: Record "Member Register";
+        ObjMembers: Record Customer;
 }
 

@@ -300,7 +300,7 @@ page 50865 "Loan 2nd  Demand Notices Card"
                         //    "Demand Notice Date":=TODAY;
                         ObjLoans.Reset;
                         ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
-                        if ObjLoans.FindSet then begin
+                        if ObjLoans.Find('-') then begin
                             Report.Run(50054, true, true, ObjLoans);
                         end;
                         //   END;

@@ -333,6 +333,6 @@ Table 51655 "Checkoff Lines-DistributedBC"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

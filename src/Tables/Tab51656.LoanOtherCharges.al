@@ -76,7 +76,7 @@ Table 51656 "Loan Other Charges"
         Loans: Record "Loans Register";
         Loantypes: Record "Loan Products Setup";
         Interest: Decimal;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoansTop: Record "Loans Register";
         GenSetUp: Record "Sacco General Set-Up";
         ObjRepaymentSchedule: Record "Loan Repayment Schedule";

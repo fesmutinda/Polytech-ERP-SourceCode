@@ -669,6 +669,6 @@ Table 50083 "CheckoffLinesDistributed poly"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

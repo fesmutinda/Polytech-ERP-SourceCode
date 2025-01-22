@@ -464,7 +464,7 @@ page 50310 "Payroll Employee Card."
         iEntryNo: Integer;
         GenSetup: Record "Sacco General Set-Up";
         compinfo: Record "Company Information";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 
     local procedure RemoveTrans(EmpNo: Code[20]; PayrollPeriod: Date)
     begin

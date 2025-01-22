@@ -197,7 +197,7 @@ Table 51390 "Checkoff Processing Lin(Block)"
     end;
 
     var
-        memb: Record "Member Register";
+        memb: Record Customer;
         loans: Record "Loans Register";
 }
 

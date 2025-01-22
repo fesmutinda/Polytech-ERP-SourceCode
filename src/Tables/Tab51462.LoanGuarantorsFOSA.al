@@ -204,8 +204,8 @@ Table 51462 "Loan GuarantorsFOSA"
         LoansG: Integer;
         LoanGuarantors: Record "Loan GuarantorsFOSA";
         Loans: Record "Loans Register";
-        Members: Record "Member Register";
+        Members: Record Customer;
         vend: Record "Vendor Ledger Entry";
-        CustN: Record "Member Register";
+        CustN: Record Customer;
 }
 

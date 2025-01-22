@@ -212,8 +212,8 @@ Table 51902 "Bulk Withdrawal Application"
     end;
 
     var
-        Cust: Record "Member Register";
-        CustM: Record "Member Register";
+        Cust: Record Customer;
+        CustM: Record Customer;
         Account: Record Vendor;
         AccountTypes: Record "Account Types-Saving Products";
         ATMApp: Record "Members Nominee Temp";

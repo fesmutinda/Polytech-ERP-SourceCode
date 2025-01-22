@@ -593,7 +593,7 @@ Table 51435 "FD Processing"
         Vends: Record Vendor;
         gnljnlLine: Record "Gen. Journal Line";
         FOSAAccount: Record Vendor;
-        Member: Record "Member Register";
+        Member: Record Customer;
         Vend: Record Vendor;
         Loans: Record "Loans Register";
         StatusPermissions: Record "Status Change Permision";
@@ -604,7 +604,7 @@ Table 51435 "FD Processing"
         ObjVendor: Record Vendor;
         ObjFDProcessing: Record "Loan Officers Details";
         ObjSaccoSetup: Record "Sacco No. Series";
-        ObjMembReg: Record "Member Register";
+        ObjMembReg: Record Customer;
 
 
     procedure AssistEdit(OldVend: Record "Loan Repay Schedule-Calc"): Boolean

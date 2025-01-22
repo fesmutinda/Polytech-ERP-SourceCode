@@ -37,7 +37,7 @@ Table 51549 "Funeral Expense Payment"
 
                 if Cust.Get("Member No.") then begin
                     "Member Name" := Cust.Name;
-                    Cust.CalcFields(Cust."Current Savings", Cust."Risk Fund", Cust.Picture, Cust.Signature);
+                    Cust.CalcFields(Cust."Current Savings", Cust."Risk Fund", Cust.Image, Cust.Signature);
                     "Member No." := Cust."No.";
                     //Picture:=Cust.Picture;
                     //Signature:=Cust.Signature;
@@ -163,7 +163,7 @@ Table 51549 "Funeral Expense Payment"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Loans: Record "Loans Register";
         MemLed: Record "Member Ledger Entry";
         IntTotal: Decimal;

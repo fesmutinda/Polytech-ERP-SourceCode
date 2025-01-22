@@ -211,7 +211,7 @@ Table 51496 "Customer Care Logs"
         NoSeriesMgt: Codeunit NoSeriesManagement;
         Loans: Record "Loans Register";
         GenSetUp: Record "Sacco General Set-Up";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         PVApp: Record "Member Ledger Entry";
         UserMgt: Codeunit "User Setup Management";
         PRD: Record Customer;

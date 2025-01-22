@@ -83,10 +83,10 @@ page 50411 "Sacco General Set-Up"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dividend (%)"; Rec."Dividend (%)")
+                /* field("Dividend (%)"; Rec."Dividend (%)")
                 {
                     ApplicationArea = Basic;
-                }
+                } */
                 field("Interest on Deposits (%)"; Rec."Interest on Deposits (%)")
                 {
                     ApplicationArea = Basic;
@@ -95,7 +95,7 @@ page 50411 "Sacco General Set-Up"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Min. Dividend Proc. Period"; Rec."Min. Dividend Proc. Period")
+                /* field("Min. Dividend Proc. Period"; Rec."Min. Dividend Proc. Period")
                 {
                     ApplicationArea = Basic;
                 }
@@ -114,8 +114,8 @@ page 50411 "Sacco General Set-Up"
                 field("Div Capitalization %"; Rec."Div Capitalization %")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Dividend Capitalization %';
-                }
+                    Caption = 'Dividend Capitalization %'; 
+                }*/
                 field("Days for Checkoff"; Rec."Days for Checkoff")
                 {
                     ApplicationArea = Basic;
@@ -136,10 +136,10 @@ page 50411 "Sacco General Set-Up"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Withholding Tax (%)"; Rec."Withholding Tax (%)")
-                {
-                    ApplicationArea = Basic;
-                }
+                /*  field("Withholding Tax (%)"; Rec."Withholding Tax (%)")
+                 {
+                     ApplicationArea = Basic;
+                 } */
                 field("Welfare Contribution"; Rec."Welfare Contribution")
                 {
                     ApplicationArea = Basic;
@@ -271,10 +271,10 @@ page 50411 "Sacco General Set-Up"
                     ApplicationArea = Basic;
                     Caption = '<Boosting Deposits %>';
                 }
-                field("Dividend Processing Fee"; Rec."Dividend Processing Fee")
+                /* field("Dividend Processing Fee"; Rec."Dividend Processing Fee")
                 {
                     ApplicationArea = Basic;
-                }
+                } */
                 field("Loan Trasfer Fee-EFT"; Rec."Loan Trasfer Fee-EFT")
                 {
                     ApplicationArea = Basic;
@@ -453,15 +453,15 @@ page 50411 "Sacco General Set-Up"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Dividend Payable Account"; Rec."Dividend Payable Account")
+                /* field("Dividend Payable Account"; Rec."Dividend Payable Account")
                 {
                     ApplicationArea = Basic;
-                }
+                } 
                 field("Dividend Process Fee Account"; Rec."Dividend Process Fee Account")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Dividend Processing Fee Account';
-                }
+                }*/
                 field("Excise Duty Account"; Rec."Excise Duty Account")
                 {
                     ApplicationArea = Basic;
@@ -609,6 +609,72 @@ page 50411 "Sacco General Set-Up"
                 {
                     ApplicationArea = Basic;
                 }
+            }
+            group("Dividends Processing Setups")
+            {
+                field("Withholding Tax (%)"; Rec."Withholding Tax (%)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Dividend (%)"; Rec."Dividend (%)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Min. Dividend Proc. Period"; Rec."Min. Dividend Proc. Period")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Div Capitalization Min_Indiv"; Rec."Div Capitalization Min_Indiv")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Dividend Capitalization Minimum Deposit_Individula';
+                    ToolTip = 'Less this Deposits the System will capitalize part of your dividend based on the Dividend Capitalization %';
+                }
+                field("Div Capitalization Min_Corp"; Rec."Div Capitalization Min_Corp")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Dividend Capitalization Minimum Deposit_Corporate Account';
+                    ToolTip = 'Less this Deposits the System will capitalize part of your dividend based on the Dividend Capitalization %';
+                }
+                field("Div Capitalization %"; Rec."Div Capitalization %")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Dividend Capitalization %';
+                }
+                field("Dividend Processing Fee"; Rec."Dividend Processing Fee")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Dividend Process Fee Account"; Rec."Dividend Process Fee Account")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Dividend Processing Fee Account';
+                }
+
+                field("Interest On Current Shares"; Rec."Interest On Current Shares")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Interest On Current Shares(%)';
+                }
+                field("Interest on Share Capital(%)"; Rec."Interest on Share Capital(%)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Share Interest (%)"; Rec."Share Interest (%)")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Dividends Paying Bank Account"; Rec."Dividends Paying Bank Account")
+                {
+                    ApplicationArea = Basic;
+                }
+
+                field("Dividend Payable Account"; Rec."Dividend Payable Account")
+                {
+                    ApplicationArea = Basic;
+
+                }
+
             }
             group("Default Posting Groups")
             {

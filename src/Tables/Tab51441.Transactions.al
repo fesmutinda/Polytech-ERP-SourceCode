@@ -1727,7 +1727,7 @@ Table 51441 Transactions
         PaymentMethod: Record "Payment Method";
         TransactionTypes: Record "Transaction Types";
         Denominations: Record Denominations;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         i: Integer;
         PublicHoliday: Integer;
         weekday: Integer;

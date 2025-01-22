@@ -24,7 +24,6 @@ Table 51361 "Member App Nominee"
         }
         field(5; "Date of Birth"; Date)
         {
-
             trigger OnValidate()
             begin
                 Age := Dates.DetermineAge("Date of Birth", Today);

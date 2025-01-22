@@ -168,12 +168,12 @@ Table 51438 "Loan Officers Details"
 
     var
         HR: Record "HR Employees";
-        Custs: Record "Member Register";
+        Custs: Record Customer;
         GLAcc: Record "G/L Account";
         Cust: Record Customer;
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        Mem: Record "Member Register";
+        Mem: Record Customer;
 }
 

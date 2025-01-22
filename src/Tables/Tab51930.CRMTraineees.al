@@ -55,7 +55,7 @@ Table 51930 "CRM Traineees"
     }
 
     var
-        Cust: Record "Member Register";
-        ObjCust: Record "Member Register";
+        Cust: Record Customer;
+        ObjCust: Record Customer;
 }
 

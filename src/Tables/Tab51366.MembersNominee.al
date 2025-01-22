@@ -42,7 +42,7 @@ Table 51366 "Members Nominee"
         }
         field(10; "Account No"; Code[30])
         {
-            TableRelation = "Member Register"."No.";
+            TableRelation = Customer."No.";
         }
         field(11; "ID No."; Code[40])
         {

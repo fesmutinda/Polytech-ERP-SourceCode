@@ -391,7 +391,7 @@ Table 51400 "Membership Exit"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Loans: Record "Loans Register";
         MemLed: Record "Member Ledger Entry";
         IntTotal: Decimal;

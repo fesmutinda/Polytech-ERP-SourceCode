@@ -313,7 +313,7 @@ Table 51360 "Membership Applications"
         {
             OptionMembers = " ",Single,Married,Devorced,Widower,Widow;
         }
-        field(68015; Signature; MediaSet)
+        field(68015; Signature; Media)
         {
         }
         field(68016; "Passport No."; Code[50])
@@ -1001,7 +1001,7 @@ Table 51360 "Membership Applications"
                     "Marital Status" := CustMember."Marital Status";
                     Gender := CustMember.Gender;
                     "E-Mail (Personal)" := CustMember."E-Mail";
-                    Picture := CustMember.Picture;
+                    Picture := CustMember.Image;
                     Signature := CustMember.Signature;
                     "Global Dimension 2 Code" := CustMember."Global Dimension 2 Code";
                     //"Member Category":=CustMember."Member Category";
@@ -1586,7 +1586,7 @@ Table 51360 "Membership Applications"
         GenSetUp: Record "Sacco General Set-Up";
         MinShares: Decimal;
         MovementTracker: Record "Movement Tracker";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Vend: Record Vendor;
         CustFosa: Code[20];
         Vend2: Record Vendor;
@@ -1606,7 +1606,7 @@ Table 51360 "Membership Applications"
         DAge: DateFormula;
         HREmployee: Record "HR Employees";
         DimValue: Record "Dimension Value";
-        CustMember: Record "Member Register";
+        CustMember: Record Customer;
         ObjMemberApplication: Record "Membership Applications";
         Section: Record Stations;
 

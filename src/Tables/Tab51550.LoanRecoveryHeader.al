@@ -313,7 +313,7 @@ Table 51550 "Loan Recovery Header"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoanDetails: Record "Loan Member Loans";
         LoanRec: Record "Loans Register";
         LoanGuarantors: Record "Loans Guarantee Details";

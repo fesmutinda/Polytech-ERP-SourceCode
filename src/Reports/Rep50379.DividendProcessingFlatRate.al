@@ -12,14 +12,58 @@ Report 50379 "Dividend Processing-Flat Rate"
 
     {
 
-        dataitem(Customer; Customer)
+        dataitem(Customer; "Member Register")
         {
             DataItemTableView = sorting("No.") where("No." = filter(<> ''));
             RequestFilterFields = "No.", Status;
             column(No; "No.")
             {
-
             }
+            column(COMPANYNAME; COMPANYNAME)
+            {
+            }
+
+            column(UserId; UserId)
+            {
+            }
+            column(Customer__No__; Customer."No.")
+            {
+            }
+            column(Customer_Name; Customer.Name)
+            {
+            }
+            column(Customer__Current_Shares_; Customer."Current Shares")
+            {
+            }
+            column(CustomerCaption; CustomerCaptionLbl)
+            {
+            }
+            column(CurrReport_PAGENOCaption; CurrReport_PAGENOCaptionLbl)
+            {
+            }
+            column(Customer__No__Caption; FieldCaption("No."))
+            {
+            }
+            column(Customer_NameCaption; FieldCaption(Name))
+            {
+            }
+            //column(IntOnDeposits; IntOnDeposits) { }
+
+            column(Customer__Current_Shares_Caption; FieldCaption("Current Shares"))
+            {
+            }
+            column(Shares_Retained; "Shares Retained")
+            {
+            }
+            // column(DividendsOnshareCapital; DividendsOnshareCapital)
+            // { }
+            // column(WithTaxTotal; WthTAxTotal)
+            // { }
+            // column(DivTotal; DivTotal)
+            // {
+            // }
+            // column(Totalpay; Totalpay)
+            // { }
 
             trigger OnPreDataItem()
             begin
@@ -32,7 +76,7 @@ Report 50379 "Dividend Processing-Flat Rate"
                 CustomerTable.SetRange(CustomerTable."No.", Customer."No.");
                 if CustomerTable.find('-') then begin
                     repeat
-                    //DividendsPorcessingCodeUnit.FnProcessDividendsFlatRate(Customer."No.", StartDate, EndDate);
+                        DividendsPorcessingCodeUnit.FnProcessDividendsFlatRate(Customer."No.", StartDate, EndDate);
                     until CustomerTable.next = 0;
                 end;
             end;
@@ -131,7 +175,11 @@ Report 50379 "Dividend Processing-Flat Rate"
         StartDate: date;
         EndDate: date;
         UserSetUp: Record "User Setup";
-        //  DividendsPorcessingCodeUnit: Codeunit "Dividends Processing-Flat Rate";
-        CustomerTable: Record Customer;
+        DividendsPorcessingCodeUnit: Codeunit "Dividends Processing-Flat Rate";
+        CustomerTable: Record "Member Register";//Customer
         GenJournalLine: Record "Gen. Journal Line";
+
+        CustomerCaptionLbl: label 'Customer';
+        CurrReport_PAGENOCaptionLbl: label 'Page';
+        LastFieldNo: Integer;
 }

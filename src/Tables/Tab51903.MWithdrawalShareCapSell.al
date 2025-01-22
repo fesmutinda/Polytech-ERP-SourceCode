@@ -45,6 +45,6 @@ Table 51903 "M_Withdrawal Share Cap Sell"
     }
 
     var
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
 }
 

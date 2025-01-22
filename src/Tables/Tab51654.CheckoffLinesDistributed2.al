@@ -362,6 +362,6 @@ Table 51654 "Checkoff Lines-Distributed2"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

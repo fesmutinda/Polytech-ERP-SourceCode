@@ -251,11 +251,11 @@ Table 51387 "Receipt Allocation"
 
     var
         Loans: Record "Loans Register";
-        //Cust: Record "Member Register";
+        //Cust: Record Customer;
         Cust: Record Customer;
         PTEN: Text;
         DataSheet: Record "Data Sheet Main";
-        Customer: Record "Member Register";
+        Customer: Record Customer;
         LoansR: Record "Loans Register";
         GenSetup: Record "Sacco General Set-Up";
         ReceiptAll: Record "Receipt Allocation";

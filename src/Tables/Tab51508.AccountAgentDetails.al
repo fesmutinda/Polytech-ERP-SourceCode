@@ -147,7 +147,7 @@ Table 51508 "Account Agent Details"
     end;
 
     var
-        CUST: Record "Member Register";
+        CUST: Record Customer;
         NoSeriesmgt: Codeunit NoSeriesManagement;
         SalesSetup: Record "Sacco No. Series";
 }

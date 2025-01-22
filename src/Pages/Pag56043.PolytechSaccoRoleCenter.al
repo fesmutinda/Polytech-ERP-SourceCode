@@ -1679,7 +1679,7 @@ Page 56043 "Polytech Sacco Role Center"
                     action("Loans Interest Posted Report")
                     {
                         ApplicationArea = all;
-                        //RunObject = report "Loans Interest Posted";
+                        //RunObject = Report "Loans Interest Posted";
                     }
 
                 }
@@ -1725,184 +1725,184 @@ Page 56043 "Polytech Sacco Role Center"
 
                 //..............................................................................................
 
-                // group(BOSAPeriodicActivities)
-                // {
-                //     Caption = 'Periodic Activities';
+                group(BOSAPeriodicActivities)
+                {
+                    Caption = 'Periodic Activities';
 
-                //     action("Update Member Dormancy")
-                //     {
-                //         RunObject = report "Update Member Dormancy";
-                //         ApplicationArea = all;
-                //         Visible = false;
-                //     }
-                //     group(LoanDefaulter)
-                //     {
-                //         Caption = 'Loan Defaulter Notices';
-                //         action(LoanDefaulter1st)
-                //         {
-                //             Caption = 'Loan Defaulter 1st Notice';
-                //             Image = Setup;
-                //             RunObject = report "Loan Defaulter 1st Notice";
-                //         }
-                //         action(LoanDefaulter2nd)
-                //         {
-                //             Caption = 'loan Defaulter 2nd Notice';
-                //             Image = Setup;
-                //             RunObject = report "Loan Defaulter 2nd Notice";
-                //         }
-                //         action("Loan Defaulter Final Notice")
-                //         {
+                    action("Update Member Dormancy")
+                    {
+                        //RunObject = report "Update Member Dormancy";
+                        ApplicationArea = all;
+                        Visible = false;
+                    }
+                    group(LoanDefaulter)
+                    {
+                        Caption = 'Loan Defaulter Notices';
+                        action(LoanDefaulter1st)
+                        {
+                            Caption = 'Loan Defaulter 1st Notice';
+                            Image = Setup;
+                            RunObject = report "Loan Defaulter 1st Notice";
+                        }
+                        action(LoanDefaulter2nd)
+                        {
+                            Caption = 'loan Defaulter 2nd Notice';
+                            Image = Setup;
+                            RunObject = report "Loan Defaulter 2nd Notice";
+                        }
+                        action("Loan Defaulter Final Notice")
+                        {
+                            Image = Setup;
+                            RunObject = report "Loan Defaulter Final Notice";
+                        }
+                    }
+                    //     group(CheckOffDistributed)
+                    //     {
+                    //         Caption = 'Checkoff Processing-Distributed';
+                    //         Visible = false;
+                    //         action("Checkoff Processing List")
+                    //         {
+                    //             Caption = 'Checkoff Processing List';
+                    //             Image = Setup;
+                    //             RunObject = page "Checkoff Processing-D List";
+                    //         }
+                    //         action(CheckoffProcessingDistributed)
+                    //         {
+                    //             Caption = 'Checkoff Processing-Distributed';
+                    //             Image = Setup;
+                    //             RunObject = page "Transfer Schedule";
+                    //         }
+                    //     }
+                    //     group(CheckOffBlocked)
+                    //     {
+                    //         Caption = 'Checkoff Processing-Blocked';
+                    //         action("Checkoff Processing List Blocked")
+                    //         {
+                    //             Caption = 'Employer Checkoff Remittance';
+                    //             Image = Setup;
+                    //             RunObject = page "Bosa Receipts H List-Checkoff";
+                    //         }
+                    //         action("Posted Employer Checkoff Remittance")
+                    //         {
+                    //             Caption = 'Posted Employer Checkoff Remittance';
+                    //             Image = Setup;
+                    //             RunObject = page "Posted Bosa Rcpt List-Checkof";
+                    //         }
+                    //         action("Import Sacco Jnl")
+                    //         {
+                    //             Caption = 'Import Sacco Jnl';
+                    //             Image = Setup;
+                    //             RunObject = xmlport "Import Sacco Jnl";
+                    //             visible = false;
+                    //         }
+                    //     }
+                    //     group(CheckOffAdvice)
+                    //     {
+                    //         Caption = 'Check-Off Advice';
+                    //         action("Check off Adivice-Breakdown")
+                    //         {
+                    //             Image = Setup;
+                    //             RunObject = report "Check Off Advice";
+                    //         }
+                    //         action("Check off Adivice-Lumpsum")
+                    //         {
+                    //             Image = Setup;
+                    //             RunObject = report "Check Off Advice-Lumpsum";
+                    //         }
 
-                //             Image = Setup;
-                //             RunObject = report "Loan Defaulter Final Notice";
-                //         }
-
-                //     }
-                //     group(CheckOffDistributed)
-                //     {
-                //         Caption = 'Checkoff Processing-Distributed';
-                //         Visible = false;
-                //         action("Checkoff Processing List")
-                //         {
-                //             Caption = 'Checkoff Processing List';
-                //             Image = Setup;
-                //             RunObject = page "Checkoff Processing-D List";
-                //         }
-                //         action(CheckoffProcessingDistributed)
-                //         {
-                //             Caption = 'Checkoff Processing-Distributed';
-                //             Image = Setup;
-                //             RunObject = page "Transfer Schedule";
-                //         }
-                //     }
-                //     group(CheckOffBlocked)
-                //     {
-                //         Caption = 'Checkoff Processing-Blocked';
-                //         action("Checkoff Processing List Blocked")
-                //         {
-                //             Caption = 'Employer Checkoff Remittance';
-                //             Image = Setup;
-                //             RunObject = page "Bosa Receipts H List-Checkoff";
-                //         }
-                //         action("Posted Employer Checkoff Remittance")
-                //         {
-                //             Caption = 'Posted Employer Checkoff Remittance';
-                //             Image = Setup;
-                //             RunObject = page "Posted Bosa Rcpt List-Checkof";
-                //         }
-                //         action("Import Sacco Jnl")
-                //         {
-                //             Caption = 'Import Sacco Jnl';
-                //             Image = Setup;
-                //             RunObject = xmlport "Import Sacco Jnl";
-                //             visible = false;
-                //         }
-                //     }
-                //     group(CheckOffAdvice)
-                //     {
-                //         Caption = 'Check-Off Advice';
-                //         action("Check off Adivice-Breakdown")
-                //         {
-                //             Image = Setup;
-                //             RunObject = report "Check Off Advice";
-                //         }
-                //         action("Check off Adivice-Lumpsum")
-                //         {
-                //             Image = Setup;
-                //             RunObject = report "Check Off Advice-Lumpsum";
-                //         }
-
-                //     }
-                //     group(MonthlyInterestProcessing)
-                //     {
-                //         Caption = 'Monthly Interest Processing';
-                //         action("Post Monthly Interest")
-                //         {
-                //             Caption = 'Post Monthly Interest';
-                //             Image = Setup;
-                //             RunObject = report "Post Monthly Interest.";
-                //             ToolTip = 'Used to process Loans Monthly Interest';
-                //         }
-                //     }
-                //     group(Dividends)
-                //     {
-                //         Caption = 'Dividends';
-                //         // group("Flat Rate")
-                //         // {
-                //         //     Caption = 'Flat Rate';
-                //         //     action("Dividends Processing-Flat Rate")
-                //         //     {
-                //         //         Caption = 'Dividends Processing-Flat Rate';
-                //         //         Image = Setup;
-                //         //         RunObject = report "Dividend Processing-Flat Rate";
-                //         //     }
-                //         //     action("Dividends Processing Flat Rate-List")
-                //         //     {
-                //         //         Caption = 'Dividends Processing Flat Rate-List';
-                //         //         Image = Setup;
-                //         //         RunObject = page "Dividends Processing Flat Rate";
-                //         //     }
-                //         // }
-                //         group(Prorated)
-                //         {
-                //             Caption = 'Prorated';
-                //             action("Dividends Processing-Prorated")
-                //             {
-                //                 Caption = 'Dividends Processing-Prorated';
-                //                 Image = Setup;
-                //                 RunObject = report "Dividend Processing-Prorated";
-                //             }
-                //             action("Dividends Register")
-                //             {
-                //                 Caption = 'Dividends Register';
-                //                 Image = Setup;
-                //                 RunObject = report "Dividend Register";
-                //             }
-                //             action(DividendProgressionSlip)
-                //             {
-                //                 Caption = 'Dividend Progression Slip';
-                //                 Image = Setup;
-                //                 RunObject = report "Dividends Progressionslip";
-                //                 Visible = false;
-                //             }
-                //             action("Dividends Payments Report")
-                //             {
-                //                 ApplicationArea = all;
-                //                 RunObject = Report "Dividends Payments";
-
-                //             }
-                //         }
-                //         group("Share capital Manangement")
-                //         {
-                //             action("Share Capital Recovery")
-                //             {
-                //                 Image = ReceiveLoaner;
-                //                 ApplicationArea = all;
-                //                 Caption = 'Recover Sharecapital from Deposits';
-                //                 RunObject = report "Share Capital Recovery";
-                //             }
-                //             group(SharecapitalTrading)
-                //             {
-                //                 action(SharecapitalTradingList)
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     RunObject = page "Share Capital Trading List";
-                //                     Caption = 'Sharecapital Trading List';
-                //                 }
-                //                 action(SharecapitalTradingListPosted)
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     RunObject = page "Share Capital Trading Posted";
-                //                     Caption = 'Sharecapital Trading List Posted';
-
-                //                 }
-                //             }
-                //         }
+                    //     }
+                    //     group(MonthlyInterestProcessing)
+                    //     {
+                    //         Caption = 'Monthly Interest Processing';
+                    //         action("Post Monthly Interest")
+                    //         {
+                    //             Caption = 'Post Monthly Interest';
+                    //             Image = Setup;
+                    //             RunObject = report "Post Monthly Interest.";
+                    //             ToolTip = 'Used to process Loans Monthly Interest';
+                    //         }
+                }
 
 
+                group(Dividends)
+                {
+                    Caption = 'Dividends';
+                    group("Flat Rate")
+                    {
+                        Caption = 'Flat Rate';
+                        action("Dividends Processing-Flat Rate")
+                        {
+                            Caption = 'Dividends Processing-Flat Rate';
+                            Image = Setup;
+                            RunObject = report "Dividend Processing-Flat Rate";
+                        }
+                        action("Dividends Processing Flat Rate-List")
+                        {
+                            Caption = 'Dividends Processing Flat Rate-List';
+                            Image = Setup;
+                            RunObject = page "Dividends Processing Flat Rate";
+                        }
+                    }
+                    group(Prorated)
+                    {
+                        Caption = 'Prorated';
+                        action("Dividends Processing-Prorated")
+                        {
+                            Caption = 'Dividends Processing-Prorated';
+                            Image = Setup;
+                            RunObject = report "Dividend Processing-Prorated";
+                        }
+                        action("Dividends Register")
+                        {
+                            Caption = 'Dividends Register';
+                            Image = Setup;
+                            RunObject = report "Dividend Register";
+                        }
+                        action(DividendProgressionSlip)
+                        {
+                            Caption = 'Dividend Progression Slip';
+                            Image = Setup;
+                            RunObject = report "Dividends Progressionslip";
+                            Visible = false;
+                        }
+                        action("Dividends Payments Report")
+                        {
+                            ApplicationArea = all;
+                            RunObject = Report "Dividends Payments";
 
-                //     }
-                // }
+                        }
+                    }
+                    //         group("Share capital Manangement")
+                    //         {
+                    //             action("Share Capital Recovery")
+                    //             {
+                    //                 Image = ReceiveLoaner;
+                    //                 ApplicationArea = all;
+                    //                 Caption = 'Recover Sharecapital from Deposits';
+                    //                 RunObject = report "Share Capital Recovery";
+                    //             }
+                    //             group(SharecapitalTrading)
+                    //             {
+                    //                 action(SharecapitalTradingList)
+                    //                 {
+                    //                     ApplicationArea = Basic, Suite;
+                    //                     RunObject = page "Share Capital Trading List";
+                    //                     Caption = 'Sharecapital Trading List';
+                    //                 }
+                    //                 action(SharecapitalTradingListPosted)
+                    //                 {
+                    //                     ApplicationArea = Basic, Suite;
+                    //                     RunObject = page "Share Capital Trading Posted";
+                    //                     Caption = 'Sharecapital Trading List Posted';
+
+                    //                 }
+                    //             }
+                    //         }
+
+
+
+                    //     }
+                }
 
             }
 

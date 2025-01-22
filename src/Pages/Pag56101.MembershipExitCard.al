@@ -315,7 +315,7 @@ Page 56101 "Membership Exit Card"
         Closure: Integer;
         Text001: label 'Not Approved';
         cust: Record Customer;
-        //cust: Record "Member Register";
+        //cust: Record Customer;
         UBFRefund: Decimal;
         Generalsetup: Record "Sacco General Set-Up";
         Totalavailable: Decimal;
@@ -476,7 +476,7 @@ Page 56101 "Membership Exit Card"
         DActivity: code[20];
         DBranch: Code[50];
         Cust: Record customer;
-        Cust2: Record "Member Register";
+        Cust2: Record Customer;
         Generalsetup: Record "Sacco General Set-Up";
         RunningBal: Decimal;
         SFactory: Codeunit "SURESTEP Factory";

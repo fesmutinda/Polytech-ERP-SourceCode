@@ -287,7 +287,7 @@ Table 51319 "Payroll Employee Transactions."
         Loans: Record "Loans Register";
         HR: Record "Payroll Employee.";
         SCARD: Record "Payroll Employee.";
-        MEMB: Record "Member Register";
+        MEMB: Record Customer;
 
     local procedure FnGetInterestRate(LoanProductCode: Code[40]) InterestRate: Decimal
     var

@@ -614,7 +614,7 @@ codeunit 50041 "Custom Workflow Responses"
     local procedure OnReleaseDocument(RecRef: RecordRef; var Handled: Boolean)
     var
         MemberShipApp: Record "Membership Applications";
-        LoansRegister: Record "Loans Register";
+        LoansRegister1: Record "Loans Register";
         BOSATransfers: Record "BOSA Transfers";
         LoanBatchDisbursements: Record "Loan Disburesment-Batching";
         LoanTopUp: Record "Loan Top Up.";
@@ -689,12 +689,12 @@ codeunit 50041 "Custom Workflow Responses"
             //Loans Applications
             DATABASE::"Loans Register":
                 begin
-                    RecRef.SetTable(LoansRegister);
-                    LoansRegister."Approval Status" := LoansRegister."Approval Status"::Approved;
+                    RecRef.SetTable(LoansRegister1);
+                    LoansRegister1."Approval Status" := LoansRegister1."Approval Status"::Approved;
                     //LoansRegister."loan status" := LoansRegister."loan status"::Approved;
-                    //LoansRegister.Validate("Approval Status", LoansRegister."Approval Status"::Approved);
-                    LoansRegister.Validate("loan status", LoansRegister."loan status"::Approved);
-                    LoansRegister.Modify(true);
+                    //LoansRegister1.Validate("Approval Status", LoansRegister1."Approval Status"::Approved);
+                    LoansRegister1.Validate("loan status", LoansRegister1."loan status"::Approved);
+                    LoansRegister1.Modify(true);
                     Handled := true;
                 end;
 

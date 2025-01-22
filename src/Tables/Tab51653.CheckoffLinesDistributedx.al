@@ -86,6 +86,6 @@ Table 51653 "Checkoff Lines-Distributedx"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

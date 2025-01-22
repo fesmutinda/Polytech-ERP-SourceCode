@@ -20,7 +20,7 @@ Page 56041 "Loans Cue"
                     Image = none;
                     Style = Favorable;
                     StyleExpr = true;
-                    DrillDownPageId = "Loans  List All";
+                    DrillDownPageId = "Loan List-New Application BOSA";
                 }
 
                 field("Active Loans"; Rec."Active Loans")

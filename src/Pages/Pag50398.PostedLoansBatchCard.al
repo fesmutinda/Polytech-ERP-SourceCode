@@ -115,11 +115,11 @@ page 50398 "Posted Loans Batch Card"
 
                     trigger OnAction()
                     begin
-                        /*Cust1.RESET;
-                       Cust1.SETRANGE(Cust1."No.",Cust1."No.");
-                        IF Cust1.FINDFIRST THEN BEGIN
-                         REPORT.RUN(REPORT::"members card",TRUE,FALSE,Cust1);
-                        END;     */
+                        Cust.RESET;
+                        Cust.SETRANGE(Cust."No.", Cust."No.");
+                        IF Cust.FINDFIRST THEN BEGIN
+                            REPORT.RUN(REPORT::"members card", TRUE, FALSE, Cust);
+                        END;
 
                     end;
                 }

@@ -348,6 +348,6 @@ Table 51572 "Checkoff Lines-Buffer"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

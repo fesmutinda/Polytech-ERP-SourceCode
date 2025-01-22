@@ -235,11 +235,11 @@ Table 51407 "BOSA TransferS Schedule"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Vend: Record Vendor;
         Bank: Record "Bank Account";
         Bosa: Record "BOSA Transfers";
         "G/L": Record "G/L Account";
-        memb: Record "Member Register";
+        memb: Record Customer;
 }
 

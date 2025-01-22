@@ -56,7 +56,7 @@ Codeunit 50025 SwizzKashMB
         Loans: Integer;
         LoansRegister: Record  "Loans Register";
         LoanProductsSetup: Record "Loan Products Setup";
-        Members: Record "Member Register";
+        Members: Record Customer;
         dateExpression: Text[20];
         DetailedVendorLedgerEntry: Record "Detailed Vendor Ledg. Entry";
         dashboardDataFilter: Date;

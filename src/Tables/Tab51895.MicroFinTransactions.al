@@ -283,7 +283,7 @@ Table 51895 "Micro_Fin_Transactions"
     end;
 
     var
-        GroupMembers: Record "Member Register";
+        GroupMembers: Record Customer;
         LoanApplic: Record "Loans Register";
         noseriesmgt: Codeunit NoSeriesManagement;
         SalesSetup: Record "Sacco No. Series";
@@ -291,6 +291,6 @@ Table 51895 "Micro_Fin_Transactions"
         BANKACC: Record "Bank Account";
         VEND: Record Vendor;
         OfficeGroup: Record "User Setup";
-        Member: Record "Member Register";
+        Member: Record Customer;
 }
 

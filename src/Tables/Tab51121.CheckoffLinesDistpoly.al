@@ -669,6 +669,6 @@ Table 51121 "CheckoffLinesDist poly"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 

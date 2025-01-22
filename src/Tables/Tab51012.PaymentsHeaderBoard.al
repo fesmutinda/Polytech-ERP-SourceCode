@@ -155,7 +155,7 @@ Table 51012 "Payments Header Board"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         NoSetup: Record "Funds User Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         BOSARcpt: Record "Receipt Header";

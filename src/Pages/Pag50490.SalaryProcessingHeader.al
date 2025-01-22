@@ -325,7 +325,7 @@ page 50490 "Salary Processing Header"
         DActivityBOSA: Code[20];
         DBranchBOSA: Code[20];
         ReptProcHeader: Record "Checkoff Header-Distributed";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         salarybuffer: Record "Salary Processing Lines";
         SalHeader: Record "Salary Processing Headerr";
         Sto: Record "Standing Orders";

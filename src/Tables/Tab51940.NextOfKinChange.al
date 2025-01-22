@@ -105,7 +105,7 @@ Table 51940 "Next Of Kin Change"
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         ObjAccount: Record Vendor;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjLoans: Record "Loans Register";
         ObjSwizzsoft: Codeunit "Swizzsoft Factory.";
         VarAmountInArrears: Decimal;

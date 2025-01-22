@@ -419,7 +419,7 @@ Page 56029 "Loan Application Card"
                         end else begin
                             SrestepApprovalsCodeUnit.SendLoanApplicationsRequestForApproval(rec."Loan  No.", Rec);
                             FnSendLoanApprovalNotifications();
-                            Message('Approval Request sent!');
+                            //Message('Approval Request sent!');
                             CurrPage.close();
                         end;
                     end;

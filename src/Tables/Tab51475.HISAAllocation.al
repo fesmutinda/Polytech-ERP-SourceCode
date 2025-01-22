@@ -197,7 +197,7 @@ Table 51475 "HISA Allocation"
 
     var
         Loans: Record "Loans Register";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         RECEIPTs: Record "Receipt Allocation";
         Comm: Decimal;
         bv: Integer;

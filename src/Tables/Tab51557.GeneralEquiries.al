@@ -508,14 +508,14 @@ Table 51557 "General Equiries."
         NoSeriesMgt: Codeunit NoSeriesManagement;
         Loans: Record "Loans Register";
         GenSetUp: Record "Sacco General Set-Up";
-        //Cust: Record "Member Register";
+        //Cust: Record Customer;
         Cust: Record Customer;
         PVApp: Record "Member Ledger Entry";
         UserMgt: Codeunit "User Setup Management";
         PRD: Record Customer;
         ObjEmployers: Record "Sacco Employers";
         ObjUser: Record "User Setup";
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjUsers: Record User;
 }
 

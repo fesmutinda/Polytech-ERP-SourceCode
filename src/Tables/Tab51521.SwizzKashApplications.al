@@ -131,6 +131,6 @@ Table 51521 "SwizzKash Applications"
     var
         SaccoNoSeries: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Accounts: Record "Member Register";
+        Accounts: Record Customer;
 }
 

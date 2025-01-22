@@ -231,7 +231,7 @@ page 50427 "Posted Member Withdrawal Card"
     var
         Closure: Integer;
         Text001: label 'Not Approved';
-        cust: Record "Member Register";
+        cust: Record Customer;
         UBFRefund: Decimal;
         Generalsetup: Record "Sacco General Set-Up";
         Totalavailable: Decimal;

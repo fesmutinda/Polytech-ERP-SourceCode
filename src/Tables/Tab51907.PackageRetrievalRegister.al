@@ -238,7 +238,7 @@ Table 51907 "Package Retrieval Register"
         ObjPackageTypes: Record "Package Types";
         AvailableBal: Decimal;
         LodgeFee: Decimal;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjGenSetup: Record "Sacco General Set-Up";
 }
 

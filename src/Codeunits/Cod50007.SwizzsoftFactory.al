@@ -18,8 +18,8 @@ Codeunit 50007 "Swizzsoft Factory."
         ObjBanks: Record "Bank Account";
         ObjLoanProductSetup: Record "Loan Products Setup";
         ObjProductCharges: Record  "Loan Product Charges";
-        ObjMembers: Record "Member Register";
-        ObjMembers2: Record "Member Register";
+        ObjMembers: Record Customer;
+        ObjMembers2: Record Customer;
         ObjGenSetUp: Record "Sacco General Set-Up";
         ObjCompInfo: Record "Company Information";
         BAND1: Decimal;
@@ -363,7 +363,7 @@ Codeunit 50007 "Swizzsoft Factory."
 
     procedure FnGetMemberBranch(MemberNo: Code[100]) MemberBranch: Code[100]
     var
-        ObjMemberLocal: Record "Member Register";
+        ObjMemberLocal: Record Customer;
     begin
         ObjMemberLocal.Reset;
         ObjMemberLocal.SetRange(ObjMemberLocal."No.",MemberNo);
@@ -375,7 +375,7 @@ Codeunit 50007 "Swizzsoft Factory."
 
     local procedure FnReturnRetirementDate(MemberNo: Code[50]): Date
     var
-        ObjMembers: Record "Member Register";
+        ObjMembers: Record Customer;
     begin
         ObjGenSetUp.Get();
         ObjMembers.Reset;
@@ -410,7 +410,7 @@ Codeunit 50007 "Swizzsoft Factory."
 
     procedure FnGetFosaAccount(MemberNo: Code[50]) FosaAccount: Code[50]
     var
-        ObjMembers: Record "Member Register";
+        ObjMembers: Record Customer;
     begin
         ObjMembers.Reset;
         ObjMembers.SetRange(ObjMembers."No.",MemberNo);
@@ -517,7 +517,7 @@ Codeunit 50007 "Swizzsoft Factory."
         loanTypes: Record "Loan Products Setup";
         ObjLoanX: Record "Loans Register";
         LoansRec: Record "Loans Register";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
     begin
           loanTypes.Reset;
           loanTypes.SetRange(loanTypes.Code,'BLOAN');
@@ -1860,7 +1860,7 @@ Codeunit 50007 "Swizzsoft Factory."
 
     procedure FnCalculateDividendProrated(MemberNo: Code[10];StartDate: Date;EndDate: Date)
     var
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
         ObjDivProg: Record 51393;
         FromBate: Date;
         "To Date": Date;
@@ -2589,7 +2589,7 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
 
     procedure KnGetMemberPhoneNo(MemberNo: Code[15]): Code[20]
     var
-        ObjMembersReg: Record "Member Register";
+        ObjMembersReg: Record Customer;
         PhoneNo: Code[20];
     begin
         if ObjMembersReg.Get(MemberNo) then
@@ -2603,7 +2603,7 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
 
     procedure KnGetMemberEmailAddress(MemberNo: Code[15]): Code[50]
     var
-        ObjMembersReg: Record "Member Register";
+        ObjMembersReg: Record Customer;
         Email: Code[50];
     begin
         if ObjMembersReg.Get(MemberNo) then
@@ -2749,7 +2749,7 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
     procedure KnGetLoanBalanceOneLoan(LoanNo: Code[20]) Amount: Decimal
     var
         ObjLoansRegister: Record "Loans Register";
-        MeReg: Record "Member Register";
+        MeReg: Record Customer;
     begin
         ObjLoansRegister.Reset;
         ObjLoansRegister.SetRange(ObjLoansRegister."Loan  No.",LoanNo);
@@ -2768,7 +2768,7 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
 
     procedure knCheckIfMemberIsWithdrawn(MemberNo: Code[30]): Boolean
     var
-        MembersRegisterLocal: Record "Member Register";
+        MembersRegisterLocal: Record Customer;
     begin
         MembersRegisterLocal.Reset;
         MembersRegisterLocal.SetRange("No.",MemberNo);
@@ -2794,7 +2794,7 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
     end;
 
 
-    procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
+    /* procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
     var
         ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
         PrevMonth: Date;
@@ -2813,10 +2813,55 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
             if DateParm=PrevMonth then
               begin
                 Period:=ObjLoanRepaymentSchedule."Instalment No";
+                exit;
               end;
               until ObjLoanRepaymentSchedule.Next=0;
           end;
+    end; */
+    procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
+var
+    ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
+    PrevMonth: Date;
+    DateParm: Date;
+    LastRepaymentSchedule: Integer;
+    DaysFromLastRepayment: Integer;
+    MaxDaysThreshold: Integer;
+begin
+    Period := 0; // Default value if no match is found
+    MaxDaysThreshold := 1; // Define how many days from the last repayment date are considered "far"
+
+    ObjLoanRepaymentSchedule.Reset;
+    ObjLoanRepaymentSchedule.SetRange("Loan No.", LoanNo);
+
+    // Fetch the last date of the previous month
+    PrevMonth := KnGetPreviousMonthLastDate(LoanNo, Today);
+
+    if ObjLoanRepaymentSchedule.FindSet then 
+    begin
+        repeat
+            if ObjLoanRepaymentSchedule."Repayment Date" <> 0D then begin
+                DateParm := CalcDate('CM', ObjLoanRepaymentSchedule."Repayment Date");
+
+                // If the repayment date matches the previous month
+                if DateParm = PrevMonth then begin
+                    Period := ObjLoanRepaymentSchedule."Instalment No";
+                    exit; // Exit as we've found the matching period
+                end;
+
+                // Track the last repayment schedule
+                LastRepaymentSchedule := ObjLoanRepaymentSchedule."Instalment No";
+                DaysFromLastRepayment := Date2DMY(Today, 1) - Date2DMY(ObjLoanRepaymentSchedule."Repayment Date", 1);
+            end;
+        until ObjLoanRepaymentSchedule.Next() = 0;
+     end;
+
+    // If no exact match, assign the last repayment schedule if today is far from the last repayment date
+    if Period = 0 then begin
+        if DaysFromLastRepayment > MaxDaysThreshold then
+            Period := LastRepaymentSchedule; // Assign the last repayment schedule
     end;
+end;
+
 
 
     procedure KnGetPreviousMonthLastDate(LoanNo_: Text[30];Date_: Date) Lastdate: Date
@@ -2849,7 +2894,7 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
         LoanBalance: Decimal;
         ApprovedAmount: Decimal;
         AmountGuaranteed: Decimal;
-        MembersReg: Record "Member Register";
+        MembersReg: Record Customer;
         freedSharesRetained: Decimal;
         PrevAmount: Decimal;
         SavingsGuarantorship: Record 51711;

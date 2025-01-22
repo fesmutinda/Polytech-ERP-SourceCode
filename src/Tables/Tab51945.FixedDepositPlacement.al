@@ -209,6 +209,6 @@ Table 51945 "Fixed Deposit Placement"
         ObjGenSetup: Record "Sacco General Set-Up";
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
 }
 

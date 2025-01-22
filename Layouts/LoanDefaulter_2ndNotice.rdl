@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-01-22T14:31:28.0510159Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -442,8 +453,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>2.37569in</Top>
-            <Left>0.60536cm</Left>
+            <Top>2.19514in</Top>
+            <Left>0.68263cm</Left>
             <Height>0.20298in</Height>
             <Width>0.36111in</Width>
             <ZIndex>10</ZIndex>
@@ -477,10 +488,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Top>2.38958in</Top>
-            <Left>0.59944in</Left>
+            <Top>2.20903in</Top>
+            <Left>0.64376in</Left>
             <Height>0.20298in</Height>
-            <Width>1.65625in</Width>
+            <Width>2.60196in</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -525,55 +536,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.41895in</Top>
-            <Left>4.54764cm</Left>
+            <Top>2.81618in</Top>
+            <Left>2.43244cm</Left>
             <Height>0.1875in</Height>
             <Width>2.52418in</Width>
             <ZIndex>12</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox7">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve">   </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!Member_No.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve">     </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.63423in</Top>
-            <Left>2.39043cm</Left>
-            <Height>0.1875in</Height>
-            <Width>5.74723in</Width>
-            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -599,11 +566,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.38423in</Top>
-            <Left>0.60536cm</Left>
+            <Top>3.04535in</Top>
+            <Left>0.70381cm</Left>
             <Height>0.25in</Height>
             <Width>1.42708in</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -645,7 +612,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!AmountInArrears_DefaultNoticesRegister.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AmountInArrears.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -669,11 +636,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>3.66201in</Top>
-            <Left>0.60536cm</Left>
+            <Top>3.36479in</Top>
+            <Left>0.68263cm</Left>
             <Height>0.25in</Height>
             <Width>4.53125in</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -684,7 +651,194 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox10">
+          <Image Name="Image1">
+            <Source>Database</Source>
+            <Value>=First(Fields!clogo.Value, "DataSet_Result")</Value>
+            <MIMEType>image/jpeg</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Top>1.12541in</Top>
+            <Left>3.00708in</Left>
+            <Height>0.89523in</Height>
+            <Width>2.03542in</Width>
+            <ZIndex>15</ZIndex>
+            <ToolTip>=First(Fields!clogo.Value, "DataSet_Result")</ToolTip>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="CName">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>CName</rd:DefaultName>
+            <Top>0.41944in</Top>
+            <Left>0.12708in</Left>
+            <Height>0.25in</Height>
+            <Width>7.43229in</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TO:</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.45368in</Top>
+            <Left>0.2771in</Left>
+            <Height>0.18056in</Height>
+            <Width>0.625in</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>0.73818in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.37709in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MemberNo_LoanGuarantors">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!MemberNo_LoanGuarantors.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MemberNo_LoanGuarantors</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Name_LoanGuarantors">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Name_LoanGuarantors.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Name_LoanGuarantors</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>2.46757in</Top>
+            <Left>0.95766in</Left>
+            <Height>0.25in</Height>
+            <Width>4.11527in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox22">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -700,6 +854,7 @@
                   <TextRun>
                     <Value>=First(Fields!ClientName_Loans.Value, "DataSet_Result")</Value>
                     <Style>
+                      <FontStyle>Italic</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
                     </Style>
@@ -819,7 +974,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!LoanNo_LoanPeriodInt.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!LInstallments.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -864,7 +1019,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!Loan_Outstanding_Balance.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!LoanOutstanding_Balance.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -894,7 +1049,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!AmountInArrears_DefaultNoticesRegister.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AmountInArrears.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -908,11 +1063,43 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>Loan Repayment Period Balance </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!RemainingPeriod.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Months</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
                       <Format>#,0.00;(#,0.00)</Format>
                     </Style>
                   </TextRun>
@@ -930,7 +1117,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!Loan_Outstanding_Balance.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!AmountInArrears.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -1092,144 +1279,6 @@
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>4.06826in</Top>
-            <Left>0.60536cm</Left>
-            <Height>3.90625in</Height>
-            <Width>6.21875in</Width>
-            <ZIndex>16</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Image Name="Image1">
-            <Source>Database</Source>
-            <Value>=First(Fields!clogo.Value, "DataSet_Result")</Value>
-            <MIMEType>image/jpeg</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>1.12541in</Top>
-            <Left>3.00708in</Left>
-            <Height>0.89523in</Height>
-            <Width>2.03542in</Width>
-            <ZIndex>17</ZIndex>
-            <ToolTip>=First(Fields!clogo.Value, "DataSet_Result")</ToolTip>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="CName">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CName.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>14pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>CName</rd:DefaultName>
-            <Top>0.41944in</Top>
-            <Left>0.12708in</Left>
-            <Height>0.25in</Height>
-            <Width>7.43229in</Width>
-            <ZIndex>18</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox5">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>TO:</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1237,11 +1286,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>2.63423in</Top>
-            <Left>0.24667in</Left>
-            <Height>0.18056in</Height>
-            <Width>0.625in</Width>
+            <rd:DefaultName>Textbox22</rd:DefaultName>
+            <Top>3.68424in</Top>
+            <Left>0.26876in</Left>
+            <Height>4.11667in</Height>
+            <Width>6.5in</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -1253,43 +1302,15 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox11">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Name.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.89117in</Top>
-            <Left>2.39043cm</Left>
-            <Height>0.42361in</Height>
-            <Width>6.3889in</Width>
-            <ZIndex>20</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
-        <Height>8.9in</Height>
-        <Style />
+        <Height>8.15923in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
       </Body>
-      <Width>7.85833in</Width>
+      <Width>7.73125in</Width>
       <Page>
         <Style />
       </Page>
@@ -1379,23 +1400,35 @@ End Function
         <Field Name="recoverNoticedate">
           <DataField>recoverNoticedate</DataField>
         </Field>
+        <Field Name="AmountInArrears">
+          <DataField>AmountInArrears</DataField>
+        </Field>
+        <Field Name="AmountInArrearsFormat">
+          <DataField>AmountInArrearsFormat</DataField>
+        </Field>
+        <Field Name="LoanOutstanding_Balance">
+          <DataField>LoanOutstanding_Balance</DataField>
+        </Field>
+        <Field Name="LoanOutstanding_BalanceFormat">
+          <DataField>LoanOutstanding_BalanceFormat</DataField>
+        </Field>
+        <Field Name="LoanOutstanding_Interest">
+          <DataField>LoanOutstanding_Interest</DataField>
+        </Field>
+        <Field Name="LoanOutstanding_InterestFormat">
+          <DataField>LoanOutstanding_InterestFormat</DataField>
+        </Field>
+        <Field Name="LInstallments">
+          <DataField>LInstallments</DataField>
+        </Field>
+        <Field Name="RemainingPeriod">
+          <DataField>RemainingPeriod</DataField>
+        </Field>
         <Field Name="GNo">
           <DataField>GNo</DataField>
         </Field>
         <Field Name="Gname">
           <DataField>Gname</DataField>
-        </Field>
-        <Field Name="AllGnames">
-          <DataField>AllGnames</DataField>
-        </Field>
-        <Field Name="AllGNos">
-          <DataField>AllGNos</DataField>
-        </Field>
-        <Field Name="Name">
-          <DataField>Name</DataField>
-        </Field>
-        <Field Name="Member_No">
-          <DataField>Member_No</DataField>
         </Field>
         <Field Name="ReportForNavId_1102755005">
           <DataField>ReportForNavId_1102755005</DataField>
@@ -1433,26 +1466,14 @@ End Function
         <Field Name="loansOFFICER">
           <DataField>loansOFFICER</DataField>
         </Field>
-        <Field Name="Loan_Outstanding_Balance">
-          <DataField>Loan_Outstanding_Balance</DataField>
+        <Field Name="ReportForNavId_1102755009">
+          <DataField>ReportForNavId_1102755009</DataField>
         </Field>
-        <Field Name="Loan_Outstanding_BalanceFormat">
-          <DataField>Loan_Outstanding_BalanceFormat</DataField>
+        <Field Name="MemberNo_LoanGuarantors">
+          <DataField>MemberNo_LoanGuarantors</DataField>
         </Field>
-        <Field Name="Outstanding_Interest_DefaultNoticesRegister">
-          <DataField>Outstanding_Interest_DefaultNoticesRegister</DataField>
-        </Field>
-        <Field Name="Outstanding_Interest_DefaultNoticesRegisterFormat">
-          <DataField>Outstanding_Interest_DefaultNoticesRegisterFormat</DataField>
-        </Field>
-        <Field Name="AmountInArrears_DefaultNoticesRegister">
-          <DataField>AmountInArrears_DefaultNoticesRegister</DataField>
-        </Field>
-        <Field Name="AmountInArrears_DefaultNoticesRegisterFormat">
-          <DataField>AmountInArrears_DefaultNoticesRegisterFormat</DataField>
-        </Field>
-        <Field Name="DaysInArrears_DefaultNoticesRegister">
-          <DataField>DaysInArrears_DefaultNoticesRegister</DataField>
+        <Field Name="Name_LoanGuarantors">
+          <DataField>Name_LoanGuarantors</DataField>
         </Field>
       </Fields>
       <Query>

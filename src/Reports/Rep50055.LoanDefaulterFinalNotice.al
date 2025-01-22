@@ -6,34 +6,34 @@ Report 50055 "Loan Defaulter Final Notice"
 
     dataset
     {
-        dataitem("<LoansRec>"; "Loans Register")
+        dataitem("LoansRec"; "Loans Register")
         {
             RequestFilterFields = "Client Code", "Loan  No.", "Loans Category-SASRA";
             column(ReportForNavId_1102755000; 1102755000)
             {
             }
-            column(OutstandingBalance_Loans; "Loans Register"."Outstanding Balance")
+            column(OutstandingBalance_Loans; LoansRec."Outstanding Balance")
             {
             }
-            column(LoanNo_Loans; "Loans Register"."Loan  No.")
+            column(LoanNo_Loans; LoansRec."Loan  No.")
             {
             }
-            column(ClientName_Loans; "Loans Register"."Client Name")
+            column(ClientName_Loans; LoansRec."Client Name")
             {
             }
-            column(ClientCode_Loans; "Loans Register"."Client Code")
+            column(ClientCode_Loans; LoansRec."Client Code")
             {
             }
-            column(OutstandingBalance_LoansRec; "<LoansRec>"."Outstanding Balance")
+            column(OutstandingBalance_LoansRec; "LoansRec"."Outstanding Balance")
             {
             }
-            column(OustandingInterest_LoansRec; "<LoansRec>"."Oustanding Interest")
+            column(OustandingInterest_LoansRec; "LoansRec"."Oustanding Interest")
             {
             }
-            column(CurrentShares_LoansRec; "<LoansRec>"."Current Shares")
+            column(CurrentShares_LoansRec; "LoansRec"."Current Shares")
             {
             }
-            column(ApprovedAmount_LoansRec; "<LoansRec>"."Approved Amount")
+            column(ApprovedAmount_LoansRec; "LoansRec"."Approved Amount")
             {
             }
             column(Penaltycharge_on_offset; Penaltcharge)
@@ -45,6 +45,8 @@ Report 50055 "Loan Defaulter Final Notice"
             column(OutstandingInt; OutstandingInt)
             {
             }
+            column(AmountInArrears_DefaultNoticesRegister; AmountInArrears_DefaultNoticesRegister)
+            { }
             column(LoanNo; LoanNo)
             {
             }
@@ -96,7 +98,7 @@ Report 50055 "Loan Defaulter Final Notice"
                     CalcFields("Members Register"."Current Shares", "Members Register"."Shares Retained");
                 end;
             }
-            dataitem("Loans Register"; "Loans Register")
+            dataitem("Loans Register1"; "Loans Register")
             {
                 DataItemLink = "Loan  No." = field("Loan  No.");
                 column(ReportForNavId_1102755011; 1102755011)
@@ -114,35 +116,38 @@ Report 50055 "Loan Defaulter Final Notice"
                     column(Name_LoanGuarantors; "Loans Guarantee Details".Name)
                     {
                     }
-                    column(ApprovedAmount_Loans; "Loans Register"."Approved Amount")
+                    column(ApprovedAmount_Loans; LoansRec."Approved Amount")
                     {
                     }
-                    column(OutstandingInterest_Loans; "Loans Register"."Oustanding Interest")
+                    column(OutstandingInterest_Loans; LoansRec."Oustanding Interest")
                     {
                     }
                     column(CurrentSavings_Members; "Members Register"."Current Savings")
                     {
                     }
+                    column(Amont_Guaranteed; "Amont Guaranteed") { }
+
                     column(Loan_Officer; Lofficer)
                     {
                     }
-                    dataitem("Default Notices Register"; "Default Notices Register")
-                    {
-                        column(ReportForNavId_1120054000; 1120054000)
-                        {
-                        }
-                        column(AmountInArrears_DefaultNoticesRegister; "Default Notices Register"."Amount In Arrears")
-                        {
-                        }
-                    }
+                    // dataitem("Default Notices Register"; "Default Notices Register")
+                    // {
+                    //     column(ReportForNavId_1120054000; 1120054000)
+                    //     {
+                    //     }
+                    //     column(AmountInArrears_DefaultNoticesRegister; "Default Notices Register"."Amount In Arrears")
+                    //     {
+                    //     }
+                    // }
                 }
             }
 
             trigger OnAfterGetRecord()
             begin
-                //  Penaltcharge:=0.05*("<LoansRec>"."Current Shares"+"<LoansRec>"."Share Purchase");
+                Penaltcharge := 0.05 * ("LoansRec"."Current Shares" + "LoansRec"."Share Purchase");
 
                 AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
+                AmountInArrears_DefaultNoticesRegister := Round("Outstanding Balance" + "Oustanding Interest");
                 OutstandingInt := "Oustanding Interest";
                 LoanNo := "Loan  No.";
 
@@ -204,5 +209,6 @@ Report 50055 "Loan Defaulter Final Notice"
         CompanyInfo: Record "Company Information";
         Penaltcharge: Decimal;
         Lofficer: Text;
+        AmountInArrears_DefaultNoticesRegister: Decimal;
 }
 

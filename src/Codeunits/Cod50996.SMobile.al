@@ -27,7 +27,7 @@ Codeunit 50996 "S-Mobile"
         Setup: Record "SwizzKash Transactions";
         Charges: Record "S-Mobile Charges";
         Tarrifs: Record "S-Mobile Tarrifs";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         Loans: Record "Loans Register";
         STO: Record "Standing Orders";
         Loantype: Record "Loan Products Setup";

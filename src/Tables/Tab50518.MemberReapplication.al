@@ -112,7 +112,7 @@ table 50518 "Member Reapplication"
     end;
 
     var
-        cust: Record "Member Register";
+        cust: Record Customer;
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
 

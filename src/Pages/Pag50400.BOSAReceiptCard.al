@@ -425,7 +425,6 @@ page 50400 "BOSA Receipt Card"
                     ////***************************************************************************8
                     IntDate := Rec."Cheque Date";
                     //MESSAGE(FORMAT(IntDate));
-                    //MESSAGE('here 1');
                     ReceiptAllocations.Reset;
                     ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                     if ReceiptAllocations.Find('-') then begin
@@ -989,11 +988,10 @@ page 50400 "BOSA Receipt Card"
                     //IF ObjMember."Registration Date" <>0D THEN
                     // BEGIN
 
-                    Message('Reg Fee Amount paid is %1', ObjMember."Registration Fee Paid");
+                    //Message('Reg Fee Amount paid is %1', ObjMember."Registration Fee Paid");
                     AmountToDeduct := 0;
                     //AmountToDeduct:=ABS(ObjMember."Registration Fee Paid");
                     AmountToDeduct := Abs(GenSetup."BOSA Registration Fee Amount");
-                    //Message('Reg Fee Amount To Deduct: %1', AmountToDeduct);
                     if RunningBalance <= AmountToDeduct then
                         AmountToDeduct := RunningBalance;
                     ObjReceiptTransactions.Init;
@@ -1007,7 +1005,7 @@ page 50400 "BOSA Receipt Card"
                     if ObjReceiptTransactions.Amount <> 0 then
                         ObjReceiptTransactions.Insert(true);
                     RunningBalance := RunningBalance - Abs(ObjReceiptTransactions.Amount);
-                    Message('Amount Running is %1: after Reg fee paid of %2', RunningBalance, ObjReceiptTransactions.Amount);
+                    //Message('Amount Running is %1: after Reg fee paid of %2', RunningBalance, ObjReceiptTransactions.Amount);
                     // END;
                 end;
             end;
@@ -1059,7 +1057,7 @@ page 50400 "BOSA Receipt Card"
 
                 AmountToDeduct := SharesCap;
 
-                Message(Format(AmountToDeduct));
+                //Message(Format(AmountToDeduct));
                 if RunningBalance <= AmountToDeduct then
                     AmountToDeduct := RunningBalance;
 
@@ -1527,7 +1525,7 @@ page 50400 "BOSA Receipt Card"
         //loanapp.SETFILTER( loanapp."Date filter",'<=%1',Date_OutBal);
         if loanapp.Find('-') then begin
             repeat
-                Message('loan no is %1', loanapp."Loan  No.");
+                //Message('loan no is %1', loanapp."Loan  No.");
                 CLedger.Reset;
                 CLedger.SetRange(CLedger."Loan No", loanapp."Loan  No.");
                 CLedger.SetRange("Transaction Type", CLedger."transaction type"::"Interest Due");
@@ -1581,7 +1579,7 @@ page 50400 "BOSA Receipt Card"
 
                 GenJournalLine.Amount := ROUND(InterestAmount, 1, '=');
 
-                MESSAGE(FORMAT(GenJournalLine.Amount));
+                //MESSAGE(FORMAT(GenJournalLine.Amount));
 
                 GenJournalLine.Validate(GenJournalLine.Amount);
                 if LoanType.Get(loanapp."Loan Product Type") then begin

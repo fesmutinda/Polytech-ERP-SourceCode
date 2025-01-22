@@ -58,7 +58,7 @@ Table 51370 "Loan App Witness"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LoansRegister: Record "Loans Register";
 }
 

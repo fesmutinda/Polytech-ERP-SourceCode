@@ -173,6 +173,6 @@ Table 51915 "Member House Groups"
     var
         SalesSetup: Record "Sacco No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        ObjCust: Record "Member Register";
+        ObjCust: Record Customer;
 }
 

@@ -113,7 +113,7 @@ Report 50227 "Member Loans Statement"
                 column(ModeofDisbursement_Loans; Loans."Mode of Disbursement")
                 {
                 }
-                dataitem(loan; "Member Ledger Entry")
+                dataitem(loan; "Member Ledger Entry") //Will need switch to "Cust. Ledger Entry"
                 {
                     DataItemLink = "Customer No." = field("Client Code"), "Loan No" = field("Loan  No."), "Posting Date" = field("Date filter");
                     DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter(Loan | "Loan Repayment"), "Loan No" = filter(<> ''), Reversed = filter(false));
@@ -215,7 +215,7 @@ Report 50227 "Member Loans Statement"
                         OpeningBalInt := InterestBF;
                     end;
                 }
-                dataitem(Interests; "Member Ledger Entry")
+                dataitem(Interests; "Member Ledger Entry")//Move to "Cust. Ledger Entry"
                 {
                     DataItemLink = "Customer No." = field("Client Code"), "Loan No" = field("Loan  No."), "Posting Date" = field("Date filter");
                     DataItemTableView = sorting("Posting Date") where("Transaction Type" = filter("Interest Due" | "Interest Paid"), "Loan No" = filter(<> ''), Reversed = filter(false));

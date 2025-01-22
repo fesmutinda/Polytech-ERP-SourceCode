@@ -1,7 +1,7 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50387 "Loans Guarantee Details"
 {
-    PageType = ListPart;
+    PageType = List;//from ListPart
     RefreshOnActivate = false;
     SourceTable = "Loans Guarantee Details";
 
@@ -82,7 +82,7 @@ page 50387 "Loans Guarantee Details"
     end;
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         EmployeeCode: Code[20];
         CStatus: Option Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member","New (Pending Confirmation)","Defaulter Recovery";
         LoanApps: Record "Loans Register";

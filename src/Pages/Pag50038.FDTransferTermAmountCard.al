@@ -445,7 +445,7 @@ page 50038 "FD Transfer Term Amount Card"
         InterestBuffer: Record "Interest Buffer";
         FDType: Record "Fixed Deposit Type";
         Vend: Record Vendor;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         LineNo: Integer;
         UsersID: Record User;
         DActivity: Code[20];

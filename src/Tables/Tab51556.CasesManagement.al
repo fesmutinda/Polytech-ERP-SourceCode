@@ -534,7 +534,7 @@ Table 51556 "Cases Management"
         Month: Integer;
         DAY: Integer;
         ObjEmployers: Record "Sacco Employers";
-        Cust: Record "Member Register";
+        Cust: Record Customer;
         ObjUsers: Record User;
 }
 

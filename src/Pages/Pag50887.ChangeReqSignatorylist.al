@@ -79,6 +79,6 @@ page 50887 "Change Req Signatory list"
     var
         MemberApp: Record "Membership Applications";
         ReltnShipTypeEditable: Boolean;
-        CUST: Record "Member Register";
+        CUST: Record Customer;
 }
 

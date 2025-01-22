@@ -367,7 +367,7 @@ Table 51896 "Micro_Fin_Schedule"
         RunningBAL: Decimal;
         LoanApp: Record "Loans Register";
         Trans: Record Micro_Fin_Transactions;
-        Member: Record "Member Register";
+        Member: Record Customer;
         GetLoans: Record "Loans Register";
         GenlSetUp: Record "Sacco General Set-Up";
         Text001: label 'Monthly contribution cannot be less than minimum contributions of  Kshs%1';

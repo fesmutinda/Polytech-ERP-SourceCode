@@ -38,7 +38,7 @@ Table 51362 "Member App Signatories"
         {
             Caption = 'Picture';
         }
-        field(10; Signature; MediaSet)
+        field(10; Signature; Media)
         {
             Caption = 'Signature';
         }
@@ -57,7 +57,7 @@ Table 51362 "Member App Signatories"
                     "Email Address" := Cust."E-Mail (Personal)";
                     "Date Of Birth" := Cust."Date of Birth";
                     "Staff/Payroll" := Cust."Personal No";
-                    Picture := Cust.Picture;
+                    Picture := Cust.Image;
                     Signature := Cust.Signature;
                     "Mobile No." := Cust."Mobile Phone No";
                 end;
@@ -92,6 +92,6 @@ Table 51362 "Member App Signatories"
     }
 
     var
-        Cust: Record "Member Register";
+        Cust: Record Customer;
 }
 
