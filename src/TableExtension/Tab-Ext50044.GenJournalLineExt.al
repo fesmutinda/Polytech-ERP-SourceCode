@@ -291,6 +291,9 @@ tableextension 50044 "GenJournalLineExt" extends "Gen. Journal Line"
             OptionCaption = ' ,Overdraft Granted,Overdraft Paid,Interest Accrued,Interest paid';
             OptionMembers = " ","Overdraft Granted","Overdraft Paid","Interest Accrued","Interest paid";
         }
+        field(51516442; "Mobile Transaction Type"; enum VendorTransactionTypes)
+        {
+        }
     }
 
     keys

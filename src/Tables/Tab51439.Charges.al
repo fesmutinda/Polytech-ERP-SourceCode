@@ -1,8 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51439 Charges
 {
-    DrillDownPageID = 50465;
-    LookupPageID = 50465;
+    DrillDownPageID = "Front Office Charges";
+    LookupPageID = "Front Office Charges";
 
     fields
     {
@@ -64,6 +64,10 @@ Table 51439 Charges
         }
         field(12; "Bank Account"; Code[20])
         {
+        }
+        field(13; "SAcco GL Account"; Code[20])
+        {
+            TableRelation = "G/L Account";
         }
     }
 

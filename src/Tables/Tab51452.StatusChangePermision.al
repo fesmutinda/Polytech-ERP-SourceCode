@@ -4,35 +4,20 @@ Table 51452 "Status Change Permision"
 
     fields
     {
-        field(1; "User ID"; Code[50])
+        field(1; "User Id"; Code[50])
         {
-            Caption = 'User ID';
-            NotBlank = true;
-            TableRelation = User."User Name";
-            //This property is currently not supported
-            //TestTableRelation = false;
-            ValidateTableRelation = false;
-
-            trigger OnLookup()
-            var
-                UserMgt: Codeunit "User Management";
-            begin
-                //UserMgt.LookupUserID("Account No");
-            end;
-
-            trigger OnValidate()
-            var
-                UserMgt: Codeunit "User Management";
-            begin
-                //UserMgt.ValidateUserID("Account No");
-            end;
+            TableRelation = "User Setup"."User ID";
         }
-        field(2; "Function"; Option)
+        field(2; "Function"; enum "User Permissons")
         {
             NotBlank = false;
-            OptionCaption = 'Account Status,Standing Order,Discounting Cheque,Inter Teller Approval,Discounting Loan,Fosa Loan Appraisal,Discounting Shares,Discounting Dividends,Loan External EFT,Overide Defaulters,BOSA Account Status,Fosa Loan Approval,PV Approval,PV Verify,PV Cancel,ATM Approval,Petty Cash Approval,Bosa Loan Approval,Bosa Loan Appraisal,Atm card ready,Audit Approval,Finance Approval,Replace Guarantors,Account Opening,Mpesa Change,Edit,NameEdit,Loan Reschedule,Substitute Gurantor,Smobile,SmobileApp,"Can Appeal Loans","Can View Paybill Logs"';
-            OptionMembers = "Account Status","Standing Order","Discounting Cheque","Inter Teller Approval","Discounting Loan","Fosa Loan Appraisal","Discounting Shares","Discounting Dividends","Loan External EFT","Overide Defaulters","BOSA Account Status","Fosa Loan Approval","PV Approval","PV Verify","PV Cancel","ATM Approval","Petty Cash Approval","Bosa Loan Approval","Bosa Loan Appraisal","Atm card ready","Audit Approval","Finance Approval","Replace Guarantors","Account Opening","Mpesa Change",Edit,NameEdit,"Loan Reschedule","Substitute Gurantor",Smobile,SmobileApp,"Can Appeal Loans","Can View Paybill Logs";
         }
+        //  Option)
+        // {
+        //     NotBlank = false;
+        //     OptionCaption = 'Account Status,Standing Order,Discounting Cheque,Inter Teller Approval,Discounting Loan,Fosa Loan Appraisal,Discounting Shares,Discounting Dividends,Loan External EFT,Overide Defaulters,BOSA Account Status,Fosa Loan Approval,PV Approval,PV Verify,PV Cancel,ATM Approval,Petty Cash Approval,Bosa Loan Approval,Bosa Loan Appraisal,Atm card ready,Audit Approval,Finance Approval,Replace Guarantors,Account Opening,Mpesa Change,Edit,NameEdit,Loan Reschedule,Substitute Gurantor,Smobile,SmobileApp,"Can Appeal Loans","Can View Paybill Logs"';
+        //     OptionMembers = "Account Status","Standing Order","Discounting Cheque","Inter Teller Approval","Discounting Loan","Fosa Loan Appraisal","Discounting Shares","Discounting Dividends","Loan External EFT","Overide Defaulters","BOSA Account Status","Fosa Loan Approval","PV Approval","PV Verify","PV Cancel","ATM Approval","Petty Cash Approval","Bosa Loan Approval","Bosa Loan Appraisal","Atm card ready","Audit Approval","Finance Approval","Replace Guarantors","Account Opening","Mpesa Change",Edit,NameEdit,"Loan Reschedule","Substitute Gurantor",Smobile,SmobileApp,"Can Appeal Loans","Can View Paybill Logs";
+        // }
     }
 
     keys

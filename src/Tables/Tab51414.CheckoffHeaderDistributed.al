@@ -1,6 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51414 "Checkoff Header-Distributed"
 {
+    // DrillDownPageID = UnknownPage39004339;
+    // LookupPageID = UnknownPage39004339;
 
     fields
     {
@@ -22,7 +24,7 @@ Table 51414 "Checkoff Header-Distributed"
         }
         field(3; Posted; Boolean)
         {
-            Editable = true;
+            Editable = false;
         }
         field(6; "Posted By"; Code[60])
         {
@@ -46,11 +48,6 @@ Table 51414 "Checkoff Header-Distributed"
         }
         field(21; "Posting date"; Date)
         {
-
-            trigger OnValidate()
-            begin
-                Remarks := FnGetCheckOffDescription();
-            end;
         }
         field(22; "Account Type"; Option)
         {
@@ -68,11 +65,11 @@ Table 51414 "Checkoff Header-Distributed"
             trigger OnValidate()
             begin
                 if "Account Type" = "account type"::Customer then begin
-                    CustDeb.Reset;
-                    CustDeb.SetRange(CustDeb."No.", "Account No");
-                    if CustDeb.Find('-') then begin
-                        "Employer Name" := CustDeb.Name;
-                        "Account No" := CustDeb."No.";
+                    cust.Reset;
+                    cust.SetRange(cust."No.", "Account No");
+                    if cust.Find('-') then begin
+                        "Employer Name" := cust.Name;
+
                     end;
                 end;
 
@@ -109,6 +106,12 @@ Table 51414 "Checkoff Header-Distributed"
 
             end;
         }
+        field(26; "Scheduled Amount"; Decimal)
+        {
+            CalcFormula = sum("Checkoff Lines-Distributed".Amount where("Receipt Header No" = field(No)));
+            Editable = false;
+            FieldClass = FlowField;
+        }
         field(27; "Total Count"; Integer)
         {
             CalcFormula = count("Checkoff Lines-Distributed" where("Receipt Header No" = field(No)));
@@ -128,44 +131,6 @@ Table 51414 "Checkoff Header-Distributed"
         {
         }
         field(32; "Loan CutOff Date"; Date)
-        {
-
-            trigger OnValidate()
-            begin
-                "CheckOff Period" := "Loan CutOff Date";
-                Modify;
-                Commit;
-            end;
-        }
-        field(34; "Employer No.(Old)"; Code[20])
-        {
-            TableRelation = if ("Account Type" = const(Customer)) Customer."Our Account No.";
-        }
-        field(35; "Total Scheduled"; Decimal)
-        {
-            CalcFormula = sum("Checkoff Lines-Distributed".Amount where("Receipt Header No" = field(No)));
-            FieldClass = FlowField;
-        }
-        field(36; "CheckOff Period"; Date)
-        {
-            Editable = true;
-            FieldClass = Normal;
-            TableRelation = "Checkoff Calender."."Date Opened";
-
-            trigger OnValidate()
-            begin
-                ObjReceiptLines.Reset;
-                ObjReceiptLines.SetRange(ObjReceiptLines."Account Code", "Account No");
-                ObjReceiptLines.SetRange(ObjReceiptLines."Employer Remmitance", true);
-                ObjReceiptLines.SetRange(ObjReceiptLines."Checkoff Period", "CheckOff Period");
-                if ObjReceiptLines.Find('-') then begin
-                    Amount := ObjReceiptLines.Amount;
-                    Modify(true);
-                end else
-                    Message('No remmitence bellonging to this employer has been posted')
-            end;
-        }
-        field(37; Reversed; Boolean)
         {
         }
     }
@@ -198,10 +163,8 @@ Table 51414 "Checkoff Header-Distributed"
         end;
 
         "Date Entered" := Today;
-        "Posting date" := Today;
         "Time Entered" := Time;
         "Entered By" := UpperCase(UserId);
-        FnGetCheckOffDescription();
     end;
 
     trigger OnModify()
@@ -214,7 +177,7 @@ Table 51414 "Checkoff Header-Distributed"
     trigger OnRename()
     begin
         if Posted = true then
-            Error('You cannot modify a Posted Check Off');
+            Error('You cannot rename a Posted Check Off');
     end;
 
     var
@@ -223,39 +186,6 @@ Table 51414 "Checkoff Header-Distributed"
         cust: Record Customer;
         "GL Account": Record "G/L Account";
         BANKACC: Record "Bank Account";
-        CustDeb: Record Customer;
-        ObjReceiptLines: Record "Receipt Line";
-
-    local procedure FnGetCheckOffDescription() rtVal: Text
-    begin
-        case Date2dmy("Posting date", 2) of
-            1:
-                rtVal := 'JAN';
-            2:
-                rtVal := 'FEB';
-            3:
-                rtVal := 'MAR';
-            4:
-                rtVal := 'APR';
-            5:
-                rtVal := 'MAY';
-            6:
-                rtVal := 'JUNE';
-            7:
-                rtVal := 'JULY';
-            8:
-                rtVal := 'AUG';
-            9:
-                rtVal := 'SEPT';
-            10:
-                rtVal := 'OCT';
-            11:
-                rtVal := 'NOV';
-            12:
-                rtVal := 'DEC';
-
-        end;
-        exit('CKF' + rtVal + '-' + Format(Date2dmy("Posting date", 3)));
-    end;
 }
+
 

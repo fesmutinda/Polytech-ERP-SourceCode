@@ -119,7 +119,7 @@ page 50882 "Member Signature-Change Req"
     begin
         Rec.TestField(Rec."No");
 
-        if Rec."Picture".Count > 0 then
+        if Rec."Picture".HasValue then //Count > 0 then
             if not Confirm(OverrideImageQst) then
                 exit;
 
@@ -139,7 +139,7 @@ page 50882 "Member Signature-Change Req"
         Rec.TestField(No);
         //TESTFIELD(Description);
 
-        if Rec.signinature.Count > 0 then
+        if Rec.signinature.HasValue then //Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -158,7 +158,7 @@ page 50882 "Member Signature-Change Req"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.signinature.Count <> 0;
+        DeleteExportEnabled := Rec.signinature.HasValue;// Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean

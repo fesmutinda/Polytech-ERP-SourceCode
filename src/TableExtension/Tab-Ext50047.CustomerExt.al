@@ -194,7 +194,7 @@ tableextension 50047 "CustomerExt" extends Customer
                 Vend: Record Vendor;
             begin
                 Vend.Reset;
-                Vend.SetRange(Vend."No.", "FOSA Account");
+                Vend.SetRange(Vend."No.", "FOSA Account No.");
                 if Vend.Find('-') then begin
                     Vend.Signature := Signature;
                     Vend.Modify;
@@ -976,7 +976,7 @@ tableextension 50047 "CustomerExt" extends Customer
         }
         field(69047; "FOSA Account Bal"; Decimal)
         {
-            CalcFormula = - sum("Detailed Vendor Ledg. Entry"."Amount Posted" where("Vendor No." = field("FOSA Account"),
+            CalcFormula = - sum("Detailed Vendor Ledg. Entry"."Amount Posted" where("Vendor No." = field("FOSA Account No."),
                                                                            "Initial Entry Global Dim. 1" = field("Global Dimension 1 Filter"),
                                                                            "Initial Entry Global Dim. 2" = field("Global Dimension 2 Filter"),
                                                                            "Currency Code" = field("Currency Filter"), "Posting Date" = field("Date Filter")));

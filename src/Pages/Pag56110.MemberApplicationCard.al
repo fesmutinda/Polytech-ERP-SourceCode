@@ -40,6 +40,7 @@ page 56110 "Member Application Card"
                 {
                     ApplicationArea = all;
                     Editable = false;
+                    Visible = false;
                     Caption = 'Assigned No';
                 }
                 field(Title; Rec.Title)
@@ -1139,8 +1140,8 @@ page 56110 "Member Application Card"
                     Image = Accounts;
                     RunObject = page "Membership App Products";// "Member Applied Products List";
                     RunPageLink = "Membership Applicaton No" = field("No.");
-                    Enabled = false;
-                    Visible = false;
+                    Enabled = true;
+                    Visible = true;
 
                     trigger OnAction()
                     begin
@@ -1151,18 +1152,23 @@ page 56110 "Member Application Card"
                         IF AccoutTypes.Find('-') THEN BEGIN
                             REPEAT
                                 IF AccoutTypes."Default Account" = TRUE THEN BEGIN
-                                    ObjProductsApp.INIT;
-                                    ObjProductsApp."Membership Applicaton No" := xRec."No.";
-                                    ObjProductsApp."Applicant Name" := xRec.Name;
-                                    // ObjProductsApp."Applicant Age" := xRec.Age;
-                                    ObjProductsApp."Applicant Gender" := xRec.Gender;
-                                    ObjProductsApp."Applicant ID" := xRec."ID No.";
-                                    ObjProductsApp."Product" := AccoutTypes.Code;
-                                    ObjProductsApp."Product Name" := AccoutTypes.Description;
-                                    ObjProductsApp."Product Category" := AccoutTypes."Activity Code";
-                                    ObjProductsApp.INSERT;
-                                    ObjProductsApp.VALIDATE(ObjProductsApp."Product");
-                                    ObjProductsApp.MODIFY;
+                                    ObjProductsApp.Reset();
+                                    ObjProductsApp.SetRange(ObjProductsApp."Membership Applicaton No", xRec."No.");
+                                    ObjProductsApp.SetRange(ObjProductsApp."Product", AccoutTypes.Code);
+                                    if ObjProductsApp.Find('-') = false then begin
+                                        ObjProductsApp.INIT;
+                                        ObjProductsApp."Membership Applicaton No" := xRec."No.";
+                                        ObjProductsApp."Applicant Name" := xRec.Name;
+                                        // ObjProductsApp."Applicant Age" := xRec.Age;
+                                        ObjProductsApp."Applicant Gender" := xRec.Gender;
+                                        ObjProductsApp."Applicant ID" := xRec."ID No.";
+                                        ObjProductsApp."Product" := AccoutTypes.Code;
+                                        ObjProductsApp."Product Name" := AccoutTypes.Description;
+                                        ObjProductsApp."Product Category" := AccoutTypes."Activity Code";
+                                        ObjProductsApp.INSERT;
+                                        ObjProductsApp.VALIDATE(ObjProductsApp."Product");
+                                        ObjProductsApp.MODIFY;
+                                    end;
                                 END;
                             UNTIL AccoutTypes.Next = 0;
                         END;
@@ -1327,9 +1333,12 @@ page 56110 "Member Application Card"
 
                     trigger OnAction()
                     var
-                        dialogBox: Dialog;
                         TheMessage: Codeunit "Email Message";
                         Email: Codeunit Email;
+
+                        DialogBox: Dialog;
+                        BOSAAccountNo: Code[50];
+                        NewFOSAAccount: Code[50];
 
                     begin
                         if Rec.Status <> Rec.Status::Approved then
@@ -1355,10 +1364,13 @@ page 56110 "Member Application Card"
                             exit;
                         end ELSE begin
                             dialogBox.Open('Creating New BOSA Account for applicant ' + Format(MembApp.Name));
-                            FnCreateBOSAMemberAccounts();
+                            BOSAAccountNo := FnCreateBOSAMemberAccounts();
                             dialogBox.Close();
 
-
+                            DialogBox.Open('Registering Mobile Wallet For  %1 ', Rec."Full Name");
+                            FnFOSAProducts(BOSAAccountNo);
+                            NewFOSAAccount := FnUpdateBOSAAccountToFOSAAccount(BOSAAccountNo);
+                            DialogBox.Close();
                             GenSetUp.Get;
                             // if GenSetUp."Auto Open FOSA Savings Acc." = true then begin
                             //     dialogBox.Open('Creating New BOSA Account for applicant ' + Format(MembApp.Name));
@@ -1387,7 +1399,8 @@ page 56110 "Member Application Card"
 
                             SendMail(Cust."No.");
                             //-----Send SMS
-                            FnSendSMSOnAccountOpening();
+                            // FnSendSMSOnAccountOpening();
+                            SendAccountOpeningNotifications(BOSAAccountNo, NewFOSAAccount);
                             //-----
                             Message('Account created successfully.');
                             Message('The Member Sacco no is %1', Cust."No.");
@@ -2271,7 +2284,7 @@ page 56110 "Member Application Card"
         EmailCodeunit.SendMail(Emailaddress, EmailSubject, EmailBody);
     end;
 
-    local procedure FnCreateBOSAMemberAccounts()
+    local procedure FnCreateBOSAMemberAccounts(): Code[50]
     var
         NoSeriesLine: Record "No. Series Line";
 
@@ -2405,7 +2418,101 @@ page 56110 "Member Application Card"
         Saccosetup."Last Memb No." := IncStr(NewMembNo);
         Saccosetup.Modify;
         BOSAACC := Cust."No.";
+        exit(BOSAACC);
+    end;
 
+    local procedure FnFOSAProducts(BOSAAccountNo: Code[50]): Code[50]
+    var
+        Vendortable: Record Vendor;
+        ProductApplications: record "Membership Reg. Products Appli";
+        ProductAccountNo: Code[50];
+    begin
+        ProductApplications.Reset();
+        ProductApplications.SetRange(ProductApplications."Membership Applicaton No", rec."No.");
+        ProductApplications.SetRange(ProductApplications.Product, 'M-WALLET');
+        if ProductApplications.Find('-') then begin
+            repeat
+                ProductAccountNo := '';
+                if ProductApplications.Product <> '' then begin
+                    ProductAccountNo := FnGetNewAccountNo(ProductApplications.Product, BOSAAccountNo, '100');
+
+                    Vendortable.Init();
+                    Vendortable."No." := ProductAccountNo;
+                    //.........................
+                    Vendortable.Name := rec.Name;
+                    Vendortable."First Name" := rec."First Name";
+                    Vendortable."Middle Name" := rec."Middle Name";
+                    Vendortable."Last Name" := rec."Last Name";
+                    // Vendortable."Country of Residence" := rec."Country of Residence";
+                    Vendortable."Phone No." := rec."Mobile Phone No";
+                    Vendortable."Account Type" := ProductApplications.Product;
+                    Vendortable.Validate(Vendortable."Account Type");
+                    Vendortable."Mobile Phone No." := rec."Mobile Phone No";
+                    Vendortable."E-Mail" := rec."E-Mail (Personal)";
+                    Vendortable."ID No." := rec."ID No.";
+                    Vendortable.Gender := rec.Gender;
+                    Vendortable."Registration Date" := Today;
+                    Vendortable."Global Dimension 1 Code" := 'FOSA';
+                    Vendortable."Global Dimension 2 Code" := rec."Global Dimension 2 Code";
+                    Vendortable.Status := Vendortable.Status::Active;
+                    Vendortable."Personal No." := rec."Payroll No";
+                    Vendortable.Image := rec.Picture;
+                    Vendortable.Signature := rec.Signature;
+                    Vendortable."BOSA Account No" := BOSAAccountNo;
+                    Vendortable."Account Type" := ProductApplications.Product;
+                    Vendortable."Creditor Type" := Vendortable."Creditor Type"::Account;
+                    Vendortable.Insert(true);
+                    //.........................
+                    Vendortable.Reset();
+                    Vendortable.SetRange(Vendortable."BOSA Account No", BOSAAccountNo);
+                    if Vendortable.Find('-') then begin
+                        Vendortable."Global Dimension 1 Code" := 'FOSA';
+                        Vendortable."Global Dimension 2 Code" := REC."Global Dimension 2 Code";
+                        Vendortable."Account Type" := ProductApplications.Product;
+                        Vendortable."Creditor Type" := Vendortable."Creditor Type"::Account;
+                        Vendortable.Modify(true);
+                    end;
+                end;
+            until ProductApplications.Next = 0;
+        end;
+    end;
+
+    local procedure FnGetNewAccountNo(Product: Code[20]; BOSAAccountNo: Code[50]; arg: Text): Code[50]
+    var
+        SavingsProductTypes: record "Account Types-Saving Products";
+        NEWNo: text;
+    begin
+        NEWNo := '';
+        SavingsProductTypes.Reset();
+        SavingsProductTypes.SetRange(SavingsProductTypes.Code, Product);
+        if SavingsProductTypes.Find('-') then begin
+            // NEWNo := (SavingsProductTypes."Account No Prefix" + '-' + Format(arg) + '-' + SavingsProductTypes."Last No Used");
+            NEWNo := Format(arg) + '-' + BOSAAccountNo;
+            SavingsProductTypes."Last No Used" := IncStr(SavingsProductTypes."Last No Used");
+            SavingsProductTypes.Modify(true);
+            exit(NEWNo);
+        end;
+    end;
+
+    local procedure FnUpdateBOSAAccountToFOSAAccount(BOSAAccountNo: Code[50]): Code[50]
+    var
+        VendorTable: Record Vendor;
+        MemberTable: record Customer;
+    begin
+        VendorTable.Reset();
+        VendorTable.SetRange(VendorTable."BOSA Account No", BOSAAccountNo);
+        if VendorTable.Find('-') then begin
+            MemberTable.Reset();
+            MemberTable.SetRange(MemberTable."No.", BOSAAccountNo);
+            if MemberTable.Find('-') then begin
+                MemberTable."FOSA Account No." := VendorTable."No.";
+                MemberTable."Global Dimension 1 Code" := rec."Global Dimension 1 Code";
+                MemberTable."Global Dimension 2 Code" := rec."Global Dimension 2 Code";
+                MemberTable."Employer Code" := rec."Employer Code";
+                MemberTable."Employer Name" := rec."Employer Code";
+                MemberTable.Modify();
+            end;
+        end;
     end;
 
     local procedure FnGetPostingGroup(ProductCode: Code[40]): Code[20]
@@ -2564,6 +2671,51 @@ page 56110 "Member Application Card"
         SMSMessages."SMS Message" := SMSToSend;
         SMSMessages."Telephone No" := Rec."Mobile Phone No";
         SMSMessages.Insert();
+    end;
+
+    local procedure SendAccountOpeningNotifications(BOSAAccountNo: Code[50]; NewFOSAAccount: Code[50])
+    var
+        SMSMessages: record "SMS Messages";
+        SaccoGeneralSetUp: record "Sacco General Set-Up";
+        SystemFactory: Codeunit "SURESTEP Factory";
+        Msg: Text;
+        VendorTable: record Vendor;
+        CompanyInfo: record "Company Information";
+        MembershipApplications: record "Membership Applications";
+        Outstr: OutStream;
+        Instr: InStream;
+        RecRef: RecordRef;
+        TempBlob: Codeunit "Temp Blob";
+        EmailMessage: Codeunit "Email Message";
+        Email: Codeunit Email;
+        SendTo: Text;
+        Subject: Text;
+        MessageBody: Text;
+        Base64Convert: Codeunit "Base64 Convert";
+    begin
+        SaccoGeneralSetUp.Get();
+        CompanyInfo.get();
+        if SaccoGeneralSetUp."Send Membership Reg SMS" then begin
+            Msg := '';
+            if rec."Account Category" = rec."Account Category"::Individual then begin
+                if Rec."Account type" = rec."Account type"::Single then begin
+                    Msg := 'Hello ' + Format(rec."First Name") + 'Welcome to ' + Format(CompanyInfo.Name) + ' membership has been successfully registered. Your BOSA account number is ' + Format(BOSAAccountNo) + '.';
+                    SystemFactory.FnSendSMS('MEMBERSHIP', Msg, BOSAAccountNo, Rec."Mobile Phone No");
+                    //.....................Send Message for the Products Opened
+                    Sleep(1000);
+                    VendorTable.Reset();
+                    VendorTable.SetRange(VendorTable."BOSA Account No", BOSAAccountNo);
+                    if VendorTable.Find('-') then begin
+                        repeat
+                            Msg := '';
+                            Msg := 'Hello ' + Format(rec."First Name") + ',You have successfully registered for our ' + Format(VendorTable."Account Type") + ' product. To Deposit to ' + Format(VendorTable."Account Type") + ' account, use our paybill account ' + Format('854846') + ' and include your ' + Format(VendorTable."Account Type") + ' account number ' + Format(VendorTable."No.") + ' as the account number.';
+                            SystemFactory.FnSendSMS('MEMBERSHIP', Msg, VendorTable."No.", Rec."Mobile Phone No");
+                        until VendorTable.Next = 0;
+                    end;
+                end;
+            end;
+        end;
+
     end;
 
     trigger OnAfterGetRecord()

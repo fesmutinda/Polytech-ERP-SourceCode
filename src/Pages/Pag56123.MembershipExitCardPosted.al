@@ -74,7 +74,7 @@ Page 56123 "Membership Exit Card Posted"
                     Style = Attention;
                     StyleExpr = true;
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -219,7 +219,7 @@ Page 56123 "Membership Exit Card Posted"
         ShareCapSellPageVisible: Boolean;
         // ObjShareCapSell: Record "Share Capital Sell";
         SurestepFactory: Codeunit "SURESTEP Factory";
-        JVTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
+        JVTransactionType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         JVAccountType: Enum "Gen. Journal Account Type";
         TemplateName: Code[20];
         BatchName: Code[20];

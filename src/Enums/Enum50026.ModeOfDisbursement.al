@@ -1,7 +1,7 @@
 enum 50026 "Mode Of Disbursement"
 {
 
-    value(0; "")
+    value(0; " ")
     {
         Caption = '';
     }

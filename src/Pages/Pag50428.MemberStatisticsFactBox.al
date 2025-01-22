@@ -33,6 +33,11 @@ page 50428 "Member Statistics FactBox"
             {
                 ApplicationArea = Basic;
             }
+            field("M-Wallet Account No"; Rec."FOSA Account No.")
+            {
+                Caption = 'M-Wallet Account No';
+                ApplicationArea = Basic;
+            }
             group("Member Details FactBox")
             {
                 Caption = 'Member Details FactBox';
@@ -85,12 +90,15 @@ page 50428 "Member Statistics FactBox"
                     ApplicationArea = Basic;
                     Caption = 'Loan Insurance';
                 }
-                // field("Group Shares"; Rec."Group Shares")
-                // {
-                //     ApplicationArea = Basic;
-                //     Editable = false;
-                //     Visible = false;
-                // }
+                field("M-Wallet Balance"; Rec."FOSA Account Bal")
+                {
+                    Caption = 'M-Wallet Balance';
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Importance = Promoted;
+                    Style = StrongAccent;
+                    StyleExpr = true;
+                }
                 field("Dividend Amount"; Rec."Dividend Amount")
                 {
                     ApplicationArea = Basic;
