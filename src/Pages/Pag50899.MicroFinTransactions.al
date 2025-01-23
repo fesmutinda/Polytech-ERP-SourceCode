@@ -336,7 +336,7 @@ page 50899 "Micro_Fin_Transactions"
 
                                     //*****************************Shares Recovery*****************
                                     if DistributedAmt > 0 then begin
-                                        if Transact."Shares Capital" > 0 then begin
+                                        if Transact."Share Capital" > 0 then begin
                                             LineNo := LineNo + 10000;
                                             GenJournalLine.Init;
                                             GenJournalLine."Journal Template Name" := Jtemplate;
@@ -349,11 +349,11 @@ page 50899 "Micro_Fin_Transactions"
                                             GenJournalLine.Validate(GenJournalLine."Account No.");
                                             GenJournalLine."Posting Date" := Rec."Transaction Date";
                                             GenJournalLine.Description := Rec."Payment Description";
-                                            GenJournalLine.Amount := -Transact."Shares Capital";
+                                            GenJournalLine.Amount := -Transact."Share Capital";
                                             GenJournalLine.Validate(GenJournalLine.Amount);
                                             GenJournalLine."Loan No" := Transact."Loan No.";
                                             GenJournalLine."Shortcut Dimension 1 Code" := Rec."Activity Code";
-                                            GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";//Kamwana
+                                            GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";//Kamwana
                                             GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
                                             GenJournalLine."Shortcut Dimension 2 Code" := Rec."Branch Code";
                                             GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
@@ -482,7 +482,7 @@ page 50899 "Micro_Fin_Transactions"
                             //Shares
 
                             if DistributedAmt > 0 then begin
-                                if Transact."Shares Capital" > 0 then begin
+                                if Transact."Share Capital" > 0 then begin
 
                                     LineNo := LineNo + 10000;
                                     GenJournalLine.Init;
@@ -490,14 +490,14 @@ page 50899 "Micro_Fin_Transactions"
                                     GenJournalLine."Journal Batch Name" := JBatch;
                                     GenJournalLine."Document No." := Rec."No.";
                                     GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
+                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
                                     GenJournalLine."Group Code" := Transact."Group Code";
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := Transact."Account Number";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Rec."Transaction Date";
                                     GenJournalLine.Description := 'Shares-' + Transact."Account Number";
-                                    GenJournalLine.Amount := -Transact."Shares Capital";
+                                    GenJournalLine.Amount := -Transact."Share Capital";
                                     ;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
                                     GenJournalLine."Shortcut Dimension 1 Code" := Rec."Activity Code";

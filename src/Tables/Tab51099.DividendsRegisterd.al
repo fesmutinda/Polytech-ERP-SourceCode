@@ -192,7 +192,7 @@ Table 51099 "Dividends Registerd"
         {
             DataClassification = ToBeClassified;
         }
-        field(52; "Shares Capital"; Boolean)
+        field(52; "Share Capital"; Boolean)
         {
             DataClassification = ToBeClassified;
         }
@@ -226,11 +226,11 @@ Table 51099 "Dividends Registerd"
     }
 
     var
-        TransType: Option ,"Registration Fee",Loan,Repayment,"Interest Due","Interest Paid","Deposit Contribution","Shares Capital",Dividend,"Insurance Contribution","Demand Savings","Insurance Charge","Retained Shares","Demand Savings Withdrawal","Stock Due","Stock paid","Insurance Benefits","Demand Activation",ByLaws,"Dividend Advance","Rejoining Fee","Unallocated Funds","Life Assurance","STO Charges","T-Shirts",Umbrella;
+        TransType: Option ,"Registration Fee",Loan,Repayment,"Interest Due","Interest Paid","Deposit Contribution","Share Capital",Dividend,"Insurance Contribution","Demand Savings","Insurance Charge","Retained Shares","Demand Savings Withdrawal","Stock Due","Stock paid","Insurance Benefits","Demand Activation",ByLaws,"Dividend Advance","Rejoining Fee","Unallocated Funds","Life Assurance","STO Charges","T-Shirts",Umbrella;
         LoanApp: Record "Loans Register";
 
 
-    procedure GetPostedDiv(TransactionType: Option ,"Registration Fee",Loan,Repayment,"Interest Due","Interest Paid","Deposit Contribution","Shares Capital",Dividend,"Insurance Contribution","Demand Savings","Insurance Charge","Retained Shares","Demand Savings Withdrawal","Stock Due","Stock paid","Insurance Benefits","Demand Activation",ByLaws,"Dividend Advance","Rejoining Fee","Unallocated Funds","Life Assurance","STO Charges","T-Shirts",Umbrella) ReturnValue: Decimal
+    procedure GetPostedDiv(TransactionType: Option ,"Registration Fee",Loan,Repayment,"Interest Due","Interest Paid","Deposit Contribution","Share Capital",Dividend,"Insurance Contribution","Demand Savings","Insurance Charge","Retained Shares","Demand Savings Withdrawal","Stock Due","Stock paid","Insurance Benefits","Demand Activation",ByLaws,"Dividend Advance","Rejoining Fee","Unallocated Funds","Life Assurance","STO Charges","T-Shirts",Umbrella) ReturnValue: Decimal
     var
         MemLed: Record "Member Ledger Entry";
     begin

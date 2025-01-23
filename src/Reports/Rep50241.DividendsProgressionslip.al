@@ -144,7 +144,7 @@ Report 50241 "Dividends Progressionslip"
                 column(QualifyingShareCapital_DividendsProgression; "Dividends Progression"."Qualifying Share Capital")
                 {
                 }
-                column(ShareCapital_DividendsProgression; "Dividends Progression"."Shares Capital")
+                column(ShareCapital_DividendsProgression; "Dividends Progression"."Share Capital")
                 {
                 }
                 column(GrossInterestOnDeposit_DividendsProgression; "Dividends Progression"."Gross Interest On Deposit")

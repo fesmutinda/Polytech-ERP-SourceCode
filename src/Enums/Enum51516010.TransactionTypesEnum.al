@@ -58,9 +58,9 @@ enum 51516010 "TransactionTypesEnum"
     {
         Caption = 'Unallocated Funds';
     }
-    value(14; "Shares Capital")
+    value(14; "Share Capital")
     {
-        Caption = 'Shares Capital';
+        Caption = 'Share Capital';
     }
     value(15; "Loan Adjustment")
     {

@@ -37,7 +37,7 @@ page 50483 "Checkoff Processing Lines-D"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Shares Capital"; Rec."Shares Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                 }

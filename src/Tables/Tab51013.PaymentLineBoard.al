@@ -34,7 +34,7 @@ Table 51013 "Payment Line Board"
         field(3; "Transaction Type"; Option)
         {
             OptionCaption = ' ,Repayment,Deposits Contribution,Rejoining Fee,Registration Fee,Insurance Contribution,Shares Capital,Investment,Un-allocated Funds';
-            OptionMembers = " ",Repayment,"Deposits Contribution","Rejoining Fee","Registration Fee","Insurance Contribution","Shares Capital",Investment,"Un-allocated Funds";
+            OptionMembers = " ",Repayment,"Deposits Contribution","Rejoining Fee","Registration Fee","Insurance Contribution","Share Capital",Investment,"Un-allocated Funds";
         }
         field(4; "Loan No."; Code[20])
         {

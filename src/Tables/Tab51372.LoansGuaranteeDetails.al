@@ -507,7 +507,7 @@ Table 51372 "Loans Guarantee Details"
         field(30; "Member Cell"; Code[10])
         {
         }
-        field(31; "Shares Capital"; Decimal)
+        field(31; "Share Capital"; Decimal)
         {
         }
         field(32; "TotalLoan Guaranteed"; Decimal)

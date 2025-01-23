@@ -132,7 +132,6 @@ Report 50054 "Loan Defaulter 2nd Notice"
             trigger OnAfterGetRecord()
             var
                 LoanGuar: Record "Loans Guarantee Details";
-
             begin
                 /* LoanGuar.Reset;
                 LoanGuar.SetRange(LoanGuar."Loan No", "Loans Register"."Loan  No.");

@@ -1638,7 +1638,7 @@ Table 51371 "Loans Register"
         field(53109; "Loan Amount"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Shares Capital"),
+                                                                  "Transaction Type" = filter("Share Capital"),
                                                                   "Loan No" = field("Loan  No.")));
             Editable = false;
             FieldClass = FlowField;
@@ -1708,7 +1708,7 @@ Table 51371 "Loans Register"
         field(53182; "Last Pay Date"; Date)
         {
             CalcFormula = max("Member Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
-                                                                          "Transaction Type" = filter("Interest Paid" | "Shares Capital")));
+                                                                          "Transaction Type" = filter("Interest Paid" | "Share Capital")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -2553,7 +2553,7 @@ Table 51371 "Loans Register"
         field(68071; "Outstanding Balance to Date"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid" | "FOSA Shares"),
+                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid" | "FOSA Shares"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
             Editable = false;
@@ -2683,7 +2683,7 @@ Table 51371 "Loans Register"
         field(69008; "Loan Count"; Integer)
         {
             CalcFormula = count("Member Ledger Entry" where("Customer No." = field("Client Code"),
-                                                             "Transaction Type" = filter("Shares Capital"),
+                                                             "Transaction Type" = filter("Share Capital"),
                                                              "Loan No" = field("Loan  No.")));
             FieldClass = FlowField;
         }
@@ -2867,7 +2867,7 @@ Table 51371 "Loans Register"
         field(69044; "Total Loans Outstanding"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid"),
+                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid"),
                                                                   "Loan Type" = filter(<> 'ADV' | 'ASSET' | 'B/L' | 'FL' | 'IPF')));
             FieldClass = FlowField;
         }
@@ -3068,7 +3068,7 @@ Table 51371 "Loans Register"
         field(69078; "Totals Loan Outstanding"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid"),
+                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid"),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
         }

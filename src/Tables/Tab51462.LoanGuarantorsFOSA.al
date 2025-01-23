@@ -139,14 +139,14 @@ Table 51462 "Loan GuarantorsFOSA"
         }
         field(13; "Outstanding Balance"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Transaction Type" = filter("Shares Capital" | "Interest Paid"),
+            CalcFormula = sum("Member Ledger Entry".Amount where("Transaction Type" = filter("Share Capital" | "Interest Paid"),
                                                                   "Loan No" = field("Loan No")));
             FieldClass = FlowField;
         }
         field(14; "Guarantor Outstanding"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Account No."),
-                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid")));
+                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid")));
             FieldClass = FlowField;
         }
         field(15; "Employer Code"; Code[20])

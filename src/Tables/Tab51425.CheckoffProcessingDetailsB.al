@@ -36,7 +36,7 @@ Table 51425 "Checkoff Processing Details(B)"
         {
             DataClassification = ToBeClassified;
             OptionCaption = ' ,Interest Paid,Loan Repayment,Deposit Contribution,Benevolent Fund,Share Capital,Capital Reserve,FOSA Savings,Unallocated Funds';
-            OptionMembers = " ","Interest Paid","Loan Repayment","Deposit Contribution","Benevolent Fund","Shares Capital","Capital Reserve","FOSA Savings","Unallocated Funds";
+            OptionMembers = " ","Interest Paid","Loan Repayment","Deposit Contribution","Benevolent Fund","Share Capital","Capital Reserve","FOSA Savings","Unallocated Funds";
         }
         field(6; "Loan Product"; Code[100])
         {

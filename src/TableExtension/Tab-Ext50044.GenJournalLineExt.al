@@ -131,7 +131,7 @@ tableextension 50044 "GenJournalLineExt" extends "Gen. Journal Line"
                     Description := 'Loan';
                 if "Transaction Type" = "transaction type"::Repayment then
                     Description := 'Loan Repayment';
-                if "Transaction Type" = "transaction type"::"Shares Capital" then
+                if "Transaction Type" = "transaction type"::"Share Capital" then
                     Description := 'Shares Capital';
                 if "Transaction Type" = "transaction type"::Withdrawal then
                     Description := 'Withdrawal';

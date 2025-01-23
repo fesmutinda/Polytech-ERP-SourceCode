@@ -133,7 +133,7 @@ Table 51572 "Checkoff Lines-Buffer"
         field(38; "Deposit contribution"; Decimal)
         {
         }
-        field(39; "Shares Capital"; Decimal)
+        field(39; "Share Capital"; Decimal)
         {
         }
         field(40; "By Laws"; Decimal)

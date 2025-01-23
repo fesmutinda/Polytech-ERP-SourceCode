@@ -96,7 +96,7 @@ Table 51318 "Payroll Transaction Code."
         field(31; "Co-Op Parameters"; Option)
         {
             OptionCaption = 'none,shares,loan,loan Interest,Emergency loan,Emergency loan Interest,School Fees loan,School Fees loan Interest,Welfare,Pension,NSSF,Overtime,DevShare,NHIF,FOSA,Insurance Contribution,Jiokoe Savings,Share Capital';
-            OptionMembers = "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF,Overtime,DevShare,NHIF,FOSA,"Insurance Contribution","Jiokoe Savings","Shares Capital";
+            OptionMembers = "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF,Overtime,DevShare,NHIF,FOSA,"Insurance Contribution","Jiokoe Savings","Share Capital";
         }
         field(32; "IsCo-Op/LnRep"; Boolean)
         {

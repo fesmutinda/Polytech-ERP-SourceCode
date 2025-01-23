@@ -25,7 +25,7 @@ Table 51393 "Dividends Progression"
         field(7; Shares; Decimal)
         {
         }
-        field(51516150; "Shares Capital"; Decimal)
+        field(51516150; "Share Capital"; Decimal)
         {
         }
         field(51516151; "Qualifying Share Capital"; Decimal)

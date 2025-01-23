@@ -41,7 +41,7 @@ Table 51496 "Customer Care Logs"
                         Status := Cust.Status;
 
                         //"Holiday Savings":=Cust."Insurance Fund";
-                        "Shares Capital" := Cust."Shares Retained";
+                        "Share Capital" := Cust."Shares Retained";
                         Source := Cust."Customer Posting Group";
                     end;
                 end else
@@ -98,7 +98,7 @@ Table 51496 "Customer Care Logs"
         {
             TableRelation = Customer;
         }
-        field(16; "Shares Capital"; Decimal)
+        field(16; "Share Capital"; Decimal)
         {
         }
         field(17; Source; Code[20])

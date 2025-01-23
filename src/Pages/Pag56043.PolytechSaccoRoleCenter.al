@@ -1628,34 +1628,47 @@ Page 56043 "Polytech Sacco Role Center"
                                 ApplicationArea = Basic, Suite;
                                 RunObject = Page "Loan 3rd Demand Notices List";
                             }
+
+                            action("Loan Demand Notice List(Recovery)")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "Loan 4TH Demand Notices List";
+                            }
+                            action("Loan CRB Notices List")
+                            {
+                                ApplicationArea = "Basic", Suite;
+                                RunObject = Page "Loan CRB Notices List";
+                            }
+
+
                         }
 
-                        group(DemandReports)
-                        {
-                            action(Ldemandnotice1)
-                            {
-                                Caption = 'Loan Defaulter 1st Notice';
-                                RunObject = report "Loan Defaulter 1st Notice";
-                                Image = Report;
-                            }
-                            action(Ldemandnotice2)
-                            {
-                                Caption = 'Loan Defaulter 2nd Notice';
-                                RunObject = report "Loan Defaulter 2nd Notice";
-                                Image = Report;
-                            }
-                            action(Ldemandnotice3)
-                            {
-                                Caption = 'Loan Defaulter 3rd Notice';
-                                RunObject = report "Loan Defaulter Final Notice";
-                                Image = Report;
-                            }
-                            // action("Update Defaulter aging")
-                            // {
-                            //     ApplicationArea = Basic, Suite;
-                            //     RunObject = report "Loans Aging Report New-SASRA";
-                            // }
-                        }
+                        // group(DemandReports)
+                        // {
+                        //     action(Ldemandnotice1)
+                        //     {
+                        //         Caption = 'Loan Defaulter 1st Notice';
+                        //         RunObject = report "Loan Defaulter 1st Notice";
+                        //         Image = Report;
+                        //     }
+                        //     action(Ldemandnotice2)
+                        //     {
+                        //         Caption = 'Loan Defaulter 2nd Notice';
+                        //         RunObject = report "Loan Defaulter 2nd Notice";
+                        //         Image = Report;
+                        //     }
+                        //     action(Ldemandnotice3)
+                        //     {
+                        //         Caption = 'Loan Defaulter 3rd Notice';
+                        //         RunObject = report "Loan Defaulter Final Notice";
+                        //         Image = Report;
+                        //     }
+                        //     // action("Update Defaulter aging")
+                        //     // {
+                        //     //     ApplicationArea = Basic, Suite;
+                        //     //     RunObject = report "Loans Aging Report New-SASRA";
+                        //     // }
+                        // }
                     }
 
 
@@ -1731,31 +1744,32 @@ Page 56043 "Polytech Sacco Role Center"
 
                     action("Update Member Dormancy")
                     {
-                        //RunObject = report "Update Member Dormancy";
+                        RunObject = report "Update Member Dormancy";
                         ApplicationArea = all;
-                        Visible = false;
+                        Visible = true;
                     }
-                    group(LoanDefaulter)
-                    {
-                        Caption = 'Loan Defaulter Notices';
-                        action(LoanDefaulter1st)
-                        {
-                            Caption = 'Loan Defaulter 1st Notice';
-                            Image = Setup;
-                            RunObject = report "Loan Defaulter 1st Notice";
-                        }
-                        action(LoanDefaulter2nd)
-                        {
-                            Caption = 'loan Defaulter 2nd Notice';
-                            Image = Setup;
-                            RunObject = report "Loan Defaulter 2nd Notice";
-                        }
-                        action("Loan Defaulter Final Notice")
-                        {
-                            Image = Setup;
-                            RunObject = report "Loan Defaulter Final Notice";
-                        }
-                    }
+                    // group(LoanDefaulter)
+                    // {
+                    //     Caption = 'Loan Defaulter Notices';
+                    //     action(LoanDefaulter1st)
+                    //     {
+                    //         Caption = 'Loan Defaulter 1st Notice';
+                    //         Image = Setup;
+                    //         RunObject = report "Loan Defaulter 1st Notice";
+                    //     }
+                    //     action(LoanDefaulter2nd)
+                    //     {
+                    //         Caption = 'loan Defaulter 2nd Notice';
+                    //         Image = Setup;
+                    //         RunObject = report "Loan Defaulter 2nd Notice";
+                    //     }
+                    //     action("Loan Defaulter Final Notice")
+                    //     {
+                    //         Image = Setup;
+                    //         RunObject = report "Loan Defaulter Final Notice";
+                    //     }
+                    // }
+
                     //     group(CheckOffDistributed)
                     //     {
                     //         Caption = 'Checkoff Processing-Distributed';
@@ -1869,7 +1883,6 @@ Page 56043 "Polytech Sacco Role Center"
                         {
                             ApplicationArea = all;
                             RunObject = Report "Dividends Payments";
-
                         }
                     }
                     //         group("Share capital Manangement")

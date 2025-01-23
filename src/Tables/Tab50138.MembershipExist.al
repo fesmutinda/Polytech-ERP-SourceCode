@@ -50,7 +50,7 @@ table 50138 "Membership Exist"
                     "Member Deposits" := Cust."Current Shares";
                     "FOSA Account No." := Cust."FOSA Account";
                     "Unpaid Dividends" := Cust."Dividend Amount";
-                    "Shares Capital" := Cust."Shares Retained";
+                    "Share Capital" := Cust."Shares Retained";
 
                     GenSetup.Get();
 
@@ -204,7 +204,7 @@ table 50138 "Membership Exist"
                 "Tax: Share Capital Transfer Fe" := "Share Capital Transfer Fee" * (GenSetup."Excise Duty(%)" / 100);
             end;
         }
-        field(34; "Shares Capital"; Decimal)
+        field(34; "Share Capital"; Decimal)
         {
         }
         field(35; "Share Capital to Sell"; Decimal)

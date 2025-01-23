@@ -17,7 +17,7 @@ Table 51475 "HISA Allocation"
         {
             NotBlank = true;
             OptionCaption = ' ,Repayment,Deposits Contribution,Rejoining Fee,Registration Fee,Insurance Contribution,Shares Capital,Investment,Un-allocated Funds';
-            OptionMembers = " ",Repayment,"Deposits Contribution","Rejoining Fee","Registration Fee","Insurance Contribution","Shares Capital",Investment,"Un-allocated Funds";
+            OptionMembers = " ",Repayment,"Deposits Contribution","Rejoining Fee","Registration Fee","Insurance Contribution","Share Capital",Investment,"Un-allocated Funds";
 
             trigger OnValidate()
             begin
@@ -97,11 +97,11 @@ Table 51475 "HISA Allocation"
                     end;
                 end;
 
-                /*IF ("Transaction Type" = "Transaction Type"::"Shares Capital") THEN BEGIN
+                /*IF ("Transaction Type" = "Transaction Type"::"Share Capital") THEN BEGIN
                 IF Cust.GET("Member No") THEN BEGIN
                 Cust.CALCFIELDS(Cust."Shares Retained");
-                IF Amount > (Cust."Shares Capital"+Cust."Shares Retained") THEN
-                ERROR('You can only receive the oustanding Share Capital amount of %1',(Cust."Shares Capital"+Cust."Shares Retained"));
+                IF Amount > (Cust."Share Capital"+Cust."Shares Retained") THEN
+                ERROR('You can only receive the oustanding Share Capital amount of %1',(Cust."Share Capital"+Cust."Shares Retained"));
                 END;
                 END;   */
 

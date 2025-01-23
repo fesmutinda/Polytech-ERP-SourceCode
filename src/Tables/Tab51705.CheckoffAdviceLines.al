@@ -51,7 +51,7 @@ Table 51705 "Checkoff Advice Lines"
         field(12; "Demand Savings"; Decimal)
         {
         }
-        field(13; "Shares Capital"; Decimal)
+        field(13; "Share Capital"; Decimal)
         {
         }
         field(14; Stocks; Decimal)

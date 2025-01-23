@@ -39,7 +39,7 @@ Page 50133 "Dividends Processing Flat-Rate"
                 field("FOSA Shares"; Rec.Shares)
                 {
                 }
-                field("Qualifying FOSA Shares"; Rec."Shares Capital")
+                field("Qualifying FOSA Shares"; Rec."Share Capital")
                 {
                 }
                 field("Gross Interest -FOSA Shares"; Rec."Gross Dividend/Rebates")

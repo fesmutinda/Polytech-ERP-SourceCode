@@ -1421,7 +1421,7 @@ Codeunit 50030 "Poly Factory"
     end;
 
 
-    procedure KnCreateGnlJournalLineBalanced(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee",Loan,Repayment,"Interest Due","Interest Paid","Deposit Contribution","Shares Capital",Dividend,"Insurance Contribution","Demand Savings","Insurance Charge","Retained Shares","Demand Savings Withdrawal","Stock Due","Stock paid","Insurance Benefits","Demand Activation",ByLaws,"Dividend Advance","Rejoining Fee","Unallocated Funds"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50]; BalancingAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member; BalancingAccountNo: Code[40]; DefaulterPaymentType: Option " ",Attachement,"Subsequent Payment","Guarantor Payment",Reversal)
+    procedure KnCreateGnlJournalLineBalanced(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee",Loan,Repayment,"Interest Due","Interest Paid","Deposit Contribution","Share Capital",Dividend,"Insurance Contribution","Demand Savings","Insurance Charge","Retained Shares","Demand Savings Withdrawal","Stock Due","Stock paid","Insurance Benefits","Demand Activation",ByLaws,"Dividend Advance","Rejoining Fee","Unallocated Funds"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50]; BalancingAccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member; BalancingAccountNo: Code[40]; DefaulterPaymentType: Option " ",Attachement,"Subsequent Payment","Guarantor Payment",Reversal)
     var
         GenJournalLine: Record "Gen. Journal Line";
     begin
@@ -2662,7 +2662,7 @@ Codeunit 50030 "Poly Factory"
     end;
 
 
-    procedure knInsertDataSheetMain(MemberNo: Code[20]; PayrollNo: Code[30]; EmployerCode: Code[70]; AdjustmentType: Option " ","Registration Fee","Rejoining Fee","Deposit Contriution","Shares Capital","Insurance Contribution","Stock Payment","By Laws","Loan Adjustment","Demand Savings"; AdjustmentDate: Date; AdjustmentAmount: Decimal; LoanNo: Code[20]; LoanProductType: Code[40]; PrevAmount: Decimal)
+    procedure knInsertDataSheetMain(MemberNo: Code[20]; PayrollNo: Code[30]; EmployerCode: Code[70]; AdjustmentType: Option " ","Registration Fee","Rejoining Fee","Deposit Contriution","Share Capital","Insurance Contribution","Stock Payment","By Laws","Loan Adjustment","Demand Savings"; AdjustmentDate: Date; AdjustmentAmount: Decimal; LoanNo: Code[20]; LoanProductType: Code[40]; PrevAmount: Decimal)
     var
         DataSheetMain: Record 51417;
     begin
@@ -2926,7 +2926,7 @@ Codeunit 50030 "Poly Factory"
         //CALCFIELDS("Committed Shares");
         GenJournalLine.Amount := ROUND(FreedAmt, 0.0005, '>');
         GenJournalLine.Validate(GenJournalLine.Amount);
-        GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
+        GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
         GenJournalLine."Loan No" := LoanNo;
         GenJournalLine."Shortcut Dimension 1 Code" := Dim1;
         GenJournalLine."Shortcut Dimension 2 Code" := Dim2;

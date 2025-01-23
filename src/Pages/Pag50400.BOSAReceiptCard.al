@@ -1064,7 +1064,7 @@ page 50400 "BOSA Receipt Card"
                 ObjReceiptTransactions.Init;
                 ObjReceiptTransactions."Document No" := ObjRcptBuffer."Transaction No.";
                 ObjReceiptTransactions."Member No" := ObjRcptBuffer."Account No.";
-                ObjReceiptTransactions."Transaction Type" := ObjReceiptTransactions."transaction type"::"Shares Capital";
+                ObjReceiptTransactions."Transaction Type" := ObjReceiptTransactions."transaction type"::"Share Capital";
                 ObjReceiptTransactions.Validate(ObjReceiptTransactions."Transaction Type");
                 ObjReceiptTransactions."Global Dimension 1 Code" := 'BOSA';
                 ObjReceiptTransactions."Global Dimension 2 Code" := SwizzsoftFactory.FnGetMemberBranch(ObjRcptBuffer."Account No.");
@@ -1278,7 +1278,7 @@ page 50400 "BOSA Receipt Card"
         SharesCap: Decimal;
         DIFF: Decimal;
         TransType: Enum TransactionTypesEnum;
-    //TransType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
+    //TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
     begin
 
         ObjMember.Reset;
@@ -1300,7 +1300,7 @@ page 50400 "BOSA Receipt Card"
         end;
     end;
 
-    local procedure FnReturnAmountToClear(TransType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account") AmountReturned: Decimal
+    local procedure FnReturnAmountToClear(TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account") AmountReturned: Decimal
     var
         ObjReceiptAllocation: Record "Receipt Allocation";
     begin
@@ -1325,7 +1325,7 @@ page 50400 "BOSA Receipt Card"
         ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
-        TransType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings";
+        TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"Mwanangu Savings","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares","Interest Due","Jiokoe Savings";
     begin
         ObjMember.Reset;
         ObjMember.SetRange(ObjMember."No.", ObjRcptBuffer."Account No.");
@@ -1358,7 +1358,7 @@ page 50400 "BOSA Receipt Card"
         ObjMember: Record Customer;
         SharesCap: Decimal;
         DIFF: Decimal;
-        TransType: Option " ","Registration Fee","Shares Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
+        TransType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account";
     begin
 
         ObjMember.Reset;

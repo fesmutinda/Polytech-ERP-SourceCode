@@ -43,7 +43,7 @@ Table 51557 "General Equiries."
                     City := ObjCust.City;
                     "Company No" := ObjCust."Employer Code";
                     "Company Name" := ObjCust."Employer Name";
-                    "Shares Capital" := ObjCust."Shares Retained";
+                    "Share Capital" := ObjCust."Shares Retained";
                     Source := ObjCust."Customer Posting Group";
                     "Employment Info" := ObjCust."Employment Info";
                     "Employer Code" := ObjCust."Employer Code";
@@ -125,7 +125,7 @@ Table 51557 "General Equiries."
                 end;
             end;
         }
-        field(16; "Shares Capital"; Decimal)
+        field(16; "Share Capital"; Decimal)
         {
         }
         field(17; Source; Code[20])

@@ -59,7 +59,7 @@ Table 51383 "Loan Product Charges"
         {
             DataClassification = ToBeClassified;
             OptionCaption = 'General,Top up,External Loan,Deposit Financing,Share Capital,Share Financing,Deposit Financing on Maximum,External Payment to Vendor,Rescheduling';
-            OptionMembers = General,"Top up","External Loan","Deposit Financing","Shares Capital","Share Financing","Deposit Financing on Maximum","External Payment to Vendor",Rescheduling;
+            OptionMembers = General,"Top up","External Loan","Deposit Financing","Share Capital","Share Financing","Deposit Financing on Maximum","External Payment to Vendor",Rescheduling;
         }
         field(12; "Charge Method"; Option)
         {

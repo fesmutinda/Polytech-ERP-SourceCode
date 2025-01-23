@@ -95,7 +95,7 @@ Table 51267 "prEmployee Transactions"
         field(24; "Transaction Type"; Option)
         {
             OptionCaption = ' ,Registration Fee,Loan,Repayment,Withdrawal,Interest Due,Interest Paid,Benevolent Fund,Deposit Contribution,Loan Penalty,Application Fee,Appraisal Fee,Investment,Unallocated Funds,Share Capital,Loan Adjustment,Dividend,Withholding Tax,Administration Fee,Welfare Contribution 2,Prepayment,Withdrawable Deposits,Domant Share Capital,Interest ADJ';
-            OptionMembers = " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Benevolent Fund","Deposit Contribution","Loan Penalty","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Shares Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee","Welfare Contribution 2",Prepayment,"Withdrawable Deposits","Domant Share Capital","Interest ADJ";
+            OptionMembers = " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Benevolent Fund","Deposit Contribution","Loan Penalty","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Share Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee","Welfare Contribution 2",Prepayment,"Withdrawable Deposits","Domant Share Capital","Interest ADJ";
         }
         field(25; "Loan Account No"; Code[30])
         {

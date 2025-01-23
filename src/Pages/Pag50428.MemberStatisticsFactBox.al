@@ -57,17 +57,17 @@ page 50428 "Member Statistics FactBox"
                     Style = StrongAccent;
                     StyleExpr = true;
                 }
-                field("Holiday Savings"; Rec."Holiday Savings")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Holiday Savings';
-                }
-                field("Additional Shares"; Rec."Additional Shares")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = false;
-                }
+                // field("Holiday Savings"; Rec."Holiday Savings")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Holiday Savings';
+                // }
+                // field("Additional Shares"; Rec."Additional Shares")
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = false;
+                //     Visible = false;
+                // }
                 field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;

@@ -27,7 +27,7 @@ Page 50145 "Member Re-Application Page"
                     ToolTip = 'Specifies the value of the Member Name field.';
                     Editable = false;
                 }
-                field("Shares Capital"; Rec."Shares Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = all;
                     Editable = false;

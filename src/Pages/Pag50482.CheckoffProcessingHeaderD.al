@@ -273,7 +273,7 @@ page 50482 "Checkoff Processing Header-D"
                                    + ObjCheckoffLines."QUICK LOAN" + ObjCheckoffLines."Int QUICK LOAN" + ObjCheckoffLines."SUPER QUICK" + ObjCheckoffLines."Int SUPER QUICK"
                                    + ObjCheckoffLines."SCHOOL FEES" + ObjCheckoffLines."Int SCHOOL FEES" + ObjCheckoffLines."SUPER SCHOOL FEES" + ObjCheckoffLines."Int SUPER SCHOOL FEES"
                                    + ObjCheckoffLines."INVESTMENT LOAN" + ObjCheckoffLines."Int INVESTMENT LOAN" + ObjCheckoffLines."DEVELOPMENT LOAN" + ObjCheckoffLines."Int DEVELOPMENT LOAN" + ObjCheckoffLines."Insurance Contribution"
-                                   + ObjCheckoffLines."Deposit contribution" + ObjCheckoffLines."Shares Capital";
+                                   + ObjCheckoffLines."Deposit contribution" + ObjCheckoffLines."Share Capital";
                                     //MESSAGE('"Deposit contribution"',ObjCheckoffLines."Deposit contribution");
 
                                 end;
@@ -294,7 +294,7 @@ page 50482 "Checkoff Processing Header-D"
                             + ObjCheckoffLines."QUICK LOAN" + ObjCheckoffLines."Int QUICK LOAN" + ObjCheckoffLines."SUPER QUICK" + ObjCheckoffLines."Int SUPER QUICK"
                             + ObjCheckoffLines."SCHOOL FEES" + ObjCheckoffLines."Int SCHOOL FEES" + ObjCheckoffLines."SUPER SCHOOL FEES" + ObjCheckoffLines."Int SUPER SCHOOL FEES"
                             + ObjCheckoffLines."INVESTMENT LOAN" + ObjCheckoffLines."Int INVESTMENT LOAN" + ObjCheckoffLines."DEVELOPMENT LOAN" + ObjCheckoffLines."Int DEVELOPMENT LOAN" + ObjCheckoffLines."Insurance Contribution"
-                            + ObjCheckoffLines."Deposit contribution" + ObjCheckoffLines."Shares Capital";
+                            + ObjCheckoffLines."Deposit contribution" + ObjCheckoffLines."Share Capital";
                             Rec.Amount := MemberTotal;
                             //VALIDATE(Amount);
                             ObjCheckoffLines.Amount := MemberTotal;
@@ -306,7 +306,7 @@ page 50482 "Checkoff Processing Header-D"
                     ObjCheckoffLines.Reset;
                     ObjCheckoffLines.SetRange(ObjCheckoffLines."Receipt Header No", Rec.No);
                     if ObjCheckoffLines.FindSet then begin
-                        ObjCheckoffLines.CalcSums(ObjCheckoffLines."Deposit contribution", ObjCheckoffLines."Shares Capital",
+                        ObjCheckoffLines.CalcSums(ObjCheckoffLines."Deposit contribution", ObjCheckoffLines."Share Capital",
                         ObjCheckoffLines."EMERGENCY LOAN", ObjCheckoffLines."Int EMERGENCY LOAN", ObjCheckoffLines."SUPER EMERGENCY LOAN", ObjCheckoffLines."Int SUPER EMERGENCY LOAN"
                         , ObjCheckoffLines."QUICK LOAN", ObjCheckoffLines."Int QUICK LOAN", ObjCheckoffLines."SUPER QUICK", ObjCheckoffLines."Int SUPER QUICK"
                         , ObjCheckoffLines."SCHOOL FEES", ObjCheckoffLines."Int SCHOOL FEES", ObjCheckoffLines."SUPER SCHOOL FEES", ObjCheckoffLines."Int SUPER SCHOOL FEES"
@@ -317,7 +317,7 @@ page 50482 "Checkoff Processing Header-D"
                         //Stock:=ObjCheckoffLines.Stocks;
                         //By
                         //DeamndSavings:=ObjCheckoffLines.Demand;
-                        ShareCapital := ObjCheckoffLines."Shares Capital";
+                        ShareCapital := ObjCheckoffLines."Share Capital";
                         Insurance := ObjCheckoffLines."Insurance Contribution";
 
 
@@ -343,7 +343,7 @@ page 50482 "Checkoff Processing Header-D"
                         TotalAmount := ObjCheckoffLines.Amount;
                         TotalLines := +EmergencyLoan + EmergencyLoanInt + SuperEmergencyLoan + SuperEmergencyLoanInt + QuickLoan + QuickLoanInt + SuperQuickLoan + SuperQuickLoanInt
                         + SchoolFees + SchoolFeesInt + SuperSchool + SuperSchoolInt + InvestLoan + InvestLoanInt + DevlLoan + DevLoanInt + ObjCheckoffLines."Deposit contribution"
-                        + ObjCheckoffLines."Shares Capital";
+                        + ObjCheckoffLines."Share Capital";
                     end;
                 end;
             }
@@ -454,8 +454,8 @@ page 50482 "Checkoff Processing Header-D"
                                                                      KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
                                 //share capital
                                 LineNo := LineNo + 10000;
-                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Shares Capital", GenJournalLine."account type"::Customer,
-                                                                     ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Shares Capital", 'BOSA', '', 'Shares capital checkofffor '
+                                SwizzsoftFactory.FnCreateGnlJournalLine(Jtemplate, JBatch, Rec.No, LineNo, GenJournalLine."transaction type"::"Share Capital", GenJournalLine."account type"::Customer,
+                                                                     ReceiptLine."Member No.", Rec."Loan CutOff Date", -ReceiptLine."Share Capital", 'BOSA', '', 'Shares capital checkofffor '
                                                                      + KnGetPeriodDescription(Rec."CheckOff Period") + ' ' + CheckoffLinesBuffer."Member No." + ' ' + Rec."Employer Code", '');
 
                                 //Reg/fess

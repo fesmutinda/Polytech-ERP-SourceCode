@@ -454,7 +454,7 @@ page 50398 "Posted Loans Batch Card"
                                 GenJournalLine.Description := 'Principal Amount';
                                 GenJournalLine.Amount := LoanDisbAmount + TCharges;
                                 GenJournalLine.Validate(GenJournalLine.Amount);
-                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
+                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
                                 GenJournalLine."Loan No" := LoanApps."Loan  No.";
                                 GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
                                 GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
@@ -475,7 +475,7 @@ page 50398 "Posted Loans Batch Card"
                                     GenJournalLine."Line No." := LineNo;
                                     GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                     GenJournalLine."Account No." := LoanApps."Client Code";
-                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Shares Capital";
+                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Share Capital";
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                                     GenJournalLine."Document No." := Rec."Document No.";
                                     GenJournalLine."Posting Date" := Rec."Posting Date";

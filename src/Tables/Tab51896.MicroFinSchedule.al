@@ -311,7 +311,7 @@ Table 51896 "Micro_Fin_Schedule"
         field(51516021; "Excess Amount"; Decimal)
         {
         }
-        field(51516022; "Shares Capital"; Decimal)
+        field(51516022; "Share Capital"; Decimal)
         {
         }
     }

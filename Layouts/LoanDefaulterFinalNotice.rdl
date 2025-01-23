@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-01-22T15:20:47.2481669Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-01-22T22:07:23.7343095Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -339,7 +339,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Our records show that you have defaulted in payment of the above loan. The purpose of this letter is to request you to resume regular repayment of full monthly instalments and also clear tha outstanding arreas of Kshs. </Value>
+                    <Value>Our records show that you have defaulted in payment of the above loan. The purpose of this letter is to request you to resume regular repayments or pay full monthly instalments and also clear the outstanding arrears of Kshs. </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -465,7 +465,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve">                                                             </Value>
+                    <Value xml:space="preserve">                                                           </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -486,7 +486,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Current Loan Balance                                                       </Value>
+                    <Value>Current Loan Balance                                                      </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -502,7 +502,7 @@
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <Format>#,0.00;#,0.00-;'-'</Format>
-                      <TextDecoration>Underline</TextDecoration>
+                      <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -537,7 +537,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>Interest                                                                  </Value>
+                    <Value>Interest                                                                  +</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -611,29 +611,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Penality on offset against share capital&amp;deposit                  </Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!Penaltycharge_on_offset.Value</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <Format>#,0.00;(#,0.00);'-'</Format>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
                     <Value>Amount to be deducted from your guarantors                     </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
@@ -648,34 +625,6 @@
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <Format>#,0.00;(#,0.00);'-'</Format>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
@@ -726,19 +675,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
                     <Value>Yours faithfully,</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
@@ -765,7 +701,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!Loan_Officer.Value</Value>
+                    <Value />
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Loan_Officer.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -782,7 +731,7 @@
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1416,13 +1365,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.88704in</Width>
+                  <Width>0.97076in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.39537in</Width>
+                  <Width>2.24414in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.4537in</Width>
+                  <Width>1.30247in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1648,12 +1597,22 @@
             <Top>8.305in</Top>
             <Left>0.64736in</Left>
             <Height>0.5in</Height>
-            <Width>4.73611in</Width>
+            <Width>4.51737in</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
             </Style>
           </Tablix>
         </ReportItems>

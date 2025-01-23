@@ -1304,7 +1304,7 @@ Table 52364 "Member Register Depricated"
         field(68002; "Current Loan"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
-                                                                  "Transaction Type" = const("Shares Capital"),
+                                                                  "Transaction Type" = const("Share Capital"),
                                                                   "Posting Date" = field("Date Filter"),
                                                                   "Document No." = field("Document No. Filter")));
             Editable = false;
@@ -1603,7 +1603,7 @@ Table 52364 "Member Register Depricated"
         field(68041; "Shares Retained"; Decimal)
         {
             CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
-                                                                   "Transaction Type" = const("Shares Capital"),
+                                                                   "Transaction Type" = const("Share Capital"),
                                                                    "Document No." = field("Document No. Filter"),
                                                                    "Posting Date" = field("Date Filter")));
             Editable = false;
@@ -1868,7 +1868,7 @@ Table 52364 "Member Register Depricated"
         field(68083; "FOSA Outstanding Balance"; Decimal)
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
-                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid" | "FOSA Shares")));
+                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid" | "FOSA Shares")));
             FieldClass = FlowField;
         }
         field(68084; "FOSA Oustanding Interest"; Decimal)
@@ -2425,7 +2425,7 @@ Table 52364 "Member Register Depricated"
             CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
                                                                    "Posting Date" = field("Date Filter"),
                                                                    "Document No." = field("Document No. Filter"),
-                                                                   "Transaction Type" = const("Shares Capital")));
+                                                                   "Transaction Type" = const("Share Capital")));
             FieldClass = FlowField;
         }
         field(69081; "Normal Shares B Class"; Decimal)
@@ -2760,7 +2760,7 @@ Table 52364 "Member Register Depricated"
         {
             CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("No."),
                                                                   "Posting Date" = field("Date Filter"),
-                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid" | "Deposit Contribution" | "Insurance Contribution")));
+                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid" | "Deposit Contribution" | "Insurance Contribution")));
             FieldClass = FlowField;
         }
         field(69151; "Last Deposit Contribution Date"; Date)

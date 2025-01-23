@@ -35,7 +35,7 @@ page 50898 "Micro_Fin_Schedule"
                     ApplicationArea = Basic;
                     Caption = 'Deposits';
                 }
-                field("Shares Capital"; Rec."Shares Capital")
+                field("Share Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Shares';

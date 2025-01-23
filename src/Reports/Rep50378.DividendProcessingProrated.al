@@ -165,7 +165,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
 
@@ -216,7 +216,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -266,7 +266,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -317,7 +317,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -365,7 +365,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -413,7 +413,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -461,7 +461,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
                         ;
 
@@ -510,7 +510,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -559,7 +559,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -608,7 +608,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -658,7 +658,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;
@@ -708,7 +708,7 @@ Report 50378 "Dividend Processing-Prorated"
                         DivProg."Net Dividends" := DivTotal - WthTAxTotal;
                         DivProg."Qualifying Shares" := Cust."Current Shares";
                         DivProg.Shares := Cust."Current Shares";
-                        DivProg."Shares Capital" := Cust."Shares Retained";
+                        DivProg."Share Capital" := Cust."Shares Retained";
                         DivProg.INSERT;
 
                     END;

@@ -28,7 +28,7 @@ Table 51708 "Dividends Register Flat Rate1"
         field(8; Shares; Decimal)
         {
         }
-        field(9; "Shares Capital"; Decimal)
+        field(9; "Share Capital"; Decimal)
         {
         }
         field(10; "Gross Dividend/Rebates"; Decimal)

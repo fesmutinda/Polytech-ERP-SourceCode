@@ -42,7 +42,7 @@ Table 51400 "Membership Exit"
                     "Member Name" := Cust.Name;
                     "Member Deposits" := Cust."Current Shares";
                     "Unpaid Dividends" := Cust."Dividend Amount";
-                    "Shares Capital" := Cust."Shares Retained";
+                    "Share Capital" := Cust."Shares Retained";
                     "Refundable Share Capital" := 0;
                     ///"Refundable Share Capital":=Cust."Shares Retained";
 
@@ -124,9 +124,9 @@ Table 51400 "Membership Exit"
                     "Member Name" := Cust.Name;
                     "Member Deposits" := Cust."Current Shares";
                     "Unpaid Dividends" := Cust."Dividend Amount";
-                    "Shares Capital" := Cust."Shares Retained";
-                    if "Shares Capital" < 20000 then begin
-                        "Share Capital Deduction" := 20000 - "Shares Capital";
+                    "Share Capital" := Cust."Shares Retained";
+                    if "Share Capital" < 20000 then begin
+                        "Share Capital Deduction" := 20000 - "Share Capital";
                     end;
                     "Refundable Share Capital" := 0;
                     "Ledger Fee" := GenSetup."Ledger Fee";
@@ -285,7 +285,7 @@ Table 51400 "Membership Exit"
                 // "Share Capital Transfer Fee":=GenSetup."Share Capital Transfer Fee";
             end;
         }
-        field(34; "Shares Capital"; Decimal)
+        field(34; "Share Capital"; Decimal)
         {
         }
         field(35; "Share Capital to Sell"; Decimal)

@@ -371,9 +371,9 @@ page 50485 "Posted Checkoff Proc. Header-D"
                         END;
                         //---------------------------16.BENEVOLENT------------------------------------------------------------------
                         LineNo:=LineNo+10000;
-                        SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."Transaction Type"::"Shares Capital",
+                        SFactory.FnCreateGnlJournalLine(BATCH_TEMPLATE,BATCH_NAME,DOCUMENT_NO,LineNo,GenJournalLine."Transaction Type"::"Share Capital",
                         GenJournalLine."Account Type"::Employee,ReceiptLine."No Repayment","Posting date",ReceiptLine.DEPT* -1,'BOSA',"Document No",
-                        FORMAT(GenJournalLine."Transaction Type"::"Shares Capital"),'');
+                        FORMAT(GenJournalLine."Transaction Type"::"Share Capital"),'');
                     
                     
                         //----------------------------17.ADVANCE_P------------------------------------------------------------------

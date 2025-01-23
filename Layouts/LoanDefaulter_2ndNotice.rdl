@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-01-22T14:31:28.0510159Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-01-22T21:48:03.2810188Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -478,7 +478,7 @@
                     <Value>=Globals!ExecutionTime</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
-                      <Format>D</Format>
+                      <Format>d MMMM, yyyy</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -489,7 +489,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
             <Top>2.20903in</Top>
-            <Left>0.64376in</Left>
+            <Left>1.01876in</Left>
             <Height>0.20298in</Height>
             <Width>2.60196in</Width>
             <ZIndex>11</ZIndex>
@@ -510,19 +510,6 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>CC</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
                     <Value>=First(Fields!ClientName_Loans.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
@@ -536,8 +523,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>2.81618in</Top>
-            <Left>2.43244cm</Left>
+            <Top>2.97868in</Top>
+            <Left>2.53829cm</Left>
             <Height>0.1875in</Height>
             <Width>2.52418in</Width>
             <ZIndex>12</ZIndex>
@@ -566,7 +553,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.04535in</Top>
+            <Top>3.29535in</Top>
             <Left>0.70381cm</Left>
             <Height>0.25in</Height>
             <Width>1.42708in</Width>
@@ -636,7 +623,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>3.36479in</Top>
+            <Top>3.61479in</Top>
             <Left>0.68263cm</Left>
             <Height>0.25in</Height>
             <Width>4.53125in</Width>
@@ -722,8 +709,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>2.45368in</Top>
-            <Left>0.2771in</Left>
+            <Top>2.58701in</Top>
+            <Left>0.30488in</Left>
             <Height>0.18056in</Height>
             <Width>0.625in</Width>
             <ZIndex>17</ZIndex>
@@ -741,10 +728,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.73818in</Width>
+                  <Width>0.69859in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.37709in</Width>
+                  <Width>3.10209in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -827,10 +814,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>2.46757in</Top>
-            <Left>0.95766in</Left>
+            <Top>2.56618in</Top>
+            <Left>0.99933in</Left>
             <Height>0.25in</Height>
-            <Width>4.11527in</Width>
+            <Width>3.80068in</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -860,10 +847,43 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> has not made any efforts to repay his loan with POLYTECH SACCO to date. The loan details are as follows:</Value>
+                    <Value> has not made any efforts to repay his loan with POLYTECH SACCO to date. </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Despite our initial notice, no repayment efforts have been made to date. The Loan outstanding balance is Kshs. </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanOutstanding_Balance.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>, and the loan details are as follows:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1077,7 +1097,7 @@
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <Format>#,0.00;(#,0.00)</Format>
+                      <Format>#,0;(#,0)</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
@@ -1287,11 +1307,44 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox22</rd:DefaultName>
-            <Top>3.68424in</Top>
+            <Top>3.89257in</Top>
             <Left>0.26876in</Left>
-            <Height>4.11667in</Height>
+            <Height>3.90834in</Height>
             <Width>6.5in</Width>
             <ZIndex>19</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CC:</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>2.97868in</Top>
+            <Left>0.27709in</Left>
+            <Height>0.18056in</Height>
+            <Width>0.625in</Width>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>

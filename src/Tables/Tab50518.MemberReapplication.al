@@ -31,8 +31,8 @@ table 50518 "Member Reapplication"
                 if cust.get("Member No.") then
                     "Member Name" := cust.Name;
                 "Status on Exit" := cust.Status;
-                cust.CalcFields("Shares Retained");//"Shares Capital");
-                "Shares Capital" := Cust."Shares Retained";
+                cust.CalcFields("Shares Retained");//"Share Capital");
+                "Share Capital" := Cust."Shares Retained";
 
             end;
         }
@@ -86,7 +86,7 @@ table 50518 "Member Reapplication"
         {
 
         }
-        field(15; "Shares Capital"; Decimal)
+        field(15; "Share Capital"; Decimal)
         {
             DataClassification = ToBeClassified;
         }

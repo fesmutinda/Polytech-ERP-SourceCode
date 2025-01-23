@@ -122,7 +122,7 @@ Table 51421 "Data Sheet Lines"
         {
             DataClassification = ToBeClassified;
         }
-        field(43; "Shares Capital"; Decimal)
+        field(43; "Share Capital"; Decimal)
         {
             DataClassification = ToBeClassified;
         }

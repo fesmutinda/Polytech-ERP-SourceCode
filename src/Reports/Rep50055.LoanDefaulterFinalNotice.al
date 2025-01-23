@@ -144,10 +144,14 @@ Report 50055 "Loan Defaulter Final Notice"
 
             trigger OnAfterGetRecord()
             begin
-                Penaltcharge := 0.05 * ("LoansRec"."Current Shares" + "LoansRec"."Share Purchase");
+                //Penaltcharge := 0.05 * ("LoansRec"."Current Shares" + "LoansRec"."Share Purchase");
+                //AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
 
-                AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
                 AmountInArrears_DefaultNoticesRegister := Round("Outstanding Balance" + "Oustanding Interest");
+                if "Current Shares" > AmountInArrears_DefaultNoticesRegister then
+                    AmountInArrears_DefaultNoticesRegister := 0
+                else
+                    AmouuntToRecover := AmountInArrears_DefaultNoticesRegister - -"LoansRec"."Current Shares";
                 OutstandingInt := "Oustanding Interest";
                 LoanNo := "Loan  No.";
 

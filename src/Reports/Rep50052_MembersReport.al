@@ -57,7 +57,7 @@ Report 50052 MemberReport
                 if TbMembRegister.get(TbMembRegister."No.") then begin
                     TbMembRegister.SetAutoCalcFields(TbMembRegister."Current Shares");
                     Deposits := TbMembRegister."Current Shares";
-                    //ShareCapital := TbMembRegister."Shares Capital";
+                    //ShareCapital := TbMembRegister."Share Capital";
                     LoanBalance := TbMembRegister."Outstanding Balance";
                 end;
                 EntryNo := EntryNo + 1;
