@@ -77,15 +77,15 @@ Codeunit 51120 PORTALIntegration
         CapTotal: Decimal;
         Period: Code[20];
         WTaxShareCap: Decimal;
-        CloudPesaLive: Codeunit SwizzKashMB;
+        CloudPesaLive: Codeunit SwizzKashMobile;
         Online: Record "Online Users";
         SaccoSetup: Record "Sacco No. Series";
         NoSeriesMgmt: Codeunit NoSeriesManagement;
-        // ObjLoanApplications: Record "Online Loan Application";
+        ObjLoanApplications: Record "Online Loan Application";
         LoanProductType: Record "Loan Products Setup";
         ReturnList: Text;
         source: Text;
-        // OnlineLoanGuarantors: Record "Online Loan Guarantors";
+        OnlineLoanGuarantors: Record "Online Loan Guarantors";
         NewApplicationNumber: Integer;
         ReturnDecimal: Decimal;
         LoanBalancing: Decimal;
@@ -234,6 +234,31 @@ Codeunit 51120 PORTALIntegration
     end;
 
 
+    procedure fnFosaStatement(MemberNo: Code[50]; "filter": Text; var BigText: BigText) exitString: Text
+    var
+        Filename: Text[100];
+        Outputstream: OutStream;
+        RecRef: RecordRef;
+        TempBlob: Codeunit "Temp Blob";
+        Outstr: OutStream;
+        Instr: InStream;
+        Base64Convert: Codeunit "Base64 Convert";
+    begin
+        Vendor.Reset;
+        Vendor.SetRange(Vendor."No.", MemberNo);
+        Vendor.SetFilter("Date Filter", filter);
+        if Vendor.Find('-') then begin
+            RecRef.GetTable(Vendor);
+            Clear(TempBlob);
+            TempBlob.CreateOutStream(Outstr);
+            TempBlob.CreateInStream(Instr);
+            if Report.SaveAs(Report::"Member Detailed Statement", '', ReportFormat::Pdf, Outstr, RecRef) then begin
+                exitString := Base64Convert.ToBase64(Instr);
+                exit;
+            end;
+        end;
+    end;
+
 
     procedure fndividentstatement(No: Code[50]; Path: Text[100]) exitString: Text
     var
@@ -296,6 +321,22 @@ Codeunit 51120 PORTALIntegration
             CustomerLedgerEntry.CalcFields(CustomerLedgerEntry."Credit Amount");
             Amount := CustomerLedgerEntry."Credit Amount";
         end;
+
+    end;
+
+    procedure GetMonthlyContribution(MemberNo: Code[20]) Amount: Decimal
+    var
+        CustomerLedgerEntry: Record 21;
+    begin
+        Amount := 0;
+        objMember.Reset();
+        objMember.SetRange("No.", MemberNo);
+        if (objMember.find('-')) then begin//si calcfield
+            //objMember.CalcFields(objMember."Monthly Contribution");
+            Amount := objMember."Monthly Contribution";
+        end;
+        // Amount := 0;
+
 
     end;
 
@@ -365,6 +406,7 @@ Codeunit 51120 PORTALIntegration
         end;
     end;
 
+
     procedure fnLoanGurantorsReport(MemberNo: Code[50]; "filter": Text; BigText: BigText) exitString: Text
     var
         Filename: Text[100];
@@ -390,6 +432,7 @@ Codeunit 51120 PORTALIntegration
             end;
         end;
     end;
+
 
 
     procedure fnChangePassword(memberNumber: Code[100]; currentPass: Text; newPass: Text) updated: Boolean
@@ -567,7 +610,7 @@ Codeunit 51120 PORTALIntegration
         if objMember.Find('-') then begin
             phoneNumber := objMember."Phone No.";
             sms := 'You have created a standing order of amount : ' + Format(Amount) + ' from Account ' + SourceAcc + ' start date: '
-                  + Format(StartDate) + '. Thanks for using POLYTECH SACCO Portal.';
+                  + Format(StartDate) + '. Thanks for using POLYTECh SACCO Portal.';
             FnSMSMessage(SourceAcc, phoneNumber, sms);
             //MESSAGE('All Cool');
         end
@@ -683,7 +726,7 @@ Codeunit 51120 PORTALIntegration
             objMember."Monthly Contribution" := "Updated Fig";
             objMember.Modify;
             sms := 'You have adjusted your monthly contributions to: ' + Format("Updated Fig") + ' account number ' + FAccNo +
-                  '. Thank you for using POLYTECH Sacco Portal';
+                  '. Thank you for using SURESTEP Sacco Portal';
             FnSMSMessage(FAccNo, phoneNumber, sms);
 
             //MESSAGE('Updated');
@@ -711,7 +754,7 @@ Codeunit 51120 PORTALIntegration
         SMSMessages."Time Entered" := Time;
         SMSMessages.Source := 'WEBPORTAL';
         SMSMessages."Entered By" := UserId;
-        SMSMessages."Sent To Server" := SMSMessages."sent to server"::No;
+        SMSMessages."Sent To Server" := SMSMessages."sent to server"::No;// PENDING;
         SMSMessages."SMS Message" := message;
         SMSMessages."Telephone No" := phone;
         if SMSMessages."Telephone No" <> '' then
@@ -749,7 +792,7 @@ Codeunit 51120 PORTALIntegration
             phoneNumber := objMember."Mobile Phone No";
             ClientName := objMember."FOSA Account No.";
             sms := 'We have received your ' + LoanProductType + ' loan application of  amount : ' + Format(AmountApplied) +
-            '. We are processing your loan, you will hear from us soon. Thanks for using POLYTECH SACCO  Portal.';
+            '. We are processing your loan, you will hear from us soon. Thanks for using POLYTECh SACCO  Portal.';
             FnSMSMessage(ClientName, phoneNumber, sms);
             PortaLuPS.Init;
             // PortaLuPS.INSERT(TRUE);
@@ -843,6 +886,35 @@ Codeunit 51120 PORTALIntegration
     end;
 
 
+    procedure FnLoanStatementHistorical(MemberNo: Code[50]; "filter": Text; var BigText: BigText) exitString: Text
+    var
+        Filename: Text[100];
+        Outputstream: OutStream;
+        RecRef: RecordRef;
+        TempBlob: Codeunit "Temp Blob";
+        Outstr: OutStream;
+        Instr: InStream;
+        Base64Convert: Codeunit "Base64 Convert";
+    begin
+        // objMember.Reset;
+        // objMember.SetRange(objMember."No.", MemberNo);
+        // if objMember.Find('-') then begin
+        //     objMember.Reset;
+        //     objMember.SetRange(objMember."No.", MemberNo);
+        //     if objMember.Find('-') then begin
+        //         RecRef.GetTable(objMember);
+        //         Clear(TempBlob);
+        //         TempBlob.CreateOutStream(Outstr);
+        //         TempBlob.CreateInStream(Instr);
+        //         if Report.SaveAs(Report::"Loan Statement-FOSA", '', ReportFormat::Pdf, Outstr, RecRef) then begin
+        //             exitString := Base64Convert.ToBase64(Instr);
+        //             exit;
+        //         end;
+        //     end;
+        // end;
+    end;
+
+
     procedure Fnlogin(username: Code[50]; password: Text) status: Boolean
     var
         InStream: InStream;
@@ -930,18 +1002,18 @@ Codeunit 51120 PORTALIntegration
 
             objMember.CalcFields("Current Shares");
             objMember.CalcFields("Shares Retained");
-            objMember.CalcFields("School Fees Shares");
+            objMember.CalcFields("FOSA Account Bal");
 
-            // objMember.CalcFields("FOSA  Account Bal");
+            objMember.CalcFields("FOSA Account Bal");
             objMember.CalcFields("Outstanding Interest");
-            objMember.CalcFields("Outstanding Balance");
+            // objMember.CalcFields("Outstanding Balance", "Outstanding Interest FOSA");
 
 
             info := '{ "MemberNumber":"' + objMember."No." +
                       '","MemberDeposits":"' + FORMAT(objMember."Current Shares") +
                       '","ShareCapital":"' + FORMAT(objMember."Shares Retained") +
-                      '","KhojaShares":"' + FORMAT(objMember."Outstanding Interest") +
-                      //   '","FosaAccountBalance":"' + FORMAT(objMember."FOSA  Account Bal") +
+                      '","KhojaShares":"' + FORMAT(objMember."FOSA Account Bal") +
+                      '","FosaAccountBalance":"' + FORMAT(objMember."FOSA Account Bal") +
                       '","OutstandingLoanBalance":"' + FORMAT(objMember."Outstanding Balance") +
                       '","OutstandingInterest":"' + FORMAT(objMember."Outstanding Interest") +
                       '","FosaAccount":"' + FORMAT(objMember."FOSA Account No.") + '" }';
@@ -983,9 +1055,9 @@ Codeunit 51120 PORTALIntegration
             // FOSAbal:=FNFosaBalance(objMember."FOSA Account No.");
             objMember.CalcFields("Current Shares");
             objMember.CalcFields("Dividend Amount");
-            objMember.CalcFields("Shares Retained");
+            objMember.CalcFields("Shares Retained", "FOSA Account Bal");
             info := Format(objMember."Shares Retained") + ':' + Format(objMember."Shares Retained") + ':' + Format(objMember."Current Shares") + ':' + Format(FOSAbal)
-            + ':' + ':' + Format(objMember."Dividend Amount", 0, '<Precision,2:2><Integer><Decimals>');
+            + ':' + Format(objMember."FOSA Account Bal", 0, '<Precision,2:2><Integer><Decimals>') + ':' + Format(objMember."Dividend Amount", 0, '<Precision,2:2><Integer><Decimals>');
         end;
     end;
 
@@ -994,13 +1066,13 @@ Codeunit 51120 PORTALIntegration
     begin
         objMember.Reset;
         objMember.SetRange(objMember."No.", Memberno);
-        objMember.Get(objMember."FOSA Account No.");
+        // objMember.Get(objMember."FOSA Account No.");
         if objMember.Find('-') then begin
-            Message('fosa %1', objMember."FOSA Account No.");
+            // Message('fosa %1', objMember."FOSA Account No.");
             objMember.CalcFields("Outstanding Balance");
             objMember.CalcFields("Outstanding Interest");
             // objMember.CalcFields("Outstanding Loan FOSA", "Outstanding Interest FOSA");
-            info := Format(objMember."Outstanding Balance") + ':' + Format(objMember."Outstanding Interest") + ':' + Format(objMember."FOSA Oustanding Interest")
+            info := Format(objMember."Outstanding Balance") + ':' + Format(objMember."Outstanding Interest");// + ':' + Format(200) + ':' + Format(objMember."FOSA Oustanding Interest")
         end;
     end;
 
@@ -2138,7 +2210,7 @@ Codeunit 51120 PORTALIntegration
 
     procedure fnFundsTransfer(Acountfrom: Code[20]; AccountTo: Code[20]; Amount: Decimal; DocNo: Code[20]) result: Text
     begin
-        result := CloudPesaLive.FundsTransferFOSA(Acountfrom, AccountTo, DocNo, Amount);
+        // result := CloudPesaLive.FundsTransferFOSA(Acountfrom, AccountTo, DocNo, Amount);
     end;
 
 
@@ -2162,6 +2234,19 @@ Codeunit 51120 PORTALIntegration
         //  END;
 
     end;
+
+
+    // procedure fnGetAtms(idnumber: Code[30]) return: Text
+    // begin
+    //     objAtmapplication.Reset;
+    //     objAtmapplication.SetRange("Customer ID", idnumber);
+    //     if objAtmapplication.Find('-') then begin
+    //         repeat
+    //             return := objAtmapplication."No." + ':::' + Format(objAtmapplication."Application Date") + ':::' + Format(objAtmapplication.Status) + ':::' + Format(objAtmapplication.Limit) + '::::' + return;
+    //         until
+    //           objAtmapplication.Next = 0;
+    //     end;
+    // end;
 
 
     procedure fnGetNextofkin(MemberNumber: Code[20]) return: Text
@@ -2207,7 +2292,7 @@ Codeunit 51120 PORTALIntegration
     procedure FnAuditTrail(MemberNo: Code[30]; Accessed: Text)
     var
         ObjLog: Record "Portal Logs";
-        ObjMember: Record Customer;
+        ObjMember: Record 18;//customer;
     begin
         ObjLog.Reset;
         ObjLog.Init;
