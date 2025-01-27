@@ -4,13 +4,13 @@ Page 57103 "Product Details Master"
     ApplicationArea = Basic;
     CardPageID = "Product Card";
     DeleteAllowed = false;
-    Editable = false;
+    Editable = true;
     AnalysisModeEnabled = false;
-    InsertAllowed = false;
-    ModifyAllowed = false;
+    InsertAllowed = true;
+    ModifyAllowed = true;
     PageType = List;
     SourceTable = Vendor;
-    SourceTableView = where("Debtor Type" = const("FOSA Account"));
+    SourceTableView = where("Account Type" = filter('M-Wallet'));
     UsageCategory = Lists;
 
     layout
@@ -119,7 +119,8 @@ Page 57103 "Product Details Master"
 
     trigger OnAfterGetCurrRecord()
     begin
-
+        // Codeunit.Run(Codeunit::"Adjust Gen. Journal Balance", GenJnlLine);
+        // Codeunit.Run(Codeunit::SwizzKashMobile);
     end;
 
     var

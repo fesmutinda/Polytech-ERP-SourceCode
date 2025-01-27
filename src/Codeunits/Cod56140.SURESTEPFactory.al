@@ -192,6 +192,24 @@ codeunit 56140 "SURESTEP Factory"
 
     end;
 
+    procedure FnGetNewWalletAccountNo(Product: Code[20]; BOSAAccountNo: Code[50]; arg: Text): Code[50]
+    var
+        SavingsProductTypes: record "Account Types-Saving Products";
+        NEWNo: text;
+    begin
+        NEWNo := '';
+        SavingsProductTypes.Reset();
+        SavingsProductTypes.SetRange(SavingsProductTypes.Code, Product);
+        if SavingsProductTypes.Find('-') then begin
+            // NEWNo := (SavingsProductTypes."Account No Prefix" + '-' + Format(arg) + '-' + SavingsProductTypes."Last No Used");
+            // NEWNo := Format(arg) + '-' + BOSAAccountNo;
+            NEWNo := SavingsProductTypes."Account No Prefix" + '-' + BOSAAccountNo;
+            SavingsProductTypes."Last No Used" := IncStr(SavingsProductTypes."Last No Used");
+            SavingsProductTypes.Modify(true);
+            exit(NEWNo);
+        end;
+    end;
+
     procedure FnSendSMS(SMSSource: Text; SMSBody: Text[200]; CurrentAccountNo: Text; MobileNumber: Text)
     var
         SMSMessages: Record "SMS Messages";

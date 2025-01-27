@@ -3,8 +3,8 @@ Page 57104 "Product Card"
 {
     Caption = 'Account Card';
     DeleteAllowed = false;
-    InsertAllowed = false;
-    editable = false;
+    InsertAllowed = true;
+    editable = true;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     RefreshOnActivate = true;
@@ -20,20 +20,29 @@ Page 57104 "Product Card"
             {
                 Caption = 'General Info';
                 Editable = true;
+                field("BOSA No."; Rec."BOSA Account No")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'BOSA Account No.';
+                    Editable = true;
+
+                }
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Account No.';
+                    Caption = 'Wallet Account No.';
                     Editable = false;
 
                 }
                 field("Sacco No"; Rec."Sacco No")
                 {
+                    Visible = false;
                     ApplicationArea = Basic;
                     Editable = false;
                 }
                 field("Joint Account Name"; Rec."Joint Account Name")
                 {
+                    Visible = false;
                     ApplicationArea = Basic;
                     Editable = false;
                 }
@@ -571,6 +580,7 @@ Page 57104 "Product Card"
             }
             group(AccountTab1)
             {
+                Visible = false;
                 Caption = 'Communication Info';
                 Editable = true;
                 field(Address; Rec.Address)
@@ -621,6 +631,7 @@ Page 57104 "Product Card"
             }
             group("Term Deposit Details")
             {
+                Visible = false;
                 Caption = 'Term Deposit Details';
                 field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
@@ -697,6 +708,7 @@ Page 57104 "Product Card"
             }
             group("Previous Term Deposit Details")
             {
+                Visible = false;
                 Caption = 'Previous Term Deposit Details';
                 field("Prevous Fixed Deposit Type"; Rec."Prevous Fixed Deposit Type")
                 {
@@ -747,6 +759,7 @@ Page 57104 "Product Card"
             }
             group("ATM Details")
             {
+                Visible = false;
                 Caption = 'ATM Details';
                 field("ATM No.B"; Rec."ATM No.")
                 {
@@ -1173,6 +1186,7 @@ Page 57104 "Product Card"
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
         Rec."Creditor Type" := Rec."creditor type"::Account;
+        Rec."Account Type" := 'M-Wallet';
     end;
 
     trigger OnOpenPage()

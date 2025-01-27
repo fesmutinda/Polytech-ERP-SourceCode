@@ -31,7 +31,7 @@ Page 56043 "Polytech Sacco Role Center"
             part(FOSACue; "FOSA Cue")
             {
                 ApplicationArea = Basic, Suite;
-                Visible = true;
+                Visible = false;
 
             }
             part("LoansCue"; "Loans Cue")
@@ -132,10 +132,10 @@ Page 56043 "Polytech Sacco Role Center"
                 RunObject = Page "Bank Account List";
                 ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
             }
-            action(FOSAAccounts)
+            action("M-Wallets")
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Mobile Accounts';
+                Caption = 'M-Wallet Accounts';
                 Image = Vendor;
                 RunObject = Page "Product Details Master";
                 ToolTip = 'View or edit detailed information for the Mobile Wallet Accounts.';

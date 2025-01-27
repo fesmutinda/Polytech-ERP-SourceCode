@@ -4,7 +4,7 @@ Codeunit 51022 SwizzKashMobile
 
     trigger OnRun()
     begin
-
+        Message(PostLoan('78511383102', '100-3023', 25000, 3));
     end;
 
     var
@@ -49,7 +49,7 @@ Codeunit 51022 SwizzKashMobile
         TariffDetails: Record "Tariff Details";
         MPESACharge: Decimal;
         TotalCharges: Decimal;
-        ExxcDuty: label '8-01-1-0007-00';
+        ExxcDuty: label '201421';
         PaybillTrans: Record "SwizzKash MPESA Trans";
         PaybillRecon: Code[30];
         fosaConst: label '101';
@@ -516,7 +516,7 @@ Codeunit 51022 SwizzKashMobile
                 Vendor.CALCFIELDS(Vendor."Balance (LCY)", Vendor."Mobile Transactions");
                 TempBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance + Vendor."Mobile Transactions");
 
-                IF Vendor."Account Type" = 'ORDINARY' THEN BEGIN
+                IF Vendor."Account Type" = 'M-WALLET' THEN BEGIN
                     IF (TempBalance > MobileCharges + SwizzKashCharge) THEN BEGIN
                         GenJournalLine.RESET;
                         GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
@@ -661,14 +661,14 @@ Codeunit 51022 SwizzKashMobile
                         response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
 
                         localMessage := FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>');
-                        //SMSMessage(DocumentNo,vendorTable."No.",PhoneNo,' Your Share Capital balance is Kshs: '+localMessage+' Thank you, MAFANIKIO SACCO Mobile');
-                        SMSMessage(DocumentNo, vendorTable."No.", phonenumber, ' Your balance is Kshs: ' + localMessage + '. MAFANIKIO SACCO Mobile');
+                        //SMSMessage(DocumentNo,vendorTable."No.",PhoneNo,' Your Share Capital balance is Kshs: '+localMessage+' Thank you, POLYTECH SACCO Mobile');
+                        SMSMessage(DocumentNo, vendorTable."No.", phonenumber, ' Your balance is Kshs: ' + localMessage + '. POLYTECH SACCO Mobile');
 
                     END
                     ELSE BEGIN
                         //Bal := 'INSUFFICIENT';
                         response := '{ "StatusCode":"3003","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
-                        SMSMessage(DocumentNo, vendorTable."No.", phonenumber, ' You have insufficient funds to querry balances. MAFANIKIO SACCO Mobile');
+                        SMSMessage(DocumentNo, vendorTable."No.", phonenumber, ' You have insufficient funds to querry balances. POLYTECH SACCO Mobile');
                     END;
                 END
                 ELSE BEGIN
@@ -810,7 +810,7 @@ Codeunit 51022 SwizzKashMobile
             GenJournalLine."Account No." := vendorTable."No.";
             GenJournalLine.VALIDATE(GenJournalLine."Account No.");
             GenJournalLine."External Document No." := vendorCommAcc;
-            GenJournalLine."Posting Date" := DT2DATE(transactionDate);// surepesaTransTable."Document Date";
+            GenJournalLine."Posting Date" := DT2DATE(transactionDate);// swizzkasTransTable."Document Date";
             GenJournalLine.Amount := vendorCommAmount + saccoCommAmount;
             GenJournalLine.VALIDATE(GenJournalLine.Amount);
             GenJournalLine.Description := 'Loan Bal. Enquiry-SwizzKash Comm.';
@@ -828,7 +828,7 @@ Codeunit 51022 SwizzKashMobile
             GenJournalLine."Account No." := vendorCommAcc;
             GenJournalLine.VALIDATE(GenJournalLine."Account No.");
             GenJournalLine."External Document No." := vendorTable."No.";
-            GenJournalLine."Posting Date" := DT2DATE(transactionDate);// surepesaTransTable."Document Date";
+            GenJournalLine."Posting Date" := DT2DATE(transactionDate);// swizzkasTransTable."Document Date";
             GenJournalLine.Amount := vendorCommAmount * -1;
             GenJournalLine.VALIDATE(GenJournalLine.Amount);
             GenJournalLine.Description := 'Loan Bal. Enquiry-SwizzKash Comm.';
@@ -846,7 +846,7 @@ Codeunit 51022 SwizzKashMobile
             GenJournalLine."Account No." := saccoCommAcc;
             GenJournalLine.VALIDATE(GenJournalLine."Account No.");
             GenJournalLine."External Document No." := vendorTable."No.";
-            GenJournalLine."Posting Date" := DT2DATE(transactionDate);// surepesaTransTable."Document Date";
+            GenJournalLine."Posting Date" := DT2DATE(transactionDate);// swizzkasTransTable."Document Date";
             GenJournalLine.Amount := saccoCommAmount * -1;
             GenJournalLine.VALIDATE(GenJournalLine.Amount);
             GenJournalLine.Description := 'Loan Bal. Enquiry-SACCO Comm.';
@@ -921,7 +921,7 @@ Codeunit 51022 SwizzKashMobile
             END;
 
             // ** send loan balance statement ** //
-            SMSMessage(documentNumber, vendorTable."No.", phonenumber, localMessage + '. MAFANIKIO MOBILE');
+            SMSMessage(documentNumber, vendorTable."No.", phonenumber, localMessage + '. POLYTECH MOBILE');
 
         END ELSE BEGIN
             response := '{ "StatusCode":"3005","StatusDescription":"NUMBERNOTFOUND","DocumentNo":"' + documentNumber + '","Phone":"' + phonenumber + '","LoanBalances": [] }';
@@ -993,7 +993,7 @@ Codeunit 51022 SwizzKashMobile
                 Vendor.CALCFIELDS(Vendor."Balance (LCY)", Vendor."ATM Transactions", Vendor."Uncleared Cheques", Vendor."EFT Transactions");
                 TempBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
 
-                IF (Vendor."Account Type" = 'ORDINARY') OR (Vendor."Account Type" = 'SALARY') OR (Vendor."Account Type" = 'FIXED') THEN BEGIN
+                IF (Vendor."Account Type" = 'M-WALLET') OR (Vendor."Account Type" = 'SALARY') OR (Vendor."Account Type" = 'FIXED') THEN BEGIN
                     IF (TempBalance > MobileCharges + SwizzKashCharge) THEN BEGIN
                         GenJournalLine.RESET;
                         GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
@@ -1151,10 +1151,10 @@ Codeunit 51022 SwizzKashMobile
                         Vendor.CALCFIELDS(Vendor."EFT Transactions");
                         accBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
                         msg := 'Account Name: ' + Vendor.Name + ', ' + 'BALANCE: ' + FORMAT(accBalance) + '. '
-                       + 'Thank you for using MAFANIKIO  Sacco Mobile';
+                       + 'Thank you for using POLYTECH  Sacco Mobile';
                         //SMSMessage(DocNumber, Vendor."No.", Vendor."Mobile Phone No", msg);
                         localMessage := FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>');
-                        SMSMessage(DocumentNo, Vendor."No.", phonenumber, ' Your balance is Kshs: ' + localMessage + '. Thank you for using MAFANIKIO SACCO Mobile Banking.');
+                        SMSMessage(DocumentNo, Vendor."No.", phonenumber, ' Your balance is Kshs: ' + localMessage + '. Thank you for using POLYTECH SACCO Mobile Banking.');
                         //Bal := FORMAT(accBalance);
                         response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
                     END
@@ -1250,7 +1250,7 @@ Codeunit 51022 SwizzKashMobile
 
                 TempBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
 
-                IF (Vendor."Account Type" = 'ORDINARY') OR (Vendor."Account Type" = 'SALARY') OR (Vendor."Account Type" = 'FIXED') THEN BEGIN
+                IF (Vendor."Account Type" = 'M-WALLET') OR (Vendor."Account Type" = 'SALARY') OR (Vendor."Account Type" = 'FIXED') THEN BEGIN
                     IF (TempBalance > MobileCharges + SwizzKashCharge) THEN BEGIN
                         GenJournalLine.RESET;
                         GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
@@ -1414,8 +1414,8 @@ Codeunit 51022 SwizzKashMobile
                         end
                     end;
                     accountsBalances := 'Account Name: ' + Vendor.Name + ', ' + 'Deposits: ' + FORMAT(memberDeposits, 0, '<Precision,2:2><Integer><Decimals>') + ',' + 'Share Capital: ' + FORMAT(sharesBalances, 0, '<Precision,2:2><Integer><Decimals>') + ',' + 'Khoja Savings: ' + FORMAT(khojaBalances, 0, '<Precision,2:2><Integer><Decimals>') + ',' + '. '
-                   + 'Thank you for using MAFANIKIO  Sacco Mobile';
-                    SMSMessage(DocumentNo, Vendor."No.", phonenumber, ' Your Balances: ' + accountsBalances + '. Thank you for using MAFANIKIO SACCO Mobile Banking.');
+                   + 'Thank you for using POLYTECH  Sacco Mobile';
+                    SMSMessage(DocumentNo, Vendor."No.", phonenumber, ' Your Balances: ' + accountsBalances + '. Thank you for using POLYTECH SACCO Mobile Banking.');
                     //Bal := FORMAT(accBalance);
                     response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
                 END
@@ -1478,7 +1478,7 @@ Codeunit 51022 SwizzKashMobile
                     saccoCommAcc := chargesTable."GL Account";// '3000407';     // -- sacco commission account
                 END;
 
-                // -- check m-wallet account balance
+                // -- check m-wallet account balance TRUE THEN BEGIN// 
                 vendorTable.CALCFIELDS("Balance (LCY)");
                 vendorTable.CALCFIELDS(vendorTable."Balance (LCY)", vendorTable."ATM Transactions", vendorTable."Uncleared Cheques", vendorTable."EFT Transactions");
 
@@ -1504,7 +1504,7 @@ Codeunit 51022 SwizzKashMobile
                     GenJournalLine."Account No." := vendorTable."No.";
                     GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                     GenJournalLine."External Document No." := vendorCommAcc;
-                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                     GenJournalLine.Amount := vendorCommAmount + saccoCommAmount;
                     GenJournalLine.VALIDATE(GenJournalLine.Amount);
                     GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -1522,7 +1522,7 @@ Codeunit 51022 SwizzKashMobile
                     GenJournalLine."Account No." := vendorCommAcc;
                     GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                     GenJournalLine."External Document No." := vendorTable."No.";
-                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                     GenJournalLine.Amount := vendorCommAmount * -1;
                     GenJournalLine.VALIDATE(GenJournalLine.Amount);
                     GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -1540,7 +1540,7 @@ Codeunit 51022 SwizzKashMobile
                     GenJournalLine."Account No." := saccoCommAcc;
                     GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                     GenJournalLine."External Document No." := vendorTable."No.";
-                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                     GenJournalLine.Amount := saccoCommAmount * -1;
                     GenJournalLine.VALIDATE(GenJournalLine.Amount);
                     GenJournalLine.Description := 'Ministatement Enquiry-SACCO Comm.';
@@ -1615,7 +1615,7 @@ Codeunit 51022 SwizzKashMobile
                     response := '{ "StatusCode":"3004","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
                     localMessage := 'No transactions';
                 END;
-                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. MAFANIKIO SACCO');
+                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
             END ELSE BEGIN
                 response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
             END;
@@ -1690,7 +1690,7 @@ Codeunit 51022 SwizzKashMobile
                     GenJournalLine."Account No." := vendorTable."No.";
                     GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                     GenJournalLine."External Document No." := vendorCommAcc;
-                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                     GenJournalLine.Amount := vendorCommAmount + saccoCommAmount;
                     GenJournalLine.VALIDATE(GenJournalLine.Amount);
                     GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -1708,7 +1708,7 @@ Codeunit 51022 SwizzKashMobile
                     GenJournalLine."Account No." := vendorCommAcc;
                     GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                     GenJournalLine."External Document No." := vendorTable."No.";
-                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                     GenJournalLine.Amount := vendorCommAmount * -1;
                     GenJournalLine.VALIDATE(GenJournalLine.Amount);
                     GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -1726,7 +1726,7 @@ Codeunit 51022 SwizzKashMobile
                     GenJournalLine."Account No." := saccoCommAcc;
                     GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                     GenJournalLine."External Document No." := vendorTable."No.";
-                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                    GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                     GenJournalLine.Amount := saccoCommAmount * -1;
                     GenJournalLine.VALIDATE(GenJournalLine.Amount);
                     GenJournalLine.Description := 'Ministatement Enquiry-SACCO Comm.';
@@ -1807,7 +1807,7 @@ Codeunit 51022 SwizzKashMobile
                     localMessage := 'No transactions';
                 END;
 
-                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. MAFANIKIO SACCO');
+                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
 
             END ELSE BEGIN
                 response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
@@ -1882,7 +1882,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := vendorTable."No.";
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorCommAcc;
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := vendorCommAmount + saccoCommAmount;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -1900,7 +1900,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := vendorCommAcc;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorTable."No.";
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := vendorCommAmount * -1;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -1918,7 +1918,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := saccoCommAcc;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorTable."No.";
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := saccoCommAmount * -1;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SACCO Comm.';
@@ -2000,7 +2000,7 @@ Codeunit 51022 SwizzKashMobile
                     localMessage := 'No transactions';
                 END;
 
-                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. MAFANIKIO SACCO');
+                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
 
             END ELSE BEGIN
                 response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
@@ -2075,7 +2075,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := vendorTable."No.";
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorCommAcc;
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := vendorCommAmount + saccoCommAmount;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -2093,7 +2093,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := vendorCommAcc;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorTable."No.";
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := vendorCommAmount * -1;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -2111,7 +2111,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := saccoCommAcc;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorTable."No.";
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := saccoCommAmount * -1;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SACCO Comm.';
@@ -2193,7 +2193,7 @@ Codeunit 51022 SwizzKashMobile
                     localMessage := 'No transactions';
                 END;
 
-                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. MAFANIKIO SACCO');
+                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
 
             END ELSE BEGIN
                 response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
@@ -2268,7 +2268,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := vendorTable."No.";
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorCommAcc;
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := vendorCommAmount + saccoCommAmount;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -2286,7 +2286,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := vendorCommAcc;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorTable."No.";
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := vendorCommAmount * -1;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SwizzKash Comm.';
@@ -2304,7 +2304,7 @@ Codeunit 51022 SwizzKashMobile
                 GenJournalLine."Account No." := saccoCommAcc;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."External Document No." := vendorTable."No.";
-                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//surepesaTransTable."Document Date";
+                GenJournalLine."Posting Date" := DT2DATE(transactionDate);//swizzkasTransTable."Document Date";
                 GenJournalLine.Amount := saccoCommAmount * -1;
                 GenJournalLine.VALIDATE(GenJournalLine.Amount);
                 GenJournalLine.Description := 'Ministatement Enquiry-SACCO Comm.';
@@ -2386,7 +2386,7 @@ Codeunit 51022 SwizzKashMobile
                     localMessage := 'No transactions';
                 END;
 
-                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. MAFANIKIO SACCO');
+                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
 
             END ELSE BEGIN
                 response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
@@ -2507,6 +2507,8 @@ Codeunit 51022 SwizzKashMobile
     VAR
         vendorTable: Record Vendor;
         memberTable: Record Customer;
+        fullName: Code[20];
+        int1: Integer;
     BEGIN
 
         response := '{ "StatusCode":"302","StatusDescription":"NOTPROCESSED","MemberNo":"","MemberName":"" }';
@@ -2824,7 +2826,7 @@ Codeunit 51022 SwizzKashMobile
             LoansRegisterTable.RESET;
             LoansRegisterTable.SETRANGE(LoansRegisterTable."Client Code", CustomerTable."No.");
             LoansRegisterTable.SETRANGE(LoansRegisterTable.Posted, TRUE);
-            LoansRegisterTable.SetFilter(LoansRegisterTable."Loan Product Type", '%1|%2', '551', '552');
+            LoansRegisterTable.SetFilter(LoansRegisterTable."Loan Product Type", '%1|%2', '25', '552');
             IF LoansRegisterTable.FIND('-') THEN BEGIN
                 REPEAT
                     LoansRegisterTable.CALCFIELDS(LoansRegisterTable."Outstanding Balance");
@@ -3051,7 +3053,7 @@ Codeunit 51022 SwizzKashMobile
                     SwizzKashTransactionsTable.INIT;
                     //SwizzKashTransactionsTable.Entry := intNumber;
                     SwizzKashTransactionsTable."Document No" := DocumentNo;
-                    SwizzKashTransactionsTable.Description := 'E-Loan';
+                    SwizzKashTransactionsTable.Description := 'E-Loan Application';
                     SwizzKashTransactionsTable."Document Date" := DT2DATE(TransactionDate);// TODAY;
                     SwizzKashTransactionsTable."Transaction Time" := DT2TIME(TransactionDate);// TIME;
                     SwizzKashTransactionsTable."Telephone Number" := phonenumber;
@@ -3093,7 +3095,7 @@ Codeunit 51022 SwizzKashMobile
             Vendor.SetRange(vendor."Mobile Phone No", phonenumber);
             if not Vendor.Find('-') then begin
                 msg := 'Your request has failed.Please make sure you are registered for mobile banking.' +
-                   '. Thank you for using MAFANIKIO Sacco Mobile.';
+                   '. Thank you for using POLYTECH Sacco Mobile.';
                 //SMSMessage(documentno, phonenumber,phonenumber, msg);
                 response := '{ "StatusCode": "302", "StatusDescription":"SOURCENOTFOUND" }';
                 exit(response);
@@ -3109,7 +3111,7 @@ Codeunit 51022 SwizzKashMobile
 
                 response := 'MEMBERINEXISTENT';
                 msg := 'Your request has failed because the recipent account does not exist.' +
-                '. Thank you for using MAFANIKIO Sacco Mobile.';
+                '. Thank you for using POLYTECH Sacco Mobile.';
                 SMSMessage(documentno, sourceaccount, Vendor."Phone No.", msg);
                 response := '{ "StatusCode": "303", "StatusDescription":"MEMBERNOTFOUND" }';
                 exit(response);
@@ -3376,20 +3378,20 @@ Codeunit 51022 SwizzKashMobile
                             //response := 'TRUE';
                             response := '{ "StatusCode": "200", "StatusDescription":"OK" }';
                             msg := 'You have transfered KES ' + Format(LoanAmt) + ' from Account ' + Vendor.Name + ' to ' + loanNo +
-                             '. Thank you for using MAFANIKIO Sacco Mobile.';
+                             '. Thank you for using POLYTECH Sacco Mobile.';
                             SMSMessage(documentno, sourceaccount, Vendor."Phone No.", msg);
 
                         end;
                     end else begin
                         response := '{ "StatusCode": "304", "StatusDescription":"INSUFFICIENTBALANCE" }';
                         msg := 'You have insufficient funds in your savings Account to use this service.' +
-                       '. Thank you for using MAFANIKIO Sacco Mobile.';
+                       '. Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, sourceaccount, Vendor."Phone No.", msg);
                     end;
                 end else begin
                     response := '{ "StatusCode": "305", "StatusDescription":"INSUFFICIENTBALANCE" }';
                     msg := 'Your request has failed because you do not have any outstanding balance.' +
-                   '. Thank you for using MAFANIKIO Sacco Mobile.';
+                   '. Thank you for using POLYTECH Sacco Mobile.';
                     SMSMessage(documentno, sourceaccount, Vendor."Phone No.", msg);
                 end;
 
@@ -3548,25 +3550,25 @@ Codeunit 51022 SwizzKashMobile
                         end;
 
                         msg := 'You have transfered KES ' + Format(amount) + ' from Account ' + accountName1 + ' to ' + accountName2 +
-                         ' .Thank you, MAFANIKIO Sacco Mobile.';
+                         ' .Thank you, POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
 
                     end else begin
                         result := '{ "StatusCode":"503":",StatusDescription":"INSUFFIENTBALANCE" }';
                         msg := 'You have insufficient funds in your savings Account to use this service.' +
-                       ' .Thank you, MAFANIKIO Sacco Mobile.';
+                       ' .Thank you, POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
                     end;
                 end else begin
                     result := '{ "StatusCode":"504":",StatusDescription":"DESTINATIONAACCOUNTNOTFOUND" }';
                     msg := 'Your request has failed because the recipent account does not exist.' +
-                   ' .Thank you, MAFANIKIO Sacco Mobile.';
+                   ' .Thank you, POLYTECH Sacco Mobile.';
                     SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
                 end;
             end else begin
                 result := '{ "StatusCode":"504":",StatusDescription":"DESTINATIONAACCOUNTNOTFOUND" }';
                 msg := 'Your request has failed because the recipent account does not exist.' +
-                ' .Thank you, MAFANIKIO Sacco Mobile.';
+                ' .Thank you, POLYTECH Sacco Mobile.';
                 SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
             end;
         end;
@@ -3605,7 +3607,7 @@ Codeunit 51022 SwizzKashMobile
             if not vendorTable.Find('-') then begin
                 result := '{ "StatusCode":"503":",StatusDescription":"SOURCEACCOUNTNOTFOUND" }';
                 msg := 'Your request has failed because the recipent account does not exist.' +
-                '. Thank you, MAFANIKIO Sacco Mobile.';
+                '. Thank you, POLYTECH Sacco Mobile.';
                 // SMSMessage(documentno, accFrom, vendorTable."Phone No.", msg);
                 exit(result);
             end;
@@ -3884,27 +3886,27 @@ Codeunit 51022 SwizzKashMobile
 
                         result := '{ "StatusCode":"000", "StatusDecription":"OK" }';
                         msg := 'You have transfered KES ' + Format(amount) + ' from Account ' + vendorTable.Name + ' to ' + destinationAccount +
-                         ' .Thank you, MAFANIKIO Sacco Mobile.';
+                         ' .Thank you, POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
 
                     end else begin
                         result := '{ "StatusCode":"502", "StatusDecription":"INSUFFICIENTFUNDS" }';
                         msg := 'You have insufficient funds in your savings Account to use this service.' +
-                       '. Thank you, MAFANIKIO Sacco Mobile.';
+                       '. Thank you, POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
                     end;
 
                 end else begin
                     result := '{ "StatusCode":"504", "StatusDecription":"DESTINATIONACCOUNTNOTFOUND" }';
                     msg := 'Your request has failed because the recipent account does not exist.' +
-                   '. Thank you, MAFANIKIO Sacco Mobile.';
+                   '. Thank you, POLYTECH Sacco Mobile.';
                     SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
                 end;
 
             end else begin
                 result := '{ "StatusCode":"505", "StatusDecription":"MEMBERNUMBERNOTFOUND" }';
                 msg := 'Your request has failed because the recipent account does not exist.' +
-                '. Thank you, MAFANIKIO Sacco Mobile.';
+                '. Thank you, POLYTECH Sacco Mobile.';
                 SMSMessage(documentno, vendorTable."No.", vendorTable."Phone No.", msg);
             end;
 
@@ -4067,25 +4069,25 @@ Codeunit 51022 SwizzKashMobile
                         // end;
 
                         msg := 'You have transfered KES ' + Format(amount) + ' from Account ' + accountName1 + ' to ' + accountName2 +
-                         ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                         ' .Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, Vendor."No.", Vendor."Phone No.", msg);
 
                     end else begin
                         result := '{ "StatusCode":"503":",StatusDescription":"INSUFFIENTBALANCE" }';
                         msg := 'You have insufficient funds in your savings Account to use this service.' +
-                       ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                       ' .Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage(documentno, Vendor."No.", Vendor."Phone No.", msg);
                     end;
                 end else begin
                     result := '{ "StatusCode":"504":",StatusDescription":"DESTINATIONAACCOUNTNOTFOUND" }';
                     msg := 'Your request has failed because the recipent account does not exist.' +
-                   ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                   ' .Thank you for using POLYTECH Sacco Mobile.';
                     SMSMessage(documentno, Vendor."No.", Vendor."Phone No.", msg);
                 end;
             end else begin
                 result := '{ "StatusCode":"504":",StatusDescription":"DESTINATIONAACCOUNTNOTFOUND" }';
                 msg := 'Your request has failed because the recipent account does not exist.' +
-                ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                ' .Thank you for using POLYTECH Sacco Mobile.';
                 SMSMessage(documentno, Vendor."No.", Vendor."Phone No.", msg);
             end;
         end;
@@ -4765,9 +4767,9 @@ Codeunit 51022 SwizzKashMobile
                 'TOT':
                     Result := PayBillToAcc('PAYBILL', thisDocNum, thisAccNum, thisMemberNum, thisAmount, 'TOTO');
                 'ORD':
-                    Result := PayBillToAcc('PAYBILL', thisDocNum, thisAccNum, thisMemberNum, thisAmount, 'ORDINARY');
+                    Result := PayBillToAcc('PAYBILL', thisDocNum, thisAccNum, thisMemberNum, thisAmount, 'M-WALLET');
                 'SAV':
-                    Result := PayBillToAcc('PAYBILL', thisDocNum, thisAccNum, thisMemberNum, thisAmount, 'ORDINARY');
+                    Result := PayBillToAcc('PAYBILL', thisDocNum, thisAccNum, thisMemberNum, thisAmount, 'M-WALLET');
 
                 'FXD':
                     Result := PayBillToAcc('PAYBILL', thisDocNum, thisAccNum, thisMemberNum, thisAmount, 'FIXED');
@@ -4854,7 +4856,7 @@ Codeunit 51022 SwizzKashMobile
                         vendorTable.RESET;
                         vendorTable.SETRANGE("No.", thisAccNum);
                         IF vendorTable.FIND('-') THEN BEGIN
-                            Result := PayBillToFOSA('PAYBILL', thisDocNum, thisAccNum, thisAmount, 'ORDINARY');
+                            Result := PayBillToFOSA('PAYBILL', thisDocNum, thisAccNum, thisAmount, 'M-WALLET');
                         END ELSE BEGIN
                             PaybillTrans."Date Posted" := TODAY;
                             PaybillTrans."Needs Manual Posting" := TRUE;
@@ -5087,7 +5089,7 @@ Codeunit 51022 SwizzKashMobile
                         PaybillTransTable.MODIFY;
                         res := 'TRUE';
                         msg := 'Dear ' + Vendor.Name + ', Your ACC: ' + Vendor."No." + ' has been credited with KES. ' + FORMAT(Amount) +
-                                    ' .Thank you, MAFANIKIO Sacco Mobile.';
+                                    ' .Thank you, POLYTECH Sacco Mobile.';
                         SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
@@ -5363,7 +5365,7 @@ Codeunit 51022 SwizzKashMobile
                         PaybillTransTable.MODIFY;
                         res := 'TRUE';
                         msg := 'Dear ' + Members.Name + ', Your ACC: ' + accNo + ' has been credited with KES. ' + FORMAT(amount) +
-                                  ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                                  ' .Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
@@ -5577,7 +5579,7 @@ Codeunit 51022 SwizzKashMobile
                         PaybillTransTable.MODIFY;
                         res := 'TRUE';
                         msg := 'Dear ' + Members.Name + ', Your ACC: ' + accNo + ' has been credited with KES. ' + FORMAT(amount) +
-                                  ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                                  ' .Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
@@ -5848,7 +5850,7 @@ Codeunit 51022 SwizzKashMobile
                                 isPosted := TRUE;
                                 msg := 'Dear ' + Members.Name + ', your payment of KES. ' + FORMAT(PaybillTrans.Amount) +
                                           ' for loan: ' + LoansRegister."Loan  No." + '-' + LoansRegister."Loan Product Type Name"
-                                      + ' has been received.Thank you, MAFANIKIO DT SACCO Mobile.';
+                                      + ' has been received.Thank you, POLYTECH DT SACCO Mobile.';
                                 SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
 
                             END ELSE BEGIN
@@ -6121,7 +6123,7 @@ Codeunit 51022 SwizzKashMobile
                                 isPosted := TRUE;
                                 msg := 'Dear ' + Members.Name + ', your payment of KES. ' + FORMAT(PaybillTrans.Amount) +
                                           ' for loan: ' + LoansRegister."Loan  No." + '-' + LoansRegister."Loan Product Type Name"
-                                      + ' has been received.Thank you, MAFANIKIO DT SACCO Mobile.';
+                                      + ' has been received.Thank you, POLYTECH DT SACCO Mobile.';
                                 SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
 
                             END ELSE BEGIN
@@ -6354,7 +6356,7 @@ Codeunit 51022 SwizzKashMobile
                     PaybillTransTable.MODIFY;
                     res := 'TRUE';
                     msg := 'Dear ' + Vendor.Name + ', Your ACC: ' + Vendor."No." + ' has been credited with KES. ' + FORMAT(Amount) +
-                                ' .Thank you, MAFANIKIO Sacco Mobile.';
+                                ' .Thank you, POLYTECH Sacco Mobile.';
                     SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                 END ELSE BEGIN
                     PaybillTransTable."Date Posted" := TODAY;
@@ -6421,11 +6423,11 @@ Codeunit 51022 SwizzKashMobile
                 'TOT':
                     Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'TOTO');
                 'ORD':
-                    Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'ORDINARY');
+                    Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'M-WALLET');
                 '010':
-                    Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'ORDINARY');
+                    Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'M-WALLET');
                 'SAV':
-                    Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'ORDINARY');
+                    Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'M-WALLET');
                 'FXD':
                     Result := PayBillToAcc2('PAYBILL', PaybillTrans."Document No", thisAccNum, thisAccNum, PaybillTrans.Amount, 'FIXED');
                 'CON':
@@ -6702,7 +6704,7 @@ Codeunit 51022 SwizzKashMobile
                 PaybillTrans.Modify;
                 res := 'TRUE';
                 msg := 'Dear ' + Vendor.Name + ', Your ACC: ' + Vendor."No." + ' has been credited with KES. ' + Format(Amount) +
-                    ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                    ' .Thank you for using POLYTECH Sacco Mobile.';
                 SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
             end
             else begin
@@ -6866,7 +6868,7 @@ Codeunit 51022 SwizzKashMobile
                     PaybillTrans.Modify;
                     res := 'TRUE';
                     msg := 'Dear ' + Members.Name + ', Your ACC: ' + accNo + ' has been credited with KES. ' + Format(amount) +
-                             ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                             ' .Thank you for using POLYTECH Sacco Mobile.';
                     SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                 end
                 else begin
@@ -7048,7 +7050,7 @@ Codeunit 51022 SwizzKashMobile
                             PaybillTrans.Modify;
                             res := 'TRUE';
                             msg := 'Dear ' + Members.Name + ' loan: ' + LoansRegister."Loan  No." + ' has been credited with KES. ' + Format(LoanAmt) +
-                                     ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                                     ' .Thank you for using POLYTECH Sacco Mobile.';
                             SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                         end else begin
                             PaybillTrans."Date Posted" := Today;
@@ -7252,7 +7254,7 @@ Codeunit 51022 SwizzKashMobile
                         PaybillTransTable.MODIFY;
                         res := 'TRUE';
                         msg := 'Dear ' + Vendor.Name + ', Your ACC: ' + Vendor."No." + ' has been credited with KES. ' + FORMAT(Amount) +
-                                    ' .Thank you, MAFANIKIO Sacco Mobile.';
+                                    ' .Thank you, POLYTECH Sacco Mobile.';
                         SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
@@ -7528,7 +7530,7 @@ Codeunit 51022 SwizzKashMobile
                         PaybillTransTable.MODIFY;
                         res := 'TRUE';
                         msg := 'Dear ' + Members.Name + ', Your ACC: ' + accNo + ' has been credited with KES. ' + FORMAT(amount) +
-                                  ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                                  ' .Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
@@ -7742,7 +7744,7 @@ Codeunit 51022 SwizzKashMobile
                         PaybillTransTable.MODIFY;
                         res := 'TRUE';
                         msg := 'Dear ' + Members.Name + ', Your ACC: ' + accNo + ' has been credited with KES. ' + FORMAT(amount) +
-                                  ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                                  ' .Thank you for using POLYTECH Sacco Mobile.';
                         SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
@@ -7989,7 +7991,7 @@ Codeunit 51022 SwizzKashMobile
                                 isPosted := TRUE;
                                 msg := 'Dear ' + Members.Name + ', your payment of KES. ' + FORMAT(PaybillTrans.Amount) +
                                           ' for loan: ' + LoansRegister."Loan  No." + '-' + LoansRegister."Loan Product Type Name"
-                                      + ' has been received.Thank you, MAFANIKIO DT SACCO Mobile.';
+                                      + ' has been received.Thank you, POLYTECH DT SACCO Mobile.';
                                 SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
 
                             END ELSE BEGIN
@@ -8260,7 +8262,7 @@ Codeunit 51022 SwizzKashMobile
                                 isPosted := TRUE;
                                 msg := 'Dear ' + Members.Name + ', your payment of KES. ' + FORMAT(PaybillTrans.Amount) +
                                           ' for loan: ' + LoansRegister."Loan  No." + '-' + LoansRegister."Loan Product Type Name"
-                                      + ' has been received.Thank you, MAFANIKIO DT SACCO Mobile.';
+                                      + ' has been received.Thank you, POLYTECH DT SACCO Mobile.';
                                 SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
 
                             END ELSE BEGIN
@@ -8608,7 +8610,7 @@ Codeunit 51022 SwizzKashMobile
 
     LOCAL PROCEDURE PostLoan(documentNo: Code[20]; AccountNo: Code[50]; amount: Decimal; Period: Decimal) result: Code[30];
     VAR
-        surepesaTransTable: Record "SwizzKash Transactions";
+        swizzkasTransTable: Record "SwizzKash Transactions";
         membersTable: Record Customer;
         vendorTable: Record Vendor;
         loansRegisterTable: Record "Loans Register";
@@ -8633,14 +8635,14 @@ Codeunit 51022 SwizzKashMobile
         InsuranceAcc: Code[10];
         AmountDispursed: Decimal;
     BEGIN
-        loanType := 'ELOAN';
+        loanType := '24';
 
-        surepesaTransTable.RESET;
-        surepesaTransTable.SETRANGE(surepesaTransTable."Document No", documentNo);
-        surepesaTransTable.SETRANGE(surepesaTransTable.Posted, FALSE);
-        surepesaTransTable.SETRANGE(surepesaTransTable."Transaction Type", surepesaTransTable."Transaction Type"::"Loan Application");
-        surepesaTransTable.SETRANGE(surepesaTransTable.Status, surepesaTransTable.Status::Pending);
-        IF surepesaTransTable.FIND('-') THEN BEGIN
+        swizzkasTransTable.RESET;
+        swizzkasTransTable.SETRANGE(swizzkasTransTable."Document No", documentNo);
+        swizzkasTransTable.SETRANGE(swizzkasTransTable.Posted, FALSE);
+        swizzkasTransTable.SETRANGE(swizzkasTransTable."Transaction Type", swizzkasTransTable."Transaction Type"::"Loan Application");
+        swizzkasTransTable.SETRANGE(swizzkasTransTable.Status, swizzkasTransTable.Status::Pending);
+        IF swizzkasTransTable.FIND('-') THEN BEGIN
 
             GenSetUp.RESET;
             GenSetUp.GET();
@@ -8679,11 +8681,11 @@ Codeunit 51022 SwizzKashMobile
             vendorTable.SETRANGE("No.", AccountNo);
             IF NOT vendorTable.FIND('-') THEN BEGIN
                 result := 'ACCNOTFOUND';
-                surepesaTransTable.Status := surepesaTransTable.Status::Failed;
-                surepesaTransTable.Posted := TRUE;
-                surepesaTransTable."Posting Date" := TODAY;
-                surepesaTransTable.Comments := 'Failed.Account Not Found';
-                surepesaTransTable.MODIFY;
+                swizzkasTransTable.Status := swizzkasTransTable.Status::Failed;
+                swizzkasTransTable.Posted := TRUE;
+                swizzkasTransTable."Posting Date" := TODAY;
+                swizzkasTransTable.Comments := 'Failed.Account Not Found';
+                swizzkasTransTable.MODIFY;
                 EXIT;
             END;
 
@@ -8932,11 +8934,11 @@ Codeunit 51022 SwizzKashMobile
                         // END;
                     END;
 
-                    surepesaTransTable.Status := surepesaTransTable.Status::Completed;
-                    surepesaTransTable.Posted := TRUE;
-                    surepesaTransTable."Posting Date" := TODAY;
-                    surepesaTransTable.Comments := 'POSTED';
-                    surepesaTransTable.MODIFY;
+                    swizzkasTransTable.Status := swizzkasTransTable.Status::Completed;
+                    swizzkasTransTable.Posted := TRUE;
+                    swizzkasTransTable."Posting Date" := TODAY;
+                    swizzkasTransTable.Comments := 'POSTED';
+                    swizzkasTransTable.MODIFY;
                     result := 'TRUE';
                     msg := 'Dear ' + SplitString(membersTable.Name, ' ') + ', Your ELOAN No ' + loanNo
                       + ' of Ksh ' + FORMAT((AmountToDisburse)) + ' has been disbursed to your M-WALLET Account, '
@@ -8948,16 +8950,16 @@ Codeunit 51022 SwizzKashMobile
 
             END ELSE BEGIN
                 result := 'ACCINEXISTENT';
-                surepesaTransTable.Status := surepesaTransTable.Status::Failed;
-                surepesaTransTable.Posted := TRUE;
-                surepesaTransTable."Posting Date" := TODAY;
-                surepesaTransTable.Comments := 'Failed.Invalid Account';
-                surepesaTransTable.MODIFY;
+                swizzkasTransTable.Status := swizzkasTransTable.Status::Failed;
+                swizzkasTransTable.Posted := TRUE;
+                swizzkasTransTable."Posting Date" := TODAY;
+                swizzkasTransTable.Comments := 'Failed.Invalid Account';
+                swizzkasTransTable.MODIFY;
             END;
 
         END;
     END;
-
+    //this one is not in use..2025, wait for CO-Op Wallets
     LOCAL PROCEDURE PostAdvance(docNo: Code[20]; AccountNo: Code[50]; amount: Decimal; period: Decimal) result: Code[30];
     VAR
         VendorTable: Record "Vendor";
@@ -10235,7 +10237,7 @@ Codeunit 51022 SwizzKashMobile
                         GenJournalLine.DELETEALL;
 
                         msg := 'You have withdrawn KES ' + FORMAT(withdrawAmount) + ' from Account ' + Vendor.Name +
-                        ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                        ' .Thank you for using POLYTECH Sacco Mobile.';
 
                         SwizzKashTransTable."Account No2" := MPESARecon;
                         SwizzKashTransTable.Charge := TotalCharges;
@@ -10482,7 +10484,7 @@ Codeunit 51022 SwizzKashMobile
                         GenJournalLine.DELETEALL;
 
                         msg := 'You have withdrawn KES ' + FORMAT(withdrawAmount) + ' from Account ' + Vendor.Name +
-                        ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                        ' .Thank you for using POLYTECH Sacco Mobile.';
 
                         SwizzKashTransTable."Account No2" := MPESARecon;
                         SwizzKashTransTable.Charge := TotalCharges;
@@ -11032,7 +11034,7 @@ Codeunit 51022 SwizzKashMobile
                     Vendor.CalcFields(Vendor."Balance (LCY)");
                     TempBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions");
 
-                    if (Vendor."Account Type" = 'ORDINARY') or (Vendor."Account Type" = 'CHURCH') or (Vendor."Account Type" = 'BUSINESS') or (Vendor."Account Type" = 'STAFF')
+                    if (Vendor."Account Type" = 'M-WALLET') or (Vendor."Account Type" = 'CHURCH') or (Vendor."Account Type" = 'BUSINESS') or (Vendor."Account Type" = 'STAFF')
                       or (Vendor."Account Type" = 'COFFEE') or (Vendor."Account Type" = 'SAVINGS') then begin
                         if (TempBalance > MobileCharges + SurePESACharge) then begin
                             GenJournalLine.Reset;
@@ -11189,7 +11191,7 @@ Codeunit 51022 SwizzKashMobile
                             Vendor.CalcFields(Vendor."EFT Transactions");
                             accBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions");
                             msg := 'Account Name: ' + Vendor.Name + ', ' + 'BALANCE: ' + Format(accBalance) + '. '
-                           + 'MAFANIKIO Mobile';
+                           + 'POLYTECH Mobile';
                             SMSMessage(DocNumber, Vendor."No.", Vendor."Phone No.", msg);
                             Bal := 'TRUE';
                         end
@@ -11473,13 +11475,13 @@ Codeunit 51022 SwizzKashMobile
                     SurePESATrans."Transaction Time" := Time;
                     SurePESATrans.Insert;
                     result := 'TRUE';
-                    msg := 'You have withdrawn KES ' + Format(amount) + ' from Account ' + Vendor.Name + ' thank you for using MAFANIKIO Sacco Mobile.';
+                    msg := 'You have withdrawn KES ' + Format(amount) + ' from Account ' + Vendor.Name + ' thank you for using POLYTECH Sacco Mobile.';
                     SMSMessage(documentNo, Vendor."No.", Vendor."Phone No.", msg);
                 end
                 else begin
                     result := 'INSUFFICIENT';
                     /* msg:='You have insufficient funds in your savings Account to use this service.'+
-                    ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                    ' .Thank you for using POLYTECH Sacco Mobile.';
                     SMSMessage(documentNo,Vendor."No.",Vendor."Phone No.",msg);*/
                     SurePESATrans.Init;
                     SurePESATrans."Document No" := documentNo;
@@ -11501,7 +11503,7 @@ Codeunit 51022 SwizzKashMobile
             else begin
                 result := 'ACCINEXISTENT';
                 /* msg:='Your request has failed because account does not exist.'+
-                 ' .Thank you for using MAFANIKIO Sacco Mobile.';
+                 ' .Thank you for using POLYTECH Sacco Mobile.';
                  SMSMessage(documentNo,Vendor."No.",Vendor."Phone No.",msg);*/
                 SurePESATrans.Init;
                 SurePESATrans."Document No" := documentNo;

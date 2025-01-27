@@ -2426,6 +2426,7 @@ page 56110 "Member Application Card"
         Vendortable: Record Vendor;
         ProductApplications: record "Membership Reg. Products Appli";
         ProductAccountNo: Code[50];
+        SystemFactory: Codeunit "SURESTEP Factory";
     begin
         ProductApplications.Reset();
         ProductApplications.SetRange(ProductApplications."Membership Applicaton No", rec."No.");
@@ -2434,7 +2435,7 @@ page 56110 "Member Application Card"
             repeat
                 ProductAccountNo := '';
                 if ProductApplications.Product <> '' then begin
-                    ProductAccountNo := FnGetNewAccountNo(ProductApplications.Product, BOSAAccountNo, '100');
+                    ProductAccountNo := SystemFactory.FnGetNewWalletAccountNo(ProductApplications.Product, BOSAAccountNo, '100');
 
                     Vendortable.Init();
                     Vendortable."No." := ProductAccountNo;
@@ -2448,6 +2449,7 @@ page 56110 "Member Application Card"
                     Vendortable."Account Type" := ProductApplications.Product;
                     Vendortable.Validate(Vendortable."Account Type");
                     Vendortable."Mobile Phone No." := rec."Mobile Phone No";
+                    Vendortable."Mobile Phone No" := rec."Mobile Phone No";
                     Vendortable."E-Mail" := rec."E-Mail (Personal)";
                     Vendortable."ID No." := rec."ID No.";
                     Vendortable.Gender := rec.Gender;
@@ -2474,23 +2476,6 @@ page 56110 "Member Application Card"
                     end;
                 end;
             until ProductApplications.Next = 0;
-        end;
-    end;
-
-    local procedure FnGetNewAccountNo(Product: Code[20]; BOSAAccountNo: Code[50]; arg: Text): Code[50]
-    var
-        SavingsProductTypes: record "Account Types-Saving Products";
-        NEWNo: text;
-    begin
-        NEWNo := '';
-        SavingsProductTypes.Reset();
-        SavingsProductTypes.SetRange(SavingsProductTypes.Code, Product);
-        if SavingsProductTypes.Find('-') then begin
-            // NEWNo := (SavingsProductTypes."Account No Prefix" + '-' + Format(arg) + '-' + SavingsProductTypes."Last No Used");
-            NEWNo := Format(arg) + '-' + BOSAAccountNo;
-            SavingsProductTypes."Last No Used" := IncStr(SavingsProductTypes."Last No Used");
-            SavingsProductTypes.Modify(true);
-            exit(NEWNo);
         end;
     end;
 
