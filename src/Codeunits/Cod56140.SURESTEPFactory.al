@@ -192,40 +192,52 @@ codeunit 56140 "SURESTEP Factory"
 
     end;
 
+    procedure FnGetNewWalletAccountNo(Product: Code[20]; BOSAAccountNo: Code[50]; arg: Text): Code[50]
+    var
+        SavingsProductTypes: record "Account Types-Saving Products";
+        NEWNo: text;
+    begin
+        NEWNo := '';
+        SavingsProductTypes.Reset();
+        SavingsProductTypes.SetRange(SavingsProductTypes.Code, Product);
+        if SavingsProductTypes.Find('-') then begin
+            // NEWNo := (SavingsProductTypes."Account No Prefix" + '-' + Format(arg) + '-' + SavingsProductTypes."Last No Used");
+            // NEWNo := Format(arg) + '-' + BOSAAccountNo;
+            NEWNo := SavingsProductTypes."Account No Prefix" + '-' + BOSAAccountNo;
+            SavingsProductTypes."Last No Used" := IncStr(SavingsProductTypes."Last No Used");
+            SavingsProductTypes.Modify(true);
+            exit(NEWNo);
+        end;
+    end;
+
     procedure FnSendSMS(SMSSource: Text; SMSBody: Text[200]; CurrentAccountNo: Text; MobileNumber: Text)
     var
-        SMSMessage: Record "SMS Messages";
+        SMSMessages: Record "SMS Messages";
         iEntryNo: Integer;
     begin
-        ObjGenSetUp.Get;
-        ObjCompInfo.Get;
 
-        SMSMessage.Reset;
-        //SMSMessage.LockTable(true);
-        if SMSMessage.Find('+') then begin
-            iEntryNo := SMSMessage."Entry No";
+        SMSMessages.Reset();
+        if SMSMessages.Find('+') then begin
+            iEntryNo := SMSMessages."Entry No";
             iEntryNo := iEntryNo + 1;
-        end
-        else begin
+        end else begin
             iEntryNo := 1;
         end;
-
-
-        SMSMessage.Init;
-        SMSMessage."Entry No" := iEntryNo;
-        SMSMessage."Batch No" := CurrentAccountNo;
-        SMSMessage."Document No" := '';
-        SMSMessage."Account No" := CurrentAccountNo;
-        SMSMessage."Date Entered" := Today;
-        SMSMessage."Time Entered" := Time;
-        SMSMessage.Source := SMSSource;
-        SMSMessage."Entered By" := UserId;
-        SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-        SMSMessage."SMS Message" := SMSBody + '.' + ObjCompInfo.Name + ' ' + ObjGenSetUp."Customer Care No";
-        SMSMessage."Telephone No" := MobileNumber;
-        if ((MobileNumber <> '') and (SMSBody <> '')) then
-            SMSMessage.Insert;
+        SMSMessages.Reset();
+        SMSMessages."Entry No" := iEntryNo;
+        SMSMessages."Batch No" := '';
+        SMSMessages."Document No" := CurrentAccountNo;
+        SMSMessages."Account No" := CurrentAccountNo;
+        SMSMessages."Date Entered" := Today;
+        SMSMessages."Time Entered" := Time;
+        SMSMessages.Source := 'MEMBERREGISTRATION';
+        SMSMessages."Entered By" := UserId;
+        SMSMessages."Sent To Server" := SMSMessages."Sent To Server"::No;
+        SMSMessages."SMS Message" := SMSBody + '.' + ObjCompInfo.Name + ' ' + ObjGenSetUp."Customer Care No";
+        SMSMessages."Telephone No" := MobileNumber;
+        SMSMessages.Insert();
     end;
+
 
 
     procedure FnCreateGnlJournalLine(TemplateName: Text; BatchName: Text; DocumentNo: Code[30]; LineNo: Integer; TransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account"; AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member,Investor; AccountNo: Code[50]; TransactionDate: Date; TransactionAmount: Decimal; DimensionActivity: Code[40]; ExternalDocumentNo: Code[50]; TransactionDescription: Text; LoanNumber: Code[50])

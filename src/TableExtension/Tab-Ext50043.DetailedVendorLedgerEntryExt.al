@@ -25,6 +25,16 @@ tableextension 50043 "DetailedVendorLedgerEntryExt" extends "Detailed Vendor Led
         field(51516834; "Amount Posted"; Decimal)
         {
         }
+        field(1004; Reversed; Boolean)
+        {
+        }
+        field(1005; Descriptions; Text[250])
+        {
+            Caption = 'Description';//0101-001-68954
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = lookup("Vendor Ledger Entry".Description where("Document No." = field("Document No."), Amount = field(Amount), "Posting Date" = field("Posting Date"), "User ID" = field("User ID")));
+        }
     }
 
     keys

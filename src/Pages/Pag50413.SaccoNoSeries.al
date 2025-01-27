@@ -311,8 +311,8 @@ page 50413 "Sacco No. Series"
             }
             group("S-PESA")
             {
-                Caption = 'S-PESA';
-                Visible = false;
+                Caption = 'SwizzKash';
+                Visible = true;
                 field("MPESA Change Nos"; Rec."MPESA Change Nos")
                 {
                     ApplicationArea = Basic;
@@ -329,7 +329,7 @@ page 50413 "Sacco No. Series"
                 {
                     ApplicationArea = Basic;
                 }
-                field("SurePESA Registration Nos"; Rec."SwizzKash Reg No.")
+                field("SwizzKash Registration Nos"; Rec."SwizzKash Reg No.")
                 {
                     ApplicationArea = all;
                 }

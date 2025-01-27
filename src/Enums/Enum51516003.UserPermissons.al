@@ -37,7 +37,16 @@ enum 51516003 "User Permissons"
     {
 
     }
-    value(10;"Can activate Account"){
-        
+    value(10; "Can activate Account")
+    {
+
     }
+    value(11; "Account Status") { }
+    value(12; "Standing Order") { }
+    value(13; "BOSA Account Status") { }
+    value(14; "Smobile") { }
+    value(15; "SmobileApp") { }
+    value(16; "Can Appeal Loans") { }//Overide Defaulters
+    value(17; "Overide Defaulters") { }//
+
 }

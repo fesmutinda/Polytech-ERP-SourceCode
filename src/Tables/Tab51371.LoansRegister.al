@@ -80,7 +80,7 @@ Table 51371 "Loans Register"
                 // GenSetUp.GET();
                 // IF Cust.GET("Client Code") THEN BEGIN
                 //  IF Cust."Registration Date"<>0D THEN
-                //  RefDate:=CALCDATE('<+'+GenSetUp."Share Capital Period"+'>',Cust."Registration Date");
+                //  RefDate:=CALCDATE('<+'+GenSetUp."Shares Capital Period"+'>',Cust."Registration Date");
                 //  IF RefDate>TODAY THEN BEGIN
                 //    IF "Loan Product Type"<>'KARIBU' THEN
                 //    ERROR('Member has not finished 6 Months in the sacco to qualify for this loan!');
@@ -434,14 +434,14 @@ Table 51371 "Loans Register"
                 GenSetUp.Get();
                 if Cust.Get("Client Code") then begin
                     //  IF Cust."Registration Date"<>0D THEN
-                    //  RefDate:=CALCDATE('<+'+GenSetup."Share Capital Period"+'>',Cust."Registration Date");
+                    //  RefDate:=CALCDATE('<+'+GenSetup."Shares Capital Period"+'>',Cust."Registration Date");
                     //  IF RefDate<TODAY THEN BEGIN
                     //    ERROR('Member does not qualify for this loan!');
                     //  END; // For members who are not 6 months old in the Sacco
 
                     //  Cust.CALCFIELDS("Shares Retained");
                     //  IF Cust."Shares Retained"<GenSetUp."Retained Shares" THEN
-                    //    ERROR('Member does not meet the minimum share capital contibution to qualify for this loan');
+                    //    ERROR('Member does not meet the minimum Shares Capital contibution to qualify for this loan');
                 end;
                 if Source = Source::BOSA then begin
                     if "Loan  No." = '' then begin
@@ -559,7 +559,7 @@ Table 51371 "Loans Register"
                     //"Account No":=CustomerRecord."FOSA Account No.";
                     "Staff No" := CustomerRecord."Personal No";
                     "Registration Date" := CustomerRecord."Registration Date";
-                    "Member Share Capital" := CustomerRecord."Shares Retained";
+                    "Member Shares Capital" := CustomerRecord."Shares Retained";
                     //"Membership Duration(Years)":=FORMAT(Dates.DetermineAge("Registration Date",TODAY),2);
                     //"Membership Duration(Years)":=ROUND((TODAY-"Registration Date")/30,1,'<');
                     Gender := CustomerRecord.Gender;
@@ -597,9 +597,9 @@ Table 51371 "Loans Register"
                     "Risk MGT" := GenSetUp."Risk Fund Amount";
                     "Member Account Category" := CustomerRecord."Account Category";
                     if CustomerRecord."Shares Retained" < GenSetUp."Retained Shares" then begin
-                        "Share Capital Due" := GenSetUp."Retained Shares" - CustomerRecord."Shares Retained"
+                        "Shares Capital Due" := GenSetUp."Retained Shares" - CustomerRecord."Shares Retained"
                     end else
-                        "Share Capital Due" := 0;
+                        "Shares Capital Due" := 0;
 
                     //TESTFIELD("Account No");
 
@@ -3142,7 +3142,7 @@ Table 51371 "Loans Register"
         field(69097; "Hisa Boosting Commission"; Decimal)
         {
         }
-        field(69098; "Share Capital Due"; Decimal)
+        field(69098; "Shares Capital Due"; Decimal)
         {
         }
         field(69099; IntersetInArreas; Decimal)
@@ -3879,7 +3879,7 @@ Table 51371 "Loans Register"
                     "Loan Product Type" := 'INUKA';
             end;
         }
-        field(69217; "Member Share Capital"; Decimal)
+        field(69217; "Member Shares Capital"; Decimal)
         {
         }
         field(69218; "Membership Duration(Years)"; Integer)

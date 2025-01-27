@@ -40,7 +40,7 @@ table 50015 "Approval Setup"
         {
             Caption = 'Rejections';
         }
-        field(9; Delegations; Boolean)
+        field(99999; Delegations; Boolean)
         {
             Caption = 'Delegations';
         }

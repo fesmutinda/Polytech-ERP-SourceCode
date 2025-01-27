@@ -10,7 +10,8 @@ Table 51388 "Receipts & Payments"
         field(2; "Account No."; Code[30])
         {
             NotBlank = true;
-            TableRelation = if ("Account Type" = const(Customer)) Customer."No." where("Customer Type" = filter(Member));
+            TableRelation = if ("Account Type" = const(Customer)) Customer."No." where("Customer Type" = filter(Member)) else
+            if ("Account Type" = const(Vendor)) Vendor."No." where("Account Type" = filter('M-Wallet'));// "Customer Type" = filter(Member));
             //  where(ISNormalMember = filter(true)
             // , "Employer Checkoff" = filter(false))
             // else

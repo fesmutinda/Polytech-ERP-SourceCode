@@ -119,7 +119,7 @@ page 50881 "Member Picture-Change Req"
     begin
         Rec.TestField(Rec."No");
 
-        if Rec."Picture".Count > 0 then
+        if Rec."Picture".HasValue then//Count > 0 then
             if not Confirm(OverrideImageQst) then
                 exit;
 
@@ -140,7 +140,7 @@ page 50881 "Member Picture-Change Req"
         Rec.TestField(No);
         //TESTFIELD(Description);
 
-        if Rec.Picture.Count > 0 then
+        if Rec.Picture.HasValue then//;//Count > 0 then
             if not Confirm(OverrideImageQst) then
                 Error('');
 
@@ -159,7 +159,7 @@ page 50881 "Member Picture-Change Req"
 
     local procedure SetEditableOnPictureActions()
     begin
-        DeleteExportEnabled := Rec.Picture.Count <> 0;
+        DeleteExportEnabled := Rec.Picture.HasValue;//Count <> 0;
     end;
 
     procedure IsCameraAvailable(): Boolean

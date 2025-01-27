@@ -10,7 +10,7 @@ Codeunit 50025 SwizzKashMB
         //MESSAGE(AccountBalanceUSSD('0741301635','25195455'));
         //MESSAGE(FORMAT(PaybillSwitchLoans()));
         //MESSAGE(LoanGuarantors('LB13352'));\
-        //MESSAGE(SurePESARegistration);
+        //MESSAGE(SwizzKashhRegistration);
         //MESSAGE(MemberAccounts('254727900220'));
         //MESSAGE(AccountBalance('+254723214181','156526'));
         //MESSAGE(Guaranteefreeshares('+254723214181'));

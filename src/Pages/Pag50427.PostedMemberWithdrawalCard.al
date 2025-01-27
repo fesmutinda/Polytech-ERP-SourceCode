@@ -97,7 +97,7 @@ page 50427 "Posted Member Withdrawal Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Share Capital"; Rec."Share Capital")
+                field("Shares Capital"; Rec."Share Capital")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

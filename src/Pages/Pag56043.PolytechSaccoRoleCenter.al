@@ -28,6 +28,12 @@ Page 56043 "Polytech Sacco Role Center"
                 Visible = true;
 
             }
+            part(FOSACue; "FOSA Cue")
+            {
+                ApplicationArea = Basic, Suite;
+                Visible = false;
+
+            }
             part("LoansCue"; "Loans Cue")
             {
                 ApplicationArea = Suite;
@@ -125,6 +131,15 @@ Page 56043 "Polytech Sacco Role Center"
                 visible = false;
                 RunObject = Page "Bank Account List";
                 ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
+            }
+            action("M-Wallets")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'M-Wallet Accounts';
+                Image = Vendor;
+                RunObject = Page "Product Details Master";
+                ToolTip = 'View or edit detailed information for the Mobile Wallet Accounts.';
+
             }
             action(Members)
             {
@@ -759,169 +774,6 @@ Page 56043 "Polytech Sacco Role Center"
 
             }
 
-            group("Cash Management New")
-            {
-                Caption = 'Cash Management';
-                ToolTip = 'Process incoming and outgoing payments. Set up bank accounts and service connections for electronic banking.  ';
-                Visible = false;
-                group("Cheque Manangement")
-                {
-                    action(CollectedCheques)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Collected Cheques';
-                        // promoted = true;
-                        // PromotedCategory = Process;
-                        //RunObject = page CollectedCheques;
-                    }
-                    action(ProcessedCheques)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Procesed Cheques';
-                        // promoted = true;
-                        // PromotedCategory = Process;
-                        //RunObject = page ProccesedCheques;
-                    }
-                    action("OpenCheques")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Open Cheques';
-                        // promoted = true;
-                        // PromotedCategory = Process;
-                        //RunObject = Page OpenCheques;
-
-                    }
-                    action("RejectedCheques")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Rejected Cheques';
-                        // promoted = true;
-                        // PromotedCategory = Process;
-                        //RunObject = Page RejectedCheques;
-
-                    }
-                    action("ApprovedCheques")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved Cheques';
-                        // promoted = true;
-                        // PromotedCategory = Process;
-                        //RunObject = Page ApprovedCheques;
-
-                    }
-                    action("PendingCheques")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Pending Cheques';
-                        // promoted = true;
-                        // PromotedCategory = Process;
-                        // RunObject = Page PendingCheques;
-
-                    }
-
-                }
-                action(CashReceiptJournals)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Receipt Journals';
-                    Image = Journals;
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "General Journal Batches";
-                    RunPageView = WHERE("Template Type" = CONST("Cash Receipts"),
-                                        Recurring = CONST(false));
-                    ToolTip = 'Register received payments by manually applying them to the related customer, vendor, or bank ledger entries. Then, post the payments to G/L accounts and thereby close the related ledger entries.';
-                }
-                action(PaymentJournals)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Payment Journals';
-                    Image = Journals;
-                    RunObject = Page "General Journal Batches";
-                    RunPageView = WHERE("Template Type" = CONST(Payments),
-                                        Recurring = CONST(false));
-                    ToolTip = 'Register payments to vendors. A payment journal is a type of general journal that is used to post outgoing payment transactions to G/L, bank, customer, vendor, employee, and fixed assets accounts. The Suggest Vendor Payments functions automatically fills the journal with payments that are due. When payments are posted, you can export the payments to a bank file for upload to your bank if your system is set up for electronic banking. You can also issue computer checks from the payment journal.';
-                }
-
-                action(Action164)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Bank Accounts';
-                    Image = BankAccount;
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Bank Account List";
-                    ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
-                }
-                action("Payment Recon. Journals")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Payment Recon. Journals';
-                    Image = ApplyEntries;
-                    // Promoted = true;
-
-                    // PromotedCategory = Process;
-                    RunObject = Page "Pmt. Reconciliation Journals";
-                    ToolTip = 'Reconcile unpaid documents automatically with their related bank transactions by importing a bank statement feed or file. In the payment reconciliation journal, incoming or outgoing payments on your bank are automatically, or semi-automatically, applied to their related open customer or vendor ledger entries. Any open bank account ledger entries related to the applied customer or vendor ledger entries will be closed when you choose the Post Payments and Reconcile Bank Account action. This means that the bank account is automatically reconciled for payments that you post with the journal.';
-                }
-                action("Bank Acc. Statements")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Bank Acc. Statements';
-                    Image = BankAccountStatement;
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Bank Account Statement List";
-                    ToolTip = 'View statements for selected bank accounts. For each bank transaction, the report shows a description, an applied amount, a statement amount, and other information.';
-                }
-                action("Cash Flow Forecasts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Flow Forecasts';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Cash Flow Forecast List";
-                    ToolTip = 'Combine various financial data sources to find out when a cash surplus or deficit might happen or whether you should pay down debt, or borrow to meet upcoming expenses.';
-                }
-                action("Chart of Cash Flow Accounts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Chart of Cash Flow Accounts';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Chart of Cash Flow Accounts";
-                    ToolTip = 'View a chart contain a graphical representation of one or more cash flow accounts and one or more cash flow setups for the included general ledger, purchase, sales, services, or fixed assets accounts.';
-                }
-                action("Cash Flow Manual Revenues")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Flow Manual Revenues';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Cash Flow Manual Revenues";
-                    ToolTip = 'Record manual revenues, such as rental income, interest from financial assets, or new private capital to be used in cash flow forecasting.';
-                }
-                action("Cash Flow Manual Expenses")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Flow Manual Expenses';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Cash Flow Manual Expenses";
-                    ToolTip = 'Record manual expenses, such as salaries, interest on credit, or planned investments to be used in cash flow forecasting.';
-                }
-                action(BankAccountReconciliations)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Bank Account Reconciliations';
-                    Image = BankAccountRec;
-                    // Promoted = true;
-                    // PromotedCategory = Process;
-                    RunObject = Page "Bank Acc. Reconciliation List";
-                    ToolTip = 'Reconcile bank accounts in your system with bank statements received from your bank.';
-                }
-            }
-
             //.................................START OF MEMBERSHIP MANAGEMENT..................................
             group(MembershipManagement)
             {
@@ -1305,6 +1157,21 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = Page "Change Request List";
                         ToolTip = 'Change Member Details';
                     }
+
+                    group(ReportsChangereq)
+                    {
+                        caption = 'Change Request Reports ';
+                        action(ChangeReqMobile)
+                        {
+                            ApplicationArea = All;
+                            Caption = 'Change Req(mobile)';
+                            Visible = false;
+                            // Promoted = true;
+                            // PromotedCategory = Process;
+                            //RunObject = report "Change Request Report(Mobile)";
+                        }
+                    }
+
                     action(updatedchangereqslist)
                     {
                         ApplicationArea = All;
@@ -1575,6 +1442,7 @@ Page 56043 "Polytech Sacco Role Center"
                 group(BOSAPeriodicActivities)
                 {
                     Caption = 'Periodic Activities';
+
                     group(LoanDefaulter)
                     {
                         Caption = 'Loan Defaulter Notices';
@@ -1644,12 +1512,12 @@ Page 56043 "Polytech Sacco Role Center"
                         action("Check off Adivice-Breakdown")
                         {
                             Image = Setup;
-                            // RunObject = report "Check Off Advice";
+                            RunObject = report "Check Off Advice";
                         }
                         action("Check off Adivice-Lumpsum")
                         {
                             Image = Setup;
-                            // RunObject = report "Check Off Advice-Lumpsum";
+                            RunObject = report "Check Off Advice-Lumpsum";
                         }
 
                     }
@@ -1660,13 +1528,14 @@ Page 56043 "Polytech Sacco Role Center"
                         {
                             Caption = 'Post Monthly Interest';
                             Image = Setup;
-                            // RunObject = report "Post Monthly Interest.";
+                            RunObject = report "Post Monthly Interest.";
                             ToolTip = 'Used to process Loans Monthly Interest';
                         }
                     }
                     group(Dividends)
                     {
                         Caption = 'Dividends';
+
                         group(Prorated)
                         {
                             Caption = 'Prorated';
@@ -1674,25 +1543,25 @@ Page 56043 "Polytech Sacco Role Center"
                             {
                                 Caption = 'Dividends Processing-Prorated';
                                 Image = Setup;
-                                // RunObject = report "Dividend Processing-Prorated";
+                                RunObject = report "Dividend Processing-Prorated";
                             }
                             action("Dividends Register")
                             {
                                 Caption = 'Dividends Register';
                                 Image = Setup;
-                                // RunObject = report "Dividend Register";
+                                RunObject = report "Dividend Register";
                             }
                             action(DividendProgressionSlip)
                             {
                                 Caption = 'Dividend Progression Slip';
                                 Image = Setup;
-                                // RunObject = report "Dividends Progressionslip";
+                                RunObject = report "Dividends Progressionslip";
                                 Visible = false;
                             }
                             action("Dividends Payments Report")
                             {
                                 ApplicationArea = all;
-                                // RunObject = Report "Dividends Payments";
+                                RunObject = Report "Dividends Payments";
 
                             }
                         }
@@ -1703,7 +1572,7 @@ Page 56043 "Polytech Sacco Role Center"
                                 Image = ReceiveLoaner;
                                 ApplicationArea = all;
                                 Caption = 'Recover Sharecapital from Deposits';
-                                // RunObject = report "Share Capital Recovery";
+                                RunObject = report "Share Capital Recovery";
                             }
                             group(SharecapitalTrading)
                             {
@@ -1747,7 +1616,7 @@ Page 56043 "Polytech Sacco Role Center"
                         Caption = 'M-Banking Applications';
                         Image = Calls;
                         RunObject = page "SwizzKash Applications";
-                        RunPageView = WHERE(status = filter('<>closed'));
+                        RunPageView = WHERE(status = filter('<>Approved'));
                         ToolTip = 'Membership Applicaton for SwizzKash.';
                     }
                     action("RegisteredSwizzKashMembers")

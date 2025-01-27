@@ -21,7 +21,7 @@ Codeunit 50013 "Import Images"
         // objMembers.Reset;
         // if objMembers.FindSet(true,false) then begin
         //   repeat
-        //   filename:='C:\Mafanikio\'+objMembers."Sacco No"+'.gif';
+        //   filename:='C:\POLYTECH\'+objMembers."Sacco No"+'.gif';
         // if objMembers.Signature.Hasvalue then
         // Clear(objMembers.Signature);
         // if FILE.Exists(filename) then begin

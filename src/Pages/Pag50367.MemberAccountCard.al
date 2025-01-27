@@ -824,7 +824,7 @@ page 50367 "Member Account Card"
                 action("Members Beneficiary Details")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Members Benevolent Beneficiary Details';
+                    Caption = 'Members Beneficiary Details';
                     Image = Relationship;
                     Promoted = true;
                     PromotedCategory = Process;
@@ -932,7 +932,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then begin
-                            Report.Run(50224, true, false, Cust);
+                            Report.Run(50051, true, false, Cust);
                         END;
                     end;
                 }

@@ -2,7 +2,7 @@
 page 50014 "Guarantor Sub Subform"
 {
     PageType = ListPart;
-    SourceTable = 51564;
+    SourceTable = "Guarantorship Substitution L";
 
     layout
     {

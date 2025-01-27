@@ -47,10 +47,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Appraisal Fee';
     // }
-    // value(12; Executive)
-    // {
-    //     Caption = 'Executive';
-    // }
+    value(12; MobileTransactions)
+    {
+        Caption = 'MobileTransactions';
+    }
     value(13; "Unallocated Funds")
     {
         Caption = 'Unallocated Funds';
@@ -163,10 +163,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Loan Due';
     // }
-    // value(41; "FOSA Shares")
-    // {
-    //     Caption = 'FOSA Shares';
-    // }
+    value(41; Investment)
+    {
+        Caption = 'FOSA Shares';
+    }
     // value(42; "Loan Form Fee")
     // {
     //     Caption = 'Loan Form Fee';
@@ -202,5 +202,24 @@ enum 51516010 "TransactionTypesEnum"
 
     }
     value(56; "Mwanangu Savings") { Caption = 'Mwanangu Savings'; }
-
+    value(57; "EXCISE_DUTY")
+    {
+        Caption = 'EXCISE_DUTY';
+    }
+    value(58; "MOBILE_FOSA_TRANSFER")
+    {
+        Caption = 'MOBILE_FOSA_TRANSFER';
+    }
+    value(59; "MOBILE_BOSA_TRANSFER")
+    {
+        Caption = 'MOBILE_BOSA_TRANSFER';
+    }
+    value(60; "MOBILE_FOSA_TRANSFER_CHARGE")
+    {
+        Caption = 'MOBILE_FOSA_TRANSFER_CHARGE';
+    }
+    value(61; "MOBILE_BOSA_TRANSFER_CHARGE")
+    {
+        Caption = 'MOBILE_BOSA_TRANSFER_CHARGE';
+    }
 }

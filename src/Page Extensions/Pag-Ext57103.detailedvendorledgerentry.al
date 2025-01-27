@@ -1,4 +1,4 @@
-pageextension 50618 "detailedvendorledgerentry" extends "Detailed Vendor Ledg. Entries"
+pageextension 57103 "detailedvendorledgerentry" extends "Detailed Vendor Ledg. Entries"
 {
     layout
     {
@@ -12,7 +12,12 @@ pageextension 50618 "detailedvendorledgerentry" extends "Detailed Vendor Ledg. E
             {
                 ApplicationArea = Basic;
             }
+            field(Descriptions; Rec.Descriptions)
+            {
+                ApplicationArea = Basic;
+            }
         }
+
         modify("Entry Type")
         {
             Visible = false;

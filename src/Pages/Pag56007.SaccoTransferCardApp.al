@@ -170,7 +170,7 @@ Page 56007 "Sacco Transfer Card(App)"
                         if (Vend.Get(Rec."Source Account No")) and (Rec."Source Account Type" = Rec."source account type"::Fosa) then begin
                             Vend.CalcFields(Vend.Balance);
                             if (Vend.Balance - Rec."Schedule Total") < 0 then begin
-                                if UserId in ['MAFANIKIOSACCO\EWAMBUA'] then
+                                if UserId in ['POLYTECHSACCO\EWAMBUA'] then
                                     Message('Note that you will be overdrawing the account') else
                                     Error('The Account balance will fall below zero !');
                             end;
