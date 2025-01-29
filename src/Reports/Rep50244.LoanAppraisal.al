@@ -23,16 +23,20 @@ Report 50244 "Loan Appraisal"
             column(USERID; UserId)
             {
             }
-            column(COMPANYNAME; COMPANYNAME)
+            column(COMPANYNAME; Company.name)
             {
             }
-            column(CompanyInfo_Address; CompanyInfo.Address)
+            column(CompanyPic; Company.Picture)
+            {
+
+            }
+            column(Company_Address; Company.Address)
             {
             }
-            column(CompanyInfo__Phone_No__; CompanyInfo."Phone No.")
+            column(Company__Phone_No__; Company."Phone No.")
             {
             }
-            column(CompanyInfo__E_Mail_; CompanyInfo."E-Mail")
+            column(Company__E_Mail_; Company."E-Mail")
             {
             }
             column(Loans__Application_Date_; "Application Date")
@@ -1058,11 +1062,10 @@ Report 50244 "Loan Appraisal"
                     CollateralGuarantee := CollCharge + GShares;
                     DepX := (DEpMultiplier) - (LBalance - FinalInst);
                     StatDeductions := StatDeductions + "Loans Register".Repayment;
-                    if (Psalary > Repayment) or (Psalary = Repayment) then
+                    if (Psalary >= Repayment) and (Psalary > "Requested Amount") then
                         Msalary := "Requested Amount"
-
                     else
-                        Message('The utilixable salary %1 is less than Repayment %2', Psalary, Repayment);
+                        Msalary := Psalary;
                 end;
                 if "Deboost Loan Applied" = false then begin
                     if (Depx < "Loans Register"."Requested Amount") and ("Loans Register"."Requested Amount" <= CollateralGuarantee) then
@@ -1082,10 +1085,29 @@ Report 50244 "Loan Appraisal"
                 //Recomm:=ROUND(DepX,100,'<');
 
                 Riskamount := "Loans Register"."Requested Amount" - MAXAvailable;
-                "Recommended Amount" := Recomm;
-                "Approved Amount" := Recomm;
+
+                // Adjust DepX if it's larger than the Requested Amount
+                if DepX > "Loans Register"."Requested Amount" then
+                    DepX := "Loans Register"."Requested Amount";
+
+                // Start with DepX as the default recommendation
+                Recomm := ROUND(DepX, 100, '<');
+
+                // Compare with Psalary and update Recomm if Psalary is smaller
+                if Psalary < Recomm then
+                    Recomm := ROUND(Psalary, 100, '<');
+
+                // Compare with GShares and update Recomm if GShares is smaller
+                if GShares < Recomm then
+                    Recomm := ROUND(GShares, 100, '<');
+
+                // Update the Loans Register with the calculated recommendation
+                "Loans Register"."Recommended Amount" := Recomm;
+                "Loans Register"."Approved Amount" := Recomm;
                 "Loans Register".Modify;
-                //Recommended Amount
+
+                // Display the recommendation
+
 
                 //*************************Charges*********************************//
                 ProccessingFee := 0;
@@ -1292,8 +1314,8 @@ Report 50244 "Loan Appraisal"
 
     trigger OnPreReport()
     begin
-        if GenSetUp.Get(0) then
-            CompanyInfo.Get;
+        Company.Get();
+        Company.CalcFields(Company.Picture);
     end;
 
     var
@@ -1376,7 +1398,7 @@ Report 50244 "Loan Appraisal"
         BrTopUpCom: Decimal;
         LoanAmount: Decimal;
 #pragma warning disable AL0275
-        CompanyInfo: Record "Company Information";
+        Company: Record "Company Information";
 #pragma warning restore AL0275
         CompanyAddress: Code[20];
         CompanyEmail: Text[30];

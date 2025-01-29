@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-01-29T15:08:15.9297237Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -19,55 +30,55 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.25cm</Width>
+                  <Width>1.95925cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.94292cm</Width>
+                  <Width>1.96027cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.05cm</Width>
+                  <Width>4.06735cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.08375cm</Width>
+                  <Width>2.1011cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.40854cm</Width>
+                  <Width>1.42589cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.35604cm</Width>
+                  <Width>2.37339cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4cm</Width>
+                  <Width>2.41735cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.85271cm</Width>
+                  <Width>1.87006cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.14688cm</Width>
+                  <Width>1.16423cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.57667cm</Width>
+                  <Width>2.59402cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.50125cm</Width>
+                  <Width>1.5186cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.07938cm</Width>
+                  <Width>0.09673cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.07938cm</Width>
+                  <Width>0.09673cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.07938cm</Width>
+                  <Width>0.09673cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.07938cm</Width>
+                  <Width>0.09673cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.07938cm</Width>
+                  <Width>0.09673cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.10583cm</Width>
+                  <Width>0.12318cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1898,19 +1909,19 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.07539in</Top>
-            <Left>0.12819in</Left>
+            <Left>0.26918in</Left>
             <Height>2.538cm</Height>
-            <Width>23.07149cm</Width>
+            <Width>24.05834cm</Width>
             <Style />
           </Tablix>
         </ReportItems>
         <Height>1.14583in</Height>
         <Style />
       </Body>
-      <Width>9.27297in</Width>
+      <Width>9.91813in</Width>
       <Page>
         <PageHeader>
-          <Height>1in</Height>
+          <Height>1.2478in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1931,8 +1942,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.57306cm</Top>
-              <Left>22.79644cm</Left>
+              <Top>1.88777cm</Top>
+              <Left>24.74205cm</Left>
               <Height>0.423cm</Height>
               <Width>0.45cm</Width>
               <Style>
@@ -1956,8 +1967,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.00895cm</Top>
-              <Left>17.88913cm</Left>
+              <Top>1.32366cm</Top>
+              <Left>19.83474cm</Left>
               <Height>0.423cm</Height>
               <Width>5.35731cm</Width>
               <ZIndex>1</ZIndex>
@@ -1983,113 +1994,11 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.06415in</Top>
-              <Left>20.09644cm</Left>
+              <Top>0.18805in</Top>
+              <Left>22.04205cm</Left>
               <Height>0.423cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>2</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="COMPANYNAME1">
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=ReportItems!COMPANYNAME.Value</Value>
-                      <Style>
-                        <FontFamily>tahoma</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.06415in</Top>
-              <Left>0.125in</Left>
-              <Height>0.423cm</Height>
-              <Width>7.5cm</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="LoanType1">
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=ReportItems!LoanType.Value</Value>
-                      <Style>
-                        <FontFamily>tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <Top>1.00895cm</Top>
-              <Left>2.41751cm</Left>
-              <Height>0.423cm</Height>
-              <Width>4.65cm</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="RFilters1">
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=ReportItems!RFilters.Value</Value>
-                      <Style>
-                        <FontFamily>tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <Top>1.43195cm</Top>
-              <Left>0.125in</Left>
-              <Height>0.423cm</Height>
-              <Width>6.75cm</Width>
-              <ZIndex>5</ZIndex>
-              <Style>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="Loans_RegisterCaption1">
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=ReportItems!Loans_RegisterCaption.Value</Value>
-                      <Style>
-                        <FontFamily>tahoma</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.58595cm</Top>
-              <Left>0.125in</Left>
-              <Height>0.423cm</Height>
-              <Width>7.5cm</Width>
-              <ZIndex>6</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>
@@ -2109,38 +2018,187 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>1.57306cm</Top>
-              <Left>22.04643cm</Left>
+              <Top>1.88777cm</Top>
+              <Left>23.99204cm</Left>
               <Height>0.423cm</Height>
               <Width>0.75cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>
             </Textbox>
-            <Textbox Name="Loan_TypeCaption1">
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=ReportItems!Loan_TypeCaption.Value</Value>
+                      <Value>SACCO LOANS REGISTER REPORT</Value>
                       <Style>
-                        <FontFamily>tahoma</FontFamily>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>1.00895cm</Top>
-              <Left>0.125in</Left>
-              <Height>0.423cm</Height>
-              <Width>1.95cm</Width>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>1.01158in</Top>
+              <Left>1.81229in</Left>
+              <Height>0.19275in</Height>
+              <Width>5.61226in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox12">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>0.74074in</Top>
+              <Left>1.81229in</Left>
+              <Height>0.19623in</Height>
+              <Width>6.07062in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox14">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>0.50386in</Top>
+              <Left>1.81229in</Left>
+              <Height>0.20809in</Height>
+              <Width>6.07062in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox17">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>0.24729in</Top>
+              <Left>1.81458in</Left>
+              <Height>0.20809in</Height>
+              <Width>6.06833in</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox18">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Left>1.81458in</Left>
+              <Height>0.21851in</Height>
+              <Width>6.79394in</Width>
               <ZIndex>8</ZIndex>
               <Style>
-                <VerticalAlign>Middle</VerticalAlign>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
           </ReportItems>

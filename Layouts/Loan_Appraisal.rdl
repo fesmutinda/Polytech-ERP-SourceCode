@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-01-29T14:19:07.8168595Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -6738,7 +6749,7 @@
       <Width>17.47792cm</Width>
       <Page>
         <PageHeader>
-          <Height>1.27cm</Height>
+          <Height>2.77283cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -6760,8 +6771,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox29</rd:DefaultName>
-              <Top>0.13189in</Top>
-              <Left>7.03634cm</Left>
+              <Top>0.786in</Top>
+              <Left>6.18967cm</Left>
               <Height>0.6cm</Height>
               <Width>5.2433cm</Width>
               <Style>
@@ -6793,11 +6804,93 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox25</rd:DefaultName>
-              <Top>0.35804cm</Top>
-              <Left>13.65657cm</Left>
+              <Top>0.45191cm</Top>
+              <Left>15.26086cm</Left>
               <Height>0.41479cm</Height>
-              <Width>2.5cm</Width>
+              <Width>1.81499cm</Width>
               <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Image1">
+              <Source>Database</Source>
+              <Value>=First(Fields!CompanyPic.Value, "DataSet_Result")</Value>
+              <MIMEType>image/png</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.2667cm</Top>
+              <Left>0.6477cm</Left>
+              <Height>2.159cm</Height>
+              <Width>2.96823cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Textbox35">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Company_Address.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>0.45123in</Top>
+              <Left>5.30232cm</Left>
+              <Height>0.6cm</Height>
+              <Width>8.05847cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox39">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!COMPANYNAME.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>0.105in</Top>
+              <Left>4.15793cm</Left>
+              <Height>0.6cm</Height>
+              <Width>10.13813cm</Width>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -6883,14 +6976,17 @@ End Function
         <Field Name="COMPANYNAME">
           <DataField>COMPANYNAME</DataField>
         </Field>
-        <Field Name="CompanyInfo_Address">
-          <DataField>CompanyInfo_Address</DataField>
+        <Field Name="CompanyPic">
+          <DataField>CompanyPic</DataField>
         </Field>
-        <Field Name="CompanyInfo__Phone_No__">
-          <DataField>CompanyInfo__Phone_No__</DataField>
+        <Field Name="Company_Address">
+          <DataField>Company_Address</DataField>
         </Field>
-        <Field Name="CompanyInfo__E_Mail_">
-          <DataField>CompanyInfo__E_Mail_</DataField>
+        <Field Name="Company__Phone_No__">
+          <DataField>Company__Phone_No__</DataField>
+        </Field>
+        <Field Name="Company__E_Mail_">
+          <DataField>Company__E_Mail_</DataField>
         </Field>
         <Field Name="Loans__Application_Date_">
           <DataField>Loans__Application_Date_</DataField>

@@ -358,6 +358,18 @@ codeunit 51113 "PostCustomerExtension"
         end;
     end;
 
+    procedure GetMaxEntryNo(): Integer
+    var
+        CustLedgerEntry: Record "Cust. Ledger Entry";
+        MaxEntryNo: Integer;
+    begin
+        if CustLedgerEntry.FindLast() then
+            MaxEntryNo := CustLedgerEntry."Entry No.";
+
+        // Message('Max Entry No.: %1', MaxEntryNo);
+        exit(MaxEntryNo);
+    end;
+
     [EventSubscriber(ObjectType::Codeunit, codeunit::"Gen. Jnl.-Post Line", 'OnAfterInitCustLedgEntry', '', false, false)]
     procedure InsertCustomTransactionFields(GenJournalLine: Record "Gen. Journal Line"; var CustLedgerEntry: Record "Cust. Ledger Entry")
     var
@@ -365,6 +377,7 @@ codeunit 51113 "PostCustomerExtension"
         sfactory: Codeunit "SURESTEP Factory";
     begin
         CustLedgerEntry.LockTable();
+        CustLedgerEntry."Entry No." := GetMaxEntryNo() + 1;
         CustLedgerEntry."Transaction Type" := GenJournalLine."Transaction Type";
         CustLedgerEntry."Loan No" := GenJournalLine."Loan No";
         CustLedgerEntry."Loan product Type" := FnGetLoanProductType(GenJournalLine."Loan No");

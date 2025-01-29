@@ -1,39 +1,22 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 50228 "Loans Register"
+Report 50257 "Loan Guard Report"
 {
-    ApplicationArea = All;
-    RDLCLayout = './Layouts/Loans Register.rdlc';//from loans register.rdlc
-    UsageCategory = ReportsAndAnalysis;
-
+    DefaultLayout = RDLC;
+    RDLCLayout = './Layouts/Loan Guard Report.rdlc';
 
     dataset
     {
         dataitem(Loans; "Loans Register")
         {
             DataItemTableView = sorting("Staff No") order(ascending) where(Posted = const(true));
-            RequestFilterFields = Source, "Loan Product Type", "Application Date", "Issued Date", "Batch No.", "Captured By", "Branch Code", "Outstanding Balance", "Loan  No.", "Top Up Amount";
+            RequestFilterFields = "Date filter", "Issued Date";
             column(ReportForNavId_4645; 4645)
             {
             }
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
-            column(Top_Up_Amount; "Top Up Amount")
-            {
-            }
-            column(CompanyName; Company.Name)
-            {
-            }
-            column(CompanyAddress; Company.Address)
-            {
-            }
-            column(CompanyPhone; Company."Phone No.")
-            {
-            }
-            column(CompanyEmail; Company."E-Mail")
-            {
-            }
-            column(CompanyPic; Company.Picture)
+            column(COMPANYNAME; COMPANYNAME)
             {
             }
             column(CurrReport_PAGENO; CurrReport.PageNo)
@@ -48,16 +31,7 @@ Report 50228 "Loans Register"
             column(RFilters; RFilters)
             {
             }
-            column(EmployerCode; CompanyCode)
-            {
-            }
-            column(StaffNo; "Staff No")
-            {
-            }
             column(Loans__Loan__No__; "Loan  No.")
-            {
-            }
-            column(AccountNo_Loans; Loans."Account No")
             {
             }
             column(Loans__Client_Code_; "Client Code")
@@ -70,9 +44,6 @@ Report 50228 "Loans Register"
             {
             }
             column(Loans__Approved_Amount_; "Approved Amount")
-            {
-            }
-            column(Repayment; Repayment)
             {
             }
             column(Loans_Installments; Installments)
@@ -108,7 +79,7 @@ Report 50228 "Loans Register"
             column(Loans__Requested_Amount__Control1102760038; "Requested Amount")
             {
             }
-            column(EntryNo; LCount)
+            column(LCount; LCount)
             {
             }
             column(Loans_Loans__Outstanding_Balance__Control1102760040; Loans."Outstanding Balance")
@@ -119,6 +90,14 @@ Report 50228 "Loans Register"
             }
             column(Loans__Top_Up_Amount__Control1000000001; "Top Up Amount")
             {
+            }
+            column(RPeriod; RPeriod)
+            {
+
+            }
+            column(currentBalance; currentBalance)
+            {
+
             }
             column(Loans_RegisterCaption; Loans_RegisterCaptionLbl)
             {
@@ -189,20 +168,54 @@ Report 50228 "Loans Register"
             column(Date________________________Caption_Control1102755005; Date________________________Caption_Control1102755005Lbl)
             {
             }
-            column(Lbal; LBalance)
+            column(Idno; IDno)
+            {
+            }
+            column(Dob; Dob)
             {
             }
 
             trigger OnAfterGetRecord()
             begin
 
+                CompanyCode := '';
+                if cust.Get(Loans."BOSA No") then
+                    CompanyCode := cust."Employer Code";
+
                 LCount := LCount + 1;
 
+                if Loans.Source = Loans.Source::BOSA then begin
+                    cust.Reset;
+                    cust.SetRange(cust."No.", Loans."Client Code");
+                    if cust.Find('-') then begin
+                        Dob := cust."Date of Birth";
+                        IDno := cust."ID No.";
+                    end;
+                end;
+                AsAt := GetRangeMax("Date filter");
+
+
+                //RPeriod := 0;
+
+                currentBalance := 0;
+                LoanRec.Reset();
+                LoanRec.SetRange(LoanRec."Loan  No.", Loans."Loan  No.");
+                if LoanRec.FindSet() then begin
+                    repeat
+                        Loans.CalcFields(Loans."Outstanding Balance");
+                        currentBalance := Loans."Outstanding Balance";
+                        If Loans."Outstanding Balance" <= 0 then
+                            RPeriod := 0 else begin
+                            RPeriod := Installments - GetRepayment("Loan  No.", AsAt);
+                        end;
+
+
+                    until LoanRec.Next = 0;
+                end;
             end;
 
             trigger OnPreDataItem()
             begin
-
                 if LoanProdType.Get(Loans.GetFilter(Loans."Loan Product Type")) then
                     LoanType := LoanProdType."Product Description";
                 LCount := 0;
@@ -215,11 +228,6 @@ Report 50228 "Loans Register"
                         RFilters := 'Branch: ' + DValue.Name;
 
                 end;
-
-
-
-                //Datefilter:=Loans.GETRANGEMAX(Loans."Date filter");
-                //Loans.SETRANGE(Loans."Date filter",0D,Datefilter);
             end;
         }
     }
@@ -229,9 +237,14 @@ Report 50228 "Loans Register"
 
         layout
         {
-            area(content)
-            {
-            }
+            // area(content)
+            // {
+            //     field(AsAt; AsAt)
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'AsAt';
+            //     }
+            // }
         }
 
         actions
@@ -242,23 +255,39 @@ Report 50228 "Loans Register"
     labels
     {
     }
-    trigger OnPreReport()
+    local procedure GetRepayment(LoanNos: Code[20]; DateFiltering: Date): Decimal
+    var
+        RepaymentInstallments: Decimal;
     begin
-        company.get();
-        company.CalcFields(company.Picture);
+        RepaymentInstallments := 0;
+        RepaymentSchedule.Reset;
+        RepaymentSchedule.SetRange(RepaymentSchedule."Loan No.", LoanNos);
+        RepaymentSchedule.SetFilter(RepaymentSchedule."Repayment Date", '%1..%2', 0D, DateFiltering);
+        if RepaymentSchedule.FindLast then begin
+            repeat
+                Evaluate(RepaymentInstallments, RepaymentSchedule."Repayment Code");
+            until RepaymentSchedule.Next = 0;
+        end;
+        exit(RepaymentInstallments);
     end;
 
+
     var
-        company: record "Company Information";
         RPeriod: Decimal;
+
+        currentBalance: Decimal;
+        AsAt: Date;
+        ExpextedRepayment: Decimal;
+        RepaymentSchedule: Record "Loan Repayment Schedule";
         BatchL: Code[100];
         Batches: Record "Loan Disburesment-Batching";
+        ApprovalSetup: Record "Approval Setup";
         LocationFilter: Code[20];
         TotalApproved: Decimal;
         cust: Record Customer;
         BOSABal: Decimal;
         SuperBal: Decimal;
-        LAppl: Record "Loans Register";
+        LoanRec: Record "Loans Register";
         Deposits: Decimal;
         CompanyCode: Code[20];
         LoanType: Text[50];
@@ -281,9 +310,8 @@ Report 50228 "Loans Register"
         Sign________________________Caption_Control1102755003Lbl: label 'Sign........................';
         Date________________________CaptionLbl: label 'Date........................';
         Date________________________Caption_Control1102755005Lbl: label 'Date........................';
-        Datefilter: Date;
-        CustLedger: Record "Cust. Ledger Entry";
-        DateFilterr: Date;
-        LBalance: Decimal;
+        IDno: Code[50];
+        Dob: Date;
+        vend: Record Vendor;
 }
 

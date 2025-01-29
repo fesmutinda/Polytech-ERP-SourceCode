@@ -332,7 +332,7 @@ Codeunit 50029 "Periodic Activities"
         DailyLoansInterestBuffer: Record 51297;
     begin
         //............................................................
-        Message('here userid is %1', UserId);
+        //Message('here userid is %1', UserId);
         //....Check for missing bal accounts and update interestbuffer
         Temp.Get(UserId);
         if Temp.Get(UserId) then begin

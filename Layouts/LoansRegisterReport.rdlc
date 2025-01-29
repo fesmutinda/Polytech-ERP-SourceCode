@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-01-29T14:33:45.5573521Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -35,10 +46,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.3023in</Top>
-            <Left>0.94458in</Left>
-            <Height>0.19792in</Height>
-            <Width>10.08375in</Width>
+            <Top>1.30747in</Top>
+            <Left>1.55858in</Left>
+            <Height>0.19275in</Height>
+            <Width>9.46975in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -138,10 +149,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox12</rd:DefaultName>
-            <Top>1.03146in</Top>
-            <Left>0.94458in</Left>
-            <Height>0.2014in</Height>
-            <Width>10.08375in</Width>
+            <Top>1.03663in</Top>
+            <Left>1.55858in</Left>
+            <Height>0.19623in</Height>
+            <Width>9.46975in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -173,10 +184,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox12</rd:DefaultName>
-            <Top>0.79458in</Top>
-            <Left>0.94458in</Left>
-            <Height>0.21326in</Height>
-            <Width>10.08375in</Width>
+            <Top>0.79975in</Top>
+            <Left>1.55858in</Left>
+            <Height>0.20809in</Height>
+            <Width>9.46975in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -208,10 +219,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox12</rd:DefaultName>
-            <Top>0.53801in</Top>
-            <Left>0.94687in</Left>
-            <Height>0.21326in</Height>
-            <Width>10.08146in</Width>
+            <Top>0.54318in</Top>
+            <Left>1.56087in</Left>
+            <Height>0.20809in</Height>
+            <Width>9.46746in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -243,10 +254,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox12</rd:DefaultName>
-            <Top>0.29072in</Top>
-            <Left>0.94687in</Left>
-            <Height>0.22368in</Height>
-            <Width>10.08146in</Width>
+            <Top>0.29589in</Top>
+            <Left>1.56087in</Left>
+            <Height>0.21851in</Height>
+            <Width>9.46746in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -265,7 +276,7 @@
                   <Width>0.61458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.9315in</Width>
+                  <Width>0.79806in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.29293in</Width>
@@ -274,7 +285,7 @@
                   <Width>1.0297in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.68671in</Width>
+                  <Width>0.80974in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.78333in</Width>
@@ -311,6 +322,7 @@
                                   <Value>Loanee Details</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -348,6 +360,7 @@
                                   <Value>LOAN DETAILS</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -395,6 +408,7 @@
                                   <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -427,6 +441,7 @@
                                   <Value>Member No</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -459,6 +474,7 @@
                                   <Value>Member Name</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -491,6 +507,7 @@
                                   <Value>Loan Product Type</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -523,6 +540,7 @@
                                   <Value>Loan No</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -555,6 +573,7 @@
                                   <Value>Issued Date</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -587,6 +606,7 @@
                                   <Value>Installments</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -619,6 +639,7 @@
                                   <Value>Issued Amount</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -651,6 +672,7 @@
                                   <Value>Outstanding Balance</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -683,6 +705,7 @@
                                   <Value>Oustanding Interest</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -715,6 +738,7 @@
                                   <Value>Loans Category</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1130,7 +1154,7 @@
             <Top>1.57146in</Top>
             <Left>0.0125in</Left>
             <Height>0.5625in</Height>
-            <Width>11.01583in</Width>
+            <Width>11.00542in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -1154,10 +1178,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyPic</rd:DefaultName>
-            <Top>0.2644in</Top>
+            <Top>0.30979in</Top>
             <Left>0.0125in</Left>
-            <Height>1.26539in</Height>
-            <Width>0.86264in</Width>
+            <Height>1.2339in</Height>
+            <Width>1.41264in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -1368,8 +1392,17 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="EntryNo">
-          <DataField>EntryNo</DataField>
+        <Field Name="ReportForNavId_4645">
+          <DataField>ReportForNavId_4645</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="Top_Up_Amount">
+          <DataField>Top_Up_Amount</DataField>
+        </Field>
+        <Field Name="Top_Up_AmountFormat">
+          <DataField>Top_Up_AmountFormat</DataField>
         </Field>
         <Field Name="CompanyName">
           <DataField>CompanyName</DataField>
@@ -1380,56 +1413,203 @@ End Function
         <Field Name="CompanyPhone">
           <DataField>CompanyPhone</DataField>
         </Field>
-        <Field Name="CompanyPic">
-          <DataField>CompanyPic</DataField>
-        </Field>
         <Field Name="CompanyEmail">
           <DataField>CompanyEmail</DataField>
         </Field>
-        <Field Name="ClientCode">
-          <DataField>ClientCode</DataField>
+        <Field Name="CompanyPic">
+          <DataField>CompanyPic</DataField>
         </Field>
-        <Field Name="ClientName">
-          <DataField>ClientName</DataField>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
         </Field>
-        <Field Name="LoanNo">
-          <DataField>LoanNo</DataField>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
         </Field>
-        <Field Name="LoanDisbursementDate">
-          <DataField>LoanDisbursementDate</DataField>
+        <Field Name="LoanType">
+          <DataField>LoanType</DataField>
         </Field>
-        <Field Name="LoanDisbursedAmount">
-          <DataField>LoanDisbursedAmount</DataField>
+        <Field Name="RFilters">
+          <DataField>RFilters</DataField>
         </Field>
-        <Field Name="LoanDisbursedAmountFormat">
-          <DataField>LoanDisbursedAmountFormat</DataField>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
         </Field>
-        <Field Name="LoanProductType">
-          <DataField>LoanProductType</DataField>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
         </Field>
-        <Field Name="LoanProductTypeName">
-          <DataField>LoanProductTypeName</DataField>
+        <Field Name="Loans__Loan__No__">
+          <DataField>Loans__Loan__No__</DataField>
         </Field>
-        <Field Name="LoansCategorySASRA">
-          <DataField>LoansCategorySASRA</DataField>
+        <Field Name="AccountNo_Loans">
+          <DataField>AccountNo_Loans</DataField>
         </Field>
-        <Field Name="Outstanding_Balance">
-          <DataField>Outstanding_Balance</DataField>
+        <Field Name="Loans__Client_Code_">
+          <DataField>Loans__Client_Code_</DataField>
         </Field>
-        <Field Name="Outstanding_BalanceFormat">
-          <DataField>Outstanding_BalanceFormat</DataField>
+        <Field Name="Loans__Client_Name_">
+          <DataField>Loans__Client_Name_</DataField>
         </Field>
-        <Field Name="Oustanding_Interest">
-          <DataField>Oustanding_Interest</DataField>
+        <Field Name="Loans__Requested_Amount_">
+          <DataField>Loans__Requested_Amount_</DataField>
         </Field>
-        <Field Name="Oustanding_InterestFormat">
-          <DataField>Oustanding_InterestFormat</DataField>
+        <Field Name="Loans__Requested_Amount_Format">
+          <DataField>Loans__Requested_Amount_Format</DataField>
         </Field>
-        <Field Name="IssuedDate">
-          <DataField>IssuedDate</DataField>
+        <Field Name="Loans__Approved_Amount_">
+          <DataField>Loans__Approved_Amount_</DataField>
         </Field>
-        <Field Name="Installments">
-          <DataField>Installments</DataField>
+        <Field Name="Loans__Approved_Amount_Format">
+          <DataField>Loans__Approved_Amount_Format</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Loans_Installments">
+          <DataField>Loans_Installments</DataField>
+        </Field>
+        <Field Name="Loans__Loan_Status_">
+          <DataField>Loans__Loan_Status_</DataField>
+        </Field>
+        <Field Name="Loans_Loans__Outstanding_Balance_">
+          <DataField>Loans_Loans__Outstanding_Balance_</DataField>
+        </Field>
+        <Field Name="Loans_Loans__Outstanding_Balance_Format">
+          <DataField>Loans_Loans__Outstanding_Balance_Format</DataField>
+        </Field>
+        <Field Name="Loans__Application_Date_">
+          <DataField>Loans__Application_Date_</DataField>
+        </Field>
+        <Field Name="Loans__Issued_Date_">
+          <DataField>Loans__Issued_Date_</DataField>
+        </Field>
+        <Field Name="Loans__Oustanding_Interest_">
+          <DataField>Loans__Oustanding_Interest_</DataField>
+        </Field>
+        <Field Name="Loans__Oustanding_Interest_Format">
+          <DataField>Loans__Oustanding_Interest_Format</DataField>
+        </Field>
+        <Field Name="Loans_Loans__Loan_Product_Type_">
+          <DataField>Loans_Loans__Loan_Product_Type_</DataField>
+        </Field>
+        <Field Name="Loans__Last_Pay_Date_">
+          <DataField>Loans__Last_Pay_Date_</DataField>
+        </Field>
+        <Field Name="Loans__Top_Up_Amount_">
+          <DataField>Loans__Top_Up_Amount_</DataField>
+        </Field>
+        <Field Name="Loans__Top_Up_Amount_Format">
+          <DataField>Loans__Top_Up_Amount_Format</DataField>
+        </Field>
+        <Field Name="Loans__Approved_Amount__Control1102760017">
+          <DataField>Loans__Approved_Amount__Control1102760017</DataField>
+        </Field>
+        <Field Name="Loans__Approved_Amount__Control1102760017Format">
+          <DataField>Loans__Approved_Amount__Control1102760017Format</DataField>
+        </Field>
+        <Field Name="Loans__Requested_Amount__Control1102760038">
+          <DataField>Loans__Requested_Amount__Control1102760038</DataField>
+        </Field>
+        <Field Name="Loans__Requested_Amount__Control1102760038Format">
+          <DataField>Loans__Requested_Amount__Control1102760038Format</DataField>
+        </Field>
+        <Field Name="EntryNo">
+          <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="Loans_Loans__Outstanding_Balance__Control1102760040">
+          <DataField>Loans_Loans__Outstanding_Balance__Control1102760040</DataField>
+        </Field>
+        <Field Name="Loans_Loans__Outstanding_Balance__Control1102760040Format">
+          <DataField>Loans_Loans__Outstanding_Balance__Control1102760040Format</DataField>
+        </Field>
+        <Field Name="Loans__Oustanding_Interest__Control1102760041">
+          <DataField>Loans__Oustanding_Interest__Control1102760041</DataField>
+        </Field>
+        <Field Name="Loans__Oustanding_Interest__Control1102760041Format">
+          <DataField>Loans__Oustanding_Interest__Control1102760041Format</DataField>
+        </Field>
+        <Field Name="Loans__Top_Up_Amount__Control1000000001">
+          <DataField>Loans__Top_Up_Amount__Control1000000001</DataField>
+        </Field>
+        <Field Name="Loans__Top_Up_Amount__Control1000000001Format">
+          <DataField>Loans__Top_Up_Amount__Control1000000001Format</DataField>
+        </Field>
+        <Field Name="Loans_RegisterCaption">
+          <DataField>Loans_RegisterCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Loan_TypeCaption">
+          <DataField>Loan_TypeCaption</DataField>
+        </Field>
+        <Field Name="Loans__Loan__No__Caption">
+          <DataField>Loans__Loan__No__Caption</DataField>
+        </Field>
+        <Field Name="Client_No_Caption">
+          <DataField>Client_No_Caption</DataField>
+        </Field>
+        <Field Name="Loans__Client_Name_Caption">
+          <DataField>Loans__Client_Name_Caption</DataField>
+        </Field>
+        <Field Name="Loans__Requested_Amount_Caption">
+          <DataField>Loans__Requested_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Loans__Approved_Amount_Caption">
+          <DataField>Loans__Approved_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Loans__Loan_Status_Caption">
+          <DataField>Loans__Loan_Status_Caption</DataField>
+        </Field>
+        <Field Name="Outstanding_LoanCaption">
+          <DataField>Outstanding_LoanCaption</DataField>
+        </Field>
+        <Field Name="PeriodCaption">
+          <DataField>PeriodCaption</DataField>
+        </Field>
+        <Field Name="Loans__Application_Date_Caption">
+          <DataField>Loans__Application_Date_Caption</DataField>
+        </Field>
+        <Field Name="Approved_DateCaption">
+          <DataField>Approved_DateCaption</DataField>
+        </Field>
+        <Field Name="Loans__Oustanding_Interest_Caption">
+          <DataField>Loans__Oustanding_Interest_Caption</DataField>
+        </Field>
+        <Field Name="Loan_TypeCaption_Control1102760043">
+          <DataField>Loan_TypeCaption_Control1102760043</DataField>
+        </Field>
+        <Field Name="Loans__Last_Pay_Date_Caption">
+          <DataField>Loans__Last_Pay_Date_Caption</DataField>
+        </Field>
+        <Field Name="Loans__Top_Up_Amount_Caption">
+          <DataField>Loans__Top_Up_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Verified_By__________________________________________________Caption">
+          <DataField>Verified_By__________________________________________________Caption</DataField>
+        </Field>
+        <Field Name="Confirmed_By__________________________________________________Caption">
+          <DataField>Confirmed_By__________________________________________________Caption</DataField>
+        </Field>
+        <Field Name="Sign________________________Caption">
+          <DataField>Sign________________________Caption</DataField>
+        </Field>
+        <Field Name="Sign________________________Caption_Control1102755003">
+          <DataField>Sign________________________Caption_Control1102755003</DataField>
+        </Field>
+        <Field Name="Date________________________Caption">
+          <DataField>Date________________________Caption</DataField>
+        </Field>
+        <Field Name="Date________________________Caption_Control1102755005">
+          <DataField>Date________________________Caption_Control1102755005</DataField>
+        </Field>
+        <Field Name="Lbal">
+          <DataField>Lbal</DataField>
+        </Field>
+        <Field Name="LbalFormat">
+          <DataField>LbalFormat</DataField>
         </Field>
       </Fields>
       <Query>
