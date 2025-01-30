@@ -830,6 +830,14 @@ tableextension 50047 "CustomerExt" extends Customer
         field(68202; "Member No. 2"; Code[20])
         {
         }
+        field(6804711; "Holiday Monthly Contribution"; Decimal)
+        {
+
+            trigger OnValidate()
+            begin
+
+            end;
+        }
         field(68199; "Likizo Contribution"; Decimal)
         {
 

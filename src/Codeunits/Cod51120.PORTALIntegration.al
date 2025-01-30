@@ -2260,6 +2260,16 @@ Codeunit 51120 PORTALIntegration
         end;
     end;
 
+    procedure fnGetNextofkin2(MemberNumber: Code[20]) return: Text
+    begin
+        objNextKin.Reset;
+        objNextKin.SetRange("Account No", MemberNumber);
+        if objNextKin.Find('-') then begin
+            repeat
+                return := return + objNextKin.Name + ':::' + objNextKin.Relationship + ':::' + objNextKin.Email + ':::' + Format(objNextKin."%Allocation") + '::::';
+            until objNextKin.Next = 0;
+        end;
+    end;
 
     procedure FNFosaBalance(Acc: Code[30]) Bal: Text[1024]
     var

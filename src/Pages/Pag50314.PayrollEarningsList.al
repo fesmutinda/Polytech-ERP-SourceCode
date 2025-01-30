@@ -61,4 +61,3 @@ page 50314 "Payroll Earnings List."
         Rec."Transaction Type" := Rec."Transaction Type"::Income;
     end;
 }
-

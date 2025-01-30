@@ -143,10 +143,10 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'M Pesa Charge ';
     // }
-    // value(36; "Insurance Charge")
-    // {
-    //     Caption = 'Insurance Charge';
-    // }
+    value(36; "Insurance Charged")
+    {
+        Caption = 'Insurance Charged';
+    }
     value(37; "Insurance Paid")
     {
         Caption = 'Insurance Paid';

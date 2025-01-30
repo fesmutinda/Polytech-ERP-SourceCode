@@ -2218,42 +2218,70 @@ Page 56043 "Polytech Sacco Role Center"
 
             group("Swizz Payroll Management")
             {
-                group("Payroll Employees.")
+                group("Payroll Employees")
                 {
-                    action("Payroll Employee List.")
+                    action("Payroll Employee List")
                     {
                         RunObject = page "Payroll Employee List.";
                         ApplicationArea = All;
 
                     }
-                    action("Payroll Earnings List")
+                    action("Payroll Earnings List.")
                     {
                         RunObject = page "Payroll Earnings List.";
                         ApplicationArea = All;
 
                     }
+                    action("Payroll Deductions List.")
+                    {
+                        RunObject = page "Payroll Deductions List.";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
+                    action("Payroll Employee Earnings.")
+                    {
+                        RunObject = page "Payroll Employee Earnings.";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
+                    action("Payroll Employee Deductions.")
+                    {
+                        RunObject = page "Payroll Employee Deductions.";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
 
                 }
-                group("Payrolll Periodic Activities.")
+                group("Payrolll Periodic Activities")
                 {
-                    action("Payroll Periods.")
+                    action("Payroll Periods")
                     {
                         RunObject = page "Payroll Periods.";
                         ApplicationArea = All;
 
                     }
-                    action("Transfer Payroll to journal.")
+                    action("Transfer Payroll to journal")
                     {
                         RunObject = report "Payroll JournalTransfer.";
                         ApplicationArea = All;
 
                     }
+                    action("General Journal")
+                    {
+                        RunObject = page "General Journal";
+                        ApplicationArea = All;
+                        Visible = false;
+
+                    }
 
                 }
-                group(Reports)
+                group(Reports1)
                 {
                     Caption = 'Reports';
-                    action("Payroll Employees Report.")
+                    action("Payroll Employees Report")
                     {
                         RunObject = report "Payroll Employees Report.";
                         ApplicationArea = All;
@@ -2268,33 +2296,33 @@ Page 56043 "Polytech Sacco Role Center"
                     //     RunObject = report "payroll Deductions Report.";
                     //     ApplicationArea = All;
                     // }
-                    action("NHIF Report.")
+                    action("NHIF Report")
                     {
                         RunObject = report "NHIF Schedule W..";
 
                         ApplicationArea = all;
                     }
-                    action("NSSF Report.")
+                    action("NSSF Report")
                     {
                         RunObject = report "NSSF Schedule W..";
                         ApplicationArea = all;
                     }
-                    action("Payroll Summary.")
+                    action("Payroll Summary")
                     {
                         RunObject = report "Payroll Summary";
                         ApplicationArea = All;
                     }
-                    action("Payroll Payee.")
+                    action("Payroll Payee")
                     {
                         RunObject = report "PAYE Schedule";
                         ApplicationArea = All;
                     }
-                    action("P9 Report.")
+                    action("P9 Report")
                     {
                         RunObject = report "P9 Report";
                         ApplicationArea = All;
                     }
-                    action("Staff Salaries Report.")
+                    action("Staff Salaries Report")
                     {
                         RunObject = report "Staff Salaries Report";
                         Caption = 'Staff Loan Report';
@@ -2303,7 +2331,7 @@ Page 56043 "Polytech Sacco Role Center"
 
 
                 }
-                group(Setup)
+                group(Setup1)
                 {
                     Caption = 'Payroll Setup';
                     action("Payroll PAYE Setup")

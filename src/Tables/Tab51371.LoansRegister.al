@@ -1593,7 +1593,7 @@ Table 51371 "Loans Register"
         }
         field(53102; "Outstanding Balance"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter(Loan | "Loan Repayment" | "Interest Paid" | "Interest Due"),
                                                                   "Currency Code" = field("Currency Filter"),
@@ -1632,7 +1632,7 @@ Table 51371 "Loans Register"
         }
         field(53108; "Penalty Charged"; Decimal)
         {
-            // CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            // CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
             //                                                       "Transaction Type" = filter("Unallocated Funds" | "23"),
             //                                                       "Loan No" = field("Loan  No."),
             //                                                       "Posting Date" = field("Date filter")));
@@ -1641,21 +1641,21 @@ Table 51371 "Loans Register"
         }
         field(53109; "Loan Amount"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Share Capital"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Shares Capital"),
                                                                   "Loan No" = field("Loan  No.")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(53110; "Current Shares"; Decimal)
         {
-            CalcFormula = - sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                    "Transaction Type" = filter(Loan)));
             FieldClass = FlowField;
         }
         field(53111; "Loan Repayment"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Transaction Type" = filter("Interest Paid"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
@@ -1711,14 +1711,14 @@ Table 51371 "Loans Register"
         }
         field(53182; "Last Pay Date"; Date)
         {
-            CalcFormula = max("Member Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
-                                                                          "Transaction Type" = filter("Interest Paid" | "Share Capital")));
+            CalcFormula = max("Cust. Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
+                                                                          "Transaction Type" = filter("Interest Paid" | "Shares Capital")));
             Editable = false;
             FieldClass = FlowField;
         }
         field(53183; "Interest Due"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Interest Due"),
                                                                   "Posting Date" = field("Date filter"),
                                                                   Reversed = filter(false)));
@@ -1753,14 +1753,14 @@ Table 51371 "Loans Register"
         }
         field(53185; "Interest Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Interest Paid"),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
         }
         field(53186; "Penalty Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Transaction Type" = filter("Interest Paid"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
@@ -1768,7 +1768,7 @@ Table 51371 "Loans Register"
         }
         field(53187; "Application Fee Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter(Dividend),
                                                                   "Posting Date" = field("Date filter")));
             Editable = false;
@@ -1776,7 +1776,7 @@ Table 51371 "Loans Register"
         }
         field(53188; "Appraisal Fee Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Mwanangu Savings"),
                                                                   "Posting Date" = field("Date filter")));
             Editable = false;
@@ -1820,7 +1820,7 @@ Table 51371 "Loans Register"
         }
         field(53194; "Interest Debit"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Deposit Contribution"),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
@@ -2184,7 +2184,7 @@ Table 51371 "Loans Register"
         }
         field(68007; "Current Repayment"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Interest Paid"),
                                                                   "Posting Date" = field("Period Date Filter")));
             Editable = false;
@@ -2192,7 +2192,7 @@ Table 51371 "Loans Register"
         }
         field(68008; "Oustanding Interest"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Interest Due" | "Interest Paid"),
                                                                   "Currency Code" = field("Currency Filter"),
@@ -2206,7 +2206,7 @@ Table 51371 "Loans Register"
         }
         field(68009; "Oustanding Interest to Date"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Insurance Contribution" | "Deposit Contribution"),
                                                                   "Document No." = field("Document No. Filter")));
             Editable = false;
@@ -2214,7 +2214,7 @@ Table 51371 "Loans Register"
         }
         field(68010; "Current Interest Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = const("Insurance Contribution"),
                                                                   "Posting Date" = field("Period Date Filter")));
             Editable = false;
@@ -2546,7 +2546,7 @@ Table 51371 "Loans Register"
         }
         field(68065; "Last Interest Pay Date"; Date)
         {
-            CalcFormula = max("Member Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
+            CalcFormula = max("Cust. Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
                                                                           "Transaction Type" = filter("Insurance Contribution"),
                                                                           "Posting Date" = field("Date filter")));
             Editable = false;
@@ -2576,8 +2576,8 @@ Table 51371 "Loans Register"
         }
         field(68071; "Outstanding Balance to Date"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid" | "FOSA Shares"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
             Editable = false;
@@ -2637,7 +2637,7 @@ Table 51371 "Loans Register"
         }
         field(68096; "Last Loan Issue Date"; Date)
         {
-            CalcFormula = max("Member Ledger Entry"."Posting Date" where("Customer No." = field("Client Code"),
+            CalcFormula = max("Cust. Ledger Entry"."Posting Date" where("Customer No." = field("Client Code"),
                                                                           "Transaction Type" = filter(Loan),
                                                                           "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
@@ -2696,7 +2696,7 @@ Table 51371 "Loans Register"
         }
         field(69007; "Outstanding Loan"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter(Loan | "Loan Repayment" | "Interest Due" | "Interest Paid"),
                                                                   "Currency Code" = field("Currency Filter"),
@@ -2706,21 +2706,21 @@ Table 51371 "Loans Register"
         }
         field(69008; "Loan Count"; Integer)
         {
-            CalcFormula = count("Member Ledger Entry" where("Customer No." = field("Client Code"),
-                                                             "Transaction Type" = filter("Share Capital"),
+            CalcFormula = count("Cust. Ledger Entry" where("Customer No." = field("Client Code"),
+                                                             "Transaction Type" = filter("Shares Capital"),
                                                              "Loan No" = field("Loan  No.")));
             FieldClass = FlowField;
         }
         field(69009; "Repay Count"; Integer)
         {
-            CalcFormula = count("Member Ledger Entry" where("Customer No." = field("Client Code"),
+            CalcFormula = count("Cust. Ledger Entry" where("Customer No." = field("Client Code"),
                                                              "Transaction Type" = filter("Interest Paid"),
                                                              "Loan No" = field("Loan  No.")));
             FieldClass = FlowField;
         }
         field(69010; "Outstanding Loan2"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Posting Date" = field("Date filter"),
                                                                   Amount = field("Approved Amount")));
             Editable = false;
@@ -2764,7 +2764,7 @@ Table 51371 "Loans Register"
         }
         // field(69020; Prepayments; Decimal)
         // {
-        //     CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+        //     CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
         //                                                           "Transaction Type" = filter("20"),
         //                                                           "Loan No" = field("Loan  No."),
         //                                                           "Posting Date" = field("Date filter"),
@@ -2890,8 +2890,8 @@ Table 51371 "Loans Register"
         }
         field(69044; "Total Loans Outstanding"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid"),
                                                                   "Loan Type" = filter(<> 'ADV' | 'ASSET' | 'B/L' | 'FL' | 'IPF')));
             FieldClass = FlowField;
         }
@@ -2975,7 +2975,7 @@ Table 51371 "Loans Register"
         }
         field(69057; "loan  Interest"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Loan No" = field("Loan  No."),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter("Insurance Contribution" | "Deposit Contribution"),
                                                                   "Posting Date" = field("Date filter")));
             Editable = false;
@@ -3052,14 +3052,14 @@ Table 51371 "Loans Register"
         }
         field(69067; "Loans Insurance"; Decimal)
         {
-            // CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            // CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
             //                                                       "Transaction Type" = filter("36" | "37"),
             //                                                       "Loan No" = field("Loan  No.")));
             // FieldClass = FlowField;
         }
         field(69068; "Last Int Date"; Date)
         {
-            CalcFormula = max("Member Ledger Entry"."Posting Date" where("Customer No." = field("Client Code"),
+            CalcFormula = max("Cust. Ledger Entry"."Posting Date" where("Customer No." = field("Client Code"),
                                                                           "Loan No" = field("Loan  No."),
                                                                           "Transaction Type" = filter("Deposit Contribution")));
             FieldClass = FlowField;
@@ -3095,8 +3095,8 @@ Table 51371 "Loans Register"
         }
         field(69078; "Totals Loan Outstanding"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Share Capital" | "Interest Paid"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Shares Capital" | "Interest Paid"),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
         }
@@ -3448,7 +3448,7 @@ Table 51371 "Loans Register"
         }
         field(69146; "Loan Due"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Transaction Type" = filter(Loan),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
@@ -3456,7 +3456,7 @@ Table 51371 "Loans Register"
         }
         field(69147; "Partial Disbursed(Amount Due)"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Transaction Type" = filter(Loan),
                                                                   "Currency Code" = field("Currency Filter"),
@@ -3660,7 +3660,7 @@ Table 51371 "Loans Register"
         }
         field(69185; "Outstanding Balance-Capitalize"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Transaction Type" = filter(Loan | "Loan Repayment"),
                                                                   "Posting Date" = field("Date filter"),
                                                                   "Loan No" = field("Loan  No.")));
@@ -3668,7 +3668,7 @@ Table 51371 "Loans Register"
         }
         field(69186; "Last Interest Due Date"; Date)
         {
-            CalcFormula = max("Member Ledger Entry"."Posting Date" where("Customer No." = field("Client Code"),
+            CalcFormula = max("Cust. Ledger Entry"."Posting Date" where("Customer No." = field("Client Code"),
                                                                           "Posting Date" = field("Date filter"),
                                                                           "Loan No" = field("Loan  No.")));
             FieldClass = FlowField;
@@ -3802,7 +3802,7 @@ Table 51371 "Loans Register"
                             ObjAccountLedger.SetRange(ObjAccountLedger."Transaction Type", ObjAccountLedger."transaction type"::"Deposit Contribution");
                             ObjAccountLedger.SetFilter(ObjAccountLedger."Posting Date", '>=%1', ThreeMonthsBack);
                             if ObjAccountLedger.Find('-') then begin
-                                ObjAccountLedger.CalcSums(ObjAccountLedger.Amount);
+                                ObjAccountLedger.CalcSums(ObjAccountLedger."Amount Posted");
                                 AverageDep := 10 * (-1 * (ObjAccountLedger.Amount / 3));
                                 if AverageDep > GenSetUp."Max Boosting Amount" then
                                     AverageDep := GenSetUp."Max Boosting Amount";
@@ -3861,7 +3861,7 @@ Table 51371 "Loans Register"
         }
         field(69215; "Principal Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Transaction Type" = filter("Loan Repayment"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
@@ -3917,15 +3917,15 @@ Table 51371 "Loans Register"
         }
         field(69225; "Loan Insurance Charged"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Loan Insurance Charged"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Insurance Charged"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
         }
         field(69226; "Loan Insurance Paid"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
                                                                   "Transaction Type" = filter("Loan Insurance Paid"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
@@ -3933,8 +3933,8 @@ Table 51371 "Loans Register"
         }
         field(69227; "Outstanding Insurance"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Loan Insurance Paid" | "Loan Insurance Charged"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Loan Insurance Paid" | "Insurance Charged"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
@@ -4262,8 +4262,8 @@ Table 51371 "Loans Register"
         }
         field(51516217; "Outstanding Penalty"; Decimal)
         {
-            CalcFormula = sum("Member Ledger Entry".Amount where("Customer No." = field("Client Code"),
-                                                                  "Transaction Type" = filter("Loan Insurance Paid" | "Loan Insurance Charged"),
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("Client Code"),
+                                                                  "Transaction Type" = filter("Loan Insurance Paid" | "Insurance Charged"),
                                                                   "Loan No" = field("Loan  No."),
                                                                   "Posting Date" = field("Date filter")));
             FieldClass = FlowField;
@@ -4483,7 +4483,7 @@ Table 51371 "Loans Register"
         }
         field(51516249; "Interest To Date"; Date)
         {
-            CalcFormula = max("Member Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
+            CalcFormula = max("Cust. Ledger Entry"."Posting Date" where("Loan No" = field("Loan  No."),
                                                                           "Transaction Type" = filter("Interest Due")));
             FieldClass = FlowField;
         }
@@ -4750,7 +4750,7 @@ Table 51371 "Loans Register"
         RAllocation: Record "Receipt Allocation";
         "Standing Orders": Record "Standing Orders";
         StatusPermissions: Record "Status Change Permision";
-        CustLedg: Record "Member Ledger Entry";
+        CustLedg: Record "Cust. Ledger Entry";
         LoansClearedSpecial: Record "Loan Special Clearance";
         BridgedLoans: Record "Loan Special Clearance";
         Loan: Record "Loans Register";
@@ -4799,7 +4799,7 @@ Table 51371 "Loans Register"
         ObjProductCharge: Record "Loan Product Charges";
         LInsurance: Decimal;
         ObjDepositHistory: Record "Member Deposits Saving History";
-        ObjAccountLedger: Record "Member Ledger Entry";
+        ObjAccountLedger: Record "Cust. Ledger Entry";
         ObjStatementB: Record "Member Deposits Saving History";
         StatementStartDate: Date;
         StatementDateFilter: Date;

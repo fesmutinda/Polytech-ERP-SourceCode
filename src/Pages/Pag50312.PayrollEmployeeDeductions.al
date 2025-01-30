@@ -2,6 +2,8 @@
 page 50312 "Payroll Employee Deductions."
 {
     PageType = List;
+    UsageCategory = Lists;
+    ApplicationArea = All;
     SourceTable = "Payroll Employee Transactions.";
     SourceTableView = where("Transaction Type" = const(Deduction));
 
@@ -19,68 +21,88 @@ page 50312 "Payroll Employee Deductions."
                 field("Transaction Name"; Rec."Transaction Name")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Loan Number"; Rec."Loan Number")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field("Original Deduction Amount"; Rec."Original Deduction Amount")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
+                    Visible = false;
                 }
                 field("Interest Charged"; Rec."Interest Charged")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    //Editable = false;
+                    Visible = false;
                 }
                 field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    //Editable = false;
                 }
                 field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
+                    Visible = false;
                 }
                 field("Amtzd Loan Repay Amt"; Rec."Amtzd Loan Repay Amt")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
+                    Visible = false;
                 }
                 field(Balance; Rec.Balance)
                 {
                     ApplicationArea = Basic;
+
                 }
                 field("Balance(LCY)"; Rec."Balance(LCY)")
                 {
                     ApplicationArea = Basic;
+                    Visible = false;
                 }
                 field("Period Month"; Rec."Period Month")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
+
                 }
                 field("Period Year"; Rec."Period Year")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
                 }
                 field("Payroll Period"; Rec."Payroll Period")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
                 }
                 field("Original Amount"; Rec."Original Amount")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
+                    Visible = false;
                 }
                 field("Outstanding Interest"; Rec."Outstanding Interest")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
+                    Visible = false;
                 }
                 field("Sacco Membership No."; Rec."Sacco Membership No.")
                 {
                     ApplicationArea = Basic;
+                    //Editable = false;
                 }
             }
         }
@@ -89,5 +111,20 @@ page 50312 "Payroll Employee Deductions."
     actions
     {
     }
-}
 
+    trigger OnOpenPage()
+    begin
+        ObjPayrollCalender.Reset;
+        ObjPayrollCalender.SetCurrentkey(ObjPayrollCalender."Date Opened");
+        ObjPayrollCalender.SetRange(ObjPayrollCalender.Closed, false);
+        if ObjPayrollCalender.FindLast then begin
+            VarOpenPeriod := ObjPayrollCalender."Date Opened";
+        end;
+
+        Rec.SetFilter("Payroll Period", '%1', VarOpenPeriod);
+    end;
+
+    var
+        ObjPayrollCalender: Record "Payroll Calender.";
+        VarOpenPeriod: Date;
+}

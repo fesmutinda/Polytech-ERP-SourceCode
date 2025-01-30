@@ -2899,7 +2899,7 @@ Codeunit 51022 SwizzKashMobile
                 countTrans := 1;
                 Cust_LedgerEntryTable.RESET;
                 Cust_LedgerEntryTable.SETRANGE(Cust_LedgerEntryTable."Customer No.", VendorTable."BOSA Account No");
-                Cust_LedgerEntryTable.SETRANGE(Cust_LedgerEntryTable."Transaction Type", Cust_LedgerEntryTable."Transaction Type"::"Interest Due");
+                //Cust_LedgerEntryTable.SETRANGE(Cust_LedgerEntryTable."Transaction Type", Cust_LedgerEntryTable."Transaction Type"::"Interest Due");
                 IF Cust_LedgerEntryTable.FIND('-') THEN BEGIN
                     countTrans := Cust_LedgerEntryTable.Count;
                     // REPEAT
@@ -2923,7 +2923,7 @@ Codeunit 51022 SwizzKashMobile
                 countTrans := 0;
                 Cust_LedgerEntryTable.RESET;
                 Cust_LedgerEntryTable.SETRANGE(Cust_LedgerEntryTable."Customer No.", VendorTable."BOSA Account No");
-                Cust_LedgerEntryTable.SETRANGE(Cust_LedgerEntryTable."Transaction Type", Cust_LedgerEntryTable."Transaction Type"::"Interest Due");
+                // Cust_LedgerEntryTable.SETRANGE(Cust_LedgerEntryTable."Transaction Type", Cust_LedgerEntryTable."Transaction Type"::"Interest Due");
                 Cust_LedgerEntryTable.SETFILTER(Cust_LedgerEntryTable."Posting Date", FORMAT(CALCDATE('CM+1D-6M', TODAY)) + '..' + FORMAT(CALCDATE('CM', TODAY)));
                 Cust_LedgerEntryTable.SETFILTER(Cust_LedgerEntryTable.Description, '<>%1', 'Opening Balance');
                 Cust_LedgerEntryTable.SETCURRENTKEY(Cust_LedgerEntryTable."Posting Date");

@@ -1,6 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 page 50324 "Payroll Employee Assignments."
 {
+    // version Payroll ManagementV1.0(Surestep Systems)
+
     DeleteAllowed = false;
     InsertAllowed = false;
     PageType = Card;
@@ -14,79 +16,71 @@ page 50324 "Payroll Employee Assignments."
             {
                 field("No."; Rec."No.")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
-                field(Surname; Rec.Surname)
+                field("Full Name"; Rec."Full Name")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                     Editable = false;
                 }
-                field(Firstname; Rec."First Name")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field(Lastname; Rec.Surname)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
+
                 field("Pays PAYE"; Rec."Pays PAYE")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field("Pays NSSF"; Rec."Pays NSSF")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field("Pays NHIF"; Rec."Pays NHIF")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field(Secondary; Rec.Secondary)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
             }
             group(Numbers)
             {
                 field("National ID No"; Rec."National ID No")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field("PIN No"; Rec."PIN No")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field("NHIF No"; Rec."NHIF No")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field("NSSF No"; Rec."NSSF No")
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
             }
             group("PAYE Relief and Benefit")
             {
                 field(GetsPayeRelief; Rec.GetsPayeRelief)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field(GetsPayeBenefit; Rec.GetsPayeBenefit)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
                 field(PayeBenefitPercent; Rec.PayeBenefitPercent)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
                 }
             }
             group("Employee Company")
             {
                 field(Company; Rec.Company)
                 {
-                    ApplicationArea = Basic;
+                    ApplicationArea = All;
+                    OptionCaption = '';
                 }
             }
         }
