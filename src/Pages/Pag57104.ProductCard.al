@@ -86,14 +86,14 @@ Page 57104 "Product Card"
                 field("Mobile Phone No"; Rec."Mobile Phone No")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = true;
                     Visible = true;
                 }
 
                 field("Mobile Phone No."; Rec."Mobile Phone No.")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = true;
                     Visible = false;
                 }
 
@@ -110,7 +110,7 @@ Page 57104 "Product Card"
                 field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = true;
                 }
                 field("Date of Birth"; Rec."Date of Birth")
                 {

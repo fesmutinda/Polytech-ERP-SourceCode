@@ -5090,7 +5090,7 @@ Codeunit 51022 SwizzKashMobile
                         res := 'TRUE';
                         msg := 'Dear ' + Vendor.Name + ', Your ACC: ' + Vendor."No." + ' has been credited with KES. ' + FORMAT(Amount) +
                                     ' .Thank you, POLYTECH Sacco Mobile.';
-                        SMSMessage('PAYBILL', Vendor."No.", Vendor."Phone No.", msg);
+                        SMSMessage('PAYBILL', Vendor."No.", Vendor."Mobile Phone No", msg);
                     END ELSE BEGIN
                         PaybillTransTable."Date Posted" := TODAY;
                         PaybillTransTable."Needs Manual Posting" := TRUE;
@@ -11537,12 +11537,6 @@ Codeunit 51022 SwizzKashMobile
             end
         end;
     end;
-
-
-
-
-
-
 
 
 }
