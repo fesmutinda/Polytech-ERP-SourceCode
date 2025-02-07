@@ -8,7 +8,7 @@ Report 50014 "Loan Arrears Report"
         dataitem("Loans Register"; "Loans Register")
         {
             DataItemTableView = where(Posted = const(true), "Amount in Arrears" = filter(> 0));
-            RequestFilterFields = Source, "Loan Product Type", "Issued Date";
+            RequestFilterFields = "Client Code", "Outstanding Balance", Source, "Loan Product Type", "Issued Date";
             column(Counting; Counting)
             {
             }
@@ -24,7 +24,7 @@ Report 50014 "Loan Arrears Report"
             column(EmployerCode_Loans; "Loans Register"."Employer Code")
             {
             }
-            column(LoanProductType_Loans; "Loans Register"."Loan Product Type")
+            column(LoanProductType_Loans; "Loans Register"."Loan Product Type Name")
             {
             }
             column(LoanNo_Loans; "Loans Register"."Loan  No.")
@@ -72,13 +72,23 @@ Report 50014 "Loan Arrears Report"
             column(Month; Month)
             {
             }
-            column(Name; CompanyInfo.Name)
+            column(Loans_Category_SASRA; "Loans Category-SASRA")
+            {
+
+            }
+            column(CompanyName; CompanyInfo.Name)
             {
             }
-            column(Address; CompanyInfo.Address)
+            column(CompanyAddress; CompanyInfo.Address)
             {
             }
-            column(Picture; CompanyInfo.Picture)
+            column(CompanyPhone; CompanyInfo."Phone No.")
+            {
+            }
+            column(CompanyPic; CompanyInfo.Picture)
+            {
+            }
+            column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
 

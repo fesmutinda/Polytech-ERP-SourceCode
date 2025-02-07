@@ -12,7 +12,7 @@ Report 50379 "Dividend Processing-Flat Rate"
 
     {
 
-        dataitem(Customer; "Member Register")
+        dataitem(Customer; Customer)
         {
             DataItemTableView = sorting("No.") where("No." = filter(<> ''));
             RequestFilterFields = "No.", Status;

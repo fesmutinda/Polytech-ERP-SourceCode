@@ -1,15 +1,15 @@
-Report 50050 MembershipApplicationReport
+Report 50056 "Memberwithoutsignaturereport"
 {
     ApplicationArea = All;
-    Caption = 'Membership Application Report';
-    RDLCLayout = './Layout/MembershipApplicationReport.rdl';
+    Caption = 'Members without signature report.';
+    RDLCLayout = './Layout/Memberwithoutsignaturereport.rdlc';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem("Membership Applications"; "Membership Applications")
+        dataitem(Customer; Customer)
         {
             DataItemTableView = sorting("No.") order(descending);
-            RequestFilterFields = Status, "Registration Date";
+
             column(CompanyName; CompanyInfo.Name)
             {
             }
@@ -25,18 +25,11 @@ Report 50050 MembershipApplicationReport
             column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
-            column(No; "No.")
-            { }
-            column(Name; Name)
-            { }
-            column(ID_No_; "ID No.")
-            { }
-            column(EntryNo; EntryNo)
-            { }
-            column(Phone_No_; "Mobile Phone No")
-            { }
-            column(Registration_Date; "Registration Date")
-            { }
+            column(No; "No.") { }
+            column(Name; Name) { }
+            column(ID_No_; "ID No.") { }
+            column(EntryNo; EntryNo) { }
+            column(Phone_No_; "Phone No.") { }
 
 
 
@@ -45,7 +38,8 @@ Report 50050 MembershipApplicationReport
             var
             begin
 
-                ;
+                If Signature.HasValue then
+                    CurrReport.Skip();
                 EntryNo := EntryNo + 1;
             end;
 
@@ -72,17 +66,16 @@ Report 50050 MembershipApplicationReport
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        CompanyInfo.CALCFIELDS(CompanyInfo.Picture);
-        Datefilter := TbMembRegister.GetFilter("Date Filter");
+        Datefilter := Customer.GetFilter("Date Filter");
+        CompanyInfo.CalcFields(CompanyInfo.Picture);
 
     end;
-
 
     var
         CompanyInfo: Record "Company Information";
         EntryNo: Integer;
         Sharecapital: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record Customer;
+        Cust: Record Customer;
         Gensetup: Record "Sacco General Set-Up";
 }

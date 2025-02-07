@@ -1109,14 +1109,14 @@ Page 56043 "Polytech Sacco Role Center"
                 }
 
 
-                /* group("Member Reports")
+                group("Member Reports")
                 {
 
                     Caption = 'Membership Reports';
                     action("Sacco Membership Reports")
                     {
                         ApplicationArea = all;
-                        RunObject = report "Member Accounts List";
+                        RunObject = Page "Member List";
                         ToolTip = 'Members Register';
 
                     }
@@ -1193,7 +1193,7 @@ Page 56043 "Polytech Sacco Role Center"
                     action("Members Without Next of Kin")
                     {
                         ApplicationArea = All;
-                        // RunObject = report MemberWithoutNextOfKin;
+                        RunObject = report MemberWithoutNextOfKin;
                     }
                     action("Member shares Report")
                     {
@@ -1210,12 +1210,12 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = all;
                         RunObject = report "Member Detailed Statement";
                     }
-                    action("Member Accounts Statement")
+                    /* action("Member Accounts Statement")
                     {
                         ApplicationArea = all;
                         RunObject = report "Member Account Statement";
-                    }
-                } */
+                    } */
+                }
 
 
             }

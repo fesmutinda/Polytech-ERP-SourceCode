@@ -2,12 +2,12 @@
 Report 50222 "Member Account  Balances"
 {
     ApplicationArea = All;
-    RDLCLayout = './Layouts/MemberAccountbalances.rdl';
+    RDLCLayout = './Layouts/MemberAccountbalances.rdlc';
     UsageCategory = ReportsAndAnalysis;
 
     dataset
     {
-        dataitem(member; "Member Register")
+        dataitem(member; "Customer")
         {
             RequestFilterFields = "No.", Name, "Date Filter";
             /* column(ReportForNavId_1102755077; 1102755077)
@@ -43,9 +43,9 @@ Report 50222 "Member Account  Balances"
             column(OutstandingBalance_member; Member."Outstanding Balance")
             {
             }
-            /* column(Shares_capital; Member."Share Capital")
+            column(Shares_capital; Member."Share Capital")
             {
-            } */
+            }
 
             column(Outstanding_Interest; Member."Outstanding Interest")
             {
@@ -67,10 +67,10 @@ Report 50222 "Member Account  Balances"
             trigger OnAfterGetRecord()
             begin
 
-                CalcFields("Current Shares", /* "Share Capital", */ "Outstanding Balance", "Outstanding Interest"/* , "Alpha Savings", "Junior Savings One", "Likizo Contribution" */);
+                CalcFields("Current Shares", "Share Capital", "Outstanding Balance", "Outstanding Interest"/* , "Alpha Savings", "Junior Savings One", "Likizo Contribution" */);
                 LoansBal := "Outstanding Balance";
                 CurrentShares := "Current Shares";
-                //SharesCap := "Share Capital";
+                SharesCap := "Share Capital";
                 InterestBal := "Outstanding Interest";
 
 

@@ -1,15 +1,15 @@
-Report 50050 MembershipApplicationReport
+Report 50057 "MemberWithoutNextOfKin"
 {
     ApplicationArea = All;
-    Caption = 'Membership Application Report';
-    RDLCLayout = './Layout/MembershipApplicationReport.rdl';
+    Caption = 'Members without Next report.';
+    RDLCLayout = './Layout/MemberWithoutNextOfKin.rdlc';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem("Membership Applications"; "Membership Applications")
+        dataitem(Customer; Customer)
         {
             DataItemTableView = sorting("No.") order(descending);
-            RequestFilterFields = Status, "Registration Date";
+
             column(CompanyName; CompanyInfo.Name)
             {
             }
@@ -25,18 +25,11 @@ Report 50050 MembershipApplicationReport
             column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
-            column(No; "No.")
-            { }
-            column(Name; Name)
-            { }
-            column(ID_No_; "ID No.")
-            { }
-            column(EntryNo; EntryNo)
-            { }
-            column(Phone_No_; "Mobile Phone No")
-            { }
-            column(Registration_Date; "Registration Date")
-            { }
+            column(No; "No.") { }
+            column(Name; Name) { }
+            column(ID_No_; "ID No.") { }
+            column(EntryNo; EntryNo) { }
+            column(Phone_No_; "Phone No.") { }
 
 
 
@@ -44,9 +37,14 @@ Report 50050 MembershipApplicationReport
             trigger OnAfterGetRecord();
             var
             begin
-
-                ;
                 EntryNo := EntryNo + 1;
+                NextOfKin.Reset();
+                NextOfKin.SetRange(NextOfKin."Account No", "No.");
+                if NextOfKin.Find('-') then
+                    if NextOfKin.IsEmpty = false then begin
+                        CurrReport.Skip();
+                    end;
+
             end;
 
         }
@@ -72,17 +70,17 @@ Report 50050 MembershipApplicationReport
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        CompanyInfo.CALCFIELDS(CompanyInfo.Picture);
-        Datefilter := TbMembRegister.GetFilter("Date Filter");
+        Datefilter := Customer.GetFilter("Date Filter");
+        CompanyInfo.CalcFields(CompanyInfo.Picture);
 
     end;
-
 
     var
         CompanyInfo: Record "Company Information";
         EntryNo: Integer;
         Sharecapital: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record Customer;
+        Cust: Record Customer;
         Gensetup: Record "Sacco General Set-Up";
+        NextOfKin: Record "Members Next Kin Details";
 }

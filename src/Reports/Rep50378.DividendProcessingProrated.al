@@ -10,7 +10,7 @@ Report 50378 "Dividend Processing-Prorated"
 
     dataset
     {
-        dataitem(Customer; "Member Register")
+        dataitem(Customer; Customer)
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.", Status;
@@ -881,8 +881,8 @@ Report 50378 "Dividend Processing-Prorated"
         CurrReport_PAGENOCaptionLbl: label 'Page';
         LastFieldNo: Integer;
         FooterPrinted: Boolean;
-        //Cust: Record Customer;
-        Cust: Record "Member Register";
+        Cust: Record Customer;
+        //Cust: Record "Member Register";
         "From Date": Date;
         DateFilter: Text[100];
         FromDate: Date;

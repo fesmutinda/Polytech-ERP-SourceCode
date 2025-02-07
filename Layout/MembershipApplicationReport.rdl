@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-02-04T13:36:03.0745106Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -8,7 +19,7 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>66acc775-7709-4d7f-b221-2eba4753de28</rd:DataSourceID>
+      <rd:DataSourceID>d82bb707-fef9-4a0a-8012-5dccc58020a5</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -19,19 +30,22 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.39931in</Width>
+                  <Width>0.32192in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.10764in</Width>
+                  <Width>1.03025in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.21875in</Width>
+                  <Width>3.03913in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.92261in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.36458in</Width>
+                  <Width>1.08719in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.24427in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -213,6 +227,41 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Registration Date</Value>
+                                  <Style>
+                                    <FontFamily>Cambria</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Width>2pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -373,12 +422,45 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Registration_Date">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Registration_Date.Value</Value>
+                                  <Style>
+                                    <FontFamily>Cambria</FontFamily>
+                                    <Format>d MMM yyyy</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Registration_Date</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -397,10 +479,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.09035in</Top>
-            <Left>0.13125in</Left>
+            <Top>0.04688in</Top>
+            <Left>0.33658in</Left>
             <Height>0.40625in</Height>
-            <Width>7.09028in</Width>
+            <Width>7.64537in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -408,25 +490,38 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>0.84528in</Height>
+        <Height>1in</Height>
         <Style />
       </Body>
-      <Width>7.45278in</Width>
+      <Width>8.19862in</Width>
       <Page>
         <PageHeader>
-          <Height>0.89167in</Height>
+          <Height>1.09166in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <Line Name="Line1">
+              <Top>1.02993in</Top>
+              <Left>0.33658in</Left>
+              <Height>0in</Height>
+              <Width>7.60266in</Width>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                  <Width>2pt</Width>
+                </Border>
+              </Style>
+            </Line>
             <Image Name="Image1">
               <Source>Database</Source>
               <Value>=First(Fields!CompanyPic.Value, "DataSet_Result")</Value>
               <MIMEType>image/png</MIMEType>
               <Sizing>FitProportional</Sizing>
-              <Top>0.13959in</Top>
-              <Left>0.13125in</Left>
-              <Height>0.64583in</Height>
-              <Width>0.97917in</Width>
+              <Top>0.1534in</Top>
+              <Left>0.33658in</Left>
+              <Height>0.77083in</Height>
+              <Width>0.95197in</Width>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -440,7 +535,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Member application report</Value>
+                      <Value>Members Application Report.</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Cambria</FontFamily>
@@ -457,11 +552,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>0.53542in</Top>
-              <Left>1.61736in</Left>
+              <Top>0.67771in</Top>
+              <Left>1.84352in</Left>
               <Height>0.25in</Height>
-              <Width>3.82292in</Width>
-              <ZIndex>1</ZIndex>
+              <Width>3.74572in</Width>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -489,11 +584,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>0.13959in</Top>
-              <Left>5.87778in</Left>
-              <Height>0.16667in</Height>
-              <Width>1.34375in</Width>
-              <ZIndex>2</ZIndex>
+              <Top>0.1534in</Top>
+              <Left>5.95045in</Left>
+              <Height>0.20972in</Height>
+              <Width>1.97837in</Width>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -521,11 +616,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>0.32015in</Top>
-              <Left>5.87778in</Left>
-              <Height>0.16667in</Height>
-              <Width>1.34375in</Width>
-              <ZIndex>3</ZIndex>
+              <Top>0.43256in</Top>
+              <Left>5.95045in</Left>
+              <Height>0.22223in</Height>
+              <Width>1.98879in</Width>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -553,11 +648,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>0.48682in</Top>
-              <Left>5.87778in</Left>
-              <Height>0.16667in</Height>
-              <Width>1.34375in</Width>
-              <ZIndex>4</ZIndex>
+              <Top>0.72423in</Top>
+              <Left>5.95045in</Left>
+              <Height>0.2in</Height>
+              <Width>1.98879in</Width>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -568,7 +663,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox95">
+            <Textbox Name="Textbox4">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -576,7 +671,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
-                      <Style />
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -584,12 +681,46 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox95</rd:DefaultName>
-              <Top>0.13959in</Top>
-              <Left>1.27167in</Left>
-              <Height>0.25264in</Height>
-              <Width>4.33333in</Width>
-              <ZIndex>5</ZIndex>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0.1534in</Top>
+              <Left>1.54769in</Left>
+              <Height>0.23612in</Height>
+              <Width>4.15822in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox8">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox5</rd:DefaultName>
+              <Top>0.41729in</Top>
+              <Left>1.54769in</Left>
+              <Height>0.20486in</Height>
+              <Width>4.15822in</Width>
+              <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -607,10 +738,6 @@
             </Border>
           </Style>
         </PageHeader>
-        <LeftMargin>0.4in</LeftMargin>
-        <RightMargin>0.4in</RightMargin>
-        <TopMargin>0.5in</TopMargin>
-        <BottomMargin>0.5in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

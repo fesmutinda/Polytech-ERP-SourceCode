@@ -8,7 +8,7 @@ Report 50207 "SASRA Loans Classification"
         dataitem("Loans Register"; "Loans Register")
         {
             DataItemTableView = sorting("Client Code") order(ascending) where(Posted = const(true));
-            RequestFilterFields = "Client Code", "Loan Product Type", "Loan  No.", "Issued Date";
+            RequestFilterFields = Source, "Client Code", "Loan Product Type", "Loan  No.", "Issued Date";
             column(ReportForNavId_1120054000; 1120054000)
             {
             }

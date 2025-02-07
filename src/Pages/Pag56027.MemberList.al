@@ -7,7 +7,6 @@ Page 56027 "Member List"
     Editable = false;
     DeleteAllowed = true;
     PageType = List;
-    //SourceTable = "Member Register";
     SourceTable = Customer;
     SourceTableView = sorting("No.")
                       order(descending)

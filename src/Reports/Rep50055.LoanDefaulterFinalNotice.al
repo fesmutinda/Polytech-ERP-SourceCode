@@ -142,26 +142,48 @@ Report 50055 "Loan Defaulter Final Notice"
                 }
             }
 
+            // trigger OnAfterGetRecord()
+            // begin
+            //     //Penaltcharge := 0.05 * ("LoansRec"."Current Shares" + "LoansRec"."Share Purchase");
+            //     //AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
+
+            //     AmountInArrears_DefaultNoticesRegister := Round("Outstanding Balance" + "Oustanding Interest");
+            //     if "Current Shares" > AmountInArrears_DefaultNoticesRegister then
+            //         AmountInArrears_DefaultNoticesRegister := 0
+            //     else
+            //         AmouuntToRecover := AmountInArrears_DefaultNoticesRegister - -"LoansRec"."Current Shares";
+            //     OutstandingInt := "Oustanding Interest";
+            //     LoanNo := "Loan  No.";
+
+            // end;
+
+            // trigger OnPreDataItem()
+            // begin
+            //     CalcFields("Outstanding Balance", "Oustanding Interest", "Current Shares");
+
+            // end;
             trigger OnAfterGetRecord()
             begin
-                //Penaltcharge := 0.05 * ("LoansRec"."Current Shares" + "LoansRec"."Share Purchase");
-                //AmouuntToRecover := ("Outstanding Balance" + "Oustanding Interest" + Penaltcharge) - "Current Shares";
-
+                // Calculate total arrears (Outstanding Balance + Outstanding Interest)
                 AmountInArrears_DefaultNoticesRegister := Round("Outstanding Balance" + "Oustanding Interest");
-                if "Current Shares" > AmountInArrears_DefaultNoticesRegister then
-                    AmountInArrears_DefaultNoticesRegister := 0
+
+                // Ensure amount is correctly reduced if current shares cover the arrears
+                if "Current Shares" >= AmountInArrears_DefaultNoticesRegister then
+                    AmouuntToRecover := 0
                 else
-                    AmouuntToRecover := AmountInArrears_DefaultNoticesRegister - -"LoansRec"."Current Shares";
+                    AmouuntToRecover := AmountInArrears_DefaultNoticesRegister - "Current Shares"; // Removed redundant negative sign (- -)
+
+                // Assign values to variables
                 OutstandingInt := "Oustanding Interest";
                 LoanNo := "Loan  No.";
-
             end;
 
             trigger OnPreDataItem()
             begin
+                // Ensure calculated fields are retrieved
                 CalcFields("Outstanding Balance", "Oustanding Interest", "Current Shares");
-
             end;
+
         }
     }
 

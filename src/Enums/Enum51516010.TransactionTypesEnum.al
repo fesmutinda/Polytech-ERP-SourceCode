@@ -4,96 +4,91 @@ enum 51516010 "TransactionTypesEnum"
 
     value(0; " ")
     {
-
     }
     value(1; "Registration Fee")
     {
         Caption = 'Registration Fee';
     }
-    value(2; Loan)
+    value(2; "Share Capital")
     {
-        Caption = 'Loan';
+        Caption = 'Share Capital';
     }
-    value(3; Repayment)
+    value(3; "Interest Paid")
+    {
+        Caption = 'Interest Paid';
+    }
+    value(4; "Loan Repayment")
     {
         Caption = 'Repayment';
     }
-    value(4; Withdrawal)
+    value(5; "Deposit Contribution")
     {
-        Caption = 'Withdrawal';
+        Caption = 'Deposit Contribution';
     }
-    value(5; "Interest Due")
+    value(6; "Insurance Contribution")
     {
-        Caption = 'Interest Due';
-    }
-    value(6; "Interest Paid")
-    {
-        Caption = 'Interest Paid';
+        Caption = 'Insurance Contribution';
     }
     value(7; "Benevolent Fund")
     {
         Caption = 'Benevolent Fund';
     }
-    value(8; "Deposit Contribution")
+    value(8; Loan)
     {
-        Caption = 'Deposit Contribution';
+        Caption = 'Loan';
     }
-    // value(9; "Penalty Charged")
-    // {
-    //     Caption = 'Penalty Charged';
-    // }
-    // value(10; "Application Fee")
-    // {
-    //     Caption = 'Application Fee';
-    // }
-    // value(11; "Appraisal Fee")
-    // {
-    //     Caption = 'Appraisal Fee';
-    // }
-    // value(12; Executive)
-    // {
-    //     Caption = 'Executive';
-    // }
-    value(13; "Unallocated Funds")
+    value(9; "Unallocated Funds")
     {
         Caption = 'Unallocated Funds';
     }
-    value(14; "Share Capital")
-    {
-        Caption = 'Share Capital';
-    }
-    value(15; "Loan Adjustment")
-    {
-        Caption = 'Loan Adjustment';
-    }
-    value(16; Dividend)
+    value(10; Dividend)
     {
         Caption = 'Dividend';
     }
-    value(17; "Withholding Tax")
+    value(11; "Mwanangu Savings")
+    {
+
+    }
+    value(12; "Loan Insurance Charged")
+    {
+        Caption = 'Insurance Charge';
+    }
+    value(13; "Loan Insurance Paid")
+    {
+
+    }
+    value(14; "Recovery Account")
+    {
+
+    }
+    value(15; "Standing Order Charges")
+    {
+    }
+
+    value(17; "Interest Due")
+    {
+        Caption = 'Interest Due';
+    }
+    value(18; "Jiokoe Savings")
+    {
+    }
+    value(19; "Holiday Savings")
+    {
+        Caption = 'Holiday Savings';
+    }
+    value(20; Withdrawal)
+    {
+        Caption = 'Withdrawal';
+    }
+    value(21; "Withholding Tax")
     {
         Caption = 'Withholding Tax';
     }
-    // value(18; "Administration Fee")
-    // {
-    //     Caption = 'Administration Fee';
-    // }
-    value(19; "Insurance Contribution")
+    value(22; "Loan Adjustment")
     {
-        Caption = 'Insurance Contribution';
+        Caption = 'Loan Adjustment';
     }
-    // value(20; Prepayment)
-    // {
-    //     Caption = 'Prepayment';
-    // }
-    // value(21; "Ordinary Building Shares(2)")
-    // {
-    //     Caption = 'Ordinary Building Shares(2)';
-    // }
-    // value(22; "Xmas Contribution")
-    // {
-    //     Caption = 'Xmas Contribution';
-    // }
+
     // value(23; "Penalty Paid")
     // {
     //     Caption = 'Penalty Paid';
@@ -211,10 +206,7 @@ enum 51516010 "TransactionTypesEnum"
     {
         Caption = 'Housing Shares';
     }
-    value(52; "Holiday Savings")
-    {
-        Caption = 'Holiday Savings';
-    }
+
     value(53; Alpha_savings)
     {
         Caption = 'Alpha Savings';
@@ -224,10 +216,7 @@ enum 51516010 "TransactionTypesEnum"
     // {
 
     // }
-    value(55; "Loan Insurance Paid")
-    {
 
-    }
     value(56; Junior_1)
     {
 
@@ -237,9 +226,6 @@ enum 51516010 "TransactionTypesEnum"
 
     }
 
-    value(58; "Jiokoe Savings")
-    {
-    }
     value(59; Junior3)
     {
 
@@ -256,20 +242,28 @@ enum 51516010 "TransactionTypesEnum"
     // {
     //     Caption = 'Debtors to Ex-Members';
     // }
-    value(63; "Loan Repayment")
+    value(63; Repayment)
     {
-
     }
-    value(64; "Mwanangu Savings")
+    value(62; "EXCISE_DUTY")
     {
-
+        Caption = 'EXCISE_DUTY';
     }
-    value(65; "Recovery Account")
+    value(58; "MOBILE_FOSA_TRANSFER")
     {
-
+        Caption = 'MOBILE_FOSA_TRANSFER';
     }
-    value(66; "Standing Order Charges")
+    value(64; "MOBILE_BOSA_TRANSFER")
     {
-
+        Caption = 'MOBILE_BOSA_TRANSFER';
     }
+    value(60; "MOBILE_FOSA_TRANSFER_CHARGE")
+    {
+        Caption = 'MOBILE_FOSA_TRANSFER_CHARGE';
+    }
+    value(61; "MOBILE_BOSA_TRANSFER_CHARGE")
+    {
+        Caption = 'MOBILE_BOSA_TRANSFER_CHARGE';
+    }
+
 }

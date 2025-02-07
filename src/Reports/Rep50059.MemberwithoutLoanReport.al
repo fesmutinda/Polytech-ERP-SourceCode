@@ -1,15 +1,15 @@
-Report 50050 MembershipApplicationReport
+Report 50059 MemberwithoutLoanReport
 {
     ApplicationArea = All;
-    Caption = 'Membership Application Report';
-    RDLCLayout = './Layout/MembershipApplicationReport.rdl';
+    Caption = 'Members without loan report.';
+    RDLCLayout = './Layout/MemberwithoutLoanReport.rdlc';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem("Membership Applications"; "Membership Applications")
+        dataitem(Customer; Customer)
         {
             DataItemTableView = sorting("No.") order(descending);
-            RequestFilterFields = Status, "Registration Date";
+            RequestFilterFields = "No.", "Date Filter";
             column(CompanyName; CompanyInfo.Name)
             {
             }
@@ -25,27 +25,30 @@ Report 50050 MembershipApplicationReport
             column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
-            column(No; "No.")
-            { }
-            column(Name; Name)
-            { }
-            column(ID_No_; "ID No.")
-            { }
-            column(EntryNo; EntryNo)
-            { }
-            column(Phone_No_; "Mobile Phone No")
-            { }
-            column(Registration_Date; "Registration Date")
-            { }
+            column(No; "No.") { }
+            column(Name; Name) { }
+            column(ID_No_; "ID No.") { }
+            column(EntryNo; EntryNo) { }
+            column(Phone_No_; "Phone No.") { }
 
-
-
+            column(OutstandingBalance; OutstandingBalance) { }
+            trigger OnPreDataItem()
+            var
+                myInt: Integer;
+            begin
+                OutstandingBalance := 0;
+            end;
 
             trigger OnAfterGetRecord();
             var
             begin
-
-                ;
+                Cust.SetFilter(Cust."Date Filter", Datefilter);
+                if cust.get(Customer."No.") then begin
+                    cust.SetAutoCalcFields(Cust."Outstanding Balance");
+                    OutstandingBalance := cust."Outstanding Balance";
+                end;
+                if OutstandingBalance > 0 then
+                    CurrReport.Skip();
                 EntryNo := EntryNo + 1;
             end;
 
@@ -72,17 +75,15 @@ Report 50050 MembershipApplicationReport
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        CompanyInfo.CALCFIELDS(CompanyInfo.Picture);
-        Datefilter := TbMembRegister.GetFilter("Date Filter");
-
+        Datefilter := Customer.GetFilter("Date Filter");
+        CompanyInfo.CalcFields(CompanyInfo.Picture);
     end;
-
 
     var
         CompanyInfo: Record "Company Information";
         EntryNo: Integer;
-        Sharecapital: Decimal;
+        OutstandingBalance: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record Customer;
+        Cust: Record Customer;
         Gensetup: Record "Sacco General Set-Up";
 }

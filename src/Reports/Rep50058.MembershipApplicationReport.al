@@ -1,15 +1,15 @@
-Report 50050 MembershipApplicationReport
+Report 50058 MembershipApplicationReport2
 {
     ApplicationArea = All;
-    Caption = 'Membership Application Report';
-    RDLCLayout = './Layout/MembershipApplicationReport.rdl';
+    Caption = 'Member application report.';
+    RDLCLayout = './Layout/MembershipApplicationReport.rdlc';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
         dataitem("Membership Applications"; "Membership Applications")
         {
             DataItemTableView = sorting("No.") order(descending);
-            RequestFilterFields = Status, "Registration Date";
+            RequestFilterFields = Status;
             column(CompanyName; CompanyInfo.Name)
             {
             }
@@ -25,18 +25,11 @@ Report 50050 MembershipApplicationReport
             column(CompanyEmail; CompanyInfo."E-Mail")
             {
             }
-            column(No; "No.")
-            { }
-            column(Name; Name)
-            { }
-            column(ID_No_; "ID No.")
-            { }
-            column(EntryNo; EntryNo)
-            { }
-            column(Phone_No_; "Mobile Phone No")
-            { }
-            column(Registration_Date; "Registration Date")
-            { }
+            column(No; "No.") { }
+            column(Name; Name) { }
+            column(ID_No_; "ID No.") { }
+            column(EntryNo; EntryNo) { }
+            column(Phone_No_; "Phone No.") { }
 
 
 
@@ -72,17 +65,16 @@ Report 50050 MembershipApplicationReport
     trigger OnPreReport()
     begin
         CompanyInfo.Get();
-        CompanyInfo.CALCFIELDS(CompanyInfo.Picture);
-        Datefilter := TbMembRegister.GetFilter("Date Filter");
+        Datefilter := Cust.GetFilter("Date Filter");
+        CompanyInfo.CalcFields(CompanyInfo.Picture);
 
     end;
-
 
     var
         CompanyInfo: Record "Company Information";
         EntryNo: Integer;
         Sharecapital: Decimal;
         Datefilter: Text[100];
-        TbMembRegister: Record Customer;
+        Cust: Record Customer;
         Gensetup: Record "Sacco General Set-Up";
 }

@@ -143,6 +143,24 @@ tableextension 56013 CustLedgerEntryExt extends "Cust. Ledger Entry"
             OptionCaption = ',Salary Processing,Checkoff Processing,Cashier Receipt,BackOffice Receipt,Autorecovery,Funds Transfer';
             OptionMembers = ,"Salary Processing","Checkoff Processing","Cashier Receipt","BackOffice Receipt",Autorecovery,"Funds Transfer";
         }
+
+        // field(7710; "Debit Amount(LCY)"; Decimal)
+        // {
+        // }
+        // field(7711; "Credit Amount(LCY)"; Decimal)
+        // {
+        // }
+        // field(7712; Amount; Decimal)
+        // {
+        // }
+
+        // field(7713; "Original Amt_(LCY)"; Decimal)
+        // {
+        // }
+        // field(7714; "Remaining Amt_(LCY)"; Decimal)
+        // {
+        // }
+
     }
     keys
     {
