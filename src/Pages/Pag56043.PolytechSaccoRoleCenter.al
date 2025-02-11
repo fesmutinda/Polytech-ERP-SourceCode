@@ -1188,7 +1188,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = All;
                         Caption = 'Benificiary Report';
-                        RunObject = report "Next of Kin Details Report";
+                        RunObject = report "Next of Kin Details2 Report";
                     }
                     action("Members Without Next of Kin")
                     {

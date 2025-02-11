@@ -1,14 +1,12 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 50060 "Next of Kin Details Report0"
+Report 50073 "Next of Kin Details Report"
 {
-    //DefaultLayout = RDLC;
-    ApplicationArea = All;
-    UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './Layouts/NextofKinDetailsReport.rdl';
+    DefaultLayout = RDLC;
+    RDLCLayout = './Layouts/Next of Kin Details Report2.rdlc';
 
     dataset
     {
-        dataitem(Customer; Customer)
+        dataitem("Members Register"; Customer)
         {
             RequestFilterFields = "No.", "Employer Code", Gender, "Registration Date", Status, "Current Shares", "Shares Retained", "Account Category";
             column(ReportForNavId_1000000000; 1000000000)
@@ -41,104 +39,104 @@ Report 50060 "Next of Kin Details Report0"
             column(USERID; UserId)
             {
             }
-            column(Personal_No; Customer."Payroll/Staff No")
+            column(Personal_No; "Members Register"."Payroll/Staff No")
             {
             }
-            column(Registration_Date; Format(Customer."Registration Date"))
+            column(Registration_Date; Format("Members Register"."Registration Date"))
             {
             }
-            column(Share_Capital; Customer."Shares Retained")
+            column(Share_Capital; "Members Register"."Shares Retained")
             {
             }
-            column(Deposits; Customer."Monthly Contribution")
+            column(Deposits; "Members Register"."Monthly Contribution")
             {
                 AutoCalcField = true;
             }
-            column(EMail_Customer; Customer."E-Mail")
+            column(EMail_MembersRegister; "Members Register"."E-Mail")
             {
             }
-            column(No_Customer; Customer."No.")
+            column(No_MembersRegister; "Members Register"."No.")
             {
             }
-            column(Name_Customer; Customer.Name)
+            column(Name_MembersRegister; "Members Register".Name)
             {
             }
-            column(Address_Customer; Customer.Address)
+            column(Address_MembersRegister; "Members Register".Address)
             {
             }
-            column(PhoneNo_Customer; Customer."Phone No.")
+            column(PhoneNo_MembersRegister; "Members Register"."Phone No.")
             {
             }
-            // column(RiskFund_Customer;Customer."Risk Fund")
+            // column(RiskFund_MembersRegister;"Members Register"."Risk Fund")
             // {
             // }
-            // column(FOSAAccountNo_Customer;Customer."FOSA Account No.")
+            // column(FOSAAccountNo_MembersRegister;"Members Register"."FOSA Account No.")
             // {
             // }
-            column(SharesRetained_Customer; Customer."Shares Retained")
+            column(SharesRetained_MembersRegister; "Members Register"."Shares Retained")
             {
             }
-            column(CurrentShares_Customer; Customer."Current Shares")
+            column(CurrentShares_MembersRegister; "Members Register"."Current Shares")
             {
             }
-            column(Status_Customer; Customer.Status)
+            column(Status_MembersRegister; "Members Register".Status)
             {
             }
-            column(DividendAmount_Customer; Customer."Dividend Amount")
+            column(DividendAmount_MembersRegister; "Members Register"."Dividend Amount")
             {
             }
-            column(FOSAShares_Customer; Customer."FOSA Shares")
+            column(FOSAShares_MembersRegister; "Members Register"."FOSA Shares")
             {
             }
-            column(mobile_number; Customer."Mobile Phone No")
+            column(mobile_number; "Members Register"."Mobile Phone No")
             {
             }
-            column(id; Customer."ID No.")
+            column(id; "Members Register"."ID No.")
             {
             }
-            column(branch; Customer."Global Dimension 2 Code")
+            column(branch; "Members Register"."Global Dimension 2 Code")
             {
             }
-            column(category; Customer."Account Category")
+            column(category; "Members Register"."Account Category")
             {
             }
             column(SN; SN)
             {
             }
-            // column(JuniorSavings_Customer;Customer."Junior Savings")
+            // column(JuniorSavings_MembersRegister;"Members Register"."Junior Savings")
             // {
             // }
-            // column(SafariSavings_Customer;Customer."Safari Savings")
+            // column(SafariSavings_MembersRegister;"Members Register"."Safari Savings")
             // {
             // }
-            // column(SilverSavings_Customer;Customer."Silver Savings")
+            // column(SilverSavings_MembersRegister;"Members Register"."Silver Savings")
             // {
             // }
-            column(EmployerName_Customer; Customer."Employer Name")
+            column(EmployerName_MembersRegister; "Members Register"."Employer Name")
             {
             }
-            column(OutstandingInterest_Customer; Customer."Outstanding Interest")
+            column(OutstandingInterest_MembersRegister; "Members Register"."Outstanding Interest")
             {
             }
-            column(OutstandingBalance_Customer; Customer."Outstanding Balance")
+            column(OutstandingBalance_MembersRegister; "Members Register"."Outstanding Balance")
             {
             }
-            column(DateofBirth_Customer; Customer."Date of Birth")
+            column(DateofBirth_MembersRegister; "Members Register"."Date of Birth")
             {
             }
-            column(EMailPersonal_Customer; Customer."E-Mail")
+            column(EMailPersonal_MembersRegister; "Members Register"."E-Mail")
             {
             }
-            // column(RefereeMemberNo_Customer;Customer."Referee Member No")
+            // column(RefereeMemberNo_MembersRegister;"Members Register"."Referee Member No")
             // {
             // }
-            // column(RefereeName_Customer;Customer."Referee Name")
+            // column(RefereeName_MembersRegister;"Members Register"."Referee Name")
             // {
             // }
-            column(RegistrationDate_Customer; Customer."Registration Date")
+            column(RegistrationDate_MembersRegister; "Members Register"."Registration Date")
             {
             }
-            dataitem(NextofKin; "Members Next Kin Details")
+            dataitem(NextofKin; "Members Nominee")
             {
                 DataItemLink = "Account No" = field("No.");
                 column(ReportForNavId_12; 12)
@@ -207,9 +205,7 @@ Report 50060 "Next of Kin Details Report0"
                 // column(DateCreated_NextofKin;NextofKin."Date Created")
                 // {
                 // }
-                column(NextOfKinType_NextofKin; NextofKin.Type)
-                {
-                }
+
                 // column(MemberNo_NextofKin;NextofKin."Member No")
                 // {
                 // }
@@ -230,15 +226,14 @@ Report 50060 "Next of Kin Details Report0"
             trigger OnAfterGetRecord()
             begin
                 SN := SN + 1;
-                // IF EmployersRec.GET(Customer."Employer Code") THEN BEGIN
-                //  Customer."Employer Name":=EmployersRec."Employer Name";
+                // IF EmployersRec.GET("Members Register"."Employer Code") THEN BEGIN
+                //  "Members Register"."Employer Name":=EmployersRec."Employer Name";
                 //  END;
             end;
 
             trigger OnPreDataItem()
             begin
                 Company.Get();
-                company.CalcFields(Company.Picture);
             end;
         }
     }

@@ -169,6 +169,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('Statutory Reserve of %1', StatutoryReserve);
 
                 end;
                 //retained earnings
@@ -191,16 +192,24 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
 
                 //current year surplus
                 NetSurplusaftertax := 0;
-                GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '599999');
+                /* GLAccount.Reset;
+                GLAccount.SetRange(GLAccount."No.", GLAccount."No.");//'599999'
                 GLAccount.SetFilter(GLAccount."Date Filter", '<=%1', AsAt);
                 if GLAccount.FindSet then begin
                     GLAccount.CalcFields(GLAccount."Net Change");
                     NetSurplusaftertax := (NetSurplusaftertax + GLAccount."Net Change");
-                end;
+                end; */
+
+                GLEntry.RESET;
+                GLEntry.SETRANGE(GLEntry."G/L Account No.", GLAccount."No.");
+                GLEntry.SETFILTER(GLEntry."Posting Date", '<=%1', AsAt);
+                IF GLEntry.FINDSET THEN BEGIN
+                    GLEntry.CALCSUMS(Amount);
+                    NetSurplusaftertax += GLEntry.Amount * -1;
+                END;
 
 
-                //MESSAGE('net year supp%1',NetSurplusaftertax);
+                //MESSAGE('NetSurplusaftertax %1', NetSurplusaftertax / 2);
                 // GLAccount.RESET;
                 // GLAccount.SETRANGE(GLAccount."No.",'202450');
                 // GLAccount.SETFILTER(GLAccount."Date Filter",Datefilter);
@@ -239,6 +248,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                             AllowanceforLoanLoss += -GLEntry.Amount;
                         end;
                     until GLAccount.Next = 0;
+                    //Message('AllowanceforLoanLoss %1', AllowanceforLoanLoss);
 
                 end;
                 GLAccount.Reset;
@@ -255,6 +265,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('Loans and advances %1', LoansandAdvances);
 
                 end;
                 LoansandAdvances := LoansandAdvances - AllowanceforLoanLoss;
@@ -264,9 +275,11 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                 GLAccount.SetRange(GLAccount."No.", '199999');//'14300'
                 GLAccount.SetFilter(GLAccount."Date Filter", '<=%1', AsAt);
                 if GLAccount.FindSet then begin
-                    GLAccount.CalcFields(GLAccount."Net Change");
-                    totalassetsPBSheet := totalassetsPBSheet + GLAccount."Net Change";
+                    GLAccount.CalcFields(GLAccount."Net Change", GLAccount.Balance);//"Net Change"
+                    totalassetsPBSheet := totalassetsPBSheet + GLAccount.Balance;
+                    totalassetsPBSheet2 := totalassetspbsheet2 + glaccount."Net Change";
                 end;
+                //Message('totalassetsPBSheet is %1, with balance is %2', totalassetsPBSheet, totalassetsPBSheet2);
 
                 //Cash (Local + Foreign Currency)
                 GLAccount.Reset;
@@ -282,6 +295,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('Cash -> %1', Cash);
 
                 end;
 
@@ -300,6 +314,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('InvestmentsinSubsidiary is %1', Investmentsinsubsidiary);
 
                 end;
 
@@ -324,21 +339,22 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
 
                 //Other reserves
                 Otherreserves := 0;
-                // GLAccount.Reset;
-                // GLAccount.SetFilter(GLAccount."Capital adequecy", '%1', GLAccount."capital adequecy"::Otherreserves);
-                // if GLAccount.FindSet then begin
-                //     repeat
-                //         GLEntry.Reset;
-                //         GLEntry.SetRange(GLEntry."G/L Account No.", GLAccount."No.");
-                //         GLEntry.SetFilter(GLEntry."Posting Date", '<=%1', AsAt);
-                //         if GLEntry.FindSet then begin
-                //             GLEntry.CalcSums(Amount);
-                //             Otherreserves += GLEntry.Amount * -1;
-                //         end;
+                GLAccount.Reset;
+                GLAccount.SetFilter(GLAccount."Capital adequecy", '%1', GLAccount."capital adequecy"::Otherreserves);
+                if GLAccount.FindSet then begin
+                    repeat
+                        GLEntry.Reset;
+                        GLEntry.SetRange(GLEntry."G/L Account No.", GLAccount."No.");
+                        GLEntry.SetFilter(GLEntry."Posting Date", '<=%1', AsAt);
+                        if GLEntry.FindSet then begin
+                            GLEntry.CalcSums(Amount);
+                            Otherreserves += GLEntry.Amount * -1;//
+                        end;
 
-                //     until GLAccount.Next = 0;
+                    until GLAccount.Next = 0;
+                    //Message('Other reserves is %1', Otherreserves);
 
-                // end;
+                end;
 
                 //gov securities
                 GovernmentSecurities := 0;
@@ -355,6 +371,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('Government Securities %1', GovernmentSecurities);
 
                 end;
 
@@ -373,6 +390,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('DepositsandBalancesatOtherInstitutions %1', DepositsandBalancesatOtherInstitutions);
 
                 end;
 
@@ -397,7 +415,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                 //property and equipment
                 PropertyandEquipment := 0;
                 GLAccount.Reset;
-                GLAccount.SetFilter(GLAccount."Capital adequecy", '%1', GLAccount."capital adequecy"::"PropertyandEquipment ");
+                GLAccount.SetFilter(GLAccount."Capital adequecy", '%1', GLAccount."capital adequecy"::"PropertyandEquipment");
                 if GLAccount.FindSet then begin
                     repeat
                         GLEntry.Reset;
@@ -444,6 +462,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    //Message('Investments is %1', Investment);
 
                 end;
 
@@ -478,6 +497,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                         end;
 
                     until GLAccount.Next = 0;
+                    // Message('InvestmentinCompanies shares is %1', InvestmentinCompaniesshares);
                 end;
                 Taxpaid := 0;
                 GLAccount.Reset;
@@ -508,18 +528,25 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
                 Taxes := ((InvestmentinCompaniesshares * 0.50) * 0.30);
                 Taxes := Taxes - Taxpaid;
                 NetSurplusaftertax := NetSurplusaftertax + Taxes;
+                //Message('Net plus taxes is %1', NetSurplusaftertax);
+
                 Netsurplus := -(NetSurplusaftertax * 0.50);
                 StatturyAdjustment := -(0.20 * NetSurplusaftertax);
                 NetSurplusaftertax := -(NetSurplusaftertax + (StatturyAdjustment + ProposedHonoraria));
-                Otherreserves := NetSurplusaftertax;
+                //Otherreserves := NetSurplusaftertax;
+                //Message('ProposedDividends is %1, Netsurplus of %2 ,StatturyAdjustment %3', ProposedDividends, Netsurplus, StatturyAdjustment);
 
-                StatutoryReserve := StatutoryReserve + StatturyAdjustment;
+                //StatutoryReserve := StatutoryReserve + StatturyAdjustment;
                 TOTALOnBalanceSheet := Cash + GovernmentSecurities + DepositsandBalancesatOtherInstitutions + LoansandAdvances + InvestmentsinSubsidiary + Otherassets + PropertyandEquipment + investment;
-                Sub_Total := ShareCapital + CapitalGrants + retainedEarnins + Netsurplus + StatutoryReserve + Otherreserves;
-                TotalDeductions := InvestmentsinSubsidiary + OtherDeductions;
+                Sub_Total := ShareCapital + CapitalGrants + retainedEarnins + NetSurplus + StatutoryReserve + Otherreserves;
+                TotalDeductions := /* InvestmentsinSubsidiary */GovernmentSecurities + OtherDeductions;
+
+                //Message('StatutoryAdjustment = %1  ->StatutoryReserve of %3', StatturyAdjustment, StatutoryReserve);
+
 
                 CORECAPITAL := Sub_Total - TotalDeductions;
-                RetainedearningsandDisclosedreserves := Sub_Total - ShareCapital;
+                //RetainedearningsandDisclosedreserves := Sub_Total - ShareCapital;
+                RetainedearningsandDisclosedreserves := retainedEarnins;
                 totalassetsPBSheet := totalassetsPBSheet - AllowanceforLoanLoss;
                 TotalAssets := totalassetsPBSheet + OFFBALANCESHEETASSETS;
                 //CorecapitaltoAssetsRatio := CORECAPITAL / TotalAssets;
@@ -636,5 +663,7 @@ Report 52011 "CAPITAL ADEQUACY RETURN"
         DifferenceNew: Decimal;
         Kuscoshares: Decimal;
         AllowanceforLoanLoss: Decimal;
+
+        totalassetsPBSheet2: Decimal;
 }
 

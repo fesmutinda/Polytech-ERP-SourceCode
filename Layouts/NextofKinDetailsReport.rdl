@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-02-07T09:21:44.3901995Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -19,13 +30,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.59028in</Width>
+                  <Width>0.84028in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.59028in</Width>
+                  <Width>2.32361in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.59028in</Width>
+                  <Width>4.60694in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -42,10 +53,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>SN</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox7</rd:DefaultName>
@@ -72,10 +87,14 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Personal No</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox9</rd:DefaultName>
@@ -101,8 +120,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Name Members Register</Value>
-                                  <Style />
+                                  <Value>Member Name</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -140,7 +161,9 @@
                                   <Style />
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>SN</rd:DefaultName>
@@ -166,11 +189,13 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!No_MembersRegister.Value</Value>
+                                  <Value>=Fields!PhoneNo_Customer.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>No_MembersRegister</rd:DefaultName>
@@ -196,7 +221,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Name_MembersRegister.Value</Value>
+                                  <Value>=Fields!Name_Customer.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -267,7 +292,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!COMPANYNAME.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                       </Style>
@@ -281,7 +306,7 @@
               <rd:DefaultName>CompanyName</rd:DefaultName>
               <Top>0.26973in</Top>
               <Left>1.8368in</Left>
-              <Height>0.36334in</Height>
+              <Height>0.32862in</Height>
               <Width>5.58334in</Width>
               <Style>
                 <Border>
@@ -300,7 +325,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!Company_Address.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                       </Style>
@@ -314,7 +339,7 @@
               <rd:DefaultName>CompanyAddress</rd:DefaultName>
               <Top>0.68862in</Top>
               <Left>1.8368in</Left>
-              <Height>0.34721in</Height>
+              <Height>0.31249in</Height>
               <Width>5.58334in</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -387,7 +412,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Value>=First(Fields!Company_Email.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                       </Style>
@@ -401,7 +426,7 @@
               <rd:DefaultName>CompanyAddress</rd:DefaultName>
               <Top>1.09139in</Top>
               <Left>1.8368in</Left>
-              <Height>0.34721in</Height>
+              <Height>0.31249in</Height>
               <Width>5.58334in</Width>
               <ZIndex>4</ZIndex>
               <Style>
@@ -527,47 +552,47 @@ End Function
         <Field Name="DepositsFormat">
           <DataField>DepositsFormat</DataField>
         </Field>
-        <Field Name="EMail_MembersRegister">
-          <DataField>EMail_MembersRegister</DataField>
+        <Field Name="EMail_Customer">
+          <DataField>EMail_Customer</DataField>
         </Field>
-        <Field Name="No_MembersRegister">
-          <DataField>No_MembersRegister</DataField>
+        <Field Name="No_Customer">
+          <DataField>No_Customer</DataField>
         </Field>
-        <Field Name="Name_MembersRegister">
-          <DataField>Name_MembersRegister</DataField>
+        <Field Name="Name_Customer">
+          <DataField>Name_Customer</DataField>
         </Field>
-        <Field Name="Address_MembersRegister">
-          <DataField>Address_MembersRegister</DataField>
+        <Field Name="Address_Customer">
+          <DataField>Address_Customer</DataField>
         </Field>
-        <Field Name="PhoneNo_MembersRegister">
-          <DataField>PhoneNo_MembersRegister</DataField>
+        <Field Name="PhoneNo_Customer">
+          <DataField>PhoneNo_Customer</DataField>
         </Field>
-        <Field Name="SharesRetained_MembersRegister">
-          <DataField>SharesRetained_MembersRegister</DataField>
+        <Field Name="SharesRetained_Customer">
+          <DataField>SharesRetained_Customer</DataField>
         </Field>
-        <Field Name="SharesRetained_MembersRegisterFormat">
-          <DataField>SharesRetained_MembersRegisterFormat</DataField>
+        <Field Name="SharesRetained_CustomerFormat">
+          <DataField>SharesRetained_CustomerFormat</DataField>
         </Field>
-        <Field Name="CurrentShares_MembersRegister">
-          <DataField>CurrentShares_MembersRegister</DataField>
+        <Field Name="CurrentShares_Customer">
+          <DataField>CurrentShares_Customer</DataField>
         </Field>
-        <Field Name="CurrentShares_MembersRegisterFormat">
-          <DataField>CurrentShares_MembersRegisterFormat</DataField>
+        <Field Name="CurrentShares_CustomerFormat">
+          <DataField>CurrentShares_CustomerFormat</DataField>
         </Field>
-        <Field Name="Status_MembersRegister">
-          <DataField>Status_MembersRegister</DataField>
+        <Field Name="Status_Customer">
+          <DataField>Status_Customer</DataField>
         </Field>
-        <Field Name="DividendAmount_MembersRegister">
-          <DataField>DividendAmount_MembersRegister</DataField>
+        <Field Name="DividendAmount_Customer">
+          <DataField>DividendAmount_Customer</DataField>
         </Field>
-        <Field Name="DividendAmount_MembersRegisterFormat">
-          <DataField>DividendAmount_MembersRegisterFormat</DataField>
+        <Field Name="DividendAmount_CustomerFormat">
+          <DataField>DividendAmount_CustomerFormat</DataField>
         </Field>
-        <Field Name="FOSAShares_MembersRegister">
-          <DataField>FOSAShares_MembersRegister</DataField>
+        <Field Name="FOSAShares_Customer">
+          <DataField>FOSAShares_Customer</DataField>
         </Field>
-        <Field Name="FOSAShares_MembersRegisterFormat">
-          <DataField>FOSAShares_MembersRegisterFormat</DataField>
+        <Field Name="FOSAShares_CustomerFormat">
+          <DataField>FOSAShares_CustomerFormat</DataField>
         </Field>
         <Field Name="mobile_number">
           <DataField>mobile_number</DataField>
@@ -584,29 +609,29 @@ End Function
         <Field Name="SN">
           <DataField>SN</DataField>
         </Field>
-        <Field Name="EmployerName_MembersRegister">
-          <DataField>EmployerName_MembersRegister</DataField>
+        <Field Name="EmployerName_Customer">
+          <DataField>EmployerName_Customer</DataField>
         </Field>
-        <Field Name="OutstandingInterest_MembersRegister">
-          <DataField>OutstandingInterest_MembersRegister</DataField>
+        <Field Name="OutstandingInterest_Customer">
+          <DataField>OutstandingInterest_Customer</DataField>
         </Field>
-        <Field Name="OutstandingInterest_MembersRegisterFormat">
-          <DataField>OutstandingInterest_MembersRegisterFormat</DataField>
+        <Field Name="OutstandingInterest_CustomerFormat">
+          <DataField>OutstandingInterest_CustomerFormat</DataField>
         </Field>
-        <Field Name="OutstandingBalance_MembersRegister">
-          <DataField>OutstandingBalance_MembersRegister</DataField>
+        <Field Name="OutstandingBalance_Customer">
+          <DataField>OutstandingBalance_Customer</DataField>
         </Field>
-        <Field Name="OutstandingBalance_MembersRegisterFormat">
-          <DataField>OutstandingBalance_MembersRegisterFormat</DataField>
+        <Field Name="OutstandingBalance_CustomerFormat">
+          <DataField>OutstandingBalance_CustomerFormat</DataField>
         </Field>
-        <Field Name="DateofBirth_MembersRegister">
-          <DataField>DateofBirth_MembersRegister</DataField>
+        <Field Name="DateofBirth_Customer">
+          <DataField>DateofBirth_Customer</DataField>
         </Field>
-        <Field Name="EMailPersonal_MembersRegister">
-          <DataField>EMailPersonal_MembersRegister</DataField>
+        <Field Name="EMailPersonal_Customer">
+          <DataField>EMailPersonal_Customer</DataField>
         </Field>
-        <Field Name="RegistrationDate_MembersRegister">
-          <DataField>RegistrationDate_MembersRegister</DataField>
+        <Field Name="RegistrationDate_Customer">
+          <DataField>RegistrationDate_Customer</DataField>
         </Field>
         <Field Name="ReportForNavId_12">
           <DataField>ReportForNavId_12</DataField>

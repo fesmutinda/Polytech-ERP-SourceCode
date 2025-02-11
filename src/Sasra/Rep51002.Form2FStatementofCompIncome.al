@@ -247,7 +247,7 @@ Report 51002 "Form2F Statement of CompIncome"
                 //Other Financial Expense
                 OtherFinancialExpense := 0;
                 GLAccount.Reset;
-                GLAccount.SetFilter(GLAccount."Form2F1(Statement of C Income)", '%1', GLAccount."Form2F1(Statement of C Income)"::OtherFinancialExpense);
+                GLAccount.SetFilter(GLAccount."Form2F1(Statement of C Income)", '%1', GLAccount."Form2F1(Statement of C Income)"::OtherFinancialExpense);//was added, didn't exist in nav
                 if GLAccount.FindSet then begin
                     repeat
 

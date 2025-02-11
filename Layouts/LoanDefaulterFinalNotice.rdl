@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-01-22T22:07:23.7343095Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-02-07T12:54:29.7150939Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -285,7 +285,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> LOAN NO:  </Value>
+                    <Value>  LOAN NO:  </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -486,7 +486,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Current Loan Balance                                                      </Value>
+                    <Value>Current Loan Balance                                                     </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -537,7 +537,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>Interest                                                                  +</Value>
+                    <Value>Interest                                                                  </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -603,29 +603,6 @@
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
                       <Format>#,0.00;(#,0.00);'-'</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Amount to be deducted from your guarantors                     </Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!AmouuntToRecover.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                      <Format>#,0.00;(#,0.00);'-'</Format>
-                      <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -748,11 +725,6 @@
                       <TextDecoration>Underline</TextDecoration>
                     </Style>
                   </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
                   <TextRun>
                     <Value xml:space="preserve">                                                                                  </Value>
                     <Style>
@@ -779,7 +751,7 @@
             <rd:DefaultName>Textbox10</rd:DefaultName>
             <Top>2.98346in</Top>
             <Left>1.60902cm</Left>
-            <Height>4.96479in</Height>
+            <Height>4.46043in</Height>
             <Width>6.94604in</Width>
             <ZIndex>9</ZIndex>
             <Style>
@@ -1346,7 +1318,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>8.01333in</Top>
+            <Top>7.51333in</Top>
             <Left>0.64667in</Left>
             <Height>0.25556in</Height>
             <Width>1.35833in</Width>
@@ -1594,7 +1566,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>8.305in</Top>
+            <Top>7.805in</Top>
             <Left>0.64736in</Left>
             <Height>0.5in</Height>
             <Width>4.51737in</Width>
@@ -1603,16 +1575,6 @@
               <Border>
                 <Style>None</Style>
               </Border>
-              <TopBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </TopBorder>
-              <BottomBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </BottomBorder>
             </Style>
           </Tablix>
         </ReportItems>

@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-01-22T21:48:03.2810188Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-02-07T12:35:55.3512681Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -575,7 +575,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>RE: DEFAULTED </Value>
+                    <Value>RE: DEFAULTED  </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -871,6 +871,7 @@
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -1309,7 +1310,7 @@
             <rd:DefaultName>Textbox22</rd:DefaultName>
             <Top>3.89257in</Top>
             <Left>0.26876in</Left>
-            <Height>3.90834in</Height>
+            <Height>4.15834in</Height>
             <Width>6.5in</Width>
             <ZIndex>19</ZIndex>
             <Style>

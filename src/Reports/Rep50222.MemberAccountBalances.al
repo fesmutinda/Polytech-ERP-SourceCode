@@ -50,11 +50,12 @@ Report 50222 "Member Account  Balances"
             column(Outstanding_Interest; Member."Outstanding Interest")
             {
             }
-            /* column(LikizoContribution; Member."Likizo Contribution")
+            column(LikizoContribution; Member."Likizo Contribution")
             {
 
             }
             column(Alpha_Savings; Member."Alpha Savings") { }
+            /*
             column(Junior_Savings_One; "Junior Savings One") { }
             column(Junior_Savings_Two; "Junior Savings Two") { }
             column(Junior_Savings_Three; "Junior Savings Three") { } */

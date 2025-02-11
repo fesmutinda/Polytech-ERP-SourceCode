@@ -493,6 +493,49 @@ Report 51003 "STATEMENT OF FINANCIAL P"
                 Taxes := (((InvestmentinCompaniesshares * 0.50) * 0.30));
                 Taxes := Taxes - Taxpaid;
 
+
+                //Placementstart
+                GLAccount.RESET;
+                GLAccount.SETFILTER(GLAccount.StatementOfFP, '%1', GLAccount.StatementOfFP::Placement);
+                IF GLAccount.FINDSET THEN BEGIN
+                    Placement := 0;
+                    REPEAT
+
+                        GLEntry.RESET;
+                        GLEntry.SETRANGE(GLEntry."G/L Account No.", GLAccount."No.");
+                        GLEntry.SETFILTER(GLEntry."Posting Date", DateFilter);
+                        IF GLEntry.FINDSET THEN BEGIN
+                            GLEntry.CALCSUMS(Amount);
+                            Placement += GLEntry.Amount;
+                            //     MESSAGE('Nonwithdrawabledeposits %1',Nonwithdrawabledeposits);
+                        END;
+
+                    UNTIL GLAccount.NEXT = 0;
+
+                END;
+                //Placement end
+
+                //EquityInvestmentsstart
+                GLAccount.RESET;
+                GLAccount.SETFILTER(GLAccount.StatementOfFP, '%1', GLAccount.StatementOfFP::EquityInvestments);
+                IF GLAccount.FINDSET THEN BEGIN
+                    EquityInvestments := 0;
+                    REPEAT
+
+                        GLEntry.RESET;
+                        GLEntry.SETRANGE(GLEntry."G/L Account No.", GLAccount."No.");
+                        GLEntry.SETFILTER(GLEntry."Posting Date", DateFilter);
+                        IF GLEntry.FINDSET THEN BEGIN
+                            GLEntry.CALCSUMS(Amount);
+                            EquityInvestments += GLEntry.Amount;
+                            //     MESSAGE('Nonwithdrawabledeposits %1',Nonwithdrawabledeposits);
+                        END;
+
+                    UNTIL GLAccount.NEXT = 0;
+
+                END;
+                //EquityInvestments end
+
                 DividendPayable := ((Nonwithdrawabledeposits * SaccoGen."Share Interest (%)") * 0.01) + ((ShareCapital * SaccoGen."Share Interest (%)") * 0.01);
                 ProposedHonoraria := (((Nonwithdrawabledeposits * SaccoGen."Retained Shares") * 0.01) * (SaccoGen."Proposed Honoraria" * 0.01));
                 CurrentYearSurplus := CurrentYearSurplus + (DividendPayable + Taxes);
@@ -502,6 +545,7 @@ Report 51003 "STATEMENT OF FINANCIAL P"
                 OtherLiabilities := OtherLiabilities + ProposedHonoraria;
                 StatutoryReserve := StatutoryReserve + StatturyAdjustment;
                 CashCashEquivalent := Cashatbank + Cashinhand;
+
                 FinancialInvestments := GovernmentSecurities + Placement + CollectiveInvestment + Derivatives + EquityInvestments + Investmentincompanies + CommercialPapers;
                 NetLoanPortfolio := GrossLoanPortfolio + AllowanceforLoanLoss;
                 AccountsReceivables := TaxRecoverable + DeferredTaxAssets + RetirementBenefitAssets;
