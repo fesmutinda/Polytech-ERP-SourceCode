@@ -34,19 +34,19 @@ Report 50179 "Check Off Advice"
             column(mothlcommitment; "Members Register"."Monthly Contribution")
             {
             }
-            column(Insurancecontributions; Insurance)
+            column(Insurancecontributions; InsuaranceContribution)
             {
             }
-            column(LIKIZO_CONTRIBUTION; Likizo)
+            column(LIKIZO_CONTRIBUTION; HolidaySavings)
             {
             }
-            column(Share_Capital; scapital)
+            column(Share_Capital; ShareCapital)
             {
             }
             column(HOUSING_CONTRIBUTION; HOUSING)
             {
             }
-            column(Deposit_Contribution; DEPOSIT)
+            column(Deposit_Contribution; DepositContribution)
             {
             }
             column(Interest_Repayment; interest)
@@ -94,7 +94,9 @@ Report 50179 "Check Off Advice"
             column(scfee; scfee)
             {
             }
-            column(emmerg; emmerg)
+            column(EmergencyLoan; EmergencyLoan) { }
+            column(SuperEmergencyLoan; SuperEmergencyLoan) { }
+            column(emmerg; EmergencyLoan)
             {
             }
             column(Quick; Quick)
@@ -120,18 +122,19 @@ Report 50179 "Check Off Advice"
                 PrincipalInterest := 0;
                 MonthlyAdvice := 0;
                 Juniorcontribution := 0;
-                Likizo := 0;
+                HolidaySavings := 0;
                 normloan := 0;
                 College := 0;
                 AssetL := 0;
                 scfee := 0;
-                emmerg := 0;
+                EmergencyLoan := 0;
+                SuperEmergencyLoan := 0;
                 Quick := 0;
                 karibu := 0;
                 Makeover := 0;
                 Premium := 0;
                 HOUSING := 0;
-                DEPOSIT := 0;
+                DepositContribution := 0;
 
                 Cust.Reset;
                 Cust.SetRange(Cust."No.", "Members Register"."No.");
@@ -140,12 +143,12 @@ Report 50179 "Check Off Advice"
                     Gsetup.Get();
                     Cust.CalcFields(Cust."Shares Retained");
                     if Cust."Shares Retained" < Gsetup."Retained Shares" then
-                        scapital := cust."Monthly ShareCap Cont.";
-                    Likizo := Cust."Holiday Contribution";// "Holiday Monthly Contribution";
+                        ShareCapital := cust."Monthly ShareCap Cont.";
+                    HolidaySavings := Cust."Holiday Contribution";// "Holiday Monthly Contribution";
                     AlphaSavings := cust."Alpha Monthly Contribution";
                     Juniorcontribution := Cust."Junior Monthly Contribution";
                     HOUSING := Cust."Investment Monthly Cont";
-                    DEPOSIT := Cust."Monthly Contribution" + cust."Monthly ShareCap Cont.";
+                    DepositContribution := Cust."Monthly Contribution" + cust."Monthly ShareCap Cont.";
 
                     //normloan
                     TRepayment := 0;
@@ -253,7 +256,7 @@ Report 50179 "Check Off Advice"
                     TRepayment := 0;
                     loans.Reset;
                     loans.SetRange(loans."Client Code", "Members Register"."No.");
-                    loans.SetRange(loans."Loan Product Type", 'EMERGENCY');
+                    loans.SetRange(loans."Loan Product Type", '12');
                     loans.SetFilter(loans."Outstanding Balance", '>0');
                     loans.SetAutocalcFields(loans."Outstanding Balance", loans."Oustanding Interest");
                     loans.SetRange(loans.Posted, true);
@@ -261,11 +264,30 @@ Report 50179 "Check Off Advice"
                         repeat
                             TRepayment := Loans."Oustanding Interest" + Loans."Outstanding Balance";
                             if TRepayment < Loans.Repayment then begin
-                                emmerg := TRepayment;
+                                EmergencyLoan := TRepayment;
                             end else begin
-                                emmerg := loans.Repayment;
+                                EmergencyLoan := loans.Repayment;
                             end;
-                            emmerg := emmerg;//
+                            EmergencyLoan := EmergencyLoan;//
+                        until loans.Next = 0;
+                    end;
+                    //SuperEmergencyLoan
+                    TRepayment := 0;
+                    loans.Reset;
+                    loans.SetRange(loans."Client Code", "Members Register"."No.");
+                    loans.SetRange(loans."Loan Product Type", '13');
+                    loans.SetFilter(loans."Outstanding Balance", '>0');
+                    loans.SetAutocalcFields(loans."Outstanding Balance", loans."Oustanding Interest");
+                    loans.SetRange(loans.Posted, true);
+                    if loans.Find('-') then begin
+                        repeat
+                            TRepayment := Loans."Oustanding Interest" + Loans."Outstanding Balance";
+                            if TRepayment < Loans.Repayment then begin
+                                SuperEmergencyLoan := TRepayment;
+                            end else begin
+                                SuperEmergencyLoan := loans.Repayment;
+                            end;
+                            SuperEmergencyLoan := SuperEmergencyLoan;//
                         until loans.Next = 0;
                     end;
 
@@ -324,22 +346,8 @@ Report 50179 "Check Off Advice"
                             AssetL := AssetL;//
                         until loans.Next = 0;
                     end;
-                    // //quic fee
-                    // loans.Reset;
-                    // loans.SetRange(loans."Client Code", "Members Register"."No.");
-                    // loans.SetRange(loans."Loan Product Type", 'Likizo');
-                    // loans.SetFilter(loans."Outstanding Balance", '>0');
-                    // loans.SetAutocalcFields(loans."Outstanding Balance");
-                    // loans.SetRange(loans.Posted, true);
-                    // if loans.Find('-') then begin
-                    //     repeat
-                    //         Likizo := loans."Loan Principle Repayment" + loans."Loan Interest Repayment";
-                    //         Likizo := Likizo;//
-                    //     until loans.Next = 0;
-                    // end;
 
-
-                    MonthlyAdvice := HOUSING + AlphaSavings + Juniorcontribution + DEPOSIT + Likizo + normloan + College + scfee + emmerg + Quick + karibu + AssetL + Makeover + Premium;
+                    MonthlyAdvice := HOUSING + AlphaSavings + Juniorcontribution + DepositContribution + HolidaySavings + normloan + College + scfee + EmergencyLoan + SuperEmergencyLoan + Quick + karibu + AssetL + Makeover + Premium;
 
 
                 end;
@@ -381,13 +389,10 @@ Report 50179 "Check Off Advice"
         DOCNAME: Text[30];
         CompanyInfo: Record "Company Information";
         Gsetup: Record "Sacco General Set-Up";
-        Insurance: Decimal;
-        insuranceContribution: Decimal;
-        scapital: Decimal;
+        // scapital: Decimal;
         minbal: Decimal;
-        DEPOSIT: Decimal;
+        // DEPOSIT: Decimal;
         AlphaSavings: Decimal;
-        Likizo: Decimal;
         HOUSING: Decimal;
         interest: Decimal;
         principle: Decimal;
@@ -399,12 +404,33 @@ Report 50179 "Check Off Advice"
         normloan: Decimal;
         College: Decimal;
         scfee: Decimal;
-        emmerg: Decimal;
+        // emmerg: Decimal;
         Quick: Decimal;
         karibu: Decimal;
         AssetL: Decimal;
         Makeover: Decimal;
         Premium: Decimal;
 
+
+
+        ShareCapital: Decimal;
+        DepositContribution: Decimal;
+        BenevolentFund: Decimal;
+        InsuaranceContribution: Decimal;
+        RegistrationFee: Decimal;
+        HolidaySavings: Decimal;
+        EmergencyLoan: Decimal;
+        SuperEmergencyLoan: Decimal;
+        QuickLoan: Decimal;
+        SuperQuickLoan: Decimal;
+        SchoolFeesLoan: Decimal;
+        SuperSchoolFees: Decimal;
+        InvestmentLoan: Decimal;
+        NormalLoan_20: Decimal;
+        NormalLoan_21: Decimal;
+        NormalLoan_22: Decimal;
+        DevelopmentLoan_1: Decimal;
+        M_PolytechLoan: Decimal;
+        DevelopmentLoan_25: Decimal;
 }
 

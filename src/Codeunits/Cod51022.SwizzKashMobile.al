@@ -426,322 +426,6 @@ Codeunit 51022 SwizzKashMobile
         END;
     END;
 
-    PROCEDURE EnquireAccountBalanceOld(traceid: code[30]; phonenumber: text[100]; documentNo: Text[20]; AccountNo: Text[20]; TransactionDate: DateTime) response: Text
-    VAR
-        exciseDutyRate: Decimal;
-        exciseDutyAccount: Text;
-        exciseDutyAmount: Decimal;
-        Bal: Decimal;
-        vendorTable: Record Vendor;
-        SwizzKashTrans: Record "SwizzKash Transactions";
-        localMessage: Text[300];
-        chargesTable: Record charges;
-        vendorCommAcc: Code[30];
-        saccoCommAcc: Code[30];
-        vendorCommAmount: Decimal;
-        saccoCommAmount: Decimal;
-        journalTemplateName: Code[50];
-        journalBatchName: Code[50];
-        intNumber: Integer;
-    BEGIN
-
-        response := '{ "StatusCode":"3002","StatusDescription":"NOTPROCESSED","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
-
-        SwizzKashTrans.RESET;
-        SwizzKashTrans.SETRANGE(SwizzKashTrans."Document No", DocumentNo);
-        IF SwizzKashTrans.FIND('-') THEN BEGIN
-            //this checks for that request...
-            response := '{ "StatusCode":"3001","StatusDescription":"REFEXISTS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
-        END ELSE BEGIN
-            //begins the enquiry process...
-
-            GenLedgerSetup.RESET;
-            GenLedgerSetup.GET;
-            GenLedgerSetup.TESTFIELD(GenLedgerSetup."Mobile Charge");
-            GenLedgerSetup.TESTFIELD(GenLedgerSetup."SwizzKash Comm Acc");
-            GenLedgerSetup.TESTFIELD(GenLedgerSetup."SwizzKash Charge");
-
-            vendorTable.RESET;
-            vendorTable.SETRANGE("Mobile Phone No", phonenumber);
-            vendorTable.SETRANGE(vendorTable.Status, vendorTable.Status::Active);
-            vendorTable.SetRange(vendorTable.Blocked, vendorTable.Blocked::" ");
-            //vendorTable.SETRANGE(vendorTable."Account Type", 'M-WALLET');
-            IF vendorTable.FIND('-') THEN BEGIN
-                //the member is found, and is active..
-
-                // -- get balance enquiry charges
-                chargesTable.RESET;
-                //chargesTable.SETRANGE(Code, 'BLE');
-                Charges.SETRANGE(Charges.Code, GenLedgerSetup."Mobile Charge");
-                IF chargesTable.FIND('-') THEN BEGIN
-                    Charges.TESTFIELD(Charges."GL Account");
-                    vendorCommAcc := chargesTable."GL Account";
-                    vendorCommAmount := chargesTable."Charge Amount";
-                    saccoCommAmount := chargesTable."Sacco Amount";
-                    saccoCommAcc := chargesTable."GL Account";// '3000407';     // -- sacco commission account
-                END;
-
-                //starting charges.....
-                Charges.RESET;
-                Charges.SETRANGE(Charges.Code, GenLedgerSetup."Mobile Charge");
-                IF Charges.FIND('-') THEN BEGIN
-                    Charges.TESTFIELD(Charges."GL Account");
-                    MobileCharges := Charges."Charge Amount";
-                    MobileChargesACC := Charges."GL Account";
-                END;
-                SwizzKashCommACC := GenLedgerSetup."SwizzKash Comm Acc";
-                SwizzKashCharge := GenLedgerSetup."SwizzKash Charge";
-
-                exciseDutyAcc := GetExciseDutyAccount();
-                ExcDuty := GetExciseDutyRate() * (MobileCharges);
-
-                SwizzKashCommACC := GenLedgerSetup."SwizzKash Comm Acc";
-                SwizzKashCharge := GenLedgerSetup."SwizzKash Charge";
-
-                ExcDuty := (20 / 100) * (MobileCharges);
-
-                TotalCharges := ExcDuty + (MobileCharges + SwizzKashCharge);
-
-                AccountTypes.RESET;
-                AccountTypes.SETRANGE(AccountTypes.Code, Vendor."Account Type");
-                //AccountTypes.SETRANGE(AccountTypes."Last Account No Used(HQ)",FALSE);
-                IF AccountTypes.FIND('-') THEN BEGIN
-                    miniBalance := AccountTypes."Minimum Balance";
-                END;
-                Vendor.CalcFields(Vendor."Balance (LCY)");
-                Vendor.CalcFields(Vendor."ATM Transactions");
-                Vendor.CalcFields(Vendor."Uncleared Cheques");
-                Vendor.CalcFields(Vendor."EFT Transactions");
-
-                Vendor.CALCFIELDS(Vendor."Balance (LCY)", Vendor."Mobile Transactions");
-                TempBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance + Vendor."Mobile Transactions");
-
-                IF Vendor."Account Type" = 'M-WALLET' THEN BEGIN
-                    IF (TempBalance > MobileCharges + SwizzKashCharge) THEN BEGIN
-                        GenJournalLine.RESET;
-                        GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
-                        GenJournalLine.SETRANGE("Journal Batch Name", 'MOBILETRAN');
-                        GenJournalLine.DELETEALL;
-                        //end of deletion
-
-                        GenBatches.RESET;
-                        GenBatches.SETRANGE(GenBatches."Journal Template Name", 'GENERAL');
-                        GenBatches.SETRANGE(GenBatches.Name, 'MOBILETRAN');
-
-                        IF GenBatches.FIND('-') = FALSE THEN BEGIN
-                            GenBatches.INIT;
-                            GenBatches."Journal Template Name" := 'GENERAL';
-                            GenBatches.Name := 'MOBILETRAN';
-                            GenBatches.Description := 'Balance Enquiry';
-                            GenBatches.VALIDATE(GenBatches."Journal Template Name");
-                            GenBatches.VALIDATE(GenBatches.Name);
-                            GenBatches.INSERT;
-                        END;
-
-                        //Dr Mobile Transfer Charges
-                        LineNo := LineNo + 10000;
-                        GenJournalLine.INIT;
-                        GenJournalLine."Journal Template Name" := 'GENERAL';
-                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
-                        GenJournalLine."Line No." := LineNo;
-                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
-                        GenJournalLine."Account No." := vendorTable."No.";
-                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                        GenJournalLine."Document No." := traceid;
-                        GenJournalLine."External Document No." := vendorTable."No.";
-                        GenJournalLine."Posting Date" := TODAY;
-                        GenJournalLine.Description := 'Balance Enquiry' + '' + Vendor.Name + '-' + Vendor."No.";
-                        GenJournalLine.Amount := (MobileCharges + SwizzKashCharge);
-                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
-                        IF GenJournalLine.Amount <> 0 THEN
-                            GenJournalLine.INSERT;
-
-                        //DR Excise Duty
-                        LineNo := LineNo + 10000;
-                        GenJournalLine.INIT;
-                        GenJournalLine."Journal Template Name" := 'GENERAL';
-                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
-                        GenJournalLine."Line No." := LineNo;
-                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
-                        GenJournalLine."Account No." := vendorTable."No.";
-                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                        GenJournalLine."Document No." := traceid;
-                        GenJournalLine."External Document No." := vendorTable."No.";
-                        GenJournalLine."Posting Date" := TODAY;
-                        GenJournalLine.Description := 'Excise duty-Balance Enquiry' + Vendor.Name + '-' + Vendor."No.";
-                        GenJournalLine.Amount := ExcDuty;
-                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
-                        IF GenJournalLine.Amount <> 0 THEN
-                            GenJournalLine.INSERT;
-
-                        //CR Ex. Duty
-                        LineNo := LineNo + 10000;
-                        GenJournalLine.INIT;
-                        GenJournalLine."Journal Template Name" := 'GENERAL';
-                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
-                        GenJournalLine."Line No." := LineNo;
-                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
-                        GenJournalLine."Account No." := ExxcDuty;
-                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                        GenJournalLine."Document No." := traceid;
-                        GenJournalLine."External Document No." := MobileChargesACC;
-                        GenJournalLine."Source No." := Vendor."No.";
-                        GenJournalLine."Posting Date" := TODAY;
-                        GenJournalLine.Description := 'Excise duty-Balance Enquiry' + '' + Vendor.Name + '-' + Vendor."No.";
-                        GenJournalLine.Amount := ExcDuty * -1;
-                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
-                        IF GenJournalLine.Amount <> 0 THEN
-                            GenJournalLine.INSERT;
-
-                        //CR Commission
-                        LineNo := LineNo + 10000;
-                        GenJournalLine.INIT;
-                        GenJournalLine."Journal Template Name" := 'GENERAL';
-                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
-                        GenJournalLine."Line No." := LineNo;
-                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
-                        GenJournalLine."Account No." := SwizzKashCommACC;
-                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                        GenJournalLine."Document No." := traceid;
-                        GenJournalLine."External Document No." := MobileChargesACC;
-                        GenJournalLine."Source No." := Vendor."No.";
-                        GenJournalLine."Posting Date" := TODAY;
-                        GenJournalLine.Description := 'Balance Enquiry Charges' + '' + Vendor.Name + '-' + Vendor."No.";
-                        GenJournalLine.Amount := -SwizzKashCharge;
-                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
-                        IF GenJournalLine.Amount <> 0 THEN
-                            GenJournalLine.INSERT;
-
-                        //CR Mobile Transactions Acc
-                        LineNo := LineNo + 10000;
-                        GenJournalLine.INIT;
-                        GenJournalLine."Journal Template Name" := 'GENERAL';
-                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
-                        GenJournalLine."Line No." := LineNo;
-                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
-                        GenJournalLine."Account No." := MobileChargesACC;
-                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                        GenJournalLine."Document No." := traceid;
-                        GenJournalLine."External Document No." := MobileChargesACC;
-                        GenJournalLine."Posting Date" := TODAY;
-                        GenJournalLine."Source No." := Vendor."No.";
-                        GenJournalLine.Description := 'Balance Enquiry Charges' + '' + Vendor.Name + '-' + Vendor."No.";
-                        GenJournalLine.Amount := MobileCharges * -1;
-                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
-                        IF GenJournalLine.Amount <> 0 THEN
-                            GenJournalLine.INSERT;
-
-                        //Post
-                        GenJournalLine.RESET;
-                        GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
-                        GenJournalLine.SETRANGE("Journal Batch Name", 'MOBILETRAN');
-                        IF GenJournalLine.FIND('-') THEN BEGIN
-                            REPEAT
-                                GLPosting.RUN(GenJournalLine);
-                            UNTIL GenJournalLine.NEXT = 0;
-                        END;
-                        GenJournalLine.RESET;
-                        GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
-                        GenJournalLine.SETRANGE("Journal Batch Name", 'MOBILETRAN');
-                        GenJournalLine.DELETEALL;
-
-
-                        AccountTypes.RESET;
-                        AccountTypes.SETRANGE(AccountTypes.Code, Vendor."Account Type");
-                        //  AccountTypes.SETFILTER(AccountTypes."Last Account No Used(HQ)",'=%1',FALSE);    //Restrict account types
-                        IF AccountTypes.FIND('-') THEN BEGIN
-                            miniBalance := AccountTypes."Minimum Balance";
-                        END;
-                        Vendor.CALCFIELDS(Vendor."Balance (LCY)");
-                        Vendor.CALCFIELDS(Vendor."ATM Transactions");
-                        Vendor.CALCFIELDS(Vendor."Uncleared Cheques");
-                        Vendor.CALCFIELDS(Vendor."EFT Transactions");
-                        accBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
-                        //Bal := FORMAT(accBalance);
-                        response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
-
-                        localMessage := FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>');
-                        //SMSMessage(DocumentNo,vendorTable."No.",PhoneNo,' Your Share Capital balance is Kshs: '+localMessage+' Thank you, POLYTECH SACCO Mobile');
-                        SMSMessage(DocumentNo, vendorTable."No.", phonenumber, ' Your balance is Kshs: ' + localMessage + '. POLYTECH SACCO Mobile');
-
-                    END
-                    ELSE BEGIN
-                        //Bal := 'INSUFFICIENT';
-                        response := '{ "StatusCode":"3003","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
-                        SMSMessage(DocumentNo, vendorTable."No.", phonenumber, ' You have insufficient funds to querry balances. POLYTECH SACCO Mobile');
-                    END;
-                END
-                ELSE BEGIN
-                    AccountTypes.RESET;
-                    AccountTypes.SETRANGE(AccountTypes.Code, Vendor."Account Type");
-                    // AccountTypes.SETFILTER(AccountTypes."Last Account No Used(HQ)",'=%1',FALSE);  //Restrict account types
-                    IF AccountTypes.FIND('-') THEN BEGIN
-                        miniBalance := AccountTypes."Minimum Balance";
-                    END;
-                    Vendor.CALCFIELDS(Vendor."Balance (LCY)");
-                    Vendor.CALCFIELDS(Vendor."ATM Transactions");
-                    Vendor.CALCFIELDS(Vendor."Uncleared Cheques");
-                    Vendor.CALCFIELDS(Vendor."EFT Transactions");
-                    accBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
-                    //Bal := FORMAT(accBalance);
-                    response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
-                END;
-
-
-                //// -- check m-wallet account balance
-                //vendorTable.CALCFIELDS("Balance (LCY)");
-                //IF (vendorTable."Balance (LCY)" < (saccoCommAmount + vendorCommAmount)) THEN BEGIN
-                //response := '{ "StatusCode":"3003","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
-                //EXIT(response);
-                //END;
-
-                Evaluate(intNumber, traceid);//, intNumber);
-
-                SwizzKashTrans.INIT;
-                SwizzKashTrans."Document No" := DocumentNo;
-                SwizzKashTrans.Description := 'Balance Enquiry';
-                //SwizzKashTrans.Entry := intNumber;
-                SwizzKashTrans."Document Date" := DT2DATE(TransactionDate);// TODAY;
-                SwizzKashTrans."Account No" := vendorTable."No.";//Members."No.";
-                SwizzKashTrans.Charge := TotalCharges;
-                SwizzKashTrans."Account Name" := vendorTable.Name;// Members.Name;
-                SwizzKashTrans."Telephone Number" := phonenumber;
-                SwizzKashTrans."Account No2" := '';
-                SwizzKashTrans.Posted := TRUE;
-                SwizzKashTrans."Date Posted" := CurrentDateTime;
-                SwizzKashTrans."Posting Date" := TODAY;
-                SwizzKashTrans.Status := SwizzKashTrans.Status::Completed;
-                //SwizzKashTrans.Remarks := '';
-                SwizzKashTrans.Comments := 'Success';
-                SwizzKashTrans.Client := vendorTable."BOSA Account No";
-                SwizzKashTrans."Transaction Type" := SwizzKashTrans."Transaction Type"::Balance;//    "Balance Enquiry";
-                SwizzKashTrans."Transaction Time" := DT2TIME(TransactionDate);// TIME;
-                SwizzKashTrans.INSERT;
-
-
-                // ** THIS BALANCE IS PLACEHOLDER FOR M-WALLET BALANCE DURING TESTING- TO BE COMMENTED OUT WHEN GOING LIVE
-                // {
-                // MemberLedgerEntry.RESET;
-                //     MemberLedgerEntry.SETRANGE(MemberLedgerEntry."Customer No.", vendorTable."BOSA Account No");
-                //     MemberLedgerEntry.SETRANGE(MemberLedgerEntry."Transaction Type", MemberLedgerEntry."Transaction Type"::"Share Capital");
-                //     IF MemberLedgerEntry.FIND('-') THEN BEGIN
-                //         REPEAT
-                //             Bal := Bal + MemberLedgerEntry.Amount;
-                //         UNTIL MemberLedgerEntry.NEXT = 0;
-                //         //response:= FORMAT(Bal,0,'<Precision,2:2><Integer><Decimals>');
-                //     END;
-                // }
-                // ** END THIS BALANCE IS PLACEHOLDER FOR M-WALLET BALANCE DURING TESTING- TO BE COMMENTED OUT WHEN GOING LIVE
-
-
-
-            END ELSE BEGIN
-                response := '{ "StatusCode":"3004","StatusDescription":"ACOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
-            END;
-
-        END;
-    END;
-
     PROCEDURE EnquireLoanBalance(traceid: code[30]; phonenumber: text[100]; documentNumber: Text[20]; transactionDate: DateTime) response: Text
     VAR
         loanbalanceList: Text;
@@ -900,7 +584,7 @@ Codeunit 51022 SwizzKashMobile
                             localMessage := LoansRegister."Loan  No." + ' ' + GetLoanProductName(LoansRegister."Loan Product Type") + ' ' + FORMAT(loanbalanceamt) + ',';
                         END ELSE BEGIN
                             loanbalanceList += ',{ "LoanNo":"' + LoansRegister."Loan  No." + '","ProductType":"' + GetLoanProductName(LoansRegister."Loan Product Type") + '","BalanceAmount":' + FORMAT(loanbalanceamt) + ' } ';
-                            localMessage += LoansRegister."Loan  No." + ' ' + GetLoanProductName(LoansRegister."Loan Product Type") + ' ' + FORMAT(loanbalanceamt) + ',';
+                            localMessage += LoansRegister."Loan  No." + ' ' + GetLoanProductName(LoansRegister."Loan Product Type") + ' ' + FORMAT(loanbalanceamt) + '\n';
                         END;
                     END;
                 UNTIL LoansRegister.NEXT = 0;
@@ -1180,6 +864,256 @@ Codeunit 51022 SwizzKashMobile
         END;
     END;
 
+    PROCEDURE EnquireWalletBalance(traceid: code[30]; phonenumber: text[100]; documentNo: Text[20]; AccountNo: Text[20]; TransactionDate: DateTime) response: Text
+    VAR
+        exciseDutyRate: Decimal;
+        exciseDutyAccount: Text;
+        exciseDutyAmount: Decimal;
+        Bal: Decimal;
+        vendorTable: Record Vendor;
+        SwizzKashTrans: Record "SwizzKash Transactions";
+        localMessage: Text[300];
+        chargesTable: Record charges;
+        vendorCommAcc: Code[30];
+        saccoCommAcc: Code[30];
+        vendorCommAmount: Decimal;
+        saccoCommAmount: Decimal;
+        journalTemplateName: Code[50];
+        journalBatchName: Code[50];
+        intNumber: Integer;
+    BEGIN
+        SwizzKashTrans.RESET;
+        SwizzKashTrans.SETRANGE(SwizzKashTrans."Document No", documentNo);
+        IF SwizzKashTrans.FIND('-') THEN BEGIN
+            //Bal:='REFEXISTS';
+            response := '{ "StatusCode":"3002","StatusDescription":"Your request has already been Processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + documentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
+        END
+        ELSE BEGIN
+            // Bal := '';
+            GenLedgerSetup.RESET;
+            GenLedgerSetup.GET;
+            GenLedgerSetup.TESTFIELD(GenLedgerSetup."Mobile Charge");
+            GenLedgerSetup.TESTFIELD(GenLedgerSetup."SwizzKash Comm Acc");
+            GenLedgerSetup.TESTFIELD(GenLedgerSetup."SwizzKash Charge");
+
+            Charges.RESET;
+            Charges.SETRANGE(Charges.Code, GenLedgerSetup."Mobile Charge");
+            IF Charges.FIND('-') THEN BEGIN
+                Charges.TESTFIELD(Charges."GL Account");
+                MobileCharges := Charges."Charge Amount";
+                MobileChargesACC := Charges."GL Account";
+            END;
+
+            SwizzKashCommACC := GenLedgerSetup."SwizzKash Comm Acc";
+            SwizzKashCharge := GenLedgerSetup."SwizzKash Charge";
+
+            ExcDuty := (20 / 100) * (MobileCharges);
+
+            Vendor.RESET;
+            Vendor.RESET;
+            Vendor.SETRANGE("Mobile Phone No", phonenumber);
+            Vendor.SETRANGE(Vendor.Status, Vendor.Status::Active);
+            Vendor.SetRange(Vendor.Blocked, Vendor.Blocked::" ");
+            Vendor.SETRANGE(Vendor."Account Type", 'M-WALLET');
+            //Vendor.SETRANGE(Vendor."No.", Acc);
+            //Vendor.SETRANGE("Mobile Phone No", phonenumber);
+            IF Vendor.FIND('-') THEN BEGIN
+                AccountTypes.RESET;
+                AccountTypes.SETRANGE(AccountTypes.Code, Vendor."Account Type");
+                //AccountTypes.SETRANGE(AccountTypes."Last Account No Used(HQ)",FALSE);
+                IF AccountTypes.FIND('-') THEN BEGIN
+                    miniBalance := AccountTypes."Minimum Balance";
+                END;
+                Vendor.CALCFIELDS(Vendor."Balance (LCY)", Vendor."ATM Transactions", Vendor."Uncleared Cheques", Vendor."EFT Transactions");
+                TempBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
+
+                IF (Vendor."Account Type" = 'M-WALLET') OR (Vendor."Account Type" = 'SALARY') OR (Vendor."Account Type" = 'FIXED') THEN BEGIN
+                    IF (TempBalance > MobileCharges + SwizzKashCharge) THEN BEGIN
+                        GenJournalLine.RESET;
+                        GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
+                        GenJournalLine.SETRANGE("Journal Batch Name", 'MOBILETRAN');
+                        GenJournalLine.DELETEALL;
+                        //end of deletion
+
+                        GenBatches.RESET;
+                        GenBatches.SETRANGE(GenBatches."Journal Template Name", 'GENERAL');
+                        GenBatches.SETRANGE(GenBatches.Name, 'MOBILETRAN');
+
+                        IF GenBatches.FIND('-') = FALSE THEN BEGIN
+                            GenBatches.INIT;
+                            GenBatches."Journal Template Name" := 'GENERAL';
+                            GenBatches.Name := 'MOBILETRAN';
+                            GenBatches.Description := 'Balance Enquiry';
+                            GenBatches.VALIDATE(GenBatches."Journal Template Name");
+                            GenBatches.VALIDATE(GenBatches.Name);
+                            GenBatches.INSERT;
+                        END;
+
+                        //Dr Mobile Transfer Charges
+                        LineNo := LineNo + 10000;
+                        GenJournalLine.INIT;
+                        GenJournalLine."Journal Template Name" := 'GENERAL';
+                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
+                        GenJournalLine."Line No." := LineNo;
+                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
+                        GenJournalLine."Account No." := Vendor."No.";
+                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
+                        GenJournalLine."Document No." := DocumentNo;
+                        GenJournalLine."External Document No." := Vendor."No.";
+                        GenJournalLine."Posting Date" := TODAY;
+                        GenJournalLine.Description := 'Balance Enquiry-' + Vendor."No." + '' + Vendor.Name;
+                        GenJournalLine.Amount := MobileCharges + SwizzKashCharge;
+                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                        IF GenJournalLine.Amount <> 0 THEN
+                            GenJournalLine.INSERT;
+
+                        //DR Excise Duty
+                        LineNo := LineNo + 10000;
+                        GenJournalLine.INIT;
+                        GenJournalLine."Journal Template Name" := 'GENERAL';
+                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
+                        GenJournalLine."Line No." := LineNo;
+                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
+                        GenJournalLine."Account No." := Vendor."No.";
+                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
+                        GenJournalLine."Document No." := DocumentNo;
+                        GenJournalLine."External Document No." := Vendor."No.";
+                        GenJournalLine."Posting Date" := TODAY;
+                        GenJournalLine.Description := 'Excise duty-Balance Enquiry-' + Vendor."No." + '' + Vendor.Name;
+                        GenJournalLine.Amount := ExcDuty;
+                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                        IF GenJournalLine.Amount <> 0 THEN
+                            GenJournalLine.INSERT;
+
+                        LineNo := LineNo + 10000;
+                        GenJournalLine.INIT;
+                        GenJournalLine."Journal Template Name" := 'GENERAL';
+                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
+                        GenJournalLine."Line No." := LineNo;
+                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
+                        GenJournalLine."Account No." := ExxcDuty;
+                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
+                        GenJournalLine."Document No." := DocumentNo;
+                        GenJournalLine."External Document No." := MobileChargesACC;
+                        GenJournalLine."Posting Date" := TODAY;
+                        GenJournalLine.Description := 'Excise duty-Balance Enquiry-' + Vendor."No." + '' + Vendor.Name;
+                        GenJournalLine.Amount := ExcDuty * -1;
+                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                        IF GenJournalLine.Amount <> 0 THEN
+                            GenJournalLine.INSERT;
+
+                        //CR Commission
+                        LineNo := LineNo + 10000;
+                        GenJournalLine.INIT;
+                        GenJournalLine."Journal Template Name" := 'GENERAL';
+                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
+                        GenJournalLine."Line No." := LineNo;
+                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
+                        GenJournalLine."Account No." := SwizzKashCommACC;
+                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
+                        GenJournalLine."Document No." := DocumentNo;
+                        GenJournalLine."External Document No." := MobileChargesACC;
+                        GenJournalLine."Posting Date" := TODAY;
+                        GenJournalLine.Description := 'Balance Enquiry Charges';
+                        GenJournalLine.Amount := -SwizzKashCharge;
+                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                        IF GenJournalLine.Amount <> 0 THEN
+                            GenJournalLine.INSERT;
+
+                        //CR Mobile Transactions Acc
+                        LineNo := LineNo + 10000;
+                        GenJournalLine.INIT;
+                        GenJournalLine."Journal Template Name" := 'GENERAL';
+                        GenJournalLine."Journal Batch Name" := 'MOBILETRAN';
+                        GenJournalLine."Line No." := LineNo;
+                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
+                        GenJournalLine."Account No." := MobileChargesACC;
+                        GenJournalLine.VALIDATE(GenJournalLine."Account No.");
+                        GenJournalLine."Document No." := DocumentNo;
+                        GenJournalLine."External Document No." := MobileChargesACC;
+                        GenJournalLine."Posting Date" := TODAY;
+                        GenJournalLine.Description := 'Balance Enquiry Charges';
+                        GenJournalLine.Amount := MobileCharges * -1;
+                        GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                        IF GenJournalLine.Amount <> 0 THEN
+                            GenJournalLine.INSERT;
+
+                        //Post
+                        GenJournalLine.RESET;
+
+                        GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
+                        GenJournalLine.SETRANGE("Journal Batch Name", 'MOBILETRAN');
+                        IF GenJournalLine.FIND('-') THEN BEGIN
+                            REPEAT
+                                GLPosting.RUN(GenJournalLine);
+                            UNTIL GenJournalLine.NEXT = 0;
+                        END;
+                        GenJournalLine.RESET;
+                        GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
+                        GenJournalLine.SETRANGE("Journal Batch Name", 'MOBILETRAN');
+                        GenJournalLine.DELETEALL;
+
+                        SwizzKashTrans.INIT;
+                        SwizzKashTrans."Document No" := DocumentNo;
+                        SwizzKashTrans.Description := 'Balance Enquiry-' + Vendor."No." + '' + Vendor.Name;
+                        SwizzKashTrans."Document Date" := TODAY;
+                        SwizzKashTrans."Account No" := Vendor."No.";
+                        TotalCharges := ExcDuty + MobileCharges + SwizzKashCharge;
+                        SwizzKashTrans.Charge := TotalCharges;
+                        SwizzKashTrans."Account Name" := Vendor.Name;
+                        SwizzKashTrans."Telephone Number" := Vendor."Mobile Phone No";
+                        SwizzKashTrans."Account No2" := '';
+                        SwizzKashTrans.Amount := amount;
+                        SwizzKashTrans.Posted := TRUE;
+                        SwizzKashTrans."Posting Date" := TODAY;
+                        SwizzKashTrans.Status := SwizzKashTrans.Status::Completed;
+                        SwizzKashTrans.Comments := 'Success';
+                        SwizzKashTrans.Client := Vendor."BOSA Account No";
+                        SwizzKashTrans."Transaction Type" := SwizzKashTrans."Transaction Type"::Balance;
+                        SwizzKashTrans."Transaction Time" := TIME;
+                        SwizzKashTrans."APP Type" := 'USSD';
+                        SwizzKashTrans.INSERT;
+
+                        AccountTypes.RESET;
+                        AccountTypes.SETRANGE(AccountTypes.Code, Vendor."Account Type");
+                        IF AccountTypes.FIND('-') THEN BEGIN
+                            miniBalance := AccountTypes."Minimum Balance";
+                        END;
+                        Vendor.CALCFIELDS(Vendor."Balance (LCY)");
+                        Vendor.CALCFIELDS(Vendor."ATM Transactions");
+                        Vendor.CALCFIELDS(Vendor."Uncleared Cheques");
+                        Vendor.CALCFIELDS(Vendor."EFT Transactions");
+                        accBalance := Vendor."Balance (LCY)" - (Vendor."ATM Transactions" + Vendor."Uncleared Cheques" + Vendor."EFT Transactions" + miniBalance);
+                        msg := 'Account Name: ' + Vendor.Name + ', ' + 'BALANCE: ' + FORMAT(accBalance) + '. '
+                       + 'Thank you for using POLYTECH  Sacco Mobile';
+                        //SMSMessage(DocNumber, Vendor."No.", Vendor."Mobile Phone No", msg);
+                        localMessage := FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>');
+                        SMSMessage(DocumentNo, Vendor."No.", phonenumber, ' Your M-Wallet balance is Kshs: ' + localMessage + '. Thank you for using POLYTECH SACCO Mobile Banking.');
+                        //Bal := FORMAT(accBalance);
+                        response := '{ "StatusCode":"0000","StatusDescription":"Your M-Wallet balance is Kshs: ' + localMessage + '. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
+                    END
+                    ELSE BEGIN
+                        // Bal:='INSUFFICIENT';
+                        response := '{ "StatusCode":"3003","StatusDescription":"You have insufficient funds to process your balance enquiry request. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
+
+                    END;
+                END
+                ELSE BEGIN
+                    AccountTypes.RESET;
+                    AccountTypes.SETRANGE(AccountTypes.Code, Vendor."Account Type");
+                    IF AccountTypes.FIND('-') THEN BEGIN
+                        miniBalance := AccountTypes."Minimum Balance";
+                    END;
+                END;
+            END
+            ELSE BEGIN
+                //Bal:='ACCNOTFOUND';
+                response := '{ "StatusCode":"3004","StatusDescription":"M-Wallet account could not be found, Please Contact Polytech Sacco. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
+
+            END;
+        END;
+    END;
+
     //BOSA BALANCE
     PROCEDURE EnquireAccountBalanceBOSA(traceid: code[30]; phonenumber: text[100]; documentNo: Text[20]; AccountNo: Text[20]; TransactionDate: DateTime) response: Text
     VAR
@@ -1207,7 +1141,7 @@ Codeunit 51022 SwizzKashMobile
         SwizzKashTrans.SETRANGE(SwizzKashTrans."Document No", documentNo);
         IF SwizzKashTrans.FIND('-') THEN BEGIN
             //Bal:='REFEXISTS';
-            response := '{ "StatusCode":"3002","StatusDescription":"NOTPROCESSED","DocumentNo":"' + documentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
+            response := '{ "StatusCode":"3002","StatusDescription":"Your Request has already been Processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + documentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
         END
         ELSE BEGIN
             // Bal := '';
@@ -1413,15 +1347,14 @@ Codeunit 51022 SwizzKashMobile
 
                         end
                     end;
-                    accountsBalances := 'Account Name: ' + Vendor.Name + ', ' + 'Deposits: ' + FORMAT(memberDeposits, 0, '<Precision,2:2><Integer><Decimals>') + ',' + 'Share Capital: ' + FORMAT(sharesBalances, 0, '<Precision,2:2><Integer><Decimals>') + ',' + 'Khoja Savings: ' + FORMAT(khojaBalances, 0, '<Precision,2:2><Integer><Decimals>') + ',' + '. '
-                   + 'Thank you for using POLYTECH  Sacco Mobile';
+                    accountsBalances := 'Account Name: ' + Vendor.Name + ', ' + 'Deposits: ' + FORMAT(memberDeposits, 0, '<Precision,2:2><Integer><Decimals>') + ',' + 'Share Capital: ' + FORMAT(sharesBalances, 0, '<Precision,2:2><Integer><Decimals>') + ',' + 'Holiday Savings: ' + FORMAT(khojaBalances, 0, '<Precision,2:2><Integer><Decimals>') + ',';
                     SMSMessage(DocumentNo, Vendor."No.", phonenumber, ' Your Balances: ' + accountsBalances + '. Thank you for using POLYTECH SACCO Mobile Banking.');
                     //Bal := FORMAT(accBalance);
-                    response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
+                    response := '{ "StatusCode":"0000","StatusDescription":"Your Balances: ' + accountsBalances + '. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":' + FORMAT(accBalance, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
                 END
                 ELSE BEGIN
 
-                    response := '{ "StatusCode":"3003","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
+                    response := '{ "StatusCode":"3003","StatusDescription":"You have insufficient funds to process your request. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNo + '","AccountBal":0 }';
 
                 END;
             END
@@ -1435,7 +1368,7 @@ Codeunit 51022 SwizzKashMobile
     end;
 
 
-
+    //BOSA...this
     PROCEDURE EnquireMinistatement(traceid: code[30]; phonenumber: Text; DocumentNo: Text; AccountNumber: Text; transactionDate: DateTime) response: Text
     VAR
         phone: Text;
@@ -1453,12 +1386,12 @@ Codeunit 51022 SwizzKashMobile
         journalBatchName: Code[50];
     BEGIN
 
-        response := '{ "StatusCode":"3002","StatusDescription":"NOTPROCESSED","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+        response := '{ "StatusCode":"3002","StatusDescription":"Your request could not be processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
 
         SwizzKashTrans.RESET;
         SwizzKashTrans.SETRANGE(SwizzKashTrans."Document No", DocumentNo);
         IF SwizzKashTrans.FIND('-') THEN BEGIN
-            response := '{ "StatusCode":"3001","StatusDescription":"REFEXISTS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+            response := '{ "StatusCode":"3001","StatusDescription":"Your request has already been processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
         END ELSE BEGIN
 
             vendorTable.RESET;
@@ -1483,7 +1416,7 @@ Codeunit 51022 SwizzKashMobile
                 vendorTable.CALCFIELDS(vendorTable."Balance (LCY)", vendorTable."ATM Transactions", vendorTable."Uncleared Cheques", vendorTable."EFT Transactions");
 
                 IF (vendorTable."Balance (LCY)" < (saccoCommAmount + vendorCommAmount)) THEN BEGIN
-                    EXIT('{ "StatusCode":"3002","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }');
+                    EXIT('{ "StatusCode":"3002","StatusDescription":"You have insufficient funds to process your request. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }');
                 END;
 
                 journalTemplateName := 'GENERAL';
@@ -1598,7 +1531,7 @@ Codeunit 51022 SwizzKashMobile
                             transactionsList := '{"PostingDate":"' + FORMAT(MemberLedgerEntry."Posting Date") + '","Description":"' + MemberLedgerEntry.Description + '","Amount":"' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '" }';
                             localMessage := FORMAT(MemberLedgerEntry."Posting Date") + ' ' + MemberLedgerEntry.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + ',';
                         END ELSE BEGIN
-                            localMessage += FORMAT(MemberLedgerEntry."Posting Date") + ' ' + MemberLedgerEntry.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + ',';
+                            localMessage += FORMAT(MemberLedgerEntry."Posting Date") + ' ' + MemberLedgerEntry.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '\n';
                         END;
 
                         minimunCount := minimunCount + 1;
@@ -1608,21 +1541,21 @@ Codeunit 51022 SwizzKashMobile
                     IF transactionsList <> '' THEN BEGIN
                         response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [' + transactionsList + '] }';
                     END ELSE BEGIN
-                        response := '{ "StatusCode":"3003","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
-                        localMessage := 'No transactions';
+                        response := '{ "StatusCode":"3003","StatusDescription":"No transactions found. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                        localMessage := 'No transactions found. Thank you for using POLYTECH SACCO Mobile Banking.';
                     END;
                 END ELSE BEGIN
-                    response := '{ "StatusCode":"3004","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
-                    localMessage := 'No transactions';
+                    response := '{ "StatusCode":"3004","StatusDescription":"No transactions found. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                    localMessage := 'No transactions found.Thank you for using POLYTECH SACCO Mobile Banking.';
                 END;
                 SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
             END ELSE BEGIN
-                response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                response := '{ "StatusCode":"3005","StatusDescription":"Your request failed, Please contact the office. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
             END;
 
         END;
     END;
-
+    //M-Wallet this..
     PROCEDURE MINISTATEMENT_FOSA(traceid: code[30]; phonenumber: Text; DocumentNo: Text; AccountNumber: Text; transactionDate: DateTime) response: Text[1000]
     VAR
         phone: Text;
@@ -1639,14 +1572,15 @@ Codeunit 51022 SwizzKashMobile
         journalTemplateName: Code[50];
         journalBatchName: Code[50];
         VendorLedgerEntries: Record "Vendor Ledger Entry";
+        variable: Code[10];
     BEGIN
 
-        response := '{ "StatusCode":"3002","StatusDescription":"NOTPROCESSED","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+        response := '{ "StatusCode":"3002","StatusDescription":"Sorry, Your request failed, Please try again later. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
 
         SwizzKashTrans.RESET;
         SwizzKashTrans.SETRANGE(SwizzKashTrans."Document No", DocumentNo);
         IF SwizzKashTrans.FIND('-') THEN BEGIN
-            response := '{ "StatusCode":"3001","StatusDescription":"REFEXISTS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+            response := '{ "StatusCode":"3001","StatusDescription":"Your request has already been processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
         END ELSE BEGIN
 
             vendorTable.RESET;
@@ -1669,7 +1603,7 @@ Codeunit 51022 SwizzKashMobile
                 // -- check m-wallet account balance
                 vendorTable.CALCFIELDS("Balance (LCY)");
                 IF (vendorTable."Balance (LCY)" < (saccoCommAmount + vendorCommAmount)) THEN BEGIN
-                    EXIT('{ "StatusCode":"3002","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }');
+                    EXIT('{ "StatusCode":"3002","StatusDescription":"Sorry, you have insufficient funds to process your request. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }');
                 END;
 
                 journalTemplateName := 'GENERAL';
@@ -1780,14 +1714,14 @@ Codeunit 51022 SwizzKashMobile
                     REPEAT
                         VendorLedgerEntries.CalcFields(Amount);
                         amount := VendorLedgerEntries.Amount;
-
+                        variable[1] := 10;
                         IF amount < 1 THEN amount := amount * -1;
                         IF transactionsList = '' THEN BEGIN
                             transactionsList := '{"PostingDate":"' + FORMAT(VendorLedgerEntries."Posting Date") + '","Description":"' + VendorLedgerEntries.Description + '","Amount":"' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '" }';
                             localMessage := FORMAT(VendorLedgerEntries."Posting Date") + ' ' + VendorLedgerEntries.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + ',';
                         END ELSE BEGIN
                             transactionsList += ',{"PostingDate":"' + FORMAT(VendorLedgerEntries."Posting Date") + '","Description":"' + VendorLedgerEntries.Description + '","Amount":"' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '" }';
-                            localMessage += FORMAT(VendorLedgerEntries."Posting Date") + ' ' + VendorLedgerEntries.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + ',';
+                            localMessage += FORMAT(VendorLedgerEntries."Posting Date") + ' ' + VendorLedgerEntries.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '\n';// variable;// ', ';
                         END;
 
                         minimunCount := minimunCount + 1;
@@ -1798,19 +1732,19 @@ Codeunit 51022 SwizzKashMobile
                     IF transactionsList <> '' THEN BEGIN
                         response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [' + transactionsList + '] }';
                     END ELSE BEGIN
-                        response := '{ "StatusCode":"3003","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                        response := '{ "StatusCode":"3003","StatusDescription":"No statement could be retrieved. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
                         localMessage := 'No transactions';
                     END;
 
                 END ELSE BEGIN
-                    response := '{ "StatusCode":"3004","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                    response := '{ "StatusCode":"3004","StatusDescription":"No statements could be retrived. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
                     localMessage := 'No transactions';
                 END;
 
-                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
+                SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage);// + '. POLYTECH SACCO');
 
             END ELSE BEGIN
-                response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                response := '{ "StatusCode":"3005","StatusDescription":"Your request failed, Please contact the office. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
             END;
 
         END;
@@ -2009,7 +1943,7 @@ Codeunit 51022 SwizzKashMobile
         END;
     END;
     //MINISTATEMENT_LOAN
-    PROCEDURE MINISTATEMENT_SHARES(traceid: code[30]; phonenumber: Text; DocumentNo: Text; AccountNumber: Text; transactionDate: DateTime) response: Text
+    PROCEDURE MINISTATEMENT_LOAN(traceid: code[30]; phonenumber: Text; DocumentNo: Text; AccountNumber: Text; transactionDate: DateTime) response: Text
     VAR
         phone: Text;
         amount: Decimal;
@@ -2026,12 +1960,12 @@ Codeunit 51022 SwizzKashMobile
         journalBatchName: Code[50];
     BEGIN
 
-        response := '{ "StatusCode":"3002","StatusDescription":"NOTPROCESSED","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+        response := '{ "StatusCode":"3002","StatusDescription":"Your request could not be processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
 
         SwizzKashTrans.RESET;
         SwizzKashTrans.SETRANGE(SwizzKashTrans."Document No", DocumentNo);
         IF SwizzKashTrans.FIND('-') THEN BEGIN
-            response := '{ "StatusCode":"3001","StatusDescription":"REFEXISTS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+            response := '{ "StatusCode":"3001","StatusDescription":"Your request was already processed. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
         END ELSE BEGIN
 
             vendorTable.RESET;
@@ -2054,7 +1988,7 @@ Codeunit 51022 SwizzKashMobile
                 // -- check m-wallet account balance
                 vendorTable.CALCFIELDS("Balance (LCY)");
                 IF (vendorTable."Balance (LCY)" < (saccoCommAmount + vendorCommAmount)) THEN BEGIN
-                    EXIT('{ "StatusCode":"3002","StatusDescription":"INSUFFICIENTFUNDS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }');
+                    EXIT('{ "StatusCode":"3002","StatusDescription":"You have insufficient funds to process your request. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }');
                 END;
 
                 journalTemplateName := 'GENERAL';
@@ -2156,7 +2090,8 @@ Codeunit 51022 SwizzKashMobile
                 MemberLedgerEntry.SETCURRENTKEY(MemberLedgerEntry."Entry No.");
                 MemberLedgerEntry.ASCENDING(FALSE);
                 MemberLedgerEntry.SETFILTER(MemberLedgerEntry.Description, '<>%1', '*Charges*');
-                MemberLedgerEntry.SETRANGE(MemberLedgerEntry."Customer No.", vendorTable."BOSA Account No");
+                // MemberLedgerEntry.SETRANGE(MemberLedgerEntry."Customer No.", vendorTable."BOSA Account No");
+                MemberLedgerEntry.SetRange(MemberLedgerEntry."Document No.", AccountNumber);
                 MemberLedgerEntry.SETRANGE(MemberLedgerEntry.Reversed, false);
                 IF MemberLedgerEntry.FINDSET THEN BEGIN
 
@@ -2173,7 +2108,7 @@ Codeunit 51022 SwizzKashMobile
                             localMessage := FORMAT(MemberLedgerEntry."Posting Date") + ' ' + MemberLedgerEntry.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + ',';
                         END ELSE BEGIN
                             transactionsList += ',{"PostingDate":"' + FORMAT(MemberLedgerEntry."Posting Date") + '","Description":"' + MemberLedgerEntry.Description + '","Amount":"' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '" }';
-                            localMessage += FORMAT(MemberLedgerEntry."Posting Date") + ' ' + MemberLedgerEntry.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + ',';
+                            localMessage += FORMAT(MemberLedgerEntry."Posting Date") + ' ' + MemberLedgerEntry.Description + ' ' + FORMAT(amount, 0, '<Precision,2:2><Integer><Decimals>') + '\n';
                         END;
 
                         minimunCount := minimunCount + 1;
@@ -2184,25 +2119,25 @@ Codeunit 51022 SwizzKashMobile
                     IF transactionsList <> '' THEN BEGIN
                         response := '{ "StatusCode":"0000","StatusDescription":"OK","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [' + transactionsList + '] }';
                     END ELSE BEGIN
-                        response := '{ "StatusCode":"3003","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                        response := '{ "StatusCode":"3003","StatusDescription":"No transactions found. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
                         localMessage := 'No transactions';
                     END;
 
                 END ELSE BEGIN
-                    response := '{ "StatusCode":"3004","StatusDescription":"NOTRANSACTIONS","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                    response := '{ "StatusCode":"3004","StatusDescription":"No transactions found. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
                     localMessage := 'No transactions';
                 END;
 
                 SMSMessage(DocumentNo, AccountNumber, phonenumber, localMessage + '. POLYTECH SACCO');
 
             END ELSE BEGIN
-                response := '{ "StatusCode":"3005","StatusDescription":"ACCOUNTNOTFOUND","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
+                response := '{ "StatusCode":"3005","StatusDescription":"Your request failed, Please contact  the office. Thank you for using POLYTECH SACCO Mobile Banking.","DocumentNo":"' + DocumentNo + '","AccountNo":"' + AccountNumber + '","TransactionLines": [] }';
             END;
 
         END;
     END;
 
-    PROCEDURE MINISTATEMENT_LOAN(traceid: code[30]; phonenumber: Text; DocumentNo: Text; AccountNumber: Text; transactionDate: DateTime) response: Text
+    PROCEDURE MINISTATEMENT_SHARES(traceid: code[30]; phonenumber: Text; DocumentNo: Text; AccountNumber: Text; transactionDate: DateTime) response: Text
     VAR
         phone: Text;
         amount: Decimal;
@@ -3813,13 +3748,6 @@ Codeunit 51022 SwizzKashMobile
 
 
                         //CR ACC2
-                        /*
-                        LineNo := LineNo + 10000;
-                        CreateGenJournalLine(jnlBatchTemplate, jnlBatchName, LineNo,
-                        documentno, "Gen. Journal Account Type"::Customer,
-                        Members."No.",'SUREPESA', 'Mobile BOSA Transfer Charge',
-                        -1*transferamount, Today, TransactionTypesEnum::MOBILE_BOSA_TRANSFER_CHARGE);
-                        */
 
                         LineNo := LineNo + 10000;
                         GenJournalLine.Init;
@@ -3830,7 +3758,7 @@ Codeunit 51022 SwizzKashMobile
                         GenJournalLine."Account No." := Members."No.";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         GenJournalLine."Document No." := documentno;
-                        GenJournalLine."External Document No." := 'SUREPESA';
+                        GenJournalLine."External Document No." := 'SWIZZKASH';
                         GenJournalLine."Posting Date" := Today;
                         case destinationAccount of
                             'Deposit Contribution':
@@ -4715,7 +4643,10 @@ Codeunit 51022 SwizzKashMobile
         thisMemberNum: Code[130];
         strKeyWord: Text[10];
     BEGIN
-
+        PostLoan('7851138310285717',
+                '100-3023',
+                25000,
+                1);
         PaybillTrans.RESET;
         PaybillTrans.SETRANGE(PaybillTrans.Posted, FALSE);
         PaybillTrans.SETRANGE(PaybillTrans."Needs Manual Posting", FALSE);

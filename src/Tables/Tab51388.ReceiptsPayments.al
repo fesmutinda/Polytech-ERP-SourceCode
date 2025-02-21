@@ -220,8 +220,8 @@ Table 51388 "Receipts & Payments"
         }
         field(50015; "Excess Transaction Type"; Option)
         {
-            OptionCaption = 'Deposit Contribution,Safari Saving,Silver Savings,Junior Savings';
-            OptionMembers = "Deposit Contribution","Safari Saving","Silver Savings","Junior Savings";
+            OptionCaption = 'Deposit Contribution,Jikoe Savings,Holiday Savings,Unallocated Funds';
+            OptionMembers = "Deposit Contribution","Jikoe Savings","Holiday Savings","Unallocated Funds";
         }
     }
 

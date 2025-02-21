@@ -635,7 +635,58 @@ Page 56043 "Polytech Sacco Role Center"
                 }
 
 
+                group(Payables)
+                {
+                    Caption = 'Payables';
+                    action(vendors)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Vendor List';
+                        RunObject = Page "Vendor List";
+                        ToolTip = 'View Vendor List';
+                        Visible = true;
+                    }
+                    action("Purchase Invoicing")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Purchase Invoicing';
+                        RunObject = Page "Purchase Invoices";
+                        Visible = true;
+                    }
+                    action("Purchase Credit Memo")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Purchase Credit Memo';
+                        RunObject = Page "Purchase Credit Memo";
+                        Visible = true;
+                    }
 
+                }
+                group(Receivables)
+                {
+                    caption = 'Receivables';
+                    action(Customers)
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Customers';
+                        RunObject = Page "Customer List";
+                        Visible = true;
+                    }
+                    action("Customer Invoices")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Customer Invoices';
+                        RunObject = Page "Sales Invoice List";
+                        Visible = true;
+                    }
+                    action("Sales Memo")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Sales Memo';
+                        RunObject = page "Sales Credit Memo";
+                        Visible = true;
+                    }
+                }
                 //.................................................................................................................................................
 
                 group("Finance Statements")
@@ -687,37 +738,37 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = All;
                         Caption = 'Statement of Directors Responsibilities';
-                        // RunObject = report "Statement of Directors'RE";
+                        RunObject = report "Statement of Directors'RE";
                     }
                     action(Reportofthedirectors)
                     {
                         ApplicationArea = All;
-                        // RunObject = report "REPORT OF THE DIRECTORS";
+                        RunObject = report "REPORT OF THE DIRECTORS";
                         Caption = 'Report of the Directors';
                     }
                     action("Financial Statical Information")
                     {
                         ApplicationArea = All;
 
-                        // RunObject = report FinancialStaticalInformation;
+                        RunObject = report FinancialStaticalInformation;
                     }
                     action("Statement of Financial Position Mkopo")
                     {
                         ApplicationArea = All;
                         Caption = 'Satement of Financial Position';
-                        // RunObject = report "State of financial Position";
+                        RunObject = report "State of financial Position";
                     }
                     action("Statement of profit or loss and other comprehensive income")
                     {
                         ApplicationArea = All;
                         Caption = 'Statement of profit or loss and other comprehensive income';
-                        // RunObject = report StatementProfitorloss;
+                        RunObject = report StatementProfitorloss;
                     }
                     action("Statement of changes of Equity Current")
                     {
                         ApplicationArea = All;
                         Caption = 'Statement of Changes im Equity';
-                        // RunObject = report StatementOfChangesInEquity;
+                        RunObject = report StatementOfChangesInEquity;
                     }
                     // action("Statement of changes of Equity Previous")
                     // {
@@ -728,7 +779,7 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = All;
                         Caption = 'Cash Flows';
-                        // RunObject = report cashFlows;
+                        RunObject = report cashFlows;
                     }
                 }
                 //.......................................................................................................................................
@@ -1658,7 +1709,8 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         Caption = 'Mobile Loans';
                         Image = PostedReceipt;
-                        RunObject = page "Mobile Loans";
+                        // RunObject = page "Mobile Loans";
+                        RunObject = page "M Polytech Loans";
                         ToolTip = 'View Mobile Loans List.';
                     }
 
@@ -2814,6 +2866,11 @@ Page 56043 "Polytech Sacco Role Center"
             }
             group("Audit Trails")
             {
+                action("System Log Trails List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "System Log Trails List";
+                }
                 action("Session Tracker")
                 {
                     ApplicationArea = Basic, Suite;

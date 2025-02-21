@@ -30,6 +30,7 @@ pageextension 50620 "CustomerLookupExt" extends "Customer Lookup"
             {
 
             }
+            field("Payroll/Staff No"; Rec."Payroll/Staff No") { }
 
 
         }

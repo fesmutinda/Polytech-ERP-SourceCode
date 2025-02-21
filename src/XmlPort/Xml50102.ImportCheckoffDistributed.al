@@ -12,6 +12,7 @@ XmlPort 50102 "Import Checkoff Distributed"
                 XmlName = 'Paybill';
                 fieldelement(Header_No; "Checkoff Lines-Distributed"."Receipt Header No")
                 {
+                    // XmlName = "HEADER NO";
                     MinOccurs = Zero;
                 }
                 fieldelement(Entry_No; "Checkoff Lines-Distributed"."Entry No")
@@ -26,7 +27,19 @@ XmlPort 50102 "Import Checkoff Distributed"
                 {
                     MinOccurs = Zero;
                 }
-                fieldelement(Account_Type; "Checkoff Lines-Distributed"."Account type")
+                fieldelement(SHARE_CAPITAL; "Checkoff Lines-Distributed"."Account type")
+                {
+                    MinOccurs = Zero;
+                }
+                fieldelement(DEPOSIT_CONTRIBUTION; "Checkoff Lines-Distributed"."Account type")
+                {
+                    MinOccurs = Zero;
+                }
+                fieldelement(BENEVOLENT; "Checkoff Lines-Distributed"."Account type")
+                {
+                    MinOccurs = Zero;
+                }
+                fieldelement(INSURANCE; "Checkoff Lines-Distributed"."Account type")
                 {
                     MinOccurs = Zero;
                 }

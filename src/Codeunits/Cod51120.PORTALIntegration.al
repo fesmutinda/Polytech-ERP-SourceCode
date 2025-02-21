@@ -701,7 +701,10 @@ Codeunit 51120 PORTALIntegration
     end;
 
     procedure FnGetNOKProfile(MemberNo: Code[20]) info: Text
+    var
+        accountsList: Text;
     begin
+        accountsList := '';
         objMember.RESET;
         objMember.SETRANGE(objMember."No.", MemberNo);
         IF objMember.FIND('-') THEN BEGIN
@@ -709,9 +712,16 @@ Codeunit 51120 PORTALIntegration
             objNextKin.SETRANGE("Account No", objMember."No.");
             IF objNextKin.FIND('-') THEN BEGIN
                 REPEAT
-                    info := info + FORMAT(objNextKin.Name) + ':' + FORMAT(objNextKin."Date of Birth") + ':' + FORMAT(objNextKin."%Allocation") + ':' + FORMAT(objNextKin.Relationship) + '::';
+                    // info := info + FORMAT(objNextKin.Name) + ':' + FORMAT(objNextKin."Date of Birth") + ':' + FORMAT(objNextKin."%Allocation") + ':' + FORMAT(objNextKin.Relationship) + '::';
+                    info := '';
+                    IF accountsList = '' THEN BEGIN
+                        accountsList := '{ "KinName":"' + FORMAT(objNextKin.Name) + '","DateofBirth":"' + FORMAT(objNextKin."Date of Birth") + '","Allocation":"' + FORMAT(objNextKin."%Allocation") + '","Relationship":"' + FORMAT(objNextKin.Relationship) + '" }';
+                    END ELSE BEGIN
+                        accountsList += ',{ "KinName":"' + FORMAT(objNextKin.Name) + '","DateofBirth":"' + FORMAT(objNextKin."Date of Birth") + '","Allocation":"' + FORMAT(objNextKin."%Allocation") + '","Relationship":"' + FORMAT(objNextKin.Relationship) + '" }';
+                    END;
                 UNTIL objNextKin.NEXT() = 0;
             END;
+            info := accountsList;
         END;
     end;
 
@@ -1012,11 +1022,11 @@ Codeunit 51120 PORTALIntegration
             info := '{ "MemberNumber":"' + objMember."No." +
                       '","MemberDeposits":"' + FORMAT(objMember."Current Shares") +
                       '","ShareCapital":"' + FORMAT(objMember."Shares Retained") +
-                      '","KhojaShares":"' + FORMAT(objMember."FOSA Account Bal") +
-                      '","FosaAccountBalance":"' + FORMAT(objMember."FOSA Account Bal") +
+                      '","M_WalletBalance":"' + FORMAT(objMember."FOSA Account Bal") +
+                      '","FosaAccountBalance":"' + FORMAT(objMember."Holiday Savings") +
                       '","OutstandingLoanBalance":"' + FORMAT(objMember."Outstanding Balance") +
                       '","OutstandingInterest":"' + FORMAT(objMember."Outstanding Interest") +
-                      '","FosaAccount":"' + FORMAT(objMember."FOSA Account No.") + '" }';
+                      '","M_Walletccount":"' + FORMAT(objMember."FOSA Account No.") + '" }';
         end;
     end;
 

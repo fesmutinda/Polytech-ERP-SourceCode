@@ -492,7 +492,7 @@ Page 56029 "Loan Application Card"
                     Image = AddAction;
                     Promoted = true;
                     PromotedCategory = Process;
-                    RunObject = Page "Loan Offset Detail List";
+                    RunObject = Page "Loan Offset Detail List";//"Is Top Up"
                     RunPageLink = "Loan No." = field("Loan  No."),
                                   "Client Code" = field("Client Code");
                 }
@@ -563,6 +563,7 @@ Page 56029 "Loan Application Card"
     end;
 
     var
+        offsetTable: Record "Loan Offset Details";
         LoanGuar: Record "Loans Guarantee Details";
         SMSMessages: Record "SMS Messages";
         i: Integer;
@@ -704,9 +705,23 @@ Page 56029 "Loan Application Card"
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
         CanCancelApprovalForRecord: Boolean;
 
+    procedure updateLoanInfo()
+    begin
+        begin
+            offsetTable.reset();
+            offsetTable.setrange(offsetTable."Loan No.", Rec."Loan  No.");
+            offsetTable.SETFILTER(offsetTable."Total Top Up", '>0');//>0, 0);
+            if offsetTable.find('-') then begin
+                Rec."Is Top Up" := true;
+            end else begin
+                Rec."Is Top Up" := false;
+            end;
+        end;
+    end;
 
     procedure UpdateControl()
     begin
+        updateLoanInfo();
         MNoEditable := true;
         if Rec."Loan Status" = Rec."loan status"::Application then begin
             RecordApproved := false;
