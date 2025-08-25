@@ -15,6 +15,7 @@ page 50364 "Membership App Nominee Detail"
                     ApplicationArea = Basic;
                     ShowMandatory = true;
                 }
+
                 field(Relationship; Rec.Relationship)
                 {
                     ApplicationArea = Basic;

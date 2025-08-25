@@ -319,6 +319,20 @@ codeunit 50036 "System General Setup"
             end;
         end;
     end;
+    //2)------------------------------------Prevent One Not Allowed To Reverse From Reversing
+    [EventSubscriber(ObjectType::Table, 179, 'OnBeforeInsertReversalEntry', '', false, false)]
+    procedure CheckIfAllowedToReverse()
+    var
+        StatusChangePermission: Record "Status Change Permision";
+    begin
+        StatusChangePermission.Reset();
+        StatusChangePermission.SetRange(StatusChangePermission."User Id", UserId);
+        StatusChangePermission.SetFilter(StatusChangePermission.Function, '%1', StatusChangePermission.Function::"Can Reverse Transactions");
+        if StatusChangePermission.Find('-') = false then begin
+            if UserId in ['AGENCY', 'ATM', 'MOBILE'] = false then
+                Error('Denied!,you do have have permission to reverse Posted Transactions. Contact system administrator');
+        end;
+    end;
     //.............................................
     procedure GetGLAccBalance(var GeneralLedgerEntry: Record "G/L Entry"): Decimal
     var

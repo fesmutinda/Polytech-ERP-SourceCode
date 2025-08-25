@@ -64,6 +64,11 @@ page 50428 "Member Statistics FactBox"
                     ApplicationArea = Basic;
                     Caption = 'Holiday Savings';
                 }
+                field("Welfare Contribution"; Rec."Welfare Contribution")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Welfare Contribution';
+                }
                 field("Additional Shares"; Rec."Additional Shares")
                 {
                     ApplicationArea = Basic;
@@ -103,27 +108,26 @@ page 50428 "Member Statistics FactBox"
                 {
                     ApplicationArea = Basic;
                 }
-                field(VarMemberLiability; VarMemberLiability)
+                // field(VarMemberLiability; VarMemberLiability)
+                // {
+                //     ApplicationArea = Basic;
+                //     // Caption = 'Member Guarantorship Liability';
+                //     Caption = 'Member Free Deposits';
+                // }
+                field(memberGuarantorshipAbility; memberGuarantorshipAbility)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Member Guarantorship Liability';
+                    Caption = 'Free Guarantorship Deposits';
                 }
-                field(FreeSharesSelf; FreeSharesSelf)
+                field(selfGuarantorshipAbility; selfGuarantorshipAbility)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Grt Free Shares';
-                    Visible = false;
-                }
-                field("Guarantee Free Shares"; FreeShares)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Grt Free Shares Others';
-                    Editable = false;
-                    Visible = false;
+                    Caption = 'Self Free Guarantorship Deposits';// 'Self Guarantorship Ability';
                 }
                 field("Member Loan Liability"; Rec."Member Loan Liability")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Total Guarantor Liability';
                 }
             }
         }
@@ -140,6 +144,7 @@ page 50428 "Member Statistics FactBox"
         if ObjLoans.Find('-') then
             OutstandingInterest := SFactory.FnGetInterestDueTodate(ObjLoans) - ObjLoans."Interest Paid";
     end;
+
 
     trigger OnAfterGetRecord()
     begin
@@ -160,16 +165,9 @@ page 50428 "Member Statistics FactBox"
         Rec.CalcFields("Current Shares", "Member Loan Liability");
         VarMemberLiability := ((Rec."Current Shares") - Rec."Member Loan Liability");
 
-        // VarMemberSelfLiability:=SFactory.FnGetMemberSelfLiability("No.");
-        // CALCFIELDS("Current Shares");
-        //
-        // FreeShares:=("Current Shares")-(VarMemberLiability+VarMemberSelfLiability);
-        //
-        //
-        // FreeSharesSelf:=("Current Shares")-(VarMemberLiability+VarMemberSelfLiability);//"Current Shares"-VarMemberSelfLiability;
-        //
-        // IF FreeSharesSelf<0 THEN
-        // FreeSharesSelf:=0;
+        //get memberGuarantorshipAbility
+        memberGuarantorshipAbility := guarantorshipMngt.fnGetMemberGuarantorshipLiability(Rec."No.");
+        selfGuarantorshipAbility := guarantorshipMngt.fnGetMemberSelfGuarantorshipLiability(Rec."No.");
     end;
 
     trigger OnOpenPage()
@@ -188,6 +186,11 @@ page 50428 "Member Statistics FactBox"
     end;
 
     var
+        memberGuarantorshipAbility: Decimal;
+        selfGuarantorshipAbility: Decimal;
+        guarantorshipMngt: Codeunit "Guarantor Management";
+        totalLoansGuaranteed: Decimal;
+        Free_Shares: Decimal;
         LatestCustLedgerEntry: Record "Cust. Ledger Entry";
         CustLedgerEntry: array[4] of Record "Cust. Ledger Entry";
         AgingTitle: array[4] of Text[30];
@@ -201,7 +204,6 @@ page 50428 "Member Statistics FactBox"
         LoanGuarantors: Record "Loans Guarantee Details";
         ComittedShares: Decimal;
         Loans: Record "Loans Register";
-        FreeShares: Decimal;
         UserSetup: Record "User Setup";
         FieldStyle: Text;
         FieldStyleL: Text;

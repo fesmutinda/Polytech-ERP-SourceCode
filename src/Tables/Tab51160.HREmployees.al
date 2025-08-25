@@ -11,7 +11,7 @@ Table 51160 "HR Employees"
         field(1; "No."; Code[20])
         {
             Editable = true;
-            TableRelation = Customer."No.";
+            //TableRelation = Customer."No.";
             trigger OnValidate()
             begin
                 if "No." <> xRec."No." then begin

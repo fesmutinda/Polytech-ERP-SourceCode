@@ -141,6 +141,8 @@ tableextension 50044 "GenJournalLineExt" extends "Gen. Journal Line"
                     Description := 'ABF Fund';
                 if "Transaction Type" = "transaction type"::"Deposit Contribution" then
                     Description := 'Deposits Contribution';
+                if "Transaction Type" = "transaction type"::"Welfare Contribution" then
+                    Description := 'Welfare Contribution';
                 // if "Transaction Type" = "transaction type"::"Appraisal Fee" then
                 //     Description := 'Appraisal Fee';
                 // if "Transaction Type" = "transaction type"::"Application Fee" then

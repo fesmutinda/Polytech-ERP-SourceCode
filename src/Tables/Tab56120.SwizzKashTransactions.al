@@ -87,7 +87,22 @@ Table 56120 "SwizzKash Transactions"
         {
             Editable = false;
         }
-
+        field(31; "Outstanding Balance"; Decimal)
+        {
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan No"),
+                                                                  "Transaction Type" = filter(Loan | "Loan Repayment"),
+                                                                  Reversed = const(false)));
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(32; "Outstanding Interest"; Decimal)
+        {
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan No" = field("Loan No"),
+                                                                  "Transaction Type" = filter("Interest Due" | "Interest Paid"),
+                                                                  Reversed = const(false)));
+            Editable = false;
+            FieldClass = FlowField;
+        }
     }
 
     keys

@@ -30,32 +30,23 @@ Table 51376 "Loan Offset Details"
                     ObjLoans.Reset;
                     ObjLoans.SetRange(ObjLoans."Loan  No.", "Loan Top Up");
                     if ObjLoans.FindSet then begin
-                        //IF ObjLoans."Is Top Up"=FALSE THEN
-                        //ERROR('Is Top Up Must Be Ticked!');
 
                         if ObjLoanType.Get(ObjLoans."Loan Product Type") then begin
                             MinAmountforOffset := (ObjLoans."Approved Amount" * (ObjLoanType."Allowable Loan Offset(%)" / 100));
-                            //MESSAGE('Allowable Loan Offset(%)" %1',ObjLoanType."Allowable Loan Offset(%)");
 
                             if ObjLoans.Get("Loan Top Up") then begin
                                 ObjLoans.CalcFields(ObjLoans."Outstanding Balance");
                                 LoanBal := ObjLoans."Outstanding Balance";
                             end;
-                            //    IF LoanBal>MinAmountforOffset THEN BEGIN
-                            //      MESSAGE('LoanBal is %1',LoanBal);
-                            //      MESSAGE('MinAmountforOffset is %1',MinAmountforOffset);
-                            //      MESSAGE('The Loan has not meet the minimum requirement to be offset Loan Balance=%1:50% of the Initial Loan=%2',LoanBal,MinAmountforOffset);
-                            //      ERROR('The Loan has not meet the minimum requirement to be offset');
-                            //      END;
                         end;
                     end;
+
                     Loans.Reset;
                     Loans.SetRange(Loans."Loan  No.", "Loan Top Up");
                     if Loans.Find('-') then begin
                         repeat
                             Loans.CalcFields(Loans."Outstanding Balance", Loans."Interest Due", Loans."Oustanding Interest");
                             Loanbalance += Loans."Outstanding Balance";
-
                         until Loans.Next = 0;
                     end;
 
@@ -82,21 +73,14 @@ Table 51376 "Loan Offset Details"
                         ApplicationDate := Loans."Application Date";
                         RequstedAmount := Loans."Requested Amount";
                     end;
+
                     Loans.Reset;
                     Loans.SetRange(Loans."Loan  No.", "Loan Top Up");
                     if Loans.Find('-') then begin
                         Loans.CalcFields(Loans."Outstanding Balance", Loans."Interest Due", Loans."Oustanding Interest");
-                        //      "Loan Type":=Loans."Loan Product Type";
-                        //      Loantypes.RESET;
-                        //      Loantypes.SETRANGE(Loantypes.Code,"Loan Type");
-                        //      IF Loantypes.FIND('-') THEN BEGIN
-                        //      Commision:=Loantypes."Top Up Commision"*Loans."Outstanding Balance"/100;
-                        //      END;)
-                        //MESSAGE('%1|%2',RequstedAmount,obj);
+
                         if ObjLoans.Get("Loan No.") then begin
-                            //MESSAGE('loan %1',"Loan No.");
                             if not ObjLoans.Bridging then begin
-                                //MESSAGE('01010 %1',ObjLoans.Bridging);
                                 GenSetUp.Get();
                                 Loans.CalcFields("Outstanding Balance");
                                 if Loans."Outstanding Balance" < (Loans."Approved Amount") then begin
@@ -135,10 +119,6 @@ Table 51376 "Loan Offset Details"
                                     //IF "Principle Top Up">0 THEN
                                     //Commision:=ROUND(GenSetUp."Consolidation Commission(%)"*"Principle Top Up"/100,1,'>')
                                     Commision := ROUND(GenSetUp."Loan Top Up Commision(%)" * (Loans."Outstanding Balance") / 100, 1, '>');//ADDED BY NTHALE
-                                                                                                                                          //              ELSE
-                                                                                                                                          //               //Commision:=ROUND(GenSetUp."Consolidation Commission(%)"*Loans."Outstanding Balance"/100,1,'>');
-                                                                                                                                          //            Commision:=ROUND(GenSetUp."Loan Top Up Commision(%)"*(ObjLoans."Recommended Amount"-Loans."Outstanding Balance")/100,1,'>');//ADDED BY NTHALE
-                                                                                                                                          //               "Loan Type":=Loans."Loan Product Type";
                                                                                                                                           ///MESSAGE('REE %1|%2|%3 ',GenSetUp."Loan Top Up Commision(%)",Loans."Outstanding Balance",Commision);
                                 end;
                                 ObjLoans.Modify;
@@ -158,7 +138,9 @@ Table 51376 "Loan Offset Details"
                         end;
                         "Principle Top Up" := Loans."Outstanding Balance";
                         "Interest Top Up" := Loans."Oustanding Interest";
-                        //joel//Commision:=Loans."Outstanding Balance"*0.1;
+
+                        // Festus -- Swizzsoft
+                        Commision := ROUND(GenSetUp."Loan Top Up Commision(%)" * (Loans."Outstanding Balance") / 100, 1, '>');
                         "Total Top Up" := "Principle Top Up" + "Interest Top Up" + Commision;
                         "Outstanding Balance" := Loans."Outstanding Balance";
                         "Monthly Repayment" := Loans.Repayment;
@@ -166,11 +148,6 @@ Table 51376 "Loan Offset Details"
                     Loans.Bridged := true;
                     Loans.Modify
                 end;
-
-                // IF Loans.GET("Loan No.") THEN BEGIN
-                // IF "Total Top Up">Loans."Requested Amount" THEN
-                // ERROR('You Can not offset more than the requested loan amount');
-                // END;
             end;
         }
         field(3; "Client Code"; Code[20])
@@ -243,11 +220,8 @@ Table 51376 "Loan Offset Details"
                             ObjLoans.MODIFY;
                       END;*/
                 end;
-                //END;
                 "Total Top Up" := "Principle Top Up" + "Interest Top Up";
-
-
-                "Total Top Up" := "Principle Top Up" + "Interest Top Up";
+                Commision := ROUND(GenSetUp."Loan Top Up Commision(%)" * ("Total Top Up") / 100, 1, '>');
 
             end;
         }
@@ -312,15 +286,15 @@ Table 51376 "Loan Offset Details"
         field(13; Commision; Decimal)
         {
 
-            trigger OnValidate()
-            begin
-                // "Total Top Up":="Principle Top Up" +"Interest Top Up";
-                Commision := 0;
-                GenSetUp.Get;
+            // trigger OnValidate()
+            // begin
+            //     // "Total Top Up":="Principle Top Up" +"Interest Top Up";
+            //     Commision := 0;
+            //     GenSetUp.Get;
 
-                // Commision:=("Principle Top Up")*GenSetUp."Loan Top Up Commision(%)"/100;
-                Commision := ROUND(((("Total Top Up" - LoanApp."Requested Amount")) * GenSetUp."Loan Top Up Commision(%)" / 100), 1, '=');
-            end;
+            //     // Commision:=("Principle Top Up")*GenSetUp."Loan Top Up Commision(%)"/100;
+            //     Commision := ROUND(((("Total Top Up" - LoanApp."Requested Amount")) * GenSetUp."Loan Top Up Commision(%)" / 100), 1, '=');
+            // end;
         }
         field(14; "Partial Bridged"; Boolean)
         {
@@ -393,6 +367,23 @@ Table 51376 "Loan Offset Details"
         field(28; "Additional Top Up Commission"; Boolean)
         {
             DataClassification = ToBeClassified;
+        }
+
+        field(29; "Arrear Recovery Status"; Option)
+        {
+            OptionMembers = None,Pending,Confirmed;
+            OptionCaption = 'None,Pending,Confirmed';
+            DataClassification = ToBeClassified;
+        }
+
+        field(30; "LoanArrears"; Decimal)
+        {
+
+        }
+
+        field(31; "Selected For Offset"; Boolean)
+        {
+
         }
     }
 

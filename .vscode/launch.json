@@ -1,5 +1,5 @@
 {
-    "version": "0.2.0",
+    "version": "1.5.0",
     "configurations": [
         {
             "name": "localhost",
@@ -17,27 +17,27 @@
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": false,
             "tenant": "default",
-            "schemaUpdateMode": "ForceSync",
+            "schemaUpdateMode": "Synchronize",
             "usePublicURLFromServer": true
-        },
-        {
-            "name": "development server",
-            "request": "launch",
-            "type": "al",
-            "environmentType": "OnPrem",
-            "server": "http://197.232.170.121:8080/BC240/",
-            "serverInstance": "BC240",
-            "authentication": "UserPassword",
-            "startupObjectId": 56043,
-            "startupObjectType": "Page",
-            "port": 7049,
-            "breakOnError": "All",
-            "launchBrowser": true,
-            "enableLongRunningSqlStatements": true,
-            "enableSqlInformationDebugger": false,
-            "tenant": "default",
-            "schemaUpdateMode": "ForceSync",
-            "usePublicURLFromServer": true
-        }
+        } //,
+        // {
+        //     "name": "legacy",
+        //     "request": "launch",
+        //     "type": "al",
+        //     "environmentType": "OnPrem",
+        //     "server": "http://192.168.1.52:8080/BC240/",
+        //     "serverInstance": "BC240",
+        //     "authentication": "UserPassword",
+        //     "startupObjectId": 56043,
+        //     "startupObjectType": "Page",
+        //     "port": 7049,
+        //     "breakOnError": "All",
+        //     "launchBrowser": true,
+        //     "enableLongRunningSqlStatements": true,
+        //     "enableSqlInformationDebugger": false,
+        //     "tenant": "default",
+        //     "schemaUpdateMode": "Synchronize",
+        //     "usePublicURLFromServer": true
+        // }
     ]
 }

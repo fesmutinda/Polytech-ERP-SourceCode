@@ -1648,7 +1648,6 @@ Codeunit 50007 "Swizzsoft Factory."
         ObjMemberRiskRating.Modify;
     end;
 
-
     procedure FnGetMemberLiability(MemberNo: Code[30]) VarTotaMemberLiability: Decimal
     var
         ObjLoanGuarantors: Record 51372;
@@ -1677,7 +1676,7 @@ Codeunit 50007 "Swizzsoft Factory."
               begin
                 repeat
                       ObjLoanGuarantors.CalcFields(ObjLoanGuarantors."Outstanding Balance");
-          //              //ObjLoanGuarantors.CALCFIELDS(ObjLoanGuarantors."Amont Guaranteed");
+          //              ObjLoanGuarantors.CALCFIELDS(ObjLoanGuarantors."Amont Guaranteed");
                        if ObjLoanGuarantors."Outstanding Balance" > 0 then begin
                             VarTotalGuaranteeValue:= VarTotalGuaranteeValue+ObjLoanGuarantors."Amont Guaranteed";
 
@@ -2794,29 +2793,125 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
     end;
 
 
-    procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
-    var
-        ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
-        PrevMonth: Date;
-        DateParm: Date;
-        RepaymentDate: Date;
-    begin
-        ObjLoanRepaymentSchedule.Reset;
-        ObjLoanRepaymentSchedule.SetRange(ObjLoanRepaymentSchedule."Loan No.",LoanNo);
-        if ObjLoanRepaymentSchedule.Find('-') then
-          begin
-            PrevMonth:=KnGetPreviousMonthLastDate(LoanNo,Today);
-            repeat
-            //ObjLoanRepaymentSchedule.SETRANGE(ObjLoanRepaymentSchedule."Repayment Date",PrevMonth);
-            if ObjLoanRepaymentSchedule."Repayment Date"<>0D then
-            DateParm:=CalcDate ('CM',ObjLoanRepaymentSchedule."Repayment Date");
-            if DateParm=PrevMonth then
-              begin
-                Period:=ObjLoanRepaymentSchedule."Instalment No";
-              end;
-              until ObjLoanRepaymentSchedule.Next=0;
-          end;
+    // procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
+    // var
+    //     ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
+    //     PrevMonth: Date;
+    //     DateParm: Date;
+    //     RepaymentDate: Date;
+    // begin
+    //     ObjLoanRepaymentSchedule.Reset;
+    //     ObjLoanRepaymentSchedule.SetRange(ObjLoanRepaymentSchedule."Loan No.",LoanNo);
+    //     if ObjLoanRepaymentSchedule.Find('-') then
+    //       begin
+    //         PrevMonth:=KnGetPreviousMonthLastDate(LoanNo,Today);
+    //         repeat
+    //         //ObjLoanRepaymentSchedule.SETRANGE(ObjLoanRepaymentSchedule."Repayment Date",PrevMonth);
+    //         if ObjLoanRepaymentSchedule."Repayment Date"<>0D then
+    //           DateParm:=CalcDate ('CM',ObjLoanRepaymentSchedule."Repayment Date");
+    //         if DateParm=PrevMonth then
+    //           begin
+    //             Period:=ObjLoanRepaymentSchedule."Instalment No";
+    //           end;
+    //           until ObjLoanRepaymentSchedule.Next=0;
+    //       end;
+    // end;
+    /*  procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
+var
+    ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
+    PrevMonth: Date;
+    DateParm: Date;
+    LastRepaymentSchedule: Integer;
+    LastRepaymentDate: Date;
+    MonthsElapsed: Integer;
+begin
+    Period := 0; // Default value if no match is found
+
+    ObjLoanRepaymentSchedule.Reset;
+    ObjLoanRepaymentSchedule.SetRange("Loan No.", LoanNo);
+
+    // Fetch the last date of the previous month
+    PrevMonth := KnGetPreviousMonthLastDate(LoanNo, Today);
+
+    if ObjLoanRepaymentSchedule.FindSet then begin
+        repeat
+            if ObjLoanRepaymentSchedule."Repayment Date" <> 0D then begin
+                DateParm := CalcDate('CM', ObjLoanRepaymentSchedule."Repayment Date");
+
+                // If the repayment date matches the previous month
+                if DateParm = PrevMonth then begin
+                    Period := ObjLoanRepaymentSchedule."Instalment No";
+                    exit; // Exit as we've found the matching period
+                end;
+
+                // Track the last repayment schedule and its date
+                LastRepaymentSchedule := ObjLoanRepaymentSchedule."Instalment No";
+                LastRepaymentDate := ObjLoanRepaymentSchedule."Repayment Date";
+            end;
+        until ObjLoanRepaymentSchedule.Next() = 0;
     end;
+
+    // If no exact match, assign the last repayment schedule
+    if Period = 0 then
+        Period := LastRepaymentSchedule;
+
+    // If today's date is beyond the last repayment date, keep counting
+    if Today > LastRepaymentDate then begin
+        MonthsElapsed := Date2DMY(Today, 3) - Date2DMY(LastRepaymentDate, 3);
+        Period := LastRepaymentSchedule + MonthsElapsed;
+    end;
+end;*/
+procedure KnGetCurrentPeriodForLoan(LoanNo: Code[20]) Period: Integer
+var
+    ObjLoanRepaymentSchedule: Record "Loan Repayment Schedule";
+    PrevMonth: Date;
+    DateParm: Date;
+    LastRepaymentSchedule: Integer;
+    LastRepaymentDate: Date;
+    MonthsElapsed: Integer;
+    YearToday, MonthToday, YearLast, MonthLast: Integer;
+begin
+    Period := 0; // Default value if no match is found
+
+    ObjLoanRepaymentSchedule.Reset;
+    ObjLoanRepaymentSchedule.SetRange("Loan No.", LoanNo);
+
+    // Fetch the last date of the previous month
+    PrevMonth := KnGetPreviousMonthLastDate(LoanNo, Today);
+
+    if ObjLoanRepaymentSchedule.FindSet then begin
+        repeat
+            if ObjLoanRepaymentSchedule."Repayment Date" <> 0D then begin
+                DateParm := CalcDate('CM', ObjLoanRepaymentSchedule."Repayment Date");
+
+                // If the repayment date matches the previous month
+                if DateParm = PrevMonth then begin
+                    Period := ObjLoanRepaymentSchedule."Instalment No";
+                    exit; // Exit as we've found the matching period
+                end;
+
+                // Track the last repayment schedule
+                LastRepaymentSchedule := ObjLoanRepaymentSchedule."Instalment No";
+                LastRepaymentDate := ObjLoanRepaymentSchedule."Repayment Date";
+            end;
+        until ObjLoanRepaymentSchedule.Next() = 0;
+    end;
+
+    // If no exact match, calculate elapsed months since the last repayment
+    if LastRepaymentDate <> 0D then begin
+        YearToday := Date2DMY(Today, 3);
+        MonthToday := Date2DMY(Today, 2);
+        YearLast := Date2DMY(LastRepaymentDate, 3);
+        MonthLast := Date2DMY(LastRepaymentDate, 2);
+
+        // Calculate months difference correctly
+        MonthsElapsed := (YearToday - YearLast) * 12 + (MonthToday - MonthLast);
+
+        // Ensure we keep counting beyond last installment
+        Period := LastRepaymentSchedule + MonthsElapsed;
+    end;
+end;
+
 
 
     procedure KnGetPreviousMonthLastDate(LoanNo_: Text[30];Date_: Date) Lastdate: Date
@@ -3005,11 +3100,12 @@ GenJournalLine."account type"::Customer, LoanApps."Client Code",LoanApps."Loan D
           ExpectedPayments+=LoanRepaymentSchedule."Principal Repayment";
         until LoanRepaymentSchedule.Next=0;
         end;
-        if (CurrentLoanAmount)-(LoanDisbursed-ExpectedPayments)>0 then
-          exit(ROUND((CurrentLoanAmount)-(LoanDisbursed-ExpectedPayments),1,'='))
-        else
-          if (CurrentLoanAmount)-(LoanDisbursed-ExpectedPayments)>0 then
-          exit(0);
+
+        IF (CurrentLoanAmount - (LoanDisbursed - ExpectedPayments)) > 0 THEN
+    EXIT(ROUND(CurrentLoanAmount - (LoanDisbursed - ExpectedPayments), 1, '='))
+ELSE
+    EXIT(0);
+
         end;
     end;
 }

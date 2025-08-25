@@ -79,6 +79,7 @@ Table 51319 "Payroll Employee Transactions."
                  end;
                  end;*/
             end;
+
         }
         field(12; "Transaction Name"; Text[100])
         {
@@ -92,17 +93,17 @@ Table 51319 "Payroll Employee Transactions."
         field(14; Amount; Decimal)
         {
 
-            trigger OnValidate()
-            begin
-                Employee.Reset;
-                Employee.SetRange(Employee."No.", "No.");
-                if Employee.FindFirst then begin
-                    if Employee."Currency Code" = '' then
-                        "Amount(LCY)" := Amount
-                    else
-                        "Amount(LCY)" := Round(CurrExchRate.ExchangeAmtFCYToLCY(Today, Employee."Currency Code", Amount, Employee."Currency Factor"));
-                end;
-            end;
+            // trigger OnValidate()
+            // begin
+            //     Employee.Reset;
+            //     Employee.SetRange(Employee."No.", "No.");
+            //     if Employee.FindFirst then begin
+            //         if Employee."Currency Code" = '' then
+            //             "Amount(LCY)" := Amount
+            //         else
+            //             "Amount(LCY)" := Round(CurrExchRate.ExchangeAmtFCYToLCY(Today, Employee."Currency Code", Amount, Employee."Currency Factor"));
+            //     end;
+            // end;
         }
         field(15; "Amount(LCY)"; Decimal)
         {

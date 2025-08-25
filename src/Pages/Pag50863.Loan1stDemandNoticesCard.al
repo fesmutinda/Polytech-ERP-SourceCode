@@ -142,7 +142,7 @@ page 50863 "Loan 1st Demand Notices Card"
                         ObjLoans.Reset;
                         ObjLoans.SetRange(ObjLoans."Loan  No.", Rec."Loan In Default");
                         if ObjLoans.FindSet then begin
-                            Report.Run(51516925, true, true, ObjLoans);
+                            Report.Run(50053, true, true, ObjLoans);
                         end;
                         Commit;
                         PreviewOn := true;
@@ -165,6 +165,27 @@ page 50863 "Loan 1st Demand Notices Card"
 
                     end;
                 }
+                action("Loan Aging-Member")
+                {
+                    ApplicationArea = Basic;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    Image = Report;
+
+                    trigger OnAction()
+                    var
+                        ObjLoans: Record Customer; // Ensure ObjLoans is declared correctly
+                    begin
+                        ObjLoans.RESET;
+                        ObjLoans.SETRANGE(ObjLoans."No.", Rec."Member No");
+
+                        if ObjLoans.FindSet() then begin
+                            Report.Run(50041, true, true, ObjLoans);
+                        end;
+                    end;
+                }
+
+
                 action("1st Notice ")
                 {
                     ApplicationArea = Basic;
@@ -444,12 +465,12 @@ page 50863 "Loan 1st Demand Notices Card"
         ObjVendors: Record Vendor;
         ObjAccTypes: Record 51436;
         AvailableBal: Decimal;
-        ObjLoans: Record 51371;
+        ObjLoans: Record "Loans Register";
         ObjDemands: Record 51926;
         VarAuctioneerDetailsVisible: Boolean;
         SMSMessage: Record 51471;
         iEntryNo: Integer;
-        cust: Record 51364;
+        cust: Record Customer;
         PreviewOn: Boolean;
 
     local procedure FNenableVisbility()

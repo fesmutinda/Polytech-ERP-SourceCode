@@ -82,7 +82,6 @@ Page 56031 "Loans Posted Card"
                         Rec.TestField(Posted, false);
                     end;
                 }
-
                 field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
@@ -127,7 +126,7 @@ Page 56031 "Loans Posted Card"
                     ApplicationArea = Basic;
                     Caption = 'Approved Amount';
                     Editable = ApprovedAmountEditable;
-                    Visible = false;
+                    // Visible = false;
 
                     trigger OnValidate()
                     begin
@@ -217,6 +216,11 @@ Page 56031 "Loans Posted Card"
                     ApplicationArea = Basic;
                     Editable = BatchNoEditable;
                 }
+                field("Paying Bank Account No"; Rec."Paying Bank Account No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
                 field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic;
@@ -305,16 +309,41 @@ Page 56031 "Loans Posted Card"
                     ApplicationArea = Basic;
                 }
             }
-            part(Control1000000002; "Loan Appraisal Salary Details")
+            group(Salary)
             {
                 Caption = 'Salary Details';
-                SubPageLink = "Loan No" = field("Loan  No."),
-                              "Client Code" = field("Client Code");
+                Editable = false;
+                field("Basic Pay"; Rec."Basic Pay")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Total Allowances"; Rec."Total Allowances")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Gross Pay"; Rec."Gross Pay")
+                {
+                    ApplicationArea = Basic;
+                    Style = Favorable;
+                    StyleExpr = true;
+                    Editable = false;
+                }
+                field("Other Deductions"; Rec."Other Deductions")
+                {
+                    Caption = 'Total Deductions';
+                    ApplicationArea = Basic;
+                }
+                field("Net Utilizable"; Rec."Net Utilizable")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
             }
+
             part(Control1000000004; "Loans Guarantee Details")
             {
                 Caption = 'Guarantors  Detail';
-                SubPageLink = "Loan No" = field("Loan  No.");
+                SubPageLink = "Loan No" = field("Loan  No."), Substituted = const(false);
             }
             part(Control1000000005; "Loan Collateral Security")
             {
@@ -342,6 +371,25 @@ Page 56031 "Loans Posted Card"
                     RunObject = Page "Member Account Card";
                     RunPageLink = "No." = field("BOSA No");
                 }
+                action("Loan Appraisal")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Loan Appraisal';
+                    Enabled = true;
+                    Image = Aging;
+                    Promoted = true;
+                    PromotedCategory = Process;
+
+                    trigger OnAction()
+                    begin
+                        LoanApp.Reset;
+                        LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
+                        if LoanApp.Find('-') then begin
+                            Report.Run(50244, true, false, LoanApp);
+                        end;
+                    end;
+                }
+
                 action("Member Statement")
                 {
                     ApplicationArea = Basic;

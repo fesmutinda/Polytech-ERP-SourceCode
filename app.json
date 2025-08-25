@@ -2,7 +2,7 @@
   "id": "69e253e7-3e0d-4cf2-85e4-65cef595086a",
   "name": "PolyTech",
   "publisher": "Swizzsoft Systems and Solutions",
-  "version": "2.5.0.0",
+  "version": "3.5.0.2",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+  {
+    "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+    "name": "Base Application",
+    "publisher": "Microsoft",
+    "version": "24.0.16410.18056"
+  }
+],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "24.0.0.0",

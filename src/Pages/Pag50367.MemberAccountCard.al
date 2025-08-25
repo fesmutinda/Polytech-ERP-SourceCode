@@ -178,7 +178,7 @@ page 50367 "Member Account Card"
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = true;
 
                     trigger OnValidate()
                     begin
@@ -193,7 +193,7 @@ page 50367 "Member Account Card"
                 {
                     ApplicationArea = Basic;
                     Editable = false;
-                    Visible = false;
+                    // Visible = false;
                 }
                 field("Last Date Modified"; Rec."Last Date Modified")
                 {
@@ -864,7 +864,7 @@ page 50367 "Member Account Card"
                 action("Member is  a Guarantor")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Member is  a Guarantor';
+                    Caption = 'Member is a Guarantor';
                     Image = "Report";
 
                     trigger OnAction()
@@ -873,7 +873,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(50226, true, false, Cust);
+                            Report.Run(51035, true, false, Cust);
                     end;
                 }
                 action("Member is  Guaranteed")
@@ -887,7 +887,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then
-                            Report.Run(50225, true, false, Cust);
+                            Report.Run(51031, true, false, Cust); //51031
                     end;
                 }
                 action("Monthly Contributions")
@@ -919,6 +919,39 @@ page 50367 "Member Account Card"
                             Report.Run(50223, true, false, Cust);
                     end;
                 }
+                action("Detailed Statement Active Loans")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Detailed Active Statement';
+                    Image = Report;
+                    Promoted = true;
+                    PromotedCategory = "Report";
+
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(50229, true, false, Cust);
+                    end;
+                }
+
+                action("Detailed Statement Active")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Detailed Statement(Active)';
+                    Image = Report;
+                    Promoted = true;
+                    PromotedCategory = "Report";
+
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then
+                            Report.Run(51046, true, false, Cust);
+                    end;
+                }
                 action("Deposit Statement")
                 {
                     ApplicationArea = Basic;
@@ -932,7 +965,7 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then begin
-                            Report.Run(50051, true, false, Cust);
+                            Report.Run(50224, true, false, Cust);
                         END;
                     end;
                 }
@@ -951,6 +984,23 @@ page 50367 "Member Account Card"
                             Report.Run(50225, true, false, Cust);
                     end;
                 }
+                action("Dividend Statement")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Dividend Statement';
+                    Image = "Report";
+                    Promoted = true;
+                    PromotedCategory = "Report";
+
+                    trigger OnAction()
+                    begin
+                        Cust.Reset;
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        if Cust.Find('-') then begin
+                            Report.Run(50051, true, false, Cust);
+                        END;
+                    end;
+                }
                 action("Loans Statement")
                 {
                     ApplicationArea = Basic;
@@ -966,6 +1016,23 @@ page 50367 "Member Account Card"
                             Report.Run(50227, true, false, Cust);
                     end;
                 }
+                // action("Loans Perfomance Statement")
+                // {
+                //     ApplicationArea = Basic;
+                //     Image = "Report";
+                //     Promoted = true;
+                //     PromotedCategory = "Report";
+
+                //     trigger OnAction()
+                //     var
+                //         LoansReg: Record "Loans Register";
+                //     begin
+                //         LoansReg.Reset;
+                //         LoansReg.SetRange("Client Code", Rec."No.");
+                //         if LoansReg.FindSet() then
+                //             Report.Run(50207, true, false, LoansReg);
+                //     end;
+                // }
                 action("Loans Perfomance Statement")
                 {
                     ApplicationArea = Basic;
@@ -977,12 +1044,18 @@ page 50367 "Member Account Card"
                     var
                         LoansReg: Record "Loans Register";
                     begin
-                        LoansReg.Reset;
-                        LoansReg.SetRange(LoansReg."Client Code", Rec."No.");
-                        if LoansReg.Find('-') then
-                            Report.Run(50207, true, false, LoansReg);
+                        LoansReg.Reset();
+                        LoansReg.SetRange("Client Code", Rec."No.");
+                        LoansReg.SetRange(Source, LoansReg.Source::BOSA);
+
+                        if LoansReg.FindSet() then
+                            //Report.Run(50207, true, false, LoansReg)
+                            Report.Run(51036, true, false, LoansReg)
+                        else
+                            Message('No loan performance records found for client %1.', Rec."No.");
                     end;
                 }
+
                 action("Member Shares Status")
                 {
                     ApplicationArea = Basic;
@@ -1013,8 +1086,23 @@ page 50367 "Member Account Card"
                         Cust.Reset;
                         Cust.SetRange(Cust."No.", Rec."No.");
                         if Cust.Find('-') then begin
-                            Report.Run(50226, true, false, Cust);
+                            Report.Run(51031, true, false, Cust);
                         END;
+                    end;
+                }
+                action("Member is a Guarantor")
+                {
+                    ApplicationArea = basic;
+                    Caption = 'Member is a Guarantor';
+                    promoted = true;
+                    Image = Report2;
+                    PromotedCategory = Report;
+                    trigger OnAction()
+                    begin
+                        Cust.Reset();
+                        Cust.SetRange(Cust."No.", Rec."No.");
+                        If Cust.FindFirst() then
+                            Report.Run(51035, true, false, Cust);
                     end;
                 }
                 action("Create Withdrawal Application")
@@ -1027,11 +1115,27 @@ page 50367 "Member Account Card"
                     trigger OnAction()
 
                     begin
-                        Rec.CalcFields("Current Shares", "Outstanding Balance");
+                        /* Rec.CalcFields("Current Shares", "Outstanding Balance");
 
                         if Rec."Current Shares" >= Rec."Outstanding Balance" then begin
                             if Confirm('Are you sure you want to create a Withdrawal Application for this Member', false) = true then begin
-                                SurestepFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
+                                SwizzsoftFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
+                            end;
+                        end else
+                            Error('The withdraw Application has been denied'); */
+                        Rec.CalcFields(Rec."Current Shares", "Outstanding Balance");
+                        if Rec."Current Shares" >= Rec."Outstanding Balance" then begin
+                            if Confirm('Are you sure you want to create a Withdrawal Application for this Member', false) = true then begin
+                                TbExit.Reset;
+                                TbExit.SetRange(TbExit."Member No.", Rec."No.");
+                                if TbExit.Find('-') then begin
+                                    Error('The withdraw Application already exists.');
+                                    CurrPage.Close();
+                                end;
+                                SwizzsoftFactory.FnCreateMembershipWithdrawalApplication(Rec."No.", Rec."Withdrawal Application Date", Rec."Reason For Membership Withdraw", Rec."Withdrawal Date");
+                                Rec.Status := Rec.Status::"Awaiting Withdrawal";
+                                Rec.Modify();
+
                             end;
                         end else
                             Error('The withdraw Application has been denied');
@@ -1743,7 +1847,9 @@ page 50367 "Member Account Card"
     end;
 
     var
-        SurestepFactory: Codeunit "SURESTEP Factory";
+        //SwizzsoftFactory: Codeunit "SWIZZSFT Factory";
+        SwizzsoftFactory: Codeunit "Swizzsoft Factory";
+        TbExit: Record "Membership Exist";
         CustomizedCalEntry: Record "Customized Calendar Entry";
         Text001: label 'Do you want to allow payment tolerance for entries that are currently open?';
         CustomizedCalendar: Record "Customized Calendar Change";

@@ -3,8 +3,8 @@ Page 57104 "Product Card"
 {
     Caption = 'Account Card';
     DeleteAllowed = false;
-    InsertAllowed = true;
-    editable = true;
+    InsertAllowed = false;
+    editable = false;
     PageType = Card;
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     RefreshOnActivate = true;
@@ -20,29 +20,20 @@ Page 57104 "Product Card"
             {
                 Caption = 'General Info';
                 Editable = true;
-                field("BOSA No."; Rec."BOSA Account No")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'BOSA Account No.';
-                    Editable = true;
-
-                }
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Wallet Account No.';
+                    Caption = 'Account No.';
                     Editable = false;
 
                 }
                 field("Sacco No"; Rec."Sacco No")
                 {
-                    Visible = false;
                     ApplicationArea = Basic;
                     Editable = false;
                 }
                 field("Joint Account Name"; Rec."Joint Account Name")
                 {
-                    Visible = false;
                     ApplicationArea = Basic;
                     Editable = false;
                 }
@@ -580,7 +571,6 @@ Page 57104 "Product Card"
             }
             group(AccountTab1)
             {
-                Visible = false;
                 Caption = 'Communication Info';
                 Editable = true;
                 field(Address; Rec.Address)
@@ -631,7 +621,6 @@ Page 57104 "Product Card"
             }
             group("Term Deposit Details")
             {
-                Visible = false;
                 Caption = 'Term Deposit Details';
                 field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
@@ -708,7 +697,6 @@ Page 57104 "Product Card"
             }
             group("Previous Term Deposit Details")
             {
-                Visible = false;
                 Caption = 'Previous Term Deposit Details';
                 field("Prevous Fixed Deposit Type"; Rec."Prevous Fixed Deposit Type")
                 {
@@ -759,7 +747,6 @@ Page 57104 "Product Card"
             }
             group("ATM Details")
             {
-                Visible = false;
                 Caption = 'ATM Details';
                 field("ATM No.B"; Rec."ATM No.")
                 {
@@ -960,7 +947,7 @@ Page 57104 "Product Card"
                         Vend: Record Vendor;
 
                         AmountToPay: Decimal;
-                        Sfactory: Codeunit "SURESTEP Factory";
+                        Sfactory: Codeunit "SWIZZSFT Factory";
                         Answer: Boolean;
                         LineNo: Integer;
                         GenJournalLine: Record "Gen. Journal Line";
@@ -1001,7 +988,7 @@ Page 57104 "Product Card"
                     var
                         StatusChangePermission: record "Status Change Permision";
                         OptionChoosen: Integer;
-                        SFactory: Codeunit "SURESTEP Factory";
+                        SFactory: Codeunit "SWIZZSFT Factory";
                         GenPost: codeunit 12;
                     begin
                         GenJournalLine.Reset();
@@ -1070,7 +1057,7 @@ Page 57104 "Product Card"
                     var
                         StatusChangePermission: record "Status Change Permision";
                         OptionChoosen: Integer;
-                        SFactory: Codeunit "SURESTEP Factory";
+                        SFactory: Codeunit "SWIZZSFT Factory";
                         GenPost: codeunit 12;
                     begin
 
@@ -1186,7 +1173,6 @@ Page 57104 "Product Card"
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
         Rec."Creditor Type" := Rec."creditor type"::Account;
-        Rec."Account Type" := 'M-Wallet';
     end;
 
     trigger OnOpenPage()
@@ -1350,7 +1336,7 @@ Page 57104 "Product Card"
     local procedure FnRecoverFromFromShareDeposits(No: Code[20]; BOSAAccountNo: Code[20]; amount: Integer)
     var
         GenJournalLine: record "Gen. Journal Line";
-        SFactory: Codeunit "SURESTEP Factory";
+        SFactory: Codeunit "SWIZZSFT Factory";
         LineNo: Integer;
     begin
         //Recover from deposits
@@ -1406,7 +1392,7 @@ Page 57104 "Product Card"
     local procedure FnRecoverFromFOSAAccount(No: Code[20]; BOSAAccountNo: Code[20]; amount: Integer)
     var
         GenJournalLine: record "Gen. Journal Line";
-        SFactory: Codeunit "SURESTEP Factory";
+        SFactory: Codeunit "SWIZZSFT Factory";
         LineNo: Integer;
     begin
         //Recover from deposits

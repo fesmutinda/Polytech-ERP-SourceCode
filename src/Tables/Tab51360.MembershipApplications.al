@@ -102,27 +102,56 @@ Table 51360 "Membership Applications"
                 "Phone No." := UpperCase("Phone No.")
             end;
         }
+        // field(8; "Global Dimension 11 Code"; Code[20])
+        // {
+        //     CaptionClass = '1,1,1';
+        //     Caption = 'Global Dimension 1 Code';
+        //     TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1));
+
+        //     trigger OnValidate()
+        //     begin
+        //         DimValue.Reset;
+        //         DimValue.SetRange(DimValue.Code, "Global Dimension 1 Code");
+        //         if DimValue.Find('-') then begin
+        //         end;
+        //     end;
+        // }
+        // field(9; "Global Dimension 21 Code"; Code[20])
+        // {
+        //     CaptionClass = '1,1,2';
+        //     Caption = 'Global Dimension 2 Code';
+        //     TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2));
+
+        //     trigger OnValidate()
+        //     begin
+        //         DimValue.Reset;
+        //         DimValue.SetRange(DimValue.Code, "Global Dimension 2 Code");
+        //         if DimValue.Find('-') then begin
+        //             "Member Branch Code" := DimValue.Code;//"Branch Codes";
+        //             "Global Dimension 2 Code" := DimValue.Code;
+        //         end;
+        //     end;
+        // }
+
         field(8; "Global Dimension 1 Code"; Code[20])
         {
             CaptionClass = '1,1,1';
-            Caption = 'Global Dimension 1 Code';
+            Caption = 'Activity Code';
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1));
+            editable = false;
         }
         field(9; "Global Dimension 2 Code"; Code[20])
         {
             CaptionClass = '1,1,2';
-            Caption = 'Global Dimension 2 Code';
+            Caption = 'Branch';
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2));
 
-            // trigger OnValidate()
-            // begin
-            //     DimValue.Reset;
-            //     DimValue.SetRange(DimValue.Code, "Global Dimension 2 Code");
-            //     if DimValue.Find('-') then begin
-            //         "Member Branch Code" := DimValue.Code;//"Branch Codes";
-            //         "Global Dimension 2 Code" := DimValue.Code;
-            //     end;
-            // end;
+            editable = true;
+
+            trigger OnValidate()
+            begin
+
+            end;
         }
         field(10; "Customer Posting Group"; Code[10])
         {
@@ -204,7 +233,6 @@ Table 51360 "Membership Applications"
         }
         field(68005; "E-Mail (Personal)"; Text[50])
         {
-
             trigger OnValidate()
             begin
                 if "E-Mail (Personal)" <> '' then begin

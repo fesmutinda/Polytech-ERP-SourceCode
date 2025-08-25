@@ -215,6 +215,9 @@ Table 51318 "Payroll Transaction Code."
         {
             DataClassification = ToBeClassified;
         }
+        field(63; "Include in Levy Calculation"; Boolean)
+        {
+        }
     }
 
     keys

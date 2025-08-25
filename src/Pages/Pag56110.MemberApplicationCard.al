@@ -955,31 +955,34 @@ page 56110 "Member Application Card"
                 field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                     Editable = StatusEditable;
 
-                    trigger OnValidate()
-                    begin
-                        UpdateControls();
-                    end;
+                    /*  trigger OnValidate()
+                     begin
+                         UpdateControls();
+                     end; */
                 }
                 field("Customer Posting Group"; Rec."Customer Posting Group")
                 {
                     ApplicationArea = Basic;
                     Editable = true;// CustPostingGroupEdit;
                 }
-                field("Activity Code"; Rec."Global Dimension 1 Code")
+                field(" GroupGlobal Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
-                    Editable = GlobalDim2Editable;
+                    Editable = false;
+                    Caption = 'Activity Code';
                 }
-                field("Branch Code"; Rec."Global Dimension 2 Code")
+                field("GroupGlobal Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
-                    Editable = GlobalDim2Editable;
+                    Caption = 'Branch Code';
+                    Editable = true;
                 }
                 field("Sms Notification"; Rec."Sms Notification")
                 {
@@ -1292,10 +1295,10 @@ page 56110 "Member Application Card"
 
                         //................................
 
-                        if Confirm('Are you sure you want to send Membership Application for approval', false) = true then begin
-                            SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(Rec."No.", Rec);
-                            // ApprovalCodeUnit.OnSendMembershipApplicationForApproval(Rec);
-                            Rec.Status := Rec.Status::"Pending Approval";
+                        if confirm('Are you sure you want to send this Document for Approval', false) = true then begin
+                            SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+                            Message('Approval Request Sent!');
+                            CurrPage.Close();
                         end;
                         //.................................
 
@@ -1363,34 +1366,36 @@ page 56110 "Member Application Card"
                             Message('Aborted');
                             exit;
                         end ELSE begin
-                            dialogBox.Open('Creating New BOSA Account for applicant ' + Format(MembApp.Name));
+                            dialogBox.Open('Creating New BOSA Account for applicant ' + Format(Rec.Name));
                             BOSAAccountNo := FnCreateBOSAMemberAccounts();
                             dialogBox.Close();
 
-                            DialogBox.Open('Registering Mobile Wallet For  %1 ', Rec."Full Name");
-                            FnFOSAProducts(BOSAAccountNo);
-                            NewFOSAAccount := FnUpdateBOSAAccountToFOSAAccount(BOSAAccountNo);
-                            DialogBox.Close();
-                            GenSetUp.Get;
-                            // if GenSetUp."Auto Open FOSA Savings Acc." = true then begin
-                            //     dialogBox.Open('Creating New BOSA Account for applicant ' + Format(MembApp.Name));
-                            //     FnCreateFOSAMemberAccounts();
-                            //     dialogBox.Close();
-                            // end;
+                            // DialogBox.Open('Registering Mobile Wallet For  %1 ', Rec."Full Name");
+                            // FnFOSAProducts(BOSAAccountNo);
+                            // NewFOSAAccount := FnUpdateBOSAAccountToFOSAAccount(BOSAAccountNo);
+                            // DialogBox.Close();
+                            // GenSetUp.Get;
 
-                            dialogBox.Open('Registering Next Of Kin for ' + Format(MembApp.Name));
+                            if GenSetUp."Auto Open FOSA Savings Acc." = true then begin
+                                dialogBox.Open('Creating New M-Wallet Account for applicant ' + Format(MembApp.Name));
+                                swizzMobile.CreateMWallet(BOSAAccountNo);
+                                // swizzkash
+                                dialogBox.Close();
+                            end;
+
+                            dialogBox.Open('Registering Next Of Kin for ' + Format(Rec.Name));
                             FnCreateNextOfKinDetails(Cust."No.");
                             dialogBox.Close();
 
-                            dialogBox.Open('Registering Nominees for ' + Format(MembApp.Name));
+                            dialogBox.Open('Registering Nominees for ' + Format(Rec.Name));
                             FnCreateNomineeDetails(Cust."No.");
                             dialogBox.Close();
 
-                            dialogBox.Open('Registering Account Signatories for ' + Format(MembApp.Name));
+                            dialogBox.Open('Registering Account Signatories for ' + Format(Rec.Name));
                             FnCreateAccountSignatories(Cust."No.");
                             dialogBox.Close();
 
-                            dialogBox.Open('Registering Account Group Members for ' + Format(MembApp.Name));
+                            dialogBox.Open('Registering Account Group Members for ' + Format(Rec.Name));
                             FnCreateGroupMembers();
                             dialogBox.Close();
 
@@ -1399,7 +1404,7 @@ page 56110 "Member Application Card"
 
                             SendMail(Cust."No.");
                             //-----Send SMS
-                            // FnSendSMSOnAccountOpening();
+                            FnSendSMSOnAccountOpening();
                             SendAccountOpeningNotifications(BOSAAccountNo, NewFOSAAccount);
                             //-----
                             Message('Account created successfully.');
@@ -1547,6 +1552,7 @@ page 56110 "Member Application Card"
 
     var
         SFactory: Codeunit "Swizzsoft Factory";
+        swizzMobile: Codeunit SwizzKashMobile;
         Individual: Boolean;
         groupAcc: Boolean;
         BosaAPPGroup: Record "Bosa Member App Group Members";
@@ -2253,7 +2259,7 @@ page 56110 "Member Application Card"
         SMSMessages."Telephone No" := Rec."Mobile Phone No";
         SMSMessages."Sent To Server" := SMSMessages."sent to server"::No;
         SMSMessages."SMS Message" := 'Dear Member your account has been created successfully, your Account No is '
-        + BOSAACC + '  Account Name ' + Rec.Name + ' .' + 'You can now Deposit Via PayBill 587649. Thank You For Choosing to Save With Us';
+        + BOSAACC + '  Account Name ' + Rec.Name + ' .' + 'You can now Deposit Via PayBill 751459. Thank You For Choosing to Save With Us';
         SMSMessages.Insert;
 
     end;
@@ -2281,7 +2287,7 @@ page 56110 "Member Application Card"
         //     Companyinfo.Name + '</br>' + Companyinfo.Address + '</br>' + Companyinfo.City + '</br>' +
         //    Companyinfo."Post Code" + '</br>' + Companyinfo."Country/Region Code" + '</br>' +
         //     Companyinfo."Phone No." + '</br>' + Companyinfo."E-Mail";
-        EmailCodeunit.SendMail(Emailaddress, EmailSubject, EmailBody);
+        // EmailCodeunit.SendMail(Emailaddress, EmailSubject, EmailBody);
     end;
 
     local procedure FnCreateBOSAMemberAccounts(): Code[50]
@@ -2426,7 +2432,6 @@ page 56110 "Member Application Card"
         Vendortable: Record Vendor;
         ProductApplications: record "Membership Reg. Products Appli";
         ProductAccountNo: Code[50];
-        SystemFactory: Codeunit "SURESTEP Factory";
     begin
         ProductApplications.Reset();
         ProductApplications.SetRange(ProductApplications."Membership Applicaton No", rec."No.");
@@ -2435,7 +2440,8 @@ page 56110 "Member Application Card"
             repeat
                 ProductAccountNo := '';
                 if ProductApplications.Product <> '' then begin
-                    ProductAccountNo := SystemFactory.FnGetNewWalletAccountNo(ProductApplications.Product, BOSAAccountNo, '100');
+
+                    ProductAccountNo := swizzMobile.FnGetNewAccountNo(ProductApplications.Product, BOSAAccountNo, '100');
 
                     Vendortable.Init();
                     Vendortable."No." := ProductAccountNo;
@@ -2634,7 +2640,7 @@ page 56110 "Member Application Card"
     var
     begin
         SMSToSend := 'Dear Member your account has been created successfully, your Account No is '
-        + BOSAACC + '  Account Name ' + Rec.Name + ' .' + 'You can now Deposit Via PayBill 587649. Thank You For Choosing to Bank With Us';
+        + BOSAACC + '  Account Name ' + Rec.Name + ' .' + 'You can now Deposit Via PayBill 751459. Thank You For Choosing to Bank With Us';
         IEntry := 0;
         SMSMessages.Reset();
         if SMSMessages.Find('+') then begin
@@ -2662,7 +2668,7 @@ page 56110 "Member Application Card"
     var
         SMSMessages: record "SMS Messages";
         SaccoGeneralSetUp: record "Sacco General Set-Up";
-        SystemFactory: Codeunit "SURESTEP Factory";
+        SystemFactory: Codeunit "SWIZZSFT Factory";
         Msg: Text;
         VendorTable: record Vendor;
         CompanyInfo: record "Company Information";
@@ -2693,7 +2699,7 @@ page 56110 "Member Application Card"
                     if VendorTable.Find('-') then begin
                         repeat
                             Msg := '';
-                            Msg := 'Hello ' + Format(rec."First Name") + ',You have successfully registered for our ' + Format(VendorTable."Account Type") + ' product. To Deposit to ' + Format(VendorTable."Account Type") + ' account, use our paybill account ' + Format('854846') + ' and include your ' + Format(VendorTable."Account Type") + ' account number ' + Format(VendorTable."No.") + ' as the account number.';
+                            Msg := 'Hello ' + Format(rec."First Name") + ',You have successfully registered for our ' + Format(VendorTable."Account Type") + ' product. To Deposit to ' + Format(VendorTable."Account Type") + ' account, use our paybill account ' + Format('751459') + ' and include your ' + Format(VendorTable."Account Type") + ' account number ' + Format(VendorTable."No.") + ' as the account number.';
                             SystemFactory.FnSendSMS('MEMBERSHIP', Msg, VendorTable."No.", Rec."Mobile Phone No");
                         until VendorTable.Next = 0;
                     end;

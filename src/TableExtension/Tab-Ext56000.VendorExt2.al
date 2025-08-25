@@ -43,10 +43,10 @@ tableextension 56000 VendorExt2 extends Vendor
             trigger OnValidate()
             begin
 
-                Vend.Reset;
-                Vend.SetRange(Vend."Personal No.", "Personal No.");
-                if Vend.Find('-') then
-                    Vend.ModifyAll(Vend."Mobile Phone No", "Mobile Phone No");
+                // Vend.Reset;
+                // Vend.SetRange(Vend."Personal No.", "Personal No.");
+                // if Vend.Find('-') then
+                // Vend.ModifyAll(Vend."Mobile Phone No", "Mobile Phone No");
 
             end;
         }
@@ -68,55 +68,6 @@ tableextension 56000 VendorExt2 extends Vendor
         }
         field(68012; "BOSA Account No"; Code[20])
         {
-            TableRelation = Customer."No.";
-
-            trigger OnValidate()
-            var
-                customer: Record Customer;
-                SystemFactory: Codeunit "SURESTEP Factory";
-                vendor: Record Vendor;
-            begin
-                if "BOSA Account No" <> '' then begin
-                    vendor.Reset();
-                    vendor.SetRange(vendor."BOSA Account No", "BOSA Account No");
-                    if vendor.Find('-') then begin
-                        error('Account already exists !')
-                    end;
-                end;
-
-                customer.Reset();
-                customer.SetRange(customer."No.", "BOSA Account No");
-                if customer.Find('-') then begin
-                    Name := customer.Name;
-                    "No." := SystemFactory.FnGetNewWalletAccountNo("Account Type", "BOSA Account No", '100');
-                    "ID No." := customer."ID No.";
-
-                    //.........................
-                    Name := rec.Name;
-                    "First Name" := rec."First Name";
-                    "Middle Name" := rec."Middle Name";
-                    "Last Name" := rec."Last Name";
-                    "Country of Residence" := rec."Country of Residence";
-                    "Phone No." := rec."Mobile Phone No";
-                    "Account Type" := 'M-Wallet';
-                    Validate("Account Type");
-                    "Mobile Phone No." := rec."Mobile Phone No";
-                    "Mobile Phone No" := rec."Mobile Phone No";
-                    "E-Mail" := rec."E-Mail (Personal)";
-                    "ID No." := rec."ID No.";
-                    Gender := rec.Gender;
-                    "Registration Date" := Today;
-                    "Global Dimension 1 Code" := 'FOSA';
-                    "Global Dimension 2 Code" := rec."Global Dimension 2 Code";
-                    Status := Status::Active;
-                    "Personal No." := rec."Personal No.";
-                    Image := rec.Image;
-                    Signature := rec.Signature;
-                    "Creditor Type" := "Creditor Type"::Account;
-                    // Insert(true);
-                end;
-
-            end;
         }
         field(68013; Signature; Media)
         {
@@ -1563,7 +1514,7 @@ tableextension 56000 VendorExt2 extends Vendor
         field(68228; "Member Shares Retained"; Decimal)
         {
             CalcFormula = - sum("Cust. Ledger Entry"."Amount Posted" where("Customer No." = field("BOSA Account No"),
-                                                                   "Transaction Type" = const("Shares Capital"),
+                                                                   "Transaction Type" = const("Share Capital"),
                                                                    "Posting Date" = field("Date Filter"), Reversed = const(false)));
             Editable = false;
             FieldClass = FlowField;
