@@ -53,7 +53,7 @@ pageextension 50619 "UserSetUpExt" extends "User Setup"
             {
 
             }
-
+            field("Issue Trunch"; Rec."Issue Trunch") { }
 
         }
         modify("Allow Deferral Posting From")

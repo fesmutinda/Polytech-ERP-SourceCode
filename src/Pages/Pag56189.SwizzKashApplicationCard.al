@@ -30,6 +30,7 @@ Page 56189 "SwizzKash Application Card"
                 {
                     ApplicationArea = Basic;
                 }
+                field(Gender; Rec.Gender) { ApplicationArea = Basic; }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;

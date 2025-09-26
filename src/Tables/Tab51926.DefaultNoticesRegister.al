@@ -19,7 +19,6 @@ Table 51926 "Default Notices Register"
         field(2; "Member No"; Code[20])
         {
             TableRelation = Customer."No.";
-
             trigger OnValidate()
             begin
                 if ObjCust.Get("Member No") then begin
@@ -35,8 +34,7 @@ Table 51926 "Default Notices Register"
         }
         field(4; "Loan In Default"; Code[20])
         {
-            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Member No"),
-                                                                "Outstanding Balance" = filter(> 0));
+            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Member No"), "Outstanding Balance" = filter(> 0));
 
             trigger OnValidate()
             begin
@@ -46,7 +44,8 @@ Table 51926 "Default Notices Register"
                     "Loan Instalments" := ObjLoans.Installments;
                     "Loan Disbursement Date" := ObjLoans."Loan Disbursement Date";
                     "Expected Completion Date" := ObjLoans."Expected Date of Completion";
-                    "Amount In Arrears" := ROUND(ObjSwizzsoft.FnGetLoanInArrears("Loan In Default", ObjLoans."Outstanding Balance"), 1, '=') + ObjLoans."Oustanding Interest";
+                    "Amount In Arrears" := ObjLoans."Amount in Arrears";
+                    //"Amount In Arrears" := ROUND(ObjSwizzsoft.FnGetLoanInArrears("Loan In Default", ObjLoans."Outstanding Balance"), 1, '=') + ObjLoans."Oustanding Interest";
                     "Loan Outstanding Balance" := ObjLoans."Outstanding Balance";
                     "Loan Issued" := ObjLoans."Approved Amount";
                     "Outstanding Interest" := ObjLoans."Oustanding Interest";
@@ -199,6 +198,7 @@ Table 51926 "Default Notices Register"
         end;
 
         "Demand Notice Date" := Today;
+        "User ID" := "User ID";
     end;
 
     var

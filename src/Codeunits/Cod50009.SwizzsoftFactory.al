@@ -82,6 +82,9 @@ Codeunit 50009 "Swizzsoft Factory"
         //LoansRec.SetFilter(LoansRec.Posted, '=%1', false);
         if LoansRec.Find('-') then begin
             if (LoansRec."Repayment Start Date" <> 0D) then begin
+                LInterest := 0;
+                LPrincipal := 0;
+
                 LoansRec.TestField(LoansRec."Loan Disbursement Date");
                 LoansRec.TestField(LoansRec."Repayment Start Date");
 
@@ -138,7 +141,7 @@ Codeunit 50009 "Swizzsoft Factory"
                         LoansRec.TestField(LoansRec.Interest);
                         LoansRec.TestField(LoansRec.Installments);
                         LPrincipal := LoanAmount / RepayPeriod;
-                        LInterest := (InterestRate / 12 / 100) * LoanAmount / RepayPeriod;
+                        LInterest := (InterestRate / 12 / 100) * LoanAmount;// / RepayPeriod;
                     end;
 
                     if LoansRec."Repayment Method" = LoansRec."repayment method"::"Reducing Balance" then begin

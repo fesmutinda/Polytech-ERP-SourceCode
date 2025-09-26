@@ -40,6 +40,7 @@ Table 56119 "SwizzKash Applications"
                     Telephone := VendorTable."Mobile Phone No";
                     "Account Name" := VendorTable.Name;
                     "ID No" := VendorTable."ID No.";
+                    Gender := VendorTable.Gender;
                 end;
             end;
         }
@@ -170,7 +171,12 @@ Table 56119 "SwizzKash Applications"
         {
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup(Vendor."BOSA Account No" where("No." = field("Account No"), "Account Type" = filter('ORDINARY')));
+            CalcFormula = lookup(Vendor."BOSA Account No" where("No." = field("Account No"), "Account Type" = filter('M-WALLET')));
+        }
+        field(19; Gender; Option)
+        {
+            OptionCaption = ' ,Male,Female';
+            OptionMembers = " ",Male,Female;
         }
     }
 

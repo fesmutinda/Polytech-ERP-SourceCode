@@ -101,6 +101,7 @@ Page 56181 "Receipt Header Card"
                 Caption = 'Post Receipt';
                 Image = PostPrint;
                 Promoted = true;
+                PromotedCategory = Process;
                 PromotedIsBig = true;
 
                 trigger OnAction()

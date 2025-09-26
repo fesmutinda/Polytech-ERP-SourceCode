@@ -102,9 +102,9 @@ tableextension 50040 "UserSetUpExt" extends "User Setup"
         {
             DataClassification = ToBeClassified;
         }
-        field(51516026; "Responsibility Centre"; code[20]) { }
+        // field(51516026; "Responsibility Centre"; code[20]) { }
         field(51516027; "Other Advance Staff Account"; code[20]) { }//"Imprest Account"
-        field(51516028; "Imprest Account"; code[20]) { }//"Imprest Account"
+        // field(51516028; "Imprest Account"; code[20]) { }//"Imprest Account"
         field(51516029; "View Payroll"; Boolean) { }//"Imprest Account"
         field(51516030; "Approval Status Change"; Boolean) { }
         field(51516031; "Post Bank Rec"; Boolean) { }

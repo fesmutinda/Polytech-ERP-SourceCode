@@ -49,6 +49,10 @@ Page 56122 "Membership Exit List-Posted"
                 {
                     ApplicationArea = Basic;
                 }
+                field(VarWithdrawalFee; VarWithdrawalFee)
+                {
+                    ApplicationArea = basic;
+                }
                 field("Closure Type"; Rec."Closure Type")
                 {
                     ApplicationArea = Basic;
@@ -132,7 +136,7 @@ Page 56122 "Membership Exit List-Posted"
         ShareCapitalTransferVisible: Boolean;
         ShareCapSellPageVisible: Boolean;
         //ObjShareCapSell: Record "Share Capital Sell";
-        SurestepFactory: Codeunit "SURESTEP Factory";
+        SwizzsoftFactory: Codeunit "SWIZZSFT Factory";
         JVTransactionType: Option " ","Registration Fee","Share Capital","Interest Paid","Loan Repayment","Deposit Contribution","Insurance Contribution","Benevolent Fund",Loan,"Unallocated Funds",Dividend,"FOSA Account","Loan Insurance Charged","Loan Insurance Paid","Recovery Account","FOSA Shares","Additional Shares";
         JVAccountType: Enum "Gen. Journal Account Type";
         TemplateName: Code[20];

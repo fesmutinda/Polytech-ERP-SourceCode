@@ -1313,7 +1313,7 @@ page 50853 "Loan Application MICRO(Approv)"
                 SMSMessage.Source := 'GUARANTORSHIP';
                 SMSMessage."Entered By" := UserId;
                 SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-                SMSMessage."SMS Message" := 'Dear Member,You have guaranteed ' + Format(Rec."Client Name")
+                SMSMessage."SMS Message" := 'Dear Member, You have guaranteed ' + Format(Rec."Client Name")
                 + ' ' + Rec."Loan Product Type" + ' of KES. ' + Format(Rec."Approved Amount") + ',' + ' ' + 'Call,' + ' ' + compinfo."Phone No." + ',if in dispute .' + ' ' + compinfo.Name + ' ' + GenSetUp."Customer Care No";
                 Cust.Reset;
                 Cust.SetRange(Cust."No.", Rec."Client Code");

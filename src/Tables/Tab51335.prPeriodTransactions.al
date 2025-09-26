@@ -111,11 +111,19 @@ Table 51335 "prPeriod Transactions."
         field(26; "Loan Number"; Code[30])
         {
         }
+        // field(27; "coop parameters"; Option)
+        // {
+        //     Description = 'to be able to report the different coop contributions -Dennis';
+        //     // OptionMembers = "None",Shares,Loan,"Share Capital",Likizo,"Loan Interest","Emergency Loan","Emergency Loan Interest",Welfare,Pension,NSSF,Overtime,"Insurance Contribution"
+        //     // ,"Loan Application Fee Paid","Loan Insurance Paid";
+
+        // }
         field(27; "coop parameters"; Option)
         {
             Description = 'to be able to report the different coop contributions -Dennis';
-            OptionMembers = "None",Shares,Loan,"Share Capital",Likizo,"Loan Interest","Emergency Loan","Emergency Loan Interest",Welfare,Pension,NSSF,Overtime,"Insurance Contribution"
-            ,"Loan Application Fee Paid","Loan Insurance Paid";
+            // OptionMembers = "None",Shares,Loan,"Share Capital",Likizo,"Loan Interest","Emergency Loan","Emergency Loan Interest",Welfare,Pension,NSSF,Overtime,"Insurance Contribution"
+            // ,"Loan Application Fee Paid","Loan Insurance Paid";
+            OptionMembers = "none",shares,loan,"Loan Interest","Emergency loan","Emergency Loan Interest","School Fees loan","School Fees Loan Interest",Welfare,Pension,NSSF,Overtime,NHIF,"Insurance Contribution","Share Capital",Likizo,"Housing Levy";
         }
         field(28; "Payroll Code"; Code[20])
         {
