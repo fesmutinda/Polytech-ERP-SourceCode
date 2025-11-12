@@ -205,7 +205,7 @@ Codeunit 50029 "Periodic Activities"
                     IF LoansInterest.Posted THEN
                         InterestAmount := 0
                     ELSE
-                        LoansInterest.DELETE;
+                        LoansInterest.Delete();
                 END;
 
 
@@ -289,12 +289,13 @@ Codeunit 50029 "Periodic Activities"
     procedure GetInterestAmount(LoanNo: Code[20]; IntDate: Date; CheckExistingBill: Boolean): Decimal
     var
         LoanRec: Record "Loans Register";
-        CLedger: Record 51365;
-        RSchedule: Record 51375;
+        CLedger: Record "Cust. Ledger Entry";
+        RSchedule: Record "Loan Repayment Schedule";
         LastDate: Date;
         IntAmount: Decimal;
         LoanBalance: Decimal;
         BalDate: Date;
+        SFactory: Codeunit "Swizzsoft Factory";
     begin
         BalDate := CalcDate('+CM', Today);
         //BalDate:=CALCDATE('CM',BalDate);
@@ -310,7 +311,7 @@ Codeunit 50029 "Periodic Activities"
             exit(0);
 
         if CheckExistingBill then begin
-            CLedger.Reset;
+            CLedger.Reset();
             CLedger.SetRange("Loan No", LoanNo);
             CLedger.SetRange("Transaction Type", CLedger."transaction type"::"Interest Due");
             CLedger.SetFilter("Posting Date", '%1..%2', CalcDate('-CM', IntDate), CalcDate('CM', IntDate));
@@ -325,17 +326,10 @@ Codeunit 50029 "Periodic Activities"
         RSchedule.SetRange("Loan No.", LoanRec."Loan  No.");
         RSchedule.SetFilter("Principal Repayment", '>0');
         if not RSchedule.FindFirst then
-            //LoansProcess.GenerateRepaymentSchedule(LoanRec);
+            // LoansProcess.GenerateRepaymentSchedule(LoanRec);
+            SFactory.FnGenerateRepaymentSchedule(LoanRec."Loan  No.");
 
-
-            RSchedule.Reset;
-        RSchedule.SetRange("Loan No.", LoanRec."Loan  No.");
-        RSchedule.SetFilter("Principal Repayment", '>0');
-        if not RSchedule.FindFirst then
-            //ERROR('Loan Schedule for Loan No. %1 does not exist',LoanNo);
-            //MESSAGE('Continue');
-
-            LoanBalance := 0;
+        LoanBalance := 0;
         IntAmount := 0;
 
         LoanRec.Reset;

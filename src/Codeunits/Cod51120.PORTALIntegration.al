@@ -203,8 +203,10 @@ Codeunit 51120 PORTALIntegration
         AsAtEnd: Date;
         LoanText: Text;
         IsFirst: Boolean;
+        Principal: Decimal;
+        Interest: Decimal;
     begin
-        // Setup date range for the current month
+        // --- Setup current month range ---
         AsAtStart := DMY2DATE(1, Date2DMY(Today, 2), Date2DMY(Today, 3));
         AsAtEnd := CALCDATE('<CM>', AsAtStart);
 
@@ -214,29 +216,25 @@ Codeunit 51120 PORTALIntegration
         WelfareContribution := 0;
         HolidayContribution := 0;
 
+        // --- Fetch Member Info ---
         objMember.Reset;
         objMember.SetRange("No.", MemberNo);
 
         if objMember.FindFirst() then begin
             MonthlyContribution := objMember."Monthly Contribution";
 
-            objMember.CalcFields(objMember."Shares Retained");
-            if objMember."Shares Retained" >= 15000 then begin
+            objMember.CalcFields("Shares Retained");
+            if objMember."Shares Retained" >= 15000 then
                 ShareCapital := 0
-            end else
-                if objMember."Shares Retained" > 5000 then begin
-                    ShareCapital := 417
-                end else
-                    if objMember."Shares Retained" < 5000 then begin
-                        ShareCapital := 1000
-                    end;
+            else if objMember."Shares Retained" > 5000 then
+                ShareCapital := 417
+            else
+                ShareCapital := 1000;
 
             WelfareContribution := objMember."Welfare Contr";
             HolidayContribution := objMember."Holiday Contribution";
 
-            Message('Retrieved - Monthly: %1, Share: %2, Welfare: %3, Holiday: %4',
-                    MonthlyContribution, ShareCapital, WelfareContribution, HolidayContribution);
-
+            // Base contribution details
             OutputText += '"MonthlyContribution":"' + Format(ROUND(MonthlyContribution, 0.01)) + '",';
             OutputText += '"ShareCapital":"' + Format(ROUND(ShareCapital, 0.01)) + '",';
             OutputText += '"WelfareContribution":"' + Format(ROUND(WelfareContribution, 0.01)) + '",';
@@ -246,10 +244,12 @@ Codeunit 51120 PORTALIntegration
             exit(OutputText);
         end;
 
+        // --- Initialize Totals ---
         TotalLoanPrincipalRepayment := 0;
         TotalLoanInterest := 0;
         TotalMonthlyRepayment := 0;
 
+        // --- Get All Active Loans ---
         objLoanRegister.Reset();
         objLoanRegister.SetRange("Client Code", MemberNo);
         objLoanRegister.SetRange(Posted, true);
@@ -258,48 +258,67 @@ Codeunit 51120 PORTALIntegration
         if objLoanRegister.FindSet() then begin
             LoanText := '"Loans":[';
             IsFirst := true;
+
             repeat
                 if not IsFirst then
                     LoanText += ','
                 else
                     IsFirst := false;
 
+                // Use the NEW calculation logic
+                CalculateLoanRepayment(
+                    objLoanRegister."Loan Product Type",
+                    Principal,
+                    Interest,
+                    MemberNo,
+                    Today,
+                    AsAtStart
+                );
+
+                // Append loan info
                 LoanText += '{' +
                     '"LoanNo":"' + objLoanRegister."Loan  No." + '",' +
                     '"ProductType":"' + objLoanRegister."Loan Product Type" + '",' +
-                    '"PrincipalRepayment":"' + Format(ROUND(objLoanRegister."Loan Principle Repayment", 0.01)) + '",' +
-                    '"Interest":"' + Format(ROUND(objLoanRegister."Loan Interest Repayment", 0.01)) + '",' +
-                    '"MonthlyRepayment":"' + Format(ROUND(objLoanRegister.Repayment, 0.01)) + '"}';
+                    '"PrincipalRepayment":"' + Format(ROUND(Principal, 0.01)) + '",' +
+                    '"Interest":"' + Format(ROUND(Interest, 0.01)) + '",' +
+                    '"MonthlyRepayment":"' + Format(ROUND(Principal + Interest, 0.01)) + '"}';
 
-                TotalLoanPrincipalRepayment += objLoanRegister."Loan Principle Repayment";
-                TotalLoanInterest += objLoanRegister."Loan Interest Repayment";
-                TotalMonthlyRepayment += objLoanRegister.Repayment;
+                // Accumulate totals
+                TotalLoanPrincipalRepayment += Principal;
+                TotalLoanInterest += Interest;
+                TotalMonthlyRepayment += (Principal + Interest);
+
             until objLoanRegister.Next() = 0;
 
             LoanText += '],';
             OutputText += LoanText;
 
+            // Append totals
             OutputText += '"TotalPrincipalRepayment":"' + Format(ROUND(TotalLoanPrincipalRepayment, 0.01)) + '",';
             OutputText += '"TotalInterestRepayment":"' + Format(ROUND(TotalLoanInterest, 0.01)) + '",';
             OutputText += '"TotalMonthlyRepayment":"' + Format(ROUND(TotalMonthlyRepayment, 0.01)) + '",';
         end else begin
-            OutputText += '"Loans":[],';
-            OutputText += '"TotalPrincipalRepayment":"0.00",';
-            OutputText += '"TotalInterestRepayment":"0.00",';
-            OutputText += '"TotalMonthlyRepayment":"0.00",';
-            OutputText += '"LoanMessage":"No active loans found",';
+            // No loans found
+            OutputText += '"Loans":[],' +
+                        '"TotalPrincipalRepayment":"0.00",' +
+                        '"TotalInterestRepayment":"0.00",' +
+                        '"TotalMonthlyRepayment":"0.00",' +
+                        '"LoanMessage":"No active loans found",';
         end;
 
-        // Grand Total
-        OutputText += '"GrandTotal":"' + Format(ROUND(
-            TotalMonthlyRepayment +
-            MonthlyContribution +
-            ShareCapital +
-            WelfareContribution +
-            HolidayContribution, 0.01)) + '"}';
+        // --- Grand Total ---
+        OutputText += '"GrandTotal":"' +
+            Format(ROUND(
+                TotalMonthlyRepayment +
+                MonthlyContribution +
+                ShareCapital +
+                WelfareContribution +
+                HolidayContribution, 0.01)) +
+            '"}';
 
         exit(OutputText);
     end;
+
 
     procedure fnConfirmOTPCode(memberNumber: Code[10]; otpCode: Code[5]) validated: Boolean
     begin
@@ -2289,6 +2308,7 @@ Codeunit 51120 PORTALIntegration
             memberName := memberRegister.Name;
         end;
         EmailSubject := 'Polytech Portal Notification';
+        CompanyInfo.Get();
 
         EMailBody := 'Dear <b>' + memberName + '</b>,</br></br>' +
             message + '</br>' +

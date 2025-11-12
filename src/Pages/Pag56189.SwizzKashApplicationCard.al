@@ -35,6 +35,12 @@ Page 56189 "SwizzKash Application Card"
                 {
                     ApplicationArea = Basic;
                 }
+                field(ActivationStatus; Rec.ActivationStatus)
+                {
+                    ApplicationArea = Basic;
+                    Editable = true;
+                }
+                field("Mobile Status"; Rec."Mobile Status") { ApplicationArea = Basic; }
                 field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;

@@ -333,8 +333,13 @@ page 57206 "Existing Loans Card"
                         MissingAmount: Decimal;
                     begin
                         If FnCanPostLoans(UserId) = false then begin
-                            Error('Prohibited ! You are not allowed to POST this Loan');
+                            Error('Prohibited! You are not allowed to POST this Loan');
                         end;
+
+                        if UserId <> 'SwizzsoftAdmin' then begin
+                            Error('You should not post this loan');
+                        end;
+
                         // if "Mode of Disbursement" <> "Mode of Disbursement"::Cheque then begin
                         //     Error('Prohibited ! Mode of disbursement cannot be ' + Format("Mode of Disbursement"));
                         // end;
@@ -396,8 +401,6 @@ page 57206 "Existing Loans Card"
                                         Rec."Approval Status" := Rec."Approval Status"::Approved;
                                         Rec."Loans Category-SASRA" := Rec."Loans Category-SASRA"::Perfoming;
                                         Rec.Modify();
-                                        //...................Recover Overdraft Loan On Loan
-                                        SFactory.FnRecoverOnLoanOverdrafts(Rec."Client Code");
 
                                     end;
                                 until LoanApps.Next = 0;

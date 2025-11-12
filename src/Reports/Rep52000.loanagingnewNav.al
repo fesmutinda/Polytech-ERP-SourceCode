@@ -247,6 +247,14 @@ Report 52000 "loan aging new Nav"
 
             trigger OnAfterGetRecord()
             begin
+                Sorting := 0;
+                "0MonthC" := 0;
+                "1Month" := 0;
+                "2Month" := 0;
+                "3Month" := 0;
+                Over3Month := 0;
+                GrandTotal := 0;
+
                 "Loans Register".CalcFields("Outstanding Balance");
                 LBal := "Loans Register"."Outstanding Balance";
                 if "Loans Register"."Loans Category-SASRA" = "Loans Register"."loans category-sasra"::Perfoming then begin
@@ -330,7 +338,7 @@ Report 52000 "loan aging new Nav"
                     until LoanApp.Next = 0;
                 end;
 
-                LoanAgingProcessor.UpdateLoanArrears(AsAt);
+                // LoanAgingProcessor.UpdateLoanArrears(AsAt);
             end;
         }
     }

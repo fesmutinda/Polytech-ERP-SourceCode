@@ -508,13 +508,6 @@ Report 51045 "monthly exp polytech"
 
         LoansRegister.CalcFields("Outstanding Balance", "Oustanding Interest", "Interest Due");
 
-        // 1. If loan is supposed to be completed → just clear everything
-        // if LoansRegister."Expected Date of Completion" <= ASAT then begin
-        //     Principal := ROUND(LoansRegister."Outstanding Balance", 1, '>');
-        //     Interest := ROUND(LoansRegister."Oustanding Interest", 1, '>');
-        //     exit;
-        // end;
-
         // 2. Otherwise, try to find schedule entries within this month
         LoanRepaymentSchedule.Reset;
         LoanRepaymentSchedule.SetRange("Loan No.", LoansRegister."Loan  No.");

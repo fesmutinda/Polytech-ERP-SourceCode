@@ -5,13 +5,13 @@ Codeunit 51022 SwizzKashMobile
 
     trigger OnRun()
     begin
-        ActivateUSSD();
+        // ActivateUSSD();
         // fnProcessMPolytechNotifications();
         // fnRePostLoan('LNM485495149', '100-2015', 10000, 'BLN_0004429');
         // AdvanceEligibility();
         // PostMPESAWithdrawals();
         // FnUpdateWallets();
-        // CreateMWallets();
+        CreateMWallets();
         // CreateMWallet('2128');
     end;
 
@@ -109,7 +109,7 @@ Codeunit 51022 SwizzKashMobile
         response := '{ "StatusCode":"2","StatusDescription":"ERROR","ActivationRequests":[] }';
         IF recCount <= 0 THEN recCount := 5;
 
-        SwizzKashApplications.RESET;
+        SwizzKashApplications.Reset();
         SwizzKashApplications.SETRANGE(SwizzKashApplications.SentToServer, false);
         // SwizzKashApplications.SETRANGE(SwizzKashApplications."PIN Requested", TRUE);
         SwizzKashApplications.SETRANGE(SwizzKashApplications.ActivationStatus, SwizzKashApplications.ActivationStatus::PENDING);
@@ -447,6 +447,11 @@ Codeunit 51022 SwizzKashMobile
         CustomersTable.Reset();
         CustomersTable.SetRange(CustomersTable."No.", BOSAAccountNo);
         if CustomersTable.Find('-') then begin
+            Vendortable.Reset();
+            Vendortable.SetRange(Vendortable."BOSA Account No", BOSAAccountNo);
+            if Vendortable.Find('-') then begin
+                exit;
+            end;
             ProductAccountNo := '';
             ProductAccountNo := FnGetNewAccountNo('M-WALLET', BOSAAccountNo, '100');
 
@@ -3322,11 +3327,11 @@ Codeunit 51022 SwizzKashMobile
                 IF accountsList = '' THEN BEGIN
                     accountsList := '{ "accountNo":"' + vendorTable."No." +
                                    '", "accountName":"' + vendorTable."Account Type" +
-                                   '","balance":' + FORMAT(vendorTable."Balance (LCY)", 0, '<Precision,2:2><Integer><Decimals>') + ' }';
+                                   '","balance":' + FORMAT(SFactory.FnGetFosaAccountBalance(Vendor."No."), 0, '<Precision,2:2><Integer><Decimals>') + ' }';
                 END ELSE BEGIN
                     accountsList += ',{ "accountNo":"' + vendorTable."No." +
                                   '", "accountName":"' + vendorTable."Account Type" +
-                                  '","balance":' + FORMAT(vendorTable."Balance (LCY)", 0, '<Precision,2:2><Integer><Decimals>') + ' }';
+                                  '","balance":"' + FORMAT(SFactory.FnGetFosaAccountBalance(Vendor."No."), 0, '<Precision,2:2><Integer><Decimals>') + '" }';
                 END;
 
             UNTIL vendorTable.NEXT = 0;
@@ -3575,6 +3580,186 @@ Codeunit 51022 SwizzKashMobile
 
         END ELSE BEGIN
             response := '{ "StatusCode":"3","StatusDescription":"NUMBERNOTFOUND","guaranteedList":[] }';
+        END;
+    END;
+
+    PROCEDURE GetLoanGuarantors(phonenumber: text[100]) response: Text
+    VAR
+        guarantorsList: Text;
+        vendorTable: Record Vendor;
+        memberTable: Record Customer;
+        LoansTable: Record "Loans Register";
+    BEGIN
+
+        response := '{ "StatusCode":"2","StatusDescription":"ERROR","guarantorsList": [] }';
+
+        vendorTable.RESET;
+        vendorTable.SETRANGE(vendorTable."Mobile Phone No", phonenumber);
+        //vendorTable.SETRANGE(vendorTable."Vendor Posting Group",'M_WALLET');
+        IF vendorTable.FIND('-') THEN BEGIN
+            memberTable.RESET;
+            memberTable.SETRANGE(memberTable."No.", vendorTable."BOSA Account No");
+            IF memberTable.FIND('-') THEN BEGIN
+                LoansTable.Reset();
+                LoansTable.SETRANGE(LoansTable."Client Code", memberTable."No.");
+                LoansTable.SetAutoCalcFields(LoansTable."Outstanding Balance");
+                LoansTable.SETFILTER(LoansTable."Outstanding Balance", '>%1', 0);
+                IF LoansTable.FIND('-') THEN BEGIN
+                    LoanGuaranteeDetails.Reset();
+                    LoanGuaranteeDetails.SETRANGE(LoanGuaranteeDetails."Loan No", LoansTable."Loan  No.");
+                    IF LoanGuaranteeDetails.FIND('-') THEN BEGIN
+                        LoanGuaranteeDetails.CALCFIELDS(LoanGuaranteeDetails."Outstanding Balance");
+                        IF LoanGuaranteeDetails."Outstanding Balance" > 0 THEN
+                            guarantorsList := '';
+                        REPEAT
+                            IF guarantorsList = '' THEN BEGIN
+                                guarantorsList += '{ "LoanNumber": "' + LoanGuaranteeDetails."Loan No" +
+                                                  '", "name": "' + LoanGuaranteeDetails.Name +
+                                                  '", "amount": "' + FORMAT(LoanGuaranteeDetails."Amont Guaranteed", 0, '<Precision,2:2><Integer><Decimals>') + '" }';
+                            END ELSE BEGIN
+                                guarantorsList += ',{"LoanNumber": "' + LoanGuaranteeDetails."Loan No" +
+                                                  '", "name": "' + LoanGuaranteeDetails.Name +
+                                                  '", "amount": "' + FORMAT(LoanGuaranteeDetails."Amont Guaranteed", 0, '<Precision,2:2><Integer><Decimals>') + '" }';
+                            END;
+                        UNTIL LoanGuaranteeDetails.NEXT = 0;
+
+                        IF guarantorsList <> '' THEN BEGIN
+                            response := '{ "StatusCode":"000","StatusDescription":"OK","guarantorsList":[ ' + guarantorsList + ' ] }';
+                        END ELSE BEGIN
+                            response := '{ "StatusCode":"100","StatusDescription":"NOLOANSGUARANTEED","guarantorsList":[] }';
+                        END;
+                    END ELSE BEGIN
+                        response := '{ "StatusCode":"300","StatusDescription":"NOGUARANTORSFOUND","guarantorsList":[] }';
+                    END;
+                END ELSE BEGIN
+                    response := '{ "StatusCode":"400","StatusDescription":"NOLOANSFOUND","guarantorsList":[] }';
+                END;
+            END ELSE BEGIN
+                response := '{ "StatusCode":"1","StatusDescription":"MEMBERNOTFOUND","guarantorsList":[] }';
+            END;
+        END ELSE BEGIN
+            response := '{ "StatusCode":"3","StatusDescription":"NUMBERNOTFOUND","guarantorsList":[] }';
+        END;
+    END;
+
+    PROCEDURE GetLoansGuaranteed(phonenumber: text[100]) response: Text
+    VAR
+        guaranteedList: Text;
+        vendorTable: Record Vendor;
+        memberTable: Record Customer;
+    BEGIN
+
+        response := '{ "StatusCode":"2","StatusDescription":"NOTPROCESSED","guaranteedList": [] }';
+
+        vendorTable.RESET;
+        vendorTable.SETRANGE(vendorTable."Mobile Phone No", phonenumber);
+        //vendorTable.SETRANGE(vendorTable."Vendor Posting Group",'M_WALLET');
+        IF vendorTable.FIND('-') THEN BEGIN
+            memberTable.RESET;
+            memberTable.SETRANGE(memberTable."No.", vendorTable."BOSA Account No");
+            IF memberTable.FIND('-') THEN BEGIN
+                LoanGuaranteeDetails.RESET;
+                LoanGuaranteeDetails.SETRANGE(LoanGuaranteeDetails."Member No", memberTable."No.");
+                LoanGuaranteeDetails.SetAutoCalcFields(LoanGuaranteeDetails."Outstanding Balance");
+                LoanGuaranteeDetails.SETFILTER(LoanGuaranteeDetails."Loans Outstanding", '>%1', 0);
+                IF LoanGuaranteeDetails.FIND('-') THEN BEGIN
+
+                    guaranteedList := '';
+
+                    REPEAT
+                        IF guaranteedList = '' THEN BEGIN
+                            guaranteedList += '{ "loanId":"' + LoanGuaranteeDetails."Loan No" +
+                                            '","guaranteedAmount":' + FORMAT(LoanGuaranteeDetails."Amont Guaranteed", 0, '<Precision,2:2><Integer><Decimals>') + '}';
+                        END ELSE BEGIN
+                            guaranteedList += ',{ "loanId":"' + LoanGuaranteeDetails."Loan No" +
+                                            '","guaranteedAmount":' + FORMAT(LoanGuaranteeDetails."Amont Guaranteed", 0, '<Precision,2:2><Integer><Decimals>') + '}';
+                        END;
+                    UNTIL LoanGuaranteeDetails.NEXT = 0;
+
+                    IF guaranteedList <> '' THEN BEGIN
+                        response := '{ "StatusCode":"000","StatusDescription":"OK","guaranteedList":[ ' + guaranteedList + ' ] }';
+                    END ELSE BEGIN
+                        response := '{ "StatusCode":"1","StatusDescription":"NOLOANSGUARANTEED","guaranteedList":[] }';
+                    END;
+
+                END ELSE BEGIN
+                    response := '{ "StatusCode":"1","StatusDescription":"NOLOANSGUARANTEED","guaranteedList":[] }';
+                END;
+            END ELSE BEGIN
+                response := '{ "StatusCode":"1","StatusDescription":"MEMBERNOTFOUND","guaranteedList":[] }';
+            END;
+
+        END ELSE BEGIN
+            response := '{ "StatusCode":"3","StatusDescription":"NUMBERNOTFOUND","guaranteedList":[] }';
+        END;
+    END;
+
+    PROCEDURE GetMinistatementApp(phonenumber: text[100]) response: Text
+    VAR
+        statementList: Text;
+        vendorTable: Record Vendor;
+        memberTable: Record Customer;
+        runCount: Integer;
+        statementCount: Integer;
+    BEGIN
+
+        response := '{ "StatusCode":"300","StatusDescription":"Your request was not processed","statementList": [] }';
+
+        vendorTable.RESET;
+        vendorTable.SETRANGE(vendorTable."Mobile Phone No", phonenumber);
+        //vendorTable.SETRANGE(vendorTable."Vendor Posting Group",'M_WALLET');
+        IF vendorTable.FIND('-') THEN BEGIN
+            memberTable.RESET;
+            memberTable.SETRANGE(memberTable."No.", vendorTable."BOSA Account No");
+            IF memberTable.FIND('-') THEN BEGIN
+                MemberLedgerEntry.RESET;
+                MemberLedgerEntry.SETRANGE(MemberLedgerEntry."Customer No.", memberTable."No.");
+                MemberLedgerEntry.SETCURRENTKEY(MemberLedgerEntry."Posting Date");
+                MemberLedgerEntry.SETASCENDING("Posting Date", FALSE);
+                IF MemberLedgerEntry.FIND('-') THEN BEGIN
+                    statementCount := MemberLedgerEntry.COUNT;
+                    runCount := 0;
+                    statementList := '';
+
+                    REPEAT
+                        runCount := runCount + 1;
+                        MemberLedgerEntry.CalcFields(Amount);
+
+                        IF statementList = '' THEN BEGIN
+                            statementList := '{ "transactionDate":"' + FORMAT(MemberLedgerEntry."Posting Date") +
+                                            '", "transactionType":"' + FORMAT(MemberLedgerEntry."Transaction Type") +
+                                            '","amount":' + FORMAT(MemberLedgerEntry.Amount, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
+                        END ELSE BEGIN
+                            statementList += ',{ "transactionDate":"' + FORMAT(MemberLedgerEntry."Posting Date") +
+                                           '", "transactionType":"' + FORMAT(MemberLedgerEntry."Transaction Type") +
+                                           '","amount":' + FORMAT(MemberLedgerEntry.Amount, 0, '<Precision,2:2><Integer><Decimals>') + ' }';
+                        END;
+
+                        IF runCount >= 15 THEN BEGIN
+                            IF statementList <> '' THEN BEGIN
+                                response := '{ "StatusCode":"200","StatusDescription":"OK","statementList":[ ' + statementList + ' ] }';
+                            END ELSE BEGIN
+                                response := '{ "StatusCode":"100","StatusDescription":"No transactions","statementList":[] }';
+                            END;
+                            EXIT;
+                        END;
+
+                    UNTIL MemberLedgerEntry.NEXT = 0;
+
+                    IF statementList <> '' THEN BEGIN
+                        response := '{ "StatusCode":"200","StatusDescription":"Success","statementList":[ ' + statementList + ' ] }';
+                    END ELSE BEGIN
+                        response := '{ "StatusCode":"100","StatusDescription":"No transactions","statementList":[] }';
+                    END;
+                END ELSE BEGIN
+                    response := '{ "StatusCode":"100","StatusDescription":"No records were found","statementList":[] }';
+                END;
+            END ELSE BEGIN
+                response := '{ "StatusCode":"100","StatusDescription":"Member Not found","statementList":[] }';
+            END;
+
+        END ELSE BEGIN
+            response := '{ "StatusCode":"300","StatusDescription":"Member not found","statementList":[] }';
         END;
     END;
 

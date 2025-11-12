@@ -85,10 +85,13 @@ Report 51314 "Payroll JournalTransfer."
                                     SaccoTransactionType := Tntype::"Share Capital";
                                 PeriodTrans."coop parameters"::"Insurance Contribution":
                                     SaccoTransactionType := Tntype::"Insurance Contribution";
+                                PeriodTrans."coop parameters"::"Holiday Savings":
+                                    SaccoTransactionType := Tntype::"Holiday Savings";
                                 else
                                     // leave the “blank” value, or log/raise an error if that’s safer
                                     SaccoTransactionType := Saccotransactiontype::" ";
                             end;
+                            if PeriodTrans."Transaction Name".Contains('Insurance') then SaccoTransactionType := Tntype::"Insurance Contribution";
 
                             // Handle specific transaction codes
                             if PeriodTrans."Transaction Code" = 'BENEV' then begin
@@ -275,8 +278,12 @@ Report 51314 "Payroll JournalTransfer."
         GeneraljnlLine."Loan No" := LoanNo;
         // GeneraljnlLine."Account Type" := AccountType;
 
-        if Description.Contains('House Levy') or Description.Contains('Insurance') or Description.Contains('S.H.I.F') or Description.Contains('N.H.I.F R') then begin
+        if Description.Contains('House Levy') or Description.Contains('S.H.I.F') or Description.Contains('N.H.I.F R') or Description.Contains('SHIF Relief') then begin
             GeneraljnlLine."Account Type" := GeneraljnlLine."account type"::"G/L Account";
+            GeneraljnlLine."Transaction Type" := GeneraljnlLine."Transaction Type"::" ";
+        end else if Description.Contains('Insurance') or Description.Contains('Holiday savings') then begin
+            GeneraljnlLine."Account Type" := GeneraljnlLine."account type"::Customer;
+            GeneraljnlLine."Account No." := AccountNo;
         end else if TransType <> Transtype::" " then begin
             GeneraljnlLine."Account Type" := GeneraljnlLine."account type"::Customer;
             GeneraljnlLine."Account No." := AccountNo;

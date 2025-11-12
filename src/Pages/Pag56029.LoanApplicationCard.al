@@ -466,6 +466,25 @@ Page 56029 "Loan Application Card"
                         if checkGuarantorCount() < 2 then begin
                             Error('Loan Applications must have a minimum of 2 Guarantor');
                         end;
+                        //Audit Entries
+                        if (UserId <> 'MOBILE') and (UserId <> 'ATM') and (UserId <> 'AGENCY') then begin
+                            EntryNos := 0;
+                            if Audit.FindLast then
+                                EntryNos := 1 + Audit."Entry No";
+                            Audit.Init();
+                            Audit."Entry No" := EntryNos;
+                            Audit."Transaction Type" := 'Loan Appraisal';
+                            Audit."Loan Number" := Rec."Loan  No.";
+                            Audit."Document Number" := Rec."Loan  No.";
+                            Audit.UsersId := UserId;
+                            Audit.Amount := Rec."Requested Amount";
+                            Audit.Date := Today;
+                            Audit.Time := Time;
+                            Audit.Source := 'LOAN APPLICATION';
+                            Audit.Insert();
+                            Commit();
+                        end;
+                        //End Audit Entries
 
                         LoanApp.Reset;
                         LoanApp.SetRange(LoanApp."Loan  No.", Rec."Loan  No.");
@@ -683,6 +702,8 @@ Page 56029 "Loan Application Card"
         InstalmentEnddate: Date;
         GracePerodDays: Integer;
         InstalmentDays: Integer;
+        Audit: record "Audit Entries";
+        EntryNos: Integer;
         NoOfGracePeriod: Integer;
         NewSchedule: Record "Loan Repayment Schedule";
         RSchedule: Record "Loan Repayment Schedule";
@@ -919,7 +940,7 @@ Page 56029 "Loan Application Card"
         GuarantorCount := 0;
 
         // For certain loan types, force minimum guarantors
-        if (Rec."Loan Product Type" in ['21', '26', '22']) then begin
+        if (Rec."Loan Product Type" in ['15', '16', '21', '26', '22']) then begin
             guarantorCount := 3;
         end else begin
 

@@ -22,9 +22,11 @@ pageextension 57103 "detailedvendorledgerentry" extends "Detailed Vendor Ledg. E
                 Caption = 'Running Balance';
                 ToolTip = 'Shows the running vendor balance up to this entry.';
             }
-            field(Reversed; Rec.Reversed)
+            field(Reversed; IsReversed())
             {
-                ApplicationArea = Basic;
+                ApplicationArea = All;
+                Caption = 'Is Reversed';
+                Editable = false;
             }
         }
 
@@ -50,6 +52,34 @@ pageextension 57103 "detailedvendorledgerentry" extends "Detailed Vendor Ledg. E
         }
 
     }
+    local procedure IsReversed(): Boolean
+    var
+        SearchDVLE: Record "Detailed Vendor Ledg. Entry";
+        VendLedgEntry: Record "Vendor Ledger Entry"; // the VLE table
+        DVLE: Record "Detailed Vendor Ledg. Entry";
+    begin
+        // Work on the current record
+        DVLE := Rec;
+
+        // 1) Try: lookup Vendor Ledger Entry linked to this DVLE and use its Reversed field.
+        //    Replace "Vendor Ledger Entry No." with the correct linking field if different in your DB.
+        if DVLE."Vendor Ledger Entry No." <> 0 then begin
+            if VendLedgEntry.Get(DVLE."Vendor Ledger Entry No.") then
+                exit(VendLedgEntry.Reversed);
+        end;
+
+
+        // 3) Heuristic: look for same vendor with exact opposite amount (and posted after)
+        SearchDVLE.Reset();
+        SearchDVLE.SetRange("Vendor No.", DVLE."Vendor No.");
+        // If your amount field is "Amount (LCY)" or "Amount", adapt the field name.
+        SearchDVLE.SetRange("Amount", -DVLE."Amount");
+        if SearchDVLE.FindFirst() then
+            exit(true);
+
+        exit(false);
+    end;
+
     local procedure GetVendorRunningBalance(var VendLedgEntry: Record "Detailed Vendor Ledg. Entry"): Decimal
     var
         VendLedgEntry2: Record "Detailed Vendor Ledg. Entry";

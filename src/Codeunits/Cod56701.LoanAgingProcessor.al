@@ -109,6 +109,9 @@ codeunit 56701 LoanAgingProcessor
                 ExpectedDateofCompletion := 0D;
                 RepaymentPeriod := AsAt;
 
+                daysinarr := 0;
+                periodArrear := 0;
+
                 // //.............Update Armotised loan schedules
                 //............................................
                 Reached := Reached + 1;

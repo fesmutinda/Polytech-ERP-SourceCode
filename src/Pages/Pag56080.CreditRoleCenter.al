@@ -1131,23 +1131,6 @@ page 56080 "Credit Role Center"
                         ToolTip = 'Open the list of the Loans Posted.';
                     }
                 }
-
-                group("Loan Batching")
-                {
-
-                    action("Loan Batch List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Loans Disbursment Batch List";
-
-                    }
-                    action("Posted Loan Batch List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Posted Loan Batch - List";
-
-                    }
-                }
                 group("Loans Appeals")
                 {
                     // Visible = false;

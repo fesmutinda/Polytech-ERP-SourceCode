@@ -661,6 +661,7 @@ Codeunit 51415 "Payroll Processing"//Number2
 
             END;
 
+            //Deductions here
             prEmployeeTransactions.RESET;
             prEmployeeTransactions.SETRANGE(prEmployeeTransactions."No.", strEmpCode);
             prEmployeeTransactions.SETRANGE(prEmployeeTransactions."Period Month", intMonth);

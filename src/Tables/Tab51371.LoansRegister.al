@@ -4735,9 +4735,6 @@ Table 51371 "Loans Register"
         {
             DataClassification = ToBeClassified;
         }
-
-
-
     }
 
     keys

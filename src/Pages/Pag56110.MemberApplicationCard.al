@@ -1319,6 +1319,25 @@ page 56110 "Member Application Card"
                         if Confirm('Cancel Approval?', false) = true then begin
                             SrestepApprovalsCodeUnit.CancelMembershipApplicationsRequestForApproval(rec."No.", Rec);
 
+                            //Audit Entries
+                            if (UserId <> 'MOBILE') and (UserId <> 'ATM') and (UserId.ToUpper() <> 'SWIZZSOFTADMIN') then begin
+                                EntryNos := 0;
+                                if Audit.FindLast then
+                                    EntryNos := 1 + Audit."Entry No";
+                                Audit.Init();
+                                Audit."Entry No" := EntryNos;
+                                Audit."Transaction Type" := 'Account Appplication Request Canceled';
+                                Audit."Loan Number" := '';
+                                Audit."Document Number" := Rec."No.";
+                                Audit."Account Number" := Rec."No.";
+                                Audit.UsersId := UserId;
+                                Audit.Amount := 0;
+                                Audit.Date := Today;
+                                Audit.Time := Time;
+                                Audit.Source := 'MEMBER APPLICATION';
+                                Audit.Insert();
+                                Commit();
+                            end;
                         end;
                     end;
                 }
@@ -1414,6 +1433,25 @@ page 56110 "Member Application Card"
                             rec.Status := Rec.Status::Closed;
                             rec.Modify(true);
                             //.............................................................................
+                            //Audit Entries
+                            if (UserId <> 'MOBILE') and (UserId <> 'ATM') and (UserId <> 'SWIZZSOFTADMIN') then begin
+                                EntryNos := 0;
+                                if Audit.FindLast then
+                                    EntryNos := 1 + Audit."Entry No";
+                                Audit.Init();
+                                Audit."Entry No" := EntryNos;
+                                Audit."Transaction Type" := 'Account Creation';
+                                Audit."Loan Number" := '';
+                                Audit."Document Number" := Rec."No.";
+                                Audit."Account Number" := BOSAAccountNo;
+                                Audit.UsersId := UserId;
+                                Audit.Amount := 0;
+                                Audit.Date := Today;
+                                Audit.Time := Time;
+                                Audit.Source := 'MEMBER APPLICATION';
+                                Audit.Insert();
+                                Commit();
+                            end;
                         end;
 
                     end;
@@ -1552,6 +1590,8 @@ page 56110 "Member Application Card"
 
     var
         SFactory: Codeunit "Swizzsoft Factory";
+        Audit: Record "Audit Entries";
+        EntryNos: Integer;
         swizzMobile: Codeunit SwizzKashMobile;
         Individual: Boolean;
         groupAcc: Boolean;
@@ -2281,6 +2321,7 @@ page 56110 "Member Application Card"
             memberName := memberRegister.Name;
         end;
         EmailSubject := 'Polytech Membership Application';
+        CompanyInfo.Get();
 
         EMailBody := 'Dear <b>' + memberName + '</b>,</br></br>' +
             'On behalf of Polytech Sacco am pleased to inform you that your application for membership has been accepted. Your Membership Number is' + MemberNumber + '<br></br>' +

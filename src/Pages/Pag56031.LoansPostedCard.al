@@ -64,6 +64,11 @@ Page 56031 "Loans Posted Card"
                     Visible = false;
 
                 }
+                field("Insider-board"; Rec."Insider-board") { ApplicationArea = Basic; }
+                field("Insider-Employee"; Rec."Insider-Employee")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Loan Product Type"; Rec."Loan Product Type")
                 {
                     ApplicationArea = Basic;
