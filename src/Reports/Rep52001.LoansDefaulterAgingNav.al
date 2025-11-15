@@ -306,7 +306,7 @@ Report 52001 "Loans Defaulter Aging Nav"
                     "No.ofMonthsinArrears" <= 360:
                         "Loans Register"."Loans Category" := "loans category"::Watch;
                     else
-                        "Loans Register"."Loans Category" := "loans category"::Watch; // maybe change this to Loss?
+                        "Loans Register"."Loans Category" := "loans category"::Loss;
                 end;
 
                 "No of Months in Arrears" := "No.ofMonthsinArrears";
@@ -354,7 +354,14 @@ Report 52001 "Loans Defaulter Aging Nav"
                         LoanApp.Substandard := false;
                         LoanApp.Doubtful := false;
                         LoanApp.loss := false;
-                        LoanApp.Modify;
+
+                        LoanApp."Days In Arrears" := 0;
+                        LoanApp."Amount in Arrears" := 0;
+                        LoanApp."No of Days in Arrears" := 0;
+                        LoanApp."No of Months in Arrears" := 0;
+                        LoanApp."Loans Category" := "loans category"::Perfoming;
+
+                        LoanApp.Modify();
                     until LoanApp.Next = 0;
                 end;
             end;

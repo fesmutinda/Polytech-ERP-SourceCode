@@ -338,7 +338,7 @@ Report 52000 "loan aging new Nav"
                     until LoanApp.Next = 0;
                 end;
 
-                // LoanAgingProcessor.UpdateLoanArrears(AsAt);
+                LoanAgingProcessor.UpdateLoanArrears(AsAt);
             end;
         }
     }

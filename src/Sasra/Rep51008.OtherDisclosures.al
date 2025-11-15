@@ -589,7 +589,7 @@ Report 51008 "Other Disclosures"
                 Minimumstatutoryratio3 := 0.1;
                 BalancesheetAssets := 0;
                 GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '14300');
+                GLAccount.SetRange(GLAccount."No.", '199999');
                 GLAccount.SetFilter(GLAccount."Date Filter", DateFilter);
                 if GLAccount.FindSet then begin
                     repeat
@@ -599,7 +599,7 @@ Report 51008 "Other Disclosures"
                     until GLAccount.Next = 0;
                 end;
                 GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '14300');
+                GLAccount.SetRange(GLAccount."No.", '199999');
                 GLAccount.SetFilter(GLAccount."Date Filter", LastYearFilter);
                 if GLAccount.FindSet then begin
                     repeat
@@ -697,7 +697,7 @@ Report 51008 "Other Disclosures"
 
 
                 GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '14300');
+                GLAccount.SetRange(GLAccount."No.", '199999');
                 GLAccount.SetFilter(GLAccount."Date Filter", DateFilter);
                 GLAccount.SetAutocalcFields(Balance);
                 if GLAccount.FindSet then begin
@@ -958,7 +958,7 @@ Report 51008 "Other Disclosures"
                 //total assets as per the balance sheet
 
                 GLAccount.Reset;
-                GLAccount.SetRange(GLAccount."No.", '14300');
+                GLAccount.SetRange(GLAccount."No.", '199999');
                 GLAccount.SetFilter(GLAccount."Date Filter", DateFilter);
                 GLAccount.SetAutocalcFields(Balance);
                 if GLAccount.FindSet then begin

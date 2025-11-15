@@ -128,26 +128,30 @@ Page 56638 "Loans DrillDown List"
                     ApplicationArea = Basic;
                 }
 
-                // field("Months in Arrears"; Rec."No of Months in Arrears")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                // field("Principal In Arrears"; Rec."Principal In Arrears")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                // field("Interest In Arrears"; Rec."Interest In Arrears")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                // field("Total Amount In Arrears"; Rec."Amount in Arrears")
-                // {
-                //     ApplicationArea = Basic;
-                // }
-                // field("Loans Status"; Rec."Loans Category-SASRA")
-                // {
-                //     ApplicationArea = Basic;
-                // }
+                field("Months in Arrears"; Rec."No of Months in Arrears")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Principal In Arrears"; Rec."Principal In Arrears")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Interest In Arrears"; Rec."Interest In Arrears")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Total Amount In Arrears"; Rec."Amount in Arrears")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loans Status"; Rec."Loans Category-SASRA")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Loans Category"; Rec."Loans Category")
+                {
+                    ApplicationArea = Basic;
+                }
 
             }
         }

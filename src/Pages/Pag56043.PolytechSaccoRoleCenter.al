@@ -402,6 +402,13 @@ Page 56043 "Polytech Sacco Role Center"
                         Caption = 'Other Disclosures';
                         RunObject = report "Other Disclosures";
                     }
+                    // action("Other Disclosures 2")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Other Disclosures Nav';
+                    //     RunObject = report "Other Disclosures..";
+                    //     Visible = false;
+                    // }
                     action("Insider Lending Report")
                     {
                         ApplicationArea = Basic, Suite;
@@ -416,20 +423,12 @@ Page 56043 "Polytech Sacco Role Center"
                         Caption = 'Insider Lending';
                         RunObject = report InsiderN;
                     }
-                    action("Loans Defaulter Aging-SASRA")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Defaulter Aging';
-                        RunObject = report "Loans Defaulter Aging";//"SASRA Loans Classification"
-                    }
-
-                    // action("Sectorial Lending Report")
+                    // action("Loans Defaulter Aging-SASRA")
                     // {
                     //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Sectorial Lending Report';
-                    //     RunObject = report "SECTORAL LENDING";
-                    //     ToolTip = 'View or Generate Agency Returns for a given period.';
-                    //     // Visible = false;
+                    //     Caption = 'Loans Defaulter Aging';
+                    //     RunObject = report "Loans Defaulter Aging";//"SASRA Loans Classification"
+                    //     Visible = false;
                     // }
 
                     action("Risk Class of Assets")
@@ -443,7 +442,8 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Risk Classification and Loan Provisioning';
-                        RunObject = report "Risk Class Of Assets & ProvNav";
+                        RunObject = report "Risk Class Assets & Prov Nav";// 
+                        // RunObject = report "Risk Class Of Assets & ProvNav";
                     }
 
                     // action("Loans Provisioning Summary-SASRA")
@@ -452,13 +452,13 @@ Page 56043 "Polytech Sacco Role Center"
                     //     Caption = 'Loans Provisioning Summary';
                     //     RunObject = report "Loans Provisioning Summarys";
                     // }
-                    action("Loan Sectorial Lendng-SASRA")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Sectorial Lending';
-                        RunObject = REPORT "Loan Sectoral Lending Report";
-                        Visible = false;
-                    }
+                    // action("Loan Sectorial Lendng-SASRA")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loan Sectorial Lending';
+                    //     RunObject = REPORT "Loan Sectoral Lending Report";
+                    //     Visible = false;
+                    // }
                     action("Loan Sectorial Lendng-Nav")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1157,8 +1157,6 @@ Page 56043 "Polytech Sacco Role Center"
                     }
                 }
 
-
-
                 group("Loans' Reports")
                 {
                     action("Loan Aging 1")
@@ -1173,8 +1171,8 @@ Page 56043 "Polytech Sacco Role Center"
                     {
                         ApplicationArea = All;
                         RunObject = report "Loans Defaulter Aging Nav";
-                        Caption = 'Loans Defaulter Aging Nav';
-                        ToolTip = 'Loans Defaulter Aging Nav';
+                        Caption = 'Loans Defaulter Aging SASRA';
+                        ToolTip = 'Use this to generate Loans Defaulter Aging SASRA';
                         Visible = true;
                     }
                     action("Loans Balances Report")
@@ -1185,13 +1183,14 @@ Page 56043 "Polytech Sacco Role Center"
                         ToolTip = 'Member Loans Book Report';
                         Visible = true;
                     }
-                    action("Loan Defaulter Aging")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Loans Defaulter Aging-SASRA';
-                        RunObject = report "Loans Defaulter Aging";//"SASRA Loans Classification"
-                        ToolTip = 'Loan Classification Report';
-                    }
+                    // action("Loan Defaulter Aging")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Loans Defaulter Aging-SASRA';
+                    //     RunObject = report "Loans Defaulter Aging";//"SASRA Loans Classification"
+                    //     ToolTip = 'Loan Classification Report';
+                    //     Visible = false;
+                    // }
                     action("Loan Collection Targets Report")
                     {
                         ApplicationArea = all;
@@ -1816,10 +1815,13 @@ Page 56043 "Polytech Sacco Role Center"
                     }
                     action("Loans Defaulter Aging")
                     {
-                        RunObject = report "Loans Defaulter Aging 130";
+                        Caption = 'Loans Defaulter Aging SASRA';
+                        // RunObject = report "Loans Defaulter Aging 130";
+                        RunObject = report "Loans Defaulter Aging Nav";
                     }
                     group("Loan Aging New")
                     {
+                        Visible = false;
                         action("Run Aging")
                         {
                             Caption = 'Process Loan Aging New';
