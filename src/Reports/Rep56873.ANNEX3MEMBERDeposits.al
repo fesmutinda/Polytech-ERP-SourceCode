@@ -77,7 +77,10 @@ Report 56873 "ANNEX 3 - MEMBER Deposits"
             column(EntryNo; EntryNo)
             {
             }
-
+            column(gender; Customer.Gender) { }
+            column(dateOfBirth; Customer."Date of Birth") { }
+            column(membershipCategory; Customer."Account Category") { }
+            column(branchName; Customer."Sacco Branch") { }
             trigger OnAfterGetRecord()
             begin
                 EntryNo := EntryNo + 1;

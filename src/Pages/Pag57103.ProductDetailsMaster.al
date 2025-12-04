@@ -102,7 +102,7 @@ Page 57103 "Product Details Master"
                         Vend.Reset;
                         Vend.SetRange(Vend."No.", Rec."No.");
                         if Vend.Find('-') then
-                            Report.Run(51516890, true, false, Vend)
+                            Report.Run(56890, true, false, Vend)
                     end;
                 }
                 action("Page Vendor Statistics")

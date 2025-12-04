@@ -515,7 +515,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, emergencyLoan12Balance, Rec."Loan CutOff Date", '12');
             emergencyLoan12Balance := FnPostInterestBal(RcptBufLines, emergencyLoan12Balance, Rec."Loan CutOff Date", '12', loanNumber);
-            emergencyLoan12Balance := FnPostPrincipleBal2(RcptBufLines, emergencyLoan12Balance, loanNumber);
+            emergencyLoan12Balance := FnPostPrincipleBal(RcptBufLines, emergencyLoan12Balance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, emergencyLoan12Balance, 'Excess Payments for Emergency Loan 12');
         end;
@@ -526,7 +526,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, emergencyLoan13Balance, Rec."Loan CutOff Date", '13');
             emergencyLoan13Balance := FnPostInterestBal(RcptBufLines, emergencyLoan13Balance, Rec."Loan CutOff Date", '13', loanNumber);
-            emergencyLoan13Balance := FnPostPrincipleBal2(RcptBufLines, emergencyLoan13Balance, loanNumber);
+            emergencyLoan13Balance := FnPostPrincipleBal(RcptBufLines, emergencyLoan13Balance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, emergencyLoan13Balance, 'Excess Payments for Super Emergency Loan 13');
         end;
@@ -537,7 +537,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, quickLoanBalance, Rec."Loan CutOff Date", '15');
             quickLoanBalance := FnPostInterestBal(RcptBufLines, quickLoanBalance, Rec."Loan CutOff Date", '15', loanNumber);
-            quickLoanBalance := FnPostPrincipleBal2(RcptBufLines, quickLoanBalance, loanNumber);
+            quickLoanBalance := FnPostPrincipleBal(RcptBufLines, quickLoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, quickLoanBalance, 'Excess Payments for Quick 15');
         end;
@@ -548,7 +548,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, superQuickLoanBalance, Rec."Loan CutOff Date", '16');
             superQuickLoanBalance := FnPostInterestBal(RcptBufLines, superQuickLoanBalance, Rec."Loan CutOff Date", '16', loanNumber);
-            superQuickLoanBalance := FnPostPrincipleBal2(RcptBufLines, superQuickLoanBalance, loanNumber);
+            superQuickLoanBalance := FnPostPrincipleBal(RcptBufLines, superQuickLoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, superQuickLoanBalance, 'Excess Payments for Super Quick 16');
         end;
@@ -570,7 +570,7 @@ page 57006 "Polytech Checkoff Card"
                 //                                             );
             end else begin
                 schoolFeesLoanBalance := FnPostInterestBal(RcptBufLines, schoolFeesLoanBalance, Rec."Loan CutOff Date", '17', loanNumber);
-                schoolFeesLoanBalance := FnPostPrincipleBal2(RcptBufLines, schoolFeesLoanBalance, loanNumber);
+                schoolFeesLoanBalance := FnPostPrincipleBal(RcptBufLines, schoolFeesLoanBalance, loanNumber);
 
                 FnTransferExcessToUnallocatedFunds(RcptBufLines, schoolFeesLoanBalance, 'Excess Payments for School Fee 17');
             end;
@@ -582,7 +582,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, superSchoolFeesLoanBalance, Rec."Loan CutOff Date", '18');
             superSchoolFeesLoanBalance := FnPostInterestBal(RcptBufLines, superSchoolFeesLoanBalance, Rec."Loan CutOff Date", '18', loanNumber);
-            superSchoolFeesLoanBalance := FnPostPrincipleBal2(RcptBufLines, superSchoolFeesLoanBalance, loanNumber);
+            superSchoolFeesLoanBalance := FnPostPrincipleBal(RcptBufLines, superSchoolFeesLoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, superSchoolFeesLoanBalance, 'Excess Payments for Super School Fee 18');
         end;
@@ -593,7 +593,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, investmentLoanBalance, Rec."Loan CutOff Date", '19');
             investmentLoanBalance := FnPostInterestBal(RcptBufLines, investmentLoanBalance, Rec."Loan CutOff Date", '19', loanNumber);
-            investmentLoanBalance := FnPostPrincipleBal2(RcptBufLines, investmentLoanBalance, loanNumber);
+            investmentLoanBalance := FnPostPrincipleBal(RcptBufLines, investmentLoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, investmentLoanBalance, 'Excess Payments for Investment Loan 19');
         end;
@@ -604,7 +604,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, normal20LoanBalance, Rec."Loan CutOff Date", '20');
             normal20LoanBalance := FnPostInterestBal(RcptBufLines, normal20LoanBalance, Rec."Loan CutOff Date", '20', loanNumber);
-            normal20LoanBalance := FnPostPrincipleBal2(RcptBufLines, normal20LoanBalance, loanNumber);
+            normal20LoanBalance := FnPostPrincipleBal(RcptBufLines, normal20LoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, normal20LoanBalance, 'Excess Payments for Normal loan 20');
         end;
@@ -615,7 +615,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, normal21LoanBalance, Rec."Loan CutOff Date", '21');
             normal21LoanBalance := FnPostInterestBal(RcptBufLines, normal21LoanBalance, Rec."Loan CutOff Date", '21', loanNumber);
-            normal21LoanBalance := FnPostPrincipleBal2(RcptBufLines, normal21LoanBalance, loanNumber);
+            normal21LoanBalance := FnPostPrincipleBal(RcptBufLines, normal21LoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, normal21LoanBalance, 'Excess Payments for Normal loan 21');
         end;
@@ -626,7 +626,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, normal22LoanBalance, Rec."Loan CutOff Date", '22');
             normal22LoanBalance := FnPostInterestBal(RcptBufLines, normal22LoanBalance, Rec."Loan CutOff Date", '22', loanNumber);
-            normal22LoanBalance := FnPostPrincipleBal2(RcptBufLines, normal22LoanBalance, loanNumber);
+            normal22LoanBalance := FnPostPrincipleBal(RcptBufLines, normal22LoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, normal22LoanBalance, 'Excess Payments for Normal loan 22');
         end;
@@ -637,7 +637,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, development23LoanBalance, Rec."Loan CutOff Date", '23');
             development23LoanBalance := FnPostInterestBal(RcptBufLines, development23LoanBalance, Rec."Loan CutOff Date", '23', loanNumber);
-            development23LoanBalance := FnPostPrincipleBal2(RcptBufLines, development23LoanBalance, loanNumber);
+            development23LoanBalance := FnPostPrincipleBal(RcptBufLines, development23LoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, development23LoanBalance, 'Excess Payments for Development Loan 23');
         end;
@@ -649,7 +649,7 @@ page 57006 "Polytech Checkoff Card"
 
             loanNumber := fnGetLoanNumber(RcptBufLines, development25LoanBalance, Rec."Loan CutOff Date", '25');
             development25LoanBalance := FnPostInterestBal(RcptBufLines, development25LoanBalance, Rec."Loan CutOff Date", '25', loanNumber);
-            development25LoanBalance := FnPostPrincipleBal2(RcptBufLines, development25LoanBalance, loanNumber);
+            development25LoanBalance := FnPostPrincipleBal(RcptBufLines, development25LoanBalance, loanNumber);
 
             FnTransferExcessToUnallocatedFunds(RcptBufLines, development25LoanBalance, 'Excess Payments for Development Loan 25');
         end;
@@ -663,7 +663,7 @@ page 57006 "Polytech Checkoff Card"
                 FnTransferExcessToUnallocatedFunds(RcptBufLines, merchandiseLoanBalance, 'Excess Payments for Merchandise Loan 26');
             end else begin
                 merchandiseLoanBalance := FnPostInterestBal(RcptBufLines, merchandiseLoanBalance, Rec."Loan CutOff Date", '26', loanNumber);
-                merchandiseLoanBalance := FnPostPrincipleBal2(RcptBufLines, merchandiseLoanBalance, loanNumber);
+                merchandiseLoanBalance := FnPostPrincipleBal(RcptBufLines, merchandiseLoanBalance, loanNumber);
 
                 FnTransferExcessToUnallocatedFunds(RcptBufLines, merchandiseLoanBalance, 'Excess Payments for Merchandise Loan 26');
             end;
@@ -892,7 +892,7 @@ page 57006 "Polytech Checkoff Card"
         exit(loanNumber);
     end;
 
-    local procedure FnPostPrincipleBal2(ObjRcptBuffer: Record "Polytech CheckoffLines"; RunningBalance: Decimal; loanNumber: Code[50]) balance: Decimal
+    local procedure FnPostPrincipleBal(ObjRcptBuffer: Record "Polytech CheckoffLines"; RunningBalance: Decimal; loanNumber: Code[50]) balance: Decimal
     var
         AmountToDeduct: Decimal;
         NewOutstandingBal: Decimal;

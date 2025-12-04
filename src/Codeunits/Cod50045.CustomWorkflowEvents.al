@@ -79,10 +79,10 @@ codeunit 50045 "Custom Workflow Events"
                                     Database::"CEEP Change Request", 'An Approval request for CEEP Change Request is canceled.', 0, false);
 
         //Leave Application
-        // WFHandler.AddEventToLibrary(RunWorkflowOnSendLeaveApplicationForApprovalCode,
-        //                     Database::"HR Leave Application", 'Approval of Leave Application is Requested.', 0, false);
-        // WFHandler.AddEventToLibrary(RunWorkflowOnCancelLeaveApplicationApprovalRequestCode,
-        //                             Database::"HR Leave Application", 'An Approval request for  Leave Application is canceled.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnSendLeaveApplicationForApprovalCode,
+                            Database::"HR Leave Application", 'Approval of Leave Application is Requested.', 0, false);
+        WFHandler.AddEventToLibrary(RunWorkflowOnCancelLeaveApplicationApprovalRequestCode,
+                                    Database::"HR Leave Application", 'An Approval request for  Leave Application is canceled.', 0, false);
         //Guarantor Substitution
         WFHandler.AddEventToLibrary(RunWorkflowOnSendGuarantorSubForApprovalCode,
                             Database::"Guarantorship Substitution H", 'Approval of Guarantor Substitution is Requested.', 0, false);

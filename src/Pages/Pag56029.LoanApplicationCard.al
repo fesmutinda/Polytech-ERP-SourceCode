@@ -460,9 +460,16 @@ Page 56029 "Loan Application Card"
                     PromotedCategory = Process;
 
                     trigger OnAction()
+                    var
+                        Member: Record Customer;
                     begin
 
                         FnCheckGuarantorNotified();
+                        // Check email Address
+                        if Member.Get(Rec."Client Code") then
+                            if Member."E-Mail" = '' then
+                                Error('Prohibited! Please add an email address for this member');
+
                         if checkGuarantorCount() < 2 then begin
                             Error('Loan Applications must have a minimum of 2 Guarantor');
                         end;
@@ -545,10 +552,15 @@ Page 56029 "Loan Application Card"
                     trigger OnAction()
                     var
                         SystemGenSet: Codeunit "System General Setup";
+                        Member: Record Customer;
                     begin
                         //................Ensure than you cant have two loans same product
                         // SystemGenSet.FnCheckNoOfLoansLimit("Loan  No.", "Loan Product Type", "Client Code");
                         //----------------
+                        // Check email Address
+                        if Member.Get(Rec."Client Code") then
+                            if Member."E-Mail" = '' then
+                                Error('Prohibited! Please add an email address for this member');
 
                         if checkGuarantorCount() < 2 then begin
                             Error('Loan Applications must have a minimum of 2 Guarantor');

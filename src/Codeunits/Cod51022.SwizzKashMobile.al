@@ -5309,10 +5309,18 @@ Codeunit 51022 SwizzKashMobile
     procedure PaybillTransaction(traceid: Text[30]; documentno: Code[30]; accountno: Text[150]; accountname: Text[150]; phonenumber: Text[100]; amountpaidin: Decimal; saccopaybillbal: Decimal; transactiondate: DateTime; transactiontype: Text[30]; narration: Text[150]) Result: Text
     var
         paybillTransTable: Record "SwizzKash MPESA Trans";
+        paybillTransaction: Record "Polytech Paybill Transactions";
         Keyword: Text[30];
     begin
 
         Result := '{ "StatusCode":"2","StatusDescription":"NOTRECORDED","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
+        paybillTransaction.RESET;
+        paybillTransaction.SETRANGE(paybillTransaction."Document No", documentNo);
+        IF paybillTransaction.FIND('-') THEN BEGIN
+            Result := '{ "StatusCode":"1","StatusDescription":"DUPLICATERECORD","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
+            exit;
+        END;
+
         paybillTransTable.RESET;
         paybillTransTable.SETRANGE(paybillTransTable."Document No", documentNo);
         IF paybillTransTable.FIND('-') THEN BEGIN
@@ -5336,11 +5344,61 @@ Codeunit 51022 SwizzKashMobile
             paybillTransTable.Telephone := phonenumber;
             paybillTransTable."Transaction Type" := transactionType;
             paybillTransTable.Amount := amountpaidin;
+            paybillTransTable."Paybill Account No" := narration;
             paybillTransTable."Paybill Acc Balance" := saccopaybillbal;
             paybillTransTable.Posted := FALSE;
             paybillTransTable.TraceId := traceid;
 
             paybillTransTable.INSERT;
+
+            Result := '{ "StatusCode":"000","StatusDescription":"OK","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
+        END;
+    end;
+
+    procedure PaybillDeposits(traceid: Text[30]; documentno: Code[30]; accountno: Text[150]; accountname: Text[150]; phonenumber: Text[100]; amountpaidin: Decimal; saccopaybillbal: Decimal; transactiondate: DateTime; transactiontype: Text[30]; narration: Text[150]; paybillAccount: Code[30]) Result: Text
+    var
+        paybillTransTable: Record "Polytech Paybill Transactions";
+        paybillTransaction: Record "SwizzKash MPESA Trans";
+        Keyword: Text[30];
+    begin
+
+        Result := '{ "StatusCode":"2","StatusDescription":"NOTRECORDED","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
+        paybillTransaction.RESET;
+        paybillTransaction.SETRANGE(paybillTransaction."Document No", documentNo);
+        IF paybillTransaction.FIND('-') THEN BEGIN
+            Result := '{ "StatusCode":"1","StatusDescription":"DUPLICATERECORD","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
+            exit;
+        END;
+
+        paybillTransTable.RESET;
+        paybillTransTable.SETRANGE(paybillTransTable."Document No", documentNo);
+        IF paybillTransTable.FIND('-') THEN BEGIN
+            Result := '{ "StatusCode":"1","StatusDescription":"DUPLICATERECORD","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
+        END ELSE BEGIN
+
+            IF StrLen(accountno) > 3 THEN KeyWord := COPYSTR(accountno, 1, 3) ELSE Keyword := accountno;
+
+            /* CHECK IF ALREADY POSTED BEFORE AND MARK POSTED ACCORDINGLY */
+
+            paybillTransTable.Init();
+            paybillTransTable."Document No" := documentNo;
+            paybillTransTable."Key Word" := Keyword;
+            paybillTransTable."Account No" := accountNo;
+            paybillTransTable."Account Name" := accountName;
+            paybillTransTable."Transaction Date" := DT2DATE(transactionDate);
+            paybillTransTable."Transaction Time" := DT2TIME(transactionDate);
+            paybillTransTable.TransDate := transactionDate;
+            paybillTransTable."Document Date" := TODAY;
+            paybillTransTable.Description := 'PayBill-' + accountno + ' ' + accountname;
+            paybillTransTable.Telephone := phonenumber;
+            paybillTransTable."Transaction Type" := transactionType;
+            paybillTransTable.Amount := amountpaidin;
+            paybillTransTable."Paybill Account No" := paybillAccount;
+            paybillTransTable."Paybill Acc Balance" := saccopaybillbal;
+            paybillTransTable.Posted := FALSE;
+            paybillTransTable.TraceId := traceid;
+
+            paybillTransTable.Insert();
 
             Result := '{ "StatusCode":"000","StatusDescription":"OK","DocumentNo":"' + documentNo + '","TraceId":"' + traceid + '" }';
         END;
@@ -5717,7 +5775,7 @@ Codeunit 51022 SwizzKashMobile
         END;
     END;
 
-    LOCAL PROCEDURE CheckKeyword(AccountNumber: Text[150]) Response: Text;
+    PROCEDURE CheckKeyword(AccountNumber: Text[150]) Response: Text;
     VAR
         strKeyWord: Text[3];
     BEGIN
@@ -5920,6 +5978,7 @@ Codeunit 51022 SwizzKashMobile
         ProcessLoanRepayments();
     END;
 
+
     local procedure GetMemberNameVendor(MemberNo: Code[30]): Text
     var
     begin
@@ -5930,7 +5989,7 @@ Codeunit 51022 SwizzKashMobile
         end;
     end;
 
-    local procedure GetMemberNameCustomer(MemberNo: Code[30]): Text
+    procedure GetMemberNameCustomer(MemberNo: Code[30]): Text
     var
         Member: Record Customer;
     begin

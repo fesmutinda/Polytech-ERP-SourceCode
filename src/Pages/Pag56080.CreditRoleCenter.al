@@ -21,22 +21,22 @@ page 56080 "Credit Role Center"
                 ApplicationArea = Basic, Suite;
                 Visible = false;
             }
-            part(BOSACue; "BOSA Cue")
-            {
-                ApplicationArea = Basic, Suite;
-                Visible = true;
-            }
+            // part(BOSACue; "BOSA Cue")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Visible = true;
+            // }
             // part(FOSACue; "FOSA Cue")
             // {
             //     ApplicationArea = Basic, Suite;
             //     Visible = false;
 
             // }
-            // part("LoansCue"; "Loans Cue")
-            // {
-            //     ApplicationArea = Suite;
-            //     Visible = true;
-            // }
+            part("LoansCue"; "Loans Cue")
+            {
+                ApplicationArea = Suite;
+                Visible = true;
+            }
             part("General Cue"; "General Cue")
             {
                 ApplicationArea = Suite;
@@ -121,15 +121,6 @@ page 56080 "Credit Role Center"
                 ToolTip = 'Open the chart of accounts.';
                 Visible = true;
             }
-            action("Bank Accounts List")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Bank Accounts';
-                Image = BankAccount;
-                visible = false;
-                RunObject = Page "Bank Account List";
-                ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
-            }
             action("M-Wallets")
             {
                 ApplicationArea = Basic, Suite;
@@ -159,15 +150,6 @@ page 56080 "Credit Role Center"
                 ToolTip = 'View or edit detailed information for the Credits Accounts.';
 
             }
-            action("Bulk Sms")
-            {
-                ApplicationArea = Basic, suite;
-                Caption = 'Send SMS';
-                Image = Message;
-                RunObject = Page "Bulk SMS Header";
-                ToolTip = 'Send Bulk Sms to Members';
-                Visible = false;
-            }
             action("Posted Receipts List")
             {
                 ApplicationArea = Basic, Suite;
@@ -189,6 +171,7 @@ page 56080 "Credit Role Center"
                 Caption = 'Financial Management';
                 Image = Journals;
                 ToolTip = 'Collect and make payments, prepare statements, and reconcile bank accounts.';
+                Visible = false;
                 group("Budgeted Management")
                 {
                     action("Budgets")
@@ -853,6 +836,7 @@ page 56080 "Credit Role Center"
             group(MembershipManagement)
             {
                 Caption = 'Membership Management';
+                Visible = false;
 
                 action(MembersList)
                 {
@@ -1750,6 +1734,7 @@ page 56080 "Credit Role Center"
             //....................... START OF ALTERNATIVE CHANNELS MAIN MENU ...................................
             group(SwizzKash)
             {
+                Visible = false;
                 Caption = 'Alternative Channels';
                 group(SwizzKashActivities)
                 {

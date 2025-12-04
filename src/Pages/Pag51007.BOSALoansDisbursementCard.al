@@ -295,10 +295,16 @@ Page 51007 "BOSA Loans Disbursement Card"
                         FundsUserSetup: Record "Funds User Setup";
                         CustLed: Record "Cust. Ledger Entry";
                         MissingAmount: Decimal;
+                        Member: Record Customer;
                     begin
                         If FnCanPostLoans(UserId) = false then begin
                             Error('Prohibited ! You are not allowed to POST this Loan');
                         end;
+                        // Check email Address
+                        // if Member.Get(Rec."Client Code") then
+                        //     if Member."E-Mail" = '' then
+                        //         Error('Prohibited! Please add an email address for this member');
+
                         if (Rec."Loan Product Type" = '21') or (Rec."Loan Product Type" = '26') then begin
                             Rec."Paying Bank Account No" := ' '
                         end;
@@ -368,7 +374,7 @@ Page 51007 "BOSA Loans Disbursement Card"
                                         Rec.Modify();
                                         //Send Notifications
                                         FnSendNotifications();
-                                        SendMail();
+                                        // SendMail();//--------email Addresses in the System
 
                                     end;
                                 until LoanApps.Next = 0;

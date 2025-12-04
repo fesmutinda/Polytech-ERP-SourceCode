@@ -1297,6 +1297,15 @@ page 56110 "Member Application Card"
 
                         if confirm('Are you sure you want to send this Document for Approval', false) = true then begin
                             SrestepApprovalsCodeUnit.SendMembershipApplicationsRequestForApproval(rec."No.", Rec);
+
+                            Logger.LogActivity(
+                                'Created new Member Application',
+                                Database::"Membership Applications",
+                                Rec."No.",
+                                0,//Rec.Amount,
+                                StrSubstNo('Application No: %1, Trans. Type: %2', Rec."No.", Format(Rec."Registration Type"))
+                            );
+
                             Message('Approval Request Sent!');
                             CurrPage.Close();
                         end;
@@ -1589,6 +1598,7 @@ page 56110 "Member Application Card"
     end;
 
     var
+        Logger: Codeunit "Activity Logger";
         SFactory: Codeunit "Swizzsoft Factory";
         Audit: Record "Audit Entries";
         EntryNos: Integer;

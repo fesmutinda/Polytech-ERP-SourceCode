@@ -501,6 +501,7 @@ Report 51045 "monthly exp polytech"
         LoansRegister.SetFilter("Outstanding Balance", '>%1', 0);
         LoansRegister.SetAutoCalcFields("Outstanding Balance", "Oustanding Interest");
         LoansRegister.SetCurrentKey("Client Code", "Application Date");
+        LoansRegister.SetFilter("Repayment Start Date", '..%1', ASAT);
         LoansRegister.Ascending(false); // latest loans first
 
         if not LoansRegister.FindSet() then
@@ -533,6 +534,7 @@ Report 51045 "monthly exp polytech"
 
             LoanRepaymentSchedule.Reset;
             LoanRepaymentSchedule.SetRange("Loan No.", LoansRegister."Loan  No.");
+            LoanRepaymentSchedule.SetRange("Repayment Date", BeginMonthDate, ASAT);
             if LoanRepaymentSchedule.FindLast() then begin
                 // --- Calculate Principal ---
                 if LoanRepaymentSchedule."Principal Repayment" > LoansRegister."Outstanding Balance" then

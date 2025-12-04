@@ -9,7 +9,9 @@ Page 56632 "Users Trail"
     PageType = List;
     SourceTable = "Audit Entries";
     UsageCategory = Lists;
+    SourceTableView = sorting(Date) order(descending) where("Transaction Type" = filter(<> 'FOSA Account Viewing'));
 
+    // SourceTableView = sorting("Vendor No.", "Posting Date") order(descending);
     layout
     {
         area(content)

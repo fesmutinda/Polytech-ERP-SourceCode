@@ -147,7 +147,7 @@ page 56083 "Customer Care"
                 Image = Message;
                 RunObject = Page "Bulk SMS Header";
                 ToolTip = 'Send Bulk Sms to Members';
-                Visible = false;
+                // Visible = false;
             }
             action("Posted Receipts List")
             {
@@ -873,6 +873,7 @@ page 56083 "Customer Care"
                     Caption = 'Mobile Banking';
                     Image = Receivables;
                     ToolTip = 'Mobile Banking .';
+                    Visible = false;
 
                     action("SwizzKashApplications")
                     {
@@ -932,6 +933,7 @@ page 56083 "Customer Care"
                     Caption = 'Paybill Deposits';
                     Image = Receivables;
                     ToolTip = 'Manage Paybill Deposits.';
+                    Visible = false;
                     action("All Paybill Deposits")
                     {
                         Caption = 'All Paybill Transactions';
@@ -1005,6 +1007,7 @@ page 56083 "Customer Care"
                 {
                     Caption = 'Alternative Channels Setup';
 
+                    Visible = false;
                     ToolTip = 'SMS Messages.';
                     action("M-Banking Charges Setup")
                     {
@@ -1082,8 +1085,6 @@ page 56083 "Customer Care"
 
 
         }
-
-        // #endif
 
     }
 

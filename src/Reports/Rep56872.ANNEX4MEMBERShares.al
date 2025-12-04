@@ -81,6 +81,8 @@ Report 56872 "ANNEX 4 - MEMBER Shares"
             {
             }
 
+            column(gender; Customer.Gender) { }
+            column(dateOfBirth; Customer."Date of Birth") { }
             trigger OnAfterGetRecord()
             begin
                 EntryNo := EntryNo + 1;

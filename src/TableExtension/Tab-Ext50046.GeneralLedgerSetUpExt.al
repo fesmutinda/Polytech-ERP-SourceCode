@@ -149,6 +149,10 @@ tableextension 50046 "General Ledger SetUpExt" extends "General Ledger Setup"
         field(50022; "family account bank"; Code[20]) { }
         field(50023; "equity bank acc"; Code[20]) { }
         field(50024; "coop bank acc"; Code[20]) { }
+        field(50025; "Paybill C2b Account"; Code[20])
+        {
+            TableRelation = "Bank Account"."No.";
+        }
         field(54250; "Base No. Series"; Option)
         {
             OptionCaption = ' ,Responsibility Center,Shortcut Dimension 1,Shortcut Dimension 2,Shortcut Dimension 3,Shortcut Dimension 4';

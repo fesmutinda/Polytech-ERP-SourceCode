@@ -36,7 +36,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value EvaluationMode="Auto">MEMBER'S SHARE CAPITAL</Value>
+                    <Value>MEMBER'S SHARE CAPITAL</Value>
                     <Style>
                       <FontFamily>Palatino Linotype</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -102,6 +102,12 @@
                   <Width>2.73139cm</Width>
                 </TablixColumn>
                 <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>2.75884cm</Width>
                 </TablixColumn>
               </TablixColumns>
@@ -118,7 +124,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">No</Value>
+                                  <Value>No</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -173,7 +179,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Member No.</Value>
+                                  <Value>Member No.</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -228,7 +234,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Member Name</Value>
+                                  <Value>Member Name</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -282,7 +288,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">ID No.</Value>
+                                  <Value>ID No.</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -336,7 +342,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Payroll No.</Value>
+                                  <Value>Payroll No.</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -392,7 +398,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Employer Code</Value>
+                                  <Value>Employer Code</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -448,7 +454,119 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Status</Value>
+                                  <Value>Status</Value>
+                                  <Style>
+                                    <FontFamily>Palatino Linotype</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>LightSteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sex</Value>
+                                  <Style>
+                                    <FontFamily>Palatino Linotype</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>LightSteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date of Birth</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -504,7 +622,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">Share Capital</Value>
+                                  <Value>Share Capital</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -565,7 +683,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!EntryNo.Value</Value>
+                                  <Value>=Fields!EntryNo.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -619,7 +737,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!No_MembersRegister.Value</Value>
+                                  <Value>=Fields!No_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -674,7 +792,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!Name_MembersRegister.Value</Value>
+                                  <Value>=Fields!Name_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -726,7 +844,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!IDNo_MembersRegister.Value</Value>
+                                  <Value>=Fields!IDNo_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -778,7 +896,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!PersonalNo_MembersRegister.Value</Value>
+                                  <Value>=Fields!PersonalNo_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -833,7 +951,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!EmployerCode_MembersRegister.Value</Value>
+                                  <Value>=Fields!EmployerCode_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -888,7 +1006,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!Status_MembersRegister.Value</Value>
+                                  <Value>=Fields!Status_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -916,6 +1034,75 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Company_Picture">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!gender.Value</Value>
+                                  <Style>
+                                    <FontFamily>Palatino Linotype</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Company_Picture</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Company_Email">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!dateOfBirth.Value</Value>
+                                  <Style>
+                                    <FontFamily>Palatino Linotype</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>d</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Company_Email</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Loans_Installments2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -923,7 +1110,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Fields!SharesRetained_MembersRegister.Value</Value>
+                                  <Value>=Fields!SharesRetained_MembersRegister.Value</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -963,7 +1150,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto" />
+                                  <Value />
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1002,7 +1189,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">TOTAL</Value>
+                                  <Value>TOTAL</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1044,7 +1231,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto" />
+                                  <Value />
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1079,7 +1266,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto" />
+                                  <Value />
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1114,7 +1301,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto" />
+                                  <Value />
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1143,6 +1330,78 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Palatino Linotype</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>LightSteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Palatino Linotype</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>LightSteelBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox35">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1150,7 +1409,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Auto">=Sum(Fields!SharesRetained_MembersRegister.Value)</Value>
+                                  <Value>=Sum(Fields!SharesRetained_MembersRegister.Value)</Value>
                                   <Style>
                                     <FontFamily>Palatino Linotype</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1192,6 +1451,8 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1211,7 +1472,7 @@
             <Top>4.34806cm</Top>
             <Left>0.36234cm</Left>
             <Height>1.45605cm</Height>
-            <Width>21.74192cm</Width>
+            <Width>26.74192cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -1223,7 +1484,7 @@
         <Height>6.8333cm</Height>
         <Style />
       </Body>
-      <Width>22.40186cm</Width>
+      <Width>27.10426cm</Width>
       <Page>
         <PageHeight>27cm</PageHeight>
         <PageWidth>33.5cm</PageWidth>
@@ -1348,6 +1609,12 @@ End Function
         </Field>
         <Field Name="EntryNo">
           <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="gender">
+          <DataField>gender</DataField>
+        </Field>
+        <Field Name="dateOfBirth">
+          <DataField>dateOfBirth</DataField>
         </Field>
       </Fields>
       <Query>

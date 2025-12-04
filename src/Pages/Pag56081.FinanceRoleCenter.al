@@ -126,7 +126,7 @@ page 56081 "Finance Role Center"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Bank Accounts';
                 Image = BankAccount;
-                visible = false;
+                // visible = false;
                 RunObject = Page "Bank Account List";
                 ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
             }
@@ -853,6 +853,7 @@ page 56081 "Finance Role Center"
             group(MembershipManagement)
             {
                 Caption = 'Membership Management';
+                Visible = false;
 
                 action(MembersList)
                 {
@@ -1080,6 +1081,7 @@ page 56081 "Finance Role Center"
             //.....................................START OF LOAN MANAGEMENT
             group(SaccoLoansManagement)
             {
+                Visible = false;
                 Caption = 'Credit Management';
                 ToolTip = 'Manage BOSA Loans Module';
                 group("Import Loans BC240")
@@ -1277,6 +1279,7 @@ page 56081 "Finance Role Center"
 
             group(BosaManagement)
             {
+                Visible = false;
                 Caption = 'Other Bosa Management Functions';
                 //................................................START OF CHANGE REQUEST MENU.........................
                 group(ChangeRequest)
@@ -1747,6 +1750,76 @@ page 56081 "Finance Role Center"
                 }
 
             }
+            group(AllReport)
+            {
+                Caption = 'Polytech Banking Reports';
+                group("Membership/Product Management")
+                {
+                    action("Members Deposit Listing")
+                    {
+                        RunObject = report "ANNEX 3 - MEMBER Deposits";
+                        ToolTip = 'Show Deposits Listing Report';
+                    }
+                    action("Members Shares Listing")
+                    {
+                        RunObject = report "ANNEX 4 - MEMBER Shares";
+                        ToolTip = 'Show Shares Listing Report';
+                    }
+                    action("Next of Kin")
+                    {
+                        Caption = 'Next of Kin Report';
+                        RunObject = report "nok Report";
+                    }
+                    action("Members Missing Next of Kin")
+                    {
+                        ApplicationArea = All;
+                        RunObject = report "Member Missing NOK";
+                    }
+                }
+                group("Credit Reports")
+                {
+                    action("Loans Disbursment Listing")
+                    {
+                        RunObject = report "Loans Register-Net";
+                    }
+                    action("Loan Recovery Report")
+                    {
+                        RunObject = report "Loan Recovery Rprt";
+                    }
+                    action("Insinder Lending Board")
+                    {
+                        RunObject = report "Insider Loans Board";
+                    }
+                    action("Insinder Lending Employee")
+                    {
+                        RunObject = report "Insider Loans Employee";
+                    }
+                    action("Loans Defaulter Aging")
+                    {
+                        Caption = 'Loans Defaulter Aging SASRA';
+                        // RunObject = report "Loans Defaulter Aging 130";
+                        RunObject = report "Loans Defaulter Aging Nav";
+                    }
+                    group("Loan Aging New")
+                    {
+                        Visible = false;
+                        action("Run Aging")
+                        {
+                            Caption = 'Process Loan Aging New';
+                            ToolTip = 'Process Loan Aging New';
+                            RunObject = codeunit LoanAgingProcessor;
+                        }
+                        action("Loan Aging nav")
+                        {
+                            ApplicationArea = all;
+                            RunObject = report "loan aging new Nav";
+                            Caption = 'Loan Aging New';
+                            ToolTip = 'Loan Aging New';
+                            Visible = true;
+                        }
+                    }
+                }
+            }
 
 
             //....................... START OF ALTERNATIVE CHANNELS MAIN MENU ...................................
@@ -1824,6 +1897,13 @@ page 56081 "Finance Role Center"
                         RunObject = page "SwizzKash Paybill Trans";
                         ToolTip = 'View Paybill Deposits.';
 
+                    }
+                    action("Polytech Paybill Transactions")
+                    {
+                        Caption = 'Polytech Paybill Transactions';
+                        Image = ReceiptLines;
+                        RunObject = page "Polytech Paybill Transactions";
+                        ToolTip = 'This page contains C2B Transactions for paybill Number 751459';
                     }
                     action("Import Paybills")
                     {
@@ -2139,43 +2219,117 @@ page 56081 "Finance Role Center"
                         RunObject = page "HR Employee List";
                     }
                 }
-
-                // group("HR Leave Management1")
-                // {
-                //     Caption = 'HR Leave Management';
-                //     action("HR Leave Application")
-                //     {
-                //         RunObject = page "HR Leave Applications List";
-                //         ApplicationArea = All;
-                //     }
-                //     action("Escalated Leave Application List")
-                //     {
-                //         RunObject = page " Escalated HR Leave App List";
-                //         ApplicationArea = all;
-                //     }
-                //     // action("Approved Leave Applications")
-                //     // {
-                //     //     RunObject = page "HR Leave Approved List";
-                //     //     ApplicationArea = All;
-                //     // }
-                //     action("Posted Leave Applications")
-                //     {
-                //         RunObject = page "Hr Leave Posted List";
-
-                //         ApplicationArea = All;
-                //     }
-                //     action("HR Leave Reimbursment List")
-                //     {
-                //         RunObject = page "HR Leave Reimbursment List";
-                //         ApplicationArea = All;
-                //         Visible = false;
-                //     }
-                //     action("HR Leave Journal Lines")
-                //     {
-                //         RunObject = page "HR Leave Journal Lines";
-                //         ApplicationArea = All;
-                //     }
-                // }
+                group("Leave Management")
+                {
+                    Image = Administration;
+                    Caption = 'Leave Management';
+                    group("Leave")
+                    {
+                        Caption = 'Leave Applications';
+                        action("Leave Applications-Open")
+                        {
+                            RunObject = page "Leave Application List";
+                            RunPageLink = Status = const(Open);
+                            ToolTip = 'Executes the Leave Applications action';
+                            Caption = 'Leave Applications-Open';
+                        }
+                        action("Leave Applications-Pending Approval")
+                        {
+                            RunObject = page "Leave Application List";
+                            RunPageLink = Status = const("Pending Approval");
+                            ToolTip = 'Executes the Leave Applications action';
+                            Caption = 'Leave Applications-Pending';
+                        }
+                        action("Leave Applications-Approved")
+                        {
+                            RunObject = page "Leave Application List";
+                            RunPageLink = Status = const(Released);
+                            ToolTip = 'Executes the Leave Applications action';
+                            Caption = 'Leave Applications-Approved';
+                        }
+                        action("Leave Applications-Rejected")
+                        {
+                            RunObject = page "Leave Application List";
+                            RunPageLink = Status = const(Rejected);
+                            ToolTip = 'Executes the Leave Applications action';
+                            Caption = 'Leave Applications-Rejected';
+                        }
+                    }
+                    group("Leave Adjustments ")
+                    {
+                        action("Leave Adjustments")
+                        {
+                            RunObject = page "Leave Adjustment List";
+                            RunPageLink = Posted = filter(false);
+                            ToolTip = 'Executes the Leave Adjustments action';
+                            Caption = 'Leave Adjustments';
+                        }
+                        action("Posted Leave Adjustments")
+                        {
+                            RunObject = page "Leave Adjustment List";
+                            RunPageLink = Posted = filter(true);
+                            ToolTip = 'Executes the Posted Leave Adjustments action';
+                            Caption = 'Posted Leave Adjustments';
+                        }
+                    }
+                    group("Leave Recalls")
+                    {
+                        action("Leave Recall")
+                        {
+                            RunObject = page "Leave Recall List";
+                            RunPageLink = Completed = filter(false);
+                            ToolTip = 'Executes the Leave Recall action';
+                            Caption = 'Leave Recall';
+                        }
+                        action("Completed Leave Recalls")
+                        {
+                            RunObject = page "Leave Recall List";
+                            RunPageLink = Completed = filter(true);
+                            ToolTip = 'Executes the Completed Leave Recalls action';
+                            Caption = 'Completed Leave Recalls';
+                        }
+                    }
+                    group("Leave Planner ")
+                    {
+                        Caption = 'Leave Planner ';
+                        action("Leave Planner")
+                        {
+                            RunObject = page "Leave Planner List";
+                            ToolTip = 'Executes the Assign Leave Days action';
+                            Caption = 'Leave Planner';
+                        }
+                    }
+                    group("Leave Reports")
+                    {
+                        Caption = 'Leave Reports';
+                        action("Leave Applications Report")
+                        {
+                            RunObject = report "Leave Applications";
+                            ToolTip = 'Executes the Leave Balances action';
+                            Caption = 'Leave Applications';
+                        }
+                        action("Leave Balances")
+                        {
+                            RunObject = report "Leave Balance";
+                            ToolTip = 'Executes the Leave Balances action';
+                            Caption = 'Leave Balances';
+                        }
+                        action("Leave Statement")
+                        {
+                            RunObject = report "HR Staff Leave Statement";
+                            ToolTip = 'Executes the Leave Statement action';
+                            Caption = 'Leave Statement';
+                        }
+                    }
+                    group("Leave Archive")
+                    {
+                        action("Leave Ledger")
+                        {
+                            RunObject = page "HR Leave Ledger Entries";
+                            Caption = 'Leave Ledger Entries';
+                        }
+                    }
+                }
 
                 group("HR Setup")
                 {
@@ -2187,82 +2341,37 @@ page 56081 "Finance Role Center"
                         ApplicationArea = All;
                         RunObject = page "HR Setup";
                     }
-
-                    action("HR Leave Types")
+                    action("HR Set up")
                     {
-                        RunObject = page "HR Leave Types";
+                        Caption = 'Human Resources Setup';
+                        RunObject = page "Human Resources Setup";
                         ApplicationArea = All;
                     }
-                    action("HR Leave Period Lists")
+                    group("Leave Setups")
                     {
-                        Caption = 'HR Leave Period Lists';
-                        ApplicationArea = All;
-                        RunObject = page "HR Leave Period List";
-                        Visible = false;
-                    }
-                    action("HR Leave Batches")
-                    {
-                        Caption = 'HR Leave Batches';
-                        ApplicationArea = All;
-                        RunObject = page "HR Leave Batches";
-                    }
-                }
-
-                group("EmployeeRecruitment")
-
-                {
-                    Caption = 'Employees Recruitment';
-                    Visible = false;
-                    action(EmployeeRequisitionsList)
-                    {
-                        Caption = 'Employee Requisition';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-                        RunObject = page "HR Employee Requisitions List";
-
-                    }
-
-                    action("JobApplicationList")
-                    {
-                        Caption = 'Job Application List';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-                        // RunObject = page "HR Job Applications List";
-                    }
-
-                    action("JobShortlisting")
-                    {
-                        Caption = 'Job Shortlisting';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-                        RunObject = page "HR Shortlisting List";
-                    }
-
-                    action("QualifiedJobApplicants")
-                    {
-                        Caption = 'Qualified Job Applicants';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-                        // RunObject = page "HR Job Applicants Qualified";
-                    }
-
-                    action("UnQualifiedJobApplicants")
-                    {
-                        Caption = 'UnQualified Job Applicants';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-                        // RunObject = page "HR Applicants UnQualified List";
-                    }
-
-                    action("ApplicantToEmployee")
-                    {
-                        Caption = 'New Employees Registration';
-                        ApplicationArea = basic, suite;
-                        Image = Employee;
-
+                        Caption = 'Leave Setups';
+                        action("Leave Types")
+                        {
+                            RunObject = page "Leave Types Setup";
+                            ToolTip = 'Executes the Leave Types action';
+                            Caption = 'Leave Types';
+                        }
+                        action("Leave Period")
+                        {
+                            RunObject = page "Leave Periods";
+                            ToolTip = 'Executes the Leave Period action';
+                            Caption = 'Leave Period';
+                        }
+                        action("Base Calendar")
+                        {
+                            RunObject = page "Base Calendar List";
+                            ToolTip = 'Executes the Base Calendar List action';
+                            Caption = 'Base Calendar';
+                        }
                     }
 
                 }
+
             }
 
             group("Swizz Payroll Management")
@@ -2878,6 +2987,7 @@ page 56081 "Finance Role Center"
             }
             group("Audit Trails")
             {
+                Visible = false;
                 action("Session Tracker")
                 {
                     ApplicationArea = Basic, Suite;
@@ -3165,7 +3275,6 @@ page 56081 "Finance Role Center"
 
         }
 
-        // #endif
 
     }
 

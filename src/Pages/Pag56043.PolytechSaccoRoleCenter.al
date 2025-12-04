@@ -1172,7 +1172,7 @@ Page 56043 "Polytech Sacco Role Center"
                         ApplicationArea = All;
                         RunObject = report "Loans Defaulter Aging Nav";
                         Caption = 'Loans Defaulter Aging SASRA';
-                        ToolTip = 'Use this to generate Loans Defaulter Aging SASRA';
+                        ToolTip = 'Loans Defaulter Aging SASRA';
                         Visible = true;
                     }
                     action("Loans Balances Report")
@@ -1616,7 +1616,7 @@ Page 56043 "Polytech Sacco Role Center"
                     group(CheckOffBlockedPoly)
                     {
                         Caption = 'Checkoff Processing';
-                        action("Checkoff Processing List Blocked Poly")
+                        action("Checkoff Processing")
                         {
                             Caption = 'Polytech Employer Remittance';
                             Image = Setup;
@@ -1672,10 +1672,10 @@ Page 56043 "Polytech Sacco Role Center"
                         action("Post Monthly Interest")
                         {
                             // Visible = false;
-                            Caption = 'Post Monthly Interest';
+                            Caption = 'Individual Interest Processing';
                             Image = Setup;
                             RunObject = report "Post Monthly Interest.";
-                            ToolTip = 'Used to process Loans Monthly Interest';
+                            ToolTip = 'Used to process Loans Monthly Interest for a particular Member/Loan';
                         }
                         action(process)
                         {
@@ -1914,6 +1914,13 @@ Page 56043 "Polytech Sacco Role Center"
                         RunObject = page "SwizzKash Paybill Trans";
                         ToolTip = 'View Paybill Deposits.';
 
+                    }
+                    action("Polytech Paybill Transactions")
+                    {
+                        Caption = 'Polytech Paybill Transactions';
+                        Image = ReceiptLines;
+                        RunObject = page "Polytech Paybill Transactions";
+                        ToolTip = 'This page contains C2B Transactions for paybill Number 751459';
                     }
                     action("Import Paybills")
                     {

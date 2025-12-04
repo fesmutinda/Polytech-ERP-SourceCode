@@ -830,7 +830,7 @@ Page 57104 "Product Card"
                         Vend.Reset;
                         Vend.SetRange(Vend."No.", Rec."No.");
                         if Vend.Find('-') then
-                            Report.Run(51516890, true, false, Vend)
+                            Report.Run(56890, true, false, Vend)
                     end;
                 }
                 action("Ledger E&ntries")
@@ -1281,7 +1281,7 @@ Page 57104 "Product Card"
             Audit.Date := Today;
             Audit.Time := Time;
             Audit.Source := 'FOSA ACCOUNT';
-            Audit.Insert;
+            // Audit.Insert;
             // COMMIT
         end;
         //End Audit Entries

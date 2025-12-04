@@ -29,6 +29,15 @@ Report 56858 "Loans Register-Net"
             column(LoanType; LoanType)
             {
             }
+            column(loanTypeName; "Loans Register"."Loan Product Type Name") { }// LoanTypeNameTxt) { }
+            column(loanPeriod; "Loans Register".Installments) { }
+            column(interestRate; "Loans Register".Interest) { }// loanInterestRate) { }
+            column(daysInArrears; "Loans Register"."Days In Arrears") { }
+            column(loanClassification; "Loans Register"."Loans Category") { }
+            column(loanMaturity; "Loans Register"."Expected Date of Completion") { }
+            column(LoanSecurityPledged; NATUREOFSECURITY)
+            {
+            }
             column(RFilters; RFilters)
             {
             }
@@ -281,85 +290,17 @@ Report 56858 "Loans Register-Net"
             column(Category; "Loans Category")
             {
             }
-
+            dataitem(Customer; Customer)
+            {
+                DataItemLink = "No." = field("Client Code");
+                column(idNumber; Customer."ID No.") { }
+                column(gender; Customer.Gender) { }
+                column(dateOfBirth; Customer."Date of Birth") { }
+            }
             trigger OnAfterGetRecord()
             begin
 
-
-                /*
-                BOSABal:=0;
-                SuperBal:=0;
-                Deposits:=0;
-                LCount:=LCount+1;
-                CompanyCode:='';
-                
-                LocationFilter:='';
-                RPeriod:=Loans.Installments;
-                IF (Loans."Outstanding Balance" > 0) AND (Loans.Repayment > 0) THEN
-                RPeriod:=Loans."Outstanding Balance"/Loans.Repayment;
-                
-                BatchL:='';
-                IF Batches.GET(Loans."Batch No.") THEN BEGIN
-                Batches.CALCFIELDS(Batches."Currect Location");
-                BatchL:=Batches."Currect Location";
-                END;
-                
-                IF Loans.GETFILTER(Loans."Location Filter") <> '' THEN  BEGIN
-                ApprovalSetup.RESET;
-                ApprovalSetup.SETRANGE(ApprovalSetup."Approval Type",ApprovalSetup."Approval Type"::"File Movement");
-                ApprovalSetup.SETFILTER(ApprovalSetup.Stage,Loans.GETFILTER(Loans."Location Filter"));
-                IF ApprovalSetup.FIND('-') THEN
-                LocationFilter:=ApprovalSetup.Station;
-                END;
-                
-                IF LocationFilter = '' THEN
-                TotalApproved:=TotalApproved+Loans."Approved Amount"
-                ELSE BEGIN
-                IF LocationFilter = BatchL THEN
-                TotalApproved:=TotalApproved+Loans."Approved Amount"
-                END;
-                
-                //Get balance of BOSA Loans + super loans
-                IF (Loans.Source=Loans.Source::BOSA) OR (Loans."Loan Product Type"='SUPER') THEN BEGIN
-                cust.RESET;
-                cust.SETRANGE(cust."No.",Loans."Client Code");
-                cust.SETRANGE(cust."Customer Type",cust."Customer Type"::Member);
-                IF cust.FIND('-') THEN BEGIN
-                cust.CALCFIELDS(cust."Outstanding Balance",cust."Current Shares");
-                BOSABal:=cust."Outstanding Balance";
-                Deposits:=ABS(cust."Current Shares");
-                CompanyCode:=cust."Employer Code";
-                END ELSE BEGIN
-                cust.RESET;
-                cust.SETRANGE(cust."No.",Loans."BOSA No");
-                cust.SETRANGE(cust."Customer Type",cust."Customer Type"::Member);
-                
-                IF cust.FIND('-') THEN BEGIN
-                cust.CALCFIELDS(cust."Outstanding Balance",cust."Current Shares");
-                BOSABal:=cust."Outstanding Balance";
-                Deposits:=ABS(cust."Current Shares");
-                CompanyCode:=cust."Employer Code";
-                
-                END;
-                END;
-                LAppl.RESET;
-                LAppl.SETRANGE(LAppl."Client Code",Loans."Account No");
-                LAppl.SETRANGE(LAppl."Loan Product Type",'SUPER');
-                LAppl.SETFILTER(LAppl."Outstanding Balance",'>0');
-                LAppl.SETRANGE(LAppl.Posted,TRUE);
-                IF LAppl.FIND('-') THEN BEGIN
-                REPEAT
-                LAppl.CALCFIELDS(LAppl."Outstanding Balance");
-                SuperBal:=SuperBal+LAppl."Outstanding Balance";
-                UNTIL LAppl.NEXT=0;
-                END;
-                END;
-                
-                //Loans."Net Amount":=Loans."Approved Amount"-Loans."Top Up Amount";
-                
-                //Get The Loan Type
-                */
-
+                NATUREOFSECURITY := '';
                 CompanyCode := '';
                 if cust.Get("Loans Register"."BOSA No") then
                     CompanyCode := cust."Employer Code";
@@ -380,6 +321,27 @@ Report 56858 "Loans Register-Net"
                     until LoanTopUp.Next = 0;
                 end;
 
+                LoansGuaranteeDetails.Reset;
+                LoansGuaranteeDetails.SetRange(LoansGuaranteeDetails."Loan No", "Loans Register"."Loan  No.");
+                //LoansGuaranteeDetails.SETRANGE(LoansGuaranteeDetails."Loanees  No","Loans Register"."Client Code");
+                if LoansGuaranteeDetails.FindFirst then begin
+                    LoansGuaranteeDetails.CalcFields(LoanCount);
+
+                    if (LoansGuaranteeDetails.LoanCount = 1) and (LoansGuaranteeDetails."Self Guarantee" = true) then
+                        NATUREOFSECURITY := 'Deposits'
+                    else
+                        NATUREOFSECURITY := 'Guarantors'
+
+                end;
+
+                LoanCollateralDetails.Reset;
+                LoanCollateralDetails.SetRange(LoanCollateralDetails."Loan No", "Loans Register"."Loan  No.");
+                if LoanCollateralDetails.FindFirst then begin
+                    NATUREOFSECURITY := 'Collateral'
+                end;
+                if NATUREOFSECURITY = '' then begin
+                    NATUREOFSECURITY := 'Deposits';
+                end;
 
                 GenSetUp.Get();
                 if LoanProdType.Get("Loan Product Type") then begin
@@ -426,8 +388,11 @@ Report 56858 "Loans Register-Net"
 
             trigger OnPreDataItem()
             begin
-                if LoanProdType.Get("Loans Register".GetFilter("Loans Register"."Loan Product Type")) then
+                if LoanProdType.Get("Loans Register".GetFilter("Loans Register"."Loan Product Type")) then begin
                     LoanType := LoanProdType."Product Description";
+                    LoanTypeNameTxt := LoanProdType."Product Description";
+                    loanInterestRate := LoanProdType."Interest rate";
+                end;
                 LCount := 0;
 
                 if "Loans Register".GetFilter("Loans Register"."Branch Code") <> '' then begin
@@ -463,14 +428,6 @@ Report 56858 "Loans Register-Net"
 
     trigger OnPreReport()
     begin
-        /* IF "COMPY INFOR".GET THEN
-         BEGIN
- "COMPY INFOR".CALCFIELDS("COMPY INFOR".Picture);
-         NAME:="COMPY INFOR".Name;
-         END;*/
-
-        //***************kyalo************
-
         if CompanyInfo.Get then begin
             CompanyInfo.CalcFields(Picture);//, "Address 2");
 
@@ -483,6 +440,9 @@ Report 56858 "Loans Register-Net"
 
     var
         RPeriod: Decimal;
+        NATUREOFSECURITY: Text;
+        LoansGuaranteeDetails: Record "Loans Guarantee Details";
+        LoanCollateralDetails: Record "Loan Collateral Details";
         BatchL: Code[100];
         // Batches: Record 51516377;
         ApprovalSetup: Codeunit "Approvals Mgmt.";
@@ -495,6 +455,8 @@ Report 56858 "Loans Register-Net"
         Deposits: Decimal;
         CompanyCode: Code[60];
         LoanType: Text[50];
+        loanInterestRate: Decimal;
+        LoanTypeNameTxt: Text;
         LoanProdType: Record "Loan Products Setup";
         LCount: Integer;
         RFilters: Text[250];
