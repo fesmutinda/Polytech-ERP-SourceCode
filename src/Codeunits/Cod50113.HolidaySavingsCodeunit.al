@@ -12,6 +12,7 @@ Codeunit 50113 "Holiday Savings Codeunit"
         SFactory: Codeunit "Swizzsoft Factory.";
         GenJournalLine: Record "Gen. Journal Line";
         HolidayTable: Record 51070;
+        swizzMobile: Codeunit SwizzKashMobile;
 
 
     procedure FnProcessHolidaySavings(MemberNo: Code[50]; StartDate: Date; PostingDate: Date)
@@ -244,24 +245,24 @@ Codeunit 50113 "Holiday Savings Codeunit"
         //....................................Insert Member Saved Amounts start
         //...Dr Member Holiday Account
         LineNo := LineNo + 10000;
-        SFactory.FnCreateGnlJournalLine('PAYMENTS', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday Savings",
+        SFactory.FnCreateGnlJournalLine('GENERAL', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday Savings",
         GenJournalLine."account type"::Customer, MemberNo, PostingDate, MemberHolidaySaving, 'BOSA', '',
         'Holiday Savings Transferred To Bank- ' + Format(PostingDate) + 'BNK_0001', '');
         //...Cr Bank Account Paying Out
         LineNo := LineNo + 10000;
-        SFactory.FnCreateGnlJournalLine('PAYMENTS', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
+        SFactory.FnCreateGnlJournalLine('GENERAL', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
         GenJournalLine."account type"::"Bank Account", 'BNK_0001', PostingDate, MemberHolidaySaving * -1, 'BOSA', '',
-        'Holiday Savings Paid Out To Member- ' + Format(PostingDate), '');
+        'Holiday Savings Paid Out To Member- ' + swizzMobile.GetMemberNameCustomer(MemberNo), '');
         //.....................................Insert Member Saved Amounts Stop
         //.....................................Insert Member Interest Earned Amounts Start
         //...Dr Provision Account for Holiday Savings
         LineNo := LineNo + 10000;
-        SFactory.FnCreateGnlJournalLine('PAYMENTS', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
+        SFactory.FnCreateGnlJournalLine('GENERAL', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
         GenJournalLine."account type"::"G/L Account", '201216', PostingDate, InterestEarned, 'BOSA', '',
-        'Holiday Savings Interest Earned- ' + Format(PostingDate), '');
+        'Holiday Savings Interest Earned- ' + swizzMobile.GetMemberNameCustomer(MemberNo), '');
         //...Cr Bank Account Paying Out
         LineNo := LineNo + 10000;
-        SFactory.FnCreateGnlJournalLine('PAYMENTS', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
+        SFactory.FnCreateGnlJournalLine('GENERAL', 'HOLIDAY', (Format(Date2dmy(Today, 3)) + '-HOLID'), LineNo, GenJournalLine."transaction type"::"Holiday savings",
         GenJournalLine."account type"::"Bank Account", 'BNK_0001', PostingDate, InterestEarned * -1, 'BOSA', '',
         'Holiday Savings Interest Earned Paid Out To Member- ' + Format(PostingDate), '');
         //....................................Insert Member Interest Earned Amounts stop

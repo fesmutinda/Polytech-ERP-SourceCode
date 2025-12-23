@@ -225,6 +225,8 @@ page 50400 "BOSA Receipt Card"
                         if Rec.Amount <> Rec."Allocated Amount" then
                             Error('Receipt amount must be equal to the allocated amount.');
                     end;
+                    welfareAmounts := 0;
+                    welfareAmounts := getTotalWelfareAmount();
 
                     GenJournalLine.Reset;
                     GenJournalLine.SetRange("Journal Template Name", Jtemplate);
@@ -249,9 +251,9 @@ page 50400 "BOSA Receipt Card"
                     ReceiptAllocations."Global Dimension 1 Code" := Rec."Global Dimension 1 Code";
                     ReceiptAllocations."Global Dimension 2 Code" := Rec."Global Dimension 2 Code";
                     if TransType = 'Withdrawal' then
-                        GenJournalLine.Amount := -Rec.Amount
+                        GenJournalLine.Amount := -(Rec.Amount - welfareAmounts)
                     else
-                        GenJournalLine.Amount := Rec.Amount;
+                        GenJournalLine.Amount := (Rec.Amount - welfareAmounts);
                     GenJournalLine.Validate(GenJournalLine.Amount);
                     if GenJournalLine.Amount <> 0 then
                         GenJournalLine.Insert;
@@ -301,41 +303,57 @@ page 50400 "BOSA Receipt Card"
                         ReceiptAllocations.SetRange(ReceiptAllocations."Document No", Rec."Transaction No.");
                         if ReceiptAllocations.Find('-') then begin
                             repeat
-                                LineNo := LineNo + 10000;
-                                GenJournalLine.Init;
-                                GenJournalLine."Journal Template Name" := Jtemplate;
-                                GenJournalLine."Journal Batch Name" := Jbatch;
-                                GenJournalLine."Line No." := LineNo;
-                                GenJournalLine."Document No." := Rec."Transaction No.";
-                                GenJournalLine."External Document No." := Rec."Cheque No.";
-                                GenJournalLine."Posting Date" := Rec."Cheque Date";
-                                //GenJournalLine."Posting Date":="Transaction Date";
-                                if ReceiptAllocations."Account No" <> '' then begin
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
-                                    GenJournalLine."Account No." := ReceiptAllocations."Member No";
-                                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                                if ReceiptAllocations."Transaction Type" = ReceiptAllocations."Transaction Type"::"Welfare Contribution" then begin
+                                    //post the welfare here...
+                                    //amount should be 320
+                                    if (ReceiptAllocations.Amount <> 320) then Error('Welfare Amount should be Ksh.320');
+                                    welfareProcessing.fnPostWelfare(ReceiptAllocations."Member No",
+                                                                Jtemplate, Jbatch,
+                                                                LineNo,
+                                                                Rec."Transaction No.",
+                                                                Rec."Cheque Date",
+                                                                320,
+                                                                GenJournalLine."account type"::"Bank Account",
+                                                                Rec."Employer No."
+                                                            );
                                 end else begin
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
-                                    GenJournalLine."Account No." := ReceiptAllocations."Member No";
-                                    GenJournalLine.Validate(GenJournalLine."Account No.");
-                                end;
+                                    LineNo := LineNo + 10000;
+                                    GenJournalLine.Init;
+                                    GenJournalLine."Journal Template Name" := Jtemplate;
+                                    GenJournalLine."Journal Batch Name" := Jbatch;
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Document No." := Rec."Transaction No.";
+                                    GenJournalLine."External Document No." := Rec."Cheque No.";
+                                    GenJournalLine."Posting Date" := Rec."Cheque Date";
+                                    //GenJournalLine."Posting Date":="Transaction Date";
+                                    if ReceiptAllocations."Account No" <> '' then begin
+                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
+                                        GenJournalLine."Account No." := ReceiptAllocations."Member No";
+                                        GenJournalLine.Validate(GenJournalLine."Account No.");
+                                    end else begin
+                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
+                                        GenJournalLine."Account No." := ReceiptAllocations."Member No";
+                                        GenJournalLine.Validate(GenJournalLine."Account No.");
+                                    end;
 
-                                GenJournalLine."Posting Date" := Rec."Cheque Date";
-                                GenJournalLine.Description := copyStr(Format(ReceiptAllocations."Transaction Type"), 1, 50) + ' ' + ReceiptAllocations.Description;
-                                //GenJournalLine.Description := 'BT-' + '-' + Rec."Account No." + '-' + Rec.Name;
-                                ReceiptAllocations."Global Dimension 1 Code" := 'BOSA';
-                                ReceiptAllocations."Global Dimension 2 Code" := SwizzsoftFactory.FnGetUserBranch();
-                                GenJournalLine.Amount := -ReceiptAllocations.Amount;
-                                GenJournalLine."Shortcut Dimension 1 Code" := ReceiptAllocations."Global Dimension 1 Code";
-                                GenJournalLine."Shortcut Dimension 2 Code" := ReceiptAllocations."Global Dimension 2 Code";
-                                GenJournalLine.Validate(GenJournalLine.Amount);
-                                GenJournalLine.Description := CopyStr(
-                                Format(ReceiptAllocations."Transaction Type")
-                                , 1, 50);
-                                GenJournalLine."Transaction Type" := ReceiptAllocations."Transaction Type";
-                                GenJournalLine."Loan No" := ReceiptAllocations."Loan No.";
-                                if GenJournalLine.Amount <> 0 then
-                                    GenJournalLine.Insert;
+                                    GenJournalLine."Posting Date" := Rec."Cheque Date";
+                                    GenJournalLine.Description := copyStr(Format(ReceiptAllocations."Transaction Type"), 1, 50) + ' ' + ReceiptAllocations.Description;
+                                    //GenJournalLine.Description := 'BT-' + '-' + Rec."Account No." + '-' + Rec.Name;
+                                    ReceiptAllocations."Global Dimension 1 Code" := 'BOSA';
+                                    ReceiptAllocations."Global Dimension 2 Code" := SwizzsoftFactory.FnGetUserBranch();
+                                    GenJournalLine.Amount := -ReceiptAllocations.Amount;
+                                    GenJournalLine."Shortcut Dimension 1 Code" := ReceiptAllocations."Global Dimension 1 Code";
+                                    GenJournalLine."Shortcut Dimension 2 Code" := ReceiptAllocations."Global Dimension 2 Code";
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine.Description := CopyStr(
+                                    Format(ReceiptAllocations."Transaction Type")
+                                    , 1, 50);
+                                    GenJournalLine."Transaction Type" := ReceiptAllocations."Transaction Type";
+                                    GenJournalLine."Loan No" := ReceiptAllocations."Loan No.";
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert;
+
+                                end;
                             until ReceiptAllocations.Next = 0;
                         end;
 
@@ -352,7 +370,7 @@ page 50400 "BOSA Receipt Card"
                     //Post New
                     Message('Transaction posted successfully');
                     Rec.Posted := true;
-                    rec.Modify;
+                    Rec.Modify;
                     Commit;
 
 
@@ -361,7 +379,7 @@ page 50400 "BOSA Receipt Card"
                     // if BOSARcpt.Find('-') then
                     //     Report.Run(50259, true, false, BOSARcpt);
 
-                    CurrPage.Close;
+                    CurrPage.Close();
                 end;
             }
             action("Reprint Frecipt")
@@ -392,6 +410,7 @@ page 50400 "BOSA Receipt Card"
     end;
 
     var
+        welfareProcessing: Codeunit WelfareProcessing;
         GenJournalLine: Record "Gen. Journal Line";
         InterestPaid: Decimal;
         PaymentAmount: Decimal;
@@ -406,6 +425,7 @@ page 50400 "BOSA Receipt Card"
         TotalOustanding: Decimal;
         Cust: Record Customer;
         BOSABank: Code[20];
+        welfareAmounts: Decimal;
         LineNo: Integer;
         BOSARcpt: Record "Receipts & Payments";
         TellerTill: Record "Bank Account";
@@ -434,6 +454,21 @@ page 50400 "BOSA Receipt Card"
     local procedure AllocatedAmountOnDeactivate()
     begin
         CurrPage.Update := true;
+    end;
+
+    local procedure getTotalWelfareAmount() totalWelfare: Decimal
+    var
+        ReceiptAllocationsTot: Record "Receipt Allocation";
+    begin
+        totalWelfare := 0;
+        ReceiptAllocationsTot.Reset();
+        ReceiptAllocationsTot.SetRange(ReceiptAllocationsTot."Document No", Rec."Transaction No.");
+        repeat
+            if ReceiptAllocationsTot."Transaction Type" = ReceiptAllocationsTot."Transaction Type"::"Welfare Contribution" then begin
+                totalWelfare := totalWelfare + ReceiptAllocationsTot.Amount;
+            end;
+        until ReceiptAllocationsTot.Next = 0;
+        exit(totalWelfare);
     end;
 
     local procedure FnRunInterest(ObjRcptBuffer: Record "Receipts & Payments"; RunningBalance: Decimal): Decimal

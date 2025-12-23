@@ -30,12 +30,15 @@ Codeunit 50021 SwizzKashBulkSMS
             SMSMessages.SetRange(SMSMessages."Date Entered", Today);
             if SMSMessages.Find('-') then begin
 
-                if (SMSMessages."Telephone No" = '') or (SMSMessages."Telephone No" = '+') or (SMSMessages."SMS Message" = '') then begin
+                if (SMSMessages."Telephone No" = '') or (SMSMessages."Telephone No" = '+') or (SMSMessages."SMS Message" = '') or (SMSMessages."Telephone No" = '0743901110') then begin
                     SMSMessages."Sent To Server" := SMSMessages."sent to server"::Failed;
                     SMSMessages."Entry No." := 'FAILED';
                     SMSMessages.Modify;
-                end
-                else begin
+                    // end else if (SMSMessages."SMS Message").Contains('Dear MOBILE, Your one time password for ERP logi') then begin
+                    //     SMSMessages."Sent To Server" := SMSMessages."sent to server"::Failed;
+                    //     SMSMessages."Entry No." := 'FAILED';
+                    //     SMSMessages.Modify;
+                end else begin
                     MessageDetails := '{ "Phonenumber":"' + SMSMessages."Telephone No" + '","Message":"' + SMSMessages."SMS Message" + '","EntryNo":"' + Format(SMSMessages."Entry No") + '" }';
                 end;
             end;

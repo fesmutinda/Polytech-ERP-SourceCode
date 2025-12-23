@@ -103,7 +103,23 @@ Report 50280 "Post Monthly Interest."
                                         GenJournalLine."Posting Date" := PostDate;
                                         GenJournalLine.Description := 'INT Charged' + ' ' + Format(PostDate);
                                         if LoanType.Get(loanapp."Loan Product Type") then begin
-                                            GenJournalLine.Amount := ROUND(loanapp."Outstanding Balance" * (LoanType."Interest rate" / 1200), 1, '>'); //(loanapp."Outstanding Balance" + loanapp."Oustanding Interest")
+
+                                            if loanapp."Repayment Method" = loanapp."repayment method"::"Straight Line" then begin
+                                                //Added by D.O to handle Member Receipting prior to Interest Accrual
+                                                if (loanapp."Disbursement Status" = loanapp."disbursement status"::Partial) and ((loanapp."Initial Trunch") = Date2dmy(Today, 2)) and ((loanapp."Amount To Disburse") = Date2dmy(Today, 3)) then begin
+                                                    GenJournalLine.Amount := loanapp."Total Charges and Commissions";
+                                                    //MESSAGE('Interest arrears %1',GenJournalLine.Amount);
+                                                end else
+                                                    GenJournalLine.Amount := ROUND(loanapp."Approved Amount" * (loanapp.Interest / 1200), 1, '>')
+                                            end else begin
+                                                if (loanapp."Disbursement Status" = loanapp."disbursement status"::Partial) and ((loanapp."Initial Trunch") = Date2dmy(Today, 2)) and ((loanapp."Amount To Disburse") = Date2dmy(Today, 3)) then begin
+                                                    GenJournalLine.Amount := loanapp."Total Charges and Commissions";
+                                                    //MESSAGE('Interest arrears %1',GenJournalLine.Amount);
+                                                end else
+                                                    GenJournalLine.Amount := ROUND(loanapp."Outstanding Balance" * (loanapp.Interest / 1200), 1, '>');
+                                            end;
+
+                                            // GenJournalLine.Amount := ROUND(loanapp."Outstanding Balance" * (LoanType."Interest rate" / 1200), 1, '>'); //(loanapp."Outstanding Balance" + loanapp."Oustanding Interest")
                                             GenJournalLine.Validate(GenJournalLine.Amount);
                                             GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                             GenJournalLine."Bal. Account No." := LoanType."Loan Interest Account";

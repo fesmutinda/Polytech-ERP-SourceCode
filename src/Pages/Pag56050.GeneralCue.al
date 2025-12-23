@@ -16,11 +16,11 @@ Page 56050 "General Cue"
                     ApplicationArea = Basic;
                     DrillDownPageID = "Approval Entries";
                 }
-                // field("Requests to Approve"; Rec."Requests to Approve")
-                // {
-                //     ApplicationArea = Basic;
-                //     DrillDownPageID = "Requests to Approve";
-                // }
+                field("Requests to Approve"; Rec."Requests to Approve")
+                {
+                    ApplicationArea = Basic;
+                    DrillDownPageID = "Requests to Approve";
+                }
             }
             cuegroup(ApprovalRequestCue2)
             {

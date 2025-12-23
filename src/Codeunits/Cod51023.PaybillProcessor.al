@@ -2,6 +2,11 @@
 
 codeunit 51023 "Paybill Processor"
 {
+    trigger OnRun()
+    begin
+        Message(' ' + fnProcessPaybill());
+    end;
+
     var
         membersTable: Record Customer;
         vendorsTable: Record Vendor;

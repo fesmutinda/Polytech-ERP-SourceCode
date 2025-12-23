@@ -9175,7 +9175,7 @@ Codeunit 51022 SwizzKashMobile
 
 
                         //Calculate Graduation here... Festus
-                        MpesaDisbus.RESET;
+                        MpesaDisbus.Reset();
                         MpesaDisbus.SETCURRENTKEY(MpesaDisbus."Entry No");
                         MpesaDisbus.ASCENDING(FALSE);
                         MpesaDisbus.SETRANGE(MpesaDisbus."Member No", vendorTable."BOSA Account No");

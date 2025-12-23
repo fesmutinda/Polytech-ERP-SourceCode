@@ -63,6 +63,7 @@ Table 51371 "Loans Register"
                 TrusteeLn: Decimal;
                 KHLLn: Decimal;
                 RefDate: Date;
+                loanOffsetTable: Record "Loan Offset Details";
             begin
                 LoanApp.Reset;
                 LoanApp.SetRange("Client Code", "Client Code");
@@ -71,44 +72,34 @@ Table 51371 "Loans Register"
                 LoanApp.SetFilter("Outstanding Balance", '>0');
                 if LoanApp.Find('-') then begin
                     repeat
-                        if ProdFac.Get("Loan Product Type") then begin
+                        //check if the loan is marked for topup in this loan
+                        loanOffsetTable.Reset();
+                        loanOffsetTable.SetRange(loanOffsetTable."Loan No.", "Loan  No.");
+                        loanOffsetTable.SetRange(loanOffsetTable."Loan Top Up", LoanApp."Loan  No.");
+                        if loanOffsetTable.Find('-') then begin
+                            Message('You have decided to Offset Loan ' + LoanApp."Loan  No." + ' with this Application');
+                        end else if ProdFac.Get("Loan Product Type") then begin
                             if ProdFac."Allow Multiple Running Loans" = false then
-                                Message('Member already has an existing Loan %1 of same product which needs bridging', LoanApp."Loan  No.")
+                                Error('Member already has an existing Loan %1 of same product which needs bridging')
+                            // Message('Member already has an existing Loan %1 of same product which needs bridging', LoanApp."Loan  No.")
                             else
                                 Message('Member already has an existing Loan %1 of same product', LoanApp."Loan  No.");
                         end;
                     until LoanApp.Next = 0;
                 end;
-                //Check if member has unpaid Sukuma Mwezi Loan
 
-                GenSetUp.Get();
-                if Cust.Get("Client Code") then begin
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Client Code", "Client Code");
-                    //LoanApp.SETRANGE(LoanApp."Loan Product Type",'SUKUMA');
-                    LoanApp.SetRange(LoanApp.Posted, true);
-                    if LoanApp.Find('-') then begin
-                        LoanApp.CalcFields(LoanApp."Outstanding Balance");
-                        if LoanApp."Outstanding Balance" > 0 then begin
-                            if LoanApp."Expected Date of Completion" < Today then begin
-                                //IF "Loan Product Type"<>'TRUSTEE' THEN
-                                //ERROR('Member has an outstanding Sukuma Mwezi Loan that is overdue!');
-                            end;
-                        end;
-                    end;
-                end;
 
-                Cust.Reset;
-                Cust.SetRange(Cust."No.", "Client Code");
-                if Cust.FindFirst then begin
-                    //MESSAGE('01021 %1',"Client Code");
-                    Cust.CalcFields("Shares Retained", "Current Shares");
-                    //IF "Loan Product Type"<>'QUICK' THEN BEGIN
-                    if (Cust."Shares Retained" < GenSetUp."Retained Shares") and ("Loan Product Type" <> 'QUICK') then
-                        Error(Err, "Client Code", Cust."Shares Retained");
+                // Cust.Reset;
+                // Cust.SetRange(Cust."No.", "Client Code");
+                // if Cust.FindFirst then begin
+                //     //MESSAGE('01021 %1',"Client Code");
+                //     Cust.CalcFields("Shares Retained", "Current Shares");
+                //     //IF "Loan Product Type"<>'QUICK' THEN BEGIN
+                //     if (Cust."Shares Retained" < GenSetUp."Retained Shares") and ("Loan Product Type" <> 'QUICK') then
+                //         Error(Err, "Client Code", Cust."Shares Retained");
 
-                    //END;
-                end;
+                //     //END;
+                // end;
 
                 sHARES := 0;
                 LoanApp.Reset;
@@ -120,17 +111,6 @@ Table 51371 "Loans Register"
                         LoanApp.CalcFields(LoanApp."Outstanding Balance");
                         TrusteeLn := TrusteeLn + LoanApp."Outstanding Balance"
                     until LoanApp.Next = 0;
-                end;
-
-                LoanApp.Reset;
-                LoanApp.SetRange(LoanApp."Client Code", "Client Code");
-                LoanApp.SetRange(LoanApp."Loan Product Type", 'KHL');
-                LoanApp.SetRange(LoanApp.Posted, true);
-                if LoanApp.Find('-') then begin
-                    repeat
-                        LoanApp.CalcFields(LoanApp."Outstanding Balance");
-                        KHLLn := KHLLn + LoanApp."Outstanding Balance"
-                  until LoanApp.Next = 0;
                 end;
 
                 LoansRec.Reset;
@@ -720,45 +700,19 @@ Table 51371 "Loans Register"
                 LoanBal: Decimal;
                 Amtt: Decimal;
             begin
-                //******************************Karibu Loan***********************************//
-                if "Loan Product Type" = 'KARIBU' then begin
-                    Cust.Reset;
-                    Cust.SetRange(Cust."No.", "Client Code");
-                    if Cust.Find('-') then begin
-                        Cust.CalcFields("Current Shares");
-                        if "Requested Amount" > Cust."Current Shares" then
-                            Error('Member can only apply for a maximum of ksh ' + Format(Cust."Current Shares"));
+                //check qualifying deposists *3
+                if "Requested Amount" > ("Member Deposits" * 3) then Error('Amount Requested exceeds member Eligibility');
+
+                if LoanType.Get("Loan Product Type") then begin
+                    if "Requested Amount" > ("Member Deposits" * LoanType."Deposits Multiplier") then begin
+                        Error('Amount Requested exceeds member Eligibility');
+                    end;
+                    if "Requested Amount" > LoanType."Max. Loan Amount" then begin
+                        Error('You Can not request more than the Loan Allowable limit of %1', LoanType."Max. Loan Amount");
                     end;
                 end;
-                if "Is Top Up" = false then begin
-                    // if "Affidavit - Estimated Value 2" > 0 then begin
-                    //     //if AmountInArrears > 0 then begin
-                    //     Error('Member Has Pending Arrears of Ksh %1,kindly sort out with CEO', Loanapp."Amount in Arrears");
-                    //     //;
-                    // end;
-                end;
-                //******************************Karibu Loan***********************************//
-                //  IF Bridging THEN BEGIN
-                //  ObjLoanOffsets.RESET;
-                //  ObjLoanOffsets.SETRANGE(ObjLoanOffsets."Loan No.","Loan  No.");
-                //  IF ObjLoanOffsets.FIND('-') THEN BEGIN
-                //    Loan.RESET;
-                //    Loan.SETRANGE("Loan  No.",ObjLoanOffsets."Loan Top Up");
-                //    IF Loan.FIND('-') THEN BEG
-                //      Loan.CALCFIELDS("Outstanding Balance");
-                //      GenSetUp.GET();
-                //      IF Loan."Outstanding Balance"<(Loan."Amount Disbursed"/2) THEN BEGIN
-                //        Amtt:=GenSetUp."Loan Top Up Commision(%)"*Loan."Outstanding Balance"/100;
-                //       "Total TopUp Commission":=Amtt;
-                //      END ELSE BEGIN
-                //       Amtt:=GenSetUp."Loan Top Up Commision2(%)"*Loan."Outstanding Balance"/100;
-                //       "Total TopUp Commission":=Amtt;
-                //      END;
-                //      IF Loan."Outstanding BaINlance"+Amtt>"Requested Amount" THEN
-                //        ERROR('Amount Requested cannot be less than '+FORMAT(Loan."Outstanding Balance"+Amtt));
-                //    END;
-                //  END;
-                //  END;
+
+
                 //.....................................cj
                 if LoanType.Get("Loan Product Type") then begin
                     if LoanType."Maximum No. Of Runing Loans" > 1 then begin
@@ -767,12 +721,7 @@ Table 51371 "Loans Register"
                         LoansRec.SetRange(LoansRec."Client Code", Rec."Client Code");
                         //LoansRec.SETFILTER(LoansRec."Outstanding Balance",'>%1',0);
                         LoansRec.SetRange(LoansRec.Posted, true);
-                        //LoansRec.SETFILTER(LoansRec."Loan  No.",'<>%1',Rec."Loan  No.");
-                        //    IF LoansRec.FINDFIRST() THEN BEGIN
-                        //      LoanBal:=SwizzsoftFactory.KnGetLoanBalanceOneLoan(LoansRec."Loan  No.");
-                        //        IF "Requested Amount">(LoanType."Max. Loan Amount"-LoanBal) THEN
-                        //        ERROR('You cannot request more than the Loan Allowable limit of %1',LoanType."Max. Loan Amount"-LoanBal);
-                        //    END;
+
                     end else
                         if "Requested Amount" > LoanType."Max. Loan Amount" then begin
                             Error('You cannot request more than the Loan Allowable limit of %1', LoanType."Max. Loan Amount");
@@ -807,10 +756,6 @@ Table 51371 "Loans Register"
                     TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -Installments)) * "Requested Amount", 1, '=');
                     LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 1, '=');
 
-                    //IF "Repayment Method"="Repayment Method"::"Reducing Balance" THEN
-                    //  LInterest:=ROUND(("Approved Amount"*InterestRate/1200),1,'=');
-
-
                     LPrincipal := TotalMRepay - LInterest;
                     "Loan Principle Repayment" := LPrincipal;
                     "Loan Interest Repayment" := LInterest;
@@ -819,8 +764,6 @@ Table 51371 "Loans Register"
                     if "Repayment Method" = "repayment method"::"Straight Line" then begin
                         TestField(Installments);
                         LPrincipal := ROUND(LoanAmount / RepayPeriod, 1, '=');
-                        //MESSAGE('LPrincipal %1',LPrincipal);
-                        //LInterest:=ROUND((InterestRate/1200)*LoanAmount,1,'=');
                         LInterest := ROUND((InterestRate / 12 / 100) * LoanAmount, 0.05, '>');
                         //MESSAGE('LInterest %1',LInterest);
 
@@ -879,18 +822,13 @@ Table 51371 "Loans Register"
 
                     ObjProductCharge.Reset;
                     ObjProductCharge.SetRange(ObjProductCharge."Product Code", "Loan Product Type");
-                    //ObjProductCharge.SETRANGE(ObjProductCharge."Loan Charge Type",ObjProductCharge."Loan Charge Type"::"Loan Insurance");
                     if ObjProductCharge.FindSet then begin
                         LInsurance := ("Requested Amount" * (ObjProductCharge.Percentage / 100)) * Installments;
                     end;
 
                     Repayment := LPrincipal + LInterest;//+LInsurance;
                 end;
-                // IF ("Loan Product Type"='SUKUMA') OR ("Loan Product Type"='KARIBU') OR ("Loan Product Type"='INSTANT') THEN
-                //  BEGIN
-                //    "Loan Principle Repayment":="Requested Amount";
-                //    Repayment:="Requested Amount";
-                //  END;
+
                 "Loan Interest Repayment" := LInterest;
                 "top fee" := ("Requested Amount" - "Top Up Amount") * 0.1;
             end;

@@ -233,7 +233,7 @@ page 57006 "Polytech Checkoff Card"
                     Gnljnline."Document No." := Rec."Document No";
                     Gnljnline."Posting Date" := Rec."Posting date";
                     Gnljnline.Description := 'CHECKOFF ' + Rec.Remarks;
-                    Gnljnline.Amount := (Rec."Scheduled Amount" - Rec."Total Welfare");
+                    Gnljnline.Amount := (Rec."Scheduled Amount" - Rec."Total Welfare");//Minus welfare amount
                     Gnljnline.Validate(Gnljnline.Amount);
                     Gnljnline."Shortcut Dimension 1 Code" := 'BOSA';
                     Gnljnline."Shortcut Dimension 2 Code" := 'NAIROBI';
@@ -273,47 +273,38 @@ page 57006 "Polytech Checkoff Card"
                                                             GenJournalLine."Transaction Type"::"Deposit Contribution"
                                                             );
                             end;
+
                             //New Welfare Contribution
-                            if RcptBufLines."Welfare Contribution" > 0 then begin
-                                FnInsertWelfareContribution(Jtemplate,
-                                                            Jbatch,
-                                                            RcptBufLines."Member No",
-                                                            Rec."Document No",
-                                                            'Welfare contribution for ' + RcptBufLines."Member No",
-                                                            RcptBufLines."Welfare Contribution",
-                                                            GenJournalLine."Transaction Type"::"Welfare Contribution"
-                                                            );
-                            end;
                             // if RcptBufLines."Welfare Contribution" > 0 then begin
-                            //     FnInsertWelfareCreditBank(Jtemplate,
+                            //     FnInsertWelfareContribution(Jtemplate,
                             //                                 Jbatch,
                             //                                 RcptBufLines."Member No",
                             //                                 Rec."Document No",
-                            //                                 'Welfare Checkoff Polytech',
+                            //                                 'Welfare contribution for ' + RcptBufLines."Member No",
                             //                                 RcptBufLines."Welfare Contribution",
                             //                                 GenJournalLine."Transaction Type"::"Welfare Contribution"
                             //                                 );
                             // end;
-                            if RcptBufLines."Welfare Contribution" > 0 then begin
-                                FnInsertWelfareCommisionCredit(Jtemplate,
-                                                            Jbatch,
-                                                            RcptBufLines."Member No",
-                                                            Rec."Document No",
-                                                            'Welfare Polytech Comm',
-                                                            20,
-                                                            GenJournalLine."Transaction Type"::"Welfare Contribution"
-                                                            );
-                            end;
-                            if RcptBufLines."Welfare Contribution" > 0 then begin
-                                FnInsertWelfareAccountCredit(Jtemplate,
-                                                            Jbatch,
-                                                            RcptBufLines."Member No",
-                                                            Rec."Document No",
-                                                            'Welfare contribution for ' + RcptBufLines."Member No",
-                                                            300,
-                                                            GenJournalLine."Transaction Type"::"Welfare Contribution"
-                                                            );
-                            end;
+                            // if RcptBufLines."Welfare Contribution" > 0 then begin
+                            //     FnInsertWelfareCommisionCredit(Jtemplate,
+                            //                                 Jbatch,
+                            //                                 RcptBufLines."Member No",
+                            //                                 Rec."Document No",
+                            //                                 'Welfare Polytech Comm',
+                            //                                 20,
+                            //                                 GenJournalLine."Transaction Type"::"Welfare Contribution"
+                            //                                 );
+                            // end;
+                            // if RcptBufLines."Welfare Contribution" > 0 then begin
+                            //     FnInsertWelfareAccountCredit(Jtemplate,
+                            //                                 Jbatch,
+                            //                                 RcptBufLines."Member No",
+                            //                                 Rec."Document No",
+                            //                                 'Welfare contribution for ' + RcptBufLines."Member No",
+                            //                                 300,
+                            //                                 GenJournalLine."Transaction Type"::"Welfare Contribution"
+                            //                                 );
+                            // end;
                             //Benevolent
                             if RcptBufLines.Benevolent > 0 then begin
                                 FnInsertMemberContribution(Jtemplate,
@@ -361,6 +352,19 @@ page 57006 "Polytech Checkoff Card"
                             //Add Loan lines...Festus
                             FnPostLoansBal();
 
+                            //Process Welfare.... Festus
+                            //################KINDLY NOTE - WELFARE BALANCES ITSELF----
+                            if RcptBufLines."Welfare Contribution" > 0 then begin
+                                welfareProcessing.fnPostWelfare(RcptBufLines."Member No",
+                                                                Jtemplate, Jbatch,
+                                                                LineN,
+                                                                Rec."Document No",
+                                                                Rec."Posting date",
+                                                                320,
+                                                                Rec."Account Type",
+                                                                Rec."Account No"
+                                                            );
+                            end;
                             dialogBox.Close();
 
                         until RcptBufLines.Next = 0;
@@ -407,6 +411,7 @@ page 57006 "Polytech Checkoff Card"
     end;
 
     var
+        welfareProcessing: Codeunit WelfareProcessing;
         Gnljnline: Record "Gen. Journal Line";
         GenJournalLine: Record "Gen. Journal Line";
         PDate: Date;

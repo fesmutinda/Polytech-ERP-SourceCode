@@ -7,7 +7,7 @@ Codeunit 50000 "Funds Management"
     end;
 
     var
-        TaxCodes: Record 51033;
+        TaxCodes: Record 51033; 
         AdjustGenJnl: Codeunit "Adjust Gen. Journal Balance";
         DocPrint: Codeunit "Document-Print";
         ReversalEntry: Record "Reversal Entry";

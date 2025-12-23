@@ -7,7 +7,7 @@ page 57205 "Existing Loans"
     CardPageId = "Existing Loans Card";
     PageType = List;
     SourceTable = "Loans Register";
-    // UsageCategory = Administration;
+    UsageCategory = Administration;
     Editable = false;
 
     layout
