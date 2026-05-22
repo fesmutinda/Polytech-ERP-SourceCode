@@ -139,7 +139,7 @@ Page 56170 "share Capital Card"
                 begin
                     Rec.TestField("Buyer No.");
                     Rec.TestField("Seller No");
-                    if Rec."Buyer Shares Balance" > 0 then begin
+                    if Rec."Seller Share Balance" > 0 then begin
                         TempBatch.Reset;
                         TempBatch.SetRange(TempBatch.UserID, UserId);
                         if TempBatch.Find('-') then begin
@@ -153,10 +153,10 @@ Page 56170 "share Capital Card"
                         GenJournalLine.DELETEALL;
                         //.sharecapital Transfer Seller
                         LineNo := LineNo + 10000;
-                        SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."No.", LineNo, GenJournalLine."Transaction Type"::"Shares Capital", GenJournalLine."Account Type"::Customer, Rec."Seller No", Rec."Trasaction Date", Rec."Amount to Sell", 'BOSA', Rec."No.", 'Share Capital Tranfer' + Format(Rec."Seller No"), '');
+                        SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."No.", LineNo, GenJournalLine."Transaction Type"::"Share Capital", GenJournalLine."Account Type"::Customer, Rec."Seller No", Rec."Trasaction Date", Rec."Amount to Sell", 'BOSA', Rec."No.", 'Share Capital Tranfer' + Format(Rec."Seller No"), '');
                         //.sharecapital Buyer
                         LineNo := LineNo + 10000;
-                        SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."No.", LineNo, GenJournalLine."Transaction Type"::"Shares Capital", GenJournalLine."Account Type"::Customer, Rec."Buyer No.", Rec."Trasaction Date", Rec."Amount to Sell" * -1, 'BOSA', Rec."No.", 'Share Capital Tranfer' + Format(Rec."Buyer Name"), '');
+                        SFactory.FnCreateGnlJournalLine(TemplateName, BatchName, Rec."No.", LineNo, GenJournalLine."Transaction Type"::"Share Capital", GenJournalLine."Account Type"::Customer, Rec."Buyer No.", Rec."Trasaction Date", Rec."Amount to Sell" * -1, 'BOSA', Rec."No.", 'Share Capital Tranfer' + Format(Rec."Buyer Name"), '');
 
                         GenJournalLine.SETRANGE("Journal Batch Name", BatchName);
                         if GenJournalLine.Find('-') then begin
@@ -166,6 +166,10 @@ Page 56170 "share Capital Card"
                             FnSendNotificationstoBuyer();
                         end;
                         Rec.Posted := true;
+                        Rec.Modify();
+                        CurrPage.Close();
+
+                        Message('Shared Sold Succesfully');
                     end;
 
                 end;

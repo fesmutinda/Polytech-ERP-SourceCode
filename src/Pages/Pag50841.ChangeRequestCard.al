@@ -103,7 +103,7 @@ page 50841 "Change Request Card"
                     Editable = true;
                     Visible = false;
                 }
-                field("E-mail"; Rec."E-mail")
+                field("E-mail"; Rec.Email)
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -160,6 +160,13 @@ page 50841 "Change Request Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
+                field("Marital Status(New Value)"; Rec."Marital Status(New Value)")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Marital Status(New Value)';
+                    Editable = MaritalStatusEditable;
+                    ToolTip = 'Please enter your marital status';
+                }
                 field("Date Of Birth"; Rec."Date Of Birth")
                 {
                     ApplicationArea = Basic;
@@ -169,17 +176,16 @@ page 50841 "Change Request Card"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
+
                 field(Gender; Rec.Gender)
                 {
                     ApplicationArea = Basic;
+                    Editable = false;
                 }
-                field("Marital Status(New Value)"; Rec."Marital Status(New Value)")
+                field("Gender(New Value)"; Rec."Gender(New Value)")
                 {
-                    ApplicationArea = Basic;
-                    Caption = 'Marital Status(New Value)';
-                    Editable = MaritalStatusEditable;
-                    ToolTip = 'Please enter your marital status';
                 }
+
                 field("Account Category"; Rec."Account Category")
                 {
                     ApplicationArea = Basic;
@@ -373,7 +379,7 @@ page 50841 "Change Request Card"
                 {
 
                 }
-                field("E-mail."; Rec."E-mail")
+                field("E-mail."; Rec."E-Mail")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -863,7 +869,7 @@ page 50841 "Change Request Card"
         BATCH_TEMPLATE: Code[30];
         BATCH_NAME: Code[30];
         DOCUMENT_NO: code[50];
-        SFactory: Codeunit "SURESTEP Factory";
+        SFactory: Codeunit "SWIZZSFT Factory";
         SrestepApprovalsCodeUnit: Codeunit SurestepApprovalsCodeUnit;
 
 

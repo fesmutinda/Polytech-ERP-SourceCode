@@ -10,7 +10,7 @@ Table 50017 "Sacco Transfers Schedule"
         }
         field(2; "Destination Account No."; Code[20])
         {
-            TableRelation = if ("Destination Account Type" = const(FOSA)) Vendor."No."
+            TableRelation = if ("Destination Account Type" = const("M-Wallet")) Vendor."No."
             else
             if ("Destination Account Type" = const(BANK)) "Bank Account"."No."
             else
@@ -20,7 +20,7 @@ Table 50017 "Sacco Transfers Schedule"
 
             trigger OnValidate()
             begin
-                if "Destination Account Type" = "destination account type"::FOSA then begin
+                if "Destination Account Type" = "destination account type"::"M-Wallet" then begin
                     Vend.Reset;
                     if Vend.Get("Destination Account No.") then begin
                         "Destination Account Name" := Vend.Name;
@@ -65,8 +65,8 @@ Table 50017 "Sacco Transfers Schedule"
         }
         field(4; "Destination Account Type"; Option)
         {
-            OptionCaption = 'FOSA,BANK,G/L ACCOUNT,MEMBER';
-            OptionMembers = FOSA,BANK,"G/L ACCOUNT",MEMBER;
+            OptionCaption = ' ,M-Wallet,Bank,G/L ACCOUNT,MEMBER';
+            OptionMembers = "","M-Wallet",Bank,"G/L ACCOUNT",MEMBER;
 
             trigger OnValidate()
             begin
@@ -83,10 +83,8 @@ Table 50017 "Sacco Transfers Schedule"
         }
         field(6; "Destination Loan"; Code[30])
         {
-            TableRelation = if ("Destination Account Type" = filter(MEMBER)) "Loans Register"."Loan  No." where("BOSA No" = field("Destination Account No."),
-                                                                                                               "Loan  No." = field("Destination Loan"))
-            else
-            if ("Destination Account Type" = filter(FOSA)) "Loans Register"."Loan  No." where("Client Code" = field("Destination Account No."));
+            TableRelation = if ("Destination Account Type" = filter(MEMBER)) "Loans Register"."Loan  No." where("Client Code" = field("Destination Account No."), "Outstanding Balance" = filter(<> 0)) else
+            if ("Destination Account Type" = filter("M-Wallet")) "Loans Register"."Loan  No." where("Client Code" = field("Destination Account No."));
 
             trigger OnValidate()
             begin
@@ -110,7 +108,7 @@ Table 50017 "Sacco Transfers Schedule"
                                 ReceiptAll."No." := "No.";
                                 ReceiptAll.Amount := "Cummulative Total Payment Loan" * Loans."Loan Debt Collector Interest %";
                                 //ReceiptAll."Total Amount":="Cummulative Total Payment Loan"*Loans."Loan Debt Collector Interest %";
-                                ReceiptAll."Destination Account Type" := ReceiptAll."destination account type"::FOSA;
+                                ReceiptAll."Destination Account Type" := ReceiptAll."destination account type"::"M-Wallet";
                                 ReceiptAll."Destination Account No." := Loans."Loan Debt Collector";
                                 ReceiptAll."Destination Loan" := "Destination Loan";
                                 //ReceiptAll."Destination Account No.":="Destination Account No.";

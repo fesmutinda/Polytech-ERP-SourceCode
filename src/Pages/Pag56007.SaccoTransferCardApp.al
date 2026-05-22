@@ -129,7 +129,7 @@ Page 56007 "Sacco Transfer Card(App)"
                         if Confirm('Send Approval Request ?', false) = false then begin
                             exit;
                         end else begin
-                            //Approvals.SendInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            // Approvals.SendInternalTransfersRequestForApproval(rec.No, Rec);
                             CurrPage.Close();
                         end;
                     end;
@@ -148,7 +148,7 @@ Page 56007 "Sacco Transfer Card(App)"
                         if Confirm('Cancel Approval Request ?', false) = false then begin
                             exit;
                         end else begin
-                            Approvals.CancelInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            // Approvals.CancelInternalTransfersRequestForApproval(rec.No, Rec);
                             CurrPage.Close();
                         end;
                     end;
@@ -167,7 +167,7 @@ Page 56007 "Sacco Transfer Card(App)"
                         Rec.TestField(Status, Rec.Status::Approved);
                         //............................................................................
                         Rec.CalcFields("Schedule Total");
-                        if (Vend.Get(Rec."Source Account No")) and (Rec."Source Account Type" = Rec."source account type"::Fosa) then begin
+                        if (Vend.Get(Rec."Source Account No")) and (Rec."Source Account Type" = Rec."source account type"::"M-Wallet") then begin
                             Vend.CalcFields(Vend.Balance);
                             if (Vend.Balance - Rec."Schedule Total") < 0 then begin
                                 if UserId in ['POLYTECHSACCO\EWAMBUA'] then
@@ -201,7 +201,7 @@ Page 56007 "Sacco Transfer Card(App)"
                             GenJournalLine."Journal Batch Name" := Jbatch;
                             GenJournalLine."Document No." := Rec.No;
                             GenJournalLine."Line No." := GenJournalLine."Line No." + 10000;
-                            if Rec."Source Account Type" = Rec."source account type"::Customer then begin
+                            if Rec."Source Account Type" = Rec."source account type"::MEMBER then begin
                                 GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
                                 GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
                                 GenJournalLine."Account No." := Rec."Source Account No";
@@ -216,9 +216,9 @@ Page 56007 "Sacco Transfer Card(App)"
                                     GenJournalLine."Loan No" := Rec."Source Loan No";
                                 end else
 
-                                    if Rec."Source Account Type" = Rec."source account type"::Fosa then begin
+                                    if Rec."Source Account Type" = Rec."source account type"::"M-Wallet" then begin
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
-                                        GenJournalLine."Shortcut Dimension 1 Code" := 'fOSA';
+                                        GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
                                         GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
                                         // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
                                         GenJournalLine."Account No." := Rec."Source Account No";
@@ -264,7 +264,7 @@ Page 56007 "Sacco Transfer Card(App)"
                                         GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
                                     end else
 
-                                        if BSched."Destination Account Type" = BSched."destination account type"::FOSA then begin
+                                        if BSched."Destination Account Type" = BSched."destination account type"::"M-Wallet" then begin
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                             GenJournalLine."Transaction Type" := BSched."Destination Type";
                                             // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
@@ -370,12 +370,12 @@ Page 56007 "Sacco Transfer Card(App)"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        Rec."Source Account Type" := Rec."source account type"::Fosa;
+        Rec."Source Account Type" := Rec."source account type"::"M-Wallet";
     end;
 
     trigger OnOpenPage()
     begin
-        Rec."Source Account Type" := Rec."source account type"::Fosa;
+        Rec."Source Account Type" := Rec."source account type"::"M-Wallet";
         AddRecordRestriction();
     end;
 

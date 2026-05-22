@@ -56,8 +56,9 @@ Table 51399 "Sacco No. Series"
 
             end;
         }
-        field(6; "Investors Nos"; Code[10])
+        field(6; "Portal Loan Nos"; Code[10])
         {
+            TableRelation = "No. Series";
         }
         field(7; "Property Nos"; Code[10])
         {
@@ -72,6 +73,10 @@ Table 51399 "Sacco No. Series"
             TableRelation = "No. Series";
         }
         field(10; "BOSA Transfer Nos"; Code[10])
+        {
+            TableRelation = "No. Series";
+        }
+        field(1011; "Wallet Transaction Nos"; Code[20])
         {
             TableRelation = "No. Series";
         }

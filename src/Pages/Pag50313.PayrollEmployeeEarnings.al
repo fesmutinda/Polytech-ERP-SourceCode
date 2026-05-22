@@ -3,7 +3,9 @@ page 50313 "Payroll Employee Earnings."
 {
     PageType = List;
     SourceTable = "Payroll Employee Transactions.";
-    SourceTableView = where("Transaction Type" = const(Income));
+    SourceTableView = sorting("Payroll Period")
+                        order(descending)
+                       where("Transaction Type" = const(Income));
 
     layout
     {

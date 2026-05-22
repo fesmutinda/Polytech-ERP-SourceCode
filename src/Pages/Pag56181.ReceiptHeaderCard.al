@@ -95,12 +95,14 @@ Page 56181 "Receipt Header Card"
     {
         area(Processing)
         {
+            // action("Upload Attendance") { }
             action("Post Receipt")
             {
                 ApplicationArea = Basic;
                 Caption = 'Post Receipt';
                 Image = PostPrint;
                 Promoted = true;
+                PromotedCategory = Process;
                 PromotedIsBig = true;
 
                 trigger OnAction()

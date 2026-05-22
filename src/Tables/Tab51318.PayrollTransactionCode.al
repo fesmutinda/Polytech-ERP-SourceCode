@@ -97,7 +97,7 @@ Table 51318 "Payroll Transaction Code."
         {
 
             OptionMembers = "None",Shares,Loan,"Share Capital",Likizo,"Loan Interest","Emergency Loan","Emergency Loan Interest",Welfare,Pension,NSSF,Overtime,"Insurance Contribution"
-            ,"Loan Application Fee Paid","Loan Insurance Paid";
+            ,"Loan Application Fee Paid","Loan Insurance Paid","Holiday Savings";
         }
         field(32; "IsCo-Op/LnRep"; Boolean)
         {
@@ -214,6 +214,9 @@ Table 51318 "Payroll Transaction Code."
         field(62; "Loan Product Name"; text[50])
         {
             DataClassification = ToBeClassified;
+        }
+        field(63; "Include in Levy Calculation"; Boolean)
+        {
         }
     }
 

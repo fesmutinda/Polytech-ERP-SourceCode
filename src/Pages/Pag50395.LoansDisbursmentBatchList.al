@@ -11,7 +11,7 @@ page 50395 "Loans Disbursment Batch List"
     PromotedActionCategories = 'New,Process,Reports,Approval,Budgetary Control,Cancellation,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
     SourceTable = "Loan Disburesment-Batching";
     SourceTableView = where(Posted = filter(false));
-    UsageCategory = Tasks;
+    // UsageCategory = Tasks;
 
     layout
     {
@@ -169,7 +169,6 @@ page 50395 "Loans Disbursment Batch List"
         NegFee: Decimal;
         DValue: Record "Dimension Value";
         ChBank: Code[20];
-        Trans: Record Transactions;
         TransactionCharges: Record "Transaction Charges";
         BChequeRegister: Record "Banker Cheque Register";
         OtherCommitments: Record "Other Commitements Clearance";

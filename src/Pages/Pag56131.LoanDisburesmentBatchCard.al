@@ -198,8 +198,6 @@ Page 56131 "Loan Disburesment Batch Card"
                                     LoanApps."Approval Status" := LoanApps."Approval Status"::Approved;
                                     LoanApps."Loans Category-SASRA" := LoanApps."Loans Category-SASRA"::Perfoming;
                                     LoanApps.Modify;
-                                    //...................Recover Overdraft Loan On Loan
-                                    SFactory.FnRecoverOnLoanOverdrafts(LoanApps."Client Code");
                                     //.................................................
                                     CurrPage.close();
                                 until LoanApps.Next = 0;

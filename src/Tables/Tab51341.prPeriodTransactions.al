@@ -98,7 +98,7 @@ Table 51341 "prPeriod Transactions.."
         field(27; "coop parameters"; Option)
         {
             Description = 'to be able to report the different coop contributions -Dennis';
-            OptionMembers = "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF,Overtime,DevShare,NHIF;
+            OptionMembers = "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF,Overtime,DevShare,NHIF,"Share Capital";
         }
         field(28; "Payroll Code"; Code[20])
         {

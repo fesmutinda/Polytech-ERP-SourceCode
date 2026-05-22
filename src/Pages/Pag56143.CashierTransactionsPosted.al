@@ -2,7 +2,7 @@
 Page 56143 "Cashier Transactions - Posted"
 {
     ApplicationArea = Basic;
-    CardPageID = "CashierTransactionCard-Posted";
+    // CardPageID = "CashierTransactionCard-Posted";
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;

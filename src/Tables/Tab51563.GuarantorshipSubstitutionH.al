@@ -2,6 +2,8 @@
 Table 51563 "Guarantorship Substitution H"
 {
     // LookupPageID = 50012;
+    DrillDownPageId = "Guarantorship Sub List";
+    LookupPageId = "Guarantorship Sub List";
 
     fields
     {
@@ -36,7 +38,7 @@ Table 51563 "Guarantorship Substitution H"
         }
         field(5; "Loan Guaranteed"; Code[30])
         {
-            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Loanee Member No"));
+            TableRelation = "Loans Register"."Loan  No." where("Client Code" = field("Loanee Member No"), "Outstanding Balance" = filter(> 0));
 
             trigger OnValidate()
             begin
@@ -45,8 +47,6 @@ Table 51563 "Guarantorship Substitution H"
                 if GuarantorshipLine.FindSet then begin
                     GuarantorshipLine.DeleteAll;
                 end;
-
-
 
                 LoanGuarantors.Reset;
                 LoanGuarantors.SetRange(LoanGuarantors."Loan No", "Loan Guaranteed");
@@ -81,35 +81,27 @@ Table 51563 "Guarantorship Substitution H"
                                 Modify;
                             end;
 
-
-
-
                             GenSetUp.Get();
                             GenSetUp."Defaulter LN" := GenSetUp."Defaulter LN" + 10;
                             GenSetUp.Modify;
-                            DLN := 'DLN_' + Format(GenSetUp."Defaulter LN");
+                            DLN := 'PLN_' + Format(GenSetUp."Defaulter LN");
                             TGrAmount := TGrAmount + GrAmount;
                             GrAmount := LoanGuarantors."Amont Guaranteed";
 
 
 
                             if loanTypes.Get(LoansRec."Loan Product Type") then begin
-
-
-
-
-
                                 /*
-                                      GuarantorshipLine.INIT;
-                                      GuarantorshipLine."Document No":="Document No";
-                                      GuarantorshipLine."Loan No.":=LoanGuarantors."Loan No";
-                                      GuarantorshipLine."Member No":=LoanGuarantors."Member No";
-                                      GuarantorshipLine."Member Name":=LoanGuarantors.Name;
-                                      GuarantorshipLine."Amount Guaranteed":=LoanGuarantors."Amont Guaranteed";
-                                      GuarantorshipLine."Current Commitment":=((GrAmount/FGrAmount)*(Lbal+INTBAL+COMM));
-                                      GuarantorshipLine.Substituted:=LoanGuarantors.Substituted;
-                                      GuarantorshipLine.VALIDATE(GuarantorshipLine."Loan No.");
-                                      GuarantorshipLine.INSERT;*/
+                                        GuarantorshipLine.INIT;
+                                        GuarantorshipLine."Document No":="Document No";
+                                        GuarantorshipLine."Loan No.":=LoanGuarantors."Loan No";
+                                        GuarantorshipLine."Member No":=LoanGuarantors."Member No";
+                                        GuarantorshipLine."Member Name":=LoanGuarantors.Name;
+                                        GuarantorshipLine."Amount Guaranteed":=LoanGuarantors."Amont Guaranteed";
+                                        GuarantorshipLine."Current Commitment":=((GrAmount/FGrAmount)*(Lbal+INTBAL+COMM));
+                                        GuarantorshipLine.Substituted:=LoanGuarantors.Substituted;
+                                        GuarantorshipLine.VALIDATE(GuarantorshipLine."Loan No.");
+                                        GuarantorshipLine.INSERT;*/
                             end;
                         end;
                     until LoanGuarantors.Next = 0;

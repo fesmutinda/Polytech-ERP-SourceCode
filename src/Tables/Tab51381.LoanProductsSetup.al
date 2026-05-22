@@ -422,6 +422,15 @@ Table 51381 "Loan Products Setup"
         field(132; "Loan Calculator"; Boolean)
         {
         }
+        field(133; "Total Loan Book"; Decimal)
+        {
+            CalcFormula = sum("Cust. Ledger Entry"."Amount Posted" where("Loan Type" = field(Code),
+                                                                           "Posting Date" = field("Date Filter"),
+                                                                           "Transaction Type" = filter(Loan | "Loan Repayment"), Reversed = const(false)));
+            FieldClass = FlowField;
+            Editable = false;
+
+        }
     }
 
     keys

@@ -611,6 +611,12 @@ Table 51552 "Change Request"
         {
 
         }
+        field(121; "Gender(New Value)"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionCaption = ' ,Male, Female';
+            OptionMembers = " ",Male," Female";
+        }
 
     }
 
@@ -646,7 +652,7 @@ Table 51552 "Change Request"
         vend: Record Vendor;
         Memb: Record Customer;
         MemberCell: Record "Hexa Binary";
-        SFactory: Codeunit "SURESTEP Factory";
+        SFactory: Codeunit "SWIZZSFT Factory";
         MediaId: Guid;
         Dates: Codeunit "Dates Calculation";
         MemmberExit: Record "Membership Withdrawals";

@@ -18,6 +18,8 @@ pageextension 50882 CustomerExtension extends "Customer Card"
                 ApplicationArea = all;
                 Editable = false;
             }
+            field("Mobile Phone No"; Rec."Mobile Phone No") { Editable = true; }
+            field("Mobile Phone No."; Rec."Mobile Phone No.") { Editable = true; }
         }
     }
 

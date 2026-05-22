@@ -53,7 +53,10 @@ pageextension 50619 "UserSetUpExt" extends "User Setup"
             {
 
             }
-
+            // field("Role Centre"; Rec."Role Centre")
+            // {
+            // }
+            field("Issue Trunch"; Rec."Issue Trunch") { }
 
         }
         modify("Allow Deferral Posting From")

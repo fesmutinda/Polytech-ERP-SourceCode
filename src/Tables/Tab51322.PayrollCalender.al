@@ -37,6 +37,10 @@ Table 51322 "Payroll Calender."
         field(20; Closed; Boolean)
         {
         }
+        field(21; "Created By"; Code[20])
+        {
+
+        }
     }
 
     keys

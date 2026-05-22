@@ -5,7 +5,7 @@ page 50326 "Payroll Periods."
     Caption = 'Payroll Periods.';
     UsageCategory = Tasks;
     DeleteAllowed = true;
-    Editable = false;
+    Editable = true;
     PageType = Card;
     SourceTable = "Payroll Calender.";
 
@@ -39,12 +39,14 @@ page 50326 "Payroll Periods."
                 field("Date Closed"; Rec."Date Closed")
                 {
                     ApplicationArea = All;
+                    Editable = true;
 
                 }
                 field(Closed; Rec.Closed)
                 {
 
                     ApplicationArea = All;
+                    Editable = true;
 
                 }
                 field("Payroll Code"; Rec."Payroll Code")
@@ -52,6 +54,11 @@ page 50326 "Payroll Periods."
                     Editable = false;
                     ApplicationArea = All;
                     Visible = false;
+                }
+                field("Created By"; Rec."Created By")
+                // field(SystemCreatedBy; Rec.SystemCreatedBy)
+                {
+                    Caption = 'Created By';
                 }
             }
         }
@@ -71,39 +78,11 @@ page 50326 "Payroll Periods."
 
                 trigger OnAction()
                 begin
-                    /*
-                    Warn user about the consequence of closure - operation is not reversible.
-                    Ask if he is sure about the closure.
-                    */
-
-                    fnGetOpenPeriod;
+                    fnGetOpenPeriod();
 
                     Question := 'Once a period has been closed it can NOT be opened.\It is assumed that you have PAID out salaries.\'
                     + 'Still want to close [' + strPeriodName + ']';
                     PayrollDefined := '';
-                    // PayrollType.SetCurrentKey("Payroll Code");
-                    // if PayrollType.FindFirst then begin
-                    //     NoofRecords := PayrollType.Count;
-                    //     repeat
-                    //         i += 1;
-                    //         PayrollDefined := PayrollDefined + '&' + PayrollType."Payroll Code";
-                    //         if i < NoofRecords then
-                    //             PayrollDefined := PayrollDefined + ','
-                    //     until PayrollType.Next = 0;
-                    // end;
-
-
-                    // Selection := StrMenu(PayrollDefined, 3);
-                    // PayrollType.Reset;
-                    // PayrollType.SetRange(PayrollType.EntryNo, Selection);
-                    // if PayrollType.Find('-') then begin
-                    //     PayrollCode := PayrollType."Payroll Code";
-                    // end;
-                    // end;
-                    //End Multiple Payroll
-
-
-
 
                     Answer := DIALOG.Confirm(Question, false);
                     if Answer = true then begin
@@ -116,19 +95,6 @@ page 50326 "Payroll Periods."
 
                 end;
             }
-            // action("Create Period")
-            // {
-            //     ApplicationArea = All;
-            //     Visible = false;
-            //     trigger OnAction()
-            //     begin
-            //         ContrInfo.Init();
-
-            //         ContrInfo."Primary Key" := ' ';
-            //         ContrInfo.Name := 'Polytech';
-            //         ContrInfo.Insert();
-            //     end;
-            // }
         }
     }
 

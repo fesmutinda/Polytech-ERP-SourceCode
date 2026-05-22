@@ -1,6 +1,8 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0204, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 Table 51056 "Funds Transfer Header"
 {
+    DrillDownPageId = "Funds Transfer List";
+    LookupPageId = "Funds Transfer List";
 
     fields
     {
@@ -97,8 +99,8 @@ Table 51056 "Funds Transfer Header"
         field(24; "Pay Mode"; Option)
         {
             Editable = true;
-            OptionCaption = ' ,Cash,Cheque,Standing Order';
-            OptionMembers = " ",Cash,Cheque,"Bank Slip","Standing Order";
+            OptionCaption = ' ,Cash,Cheque,Standing Order,RTGS,EFT';
+            OptionMembers = " ",Cash,Cheque,"Bank Slip","Standing Order",RTGS,EFT;
         }
         field(25; Status; Option)
         {

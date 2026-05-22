@@ -3,7 +3,10 @@ page 50312 "Payroll Employee Deductions."
 {
     PageType = List;
     SourceTable = "Payroll Employee Transactions.";
-    SourceTableView = where("Transaction Type" = const(Deduction));
+    SourceTableView = sorting("Payroll Period")
+                        order(descending)
+                        where("Transaction Type" = const(Deduction));
+
 
     layout
     {
@@ -28,23 +31,30 @@ page 50312 "Payroll Employee Deductions."
                 {
                     ApplicationArea = Basic;
                 }
+                field("Loan Repayment Amount"; Rec."Loan Repayment Amount")
+                {
+                    ApplicationArea = basic;
+                    Editable = true;
+                }
                 field("Original Deduction Amount"; Rec."Original Deduction Amount")
                 {
                     ApplicationArea = Basic;
+                    Visible = false;
                 }
                 field("Interest Charged"; Rec."Interest Charged")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = TRUE;
                 }
                 field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = TRUE;//
                 }
                 field("Amount(LCY)"; Rec."Amount(LCY)")
                 {
                     ApplicationArea = Basic;
+                    Visible = false;
                 }
                 field("Amtzd Loan Repay Amt"; Rec."Amtzd Loan Repay Amt")
                 {

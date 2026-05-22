@@ -45,20 +45,18 @@ Table 51016 "Sacco Transfers"
         }
         field(10; "Source Account Type"; Option)
         {
-            OptionCaption = 'Customer,Fosa,Bank,G/L ACCOUNT,MEMBER';
-            OptionMembers = Customer,Fosa,Bank,"G/L ACCOUNT",MEMBER;
+            OptionCaption = ' ,M-Wallet,Bank,G/L ACCOUNT,MEMBER';
+            OptionMembers = "","M-Wallet",Bank,"G/L ACCOUNT",MEMBER;
         }
         field(11; "Source Account No"; Code[20])
         {
-            TableRelation = if ("Source Account Type" = filter(Fosa)) Vendor."No."
+            TableRelation = if ("Source Account Type" = filter("M-Wallet")) Vendor."No."
             else
             if ("Source Account Type" = filter(MEMBER)) customer."No."
             else
             if ("Source Account Type" = filter(Bank)) "Bank Account"."No."
             else
-            if ("Source Account Type" = filter("G/L ACCOUNT")) "G/L Account"."No."
-            else
-            if ("Source Account Type" = filter(Customer)) Customer."No.";
+            if ("Source Account Type" = filter("G/L ACCOUNT")) "G/L Account"."No.";
 
             trigger OnValidate()
             begin
@@ -72,16 +70,6 @@ Table 51016 "Sacco Transfers"
                   END;
                   END;*/
 
-                if "Source Account Type" = "source account type"::Customer then begin
-                    Cust.Reset;
-                    if Cust.Get("Source Account No") then begin
-                        "Source Account Name" := Cust.Name;
-                        //"Source Transaction Type":="Source Transaction Type"::"FOSA Account";
-                        //"Source Account No":=Cust."FOSA Account";
-                        //VALIDATE("Source Account No");
-                    end;
-                end;
-
                 if "Source Account Type" = "source account type"::Bank then begin
                     Bank.Reset;
                     if Bank.Get("Source Account No") then begin
@@ -90,7 +78,7 @@ Table 51016 "Sacco Transfers"
                     end;
                 end;
 
-                if "Source Account Type" = "source account type"::Fosa then begin
+                if "Source Account Type" = "source account type"::"M-Wallet" then begin
                     Vend.Reset;
                     if Vend.Get("Source Account No") then begin
                         "Source Account Name" := Vend.Name;
@@ -125,10 +113,26 @@ Table 51016 "Sacco Transfers"
         }
         field(14; "Source Loan No"; Code[20])
         {
-            TableRelation = if ("Source Account Type" = filter(Fosa)) "Loans Register"."Loan  No." where("Account No" = field("Source Account No"))
+            TableRelation = if ("Source Account Type" = filter("M-Wallet")) "Loans Register"."Loan  No." where("Client Code" = field("Source Account No"))
             else
-            if ("Source Account Type" = filter(MEMBER)) "Loans Register"."Loan  No." where("Bosa No" = field("Source Account No"));
-
+            if ("Source Account Type" = filter(MEMBER)) "Loans Register"."Loan  No." where("Client Code" = field("Source Account No"), "Outstanding Balance" = filter(<> 0));
+            trigger OnValidate()
+            var
+                ObjLoans: Record "Loans Register";
+            begin
+                // ObjLoans.RESET;
+                // ObjLoans.SETRANGE("Loan  No.", "Source Loan No");
+                // IF ObjLoans.FIND('-') THEN BEGIN
+                //     IF (("Source Transaction Type" = "Source Transaction Type"::"Loan Repayment") OR
+                //       ("Source Transaction Type" = "Source Transaction Type"::"Interest Paid")) THEN BEGIN
+                //         ObjLoans.CALCFIELDS("Outstanding Balance", "Oustanding Interest");
+                //         IF (("Source Transaction Type" = "Source Transaction Type"::"Loan Repayment") AND (ObjLoans."Outstanding Balance" < 0)) THEN
+                //             "Header Amount" := ABS(ObjLoans."Outstanding Balance");
+                //         IF (("Source Transaction Type" = "Source Transaction Type"::"Interest Paid") AND (ObjLoans."Oustanding Interest" < 0)) THEN
+                //             "Amount" := ABS(ObjLoans."Oustanding Interest");
+                //     END;
+                // END;
+            end;
         }
         field(15; "Created By"; Code[60])
         {

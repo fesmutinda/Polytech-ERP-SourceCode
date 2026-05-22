@@ -112,11 +112,11 @@ page 50028 "Posted Receipt Header Card"
 
                 trigger OnAction()
                 begin
-                    DocNo := Rec."No.";
                     ReceiptHeader.Reset;
-                    ReceiptHeader.SetRange(ReceiptHeader."No.", DocNo);
+                    ReceiptHeader.SetRange(ReceiptHeader."No.", Rec."No.");
                     if ReceiptHeader.FindFirst then begin
-                        // Report.RunModal(Report::"Receipt Header", true, false, ReceiptHeader);
+                        Report.RunModal(Report::"Receipt Header", true, false, ReceiptHeader);
+
                     end;
                 end;
             }

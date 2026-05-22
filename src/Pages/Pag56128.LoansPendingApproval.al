@@ -180,20 +180,17 @@ Page 56128 "Loans Pending Approval"
                 field("Loan Status"; Rec."Loan Status")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = true;
 
                     trigger OnValidate()
                     begin
                         UpdateControl();
-
-
-
                     end;
                 }
                 field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Editable = true;
                 }
                 field("Repayment Frequency"; Rec."Repayment Frequency")
                 {
@@ -333,13 +330,40 @@ Page 56128 "Loans Pending Approval"
                     trigger OnAction()
                     begin
                         if Confirm('Cancel Approval?', false) = false then begin
+
                             exit;
                         end else begin
                             SrestepApprovalsCodeUnit.CancelLoanApplicationsRequestForApproval(rec."Loan  No.", Rec);
+                            // Rec."Approval Status" := Rec."Approval Status"::
+                            Rec."Loan Status" := Rec."Loan Status"::Application;
+                            Rec."Approval Status" := Rec."Approval Status"::Open;
+
+                            Rec.Modify();
+                            Message('Success. Loan moved back to Application');
                             CurrPage.Close();
                         end;
                     end;
                 }
+
+
+                // action(Reopen)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Reopen';
+                //     Image = ReOpen;
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+
+                //     trigger OnAction()
+                //     var
+                //         WorkflowManagement: Codeunit "Workflow Management";
+                //         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                //     begin
+                //         ReopenDocument();
+                //     end;
+                // }
+
+
                 action("Member Statement")
                 {
                     ApplicationArea = Basic;
@@ -438,6 +462,30 @@ Page 56128 "Loans Pending Approval"
         Rec.SetRange(Posted, false);
 
     end;
+
+
+    // local procedure ReopenDocument()
+    // var
+    //     ApprovalEntry: Record "Approval Entry";
+    // begin
+
+
+    //     ApprovalEntry.SetRange("Table ID", Database::"Loans Register");
+    //     ApprovalEntry.SetRange("Approval Code", 'LOANSAPPROVAL');
+    //     ApprovalEntry.SetRange(Status, ApprovalEntry.Status::Rejected);
+    //     if ApprovalEntry.FindSet() then
+    //         repeat
+    //             ApprovalEntry.Status := ApprovalEntry.Status::Open;
+
+    //             ApprovalEntry.Modify(true);
+    //         until ApprovalEntry.Next() = 0;
+
+    //     Rec."Loan Status" := Rec."Loan Status"::Application;
+    //     Rec."Approval Status" := Rec."Approval Status"::Open
+    //     Rec.Modify();
+
+    //     Message('Document %1 has been reopened.', Rec."Loan  No.");
+    // end;
 
     var
         LoanGuar: Record "Loans Guarantee Details";
@@ -823,7 +871,7 @@ Page 56128 "Loans Pending Approval"
                     IF LoanApp.GET(LoanGuar."Loan No") THEN
                         SMSMessages."SMS Message" := 'You have guaranteed an amount of ' + FORMAT(LoanGuar."Amont Guaranteed")
                         + ' to ' + Rec."Client Name" + '  ' +
-                        'Loan Type ' + Rec."Loan Product Type Name" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0726050260 if in dispute';
+                        'Loan Type ' + Rec."Loan Product Type Name" + ' ' + 'of ' + FORMAT(Rec."Requested Amount") + ' at Polytech Sacco Ltd. Call 0719421588 if in dispute';
                     ;
                     SMSMessages."Telephone No" := Cust."Phone No.";
                     SMSMessages.INSERT;

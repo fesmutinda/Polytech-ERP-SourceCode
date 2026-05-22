@@ -9,7 +9,11 @@ Page 56045 "Loans Reschedule  List"
     ModifyAllowed = true;
     PageType = List;
     SourceTable = "Loans Register";
-    SourceTableView = where(Posted = filter(false));
+    SourceTableView = sorting("Application Date")
+                      order(descending)
+                     where(Posted = filter(true),
+                            "Loan Status" = const(Issued),
+                            "Outstanding Balance" = filter(> 0));
     UsageCategory = Lists;
 
     layout
@@ -34,10 +38,6 @@ Page 56045 "Loans Reschedule  List"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Member  No';
-                }
-                field("Group Code"; Rec."Group Code")
-                {
-                    ApplicationArea = Basic;
                 }
                 field("Client Name"; Rec."Client Name")
                 {
@@ -71,18 +71,14 @@ Page 56045 "Loans Reschedule  List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejection  Remark"; Rec."Rejection  Remark")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Outstanding Balance"; Rec."Outstanding Balance")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Oustanding Interest"; Rec."Oustanding Interest")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Outstanding Balance"; Rec."Outstanding Balance")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Oustanding Interest"; Rec."Oustanding Interest")
+                // {
+                //     ApplicationArea = Basic;
+                // }
             }
         }
         area(factboxes)

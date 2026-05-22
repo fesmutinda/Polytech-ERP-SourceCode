@@ -54,6 +54,17 @@ Codeunit 50009 "Swizzsoft Factory"
         PostingDate: Date;
         ObjNoSeries: Record "No. Series Line";
 
+    Procedure FnGetMemberMobileNo(AccountNo: Code[20]): text[100]
+    var
+        ObjVendorLocal: Record Vendor;
+    begin
+        ObjVendorLocal.reset;
+        ObjVendorLocal.SetRange(ObjVendorLocal."BOSA Account No", AccountNo);
+        if ObjVendorLocal.find('-') then begin
+            exit(ObjVendorLocal."Mobile Phone No");
+        end;
+    end;
+
     procedure FnGenerateRepaymentSchedule(LoanNumber: Code[50])
     var
         LoansRec: Record "Loans Register";
@@ -82,6 +93,9 @@ Codeunit 50009 "Swizzsoft Factory"
         //LoansRec.SetFilter(LoansRec.Posted, '=%1', false);
         if LoansRec.Find('-') then begin
             if (LoansRec."Repayment Start Date" <> 0D) then begin
+                LInterest := 0;
+                LPrincipal := 0;
+
                 LoansRec.TestField(LoansRec."Loan Disbursement Date");
                 LoansRec.TestField(LoansRec."Repayment Start Date");
 
@@ -132,13 +146,17 @@ Codeunit 50009 "Swizzsoft Factory"
                         TotalMRepay := ROUND((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
                         LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
                         LPrincipal := TotalMRepay - LInterest;
+
+                        // TotalMRepay := (InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -RepayPeriod)) * LoanAmount;
+                        // LInterest := ROUND(LBalance / 100 / 12 * InterestRate);
+                        // LPrincipal := TotalMRepay - LInterest;
                     end;
 
                     if LoansRec."Repayment Method" = LoansRec."repayment method"::"Straight Line" then begin
                         LoansRec.TestField(LoansRec.Interest);
                         LoansRec.TestField(LoansRec.Installments);
                         LPrincipal := LoanAmount / RepayPeriod;
-                        LInterest := (InterestRate / 12 / 100) * LoanAmount / RepayPeriod;
+                        LInterest := (InterestRate / 12 / 100) * LoanAmount;// / RepayPeriod;
                     end;
 
                     if LoansRec."Repayment Method" = LoansRec."repayment method"::"Reducing Balance" then begin
@@ -190,6 +208,165 @@ Codeunit 50009 "Swizzsoft Factory"
         end;
 
         Commit;
+    end;
+
+    procedure FnGenerateRepaymentScheduleMerged(LoanNumber: Code[50]): Boolean
+    var
+        LoansRec: Record "Loans Register";
+        RSchedule: Record "Loan Repayment Schedule";
+        LoanAmount: Decimal;
+        InterestRate: Decimal;
+        RepayPeriod: Integer;
+        InitialInstal: Integer;
+        LBalance: Decimal;
+        RunDate: Date;
+        InstalNo: Integer;
+        TotalMRepay: Decimal;
+        LInterest: Decimal;
+        LPrincipal: Decimal;
+        GrPrinciple: Integer;
+        GrInterest: Integer;
+        RepayCode: Code[30];
+        RepaymentStartDate: Date;
+        RepaymentFrequency: Integer;
+        DateOffsetFormula: Text;
+    begin
+        // Find loan
+        LoansRec.Reset;
+        LoansRec.SetRange(LoansRec."Loan  No.", LoanNumber);
+        LoansRec.SetFilter(LoansRec."Approved Amount", '>%1', 0);
+        if not LoansRec.Find('-') then
+            exit(false);
+
+        // Required fields check
+        LoansRec.TestField(LoansRec."Loan Disbursement Date");
+        LoansRec.TestField(LoansRec."Repayment Start Date");
+
+        // Prepare
+        GrPrinciple := LoansRec."Grace Period - Principle (M)";
+        GrInterest := LoansRec."Grace Period - Interest (M)";
+
+        // Clear existing schedule
+        RSchedule.Reset;
+        RSchedule.SetRange(RSchedule."Loan No.", LoansRec."Loan  No.");
+        RSchedule.DeleteAll;
+
+        LoanAmount := LoansRec."Approved Amount";
+        InterestRate := LoansRec.Interest;
+        RepayPeriod := LoansRec.Installments;
+        InitialInstal := LoansRec.Installments + LoansRec."Grace Period - Principle (M)";
+        LBalance := LoanAmount;
+        RepaymentStartDate := LoansRec."Repayment Start Date";
+        InstalNo := 0;
+
+        // Choose date offset formula base (we will compute RunDate per installment so first instal uses RepaymentStartDate)
+        if LoansRec."Repayment Frequency" = LoansRec."repayment frequency"::Daily then
+            DateOffsetFormula := 'D'
+        else
+            if LoansRec."Repayment Frequency" = LoansRec."repayment frequency"::Weekly then
+                DateOffsetFormula := 'W'
+            else
+                if LoansRec."Repayment Frequency" = LoansRec."repayment frequency"::Monthly then
+                    DateOffsetFormula := 'M'
+                else
+                    if LoansRec."Repayment Frequency" = LoansRec."repayment frequency"::Quaterly then
+                        DateOffsetFormula := 'Q'
+                    else
+                        Error('Unsupported repayment frequency');
+
+        // Repeat until balance is paid
+        repeat
+            InstalNo += 1;
+
+            // compute current RunDate based on RepaymentStartDate and instal index
+            case DateOffsetFormula of
+                'D':
+                    RunDate := CalcDate(Format(InstalNo - 1) + 'D', RepaymentStartDate);
+                'W':
+                    RunDate := CalcDate(Format(InstalNo - 1) + 'W', RepaymentStartDate);
+                'M':
+                    RunDate := CalcDate(Format(InstalNo - 1) + 'M', RepaymentStartDate);
+                'Q':
+                    RunDate := CalcDate(Format(InstalNo - 1) + 'Q', RepaymentStartDate);
+            end;
+
+            // Calculate repayment amounts depending on method
+            if LoansRec."Repayment Method" = LoansRec."repayment method"::Amortised then begin
+                LoansRec.TestField(LoansRec.Installments);
+                LoansRec.TestField(LoansRec.Interest);
+
+                // Monthly rate used for formula (InterestRate assumed annual percentage)
+                TotalMRepay := (InterestRate / 12 / 100) / (1 - Power(1 + (InterestRate / 12 / 100), -RepayPeriod)) * LoanAmount;
+                TotalMRepay := ROUND(TotalMRepay, 0.0001, '>');
+
+                LInterest := ROUND(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
+                LPrincipal := TotalMRepay - LInterest;
+            end else
+                if LoansRec."Repayment Method" = LoansRec."repayment method"::"Straight Line" then begin
+                    LoansRec.TestField(LoansRec.Installments);
+                    LoansRec.TestField(LoansRec.Interest);
+
+                    LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.0001, '>');
+                    // Interest spread evenly across instalments (annual -> monthly fraction applied to whole loan)
+                    LInterest := ROUND((InterestRate / 12 / 100) * LoanAmount, 0.0001, '>');
+                end else
+                    if LoansRec."Repayment Method" = LoansRec."repayment method"::"Reducing Balance" then begin
+                        LoansRec.TestField(LoansRec.Installments);
+                        LoansRec.TestField(LoansRec.Interest);
+
+                        LPrincipal := ROUND(LoanAmount / RepayPeriod, 0.0001, '>');
+                        LInterest := ROUND((InterestRate / 12 / 100) * LBalance, 0.0001, '>');
+                    end else
+                        if LoansRec."Repayment Method" = LoansRec."repayment method"::Constants then begin
+                            LoansRec.TestField(LoansRec.Repayment);
+
+                            if LBalance < LoansRec.Repayment then
+                                LPrincipal := LBalance
+                            else
+                                LPrincipal := LoansRec.Repayment;
+
+                            LInterest := ROUND(LoansRec."Loan Interest Repayment" / LoansRec.Installments, 0.0001, '>');
+                        end else
+                            Error('Unsupported repayment method');
+
+            // Grace period handling
+            if GrPrinciple > 0 then
+                LPrincipal := 0
+            else
+                LBalance := LBalance - LPrincipal;
+
+            if GrInterest > 0 then
+                LInterest := 0;
+
+            GrPrinciple -= 1;
+            GrInterest -= 1;
+
+            // avoid negative small balances due to rounding
+            if LBalance < 0 then
+                LBalance := 0;
+
+            Evaluate(RepayCode, Format(InstalNo));
+
+            // Insert schedule line
+            RSchedule.Init;
+            RSchedule."Repayment Code" := RepayCode;
+            RSchedule."Interest Rate" := InterestRate;
+            RSchedule."Loan No." := LoansRec."Loan  No.";
+            RSchedule."Loan Amount" := LoanAmount;
+            RSchedule."Instalment No" := InstalNo;
+            RSchedule."Repayment Date" := RunDate;
+            RSchedule."Member No." := LoansRec."Client Code";
+            RSchedule."Loan Category" := LoansRec."Loan Product Type";
+            RSchedule."Monthly Repayment" := LInterest + LPrincipal;
+            RSchedule."Monthly Interest" := LInterest;
+            RSchedule."Principal Repayment" := LPrincipal;
+            RSchedule."Loan Balance" := LBalance;
+            RSchedule.Insert;
+
+        until LBalance <= 0;
+
+        Commit;
+        exit(true);
     end;
 
     procedure FnGetCashierTransactionBudding(TransactionType: Code[100]; TransAmount: Decimal) TCharge: Decimal
@@ -603,7 +780,7 @@ Codeunit 50009 "Swizzsoft Factory"
         SMSMessage.Source := SMSSource;
         SMSMessage."Entered By" := UserId;
         SMSMessage."Sent To Server" := SMSMessage."sent to server"::No;
-        SMSMessage."SMS Message" := SMSBody + '.' + ObjCompInfo.Name + ' ' + ObjGenSetUp."Customer Care No";
+        SMSMessage."SMS Message" := SMSBody; //+ '.' + ObjCompInfo.Name + ' ' + ObjGenSetUp."Customer Care No";
         SMSMessage."Telephone No" := MobileNumber;
         if ((MobileNumber <> '') and (SMSBody <> '')) then
             SMSMessage.Insert;
@@ -1488,104 +1665,6 @@ Codeunit 50009 "Swizzsoft Factory"
         end;
 
         Commit;
-    end;
-
-    procedure FnRecoverOnLoanOverdrafts(ClientCode: Code[50])
-    var
-        LoansRegister: Record "Loans Register";
-        GenJournalLine: Record "Gen. Journal Line";
-        LineNo: Integer;
-        VendorTable: record Vendor;
-    begin
-        LoansRegister.Reset();
-        LoansRegister.SetRange(LoansRegister."Client Code", ClientCode);
-        LoansRegister.SetAutoCalcFields(LoansRegister."Outstanding Balance", LoansRegister."Oustanding Interest");
-        LoansRegister.SetFilter(LoansRegister."Outstanding Balance", '>%1', 0);
-        LoansRegister.SetRange(LoansRegister."Overdraft Installements", LoansRegister."Overdraft Installements"::Loan);
-        if LoansRegister.Find('-') then begin
-            //...............................Remove Amount from Vendor
-            LineNo := LineNo + 1000;
-            GenJournalLine.Init;
-            GenJournalLine."Journal Template Name" := 'GENERAL';
-            GenJournalLine."Journal Batch Name" := 'ARECOVERY';
-            GenJournalLine."Document No." := LoansRegister."Loan  No.";
-            GenJournalLine."Line No." := LineNo;
-            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
-            VendorTable.Reset();
-            VendorTable.SetRange(VendorTable."BOSA Account No", ClientCode);
-            if VendorTable.Find('-') then begin
-                GenJournalLine."Account No." := VendorTable."No.";
-            end;
-            GenJournalLine.Validate(GenJournalLine."Account No.");
-            GenJournalLine."Posting Date" := Today;
-            GenJournalLine.Description := 'Overdraft On Loan Recovered';
-            GenJournalLine.Validate(GenJournalLine."Currency Code");
-            GenJournalLine.Amount := LoansRegister."Oustanding Interest" + LoansRegister."Outstanding Balance";
-            GenJournalLine."External Document No." := LoansRegister."Loan  No.";
-            GenJournalLine.Validate(GenJournalLine.Amount);
-            GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
-            GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranch(ClientCode);
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-            if GenJournalLine.Amount <> 0 then
-                GenJournalLine.Insert;
-            //...............................Repay Loan Interest
-            LineNo := LineNo + 1000;
-            GenJournalLine.Init;
-            GenJournalLine."Journal Template Name" := 'GENERAL';
-            GenJournalLine."Journal Batch Name" := 'ARECOVERY';
-            GenJournalLine."Document No." := LoansRegister."Loan  No.";
-            GenJournalLine."Line No." := LineNo;
-            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-            GenJournalLine."Account No." := ClientCode;
-            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Paid";
-            GenJournalLine."Loan No" := LoansRegister."Loan  No.";
-            GenJournalLine.Validate(GenJournalLine."Account No.");
-            GenJournalLine."Posting Date" := Today;
-            GenJournalLine.Description := 'Overdraft Interest Paid On Loan Recovery';
-            GenJournalLine.Validate(GenJournalLine."Currency Code");
-            GenJournalLine.Amount := -LoansRegister."Oustanding Interest";
-            GenJournalLine."External Document No." := LoansRegister."Loan  No.";
-            GenJournalLine.Validate(GenJournalLine.Amount);
-            GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
-            GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranch(ClientCode);
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-            if GenJournalLine.Amount <> 0 then
-                GenJournalLine.Insert;
-            //...............................Repay Loan Interest
-            LineNo := LineNo + 1000;
-            GenJournalLine.Init;
-            GenJournalLine."Journal Template Name" := 'GENERAL';
-            GenJournalLine."Journal Batch Name" := 'ARECOVERY';
-            GenJournalLine."Document No." := LoansRegister."Loan  No.";
-            GenJournalLine."Line No." := LineNo;
-            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-            GenJournalLine."Account No." := ClientCode;
-            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Loan Repayment";
-            GenJournalLine."Loan No" := LoansRegister."Loan  No.";
-            GenJournalLine.Validate(GenJournalLine."Account No.");
-            GenJournalLine."Posting Date" := Today;
-            GenJournalLine.Description := 'Overdraft Principle Paid On Loan Recovery';
-            GenJournalLine.Validate(GenJournalLine."Currency Code");
-            GenJournalLine.Amount := -LoansRegister."Outstanding Balance";
-            GenJournalLine."External Document No." := LoansRegister."Loan  No.";
-            GenJournalLine.Validate(GenJournalLine.Amount);
-            GenJournalLine."Shortcut Dimension 1 Code" := 'FOSA';
-            GenJournalLine."Shortcut Dimension 2 Code" := FnGetMemberBranch(ClientCode);
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-            if GenJournalLine.Amount <> 0 then
-                GenJournalLine.Insert;
-
-            GenJournalLine.RESET;
-            GenJournalLine.SETRANGE("Journal Template Name", 'GENERAL');
-            GenJournalLine.SETRANGE("Journal Batch Name", 'ARECOVERY');
-            if GenJournalLine.Find('-') then begin
-                CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post Batch", GenJournalLine);
-            end;
-        end;
-
     end;
 
 }

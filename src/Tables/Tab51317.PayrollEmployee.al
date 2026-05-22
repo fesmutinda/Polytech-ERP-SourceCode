@@ -435,6 +435,18 @@ Table 51317 "Payroll Employee."
         }
         field(93; "Sacco Membership No."; Code[20])
         {
+            TableRelation = Customer."No.";
+            trigger OnValidate()
+            begin
+                if ObjCust.Get("Payroll No") then begin
+                    "Full Name" := ObjCust.Name;
+                    "Employee Email" := ObjCust."E-Mail";
+                    "National ID No" := ObjCust."ID No.";
+                    "PIN No" := ObjCust.Pin;
+                    "No." := ObjCust."Payroll/Staff No";
+
+                end;
+            end;
         }
         field(94; "Insurance Premium"; Decimal)
         {
@@ -642,7 +654,10 @@ Table 51317 "Payroll Employee."
             Editable = false;
             FieldClass = FlowField;
         }
-
+        field(128; "User ID"; Code[22])
+        {
+            TableRelation = "User Setup"."User ID";
+        }
 
     }
 

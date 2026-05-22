@@ -248,7 +248,7 @@ page 50933 "Bulk Withdrawal Appl card"
         CanCancelApprovalForRecord: Boolean;
         EventFilter: Text;
         EnablePosting: Boolean;
-        ObjTransactions: Record 51441;
+        // ObjTransactions: Record 51441;
         WithdrawalDateEditable: Boolean;
 
     local procedure FnAddRecordRestriction()

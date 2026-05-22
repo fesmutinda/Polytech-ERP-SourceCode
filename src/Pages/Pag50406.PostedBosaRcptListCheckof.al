@@ -2,10 +2,10 @@
 page 50406 "Posted Bosa Rcpt List-Checkof"
 {
     ApplicationArea = Basic;
-    CardPageID = "PostedBosa Rcpt HCard-Checkof";
+    CardPageID = "Posted Polytech Checkoff";// Card";
     Editable = false;
     PageType = List;
-    SourceTable = "ReceiptsProcessing_H-Checkoff";
+    SourceTable = "Polytech Checkoff Header";
     SourceTableView = where(Posted = filter(true));
     UsageCategory = Lists;
 
@@ -39,11 +39,15 @@ page 50406 "Posted Bosa Rcpt List-Checkof"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Account Name"; Rec."Account Name")
+                field("Total Welfare"; Rec."Total Welfare")
                 {
                     ApplicationArea = Basic;
                 }
                 field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Posting date"; Rec."Posting date")
                 {
                     ApplicationArea = Basic;
                 }

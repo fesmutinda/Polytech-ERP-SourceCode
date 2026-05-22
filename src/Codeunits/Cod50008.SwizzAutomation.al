@@ -8,7 +8,7 @@ Codeunit 50008 SwizzAutomation
 
     var
         objVendor: Record Vendor;
-        objTransactions: Record 51441;
+        objTransactions: Record Transactions;
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
         GenSetup: Record 51398;

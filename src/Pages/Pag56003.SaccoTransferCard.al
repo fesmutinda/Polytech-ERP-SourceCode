@@ -88,7 +88,7 @@ Page 56003 "Sacco Transfer Card"
             }
             part(Control1102760014; "Sacco Transfer Schedule")
             {
-                // SubPageLink = Rec."No." = field(No);
+                SubPageLink = "No." = field(No);
             }
         }
     }
@@ -102,6 +102,7 @@ Page 56003 "Sacco Transfer Card"
                 Caption = 'Posting';
                 action(Approvals)
                 {
+                    Visible = false;
                     ApplicationArea = Basic;
                     Caption = 'Approvals';
                     Image = Approval;
@@ -114,10 +115,10 @@ Page 56003 "Sacco Transfer Card"
                     begin
                     end;
                 }
-                action("Send A&pproval Request")
+                action("Send Approval Request")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Send A&pproval Request';
+                    Caption = 'Send Approval Request';
                     Image = SendApprovalRequest;
                     Promoted = true;
                     PromotedCategory = process;
@@ -129,7 +130,7 @@ Page 56003 "Sacco Transfer Card"
                         if Confirm('Send Approval Request ?', false) = false then begin
                             exit;
                         end else begin
-                            //Approvals.SendInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
+                            Approvals.SendInternalTransfersTransactionsRequestForApproval(rec.No, Rec);
                             CurrPage.Close();
                         end;
                     end;
@@ -153,7 +154,154 @@ Page 56003 "Sacco Transfer Card"
                         end;
                     end;
                 }
-                action(Post)
+                // action(Post)
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Post';
+                //     Image = Post;
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+                //     PromotedIsBig = true;
+                //     Visible = false;
+
+                //     trigger OnAction()
+                //     begin
+                //         // Approval restriction
+                //         Rec.TestField(Status, Rec.Status::Approved);
+                //         //............................................................................
+                //         Rec.CalcFields("Schedule Total");
+                //         if (Vend.Get(Rec."Source Account No")) and (Rec."Source Account Type" = Rec."source account type"::"M-Wallet") then begin
+                //             Vend.CalcFields(Vend.Balance);
+                //             if (Vend.Balance - Rec."Schedule Total") < 0 then begin
+                //                 if UserId in ['CLARIS', 'IRENE'] then
+                //                     Message('Note that you will be overdrawing the account') else
+                //                     Error('The Account balance will fall below zero !');
+                //             end;
+                //         end;
+                //         //............................................................................
+                //         if FundsUSer.Get(UserId) then begin
+                //             Jtemplate := 'GENERAL';// FundsUSer."Payment Journal Template";
+                //             Jbatch := 'RECEIPTS';// FundsUSer."Payment Journal Batch";
+                //         end else begin
+                //             Error('Funds user setup setting does not exist');
+                //         end;
+                //         if Rec.Posted = true then
+                //             Error('This Shedule is already posted');
+                //         Rec.TestField(Remarks);
+
+                //         if Confirm('Are you sure you want to transfer schedule?', false) = false then begin
+                //             exit;
+                //         end else begin
+                //             // DELETE ANY LINE ITEM THAT MAY BE PRESENT
+                //             GenJournalLine.Reset;
+                //             GenJournalLine.SetRange(GenJournalLine."Journal Template Name", Jtemplate);
+                //             GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", Jbatch);
+                //             GenJournalLine.DeleteAll;
+
+                //             // UPDATE Source Account
+                //             GenJournalLine.Init;
+                //             GenJournalLine."Journal Template Name" := Jtemplate;
+                //             GenJournalLine."Journal Batch Name" := Jbatch;
+                //             GenJournalLine."Document No." := Rec.No;
+                //             GenJournalLine."Line No." := GenJournalLine."Line No." + 10000;
+
+                //             if Rec."Source Account Type" = Rec."source account type"::MEMBER then begin
+                //                 GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
+                //                 GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
+                //                 GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
+                //                 GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
+                //                 GenJournalLine."Account No." := Rec."Source Account No";
+                //                 GenJournalLine."Loan No" := Rec."Source Loan No";
+                //             end else if Rec."Source Account Type" = Rec."source account type"::"M-Wallet" then begin
+                //                 GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
+                //                 GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
+                //                 GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
+                //                 // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
+                //                 GenJournalLine."Account No." := Rec."Source Account No";
+                //             end else if Rec."Source Account Type" = Rec."Source Account Type"::"G/L ACCOUNT" then begin
+                //                 GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
+                //                 GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
+                //                 GenJournalLine."Shortcut Dimension 2 Code" := '01';
+                //                 GenJournalLine."Account No." := Rec."Source Account No";
+                //             end else if Rec."Source Account Type" = Rec."source account type"::Bank then begin
+                //                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
+                //                 GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
+                //                 GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
+                //                 GenJournalLine."Account No." := Rec."Source Account No";
+                //             end;
+
+                //             GenJournalLine."Posting Date" := Today;
+                //             GenJournalLine.Description := Rec.Remarks + ' ' + Rec."Source Account Name";
+                //             Rec.CalcFields("Schedule Total");
+                //             GenJournalLine.Amount := Rec."Schedule Total";
+                //             //GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                //             GenJournalLine.Insert;
+
+
+                //             BSched.Reset;
+                //             BSched.SetRange(BSched."No.", Rec.No);
+                //             if BSched.Find('-') then begin
+                //                 repeat
+
+                //                     GenJournalLine.Init();
+
+                //                     GenJournalLine."Journal Template Name" := Jtemplate;
+                //                     GenJournalLine."Journal Batch Name" := Jbatch;
+                //                     GenJournalLine."Document No." := Rec.No;
+                //                     GenJournalLine."Line No." := GenJournalLine."Line No." + 10000;
+
+                //                     if BSched."Destination Account Type" = BSched."destination account type"::MEMBER then begin
+                //                         GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
+                //                         GenJournalLine."Transaction Type" := BSched."Destination Type";
+                //                         GenJournalLine."Account No." := BSched."Destination Account No.";
+                //                         GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
+                //                     end else
+
+                //                         if BSched."Destination Account Type" = BSched."destination account type"::"M-Wallet" then begin
+                //                             GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
+                //                             GenJournalLine."Transaction Type" := BSched."Destination Type";
+                //                             // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
+                //                             GenJournalLine."Account No." := BSched."Destination Account No.";
+                //                             GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
+                //                         end else
+                //                             if BSched."Destination Account Type" = BSched."destination account type"::"G/L ACCOUNT" then begin
+                //                                 GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
+                //                                 GenJournalLine."Account No." := BSched."Destination Account No.";
+                //                                 GenJournalLine."Shortcut Dimension 2 Code" := '01';
+
+                //                             end else
+                //                                 if BSched."Destination Account Type" = BSched."destination account type"::BANK then begin
+                //                                     GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
+                //                                     GenJournalLine."Account No." := BSched."Destination Account No.";
+                //                                     GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
+                //                                 end;
+                //                     GenJournalLine."Loan No" := BSched."Destination Loan";
+                //                     GenJournalLine.Validate(GenJournalLine."Loan No");
+                //                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
+                //                     GenJournalLine."Posting Date" := Today;
+                //                     GenJournalLine.Description := Rec.Remarks;
+                //                     GenJournalLine.Amount := -BSched.Amount;
+                //                     //GenJournalLine.VALIDATE(GenJournalLine.Amount);
+                //                     GenJournalLine.Insert;
+                //                 //End Audit Entries
+                //                 until BSched.Next = 0;
+                //             end;
+                //             //Post
+                //             GenJournalLine.Reset;
+                //             GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                //             GenJournalLine.SetRange("Journal Batch Name", Jbatch);
+                //             if GenJournalLine.Find('-') then begin
+                //                 // Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
+                //                 page.Run(Page::"General Journal", GenJournalLine);
+                //             end;
+                //             //Post
+                //             Rec.Posted := true;
+                //             Rec.Modify;
+                //         end;
+                //     end;
+                // }
+
+                action(PostNav)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Post';
@@ -161,96 +309,85 @@ Page 56003 "Sacco Transfer Card"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
-
                     trigger OnAction()
+                    var
+                        ObjVendors: Record Vendor;
                     begin
-                        Rec.TestField(Status, Rec.Status::Approved);
-                        //............................................................................
-                        Rec.CalcFields("Schedule Total");
-                        if (Vend.Get(Rec."Source Account No")) and (Rec."Source Account Type" = Rec."source account type"::Fosa) then begin
-                            Vend.CalcFields(Vend.Balance);
-                            if (Vend.Balance - Rec."Schedule Total") < 0 then begin
-                                if UserId in ['POLYTECHSACCO\EWAMBUA'] then
-                                    Message('Note that you will be overdrawing the account') else
-                                    Error('The Account balance will fall below zero !');
-                            end;
-                        end;
-                        //............................................................................
-                        if FundsUSer.Get(UserId) then begin
+                        IF FundsUSer.GET(USERID) THEN BEGIN
                             Jtemplate := FundsUSer."Payment Journal Template";
                             Jbatch := FundsUSer."Payment Journal Batch";
-                        end else begin
-                            Error('Funds user setup setting does not exist');
-                        end;
-                        if Rec.Posted = true then
-                            Error('This Shedule is already posted');
-                        Rec.TestField(Remarks);
+                        END;
+                        IF Rec.Posted = TRUE THEN
+                            ERROR('This Shedule is already posted');
 
-                        if Confirm('Are you sure you want to transfer schedule?', false) = false then begin
-                            exit;
-                        end else begin
+                        IF CONFIRM('Are you sure you want to transfer schedule?', FALSE) = TRUE THEN BEGIN
+
+                            //IF Approved=FALSE THEN
+                            //ERROR('This schedule is not approved');
+
                             // DELETE ANY LINE ITEM THAT MAY BE PRESENT
-                            GenJournalLine.Reset;
-                            GenJournalLine.SetRange(GenJournalLine."Journal Template Name", Jtemplate);
-                            GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", Jbatch);
-                            GenJournalLine.DeleteAll;
+                            GenJournalLine.RESET;
+                            GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", Jtemplate);
+                            GenJournalLine.SETRANGE(GenJournalLine."Journal Batch Name", Jbatch);
+                            GenJournalLine.DELETEALL;
+
+
+                            //POSTING MAIN TRANSACTION
+
+                            //window.OPEN('Posting:,#1######################');
+                            BSched.RESET;
+                            BSched.SETRANGE(BSched."No.", Rec.No);
 
                             // UPDATE Source Account
-                            GenJournalLine.Init;
+                            GenJournalLine.INIT;
                             GenJournalLine."Journal Template Name" := Jtemplate;
                             GenJournalLine."Journal Batch Name" := Jbatch;
                             GenJournalLine."Document No." := Rec.No;
+                            GenJournalLine.Description := BSched."Description" + ' ' + Rec."Source Account No";
                             GenJournalLine."Line No." := GenJournalLine."Line No." + 10000;
-                            if Rec."Source Account Type" = Rec."source account type"::Customer then begin
-                                GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
-                                GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
+                            IF Rec."Source Account Type" = Rec."Source Account Type"::"M-Wallet" THEN BEGIN
+                                GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
+                                // GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
                                 GenJournalLine."Account No." := Rec."Source Account No";
                                 GenJournalLine."Loan No" := Rec."Source Loan No";
-                            end else
-                                if Rec."Source Account Type" = Rec."source account type"::MEMBER then begin
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
+                            END ELSE
+                                IF Rec."Source Account Type" = Rec."Source Account Type"::MEMBER THEN BEGIN
+                                    GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
                                     GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
+                                    GenJournalLine.Description := BSched."Description" + ' ' + Rec."Source Account No";
                                     GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
                                     GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
                                     GenJournalLine."Account No." := Rec."Source Account No";
                                     GenJournalLine."Loan No" := Rec."Source Loan No";
-                                end else
+                                END ELSE
 
-                                    if Rec."Source Account Type" = Rec."source account type"::Fosa then begin
-                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
-                                        GenJournalLine."Shortcut Dimension 1 Code" := 'fOSA';
-                                        GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
-                                        // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
+                                    IF Rec."Source Account Type" = Rec."Source Account Type"::"G/L ACCOUNT" THEN BEGIN
+                                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::"G/L Account";
+                                        GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
+                                        GenJournalLine."Shortcut Dimension 2 Code" := '01';
                                         GenJournalLine."Account No." := Rec."Source Account No";
-                                    end else
-                                        if Rec."Source Account Type" = Rec."Source Account Type"::"G/L ACCOUNT" then begin
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
-                                            GenJournalLine."Transaction Type" := Rec."Source Transaction Type";
-                                            GenJournalLine."Shortcut Dimension 2 Code" := '01';
+                                    END ELSE
+                                        IF Rec."Source Account Type" = Rec."Source Account Type"::Bank THEN BEGIN
+                                            GenJournalLine."Account Type" := GenJournalLine."Account Type"::"Bank Account";
+                                            GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
+                                            GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
                                             GenJournalLine."Account No." := Rec."Source Account No";
-                                        end else
-                                            if Rec."Source Account Type" = Rec."source account type"::Bank then begin
-                                                GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
-                                                GenJournalLine."Shortcut Dimension 1 Code" := 'BOSA';
-                                                GenJournalLine."Shortcut Dimension 2 Code" := BTRANS."Global Dimension 2 Code";
-                                                GenJournalLine."Account No." := Rec."Source Account No";
-                                            end;
-                            GenJournalLine."Posting Date" := Today;
-                            GenJournalLine.Description := Rec.Remarks + ' ' + Rec."Source Account Name";
-                            Rec.CalcFields("Schedule Total");
+                                        END;
+                            GenJournalLine."Posting Date" := Rec."Transaction Date";
+                            GenJournalLine.Description := BSched."Description" + ' ' + Rec."Source Account No";
+                            Rec.CALCFIELDS("Schedule Total");
                             GenJournalLine.Amount := Rec."Schedule Total";
-                            //GenJournalLine.VALIDATE(GenJournalLine.Amount);
-                            GenJournalLine.Insert;
+                            GenJournalLine.INSERT;
 
 
 
 
-                            BSched.Reset;
-                            BSched.SetRange(BSched."No.", Rec.No);
-                            if BSched.Find('-') then begin
+                            BSched.RESET;
+                            BSched.SETRANGE(BSched."No.", Rec.No);
+                            IF BSched.FIND('-') THEN BEGIN
                                 repeat
 
-                                    GenJournalLine.Init;
+                                    GenJournalLine.Init();
 
                                     GenJournalLine."Journal Template Name" := Jtemplate;
                                     GenJournalLine."Journal Batch Name" := Jbatch;
@@ -264,7 +401,7 @@ Page 56003 "Sacco Transfer Card"
                                         GenJournalLine."Shortcut Dimension 2 Code" := BSched."Global Dimension 2 Code";
                                     end else
 
-                                        if BSched."Destination Account Type" = BSched."destination account type"::FOSA then begin
+                                        if BSched."Destination Account Type" = BSched."destination account type"::"M-Wallet" then begin
                                             GenJournalLine."Account Type" := GenJournalLine."account type"::Vendor;
                                             GenJournalLine."Transaction Type" := BSched."Destination Type";
                                             // GenJournalLine."FOSA Transaction Type" := GenJournalLine."fosa transaction type"::InternalTransfers;
@@ -285,25 +422,31 @@ Page 56003 "Sacco Transfer Card"
                                     GenJournalLine."Loan No" := BSched."Destination Loan";
                                     GenJournalLine.Validate(GenJournalLine."Loan No");
                                     //GenJournalLine.VALIDATE(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := Today;
+                                    GenJournalLine."Posting Date" := Rec."Transaction Date";// Today;
                                     GenJournalLine.Description := Rec.Remarks;
                                     GenJournalLine.Amount := -BSched.Amount;
                                     //GenJournalLine.VALIDATE(GenJournalLine.Amount);
                                     GenJournalLine.Insert;
-                                //End Audit Entries
                                 until BSched.Next = 0;
-                            end;
+
+
+                            END;
+
                             //Post
-                            GenJournalLine.Reset;
-                            GenJournalLine.SetRange("Journal Template Name", Jtemplate);
-                            GenJournalLine.SetRange("Journal Batch Name", Jbatch);
-                            if GenJournalLine.Find('-') then begin
-                                Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
-                            end;
+                            GenJournalLine.RESET;
+                            GenJournalLine.SETRANGE("Journal Template Name", Jtemplate);
+                            GenJournalLine.SETRANGE("Journal Batch Name", Jbatch);
+                            IF GenJournalLine.FIND('-') THEN BEGIN
+                                CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GenJournalLine);
+                                // page.Run(Page::"General Journal", GenJournalLine);
+                            END;
+
                             //Post
-                            Rec.Posted := true;
-                            Rec.Modify;
-                        end;
+                            Rec.Posted := TRUE;
+                            Rec.MODIFY;
+                            MESSAGE('Transaction posted succesfully');
+
+                        END;
                     end;
                 }
                 action(Print)
@@ -370,12 +513,12 @@ Page 56003 "Sacco Transfer Card"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        Rec."Source Account Type" := Rec."source account type"::Fosa;
+        Rec."Source Account Type" := Rec."source account type"::"M-Wallet";
     end;
 
     trigger OnOpenPage()
     begin
-        Rec."Source Account Type" := Rec."source account type"::Fosa;
+        Rec."Source Account Type" := Rec."source account type"::"M-Wallet";
         AddRecordRestriction();
     end;
 

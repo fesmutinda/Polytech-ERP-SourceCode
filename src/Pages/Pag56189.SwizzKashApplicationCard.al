@@ -30,10 +30,17 @@ Page 56189 "SwizzKash Application Card"
                 {
                     ApplicationArea = Basic;
                 }
+                field(Gender; Rec.Gender) { ApplicationArea = Basic; }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }
+                field(ActivationStatus; Rec.ActivationStatus)
+                {
+                    ApplicationArea = Basic;
+                    Editable = true;
+                }
+                field("Mobile Status"; Rec."Mobile Status") { ApplicationArea = Basic; }
                 field("Date Applied"; Rec."Date Applied")
                 {
                     ApplicationArea = Basic;
@@ -87,7 +94,9 @@ Page 56189 "SwizzKash Application Card"
                     if Confirm('Are you sure to send the Mobile Application record for ' + Format(rec."Account Name") + ' for activation ?', false) = false then begin
                         exit;
                     end else begin
+                        Rec.ActivationStatus := Rec.ActivationStatus::PENDING;
                         rec.status := rec.status::"Pending Approval";
+                        Rec.SentToServer := false;
                         rec.Modify(true);
                         Message('Record Marked for activation');
                         CurrPage.Close();

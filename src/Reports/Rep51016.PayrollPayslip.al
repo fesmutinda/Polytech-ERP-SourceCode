@@ -1,9 +1,8 @@
 report 51016 "Payroll Payslip"
 {
-    // version Payroll ManagementV1.0(Surestep Systems)
 
     DefaultLayout = RDLC;
-    RDLCLayout = './Layouts/Payroll Payslip.rdl';
+    RDLCLayout = './Layouts/PayrollPayslip.rdl';
 
     dataset
     {
@@ -101,13 +100,14 @@ report 51016 "Payroll Payslip"
             {
 
             }
+
             dataitem("prPeriod Transactions."; "prPeriod Transactions.")
             {
                 DataItemLink = "Employee Code" = FIELD("No.");
                 RequestFilterFields = "Payroll Period";
+                column(Employee_Code; "Employee Code") { }
                 column(TCode; "Transaction Code")
                 {
-
                 }
                 column(TName; "Transaction Name")
                 {
@@ -135,6 +135,9 @@ report 51016 "Payroll Payslip"
                 {
                 }
                 column(NSSF; NSSF)
+                {
+                }
+                column(NSSF2; NSSF2)
                 {
                 }
                 column(Pens; Pens)
@@ -195,6 +198,7 @@ report 51016 "Payroll Payslip"
 
                 }
 
+
                 trigger OnAfterGetRecord()
                 begin
                     BANKN := '';
@@ -212,6 +216,7 @@ report 51016 "Payroll Payslip"
 
 
                     NSSF := 0;
+                    NSSF2 := 0;
                     Pens := 0;
                     TaxablePay := 0;
                     Taxcharged := 0;
@@ -225,9 +230,6 @@ report 51016 "Payroll Payslip"
                     BenevolentAmount := 0;
                     LoanInterestAmont := 0;
                     "Housing Levy" := 0;
-
-
-
 
                     PayrollCalender.Reset;
                     PayrollCalender.SetRange(PayrollCalender."Date Opened", "Payroll Period");
@@ -243,9 +245,16 @@ report 51016 "Payroll Payslip"
                     prPeriodTransactions2.Reset;
                     prPeriodTransactions2.SetRange("Employee Code", "prPeriod Transactions."."Employee Code");
                     prPeriodTransactions2.SetRange("Payroll Period", "prPeriod Transactions."."Payroll Period");
-                    prPeriodTransactions2.SetRange("Transaction Code", 'NSSF');
+                    prPeriodTransactions2.SetRange("Transaction Code", 'NSSF Tier 1');
                     if prPeriodTransactions2.FindFirst then
                         NSSF := prPeriodTransactions2.Amount;
+
+                    prPeriodTransactions2.Reset;
+                    prPeriodTransactions2.SetRange("Employee Code", "prPeriod Transactions."."Employee Code");
+                    prPeriodTransactions2.SetRange("Payroll Period", "prPeriod Transactions."."Payroll Period");
+                    prPeriodTransactions2.SetRange("Transaction Code", 'NSSF Tier 2');
+                    if prPeriodTransactions2.FindFirst then
+                        NSSF2 := prPeriodTransactions2.Amount;
 
                     prPeriodTransactions2.Reset;
                     prPeriodTransactions2.SetRange("Employee Code", "prPeriod Transactions."."Employee Code");
@@ -260,10 +269,11 @@ report 51016 "Payroll Payslip"
                     prPeriodTransactions2.SetRange("Transaction Code", 'TXBP');
                     if prPeriodTransactions2.FindFirst then
                         TaxablePay := prPeriodTransactions2.Amount;
+
                     prPeriodTransactions2.Reset;
                     prPeriodTransactions2.SetRange("Employee Code", "prPeriod Transactions."."Employee Code");
                     prPeriodTransactions2.SetRange("Payroll Period", "prPeriod Transactions."."Payroll Period");
-                    prPeriodTransactions2.SetRange("Transaction Code", 'HOUSING LEVY');
+                    prPeriodTransactions2.SetRange("Transaction Code", 'D13');
                     if prPeriodTransactions2.FindFirst then
                         "Housing Levy" := prPeriodTransactions2.Amount;
 
@@ -306,7 +316,9 @@ report 51016 "Payroll Payslip"
                     prPeriodTransactions2.Reset;
                     prPeriodTransactions2.SetRange("Employee Code", "prPeriod Transactions."."Employee Code");
                     prPeriodTransactions2.SetRange("Payroll Period", "prPeriod Transactions."."Payroll Period");
-                    prPeriodTransactions2.SetRange("Transaction Code", 'NHIF');//LOAN APP FEE
+                    //prPeriodTransactions2.SetRange("Transaction Code", 'NHIF');//LOAN APP FEE
+                    prPeriodTransactions2.SetRange("coop parameters", "coop parameters"::NHIF);
+
                     if prPeriodTransactions2.FindFirst then
                         NHIF := prPeriodTransactions2.Amount;
                     //Sacco deductions
@@ -327,12 +339,13 @@ report 51016 "Payroll Payslip"
                     prPeriodTransactions2.Reset;
                     prPeriodTransactions2.SetRange("Employee Code", "prPeriod Transactions."."Employee Code");
                     prPeriodTransactions2.SetRange("Payroll Period", "prPeriod Transactions."."Payroll Period");
-                    prPeriodTransactions2.SetRange("coop parameters", "coop parameters"::"loan Interest");
+                    prPeriodTransactions2.SetRange("coop parameters", "coop parameters"::"Loan Interest");
                     if prPeriodTransactions2.Findset then begin
                         repeat
                             LoanInterestAmont := LoanInterestAmont + prPeriodTransactions2.Amount;
                         until prPeriodTransactions2.Next = 0;
                     end;
+                    //Message('Loan Interest Amount of %1', LoanInterestAmont);
 
                     //Sharecapital Feee
 
@@ -342,7 +355,7 @@ report 51016 "Payroll Payslip"
                     prPeriodTransactions2.SetRange("coop parameters", "coop parameters"::"Share Capital");
                     if prPeriodTransactions2.FindFirst then begin
                         repeat
-                            ShareCapital := ShareCapital + ShareCapital + prPeriodTransactions2.Amount;
+                            ShareCapital := ShareCapital + prPeriodTransactions2.Amount;
                         until prPeriodTransactions2.Next = 0;
                     end;
 
@@ -365,7 +378,7 @@ report 51016 "Payroll Payslip"
 
 
                     TotalDeduction := (BenevolentAmount + SaccoSharesAmunt + ShareCapital +
-                    LikizoContribution + LoanInterestAmont + Loanamounnt + "Housing Levy" + NSSF + paye + NHIF);
+                    LikizoContribution + LoanInterestAmont + Loanamounnt + "Housing Levy" + NSSF + NSSF2 + paye + NHIF);
 
 
 
@@ -430,7 +443,8 @@ report 51016 "Payroll Payslip"
 
     trigger OnPreReport()
     begin
-        CompanyInfo.Get;
+
+
         CompanyInfo.CalcFields(CompanyInfo.Picture);
 
         // PayrollEmp.RESET;
@@ -489,6 +503,7 @@ report 51016 "Payroll Payslip"
         // HREmployees: Record "HR Employees";
         prPeriodTransactions2: Record "prPeriod Transactions.";
         NSSF: Decimal;
+        NSSF2: Decimal;
         Pens: Decimal;
         TaxablePay: Decimal;
         Taxcharged: Decimal;
